@@ -7,13 +7,13 @@ class SimplenoteUISmokeTestsTrash: XCTestCase {
         let _ = attemptLogOut()
         EmailLogin.open()
         EmailLogin.logIn(email: testDataExistingEmail, password: testDataExistingPassword)
-        AllNotes.waitForLoad()
+        NoteList.waitForLoad()
     }
 
     override func setUpWithError() throws {
-        AllNotes.clearAllNotes()
+        NoteList.trashAllNotes()
         Trash.empty()
-        AllNotes.open()
+        NoteList.openAllNotes()
     }
 
     func testCanViewTrashedNotes() throws {
@@ -27,17 +27,17 @@ class SimplenoteUISmokeTestsTrash: XCTestCase {
         TrashAssert.notesNumber(expectedNotesNumber: 0)
 
         // Step 2
-        AllNotes.open()
-        AllNotes.createNotes(names: noteNamesArray)
-        AllNotesAssert.notesExist(names: noteNamesArray)
-        AllNotesAssert.notesNumber(expectedNotesNumber: 3)
+        NoteList.openAllNotes()
+        NoteList.createNotes(names: noteNamesArray)
+        NoteListAssert.notesExist(names: noteNamesArray)
+        NoteListAssert.notesNumber(expectedNotesNumber: 3)
 
         // Step 3
-        AllNotes.trashNote(noteName: noteOneName)
-        AllNotesAssert.noteAbsent(noteName: noteOneName)
-        AllNotesAssert.noteExists(noteName: noteTwoName)
-        AllNotesAssert.noteExists(noteName: noteThreeName)
-        AllNotesAssert.notesNumber(expectedNotesNumber: 2)
+        NoteList.trashNote(noteName: noteOneName)
+        NoteListAssert.noteAbsent(noteName: noteOneName)
+        NoteListAssert.noteExists(noteName: noteTwoName)
+        NoteListAssert.noteExists(noteName: noteThreeName)
+        NoteListAssert.notesNumber(expectedNotesNumber: 2)
 
         //Step 4
         Trash.open()
@@ -56,18 +56,18 @@ class SimplenoteUISmokeTestsTrash: XCTestCase {
         TrashAssert.notesNumber(expectedNotesNumber: 0)
 
         // Step 2
-        AllNotes.open()
-        AllNotes.createNotes(names: noteNamesArray)
-        AllNotesAssert.notesExist(names: noteNamesArray)
-        AllNotesAssert.notesNumber(expectedNotesNumber: 3)
+        NoteList.openAllNotes()
+        NoteList.createNotes(names: noteNamesArray)
+        NoteListAssert.notesExist(names: noteNamesArray)
+        NoteListAssert.notesNumber(expectedNotesNumber: 3)
 
         // Step 3
-        AllNotes.trashNote(noteName: noteOneName)
-        AllNotes.trashNote(noteName: noteTwoName)
-        AllNotesAssert.noteAbsent(noteName: noteOneName)
-        AllNotesAssert.noteAbsent(noteName: noteTwoName)
-        AllNotesAssert.noteExists(noteName: noteThreeName)
-        AllNotesAssert.notesNumber(expectedNotesNumber: 1)
+        NoteList.trashNote(noteName: noteOneName)
+        NoteList.trashNote(noteName: noteTwoName)
+        NoteListAssert.noteAbsent(noteName: noteOneName)
+        NoteListAssert.noteAbsent(noteName: noteTwoName)
+        NoteListAssert.noteExists(noteName: noteThreeName)
+        NoteListAssert.notesNumber(expectedNotesNumber: 1)
 
         //Step 4
         Trash.open()
@@ -82,11 +82,11 @@ class SimplenoteUISmokeTestsTrash: XCTestCase {
         TrashAssert.notesNumber(expectedNotesNumber: 1)
 
         // Step 6
-        AllNotes.open()
-        AllNotesAssert.noteAbsent(noteName: noteOneName)
-        AllNotesAssert.noteAbsent(noteName: noteTwoName)
-        AllNotesAssert.noteExists(noteName: noteThreeName)
-        AllNotesAssert.notesNumber(expectedNotesNumber: 1)
+        NoteList.openAllNotes()
+        NoteListAssert.noteAbsent(noteName: noteOneName)
+        NoteListAssert.noteAbsent(noteName: noteTwoName)
+        NoteListAssert.noteExists(noteName: noteThreeName)
+        NoteListAssert.notesNumber(expectedNotesNumber: 1)
     }
 
     func testCanDeleteNotesForeverViaEmpty() throws {
@@ -100,18 +100,18 @@ class SimplenoteUISmokeTestsTrash: XCTestCase {
         TrashAssert.notesNumber(expectedNotesNumber: 0)
 
         // Step 2
-        AllNotes.open()
-        AllNotes.createNotes(names: noteNamesArray)
-        AllNotesAssert.notesExist(names: noteNamesArray)
-        AllNotesAssert.notesNumber(expectedNotesNumber: 3)
+        NoteList.openAllNotes()
+        NoteList.createNotes(names: noteNamesArray)
+        NoteListAssert.notesExist(names: noteNamesArray)
+        NoteListAssert.notesNumber(expectedNotesNumber: 3)
 
         // Step 3
-        AllNotes.trashNote(noteName: noteOneName)
-        AllNotes.trashNote(noteName: noteTwoName)
-        AllNotesAssert.noteAbsent(noteName: noteOneName)
-        AllNotesAssert.noteAbsent(noteName: noteTwoName)
-        AllNotesAssert.noteExists(noteName: noteThreeName)
-        AllNotesAssert.notesNumber(expectedNotesNumber: 1)
+        NoteList.trashNote(noteName: noteOneName)
+        NoteList.trashNote(noteName: noteTwoName)
+        NoteListAssert.noteAbsent(noteName: noteOneName)
+        NoteListAssert.noteAbsent(noteName: noteTwoName)
+        NoteListAssert.noteExists(noteName: noteThreeName)
+        NoteListAssert.notesNumber(expectedNotesNumber: 1)
 
         //Step 4
         Trash.open()
@@ -124,11 +124,11 @@ class SimplenoteUISmokeTestsTrash: XCTestCase {
         TrashAssert.notesNumber(expectedNotesNumber: 0)
 
         // Step 6
-        AllNotes.open()
-        AllNotesAssert.noteAbsent(noteName: noteOneName)
-        AllNotesAssert.noteAbsent(noteName: noteTwoName)
-        AllNotesAssert.noteExists(noteName: noteThreeName)
-        AllNotesAssert.notesNumber(expectedNotesNumber: 1)
+        NoteList.openAllNotes()
+        NoteListAssert.noteAbsent(noteName: noteOneName)
+        NoteListAssert.noteAbsent(noteName: noteTwoName)
+        NoteListAssert.noteExists(noteName: noteThreeName)
+        NoteListAssert.notesNumber(expectedNotesNumber: 1)
     }
 
     func testCanRestoreNote() throws {
@@ -142,17 +142,17 @@ class SimplenoteUISmokeTestsTrash: XCTestCase {
         TrashAssert.notesNumber(expectedNotesNumber: 0)
 
         // Step 2
-        AllNotes.open()
-        AllNotes.createNotes(names: noteNamesArray)
-        AllNotesAssert.notesExist(names: noteNamesArray)
-        AllNotesAssert.notesNumber(expectedNotesNumber: 3)
+        NoteList.openAllNotes()
+        NoteList.createNotes(names: noteNamesArray)
+        NoteListAssert.notesExist(names: noteNamesArray)
+        NoteListAssert.notesNumber(expectedNotesNumber: 3)
 
         // Step 3
-        AllNotes.trashNote(noteName: noteOneName)
-        AllNotesAssert.noteAbsent(noteName: noteOneName)
-        AllNotesAssert.noteExists(noteName: noteTwoName)
-        AllNotesAssert.noteExists(noteName: noteThreeName)
-        AllNotesAssert.notesNumber(expectedNotesNumber: 2)
+        NoteList.trashNote(noteName: noteOneName)
+        NoteListAssert.noteAbsent(noteName: noteOneName)
+        NoteListAssert.noteExists(noteName: noteTwoName)
+        NoteListAssert.noteExists(noteName: noteThreeName)
+        NoteListAssert.notesNumber(expectedNotesNumber: 2)
 
         //Step 4
         Trash.open()
@@ -164,9 +164,9 @@ class SimplenoteUISmokeTestsTrash: XCTestCase {
         TrashAssert.notesNumber(expectedNotesNumber: 0)
 
         //Step 6
-        AllNotes.open()
-        AllNotesAssert.notesExist(names: noteNamesArray)
-        AllNotesAssert.notesNumber(expectedNotesNumber: 3)
+        NoteList.openAllNotes()
+        NoteListAssert.notesExist(names: noteNamesArray)
+        NoteListAssert.notesNumber(expectedNotesNumber: 3)
     }
 
     func testCanTrashNote() throws {
@@ -177,15 +177,15 @@ class SimplenoteUISmokeTestsTrash: XCTestCase {
         TrashAssert.notesNumber(expectedNotesNumber: 0)
 
         // Step 2
-        AllNotes.open()
-        AllNotes.createNoteAndLeaveEditor(noteName: noteName)
-        AllNotesAssert.noteExists(noteName: noteName)
-        AllNotesAssert.notesNumber(expectedNotesNumber: 1)
+        NoteList.openAllNotes()
+        NoteList.createNoteAndLeaveEditor(noteName: noteName)
+        NoteListAssert.noteExists(noteName: noteName)
+        NoteListAssert.notesNumber(expectedNotesNumber: 1)
 
         // Step 3
-        AllNotes.trashNote(noteName: noteName)
-        AllNotesAssert.noteAbsent(noteName: noteName)
-        AllNotesAssert.notesNumber(expectedNotesNumber: 0)
+        NoteList.trashNote(noteName: noteName)
+        NoteListAssert.noteAbsent(noteName: noteName)
+        NoteListAssert.notesNumber(expectedNotesNumber: 0)
 
         //Step 4
         Trash.open()

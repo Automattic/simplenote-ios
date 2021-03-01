@@ -16,20 +16,20 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         let _ = attemptLogOut()
         EmailLogin.open()
         EmailLogin.logIn(email: testDataExistingEmail, password: testDataExistingPassword)
-        AllNotes.waitForLoad()
+        NoteList.waitForLoad()
     }
 
     override func setUpWithError() throws {
         getToAllNotes()
-        AllNotes.clearAllNotes()
+        NoteList.trashAllNotes()
         Trash.empty()
-        AllNotes.open()
+        NoteList.openAllNotes()
     }
 
     func testCanPreviewMarkdownBySwiping() throws {
 
         // Step 1
-        AllNotes.addNoteTap()
+        NoteList.addNoteTap()
         NoteEditorAssert.editorShown()
 
         // Step 2
@@ -47,7 +47,7 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
     func testCanFlipToEditMode() throws {
 
         // Step 1
-        AllNotes.addNoteTap()
+        NoteList.addNoteTap()
         NoteEditorAssert.editorShown()
 
         // Step 2
@@ -77,16 +77,16 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         trackTest()
 
         trackStep()
-        AllNotes.addNoteTap()
+        NoteList.addNoteTap()
         NoteEditorAssert.editorShown()
 
         trackStep()
         NoteEditor.clearAndEnterText(enteredValue: noteTextInitial)
         NoteEditor.leaveEditor()
-        AllNotesAssert.noteExists(noteName: noteNameInitial)
+        NoteListAssert.noteExists(noteName: noteNameInitial)
 
         trackStep()
-        AllNotes.openNote(noteName: noteNameInitial)
+        NoteList.openNote(noteName: noteNameInitial)
         NoteEditor.markdownEnable()
         NoteEditorAssert.textViewWithExactValueShownOnce(value: noteTextInitial)
 
@@ -100,11 +100,11 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         NoteEditor.setFocus()
         NoteEditor.insertChecklist()
         NoteEditor.leaveEditor()
-        AllNotesAssert.noteExists(noteName: noteNameWithCheckbox)
-        AllNotesAssert.noteAbsent(noteName: noteNameInitial)
+        NoteListAssert.noteExists(noteName: noteNameWithCheckbox)
+        NoteListAssert.noteAbsent(noteName: noteNameInitial)
 
         trackStep()
-        AllNotes.openNote(noteName: noteNameWithCheckbox)
+        NoteList.openNote(noteName: noteNameWithCheckbox)
         NoteEditorAssert.textViewWithExactValueShownOnce(value: noteTextWithCheckbox)
 
         trackStep()
@@ -117,7 +117,7 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         let editorText = "ABCD"
 
         // Step 1
-        AllNotes.addNoteTap()
+        NoteList.addNoteTap()
         NoteEditorAssert.editorShown()
 
         // Step 2
@@ -133,7 +133,7 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
     func testAddedURLIsLinkified() throws {
 
         // Step 1
-        AllNotes.addNoteTap()
+        NoteList.addNoteTap()
         NoteEditorAssert.editorShown()
 
         // Step 2
@@ -143,17 +143,17 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
 
         // Step 3
         NoteEditor.leaveEditor()
-        AllNotesAssert.noteExists(noteName: usualLinkText)
+        NoteListAssert.noteExists(noteName: usualLinkText)
 
         // Step 4
-        AllNotes.openNote(noteName: usualLinkText)
+        NoteList.openNote(noteName: usualLinkText)
         NoteEditorAssert.linkifiedURL(containerText: usualLinkText, linkifiedText: usualLinkText)
     }
 
     func testLongTappingOnLinkOpensLinkInNewWindow() throws {
 
         // Step 1
-        AllNotes.addNoteTap()
+        NoteList.addNoteTap()
         NoteEditorAssert.editorShown()
 
         // Step 2
@@ -163,10 +163,10 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
 
         // Step 3
         NoteEditor.leaveEditor()
-        AllNotesAssert.noteExists(noteName: usualLinkText)
+        NoteListAssert.noteExists(noteName: usualLinkText)
 
         // Step 4
-        AllNotes.openNote(noteName: usualLinkText)
+        NoteList.openNote(noteName: usualLinkText)
         //NoteEditorAssert.editorText(text: usualURL)
         NoteEditorAssert.linkifiedURL(containerText: usualLinkText, linkifiedText: usualLinkText)
 
@@ -180,7 +180,7 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
     func testTappingOnLinkInPreviewOpensLinkInNewWindow() throws {
 
         // Step 1
-        AllNotes.addNoteTap()
+        NoteList.addNoteTap()
         NoteEditorAssert.editorShown()
 
         // Step 2
@@ -204,7 +204,7 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         let completeText = "- [x]" + checklistText
 
         // Step 1
-        AllNotes.addNoteTap()
+        NoteList.addNoteTap()
         NoteEditorAssert.editorShown()
 
         // Step 2
@@ -213,10 +213,10 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
 
         // Step 3
         NoteEditor.leaveEditor()
-        AllNotesAssert.noteExists(noteName: completeText)
+        NoteListAssert.noteExists(noteName: completeText)
 
         // Step 4
-        AllNotes.openNote(noteName: completeText)
+        NoteList.openNote(noteName: completeText)
         NoteEditorAssert.textViewWithExactValueShownOnce(value: checklistText)
         NoteEditorAssert.checkboxForTextShownOnce(text: checklistText)
 
@@ -232,7 +232,7 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         let completeText = "- [ ]" + checklistText
 
         // Step 1
-        AllNotes.addNoteTap()
+        NoteList.addNoteTap()
         NoteEditorAssert.editorShown()
 
         // Step 2
@@ -241,10 +241,10 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
 
         // Step 3
         NoteEditor.leaveEditor()
-        AllNotesAssert.noteExists(noteName: completeText)
+        NoteListAssert.noteExists(noteName: completeText)
 
         // Step 4
-        AllNotes.openNote(noteName: completeText)
+        NoteList.openNote(noteName: completeText)
         NoteEditorAssert.textViewWithExactValueShownOnce(value: checklistText)
         NoteEditorAssert.checkboxForTextShownOnce(text: checklistText)
 
@@ -264,16 +264,16 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         trackTest()
 
         trackStep()
-        AllNotes.addNoteTap()
+        NoteList.addNoteTap()
         NoteEditorAssert.editorShown()
 
         trackStep()
         NoteEditor.clearAndEnterText(enteredValue: noteTitle + noteContent)
         NoteEditor.leaveEditor()
-        AllNotesAssert.noteExists(noteName: noteTitle)
+        NoteListAssert.noteExists(noteName: noteTitle)
 
         trackStep()
-        AllNotes.openNote(noteName: noteTitle)
+        NoteList.openNote(noteName: noteTitle)
         NoteEditorAssert.textViewWithExactLabelsShownOnce(labels: ["- Minus1", "- Minus2", "- Minus3"])
         NoteEditorAssert.textViewWithExactLabelsShownOnce(labels: ["+ Plus1", "+ Plus2", "+ Plus3"])
         NoteEditorAssert.textViewWithExactLabelsShownOnce(labels: ["* Asterisk1", "* Asterisk2", "* Asterisk3"])
