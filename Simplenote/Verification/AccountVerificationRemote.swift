@@ -40,16 +40,9 @@ class AccountVerificationRemote {
 
         var request = URLRequest(url: verificationURL.appendingPathComponent(base64EncodedEmail),
                                  cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
-                                 timeoutInterval: Constants.timeoutInterval)
-        request.httpMethod = Constants.httpMethod
+                                 timeoutInterval: RemoteConstants.timeout)
+        request.httpMethod = RemoteConstants.Method.GET
 
         return request
     }
-}
-
-// MARK: - Constants
-//
-private struct Constants {
-    static let httpMethod = "GET"
-    static let timeoutInterval: TimeInterval = 30
 }

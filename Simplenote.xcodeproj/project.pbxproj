@@ -117,6 +117,7 @@
 		A61471B925D70C190065D849 /* PopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61471B725D70C190065D849 /* PopoverViewController.swift */; };
 		A628BEB625ECD97900121B64 /* SignupVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A628BEB425ECD97900121B64 /* SignupVerificationViewController.swift */; };
 		A628BEB725ECD97900121B64 /* SignupVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A628BEB525ECD97900121B64 /* SignupVerificationViewController.xib */; };
+		A628BEC325ED703A00121B64 /* RemoteConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A628BEC225ED703A00121B64 /* RemoteConstants.swift */; };
 		A6344AD9255952C70072FA07 /* NoteContentPreviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6344AD8255952C70072FA07 /* NoteContentPreviewTests.swift */; };
 		A645FA70254C5E69008A1519 /* NoteContentHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A645FA6F254C5E69008A1519 /* NoteContentHelperTests.swift */; };
 		A64DE6E9255D1C9F001D0526 /* ContentSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64DE6E8255D1C9F001D0526 /* ContentSlice.swift */; };
@@ -603,6 +604,7 @@
 		A61471B725D70C190065D849 /* PopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopoverViewController.swift; path = Classes/PopoverViewController.swift; sourceTree = "<group>"; };
 		A628BEB425ECD97900121B64 /* SignupVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignupVerificationViewController.swift; path = Classes/SignupVerificationViewController.swift; sourceTree = "<group>"; };
 		A628BEB525ECD97900121B64 /* SignupVerificationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SignupVerificationViewController.xib; path = Classes/SignupVerificationViewController.xib; sourceTree = "<group>"; };
+		A628BEC225ED703A00121B64 /* RemoteConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RemoteConstants.swift; path = Classes/RemoteConstants.swift; sourceTree = "<group>"; };
 		A6344AD8255952C70072FA07 /* NoteContentPreviewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteContentPreviewTests.swift; sourceTree = "<group>"; };
 		A645FA6F254C5E69008A1519 /* NoteContentHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteContentHelperTests.swift; sourceTree = "<group>"; };
 		A64DE6E8255D1C9F001D0526 /* ContentSlice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentSlice.swift; path = Classes/ContentSlice.swift; sourceTree = "<group>"; };
@@ -1408,6 +1410,7 @@
 				B52F35D022F3254800724793 /* Theme.swift */,
 				B5AB169B22FB2DF300B4EBA5 /* UIKitConstants.swift */,
 				B5095DC824632E3300812711 /* SimplenoteConstants.swift */,
+				A628BEC225ED703A00121B64 /* RemoteConstants.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -2822,6 +2825,7 @@
 				E215C79E180B228800AD36B5 /* SPTextField.m in Sources */,
 				A6DE79CE2552E6CC00BC69C6 /* TagListViewController.swift in Sources */,
 				B513F2B82319A9A40021CFA4 /* UITableViewCell+Simplenote.swift in Sources */,
+				A628BEC325ED703A00121B64 /* RemoteConstants.swift in Sources */,
 				B51F6DD52460D7540074DDD9 /* NSPredicate+Email.swift in Sources */,
 				B5C2EDF0255AFB6C00C09B32 /* PassthruView.swift in Sources */,
 				A6F4882325A8889E0050CFA8 /* UITextField+Tag.swift in Sources */,

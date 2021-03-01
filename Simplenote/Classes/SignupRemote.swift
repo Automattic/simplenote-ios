@@ -39,18 +39,11 @@ class SignupRemote {
 
         var request = URLRequest(url: url,
                                  cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
-                                 timeoutInterval: Constants.timeoutInterval)
-        request.httpMethod = Constants.httpMethod
+                                 timeoutInterval: RemoteConstants.timeout)
+        request.httpMethod = RemoteConstants.Method.POST
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try? JSONEncoder().encode(["username": email])
 
         return request
     }
-}
-
-// MARK: - Constants
-//
-private struct Constants {
-    static let httpMethod = "POST"
-    static let timeoutInterval: TimeInterval = 30
 }
