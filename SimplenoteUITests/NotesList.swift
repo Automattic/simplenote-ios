@@ -17,7 +17,7 @@ class NoteList {
         return app.navigationBars[UID.NavBar.allNotes].exists
     }
 
-    class func isNoteListForTagOpen(tag: String) -> Bool {
+    class func isNoteListOpen(forTag tag: String) -> Bool {
         return app.navigationBars[tag].exists
     }
 
