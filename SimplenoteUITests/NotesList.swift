@@ -6,9 +6,9 @@ class NoteList {
         app.tables.cells[noteName].tap()
     }
 
-    class func getNavBarIdentifier() -> String {
+    class func getNavBarIdentifier() -> String? {
         let navBar = app.navigationBars.element
-        guard navBar.exists else { return "" }
+        guard navBar.exists else { return .none }
         print(">>> Currently active navigation bar: " + navBar.identifier)
         return navBar.identifier
     }
@@ -137,27 +137,33 @@ class NoteListAssert {
         XCTAssertEqual(actualNotesNumber, expectedNotesNumber, numberOfNotesInAllNotesNotExpected)
     }
 
-    class func allNotesScreenShown() {
-        print(assertNavBarIdentifier + UID.NavBar.allNotes)
-        XCTAssertTrue(app.navigationBars[UID.NavBar.allNotes].waitForExistence(timeout: maxLoadTimeout))
-        XCTAssertEqual(NoteList.getNavBarIdentifier(), UID.NavBar.allNotes, UID.NavBar.allNotes + navBarNotFound)
+    class func noteListShown(forSelection selection: String ) {
+        print(assertNavBarIdentifier + selection)
+        XCTAssertTrue(app.navigationBars[selection].waitForExistence(timeout: maxLoadTimeout))
+
+        if let navBarID = NoteList.getNavBarIdentifier() {
+            XCTAssertEqual(navBarID, selection, selection + navBarNotFound)
+        } else {
+            XCTAssertTrue(false, foundNoNavBar)
+        }
+    }
+
+    class func allNotesShown() {
+        NoteListAssert.noteListShown(forSelection: UID.NavBar.allNotes)
     }
 
     class func trashShown() {
-        let expectedNavbar = "Trash"
-        print(assertNavBarIdentifier + expectedNavbar)
-        XCTAssertEqual(NoteList.getNavBarIdentifier(), expectedNavbar, expectedNavbar + navBarNotFound)
-    }
-
-    class func noteListForTagOpen(tag: String) {
-        print(assertNavBarIdentifier + tag)
-        XCTAssertEqual(NoteList.getNavBarIdentifier(), tag, tag + navBarNotFound)
+        NoteListAssert.noteListShown(forSelection: UID.NavBar.trash)
     }
 
     class func noteContentIsShownInSearch(noteName: String, expectedContent: String) {
         print(">>> Asserting that note '\(noteName)' shows the following content:")
         print(">>>> " + expectedContent)
-        let noteContent = Table.getContentOfCell(noteName: noteName)
-        XCTAssertTrue(noteContent.contains(expectedContent), "Content NOT found")
+
+        if let noteContent = Table.getContentOfCell(noteName: noteName) {
+            XCTAssertTrue(noteContent.contains(expectedContent), "Content NOT found")
+        } else {
+            XCTAssertTrue(false, "Could not find note")
+        }
     }
 }

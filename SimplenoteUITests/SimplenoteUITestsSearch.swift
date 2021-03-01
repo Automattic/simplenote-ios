@@ -70,21 +70,21 @@ class SimplenoteUISmokeTestsSearch: XCTestCase {
         trackStep()
         var testedTag = "prehistoric"
         Sidebar.tagSelect(tagName: testedTag)
-        NoteListAssert.noteListForTagOpen(tag: testedTag)
+        NoteListAssert.noteListShown(forSelection: testedTag)
         NoteListAssert.notesExist(names: [godzillaNoteName, kingKongNoteName])
         NoteListAssert.notesNumber(expectedNotesNumber: 2)
 
         trackStep()
         testedTag = "reptile"
         Sidebar.tagSelect(tagName: testedTag)
-        NoteListAssert.noteListForTagOpen(tag: testedTag)
+        NoteListAssert.noteListShown(forSelection: testedTag)
         NoteListAssert.noteExists(noteName: godzillaNoteName)
         NoteListAssert.notesNumber(expectedNotesNumber: 1)
 
         trackStep()
         testedTag = "robot"
         Sidebar.tagSelect(tagName: testedTag)
-        NoteListAssert.noteListForTagOpen(tag: testedTag)
+        NoteListAssert.noteListShown(forSelection: testedTag)
         NoteListAssert.noteExists(noteName: mechagodzillaNoteName)
         NoteListAssert.notesNumber(expectedNotesNumber: 1)
     }
@@ -95,13 +95,13 @@ class SimplenoteUISmokeTestsSearch: XCTestCase {
         trackStep()
         var testedTag = "prehistoric"
         Sidebar.tagSelect(tagName: testedTag)
-        NoteListAssert.noteListForTagOpen(tag: testedTag)
+        NoteListAssert.noteListShown(forSelection: testedTag)
         NoteListAssert.notesExist(names: [godzillaNoteName, kingKongNoteName])
         NoteListAssert.notesNumber(expectedNotesNumber: 2)
 
         trackStep()
         NoteList.openAllNotes()
-        NoteListAssert.allNotesScreenShown()
+        NoteListAssert.allNotesShown()
         NoteListAssert.notesExist(names: [godzillaNoteName, kingKongNoteName, mechagodzillaNoteName, diacriticNoteName])
         NoteListAssert.notesNumber(expectedNotesNumber: 4)
 
@@ -113,7 +113,7 @@ class SimplenoteUISmokeTestsSearch: XCTestCase {
         trackStep()
         testedTag = "language"
         Sidebar.tagSelect(tagName: testedTag)
-        NoteListAssert.noteListForTagOpen(tag: testedTag)
+        NoteListAssert.noteListShown(forSelection: testedTag)
         NoteListAssert.noteExists(noteName: diacriticNoteName)
         NoteListAssert.notesNumber(expectedNotesNumber: 1)
     }

@@ -13,6 +13,7 @@ enum UID {
         static let logIn = "Log In"
         static let noteEditorPreview = "Preview"
         static let noteEditorOptions = "Options"
+        static let trash = "Trash"
     }
 
     enum Button {
