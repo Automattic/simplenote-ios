@@ -64,20 +64,58 @@ class SimplenoteUISmokeTestsSearch: XCTestCase {
         NoteListAssert.notesNumber(expectedNotesNumber: 4)
     }
 
-    func testTagsTapping() throws {
+    func testCanFilterByTagWhenClickingOnTagInTagDrawer() throws {
         trackTest()
 
         trackStep()
-        Sidebar.tagSelect(tagName: "ape")
-        NoteListAssert.noteExists(noteName: kingKongNoteName)
+        var testedTag = "prehistoric"
+        Sidebar.tagSelect(tagName: testedTag)
+        NoteListAssert.noteListForTagOpen(tag: testedTag)
+        NoteListAssert.notesExist(names: [godzillaNoteName, kingKongNoteName])
+        NoteListAssert.notesNumber(expectedNotesNumber: 2)
 
         trackStep()
-        Sidebar.tagSelect(tagName: "reptile")
+        testedTag = "reptile"
+        Sidebar.tagSelect(tagName: testedTag)
+        NoteListAssert.noteListForTagOpen(tag: testedTag)
         NoteListAssert.noteExists(noteName: godzillaNoteName)
+        NoteListAssert.notesNumber(expectedNotesNumber: 1)
 
         trackStep()
-        Sidebar.tagSelect(tagName: "robot")
+        testedTag = "robot"
+        Sidebar.tagSelect(tagName: testedTag)
+        NoteListAssert.noteListForTagOpen(tag: testedTag)
         NoteListAssert.noteExists(noteName: mechagodzillaNoteName)
+        NoteListAssert.notesNumber(expectedNotesNumber: 1)
+    }
+
+    func testClickingOnDifferentTagsOrAllNotesOrTrashImmediatelyUpdatesFilteredNotes() throws {
+        trackTest()
+
+        trackStep()
+        var testedTag = "prehistoric"
+        Sidebar.tagSelect(tagName: testedTag)
+        NoteListAssert.noteListForTagOpen(tag: testedTag)
+        NoteListAssert.notesExist(names: [godzillaNoteName, kingKongNoteName])
+        NoteListAssert.notesNumber(expectedNotesNumber: 2)
+
+        trackStep()
+        NoteList.openAllNotes()
+        NoteListAssert.allNotesScreenShown()
+        NoteListAssert.notesExist(names: [godzillaNoteName, kingKongNoteName, mechagodzillaNoteName, diacriticNoteName])
+        NoteListAssert.notesNumber(expectedNotesNumber: 4)
+
+        trackStep()
+        Trash.open()
+        NoteListAssert.trashShown()
+        TrashAssert.notesNumber(expectedNotesNumber: 0)
+
+        trackStep()
+        testedTag = "language"
+        Sidebar.tagSelect(tagName: testedTag)
+        NoteListAssert.noteListForTagOpen(tag: testedTag)
+        NoteListAssert.noteExists(noteName: diacriticNoteName)
+        NoteListAssert.notesNumber(expectedNotesNumber: 1)
     }
 
     func testCanSearchByKeyword() throws {
