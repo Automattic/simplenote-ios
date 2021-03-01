@@ -192,12 +192,14 @@ class SPAuthViewController: UIViewController {
         startListeningToNotifications()
 
         passwordInputView.isHidden = mode.isPasswordHidden
+
+        // hiding text from back button
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         ensureStylesMatchValidationState()
-        performPrimaryActionIfPossible()
         ensureNavigationBarIsVisible()
     }
 
@@ -311,9 +313,15 @@ private extension SPAuthViewController {
 
         lockdownInterface()
 
-        controller.signupWithCredentials(username: email) { error in
+        controller.signupWithCredentials(username: email) { [weak self] error in
+            guard let self = self else {
+                return
+            }
+
             if let error = error {
                 self.handleError(error: error)
+            } else {
+                self.presentSignupVerification()
             }
 
             self.unlockInterface()
@@ -332,6 +340,12 @@ private extension SPAuthViewController {
         let safariViewController = SFSafariViewController(url: targetURL)
         safariViewController.modalPresentationStyle = .overFullScreen
         present(safariViewController, animated: true, completion: nil)
+    }
+
+    private func presentSignupVerification() {
+        let viewController = SignupVerificationViewController(email: email)
+        viewController.title = title
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 

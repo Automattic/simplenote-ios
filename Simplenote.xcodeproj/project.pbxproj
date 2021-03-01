@@ -115,6 +115,8 @@
 		A61471A925D6BC700065D849 /* NoteEditorTagSuggestionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A61471A725D6BC700065D849 /* NoteEditorTagSuggestionsViewController.xib */; };
 		A61471B825D70C190065D849 /* PopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A61471B625D70C190065D849 /* PopoverViewController.xib */; };
 		A61471B925D70C190065D849 /* PopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61471B725D70C190065D849 /* PopoverViewController.swift */; };
+		A628BEB625ECD97900121B64 /* SignupVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A628BEB425ECD97900121B64 /* SignupVerificationViewController.swift */; };
+		A628BEB725ECD97900121B64 /* SignupVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A628BEB525ECD97900121B64 /* SignupVerificationViewController.xib */; };
 		A6344AD9255952C70072FA07 /* NoteContentPreviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6344AD8255952C70072FA07 /* NoteContentPreviewTests.swift */; };
 		A645FA70254C5E69008A1519 /* NoteContentHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A645FA6F254C5E69008A1519 /* NoteContentHelperTests.swift */; };
 		A64DE6E9255D1C9F001D0526 /* ContentSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64DE6E8255D1C9F001D0526 /* ContentSlice.swift */; };
@@ -599,6 +601,8 @@
 		A61471A725D6BC700065D849 /* NoteEditorTagSuggestionsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteEditorTagSuggestionsViewController.xib; sourceTree = "<group>"; };
 		A61471B625D70C190065D849 /* PopoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PopoverViewController.xib; path = Classes/PopoverViewController.xib; sourceTree = "<group>"; };
 		A61471B725D70C190065D849 /* PopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopoverViewController.swift; path = Classes/PopoverViewController.swift; sourceTree = "<group>"; };
+		A628BEB425ECD97900121B64 /* SignupVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignupVerificationViewController.swift; path = Classes/SignupVerificationViewController.swift; sourceTree = "<group>"; };
+		A628BEB525ECD97900121B64 /* SignupVerificationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SignupVerificationViewController.xib; path = Classes/SignupVerificationViewController.xib; sourceTree = "<group>"; };
 		A6344AD8255952C70072FA07 /* NoteContentPreviewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteContentPreviewTests.swift; sourceTree = "<group>"; };
 		A645FA6F254C5E69008A1519 /* NoteContentHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteContentHelperTests.swift; sourceTree = "<group>"; };
 		A64DE6E8255D1C9F001D0526 /* ContentSlice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentSlice.swift; path = Classes/ContentSlice.swift; sourceTree = "<group>"; };
@@ -1627,6 +1631,8 @@
 				B5AB169922FA128000B4EBA5 /* SPSheetController.xib */,
 				A6C7647F25E9131C00A39067 /* SignupRemote.swift */,
 				A6B5F15D25E973AE000BE75B /* MagicLinkAuthenticator.swift */,
+				A628BEB425ECD97900121B64 /* SignupVerificationViewController.swift */,
+				A628BEB525ECD97900121B64 /* SignupVerificationViewController.xib */,
 			);
 			name = Onboarding;
 			sourceTree = "<group>";
@@ -2373,6 +2379,7 @@
 				B5767F9122FDF2B900052D81 /* LaunchScreen.storyboard in Resources */,
 				B5F3000223F4502C007A7C59 /* SPSortBar.xib in Resources */,
 				A6C0DFE825C18E3300B9BE39 /* NoteEditorTagListViewController.xib in Resources */,
+				A628BEB725ECD97900121B64 /* SignupVerificationViewController.xib in Resources */,
 				B56A695822F9CD1500B90398 /* SPOnboardingViewController.xib in Resources */,
 				A61471B825D70C190065D849 /* PopoverViewController.xib in Resources */,
 				A6C0589524AD2B8F006BC572 /* SPNoteHistoryViewController.xib in Resources */,
@@ -2819,6 +2826,7 @@
 				B5C2EDF0255AFB6C00C09B32 /* PassthruView.swift in Sources */,
 				A6F4882325A8889E0050CFA8 /* UITextField+Tag.swift in Sources */,
 				A64DE6F1255D1CD9001D0526 /* NoteContentHelper.swift in Sources */,
+				A628BEB625ECD97900121B64 /* SignupVerificationViewController.swift in Sources */,
 				B550F93322BA6A3300091939 /* ShortcutsHandler.swift in Sources */,
 				A6C0589424AD2B8F006BC572 /* SPNoteHistoryViewController.swift in Sources */,
 				F52A2FD11DE8B1FB002DEB0E /* CSSearchable+Helpers.swift in Sources */,
