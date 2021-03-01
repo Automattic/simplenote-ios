@@ -399,6 +399,11 @@
 		B5EB1EFF1C205A800080A1B3 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5EB1EFD1C205A800080A1B3 /* Icons.xcassets */; };
 		B5F3000223F4502C007A7C59 /* SPSortBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5F3000123F4502C007A7C59 /* SPSortBar.xib */; };
 		B5F3FFFF23F44679007A7C59 /* SPSortBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F3FFFE23F44679007A7C59 /* SPSortBar.swift */; };
+		BA4499AA25ED8821000C563E /* NoticeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA4499A925ED8821000C563E /* NoticeView.xib */; };
+		BA4499B325ED8AB0000C563E /* NoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4499B225ED8AB0000C563E /* NoticeView.swift */; };
+		BA4499BC25ED95D0000C563E /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4499BB25ED95D0000C563E /* Notice.swift */; };
+		BA4499C525ED95E5000C563E /* NoticeAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4499C425ED95E5000C563E /* NoticeAction.swift */; };
+		BA4499CE25ED9A0B000C563E /* UntouchableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4499CD25ED9A0B000C563E /* UntouchableView.swift */; };
 		BA5C1C0725BF9D6C006E3820 /* SPDragBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5C1C0625BF9D6C006E3820 /* SPDragBar.swift */; };
 		BAA4856925D5E40900F3BDB9 /* SearchQuery+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */; };
 		D435D38FCA5863E8447D5C2C /* Pods_Automattic_SimplenoteShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183BAB896957F07FDCAB6DF5 /* Pods_Automattic_SimplenoteShare.framework */; };
@@ -903,6 +908,11 @@
 		B5EB1EFD1C205A800080A1B3 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = ../Icons.xcassets; sourceTree = "<group>"; };
 		B5F3000123F4502C007A7C59 /* SPSortBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPSortBar.xib; path = Classes/SPSortBar.xib; sourceTree = "<group>"; };
 		B5F3FFFE23F44679007A7C59 /* SPSortBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPSortBar.swift; path = Classes/SPSortBar.swift; sourceTree = "<group>"; };
+		BA4499A925ED8821000C563E /* NoticeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoticeView.xib; sourceTree = "<group>"; };
+		BA4499B225ED8AB0000C563E /* NoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeView.swift; sourceTree = "<group>"; };
+		BA4499BB25ED95D0000C563E /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
+		BA4499C425ED95E5000C563E /* NoticeAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeAction.swift; sourceTree = "<group>"; };
+		BA4499CD25ED9A0B000C563E /* UntouchableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UntouchableView.swift; sourceTree = "<group>"; };
 		BA5C1C0625BF9D6C006E3820 /* SPDragBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPDragBar.swift; sourceTree = "<group>"; };
 		BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchQuery+Simplenote.swift"; sourceTree = "<group>"; };
 		C07B32800E3C783BDF105B3A /* Pods-Automattic-SimplenoteShare.distribution alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-SimplenoteShare.distribution alpha.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-SimplenoteShare/Pods-Automattic-SimplenoteShare.distribution alpha.xcconfig"; sourceTree = "<group>"; };
@@ -1134,6 +1144,8 @@
 				A6E1E79724B7D7B4008A44BC /* SPHistoryVersion.swift */,
 				A681C72B254172B600F369C2 /* NoteMetrics.swift */,
 				A64DE6E8255D1C9F001D0526 /* ContentSlice.swift */,
+				BA4499BB25ED95D0000C563E /* Notice.swift */,
+				BA4499C425ED95E5000C563E /* NoticeAction.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1862,6 +1874,15 @@
 			name = SortBar;
 			sourceTree = "<group>";
 		};
+		BA4499A825ED87F8000C563E /* Notices */ = {
+			isa = PBXGroup;
+			children = (
+				BA4499A925ED8821000C563E /* NoticeView.xib */,
+				BA4499B225ED8AB0000C563E /* NoticeView.swift */,
+			);
+			name = Notices;
+			sourceTree = "<group>";
+		};
 		D864B15525CAE25000F9B73E /* SimplenoteUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1887,6 +1908,7 @@
 		E22BCDF11794F42000A17ED2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BA4499A825ED87F8000C563E /* Notices */,
 				B52E2B13253747F20074509A /* Editor */,
 				B5476BB523D89AE2000E7723 /* Headers */,
 				B5F3000023F446FC007A7C59 /* SortBar */,
@@ -1924,6 +1946,7 @@
 				A6CDF8FF256B9CB900CF2F27 /* ViewSpinner.swift */,
 				BA5C1C0625BF9D6C006E3820 /* SPDragBar.swift */,
 				A6A648B225AC7EA40074A094 /* ActivityIndicatorButton.swift */,
+				BA4499CD25ED9A0B000C563E /* UntouchableView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -2380,6 +2403,7 @@
 				B546BEA0234F6DA000A126DA /* SPTagHeaderView.xib in Resources */,
 				A61471A925D6BC700065D849 /* NoteEditorTagSuggestionsViewController.xib in Resources */,
 				A69F861D25408085005140F2 /* NoteInformationViewController.xib in Resources */,
+				BA4499AA25ED8821000C563E /* NoticeView.xib in Resources */,
 				B513F2B62319A8F40021CFA4 /* SPNoteTableViewCell.xib in Resources */,
 				B5078A001C1F5595009F097A /* markdown-dark.css in Resources */,
 				B502311325129525002C3CDA /* SPDiagnosticsViewController.xib in Resources */,
@@ -2694,6 +2718,7 @@
 				37E10E7720B3368700864E43 /* WPAuthHandler.m in Sources */,
 				B52E2B152537480A0074509A /* SPEditorTapRecognizerDelegate.swift in Sources */,
 				A6A648A425AC3AC00074A094 /* AccountVerificationViewController.swift in Sources */,
+				BA4499B325ED8AB0000C563E /* NoticeView.swift in Sources */,
 				B59188C224005B8A0069EF96 /* NSString+Simplenote.swift in Sources */,
 				B57CFA4925B11AA800ABA284 /* EmailVerification.swift in Sources */,
 				375D24BB21E01131007AB25A /* html.c in Sources */,
@@ -2774,6 +2799,7 @@
 				46A3C98F17DFA81A002865AE /* SPNoteListViewController.m in Sources */,
 				B5BD6AF51BF66093004ECE33 /* SPMarkdownPreviewViewController.m in Sources */,
 				B5F3FFFF23F44679007A7C59 /* SPSortBar.swift in Sources */,
+				BA4499C525ED95E5000C563E /* NoticeAction.swift in Sources */,
 				A6E02778256E9487002054DF /* PinLockSetupController.swift in Sources */,
 				B513F2B42319A8D50021CFA4 /* SPNoteTableViewCell.swift in Sources */,
 				375D24B321E01131007AB25A /* autolink.c in Sources */,
@@ -2796,6 +2822,7 @@
 				46A3C99C17DFA81A002865AE /* NSString+Bullets.m in Sources */,
 				B58BF1FB23D78ADF00515B50 /* UIContextualAction+Simplenote.swift in Sources */,
 				E215C79A180B130B00AD36B5 /* SPTableViewController.m in Sources */,
+				BA4499BC25ED95D0000C563E /* Notice.swift in Sources */,
 				BA5C1C0725BF9D6C006E3820 /* SPDragBar.swift in Sources */,
 				B5AEC38423FAC5D600D24221 /* DateFormatter+Simplenote.swift in Sources */,
 				B5DF734622A5713600602CE7 /* SortMode.swift in Sources */,
@@ -2830,6 +2857,7 @@
 				B50E99F4234242130092F274 /* UISearchBar+Simplenote.swift in Sources */,
 				A68ABCA624ABFA5800715EBD /* UIView+Constraints.swift in Sources */,
 				A6E1E7A024BDE440008A44BC /* SPCardDismissalAnimator.swift in Sources */,
+				BA4499CE25ED9A0B000C563E /* UntouchableView.swift in Sources */,
 				B56A696522F9D54600B90398 /* SPLabel.swift in Sources */,
 				46A3C9A917DFA81A002865AE /* SPModalActivityIndicator.m in Sources */,
 				B550F93822BA814D00091939 /* NSUserActivity+Shortcuts.swift in Sources */,
