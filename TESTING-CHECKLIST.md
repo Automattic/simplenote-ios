@@ -45,9 +45,9 @@ Note: (A) means Automated Test. If automated UI tests were executed for the app,
 - [ ] Clearing the search field immediately updates filtered notes (A)
 - [ ] Clicking on different tags or All Notes or Trash immediately updates filtered notes (A)
 - [ ] Can search by keyword (A)
-- [ ] Tag auto-completes appear when typing in search field
-- [ ] Typing `tag:` and something else, like `tag:te` results in autocomplete tag results including that something else, e.g. `test`
-- [ ] Tag suggestions suggest tags regardless of case
+- [ ] Tag auto-completes appear when typing in search field (A)
+- [ ] Typing `tag:` and something else, like `tag:te` results in autocomplete tag results including that something else, e.g. `test` (A)
+- [ ] Tag suggestions suggest tags regardless of case (A)
 - [ ] Search field updates with results of `tag:test` format search string
 
 ### Trash

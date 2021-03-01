@@ -47,6 +47,8 @@ enum UID {
         static let noteEditorPreview = "Preview"
         static let noteEditorOptionsMarkdown = "Markdown"
         static let allNotesInProgress = "In progress"
+        static let searchByTag = "Search by Tag"
+        static let notes = "Notes"
     }
 
     enum TextField {

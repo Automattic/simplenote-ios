@@ -55,7 +55,11 @@ class NoteList {
     }
 
     class func getNotesNumber() -> Int {
-        return Table.getCellsNumber()
+        return Table.getVisibleLabelledCellsNumber()
+    }
+
+    class func getTagsSuggestionsNumber() -> Int {
+        return Table.getVisibleNonLabelledCellsNumber()
     }
 
     class func trashAllNotes() {
@@ -116,6 +120,49 @@ class NoteList {
 
 class NoteListAssert {
 
+    class func searchHeaderShown(header: String, numberOfOccurences: Int) {
+        switch numberOfOccurences {
+        case 0:
+            print(assertSearchHeaderNotShown + header)
+        case 1:
+            print(assertSearchHeaderShown + header)
+        default:
+            print("Invalid value of \"numberOfOccurences\". Valid values are 0 or 1")
+            return
+        }
+
+        let matchesCount = Table.getStaticTextsWithExactLabelCount(label: header)
+        XCTAssertEqual(matchesCount, numberOfOccurences)
+    }
+
+    class func tagsSearchHeaderShown() {
+        NoteListAssert.searchHeaderShown(header: UID.Text.searchByTag, numberOfOccurences: 1)
+    }
+
+    class func tagsSearchHeaderNotShown() {
+        NoteListAssert.searchHeaderShown(header: UID.Text.searchByTag, numberOfOccurences: 0)
+    }
+
+    class func notesSearchHeaderShown() {
+        NoteListAssert.searchHeaderShown(header: UID.Text.notes, numberOfOccurences: 1)
+    }
+
+    class func notesSearchHeaderNotShown() {
+        NoteListAssert.searchHeaderShown(header: UID.Text.notes, numberOfOccurences: 0)
+    }
+
+    class func tagSuggestionExists(tag: String) {
+        print(">>> Asserting that \"\(tag)\" tag suggestion is shown once")
+        let matchesCount = Table.getStaticTextsWithExactLabelCount(label: tag)
+        XCTAssertEqual(matchesCount, 1)
+    }
+
+    class func tagSuggestionsExist(tags: [String]) {
+        for tag in tags {
+            NoteListAssert.tagSuggestionExists(tag: tag)
+        }
+    }
+
     class func noteExists(noteName: String) {
         print(">>> Asserting that note is shown once: " + noteName)
         let matchesCount = Table.getCellsWithExactLabelCount(label: noteName)
@@ -135,6 +182,11 @@ class NoteListAssert {
     class func notesNumber(expectedNotesNumber: Int) {
         let actualNotesNumber = NoteList.getNotesNumber()
         XCTAssertEqual(actualNotesNumber, expectedNotesNumber, numberOfNotesInAllNotesNotExpected)
+    }
+
+    class func tagsSuggestionsNumber(number: Int) {
+        let actualNumber = NoteList.getTagsSuggestionsNumber()
+        XCTAssertEqual(actualNumber, number, numberOfTagsSuggestionsNotExpected)
     }
 
     class func noteListShown(forSelection selection: String ) {

@@ -41,26 +41,41 @@ func getToAllNotes() {
 
 class Table {
 
-    class func getCellsNumber() -> Int {
-        // We need to count only the table cells that have X = 0
+    class func getVisibleLabelledCellsNumber() -> Int {
+        // We need only the table cells that have X = 0 and a non-empty label
         // otherwise we will include invisible elements from Sidebar pane, when Notes List is open
         // or the elements from Notes List when Settings are open
+        // or the visible tags search suggestrions
         let cellsNum = app.tables.element.children(matching: .cell).count
-        var notesNum: Int = 0
-
-        if cellsNum == 0 {
-            return notesNum
-        }
+        var matchesNum: Int = 0
+        guard cellsNum > 0 else { return matchesNum }
 
         for index in 0...cellsNum - 1 {
             let cell = app.tables.cells.element(boundBy: index)
-
-            if cell.frame.minX == 0.0 {
-                notesNum += 1
+            if cell.frame.minX == 0.0 && cell.label.count > 0 {
+                matchesNum += 1
             }
         }
 
-        return notesNum
+        return matchesNum
+    }
+
+    class func getVisibleNonLabelledCellsNumber() -> Int {
+        // We need only the table cells that have X = 0 and an empty label
+        // Currently (besides using object dimentions) this is the way to
+        // locate tags search suggestions
+        let cellsNum = app.tables.element.children(matching: .cell).count
+        var matchesNum: Int = 0
+        guard cellsNum > 0 else { return matchesNum }
+
+        for index in 0...cellsNum - 1 {
+            let cell = app.tables.cells.element(boundBy: index)
+            if cell.frame.minX == 0.0 && cell.label.count == 0 {
+                matchesNum += 1
+            }
+        }
+
+        return matchesNum
     }
 
     class func trashCell(noteName: String) {
@@ -79,6 +94,16 @@ class Table {
         let matchingCells = app.cells.matching(predicate)
         let matchesCount = matchingCells.count
         print(">>> Found " + String(matchesCount) + " Cell(s) with '" + label + "' label")
+        return matchesCount
+    }
+
+    class func getStaticTextsWithExactLabelCount(label: String) -> Int {
+        let predicate = NSPredicate(format: "label == '" + label + "'")
+        let table = app.tables
+        print(table.debugDescription)
+        let matchingCells = app.tables.staticTexts.matching(predicate)
+        let matchesCount = matchingCells.count
+        print(">>> Found " + String(matchesCount) + " StaticText(s) with '" + label + "' label")
         return matchesCount
     }
 
