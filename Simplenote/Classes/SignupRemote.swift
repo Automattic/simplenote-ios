@@ -33,8 +33,7 @@ class SignupRemote {
     }
 
     private func request(with email: String) -> URLRequest? {
-        guard let base64EncodedEmail = email.data(using: .utf8)?.base64EncodedString(),
-              let url = URL(string: SimplenoteConstants.signupURL) else {
+        guard let url = URL(string: SimplenoteConstants.signupURL) else {
             return nil
         }
 
@@ -43,7 +42,7 @@ class SignupRemote {
                                  timeoutInterval: Constants.timeoutInterval)
         request.httpMethod = Constants.httpMethod
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try? JSONEncoder().encode(["username": base64EncodedEmail])
+        request.httpBody = try? JSONEncoder().encode(["username": email])
 
         return request
     }
