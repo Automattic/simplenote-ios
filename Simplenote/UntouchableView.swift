@@ -1,9 +1,16 @@
-//
-//  UntouchableView.swift
-//  Simplenote
-//
-//  Created by Charlie Scheer on 3/2/21.
-//  Copyright © 2021 Automattic. All rights reserved.
-//
+import UIKit
 
-import Foundation
+class UntouchableView: UIView {
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        let visibleViews = subviews.filter { view -> Bool in
+            return view.alpha >= 0.01 && !view.isHidden && view.isUserInteractionEnabled
+        }
+        for view in visibleViews {
+            let relativePoint = convert(point, to: view)
+            if view.point(inside: relativePoint, with: event) {
+                return true
+            }
+        }
+        return false
+    }
+}
