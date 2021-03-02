@@ -174,7 +174,7 @@ extension String {
 
 // MARK: Substring Instance Count
 extension String {
-    func occurancesOf(_ string: String) -> Int {
+    func occurrences(of string: String) -> Int {
         return components(separatedBy: string).count - 1
     }
 }
