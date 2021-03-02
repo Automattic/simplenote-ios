@@ -142,6 +142,87 @@ class SimplenoteUISmokeTestsSearch: XCTestCase {
         NoteListAssert.notesNumber(expectedNotesNumber: 1)
     }
 
+    func testTagSuggestionsSuggestTagsRegardlessOfCase() throws {
+        trackTest()
+
+        trackStep()
+        NoteList.searchForText(text: "robot")
+        NoteListAssert.tagsSearchHeaderShown()
+        NoteListAssert.tagSuggestionExists(tag: "tag:robot")
+        NoteListAssert.tagsSuggestionsNumber(number: 1)
+        NoteListAssert.notesSearchHeaderShown()
+        NoteListAssert.noteExists(noteName: mechagodzillaNoteName)
+        NoteListAssert.notesNumber(expectedNotesNumber: 1)
+
+        trackStep()
+        NoteList.searchForText(text: "ROBOT")
+        NoteListAssert.tagsSearchHeaderShown()
+        NoteListAssert.tagSuggestionExists(tag: "tag:robot")
+        NoteListAssert.tagsSuggestionsNumber(number: 1)
+        NoteListAssert.notesSearchHeaderShown()
+        NoteListAssert.noteExists(noteName: mechagodzillaNoteName)
+        NoteListAssert.notesNumber(expectedNotesNumber: 1)
+
+        trackStep()
+        NoteList.searchForText(text: "PrEhIsToRiC")
+        NoteListAssert.tagsSearchHeaderShown()
+        NoteListAssert.tagSuggestionExists(tag: "tag:prehistoric")
+        NoteListAssert.tagsSuggestionsNumber(number: 1)
+        NoteListAssert.notesSearchHeaderNotShown()
+        NoteListAssert.notesNumber(expectedNotesNumber: 0)
+    }
+
+    func testTagAutoCompletesAppearWhenTypingInSearchField() throws {
+        trackTest()
+
+        trackStep()
+        NoteList.searchForText(text: "t")
+        NoteListAssert.tagsSearchHeaderShown()
+        NoteListAssert.tagSuggestionsExist(tags: ["tag:diacritic", "tag:prehistoric", "tag:reptile", "tag:robot", "tag:sea-monster"])
+        NoteListAssert.tagsSuggestionsNumber(number: 5)
+        NoteListAssert.notesSearchHeaderShown()
+
+        trackStep()
+        NoteList.searchForText(text: "a")
+        NoteListAssert.tagsSearchHeaderShown()
+        NoteListAssert.tagSuggestionsExist(tags: ["tag:ape", "tag:diacritic", "tag:language", "tag:man-made", "tag:sea-monster"])
+        NoteListAssert.tagsSuggestionsNumber(number: 5)
+        NoteListAssert.notesSearchHeaderShown()
+
+        trackStep()
+        NoteList.searchForText(text: "ic")
+        NoteListAssert.tagsSearchHeaderShown()
+        NoteListAssert.tagSuggestionsExist(tags: ["tag:diacritic", "tag:prehistoric"])
+        NoteListAssert.tagsSuggestionsNumber(number: 2)
+        NoteListAssert.notesSearchHeaderShown()
+
+        trackStep()
+        NoteList.searchForText(text: "abc")
+        NoteListAssert.tagsSearchHeaderNotShown()
+        NoteListAssert.notesSearchHeaderNotShown()
+        NoteListAssert.notesNumber(expectedNotesNumber: 0)
+    }
+
+    func testTypingTagAndSomethingElseResultsInAutocompleteTagResultsIncludingThatSomethingElse() throws {
+        trackTest()
+
+        trackStep()
+        NoteList.searchForText(text: "tag:re")
+        NoteListAssert.tagsSearchHeaderShown()
+        NoteListAssert.tagSuggestionsExist(tags: ["tag:prehistoric", "tag:reptile"])
+        NoteListAssert.tagsSuggestionsNumber(number: 2)
+        NoteListAssert.notesSearchHeaderNotShown()
+        NoteListAssert.notesNumber(expectedNotesNumber: 0)
+
+        trackStep()
+        NoteList.searchForText(text: "tag:-")
+        NoteListAssert.tagsSearchHeaderShown()
+        NoteListAssert.tagSuggestionsExist(tags: ["tag:man-made", "tag:sea-monster"])
+        NoteListAssert.tagsSuggestionsNumber(number: 2)
+        NoteListAssert.notesSearchHeaderNotShown()
+        NoteListAssert.notesNumber(expectedNotesNumber: 0)
+    }
+
     func testCanSeeExcerpts() throws {
         trackTest()
 

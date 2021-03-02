@@ -4,7 +4,8 @@ let notExpectedEnding = " is NOT as expected",
     notFoundEnding = " NOT found",
     notAbsentEnding = " NOT absent"
 
-let inAllNotesEnding = " in \"All Notes\"",
+let inAllNotesEnding = #" in "All Notes""#,
+    inNoteListEnding = #" in "Note List""#,
     inTrashEnding = " in \"Trash\"",
     inEditorEnding = " in Note Editor",
     inNotePreviewEnding = " in Note Preview",
@@ -30,7 +31,8 @@ let noteNotFoundInAllNotes = "\" Note" + notFoundEnding + inAllNotesEnding,
     noteNotAbsentInTrash = " Note" + notAbsentEnding + inTrashEnding
 
 let numberOfNotesInAllNotesNotExpected = "Notes Number" + inAllNotesEnding + notExpectedEnding,
-    numberOfNotesInTrashNotExpected = "Notes Number" + inTrashEnding + notExpectedEnding
+    numberOfNotesInTrashNotExpected = "Notes Number" + inTrashEnding + notExpectedEnding,
+    numberOfTagsSuggestionsNotExpected = "Tags search suggestions " + inNoteListEnding + notExpectedEnding
 
 let linkContainerNotFoundInEditor = "\" link container" + notFoundEnding + inEditorEnding,
     linkNotFoundInEditor = "\" link" + notFoundEnding + inEditorEnding,
@@ -46,6 +48,8 @@ let numberOfBoxesInPreviewNotExpected = "Boxes number" + inNotePreviewEnding + n
 
 let checkboxFoundMoreThanOnce = "Checkbox found more than once"
 let assertNavBarIdentifier = ">>> Asserting that currenly active navigation bar is: "
+let assertSearchHeaderShown = ">>> Asserting that search results header is shown: "
+let assertSearchHeaderNotShown = ">>> Asserting that search results header is NOT shown: "
 let foundNoNavBar = "Could not find any navigation bar"
 
 let maxLoadTimeout = 20.0,
