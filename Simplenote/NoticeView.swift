@@ -35,7 +35,7 @@ class NoticeView: UIView {
     // MARK: View Layout
     //
     private func setupView() {
-        let nib = UINib(nibName: "NoticeView", bundle: nil)
+        let nib = NoticeView.loadNib()
         guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
             fatalError("Could not load notice from nib")
         }
@@ -69,7 +69,7 @@ class NoticeView: UIView {
     }
 
     private func setupViewStyles() {
-        stackView.layer.cornerRadius = 25
+        stackView.layer.cornerRadius = Constants.cornerRadius
         stackView.clipsToBounds = true
         stackView.backgroundColor = .lightGray
 
@@ -109,4 +109,9 @@ extension NoticeView {
         print("long press finished")
         delegate?.noticeTouchEnded()
     }
+}
+
+private struct Constants {
+    static let cornerRadius = CGFloat(25)
+    static let nibName = "NoticeView"
 }
