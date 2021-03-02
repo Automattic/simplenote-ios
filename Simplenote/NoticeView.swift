@@ -69,11 +69,17 @@ class NoticeView: UIView {
     }
 
     private func setupViewStyles() {
+        stackView.backgroundColor = UIColor(lightColor: .spGray3, darkColor: .darkGray2)
+        noticeLabel.textColor = UIColor(lightColor: .gray100, darkColor: .white)
+        noticeButton.titleLabel?.textColor = UIColor(lightColor: .spBlue50, darkColor: .spBlue30)
+
         stackView.layer.cornerRadius = Constants.cornerRadius
         stackView.clipsToBounds = true
-        stackView.backgroundColor = .lightGray
 
         noticeButton.isHidden = true
+
+        noticeButton.invalidateIntrinsicContentSize()
+        stackView.layoutIfNeeded()
     }
 
     // MARK: Action
