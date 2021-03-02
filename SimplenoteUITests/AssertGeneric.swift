@@ -4,8 +4,8 @@ let notExpectedEnding = " is NOT as expected",
     notFoundEnding = " NOT found",
     notAbsentEnding = " NOT absent"
 
-let inAllNotesEnding = " in \"All Notes\"",
-    inNoteListEnding = " in \"Note List\"",
+let inAllNotesEnding = #" in "All Notes""#,
+    inNoteListEnding = #" in "Note List""#,
     inTrashEnding = " in \"Trash\"",
     inEditorEnding = " in Note Editor",
     inNotePreviewEnding = " in Note Preview",
