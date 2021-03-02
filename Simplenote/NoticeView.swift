@@ -71,8 +71,13 @@ class NoticeView: UIView {
     }
 }
 
+// NOTE: tap recognizing has not been connected to anything yet
+// Currently just prints taps.
 extension NoticeView {
-    @objc private func viewWasTapped(_ gesture: UIGestureRecognizer) {
+
+    // MARK: Tap Gesture Recognizer
+    //
+    @objc private func viewWasLongPressed(_ gesture: UIGestureRecognizer) {
         switch gesture.state {
         case .began:
             tapBegan()
@@ -84,10 +89,12 @@ extension NoticeView {
     }
 
     private func tapBegan() {
+        print("long press began")
         delegate?.noticeTouchBegan()
     }
 
     private func tapEnded() {
+        print("long press finished")
         delegate?.noticeTouchEnded()
     }
 }
