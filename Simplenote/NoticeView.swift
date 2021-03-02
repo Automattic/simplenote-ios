@@ -41,15 +41,18 @@ class NoticeView: UIView {
             fatalError("Could not load notice from nib")
         }
         translatesAutoresizingMaskIntoConstraints = false
+        view.translatesAutoresizingMaskIntoConstraints = false
         addSubview(view)
 
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: self.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            stackView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+            view.topAnchor.constraint(equalTo: self.topAnchor),
+            view.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            view.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            view.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            view.leadingAnchor.constraint(lessThanOrEqualTo: self.trailingAnchor),
+            view.trailingAnchor.constraint(lessThanOrEqualTo: self.trailingAnchor)
         ])
-
+    
         stackView.layer.cornerRadius = 25
         stackView.clipsToBounds = true
         stackView.backgroundColor = .lightGray

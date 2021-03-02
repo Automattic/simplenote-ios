@@ -18,40 +18,43 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="275" height="50"/>
+            <rect key="frame" x="0.0" y="0.0" width="275" height="75"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="SfY-hE-pTa">
-                    <rect key="frame" x="0.0" y="0.0" width="275" height="50"/>
+                <stackView opaque="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="SfY-hE-pTa">
+                    <rect key="frame" x="0.0" y="-9.5" width="275" height="94"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VzW-UO-SDt">
-                            <rect key="frame" x="0.0" y="15" width="137.5" height="20.5"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VzW-UO-SDt">
+                            <rect key="frame" x="30" y="54" width="107.5" height="30"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PEr-q4-fDe">
-                            <rect key="frame" x="137.5" y="10" width="137.5" height="30"/>
+                        <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PEr-q4-fDe">
+                            <rect key="frame" x="137.5" y="54" width="107.5" height="30"/>
+                            <directionalEdgeInsets key="directionalLayoutMargins" top="0.0" leading="8" bottom="0.0" trailing="8"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <state key="normal" title="Button"/>
                             <connections>
                                 <action selector="noticeButtonWasTapped:" destination="-1" eventType="touchUpInside" id="sjm-jB-55E"/>
                             </connections>
                         </button>
                     </subviews>
+                    <directionalEdgeInsets key="directionalLayoutMargins" top="10" leading="30" bottom="10" trailing="30"/>
                 </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="SfY-hE-pTa" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="1TL-mY-UmS"/>
-                <constraint firstItem="SfY-hE-pTa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="BHb-NA-vDr"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="SfY-hE-pTa" secondAttribute="trailing" id="OwN-JT-fJz"/>
-                <constraint firstAttribute="bottom" secondItem="SfY-hE-pTa" secondAttribute="bottom" id="cpL-H3-ZQa"/>
+                <constraint firstItem="SfY-hE-pTa" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="HYy-QP-Dqd"/>
+                <constraint firstItem="SfY-hE-pTa" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="PSL-lC-3aj"/>
+                <constraint firstAttribute="trailing" secondItem="SfY-hE-pTa" secondAttribute="trailing" id="aG2-kI-faz"/>
+                <constraint firstItem="SfY-hE-pTa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="bK3-eX-nVz"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="132" y="100"/>
+            <point key="canvasLocation" x="131.15942028985509" y="99.441964285714278"/>
         </view>
     </objects>
     <resources>
