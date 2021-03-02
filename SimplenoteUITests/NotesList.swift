@@ -196,7 +196,7 @@ class NoteListAssert {
         if let navBarID = NoteList.getNavBarIdentifier() {
             XCTAssertEqual(navBarID, selection, selection + navBarNotFound)
         } else {
-            XCTAssertTrue(false, foundNoNavBar)
+            XCTFail(foundNoNavBar)
         }
     }
 
@@ -215,7 +215,7 @@ class NoteListAssert {
         if let noteContent = Table.getContentOfCell(noteName: noteName) {
             XCTAssertTrue(noteContent.contains(expectedContent), "Content NOT found")
         } else {
-            XCTAssertTrue(false, "Could not find note")
+            XCTFail("Could not find note")
         }
     }
 }
