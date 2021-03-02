@@ -65,14 +65,14 @@ class SimplenoteUISmokeTestsLogin: XCTestCase {
     func testLogInWithCorrectCredentials() throws {
         EmailLogin.open()
         EmailLogin.logIn(email: testDataExistingEmail, password: testDataExistingPassword)
-        NoteListAssert.allNotesScreenShown()
+        NoteListAssert.allNotesShown()
     }
 
     func testLogOut() throws {
         // Step 1
         EmailLogin.open()
         EmailLogin.logIn(email: testDataExistingEmail, password: testDataExistingPassword)
-        NoteListAssert.allNotesScreenShown()
+        NoteListAssert.allNotesShown()
 
         // Step 2
         _ = logOut()

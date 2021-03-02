@@ -46,6 +46,7 @@ let numberOfBoxesInPreviewNotExpected = "Boxes number" + inNotePreviewEnding + n
 
 let checkboxFoundMoreThanOnce = "Checkbox found more than once"
 let assertNavBarIdentifier = ">>> Asserting that currenly active navigation bar is: "
+let foundNoNavBar = "Could not find any navigation bar"
 
 let maxLoadTimeout = 20.0,
     minLoadTimeout = 1.0

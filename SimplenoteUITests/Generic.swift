@@ -82,7 +82,7 @@ class Table {
         return matchesCount
     }
 
-    class func getContentOfCell(noteName: String) -> String {
+    class func getContentOfCell(noteName: String) -> String? {
         let cell = Table.getCell(label: noteName)
         guard cell.exists else { return "" }
 
@@ -91,7 +91,7 @@ class Table {
         // this is the one we need.
         let predicate = NSPredicate(format: "label != '" + noteName + "'")
         let staticTextWithContent = cell.staticTexts.element(matching: predicate)
-        guard staticTextWithContent.exists else { return "" }
+        guard staticTextWithContent.exists else { return .none }
 
         return staticTextWithContent.label
     }
