@@ -1,8 +1,8 @@
 import UIKit
 
 protocol NoticePresentingDelegate {
-    func noticeTouchBegan()
-    func noticeTouchEnded()
+    func noticePressBegan()
+    func noticePressEnded()
 }
 
 class NoticeView: UIView {
@@ -39,27 +39,25 @@ class NoticeView: UIView {
         guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
             fatalError("Could not load notice from nib")
         }
-        setupViewConstraints(view)
+        setupViewConstraints(for: view)
+        setupViewStyles(with: view)
         setupLongPress()
-        view.backgroundColor = .clear
-
-        setupViewStyles()
 
         view.layoutIfNeeded()
     }
 
-    private func setupViewConstraints(_ view: UIView) {
+    private func setupViewConstraints(for view: UIView) {
         translatesAutoresizingMaskIntoConstraints = false
         view.translatesAutoresizingMaskIntoConstraints = false
         addSubview(view)
 
         NSLayoutConstraint.activate([
-            view.topAnchor.constraint(equalTo: self.topAnchor),
-            view.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            view.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            view.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            view.leadingAnchor.constraint(lessThanOrEqualTo: self.trailingAnchor),
-            view.trailingAnchor.constraint(lessThanOrEqualTo: self.trailingAnchor)
+            view.topAnchor.constraint(equalTo: topAnchor),
+            view.bottomAnchor.constraint(equalTo: bottomAnchor),
+            view.centerXAnchor.constraint(equalTo: centerXAnchor),
+            view.centerYAnchor.constraint(equalTo: centerYAnchor),
+            view.leadingAnchor.constraint(lessThanOrEqualTo: leadingAnchor),
+            view.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor)
         ])
     }
 
@@ -68,18 +66,16 @@ class NoticeView: UIView {
         addGestureRecognizer(longPressGesture)
     }
 
-    private func setupViewStyles() {
-        stackView.backgroundColor = UIColor(lightColor: .spGray3, darkColor: .darkGray2)
-        noticeLabel.textColor = UIColor(lightColor: .gray100, darkColor: .white)
-        noticeButton.titleLabel?.textColor = UIColor(lightColor: .spBlue50, darkColor: .spBlue30)
+    private func setupViewStyles(with view: UIView) {
+        view.backgroundColor = .clear
 
+        stackView.backgroundColor = UIColor(lightColor: .spGray3, darkColor: .darkGray2)
         stackView.layer.cornerRadius = Constants.cornerRadius
         stackView.clipsToBounds = true
 
+        noticeLabel.textColor = UIColor(lightColor: .gray100, darkColor: .white)
+        noticeButton.titleLabel?.textColor = UIColor(lightColor: .spBlue50, darkColor: .spBlue30)
         noticeButton.isHidden = true
-
-        noticeButton.invalidateIntrinsicContentSize()
-        stackView.layoutIfNeeded()
     }
 
     // MARK: Action
@@ -89,31 +85,31 @@ class NoticeView: UIView {
     }
 }
 
-// NOTE: tap recognizing has not been connected to anything yet
-// Currently just prints taps.
+// NOTE: long press recognizing has not been connected to anything yet
+// Currently just prints to log that a press event happened.
 extension NoticeView {
 
-    // MARK: Tap Gesture Recognizer
+    // MARK: Long Press Gesture Recognizer
     //
     @objc private func viewWasLongPressed(_ gesture: UIGestureRecognizer) {
         switch gesture.state {
         case .began:
-            tapBegan()
+            longPressBegan()
         case .ended:
-            tapEnded()
+            longPressEnded()
         default:
             return
         }
     }
 
-    private func tapBegan() {
+    private func longPressBegan() {
         print("long press began")
-        delegate?.noticeTouchBegan()
+        delegate?.noticePressBegan()
     }
 
-    private func tapEnded() {
+    private func longPressEnded() {
         print("long press finished")
-        delegate?.noticeTouchEnded()
+        delegate?.noticePressEnded()
     }
 }
 
