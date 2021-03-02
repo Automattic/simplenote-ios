@@ -37,8 +37,10 @@ extension Note {
         return SimplenoteConstants.simplenotePublishedBaseURL + targetURL
     }
 
-    static func instancesOfReferenceToNoteWith(simperiumKey: String, in content: String) -> Int {
-        let internalLink = SimplenoteConstants.simplenoteScheme + "://" + SimplenoteConstants.simplenoteInterlinkHost + "/" + simperiumKey
-        return content.occurancesOf(internalLink)
+    func instancesOfReference(to note: Note) -> Int {
+        guard let internalLink = note.plainInternalLink else {
+            return 0
+        }
+        return content.occurrences(of: internalLink)
     }
 }
