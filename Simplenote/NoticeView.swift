@@ -39,6 +39,16 @@ class NoticeView: UIView {
         guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
             fatalError("Could not load notice from nib")
         }
+        setupViewConstraints(view)
+        setupLongPress()
+        view.backgroundColor = .clear
+
+        setupViewStyles()
+
+        view.layoutIfNeeded()
+    }
+
+    private func setupViewConstraints(_ view: UIView) {
         translatesAutoresizingMaskIntoConstraints = false
         view.translatesAutoresizingMaskIntoConstraints = false
         addSubview(view)
@@ -51,17 +61,19 @@ class NoticeView: UIView {
             view.leadingAnchor.constraint(lessThanOrEqualTo: self.trailingAnchor),
             view.trailingAnchor.constraint(lessThanOrEqualTo: self.trailingAnchor)
         ])
-        view.backgroundColor = .clear
+    }
+
+    private func setupLongPress() {
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(viewWasLongPressed(_:)))
+        addGestureRecognizer(longPressGesture)
+    }
+
+    private func setupViewStyles() {
         stackView.layer.cornerRadius = 25
         stackView.clipsToBounds = true
-        stackView.backgroundColor = .lightGray 
+        stackView.backgroundColor = .lightGray
 
         noticeButton.isHidden = true
-
-        let tapGesture = UILongPressGestureRecognizer(target: self, action: #selector(viewWasTapped(_:)))
-        view.addGestureRecognizer(tapGesture)
-
-        view.layoutIfNeeded()
     }
 
     // MARK: Action
