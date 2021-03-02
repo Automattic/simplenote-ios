@@ -89,6 +89,11 @@ class Table {
         return cell
     }
 
+    class func getStaticText(label: String) -> XCUIElement {
+        let staticText = app.tables.staticTexts[label]
+        return staticText
+    }
+
     class func getCellsWithExactLabelCount(label: String) -> Int {
         let predicate = NSPredicate(format: "label == '" + label + "'")
         let matchingCells = app.cells.matching(predicate)

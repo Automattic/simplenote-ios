@@ -223,6 +223,23 @@ class SimplenoteUISmokeTestsSearch: XCTestCase {
         NoteListAssert.notesNumber(expectedNotesNumber: 0)
     }
 
+    func testSearchFieldUpdatesWithResultsOfTagFormatSearchString() throws {
+        trackTest()
+        let testedTag = "tag:prehistoric"
+
+        trackStep()
+        NoteList.searchForText(text: "pre")
+        NoteListAssert.tagsSearchHeaderShown()
+        NoteListAssert.tagSuggestionExists(tag: testedTag)
+
+        trackStep()
+        NoteList.tagSuggestionTap(tag: testedTag)
+        NoteListAssert.searchStringIsShown(searchString: testedTag + " ")
+        NoteListAssert.notesSearchHeaderShown()
+        NoteListAssert.notesExist(names: [godzillaNoteName, kingKongNoteName])
+        NoteListAssert.notesNumber(expectedNotesNumber: 2)
+    }
+
     func testCanSeeExcerpts() throws {
         trackTest()
 
