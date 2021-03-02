@@ -45,7 +45,7 @@ class Table {
         // We need only the table cells that have X = 0 and a non-empty label
         // otherwise we will include invisible elements from Sidebar pane, when Notes List is open
         // or the elements from Notes List when Settings are open
-        // or the visible tags search suggestrions
+        // or the visible tags search suggestions
         let cellsNum = app.tables.element.children(matching: .cell).count
         var matchesNum: Int = 0
         guard cellsNum > 0 else { return matchesNum }
