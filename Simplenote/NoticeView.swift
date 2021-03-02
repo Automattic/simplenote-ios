@@ -13,7 +13,6 @@ class NoticeView: UIView {
     @IBOutlet weak var noticeLabel: UILabel!
     @IBOutlet weak var noticeButton: UIButton!
 
-
     var delegate: NoticePresentingDelegate?
     var action: (() -> Void)? {
         didSet {
@@ -52,15 +51,17 @@ class NoticeView: UIView {
             view.leadingAnchor.constraint(lessThanOrEqualTo: self.trailingAnchor),
             view.trailingAnchor.constraint(lessThanOrEqualTo: self.trailingAnchor)
         ])
-    
+        view.backgroundColor = .clear
         stackView.layer.cornerRadius = 25
         stackView.clipsToBounds = true
-        stackView.backgroundColor = .lightGray
+        stackView.backgroundColor = .lightGray 
 
         noticeButton.isHidden = true
 
         let tapGesture = UILongPressGestureRecognizer(target: self, action: #selector(viewWasTapped(_:)))
         view.addGestureRecognizer(tapGesture)
+
+        view.layoutIfNeeded()
     }
 
     // MARK: Action
