@@ -45,11 +45,6 @@ extension UIColor {
 extension UIColor {
 
     @objc
-    static var blue50Color: UIColor {
-        UIColor(studioColor: .blue50)
-    }
-
-    @objc
     static var simplenoteBlue10Color: UIColor {
         UIColor(studioColor: .spBlue10)
     }
@@ -112,6 +107,11 @@ extension UIColor {
     @objc
     static var simplenoteRed60Color: UIColor {
         UIColor(studioColor: .red60)
+    }
+
+    @objc
+    static var simplenoteWPBlue50Color: UIColor {
+        UIColor(studioColor: .wpBlue50)
     }
 
     @objc
