@@ -39,7 +39,7 @@ extension Note {
 
     func instancesOfReference(to note: Note) -> Int {
         guard let internalLink = note.plainInternalLink else {
-            return 0
+            return .zero
         }
         return content.occurrences(of: internalLink)
     }
