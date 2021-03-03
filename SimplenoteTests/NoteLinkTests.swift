@@ -4,7 +4,7 @@ import XCTest
 
 // MARK: - Note+Extension Tests
 //
-class NoteExtensionTests: XCTestCase {
+class NoteLinkTests: XCTestCase {
 
     /// InMemory Storage!
     ///
@@ -26,7 +26,7 @@ class NoteExtensionTests: XCTestCase {
 
 // MARK: - Private
 //
-private extension NoteExtensionTests {
+private extension NoteLinkTests {
 
     /// Inserts a collection of sample entities.
     ///
