@@ -18,15 +18,15 @@
                     <rect key="frame" x="0.0" y="0.0" width="275" height="94"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" insetsLayoutMarginsFromSafeArea="NO" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="216" translatesAutoresizingMaskIntoConstraints="NO" id="VzW-UO-SDt">
-                            <rect key="frame" x="28" y="60" width="38.5" height="18"/>
-                            <directionalEdgeInsets key="directionalLayoutMargins" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
+                            <rect key="frame" x="28" y="44" width="38.5" height="50"/>
+                            <directionalEdgeInsets key="directionalLayoutMargins" top="16" leading="0.0" bottom="16" trailing="8"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" horizontalCompressionResistancePriority="751" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PEr-q4-fDe">
-                            <rect key="frame" x="199" y="60" width="48" height="18"/>
-                            <directionalEdgeInsets key="directionalLayoutMargins" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
+                            <rect key="frame" x="200" y="44" width="48" height="50"/>
+                            <directionalEdgeInsets key="directionalLayoutMargins" top="16" leading="8" bottom="16" trailing="0.0"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                             <inset key="contentEdgeInsets" minX="0.0" minY="-6" maxX="0.0" maxY="-6"/>
                             <state key="normal" title="Button"/>
@@ -35,7 +35,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <directionalEdgeInsets key="directionalLayoutMargins" top="16" leading="28" bottom="16" trailing="28"/>
+                    <directionalEdgeInsets key="directionalLayoutMargins" top="0.0" leading="28" bottom="0.0" trailing="27"/>
                 </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
