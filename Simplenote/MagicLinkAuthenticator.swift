@@ -14,7 +14,7 @@ struct MagicLinkAuthenticator {
             return
         }
 
-        guard let email = queryItems.value(for: Constants.emailField),
+        guard let email = queryItems.base64DecodedValue(for: Constants.emailField),
               let token = queryItems.value(for: Constants.tokenField),
               !email.isEmpty, !token.isEmpty else {
             return
@@ -30,6 +30,15 @@ struct MagicLinkAuthenticator {
 private extension Array where Element == URLQueryItem {
     func value(for name: String) -> String? {
         first(where: { $0.name == name })?.value
+    }
+
+    func base64DecodedValue(for name: String) -> String? {
+        guard let base64String = value(for: name),
+              let data = Data(base64Encoded: base64String) else {
+            return nil
+        }
+
+        return String(data: data, encoding: .utf8)
     }
 }
 
