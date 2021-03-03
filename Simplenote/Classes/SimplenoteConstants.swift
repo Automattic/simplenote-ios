@@ -24,7 +24,7 @@ class SimplenoteConstants: NSObject {
 
     /// Signup URL
     ///
-    static let signupURL = "https://jbtest-dot-simple-note-hrd.appspot.com/account/request-signup"
+    static let signupURL = "https://app.simplenote.com/request-signup"
 
     /// Simplenote: Scheme
     ///
