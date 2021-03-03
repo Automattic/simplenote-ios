@@ -22,43 +22,19 @@ class NoticeView: UIView {
 
     // MARK: Initialization
     //
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupView()
-    }
-
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
+    override func awakeFromNib() {
+        super.awakeFromNib()
         setupView()
     }
 
     // MARK: View Layout
     //
     private func setupView() {
-        let nib = NoticeView.loadNib()
-        guard let view = nib.instantiate(withOwner: self, options: nil).first as? UIView else {
-            fatalError("Could not load notice from nib")
-        }
-        setupViewConstraints(for: view)
-        setupViewStyles(with: view)
+        translatesAutoresizingMaskIntoConstraints = false
+        setupViewStyles()
         setupLongPress()
 
-        view.layoutIfNeeded()
-    }
-
-    private func setupViewConstraints(for view: UIView) {
-        translatesAutoresizingMaskIntoConstraints = false
-        view.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(view)
-
-        NSLayoutConstraint.activate([
-            view.topAnchor.constraint(equalTo: topAnchor),
-            view.bottomAnchor.constraint(equalTo: bottomAnchor),
-            view.centerXAnchor.constraint(equalTo: centerXAnchor),
-            view.centerYAnchor.constraint(equalTo: centerYAnchor),
-            view.leadingAnchor.constraint(lessThanOrEqualTo: leadingAnchor),
-            view.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor)
-        ])
+        layoutIfNeeded()
     }
 
     private func setupLongPress() {
@@ -66,9 +42,7 @@ class NoticeView: UIView {
         addGestureRecognizer(longPressGesture)
     }
 
-    private func setupViewStyles(with view: UIView) {
-        view.backgroundColor = .clear
-
+    private func setupViewStyles() {
         stackView.backgroundColor = UIColor(lightColor: .spGray3, darkColor: .darkGray2)
         stackView.layer.cornerRadius = Constants.cornerRadius
         stackView.clipsToBounds = true
