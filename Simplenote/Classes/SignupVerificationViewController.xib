@@ -23,7 +23,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J44-oj-Jqm">
-                    <rect key="frame" x="0.0" y="360.5" width="414" height="185.5"/>
+                    <rect key="frame" x="0.0" y="355.5" width="414" height="185.5"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="yEL-fb-6Of">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="185.5"/>
@@ -70,7 +70,8 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="J44-oj-Jqm" secondAttribute="bottom" id="9n4-vM-vwx"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="J44-oj-Jqm" secondAttribute="trailing" id="JSF-Sg-gBY"/>
                 <constraint firstItem="J44-oj-Jqm" firstAttribute="top" relation="greaterThanOrEqual" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Pjc-EV-PD1"/>
-                <constraint firstItem="J44-oj-Jqm" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="Xvd-3w-CTU"/>
+                <constraint firstItem="J44-oj-Jqm" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Xvd-3w-CTU"/>
+                <constraint firstItem="yEL-fb-6Of" firstAttribute="top" relation="greaterThanOrEqual" secondItem="fnl-2z-Ty3" secondAttribute="top" id="YTV-4l-1VB"/>
                 <constraint firstItem="J44-oj-Jqm" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="tXq-Wn-ial"/>
             </constraints>
             <point key="canvasLocation" x="139" y="153"/>
