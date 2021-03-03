@@ -3,6 +3,11 @@ import Foundation
 // MARK: - SignupRemote
 //
 class SignupRemote {
+    enum Result {
+        case success
+        case failure(_ statusCode: Int, _ error: Error?)
+    }
+
     private let urlSession: URLSession
 
     init(urlSession: URLSession = URLSession.shared) {
@@ -11,21 +16,23 @@ class SignupRemote {
 
     /// Send signup request for specified email address
     ///
-    func signup(with email: String, completion: @escaping (_ success: Bool) -> Void) {
+    func signup(with email: String, completion: @escaping (_ result: Result) -> Void) {
         guard let request = request(with: email) else {
-            completion(false)
+            completion(.failure(0, nil))
             return
         }
 
         let dataTask = urlSession.dataTask(with: request) { (data, response, error) in
             DispatchQueue.main.async {
+                let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
+
                 // Check for 2xx status code
-                guard let response = response as? HTTPURLResponse, response.statusCode / 100 == 2 else {
-                    completion(false)
+                guard statusCode / 100 == 2 else {
+                    completion(.failure(statusCode, error))
                     return
                 }
 
-                completion(true)
+                completion(.success)
             }
         }
 

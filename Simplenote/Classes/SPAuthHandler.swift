@@ -68,15 +68,14 @@ class SPAuthHandler {
     ///     - onCompletion: Closure to be executed on completion
     ///
     func signupWithCredentials(username: String, onCompletion: @escaping (SPAuthError?) -> Void) {
-        SignupRemote().signup(with: username) { (success) in
-            let error: SPAuthError? = {
-                guard !success else {
-                    return nil
-                }
-                return SPAuthError(signupErrorCode: 0, response: nil, error: nil)
-            }()
-
-            onCompletion(error)
+        SignupRemote().signup(with: username) { (result) in
+            switch result {
+            case .success:
+                onCompletion(nil)
+            case .failure(let statusCode, let error):
+                let error = SPAuthError(signupErrorCode: statusCode, response: nil, error: error)
+                onCompletion(error)
+            }
         }
     }
 
