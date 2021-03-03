@@ -62,6 +62,11 @@ class NoteList {
         return Table.getVisibleNonLabelledCellsNumber()
     }
 
+    class func tagSuggestionTap(tag: String) {
+        print(">>> Tapping '\(tag)' tag suggestion")
+        Table.getStaticText(label: tag).tap()
+    }
+
     class func trashAllNotes() {
         NoteList.openAllNotes()
 
@@ -217,5 +222,23 @@ class NoteListAssert {
         } else {
             XCTFail("Could not find note")
         }
+    }
+
+    class func searchStringIsShown(searchString: String) {
+        print(">>> Asserting that search string is '\(searchString)'")
+        let searchField = app.searchFields[UID.SearchField.search]
+
+        guard searchField.exists else {
+            XCTFail(">>> Search field not found")
+            return
+        }
+
+        guard let actualSearchString = searchField.value as? String else {
+            XCTFail(">>> Search field has no value")
+            return
+        }
+
+        print(">>> Actual search string is '\(actualSearchString)'")
+        XCTAssertEqual(actualSearchString, searchString)
     }
 }
