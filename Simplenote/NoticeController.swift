@@ -37,8 +37,8 @@ class NoticeController {
 
     private func makeNoticeView(from notice: Notice) -> NoticeView {
         let noticeView: NoticeView = NoticeView.instantiateFromNib()
-        noticeView.noticeLabel.text = notice.message
-        noticeView.noticeButton.setTitle(notice.action?.title, for: .normal)
+        noticeView.noticeLabel.text = notice.localizedMessage()
+        noticeView.noticeButton.setTitle(notice.action?.localizedTitle(), for: .normal)
         noticeView.action = notice.action?.handler
         noticeView.delegate = self
 
