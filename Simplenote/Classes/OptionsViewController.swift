@@ -357,6 +357,9 @@ private extension OptionsViewController {
         SPTracker.trackEditorCopiedInternalLink()
         UIPasteboard.general.copyInternalLink(to: note)
         dismiss(animated: true, completion: nil)
+
+        let notice = Notice(message: .linkCopied)
+        NoticeController.shared.present(notice)
     }
 
     @IBAction
@@ -374,6 +377,9 @@ private extension OptionsViewController {
         SPTracker.trackEditorNotePublishEnabled(newState)
         SPObjectManager.shared().updatePublishedState(newState, note: note)
         pendingUpdate = true
+
+        let notice = newState ? Notice(message: .publishingNote) : Notice(message: .unpublishingNote)
+        NoticeController.shared.present(notice)
     }
 
     @IBAction
@@ -385,6 +391,9 @@ private extension OptionsViewController {
         SPTracker.trackEditorCopiedPublicLink()
         UIPasteboard.general.copyPublicLink(to: note)
         dismiss(animated: true, completion: nil)
+
+        let notice = Notice(message: .linkCopied)
+        NoticeController.shared.present(notice)
     }
 
     @IBAction
