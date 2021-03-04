@@ -407,7 +407,7 @@
 		D843AD8F25E3EB16007E5B15 /* SimplenoteUITestsSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D843AD8E25E3EB16007E5B15 /* SimplenoteUITestsSearch.swift */; };
 		D864B16925CAE47C00F9B73E /* Generic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B16825CAE47C00F9B73E /* Generic.swift */; };
 		D864B18225CAE4BE00F9B73E /* SimplenoteUITestsNoteEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B18125CAE4BE00F9B73E /* SimplenoteUITestsNoteEditor.swift */; };
-		D864B19225CAE54300F9B73E /* NotesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B19125CAE54300F9B73E /* NotesList.swift */; };
+		D864B19225CAE54300F9B73E /* NoteList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B19125CAE54300F9B73E /* NoteList.swift */; };
 		D864B1A225CAE57100F9B73E /* AssertGeneric.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B1A125CAE57100F9B73E /* AssertGeneric.swift */; };
 		D864B1AB25CAE59400F9B73E /* EmailLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B1AA25CAE59400F9B73E /* EmailLogin.swift */; };
 		D864B1B425CAE5C900F9B73E /* NoteEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B1B325CAE5C900F9B73E /* NoteEditor.swift */; };
@@ -912,7 +912,7 @@
 		D864B15425CAE25000F9B73E /* SimplenoteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimplenoteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D864B16825CAE47C00F9B73E /* Generic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generic.swift; sourceTree = "<group>"; };
 		D864B18125CAE4BE00F9B73E /* SimplenoteUITestsNoteEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplenoteUITestsNoteEditor.swift; sourceTree = "<group>"; };
-		D864B19125CAE54300F9B73E /* NotesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesList.swift; sourceTree = "<group>"; };
+		D864B19125CAE54300F9B73E /* NoteList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteList.swift; sourceTree = "<group>"; };
 		D864B1A125CAE57100F9B73E /* AssertGeneric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssertGeneric.swift; sourceTree = "<group>"; };
 		D864B1AA25CAE59400F9B73E /* EmailLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLogin.swift; sourceTree = "<group>"; };
 		D864B1B325CAE5C900F9B73E /* NoteEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditor.swift; sourceTree = "<group>"; };
@@ -1870,7 +1870,7 @@
 				D864B16825CAE47C00F9B73E /* Generic.swift */,
 				D864B1F025CAE87800F9B73E /* Info.plist */,
 				D864B1B325CAE5C900F9B73E /* NoteEditor.swift */,
-				D864B19125CAE54300F9B73E /* NotesList.swift */,
+				D864B19125CAE54300F9B73E /* NoteList.swift */,
 				D864B1C525CAE5F800F9B73E /* Preview.swift */,
 				D8E2D8E225E7DE090001315B /* Sidebar.swift */,
 				D843AD6E25E3E633007E5B15 /* SimplenoteUITestsLogin.swift */,
@@ -2957,7 +2957,7 @@
 				D864B1CF25CAE61F00F9B73E /* Trash.swift in Sources */,
 				D864B1C625CAE5F800F9B73E /* Preview.swift in Sources */,
 				D843AD8F25E3EB16007E5B15 /* SimplenoteUITestsSearch.swift in Sources */,
-				D864B19225CAE54300F9B73E /* NotesList.swift in Sources */,
+				D864B19225CAE54300F9B73E /* NoteList.swift in Sources */,
 				D864B1D825CAE63E00F9B73E /* UIDs.swift in Sources */,
 				D864B16925CAE47C00F9B73E /* Generic.swift in Sources */,
 				D8E2D8E325E7DE090001315B /* Sidebar.swift in Sources */,
