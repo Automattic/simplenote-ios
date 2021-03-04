@@ -43,6 +43,8 @@ class NoticeView: UIView {
     }
 
     private func setupViewStyles() {
+        backgroundColor = .clear
+
         stackView.backgroundColor = UIColor(lightColor: .spGray3, darkColor: .darkGray2)
         stackView.layer.cornerRadius = Constants.cornerRadius
         stackView.clipsToBounds = true
@@ -77,12 +79,10 @@ extension NoticeView {
     }
 
     private func longPressBegan() {
-        print("long press began")
         delegate?.noticePressBegan()
     }
 
     private func longPressEnded() {
-        print("long press finished")
         delegate?.noticePressEnded()
     }
 }
