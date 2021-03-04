@@ -116,7 +116,8 @@ extension ShareViewController: KeyboardObservable {
     }
 
     func keyboardDidChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
-        //currently not used
+        // Currently not in use
+        //
     }
 }
 
@@ -223,13 +224,6 @@ private extension ShareViewController {
         }
     }
 }
-
-extension UIDevice {
-    static var isPad: Bool {
-        current.userInterfaceIdiom == .pad
-    }
-}
-
 
 // MARK: - Constants
 //
