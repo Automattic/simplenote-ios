@@ -104,4 +104,22 @@ extension StringSimplenoteTests {
         XCTAssertNil(actual)
     }
 
+    /// Verifies the correct return from occurancesOf
+    ///
+    func testOccurancesOfReturnsCorrectValue() {
+        let sampleA = "test x value, x test"
+        let sampleB = "test x value x"
+        let sampleC = "x test x value"
+        let sampleD = "X test X value"
+        let sampleE = "x test xxx valxue"
+        let sampleF = ""
+        let testValue = "x"
+
+        XCTAssertEqual(sampleA.occurrences(of: testValue), 2)
+        XCTAssertEqual(sampleB.occurrences(of: testValue), 2)
+        XCTAssertEqual(sampleC.occurrences(of: testValue), 2)
+        XCTAssertEqual(sampleD.occurrences(of: testValue), 0)
+        XCTAssertEqual(sampleE.occurrences(of: testValue), 5)
+        XCTAssertEqual(sampleF.occurrences(of: testValue), 0)
+    }
 }

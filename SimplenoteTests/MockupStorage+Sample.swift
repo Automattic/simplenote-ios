@@ -17,6 +17,7 @@ extension MockupStorageManager {
         note.modificationDate = Date()
         note.creationDate = Date()
         note.content = contents
+        note.simperiumKey = UUID().uuidString
 
         return note
     }

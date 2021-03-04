@@ -36,4 +36,11 @@ extension Note {
 
         return SimplenoteConstants.simplenotePublishedBaseURL + targetURL
     }
+
+    func instancesOfReference(to note: Note) -> Int {
+        guard let internalLink = note.plainInternalLink else {
+            return .zero
+        }
+        return content.occurrences(of: internalLink)
+    }
 }
