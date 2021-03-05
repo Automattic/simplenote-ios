@@ -65,16 +65,18 @@ class SPAuthHandler {
     ///
     /// - Parameters:
     ///     - username: Simperium Username
-    ///     - password: Simperium Password
     ///     - onCompletion: Closure to be executed on completion
     ///
-    func signupWithCredentials(username: String, password: String, onCompletion: @escaping (SPAuthError?) -> Void) {
-        simperiumService.signup(withUsername: username, password: password, success: {
-            onCompletion(nil)
-        }, failure: { (statusCode, response, error) in
-            let error = SPAuthError(signupErrorCode: statusCode, response: response, error: error)
-            onCompletion(error)
-        })
+    func signupWithCredentials(username: String, onCompletion: @escaping (SPAuthError?) -> Void) {
+        SignupRemote().signup(with: username) { (result) in
+            switch result {
+            case .success:
+                onCompletion(nil)
+            case .failure(let statusCode, let error):
+                let error = SPAuthError(signupErrorCode: statusCode, response: nil, error: error)
+                onCompletion(error)
+            }
+        }
     }
 
 

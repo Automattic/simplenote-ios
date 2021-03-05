@@ -578,6 +578,10 @@
 {
     if (!self.simperium.user.authenticated) {
         [self performDotcomAuthenticationWithURL:url];
+
+        if (!self.simperium.user.authenticated && url) {
+            [self performMagicLinkAuthenticationWith:url];
+        }
         return YES;
     }
 

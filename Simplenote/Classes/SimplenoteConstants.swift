@@ -22,6 +22,10 @@ class SimplenoteConstants: NSObject {
     ///
     static let verificationURL = "https://app.simplenote.com/account/verify-email/"
 
+    /// Signup URL
+    ///
+    static let signupURL = "https://app.simplenote.com/account/request-signup"
+
     /// Simplenote: Scheme
     ///
     static let simplenoteScheme = "simplenote"
