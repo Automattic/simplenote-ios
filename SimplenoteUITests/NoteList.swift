@@ -101,7 +101,7 @@ class NoteList {
     }
 
     class func searchForText(text: String) {
-        print(">>> Searching for '" + text + "'")
+        print(">>> Searching for '\(text)'")
         let searchField = app.searchFields[UID.SearchField.search]
         guard searchField.exists else { return }
         searchField.tap()
@@ -136,8 +136,8 @@ class NoteListAssert {
             return
         }
 
-        let matchesCount = Table.getStaticTextsWithExactLabelCount(label: header)
-        XCTAssertEqual(matchesCount, numberOfOccurences)
+        let matches = Table.getStaticTextsWithExactLabelCount(label: header)
+        XCTAssertEqual(matches, numberOfOccurences)
     }
 
     class func tagsSearchHeaderShown() {
@@ -157,9 +157,9 @@ class NoteListAssert {
     }
 
     class func tagSuggestionExists(tag: String) {
-        print(">>> Asserting that \"\(tag)\" tag suggestion is shown once")
-        let matchesCount = Table.getStaticTextsWithExactLabelCount(label: tag)
-        XCTAssertEqual(matchesCount, 1)
+        print(">>> Asserting that '\(tag)' tag suggestion is shown once")
+        let matches = Table.getStaticTextsWithExactLabelCount(label: tag)
+        XCTAssertEqual(matches, 1)
     }
 
     class func tagSuggestionsExist(tags: [String]) {
@@ -170,8 +170,8 @@ class NoteListAssert {
 
     class func noteExists(noteName: String) {
         print(">>> Asserting that note is shown once: " + noteName)
-        let matchesCount = Table.getCellsWithExactLabelCount(label: noteName)
-        XCTAssertEqual(matchesCount, 1)
+        let matches = Table.getCellsWithExactLabelCount(label: noteName)
+        XCTAssertEqual(matches, 1)
     }
 
     class func notesExist(names: [String]) {

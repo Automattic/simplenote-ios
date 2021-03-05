@@ -96,35 +96,35 @@ class NoteEditor {
     }
 
     class func getCheckboxesForTextCount(text: String) -> Int {
-        let matchesCount = NoteEditor.getTextViewsWithExactLabelCount(label: text)
-        print(">>> ^ Found " + String(matchesCount) + " Checkboxe(s) for '" + text + "'")
-        return matchesCount
+        let matches = NoteEditor.getTextViewsWithExactLabelCount(label: text)
+        print(">>> ^ Found " + String(matches) + " Checkbox(es) for '" + text + "'")
+        return matches
     }
 
     class func getTextViewsWithExactValueCount(value: String) -> Int {
         let textViews = getAllTextViews()
-        var matchesCounter = 0
+        var matches = 0
 
-        for index in 0...textViews.count - 1 {
-            let currentValue = textViews.element(boundBy: index).value as! String
+        for textView in textViews {
+            let currentValue = textView.value as! String
             let currentValueStripped = currentValue.replacingOccurrences(of: "\u{fffc}", with: "")
 
             if currentValueStripped == value {
-                matchesCounter += 1
+                matches += 1
             }
         }
 
-        print(">>> Found " + String(matchesCounter) + " TextView(s) with '" + value + "' value")
-        return matchesCounter
+        print(">>> Found \(matches) TextView(s) with '\(value)' value")
+        return matches
     }
 
     class func getTextViewsWithExactLabelCount(label: String) -> Int {
         let _ = getAllTextViews()// To initialize the editor
         let predicate = NSPredicate(format: "label == '" + label + "'")
         let matchingTextViews = app.textViews.matching(predicate)
-        let matchesCount = matchingTextViews.count
-        print(">>> Found " + String(matchesCount) + " TextView(s) with '" + label + "' label")
-        return matchesCount
+        let matches = matchingTextViews.count
+        print(">>> Found \(matches) TextView(s) with '\(label)' label")
+        return matches
     }
 
 }
@@ -148,18 +148,18 @@ class NoteEditorAssert {
     }
 
     class func textViewWithExactValueShownOnce(value: String) {
-        let matchesCount = NoteEditor.getTextViewsWithExactValueCount(value: value)
-        XCTAssertEqual(matchesCount, 1)
+        let matches = NoteEditor.getTextViewsWithExactValueCount(value: value)
+        XCTAssertEqual(matches, 1)
     }
 
     class func textViewWithExactValueNotShown(value: String) {
-        let matchesCount = NoteEditor.getTextViewsWithExactValueCount(value: value)
-        XCTAssertEqual(matchesCount, 0)
+        let matches = NoteEditor.getTextViewsWithExactValueCount(value: value)
+        XCTAssertEqual(matches, 0)
     }
 
     class func textViewWithExactLabelShownOnce(label: String) {
-        let matchesCount = NoteEditor.getTextViewsWithExactLabelCount(label: label)
-        XCTAssertEqual(matchesCount, 1)
+        let matches = NoteEditor.getTextViewsWithExactLabelCount(label: label)
+        XCTAssertEqual(matches, 1)
     }
 
     class func textViewWithExactLabelsShownOnce(labels: [String]) {
@@ -169,12 +169,12 @@ class NoteEditorAssert {
     }
 
     class func checkboxForTextShownOnce(text: String) {
-        let matchesCount = NoteEditor.getCheckboxesForTextCount(text: text)
-        XCTAssertEqual(matchesCount, 1)
+        let matches = NoteEditor.getCheckboxesForTextCount(text: text)
+        XCTAssertEqual(matches, 1)
     }
 
     class func checkboxForTextNotShown(text: String) {
-        let matchesCount = NoteEditor.getCheckboxesForTextCount(text: text)
-        XCTAssertEqual(matchesCount, 0)
+        let matches = NoteEditor.getCheckboxesForTextCount(text: text)
+        XCTAssertEqual(matches, 0)
     }
 }
