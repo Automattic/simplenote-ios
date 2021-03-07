@@ -1,6 +1,6 @@
 import UIKit
 
-protocol NoticePresentingDelegate {
+protocol NoticePresentingDelegate: class {
     func noticePressBegan()
     func noticePressEnded()
 }
@@ -13,7 +13,7 @@ class NoticeView: UIView {
     @IBOutlet weak var noticeLabel: UILabel!
     @IBOutlet weak var noticeButton: UIButton!
 
-    var delegate: NoticePresentingDelegate?
+    weak var delegate: NoticePresentingDelegate?
     var action: (() -> Void)? {
         didSet {
             noticeButton.isHidden = action == nil
