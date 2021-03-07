@@ -79,12 +79,10 @@ extension NoticeView {
     }
 
     private func longPressBegan() {
-        print("long press began")
         delegate?.noticePressBegan()
     }
 
     private func longPressEnded() {
-        print("long press finished")
         delegate?.noticePressEnded()
     }
 }
