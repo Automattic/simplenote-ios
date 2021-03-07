@@ -43,13 +43,15 @@ class NoticeView: UIView {
     }
 
     private func setupViewStyles() {
-        stackView.backgroundColor = UIColor(lightColor: .spGray3, darkColor: .darkGray2)
+        stackView.backgroundColor = .simplenoteNoticeViewBackgroundColor
         stackView.layer.cornerRadius = Constants.cornerRadius
         stackView.clipsToBounds = true
 
-        noticeLabel.textColor = UIColor(lightColor: .gray100, darkColor: .white)
-        noticeButton.titleLabel?.textColor = UIColor(lightColor: .spBlue50, darkColor: .spBlue30)
+        noticeLabel.textColor = .simplenoteTextColor
+        noticeButton.setTitleColor(.simplenoteTintColor, for: .normal)
+        noticeButton.setTitleColor(.simplenoteCardDismissButtonHighlightedBackgroundColor, for: .highlighted)
         noticeButton.isHidden = true
+
     }
 
     // MARK: Action

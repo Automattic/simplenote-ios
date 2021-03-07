@@ -25,12 +25,13 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PEr-q4-fDe">
-                            <rect key="frame" x="202" y="60" width="46" height="18"/>
+                        <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PEr-q4-fDe">
+                            <rect key="frame" x="194" y="60" width="54" height="18"/>
                             <directionalEdgeInsets key="directionalLayoutMargins" top="16" leading="8" bottom="16" trailing="0.0"/>
-                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                             <inset key="contentEdgeInsets" minX="0.0" minY="-6" maxX="0.0" maxY="-6"/>
-                            <state key="normal" title="Button"/>
+                            <state key="normal" title="Button">
+                                <color key="titleColor" systemColor="linkColor"/>
+                            </state>
                             <connections>
                                 <action selector="noticeButtonWasTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="ZvQ-Fn-B9S"/>
                             </connections>
@@ -61,6 +62,9 @@
         </view>
     </objects>
     <resources>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
