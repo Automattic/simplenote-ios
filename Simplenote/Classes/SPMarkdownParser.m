@@ -52,6 +52,15 @@
 
     NSString *css = [NSString stringWithContentsOfURL:[[NSBundle mainBundle] URLForResource:self.cssPath withExtension:nil]
                                              encoding:NSUTF8StringEncoding error:nil];
+
+    // Check if increase contrast is enabled.  If enabled amend CSS to include high contrast colors
+    //
+    if (@available(iOS 13.0, *)) {
+        if ([[UITraitCollection currentTraitCollection] accessibilityContrast] == UIAccessibilityContrastHigh) {
+            NSString *contrast = [NSString stringWithContentsOfURL:[[NSBundle mainBundle] URLForResource:self.contrastCssPath withExtension:nil]
+                                                         encoding:NSUTF8StringEncoding error:nil];
+            css = [css stringByAppendingString:contrast];        }
+    }
     
     return [[headerStart stringByAppendingString:css] stringByAppendingString:headerEnd];
 }
@@ -63,6 +72,15 @@
     }
 
     return @"markdown-default.css";
+}
+
++ (NSString *)contrastCssPath
+{
+    if (SPUserInterface.isDark) {
+        return @"markdown-dark-contrast.css";
+    }
+
+    return @"markdown-default-contrast.css";
 }
 
 + (NSString *)htmlFooter
