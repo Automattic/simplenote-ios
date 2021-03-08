@@ -1,3 +1,6 @@
+4.34
+-----
+ 
 4.33
 -----
 -   Updating new-note and collaborate icons #1103

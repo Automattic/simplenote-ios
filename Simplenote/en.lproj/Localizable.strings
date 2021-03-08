@@ -65,17 +65,9 @@
 /* Label on button to add a new tag to a note */
 "Add tag" = "Add tag";
 
-/* Title: No filters applied */
+/* All Notes filter button
+   Title: No filters applied */
 "All Notes" = "All Notes";
-
-/* Sort Mode: Alphabetically */
-"Alphabetically" = "Alphabetically";
-
-/* Sort Mode: Alphabetically, ascending */
-"Alphabetically: A-Z" = "Alphabetically: A-Z";
-
-/* Sort Mode: Alphabetically, descending */
-"Alphabetically: Z-A" = "Alphabetically: Z-A";
 
 /* Sign in error message */
 "An error was encountered while signing in." = "An error was encountered while signing in.";
@@ -157,7 +149,7 @@
 /* Copies the Note's Public Link */
 "Copy Link" = "Copy Link";
 
-/* No comment provided by engineer. */
+/* Rating view - initial - could be better button */
 "Could be better" = "Could be better";
 
 /* Error for bad email or password */
@@ -166,7 +158,7 @@
 /* Message displayed when login fails */
 "Could not login with the provided email address and password." = "Could not login with the provided email address and password.";
 
-/* No comment provided by engineer. */
+/* Rating view disliked title */
 "Could you tell us how we could improve?" = "Could you tell us how we could improve?";
 
 /* Error message shown when trying to view history of a note without an internet connection */
@@ -187,8 +179,7 @@
 /* Message shown in note list when no notes are in the current view */
 "Create your first note" = "Create your first note";
 
-/* Note Creation Date
-   Sort Mode: Creation Date */
+/* Note Creation Date */
 "Created" = "Created";
 
 /* Sort Mode: Creation Date, descending */
@@ -225,6 +216,9 @@
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "Diagnostics";
 
+/* Footer -> Sign up verification screen. Parameter: %1$@ - support email address */
+"Didn't get an email? You may already have an account. Contact %1$@ for help." = "Didn't get an email? You may already have an account. Contact %1$@ for help.";
+
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "Disable Markdown formatting";
 
@@ -242,6 +236,7 @@
 
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
+   Done editing tags
    Done toolbar button */
 "Done" = "Done";
 
@@ -290,7 +285,7 @@
 /* FAQ or contact us */
 "Get Help" = "Get Help";
 
-/* No comment provided by engineer. */
+/* Rating view liked title */
 "Great! Mind leaving a review to tell us what you like?" = "Great! Mind leaving a review to tell us what you like?";
 
 /* Display help web page */
@@ -302,7 +297,7 @@
 /* Opens the Note's History */
 "History" = "History";
 
-/* No comment provided by engineer. */
+/* Rating view - initial - liked button */
 "I like it" = "I like it";
 
 /* Note Information Button (metrics + references) */
@@ -323,7 +318,7 @@
 /* Learn More Action */
 "Learn more" = "Learn more";
 
-/* No comment provided by engineer. */
+/* Rating view - liked - leave review button */
 "Leave a review" = "Leave a review";
 
 /* Theme: Light */
@@ -365,8 +360,7 @@
 /* Month and year date formatter */
 "MMM yyyy" = "MMM yyyy";
 
-/* Note Modification Date
-   Sort Mode: Modified Date */
+/* Note Modification Date */
 "Modified" = "Modified";
 
 /* Sort Mode: Modified Date, descending */
@@ -378,6 +372,12 @@
 /* Delete Action
    Deletes a note */
 "Move to Trash" = "Move to Trash";
+
+/* Sort Mode: Alphabetically, ascending */
+"Name: A-Z" = "Name: A-Z";
+
+/* Sort Mode: Alphabetically, descending */
+"Name: Z-A" = "Name: Z-A";
 
 /* Home screen quick action: New Note
    Keyboard shortcut: New Note */
@@ -401,7 +401,7 @@
 /* Message shown when no notes match a search string */
 "No Results" = "No Results";
 
-/* No comment provided by engineer. */
+/* Rating view - liked or disliked - no thanks button */
 "No thanks" = "No thanks";
 
 /* Message shown in note list when no notes are untagged */
@@ -413,7 +413,8 @@
 /* Instant passcode lock timeout */
 "Off" = "Off";
 
-/* Dismisses an AlertController */
+/* Closes alert controller for spinner on About view
+   Dismisses an AlertController */
 "OK" = "OK";
 
 /* No comment provided by engineer. */
@@ -546,10 +547,11 @@
 /* For debugging use */
 "Send a Test Crash" = "Send a Test Crash";
 
-/* No comment provided by engineer. */
+/* Rating view - disliked - send feedback button */
 "Send feedback" = "Send feedback";
 
-/* Title of options screen */
+/* Settings button
+   Title of options screen */
 "Settings" = "Settings";
 
 /* Opens the Share Sheet
@@ -604,10 +606,13 @@
 /* Accessibility hint for adding a tag to a note */
 "tag-add-accessibility-hint" = "Add a tag to the current note";
 
-/* No comment provided by engineer. */
+/* Remove a tag from the current note */
 "tag-delete-accessibility-hint" = "Remove tag from the current note";
 
-/* No comment provided by engineer. */
+/* Search Operator for tags. Please preserve the semicolons when translating! */
+"tag:" = "tag:";
+
+/* Tags List Header */
 "Tags" = "Tags";
 
 /* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
@@ -643,7 +648,8 @@
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Touch ID";
 
-/* Title: Trash Tag is selected */
+/* Title: Trash Tag is selected
+   Trash filter button */
 "Trash-noun" = "Trash";
 
 /* Prompt when disabling passcode */
@@ -688,13 +694,13 @@
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
 
-/* A welcome note for new iOS users */
-"welcomeNote-iOS" = "Welcome to Simplenote for iOS!\n\nTo add a note, tap the plus button.\n\nFlick the list to browse your notes. Tap a title to view a note, then tap its contents to change it.\n\nYou can search all your notes by typing in the search field at the top of the note list.\n\nTap the arrow button at the top left or swipe across your note list to view your tags. You can add tags to a note at the bottom of the note editor, and then use the sidebar to help you stay organized.\n\nThere are more note options if you need them. You can add others as collaborators to a note, or publish a note as a web page.\n\nUse Simplenote on your Mac, Android device, or in your web browser at http:\/\/simplenote.com. Your notes will stay updated everywhere automatically.";
-
 /* Message -> Verify your email screen. Parameter: %1$@ - email address */
 "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions.";
 
-/* No comment provided by engineer. */
+/* Message -> Sign up verification screen. Parameter: %1$@ - email address */
+"We’ve sent an email to %1$@. Please check your inbox and follow the instructions." = "We’ve sent an email to %1$@. Please check your inbox and follow the instructions.";
+
+/* Rating view initial title */
 "What do you think about Simplenote?" = "What do you think about Simplenote?";
 
 /* Number of words in the note */
