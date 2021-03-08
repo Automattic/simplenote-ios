@@ -5,7 +5,11 @@
 #
 # ruby ./this_script >| Simplenote/Resources/release_notes.txt
 #
-# To generate the GitHub release copy:
+# To generate the App Store Connect release message:
+#
+# ruby ./this_script | pbcopy
+#
+# To generate the GitHub and App Center release message:
 #
 # ruby ./this_script -k | pbcopy
 
@@ -70,7 +74,7 @@ when :keep_pr_links
     map { |l| replace_pr_number_with_markdown_link(l) }
 end
 
-# TODO: It would be good to either add overriding of the file where the parsed
+# It would be good to either add overriding of the file where the parsed
 # release notes should go. I haven't done it yet because I'm using this script
 # also to generate the text for the release notes on GitHub, where I want to
 # keep the PR links. See info on the usage a the start of the file.
