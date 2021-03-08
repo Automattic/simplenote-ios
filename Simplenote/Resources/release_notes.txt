@@ -1,1 +1,4 @@
-- Added support for keyboard navigation and shortcuts
+- Updating new-note and collaborate icons
+- Updating tags editor
+- Updating sort bar
+- Removing trailing comma from tags when used as delimiter
