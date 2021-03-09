@@ -1,0 +1,34 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "SimplenoteFoundation",
+        "repositoryURL": "git@github.com:Automattic/SimplenoteFoundation-Swift.git",
+        "state": {
+          "branch": null,
+          "revision": "2731e4d28c42d394ddc62cd864d9f7ff96759228",
+          "version": "1.3.0"
+        }
+      },
+      {
+        "package": "SimplenoteInterlinks",
+        "repositoryURL": "git@github.com:Automattic/SimplenoteInterlinks-Swift.git",
+        "state": {
+          "branch": null,
+          "revision": "be3827a5bf05c5349ed62126c3e1dc60a2a6cee6",
+          "version": "1.1.0"
+        }
+      },
+      {
+        "package": "SimplenoteSearch",
+        "repositoryURL": "git@github.com:Automattic/SimplenoteSearch-Swift.git",
+        "state": {
+          "branch": null,
+          "revision": "499d2809d169fcbeb9ff75568d9f1f937f290ffc",
+          "version": "1.3.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
