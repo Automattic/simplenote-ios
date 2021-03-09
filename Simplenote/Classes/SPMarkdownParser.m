@@ -50,13 +50,13 @@
             "<style media=\"screen\" type=\"text/css\">\n";
     NSString *headerEnd = @"</style></head><body><div class=\"note-detail-markdown\">";
 
-    NSString *css = [SPMarkdownParser loadCSSAtPath:self.cssPath];
+    NSString *css = [self loadCSSAtPath:self.cssPath];
 
     // Check if increase contrast is enabled.  If enabled amend CSS to include high contrast colors
     //
     if (@available(iOS 13.0, *)) {
         if ([[UITraitCollection currentTraitCollection] accessibilityContrast] == UIAccessibilityContrastHigh) {
-            NSString *contrast = [SPMarkdownParser loadCSSAtPath:self.contrastCssPath];
+            NSString *contrast = [self loadCSSAtPath:self.contrastCssPath];
             css = [css stringByAppendingString:contrast];
         }
     }
