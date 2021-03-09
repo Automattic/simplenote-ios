@@ -40,7 +40,7 @@ class NoticePresenter {
 
         noticeBottomConstraint?.constant = Constants.notificationOnScreenPosition
 
-        let delay = noticeView.action == nil ? Times.waitShort : Times.waitLong
+        let delay = noticeView.actionTitle == nil ? Times.waitShort : Times.waitLong
 
         UIView.animate(withDuration: Times.animationTime) {
             self.containerView.layoutIfNeeded()
