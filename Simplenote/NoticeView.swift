@@ -28,7 +28,7 @@ class NoticeView: UIView {
         }
         set {
             noticeButton.setTitle(newValue, for: .normal)
-            noticeButton.isHidden = false
+            noticeButton.isHidden = newValue == nil
         }
     }
 

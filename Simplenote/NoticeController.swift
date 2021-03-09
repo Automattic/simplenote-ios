@@ -41,7 +41,8 @@ class NoticeController {
     private func makeNoticeView(from notice: Notice) -> NoticeView {
         let noticeView: NoticeView = NoticeView.instantiateFromNib()
         noticeView.message = notice.message
-        noticeView.action = notice.action
+        noticeView.actionTitle = notice.action?.title
+        noticeView.handler = notice.action?.handler
         noticeView.delegate = self
 
         return noticeView
