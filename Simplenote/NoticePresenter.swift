@@ -4,7 +4,7 @@ class NoticePresenter {
 
     // MARK: Properties
     //
-    var containerView = UntouchableView(frame: .zero)
+    var containerView = PassthruView(frame: .zero)
     var noticeView: NoticeView?
     var noticeBottomConstraint: NSLayoutConstraint?
 
