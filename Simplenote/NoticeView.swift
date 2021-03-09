@@ -9,16 +9,41 @@ class NoticeView: UIView {
 
     // MARK: Properties
     //
-    @IBOutlet weak var stackView: UIStackView!
-    @IBOutlet weak var noticeLabel: UILabel!
-    @IBOutlet weak var noticeButton: UIButton!
+    @IBOutlet private weak var stackView: UIStackView!
+    @IBOutlet private weak var noticeLabel: UILabel!
+    @IBOutlet private weak var noticeButton: UIButton!
 
-    weak var delegate: NoticePresentingDelegate?
-    var action: (() -> Void)? {
-        didSet {
-            noticeButton.isHidden = action == nil
+    private var handler: (() -> Void)?
+
+    var message: String? {
+        get {
+            noticeLabel.text
+        }
+        set {
+            noticeLabel.text = newValue
         }
     }
+
+    var action: NoticeAction? {
+        get {
+            guard let title = noticeButton.titleLabel?.text,
+                  let handler = handler else {
+                return nil
+            }
+            return NoticeAction(title: title, handler: handler)
+        }
+        set {
+            guard let newValue = newValue else {
+                return
+            }
+            noticeButton.setTitle(newValue.title, for: .normal)
+            handler = newValue.handler
+            noticeButton.isHidden = false
+        }
+    }
+
+    weak var delegate: NoticePresentingDelegate?
+
 
     // MARK: Initialization
     //
