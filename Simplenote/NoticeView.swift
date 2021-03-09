@@ -13,8 +13,6 @@ class NoticeView: UIView {
     @IBOutlet private weak var noticeLabel: UILabel!
     @IBOutlet private weak var noticeButton: UIButton!
 
-    private var handler: (() -> Void)?
-
     var message: String? {
         get {
             noticeLabel.text
@@ -23,21 +21,13 @@ class NoticeView: UIView {
             noticeLabel.text = newValue
         }
     }
-
-    var action: NoticeAction? {
+    var handler: (() -> Void)?
+    var actionTitle: String? {
         get {
-            guard let title = noticeButton.titleLabel?.text,
-                  let handler = handler else {
-                return nil
-            }
-            return NoticeAction(title: title, handler: handler)
+            noticeButton.titleLabel?.text
         }
         set {
-            guard let newValue = newValue else {
-                return
-            }
-            noticeButton.setTitle(newValue.title, for: .normal)
-            handler = newValue.handler
+            noticeButton.setTitle(newValue, for: .normal)
             noticeButton.isHidden = false
         }
     }
