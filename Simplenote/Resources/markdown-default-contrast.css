@@ -1,5 +1,5 @@
 
 /* Accessibility high contrast blue */
 .note-detail-markdown a {
-    color: #284da2;
+    color: #284da2 !important;
 }
