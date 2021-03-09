@@ -71,8 +71,6 @@ class NoticeView: UIView {
         backgroundColor = .clear
 
         setupStackViewBackground(color: .simplenoteNoticeViewBackgroundColor)
-        stackView.layer.cornerRadius = Constants.cornerRadius
-        stackView.clipsToBounds = true
 
         noticeLabel.textColor = .simplenoteTextColor
         noticeButton.setTitleColor(.simplenoteTintColor, for: .normal)
@@ -84,7 +82,6 @@ class NoticeView: UIView {
     private func setupStackViewBackground(color: UIColor) {
         let backgroundView = UIView(frame: .zero)
         backgroundView.backgroundColor = color
-        backgroundView.clipsToBounds = true
         backgroundView.layer.cornerRadius = Constants.cornerRadius
         stackView.addFillingSubview(backgroundView, atPosition: 0)
     }
