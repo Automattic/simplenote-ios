@@ -28,7 +28,14 @@ extension UIView {
     @discardableResult
     func addFillingSubview(_ view: UIView,
                            edgeInsets: UIEdgeInsets = .zero,
-                           target: AnchorTarget = .bounds) -> EdgeConstraints {
+                           target: AnchorTarget = .bounds,
+                           atPosition: Int? = nil) -> EdgeConstraints {
+
+        if let position = atPosition {
+            insertSubview(view, at: position)
+            return pinSubviewToAllEdges(view, edgeInsets: edgeInsets, target: target)
+        }
+
         addSubview(view)
         return pinSubviewToAllEdges(view, edgeInsets: edgeInsets, target: target)
     }

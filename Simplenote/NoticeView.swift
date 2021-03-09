@@ -68,7 +68,9 @@ class NoticeView: UIView {
     }
 
     private func setupViewStyles() {
-        stackView.backgroundColor = .simplenoteNoticeViewBackgroundColor
+        backgroundColor = .clear
+
+        setupStackViewBackground(color: .simplenoteNoticeViewBackgroundColor)
         stackView.layer.cornerRadius = Constants.cornerRadius
         stackView.clipsToBounds = true
 
@@ -79,10 +81,18 @@ class NoticeView: UIView {
 
     }
 
+    private func setupStackViewBackground(color: UIColor) {
+        let backgroundView = UIView(frame: .zero)
+        backgroundView.backgroundColor = color
+        backgroundView.clipsToBounds = true
+        backgroundView.layer.cornerRadius = Constants.cornerRadius
+        stackView.addFillingSubview(backgroundView, atPosition: 0)
+    }
+
     // MARK: Action
     //
     @IBAction func noticeButtonWasTapped(_ sender: Any) {
-        action?()
+        handler?()
     }
 }
 
