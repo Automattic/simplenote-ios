@@ -15,8 +15,6 @@ class NoticePresenter: KeyboardObservable {
     private var keyboardHeight: CGFloat = 0
     private var keyboardNotificationTokens: [Any]?
 
-    private init() { }
-
     deinit {
         stopListeningToKeyboardNotifications()
     }
