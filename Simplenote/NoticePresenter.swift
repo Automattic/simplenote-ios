@@ -1,6 +1,6 @@
 import UIKit
 
-class NoticePresenter {
+class NoticePresenter: KeyboardObservable {
 
     // MARK: Properties
     //
@@ -10,6 +10,13 @@ class NoticePresenter {
 
     var isPresenting: Bool {
         noticeView != nil
+    }
+    private var keyboardNotificationTokens: [Any]?
+
+    private init() { }
+
+    deinit {
+        stopListeningToKeyboardNotifications()
     }
 
     // MARK: Presenting/Dismissing Methods
@@ -64,6 +71,22 @@ class NoticePresenter {
             self.noticeView = nil
             completion()
         }
+    }
+    func keyboardDidChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
+    }
+    func keyboardWillChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
+    }
+    func startListeningToKeyboardNotifications() {
+        keyboardNotificationTokens = addKeyboardObservers()
+    }
+
+    func stopListeningToKeyboardNotifications() {
+        guard let tokens = keyboardNotificationTokens else {
+            return
+        }
+
+        removeKeyboardObservers(with: tokens)
+        keyboardNotificationTokens = nil
     }
 }
 
