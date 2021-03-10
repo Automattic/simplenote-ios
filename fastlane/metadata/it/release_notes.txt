@@ -1,1 +1,4 @@
-- Aggiunta del supporto per la navigazione da tastiera e per le scorciatoie
+- Aggiornate le icone per creare una nuova nota ed per il menù di collaborazione
+- Aggiornato l'editor per le tags
+- Aggiornata la barra laterale con i risultati di una ricerca
+- Rimosse le virgole alla fine delle tags quando sono usate come delimitatrici

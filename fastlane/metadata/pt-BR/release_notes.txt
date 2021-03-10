@@ -1,1 +1,0 @@
-- Suporte adicionado para atalhos e navegação do teclado

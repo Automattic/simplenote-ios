@@ -1,1 +1,0 @@
-- Tillagt stöd för tangentbordsnavigering och genvägar
