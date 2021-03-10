@@ -172,6 +172,8 @@
     // Index (All of the) Spotlight Items if the user upgraded
     [self indexSpotlightItemsIfNeeded];
 
+    [self setupNoticeController];
+
     return YES;
 }
 

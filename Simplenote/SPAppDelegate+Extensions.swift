@@ -148,6 +148,11 @@ extension SPAppDelegate {
             navigationController.popToViewController(noteListViewController, animated: animated)
         }
     }
+
+    @objc
+    func setupNoticeController() {
+        NoticeController.shared.setupNoticeController()
+    }
 }
 
 

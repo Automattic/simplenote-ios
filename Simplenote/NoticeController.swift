@@ -11,6 +11,10 @@ class NoticeController {
 
     private init() { }
 
+    func setupNoticeController() {
+        noticePresenter.startListeningToKeyboardNotifications()
+    }
+
     func present(_ notice: Notice) {
         if noticePresenter.isPresenting {
             appendToQueueIfNew(notice)
