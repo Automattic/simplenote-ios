@@ -35,16 +35,6 @@ extension UIView {
     }
 
     @discardableResult
-    func addFillingSubview(_ view: UIView,
-                           atPosition position: Int,
-                           edgeInsets: UIEdgeInsets = .zero,
-                           target: AnchorTarget = .bounds) -> EdgeConstraints {
-
-        insertSubview(view, at: position)
-        return pinSubviewToAllEdges(view, edgeInsets: edgeInsets, target: target)
-    }
-
-    @discardableResult
     func pinSubviewToAllEdges(_ view: UIView, edgeInsets: UIEdgeInsets = .zero, target: AnchorTarget = .bounds) -> EdgeConstraints {
         view.translatesAutoresizingMaskIntoConstraints = false
 
