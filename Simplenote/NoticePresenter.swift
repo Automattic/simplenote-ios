@@ -12,7 +12,7 @@ class NoticePresenter: KeyboardObservable {
         noticeView != nil
     }
     private var keyboardVisible: Bool = false
-    private var keyboardHeight: CGFloat = 0
+    private var keyboardHeight: CGFloat = .zero
     private var keyboardNotificationTokens: [Any]?
 
     deinit {
@@ -74,7 +74,7 @@ class NoticePresenter: KeyboardObservable {
         }
 
         UIView.animate(withDuration: Times.animationTime) {
-            noticeView.alpha = 0
+            noticeView.alpha = .zero
         } completion: { (_) in
             self.noticeView?.removeFromSuperview()
             self.containerView.removeFromSuperview()
