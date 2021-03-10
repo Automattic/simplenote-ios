@@ -11,6 +11,8 @@ class NoticePresenter: KeyboardObservable {
     var isPresenting: Bool {
         noticeView != nil
     }
+    private var keyboardVisible: Bool = false
+    private var keyboardHeight: CGFloat = 0
     private var keyboardNotificationTokens: [Any]?
 
     private init() { }
@@ -45,7 +47,7 @@ class NoticePresenter: KeyboardObservable {
             return
         }
 
-        noticeBottomConstraint?.constant = Constants.notificationOnScreenPosition
+        noticeBottomConstraint?.constant = configureOnScreenConstraint()
 
         let delay = noticeView.actionTitle == nil ? Times.waitShort : Times.waitLong
 
@@ -56,6 +58,16 @@ class NoticePresenter: KeyboardObservable {
                 completion()
             }
         }
+    }
+
+    private func configureOnScreenConstraint() -> CGFloat {
+        var constant = Constants.notificationOnScreenPosition
+
+        if keyboardVisible {
+            constant -= keyboardHeight
+        }
+
+        return constant
     }
 
     func dismissNotification(completion: @escaping () -> Void) {
@@ -72,10 +84,41 @@ class NoticePresenter: KeyboardObservable {
             completion()
         }
     }
+
     func keyboardDidChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
+        guard let window = getKeyWindow(),
+              let endFrame = endFrame,
+              let animationDuration = animationDuration,
+              let curve = animationCurve else {
+            return
+        }
+
+        changeNotificationFrame(endFrame, window, curve, animationDuration)
     }
+
     func keyboardWillChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
+        guard let window = getKeyWindow(),
+              let endFrame = endFrame,
+              let animationDuration = animationDuration,
+              let curve = animationCurve else {
+            return
+        }
+
+        changeNotificationFrame(endFrame, window, curve, animationDuration)
     }
+
+    fileprivate func changeNotificationFrame(_ endFrame: CGRect, _ window: UIWindow, _ curve: UInt, _ animationDuration: TimeInterval) {
+        keyboardVisible = endFrame.height != .zero
+        keyboardHeight = endFrame.intersection(window.frame).height
+
+        let animationOptions = UIView.AnimationOptions(arrayLiteral: .beginFromCurrentState, .init(rawValue: curve))
+
+        noticeBottomConstraint?.constant = configureOnScreenConstraint()
+        UIView.animate(withDuration: animationDuration, delay: .zero, options: animationOptions) {
+            self.containerView.layoutIfNeeded()
+        }
+    }
+
     func startListeningToKeyboardNotifications() {
         keyboardNotificationTokens = addKeyboardObservers()
     }
