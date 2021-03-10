@@ -15,6 +15,9 @@ class NoticePresenter: KeyboardObservable {
     private var keyboardHeight: CGFloat = .zero
     private var keyboardNotificationTokens: [Any]?
 
+
+    // MARK: Lifecycle
+    //
     deinit {
         stopListeningToKeyboardNotifications()
     }
@@ -83,31 +86,28 @@ class NoticePresenter: KeyboardObservable {
         }
     }
 
+    // MARK: Keyboard Obserbers
+    //
     func keyboardDidChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
-        guard let window = getKeyWindow(),
-              let endFrame = endFrame,
-              let animationDuration = animationDuration,
-              let curve = animationCurve else {
-            return
-        }
-
-        changeNotificationFrame(endFrame, window, curve, animationDuration)
+        animateNoticeToNewKeyboardLocation(frame: endFrame, curve: animationCurve, animationDuration: animationDuration)
     }
 
     func keyboardWillChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
-        guard let window = getKeyWindow(),
-              let endFrame = endFrame,
-              let animationDuration = animationDuration,
-              let curve = animationCurve else {
-            return
-        }
-
-        changeNotificationFrame(endFrame, window, curve, animationDuration)
+        animateNoticeToNewKeyboardLocation(frame: endFrame, curve: animationCurve, animationDuration: animationDuration)
     }
 
-    fileprivate func changeNotificationFrame(_ endFrame: CGRect, _ window: UIWindow, _ curve: UInt, _ animationDuration: TimeInterval) {
-        keyboardVisible = endFrame.height != .zero
-        keyboardHeight = endFrame.intersection(window.frame).height
+    private func animateNoticeToNewKeyboardLocation(frame: CGRect?, curve: UInt?, animationDuration: TimeInterval?) {
+        guard let frame = frame,
+              let curve = curve,
+              let animationDuration = animationDuration else {
+            return
+        }
+        keyboardVisible = frame.height != .zero
+        keyboardHeight = frame.intersection(getWindowFrame()).height
+
+        if !isPresenting {
+            return
+        }
 
         let animationOptions = UIView.AnimationOptions(arrayLiteral: .beginFromCurrentState, .init(rawValue: curve))
 
@@ -135,8 +135,15 @@ class NoticePresenter: KeyboardObservable {
 extension NoticePresenter {
     // Convenience method to fetch current key window
     //
-    func getKeyWindow() -> UIWindow? {
+    private func getKeyWindow() -> UIWindow? {
         return UIApplication.shared.windows.first(where: { $0.isKeyWindow })
+    }
+
+    private func getWindowFrame() -> CGRect {
+        guard let window = getKeyWindow() else {
+            return .zero
+        }
+        return window.frame
     }
 }
 
