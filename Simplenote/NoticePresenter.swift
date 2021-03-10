@@ -13,6 +13,7 @@ class NoticePresenter: KeyboardObservable {
     }
     private var keyboardVisible: Bool = false
     private var keyboardHeight: CGFloat = .zero
+    private var keyboardFloats: Bool = false
     private var keyboardNotificationTokens: [Any]?
 
 
@@ -48,7 +49,7 @@ class NoticePresenter: KeyboardObservable {
             return
         }
 
-        noticeBottomConstraint?.constant = configureOnScreenConstraint()
+        noticeBottomConstraint?.constant = keyboardFloats ? Constants.notificationOnScreenPosition :  configureOnScreenConstraint()
 
         let delay = noticeView.actionTitle == nil ? Times.waitShort : Times.waitLong
 
@@ -89,29 +90,39 @@ class NoticePresenter: KeyboardObservable {
     // MARK: Keyboard Obserbers
     //
     func keyboardDidChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
+        guard let endFrame = endFrame,
+              let animationCurve = animationCurve,
+              let animationDuration = animationDuration else {
+            return
+        }
+        setStoredStates(frame: endFrame)
         animateNoticeToNewKeyboardLocation(frame: endFrame, curve: animationCurve, animationDuration: animationDuration)
     }
 
     func keyboardWillChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
-        animateNoticeToNewKeyboardLocation(frame: endFrame, curve: animationCurve, animationDuration: animationDuration)
-    }
-
-    private func animateNoticeToNewKeyboardLocation(frame: CGRect?, curve: UInt?, animationDuration: TimeInterval?) {
-        guard let frame = frame,
-              let curve = curve,
+        guard let endFrame = endFrame,
+              let animationCurve = animationCurve,
               let animationDuration = animationDuration else {
             return
         }
+        setStoredStates(frame: endFrame)
+        animateNoticeToNewKeyboardLocation(frame: endFrame, curve: animationCurve, animationDuration: animationDuration)
+    }
+
+    private func setStoredStates(frame: CGRect) {
+        let windowFrame = getWindowFrame()
         keyboardVisible = frame.height != .zero
         keyboardHeight = frame.intersection(getWindowFrame()).height
-
+        keyboardFloats = frame.maxY < windowFrame.height
+    }
+    private func animateNoticeToNewKeyboardLocation(frame: CGRect, curve: UInt, animationDuration: TimeInterval) {
         if !isPresenting {
             return
         }
 
         let animationOptions = UIView.AnimationOptions(arrayLiteral: .beginFromCurrentState, .init(rawValue: curve))
 
-        noticeBottomConstraint?.constant = configureOnScreenConstraint()
+        noticeBottomConstraint?.constant = keyboardFloats ? Constants.notificationOnScreenPosition : configureOnScreenConstraint()
         UIView.animate(withDuration: animationDuration, delay: .zero, options: animationOptions) {
             self.containerView.layoutIfNeeded()
         }
