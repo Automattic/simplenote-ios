@@ -51,7 +51,7 @@ class NoticePresenter: KeyboardObservable {
 
         noticeBottomConstraint?.constant = keyboardFloats ? Constants.notificationOnScreenPosition :  configureOnScreenConstraint()
 
-        let delay = noticeView.actionTitle == nil ? Times.waitShort : Times.waitLong
+        let delay = noticeView.handler == nil ? Times.waitShort : Times.waitLong
 
         UIView.animate(withDuration: Times.animationTime) {
             self.containerView.layoutIfNeeded()
