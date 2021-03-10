@@ -15,6 +15,10 @@
             <rect key="frame" x="0.0" y="0.0" width="275" height="94"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mtf-MV-bkZ">
+                    <rect key="frame" x="0.0" y="0.0" width="275" height="94"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="SfY-hE-pTa">
                     <rect key="frame" x="0.0" y="0.0" width="275" height="94"/>
                     <subviews>
@@ -44,9 +48,13 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="SfY-hE-pTa" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="3cf-qp-9v0"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Mtf-MV-bkZ" secondAttribute="bottom" id="4Ts-m4-1eX"/>
                 <constraint firstItem="SfY-hE-pTa" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="AlF-qz-1e0"/>
+                <constraint firstItem="Mtf-MV-bkZ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Ejv-Yu-vUy"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="SfY-hE-pTa" secondAttribute="trailing" id="Pol-l0-5yu"/>
+                <constraint firstItem="Mtf-MV-bkZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="iNX-Ma-nI3"/>
                 <constraint firstItem="SfY-hE-pTa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="izk-mh-sTq"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Mtf-MV-bkZ" secondAttribute="trailing" id="seD-19-rKA"/>
                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="x3c-Xa-ZMj"/>
                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="335" id="y3n-Q5-KCj"/>
             </constraints>
@@ -54,6 +62,7 @@
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="backgroundView" destination="Mtf-MV-bkZ" id="mA5-2o-NUa"/>
                 <outlet property="noticeButton" destination="PEr-q4-fDe" id="liX-qn-zOK"/>
                 <outlet property="noticeLabel" destination="VzW-UO-SDt" id="pij-du-OHV"/>
                 <outlet property="stackView" destination="SfY-hE-pTa" id="fBE-yp-fw8"/>

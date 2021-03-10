@@ -9,6 +9,7 @@ class NoticeView: UIView {
 
     // MARK: Properties
     //
+    @IBOutlet weak var backgroundView: UIView!
     @IBOutlet private weak var stackView: UIStackView!
     @IBOutlet private weak var noticeLabel: UILabel!
     @IBOutlet private weak var noticeButton: UIButton!
@@ -60,20 +61,14 @@ class NoticeView: UIView {
     private func setupViewStyles() {
         backgroundColor = .clear
 
-        setupStackViewBackground(color: .simplenoteNoticeViewBackgroundColor)
+        backgroundView.backgroundColor = .simplenoteNoticeViewBackgroundColor
+        backgroundView.layer.cornerRadius = Constants.cornerRadius
 
         noticeLabel.textColor = .simplenoteTextColor
         noticeButton.setTitleColor(.simplenoteTintColor, for: .normal)
         noticeButton.setTitleColor(.simplenoteCardDismissButtonHighlightedBackgroundColor, for: .highlighted)
         noticeButton.isHidden = true
 
-    }
-
-    private func setupStackViewBackground(color: UIColor) {
-        let backgroundView = UIView(frame: .zero)
-        backgroundView.backgroundColor = color
-        backgroundView.layer.cornerRadius = Constants.cornerRadius
-        stackView.addFillingSubview(backgroundView, atPosition: 0)
     }
 
     // MARK: Action
