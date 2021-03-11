@@ -32,12 +32,10 @@ class NoticeController {
     }
 
     private func dismiss(_ noticeView: NoticeView) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + Times.tapDelay) {
-            self.noticePresenter.dismissNotification {
-                self.current = nil
-                if !self.notices.isEmpty {
-                    self.present(self.notices.removeFirst())
-                }
+        self.noticePresenter.dismissNotification {
+            self.current = nil
+            if !self.notices.isEmpty {
+                self.present(self.notices.removeFirst())
             }
         }
     }
@@ -69,19 +67,20 @@ class NoticeController {
 
 extension NoticeController: NoticePresentingDelegate {
     func noticePressBegan() {
-        activeViewIsBeingTouched = true
+        if !noticePresenter.isPresenting {
+            return
+        }
+        guard let timer = noticePresenter.timer else {
+            return
+        }
+
+        timer.invalidate()
     }
 
     func noticePressEnded() {
-        activeViewIsBeingTouched = false
-
         guard let noticeView = noticePresenter.noticeView else {
             return
         }
         dismiss(noticeView)
     }
-}
-
-private struct Times {
-    static let tapDelay = TimeInterval(2)
 }

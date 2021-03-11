@@ -49,17 +49,12 @@ class NoticePresenter: KeyboardObservable {
             return
         }
 
-        noticeBottomConstraint?.constant = keyboardFloats ? Constants.notificationOnScreenPosition :  configureOnScreenConstraint()
-
-        let delay = noticeView.handler == nil ? Times.waitShort : Times.waitLong
-
-        UIView.animate(withDuration: Times.animationTime) {
+        UIView.animate(withDuration: UIKitConstants.animationLongDuration) {
             self.containerView.layoutIfNeeded()
         } completion: { (_) in
-            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                completion()
-            }
+            completion()
         }
+    }
     }
 
     private func configureOnScreenConstraint() -> CGFloat {
@@ -77,12 +72,24 @@ class NoticePresenter: KeyboardObservable {
             return
         }
 
-        UIView.animate(withDuration: Times.animationTime) {
+        let delay = noticeView.handler == nil ? UIKitConstants.animationDelayExtraLong : UIKitConstants.animationDelayExtraExtraLong
+
+        timer = Timer.scheduledTimer(withTimeInterval: delay, repeats: false, block: { (timer) in
+            self.dismissAnimation(noticeView: noticeView) {
+                completion()
+            }
+        })
+    }
+
+    @objc
+    private func dismissAnimation(noticeView: NoticeView, completion: @escaping () -> Void) {
+        UIView.animate(withDuration: UIKitConstants.animationLongDuration) {
             noticeView.alpha = .zero
         } completion: { (_) in
             self.noticeView?.removeFromSuperview()
             self.containerView.removeFromSuperview()
             self.noticeView = nil
+            self.timer = nil
             completion()
         }
     }
@@ -142,7 +149,6 @@ class NoticePresenter: KeyboardObservable {
     }
 }
 
-
 extension NoticePresenter {
     // Convenience method to fetch current key window
     //
@@ -153,13 +159,6 @@ extension NoticePresenter {
     private func getWindowFrame() -> CGRect {
         return getKeyWindow()?.frame ?? .zero
     }
-}
-
-private struct Times {
-    static let waitShort = 1.5
-    static let waitLong = 2.75
-    static let animationTime = TimeInterval(0.5)
-    static let tapWait = TimeInterval(3)
 }
 
 private struct Constants {
