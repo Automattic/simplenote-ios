@@ -9,7 +9,7 @@ class NoticeView: UIView {
 
     // MARK: Properties
     //
-    @IBOutlet weak var backgroundView: UIView!
+    @IBOutlet private weak var backgroundView: UIView!
     @IBOutlet private weak var stackView: UIStackView!
     @IBOutlet private weak var noticeLabel: UILabel!
     @IBOutlet private weak var noticeButton: UIButton!
