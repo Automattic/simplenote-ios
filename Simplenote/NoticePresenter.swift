@@ -4,17 +4,17 @@ class NoticePresenter: KeyboardObservable {
 
     // MARK: Properties
     //
-    var containerView = PassthruView(frame: .zero)
+    private var containerView = PassthruView(frame: .zero)
     var noticeView: NoticeView?
-    var noticeBottomConstraint: NSLayoutConstraint?
+    private var noticeVariableConstraint: NSLayoutConstraint?
 
     var isPresenting: Bool {
         noticeView != nil
     }
-    private var keyboardVisible: Bool = false
     private var keyboardHeight: CGFloat = .zero
     private var keyboardFloats: Bool = false
     private var keyboardNotificationTokens: [Any]?
+    var timer: Timer?
 
 
     // MARK: Lifecycle
@@ -34,20 +34,18 @@ class NoticePresenter: KeyboardObservable {
         containerView.addSubview(noticeView)
         keyWindow.addFillingSubview(containerView)
 
-        noticeBottomConstraint = noticeView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: Constants.notificationStartingPosition)
-        noticeBottomConstraint?.isActive = true
+        noticeVariableConstraint = noticeView.topAnchor.constraint(equalTo: containerView.bottomAnchor)
+        noticeVariableConstraint?.isActive = true
         noticeView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
-
         containerView.layoutIfNeeded()
+
         displayNotificationView() {
             completion()
         }
     }
 
     private func displayNotificationView(completion: @escaping () -> Void) {
-        guard let noticeView = noticeView else {
-            return
-        }
+        prepareConstraintToDisplayNotice()
 
         UIView.animate(withDuration: UIKitConstants.animationLongDuration) {
             self.containerView.layoutIfNeeded()
@@ -55,16 +53,23 @@ class NoticePresenter: KeyboardObservable {
             completion()
         }
     }
-    }
 
-    private func configureOnScreenConstraint() -> CGFloat {
-        var constant = Constants.notificationOnScreenPosition
+    private func makeBottomConstraintConstant() -> CGFloat {
+        let constant = Constants.bottomMarginConstant
 
-        if keyboardVisible {
-            constant -= keyboardHeight
+        if keyboardFloats || keyboardHeight == .zero {
+            return constant
         }
 
-        return constant
+        return constant - keyboardHeight
+    }
+
+    private func prepareConstraintToDisplayNotice() {
+        noticeVariableConstraint?.isActive = false
+
+        let constant = makeBottomConstraintConstant()
+        noticeVariableConstraint = noticeView?.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: constant)
+        noticeVariableConstraint?.isActive = true
     }
 
     func dismissNotification(completion: @escaping () -> Void) {
@@ -102,7 +107,7 @@ class NoticePresenter: KeyboardObservable {
               let animationDuration = animationDuration else {
             return
         }
-        setStoredStates(frame: endFrame)
+        updateKeyboardHeight(with: endFrame)
         animateNoticeToNewKeyboardLocation(frame: endFrame, curve: animationCurve, animationDuration: animationDuration)
     }
 
@@ -112,13 +117,12 @@ class NoticePresenter: KeyboardObservable {
               let animationDuration = animationDuration else {
             return
         }
-        setStoredStates(frame: endFrame)
+        updateKeyboardHeight(with: endFrame)
         animateNoticeToNewKeyboardLocation(frame: endFrame, curve: animationCurve, animationDuration: animationDuration)
     }
 
-    private func setStoredStates(frame: CGRect) {
+    private func updateKeyboardHeight(with frame: CGRect) {
         let windowFrame = getWindowFrame()
-        keyboardVisible = frame.height != .zero
         keyboardHeight = frame.intersection(getWindowFrame()).height
         keyboardFloats = frame.maxY < windowFrame.height
     }
@@ -129,7 +133,7 @@ class NoticePresenter: KeyboardObservable {
 
         let animationOptions = UIView.AnimationOptions(arrayLiteral: .beginFromCurrentState, .init(rawValue: curve))
 
-        noticeBottomConstraint?.constant = keyboardFloats ? Constants.notificationOnScreenPosition : configureOnScreenConstraint()
+        noticeVariableConstraint?.constant = makeBottomConstraintConstant()
         UIView.animate(withDuration: animationDuration, delay: .zero, options: animationOptions) {
             self.containerView.layoutIfNeeded()
         }
@@ -162,7 +166,5 @@ extension NoticePresenter {
 }
 
 private struct Constants {
-    static let notificationBottomMargin = CGFloat(-150)
-    static let notificationStartingPosition = CGFloat(100)
-    static let notificationOnScreenPosition = CGFloat(-50)
+    static let bottomMarginConstant = CGFloat(-50)
 }
