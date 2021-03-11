@@ -59,10 +59,8 @@ class NoticeController {
             return
         }
 
-        if let current = current {
-            if notice == current {
-                return
-            }
+        if notice == current {
+            return
         }
 
         notices.append(notice)
