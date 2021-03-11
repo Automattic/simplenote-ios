@@ -151,10 +151,7 @@ extension NoticePresenter {
     }
 
     private func getWindowFrame() -> CGRect {
-        guard let window = getKeyWindow() else {
-            return .zero
-        }
-        return window.frame
+        return getKeyWindow()?.frame ?? .zero
     }
 }
 
