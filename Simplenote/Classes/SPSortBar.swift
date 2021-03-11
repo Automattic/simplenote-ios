@@ -22,10 +22,6 @@ class SPSortBar: UIView {
     ///
     @IBOutlet private var containerView: UIView!
 
-    /// Sort Order Button!
-    ///
-    @IBOutlet private var sortOrderButton: UIButton!
-
     /// Title: Sort By
     ///
     @IBOutlet private var titleLabel: UILabel!
@@ -49,10 +45,6 @@ class SPSortBar: UIView {
     ///
     var onSortModePress: (() -> Void)?
 
-    /// Closure to be executed whenever the Sort Order [View] (center of the Sort Bar) is pressed
-    ///
-    var onSortOrderPress: (() -> Void)?
-
 
     // MARK: - Lifecycle
 
@@ -69,7 +61,6 @@ class SPSortBar: UIView {
         setupBackgroundView()
         setupBlurEffect()
         setupTextLabels()
-        setupOrderButton()
         setupSubviews()
 
         refreshStyle()
@@ -101,10 +92,6 @@ private extension SPSortBar {
         descriptionLabel.font = .systemFont(ofSize: 12.0)
     }
 
-    func setupOrderButton() {
-        sortOrderButton.imageView?.contentMode = .center
-    }
-
     func setupSubviews() {
         insertSubview(blurView, at: .zero)
 
@@ -119,7 +106,6 @@ private extension SPSortBar {
 
     func refreshStyle() {
         dividerView.backgroundColor = .simplenoteDividerColor
-        sortOrderButton.imageView?.tintColor = .simplenoteTintColor
         titleLabel.textColor = .simplenoteTextColor
         descriptionLabel.textColor = .simplenoteInteractiveTextColor
     }
@@ -148,10 +134,6 @@ private extension SPSortBar {
 // MARK: - Action Handlers
 //
 private extension SPSortBar {
-
-    @IBAction func sortOrderWasPressed() {
-        onSortOrderPress?()
-    }
 
     @IBAction func sortModeWasPressed() {
         onSortModePress?()

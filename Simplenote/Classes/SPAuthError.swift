@@ -61,7 +61,7 @@ extension SPAuthError {
     var message: String {
         switch self {
         case .loginBadCredentials:
-            return NSLocalizedString("Could not login with the provided email address and password.", comment: "Message displayed when login fails");
+            return NSLocalizedString("Could not login with the provided email address and password.", comment: "Message displayed when login fails")
         case .signupBadCredentials:
             return NSLocalizedString("Could not create an account with the provided email address and password.", comment: "Error for bad email or password")
         case .signupUserAlreadyExists:

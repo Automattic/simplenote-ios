@@ -57,4 +57,3 @@ class OptionsTests: XCTestCase {
         XCTAssert(options.theme == .light)
     }
 }
-

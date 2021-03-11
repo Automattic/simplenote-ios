@@ -52,22 +52,12 @@ extension SPNoteEditorViewController {
         keyboardButton.accessibilityLabel = NSLocalizedString("Dismiss keyboard", comment: "Dismiss Keyboard Button")
     }
 
-    /// Sets up the Bottom View:
-    /// - Note: This helper view covers the area between the bottom edge of the screen, and the safeArea's bottom
-    ///
-    @objc
-    func configureBottomView() {
-        bottomView = UIView()
-        bottomView.isHidden = true
-    }
-
     /// Sets up the Root ViewController
     ///
     @objc
     func configureRootView() {
         view.addSubview(noteEditorTextView)
         view.addSubview(navigationBarBackground)
-        view.addSubview(bottomView)
     }
 
     /// Sets up the Layout
@@ -76,7 +66,6 @@ extension SPNoteEditorViewController {
     func configureLayout() {
         navigationBarBackground.translatesAutoresizingMaskIntoConstraints = false
         noteEditorTextView.translatesAutoresizingMaskIntoConstraints = false
-        bottomView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             navigationBarBackground.topAnchor.constraint(equalTo: view.topAnchor),
@@ -91,32 +80,66 @@ extension SPNoteEditorViewController {
             noteEditorTextView.leftAnchor.constraint(equalTo: view.leftAnchor),
             noteEditorTextView.rightAnchor.constraint(equalTo: view.rightAnchor)
         ])
-
-        NSLayoutConstraint.activate([
-            bottomView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            bottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            bottomView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            bottomView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        ])
     }
 
     /// Sets up the Interlinks Processor
     ///
     @objc
     func configureInterlinksProcessor() {
-        interlinkProcessor = InterlinkProcessor(viewContext: SPAppDelegate.shared().managedObjectContext)
+        interlinkProcessor = InterlinkProcessor(viewContext: SPAppDelegate.shared().managedObjectContext,
+                                                popoverPresenter: popoverPresenter,
+                                                parentTextView: noteEditorTextView,
+                                                excludedEntityID: note.objectID)
         interlinkProcessor.delegate = self
-        interlinkProcessor.contextProvider = self
     }
-    
+
     /// Sets up the Keyboard
     ///
     @objc
     func configureTextViewKeyboard() {
         noteEditorTextView.keyboardDismissMode = .interactive
     }
+
+    /// Sets up text view observers
+    ///
+    @objc
+    func configureTextViewObservers() {
+        noteEditorTextView.onContentPositionChange = { [weak self] in
+            self?.updateTagListPosition()
+        }
+    }
+
+    private var popoverPresenter: PopoverPresenter {
+        let viewportProvider = { [weak self] () -> CGRect in
+            self?.noteEditorTextView.editingRectInWindow() ?? .zero
+        }
+
+        return PopoverPresenter(containerViewController: self,
+                                viewportProvider: viewportProvider,
+                                siblingView: navigationBarBackground)
+    }
 }
 
+
+// MARK: - Layout
+//
+extension SPNoteEditorViewController {
+    open override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        // We need to reset transform to prevent tagView from loosing `safeArea`
+        // We restore transform back in viewDidLayoutSubviews
+        tagView.transform = .identity
+    }
+
+    open override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // Adding async here to break a strange layout loop
+        // It happens when add tag field is first responder and device is rotated
+        DispatchQueue.main.async {
+            self.updateTagListPosition()
+        }
+    }
+}
 
 // MARK: - Notifications
 //
@@ -132,9 +155,19 @@ extension SPNoteEditorViewController {
         // to the bottom of the screen when voiceover is enabled to allow
         // easier access
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(refreshVoiceoverSupport),
+                                               selector: #selector(refreshVoiceOverSupport),
                                                name: UIAccessibility.voiceOverStatusDidChangeNotification,
                                                object: nil)
+
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(handleAppDidEnterBackground),
+                                               name: UIApplication.didEnterBackgroundNotification,
+                                               object: nil)
+    }
+
+    @objc
+    private func handleAppDidEnterBackground() {
+        saveScrollPosition()
     }
 }
 
@@ -200,6 +233,8 @@ extension SPNoteEditorViewController: KeyboardObservable {
         UIViewPropertyAnimator.runningPropertyAnimator(withDuration: duration, delay: .zero, options: animationOptions, animations: {
             self.noteEditorTextView.contentInset.bottom = adjustedBottomInsets
             self.noteEditorTextView.scrollIndicatorInsets.bottom = adjustedBottomInsets
+            self.tagListBottomConstraint.constant = -editorBottomInsets
+            self.view.layoutIfNeeded()
         }, completion: { _ in
             self.noteEditorTextView.enableScrollSmoothening = false
         })
@@ -209,30 +244,19 @@ extension SPNoteEditorViewController: KeyboardObservable {
 
 // MARK: - Voiceover Support
 //
-extension SPNoteEditorViewController {
+private extension SPNoteEditorViewController {
 
     /// Indicates if VoiceOver is running
     ///
-    @objc
-    var voiceoverEnabled: Bool {
+    var isVoiceOverEnabled: Bool {
         UIAccessibility.isVoiceOverRunning
     }
 
     /// Whenver VoiceOver is enabled, this API will lock the Tags List in position
     ///
     @objc
-    func refreshVoiceoverSupport() {
-        let enabled = voiceoverEnabled
-        updateTagsEditor(locked: enabled)
-    }
-
-    /// Whenever the Tags Editor must be locked:
-    ///     - We'll fix the editor's position at the bottom of the TextView
-    ///     - And we'll display the `bottomView`: covers the spacing between Bottom / SafeArea.bottom
-    ///
-    func updateTagsEditor(locked: Bool) {
-        bottomView.isHidden = !locked
-        noteEditorTextView.lockTagEditorPosition = locked
+    func refreshVoiceOverSupport() {
+        updateTagListPosition()
     }
 }
 
@@ -672,35 +696,84 @@ extension SPNoteEditorViewController {
 }
 
 
-// MARK: - InterlinkProcessorPresentationContextProvider
+// MARK: - InterlinkProcessorDelegate
 //
-extension SPNoteEditorViewController: InterlinkProcessorPresentationContextProvider {
-
-    func parentOverlayViewForInterlinkProcessor(_ processor: InterlinkProcessor) -> UIView {
-        navigationBarBackground
-    }
-
-    func parentTextViewForInterlinkProcessor(_ processor: InterlinkProcessor) -> UITextView {
-        noteEditorTextView
-    }
-
-    func parentViewControllerForInterlinkProcessor(_ processor: InterlinkProcessor) -> UIViewController {
-        self
+extension SPNoteEditorViewController: InterlinkProcessorDelegate {
+    func interlinkProcessor(_ processor: InterlinkProcessor, insert text: String, in range: Range<String.Index>) {
+        noteEditorTextView.insertText(text: text, in: range)
+        processor.dismissInterlinkLookup()
     }
 }
 
 
-// MARK: - InterlinkProcessorDelegate
+// MARK: - Tags
 //
-extension SPNoteEditorViewController: InterlinkProcessorDelegate {
+extension SPNoteEditorViewController {
+    @objc
+    func configureTagListViewController() {
+        let popoverPresenter = self.popoverPresenter
+        popoverPresenter.dismissOnInteractionWithPassthruView = true
+        tagListViewController = NoteEditorTagListViewController(note: note, popoverPresenter: popoverPresenter)
 
-    func excludedEntityIdentifierForInterlinkProcessor(_ processor: InterlinkProcessor) -> NSManagedObjectID? {
-        note.objectID
+        addChild(tagListViewController)
+        
+        tagView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(tagView)
+
+        NSLayoutConstraint.activate([
+            tagView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tagView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+
+        tagListBottomConstraint = tagView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        tagListBottomConstraint.isActive = true
+
+        tagListViewController.didMove(toParent: self)
+
+        tagListViewController.delegate = self
     }
 
-    func interlinkProcessor(_ processor: InterlinkProcessor, insert text: String, in range: Range<String.Index>) {
-        noteEditorTextView.insertText(text: text, in: range)
-        processor.dismissInterlinkLookup()
+    private func updateTagListPosition() {
+        guard !isVoiceOverEnabled else {
+            tagView.transform = .identity
+            return
+        }
+
+        let contentHeight = noteEditorTextView.contentSize.height - noteEditorTextView.textContainerInset.bottom + Metrics.additionalTagViewAndEditorCollisionDistance
+        let maxContentY = noteEditorTextView.convert(CGPoint(x: 0, y: contentHeight), to: view).y
+
+        let tagViewY = tagView.frame.origin.y - tagView.transform.ty
+        let translationY = max(maxContentY - tagViewY, 0)
+
+        if tagView.transform.ty != translationY {
+            tagView.transform = .init(translationX: 0, y: translationY)
+        }
+    }
+
+    private var tagView: UIView {
+        return tagListViewController.view
+    }
+}
+
+
+// MARK: - NoteEditorTagListViewControllerDelegate
+//
+extension SPNoteEditorViewController: NoteEditorTagListViewControllerDelegate {
+    func tagListDidUpdate(_ tagList: NoteEditorTagListViewController) {
+        modified = true
+        save()
+    }
+
+    func tagListIsEditing(_ tagList: NoteEditorTagListViewController) {
+        // Note: When Voiceover is enabled, the Tags Editor is docked!
+        guard !isVoiceOverEnabled else {
+            return
+        }
+
+        // Without async it doesn't work due to race condition with keyboard frame changes
+        DispatchQueue.main.async {
+            self.noteEditorTextView.scrollToBottom(withAnimation: true)
+        }
     }
 }
 
@@ -712,7 +785,6 @@ extension SPNoteEditorViewController {
     @objc
     func refreshStyle() {
         refreshRootView()
-        refreshBottomView()
         refreshTagsEditor()
         refreshTextEditor()
         refreshTextStorage()
@@ -720,10 +792,6 @@ extension SPNoteEditorViewController {
 
     private func refreshRootView() {
         view.backgroundColor = backgroundColor
-    }
-
-    private func refreshBottomView() {
-        bottomView.backgroundColor = backgroundColor
     }
 
     private func refreshTextEditor() {
@@ -735,7 +803,6 @@ extension SPNoteEditorViewController {
 
     private func refreshTagsEditor() {
         tagView.backgroundColor = backgroundColor
-        tagView.keyboardAppearance = .simplenoteKeyboardAppearance
     }
 
     private func refreshTextStorage() {
@@ -746,14 +813,14 @@ extension SPNoteEditorViewController {
         let textStorage = noteEditorTextView.interactiveTextStorage
 
         textStorage.defaultStyle = [
-            .font               : defaultFont,
-            .foregroundColor    : textColor,
-            .paragraphStyle     : NSMutableParagraphStyle(lineSpacing: lineSpacing)
+            .font: defaultFont,
+            .foregroundColor: textColor,
+            .paragraphStyle: NSMutableParagraphStyle(lineSpacing: lineSpacing)
         ]
 
         textStorage.headlineStyle = [
-            .font               : headlineFont,
-            .foregroundColor    : textColor,
+            .font: headlineFont,
+            .foregroundColor: textColor,
         ]
     }
 
@@ -804,7 +871,7 @@ extension SPNoteEditorViewController {
         }
 
         let searchMapView = SearchMapView()
-        
+
         view.addSubview(searchMapView)
         NSLayoutConstraint.activate([
             searchMapView.topAnchor.constraint(equalTo: noteEditorTextView.topAnchor, constant: noteEditorTextView.adjustedContentInset.top),
@@ -981,7 +1048,7 @@ private enum Metrics {
     }
 
     static let searchMapWidth: CGFloat = 15.0
-
+    static let additionalTagViewAndEditorCollisionDistance: CGFloat = 16.0
 }
 
 

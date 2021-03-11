@@ -66,10 +66,6 @@ extension SPNoteListViewController {
         sortBar.onSortModePress = { [weak self] in
             self?.sortModeWasPressed()
         }
-
-        sortBar.onSortOrderPress = { [weak self] in
-            self?.sortOrderWasPressed()
-        }
     }
 
     /// Sets up the Results Controller
@@ -277,7 +273,7 @@ extension SPNoteListViewController {
     /// Refreshes the SearchBar's Text (and backfires the NoteListController filtering mechanisms!)
     ///
     func refreshSearchText(appendFilterFor tag: Tag) {
-        let keyword = String.searchOperatorForTags + tag.name
+        let keyword = SearchQuerySettings.default.tagsKeyword + tag.name
         let updated = searchBar.text?.replaceLastWord(with: keyword) ?? keyword
 
         searchController.updateSearchText(searchText: updated + .space)
@@ -384,14 +380,14 @@ extension SPNoteListViewController {
         }
         open(note, ignoringSearchQuery: true, animated: true)
     }
-    
+
     /// Sets the state of the trash button
     ///
     @objc
     func refreshEmptyTrashState() {
         let isTrashOnScreen = self.isDeletedFilterActive
         let isNotEmpty = !self.isListEmpty
-        
+
         emptyTrashButton.isEnabled = isTrashOnScreen && isNotEmpty
     }
 }
@@ -631,7 +627,8 @@ private extension SPNoteListViewController {
         let cell = tableView.dequeueReusableCell(ofType: SPTagTableViewCell.self, for: indexPath)
         cell.leftImage = .image(name: .tag)
         cell.leftImageTintColor = .simplenoteNoteShareStatusImageColor
-        cell.titleText = String.searchOperatorForTags + tag.name
+        cell.titleText = SearchQuerySettings.default.tagsKeyword + tag.name
+
         return cell
     }
 
@@ -840,16 +837,12 @@ extension SPNoteListViewController {
 extension SPNoteListViewController {
 
     @objc
-    func displaySortBar() {
-        // No need to refresh the Table's Bottom Insets. The keyboard will always show!
-        sortBar.animateVisibility(isHidden: false)
-    }
-
-    @objc
-    func dismissSortBar() {
-        // We'll need to refresh the bottom insets. The keyboard may have been dismissed already!
-        sortBar.animateVisibility(isHidden: true)
-        refreshTableViewBottomInsets()
+    func updateSortBarVisibility() {
+        let wasHidden = sortBar.isHidden
+        sortBar.animateVisibility(isHidden: searchQuery == nil)
+        if wasHidden != sortBar.isHidden {
+            refreshTableViewBottomInsets()
+        }
     }
 }
 
@@ -860,35 +853,41 @@ extension SPNoteListViewController {
 
     @objc(keyboardWillChangeFrame:)
     func keyboardWillChangeFrame(note: Notification) {
-        
+
         guard let _ = view.window else {
             // No window means we aren't in the view hierarchy.
             // Asking UITableView to refresh layout when not in the view hierarcy results in console warnings.
             return
         }
-        
+
         guard let keyboardFrame = (note.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
             return
         }
 
         keyboardHeight = keyboardFrame.intersection(view.frame).height
-        refreshTableViewBottomInsets()
+        refreshTableViewBottomInsets(animated: true)
     }
 
-    func refreshTableViewBottomInsets() {
+    func refreshTableViewBottomInsets(animated: Bool = false) {
         let bottomInsets = bottomInsetsForTableView
 
-        UIView.animate(withDuration: UIKitConstants.animationShortDuration) {
+        let updates = {
             self.tableView.contentInset.bottom = bottomInsets
             self.tableView.scrollIndicatorInsets.bottom = bottomInsets
             self.view.layoutIfNeeded()
+        }
+
+        if animated {
+            UIView.animate(withDuration: UIKitConstants.animationShortDuration, animations: updates)
+        } else {
+            updates()
         }
     }
 
     var bottomInsetsForTableView: CGFloat {
         // Keyboard offScreen + Search Active: Seriously, consider the Search Bar
         guard keyboardHeight > .zero else {
-            return isSearchActive ? sortBar.frame.height : .zero
+            return sortBar.isHidden ? .zero : sortBar.frame.height
         }
 
         // Keyboard onScreen: the SortBar falls below the keyboard
@@ -901,32 +900,34 @@ extension SPNoteListViewController {
 //
 extension SPNoteListViewController {
 
-    @IBAction
-    func sortOrderWasPressed() {
-        feedbackGenerator.impactOccurred()
-        Options.shared.searchSortMode = notesListController.searchSortMode.inverse
-    }
-
-    @IBAction
-    func sortModeWasPressed() {
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
-        for mode in [SortMode.alphabeticallyAscending, .createdNewest, .modifiedNewest] {
-            alertController.addDefaultActionWithTitle(mode.kind) { _ in
-                Options.shared.searchSortMode = mode
+    private var popoverPresenter: PopoverPresenter {
+        let viewportProvider: () -> CGRect = { [weak self] in
+            guard let self = self else {
+                return .zero
             }
+
+            let bounds = self.view.bounds.inset(by: self.view.safeAreaInsets)
+
+            return self.view.convert(bounds, to: nil)
         }
 
-        alertController.addCancelActionWithTitle(ActionTitle.cancel)
+        let presenter = PopoverPresenter(containerViewController: self, viewportProvider: viewportProvider)
+        presenter.dismissOnInteractionWithPassthruView = true
+        presenter.dismissOnContainerFrameChange = true
+        presenter.centerContentRelativeToAnchor = view.frame.width > Constants.centeredSortPopoverThreshold
+        return presenter
+    }
 
-        let popoverPresentationController = alertController.popoverPresentationController
-        popoverPresentationController?.sourceRect = sortBar.dividerView.frame
-        popoverPresentationController?.sourceView = sortBar.dividerView
-        popoverPresentationController?.permittedArrowDirections = .any
-        self.popoverController = popoverPresentationController
+    private func sortModeWasPressed() {
+        let presenter = popoverPresenter
 
-        feedbackGenerator.impactOccurred()
-        present(alertController, animated: true, completion: nil)
+        let viewController = SortModePickerViewController(currentSelection: Options.shared.searchSortMode)
+        viewController.onSelectionCallback = { sortMode in
+            Options.shared.searchSortMode = sortMode
+            presenter.dismiss()
+        }
+
+        presenter.show(viewController, around: sortBar.convert(sortBar.bounds, to: nil))
     }
 }
 
@@ -1025,6 +1026,8 @@ private enum Constants {
     static let searchBarInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: -8)
 
     static let searchEmptyStateTopMargin = CGFloat(128)
+
+    static let centeredSortPopoverThreshold = CGFloat(500)
 }
 
 private enum Localization {

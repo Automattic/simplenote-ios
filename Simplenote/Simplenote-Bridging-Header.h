@@ -28,9 +28,9 @@
 #import "SPTableViewController.h"
 #import "SPNoteListViewController.h"
 #import "SPNoteEditorViewController.h"
-#import "SPTagView.h"
 #import "SPAddCollaboratorsViewController.h"
 #import "SPTracker.h"
+#import "SPTagEntryField.h"
 #import "WPAuthHandler.h"
 
 

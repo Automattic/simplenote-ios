@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SPTagStub.h"
 #import "SPTextField.h"
+
 @class SPTagEntryField;
 
 @protocol SPTagEntryFieldDelegate <NSObject>
@@ -21,7 +21,5 @@
 @interface SPTagEntryField : SPTextField
 
 @property (nonatomic, weak) id<SPTagEntryFieldDelegate> tagDelegate;
-
-+ (SPTagEntryField *)tagEntryField;
 
 @end

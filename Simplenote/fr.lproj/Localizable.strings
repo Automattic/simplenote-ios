@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-02-18 11:54:04+0000 */
+/* Translation-Revision-Date: 2021-03-08 11:32:12+0000 */
 /* Plural-Forms: nplurals=2; plural=n > 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: fr */
@@ -70,17 +70,9 @@
 /* Label on button to add a new tag to a note */
 "Add tag" = "Ajouter un tag";
 
-/* Title: No filters applied */
+/* All Notes filter button
+   Title: No filters applied */
 "All Notes" = "Toutes les notes";
-
-/* Sort Mode: Alphabetically */
-"Alphabetically" = "Par ordre alphabétique";
-
-/* Sort Mode: Alphabetically, ascending */
-"Alphabetically: A-Z" = "Par ordre alphabétique : A-Z";
-
-/* Sort Mode: Alphabetically, descending */
-"Alphabetically: Z-A" = "Par ordre alphabétique : Z-A";
 
 /* Sign in error message */
 "An error was encountered while signing in." = "Une erreur est survenue lors de la connexion.";
@@ -159,7 +151,7 @@
 /* Copies the Note's Public Link */
 "Copy Link" = "Copier le lien";
 
-/* No comment provided by engineer. */
+/* Rating view - initial - could be better button */
 "Could be better" = "Pourrait être améliorée";
 
 /* Error for bad email or password */
@@ -168,7 +160,7 @@
 /* Message displayed when login fails */
 "Could not login with the provided email address and password." = "Impossible de se connecter avec l'e-mail et le mot de passe fourni.";
 
-/* No comment provided by engineer. */
+/* Rating view disliked title */
 "Could you tell us how we could improve?" = "Pouvez-vous nous signaler des pistes d’amélioration ?";
 
 /* Error message shown when trying to view history of a note without an internet connection */
@@ -189,8 +181,7 @@
 /* Message shown in note list when no notes are in the current view */
 "Create your first note" = "Créer votre première note";
 
-/* Note Creation Date
-   Sort Mode: Creation Date */
+/* Note Creation Date */
 "Created" = "Créé";
 
 /* Sort Mode: Creation Date, descending */
@@ -224,6 +215,9 @@
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "Diagnostic";
 
+/* Footer -> Sign up verification screen. Parameter: %1$@ - support email address */
+"Didn't get an email? You may already have an account. Contact %1$@ for help." = "Didn't get an email? You may already have an account. Contact %1$@ for help.";
+
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "Désactiver le formatage Markdown";
 
@@ -241,6 +235,7 @@
 
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
+   Done editing tags
    Done toolbar button */
 "Done" = "Terminé";
 
@@ -289,7 +284,7 @@
 /* FAQ or contact us */
 "Get Help" = "Obtenir de l’aide";
 
-/* No comment provided by engineer. */
+/* Rating view liked title */
 "Great! Mind leaving a review to tell us what you like?" = "Très bien ! Pourriez-vous nous donner votre avis et nous dire ce que vous aimez ?";
 
 /* Display help web page */
@@ -301,7 +296,7 @@
 /* Opens the Note's History */
 "History" = "Historique";
 
-/* No comment provided by engineer. */
+/* Rating view - initial - liked button */
 "I like it" = "J’aime";
 
 /* Note Information Button (metrics + references) */
@@ -322,7 +317,7 @@
 /* Learn More Action */
 "Learn more" = "En apprendre plus";
 
-/* No comment provided by engineer. */
+/* Rating view - liked - leave review button */
 "Leave a review" = "Laisser un avis";
 
 /* Theme: Light */
@@ -364,8 +359,7 @@
 /* Note Options Button */
 "Menu" = "Menu";
 
-/* Note Modification Date
-   Sort Mode: Modified Date */
+/* Note Modification Date */
 "Modified" = "Modifié";
 
 /* Sort Mode: Modified Date, descending */
@@ -377,6 +371,12 @@
 /* Delete Action
    Deletes a note */
 "Move to Trash" = "Mettre dans la Corbeille";
+
+/* Sort Mode: Alphabetically, ascending */
+"Name: A-Z" = "Nom : A-Z";
+
+/* Sort Mode: Alphabetically, descending */
+"Name: Z-A" = "Nom : Z-A";
 
 /* Home screen quick action: New Note
    Keyboard shortcut: New Note */
@@ -400,7 +400,7 @@
 /* Message shown in note list when no notes are tagged with the provided tag. Parameter: %@ - tag */
 "No notes tagged “%@”" = "Aucune note avec l’étiquette « %@ »";
 
-/* No comment provided by engineer. */
+/* Rating view - liked or disliked - no thanks button */
 "No thanks" = "Non merci";
 
 /* Message shown in note list when no notes are untagged */
@@ -409,7 +409,8 @@
 /* Notes Header (Search Mode) */
 "Notes" = "Notes";
 
-/* Dismisses an AlertController */
+/* Closes alert controller for spinner on About view
+   Dismisses an AlertController */
 "OK" = "OK";
 
 /* Instant passcode lock timeout */
@@ -545,10 +546,11 @@
 /* For debugging use */
 "Send a Test Crash" = "Envoyer un incident de test";
 
-/* No comment provided by engineer. */
+/* Rating view - disliked - send feedback button */
 "Send feedback" = "Envoyez votre avis";
 
-/* Title of options screen */
+/* Settings button
+   Title of options screen */
 "Settings" = "Paramètres";
 
 /* Opens the Share Sheet
@@ -600,7 +602,7 @@
 /* Theme: Matches iOS Settings */
 "System Default" = "Paramètres par défaut du système";
 
-/* No comment provided by engineer. */
+/* Tags List Header */
 "Tags" = "Étiquettes";
 
 /* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
@@ -636,7 +638,8 @@
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Touch ID";
 
-/* Title: Trash Tag is selected */
+/* Title: Trash Tag is selected
+   Trash filter button */
 "Trash-noun" = "Corbeille";
 
 /* Prompt when disabling passcode */
@@ -684,7 +687,10 @@
 /* Message -> Verify your email screen. Parameter: %1$@ - email address */
 "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "Nous avons envoyé un e-mail de vérification à %1$@. Consultez votre boîte de réception et suivez les instructions.";
 
-/* No comment provided by engineer. */
+/* Message -> Sign up verification screen. Parameter: %1$@ - email address */
+"We’ve sent an email to %1$@. Please check your inbox and follow the instructions." = "We’ve sent an email to %1$@. Please check your inbox and follow the instructions.";
+
+/* Rating view initial title */
 "What do you think about Simplenote?" = "Que pensez-vous de Simplenote ?";
 
 /* Number of words in the note */
@@ -717,11 +723,11 @@
 /* Accessibility hint for adding a tag to a note */
 "tag-add-accessibility-hint" = "Ajouter un tag à cette note";
 
-/* No comment provided by engineer. */
+/* Remove a tag from the current note */
 "tag-delete-accessibility-hint" = "Retirer un tag de cette note";
 
-/* A welcome note for new iOS users */
-"welcomeNote-iOS" = "Bienvenue sur la version iOS de Simplenote !\n\nPour créer une nouvelle note, touchez le bouton plus.\n\nNaviguez dans la liste de notes. Touchez un titre pour voir la totalité de la note et touchez ensuite le contenu de la note pour effectuer des changements.\n\nCherchez parmi vos notes en touchant le champ de recherche en haut de la liste de notes.\n\nTouchez la flèche en haut ou faites glisser votre liste de notes pour voir vos tags. Vous pouvez ajouter des tags à une note en bas de l'éditeur, et ensuite utiliser le menu pour rester organisé.\n\nVous avez une note vraiment importante ? Touchez le bouton favoris pendant la lecture d'une note pour la garder en tête de liste.\n\nD'autres options de notes existent si vous en avez besoin. Vous pouvez ajouter d'autres collaborateurs à une note, ou même publier une note comme une page web.\n\nVous pouvez accéder à toutes vos notes sur le web ou sur vos autres appareils. Rendez-vous sur http:\/\/simplenote.com pour démarrer. Vos notes resteront à jour partout automatiquement.";
+/* Search Operator for tags. Please preserve the semicolons when translating! */
+"tag:" = "étiquette :";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞 Débogage activé 🐞";

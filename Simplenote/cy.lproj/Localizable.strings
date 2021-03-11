@@ -70,17 +70,9 @@
 /* Label on button to add a new tag to a note */
 "Add tag" = "Ychwanegu tag";
 
-/* Title: No filters applied */
+/* All Notes filter button
+   Title: No filters applied */
 "All Notes" = "Pob Nodyn";
-
-/* Sort Mode: Alphabetically */
-"Alphabetically" = "Alphabetically";
-
-/* Sort Mode: Alphabetically, ascending */
-"Alphabetically: A-Z" = "Alphabetically: A-Z";
-
-/* Sort Mode: Alphabetically, descending */
-"Alphabetically: Z-A" = "Alphabetically: Z-A";
 
 /* Sign in error message */
 "An error was encountered while signing in." = "An error was encountered while signing in.";
@@ -159,7 +151,7 @@
 /* Copies the Note's Public Link */
 "Copy Link" = "Copy Link";
 
-/* No comment provided by engineer. */
+/* Rating view - initial - could be better button */
 "Could be better" = "Gallai Fod yn Well";
 
 /* Error for bad email or password */
@@ -168,7 +160,7 @@
 /* Message displayed when login fails */
 "Could not login with the provided email address and password." = "Nid oedd modd mewngofnodi gyda'r cyfeiriad e-bost a chyfrinair a ddarparwyd. ";
 
-/* No comment provided by engineer. */
+/* Rating view disliked title */
 "Could you tell us how we could improve?" = "Dwedwch wrthym sut y gallwn ni ei wella?";
 
 /* Error message shown when trying to view history of a note without an internet connection */
@@ -189,8 +181,7 @@
 /* Message shown in note list when no notes are in the current view */
 "Create your first note" = "Create your first note";
 
-/* Note Creation Date
-   Sort Mode: Creation Date */
+/* Note Creation Date */
 "Created" = "Created";
 
 /* Sort Mode: Creation Date, descending */
@@ -224,6 +215,9 @@
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "Diagnostics";
 
+/* Footer -> Sign up verification screen. Parameter: %1$@ - support email address */
+"Didn't get an email? You may already have an account. Contact %1$@ for help." = "Didn't get an email? You may already have an account. Contact %1$@ for help.";
+
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "Disable Markdown formatting";
 
@@ -241,6 +235,7 @@
 
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
+   Done editing tags
    Done toolbar button */
 "Done" = "Gorffen";
 
@@ -289,7 +284,7 @@
 /* FAQ or contact us */
 "Get Help" = "Get Help";
 
-/* No comment provided by engineer. */
+/* Rating view liked title */
 "Great! Mind leaving a review to tell us what you like?" = "Great! Mind leaving a review to tell us what you like?";
 
 /* Display help web page */
@@ -301,7 +296,7 @@
 /* Opens the Note's History */
 "History" = "Hanes";
 
-/* No comment provided by engineer. */
+/* Rating view - initial - liked button */
 "I like it" = "Rydw i'n ei Hoffi";
 
 /* Note Information Button (metrics + references) */
@@ -322,7 +317,7 @@
 /* Learn More Action */
 "Learn more" = "Learn more";
 
-/* No comment provided by engineer. */
+/* Rating view - liked - leave review button */
 "Leave a review" = "Gadael Adolygiad";
 
 /* Theme: Light */
@@ -364,8 +359,7 @@
 /* Note Options Button */
 "Menu" = "Dewislen";
 
-/* Note Modification Date
-   Sort Mode: Modified Date */
+/* Note Modification Date */
 "Modified" = "Modified";
 
 /* Sort Mode: Modified Date, descending */
@@ -377,6 +371,12 @@
 /* Delete Action
    Deletes a note */
 "Move to Trash" = "Move to Trash";
+
+/* Sort Mode: Alphabetically, ascending */
+"Name: A-Z" = "Name: A-Z";
+
+/* Sort Mode: Alphabetically, descending */
+"Name: Z-A" = "Name: Z-A";
 
 /* Home screen quick action: New Note
    Keyboard shortcut: New Note */
@@ -400,7 +400,7 @@
 /* Message shown in note list when no notes are tagged with the provided tag. Parameter: %@ - tag */
 "No notes tagged “%@”" = "No notes tagged “%@”";
 
-/* No comment provided by engineer. */
+/* Rating view - liked or disliked - no thanks button */
 "No thanks" = "Dim Diolch";
 
 /* Message shown in note list when no notes are untagged */
@@ -409,7 +409,8 @@
 /* Notes Header (Search Mode) */
 "Notes" = "Nodiadau";
 
-/* Dismisses an AlertController */
+/* Closes alert controller for spinner on About view
+   Dismisses an AlertController */
 "OK" = "IAWN";
 
 /* Instant passcode lock timeout */
@@ -545,10 +546,11 @@
 /* For debugging use */
 "Send a Test Crash" = "Send a Test Crash";
 
-/* No comment provided by engineer. */
+/* Rating view - disliked - send feedback button */
 "Send feedback" = "Anfon Adborth";
 
-/* Title of options screen */
+/* Settings button
+   Title of options screen */
 "Settings" = "Gosodiadau";
 
 /* Opens the Share Sheet
@@ -600,7 +602,7 @@
 /* Theme: Matches iOS Settings */
 "System Default" = "System Default";
 
-/* No comment provided by engineer. */
+/* Tags List Header */
 "Tags" = "Tags";
 
 /* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
@@ -636,7 +638,8 @@
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Enw Cyffwrdd";
 
-/* Title: Trash Tag is selected */
+/* Title: Trash Tag is selected
+   Trash filter button */
 "Trash-noun" = "Sbwriel";
 
 /* Prompt when disabling passcode */
@@ -684,7 +687,10 @@
 /* Message -> Verify your email screen. Parameter: %1$@ - email address */
 "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions.";
 
-/* No comment provided by engineer. */
+/* Message -> Sign up verification screen. Parameter: %1$@ - email address */
+"We’ve sent an email to %1$@. Please check your inbox and follow the instructions." = "We’ve sent an email to %1$@. Please check your inbox and follow the instructions.";
+
+/* Rating view initial title */
 "What do you think about Simplenote?" = "Beth ydych chi'n ei feddwl Simplenote?";
 
 /* Number of words in the note */
@@ -717,11 +723,11 @@
 /* Accessibility hint for adding a tag to a note */
 "tag-add-accessibility-hint" = "Ychwanegu tag i'r nodyn cyfredol";
 
-/* No comment provided by engineer. */
+/* Remove a tag from the current note */
 "tag-delete-accessibility-hint" = "Tynnu'r tag o'r nodyn cyfredol";
 
-/* A welcome note for new iOS users */
-"welcomeNote-iOS" = "Croeso i Simplenote ar gyfer iOS!\n\nI ychwanegu nodyn, tapiwch y botwm adio.\n\nFfliciwch y rhestr i bori'ch nodiadau. Tapiwch deitl i weld nodyn, yna tapiwch y cynnwys i'w newid.\n\nGallwch chwilio trwy bob un o'ch nodiadau trwy deipio yn y maes chwilio ar frig y rhestr o nodiadau.\n\nTapiwch y botwm saeth ar y brig ar yr ochr chwith neu llusgwch ar draws eich rhestr o nodiadau i weld eich tagiau. Gallwch ychwanegu tagiau i nodyn ar waelod y golygydd nodiadau, ac yna defnyddio'r bar ochr i'ch helpu i gadw trefn ar bethau.\n\nMae mwy o ddewisiadau nodiadau os ydych chi eu hangen. Gallwch ychwanegu rhai eraill fel cydweithredwyr i nodyn, neu gyhoeddi nodyn fel tudalen we.\n\nDefnyddiwch Simplenote ar eich Mac, dyfais Android, neu yn eich porwr gwe ar http:\/\/simplenote.com. Bydd eich nodiadau yn diweddaru ym mhob man yn awtomatig.";
+/* Search Operator for tags. Please preserve the semicolons when translating! */
+"tag:" = "tag:";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "";

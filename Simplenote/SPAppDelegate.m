@@ -161,9 +161,9 @@
     [self loadSelectedTheme];
     
     // Check to see if first time user
-    if ([self isFirstLaunch]) {        
+    if ([self isFirstLaunch]) {
+        _noteListViewController.firstLaunch = YES;
         [[SPPinLockManager shared] removePin];
-        [self createWelcomeNoteAfterDelay];
         [self markFirstLaunch];
     } else {
         [self showPasscodeLockIfNecessary];
@@ -190,6 +190,7 @@
     }
 
     [self showPasscodeLockIfNecessary];
+    [self cleanupScrollPositionCache];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -260,30 +261,6 @@
 - (void)markFirstLaunch
 {
     [[Options shared] setFirstLaunch:YES];
-}
-
-- (void)createWelcomeNoteAfterDelay
-{
-    [self performSelector:@selector(createWelcomeNote) withObject:nil afterDelay:0.5];
-}
-
-- (void)createWelcomeNote
-{
-    NSString *welcomeKey = @"welcomeNote-iOS";
-    SPBucket *noteBucket = [_simperium bucketForName:@"Note"];
-    Note *welcomeNote = [noteBucket objectForKey:welcomeKey];
-    
-    if (welcomeNote) {
-        return;
-	}
-    
-    welcomeNote = [noteBucket insertNewObjectForKey:welcomeKey];
-    welcomeNote.modificationDate = [NSDate date];
-    welcomeNote.creationDate = [NSDate date];
-    welcomeNote.content = NSLocalizedString(@"welcomeNote-iOS", @"A welcome note for new iOS users");
-    [self save];
-    
-    _noteListViewController.firstLaunch = YES;
 }
 
 
@@ -577,6 +554,10 @@
 {
     if (!self.simperium.user.authenticated) {
         [self performDotcomAuthenticationWithURL:url];
+
+        if (!self.simperium.user.authenticated && url) {
+            [self performMagicLinkAuthenticationWith:url];
+        }
         return YES;
     }
 

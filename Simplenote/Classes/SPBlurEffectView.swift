@@ -11,7 +11,7 @@ class SPBlurEffectView: UIVisualEffectView {
     ///
     private let tintView: UIView = {
         let output = UIView()
-        output.autoresizingMask = [.flexibleWidth, .flexibleHeight];
+        output.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         return output
     }()
 

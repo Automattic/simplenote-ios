@@ -118,7 +118,7 @@ private extension AccountVerificationViewController {
         let alertController = UIAlertController(title: configuration.errorMessageTitle,
                                                 message: Localization.errorMessage,
                                                 preferredStyle: .alert)
-        
+
         alertController.addDefaultActionWithTitle(Localization.okButton)
 
         present(alertController, animated: true, completion: nil)

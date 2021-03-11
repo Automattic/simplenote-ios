@@ -424,8 +424,7 @@ private extension NSAttributedString {
                               textColor: UIColor,
                               highlighing keywords: [String]?,
                               highlightColor: UIColor,
-                              paragraphStyle: NSParagraphStyle) -> NSAttributedString
-    {
+                              paragraphStyle: NSParagraphStyle) -> NSAttributedString {
         let output = NSMutableAttributedString(string: string, attributes: [
             .font: font,
             .foregroundColor: textColor,

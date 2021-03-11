@@ -47,7 +47,7 @@ final class PinLockSetupController: PinLockBaseController, PinLockController {
                      with: .slideTrailing)
             return
         }
-        
+
         pinLockManager.setPin(pin)
         delegate?.pinLockSetupControllerDidComplete(self)
     }
@@ -73,4 +73,3 @@ private enum Localization {
     static let confirmPasscode = NSLocalizedString("Confirm your passcode", comment: "Title on the PinLock screen asking to confirm a passcode")
     static let passcodesDontMatch = NSLocalizedString("Passcodes did not match. Try again.", comment: "Pin Lock")
 }
-

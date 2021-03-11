@@ -42,13 +42,13 @@ class Note {
         }
 
         return [
-            "tags":             [],
-            "deleted":          0,
-            "shareURL":         String(),
-            "publishURL":       String(),
-            "content":          content,
-            "systemTags":       systemTags,
-            "creationDate":     creationDate.timeIntervalSince1970,
+            "tags": [],
+            "deleted": 0,
+            "shareURL": String(),
+            "publishURL": String(),
+            "content": content,
+            "systemTags": systemTags,
+            "creationDate": creationDate.timeIntervalSince1970,
             "modificationDate": modificationDate.timeIntervalSince1970
         ]
     }

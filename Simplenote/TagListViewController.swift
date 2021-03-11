@@ -509,7 +509,7 @@ extension TagListViewController: TagListViewCellDelegate {
         }
 
         alertController.addCancelActionWithTitle(Localization.TagDeletionConfirmation.cancellationButton)
-        
+
         alertController.popoverPresentationController?.sourceRect = cell.bounds
         alertController.popoverPresentationController?.sourceView = cell
         alertController.popoverPresentationController?.permittedArrowDirections = .any
@@ -602,7 +602,7 @@ extension TagListViewController: UITextFieldDelegate {
         switch result {
         case .valid:
             return true
-        case .endingWithWhitespace(let text):
+        case .endingWithDisallowedCharacter(let text):
             textField.text = text
             textField.endEditing(true)
             return false
@@ -848,13 +848,13 @@ private struct Constants {
 private struct Localization {
     static let edit = NSLocalizedString("Edit", comment: "Edit Tags Action: Visible in the Tags List")
     static let rename = NSLocalizedString("Rename", comment: "Rename a tag")
-    static let done = NSLocalizedString("Done", comment: "")
+    static let done = NSLocalizedString("Done", comment: "Done editing tags")
 
-    static let allNotes = NSLocalizedString("All Notes", comment: "")
-    static let trash = NSLocalizedString("Trash-noun", comment: "")
-    static let settings = NSLocalizedString("Settings", comment: "")
+    static let allNotes = NSLocalizedString("All Notes", comment: "All Notes filter button")
+    static let trash = NSLocalizedString("Trash-noun", comment: "Trash filter button")
+    static let settings = NSLocalizedString("Settings", comment: "Settings button")
 
-    static let tags = NSLocalizedString("Tags", comment: "")
+    static let tags = NSLocalizedString("Tags", comment: "Tags List Header")
     static let untaggedNotes = NSLocalizedString("Untagged Notes", comment: "Allows selecting notes with no tags")
 
     struct TagDeletionConfirmation {

@@ -106,6 +106,44 @@ end
       release_version: options[:version])
   end
 
+  # This lane lacks documentation because it ought to be part of the localized
+  # metadata download script instead!
+  desc "Updates the files with the localized keywords values for App Store Connect to match the 100 characters requirement"
+  lane :sanitize_appstore_keywords do | options |
+    Dir["./metadata/**"].each do |locale_dir|
+      keywords_path = File.join(locale_dir, 'keywords.txt')
+
+      unless File.exists?(keywords_path)
+        UI.message "Could not find keywords file in #{locale_dir}. Skipping."
+        next
+      end
+
+      keywords = File.read(keywords_path)
+      app_store_connect_keywords_length_limit = 100
+
+      if keywords.length <= app_store_connect_keywords_length_limit
+        UI.verbose "#{keywords_path} has less than #{app_store_connect_keywords_length_limit} characters. Not trimming."
+        next
+      end
+
+      UI.message "#{keywords_path} has more than #{app_store_connect_keywords_length_limit} characters. Trimming it..."
+
+      case File.basename(locale_dir)
+      when 'ar-SA'
+        separator = '،'
+      else
+        separator = ','
+      end
+
+      until keywords.length <= app_store_connect_keywords_length_limit do
+        keywords = keywords.split(separator)[0...-1].join(separator)
+        puts keywords
+      end
+
+      File.write(keywords_path, keywords)
+    end
+  end
+
   #####################################################################################
   # new_beta_release
   # -----------------------------------------------------------------------------------
@@ -493,6 +531,13 @@ end
       # But fail completely after those 3 retries
       stop_after_first_error: true,
 
+      # Run one Simulator at a time. One of the screenshots requires adding
+      # text to a note but because we're using the same account across all the
+      # Simulators, editing the note on one will result in the changes
+      # appearing on the other making for unexpected and inconsistent
+      # screnshots
+      concurrent_simulators: false,
+
       # Allow the caller to invoke dark mode
       dark_mode: options[:mode].to_s.downcase == "dark"
     )
@@ -673,13 +718,13 @@ end
 
 def screenshot_devices()
   [
-    "iPhone Xs Max",
-    "iPhone 8 Plus",
+    "iPhone X",
+    "iPhone 8",
     "iPad Pro (12.9-inch) (2nd generation)",
     "iPad Pro (12.9-inch) (3rd generation)",
   ]
 end
 
 def simulator_version
-  '13.4'
+  '14.4'
 end

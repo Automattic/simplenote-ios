@@ -34,4 +34,14 @@ extension NSMutableAttributedString {
             addAttribute(.foregroundColor, value: color, range: range)
         }
     }
+
+    /// Create an attributed string highlighting a term
+    ///
+    convenience init(string text: String, attributes: [NSAttributedString.Key: Any], highlighting term: String, highlightAttributes: [NSAttributedString.Key: Any]) {
+        self.init(string: text, attributes: attributes)
+
+        if let range = text.range(of: term) {
+            addAttributes(highlightAttributes, range: NSRange(range, in: text))
+        }
+    }
 }

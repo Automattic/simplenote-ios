@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-02-18 11:54:03+0000 */
+/* Translation-Revision-Date: 2021-03-08 11:32:12+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ko_KR */
@@ -70,17 +70,9 @@
 /* Label on button to add a new tag to a note */
 "Add tag" = "태그 추가";
 
-/* Title: No filters applied */
+/* All Notes filter button
+   Title: No filters applied */
 "All Notes" = "모든 메모";
-
-/* Sort Mode: Alphabetically */
-"Alphabetically" = "알파벳순";
-
-/* Sort Mode: Alphabetically, ascending */
-"Alphabetically: A-Z" = "알파벳순: A-Z";
-
-/* Sort Mode: Alphabetically, descending */
-"Alphabetically: Z-A" = "알파벳순: Z-A";
 
 /* Sign in error message */
 "An error was encountered while signing in." = "로그인하는 중에 오류가 발생했습니다.";
@@ -159,7 +151,7 @@
 /* Copies the Note's Public Link */
 "Copy Link" = "링크 복사";
 
-/* No comment provided by engineer. */
+/* Rating view - initial - could be better button */
 "Could be better" = "별로";
 
 /* Error for bad email or password */
@@ -168,7 +160,7 @@
 /* Message displayed when login fails */
 "Could not login with the provided email address and password." = "입력하신 이메일 주소와 비밀번호로 로그인하지 못했습니다.";
 
-/* No comment provided by engineer. */
+/* Rating view disliked title */
 "Could you tell us how we could improve?" = "개선 방안을 말해 주시겠어요?";
 
 /* Error message shown when trying to view history of a note without an internet connection */
@@ -189,8 +181,7 @@
 /* Message shown in note list when no notes are in the current view */
 "Create your first note" = "첫 메모 작성";
 
-/* Note Creation Date
-   Sort Mode: Creation Date */
+/* Note Creation Date */
 "Created" = "생성됨";
 
 /* Sort Mode: Creation Date, descending */
@@ -224,6 +215,9 @@
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "진단";
 
+/* Footer -> Sign up verification screen. Parameter: %1$@ - support email address */
+"Didn't get an email? You may already have an account. Contact %1$@ for help." = "Didn't get an email? You may already have an account. Contact %1$@ for help.";
+
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "마크다운 형식 사용 안 함";
 
@@ -241,6 +235,7 @@
 
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
+   Done editing tags
    Done toolbar button */
 "Done" = "완료";
 
@@ -289,7 +284,7 @@
 /* FAQ or contact us */
 "Get Help" = "도움말";
 
-/* No comment provided by engineer. */
+/* Rating view liked title */
 "Great! Mind leaving a review to tell us what you like?" = "좋습니다! 마음에 드는 리뷰를 남겨주시겠습니까?";
 
 /* Display help web page */
@@ -301,7 +296,7 @@
 /* Opens the Note's History */
 "History" = "내역";
 
-/* No comment provided by engineer. */
+/* Rating view - initial - liked button */
 "I like it" = "좋아요";
 
 /* Note Information Button (metrics + references) */
@@ -322,7 +317,7 @@
 /* Learn More Action */
 "Learn more" = "더 알아보기";
 
-/* No comment provided by engineer. */
+/* Rating view - liked - leave review button */
 "Leave a review" = "리뷰를 남겨주세요.";
 
 /* Theme: Light */
@@ -364,8 +359,7 @@
 /* Note Options Button */
 "Menu" = "메뉴";
 
-/* Note Modification Date
-   Sort Mode: Modified Date */
+/* Note Modification Date */
 "Modified" = "수정됨";
 
 /* Sort Mode: Modified Date, descending */
@@ -377,6 +371,12 @@
 /* Delete Action
    Deletes a note */
 "Move to Trash" = "휴지통으로 이동";
+
+/* Sort Mode: Alphabetically, ascending */
+"Name: A-Z" = "이름: 오름차순";
+
+/* Sort Mode: Alphabetically, descending */
+"Name: Z-A" = "이름: 내림차순";
 
 /* Home screen quick action: New Note
    Keyboard shortcut: New Note */
@@ -400,7 +400,7 @@
 /* Message shown in note list when no notes are tagged with the provided tag. Parameter: %@ - tag */
 "No notes tagged “%@”" = "태그가 “%@”인 메모 없음";
 
-/* No comment provided by engineer. */
+/* Rating view - liked or disliked - no thanks button */
 "No thanks" = "괜찮습니다.";
 
 /* Message shown in note list when no notes are untagged */
@@ -409,7 +409,8 @@
 /* Notes Header (Search Mode) */
 "Notes" = "메모";
 
-/* Dismisses an AlertController */
+/* Closes alert controller for spinner on About view
+   Dismisses an AlertController */
 "OK" = "확인";
 
 /* Instant passcode lock timeout */
@@ -545,10 +546,11 @@
 /* For debugging use */
 "Send a Test Crash" = "테스트 충돌 보내기";
 
-/* No comment provided by engineer. */
+/* Rating view - disliked - send feedback button */
 "Send feedback" = "의견 보내기";
 
-/* Title of options screen */
+/* Settings button
+   Title of options screen */
 "Settings" = "설정";
 
 /* Opens the Share Sheet
@@ -600,7 +602,7 @@
 /* Theme: Matches iOS Settings */
 "System Default" = "시스템 기본값";
 
-/* No comment provided by engineer. */
+/* Tags List Header */
 "Tags" = "태그";
 
 /* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
@@ -636,7 +638,8 @@
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Touch ID";
 
-/* Title: Trash Tag is selected */
+/* Title: Trash Tag is selected
+   Trash filter button */
 "Trash-noun" = "휴지통";
 
 /* Prompt when disabling passcode */
@@ -684,7 +687,10 @@
 /* Message -> Verify your email screen. Parameter: %1$@ - email address */
 "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "%1$@(으)로 인증 이메일을 보내드렸습니다. 받은 편지함을 확인하고 지침에 따라 주세요.";
 
-/* No comment provided by engineer. */
+/* Message -> Sign up verification screen. Parameter: %1$@ - email address */
+"We’ve sent an email to %1$@. Please check your inbox and follow the instructions." = "We’ve sent an email to %1$@. Please check your inbox and follow the instructions.";
+
+/* Rating view initial title */
 "What do you think about Simplenote?" = "Simplenote를 어떻게 생각하시나요?";
 
 /* Number of words in the note */
@@ -717,11 +723,11 @@
 /* Accessibility hint for adding a tag to a note */
 "tag-add-accessibility-hint" = "현재 메모에 태그 추가";
 
-/* No comment provided by engineer. */
+/* Remove a tag from the current note */
 "tag-delete-accessibility-hint" = "현재 메모에서 태그 제거";
 
-/* A welcome note for new iOS users */
-"welcomeNote-iOS" = "iOS용 Simplenote 시작하기\n\n메모를 추가하려면 더하기 버튼을 누르세요.\n\n메모를 탐색하려면 목록을 누르세요 메모를 보려면 제목을 누르고 메모를 수정하려면 메모 내용을 누르세요.\n\n메모 목록 상단의 검색 필드에 검색어를 입력해서 모든 메모를 검색할 수 있습니다.\n\n태그를 보려면 왼쪽 상단의 화살표 버튼을 누르거나 메모 목록을 옆으로 쓸어 넘기세요. 메모 에디터 하단에서 메모에 태그를 추가하고 사이드바를 사용해서 메모를 정리할 수 있습니다.\n\n필요한 경우 더욱 다양한 메모 옵션을 사용할 수 있습니다. 다른 사용자를 메모 공유자로 추가하거나 메모를 웹 페이지로 게시할 수 있습니다.\n\nMac, Android 장치나 웹 브라우저(http:\/\/simplenote.com)에서 Simplenote를 사용할 수 있습니다. 어디에 있든 메모 내용이 자동으로 업데이트됩니다.";
+/* Search Operator for tags. Please preserve the semicolons when translating! */
+"tag:" = "태그:";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞 디버그 활성화 🐞";
