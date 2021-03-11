@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-02-19 17:23:57+0000 */
+/* Translation-Revision-Date: 2021-03-08 11:32:12+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: zh_CN */
@@ -70,17 +70,9 @@
 /* Label on button to add a new tag to a note */
 "Add tag" = "添加标签";
 
-/* Title: No filters applied */
+/* All Notes filter button
+   Title: No filters applied */
 "All Notes" = "全部笔记";
-
-/* Sort Mode: Alphabetically */
-"Alphabetically" = "按字母顺序";
-
-/* Sort Mode: Alphabetically, ascending */
-"Alphabetically: A-Z" = "按字母顺序：A-Z";
-
-/* Sort Mode: Alphabetically, descending */
-"Alphabetically: Z-A" = "按字母顺序：Z-A";
 
 /* Sign in error message */
 "An error was encountered while signing in." = "登录时出错。";
@@ -159,7 +151,7 @@
 /* Copies the Note's Public Link */
 "Copy Link" = "复制链接";
 
-/* No comment provided by engineer. */
+/* Rating view - initial - could be better button */
 "Could be better" = "还可以更好";
 
 /* Error for bad email or password */
@@ -168,7 +160,7 @@
 /* Message displayed when login fails */
 "Could not login with the provided email address and password." = "无法使用所提供的电子邮件地址和密码登录。";
 
-/* No comment provided by engineer. */
+/* Rating view disliked title */
 "Could you tell us how we could improve?" = "您可以告诉我们如何改进吗？";
 
 /* Error message shown when trying to view history of a note without an internet connection */
@@ -189,8 +181,7 @@
 /* Message shown in note list when no notes are in the current view */
 "Create your first note" = "创建您的第一个笔记";
 
-/* Note Creation Date
-   Sort Mode: Creation Date */
+/* Note Creation Date */
 "Created" = "创建日期";
 
 /* Sort Mode: Creation Date, descending */
@@ -224,6 +215,9 @@
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "诊断";
 
+/* Footer -> Sign up verification screen. Parameter: %1$@ - support email address */
+"Didn't get an email? You may already have an account. Contact %1$@ for help." = "Didn't get an email? You may already have an account. Contact %1$@ for help.";
+
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "禁用 Markdown 格式";
 
@@ -241,6 +235,7 @@
 
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
+   Done editing tags
    Done toolbar button */
 "Done" = "完成";
 
@@ -289,7 +284,7 @@
 /* FAQ or contact us */
 "Get Help" = "获取帮助";
 
-/* No comment provided by engineer. */
+/* Rating view liked title */
 "Great! Mind leaving a review to tell us what you like?" = "太棒了！能否写下评论，告知我们您具体喜欢哪些方面？";
 
 /* Display help web page */
@@ -301,7 +296,7 @@
 /* Opens the Note's History */
 "History" = "历史";
 
-/* No comment provided by engineer. */
+/* Rating view - initial - liked button */
 "I like it" = "我喜欢";
 
 /* Note Information Button (metrics + references) */
@@ -322,7 +317,7 @@
 /* Learn More Action */
 "Learn more" = "了解更多";
 
-/* No comment provided by engineer. */
+/* Rating view - liked - leave review button */
 "Leave a review" = "留下评价";
 
 /* Theme: Light */
@@ -364,8 +359,7 @@
 /* Note Options Button */
 "Menu" = "菜单";
 
-/* Note Modification Date
-   Sort Mode: Modified Date */
+/* Note Modification Date */
 "Modified" = "修改日期";
 
 /* Sort Mode: Modified Date, descending */
@@ -377,6 +371,12 @@
 /* Delete Action
    Deletes a note */
 "Move to Trash" = "移动到回收站";
+
+/* Sort Mode: Alphabetically, ascending */
+"Name: A-Z" = "名称：A-Z";
+
+/* Sort Mode: Alphabetically, descending */
+"Name: Z-A" = "名称：Z-A";
 
 /* Home screen quick action: New Note
    Keyboard shortcut: New Note */
@@ -400,7 +400,7 @@
 /* Message shown in note list when no notes are tagged with the provided tag. Parameter: %@ - tag */
 "No notes tagged “%@”" = "没有标记为“%@”的笔记";
 
-/* No comment provided by engineer. */
+/* Rating view - liked or disliked - no thanks button */
 "No thanks" = "不用了，谢谢";
 
 /* Message shown in note list when no notes are untagged */
@@ -409,7 +409,8 @@
 /* Notes Header (Search Mode) */
 "Notes" = "笔记";
 
-/* Dismisses an AlertController */
+/* Closes alert controller for spinner on About view
+   Dismisses an AlertController */
 "OK" = "确定";
 
 /* Instant passcode lock timeout */
@@ -545,10 +546,11 @@
 /* For debugging use */
 "Send a Test Crash" = "发送测试崩溃";
 
-/* No comment provided by engineer. */
+/* Rating view - disliked - send feedback button */
 "Send feedback" = "发送反馈";
 
-/* Title of options screen */
+/* Settings button
+   Title of options screen */
 "Settings" = "设置";
 
 /* Opens the Share Sheet
@@ -600,7 +602,7 @@
 /* Theme: Matches iOS Settings */
 "System Default" = "系统默认";
 
-/* No comment provided by engineer. */
+/* Tags List Header */
 "Tags" = "标签";
 
 /* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
@@ -636,7 +638,8 @@
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "触摸 ID";
 
-/* Title: Trash Tag is selected */
+/* Title: Trash Tag is selected
+   Trash filter button */
 "Trash-noun" = "移到回收站";
 
 /* Prompt when disabling passcode */
@@ -684,7 +687,10 @@
 /* Message -> Verify your email screen. Parameter: %1$@ - email address */
 "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "我们已向 %1$@ 发送了一封验证电子邮件。 请检查您的收件箱并按照说明执行操作。";
 
-/* No comment provided by engineer. */
+/* Message -> Sign up verification screen. Parameter: %1$@ - email address */
+"We’ve sent an email to %1$@. Please check your inbox and follow the instructions." = "We’ve sent an email to %1$@. Please check your inbox and follow the instructions.";
+
+/* Rating view initial title */
 "What do you think about Simplenote?" = "您觉得 Simplenote 怎么样？";
 
 /* Number of words in the note */
@@ -717,11 +723,11 @@
 /* Accessibility hint for adding a tag to a note */
 "tag-add-accessibility-hint" = "向当前笔记中添加标签";
 
-/* No comment provided by engineer. */
+/* Remove a tag from the current note */
 "tag-delete-accessibility-hint" = "将标签从当前笔记中删除";
 
-/* A welcome note for new iOS users */
-"welcomeNote-iOS" = "欢迎使用 iOS 版 Simplenote！\n\n要添加笔记，请轻点“加号”按钮。\n\n弹出列表即可浏览笔记。轻点标题即可查看笔记；轻点笔记内容即可对其进行更改。\n\n您可以通过在笔记列表顶部的搜索字段中输入相关内容来搜索笔记。\n\n要查看标签，请轻点左上方的“箭头”按钮或滑动笔记列表。您可以在笔记编辑器底部向笔记添加标签，并借助侧边栏来整理笔记。\n\n您可以根据需要选择其他笔记选项。您可以将其他人添加为笔记的协作者，或将笔记作为网页发布。\n\n您可以通过 Mac、Android 设备或网络浏览器 (http:\/\/simplenote.com) 使用 Simplenote。您的笔记可随时随地自动更新。";
+/* Search Operator for tags. Please preserve the semicolons when translating! */
+"tag:" = "标签：";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞 调试已启用 🐞";

@@ -1,1 +1,0 @@
-- Ondersteuning voor toetsenbordnavigatie en sneltoetsen toegevoegd
