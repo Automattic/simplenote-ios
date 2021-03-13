@@ -9,6 +9,10 @@ class NoticeController {
 
     private var activeViewIsBeingTouched: Bool = false
 
+    private var isPresenting: Bool {
+        current != nil
+    }
+
     private init() { }
 
     func setupNoticeController() {
@@ -16,7 +20,7 @@ class NoticeController {
     }
 
     func present(_ notice: Notice) {
-        if noticePresenter.isPresenting {
+        if isPresenting {
             appendToQueueIfNew(notice)
             return
         }
