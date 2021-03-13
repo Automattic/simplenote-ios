@@ -46,19 +46,17 @@ class NoticePresenter: KeyboardObservable {
         noticeView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
         containerView.layoutIfNeeded()
 
-        displayNotificationView() {
+        displayNotificationView() { _ in
             completion()
         }
     }
 
-    private func displayNotificationView(completion: @escaping () -> Void) {
+    private func displayNotificationView(completion: @escaping (Bool) -> Void) {
         prepareConstraintToDisplayNotice()
 
-        UIView.animate(withDuration: UIKitConstants.animationLongDuration) {
+        UIView.animate(withDuration: UIKitConstants.animationLongDuration, animations: {
             self.containerView.layoutIfNeeded()
-        } completion: { (_) in
-            completion()
-        }
+        }, completion: completion)
     }
 
     private func makeBottomConstraintConstant() -> CGFloat {
