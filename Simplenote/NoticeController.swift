@@ -85,6 +85,7 @@ extension NoticeController: NoticePresentingDelegate {
         guard let noticeView = noticePresenter.noticeView else {
             return
         }
-        dismiss(noticeView)
+    func noticeWasTapped() {
+        self.dismiss()
     }
 }
