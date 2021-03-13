@@ -17,8 +17,6 @@ class UIKitConstants: NSObject {
     static let animationDelayZero = TimeInterval(0)
     static let animationDelayShort = TimeInterval(0.25)
     static let animationDelayLong = TimeInterval(0.5)
-    static let animationDelayExtraLong = TimeInterval(1.5)
-    static let animationDelayExtraExtraLong = TimeInterval(2.75)
     static let animationQuickDuration = TimeInterval(0.1)
     static let animationShortDuration = TimeInterval(0.25)
     static let animationLongDuration = TimeInterval(0.5)

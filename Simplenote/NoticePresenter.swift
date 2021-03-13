@@ -1,27 +1,32 @@
 import UIKit
 
-class NoticePresenter: KeyboardObservable {
+class NoticePresenter {
 
     // MARK: Properties
     //
-    var containerView: PassthruView?
     var noticeView: NoticeView?
+    private var containerView: PassthruView?
     private var noticeVariableConstraint: NSLayoutConstraint?
 
-    var isPresenting: Bool {
-        noticeView != nil
-    }
     private var keyboardHeight: CGFloat = .zero
     private var keyboardFloats: Bool = false
     private var keyboardNotificationTokens: [Any]?
-    var timer: Timer?
 
     private var keyWindow: UIWindow? {
         return UIApplication.shared.windows.first(where: { $0.isKeyWindow })
     }
-
     private var windowFrame: CGRect {
         return keyWindow?.frame ?? .zero
+    }
+
+    private var bottomConstraintConstant: CGFloat {
+        let constant = Constants.bottomMarginConstant
+
+        if keyboardFloats || keyboardHeight == .zero {
+            return constant
+        }
+
+        return constant - keyboardHeight
     }
 
     // MARK: Lifecycle
@@ -30,15 +35,14 @@ class NoticePresenter: KeyboardObservable {
         stopListeningToKeyboardNotifications()
     }
 
-    // MARK: Presenting/Dismissing Methods
+    // MARK: Presenting Methods
     //
     func presentNoticeView(_ noticeView: NoticeView, completion: @escaping (Bool) -> Void) {
         guard let containerView = prepareContainerView() else {
             return
         }
 
-        self.noticeView = noticeView
-        let noticeView = prepareNoticeView(noticeView, containerView: containerView)
+        self.noticeView = prepareNoticeView(noticeView, containerView: containerView)
 
         displayNotificationView(containerView: containerView,
                                 noticeView: noticeView,
@@ -80,37 +84,14 @@ class NoticePresenter: KeyboardObservable {
     private func prepareConstraintToDisplayNotice(containerView: PassthruView, noticeView: NoticeView) {
         noticeVariableConstraint?.isActive = false
 
-        let constant = makeBottomConstraintConstant()
+        let constant = bottomConstraintConstant
         noticeVariableConstraint = noticeView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: constant)
         noticeVariableConstraint?.isActive = true
     }
 
-    private func makeBottomConstraintConstant() -> CGFloat {
-        let constant = Constants.bottomMarginConstant
-
-        if keyboardFloats || keyboardHeight == .zero {
-            return constant
-        }
-
-        return constant - keyboardHeight
-    }
-
+    // MARK: Dismissing Methods
+    //
     func dismissNotification(completion: @escaping () -> Void) {
-        guard let noticeView = noticeView else {
-            return
-        }
-
-        let delay = noticeView.handler == nil ? UIKitConstants.animationDelayExtraLong : UIKitConstants.animationDelayExtraExtraLong
-
-        timer = Timer.scheduledTimer(withTimeInterval: delay, repeats: false, block: { (timer) in
-            self.dismissAnimation() {
-                completion()
-            }
-        })
-    }
-
-    @objc
-    private func dismissAnimation(completion: @escaping () -> Void) {
         guard let containerView = containerView,
               let noticeView = noticeView else {
             return
@@ -122,13 +103,14 @@ class NoticePresenter: KeyboardObservable {
             containerView.removeFromSuperview()
             self.noticeView = nil
             self.containerView = nil
-            self.timer = nil
             completion()
         }
     }
+}
 
-    // MARK: Keyboard Obserbers
-    //
+// MARK: Keyboard Observable
+//
+extension NoticePresenter: KeyboardObservable {
     func keyboardDidChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
         guard let endFrame = endFrame,
               let animationCurve = animationCurve,
@@ -153,18 +135,15 @@ class NoticePresenter: KeyboardObservable {
         keyboardHeight = frame.intersection(windowFrame).height
         keyboardFloats = frame.maxY < windowFrame.height
     }
-    private func animateNoticeToNewKeyboardLocation(frame: CGRect, curve: UInt, animationDuration: TimeInterval) {
-        if !isPresenting {
-            return
-        }
 
+    private func animateNoticeToNewKeyboardLocation(frame: CGRect, curve: UInt, animationDuration: TimeInterval) {
         guard let containerView = containerView else {
             return
         }
 
         let animationOptions = UIView.AnimationOptions(arrayLiteral: .beginFromCurrentState, .init(rawValue: curve))
 
-        noticeVariableConstraint?.constant = makeBottomConstraintConstant()
+        noticeVariableConstraint?.constant = bottomConstraintConstant
         UIView.animate(withDuration: animationDuration, delay: .zero, options: animationOptions) {
             containerView.layoutIfNeeded()
         }

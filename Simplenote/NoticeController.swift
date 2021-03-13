@@ -1,6 +1,8 @@
 import UIKit
 
 class NoticeController {
+    // MARK: Proerties
+    //
     static let shared = NoticeController()
 
     private var notices: [Notice] = []
@@ -8,17 +10,22 @@ class NoticeController {
     private let noticePresenter = NoticePresenter()
 
     private var activeViewIsBeingTouched: Bool = false
+    private var timer: Timer?
 
     private var isPresenting: Bool {
         current != nil
     }
 
+    // MARK: Life Cycle
+    //
     private init() { }
 
     func setupNoticeController() {
         noticePresenter.startListeningToKeyboardNotifications()
     }
 
+    // MARK: Presenting
+    //
     func present(_ notice: Notice) {
         if isPresenting {
             appendToQueueIfNew(notice)
@@ -29,29 +36,11 @@ class NoticeController {
         let noticeView = makeNoticeView(from: notice)
 
         noticePresenter.presentNoticeView(noticeView) { (_) in
-            if !self.activeViewIsBeingTouched {
-                self.dismiss(noticeView)
-            }
+            let delay = self.current?.action == nil ? Times.shortDelay : Times.longDelay
+            self.timer = Timer.scheduledTimer(withTimeInterval: delay, repeats: false, block: { (_) in
+                self.dismiss()
+            })
         }
-    }
-
-    private func dismiss(_ noticeView: NoticeView) {
-        noticePresenter.dismissNotification {
-            self.current = nil
-            if !self.notices.isEmpty {
-                self.present(self.notices.removeFirst())
-            }
-        }
-    }
-
-    private func makeNoticeView(from notice: Notice) -> NoticeView {
-        let noticeView: NoticeView = NoticeView.instantiateFromNib()
-        noticeView.message = notice.message
-        noticeView.actionTitle = notice.action?.title
-        noticeView.handler = notice.action?.handler
-        noticeView.delegate = self
-
-        return noticeView
     }
 
     /// Confirms if a notice is already contained in notices queue. Appends to queue if new
@@ -67,14 +56,38 @@ class NoticeController {
 
         notices.append(notice)
     }
+
+    private func makeNoticeView(from notice: Notice) -> NoticeView {
+        let noticeView: NoticeView = NoticeView.instantiateFromNib()
+        noticeView.message = notice.message
+        noticeView.actionTitle = notice.action?.title
+        noticeView.handler = notice.action?.handler
+        noticeView.delegate = self
+
+        return noticeView
+    }
+
+    // MARK: Dismissing
+    //
+    private func dismiss() {
+        noticePresenter.dismissNotification {
+            self.current = nil
+
+            if !self.notices.isEmpty {
+                self.present(self.notices.removeFirst())
+            }
+        }
+    }
 }
 
+// MARK: NoticePresenting Delegate
+//
 extension NoticeController: NoticePresentingDelegate {
     func noticePressBegan() {
-        if !noticePresenter.isPresenting {
+        if !isPresenting {
             return
         }
-        guard let timer = noticePresenter.timer else {
+        guard let timer = timer else {
             return
         }
 
@@ -82,10 +95,17 @@ extension NoticeController: NoticePresentingDelegate {
     }
 
     func noticePressEnded() {
-        guard let noticeView = noticePresenter.noticeView else {
-            return
-        }
+        timer = Timer.scheduledTimer(withTimeInterval: Times.shortDelay, repeats: false, block: { (_) in
+            self.dismiss()
+        })
+    }
+
     func noticeWasTapped() {
         self.dismiss()
     }
+}
+
+private struct Times {
+    static let shortDelay = TimeInterval(1.5)
+    static let longDelay = TimeInterval(2.75)
 }
