@@ -28,7 +28,7 @@ class NoticeController {
         current = notice
         let noticeView = makeNoticeView(from: notice)
 
-        noticePresenter.presentNoticeView(noticeView) {
+        noticePresenter.presentNoticeView(noticeView) { (_) in
             if !self.activeViewIsBeingTouched {
                 self.dismiss(noticeView)
             }

@@ -4,7 +4,7 @@ class NoticePresenter: KeyboardObservable {
 
     // MARK: Properties
     //
-    private var containerView = PassthruView(frame: .zero)
+    var containerView: PassthruView?
     var noticeView: NoticeView?
     private var noticeVariableConstraint: NSLayoutConstraint?
 
@@ -32,31 +32,57 @@ class NoticePresenter: KeyboardObservable {
 
     // MARK: Presenting/Dismissing Methods
     //
-    func presentNoticeView(_ noticeView: NoticeView, completion: @escaping () -> Void) {
-        guard let keyWindow = keyWindow else {
+    func presentNoticeView(_ noticeView: NoticeView, completion: @escaping (Bool) -> Void) {
+        guard let containerView = prepareContainerView() else {
             return
         }
-        self.noticeView = noticeView
 
-        containerView.addSubview(noticeView)
+        self.noticeView = noticeView
+        let noticeView = prepareNoticeView(noticeView, containerView: containerView)
+
+        displayNotificationView(containerView: containerView,
+                                noticeView: noticeView,
+                                completion: completion)
+    }
+
+    private func prepareContainerView() -> PassthruView? {
+        guard let keyWindow = keyWindow else {
+            return nil
+        }
+
+        let containerView = PassthruView(frame: .zero)
+        self.containerView = containerView
+
         keyWindow.addFillingSubview(containerView)
+
+        return containerView
+    }
+
+    private func prepareNoticeView(_ noticeView: NoticeView, containerView: PassthruView) -> NoticeView {
+        containerView.addSubview(noticeView)
 
         noticeVariableConstraint = noticeView.topAnchor.constraint(equalTo: containerView.bottomAnchor)
         noticeVariableConstraint?.isActive = true
         noticeView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
         containerView.layoutIfNeeded()
 
-        displayNotificationView() { _ in
-            completion()
-        }
+        return noticeView
     }
 
-    private func displayNotificationView(completion: @escaping (Bool) -> Void) {
-        prepareConstraintToDisplayNotice()
+    private func displayNotificationView(containerView: PassthruView, noticeView: NoticeView, completion: @escaping (Bool) -> Void) {
+        prepareConstraintToDisplayNotice(containerView: containerView, noticeView: noticeView)
 
         UIView.animate(withDuration: UIKitConstants.animationLongDuration, animations: {
-            self.containerView.layoutIfNeeded()
+            containerView.layoutIfNeeded()
         }, completion: completion)
+    }
+
+    private func prepareConstraintToDisplayNotice(containerView: PassthruView, noticeView: NoticeView) {
+        noticeVariableConstraint?.isActive = false
+
+        let constant = makeBottomConstraintConstant()
+        noticeVariableConstraint = noticeView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: constant)
+        noticeVariableConstraint?.isActive = true
     }
 
     private func makeBottomConstraintConstant() -> CGFloat {
@@ -69,14 +95,6 @@ class NoticePresenter: KeyboardObservable {
         return constant - keyboardHeight
     }
 
-    private func prepareConstraintToDisplayNotice() {
-        noticeVariableConstraint?.isActive = false
-
-        let constant = makeBottomConstraintConstant()
-        noticeVariableConstraint = noticeView?.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: constant)
-        noticeVariableConstraint?.isActive = true
-    }
-
     func dismissNotification(completion: @escaping () -> Void) {
         guard let noticeView = noticeView else {
             return
@@ -85,20 +103,25 @@ class NoticePresenter: KeyboardObservable {
         let delay = noticeView.handler == nil ? UIKitConstants.animationDelayExtraLong : UIKitConstants.animationDelayExtraExtraLong
 
         timer = Timer.scheduledTimer(withTimeInterval: delay, repeats: false, block: { (timer) in
-            self.dismissAnimation(noticeView: noticeView) {
+            self.dismissAnimation() {
                 completion()
             }
         })
     }
 
     @objc
-    private func dismissAnimation(noticeView: NoticeView, completion: @escaping () -> Void) {
+    private func dismissAnimation(completion: @escaping () -> Void) {
+        guard let containerView = containerView,
+              let noticeView = noticeView else {
+            return
+        }
         UIView.animate(withDuration: UIKitConstants.animationLongDuration) {
             noticeView.alpha = .zero
         } completion: { (_) in
-            self.noticeView?.removeFromSuperview()
-            self.containerView.removeFromSuperview()
+            noticeView.removeFromSuperview()
+            containerView.removeFromSuperview()
             self.noticeView = nil
+            self.containerView = nil
             self.timer = nil
             completion()
         }
@@ -135,11 +158,15 @@ class NoticePresenter: KeyboardObservable {
             return
         }
 
+        guard let containerView = containerView else {
+            return
+        }
+
         let animationOptions = UIView.AnimationOptions(arrayLiteral: .beginFromCurrentState, .init(rawValue: curve))
 
         noticeVariableConstraint?.constant = makeBottomConstraintConstant()
         UIView.animate(withDuration: animationDuration, delay: .zero, options: animationOptions) {
-            self.containerView.layoutIfNeeded()
+            containerView.layoutIfNeeded()
         }
     }
 
