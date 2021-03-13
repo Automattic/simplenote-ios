@@ -16,6 +16,13 @@ class NoticePresenter: KeyboardObservable {
     private var keyboardNotificationTokens: [Any]?
     var timer: Timer?
 
+    private var keyWindow: UIWindow? {
+        return UIApplication.shared.windows.first(where: { $0.isKeyWindow })
+    }
+
+    private var windowFrame: CGRect {
+        return keyWindow?.frame ?? .zero
+    }
 
     // MARK: Lifecycle
     //
@@ -26,7 +33,7 @@ class NoticePresenter: KeyboardObservable {
     // MARK: Presenting/Dismissing Methods
     //
     func presentNoticeView(_ noticeView: NoticeView, completion: @escaping () -> Void) {
-        guard let keyWindow = getKeyWindow() else {
+        guard let keyWindow = keyWindow else {
             return
         }
         self.noticeView = noticeView
@@ -122,8 +129,7 @@ class NoticePresenter: KeyboardObservable {
     }
 
     private func updateKeyboardHeight(with frame: CGRect) {
-        let windowFrame = getWindowFrame()
-        keyboardHeight = frame.intersection(getWindowFrame()).height
+        keyboardHeight = frame.intersection(windowFrame).height
         keyboardFloats = frame.maxY < windowFrame.height
     }
     private func animateNoticeToNewKeyboardLocation(frame: CGRect, curve: UInt, animationDuration: TimeInterval) {
@@ -150,18 +156,6 @@ class NoticePresenter: KeyboardObservable {
 
         removeKeyboardObservers(with: tokens)
         keyboardNotificationTokens = nil
-    }
-}
-
-extension NoticePresenter {
-    // Convenience method to fetch current key window
-    //
-    private func getKeyWindow() -> UIWindow? {
-        return UIApplication.shared.windows.first(where: { $0.isKeyWindow })
-    }
-
-    private func getWindowFrame() -> CGRect {
-        return getKeyWindow()?.frame ?? .zero
     }
 }
 
