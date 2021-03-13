@@ -36,7 +36,7 @@ class NoticeController {
     }
 
     private func dismiss(_ noticeView: NoticeView) {
-        self.noticePresenter.dismissNotification {
+        noticePresenter.dismissNotification {
             self.current = nil
             if !self.notices.isEmpty {
                 self.present(self.notices.removeFirst())
