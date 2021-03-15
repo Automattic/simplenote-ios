@@ -399,6 +399,7 @@
 		B5EB1EFF1C205A800080A1B3 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5EB1EFD1C205A800080A1B3 /* Icons.xcassets */; };
 		B5F3000223F4502C007A7C59 /* SPSortBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5F3000123F4502C007A7C59 /* SPSortBar.xib */; };
 		B5F3FFFF23F44679007A7C59 /* SPSortBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F3FFFE23F44679007A7C59 /* SPSortBar.swift */; };
+		BA3FB8CF25FEA0C500EA9A1B /* NoticeContorllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3FB8CE25FEA0C500EA9A1B /* NoticeContorllerTests.swift */; };
 		BA4499AA25ED8821000C563E /* NoticeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA4499A925ED8821000C563E /* NoticeView.xib */; };
 		BA4499B325ED8AB0000C563E /* NoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4499B225ED8AB0000C563E /* NoticeView.swift */; };
 		BA4499BC25ED95D0000C563E /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4499BB25ED95D0000C563E /* Notice.swift */; };
@@ -909,6 +910,7 @@
 		B5EB1EFD1C205A800080A1B3 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = ../Icons.xcassets; sourceTree = "<group>"; };
 		B5F3000123F4502C007A7C59 /* SPSortBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPSortBar.xib; path = Classes/SPSortBar.xib; sourceTree = "<group>"; };
 		B5F3FFFE23F44679007A7C59 /* SPSortBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPSortBar.swift; path = Classes/SPSortBar.swift; sourceTree = "<group>"; };
+		BA3FB8CE25FEA0C500EA9A1B /* NoticeContorllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeContorllerTests.swift; sourceTree = "<group>"; };
 		BA4499A925ED8821000C563E /* NoticeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoticeView.xib; sourceTree = "<group>"; };
 		BA4499B225ED8AB0000C563E /* NoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeView.swift; sourceTree = "<group>"; };
 		BA4499BB25ED95D0000C563E /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
@@ -1670,6 +1672,7 @@
 		B58218981FCC45170094ECA1 /* SimplenoteTests */ = {
 			isa = PBXGroup;
 			children = (
+				BA3FB8CD25FEA09F00EA9A1B /* Notice */,
 				A6CC0B0E25B83FC800F12A85 /* Verification */,
 				A6F4883025A891900050CFA8 /* Tags */,
 				A6E6CE5425A5A6CC005A92DB /* PinLock */,
@@ -1874,6 +1877,14 @@
 				B5F3000123F4502C007A7C59 /* SPSortBar.xib */,
 			);
 			name = SortBar;
+			sourceTree = "<group>";
+		};
+		BA3FB8CD25FEA09F00EA9A1B /* Notice */ = {
+			isa = PBXGroup;
+			children = (
+				BA3FB8CE25FEA0C500EA9A1B /* NoticeContorllerTests.swift */,
+			);
+			name = Notice;
 			sourceTree = "<group>";
 		};
 		BA4499A825ED87F8000C563E /* Notices */ = {
@@ -2926,6 +2937,7 @@
 				A6E6CE9125A5B970005A92DB /* PinLockRemoveControllerTests.swift in Sources */,
 				B57401A025B7D9960058960E /* EmailVerificationTests.swift in Sources */,
 				A6E6CEC925A6053A005A92DB /* MockApplication.swift in Sources */,
+				BA3FB8CF25FEA0C500EA9A1B /* NoticeContorllerTests.swift in Sources */,
 				A645FA70254C5E69008A1519 /* NoteContentHelperTests.swift in Sources */,
 				A6E6CE6425A5AAA8005A92DB /* PinLockControllerConfiguration+Tests.swift in Sources */,
 				B51F6DD72460D7C20074DDD9 /* NSPredicateEmailTests.swift in Sources */,
