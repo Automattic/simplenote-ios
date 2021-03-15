@@ -4,7 +4,7 @@ class NoticePresenter {
 
     // MARK: Properties
     //
-    var noticeView: NoticeView?
+    private var noticeView: UIView?
     private var containerView: PassthruView?
     private var noticeVariableConstraint: NSLayoutConstraint?
 
