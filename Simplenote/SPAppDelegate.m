@@ -129,7 +129,8 @@
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey,id> *)launchOptions
 {
     // Migrate keychain items
-    KeychainMigrator *keychainMigrator = [[KeychainMigrator alloc] init];
+    KeychainMigrator *keychainMigrator = [[KeychainMigrator alloc]
+                                          initWithUserDefaults:[NSUserDefaults standardUserDefaults]];
 // Keychain Migration Testing: Should only run in *release* targets. Uncomment / use at will
 //    [keychainMigrator testMigration];
     [keychainMigrator migrateIfNecessary];
