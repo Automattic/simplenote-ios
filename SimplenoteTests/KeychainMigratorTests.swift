@@ -8,7 +8,8 @@ class KeychainMigratorTests: XCTestCase {
 
     let testingUsername = "TestingUsername"
     let testingPassword = "TestingPassword"
-    let migrator = KeychainMigrator()
+    let testDefaults = UserDefaults(suiteName: TestConstants.suiteName)
+    lazy var migrator = KeychainMigrator(userDefaults: testDefaults)
 
     /// Cleanup
     ///
@@ -17,6 +18,7 @@ class KeychainMigratorTests: XCTestCase {
 
         migrator.username = nil
         try? migrator.deleteKeychainEntry(accessGroup: .new, username: testingUsername)
+        testDefaults?.removePersistentDomain(forName: TestConstants.presistentDomainName)
     }
 
     /// This test verifies that `needsPasswordMigration` returns false whenever the current username is not available.
@@ -38,4 +40,9 @@ class KeychainMigratorTests: XCTestCase {
 
         XCTAssertTrue(migrator.needsPasswordMigration(), "")
     }
+}
+
+private struct TestConstants {
+    static let presistentDomainName = "com.codality.NotationalFlow"
+    static let suiteName = "SimplenoteTests"
 }
