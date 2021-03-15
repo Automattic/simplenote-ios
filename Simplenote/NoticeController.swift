@@ -8,6 +8,7 @@ class NoticeController {
     private var notices: [Notice] = []
     private var current: Notice?
     private let noticePresenter = NoticePresenter()
+    private let timerFactory: TimerFactory
 
     private var timer: Timer? {
         didSet {
@@ -21,7 +22,9 @@ class NoticeController {
 
     // MARK: Life Cycle
     //
-    private init() { }
+    private init() {
+        self.timerFactory = TimerFactory()
+    }
 
     func setupNoticeController() {
         noticePresenter.startListeningToKeyboardNotifications()
@@ -29,7 +32,7 @@ class NoticeController {
 
     // MARK: Presenting
     //
-    func present(_ notice: Notice, withTimer timer: Timer? = nil) {
+    func present(_ notice: Notice) {
         if isPresenting {
             appendToQueueIfNew(notice)
             return
@@ -39,7 +42,10 @@ class NoticeController {
         let noticeView = makeNoticeView(from: notice)
 
         noticePresenter.presentNoticeView(noticeView) { () in
-            self.startTimer(timer: timer)
+            let delay = self.current?.action == nil ? Times.shortDelay : Times.longDelay
+            self.timer = self.timerFactory.scheduledTimer(with: delay, completion: {
+                self.dismiss()
+            })
         }
     }
 
@@ -57,15 +63,6 @@ class NoticeController {
         notices.append(notice)
     }
 
-    func startTimer(timer: Timer? = nil) {
-        if timer != nil {
-            self.timer = timer
-            return
-        }
-
-        let delay = current?.action == nil ? Times.shortDelay : Times.longDelay
-        self.timer = Timer.scheduledTimer(timeInterval: delay, target: self, selector: #selector(dismiss), userInfo: nil, repeats: false)
-    }
     private func makeNoticeView(from notice: Notice) -> NoticeView {
         let noticeView: NoticeView = NoticeView.instantiateFromNib()
         noticeView.message = notice.message
@@ -101,7 +98,7 @@ extension NoticeController: NoticePresentingDelegate {
     }
 
     func noticePressEnded() {
-        timer = Timer.scheduledTimer(withTimeInterval: Times.shortDelay, repeats: false, block: { (_) in
+        timer = timerFactory.scheduledTimer(with: Times.shortDelay, completion: {
             self.dismiss()
         })
     }
