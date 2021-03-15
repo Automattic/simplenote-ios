@@ -59,12 +59,13 @@ class KeychainMigrator: NSObject {
     }
 
     @objc
+    override init() {
+        self.userDefaults = UserDefaults.standard
+    }
+
+    @objc
     init(userDefaults: UserDefaults?) {
-        if let userDefaults = userDefaults {
-            self.userDefaults = userDefaults
-        } else {
-            self.userDefaults = UserDefaults.standard
-        }
+        self.userDefaults = userDefaults ?? UserDefaults.standard
     }
 }
 
