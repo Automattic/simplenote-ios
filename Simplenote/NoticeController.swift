@@ -7,7 +7,7 @@ class NoticeController {
 
     private var notices: [Notice] = []
     private var current: Notice?
-    private let noticePresenter = NoticePresenter()
+    private var noticePresenter: NoticePresentable
 
     private var activeViewIsBeingTouched: Bool = false
     private var timer: Timer?
@@ -18,7 +18,13 @@ class NoticeController {
 
     // MARK: Life Cycle
     //
-    private init() { }
+    private init() {
+        self.noticePresenter = NoticePresenter()
+    }
+
+    internal init(presenter: NoticePresentable) {
+        self.noticePresenter = presenter
+    }
 
     func setupNoticeController() {
         noticePresenter.startListeningToKeyboardNotifications()

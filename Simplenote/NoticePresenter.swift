@@ -1,6 +1,12 @@
 import UIKit
 
-class NoticePresenter {
+protocol NoticePresentable {
+    func startListeningToKeyboardNotifications()
+    func presentNoticeView(_ noticeView: NoticeView, completion: @escaping (Bool) -> Void)
+    func dismissNotification(completion: @escaping () -> Void)
+}
+
+class NoticePresenter: NoticePresentable {
 
     // MARK: Properties
     //
