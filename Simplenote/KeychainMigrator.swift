@@ -43,6 +43,10 @@ class KeychainMigrator: NSObject {
         static let newAccessGroup = newPrefix + bundleId
     }
 
+    /// Local copy of User Defaults
+    ///
+    private let userDefaults: UserDefaults
+
     /// Migrates the Legacy Keychain Entry over to the new Access Group
     ///
     @objc
@@ -52,6 +56,15 @@ class KeychainMigrator: NSObject {
         }
 
         migrateLegacyPassword()
+    }
+
+    @objc
+    init(userDefaults: UserDefaults?) {
+        if let userDefaults = userDefaults {
+            self.userDefaults = userDefaults
+        } else {
+            self.userDefaults = UserDefaults.standard
+        }
     }
 }
 
@@ -120,11 +133,11 @@ extension KeychainMigrator {
     ///
     var username: String? {
         set {
-            UserDefaults.standard.set(newValue, forKey: Constants.usernameKey)
-            UserDefaults.standard.synchronize()
+            userDefaults.set(newValue, forKey: Constants.usernameKey)
+            userDefaults.synchronize()
         }
         get {
-            return UserDefaults.standard.string(forKey: Constants.usernameKey)
+            return userDefaults.string(forKey: Constants.usernameKey)
         }
     }
 }
