@@ -9,7 +9,6 @@ class NoticeController {
     private var current: Notice?
     private let noticePresenter = NoticePresenter()
 
-    private var activeViewIsBeingTouched: Bool = false
     private var timer: Timer?
 
     private var isPresenting: Bool {
