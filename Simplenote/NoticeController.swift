@@ -9,7 +9,11 @@ class NoticeController {
     private var current: Notice?
     private let noticePresenter = NoticePresenter()
 
-    private var timer: Timer?
+    private var timer: Timer? {
+        didSet {
+            oldValue?.invalidate()
+        }
+    }
 
     private var isPresenting: Bool {
         current != nil
@@ -93,11 +97,7 @@ extension NoticeController: NoticePresentingDelegate {
         if !isPresenting {
             return
         }
-        guard let timer = timer else {
-            return
-        }
-
-        timer.invalidate()
+        timer = nil
     }
 
     func noticePressEnded() {
