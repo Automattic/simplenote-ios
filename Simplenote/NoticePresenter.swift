@@ -37,16 +37,16 @@ class NoticePresenter {
 
     // MARK: Presenting Methods
     //
-    func presentNoticeView(_ noticeView: NoticeView, completion: @escaping (Bool) -> Void) {
+    func presentNoticeView(_ noticeView: NoticeView, completion: @escaping () -> Void) {
         guard let containerView = prepareContainerView() else {
             return
         }
         self.noticeView = noticeView
         add(view: noticeView, into: containerView)
 
-        displayNotificationView(containerView: containerView,
-                                noticeView: noticeView,
-                                completion: completion)
+        display(view: noticeView, in: containerView) {
+            completion()
+        }
     }
 
     private func prepareContainerView() -> PassthruView? {
@@ -72,19 +72,21 @@ class NoticePresenter {
 
     }
 
-    private func displayNotificationView(containerView: PassthruView, noticeView: NoticeView, completion: @escaping (Bool) -> Void) {
-        prepareConstraintToDisplayNotice(containerView: containerView, noticeView: noticeView)
+    private func display(view: UIView, in containerView: UIView, completion: @escaping () -> Void) {
+        prepareConstraintFor(view: view, in: containerView)
 
         UIView.animate(withDuration: UIKitConstants.animationLongDuration, animations: {
             containerView.layoutIfNeeded()
-        }, completion: completion)
+        }, completion: { _ in
+            completion()
+        })
     }
 
-    private func prepareConstraintToDisplayNotice(containerView: PassthruView, noticeView: NoticeView) {
+    private func prepareConstraintFor(view: UIView, in containerView: UIView) {
         noticeVariableConstraint?.isActive = false
 
         let constant = bottomConstraintConstant
-        noticeVariableConstraint = noticeView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: constant)
+        noticeVariableConstraint = view.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: constant)
         noticeVariableConstraint?.isActive = true
     }
 

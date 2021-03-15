@@ -38,7 +38,7 @@ class NoticeController {
         current = notice
         let noticeView = makeNoticeView(from: notice)
 
-        noticePresenter.presentNoticeView(noticeView) { (_) in
+        noticePresenter.presentNoticeView(noticeView) { () in
             self.startTimer(timer: timer)
         }
     }
