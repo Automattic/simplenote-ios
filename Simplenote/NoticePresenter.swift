@@ -42,7 +42,7 @@ class NoticePresenter {
             return
         }
 
-        self.noticeView = prepareNoticeView(noticeView, containerView: containerView)
+        add(view: noticeView, into: containerView)
 
         displayNotificationView(containerView: containerView,
                                 noticeView: noticeView,
@@ -62,15 +62,14 @@ class NoticePresenter {
         return containerView
     }
 
-    private func prepareNoticeView(_ noticeView: NoticeView, containerView: PassthruView) -> NoticeView {
-        containerView.addSubview(noticeView)
+    private func add(view: UIView, into containerView: PassthruView) {
+        containerView.addSubview(view)
 
-        noticeVariableConstraint = noticeView.topAnchor.constraint(equalTo: containerView.bottomAnchor)
+        noticeVariableConstraint = view.topAnchor.constraint(equalTo: containerView.bottomAnchor)
         noticeVariableConstraint?.isActive = true
-        noticeView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+        view.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
         containerView.layoutIfNeeded()
 
-        return noticeView
     }
 
     private func displayNotificationView(containerView: PassthruView, noticeView: NoticeView, completion: @escaping (Bool) -> Void) {
