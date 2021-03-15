@@ -12,7 +12,7 @@ class NoticeController {
     private var activeViewIsBeingTouched: Bool = false
     private var timer: Timer?
 
-    private var isPresenting: Bool {
+    internal var isPresenting: Bool {
         current != nil
     }
 
@@ -60,6 +60,10 @@ class NoticeController {
         notices.append(notice)
     }
 
+    var pendingNotices: Int {
+        notices.count
+    }
+
     func startTimer(timer: Timer? = nil) {
         if timer != nil {
             self.timer = timer
@@ -69,6 +73,7 @@ class NoticeController {
         let delay = current?.action == nil ? Times.shortDelay : Times.longDelay
         self.timer = Timer.scheduledTimer(timeInterval: delay, target: self, selector: #selector(dismiss), userInfo: nil, repeats: false)
     }
+
     private func makeNoticeView(from notice: Notice) -> NoticeView {
         let noticeView: NoticeView = NoticeView.instantiateFromNib()
         noticeView.message = notice.message
