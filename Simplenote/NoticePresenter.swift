@@ -41,7 +41,7 @@ class NoticePresenter {
         guard let containerView = prepareContainerView() else {
             return
         }
-
+        self.noticeView = noticeView
         add(view: noticeView, into: containerView)
 
         displayNotificationView(containerView: containerView,
