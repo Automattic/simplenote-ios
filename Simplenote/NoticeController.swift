@@ -26,7 +26,7 @@ class NoticeController {
 
     // MARK: Presenting
     //
-    func present(_ notice: Notice) {
+    func present(_ notice: Notice, withTimer timer: Timer? = nil) {
         if isPresenting {
             appendToQueueIfNew(notice)
             return
@@ -36,10 +36,7 @@ class NoticeController {
         let noticeView = makeNoticeView(from: notice)
 
         noticePresenter.presentNoticeView(noticeView) { (_) in
-            let delay = self.current?.action == nil ? Times.shortDelay : Times.longDelay
-            self.timer = Timer.scheduledTimer(withTimeInterval: delay, repeats: false, block: { (_) in
-                self.dismiss()
-            })
+            self.startTimer(timer: timer)
         }
     }
 
@@ -57,6 +54,15 @@ class NoticeController {
         notices.append(notice)
     }
 
+    func startTimer(timer: Timer? = nil) {
+        if timer != nil {
+            self.timer = timer
+            return
+        }
+
+        let delay = current?.action == nil ? Times.shortDelay : Times.longDelay
+        self.timer = Timer.scheduledTimer(timeInterval: delay, target: self, selector: #selector(dismiss), userInfo: nil, repeats: false)
+    }
     private func makeNoticeView(from notice: Notice) -> NoticeView {
         let noticeView: NoticeView = NoticeView.instantiateFromNib()
         noticeView.message = notice.message
@@ -69,7 +75,8 @@ class NoticeController {
 
     // MARK: Dismissing
     //
-    private func dismiss() {
+    @objc
+    func dismiss() {
         noticePresenter.dismissNotification {
             self.current = nil
 
