@@ -1,6 +1,6 @@
 import UIKit
 
-protocol NoticePresentingDelegate: class {
+protocol NoticeInteractionDelegate: class {
     func noticePressBegan()
     func noticePressEnded()
     func noticeWasTapped()
@@ -34,7 +34,7 @@ class NoticeView: UIView {
         }
     }
 
-    weak var delegate: NoticePresentingDelegate?
+    weak var delegate: NoticeInteractionDelegate?
 
 
     // MARK: Initialization

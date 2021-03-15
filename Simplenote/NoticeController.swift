@@ -95,7 +95,7 @@ class NoticeController {
 
 // MARK: NoticePresenting Delegate
 //
-extension NoticeController: NoticePresentingDelegate {
+extension NoticeController: NoticeInteractionDelegate {
     func noticePressBegan() {
         if !isPresenting {
             return
