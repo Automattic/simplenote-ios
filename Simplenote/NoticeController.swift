@@ -7,7 +7,7 @@ class NoticeController {
 
     private var notices: [Notice] = []
     private var current: Notice?
-    private let noticePresenter = NoticePresenter()
+    private var noticePresenter: NoticePresenter
     private let timerFactory: TimerFactory
 
     private var timer: Timer? {
@@ -22,13 +22,14 @@ class NoticeController {
 
     // MARK: Life Cycle
     //
-    private init() {
-        self.timerFactory = TimerFactory()
-        self.noticePresenter = NoticePresenter()
+    private init(presenter: NoticePresenter = NoticePresenter(), timerFactory: TimerFactory = TimerFactory()) {
+        self.timerFactory = timerFactory
+        self.noticePresenter = presenter
     }
 
-    internal init(presenter: NoticePresentable) {
+    init(presenter: NoticePresenter, timerFactor: TimerFactory) {
         self.noticePresenter = presenter
+        self.timerFactory = timerFactor
     }
 
     func setupNoticeController() {
