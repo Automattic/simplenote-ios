@@ -113,8 +113,8 @@ extension NoticeController: NoticeInteractionDelegate {
         })
     }
 
-    func noticeWasTapped() {
-        self.dismiss()
+    func actionWasTapped() {
+        dismiss()
     }
 }
 
