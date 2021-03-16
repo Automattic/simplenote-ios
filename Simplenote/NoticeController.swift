@@ -16,7 +16,7 @@ class NoticeController {
         }
     }
 
-    internal var isPresenting: Bool {
+    var isPresenting: Bool {
         current != nil
     }
 

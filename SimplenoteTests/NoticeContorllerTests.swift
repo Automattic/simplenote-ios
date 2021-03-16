@@ -14,13 +14,23 @@ class NoticeContorllerTests: XCTestCase {
 
     func testPresentNotice() throws {
         let notice = Notice(message: "Message", action: nil)
+
         controller.present(notice)
 
         XCTAssertTrue(presenter.presented)
+    }
 
-        let presentedNoticeView = try XCTUnwrap(presenter.noticeView as? NoticeView)
-        XCTAssertEqual(presentedNoticeView.message, notice.message)
-        XCTAssertTrue(presentedNoticeView.handler == nil)
+    func testControlDoesNotPresentNewNoticeIfPresenting() throws {
+        let noticeA = Notice(message: "Message A", action: nil)
+        let noticeB = Notice(message: "Message B", action: nil)
+        controller.present(noticeA)
+        controller.present(noticeB)
+
+        XCTAssertTrue(presenter.presented)
+        XCTAssertEqual(presenter.presentedViews.count, 1)
+        XCTAssertEqual(controller.pendingNotices, 1)
+        let presentedNotice = try XCTUnwrap(presenter.noticeView as? NoticeView)
+        XCTAssertEqual(presentedNotice.message, noticeA.message)
     }
 
     func testAppendToQueueIfNew() {
@@ -38,18 +48,6 @@ class NoticeContorllerTests: XCTestCase {
 
         controller.present(noticeB)
         XCTAssertEqual(controller.pendingNotices, 1)
-    }
-
-    func testControllerPresent() {
-        let expectation = XCTestExpectation(description: "Did dismiss notice")
-        timerFactory.timer = Timer(timeInterval: TimeInterval(0.5), repeats: false, block: { (_) in
-            expectation.fulfill()
-        })
-
-        let notice = Notice(message: "Message", action: nil)
-        controller.present(notice)
-
-        wait(for: [expectation], timeout: TimeInterval(3))
     }
 
     func testMakeNoticeView() throws {
@@ -76,9 +74,9 @@ class NoticeContorllerTests: XCTestCase {
         XCTAssertNotNil(view.handler)
     }
 
-    func testMakeNoticeViewEmptyNotice() throws {
+    func testMakeNoticeViewWithEmptyNotice() throws {
         let action = NoticeAction(title: "") {
-            print("")
+            //No action
         }
         let notice = Notice(message: "", action: action)
 
@@ -107,20 +105,27 @@ class NoticeContorllerTests: XCTestCase {
         controller.present(noticeA)
         controller.present(noticeB)
 
+        XCTAssertTrue(controller.isPresenting)
         XCTAssertEqual(controller.pendingNotices, 1)
 
         controller.dismiss()
 
-        XCTAssertTrue(presenter.dismissed)
         XCTAssertTrue(controller.isPresenting)
         XCTAssertEqual(controller.pendingNotices, 0)
+
+        controller.dismiss()
+
+        XCTAssertTrue(presenter.dismissed)
+        XCTAssertFalse(controller.isPresenting)
+        XCTAssertEqual(controller.pendingNotices, 0)
+        XCTAssertEqual(presenter.actionLog, "presentNoticeView(Message A), dismissNotification(), presentNoticeView(Message B), dismissNotification(), ")
     }
 }
 
 extension NoticeContorllerTests {
     static var timeInterval = TimeInterval.zero
     static var timerNoActionCompletionHandler: (Timer) -> Void = { (_) in
-        print("Timer Finished")
+        //no action
     }
 }
 
@@ -128,9 +133,13 @@ class MockNoticePresenter: NoticePresenter {
     var presented: Bool = false
     var dismissed: Bool = false
     var listeningToKeyboard: Bool = false
+    var presentedViews = [NoticeView]()
+    var actionLog = String()
 
     override func presentNoticeView(_ noticeView: NoticeView, completion: @escaping () -> Void) {
         self.noticeView = noticeView
+        presentedViews.append(noticeView)
+        actionLog.append("presentNoticeView(\(noticeView.message ?? "")), ")
         presented = true
 
         completion()
@@ -138,6 +147,7 @@ class MockNoticePresenter: NoticePresenter {
 
     override func dismissNotification(completion: @escaping () -> Void) {
         dismissed = true
+        actionLog.append("dismissNotification(), ")
         completion()
     }
 
@@ -152,6 +162,7 @@ class MockTimerFactory: TimerFactory {
     override func scheduledTimer(with timeInterval: TimeInterval, completion: @escaping () -> Void) -> Timer {
         if let timer = timer {
             timer.fire()
+
             return timer
         } else {
             return Timer.scheduledTimer(withTimeInterval: NoticeContorllerTests.timeInterval, repeats: false, block: NoticeContorllerTests.timerNoActionCompletionHandler)
