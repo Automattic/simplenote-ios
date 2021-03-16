@@ -160,12 +160,20 @@ class MockTimerFactory: TimerFactory {
     var timer: Timer?
 
     override func scheduledTimer(with timeInterval: TimeInterval, completion: @escaping () -> Void) -> Timer {
-        if let timer = timer {
-            timer.fire()
+        let timer = MockTimer()
+        timer.completion = completion
+        return timer
+    }
+}
 
-            return timer
-        } else {
-            return Timer.scheduledTimer(withTimeInterval: NoticeContorllerTests.timeInterval, repeats: false, block: NoticeContorllerTests.timerNoActionCompletionHandler)
-        }
+class MockTimer: Timer {
+    var completion: (() -> Void)?
+
+    override func fire() {
+        completion?()
+    }
+
+    override func invalidate() {
+        completion = nil
     }
 }
