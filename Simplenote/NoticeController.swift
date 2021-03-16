@@ -22,14 +22,9 @@ class NoticeController {
 
     // MARK: Life Cycle
     //
-    private init(presenter: NoticePresenter = NoticePresenter(), timerFactory: TimerFactory = TimerFactory()) {
+    init(presenter: NoticePresenter = NoticePresenter(), timerFactory: TimerFactory = TimerFactory()) {
         self.timerFactory = timerFactory
         self.noticePresenter = presenter
-    }
-
-    init(presenter: NoticePresenter, timerFactor: TimerFactory) {
-        self.noticePresenter = presenter
-        self.timerFactory = timerFactor
     }
 
     func setupNoticeController() {

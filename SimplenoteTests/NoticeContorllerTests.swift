@@ -4,7 +4,7 @@ import XCTest
 class NoticeContorllerTests: XCTestCase {
     private lazy var presenter = MockNoticePresenter()
     private lazy var timerFactory = MockTimerFactory()
-    private lazy var controller = NoticeController(presenter: presenter, timerFactor: timerFactory)
+    private lazy var controller = NoticeController(presenter: presenter, timerFactory: timerFactory)
 
     func testSetupNoticeContoller() {
         controller.setupNoticeController()
