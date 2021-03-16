@@ -1,7 +1,7 @@
 import XCTest
 @testable import Simplenote
 
-class NoticeContorllerTests: XCTestCase {
+class NoticeControllerTests: XCTestCase {
     private lazy var presenter = MockNoticePresenter()
     private lazy var timerFactory = MockTimerFactory()
     private lazy var controller = NoticeController(presenter: presenter, timerFactory: timerFactory)
