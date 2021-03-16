@@ -3,7 +3,7 @@ import UIKit
 protocol NoticePresentingDelegate: class {
     func noticePressBegan()
     func noticePressEnded()
-    func noticeWasTapped()
+    func actionWasTapped()
 }
 
 class NoticeView: UIView {
@@ -56,9 +56,7 @@ class NoticeView: UIView {
 
     private func setupGestureRecognizers() {
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(viewWasLongPressed(_:)))
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewWasTapped(_:)))
         addGestureRecognizer(longPressGesture)
-        addGestureRecognizer(tapGesture)
     }
 
     private func setupViewStyles() {
@@ -77,6 +75,7 @@ class NoticeView: UIView {
     // MARK: Action
     //
     @IBAction func noticeButtonWasTapped(_ sender: Any) {
+        delegate?.actionWasTapped()
         handler?()
     }
 }
@@ -104,12 +103,6 @@ extension NoticeView {
 
     private func longPressEnded() {
         delegate?.noticePressEnded()
-    }
-
-    // MARK: Tap Gesture Recognizer
-    //
-    @objc private func viewWasTapped(_ gesture: UIGestureRecognizer) {
-        delegate?.noticeWasTapped()
     }
 }
 

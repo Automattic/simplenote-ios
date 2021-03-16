@@ -103,8 +103,8 @@ extension NoticeController: NoticePresentingDelegate {
         })
     }
 
-    func noticeWasTapped() {
-        self.dismiss()
+    func actionWasTapped() {
+        dismiss()
     }
 }
 
