@@ -10,7 +10,7 @@ class NoticePresenter: NoticePresentable {
 
     // MARK: Properties
     //
-    var noticeView: NoticeView?
+    private var noticeView: UIView?
     private var containerView: PassthruView?
     private var noticeVariableConstraint: NSLayoutConstraint?
 
@@ -43,16 +43,16 @@ class NoticePresenter: NoticePresentable {
 
     // MARK: Presenting Methods
     //
-    func presentNoticeView(_ noticeView: NoticeView, completion: @escaping (Bool) -> Void) {
+    func presentNoticeView(_ noticeView: NoticeView, completion: @escaping () -> Void) {
         guard let containerView = prepareContainerView() else {
             return
         }
+        self.noticeView = noticeView
+        add(view: noticeView, into: containerView)
 
-        self.noticeView = prepareNoticeView(noticeView, containerView: containerView)
-
-        displayNotificationView(containerView: containerView,
-                                noticeView: noticeView,
-                                completion: completion)
+        display(view: noticeView, in: containerView) {
+            completion()
+        }
     }
 
     private func prepareContainerView() -> PassthruView? {
@@ -68,30 +68,31 @@ class NoticePresenter: NoticePresentable {
         return containerView
     }
 
-    private func prepareNoticeView(_ noticeView: NoticeView, containerView: PassthruView) -> NoticeView {
-        containerView.addSubview(noticeView)
+    private func add(view: UIView, into containerView: PassthruView) {
+        containerView.addSubview(view)
 
-        noticeVariableConstraint = noticeView.topAnchor.constraint(equalTo: containerView.bottomAnchor)
+        noticeVariableConstraint = view.topAnchor.constraint(equalTo: containerView.bottomAnchor)
         noticeVariableConstraint?.isActive = true
-        noticeView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+        view.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
         containerView.layoutIfNeeded()
 
-        return noticeView
     }
 
-    private func displayNotificationView(containerView: PassthruView, noticeView: NoticeView, completion: @escaping (Bool) -> Void) {
-        prepareConstraintToDisplayNotice(containerView: containerView, noticeView: noticeView)
+    private func display(view: UIView, in containerView: UIView, completion: @escaping () -> Void) {
+        prepareConstraintFor(view: view, in: containerView)
 
         UIView.animate(withDuration: UIKitConstants.animationLongDuration, animations: {
             containerView.layoutIfNeeded()
-        }, completion: completion)
+        }, completion: { _ in
+            completion()
+        })
     }
 
-    private func prepareConstraintToDisplayNotice(containerView: PassthruView, noticeView: NoticeView) {
+    private func prepareConstraintFor(view: UIView, in containerView: UIView) {
         noticeVariableConstraint?.isActive = false
 
         let constant = bottomConstraintConstant
-        noticeVariableConstraint = noticeView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: constant)
+        noticeVariableConstraint = view.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: constant)
         noticeVariableConstraint?.isActive = true
     }
 

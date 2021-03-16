@@ -7,10 +7,14 @@ class NoticeController {
 
     private var notices: [Notice] = []
     private var current: Notice?
-    private var noticePresenter: NoticePresentable
+    private let noticePresenter = NoticePresenter()
+    private let timerFactory: TimerFactory
 
-    private var activeViewIsBeingTouched: Bool = false
-    private var timer: Timer?
+    private var timer: Timer? {
+        didSet {
+            oldValue?.invalidate()
+        }
+    }
 
     internal var isPresenting: Bool {
         current != nil
@@ -19,6 +23,7 @@ class NoticeController {
     // MARK: Life Cycle
     //
     private init() {
+        self.timerFactory = TimerFactory()
         self.noticePresenter = NoticePresenter()
     }
 
@@ -32,7 +37,7 @@ class NoticeController {
 
     // MARK: Presenting
     //
-    func present(_ notice: Notice, withTimer timer: Timer? = nil) {
+    func present(_ notice: Notice) {
         if isPresenting {
             appendToQueueIfNew(notice)
             return
@@ -41,8 +46,11 @@ class NoticeController {
         current = notice
         let noticeView = makeNoticeView(from: notice)
 
-        noticePresenter.presentNoticeView(noticeView) { (_) in
-            self.startTimer(timer: timer)
+        noticePresenter.presentNoticeView(noticeView) { () in
+            let delay = self.current?.action == nil ? Times.shortDelay : Times.longDelay
+            self.timer = self.timerFactory.scheduledTimer(with: delay, completion: {
+                self.dismiss()
+            })
         }
     }
 
@@ -62,16 +70,6 @@ class NoticeController {
 
     var pendingNotices: Int {
         notices.count
-    }
-
-    func startTimer(timer: Timer? = nil) {
-        if timer != nil {
-            self.timer = timer
-            return
-        }
-
-        let delay = current?.action == nil ? Times.shortDelay : Times.longDelay
-        self.timer = Timer.scheduledTimer(timeInterval: delay, target: self, selector: #selector(dismiss), userInfo: nil, repeats: false)
     }
 
     private func makeNoticeView(from notice: Notice) -> NoticeView {
@@ -105,15 +103,11 @@ extension NoticeController: NoticeInteractionDelegate {
         if !isPresenting {
             return
         }
-        guard let timer = timer else {
-            return
-        }
-
-        timer.invalidate()
+        timer = nil
     }
 
     func noticePressEnded() {
-        timer = Timer.scheduledTimer(withTimeInterval: Times.shortDelay, repeats: false, block: { (_) in
+        timer = timerFactory.scheduledTimer(with: Times.shortDelay, completion: {
             self.dismiss()
         })
     }
