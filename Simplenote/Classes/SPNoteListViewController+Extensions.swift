@@ -714,6 +714,7 @@ private extension SPNoteListViewController {
 
             UIContextualAction(style: .normal, image: .image(name: .link), backgroundColor: .simplenoteTertiaryActionColor) { [weak self] (_, _, completion) in
                 self?.copyInternalLink(to: note)
+                NoticeController.shared.present(Notices.linkCopied)
                 completion(true)
             },
 
@@ -1062,4 +1063,6 @@ private struct Notices {
     static func noteTrashed(_ note: Note) -> Notice {
         return Notice(message: "Note trashed.", action: Notices.undoAction(note))
     }
+
+    static let linkCopied = Notice(message: "Link Copied.", action: nil)
 }
