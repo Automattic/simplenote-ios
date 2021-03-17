@@ -12,25 +12,29 @@ class NoticeControllerTests: XCTestCase {
         XCTAssertTrue(presenter.listeningToKeyboard == true)
     }
 
-    func testPresentNotice() throws {
+    func testPresentNotice() {
         let notice = Notice(message: "Message", action: nil)
-
+        let expectedActions: [MockNoticePresenter.Action] = [
+            .present(notice.message)
+        ]
         controller.present(notice)
 
-        XCTAssertTrue(presenter.presented)
+        XCTAssertEqual(expectedActions, presenter.actionLog)
+        XCTAssertEqual(presenter.lastNoticeView?.message, notice.message)
     }
 
-    func testControlDoesNotPresentNewNoticeIfPresenting() throws {
+    func testControlDoesNotPresentNewNoticeIfPresenting() {
         let noticeA = Notice(message: "Message A", action: nil)
         let noticeB = Notice(message: "Message B", action: nil)
+        let expectedActions: [MockNoticePresenter.Action] = [
+            .present(noticeA.message)
+        ]
+
         controller.present(noticeA)
         controller.present(noticeB)
 
-        XCTAssertTrue(presenter.presented)
-        XCTAssertEqual(presenter.presentedViews.count, 1)
-        XCTAssertEqual(controller.pendingNotices, 1)
-        let presentedNotice = try XCTUnwrap(presenter.noticeView as? NoticeView)
-        XCTAssertEqual(presentedNotice.message, noticeA.message)
+        XCTAssertEqual(expectedActions, presenter.actionLog)
+        XCTAssertEqual(presenter.lastNoticeView?.message, noticeA.message)
     }
 
     func testAppendToQueueIfNew() {
@@ -55,12 +59,11 @@ class NoticeControllerTests: XCTestCase {
 
         controller.present(notice)
 
-        let view = try XCTUnwrap(presenter.noticeView as? NoticeView)
-        XCTAssertEqual(notice.message, view.message)
-        XCTAssertNil(view.handler)
+        XCTAssertEqual(notice.message, presenter.lastNoticeView?.message)
+        XCTAssertNil(presenter.lastNoticeView?.handler)
     }
 
-    func testMakeNoticeViewWithAction() throws {
+    func testMakeNoticeViewWithAction() {
         let action = NoticeAction(title: "Title") {
             print("Action")
         }
@@ -68,24 +71,20 @@ class NoticeControllerTests: XCTestCase {
 
         controller.present(notice)
 
-        let view = try XCTUnwrap(presenter.noticeView as? NoticeView)
-        XCTAssertEqual(notice.message, view.message)
-        XCTAssertEqual(notice.action?.title, view.actionTitle)
-        XCTAssertNotNil(view.handler)
+        XCTAssertEqual(notice.message, presenter.lastNoticeView?.message)
+        XCTAssertEqual(notice.action?.title, presenter.lastNoticeView?.actionTitle)
+        XCTAssertNotNil(presenter.lastNoticeView?.handler)
     }
 
-    func testMakeNoticeViewWithEmptyNotice() throws {
-        let action = NoticeAction(title: "") {
-            //No action
-        }
+    func testMakeNoticeViewWithEmptyNotice() {
+        let action = NoticeAction(title: "") { }
         let notice = Notice(message: "", action: action)
 
         controller.present(notice)
 
-        let view = try XCTUnwrap(presenter.noticeView as? NoticeView)
-        XCTAssertEqual(notice.message, view.message)
-        XCTAssertNotEqual(notice.action?.title, view.actionTitle)
-        XCTAssertNotNil(view.handler)
+        XCTAssertEqual(notice.message, presenter.lastNoticeView?.message)
+        XCTAssertNotEqual(notice.action?.title, presenter.lastNoticeView?.actionTitle)
+        XCTAssertNotNil(presenter.lastNoticeView?.handler)
     }
 
     func testDismiss() {
@@ -95,7 +94,7 @@ class NoticeControllerTests: XCTestCase {
 
         controller.dismiss()
 
-        XCTAssertTrue(presenter.dismissed)
+//        XCTAssertTrue(presenter.dismissed)
         XCTAssertFalse(controller.isPresenting)
     }
 
@@ -105,49 +104,50 @@ class NoticeControllerTests: XCTestCase {
         controller.present(noticeA)
         controller.present(noticeB)
 
-        XCTAssertTrue(controller.isPresenting)
-        XCTAssertEqual(controller.pendingNotices, 1)
+        var expectedActions: [MockNoticePresenter.Action] = [
+            .present(noticeA.message)
+        ]
+        XCTAssertEqual(presenter.actionLog, expectedActions)
 
-        controller.dismiss()
+        timerFactory.timer?.fire()
 
-        XCTAssertTrue(controller.isPresenting)
-        XCTAssertEqual(controller.pendingNotices, 0)
+        expectedActions.append(.dismiss(noticeA.message))
+        expectedActions.append(.present(noticeB.message))
+        XCTAssertEqual(presenter.actionLog, expectedActions)
 
-        controller.dismiss()
+        timerFactory.timer?.fire()
 
-        XCTAssertTrue(presenter.dismissed)
-        XCTAssertFalse(controller.isPresenting)
-        XCTAssertEqual(controller.pendingNotices, 0)
-        XCTAssertEqual(presenter.actionLog, "presentNoticeView(Message A), dismissNotification(), presentNoticeView(Message B), dismissNotification(), ")
+        expectedActions.append(.dismiss(noticeB.message))
+        XCTAssertEqual(presenter.actionLog, expectedActions)
     }
 }
 
-extension NoticeContorllerTests {
+extension NoticeControllerTests {
     static var timeInterval = TimeInterval.zero
-    static var timerNoActionCompletionHandler: (Timer) -> Void = { (_) in
-        //no action
-    }
+    static var timerNoActionCompletionHandler: (Timer) -> Void = { (_) in }
 }
 
 class MockNoticePresenter: NoticePresenter {
-    var presented: Bool = false
-    var dismissed: Bool = false
+    enum Action: Equatable {
+        case present(String?)
+        case dismiss(String?)
+    }
+
+    var actionLog: [Action] = []
+
     var listeningToKeyboard: Bool = false
-    var presentedViews = [NoticeView]()
-    var actionLog = String()
+    var lastNoticeView: NoticeView?
 
     override func presentNoticeView(_ noticeView: NoticeView, completion: @escaping () -> Void) {
-        self.noticeView = noticeView
-        presentedViews.append(noticeView)
-        actionLog.append("presentNoticeView(\(noticeView.message ?? "")), ")
-        presented = true
-
+        lastNoticeView = noticeView
+        actionLog.append(.present(noticeView.message))
         completion()
     }
 
     override func dismissNotification(completion: @escaping () -> Void) {
-        dismissed = true
-        actionLog.append("dismissNotification(), ")
+        let noticeView = try! XCTUnwrap(lastNoticeView)
+        lastNoticeView = nil
+        actionLog.append(.dismiss(noticeView.message))
         completion()
     }
 
