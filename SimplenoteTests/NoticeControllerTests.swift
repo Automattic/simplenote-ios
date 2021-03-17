@@ -87,7 +87,7 @@ class NoticeControllerTests: XCTestCase {
         XCTAssertNotNil(presenter.lastNoticeView?.handler)
     }
 
-    func testDismiss() {
+    func testDismiss() throws {
         let noticeA = Notice(message: "Message A", action: nil)
 
         controller.present(noticeA)
@@ -95,13 +95,13 @@ class NoticeControllerTests: XCTestCase {
             .present(noticeA.message)
         ]
 
-        timerFactory.timer?.fire()
+        try XCTUnwrap(timerFactory.timer).fire()
         expectedActions.append(.dismiss(noticeA.message))
 
         XCTAssertEqual(expectedActions, presenter.actionLog)
     }
 
-    func testDismissContinuesToNextNotice() {
+    func testDismissContinuesToNextNotice() throws {
         let noticeA = Notice(message: "Message A", action: nil)
         let noticeB = Notice(message: "Message B", action: nil)
 
@@ -113,13 +113,13 @@ class NoticeControllerTests: XCTestCase {
         ]
         XCTAssertEqual(presenter.actionLog, expectedActions)
 
-        timerFactory.timer?.fire()
+        try XCTUnwrap(timerFactory.timer).fire()
 
         expectedActions.append(.dismiss(noticeA.message))
         expectedActions.append(.present(noticeB.message))
         XCTAssertEqual(presenter.actionLog, expectedActions)
 
-        timerFactory.timer?.fire()
+        try XCTUnwrap(timerFactory.timer).fire()
 
         expectedActions.append(.dismiss(noticeB.message))
         XCTAssertEqual(presenter.actionLog, expectedActions)
@@ -154,7 +154,7 @@ class NoticeControllerTests: XCTestCase {
         XCTAssertNil(timerFactory.timer?.completion)
     }
 
-    func testLongPressReleasedDismissesTimer() {
+    func testLongPressReleasedDismissesTimer() throws {
         let noticeA = Notice(message: "Message A", action: nil)
 
         controller.present(noticeA)
@@ -164,8 +164,7 @@ class NoticeControllerTests: XCTestCase {
 
         controller.noticePressBegan()
 
-        XCTAssertEqual(expectedActions, presenter.actionLog)
-        XCTAssertNil(timerFactory.timer?.completion)
+        try XCTUnwrap(timerFactory.timer).fire()
 
         controller.noticePressEnded()
         timerFactory.timer?.fire()
