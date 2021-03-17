@@ -64,10 +64,6 @@ class NoticeController {
         notices.append(notice)
     }
 
-    var pendingNotices: Int {
-        notices.count
-    }
-
     private func makeNoticeView(from notice: Notice) -> NoticeView {
         let noticeView: NoticeView = NoticeView.instantiateFromNib()
         noticeView.message = notice.message

@@ -37,21 +37,31 @@ class NoticeControllerTests: XCTestCase {
         XCTAssertEqual(presenter.lastNoticeView?.message, noticeA.message)
     }
 
-    func testAppendToQueueIfNew() {
+    func testAppendToQueueIfNewDoesNotQueueDuplicateNotices() throws {
         let noticeA = Notice(message: "Message A", action: nil)
         let noticeB = Notice(message: "Message B", action: nil)
 
+        // Should not enqueue a notice that is presenting or enqueued
         controller.present(noticeA)
-        XCTAssertEqual(controller.pendingNotices, 0)
-
         controller.present(noticeA)
-        XCTAssertEqual(controller.pendingNotices, 0)
-
         controller.present(noticeB)
-        XCTAssertEqual(controller.pendingNotices, 1)
-
         controller.present(noticeB)
-        XCTAssertEqual(controller.pendingNotices, 1)
+
+        var expectedActions: [MockNoticePresenter.Action] = [
+            .present(noticeA.message)
+        ]
+        XCTAssertEqual(expectedActions, presenter.actionLog)
+
+        try XCTUnwrap(timerFactory.timer).fire()
+        expectedActions.append(.dismiss(noticeA.message))
+        expectedActions.append(.present(noticeB.message))
+
+        XCTAssertEqual(expectedActions, presenter.actionLog)
+
+        try XCTUnwrap(timerFactory.timer).fire()
+        expectedActions.append(.dismiss(noticeB.message))
+
+        XCTAssertEqual(expectedActions, presenter.actionLog)
     }
 
     func testMakeNoticeView() throws {
