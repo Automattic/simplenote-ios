@@ -60,6 +60,7 @@ class NoticeControllerTests: XCTestCase {
         controller.present(notice)
 
         XCTAssertEqual(notice.message, presenter.lastNoticeView?.message)
+        XCTAssertEqual(notice.action?.title, presenter.lastNoticeView?.actionTitle)
         XCTAssertNil(presenter.lastNoticeView?.handler)
     }
 
@@ -69,21 +70,21 @@ class NoticeControllerTests: XCTestCase {
         }
         let notice = Notice(message: "Message ", action: action)
 
-        controller.present(notice)
-
-        XCTAssertEqual(notice.message, presenter.lastNoticeView?.message)
-        XCTAssertEqual(notice.action?.title, presenter.lastNoticeView?.actionTitle)
-        XCTAssertNotNil(presenter.lastNoticeView?.handler)
+        checkNoticeViewPropertiesCreatedCorrectly(notice)
     }
 
     func testMakeNoticeViewWithEmptyNotice() {
         let action = NoticeAction(title: "") { }
         let notice = Notice(message: "", action: action)
 
+        checkNoticeViewPropertiesCreatedCorrectly(notice)
+    }
+
+    private func checkNoticeViewPropertiesCreatedCorrectly(_ notice: Notice) {
         controller.present(notice)
 
         XCTAssertEqual(notice.message, presenter.lastNoticeView?.message)
-        XCTAssertNotEqual(notice.action?.title, presenter.lastNoticeView?.actionTitle)
+        XCTAssertEqual(notice.action?.title, presenter.lastNoticeView?.actionTitle)
         XCTAssertNotNil(presenter.lastNoticeView?.handler)
     }
 

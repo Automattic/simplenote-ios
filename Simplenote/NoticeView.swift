@@ -26,7 +26,7 @@ class NoticeView: UIView {
     var handler: (() -> Void)?
     var actionTitle: String? {
         get {
-            noticeButton.titleLabel?.text
+            noticeButton.title(for: .normal)
         }
         set {
             noticeButton.setTitle(newValue, for: .normal)
