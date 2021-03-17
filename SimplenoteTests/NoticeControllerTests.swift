@@ -91,19 +91,19 @@ class NoticeControllerTests: XCTestCase {
         let noticeA = Notice(message: "Message A", action: nil)
 
         controller.present(noticeA)
+        var expectedActions: [MockNoticePresenter.Action] = [
+            .present(noticeA.message)
+        ]
 
-        controller.dismiss()
+        timerFactory.timer?.fire()
+        expectedActions.append(.dismiss(noticeA.message))
 
-//        XCTAssertTrue(presenter.dismissed)
-        XCTAssertFalse(controller.isPresenting)
+        XCTAssertEqual(expectedActions, presenter.actionLog)
     }
 
     func testDismissContinuesToNextNotice() {
         let noticeA = Notice(message: "Message A", action: nil)
         let noticeB = Notice(message: "Message B", action: nil)
-        timerFactory.timer = MockTimer {
-            self.controller.dismiss()
-        }
 
         controller.present(noticeA)
         controller.present(noticeB)
@@ -161,10 +161,13 @@ class MockNoticePresenter: NoticePresenter {
 }
 
 class MockTimerFactory: TimerFactory {
-    var timer: Timer?
+    var timer: MockTimer?
 
     override func scheduledTimer(with timeInterval: TimeInterval, completion: @escaping () -> Void) -> Timer {
-        let timer = MockTimer()
+        timer = MockTimer()
+        guard let timer = timer else {
+            return MockTimer()
+        }
         timer.completion = completion
         return timer
     }
