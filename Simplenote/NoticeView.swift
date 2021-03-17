@@ -3,12 +3,14 @@ import UIKit
 protocol NoticePresentingDelegate: class {
     func noticePressBegan()
     func noticePressEnded()
+    func actionWasTapped()
 }
 
 class NoticeView: UIView {
 
     // MARK: Properties
     //
+    @IBOutlet private weak var backgroundView: UIView!
     @IBOutlet private weak var stackView: UIStackView!
     @IBOutlet private weak var noticeLabel: UILabel!
     @IBOutlet private weak var noticeButton: UIButton!
@@ -28,7 +30,7 @@ class NoticeView: UIView {
         }
         set {
             noticeButton.setTitle(newValue, for: .normal)
-            noticeButton.isHidden = false
+            noticeButton.isHidden = newValue == nil
         }
     }
 
@@ -47,12 +49,12 @@ class NoticeView: UIView {
     private func setupView() {
         translatesAutoresizingMaskIntoConstraints = false
         setupViewStyles()
-        setupLongPress()
+        setupGestureRecognizers()
 
         layoutIfNeeded()
     }
 
-    private func setupLongPress() {
+    private func setupGestureRecognizers() {
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(viewWasLongPressed(_:)))
         addGestureRecognizer(longPressGesture)
     }
@@ -60,7 +62,8 @@ class NoticeView: UIView {
     private func setupViewStyles() {
         backgroundColor = .clear
 
-        setupStackViewBackground(color: .simplenoteNoticeViewBackgroundColor)
+        backgroundView.backgroundColor = .simplenoteNoticeViewBackgroundColor
+        backgroundView.layer.cornerRadius = Constants.cornerRadius
 
         noticeLabel.textColor = .simplenoteTextColor
         noticeButton.setTitleColor(.simplenoteTintColor, for: .normal)
@@ -69,16 +72,10 @@ class NoticeView: UIView {
 
     }
 
-    private func setupStackViewBackground(color: UIColor) {
-        let backgroundView = UIView(frame: .zero)
-        backgroundView.backgroundColor = color
-        backgroundView.layer.cornerRadius = Constants.cornerRadius
-        stackView.addFillingSubview(backgroundView, atPosition: 0)
-    }
-
     // MARK: Action
     //
     @IBAction func noticeButtonWasTapped(_ sender: Any) {
+        delegate?.actionWasTapped()
         handler?()
     }
 }
