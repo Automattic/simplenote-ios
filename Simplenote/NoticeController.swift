@@ -7,7 +7,7 @@ class NoticeController {
 
     private var notices: [Notice] = []
     private var current: Notice?
-    private var noticePresenter: NoticePresenter
+    private let noticePresenter: NoticePresenter
     private let timerFactory: TimerFactory
 
     private var timer: Timer? {
@@ -16,7 +16,7 @@ class NoticeController {
         }
     }
 
-    var isPresenting: Bool {
+    private var isPresenting: Bool {
         current != nil
     }
 
