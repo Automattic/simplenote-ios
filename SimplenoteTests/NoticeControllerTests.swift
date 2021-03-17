@@ -158,17 +158,15 @@ class NoticeControllerTests: XCTestCase {
         let noticeA = Notice(message: "Message A", action: nil)
 
         controller.present(noticeA)
-        var expectedActions: [MockNoticePresenter.Action] = [
-            .present(noticeA.message)
-        ]
-
         controller.noticePressBegan()
+        controller.noticePressEnded()
 
         try XCTUnwrap(timerFactory.timer).fire()
 
-        controller.noticePressEnded()
-        timerFactory.timer?.fire()
-        expectedActions.append(.dismiss(noticeA.message))
+        let expectedActions: [MockNoticePresenter.Action] = [
+            .present(noticeA.message),
+            .dismiss(noticeA.message)
+        ]
 
         XCTAssertEqual(expectedActions, presenter.actionLog)
     }
