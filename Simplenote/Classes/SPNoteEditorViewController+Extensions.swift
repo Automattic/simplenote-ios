@@ -493,6 +493,7 @@ extension SPNoteEditorViewController {
         SPTracker.trackEditorNoteDeleted()
         SPObjectManager.shared().trashNote(note)
         CSSearchableIndex.default().deleteSearchableNote(note)
+        NoticeController.shared.present(Notices.noteTrashed(note))
     }
 
     @objc
@@ -716,7 +717,7 @@ extension SPNoteEditorViewController {
         tagListViewController = NoteEditorTagListViewController(note: note, popoverPresenter: popoverPresenter)
 
         addChild(tagListViewController)
-        
+
         tagView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tagView)
 
@@ -1062,5 +1063,16 @@ private enum Localization {
         static let insertChecklist = NSLocalizedString("Insert Checklist", comment: "Keyboard shortcut: Insert Checklist")
         static let toggleMarkdown = NSLocalizedString("Toggle Markdown", comment: "Keyboard shortcut: Toggle Markdown")
         static let endEditing = NSLocalizedString("End Editing", comment: "Keyboard shortcut: End Editing")
+    }
+}
+
+private struct Notices {
+    static func undoAction(_ note: Note) -> NoticeAction {
+        return NoticeAction(title: "Undo") {
+            SPObjectManager.shared().restoreNote(note)
+        }
+    }
+    static func noteTrashed(_ note: Note) -> Notice {
+        return Notice(message: "Note trashed.", action: Notices.undoAction(note))
     }
 }

@@ -773,6 +773,7 @@ private extension SPNoteListViewController {
         SPTracker.trackListNoteDeleted()
         SPObjectManager.shared().trashNote(note)
         CSSearchableIndex.default().deleteSearchableNote(note)
+        NoticeController.shared.present(Notices.noteTrashed(note))
     }
 
     func copyInternalLink(to note: Note) {
@@ -1049,5 +1050,16 @@ private enum Localization {
         static func searchAction(with searchTerm: String) -> String {
             return String(format: NSLocalizedString("Create a new note titled “%@”", comment: "Tappable message shown when no notes match a search string. Parameter: %@ - search term"), searchTerm)
         }
+    }
+}
+
+private struct Notices {
+    static func undoAction(_ note: Note) -> NoticeAction {
+        return NoticeAction(title: "Undo") {
+            SPObjectManager.shared().restoreNote(note)
+        }
+    }
+    static func noteTrashed(_ note: Note) -> Notice {
+        return Notice(message: "Note trashed.", action: Notices.undoAction(note))
     }
 }
