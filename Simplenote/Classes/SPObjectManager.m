@@ -286,6 +286,7 @@
 
     note.published = published;
     note.modificationDate = [NSDate date];
+    [self presentNoticePublishStateChangingTo:published];
 
     [self save];
 }

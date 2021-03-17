@@ -38,4 +38,12 @@ extension SPObjectManager {
 
         return (try? managedObjectContext.fetch(request)) ?? []
     }
+
+    @objc
+    func presentNoticePublishStateChanging(to published: Bool) {
+        let stateChange = published ? "Publishing" : "Unpublishing"
+        let notice = Notice(message: "\(stateChange) note...", action: nil)
+
+        NoticeController.shared.present(notice)
+    }
 }
