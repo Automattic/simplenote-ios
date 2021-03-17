@@ -6,6 +6,9 @@ orbs:
   git: wordpress-mobile/git@1.0
   slack: circleci/slack@3.4.2
 
+xcode_version: &xcode_version
+  xcode-version: "12.0"
+
 commands:
   fix-path:
     steps:
@@ -24,7 +27,7 @@ jobs:
   Test:
     executor:
       name: ios/default
-      xcode-version: "12.0"
+      <<: *xcode_version
     steps:
       - git/shallow-checkout
       - fix-path
@@ -40,7 +43,7 @@ jobs:
       - run: for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts || true
       # END: Swift Package Manager Workaround
       - ios/test:
-          xcode-version: "12.0"
+          <<: *xcode_version
           workspace: Simplenote.xcworkspace
           scheme: Simplenote
           device: iPhone 11
@@ -48,7 +51,7 @@ jobs:
   Installable Build:
     executor:
       name: ios/default
-      xcode-version: "12.0"
+      <<: *xcode_version
     steps:
       - git/shallow-checkout
       - ios/install-dependencies:
@@ -76,7 +79,7 @@ jobs:
   Release Build:
     executor:
       name: ios/default
-      xcode-version: "12.0"
+      <<: *xcode_version
     environment:
       HOMEBREW_NO_AUTO_UPDATE: 1
     steps:
