@@ -101,6 +101,10 @@ class NoticeControllerTests: XCTestCase {
     func testDismissContinuesToNextNotice() {
         let noticeA = Notice(message: "Message A", action: nil)
         let noticeB = Notice(message: "Message B", action: nil)
+        timerFactory.timer = MockTimer {
+            self.controller.dismiss()
+        }
+
         controller.present(noticeA)
         controller.present(noticeB)
 
@@ -168,6 +172,11 @@ class MockTimerFactory: TimerFactory {
 
 class MockTimer: Timer {
     var completion: (() -> Void)?
+
+    convenience init(completion: (() -> Void)? = nil) {
+        self.init()
+        self.completion = completion
+    }
 
     override func fire() {
         completion?()
