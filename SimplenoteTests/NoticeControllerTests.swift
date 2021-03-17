@@ -124,6 +124,55 @@ class NoticeControllerTests: XCTestCase {
         expectedActions.append(.dismiss(noticeB.message))
         XCTAssertEqual(presenter.actionLog, expectedActions)
     }
+
+    func testPressingOnActionDismissesNotice() {
+        let action = NoticeAction(title: "Action", handler: {})
+        let noticeA = Notice(message: "Message A", action: action)
+
+        controller.present(noticeA)
+        var expectedActions: [MockNoticePresenter.Action] = [
+            .present(noticeA.message)
+        ]
+
+        controller.actionWasTapped()
+        expectedActions.append(.dismiss(noticeA.message))
+
+        XCTAssertEqual(expectedActions, presenter.actionLog)
+    }
+
+    func testLongPressInvalidatesTimerAndNoticeDoesNotDismiss() {
+        let noticeA = Notice(message: "Message A", action: nil)
+
+        controller.present(noticeA)
+        let expectedActions: [MockNoticePresenter.Action] = [
+            .present(noticeA.message)
+        ]
+
+        controller.noticePressBegan()
+
+        XCTAssertEqual(expectedActions, presenter.actionLog)
+        XCTAssertNil(timerFactory.timer?.completion)
+    }
+
+    func testLongPressReleasedDismissesTimer() {
+        let noticeA = Notice(message: "Message A", action: nil)
+
+        controller.present(noticeA)
+        var expectedActions: [MockNoticePresenter.Action] = [
+            .present(noticeA.message)
+        ]
+
+        controller.noticePressBegan()
+
+        XCTAssertEqual(expectedActions, presenter.actionLog)
+        XCTAssertNil(timerFactory.timer?.completion)
+
+        controller.noticePressEnded()
+        timerFactory.timer?.fire()
+        expectedActions.append(.dismiss(noticeA.message))
+
+        XCTAssertEqual(expectedActions, presenter.actionLog)
+    }
 }
 
 extension NoticeControllerTests {
@@ -164,10 +213,8 @@ class MockTimerFactory: TimerFactory {
     var timer: MockTimer?
 
     override func scheduledTimer(with timeInterval: TimeInterval, completion: @escaping () -> Void) -> Timer {
-        timer = MockTimer()
-        guard let timer = timer else {
-            return MockTimer()
-        }
+        let timer = MockTimer()
+        self.timer = timer
         timer.completion = completion
         return timer
     }
