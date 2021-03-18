@@ -182,7 +182,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 
         self.searchResultRanges = [self searchResultRangesIn:(searchText ?: @"")
                                                 withKeywords:self.searchQuery.keywords];
-        
+
         dispatch_async(dispatch_get_main_queue(), ^{
 
             [self showSearchMapWith:self.searchResultRanges];
@@ -534,6 +534,10 @@ CGFloat const SPSelectedAreaPadding = 20;
 - (void)highlightSearchResultAtIndex:(NSInteger)index animated:(BOOL)animated
 {
     NSInteger searchResultCount = self.searchResultRanges.count;
+
+    if (searchResultCount < 1) {
+        return;
+    }
 
     index = MIN(index, searchResultCount - 1);
     index = MAX(index, 0);
