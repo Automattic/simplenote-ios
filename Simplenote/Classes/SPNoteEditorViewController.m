@@ -183,11 +183,6 @@ CGFloat const SPSelectedAreaPadding = 20;
         self.searchResultRanges = [self searchResultRangesIn:(searchText ?: @"")
                                                 withKeywords:self.searchQuery.keywords];
 
-//        // If there are no found ranges, bail out
-//        if (self.searchResultRanges.count < 1) {
-//            return;
-//        }
-        
         dispatch_async(dispatch_get_main_queue(), ^{
 
             [self showSearchMapWith:self.searchResultRanges];
