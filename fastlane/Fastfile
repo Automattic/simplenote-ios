@@ -440,6 +440,7 @@ end
     circleci_trigger_job(
       circle_ci_token: ENV["CIRCLE_CI_AUTH_TOKEN"], 
       repository: REPOSITORY_NAME, 
+      organization: "Automattic",
       branch: options[:branch_to_build],
       job_params: {"beta_build" => true}
     )
@@ -458,6 +459,7 @@ end
     circleci_trigger_job(
       circle_ci_token: ENV["CIRCLE_CI_AUTH_TOKEN"], 
       repository: REPOSITORY_NAME, 
+      organization: "Automattic",
       branch: options[:branch_to_build],
       job_params: {"release_build" => true}
     )
