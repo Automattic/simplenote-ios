@@ -97,7 +97,7 @@ class NoteEditor {
 
     class func getCheckboxesForTextCount(text: String) -> Int {
         let matches = NoteEditor.getTextViewsWithExactLabelCount(label: text)
-        print(">>> ^ Found " + String(matches) + " Checkbox(es) for '" + text + "'")
+        print(">>> ^ Found \(matches) Checkbox(es) for '\(text)'")
         return matches
     }
 
