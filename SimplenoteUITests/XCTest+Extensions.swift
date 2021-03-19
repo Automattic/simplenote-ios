@@ -20,6 +20,7 @@ extension XCUIElement {
     }
 }
 
+// Credits to https://github.com/onmyway133/blog/issues/628
 extension XCUIElementQuery: Sequence {
     public typealias Iterator = AnyIterator<XCUIElement>
     public func makeIterator() -> Iterator {
