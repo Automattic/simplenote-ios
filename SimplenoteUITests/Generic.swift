@@ -29,7 +29,7 @@ func trackTest(_ function: String = #function) {
 }
 
 func trackStep() {
-    print(">> Step " + String(stepIndex))
+    print(">> Step \(stepIndex)")
     stepIndex += 1
 }
 
@@ -50,34 +50,18 @@ class Table {
         // otherwise we will include invisible elements from Sidebar pane, when Notes List is open
         // or the elements from Notes List when Settings are open
         // or the visible tags search suggestions
-        let cells = Table.getAllCells()
-        var matches = 0
-        guard cells.count > 0 else { return matches }
-
-        for cell in cells {
-            if cell.frame.minX == 0.0 && cell.label.count > 0 {
-                matches += 1
-            }
-        }
-
-        return matches
+        return Table.getAllCells()
+            .filter { $0.frame.minX == 0.0 && $0.label.isEmpty == false }
+            .count
     }
 
     class func getVisibleNonLabelledCellsNumber() -> Int {
         // We need only the table cells that have X = 0 and an empty label
         // Currently (besides using object dimentions) this is the way to
         // locate tags search suggestions
-        let cells = Table.getAllCells()
-        var matches = 0
-        guard cells.count > 0 else { return matches }
-
-        for cell in cells {
-            if cell.frame.minX == 0.0 && cell.label.count == 0 {
-                matches += 1
-            }
-        }
-
-        return matches
+        return Table.getAllCells()
+            .filter { $0.frame.minX == 0.0 && $0.label.isEmpty == true }
+            .count
     }
 
     class func trashCell(noteName: String) {
@@ -138,11 +122,17 @@ class WebView {
 
 class WebViewAssert {
 
-    class func textShownOnScreen(textToFind: String) {
-        let textPredicate = NSPredicate(format: "label MATCHES '" + textToFind + "'")
+    class func textShownOnScreen(text: String) {
+        let textPredicate = NSPredicate(format: "label MATCHES '" + text + "'")
         let staticText = app.staticTexts.element(matching: textPredicate)
 
-        XCTAssertTrue(staticText.exists, "\"" + textToFind + textNotFoundInWebView)
+        XCTAssertTrue(staticText.exists, "\"" + text + textNotFoundInWebView)
+    }
+
+    class func textsShownOnScreen(texts: [String]) {
+        for text in texts {
+            WebViewAssert.textShownOnScreen(text: text)
+        }
     }
 }
 

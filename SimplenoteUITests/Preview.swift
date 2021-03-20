@@ -86,25 +86,12 @@ class PreviewAssert {
         let expectedBoxesCount = expectedCheckedBoxesNumber + expectedEmptyBoxesNumber
         let boxes = app.switches
         let actualBoxesCount = boxes.count
-
-        var actualCheckedBoxesCount = 0,
-            actualEmptyBoxesCount = 0
-
-        print(">>> Number of boxes found: " + String(actualBoxesCount))
-
+        print(">>> Number of boxes found: \(actualBoxesCount)")
         XCTAssertEqual(actualBoxesCount, expectedBoxesCount, numberOfBoxesInPreviewNotExpected)
 
-        if actualBoxesCount < 1 { return }
-
-        for box in boxes {
-            print(">>> Current box debug description: " + box.value.debugDescription)
-
-            if box.value.debugDescription == "Optional(1)" {
-                actualCheckedBoxesCount += 1
-            } else if box.value.debugDescription == "Optional(0)" {
-                actualEmptyBoxesCount += 1
-            }
-        }
+        guard actualBoxesCount > 0 else { return }
+        let actualCheckedBoxesCount = boxes.filter { $0.value.debugDescription == "Optional(1)" }.count
+        let actualEmptyBoxesCount = boxes.filter { $0.value.debugDescription == "Optional(0)" }.count
 
         XCTAssertEqual(actualCheckedBoxesCount, expectedCheckedBoxesNumber, numberOfCheckedBoxesInPreviewNotExpected)
         XCTAssertEqual(actualEmptyBoxesCount, expectedEmptyBoxesNumber, numberOfEmptyBoxesInPreviewNotExpected)

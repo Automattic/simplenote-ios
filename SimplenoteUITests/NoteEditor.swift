@@ -102,18 +102,11 @@ class NoteEditor {
     }
 
     class func getTextViewsWithExactValueCount(value: String) -> Int {
-        let textViews = getAllTextViews()
-        var matches = 0
+        let matchingTextViews = getAllTextViews()
+            .compactMap { ($0.value as? String)?.strippingUnicodeObjectReplacementCharacter() }
+            .filter { $0 == value }
 
-        for textView in textViews {
-            let currentValue = textView.value as! String
-            let currentValueStripped = currentValue.replacingOccurrences(of: "\u{fffc}", with: "")
-
-            if currentValueStripped == value {
-                matches += 1
-            }
-        }
-
+        let matches = matchingTextViews.count
         print(">>> Found \(matches) TextView(s) with '\(value)' value")
         return matches
     }

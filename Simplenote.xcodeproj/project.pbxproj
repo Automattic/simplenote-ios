@@ -414,7 +414,7 @@
 		D864B1C625CAE5F800F9B73E /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B1C525CAE5F800F9B73E /* Preview.swift */; };
 		D864B1CF25CAE61F00F9B73E /* Trash.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B1CE25CAE61F00F9B73E /* Trash.swift */; };
 		D864B1D825CAE63E00F9B73E /* UIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B1D725CAE63E00F9B73E /* UIDs.swift */; };
-		D864B1E125CAE66A00F9B73E /* XCTest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B1E025CAE66A00F9B73E /* XCTest+Extensions.swift */; };
+		D864B1E125CAE66A00F9B73E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D864B1E025CAE66A00F9B73E /* Extensions.swift */; };
 		D8E2D8E325E7DE090001315B /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8E2D8E225E7DE090001315B /* Sidebar.swift */; };
 		DE7E545B214E34C8008D9928 /* NSString+Count.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7E545A214E34C8008D9928 /* NSString+Count.swift */; };
 		E215C793180B115C00AD36B5 /* SPNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E215C791180B115C00AD36B5 /* SPNavigationController.m */; };
@@ -919,7 +919,7 @@
 		D864B1C525CAE5F800F9B73E /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		D864B1CE25CAE61F00F9B73E /* Trash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trash.swift; sourceTree = "<group>"; };
 		D864B1D725CAE63E00F9B73E /* UIDs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDs.swift; sourceTree = "<group>"; };
-		D864B1E025CAE66A00F9B73E /* XCTest+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTest+Extensions.swift"; sourceTree = "<group>"; };
+		D864B1E025CAE66A00F9B73E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D864B1F025CAE87800F9B73E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8E2D8E225E7DE090001315B /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
 		DE7E545A214E34C8008D9928 /* NSString+Count.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSString+Count.swift"; path = "Classes/NSString+Count.swift"; sourceTree = "<group>"; };
@@ -1879,7 +1879,7 @@
 				D843AD7725E3E7F9007E5B15 /* SimplenoteUITestsTrash.swift */,
 				D864B1CE25CAE61F00F9B73E /* Trash.swift */,
 				D864B1D725CAE63E00F9B73E /* UIDs.swift */,
-				D864B1E025CAE66A00F9B73E /* XCTest+Extensions.swift */,
+				D864B1E025CAE66A00F9B73E /* Extensions.swift */,
 			);
 			path = SimplenoteUITests;
 			sourceTree = "<group>";
@@ -2953,7 +2953,7 @@
 				D843AD7825E3E7F9007E5B15 /* SimplenoteUITestsTrash.swift in Sources */,
 				D864B1AB25CAE59400F9B73E /* EmailLogin.swift in Sources */,
 				D864B18225CAE4BE00F9B73E /* SimplenoteUITestsNoteEditor.swift in Sources */,
-				D864B1E125CAE66A00F9B73E /* XCTest+Extensions.swift in Sources */,
+				D864B1E125CAE66A00F9B73E /* Extensions.swift in Sources */,
 				D864B1CF25CAE61F00F9B73E /* Trash.swift in Sources */,
 				D864B1C625CAE5F800F9B73E /* Preview.swift in Sources */,
 				D843AD8F25E3EB16007E5B15 /* SimplenoteUITestsSearch.swift in Sources */,
