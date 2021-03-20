@@ -29,7 +29,7 @@ func trackTest(_ function: String = #function) {
 }
 
 func trackStep() {
-    print(">> Step " + String(stepIndex))
+    print(">> Step \(stepIndex)")
     stepIndex += 1
 }
 
@@ -41,41 +41,27 @@ func getToAllNotes() {
 
 class Table {
 
+    class func getAllCells() -> XCUIElementQuery {
+        return app.tables.element.children(matching: .cell)
+    }
+
     class func getVisibleLabelledCellsNumber() -> Int {
         // We need only the table cells that have X = 0 and a non-empty label
         // otherwise we will include invisible elements from Sidebar pane, when Notes List is open
         // or the elements from Notes List when Settings are open
         // or the visible tags search suggestions
-        let cellsNum = app.tables.element.children(matching: .cell).count
-        var matchesNum: Int = 0
-        guard cellsNum > 0 else { return matchesNum }
-
-        for index in 0...cellsNum - 1 {
-            let cell = app.tables.cells.element(boundBy: index)
-            if cell.frame.minX == 0.0 && cell.label.count > 0 {
-                matchesNum += 1
-            }
-        }
-
-        return matchesNum
+        return Table.getAllCells()
+            .filter { $0.frame.minX == 0.0 && $0.label.isEmpty == false }
+            .count
     }
 
     class func getVisibleNonLabelledCellsNumber() -> Int {
         // We need only the table cells that have X = 0 and an empty label
         // Currently (besides using object dimentions) this is the way to
         // locate tags search suggestions
-        let cellsNum = app.tables.element.children(matching: .cell).count
-        var matchesNum: Int = 0
-        guard cellsNum > 0 else { return matchesNum }
-
-        for index in 0...cellsNum - 1 {
-            let cell = app.tables.cells.element(boundBy: index)
-            if cell.frame.minX == 0.0 && cell.label.count == 0 {
-                matchesNum += 1
-            }
-        }
-
-        return matchesNum
+        return Table.getAllCells()
+            .filter { $0.frame.minX == 0.0 && $0.label.isEmpty == true }
+            .count
     }
 
     class func trashCell(noteName: String) {
@@ -97,19 +83,17 @@ class Table {
     class func getCellsWithExactLabelCount(label: String) -> Int {
         let predicate = NSPredicate(format: "label == '" + label + "'")
         let matchingCells = app.cells.matching(predicate)
-        let matchesCount = matchingCells.count
-        print(">>> Found " + String(matchesCount) + " Cell(s) with '" + label + "' label")
-        return matchesCount
+        let matches = matchingCells.count
+        print(">>> Found \(matches) Cell(s) with '\(label)' label")
+        return matches
     }
 
     class func getStaticTextsWithExactLabelCount(label: String) -> Int {
         let predicate = NSPredicate(format: "label == '" + label + "'")
-        let table = app.tables
-        print(table.debugDescription)
         let matchingCells = app.tables.staticTexts.matching(predicate)
-        let matchesCount = matchingCells.count
-        print(">>> Found " + String(matchesCount) + " StaticText(s) with '" + label + "' label")
-        return matchesCount
+        let matches = matchingCells.count
+        print(">>> Found \(matches) StaticText(s) with '\(label)' label")
+        return matches
     }
 
     class func getContentOfCell(noteName: String) -> String? {
@@ -138,11 +122,17 @@ class WebView {
 
 class WebViewAssert {
 
-    class func textShownOnScreen(textToFind: String) {
-        let textPredicate = NSPredicate(format: "label MATCHES '" + textToFind + "'")
+    class func textShownOnScreen(text: String) {
+        let textPredicate = NSPredicate(format: "label MATCHES '" + text + "'")
         let staticText = app.staticTexts.element(matching: textPredicate)
 
-        XCTAssertTrue(staticText.exists, "\"" + textToFind + textNotFoundInWebView)
+        XCTAssertTrue(staticText.exists, "\"" + text + textNotFoundInWebView)
+    }
+
+    class func textsShownOnScreen(texts: [String]) {
+        for text in texts {
+            WebViewAssert.textShownOnScreen(text: text)
+        }
     }
 }
 

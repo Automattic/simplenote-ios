@@ -173,9 +173,7 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
 
         trackStep()
         NoteEditor.pressLink(containerText: usualLinkText, linkifiedText: usualLinkText)
-        for text in webViewTexts {
-            WebViewAssert.textShownOnScreen(textToFind: text)
-        }
+        WebViewAssert.textsShownOnScreen(texts: webViewTexts)
     }
 
     func testTappingOnLinkInPreviewOpensLinkInNewWindow() throws {
@@ -196,9 +194,7 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
 
         trackStep()
         Preview.tapLink(linkText: usualLinkText)
-        for text in webViewTexts {
-            WebViewAssert.textShownOnScreen(textToFind: text)
-        }
+        WebViewAssert.textsShownOnScreen(texts: webViewTexts)
     }
 
     func testCreateCheckedItem() throws {

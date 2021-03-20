@@ -66,10 +66,9 @@ class SimplenoteUISmokeTestsSearch: XCTestCase {
 
     func testCanFilterByTagWhenClickingOnTagInTagDrawer() throws {
         trackTest()
-        var testedTag = String()
 
         trackStep()
-        testedTag = "prehistoric"
+        var testedTag = "prehistoric"
         Sidebar.tagSelect(tagName: testedTag)
         NoteListAssert.noteListShown(forSelection: testedTag)
         NoteListAssert.notesExist(names: [godzillaNoteName, kingKongNoteName])
@@ -92,10 +91,9 @@ class SimplenoteUISmokeTestsSearch: XCTestCase {
 
     func testClickingOnDifferentTagsOrAllNotesOrTrashImmediatelyUpdatesFilteredNotes() throws {
         trackTest()
-        var testedTag = String()
 
         trackStep()
-        testedTag = "prehistoric"
+        var testedTag = "prehistoric"
         Sidebar.tagSelect(tagName: testedTag)
         NoteListAssert.noteListShown(forSelection: testedTag)
         NoteListAssert.notesExist(names: [godzillaNoteName, kingKongNoteName])
