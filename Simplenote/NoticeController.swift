@@ -7,7 +7,7 @@ class NoticeController {
 
     private var notices: [Notice] = []
     private var current: Notice?
-    private let noticePresenter = NoticePresenter()
+    private let noticePresenter: NoticePresenter
     private let timerFactory: TimerFactory
 
     private var timer: Timer? {
@@ -22,8 +22,9 @@ class NoticeController {
 
     // MARK: Life Cycle
     //
-    private init() {
-        self.timerFactory = TimerFactory()
+    init(presenter: NoticePresenter = NoticePresenter(), timerFactory: TimerFactory = TimerFactory()) {
+        self.timerFactory = timerFactory
+        self.noticePresenter = presenter
     }
 
     func setupNoticeController() {
@@ -76,7 +77,7 @@ class NoticeController {
     // MARK: Dismissing
     //
     @objc
-    func dismiss() {
+    private func dismiss() {
         noticePresenter.dismissNotification {
             self.current = nil
 
@@ -89,7 +90,7 @@ class NoticeController {
 
 // MARK: NoticePresenting Delegate
 //
-extension NoticeController: NoticePresentingDelegate {
+extension NoticeController: NoticeInteractionDelegate {
     func noticePressBegan() {
         if !isPresenting {
             return
