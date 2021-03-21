@@ -78,7 +78,6 @@ class Table {
         let noteCell = Table.getCell(label: noteName)
 
         noteCell.swipeLeft()
-        //sleep(1)
         noteCell.buttons[deleteButtonLabel].tap()
     }
 
