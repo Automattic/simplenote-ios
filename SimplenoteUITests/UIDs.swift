@@ -35,6 +35,7 @@ enum UID {
         static let noteEditorInformation = "Information"
         static let noteEditorMenu = "note-menu"
         static let itemTrash = "icon trash"
+        static let noteTrash = "Move to Trash"
         static let trashRestore = "icon restore"
         static let trashEmptyTrash = "Empty"
         static let clearText = "Clear text"
