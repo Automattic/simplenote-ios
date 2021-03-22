@@ -1,5 +1,9 @@
 4.34
 -----
+
+4.33.1
+-----
+-   Fixed a bug that caused a crash while accessing some searched notes
  
 4.33
 -----
