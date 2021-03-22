@@ -1,4 +1,1 @@
-- Updating new-note and collaborate icons
-- Updating tags editor
-- Updating sort bar
-- Removing trailing comma from tags when used as delimiter
+- VoiceOver now reads note contextual actions names correctly
