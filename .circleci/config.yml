@@ -110,7 +110,7 @@ jobs:
             brew install ghostscript
             curl -sL https://sentry.io/get-cli/ | bash
       - run:
-          name: Setup notifications
+          name: Setup Slack notifications
           command: |
             APP_VERSION=$(cat ./config/Version.Public.xcconfig | grep "^VERSION_LONG" | cut -d "=" -f2)
             echo "export SLACK_FAILURE_MESSAGE=':red_circle: Build for Simplenote $APP_VERSION failed!'" >> $BASH_ENV
@@ -167,4 +167,3 @@ workflows:
        or: [ << pipeline.parameters.beta_build >>, << pipeline.parameters.release_build >> ]
     jobs:
       - Release Build
-
