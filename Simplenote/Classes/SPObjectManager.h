@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 @class Note;
 @class Tag;
+@class PublishingObserver;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SPObjectManager : NSObject
+
+@property PublishingObserver * publishingObserver;
 
 + (SPObjectManager *)sharedManager;
 

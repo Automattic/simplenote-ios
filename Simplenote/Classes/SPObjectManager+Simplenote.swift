@@ -46,4 +46,10 @@ extension SPObjectManager {
 
         NoticeController.shared.present(notice)
     }
+
+    @objc
+    func publishObserverFor(_ note: Note, published: Bool) {
+        let event: PublishEvent = published ? .published(note) : .unpublished(note)
+        publishingObserver = PublishingObserver(event: event)
+    }
 }

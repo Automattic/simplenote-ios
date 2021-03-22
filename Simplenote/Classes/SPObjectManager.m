@@ -18,6 +18,8 @@
 
 @implementation SPObjectManager
 
+@synthesize publishingObserver;
+
 + (SPObjectManager *)sharedManager
 {
     static SPObjectManager *sharedManager = nil;
@@ -287,7 +289,7 @@
     note.published = published;
     note.modificationDate = [NSDate date];
     [self presentNoticePublishStateChangingTo:published];
-
+    [self publishObserverFor:note published:published];
     [self save];
 }
 
