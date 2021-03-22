@@ -1,8 +1,9 @@
 4.35
 -----
- 
+
 4.34
 -----
+-   VoiceOver now reads note contextual actions names correctly #1191
 
 4.33.1
 -----
