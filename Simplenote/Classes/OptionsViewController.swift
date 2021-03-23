@@ -52,7 +52,8 @@ class OptionsViewController: UIViewController {
     ///
     weak var delegate: OptionsControllerDelegate?
 
-
+    var publishController: PublishController?
+    var publishingToken: Any?
     /// Designated Initializer
     ///
     init(note: Note) {
@@ -372,8 +373,15 @@ private extension OptionsViewController {
 
     @IBAction
     func publishWasPressed(_ newState: Bool) {
-        SPTracker.trackEditorNotePublishEnabled(newState)
-        SPObjectManager.shared().updatePublishedState(newState, note: note)
+        publishController = SPAppDelegate.shared().publishController
+        publishingToken = publishController?.updatePublishState(for: note, to: newState, completion: { (state) in
+            switch state {
+            case .linkCopied:
+                self.dismiss(animated: true, completion: nil)
+            default:
+                self.refreshInterface()
+            }
+        })
         pendingUpdate = true
     }
 
