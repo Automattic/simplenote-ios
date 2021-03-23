@@ -52,8 +52,6 @@ class OptionsViewController: UIViewController {
     ///
     weak var delegate: OptionsControllerDelegate?
 
-    var publishController: PublishController?
-    var publishingToken: Any?
     /// Designated Initializer
     ///
     init(note: Note) {
@@ -373,13 +371,21 @@ private extension OptionsViewController {
 
     @IBAction
     func publishWasPressed(_ newState: Bool) {
-        publishController = SPAppDelegate.shared().publishController
-        publishingToken = publishController?.updatePublishState(for: note, to: newState, completion: { (state) in
+        let publishController = SPAppDelegate.shared().publishController
+        publishController.updatePublishState(for: note, to: newState, completion: { (state) in
             switch state {
-            case .linkCopied:
-                self.dismiss(animated: true, completion: nil)
-            default:
-                self.refreshInterface()
+            case .publishing:
+                let notice = NoticeFactory.publishing
+                NoticeController.shared.present(notice)
+            case .published:
+                let notice = NoticeFactory.published(self.note)
+                NoticeController.shared.present(notice)
+            case .unpublishing:
+                let notice = NoticeFactory.unpublishing
+                NoticeController.shared.present(notice)
+            case .unpublished:
+                let notice = NoticeFactory.unpublished(self.note)
+                NoticeController.shared.present(notice)
             }
         })
         pendingUpdate = true
