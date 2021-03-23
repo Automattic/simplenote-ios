@@ -55,7 +55,7 @@ class NoteList {
     }
 
     class func getNotesNumber() -> Int {
-        return Table.getVisibleLabelledCellsNumber()
+        return Table.getVisibleLabelledCells().count
     }
 
     class func getTagsSuggestionsNumber() -> Int {
@@ -69,9 +69,9 @@ class NoteList {
 
     class func trashAllNotes() {
         NoteList.openAllNotes()
-        let noteNames = Table.getVisibleLabelledCellsNames()
-        guard noteNames.isEmpty == false else { return }
-        noteNames.forEach { Table.trashCell(noteName: $0) }
+        Table
+            .getVisibleLabelledCellsNames()
+            .forEach { Table.trashCell(noteName: $0) }
     }
 
     class func waitForLoad() {
