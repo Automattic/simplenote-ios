@@ -67,6 +67,11 @@ extension SPAppDelegate {
     func configureVersionsController() {
         versionsController = VersionsController(bucket: simperium.notesBucket)
     }
+
+    @objc
+    func configurePublishController() {
+        publishController = PublishController()
+    }
 }
 
 // MARK: - URL Handlers and Deep Linking

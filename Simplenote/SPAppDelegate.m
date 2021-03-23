@@ -140,6 +140,7 @@
     [self setupAppCenter];
     [self setupCrashLogging];
     [self configureVersionsController];
+    [self configurePublishController];
     [self setupDefaultWindow];
     [self configureStateRestoration];
 
@@ -455,6 +456,11 @@
                 if ([key isEqualToString:self.noteEditorViewController.note.simperiumKey]) {
                     [self.noteEditorViewController didReceiveNewContent];
                 }
+
+                if ([memberNames containsObject:@"publishURL"]) {
+                    [self.publishController didReceiveUpdateFromSimperiumForKey: key];
+                }
+
                 Note *note = [bucket objectForKey:key];
                 if (note && !note.deleted) {
                     [[CSSearchableIndex defaultSearchableIndex] indexSearchableNote:note];
