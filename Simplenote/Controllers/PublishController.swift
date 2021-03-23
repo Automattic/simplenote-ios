@@ -4,10 +4,9 @@ import Foundation
 class PublishController: NSObject {
     private var callbackMap = [String: PublishListenWrapper]()
 
-    @discardableResult
-    func updatePublishState(for note: Note, to published: Bool, completion: @escaping (PublishState) -> Void) -> Any? {
+    func updatePublishState(for note: Note, to published: Bool, completion: @escaping (PublishState) -> Void) {
         if note.published == published {
-            return nil
+            return
         }
 
         let wrapper = PublishListenWrapper(note: note, block: completion)
@@ -16,10 +15,7 @@ class PublishController: NSObject {
         SPTracker.trackEditorNotePublishEnabled(published)
         changePublishState(for: note, to: published)
 
-        NoticeController.shared.present(published ? NoticeFactory.publishing : NoticeFactory.unpublishing)
         wrapper.block(published ? .publishing : .unpublished)
-
-        return wrapper
     }
 
     @objc(didReceiveUpdateFromSimperiumForKey:)
@@ -30,13 +26,11 @@ class PublishController: NSObject {
 
         if wrapper.note.published && wrapper.note.publishURL != nil {
             wrapper.block(.published)
-            NoticeController.shared.present(NoticeFactory.published(wrapper.note))
             return
         }
 
         if !wrapper.note.published {
             wrapper.block(.unpublished)
-            NoticeController.shared.present(NoticeFactory.unpublished(wrapper.note))
 
             callbackMap.removeValue(forKey: wrapper.note.simperiumKey)
             return
@@ -55,7 +49,6 @@ enum PublishState {
     case published
     case unpublishing
     case unpublished
-    case linkCopied
 }
 
 private class PublishListenWrapper: NSObject {
