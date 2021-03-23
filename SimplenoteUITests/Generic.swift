@@ -72,7 +72,9 @@ class Table {
 
     class func trashCell(noteName: String) {
         // `Trash Note` and `Delete note forever` buttons have different labels
-        // since #1191. To use the correct label, we need to know where we are.
+        // since 07fcccf1039495768ecdf9909d3dbd1b255936cd
+        // (https://github.com/Automattic/simplenote-ios/pull/1191).
+        // To use the correct label, we need to know where we are.
         let deleteButtonLabel = app.navigationBars[UID.NavBar.trash].exists ?
             UID.Button.itemTrash : UID.Button.noteTrash
         let noteCell = Table.getCell(label: noteName)
