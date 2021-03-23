@@ -47,7 +47,7 @@ class Table {
 
     class func getVisibleLabelledCells() -> [XCUIElement] {
         // We need only the table cells that have X = 0 and a non-empty label
-        // Currently (besides using object dimentions) this is the way to
+        // Currently (besides using object dimensions) this is the way to
         // locate note cells
         return Table.getAllCells()
             .filter { $0.frame.minX == 0.0 && $0.label.isEmpty == false }
