@@ -45,19 +45,21 @@ class Table {
         return app.tables.element.children(matching: .cell)
     }
 
-    class func getVisibleLabelledCellsNumber() -> Int {
+    class func getVisibleLabelledCells() -> [XCUIElement] {
         // We need only the table cells that have X = 0 and a non-empty label
-        // otherwise we will include invisible elements from Sidebar pane, when Notes List is open
-        // or the elements from Notes List when Settings are open
-        // or the visible tags search suggestions
+        // Currently (besides using object dimensions) this is the way to
+        // locate note cells
         return Table.getAllCells()
             .filter { $0.frame.minX == 0.0 && $0.label.isEmpty == false }
-            .count
+    }
+
+    class func getVisibleLabelledCellsNames() -> [String] {
+        return Table.getVisibleLabelledCells().compactMap { $0.label }
     }
 
     class func getVisibleNonLabelledCellsNumber() -> Int {
         // We need only the table cells that have X = 0 and an empty label
-        // Currently (besides using object dimentions) this is the way to
+        // Currently (besides using object dimensions) this is the way to
         // locate tags search suggestions
         return Table.getAllCells()
             .filter { $0.frame.minX == 0.0 && $0.label.isEmpty == true }
@@ -65,9 +67,16 @@ class Table {
     }
 
     class func trashCell(noteName: String) {
-        Table.getCell(label: noteName).swipeLeft()
-        sleep(1)
-        Table.getCell(label: noteName).buttons[UID.Button.itemTrash].tap()
+        // `Trash Note` and `Delete note forever` buttons have different labels
+        // since 07fcccf1039495768ecdf9909d3dbd1b255936cd
+        // (https://github.com/Automattic/simplenote-ios/pull/1191).
+        // To use the correct label, we need to know where we are.
+        let deleteButtonLabel = app.navigationBars[UID.NavBar.trash].exists ?
+            UID.Button.itemTrash : UID.Button.noteTrash
+        let noteCell = Table.getCell(label: noteName)
+
+        noteCell.swipeLeft()
+        noteCell.buttons[deleteButtonLabel].tap()
     }
 
     class func getCell(label: String) -> XCUIElement {

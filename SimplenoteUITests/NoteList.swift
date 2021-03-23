@@ -55,7 +55,7 @@ class NoteList {
     }
 
     class func getNotesNumber() -> Int {
-        return Table.getVisibleLabelledCellsNumber()
+        return Table.getVisibleLabelledCells().count
     }
 
     class func getTagsSuggestionsNumber() -> Int {
@@ -69,25 +69,9 @@ class NoteList {
 
     class func trashAllNotes() {
         NoteList.openAllNotes()
-
-        let notesNumber = NoteList.getNotesNumber()
-        let cellsNum = app.tables.element.children(matching: .cell).count
-        var startingIndex: Int
-
-        if notesNumber == cellsNum {
-            // Depending on what happened before, the cells numbering
-            // might not include "All Notes", "Trash" and "Settings" cells...
-            startingIndex = 0
-        } else {
-            // Or might include them
-            startingIndex = 3
-        }
-
-        for _ in 0..<notesNumber {
-            let cell = app.tables.cells.element(boundBy: startingIndex)
-            cell.swipeLeft()
-            cell.buttons[UID.Button.itemTrash].tap()
-        }
+        Table
+            .getVisibleLabelledCellsNames()
+            .forEach { Table.trashCell(noteName: $0) }
     }
 
     class func waitForLoad() {
