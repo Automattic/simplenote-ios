@@ -1053,16 +1053,3 @@ private enum Localization {
         }
     }
 }
-
-private struct Notices {
-    static func undoAction(_ note: Note) -> NoticeAction {
-        return NoticeAction(title: "Undo") {
-            SPObjectManager.shared().restoreNote(note)
-        }
-    }
-    static func noteTrashed(_ note: Note) -> Notice {
-        return Notice(message: "Note trashed.", action: Notices.undoAction(note))
-    }
-
-    static let linkCopied = Notice(message: "Link Copied.", action: nil)
-}
