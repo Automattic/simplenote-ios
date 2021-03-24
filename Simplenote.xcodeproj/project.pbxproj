@@ -411,6 +411,8 @@
 		BAA4856925D5E40900F3BDB9 /* SearchQuery+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */; };
 		BAB017722609456D007A9CC3 /* PublishController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB017712609456D007A9CC3 /* PublishController.swift */; };
 		BAB01792260AAE93007A9CC3 /* NoticeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB01791260AAE93007A9CC3 /* NoticeFactory.swift */; };
+		BAB0179B260AD591007A9CC3 /* PublishControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB0179A260AD591007A9CC3 /* PublishControllerTests.swift */; };
+		BAB017AB260ADDEB007A9CC3 /* MockTimerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB017AA260ADDEB007A9CC3 /* MockTimerFactory.swift */; };
 		D435D38FCA5863E8447D5C2C /* Pods_Automattic_SimplenoteShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183BAB896957F07FDCAB6DF5 /* Pods_Automattic_SimplenoteShare.framework */; };
 		D843AD6F25E3E633007E5B15 /* SimplenoteUITestsLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = D843AD6E25E3E633007E5B15 /* SimplenoteUITestsLogin.swift */; };
 		D843AD7825E3E7F9007E5B15 /* SimplenoteUITestsTrash.swift in Sources */ = {isa = PBXBuildFile; fileRef = D843AD7725E3E7F9007E5B15 /* SimplenoteUITestsTrash.swift */; };
@@ -925,6 +927,8 @@
 		BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchQuery+Simplenote.swift"; sourceTree = "<group>"; };
 		BAB017712609456D007A9CC3 /* PublishController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishController.swift; sourceTree = "<group>"; };
 		BAB01791260AAE93007A9CC3 /* NoticeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeFactory.swift; sourceTree = "<group>"; };
+		BAB0179A260AD591007A9CC3 /* PublishControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishControllerTests.swift; sourceTree = "<group>"; };
+		BAB017AA260ADDEB007A9CC3 /* MockTimerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTimerFactory.swift; sourceTree = "<group>"; };
 		C07B32800E3C783BDF105B3A /* Pods-Automattic-SimplenoteShare.distribution alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-SimplenoteShare.distribution alpha.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-SimplenoteShare/Pods-Automattic-SimplenoteShare.distribution alpha.xcconfig"; sourceTree = "<group>"; };
 		D843AD6E25E3E633007E5B15 /* SimplenoteUITestsLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplenoteUITestsLogin.swift; sourceTree = "<group>"; };
 		D843AD7725E3E7F9007E5B15 /* SimplenoteUITestsTrash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplenoteUITestsTrash.swift; sourceTree = "<group>"; };
@@ -1564,6 +1568,7 @@
 				A645FA6F254C5E69008A1519 /* NoteContentHelperTests.swift */,
 				A6344AD8255952C70072FA07 /* NoteContentPreviewTests.swift */,
 				A694ABB225D1687200CC3A2D /* NoteScrollPositionCacheTests.swift */,
+				BAB0179A260AD591007A9CC3 /* PublishControllerTests.swift */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -1741,6 +1746,7 @@
 				B5421F3E23CE7A1C004DDC19 /* MockupStorage+Sample.swift */,
 				B52F35D222F356F500724793 /* UserDefaults+Tests.swift */,
 				A6E6CEC825A6053A005A92DB /* MockApplication.swift */,
+				BAB017AA260ADDEB007A9CC3 /* MockTimerFactory.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -2941,6 +2947,7 @@
 				A6E6CE6C25A5ABD6005A92DB /* PinLockSetupControllerTests.swift in Sources */,
 				A64DE6F9255D21B9001D0526 /* StringContentSliceTests.swift in Sources */,
 				A6E6CE5C25A5A7F7005A92DB /* PinLockBaseControllerTests.swift in Sources */,
+				BAB017AB260ADDEB007A9CC3 /* MockTimerFactory.swift in Sources */,
 				B55AC57A22D27B9100D8CEB2 /* OptionsTests.swift in Sources */,
 				B543C7DF23CF6AB400003A80 /* NotesListControllerTests.swift in Sources */,
 				A6CC0B2D25B84FF200F12A85 /* AccountVerificationRemoteTests.swift in Sources */,
@@ -2951,6 +2958,7 @@
 				A6E6CEC925A6053A005A92DB /* MockApplication.swift in Sources */,
 				BA3FB8CF25FEA0C500EA9A1B /* NoticeControllerTests.swift in Sources */,
 				A645FA70254C5E69008A1519 /* NoteContentHelperTests.swift in Sources */,
+				BAB0179B260AD591007A9CC3 /* PublishControllerTests.swift in Sources */,
 				A6E6CE6425A5AAA8005A92DB /* PinLockControllerConfiguration+Tests.swift in Sources */,
 				B51F6DD72460D7C20074DDD9 /* NSPredicateEmailTests.swift in Sources */,
 				B5D367BE23ECF42D0024215D /* NSStringCondensingTests.swift in Sources */,
