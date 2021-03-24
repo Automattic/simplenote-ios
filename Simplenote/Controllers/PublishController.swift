@@ -2,11 +2,12 @@ import Foundation
 
 @objc
 class PublishController: NSObject {
-    private var callbackMap = PublishMap()
+    private var callbackMap: PublishMap
     private let timerFactory: TimerFactory
 
-    init(timerFactory: TimerFactory = TimerFactory()) {
+    init(timerFactory: TimerFactory = TimerFactory(), callbackMap: PublishMap = PublishMap()) {
         self.timerFactory = timerFactory
+        self.callbackMap = callbackMap
     }
 
     func updatePublishState(for note: Note, to published: Bool, completion: @escaping (PublishState) -> Void) {
@@ -15,7 +16,7 @@ class PublishController: NSObject {
         }
 
         let wrapper = PublishListenWrapper(note: note, block: completion)
-        callbackMap[note.simperiumKey] = wrapper
+        callbackMap.container[note.simperiumKey] = wrapper
 
         SPTracker.trackEditorNotePublishEnabled(published)
         changePublishState(for: note, to: published)
@@ -25,7 +26,7 @@ class PublishController: NSObject {
 
     @objc(didReceiveUpdateFromSimperiumForKey:)
     func didReceiveUpdateFromSimperium(for key: NSString) {
-        guard let wrapper = callbackMap[key as String] else {
+        guard let wrapper = callbackMap.container[key as String] else {
             return
         }
 
@@ -53,7 +54,7 @@ class PublishController: NSObject {
     }
 
     fileprivate func removeListenerCallback(for key: String) {
-        callbackMap.removeValue(forKey: key)
+        callbackMap.container.removeValue(forKey: key)
     }
 
     fileprivate func startTimer(in wrapper: PublishListenWrapper) {
@@ -75,7 +76,6 @@ enum PublishState {
     case unpublished
 }
 
-typealias PublishMap = [String: PublishListenWrapper]
 class PublishListenWrapper: NSObject {
     let note: Note
     let block: (PublishState) -> Void
@@ -85,6 +85,14 @@ class PublishListenWrapper: NSObject {
         self.note = note
         self.block = block
         self.timer = Timer()
+    }
+}
+
+class PublishMap {
+    var container: [String: PublishListenWrapper]
+
+    init(container: [String: PublishListenWrapper] = [String: PublishListenWrapper]()) {
+        self.container = container
     }
 }
 
