@@ -3,6 +3,11 @@ import Foundation
 @objc
 class PublishController: NSObject {
     private var callbackMap = [String: PublishListenWrapper]()
+    private let timerFactory: TimerFactory
+
+    init(timerFactory: TimerFactory = TimerFactory()) {
+        self.timerFactory = timerFactory
+    }
 
     func updatePublishState(for note: Note, to published: Bool, completion: @escaping (PublishState) -> Void) {
         if note.published == published {
@@ -57,7 +62,7 @@ class PublishController: NSObject {
         guard let key = wrapper.note.simperiumKey else {
             return
         }
-        wrapper.timer = Timer.scheduledTimer(withTimeInterval: Constants.timeOut, repeats: false, block: { (_) in
+        wrapper.timer = timerFactory.scheduledTimer(with: Constants.timeOut, completion: {
             self.removeListenerCallback(for: key)
         })
     }
@@ -71,6 +76,7 @@ enum PublishState {
 }
 
 private class PublishListenWrapper: NSObject {
+class PublishListenWrapper: NSObject {
     let note: Note
     let block: (PublishState) -> Void
     var timer: Timer
