@@ -2,7 +2,7 @@ import Foundation
 
 @objc
 class PublishController: NSObject {
-    private var callbackMap = [String: PublishListenWrapper]()
+    private var callbackMap = PublishMap()
     private let timerFactory: TimerFactory
 
     init(timerFactory: TimerFactory = TimerFactory()) {
@@ -75,7 +75,7 @@ enum PublishState {
     case unpublished
 }
 
-private class PublishListenWrapper: NSObject {
+typealias PublishMap = [String: PublishListenWrapper]
 class PublishListenWrapper: NSObject {
     let note: Note
     let block: (PublishState) -> Void
