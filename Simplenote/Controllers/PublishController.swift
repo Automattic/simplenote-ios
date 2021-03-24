@@ -15,7 +15,7 @@ class PublishController: NSObject {
         SPTracker.trackEditorNotePublishEnabled(published)
         changePublishState(for: note, to: published)
 
-        wrapper.block(published ? .publishing : .unpublished)
+        published ? update(wrapper, to: .publishing) : update(wrapper, to: .unpublishing)
     }
 
     @objc(didReceiveUpdateFromSimperiumForKey:)
@@ -25,22 +25,41 @@ class PublishController: NSObject {
         }
 
         if wrapper.note.published && wrapper.note.publishURL != nil {
-            wrapper.block(.published)
+            update(wrapper, to: .published)
             return
         }
 
         if !wrapper.note.published {
-            wrapper.block(.unpublished)
+            update(wrapper, to: .unpublished)
 
-            callbackMap.removeValue(forKey: wrapper.note.simperiumKey)
             return
         }
+    }
+
+    private func update(_ wrapper: PublishListenWrapper, to state: PublishState) {
+        wrapper.block(state)
+        startTimer(in: wrapper)
     }
 
     private func changePublishState(for note: Note, to published: Bool) {
         note.published = published
         note.modificationDate = Date()
         SPAppDelegate.shared().save()
+    }
+
+    fileprivate func removeListenerCallback(for key: String) {
+        callbackMap.removeValue(forKey: key)
+    }
+
+    fileprivate func startTimer(in wrapper: PublishListenWrapper) {
+        wrapper.timer.invalidate()
+
+        guard let key = wrapper.note.simperiumKey else {
+            return
+        }
+        wrapper.timer = Timer.scheduledTimer(withTimeInterval: Constants.timeOut, repeats: false, block: { (_) in
+            self.removeListenerCallback(for: key)
+        })
     }
 }
 
@@ -54,9 +73,15 @@ enum PublishState {
 private class PublishListenWrapper: NSObject {
     let note: Note
     let block: (PublishState) -> Void
+    var timer: Timer
 
     init(note: Note, block: @escaping (PublishState) -> Void) {
         self.note = note
         self.block = block
+        self.timer = Timer()
     }
+}
+
+private struct Constants {
+    static let timeOut = TimeInterval(5)
 }
