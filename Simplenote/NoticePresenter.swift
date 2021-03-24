@@ -35,6 +35,19 @@ class NoticePresenter {
         stopListeningToKeyboardNotifications()
     }
 
+    func startListeningToKeyboardNotifications() {
+        keyboardNotificationTokens = addKeyboardObservers()
+    }
+
+    func stopListeningToKeyboardNotifications() {
+        guard let tokens = keyboardNotificationTokens else {
+            return
+        }
+
+        removeKeyboardObservers(with: tokens)
+        keyboardNotificationTokens = nil
+    }
+
     // MARK: Presenting Methods
     //
     func presentNoticeView(_ noticeView: NoticeView, completion: @escaping () -> Void) {
@@ -148,19 +161,6 @@ extension NoticePresenter: KeyboardObservable {
         UIView.animate(withDuration: animationDuration, delay: .zero, options: animationOptions) {
             containerView.layoutIfNeeded()
         }
-    }
-
-    func startListeningToKeyboardNotifications() {
-        keyboardNotificationTokens = addKeyboardObservers()
-    }
-
-    func stopListeningToKeyboardNotifications() {
-        guard let tokens = keyboardNotificationTokens else {
-            return
-        }
-
-        removeKeyboardObservers(with: tokens)
-        keyboardNotificationTokens = nil
     }
 }
 
