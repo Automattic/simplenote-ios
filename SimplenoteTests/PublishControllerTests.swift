@@ -2,20 +2,21 @@ import XCTest
 @testable import Simplenote
 
 private let storage = MockupStorageManager()
-private let publishController = PublishController()
+private let timerFactory = MockTimerFactory()
+private let callbackMap = PublishMap()
+private let publishController = PublishController(timerFactory: timerFactory, callbackMap: callbackMap)
 private let mockAppDelegate = MockAppDelegate(publishController: publishController)
-private let callbackMap = [String: PublishListenWrapper]()
 
 class PublishControllerTests: XCTestCase {
 
     func testUpdatePublishExitsIfNoChangeInState() {
         let note = storage.insertSampleNote(simperiumKey: TestConstants.simperiumKey)
-
-        publishController.updatePublishState(for: note, to: false) { (_) in
+        note.published = true
+        publishController.updatePublishState(for: note, to: true) { (_) in
             XCTFail("Callback should not be called")
         }
 
-        XCTAssertFalse(note.published)
+        XCTAssertNil(callbackMap.container[TestConstants.simperiumKey])
     }
 
     func testUpdatePublishStateToPublishing() {
@@ -25,6 +26,7 @@ class PublishControllerTests: XCTestCase {
         }
         XCTAssertTrue(note.published)
         XCTAssertEqual(note.publishURL, "")
+        XCTAssertNotNil(callbackMap.container[TestConstants.simperiumKey])
     }
 
     func testUpdatePublishStateToUnpublishing() {
@@ -34,6 +36,7 @@ class PublishControllerTests: XCTestCase {
         }
         XCTAssertFalse(note.published)
         XCTAssertEqual(note.publishURL, "")
+        XCTAssertNotNil(callbackMap.container[TestConstants.simperiumKey])
     }
 
     func testPublishStateIsChangedToPublishedWhenCalledFromListener() {
@@ -43,26 +46,38 @@ class PublishControllerTests: XCTestCase {
             publishState = state
         }
 
-        mockAppDelegate.update(note: note, to: true, with: TestConstants.simperiumKey, with: "ABC123")
+        mockAppDelegate.update(note: note, to: true, with: TestConstants.simperiumKey, with: TestConstants.publishURL)
 
         XCTAssertEqual(publishState, .published)
     }
 
     func testPublishStateIsChangedToUnpublishedWhenCalledFromListener() {
         let note = storage.insertSampleNote(simperiumKey: TestConstants.simperiumKey)
-        var publishState: PublishState = .unpublished
+        var publishState: PublishState = .published
         publishController.updatePublishState(for: note, to: true) { (state) in
             publishState = state
         }
 
-        mockAppDelegate.update(note: note, to: false, with: TestConstants.simperiumKey, with: "ABC123")
+        mockAppDelegate.update(note: note, to: false, with: TestConstants.simperiumKey, with: TestConstants.publishURL)
 
         XCTAssertEqual(publishState, .unpublished)
+    }
+
+    func testTimeoutRemovesStoredCallback() {
+        let note = storage.insertSampleNote(simperiumKey: TestConstants.simperiumKey)
+        publishController.updatePublishState(for: note, to: true) { (_) in }
+
+        XCTAssertNotNil(callbackMap.container[TestConstants.simperiumKey])
+
+        timerFactory.timer?.fire()
+
+        XCTAssertNil(callbackMap.container[TestConstants.simperiumKey])
     }
 }
 
 private struct TestConstants {
     static let simperiumKey = "ABCDEF123456"
+    static let publishURL = "ABC123"
 }
 
 class MockAppDelegate {
@@ -73,8 +88,12 @@ class MockAppDelegate {
     }
 
     func update(note: Note, to published: Bool, with key: String, with url: String) {
-        note.publishURL = "ABC123"
+        note.publishURL = url
         note.published = published
         publishController.didReceiveUpdateFromSimperium(for: key as NSString)
     }
+}
+
+class MockPublishMap: PublishMap {
+
 }
