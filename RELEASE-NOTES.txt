@@ -1,5 +1,6 @@
 4.35
 -----
+-   Simplenote's Icons have been revamped #919
 
 4.34
 -----
