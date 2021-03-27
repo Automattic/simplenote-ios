@@ -18,7 +18,6 @@ class PublishController: NSObject {
         let wrapper = PublishListenWrapper(note: note, block: completion)
         callbackMap.container[note.simperiumKey] = wrapper
 
-        SPTracker.trackEditorNotePublishEnabled(published)
         changePublishState(for: note, to: published)
 
         published ? update(wrapper, to: .publishing) : update(wrapper, to: .unpublishing)
