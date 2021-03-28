@@ -2,13 +2,14 @@ import Foundation
 
 @objc
 class PublishController: NSObject {
-    private var callbackMap: [String: PublishListenWrapper]
+    private var callbackMap = [String: PublishListenWrapper]()
     private let timerFactory: TimerFactory
+    private let publishListenerFactory: PublishListenerFactory
     private var timer: Timer?
 
-    init(timerFactory: TimerFactory = TimerFactory(), callbackMap: [String: PublishListenWrapper] = [String: PublishListenWrapper]()) {
+    init(timerFactory: TimerFactory = TimerFactory(), publishListenerFactory: PublishListenerFactory = PublishListenerFactory()) {
         self.timerFactory = timerFactory
-        self.callbackMap = callbackMap
+        self.publishListenerFactory = publishListenerFactory
     }
 
     func updatePublishState(for note: Note, to published: Bool, completion: @escaping (PublishState) -> Void) {
@@ -16,15 +17,16 @@ class PublishController: NSObject {
             return
         }
 
-        var wrapper = PublishListenWrapper(note: note, block: completion, expiration: Date())
-        callbackMap[note.simperiumKey] = wrapper
+        callbackMap[note.simperiumKey] = publishListenerFactory.publishListenerWrapper(note: note, block: completion, expiration: Date())
+
         timer = timerFactory.scheduledTimer(with: Constants.timeOut, completion: {
             self.removeExpiredCallbacks()
         })
 
         changePublishState(for: note, to: published)
 
-        published ? wrapper.update(to: .publishing) : wrapper.update(to: .unpublishing)
+        published ?
+            callbackMap[note.simperiumKey]?.update(to: .publishing) : callbackMap[note.simperiumKey]?.update(to: .unpublishing)
     }
 
     @objc(didReceiveUpdateFromSimperiumForKey:)
@@ -96,6 +98,12 @@ struct PublishListenWrapper {
 
     private mutating func setExpiration() {
         expiration = Date()
+    }
+}
+
+class PublishListenerFactory {
+    func publishListenerWrapper(note: Note, block: @escaping (PublishState) -> Void, expiration: Date) -> PublishListenWrapper {
+        return PublishListenWrapper(note: note, block: block, expiration: expiration)
     }
 }
 
