@@ -2,10 +2,11 @@ import Foundation
 
 @objc
 class PublishController: NSObject {
-    private var callbackMap: PublishMap
+    private var callbackMap: [String: PublishListenWrapper]
     private let timerFactory: TimerFactory
+    private var timer: Timer?
 
-    init(timerFactory: TimerFactory = TimerFactory(), callbackMap: PublishMap = PublishMap()) {
+    init(timerFactory: TimerFactory = TimerFactory(), callbackMap: [String: PublishListenWrapper] = [String: PublishListenWrapper]()) {
         self.timerFactory = timerFactory
         self.callbackMap = callbackMap
     }
