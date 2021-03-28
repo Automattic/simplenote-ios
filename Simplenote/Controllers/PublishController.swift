@@ -16,35 +16,24 @@ class PublishController: NSObject {
             return
         }
 
-        let wrapper = PublishListenWrapper(note: note, block: completion)
-        callbackMap.container[note.simperiumKey] = wrapper
+        var wrapper = PublishListenWrapper(note: note, block: completion, expiration: Date())
+        callbackMap[note.simperiumKey] = wrapper
+        timer = timerFactory.scheduledTimer(with: Constants.timeOut, completion: {
+            self.removeExpiredCallbacks()
+        })
 
         changePublishState(for: note, to: published)
 
-        published ? update(wrapper, to: .publishing) : update(wrapper, to: .unpublishing)
+        published ? wrapper.update(to: .publishing) : wrapper.update(to: .unpublishing)
     }
 
     @objc(didReceiveUpdateFromSimperiumForKey:)
-    func didReceiveUpdateFromSimperium(for key: NSString) {
-        guard let wrapper = callbackMap.container[key as String] else {
+    func didReceiveUpdateFromSimperium(for key: String) {
+        guard var wrapper = callbackMap[key] else {
             return
         }
 
-        if wrapper.note.published && wrapper.note.publishURL != nil {
-            update(wrapper, to: .published)
-            return
-        }
-
-        if !wrapper.note.published {
-            update(wrapper, to: .unpublished)
-
-            return
-        }
-    }
-
-    private func update(_ wrapper: PublishListenWrapper, to state: PublishState) {
-        wrapper.block(state)
-        startTimer(in: wrapper)
+        wrapper.handleListenResponse()
     }
 
     private func changePublishState(for note: Note, to published: Bool) {
@@ -53,19 +42,22 @@ class PublishController: NSObject {
         SPAppDelegate.shared().save()
     }
 
-    fileprivate func removeListenerCallback(for key: String) {
-        callbackMap.container.removeValue(forKey: key)
+    private func removeListenerCallback(for key: String) {
+        callbackMap.removeValue(forKey: key)
     }
 
-    fileprivate func startTimer(in wrapper: PublishListenWrapper) {
-        wrapper.timer.invalidate()
-
-        guard let key = wrapper.note.simperiumKey else {
-            return
+    private func removeExpiredCallbacks() {
+        for wrapper in callbackMap {
+            if wrapper.value.isExpired {
+                callbackMap.removeValue(forKey: wrapper.key)
+            }
         }
-        wrapper.timer = timerFactory.scheduledTimer(with: Constants.timeOut, completion: {
-            self.removeListenerCallback(for: key)
-        })
+
+        if !callbackMap.isEmpty {
+            timer = timerFactory.scheduledTimer(with: Constants.timeOut, completion: {
+                self.removeExpiredCallbacks()
+            })
+        }
     }
 }
 
@@ -76,24 +68,37 @@ enum PublishState {
     case unpublished
 }
 
-class PublishListenWrapper: NSObject {
+struct PublishListenWrapper {
     let note: Note
     let block: (PublishState) -> Void
-    var timer: Timer
+    var expiration: Date
 
-    init(note: Note, block: @escaping (PublishState) -> Void) {
-        self.note = note
-        self.block = block
-        self.timer = Timer()
+    var isExpired: Bool {
+        expiration.timeIntervalSinceNow < -Constants.timeOut
     }
-}
 
-class PublishMap {
-    var container: [String: PublishListenWrapper]
-
-    init(container: [String: PublishListenWrapper] = [String: PublishListenWrapper]()) {
-        self.container = container
+    mutating func update(to state: PublishState) {
+        block(state)
+        setExpiration()
     }
+
+    mutating func handleListenResponse() {
+        if note.published && note.publishURL != nil {
+            update(to: .published)
+        }
+
+        if !note.published {
+            update(to: .unpublished)
+        }
+
+        setExpiration()
+    }
+
+    private mutating func setExpiration() {
+        expiration = Date()
+    }
+
+
 }
 
 private struct Constants {
