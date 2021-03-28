@@ -97,8 +97,6 @@ struct PublishListenWrapper {
     private mutating func setExpiration() {
         expiration = Date()
     }
-
-
 }
 
 private struct Constants {
