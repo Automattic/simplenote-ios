@@ -28,9 +28,7 @@ class PublishControllerTests: XCTestCase {
 
     func testUpdatePublishStateToPublishing() {
         let note = storage.insertSampleNote(simperiumKey: TestConstants.simperiumKey)
-        publishController?.updatePublishState(for: note, to: true) { (state) in
-            XCTAssertEqual(state, .publishing)
-        }
+        publishController?.updatePublishState(for: note, to: true) { (_) in }
         XCTAssertTrue(note.published)
         XCTAssertEqual(note.publishURL, "")
         XCTAssertNotNil(publishFactory.listeners[TestConstants.simperiumKey])
@@ -38,9 +36,7 @@ class PublishControllerTests: XCTestCase {
 
     func testUpdatePublishStateToUnpublishing() {
         let note = storage.insertSampleNote(simperiumKey: TestConstants.simperiumKey, published: true)
-        publishController?.updatePublishState(for: note, to: false) { (state) in
-            XCTAssertEqual(state, .unpublishing)
-        }
+        publishController?.updatePublishState(for: note, to: false) { (_) in }
         XCTAssertFalse(note.published)
         XCTAssertEqual(note.publishURL, "")
         XCTAssertNotNil(publishFactory.listeners[TestConstants.simperiumKey])
@@ -48,40 +44,32 @@ class PublishControllerTests: XCTestCase {
 
     func testPublishStateIsChangedToPublishedWhenCalledFromListener() {
         let note = storage.insertSampleNote(simperiumKey: TestConstants.simperiumKey)
-        var publishState: PublishState = .unpublished
-        publishController?.updatePublishState(for: note, to: true) { (state) in
-            publishState = state
-        }
+        publishController?.updatePublishState(for: note, to: true) { (_) in }
 
         mockAppDelegate?.updateNote(note: note, published: true, withKey: TestConstants.simperiumKey, withURL: TestConstants.publishURL)
 
-        XCTAssertEqual(publishState, .published)
+        XCTAssertEqual(note.publishState, .published)
     }
 
     func testPublishStateIsChangedToUnpublishedWhenCalledFromListener() {
         let note = storage.insertSampleNote(simperiumKey: TestConstants.simperiumKey)
-        var publishState: PublishState = .published
-        publishController?.updatePublishState(for: note, to: true) { (state) in
-            publishState = state
-        }
+        publishController?.updatePublishState(for: note, to: true) { (_) in }
 
-        mockAppDelegate?.updateNote(note: note, published: false, withKey: TestConstants.simperiumKey, withURL: TestConstants.publishURL)
+        mockAppDelegate?.updateNote(note: note, published: false, withKey: TestConstants.simperiumKey, withURL: "")
 
-        XCTAssertEqual(publishState, .unpublished)
+        XCTAssertEqual(note.publishState, .unpublished)
     }
 
     func testControllerDoesNotChangeIfUpdateIsCalledOnItemNotBeingObserved() {
         let note = storage.insertSampleNote(simperiumKey: TestConstants.simperiumKey)
         let noteB = storage.insertSampleNote(simperiumKey: TestConstants.secondKey)
-        var publishState: PublishState = .unpublished
-        publishController?.updatePublishState(for: note, to: true) { (state) in
-            XCTAssertEqual(state, .publishing)
-            publishState = state
-        }
+
+        publishController?.updatePublishState(for: note, to: true) { (_) in }
 
         mockAppDelegate?.updateNote(note: noteB, published: true, withKey: TestConstants.secondKey, withURL: TestConstants.publishURL)
 
-        XCTAssertEqual(publishState, .publishing)
+        XCTAssertEqual(note.publishState, .unpublished)
+        XCTAssertEqual(noteB.publishState, .unpublished)
     }
 }
 
@@ -100,7 +88,6 @@ class MockAppDelegate {
 
     func updateNote(note: Note, published: Bool, withKey key: String, withURL url: String) {
         note.publishURL = url
-        note.published = published
         publishController.didReceiveUpdateFromSimperium(for: key)
     }
 }
@@ -108,8 +95,8 @@ class MockAppDelegate {
 class MockPublishListenerFactory: PublishListenerFactory {
     var listeners = [String: PublishListenWrapper]()
 
-    override func publishListenerWrapper(note: Note, block: @escaping (PublishState) -> Void, expiration: Date) -> PublishListenWrapper {
-        let newWrapper = PublishListenWrapper(note: note, block: block, expiration: expiration)
+    override func publishListenerWrapper(note: Note, block: @escaping (Note) -> Void) -> PublishListenWrapper {
+        let newWrapper = PublishListenWrapper(note: note, block: block)
         listeners[note.simperiumKey] = newWrapper
         return newWrapper
     }
