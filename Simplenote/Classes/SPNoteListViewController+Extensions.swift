@@ -714,7 +714,7 @@ private extension SPNoteListViewController {
 
             UIContextualAction(style: .normal, image: .image(name: .link), backgroundColor: .simplenoteTertiaryActionColor) { [weak self] (_, _, completion) in
                 self?.copyInternalLink(to: note)
-                NoticeController.shared.present(NoticeFactory.linkCopied)
+                NoticeController.shared.present(NoticeFactory.linkCopied())
                 completion(true)
             },
 

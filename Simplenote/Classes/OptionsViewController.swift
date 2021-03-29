@@ -355,7 +355,7 @@ private extension OptionsViewController {
     func copyInterlinkWasPressed() {
         SPTracker.trackEditorCopiedInternalLink()
         UIPasteboard.general.copyInternalLink(to: note)
-        NoticeController.shared.present(NoticeFactory.linkCopied)
+        NoticeController.shared.present(NoticeFactory.linkCopied())
         dismiss(animated: true, completion: nil)
     }
 
@@ -400,7 +400,7 @@ private extension OptionsViewController {
 
         SPTracker.trackEditorCopiedPublicLink()
         UIPasteboard.general.copyPublicLink(to: note)
-        NoticeController.shared.present(NoticeFactory.linkCopied)
+        NoticeController.shared.present(NoticeFactory.linkCopied())
         dismiss(animated: true, completion: nil)
     }
 
