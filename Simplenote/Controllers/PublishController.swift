@@ -12,21 +12,18 @@ class PublishController: NSObject {
         self.publishListenerFactory = publishListenerFactory
     }
 
-    func updatePublishState(for note: Note, to published: Bool, completion: @escaping (PublishState) -> Void) {
+    func updatePublishState(for note: Note, to published: Bool, completion: @escaping (Note) -> Void) {
         if note.published == published {
             return
         }
 
-        callbackMap[note.simperiumKey] = publishListenerFactory.publishListenerWrapper(note: note, block: completion, expiration: Date())
+        callbackMap[note.simperiumKey] = publishListenerFactory.publishListenerWrapper(note: note, block: completion)
 
         timer = timerFactory.scheduledTimer(with: Constants.timeOut, completion: {
             self.removeExpiredCallbacks()
         })
 
         changePublishState(for: note, to: published)
-
-        published ?
-            callbackMap[note.simperiumKey]?.update(to: .publishing) : callbackMap[note.simperiumKey]?.update(to: .unpublishing)
     }
 
     @objc(didReceiveUpdateFromSimperiumForKey:)
@@ -35,7 +32,7 @@ class PublishController: NSObject {
             return
         }
 
-        wrapper.handleListenResponse()
+        wrapper.update()
     }
 
     private func changePublishState(for note: Note, to published: Bool) {
@@ -64,35 +61,21 @@ class PublishController: NSObject {
 }
 
 enum PublishState {
-    case publishing
     case published
-    case unpublishing
     case unpublished
 }
 
 struct PublishListenWrapper {
     let note: Note
-    let block: (PublishState) -> Void
+    let block: (Note) -> Void
     var expiration: Date
 
     var isExpired: Bool {
         expiration.timeIntervalSinceNow < -Constants.timeOut
     }
 
-    mutating func update(to state: PublishState) {
-        block(state)
-        setExpiration()
-    }
-
-    mutating func handleListenResponse() {
-        if note.published && note.publishURL != nil {
-            update(to: .published)
-        }
-
-        if !note.published {
-            update(to: .unpublished)
-        }
-
+    mutating func update() {
+        block(note)
         setExpiration()
     }
 
@@ -102,8 +85,8 @@ struct PublishListenWrapper {
 }
 
 class PublishListenerFactory {
-    func publishListenerWrapper(note: Note, block: @escaping (PublishState) -> Void, expiration: Date) -> PublishListenWrapper {
-        return PublishListenWrapper(note: note, block: block, expiration: expiration)
+    func publishListenerWrapper(note: Note, block: @escaping (Note) -> Void) -> PublishListenWrapper {
+        return PublishListenWrapper(note: note, block: block, expiration: Date())
     }
 }
 

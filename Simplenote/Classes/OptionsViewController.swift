@@ -373,22 +373,18 @@ private extension OptionsViewController {
     func publishWasPressed(_ newState: Bool) {
         SPTracker.trackEditorNotePublishEnabled(newState)
         let publishController = SPAppDelegate.shared().publishController
-        publishController.updatePublishState(for: note, to: newState, completion: { (state) in
-            switch state {
-            case .publishing:
-                let notice = NoticeFactory.publishing
-                NoticeController.shared.present(notice)
+        publishController.updatePublishState(for: note, to: newState, completion: { (note) in
+            switch note.publishState {
             case .published:
-                let notice = NoticeFactory.published(self.note)
-                NoticeController.shared.present(notice)
-            case .unpublishing:
-                let notice = NoticeFactory.unpublishing
+                let notice = NoticeFactory.published(note)
                 NoticeController.shared.present(notice)
             case .unpublished:
-                let notice = NoticeFactory.unpublished(self.note)
+                let notice = NoticeFactory.unpublished(note)
                 NoticeController.shared.present(notice)
             }
         })
+        let notice: Notice = newState ? NoticeFactory.publishing() : NoticeFactory.unpublishing()
+                NoticeController.shared.present(notice)
         pendingUpdate = true
     }
 
