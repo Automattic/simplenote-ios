@@ -23,7 +23,7 @@ struct NoticeFactory {
 
     static func unpublished(_ note: Note) -> Notice {
         let action = NoticeAction(title: Messages.undo) {
-            SPAppDelegate.shared().publishController.updatePublishState(for: note, to: true, completion: { (_, _) in
+            SPAppDelegate.shared().publishController.updatePublishState(for: note, to: true, completion: { (_) in
                 NoticeController.shared.present(NoticeFactory.published(note))
             })
         }
@@ -46,7 +46,7 @@ extension NoticeFactory {
         static let copyLink = NSLocalizedString("Copy link", comment: "Copy link action")
         static let publishing = NSLocalizedString("Publishing...", comment: "Notice of publishing action")
         static let unpublishing = NSLocalizedString("Unpublishing...", comment: "Notice of unpublishing action")
-        static let undo = NSLocalizedString("Unpublishing...", comment: "Notice of unpublishing action")
+        static let undo = NSLocalizedString("Undo", comment: "Undo action")
         static let trashed = NSLocalizedString("Note Trashed", comment: "Note trashed notification")
         static let unpublished = NSLocalizedString("Unpublish successful", comment: "Notice of publishing unsuccessful")
         static let published = NSLocalizedString("Publish Successful", comment: "Notice up succesful publishing")
