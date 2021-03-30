@@ -142,9 +142,9 @@ jobs:
           name: Fastlane
           command: bundle exec fastlane $FASTLANE_LANE
       - store_artifacts:
-          path: output
+          path: $FL_OUTPUT_DIR
       - store_test_results:
-          path: output/scan
+          path: $FL_OUTPUT_DIR/scan
 
 workflows:
   simplenote_ios:
