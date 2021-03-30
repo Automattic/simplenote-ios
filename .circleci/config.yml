@@ -135,6 +135,10 @@ jobs:
       - run: for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts || true
       # END: Swift Package Manager Workaround
       - run:
+          name: Prepare UIArtifacts
+          command: |
+            mkdir -p UIArtifacts
+      - run:
           name: Fastlane
           command: bundle exec fastlane $FASTLANE_LANE
       - store_artifacts:
