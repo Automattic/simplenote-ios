@@ -1,26 +1,16 @@
 import Foundation
 
-@objc
-class PublishController: NSObject {
+class PublishStateObserver {
     private var callbackMap = [String: PublishListenWrapper]()
     private let timerFactory: TimerFactory
-    private let publishListenerFactory: PublishListenerFactory
     private var timer: Timer?
 
-    init(timerFactory: TimerFactory = TimerFactory(), publishListenerFactory: PublishListenerFactory = PublishListenerFactory()) {
+    init(timerFactory: TimerFactory = TimerFactory()) {
         self.timerFactory = timerFactory
-        self.publishListenerFactory = publishListenerFactory
     }
 
-    func updatePublishState(for note: Note, to published: Bool, completion: @escaping (Note) -> Void) {
-        if note.published == published {
-            return
-        }
-
-        callbackMap[note.simperiumKey] = publishListenerFactory.publishListenerWrapper(note: note, block: completion)
-
-        changePublishState(for: note, to: published)
-
+    func beginListeningForChanges(to note: Note, completion: @escaping (Note) -> Void) {
+        callbackMap[note.simperiumKey] = PublishListenWrapper(note: note, block: completion)
         prepareTimerIfNeeded()
     }
 
@@ -32,12 +22,6 @@ class PublishController: NSObject {
 
         wrapper.update()
         removeCallbackFor(key: key)
-    }
-
-    private func changePublishState(for note: Note, to published: Bool) {
-        note.published = published
-        note.modificationDate = Date()
-        SPAppDelegate.shared().save()
     }
 
     private func removeExpiredCallbacks() {
@@ -88,12 +72,47 @@ struct PublishListenWrapper {
     }
 }
 
-class PublishListenerFactory {
-    func publishListenerWrapper(note: Note, block: @escaping (Note) -> Void) -> PublishListenWrapper {
-        return PublishListenWrapper(note: note, block: block)
-    }
-}
-
 private struct Constants {
     static let timeOut = TimeInterval(5)
+}
+
+
+class PublishController {
+    let publishStateObserver = PublishStateObserver()
+
+    func updatePublishState(for note: Note, to published: Bool) {
+        if note.published == published {
+            return
+        }
+
+        changePublishState(for: note, to: published)
+
+        publishStateObserver.beginListeningForChanges(to: note) { (note) in
+            self.handlePublishObserverResponse(note)
+        }
+
+        presentPendingPublishNotice(published)
+    }
+
+    private func changePublishState(for note: Note, to published: Bool) {
+        note.published = published
+        note.modificationDate = Date()
+        SPAppDelegate.shared().save()
+    }
+
+    private func presentPendingPublishNotice(_ published: Bool) {
+        let notice: Notice = published ? NoticeFactory.publishing() : NoticeFactory.unpublishing()
+        NoticeController.shared.present(notice)
+    }
+
+    private func handlePublishObserverResponse(_ note: Note) {
+        switch note.publishState {
+        case .published:
+            let notice = NoticeFactory.published(note)
+            NoticeController.shared.present(notice)
+        case .unpublished:
+            let notice = NoticeFactory.unpublished(note)
+            NoticeController.shared.present(notice)
+        }
+    }
 }
