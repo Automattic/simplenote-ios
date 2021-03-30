@@ -458,7 +458,7 @@
                 }
 
                 if ([memberNames containsObject:@"publishURL"]) {
-                    [self alertPublishListenerOfChangeWithKey:key];
+                    [self alertPublishListenerOfChangeWithKey:key memberNames:memberNames];
                 }
 
                 Note *note = [bucket objectForKey:key];

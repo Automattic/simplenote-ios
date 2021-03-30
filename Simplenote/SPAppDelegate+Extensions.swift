@@ -382,7 +382,7 @@ extension SPAppDelegate {
 
 extension SPAppDelegate {
     @objc
-    func alertPublishListenerOfChange(withKey key: String) {
-        publishController.publishStateObserver.didReceiveUpdateFromSimperium(for: key)
+    func alertPublishListenerOfChange(withKey key: String, memberNames: NSArray) {
+        publishController.publishStateObserver.didReceiveUpdateFromSimperium(for: key, with: memberNames)
     }
 }

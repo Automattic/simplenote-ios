@@ -14,47 +14,16 @@ class PublishStateObserver {
         prepareTimerIfNeeded()
     }
 
-    @objc(didReceiveUpdateFromSimperiumForKey:)
-    func didReceiveUpdateFromSimperium(for key: String) {
+    func didReceiveUpdateFromSimperium(for key: String, with memberNames: NSArray) {
+        if !memberNames.contains("publishURL") {
+            return
+        }
+
         guard var wrapper = callbackMap[key] else {
             return
         }
 
         wrapper.update()
-        removeCallbackFor(key: key)
-    }
-
-    private func removeExpiredCallbacks() {
-        for callback in callbackMap {
-            if callback.value.isExpired {
-                removeCallbackFor(key: callback.key)
-            }
-        }
-    }
-
-    private func removeCallbackFor(key: String) {
-        callbackMap.removeValue(forKey: key)
-    }
-
-    private func prepareTimerIfNeeded() {
-        guard let currentTimer = timer else {
-            timer = timeOutTimer()
-            return
-        }
-
-        if !currentTimer.isValid {
-            timer = timeOutTimer()
-        }
-    }
-
-    private func timeOutTimer() -> Timer {
-        return timerFactory.repeatingTimer(with: Constants.timeOut) { (timer) in
-            if self.callbackMap.isEmpty {
-                timer.invalidate()
-            } else {
-                self.removeExpiredCallbacks()
-            }
-        }
     }
 }
 
