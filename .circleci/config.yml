@@ -147,7 +147,7 @@ workflows:
   simplenote_ios:
     jobs:
       - Test
-      - UI Test
+      - UI Tests
   Installable Build:
     jobs:
       - Hold:
