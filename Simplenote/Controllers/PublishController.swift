@@ -2,16 +2,13 @@ import Foundation
 
 class PublishStateObserver {
     private var callbackMap = [String: PublishListenWrapper]()
-    private let timerFactory: TimerFactory
-    private var timer: Timer?
 
-    init(timerFactory: TimerFactory = TimerFactory()) {
-        self.timerFactory = timerFactory
+    func beginListeningForChanges(to note: Note, onResponse: @escaping (Note) -> Void) {
+        callbackMap[note.simperiumKey] = PublishListenWrapper(note: note, block: onResponse)
     }
 
-    func beginListeningForChanges(to note: Note, completion: @escaping (Note) -> Void) {
-        callbackMap[note.simperiumKey] = PublishListenWrapper(note: note, block: completion)
-        prepareTimerIfNeeded()
+    func endListeningForChanges(to note: Note) {
+        callbackMap.removeValue(forKey: note.simperiumKey)
     }
 
     func didReceiveUpdateFromSimperium(for key: String, with memberNames: NSArray) {
@@ -83,5 +80,6 @@ class PublishController {
             let notice = NoticeFactory.unpublished(note)
             NoticeController.shared.present(notice)
         }
+        publishStateObserver.endListeningForChanges(to: note)
     }
 }
