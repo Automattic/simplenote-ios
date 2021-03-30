@@ -118,6 +118,9 @@ jobs:
     executor:
       name: ios/default
       xcode-version: "12.4.0"
+    environment:
+      FL_OUTPUT_DIR: output
+      FASTLANE_LANE: run_login_UI_tests
     steps:
       - git/shallow-checkout
       - ios/install-dependencies:
@@ -137,11 +140,11 @@ jobs:
             mkdir -p UIArtifacts
       - run:
           name: Fastlane
-          command: bundle exec fastlane run_login_UI_tests
+          command: bundle exec fastlane $FASTLANE_LANE
       - store_artifacts:
-          path: UIArtifacts
+          path: output
       - store_test_results:
-          path: UIArtifacts/scan
+          path: output/scan
 
 workflows:
   simplenote_ios:
