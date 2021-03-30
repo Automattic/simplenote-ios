@@ -606,7 +606,7 @@ end
     workspace: workspace_name,
     scheme: ui_tests_scheme,
     only_testing: "SimplenoteUITests/SimplenoteUISmokeTestsLogin",
-    device: "iPhone 8",
+    device: "iPhone 12",
     reset_simulator: true
   )
   end
