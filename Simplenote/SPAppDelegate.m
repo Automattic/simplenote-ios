@@ -457,9 +457,8 @@
                     [self.noteEditorViewController didReceiveNewContent];
                 }
 
-                if ([memberNames containsObject:@"publishURL"]) {
-                    [self alertPublishListenerOfChangeWithKey:key memberNames:memberNames];
-                }
+                [self alertPublishListenerOfChangeWithKey:key memberNames:memberNames];
+
 
                 Note *note = [bucket objectForKey:key];
                 if (note && !note.deleted) {

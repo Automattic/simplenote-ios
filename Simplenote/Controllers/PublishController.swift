@@ -12,7 +12,7 @@ class PublishStateObserver {
     }
 
     func didReceiveUpdateFromSimperium(for key: String, with memberNames: NSArray) {
-        if !memberNames.contains("publishURL") {
+        guard memberNames.contains("publishURL") else {
             return
         }
 
