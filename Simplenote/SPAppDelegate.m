@@ -458,7 +458,7 @@
                 }
 
                 if ([memberNames containsObject:@"publishURL"]) {
-                    [self.publishController didReceiveUpdateFromSimperiumForKey: key];
+                    [self alertPublishListenerOfChangeWithKey:key];
                 }
 
                 Note *note = [bucket objectForKey:key];

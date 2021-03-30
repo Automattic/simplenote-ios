@@ -379,3 +379,10 @@ extension SPAppDelegate {
         EditorFactory.shared.scrollPositionCache.cleanup(keeping: allIdentifiers)
     }
 }
+
+extension SPAppDelegate {
+    @objc
+    func alertPublishListenerOfChange(withKey key: String) {
+        publishController.publishStateObserver.didReceiveUpdateFromSimperium(for: key)
+    }
+}
