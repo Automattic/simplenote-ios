@@ -23,9 +23,7 @@ struct NoticeFactory {
 
     static func unpublished(_ note: Note) -> Notice {
         let action = NoticeAction(title: Messages.undo) {
-            SPAppDelegate.shared().publishController.updatePublishState(for: note, to: true, completion: { (_) in
-                NoticeController.shared.present(NoticeFactory.published(note))
-            })
+            SPAppDelegate.shared().publishController.updatePublishState(for: note, to: true)
         }
         let notice = Notice(message: Messages.unpublished, action: action)
         return notice
