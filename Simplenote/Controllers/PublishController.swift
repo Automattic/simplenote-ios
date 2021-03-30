@@ -3,7 +3,7 @@ import Foundation
 class PublishStateObserver {
     private var callbackMap = [String: PublishListenWrapper]()
 
-    func beginListeningForChanges(to note: Note, onResponse: @escaping (Note) -> Void) {
+    func beginListeningForChanges(to note: Note, onResponse: @escaping (PublishStateObserver, Note) -> Void) {
         callbackMap[note.simperiumKey] = PublishListenWrapper(note: note, block: onResponse)
     }
 
@@ -16,25 +16,21 @@ class PublishStateObserver {
             return
         }
 
-        guard var wrapper = callbackMap[key] else {
+        guard let wrapper = callbackMap[key] else {
             return
         }
 
-        wrapper.update()
+        wrapper.block(self, wrapper.note)
     }
 }
 
 struct PublishListenWrapper {
     let note: Note
-    let block: (Note) -> Void
+    let block: (PublishStateObserver, Note) -> Void
     let expiration = Date()
 
     var isExpired: Bool {
         return expiration.timeIntervalSinceNow < -Constants.timeOut
-    }
-
-    mutating func update() {
-        block(note)
     }
 }
 
@@ -53,8 +49,16 @@ class PublishController {
 
         changePublishState(for: note, to: published)
 
-        publishStateObserver.beginListeningForChanges(to: note) { (note) in
-            self.handlePublishObserverResponse(note)
+        publishStateObserver.beginListeningForChanges(to: note) { (listener, note) in
+            switch note.publishState {
+            case .published:
+                let notice = NoticeFactory.published(note)
+                NoticeController.shared.present(notice)
+            case .unpublished:
+                let notice = NoticeFactory.unpublished(note)
+                NoticeController.shared.present(notice)
+            }
+            listener.endListeningForChanges(to: note)
         }
 
         presentPendingPublishNotice(published)
@@ -69,17 +73,5 @@ class PublishController {
     private func presentPendingPublishNotice(_ published: Bool) {
         let notice: Notice = published ? NoticeFactory.publishing() : NoticeFactory.unpublishing()
         NoticeController.shared.present(notice)
-    }
-
-    private func handlePublishObserverResponse(_ note: Note) {
-        switch note.publishState {
-        case .published:
-            let notice = NoticeFactory.published(note)
-            NoticeController.shared.present(notice)
-        case .unpublished:
-            let notice = NoticeFactory.unpublished(note)
-            NoticeController.shared.present(notice)
-        }
-        publishStateObserver.endListeningForChanges(to: note)
     }
 }
