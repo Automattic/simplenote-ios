@@ -52,10 +52,15 @@ class PublishController {
         publishStateObserver.beginListeningForChanges(to: note) { (listener, note) in
             switch note.publishState {
             case .published:
-                let notice = NoticeFactory.published(note)
+                let notice = NoticeFactory.published(note, onCopy: {
+                    UIPasteboard.general.copyPublicLink(to: note)
+                    NoticeController.shared.present(NoticeFactory.linkCopied())
+                })
                 NoticeController.shared.present(notice)
             case .unpublished:
-                let notice = NoticeFactory.unpublished(note)
+                let notice = NoticeFactory.unpublished(note) {
+                    SPAppDelegate.shared().publishController.updatePublishState(for: note, to: true)
+                }
                 NoticeController.shared.present(notice)
             }
             listener.endListeningForChanges(to: note)

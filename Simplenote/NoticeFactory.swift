@@ -13,27 +13,20 @@ struct NoticeFactory {
         return Notice(message: Messages.unpublishing, action: nil)
     }
 
-    static func noteTrashed(_ note: Note) -> Notice {
-        let action = NoticeAction(title: Messages.undo) {
-            SPObjectManager.shared().restoreNote(note)
-        }
+    static func noteTrashed(_ note: Note, onUndo: @escaping ()-> Void) -> Notice {
+        let action = NoticeAction(title: Messages.undo, handler: onUndo)
         let notice = Notice(message: Messages.trashed, action: action)
         return notice
     }
 
-    static func unpublished(_ note: Note) -> Notice {
-        let action = NoticeAction(title: Messages.undo) {
-            SPAppDelegate.shared().publishController.updatePublishState(for: note, to: true)
-        }
+    static func unpublished(_ note: Note, onUndo: @escaping ()-> Void) -> Notice {
+        let action = NoticeAction(title: Messages.undo, handler: onUndo)
         let notice = Notice(message: Messages.unpublished, action: action)
         return notice
     }
 
-    static func published(_ note: Note) -> Notice {
-        let action = NoticeAction(title: Messages.copyLink) {
-            UIPasteboard.general.copyPublicLink(to: note)
-            NoticeController.shared.present(NoticeFactory.linkCopied())
-        }
+    static func published(_ note: Note, onCopy: @escaping ()-> Void) -> Notice {
+        let action = NoticeAction(title: Messages.copyLink, handler: onCopy)
         let notice = Notice(message: Messages.published, action: action)
         return notice
     }

@@ -774,7 +774,9 @@ private extension SPNoteListViewController {
         SPTracker.trackListNoteDeleted()
         SPObjectManager.shared().trashNote(note)
         CSSearchableIndex.default().deleteSearchableNote(note)
-        NoticeController.shared.present(NoticeFactory.noteTrashed(note))
+        NoticeController.shared.present(NoticeFactory.noteTrashed(note, onUndo: {
+            SPObjectManager.shared().restoreNote(note)
+        }))
     }
 
     func copyInternalLink(to note: Note) {
