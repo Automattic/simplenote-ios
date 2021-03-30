@@ -414,6 +414,7 @@
 		BAB0179B260AD591007A9CC3 /* PublishControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB0179A260AD591007A9CC3 /* PublishControllerTests.swift */; };
 		BAB017AB260ADDEB007A9CC3 /* MockTimerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB017AA260ADDEB007A9CC3 /* MockTimerFactory.swift */; };
 		BAE08626261282D1009D40CD /* Note+Publish.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE08625261282D1009D40CD /* Note+Publish.swift */; };
+		BAE0865D2613E5BF009D40CD /* PublishStateObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE0865C2613E5BF009D40CD /* PublishStateObserver.swift */; };
 		D435D38FCA5863E8447D5C2C /* Pods_Automattic_SimplenoteShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183BAB896957F07FDCAB6DF5 /* Pods_Automattic_SimplenoteShare.framework */; };
 		D843AD6F25E3E633007E5B15 /* SimplenoteUITestsLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = D843AD6E25E3E633007E5B15 /* SimplenoteUITestsLogin.swift */; };
 		D843AD7825E3E7F9007E5B15 /* SimplenoteUITestsTrash.swift in Sources */ = {isa = PBXBuildFile; fileRef = D843AD7725E3E7F9007E5B15 /* SimplenoteUITestsTrash.swift */; };
@@ -931,6 +932,7 @@
 		BAB0179A260AD591007A9CC3 /* PublishControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishControllerTests.swift; sourceTree = "<group>"; };
 		BAB017AA260ADDEB007A9CC3 /* MockTimerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTimerFactory.swift; sourceTree = "<group>"; };
 		BAE08625261282D1009D40CD /* Note+Publish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+Publish.swift"; sourceTree = "<group>"; };
+		BAE0865C2613E5BF009D40CD /* PublishStateObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishStateObserver.swift; sourceTree = "<group>"; };
 		C07B32800E3C783BDF105B3A /* Pods-Automattic-SimplenoteShare.distribution alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-SimplenoteShare.distribution alpha.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-SimplenoteShare/Pods-Automattic-SimplenoteShare.distribution alpha.xcconfig"; sourceTree = "<group>"; };
 		D843AD6E25E3E633007E5B15 /* SimplenoteUITestsLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplenoteUITestsLogin.swift; sourceTree = "<group>"; };
 		D843AD7725E3E7F9007E5B15 /* SimplenoteUITestsTrash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplenoteUITestsTrash.swift; sourceTree = "<group>"; };
@@ -1271,6 +1273,7 @@
 			children = (
 				A6900345253D87060087D0D2 /* VersionsController.swift */,
 				BAB017712609456D007A9CC3 /* PublishController.swift */,
+				BAE0865C2613E5BF009D40CD /* PublishStateObserver.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -2837,6 +2840,7 @@
 				A6E02778256E9487002054DF /* PinLockSetupController.swift in Sources */,
 				B513F2B42319A8D50021CFA4 /* SPNoteTableViewCell.swift in Sources */,
 				375D24B321E01131007AB25A /* autolink.c in Sources */,
+				BAE0865D2613E5BF009D40CD /* PublishStateObserver.swift in Sources */,
 				A66E41D0256D08E6000C6FCB /* PinLockViewController.swift in Sources */,
 				46A3C99217DFA81A002865AE /* SPEditorTextView.m in Sources */,
 				B537733B252E29D400BC78C5 /* SwitchTableViewCell.swift in Sources */,
