@@ -73,7 +73,7 @@ jobs:
       - store_artifacts:
           path: Artifacts
           destination: Artifacts
-          
+
   Release Build:
     executor:
       name: ios/default
@@ -114,10 +114,10 @@ jobs:
             failure_message: '${SLACK_FAILURE_MESSAGE}'
             success_message: '${SLACK_SUCCESS_MESSAGE}'
 
-  UI Test:
+  UI Tests:
     executor:
       name: ios/default
-      xcode-version: "12.0"
+      xcode-version: "12.4.0"
     steps:
       - git/shallow-checkout
       - ios/install-dependencies:
