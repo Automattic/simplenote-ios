@@ -593,6 +593,23 @@ end
       SimCtl.create_device device, devicetype, runtime
     }
   end
+
+  #####################################################################################
+  # UI tests lanes
+  #####################################################################################
+
+  # A lane to run a subset of automated UI tests. Since only login tests are
+  # selected for now, there will be no credentials race condition.
+  desc "Run login UI tests"
+  lane :run_login_UI_tests do
+  scan(
+    workspace: workspace_name,
+    scheme: ui_tests_scheme,
+    only_testing: "SimplenoteUITests/SimplenoteUISmokeTestsLogin",
+    device: "iPhone 12",
+    reset_simulator: true
+  )
+  end
 end
 
 ########################################################################
@@ -702,6 +719,10 @@ end
 
 def screenshots_scheme
   "SimplenoteScreenshots"
+end
+
+def ui_tests_scheme
+  "SimplenoteUITests"
 end
 
 def workspace_path

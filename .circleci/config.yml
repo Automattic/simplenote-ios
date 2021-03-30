@@ -113,10 +113,40 @@ jobs:
             failure_message: '${SLACK_FAILURE_MESSAGE}'
             success_message: '${SLACK_SUCCESS_MESSAGE}'
 
+  UI Test:
+    executor:
+      name: ios/default
+      xcode-version: "12.0"
+    steps:
+      - git/shallow-checkout
+      - ios/install-dependencies:
+            bundle-install: true
+            pod-install: true
+      - run:
+          name: Copy Secrets
+          command: bundle exec fastlane run configure_apply
+      # Start: Swift Package Manager Workaround
+      # Ref. https://support.circleci.com/hc/en-us/articles/360044709573-Swift-Package-Manager-fails-to-clone-from-private-Git-repositories
+      - run: rm ~/.ssh/id_rsa
+      - run: for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts || true
+      # END: Swift Package Manager Workaround
+      - run:
+          name: Prepare UIArtifacts
+          command: |
+            mkdir -p UIArtifacts
+      - run:
+          name: Fastlane
+          command: bundle exec fastlane run_login_UI_tests
+      - store_artifacts:
+          path: UIArtifacts
+      - store_test_results:
+          path: UIArtifacts/scan
+
 workflows:
   simplenote_ios:
     jobs:
       - Test
+      - UI Test
   Installable Build:
     jobs:
       - Hold:
