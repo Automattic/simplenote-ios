@@ -607,7 +607,6 @@ end
     scheme: ui_tests_scheme,
     only_testing: "SimplenoteUITests/SimplenoteUISmokeTestsLogin",
     device: "iPhone 8",
-    ios_version: "13.5",
     reset_simulator: true
   )
   end
