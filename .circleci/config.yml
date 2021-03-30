@@ -48,7 +48,7 @@ jobs:
   Installable Build:
     executor:
       name: ios/default
-      xcode-version: "12.0"
+      xcode-version: "12.4.0"
     steps:
       - git/shallow-checkout
       - ios/install-dependencies:
@@ -73,6 +73,7 @@ jobs:
       - store_artifacts:
           path: Artifacts
           destination: Artifacts
+          
   Release Build:
     executor:
       name: ios/default
