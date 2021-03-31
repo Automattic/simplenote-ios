@@ -15,7 +15,7 @@ class PublishStateObserver {
         callbackMap.removeValue(forKey: note.simperiumKey)
     }
 
-    func didReceiveUpdateFromSimperium(for key: String, with memberNames: NSArray) {
+    func didReceiveUpdate(for key: String, with memberNames: NSArray) {
         guard memberNames.contains("publishURL"),
               let wrapper = callbackMap[key] else {
             return
