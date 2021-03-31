@@ -145,7 +145,6 @@ workflows:
       - Test
       - UI Tests
           name: UI Tests (iPhone 12)
-          type: approval
   Installable Build:
     jobs:
       - Hold:
