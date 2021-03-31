@@ -73,31 +73,31 @@ class PublishControllerTests: XCTestCase {
 //    }
 }
 
-private struct TestConstants {
-    static let simperiumKey = "ABCDEF123456"
-    static let secondKey = "QWFPGJL4567890"
-    static let publishURL = "ABC123"
-}
+//private struct TestConstants {
+//    static let simperiumKey = "ABCDEF123456"
+//    static let secondKey = "QWFPGJL4567890"
+//    static let publishURL = "ABC123"
+//}
 
-class MockAppDelegate {
-    let publishController: PublishController
-
-    init(publishController: PublishController) {
-        self.publishController = publishController
-    }
-
-    func updateNote(note: Note, published: Bool, withKey key: String, withURL url: String) {
-        note.publishURL = url
-        publishController.didReceiveUpdateFromSimperium(for: key)
-    }
-}
-
-class MockPublishListenerFactory: PublishListenerFactory {
-    var listeners = [String: PublishListenWrapper]()
-
-    override func publishListenerWrapper(note: Note, block: @escaping (Note) -> Void) -> PublishListenWrapper {
-        let newWrapper = PublishListenWrapper(note: note, block: block)
-        listeners[note.simperiumKey] = newWrapper
-        return newWrapper
-    }
-}
+//class MockAppDelegate {
+//    let publishController: PublishController
+//
+//    init(publishController: PublishController) {
+//        self.publishController = publishController
+//    }
+//
+//    func updateNote(note: Note, published: Bool, withKey key: String, withURL url: String) {
+//        note.publishURL = url
+//        publishController.didReceiveUpdateFromSimperium(for: key)
+//    }
+//}
+//
+//class MockPublishListenerFactory: PublishListenerFactory {
+//    var listeners = [String: PublishListenWrapper]()
+//
+//    override func publishListenerWrapper(note: Note, block: @escaping (Note) -> Void) -> PublishListenWrapper {
+//        let newWrapper = PublishListenWrapper(note: note, block: block)
+//        listeners[note.simperiumKey] = newWrapper
+//        return newWrapper
+//    }
+//}
