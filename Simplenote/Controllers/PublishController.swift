@@ -1,11 +1,9 @@
 import Foundation
 
 class PublishController {
-    private let publishStateObserver: PublishStateObserver
+    private var observedNotes = [String: Note]()
 
-    init(publishStateObserver: PublishStateObserver) {
-        self.publishStateObserver = publishStateObserver
-    }
+    var onUpdate: ((PublishNoticePresenter, Note) -> Void)?
 
     func updatePublishState(for note: Note, to published: Bool) {
         if note.published == published {
@@ -14,13 +12,10 @@ class PublishController {
 
         changePublishState(for: note, to: published)
 
-        publishStateObserver.beginListeningForChanges(to: note, timeOut: Constants.timeOut) { (listener, note) in
-            self.presentPublishNotice(for: note)
+        beginListeningForChanges(to: note, timeOut: Constants.timeOut)
 
-            listener.endListeningForChanges(to: note)
-        }
-
-        presentPublishNotice(for: note)
+        let presenter = PublishNoticePresenter()
+        onUpdate?(presenter, note)
     }
 
     private func changePublishState(for note: Note, to published: Bool) {
@@ -28,28 +23,44 @@ class PublishController {
         note.modificationDate = Date()
         SPAppDelegate.shared().save()
     }
+}
 
-    private func presentPublishNotice(for note: Note) {
-        switch note.publishState {
-        case .publishing:
-            NoticeController.shared.present(NoticeFactory.publishing())
-        case .published:
-            let notice = NoticeFactory.published(note, onCopy: {
-                UIPasteboard.general.copyPublicLink(to: note)
-                NoticeController.shared.present(NoticeFactory.linkCopied())
-            })
-            NoticeController.shared.present(notice)
-        case .unpublishing:
-            NoticeController.shared.present(NoticeFactory.unpublishing())
-        case .unpublished:
-            let notice = NoticeFactory.unpublished(note, onUndo: {
-                SPAppDelegate.shared().publishController.updatePublishState(for: note, to: true)
-            })
-            NoticeController.shared.present(notice)
+extension PublishController {
+
+    // MARK: Listeners
+    private func beginListeningForChanges(to note: Note, timeOut: TimeInterval) {
+        observedNotes[note.simperiumKey] = note
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + timeOut) {
+            self.endListeningForChanges(to: note)
         }
+    }
+
+    private func endListeningForChanges(to note: Note) {
+        observedNotes.removeValue(forKey: note.simperiumKey)
+    }
+
+    // MARK: Listener Notifications
+    func didReceiveUpdateNotification(for key: String, with memberNames: NSArray) {
+        guard memberNames.contains(Constants.observedProperty),
+              let note = observedNotes[key] else {
+            return
+        }
+        let presenter = PublishNoticePresenter()
+
+        onUpdate?(presenter, note)
+    }
+
+    func didReceiveDeleteNotification(for key: String) {
+        guard let note = observedNotes[key] else {
+            return
+        }
+
+        endListeningForChanges(to: note)
     }
 }
 
 private struct Constants {
     static let timeOut = TimeInterval(5)
+    static let observedProperty = "publishURL"
 }
