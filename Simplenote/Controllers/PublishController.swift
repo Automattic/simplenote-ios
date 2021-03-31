@@ -24,7 +24,6 @@ class PublishController {
     }
 
     private func publishStatechanged(for note: Note) {
-        let presenter = PublishNoticePresenter()
         onUpdate?(note)
     }
 }
