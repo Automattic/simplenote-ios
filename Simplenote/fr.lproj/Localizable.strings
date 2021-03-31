@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-03-08 11:32:12+0000 */
+/* Translation-Revision-Date: 2021-03-17 13:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n > 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: fr */
@@ -216,7 +216,7 @@
 "Diagnostics" = "Diagnostic";
 
 /* Footer -> Sign up verification screen. Parameter: %1$@ - support email address */
-"Didn't get an email? You may already have an account. Contact %1$@ for help." = "Didn't get an email? You may already have an account. Contact %1$@ for help.";
+"Didn't get an email? You may already have an account. Contact %1$@ for help." = "Vous n’avez pas reçu d’e-mail ? Vous avez peut-être déjà un compte. Contactez %1$@ pour obtenir de l’aide.";
 
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "Désactiver le formatage Markdown";
@@ -688,7 +688,7 @@
 "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "Nous avons envoyé un e-mail de vérification à %1$@. Consultez votre boîte de réception et suivez les instructions.";
 
 /* Message -> Sign up verification screen. Parameter: %1$@ - email address */
-"We’ve sent an email to %1$@. Please check your inbox and follow the instructions." = "We’ve sent an email to %1$@. Please check your inbox and follow the instructions.";
+"We’ve sent an email to %1$@. Please check your inbox and follow the instructions." = "Nous avons envoyé un e-mail à %1$@. Consultez votre boîte de réception et suivez les instructions.";
 
 /* Rating view initial title */
 "What do you think about Simplenote?" = "Que pensez-vous de Simplenote ?";

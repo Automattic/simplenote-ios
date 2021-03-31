@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-03-08 11:32:12+0000 */
+/* Translation-Revision-Date: 2021-03-17 09:54:03+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: zh_TW */
@@ -216,7 +216,7 @@
 "Diagnostics" = "診斷";
 
 /* Footer -> Sign up verification screen. Parameter: %1$@ - support email address */
-"Didn't get an email? You may already have an account. Contact %1$@ for help." = "Didn't get an email? You may already have an account. Contact %1$@ for help.";
+"Didn't get an email? You may already have an account. Contact %1$@ for help." = "沒收到電子郵件嗎？ 你可能已有帳號。 聯絡 %1$@ 尋求協助。";
 
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "停用 Markdown 格式";
@@ -688,7 +688,7 @@
 "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "我們已傳送一封驗證電子郵件到 %1$@。 請檢查你的收件匣並依照指示操作。";
 
 /* Message -> Sign up verification screen. Parameter: %1$@ - email address */
-"We’ve sent an email to %1$@. Please check your inbox and follow the instructions." = "We’ve sent an email to %1$@. Please check your inbox and follow the instructions.";
+"We’ve sent an email to %1$@. Please check your inbox and follow the instructions." = "我們已將電子郵件傳送至 %1$@。 請檢查你的收件匣並依照指示操作。";
 
 /* Rating view initial title */
 "What do you think about Simplenote?" = "你覺得 Simplenote 如何？";
