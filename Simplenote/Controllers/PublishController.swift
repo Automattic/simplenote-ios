@@ -51,6 +51,7 @@ extension PublishController {
         }
 
         publishStatechanged(for: note)
+        endListeningForChanges(to: note)
     }
 
     func didReceiveDeleteNotification(for key: String) {
