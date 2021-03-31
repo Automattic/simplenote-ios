@@ -606,7 +606,8 @@ end
     workspace: workspace_name,
     scheme: ui_tests_scheme,
     only_testing: "SimplenoteUITests/SimplenoteUISmokeTestsLogin/testLogInWithCorrectCredentials",
-    device: "iPhone 12"
+    device: "iPhone 12",
+    prelaunch_simulator: true,
     #,
     #reset_simulator: true
   )
