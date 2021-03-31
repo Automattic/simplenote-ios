@@ -15,24 +15,12 @@ class PublishController {
         changePublishState(for: note, to: published)
 
         publishStateObserver.beginListeningForChanges(to: note, timeOut: Constants.timeOut) { (listener, note) in
-            switch note.publishState {
-            case .published:
-                let notice = NoticeFactory.published(note, onCopy: {
-                    UIPasteboard.general.copyPublicLink(to: note)
-                    NoticeController.shared.present(NoticeFactory.linkCopied())
-                })
-                NoticeController.shared.present(notice)
-            case .unpublished:
-                let notice = NoticeFactory.unpublished(note, onUndo: {
-                    SPAppDelegate.shared().publishController.updatePublishState(for: note, to: true)
-                })
-                NoticeController.shared.present(notice)
-            }
+            self.presentPublishNotice(for: note)
 
             listener.endListeningForChanges(to: note)
         }
 
-        presentPendingPublishNotice(published)
+        presentPublishNotice(for: note)
     }
 
     private func changePublishState(for note: Note, to published: Bool) {
@@ -41,9 +29,24 @@ class PublishController {
         SPAppDelegate.shared().save()
     }
 
-    private func presentPendingPublishNotice(_ published: Bool) {
-        let notice: Notice = published ? NoticeFactory.publishing() : NoticeFactory.unpublishing()
-        NoticeController.shared.present(notice)
+    private func presentPublishNotice(for note: Note) {
+        switch note.publishState {
+        case .publishing:
+            NoticeController.shared.present(NoticeFactory.publishing())
+        case .published:
+            let notice = NoticeFactory.published(note, onCopy: {
+                UIPasteboard.general.copyPublicLink(to: note)
+                NoticeController.shared.present(NoticeFactory.linkCopied())
+            })
+            NoticeController.shared.present(notice)
+        case .unpublishing:
+            NoticeController.shared.present(NoticeFactory.unpublishing())
+        case .unpublished:
+            let notice = NoticeFactory.unpublished(note, onUndo: {
+                SPAppDelegate.shared().publishController.updatePublishState(for: note, to: true)
+            })
+            NoticeController.shared.present(notice)
+        }
     }
 }
 
