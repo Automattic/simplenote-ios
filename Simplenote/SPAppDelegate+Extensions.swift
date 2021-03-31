@@ -69,8 +69,9 @@ extension SPAppDelegate {
     }
 
     @objc
-    func configurePublishController() {
-        publishController = PublishController()
+    func configurePublishControllers() {
+        publishStateObserver = PublishStateObserver()
+        publishController = PublishController(publishStateObserver: publishStateObserver)
     }
 }
 
@@ -382,7 +383,7 @@ extension SPAppDelegate {
 
 extension SPAppDelegate {
     @objc
-    func alertPublishListenerOfChange(withKey key: String, memberNames: NSArray) {
-        publishController.publishStateObserver.didReceiveUpdateFromSimperium(for: key, with: memberNames)
+    func alertListenerOfChange(withKey key: String, memberNames: NSArray) {
+        publishStateObserver.didReceiveUpdate(for: key, with: memberNames)
     }
 }

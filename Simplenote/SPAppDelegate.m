@@ -140,7 +140,7 @@
     [self setupAppCenter];
     [self setupCrashLogging];
     [self configureVersionsController];
-    [self configurePublishController];
+    [self configurePublishControllers];
     [self setupDefaultWindow];
     [self configureStateRestoration];
 
@@ -457,7 +457,7 @@
                     [self.noteEditorViewController didReceiveNewContent];
                 }
 
-                [self alertPublishListenerOfChangeWithKey:key memberNames:memberNames];
+                [self alertListenerOfChangeWithKey:key memberNames:memberNames];
 
 
                 Note *note = [bucket objectForKey:key];

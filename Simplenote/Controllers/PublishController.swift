@@ -1,7 +1,11 @@
 import Foundation
 
 class PublishController {
-    let publishStateObserver = PublishStateObserver()
+    private let publishStateObserver: PublishStateObserver
+
+    init(publishStateObserver: PublishStateObserver) {
+        self.publishStateObserver = publishStateObserver
+    }
 
     func updatePublishState(for note: Note, to published: Bool) {
         if note.published == published {
@@ -19,9 +23,9 @@ class PublishController {
                 })
                 NoticeController.shared.present(notice)
             case .unpublished:
-                let notice = NoticeFactory.unpublished(note) {
+                let notice = NoticeFactory.unpublished(note, onUndo: {
                     SPAppDelegate.shared().publishController.updatePublishState(for: note, to: true)
-                }
+                })
                 NoticeController.shared.present(notice)
             }
 
