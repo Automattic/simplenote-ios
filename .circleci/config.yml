@@ -44,7 +44,6 @@ jobs:
           workspace: Simplenote.xcworkspace
           scheme: Simplenote
           device: iPhone 11
-
   Installable Build:
     executor:
       name: ios/default
@@ -73,7 +72,6 @@ jobs:
       - store_artifacts:
           path: Artifacts
           destination: Artifacts
-
   Release Build:
     executor:
       name: ios/default
@@ -113,7 +111,6 @@ jobs:
             include_visit_job_action: false
             failure_message: '${SLACK_FAILURE_MESSAGE}'
             success_message: '${SLACK_SUCCESS_MESSAGE}'
-
   UI Tests:
     executor:
       name: ios/default
@@ -140,13 +137,15 @@ jobs:
       - store_artifacts:
           path: output
       - store_test_results:
-          path: output/scan/report.junit
+          path: output/scan
 
 workflows:
   simplenote_ios:
     jobs:
       - Test
       - UI Tests
+        name: UI Tests (iPhone 12)
+        type: approval
   Installable Build:
     jobs:
       - Hold:
