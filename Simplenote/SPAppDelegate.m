@@ -457,7 +457,7 @@
                     [self.noteEditorViewController didReceiveNewContent];
                 }
 
-                [self alertListenerOfChangeWithKey:key memberNames:memberNames];
+                [self alertListenerOfUpdateWithKey:key memberNames:memberNames];
 
 
                 Note *note = [bucket objectForKey:key];
@@ -475,6 +475,9 @@
                 if ([key isEqualToString:self.noteEditorViewController.note.simperiumKey]) {
                     [self.noteEditorViewController didDeleteCurrentNote];
                 }
+
+                [self alertListenerOfDeleteWithKey:key];
+
                 [[CSSearchableIndex defaultSearchableIndex] deleteSearchableItemsWithIdentifiers:@[key] completionHandler:nil];
             }
 				break;

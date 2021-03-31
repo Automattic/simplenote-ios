@@ -3,6 +3,7 @@ import Foundation
 class PublishStateObserver {
     private var callbackMap = [String: PublishListenWrapper]()
 
+    // MARK: Listeners
     func beginListeningForChanges(to note: Note, timeOut: TimeInterval, onResponse: @escaping (PublishStateObserver, Note) -> Void) {
         callbackMap[note.simperiumKey] = PublishListenWrapper(note: note, block: onResponse)
 
@@ -15,13 +16,22 @@ class PublishStateObserver {
         callbackMap.removeValue(forKey: note.simperiumKey)
     }
 
-    func didReceiveUpdate(for key: String, with memberNames: NSArray) {
+    // MARK: Listener Notifications
+    func didReceiveUpdateNotification(for key: String, with memberNames: NSArray) {
         guard memberNames.contains("publishURL"),
               let wrapper = callbackMap[key] else {
             return
         }
 
         wrapper.block(self, wrapper.note)
+    }
+
+    func didReceiveDeleteNotification(for key: String) {
+        guard let wrapper = callbackMap[key] else {
+            return
+        }
+
+        endListeningForChanges(to: wrapper.note)
     }
 }
 

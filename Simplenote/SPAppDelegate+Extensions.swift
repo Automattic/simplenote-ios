@@ -381,9 +381,16 @@ extension SPAppDelegate {
     }
 }
 
+// MARK: Publish Listener
+//
 extension SPAppDelegate {
     @objc
-    func alertListenerOfChange(withKey key: String, memberNames: NSArray) {
-        publishStateObserver.didReceiveUpdate(for: key, with: memberNames)
+    func alertListenerOfUpdate(withKey key: String, memberNames: NSArray) {
+        publishStateObserver.didReceiveUpdateNotification(for: key, with: memberNames)
+    }
+
+    @objc
+    func alertListenerOfDelete(withKey key: String) {
+        publishStateObserver.didReceiveDeleteNotification(for: key)
     }
 }
