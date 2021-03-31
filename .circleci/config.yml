@@ -119,7 +119,6 @@ jobs:
       name: ios/default
       xcode-version: "12.4.0"
     environment:
-      FL_OUTPUT_DIR: output
       FASTLANE_LANE: run_login_UI_tests
     steps:
       - git/shallow-checkout
