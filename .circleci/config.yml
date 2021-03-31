@@ -140,7 +140,7 @@ jobs:
       - store_artifacts:
           path: output
       - store_test_results:
-          path: output/scan
+          path: output/scan/report.junit
 
 workflows:
   simplenote_ios:
