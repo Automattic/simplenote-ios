@@ -69,9 +69,12 @@ extension SPAppDelegate {
     }
 
     @objc
-    func configurePublishControllers() {
-        publishStateObserver = PublishStateObserver()
-        publishController = PublishController(publishStateObserver: publishStateObserver)
+    func configurePublishController() {
+        publishController = PublishController()
+        publishController.onUpdate = {
+            (listener, note) in
+            listener.presentNotice(for: note)
+        }
     }
 }
 
@@ -386,11 +389,11 @@ extension SPAppDelegate {
 extension SPAppDelegate {
     @objc
     func alertListenerOfUpdate(withKey key: String, memberNames: NSArray) {
-        publishStateObserver.didReceiveUpdateNotification(for: key, with: memberNames)
+        publishController.didReceiveUpdateNotification(for: key, with: memberNames)
     }
 
     @objc
     func alertListenerOfDelete(withKey key: String) {
-        publishStateObserver.didReceiveDeleteNotification(for: key)
+        publishController.didReceiveDeleteNotification(for: key)
     }
 }

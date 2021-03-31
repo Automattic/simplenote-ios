@@ -140,7 +140,7 @@
     [self setupAppCenter];
     [self setupCrashLogging];
     [self configureVersionsController];
-    [self configurePublishControllers];
+    [self configurePublishController];
     [self setupDefaultWindow];
     [self configureStateRestoration];
 
