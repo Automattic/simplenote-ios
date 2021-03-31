@@ -2,102 +2,145 @@ import XCTest
 @testable import Simplenote
 
 class PublishControllerTests: XCTestCase {
-//
-//    private let storage = MockupStorageManager()
-//    private let timerFactory = MockTimerFactory()
-//    private let publishFactory = MockPublishListenerFactory()
-//    private var publishController: PublishController?
-//    private var mockAppDelegate: MockAppDelegate?
-//
-//    override func setUpWithError() throws {
-//        publishController = PublishController(timerFactory: timerFactory, publishListenerFactory: publishFactory)
-//        if let publishController = publishController {
-//            mockAppDelegate = MockAppDelegate(publishController: publishController)
-//        }
-//    }
-//
-//    func testUpdatePublishExitsIfNoChangeInState() {
-//        let note = storage.insertSampleNote(simperiumKey: TestConstants.simperiumKey)
-//        note.published = true
-//        publishController?.updatePublishState(for: note, to: true) { (_) in
-//            XCTFail("Callback should not be called")
-//        }
-//
-//        XCTAssertNil(publishFactory.listeners[note.simperiumKey])
-//    }
-//
-//    func testUpdatePublishStateToPublishing() {
-//        let note = storage.insertSampleNote(simperiumKey: TestConstants.simperiumKey)
-//        publishController?.updatePublishState(for: note, to: true) { (_) in }
-//        XCTAssertTrue(note.published)
-//        XCTAssertEqual(note.publishURL, "")
-//        XCTAssertNotNil(publishFactory.listeners[TestConstants.simperiumKey])
-//    }
-//
-//    func testUpdatePublishStateToUnpublishing() {
-//        let note = storage.insertSampleNote(simperiumKey: TestConstants.simperiumKey, published: true)
-//        publishController?.updatePublishState(for: note, to: false) { (_) in }
-//        XCTAssertFalse(note.published)
-//        XCTAssertEqual(note.publishURL, "")
-//        XCTAssertNotNil(publishFactory.listeners[TestConstants.simperiumKey])
-//    }
-//
-//    func testPublishStateIsChangedToPublishedWhenCalledFromListener() {
-//        let note = storage.insertSampleNote(simperiumKey: TestConstants.simperiumKey)
-//        publishController?.updatePublishState(for: note, to: true) { (_) in }
-//
-//        mockAppDelegate?.updateNote(note: note, published: true, withKey: TestConstants.simperiumKey, withURL: TestConstants.publishURL)
-//
-//        XCTAssertEqual(note.publishState, .published)
-//    }
-//
-//    func testPublishStateIsChangedToUnpublishedWhenCalledFromListener() {
-//        let note = storage.insertSampleNote(simperiumKey: TestConstants.simperiumKey)
-//        publishController?.updatePublishState(for: note, to: true) { (_) in }
-//
-//        mockAppDelegate?.updateNote(note: note, published: false, withKey: TestConstants.simperiumKey, withURL: "")
-//
-//        XCTAssertEqual(note.publishState, .unpublished)
-//    }
-//
-//    func testControllerDoesNotChangeIfUpdateIsCalledOnItemNotBeingObserved() {
-//        let note = storage.insertSampleNote(simperiumKey: TestConstants.simperiumKey)
-//        let noteB = storage.insertSampleNote(simperiumKey: TestConstants.secondKey)
-//
-//        publishController?.updatePublishState(for: note, to: true) { (_) in }
-//
-//        mockAppDelegate?.updateNote(note: noteB, published: true, withKey: TestConstants.secondKey, withURL: TestConstants.publishURL)
-//
-//        XCTAssertEqual(note.publishState, .unpublished)
-//        XCTAssertEqual(noteB.publishState, .unpublished)
-//    }
+    private let publishController = PublishController()
+    private let storage = MockupStorageManager()
+    private var logger = PublishLogger()
+    private var mockAppDelegate: MockAppDelegate?
+
+    override func setUpWithError() throws {
+        publishController.onUpdate = { note in
+            self.logger.lastUpdateNote = note
+            self.logger.actions.append(note.publishState)
+        }
+
+        mockAppDelegate = MockAppDelegate(publishController: publishController)
+    }
+
+    func testUpdatePublishStateExitsIfStateUnchanged() {
+        let note = storage.insertSampleNote(published: true)
+
+        publishController.updatePublishState(for: note, to: true)
+
+        XCTAssertTrue(logger.actions.isEmpty)
+        XCTAssertNil(logger.lastUpdateNote)
+    }
+
+    func testUpdatePublishStateSetsNoteStateToPublished() {
+        let note = storage.insertSampleNote(published: false)
+
+        publishController.updatePublishState(for: note, to: true)
+
+        let expectedActions: [PublishState] = [.publishing]
+
+        XCTAssertTrue(note.published)
+        testExpectations(with: note, expectedActions: expectedActions)
+    }
+
+    func testUpdatePublishStateSetsNoteStateToUnpublished() {
+        let note = storage.insertSampleNote(published: true, publishURL: TestConstants.publishURL)
+
+        publishController.updatePublishState(for: note, to: false)
+
+        let expectedActions: [PublishState] = [.unpublishing]
+
+        XCTAssertFalse(note.published)
+        testExpectations(with: note, expectedActions: expectedActions)
+    }
+
+    func testDidReceiveUpdateNotificationUpdatesPublishState() {
+        let note = storage.insertSampleNote(simperiumKey: TestConstants.simperiumKey, published: false)
+        publishController.updatePublishState(for: note, to: true)
+        var expectedActions: [PublishState] = [.publishing]
+
+        mockAppDelegate?.updateNotification(for: note, withURL: TestConstants.publishURL)
+        expectedActions.append(.published)
+
+        testExpectations(with: note, expectedActions: expectedActions)
+    }
+
+    func testDidReceiveUpdateIgnoresNonObservedUpdates() {
+        let note = storage.insertSampleNote(simperiumKey: TestConstants.simperiumKey)
+        let noteB = storage.insertSampleNote(simperiumKey: TestConstants.altSimperiumKey)
+
+        mockAppDelegate?.updateNotification(for: note, withURL: TestConstants.publishURL)
+        mockAppDelegate?.updateNotification(for: noteB, withURL: TestConstants.publishURL, observedProperty: TestConstants.altObservedProperty)
+
+        XCTAssertNil(logger.lastUpdateNote)
+        XCTAssertTrue(logger.actions.isEmpty)
+    }
+
+    func testListenerRemovedAfterDidReceiUpdateCalled() {
+        let note = storage.insertSampleNote(simperiumKey: TestConstants.simperiumKey)
+        publishController.updatePublishState(for: note, to: true)
+        var expectedActions: [PublishState] = [.publishing]
+
+        mockAppDelegate?.updateNotification(for: note, withURL: TestConstants.publishURL)
+        expectedActions.append(.published)
+
+        mockAppDelegate?.updateNotification(for: note, withURL: TestConstants.removeURL)
+
+        testExpectations(with: note, expectedActions: expectedActions)
+    }
+
+    func testDidReceiveDeleteNotificationRemovesListener() {
+        let note = storage.insertSampleNote(simperiumKey: TestConstants.simperiumKey)
+        publishController.updatePublishState(for: note, to: true)
+        let expectedActions: [PublishState] = [.publishing]
+
+        mockAppDelegate?.deleteNotification(for: note)
+
+        mockAppDelegate?.updateNotification(for: note, withURL: TestConstants.removeURL)
+
+        testExpectations(with: note, expectedActions: expectedActions)
+    }
+
+    func testDidReceiveDeleteNotificationIgnoredWithUnobservedKey() {
+        let note = storage.insertSampleNote(simperiumKey: TestConstants.simperiumKey)
+        let noteB = storage.insertSampleNote(simperiumKey: TestConstants.altSimperiumKey)
+
+        publishController.updatePublishState(for: note, to: true)
+        var expectedActions: [PublishState] = [.publishing]
+        mockAppDelegate?.deleteNotification(for: noteB)
+
+        mockAppDelegate?.updateNotification(for: note, withURL: TestConstants.publishURL)
+        expectedActions.append(.published)
+
+        testExpectations(with: note, expectedActions: expectedActions)
+    }
+
+    private func testExpectations(with note: Note, expectedActions: [PublishState]) {
+        XCTAssertEqual(note, logger.lastUpdateNote)
+        XCTAssertEqual(expectedActions, logger.actions)
+    }
 }
 
-//private struct TestConstants {
-//    static let simperiumKey = "ABCDEF123456"
-//    static let secondKey = "QWFPGJL4567890"
-//    static let publishURL = "ABC123"
-//}
+private struct TestConstants {
+    static let publishURL = "abc123"
+    static let removeURL = ""
+    static let simperiumKey = "qwfpgj123456"
+    static let altSimperiumKey = "abcdef67890"
+    static let observedProperty = "publishURL"
+    static let altObservedProperty = "content"
+}
 
-//class MockAppDelegate {
-//    let publishController: PublishController
-//
-//    init(publishController: PublishController) {
-//        self.publishController = publishController
-//    }
-//
-//    func updateNote(note: Note, published: Bool, withKey key: String, withURL url: String) {
-//        note.publishURL = url
-//        publishController.didReceiveUpdateFromSimperium(for: key)
-//    }
-//}
-//
-//class MockPublishListenerFactory: PublishListenerFactory {
-//    var listeners = [String: PublishListenWrapper]()
-//
-//    override func publishListenerWrapper(note: Note, block: @escaping (Note) -> Void) -> PublishListenWrapper {
-//        let newWrapper = PublishListenWrapper(note: note, block: block)
-//        listeners[note.simperiumKey] = newWrapper
-//        return newWrapper
-//    }
-//}
+private class PublishLogger {
+    var lastUpdateNote: Note?
+    var actions = [PublishState]()
+}
+
+private class MockAppDelegate {
+    let publishController: PublishController
+
+    init(publishController: PublishController) {
+        self.publishController = publishController
+    }
+
+    func updateNotification(for note: Note, withURL url: String, observedProperty: String = TestConstants.observedProperty) {
+        note.publishURL = url
+        publishController.didReceiveUpdateNotification(for: note.simperiumKey, with: [observedProperty])
+    }
+
+    func deleteNotification(for note: Note) {
+        publishController.didReceiveDeleteNotification(for: note.simperiumKey)
+    }
+}
