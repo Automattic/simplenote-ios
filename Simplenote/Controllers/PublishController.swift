@@ -14,14 +14,18 @@ class PublishController {
 
         beginListeningForChanges(to: note, timeOut: Constants.timeOut)
 
-        let presenter = PublishNoticePresenter()
-        onUpdate?(presenter, note)
+        publishStatechanged(for: note)
     }
 
     private func changePublishState(for note: Note, to published: Bool) {
         note.published = published
         note.modificationDate = Date()
         SPAppDelegate.shared().save()
+    }
+
+    private func publishStatechanged(for note: Note) {
+        let presenter = PublishNoticePresenter()
+        onUpdate?(presenter, note)
     }
 }
 
@@ -46,9 +50,8 @@ extension PublishController {
               let note = observedNotes[key] else {
             return
         }
-        let presenter = PublishNoticePresenter()
 
-        onUpdate?(presenter, note)
+        publishStatechanged(for: note)
     }
 
     func didReceiveDeleteNotification(for key: String) {
