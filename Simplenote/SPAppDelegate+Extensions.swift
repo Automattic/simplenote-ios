@@ -72,8 +72,8 @@ extension SPAppDelegate {
     func configurePublishController() {
         publishController = PublishController()
         publishController.onUpdate = {
-            (listener, note) in
-            listener.presentNotice(for: note)
+            (note) in
+            PublishNoticePresenter.presentNotice(for: note)
         }
     }
 }

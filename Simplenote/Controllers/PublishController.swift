@@ -3,7 +3,7 @@ import Foundation
 class PublishController {
     private var observedNotes = [String: Note]()
 
-    var onUpdate: ((PublishNoticePresenter, Note) -> Void)?
+    var onUpdate: ((Note) -> Void)?
 
     func updatePublishState(for note: Note, to published: Bool) {
         if note.published == published {
@@ -25,7 +25,7 @@ class PublishController {
 
     private func publishStatechanged(for note: Note) {
         let presenter = PublishNoticePresenter()
-        onUpdate?(presenter, note)
+        onUpdate?(note)
     }
 }
 

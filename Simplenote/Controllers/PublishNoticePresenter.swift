@@ -1,7 +1,7 @@
 import Foundation
 
 class PublishNoticePresenter {
-    func presentNotice(for note: Note) {
+    static func presentNotice(for note: Note) {
         switch note.publishState {
         case .publishing:
             NoticeController.shared.present(NoticeFactory.publishing())
