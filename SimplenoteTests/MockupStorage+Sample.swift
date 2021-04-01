@@ -9,7 +9,7 @@ extension MockupStorageManager {
     /// Inserts a new (Sample) Note into the receiver's Main MOC
     ///
     @discardableResult
-    func insertSampleNote(contents: String = "", simperiumKey: String = "", published: Bool = false, publishURL: String? = "") -> Note {
+    func insertSampleNote(contents: String = "", simperiumKey: String = UUID().uuidString, published: Bool = false, publishURL: String? = "") -> Note {
         guard let note = NSEntityDescription.insertNewObject(forEntityName: Note.entityName, into: viewContext) as? Note else {
             fatalError()
         }
@@ -20,7 +20,6 @@ extension MockupStorageManager {
         note.published = published
         note.publishURL = publishURL
         note.simperiumKey = simperiumKey
-        note.simperiumKey = UUID().uuidString
 
         return note
     }
