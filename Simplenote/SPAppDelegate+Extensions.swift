@@ -71,8 +71,7 @@ extension SPAppDelegate {
     @objc
     func configurePublishController() {
         publishController = PublishController()
-        publishController.onUpdate = {
-            (note) in
+        publishController.onUpdate = { (note) in
             PublishNoticePresenter.presentNotice(for: note)
         }
     }

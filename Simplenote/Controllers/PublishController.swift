@@ -14,7 +14,7 @@ class PublishController: NSObject {
 
         beginListeningForChanges(to: note, timeOut: Constants.timeOut)
 
-        publishStatechanged(for: note)
+        publishStateChanged(for: note)
     }
 
     private func changePublishState(for note: Note, to published: Bool) {
@@ -23,7 +23,7 @@ class PublishController: NSObject {
         SPAppDelegate.shared().save()
     }
 
-    private func publishStatechanged(for note: Note) {
+    private func publishStateChanged(for note: Note) {
         onUpdate?(note)
     }
 }
@@ -51,7 +51,7 @@ extension PublishController {
             return
         }
 
-        publishStatechanged(for: note)
+        publishStateChanged(for: note)
         endListeningForChanges(to: note)
     }
 
