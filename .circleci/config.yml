@@ -6,6 +6,10 @@ orbs:
   git: wordpress-mobile/git@1.0
   slack: circleci/slack@3.4.2
 
+iphone_test_device: &iphone_test_device
+  device: iPhone 12
+  ios-version: "14.4"
+
 commands:
   fix-path:
     steps:
@@ -116,7 +120,11 @@ jobs:
       device:
         description: The device (e.g. "iPhone 12") to use when running tests.
         type: string
-        default: "iPhone 12"  
+        default: "iPhone 12"
+      ios-version:
+        description: The iOS version (e.g. "14.4") of the device used to run tests.
+        type: string
+        default: "14.4"
     executor:
       name: ios/default
       xcode-version: "12.4.0"
@@ -138,7 +146,7 @@ jobs:
       # END: Swift Package Manager Workaround
       - run:
           name: Fastlane
-          command: bundle exec fastlane $FASTLANE_LANE device:'<< parameters.device >>'
+          command: bundle exec fastlane $FASTLANE_LANE device:'<< parameters.device >>' ios-version:'<< parameters.ios-version >>'
       - store_artifacts:
           path: output
       - store_test_results:
@@ -150,7 +158,7 @@ workflows:
       - Test
       - UI Tests:
           name: UI Tests (iPhone 12)
-          device: "iPhone 12"
+          <<: *iphone_test_device
   Installable Build:
     jobs:
       - Hold:
