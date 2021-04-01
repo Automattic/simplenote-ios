@@ -601,15 +601,14 @@ end
   # A lane to run a subset of automated UI tests. Since only login tests are
   # selected for now, there will be no credentials race condition.
   desc "Run login UI tests"
-  lane :run_login_UI_tests do
+  lane :run_login_UI_tests do | options |
   scan(
     workspace: workspace_name,
     scheme: ui_tests_scheme,
     only_testing: "SimplenoteUITests/SimplenoteUISmokeTestsLogin/testLogInWithCorrectCredentials",
-    device: "iPhone 12",
-    prelaunch_simulator: true
-    #,
-    #reset_simulator: true
+    device: options[:device],
+    prelaunch_simulator: true,
+    reset_simulator: true
   )
   end
 end
