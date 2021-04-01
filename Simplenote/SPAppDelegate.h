@@ -10,6 +10,8 @@
 @class VersionsController;
 @class AccountVerificationController;
 @class AccountVerificationViewController;
+@class PublishController;
+@class PublishStateObserver;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,6 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) SPNavigationController                    *navigationController;
 
 @property (strong, nonatomic) VersionsController                        *versionsController;
+@property (strong, nonatomic) PublishController                         *publishController;
 
 @property (weak, nonatomic) AccountVerificationViewController           *verificationViewController;
 @property (strong, nonatomic, nullable) AccountVerificationController   *verificationController;

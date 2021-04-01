@@ -493,6 +493,9 @@ extension SPNoteEditorViewController {
         SPTracker.trackEditorNoteDeleted()
         SPObjectManager.shared().trashNote(note)
         CSSearchableIndex.default().deleteSearchableNote(note)
+        NoticeController.shared.present(NoticeFactory.noteTrashed(note, onUndo: {
+            SPObjectManager.shared().restoreNote(note)
+        }))
     }
 
     @objc
@@ -716,7 +719,7 @@ extension SPNoteEditorViewController {
         tagListViewController = NoteEditorTagListViewController(note: note, popoverPresenter: popoverPresenter)
 
         addChild(tagListViewController)
-        
+
         tagView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tagView)
 
