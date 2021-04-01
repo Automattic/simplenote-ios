@@ -1,6 +1,6 @@
 import Foundation
-
-class PublishController {
+@objc
+class PublishController: NSObject {
     private var observedNotes = [String: Note]()
 
     var onUpdate: ((Note) -> Void)?
@@ -44,6 +44,7 @@ extension PublishController {
     }
 
     // MARK: Listener Notifications
+    @objc(didReceiveUpdateNotificationForKey:withMemberNames:)
     func didReceiveUpdateNotification(for key: String, with memberNames: NSArray) {
         guard memberNames.contains(Constants.observedProperty),
               let note = observedNotes[key] else {
@@ -54,6 +55,7 @@ extension PublishController {
         endListeningForChanges(to: note)
     }
 
+    @objc(didReceiveDeleteNotificationsForKey:)
     func didReceiveDeleteNotification(for key: String) {
         guard let note = observedNotes[key] else {
             return

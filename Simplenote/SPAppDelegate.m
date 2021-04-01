@@ -457,7 +457,7 @@
                     [self.noteEditorViewController didReceiveNewContent];
                 }
 
-                [self alertListenerOfUpdateWithKey:key memberNames:memberNames];
+                [self.publishController didReceiveUpdateNotificationForKey:key withMemberNames:memberNames];
 
 
                 Note *note = [bucket objectForKey:key];
@@ -476,7 +476,8 @@
                     [self.noteEditorViewController didDeleteCurrentNote];
                 }
 
-                [self alertListenerOfDeleteWithKey:key];
+                [self.publishController didReceiveDeleteNotificationsForKey:key];
+
 
                 [[CSSearchableIndex defaultSearchableIndex] deleteSearchableItemsWithIdentifiers:@[key] completionHandler:nil];
             }

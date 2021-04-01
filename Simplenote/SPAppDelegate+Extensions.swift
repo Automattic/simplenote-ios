@@ -383,17 +383,3 @@ extension SPAppDelegate {
         EditorFactory.shared.scrollPositionCache.cleanup(keeping: allIdentifiers)
     }
 }
-
-// MARK: Publish Listener
-//
-extension SPAppDelegate {
-    @objc
-    func alertListenerOfUpdate(withKey key: String, memberNames: NSArray) {
-        publishController.didReceiveUpdateNotification(for: key, with: memberNames)
-    }
-
-    @objc
-    func alertListenerOfDelete(withKey key: String) {
-        publishController.didReceiveDeleteNotification(for: key)
-    }
-}
