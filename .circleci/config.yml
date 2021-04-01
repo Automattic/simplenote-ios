@@ -6,10 +6,6 @@ orbs:
   git: wordpress-mobile/git@1.0
   slack: circleci/slack@3.4.2
 
-iphone_test_device: &iphone_test_device
-  device: iPhone 11
-  ios-version: "14.3"
-
 commands:
   fix-path:
     steps:
@@ -157,8 +153,9 @@ workflows:
     jobs:
       - Test
       - UI Tests:
-          name: UI Tests ( '<< iphone_test_device.device >>' )
-          <<: *iphone_test_device
+          device: iPhone 12
+          ios-version: "14.4"
+          name: UI Tests ( $device )
   Installable Build:
     jobs:
       - Hold:
