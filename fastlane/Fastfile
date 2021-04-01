@@ -608,7 +608,6 @@ end
     only_testing: "SimplenoteUITests/SimplenoteUISmokeTestsLogin/testLogInWithCorrectCredentials",
     device: options[:device],
     deployment_target_version: options[:ios_version],
-    output_types: html,
     prelaunch_simulator: true,
     reset_simulator: true
   )
