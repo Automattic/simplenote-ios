@@ -130,7 +130,7 @@ jobs:
       xcode-version: "12.4.0"
     environment:
       FL_OUTPUT_DIR: output
-      FASTLANE_LANE: run_login_UI_tests
+      FASTLANE_LANE: run_UI_tests
     steps:
       - git/shallow-checkout
       - ios/install-dependencies:
@@ -157,7 +157,7 @@ workflows:
     jobs:
       - Test
       - UI Tests:
-          name: UI Tests (iPhone 12)
+          name: UI Tests ( iphone_test_device.device )
           <<: *iphone_test_device
   Installable Build:
     jobs:
