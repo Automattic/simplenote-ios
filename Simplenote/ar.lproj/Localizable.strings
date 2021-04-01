@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-03-08 11:32:12+0000 */
+/* Translation-Revision-Date: 2021-03-16 14:54:04+0000 */
 /* Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ar */
@@ -216,7 +216,7 @@
 "Diagnostics" = "التشخيصات";
 
 /* Footer -> Sign up verification screen. Parameter: %1$@ - support email address */
-"Didn't get an email? You may already have an account. Contact %1$@ for help." = "Didn't get an email? You may already have an account. Contact %1$@ for help.";
+"Didn't get an email? You may already have an account. Contact %1$@ for help." = "ألم يصلك بريدٌ إلكترونيٌ؟ ربما يكون لديك حساب بالفعل. اتصل بـ %1$@ للحصول على مساعدة.";
 
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "تعطيل تنسيق الضبط";
@@ -688,7 +688,7 @@
 "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "لقد أرسلنا بريدًا إلكترونيًا للتحقق إلى %1$@. يرجى التحقُّق من علبة الوارد لديك واتباع الإرشادات.";
 
 /* Message -> Sign up verification screen. Parameter: %1$@ - email address */
-"We’ve sent an email to %1$@. Please check your inbox and follow the instructions." = "We’ve sent an email to %1$@. Please check your inbox and follow the instructions.";
+"We’ve sent an email to %1$@. Please check your inbox and follow the instructions." = "لقد أرسلنا بريدًا إلكترونيًا إلى %1$@. يرجى التحقُّق من علبة الوارد لديك واتباع الإرشادات.";
 
 /* Rating view initial title */
 "What do you think about Simplenote?" = "ما رأيك في Simplenote؟";

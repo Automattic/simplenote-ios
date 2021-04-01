@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-03-08 11:32:12+0000 */
+/* Translation-Revision-Date: 2021-03-17 09:54:03+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ko_KR */
@@ -216,7 +216,7 @@
 "Diagnostics" = "진단";
 
 /* Footer -> Sign up verification screen. Parameter: %1$@ - support email address */
-"Didn't get an email? You may already have an account. Contact %1$@ for help." = "Didn't get an email? You may already have an account. Contact %1$@ for help.";
+"Didn't get an email? You may already have an account. Contact %1$@ for help." = "이메일을 받지 못하셨나요? 이미 계정이 있을 수도 있습니다. %1$@에 도움말을 문의하세요.";
 
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "마크다운 형식 사용 안 함";
@@ -688,7 +688,7 @@
 "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "%1$@(으)로 인증 이메일을 보내드렸습니다. 받은 편지함을 확인하고 지침에 따라 주세요.";
 
 /* Message -> Sign up verification screen. Parameter: %1$@ - email address */
-"We’ve sent an email to %1$@. Please check your inbox and follow the instructions." = "We’ve sent an email to %1$@. Please check your inbox and follow the instructions.";
+"We’ve sent an email to %1$@. Please check your inbox and follow the instructions." = "%1$@(으)로 이메일을 보내드렸습니다. 받은 편지함을 확인하고 지침에 따라 주세요.";
 
 /* Rating view initial title */
 "What do you think about Simplenote?" = "Simplenote를 어떻게 생각하시나요?";

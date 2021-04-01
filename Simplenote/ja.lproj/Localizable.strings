@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-03-08 11:32:12+0000 */
+/* Translation-Revision-Date: 2021-03-18 10:54:03+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ja_JP */
@@ -216,7 +216,7 @@
 "Diagnostics" = "診断";
 
 /* Footer -> Sign up verification screen. Parameter: %1$@ - support email address */
-"Didn't get an email? You may already have an account. Contact %1$@ for help." = "Didn't get an email? You may already have an account. Contact %1$@ for help.";
+"Didn't get an email? You may already have an account. Contact %1$@ for help." = "メールが届きませんでしたか ? すでにアカウントをお持ちの可能性があります。 サポートについては %1$@ までお問い合わせください。";
 
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "Markdown フォーマットを無効化";
@@ -688,7 +688,7 @@
 "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "%1$@ に確認メールを送信しました。 受信箱を確認して手順に従ってください。";
 
 /* Message -> Sign up verification screen. Parameter: %1$@ - email address */
-"We’ve sent an email to %1$@. Please check your inbox and follow the instructions." = "We’ve sent an email to %1$@. Please check your inbox and follow the instructions.";
+"We’ve sent an email to %1$@. Please check your inbox and follow the instructions." = "%1$@ 宛てにメールを送信しました。 受信箱を確認して手順に従ってください。";
 
 /* Rating view initial title */
 "What do you think about Simplenote?" = "Simplenote アプリに満足していますか ?";
