@@ -607,7 +607,8 @@ end
     scheme: ui_tests_scheme,
     only_testing: "SimplenoteUITests/SimplenoteUISmokeTestsLogin/testLogInWithCorrectCredentials",
     device: options[:device],
-    ios_version: options[:ios_version],
+    deployment_target_version: options[:ios_version],
+    output_types: html,
     prelaunch_simulator: true,
     reset_simulator: true
   )
