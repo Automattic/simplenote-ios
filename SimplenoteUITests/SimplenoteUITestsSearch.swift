@@ -19,109 +19,245 @@ class SimplenoteUISmokeTestsSearch: XCTestCase {
         let _ = attemptLogOut()
         EmailLogin.open()
         EmailLogin.logIn(email: testDataExistingEmail, password: testDataExistingPassword)
-        AllNotes.waitForLoad()
-        AllNotes.clearAllNotes()
+        NoteList.waitForLoad()
+        NoteList.trashAllNotes()
         Trash.empty()
         Sidebar.open()
         Sidebar.tagsDeleteAll()
-        AllNotes.open()
-        AllNotes.createNoteAndLeaveEditor(noteName: godzillaNoteName + "\n\n" + godzillaInfo, tags: ["sea-monster", "reptile", "prehistoric"])
-        AllNotes.createNoteAndLeaveEditor(noteName: kingKongNoteName + "\n\n" + kingKongInfo, tags: ["ape", "prehistoric"])
-        AllNotes.createNoteAndLeaveEditor(noteName: mechagodzillaNoteName + "\n\n" + mechagodzillaInfo, tags: ["man-made", "robot"])
-        AllNotes.createNoteAndLeaveEditor(noteName: diacriticNoteName + "\n\n" + diacriticInfo, tags: ["language", "diacritic"])
+        NoteList.openAllNotes()
+        NoteList.createNoteAndLeaveEditor(noteName: godzillaNoteName + "\n\n" + godzillaInfo, tags: ["sea-monster", "reptile", "prehistoric"])
+        NoteList.createNoteAndLeaveEditor(noteName: kingKongNoteName + "\n\n" + kingKongInfo, tags: ["ape", "prehistoric"])
+        NoteList.createNoteAndLeaveEditor(noteName: mechagodzillaNoteName + "\n\n" + mechagodzillaInfo, tags: ["man-made", "robot"])
+        NoteList.createNoteAndLeaveEditor(noteName: diacriticNoteName + "\n\n" + diacriticInfo, tags: ["language", "diacritic"])
 }
 
     override func setUpWithError() throws {
-        AllNotes.searchForText(text: "")
-        AllNotes.searchCancel()
+        NoteList.searchForText(text: "")
+        NoteList.searchCancel()
     }
 
     func testClearingSearchFieldUpdatesFilteredNotes() throws {
         trackTest()
 
         trackStep()
-        AllNotes.open()
-        AllNotesAssert.notesExist(names: [godzillaNoteName, kingKongNoteName, mechagodzillaNoteName, diacriticNoteName])
-        AllNotesAssert.notesNumber(expectedNotesNumber: 4)
+        NoteList.openAllNotes()
+        NoteListAssert.notesExist(names: [godzillaNoteName, kingKongNoteName, mechagodzillaNoteName, diacriticNoteName])
+        NoteListAssert.notesNumber(expectedNotesNumber: 4)
 
         trackStep()
-        AllNotes.searchForText(text: "Japan")
-        AllNotesAssert.notesExist(names: [godzillaNoteName, mechagodzillaNoteName])
+        NoteList.searchForText(text: "Japan")
+        NoteListAssert.notesExist(names: [godzillaNoteName, mechagodzillaNoteName])
 
         trackStep()
-        AllNotes.searchCancel()
-        AllNotesAssert.notesExist(names: [godzillaNoteName, kingKongNoteName, mechagodzillaNoteName, diacriticNoteName])
-        AllNotesAssert.notesNumber(expectedNotesNumber: 4)
+        NoteList.searchCancel()
+        NoteListAssert.notesExist(names: [godzillaNoteName, kingKongNoteName, mechagodzillaNoteName, diacriticNoteName])
+        NoteListAssert.notesNumber(expectedNotesNumber: 4)
 
         trackStep()
-        AllNotes.searchForText(text: "weapon")
-        AllNotesAssert.noteExists(noteName: mechagodzillaNoteName)
-        AllNotesAssert.notesNumber(expectedNotesNumber: 1)
+        NoteList.searchForText(text: "weapon")
+        NoteListAssert.noteExists(noteName: mechagodzillaNoteName)
+        NoteListAssert.notesNumber(expectedNotesNumber: 1)
 
         trackStep()
-        AllNotes.searchForText(text: "")
-        AllNotesAssert.notesExist(names: [godzillaNoteName, kingKongNoteName, mechagodzillaNoteName, diacriticNoteName])
-        AllNotesAssert.notesNumber(expectedNotesNumber: 4)
+        NoteList.searchForText(text: "")
+        NoteListAssert.notesExist(names: [godzillaNoteName, kingKongNoteName, mechagodzillaNoteName, diacriticNoteName])
+        NoteListAssert.notesNumber(expectedNotesNumber: 4)
     }
 
-    func testTagsTapping() throws {
+    func testCanFilterByTagWhenClickingOnTagInTagDrawer() throws {
         trackTest()
 
         trackStep()
-        Sidebar.tagSelect(tagName: "ape")
-        AllNotesAssert.noteExists(noteName: kingKongNoteName)
+        var testedTag = "prehistoric"
+        Sidebar.tagSelect(tagName: testedTag)
+        NoteListAssert.noteListShown(forSelection: testedTag)
+        NoteListAssert.notesExist(names: [godzillaNoteName, kingKongNoteName])
+        NoteListAssert.notesNumber(expectedNotesNumber: 2)
 
         trackStep()
-        Sidebar.tagSelect(tagName: "reptile")
-        AllNotesAssert.noteExists(noteName: godzillaNoteName)
+        testedTag = "reptile"
+        Sidebar.tagSelect(tagName: testedTag)
+        NoteListAssert.noteListShown(forSelection: testedTag)
+        NoteListAssert.noteExists(noteName: godzillaNoteName)
+        NoteListAssert.notesNumber(expectedNotesNumber: 1)
 
         trackStep()
-        Sidebar.tagSelect(tagName: "robot")
-        AllNotesAssert.noteExists(noteName: mechagodzillaNoteName)
+        testedTag = "robot"
+        Sidebar.tagSelect(tagName: testedTag)
+        NoteListAssert.noteListShown(forSelection: testedTag)
+        NoteListAssert.noteExists(noteName: mechagodzillaNoteName)
+        NoteListAssert.notesNumber(expectedNotesNumber: 1)
+    }
+
+    func testClickingOnDifferentTagsOrAllNotesOrTrashImmediatelyUpdatesFilteredNotes() throws {
+        trackTest()
+
+        trackStep()
+        var testedTag = "prehistoric"
+        Sidebar.tagSelect(tagName: testedTag)
+        NoteListAssert.noteListShown(forSelection: testedTag)
+        NoteListAssert.notesExist(names: [godzillaNoteName, kingKongNoteName])
+        NoteListAssert.notesNumber(expectedNotesNumber: 2)
+
+        trackStep()
+        NoteList.openAllNotes()
+        NoteListAssert.allNotesShown()
+        NoteListAssert.notesExist(names: [godzillaNoteName, kingKongNoteName, mechagodzillaNoteName, diacriticNoteName])
+        NoteListAssert.notesNumber(expectedNotesNumber: 4)
+
+        trackStep()
+        Trash.open()
+        NoteListAssert.trashShown()
+        TrashAssert.notesNumber(expectedNotesNumber: 0)
+
+        trackStep()
+        testedTag = "language"
+        Sidebar.tagSelect(tagName: testedTag)
+        NoteListAssert.noteListShown(forSelection: testedTag)
+        NoteListAssert.noteExists(noteName: diacriticNoteName)
+        NoteListAssert.notesNumber(expectedNotesNumber: 1)
     }
 
     func testCanSearchByKeyword() throws {
         trackTest()
 
         trackStep()
-        AllNotes.open()
-        AllNotesAssert.notesExist(names: [godzillaNoteName, kingKongNoteName, mechagodzillaNoteName, diacriticNoteName])
-        AllNotesAssert.notesNumber(expectedNotesNumber: 4)
+        NoteList.openAllNotes()
+        NoteListAssert.notesExist(names: [godzillaNoteName, kingKongNoteName, mechagodzillaNoteName, diacriticNoteName])
+        NoteListAssert.notesNumber(expectedNotesNumber: 4)
 
         trackStep()
-        AllNotes.searchForText(text: "Godzilla")
-        AllNotesAssert.notesExist(names: [godzillaNoteName, kingKongNoteName, mechagodzillaNoteName])
-        AllNotesAssert.notesNumber(expectedNotesNumber: 3)
+        NoteList.searchForText(text: "Godzilla")
+        NoteListAssert.notesExist(names: [godzillaNoteName, kingKongNoteName, mechagodzillaNoteName])
+        NoteListAssert.notesNumber(expectedNotesNumber: 3)
 
         trackStep()
-        AllNotes.searchForText(text: "Gorilla")
-        AllNotesAssert.notesExist(names: [kingKongNoteName])
-        AllNotesAssert.notesNumber(expectedNotesNumber: 1)
+        NoteList.searchForText(text: "Gorilla")
+        NoteListAssert.notesExist(names: [kingKongNoteName])
+        NoteListAssert.notesNumber(expectedNotesNumber: 1)
 
         trackStep()
-        AllNotes.searchForText(text: "Gaelic")
-        AllNotesAssert.notesExist(names: [diacriticNoteName])
-        AllNotesAssert.notesNumber(expectedNotesNumber: 1)
+        NoteList.searchForText(text: "Gaelic")
+        NoteListAssert.notesExist(names: [diacriticNoteName])
+        NoteListAssert.notesNumber(expectedNotesNumber: 1)
+    }
+
+    func testTagSuggestionsSuggestTagsRegardlessOfCase() throws {
+        trackTest()
+
+        trackStep()
+        NoteList.searchForText(text: "robot")
+        NoteListAssert.tagsSearchHeaderShown()
+        NoteListAssert.tagSuggestionExists(tag: "tag:robot")
+        NoteListAssert.tagsSuggestionsNumber(number: 1)
+        NoteListAssert.notesSearchHeaderShown()
+        NoteListAssert.noteExists(noteName: mechagodzillaNoteName)
+        NoteListAssert.notesNumber(expectedNotesNumber: 1)
+
+        trackStep()
+        NoteList.searchForText(text: "ROBOT")
+        NoteListAssert.tagsSearchHeaderShown()
+        NoteListAssert.tagSuggestionExists(tag: "tag:robot")
+        NoteListAssert.tagsSuggestionsNumber(number: 1)
+        NoteListAssert.notesSearchHeaderShown()
+        NoteListAssert.noteExists(noteName: mechagodzillaNoteName)
+        NoteListAssert.notesNumber(expectedNotesNumber: 1)
+
+        trackStep()
+        NoteList.searchForText(text: "PrEhIsToRiC")
+        NoteListAssert.tagsSearchHeaderShown()
+        NoteListAssert.tagSuggestionExists(tag: "tag:prehistoric")
+        NoteListAssert.tagsSuggestionsNumber(number: 1)
+        NoteListAssert.notesSearchHeaderNotShown()
+        NoteListAssert.notesNumber(expectedNotesNumber: 0)
+    }
+
+    func testTagAutoCompletesAppearWhenTypingInSearchField() throws {
+        trackTest()
+
+        trackStep()
+        NoteList.searchForText(text: "t")
+        NoteListAssert.tagsSearchHeaderShown()
+        NoteListAssert.tagSuggestionsExist(tags: ["tag:diacritic", "tag:prehistoric", "tag:reptile", "tag:robot", "tag:sea-monster"])
+        NoteListAssert.tagsSuggestionsNumber(number: 5)
+        NoteListAssert.notesSearchHeaderShown()
+
+        trackStep()
+        NoteList.searchForText(text: "a")
+        NoteListAssert.tagsSearchHeaderShown()
+        NoteListAssert.tagSuggestionsExist(tags: ["tag:ape", "tag:diacritic", "tag:language", "tag:man-made", "tag:sea-monster"])
+        NoteListAssert.tagsSuggestionsNumber(number: 5)
+        NoteListAssert.notesSearchHeaderShown()
+
+        trackStep()
+        NoteList.searchForText(text: "ic")
+        NoteListAssert.tagsSearchHeaderShown()
+        NoteListAssert.tagSuggestionsExist(tags: ["tag:diacritic", "tag:prehistoric"])
+        NoteListAssert.tagsSuggestionsNumber(number: 2)
+        NoteListAssert.notesSearchHeaderShown()
+
+        trackStep()
+        NoteList.searchForText(text: "abc")
+        NoteListAssert.tagsSearchHeaderNotShown()
+        NoteListAssert.notesSearchHeaderNotShown()
+        NoteListAssert.notesNumber(expectedNotesNumber: 0)
+    }
+
+    func testTypingTagAndSomethingElseResultsInAutocompleteTagResultsIncludingThatSomethingElse() throws {
+        trackTest()
+
+        trackStep()
+        NoteList.searchForText(text: "tag:re")
+        NoteListAssert.tagsSearchHeaderShown()
+        NoteListAssert.tagSuggestionsExist(tags: ["tag:prehistoric", "tag:reptile"])
+        NoteListAssert.tagsSuggestionsNumber(number: 2)
+        NoteListAssert.notesSearchHeaderNotShown()
+        NoteListAssert.notesNumber(expectedNotesNumber: 0)
+
+        trackStep()
+        NoteList.searchForText(text: "tag:-")
+        NoteListAssert.tagsSearchHeaderShown()
+        NoteListAssert.tagSuggestionsExist(tags: ["tag:man-made", "tag:sea-monster"])
+        NoteListAssert.tagsSuggestionsNumber(number: 2)
+        NoteListAssert.notesSearchHeaderNotShown()
+        NoteListAssert.notesNumber(expectedNotesNumber: 0)
+    }
+
+    func testSearchFieldUpdatesWithResultsOfTagFormatSearchString() throws {
+        trackTest()
+        let testedTag = "tag:prehistoric"
+
+        trackStep()
+        NoteList.searchForText(text: "pre")
+        NoteListAssert.tagsSearchHeaderShown()
+        NoteListAssert.tagSuggestionExists(tag: testedTag)
+
+        trackStep()
+        NoteList.tagSuggestionTap(tag: testedTag)
+        NoteListAssert.searchStringIsShown(searchString: testedTag + " ")
+        NoteListAssert.notesSearchHeaderShown()
+        NoteListAssert.notesExist(names: [godzillaNoteName, kingKongNoteName])
+        NoteListAssert.notesNumber(expectedNotesNumber: 2)
     }
 
     func testCanSeeExcerpts() throws {
         trackTest()
 
         trackStep()
-        AllNotes.open()
-        AllNotesAssert.notesExist(names: [godzillaNoteName, kingKongNoteName, mechagodzillaNoteName, diacriticNoteName])
-        AllNotesAssert.notesNumber(expectedNotesNumber: 4)
+        NoteList.openAllNotes()
+        NoteListAssert.notesExist(names: [godzillaNoteName, kingKongNoteName, mechagodzillaNoteName, diacriticNoteName])
+        NoteListAssert.notesNumber(expectedNotesNumber: 4)
 
         trackStep()
-        AllNotes.searchForText(text: "Hepburn")
-        AllNotesAssert.noteContentIsShownInSearch(noteName: godzillaNoteName, expectedContent: "Godzilla (Japanese: ゴジラ, Hepburn: Gojira, /ɡɒdˈzɪlə/; [ɡoꜜdʑiɾa] (About this soundlisten)) is a fictional monster, or kaiju, originating from a series of Japanese films. The character first appeared in the 1954 film Godzilla and became a worldwide pop culture icon, appearing in various media, including 32 films produced by Toho")
+        NoteList.searchForText(text: "Hepburn")
+        NoteListAssert.noteContentIsShownInSearch(noteName: godzillaNoteName, expectedContent: "Godzilla (Japanese: ゴジラ, Hepburn: Gojira, /ɡɒdˈzɪlə/; [ɡoꜜdʑiɾa] (About this soundlisten)) is a fictional monster, or kaiju, originating from a series of Japanese films. The character first appeared in the 1954 film Godzilla and became a worldwide pop culture icon, appearing in various media, including 32 films produced by Toho")
 
         trackStep()
-        AllNotes.searchForText(text: "1962")
-        AllNotesAssert.noteContentIsShownInSearch(noteName: kingKongNoteName, expectedContent: "…King Kong vs. Godzilla (1962), pitting a larger Kong against Toho's own Godzilla, and King Kong Escapes (1967), based on The King Kong Show (1966–1969) from Rankin/Bass Productions. In 1976, Dino De Laurentiis produced a modern remake of the original film directed by John Guillermin")
+        NoteList.searchForText(text: "1962")
+        NoteListAssert.noteContentIsShownInSearch(noteName: kingKongNoteName, expectedContent: "…King Kong vs. Godzilla (1962), pitting a larger Kong against Toho's own Godzilla, and King Kong Escapes (1967), based on The King Kong Show (1966–1969) from Rankin/Bass Productions. In 1976, Dino De Laurentiis produced a modern remake of the original film directed by John Guillermin")
 
         trackStep()
-        AllNotes.searchForText(text: "archenemy")
-        AllNotesAssert.noteContentIsShownInSearch(noteName: mechagodzillaNoteName, expectedContent: "…commonly considered to be an archenemy of Godzilla")
+        NoteList.searchForText(text: "archenemy")
+        NoteListAssert.noteContentIsShownInSearch(noteName: mechagodzillaNoteName, expectedContent: "…commonly considered to be an archenemy of Godzilla")
     }
 }

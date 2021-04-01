@@ -700,25 +700,26 @@ private extension SPNoteListViewController {
 
     func regularContextActions(for note: Note) -> [UIContextualAction] {
         let pinImageName: UIImageName = note.pinned ? .unpin : .pin
+        let pinActionTitle: String = note.pinned ? ActionTitle.unpin : ActionTitle.pin
 
         return [
-            UIContextualAction(style: .destructive, image: .image(name: .trash), backgroundColor: .simplenoteDestructiveActionColor) { [weak self] (_, _, completion) in
+            UIContextualAction(style: .destructive, title: ActionTitle.delete, image: .image(name: .trash), backgroundColor: .simplenoteDestructiveActionColor) { [weak self] (_, _, completion) in
                 self?.delete(note: note)
                 completion(true)
             },
 
-            UIContextualAction(style: .normal, image: .image(name: pinImageName), backgroundColor: .simplenoteSecondaryActionColor) { [weak self] (_, _, completion) in
+            UIContextualAction(style: .normal, title: pinActionTitle, image: .image(name: pinImageName), backgroundColor: .simplenoteSecondaryActionColor) { [weak self] (_, _, completion) in
                 self?.togglePinnedState(note: note)
                 completion(true)
             },
 
-            UIContextualAction(style: .normal, image: .image(name: .link), backgroundColor: .simplenoteTertiaryActionColor) { [weak self] (_, _, completion) in
+            UIContextualAction(style: .normal, title: ActionTitle.copyLink, image: .image(name: .link), backgroundColor: .simplenoteTertiaryActionColor) { [weak self] (_, _, completion) in
                 self?.copyInternalLink(to: note)
                 NoticeController.shared.present(NoticeFactory.linkCopied())
                 completion(true)
             },
 
-            UIContextualAction(style: .normal, image: .image(name: .share), backgroundColor: .simplenoteQuaternaryActionColor) { [weak self] (_, _, completion) in
+            UIContextualAction(style: .normal, title: ActionTitle.share, image: .image(name: .share), backgroundColor: .simplenoteQuaternaryActionColor) { [weak self] (_, _, completion) in
                 self?.share(note: note)
                 completion(true)
             }

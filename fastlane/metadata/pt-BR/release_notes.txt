@@ -1,1 +1,1 @@
-- Suporte adicionado para atalhos e navegação do teclado
+- Agora o VoiceOver lê os nomes de ações contextuais de anotações corretamente

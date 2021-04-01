@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-02-18 17:54:04+0000 */
+/* Translation-Revision-Date: 2021-03-16 14:54:03+0000 */
 /* Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ru */
@@ -70,17 +70,9 @@
 /* Label on button to add a new tag to a note */
 "Add tag" = "Добавить тег";
 
-/* Title: No filters applied */
+/* All Notes filter button
+   Title: No filters applied */
 "All Notes" = "Все заметки";
-
-/* Sort Mode: Alphabetically */
-"Alphabetically" = "По алфавиту";
-
-/* Sort Mode: Alphabetically, ascending */
-"Alphabetically: A-Z" = "По алфавиту: А–Я";
-
-/* Sort Mode: Alphabetically, descending */
-"Alphabetically: Z-A" = "По алфавиту: Я–А";
 
 /* Sign in error message */
 "An error was encountered while signing in." = "Во время входа произошла ошибка.";
@@ -159,7 +151,7 @@
 /* Copies the Note's Public Link */
 "Copy Link" = "Копировать ссылку";
 
-/* No comment provided by engineer. */
+/* Rating view - initial - could be better button */
 "Could be better" = "Нужно доработать";
 
 /* Error for bad email or password */
@@ -168,7 +160,7 @@
 /* Message displayed when login fails */
 "Could not login with the provided email address and password." = "Невозможно авторизоваться с указанными адресом email и паролем.";
 
-/* No comment provided by engineer. */
+/* Rating view disliked title */
 "Could you tell us how we could improve?" = "Посоветуйте, как нам стать лучше.";
 
 /* Error message shown when trying to view history of a note without an internet connection */
@@ -189,8 +181,7 @@
 /* Message shown in note list when no notes are in the current view */
 "Create your first note" = "Создание первой заметки";
 
-/* Note Creation Date
-   Sort Mode: Creation Date */
+/* Note Creation Date */
 "Created" = "Создано";
 
 /* Sort Mode: Creation Date, descending */
@@ -224,6 +215,9 @@
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "Диагностика";
 
+/* Footer -> Sign up verification screen. Parameter: %1$@ - support email address */
+"Didn't get an email? You may already have an account. Contact %1$@ for help." = "Письмо не пришло? Возможно, у вас уже есть учётная запись. Обратитесь за помощью по адресу %1$@.";
+
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "Выключить форматирование Markdown";
 
@@ -241,6 +235,7 @@
 
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
+   Done editing tags
    Done toolbar button */
 "Done" = "Готово";
 
@@ -289,7 +284,7 @@
 /* FAQ or contact us */
 "Get Help" = "Справка";
 
-/* No comment provided by engineer. */
+/* Rating view liked title */
 "Great! Mind leaving a review to tell us what you like?" = "Замечательно! Хотите рассказать, что вам понравилось?";
 
 /* Display help web page */
@@ -301,7 +296,7 @@
 /* Opens the Note's History */
 "History" = "История";
 
-/* No comment provided by engineer. */
+/* Rating view - initial - liked button */
 "I like it" = "Мне нравится";
 
 /* Note Information Button (metrics + references) */
@@ -322,7 +317,7 @@
 /* Learn More Action */
 "Learn more" = "Подробнее";
 
-/* No comment provided by engineer. */
+/* Rating view - liked - leave review button */
 "Leave a review" = "Оставить отзыв";
 
 /* Theme: Light */
@@ -364,8 +359,7 @@
 /* Note Options Button */
 "Menu" = "Меню";
 
-/* Note Modification Date
-   Sort Mode: Modified Date */
+/* Note Modification Date */
 "Modified" = "Изменено";
 
 /* Sort Mode: Modified Date, descending */
@@ -377,6 +371,12 @@
 /* Delete Action
    Deletes a note */
 "Move to Trash" = "Удалить";
+
+/* Sort Mode: Alphabetically, ascending */
+"Name: A-Z" = "Имя: А–Я";
+
+/* Sort Mode: Alphabetically, descending */
+"Name: Z-A" = "Имя: Я–А";
 
 /* Home screen quick action: New Note
    Keyboard shortcut: New Note */
@@ -400,7 +400,7 @@
 /* Message shown in note list when no notes are tagged with the provided tag. Parameter: %@ - tag */
 "No notes tagged “%@”" = "Нет заметок с тегом “%@”";
 
-/* No comment provided by engineer. */
+/* Rating view - liked or disliked - no thanks button */
 "No thanks" = "Нет, спасибо";
 
 /* Message shown in note list when no notes are untagged */
@@ -409,7 +409,8 @@
 /* Notes Header (Search Mode) */
 "Notes" = "Заметки";
 
-/* Dismisses an AlertController */
+/* Closes alert controller for spinner on About view
+   Dismisses an AlertController */
 "OK" = "Хорошо";
 
 /* Instant passcode lock timeout */
@@ -545,10 +546,11 @@
 /* For debugging use */
 "Send a Test Crash" = "Отправить данные о сбое";
 
-/* No comment provided by engineer. */
+/* Rating view - disliked - send feedback button */
 "Send feedback" = "Отправить отзыв";
 
-/* Title of options screen */
+/* Settings button
+   Title of options screen */
 "Settings" = "Настройки";
 
 /* Opens the Share Sheet
@@ -600,7 +602,7 @@
 /* Theme: Matches iOS Settings */
 "System Default" = "Настройки системы по умолчанию";
 
-/* No comment provided by engineer. */
+/* Tags List Header */
 "Tags" = "Метки";
 
 /* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
@@ -636,7 +638,8 @@
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Идентификатор прикосновения";
 
-/* Title: Trash Tag is selected */
+/* Title: Trash Tag is selected
+   Trash filter button */
 "Trash-noun" = "Корзина";
 
 /* Prompt when disabling passcode */
@@ -684,7 +687,10 @@
 /* Message -> Verify your email screen. Parameter: %1$@ - email address */
 "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "На адрес %1$@ отправлено письмо с подтверждением. Проверьте свой почтовый ящик и следуйте инструкциям.";
 
-/* No comment provided by engineer. */
+/* Message -> Sign up verification screen. Parameter: %1$@ - email address */
+"We’ve sent an email to %1$@. Please check your inbox and follow the instructions." = "Мы отправили эл. письмо на адрес %1$@. Проверьте свой почтовый ящик и следуйте инструкциям.";
+
+/* Rating view initial title */
 "What do you think about Simplenote?" = "Каково ваше мнение о Simplenote?";
 
 /* Number of words in the note */
@@ -717,11 +723,11 @@
 /* Accessibility hint for adding a tag to a note */
 "tag-add-accessibility-hint" = "Добавить тег к текущей заметке";
 
-/* No comment provided by engineer. */
+/* Remove a tag from the current note */
 "tag-delete-accessibility-hint" = "Удалить тег в текущей заметке";
 
-/* A welcome note for new iOS users */
-"welcomeNote-iOS" = "Добро пожаловать в Simplenote для iOS!\n\nДобавьте заметку, тапнув на кнопку с плюсом. \n\nПролистайте список, чтобы просмотреть ваши заметки. Нажмите на название для просмотра заметки, затем нажмите на его содержание, чтобы изменить его.\n\nВы можете искать ваши заметки: для этого пролестните вверх ваш список с заметки и нажмите на строку поиска. \n\nНажмите на кнопку в левом верхнем углу или смахните слева на право, чтобы посмотреть ваши теги. Вы можете добавить тег к заметке, нажав на кнопку при изменении заметки, и используйте боковую панель - она поможет оставаться Вам быть организованным. \n\nНо у заметок есть больше опций, если они вам нужны. Например, вы можете пригласить партнеры или соавтора для общего ведения заметки, либо опубликовать запись в виде веб-страницы. \n\nПользуйтесь Simplenote на вашем компьютере Mac, Android устройствах или в вашем веб-браузере на сайте http:\/\/simplenote.com. Ваши заметки всегда останутся обновленными везде. ";
+/* Search Operator for tags. Please preserve the semicolons when translating! */
+"tag:" = "метка:";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞 Отладка включена 🐞";

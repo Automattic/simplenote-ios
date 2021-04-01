@@ -27,17 +27,17 @@ class Preview {
     class func getStaticTextsWithExactValueCount(value: String) -> Int {
         let predicate = NSPredicate(format: "value == '" + value + "'")
         let matchingStaticTexts = app.webViews.descendants(matching: .staticText).matching(predicate)
-        let matchesCount = matchingStaticTexts.count
-        print(">>> Found " + String(matchesCount) + " StaticTexts(s) with '" + value + "' value")
-        return matchesCount
+        let matches = matchingStaticTexts.count
+        print(">>> Found \(matches) StaticTexts(s) with '\(value)' value")
+        return matches
     }
 
     class func getStaticTextsWithExactLabelCount(label: String) -> Int {
         let predicate = NSPredicate(format: "label == '" + label + "'")
         let matchingStaticTexts = app.webViews.descendants(matching: .staticText).matching(predicate)
-        let matchesCount = matchingStaticTexts.count
-        print(">>> Found " + String(matchesCount) + " StaticTexts(s) with '" + label + "' label")
-        return matchesCount
+        let matches = matchingStaticTexts.count
+        print(">>> Found \(matches) StaticTexts(s) with '\(label)' label")
+        return matches
     }
 }
 
@@ -63,13 +63,13 @@ class PreviewAssert {
     }
 
     class func staticTextWithExactLabelShownOnce(label: String) {
-        let matchesCount = Preview.getStaticTextsWithExactLabelCount(label: label)
-        XCTAssertEqual(matchesCount, 1)
+        let matches = Preview.getStaticTextsWithExactLabelCount(label: label)
+        XCTAssertEqual(matches, 1)
     }
 
     class func staticTextWithExactValueShownOnce(value: String) {
-        let matchesCount = Preview.getStaticTextsWithExactValueCount(value: value)
-        XCTAssertEqual(matchesCount, 1)
+        let matches = Preview.getStaticTextsWithExactValueCount(value: value)
+        XCTAssertEqual(matches, 1)
     }
 
     class func staticTextWithExactValuesShownOnce(values: [String]) {
@@ -83,28 +83,15 @@ class PreviewAssert {
     }
 
     class func boxesStates(expectedCheckedBoxesNumber: Int, expectedEmptyBoxesNumber: Int) {
-        let expectedBoxesCount = expectedCheckedBoxesNumber + expectedEmptyBoxesNumber,
-            actualBoxesCount = app.switches.count
+        let expectedBoxesCount = expectedCheckedBoxesNumber + expectedEmptyBoxesNumber
+        let boxes = app.switches
+        let actualBoxesCount = boxes.count
+        print(">>> Number of boxes found: \(actualBoxesCount)")
+        XCTAssertEqual(actualBoxesCount, expectedBoxesCount, numberOfBoxesInPreviewNotExpected)
 
-        var actualCheckedBoxesCount = 0,
-            actualEmptyBoxesCount = 0
-
-        print("Number of boxes found: " + String(actualBoxesCount))
-
-        XCTAssertEqual(expectedBoxesCount, actualBoxesCount, numberOfBoxesInPreviewNotExpected)
-
-        if actualBoxesCount < 1 { return }
-
-        for index in 0...actualBoxesCount - 1 {
-            let box = app.descendants(matching: .switch).element(boundBy: index)
-            print("Current box debug description: " + box.value.debugDescription)
-
-            if box.value.debugDescription == "Optional(1)" {
-                actualCheckedBoxesCount += 1
-            } else if box.value.debugDescription == "Optional(0)" {
-                actualEmptyBoxesCount += 1
-            }
-        }
+        guard actualBoxesCount > 0 else { return }
+        let actualCheckedBoxesCount = boxes.filter { $0.value.debugDescription == "Optional(1)" }.count
+        let actualEmptyBoxesCount = boxes.filter { $0.value.debugDescription == "Optional(0)" }.count
 
         XCTAssertEqual(actualCheckedBoxesCount, expectedCheckedBoxesNumber, numberOfCheckedBoxesInPreviewNotExpected)
         XCTAssertEqual(actualEmptyBoxesCount, expectedEmptyBoxesNumber, numberOfEmptyBoxesInPreviewNotExpected)

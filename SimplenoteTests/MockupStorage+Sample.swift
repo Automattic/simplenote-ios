@@ -20,6 +20,7 @@ extension MockupStorageManager {
         note.published = published
         note.publishURL = publishURL
         note.simperiumKey = simperiumKey
+        note.simperiumKey = UUID().uuidString
 
         return note
     }

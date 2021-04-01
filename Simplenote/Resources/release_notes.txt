@@ -1,1 +1,1 @@
-- Added support for keyboard navigation and shortcuts
+- VoiceOver now reads note contextual actions names correctly

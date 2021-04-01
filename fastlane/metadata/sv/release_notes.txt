@@ -1,1 +1,1 @@
-- Tillagt stöd för tangentbordsnavigering och genvägar
+– VoiceOver läser nu namn för sammanhangsåtgärder korrekt

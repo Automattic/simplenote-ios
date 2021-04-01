@@ -1,1 +1,1 @@
-- Assistance supplémentaire concernant la navigation au clavier et les raccourcis
+- VoiceOver lit désormais correctement les noms des actions contextuelles des notes

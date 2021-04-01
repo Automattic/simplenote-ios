@@ -13,6 +13,7 @@ enum UID {
         static let logIn = "Log In"
         static let noteEditorPreview = "Preview"
         static let noteEditorOptions = "Options"
+        static let trash = "Trash"
     }
 
     enum Button {
@@ -34,6 +35,7 @@ enum UID {
         static let noteEditorInformation = "Information"
         static let noteEditorMenu = "note-menu"
         static let itemTrash = "icon trash"
+        static let noteTrash = "Move to Trash"
         static let trashRestore = "icon restore"
         static let trashEmptyTrash = "Empty"
         static let clearText = "Clear text"
@@ -46,6 +48,8 @@ enum UID {
         static let noteEditorPreview = "Preview"
         static let noteEditorOptionsMarkdown = "Markdown"
         static let allNotesInProgress = "In progress"
+        static let searchByTag = "Search by Tag"
+        static let notes = "Notes"
     }
 
     enum TextField {

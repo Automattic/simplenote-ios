@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-02-18 11:54:04+0000 */
+/* Translation-Revision-Date: 2021-03-17 13:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: he_IL */
@@ -70,17 +70,9 @@
 /* Label on button to add a new tag to a note */
 "Add tag" = "הוספת תגית";
 
-/* Title: No filters applied */
+/* All Notes filter button
+   Title: No filters applied */
 "All Notes" = "כל הפתקים";
-
-/* Sort Mode: Alphabetically */
-"Alphabetically" = "סדר אלפביתי";
-
-/* Sort Mode: Alphabetically, ascending */
-"Alphabetically: A-Z" = "סדר אלפביתי: A-Z";
-
-/* Sort Mode: Alphabetically, descending */
-"Alphabetically: Z-A" = "סדר אלפביתי: Z-A";
 
 /* Sign in error message */
 "An error was encountered while signing in." = "נתקלנו בשגיאה בתהליך ההתחברות.";
@@ -159,7 +151,7 @@
 /* Copies the Note's Public Link */
 "Copy Link" = "להעתיק את הקישור";
 
-/* No comment provided by engineer. */
+/* Rating view - initial - could be better button */
 "Could be better" = "יכול להיות יותר טוב";
 
 /* Error for bad email or password */
@@ -168,7 +160,7 @@
 /* Message displayed when login fails */
 "Could not login with the provided email address and password." = "לא ניתן להיכנס באמצעות כתובת האימייל והסיסמה שסופקו.";
 
-/* No comment provided by engineer. */
+/* Rating view disliked title */
 "Could you tell us how we could improve?" = "באפשרותך לומר לנו כיצד נוכל להשתפר?";
 
 /* Error message shown when trying to view history of a note without an internet connection */
@@ -189,8 +181,7 @@
 /* Message shown in note list when no notes are in the current view */
 "Create your first note" = "ליצור את הפתק הראשון שלך";
 
-/* Note Creation Date
-   Sort Mode: Creation Date */
+/* Note Creation Date */
 "Created" = "נוצר";
 
 /* Sort Mode: Creation Date, descending */
@@ -224,6 +215,9 @@
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "אבחונים";
 
+/* Footer -> Sign up verification screen. Parameter: %1$@ - support email address */
+"Didn't get an email? You may already have an account. Contact %1$@ for help." = "לא קיבלת את הודעת האימייל? ייתכן שכבר יש לך חשבון. ניתן ליצור קשר עם %1$@ לעזרה.";
+
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "להשבית את העיצוב של Markdown";
 
@@ -241,6 +235,7 @@
 
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
+   Done editing tags
    Done toolbar button */
 "Done" = "בוצע";
 
@@ -289,7 +284,7 @@
 /* FAQ or contact us */
 "Get Help" = "לקבלת עזרה";
 
-/* No comment provided by engineer. */
+/* Rating view liked title */
 "Great! Mind leaving a review to tell us what you like?" = "נהדר! רוצה לשלוח לנו חוות דעת ולספר לנו מה אהבת?";
 
 /* Display help web page */
@@ -301,7 +296,7 @@
 /* Opens the Note's History */
 "History" = "היסטוריה";
 
-/* No comment provided by engineer. */
+/* Rating view - initial - liked button */
 "I like it" = "אהבתי את זה";
 
 /* Note Information Button (metrics + references) */
@@ -322,7 +317,7 @@
 /* Learn More Action */
 "Learn more" = "מידע נוסף";
 
-/* No comment provided by engineer. */
+/* Rating view - liked - leave review button */
 "Leave a review" = "השארת חוות דעת";
 
 /* Theme: Light */
@@ -364,8 +359,7 @@
 /* Note Options Button */
 "Menu" = "תפריט";
 
-/* Note Modification Date
-   Sort Mode: Modified Date */
+/* Note Modification Date */
 "Modified" = "הותאם";
 
 /* Sort Mode: Modified Date, descending */
@@ -377,6 +371,12 @@
 /* Delete Action
    Deletes a note */
 "Move to Trash" = "העברה לפח";
+
+/* Sort Mode: Alphabetically, ascending */
+"Name: A-Z" = "שם: מ-A ל-Z";
+
+/* Sort Mode: Alphabetically, descending */
+"Name: Z-A" = "שם: מ-Z ל-A";
 
 /* Home screen quick action: New Note
    Keyboard shortcut: New Note */
@@ -400,7 +400,7 @@
 /* Message shown in note list when no notes are tagged with the provided tag. Parameter: %@ - tag */
 "No notes tagged “%@”" = "אין פתקים עם התגית “%@”";
 
-/* No comment provided by engineer. */
+/* Rating view - liked or disliked - no thanks button */
 "No thanks" = "לא תודה";
 
 /* Message shown in note list when no notes are untagged */
@@ -409,7 +409,8 @@
 /* Notes Header (Search Mode) */
 "Notes" = "פתקים";
 
-/* Dismisses an AlertController */
+/* Closes alert controller for spinner on About view
+   Dismisses an AlertController */
 "OK" = "אישור";
 
 /* Instant passcode lock timeout */
@@ -545,10 +546,11 @@
 /* For debugging use */
 "Send a Test Crash" = "לשלוח קריסה של בדיקה";
 
-/* No comment provided by engineer. */
+/* Rating view - disliked - send feedback button */
 "Send feedback" = "שליחת משוב";
 
-/* Title of options screen */
+/* Settings button
+   Title of options screen */
 "Settings" = "הגדרות";
 
 /* Opens the Share Sheet
@@ -600,7 +602,7 @@
 /* Theme: Matches iOS Settings */
 "System Default" = "ברירת המחדל לפי המערכת";
 
-/* No comment provided by engineer. */
+/* Tags List Header */
 "Tags" = "תגיות";
 
 /* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
@@ -636,7 +638,8 @@
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "מזהה מגע";
 
-/* Title: Trash Tag is selected */
+/* Title: Trash Tag is selected
+   Trash filter button */
 "Trash-noun" = "העברה לפח";
 
 /* Prompt when disabling passcode */
@@ -684,7 +687,10 @@
 /* Message -> Verify your email screen. Parameter: %1$@ - email address */
 "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "שלחנו את האימות לכתובת האימייל %1$@. יש לבדוק את תיבת הדואר הנכנס ולפעול לפי ההוראות.";
 
-/* No comment provided by engineer. */
+/* Message -> Sign up verification screen. Parameter: %1$@ - email address */
+"We’ve sent an email to %1$@. Please check your inbox and follow the instructions." = "שלחנו הודעה לאימייל %1$@. יש לבדוק את תיבת הדואר הנכנס ולפעול לפי ההוראות.";
+
+/* Rating view initial title */
 "What do you think about Simplenote?" = "מה דעתך על Simplenote?";
 
 /* Number of words in the note */
@@ -717,11 +723,11 @@
 /* Accessibility hint for adding a tag to a note */
 "tag-add-accessibility-hint" = "הוספת תגית לפתק הנוכחי";
 
-/* No comment provided by engineer. */
+/* Remove a tag from the current note */
 "tag-delete-accessibility-hint" = "הסרת תגית מהפתק הנוכחי";
 
-/* A welcome note for new iOS users */
-"welcomeNote-iOS" = "ברוכים הבאים אל Simplenote עבור iOS!\n\nכדי להוסיף פתק, יש להקיש על לחצן הפלוס.\n\nרפרוף ברשימה כדי לעיין בפתקים שלך. יש להקיש על כותרת כדי להציג פתק, ולאחר מכן להקיש על התוכן שלו כדי לשנות אותו.\n\nאפשר לחפש בכל הפתקים באמצעות הקלדה בשדה החיפוש בחלק העליון של רשימת הפתקים.\n\nיש להקיש על לחצן החץ בחלק הימני העליון, או להחליק על רשימת הפתקים כדי להציג את התגיות שלך. אפשר להוסיף תגיות לפתק בתחתית עורך הפתקים, ולאחר מכן להשתמש בסרגל הצדדי כדי לעזור לך לשמור על הסדר.\n\nקיימות אפשרויות נוספות לפתקים במקרה הצורך. אפשר להוסיף אחרים כמשתפי פעולה לפתק, או לפרסם פתק כדף אינטרנט.\n\nניתן להשתמש ב-Simplenote במחשב Mac, מכשיר Android, או בדפדפן האינטרנט, בכתובת http:\/\/simplenote.com. הפתקים שלך יישארו מעודכנים בכל מקום, באופן אוטומטי.";
+/* Search Operator for tags. Please preserve the semicolons when translating! */
+"tag:" = "תגית:";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞האפשרות לאיתור באגים מופעלת 🐞";

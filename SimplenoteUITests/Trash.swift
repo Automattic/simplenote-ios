@@ -3,6 +3,7 @@ import XCTest
 class Trash {
 
     class func open() {
+        print(">>> Opening \"Trash\"")
         Sidebar.open()
         app.tables.staticTexts[UID.Button.trash].tap()
     }
@@ -26,7 +27,7 @@ class Trash {
     }
 
     class func getNotesNumber() -> Int {
-        return Table.getCellsNumber()
+        return Table.getVisibleLabelledCells().count
     }
 }
 

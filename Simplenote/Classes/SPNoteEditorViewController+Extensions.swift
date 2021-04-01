@@ -244,19 +244,36 @@ extension SPNoteEditorViewController: KeyboardObservable {
 
 // MARK: - Voiceover Support
 //
-private extension SPNoteEditorViewController {
+extension SPNoteEditorViewController {
 
     /// Indicates if VoiceOver is running
     ///
-    var isVoiceOverEnabled: Bool {
+    private var isVoiceOverEnabled: Bool {
         UIAccessibility.isVoiceOverRunning
     }
 
     /// Whenver VoiceOver is enabled, this API will lock the Tags List in position
     ///
     @objc
-    func refreshVoiceOverSupport() {
+    private func refreshVoiceOverSupport() {
         updateTagListPosition()
+    }
+
+    /// Sets behavior for accessibility three finger scroll
+    ///
+    open override func accessibilityScroll(_ direction: UIAccessibilityScrollDirection) -> Bool {
+        switch direction {
+        case .left:
+            presentMarkdownPreview()
+        case .right:
+            navigationController?.popViewController(animated: true)
+        default:
+            // With VoiceOver on, three finger scroll up and down will cause a page up/page down action
+            // If this method returns true that is disabled.  Returning false to maintain page up/page down
+            return false
+        }
+
+        return true
     }
 }
 

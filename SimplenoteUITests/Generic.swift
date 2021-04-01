@@ -29,7 +29,7 @@ func trackTest(_ function: String = #function) {
 }
 
 func trackStep() {
-    print(">> Step " + String(stepIndex))
+    print(">> Step \(stepIndex)")
     stepIndex += 1
 }
 
@@ -41,32 +41,42 @@ func getToAllNotes() {
 
 class Table {
 
-    class func getCellsNumber() -> Int {
-        // We need to count only the table cells that have X = 0
-        // otherwise we will include invisible elements from Sidebar pane, when Notes List is open
-        // or the elements from Notes List when Settings are open
-        let cellsNum = app.tables.element.children(matching: .cell).count
-        var notesNum: Int = 0
+    class func getAllCells() -> XCUIElementQuery {
+        return app.tables.element.children(matching: .cell)
+    }
 
-        if cellsNum == 0 {
-            return notesNum
-        }
+    class func getVisibleLabelledCells() -> [XCUIElement] {
+        // We need only the table cells that have X = 0 and a non-empty label
+        // Currently (besides using object dimensions) this is the way to
+        // locate note cells
+        return Table.getAllCells()
+            .filter { $0.frame.minX == 0.0 && $0.label.isEmpty == false }
+    }
 
-        for index in 0...cellsNum - 1 {
-            let cell = app.tables.cells.element(boundBy: index)
+    class func getVisibleLabelledCellsNames() -> [String] {
+        return Table.getVisibleLabelledCells().compactMap { $0.label }
+    }
 
-            if cell.frame.minX == 0.0 {
-                notesNum += 1
-            }
-        }
-
-        return notesNum
+    class func getVisibleNonLabelledCellsNumber() -> Int {
+        // We need only the table cells that have X = 0 and an empty label
+        // Currently (besides using object dimensions) this is the way to
+        // locate tags search suggestions
+        return Table.getAllCells()
+            .filter { $0.frame.minX == 0.0 && $0.label.isEmpty == true }
+            .count
     }
 
     class func trashCell(noteName: String) {
-        Table.getCell(label: noteName).swipeLeft()
-        sleep(1)
-        Table.getCell(label: noteName).buttons[UID.Button.itemTrash].tap()
+        // `Trash Note` and `Delete note forever` buttons have different labels
+        // since 07fcccf1039495768ecdf9909d3dbd1b255936cd
+        // (https://github.com/Automattic/simplenote-ios/pull/1191).
+        // To use the correct label, we need to know where we are.
+        let deleteButtonLabel = app.navigationBars[UID.NavBar.trash].exists ?
+            UID.Button.itemTrash : UID.Button.noteTrash
+        let noteCell = Table.getCell(label: noteName)
+
+        noteCell.swipeLeft()
+        noteCell.buttons[deleteButtonLabel].tap()
     }
 
     class func getCell(label: String) -> XCUIElement {
@@ -74,15 +84,28 @@ class Table {
         return cell
     }
 
+    class func getStaticText(label: String) -> XCUIElement {
+        let staticText = app.tables.staticTexts[label]
+        return staticText
+    }
+
     class func getCellsWithExactLabelCount(label: String) -> Int {
         let predicate = NSPredicate(format: "label == '" + label + "'")
         let matchingCells = app.cells.matching(predicate)
-        let matchesCount = matchingCells.count
-        print(">>> Found " + String(matchesCount) + " Cell(s) with '" + label + "' label")
-        return matchesCount
+        let matches = matchingCells.count
+        print(">>> Found \(matches) Cell(s) with '\(label)' label")
+        return matches
     }
 
-    class func getContentOfCell(noteName: String) -> String {
+    class func getStaticTextsWithExactLabelCount(label: String) -> Int {
+        let predicate = NSPredicate(format: "label == '" + label + "'")
+        let matchingCells = app.tables.staticTexts.matching(predicate)
+        let matches = matchingCells.count
+        print(">>> Found \(matches) StaticText(s) with '\(label)' label")
+        return matches
+    }
+
+    class func getContentOfCell(noteName: String) -> String? {
         let cell = Table.getCell(label: noteName)
         guard cell.exists else { return "" }
 
@@ -91,7 +114,7 @@ class Table {
         // this is the one we need.
         let predicate = NSPredicate(format: "label != '" + noteName + "'")
         let staticTextWithContent = cell.staticTexts.element(matching: predicate)
-        guard staticTextWithContent.exists else { return "" }
+        guard staticTextWithContent.exists else { return .none }
 
         return staticTextWithContent.label
     }
@@ -108,11 +131,17 @@ class WebView {
 
 class WebViewAssert {
 
-    class func textShownOnScreen(textToFind: String) {
-        let textPredicate = NSPredicate(format: "label MATCHES '" + textToFind + "'")
+    class func textShownOnScreen(text: String) {
+        let textPredicate = NSPredicate(format: "label MATCHES '" + text + "'")
         let staticText = app.staticTexts.element(matching: textPredicate)
 
-        XCTAssertTrue(staticText.exists, "\"" + textToFind + textNotFoundInWebView)
+        XCTAssertTrue(staticText.exists, "\"" + text + textNotFoundInWebView)
+    }
+
+    class func textsShownOnScreen(texts: [String]) {
+        for text in texts {
+            WebViewAssert.textShownOnScreen(text: text)
+        }
     }
 }
 

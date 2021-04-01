@@ -1,15 +1,27 @@
+4.35
+-----
+-   Simplenote's Icons have been revamped #919
+
+4.34
+-----
+-   VoiceOver now reads note contextual actions names correctly #1191
+
+4.33.1
+-----
+-   Fixed a bug that caused a crash while accessing some searched notes #1213
+
 4.33
 -----
 -   Updating new-note and collaborate icons #1103
 -   Updating tags editor #990
 -   Updating sort bar #1067
 -   Removing trailing comma from tags when used as delimiter #1120
- 
+
 4.32
 -----
 -   Added support for keyboard navigation and shortcuts #1092
 
- 
+
 4.31
 -----
 -   Added account verification screen #1086
@@ -53,7 +65,7 @@
 -----
 -   Fixed a bug that affected scrolling in iOS 14 #916
 -   Added a link to help in Settings and About #894
- 
+
 4.25
 -----
 -   Fixed a bug that prevented adding collaborators with email addresses that contain new TLDs #872

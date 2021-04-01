@@ -1,1 +1,1 @@
-- Klavye gezintisi ve kısayollar için destek eklendi
+- VoiceOver artık bağlamsal not eylem adlarını doğru şekilde okuyor

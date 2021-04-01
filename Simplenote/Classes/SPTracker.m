@@ -327,28 +327,6 @@
     [self trackAutomatticEventWithName:@"user_signed_out" properties:nil];
 }
 
-#pragma mark - Keychain Migration
-
-+ (void)trackKeychainMigrationSucceeded
-{
-    [self trackAutomatticEventWithName:@"keychain_migration_succeeded" properties:nil];
-}
-
-+ (void)trackKeychainMigrationFailed
-{
-    [self trackAutomatticEventWithName:@"keychain_migration_failed" properties:nil];
-}
-
-+ (void)trackKeychainFailsafeSucceeded
-{
-    [self trackAutomatticEventWithName:@"keychain_failsafe_succeeded" properties:nil];
-}
-
-+ (void)trackKeychainFailsafeFailed
-{
-    [self trackAutomatticEventWithName:@"keychain_failsafe_failed" properties:nil];
-}
-
 #pragma mark - WP.com Sign In
 
 + (void)trackWPCCButtonPressed

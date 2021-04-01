@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-02-23 03:24:10+0000 */
+/* Translation-Revision-Date: 2021-03-16 18:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: nl */
@@ -70,17 +70,9 @@
 /* Label on button to add a new tag to a note */
 "Add tag" = "Tag toevoegen";
 
-/* Title: No filters applied */
+/* All Notes filter button
+   Title: No filters applied */
 "All Notes" = "Alle notities";
-
-/* Sort Mode: Alphabetically */
-"Alphabetically" = "Alfabetisch";
-
-/* Sort Mode: Alphabetically, ascending */
-"Alphabetically: A-Z" = "Alfabetisch: A-Z";
-
-/* Sort Mode: Alphabetically, descending */
-"Alphabetically: Z-A" = "Alfabetisch: Z-A";
 
 /* Sign in error message */
 "An error was encountered while signing in." = "Er is een aanmeldfout opgetreden.";
@@ -159,7 +151,7 @@
 /* Copies the Note's Public Link */
 "Copy Link" = "Link kopiëren";
 
-/* No comment provided by engineer. */
+/* Rating view - initial - could be better button */
 "Could be better" = "Kan beter";
 
 /* Error for bad email or password */
@@ -168,7 +160,7 @@
 /* Message displayed when login fails */
 "Could not login with the provided email address and password." = "Kan niet inloggen met het opgegeven e-mailadres en wachtwoord.";
 
-/* No comment provided by engineer. */
+/* Rating view disliked title */
 "Could you tell us how we could improve?" = "Kun je ons vertellen wat we kunnen verbeteren?";
 
 /* Error message shown when trying to view history of a note without an internet connection */
@@ -189,8 +181,7 @@
 /* Message shown in note list when no notes are in the current view */
 "Create your first note" = "Voeg je eerste opmerking toe";
 
-/* Note Creation Date
-   Sort Mode: Creation Date */
+/* Note Creation Date */
 "Created" = "Aangemaakt";
 
 /* Sort Mode: Creation Date, descending */
@@ -224,6 +215,9 @@
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "Diagnoses";
 
+/* Footer -> Sign up verification screen. Parameter: %1$@ - support email address */
+"Didn't get an email? You may already have an account. Contact %1$@ for help." = "Niet ontvangen? Misschien heb je al een account. Neem voor hulp contact op met %1$@.";
+
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "Markdown-opmaak uitschakelen";
 
@@ -241,6 +235,7 @@
 
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
+   Done editing tags
    Done toolbar button */
 "Done" = "Klaar";
 
@@ -289,7 +284,7 @@
 /* FAQ or contact us */
 "Get Help" = "Ontvang hulp";
 
-/* No comment provided by engineer. */
+/* Rating view liked title */
 "Great! Mind leaving a review to tell us what you like?" = "Geweldig! Denk je eraan een beoordeling achter te laten om ons te vertellen wat je zou willen?";
 
 /* Display help web page */
@@ -301,7 +296,7 @@
 /* Opens the Note's History */
 "History" = "Geschiedenis";
 
-/* No comment provided by engineer. */
+/* Rating view - initial - liked button */
 "I like it" = "Ik vind het leuk";
 
 /* Note Information Button (metrics + references) */
@@ -322,7 +317,7 @@
 /* Learn More Action */
 "Learn more" = "Meer informatie";
 
-/* No comment provided by engineer. */
+/* Rating view - liked - leave review button */
 "Leave a review" = "Laat een beoordeling achter";
 
 /* Theme: Light */
@@ -364,8 +359,7 @@
 /* Note Options Button */
 "Menu" = "Menu";
 
-/* Note Modification Date
-   Sort Mode: Modified Date */
+/* Note Modification Date */
 "Modified" = "Aangepast";
 
 /* Sort Mode: Modified Date, descending */
@@ -377,6 +371,12 @@
 /* Delete Action
    Deletes a note */
 "Move to Trash" = "Verplaatsen naar prullenbak";
+
+/* Sort Mode: Alphabetically, ascending */
+"Name: A-Z" = "Naam: A-Z";
+
+/* Sort Mode: Alphabetically, descending */
+"Name: Z-A" = "Naam: Z-A";
 
 /* Home screen quick action: New Note
    Keyboard shortcut: New Note */
@@ -400,7 +400,7 @@
 /* Message shown in note list when no notes are tagged with the provided tag. Parameter: %@ - tag */
 "No notes tagged “%@”" = "Geen opmerkingen getagd met '%@'";
 
-/* No comment provided by engineer. */
+/* Rating view - liked or disliked - no thanks button */
 "No thanks" = "Nee, liever niet";
 
 /* Message shown in note list when no notes are untagged */
@@ -409,7 +409,8 @@
 /* Notes Header (Search Mode) */
 "Notes" = "Notities";
 
-/* Dismisses an AlertController */
+/* Closes alert controller for spinner on About view
+   Dismisses an AlertController */
 "OK" = "OK";
 
 /* Instant passcode lock timeout */
@@ -545,10 +546,11 @@
 /* For debugging use */
 "Send a Test Crash" = "Een testcrash verzenden";
 
-/* No comment provided by engineer. */
+/* Rating view - disliked - send feedback button */
 "Send feedback" = "Stuur feedback";
 
-/* Title of options screen */
+/* Settings button
+   Title of options screen */
 "Settings" = "Instellingen";
 
 /* Opens the Share Sheet
@@ -600,7 +602,7 @@
 /* Theme: Matches iOS Settings */
 "System Default" = "Systeemstandaard";
 
-/* No comment provided by engineer. */
+/* Tags List Header */
 "Tags" = "Tags";
 
 /* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
@@ -636,7 +638,8 @@
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Touch ID";
 
-/* Title: Trash Tag is selected */
+/* Title: Trash Tag is selected
+   Trash filter button */
 "Trash-noun" = "Prullenbak";
 
 /* Prompt when disabling passcode */
@@ -684,7 +687,10 @@
 /* Message -> Verify your email screen. Parameter: %1$@ - email address */
 "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "We hebben een verificatiemail verzonden naar %1$@. Controleer je postvak IN en volg de instructies.";
 
-/* No comment provided by engineer. */
+/* Message -> Sign up verification screen. Parameter: %1$@ - email address */
+"We’ve sent an email to %1$@. Please check your inbox and follow the instructions." = "We hebben een e-mail verzonden naar %1$@. Controleer je postvak IN en volg de instructies.";
+
+/* Rating view initial title */
 "What do you think about Simplenote?" = "Wat vind je van Simplenote?";
 
 /* Number of words in the note */
@@ -717,11 +723,11 @@
 /* Accessibility hint for adding a tag to a note */
 "tag-add-accessibility-hint" = "Een tag toevoegen aan de huidige notitie";
 
-/* No comment provided by engineer. */
+/* Remove a tag from the current note */
 "tag-delete-accessibility-hint" = "Tag verwijderen uit de huidige notitie";
 
-/* A welcome note for new iOS users */
-"welcomeNote-iOS" = "Welkom bij Simplenote voor iOS!\n\nOm een notitie toe te voegen, tik je op de plusknop.\n\nVeeg door de lijst om te bladeren in je notities. Tik op een titel om een notitie te bekijken en tik dan op de inhoud om hem te wijzigen.\n\nJe kunt in al je notities zoeken door te typen in het zoekveld boven aan de notitielijst.\n\nTik op de pijlknop linksboven of veeg over je notitielijst om je tags te bekijken. Je kunt tags toevoegen aan een notitie onder aan de notitie-editor en vervolgens de sidebar gebruiken om overzicht te houden.\n\nDesgewenst zijn er nog meer notitie-opties. Je kunt anderen toevoegen aan een notitie als samenwerker of een notitie publiceren als webpagina.\n\nGebruik Simplenote op je Mac, Android-apparaat of in je webbrowser op http:\/\/simplenote.com. Je notities worden overal automatisch bijgewerkt.";
+/* Search Operator for tags. Please preserve the semicolons when translating! */
+"tag:" = "tag:";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞 Debug ingeschakeld 🐞";

@@ -50,10 +50,24 @@
             "<style media=\"screen\" type=\"text/css\">\n";
     NSString *headerEnd = @"</style></head><body><div class=\"note-detail-markdown\">";
 
-    NSString *css = [NSString stringWithContentsOfURL:[[NSBundle mainBundle] URLForResource:self.cssPath withExtension:nil]
-                                             encoding:NSUTF8StringEncoding error:nil];
+    NSString *css = [self loadCSSAtPath:self.cssPath];
+
+    // Check if increase contrast is enabled.  If enabled amend CSS to include high contrast colors
+    //
+    if (@available(iOS 13.0, *)) {
+        if ([[UITraitCollection currentTraitCollection] accessibilityContrast] == UIAccessibilityContrastHigh) {
+            NSString *contrast = [self loadCSSAtPath:self.contrastCssPath];
+            css = [css stringByAppendingString:contrast];
+        }
+    }
     
     return [[headerStart stringByAppendingString:css] stringByAppendingString:headerEnd];
+}
+
++ (NSString *)loadCSSAtPath:(NSString *)path
+{
+    return [NSString stringWithContentsOfURL:[[NSBundle mainBundle] URLForResource:path withExtension:nil]
+                                    encoding:NSUTF8StringEncoding error:nil];
 }
 
 + (NSString *)cssPath
@@ -63,6 +77,15 @@
     }
 
     return @"markdown-default.css";
+}
+
++ (NSString *)contrastCssPath
+{
+    if (SPUserInterface.isDark) {
+        return @"markdown-dark-contrast.css";
+    }
+
+    return @"markdown-default-contrast.css";
 }
 
 + (NSString *)htmlFooter

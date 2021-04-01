@@ -66,8 +66,8 @@ msgctxt "app_store_keywords"
 msgid "simplenote,note,taking,taker,notes,sync,share,simple,markdown,tag,to-do,list,lock,cloud,writing"
 msgstr ""
 
-msgctxt "v4.32-whats-new"
+msgctxt "v4.34-whats-new"
 msgid ""
-"- Added support for keyboard navigation and shortcuts\n"
+"- VoiceOver now reads note contextual actions names correctly\n"
 msgstr ""
 

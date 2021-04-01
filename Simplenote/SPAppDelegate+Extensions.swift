@@ -370,13 +370,23 @@ private extension SPAppDelegate {
 }
 
 
+// MARK: - Magic Link authentication
+//
+extension SPAppDelegate {
+    @objc
+    func performMagicLinkAuthentication(with url: URL) {
+        MagicLinkAuthenticator(authenticator: simperium.authenticator).handle(url: url)
+    }
+}
+
+
 // MARK: - Scroll position cache
 //
 extension SPAppDelegate {
     @objc
     func cleanupScrollPositionCache() {
         let allNotes = SPObjectManager.shared().notes()
-        let allIdentifiers: [String] = allNotes.compactMap { note in 
+        let allIdentifiers: [String] = allNotes.compactMap { note in
             note.deleted ? nil : note.simperiumKey
         }
         EditorFactory.shared.scrollPositionCache.cleanup(keeping: allIdentifiers)

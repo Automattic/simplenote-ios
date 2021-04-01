@@ -190,12 +190,16 @@ class SPAuthViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationController()
         startListeningToNotifications()
+
+        passwordInputView.isHidden = mode.isPasswordHidden
+
+        // hiding text from back button
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         ensureStylesMatchValidationState()
-        performPrimaryActionIfPossible()
         ensureNavigationBarIsVisible()
     }
 
@@ -309,11 +313,15 @@ private extension SPAuthViewController {
 
         lockdownInterface()
 
-        controller.signupWithCredentials(username: email, password: password) { error in
+        controller.signupWithCredentials(username: email) { [weak self] error in
+            guard let self = self else {
+                return
+            }
+
             if let error = error {
                 self.handleError(error: error)
             } else {
-                SPTracker.trackUserAccountCreated()
+                self.presentSignupVerification()
             }
 
             self.unlockInterface()
@@ -332,6 +340,12 @@ private extension SPAuthViewController {
         let safariViewController = SFSafariViewController(url: targetURL)
         safariViewController.modalPresentationStyle = .overFullScreen
         present(safariViewController, animated: true, completion: nil)
+    }
+
+    private func presentSignupVerification() {
+        let viewController = SignupVerificationViewController(email: email)
+        viewController.title = title
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
@@ -499,7 +513,10 @@ private extension SPAuthViewController {
     /// That's where the `validationStyle` comes in.
     ///
     func performPasswordValidation() -> AuthenticationValidator.Result {
-        validator.performPasswordValidation(username: email, password: password, style: mode.validationStyle)
+        guard !mode.isPasswordHidden else {
+            return .success
+        }
+        return validator.performPasswordValidation(username: email, password: password, style: mode.validationStyle)
     }
 
     /// Whenever we're in `.login` mode, and the password is valid in `.legacy` terms (but invalid in `.strong` mode), we must request the
@@ -550,7 +567,11 @@ extension SPAuthViewController: SPTextInputViewDelegate {
         case emailInputView:
             switch performUsernameValidation() {
             case .success:
-                passwordInputView.becomeFirstResponder()
+                if mode.isPasswordHidden {
+                    performPrimaryActionIfPossible()
+                } else {
+                    passwordInputView.becomeFirstResponder()
+                }
 
             case let error:
                 displayEmailValidationWarning(error.description)
@@ -584,6 +605,7 @@ struct AuthenticationMode {
     let secondaryActionSelector: Selector
     let secondaryActionText: String?
     let secondaryActionAttributedText: NSAttributedString?
+    let isPasswordHidden: Bool
 }
 
 
@@ -600,7 +622,8 @@ extension AuthenticationMode {
                      primaryActionText:             AuthenticationStrings.loginPrimaryAction,
                      secondaryActionSelector:       #selector(SPAuthViewController.presentPasswordReset),
                      secondaryActionText:           AuthenticationStrings.loginSecondaryAction,
-                     secondaryActionAttributedText: nil)
+                     secondaryActionAttributedText: nil,
+                     isPasswordHidden:              false)
     }
 
     /// Signup Operation Mode: Contains all of the strings + delegate wirings, so that the AuthUI handles user account creation scenarios.
@@ -612,7 +635,8 @@ extension AuthenticationMode {
                      primaryActionText:             AuthenticationStrings.signupPrimaryAction,
                      secondaryActionSelector:       #selector(SPAuthViewController.presentTermsOfService),
                      secondaryActionText:           nil,
-                     secondaryActionAttributedText: AuthenticationStrings.signupSecondaryAttributedAction)
+                     secondaryActionAttributedText: AuthenticationStrings.signupSecondaryAttributedAction,
+                     isPasswordHidden:              true)
     }
 }
 
