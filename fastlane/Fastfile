@@ -610,9 +610,8 @@ end
     prelaunch_simulator: true,
     reset_simulator: true,
     only_testing: "SimplenoteUITests/SimplenoteUISmokeTestsLogin/testLogInWithCorrectCredentials",
-
-    #test_without_building: true,
-    #derived_data_path: derived_data_directory
+    test_without_building: true,
+    derived_data_path: derived_data_directory
   )
   end
 end
