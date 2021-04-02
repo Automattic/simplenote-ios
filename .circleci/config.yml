@@ -156,7 +156,6 @@ workflows:
           name: UI Tests (iPhone 12)
           device: iPhone 12
           ios-version: "14.4"
-          requires: [ "Test" ]
   Installable Build:
     jobs:
       - Hold:
