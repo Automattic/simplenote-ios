@@ -68,6 +68,9 @@ class NoticePresenter {
         }
 
         let containerView = PassthruView(frame: .zero)
+        containerView.onInteraction = {
+            NoticeController.shared.dismiss()
+        }
         self.containerView = containerView
 
         keyWindow.addFillingSubview(containerView)
@@ -110,8 +113,10 @@ class NoticePresenter {
               let noticeView = noticeView else {
             return
         }
-        UIView.animate(withDuration: UIKitConstants.animationLongDuration) {
-            noticeView.alpha = .zero
+
+        UIView.animate(withDuration: UIKitConstants.animationLongDuration, delay: .zero, options: [.allowUserInteraction]) {
+            noticeView.alpha = 0
+            containerView.alpha = 0
         } completion: { (_) in
             noticeView.removeFromSuperview()
             containerView.removeFromSuperview()

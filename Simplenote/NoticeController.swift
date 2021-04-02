@@ -76,8 +76,7 @@ class NoticeController {
 
     // MARK: Dismissing
     //
-    @objc
-    private func dismiss() {
+    func dismiss() {
         noticePresenter.dismissNotification {
             self.current = nil
 
