@@ -76,8 +76,8 @@ class NoticeController {
 
     // MARK: Dismissing
     //
-    func dismiss() {
-        noticePresenter.dismissNotification {
+    func dismiss(withDuration duration: TimeInterval? = nil) {
+        noticePresenter.dismissNotification(withDuration: duration) {
             self.current = nil
 
             if !self.notices.isEmpty {

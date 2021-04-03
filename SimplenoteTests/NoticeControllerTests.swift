@@ -205,7 +205,7 @@ class MockNoticePresenter: NoticePresenter {
         completion()
     }
 
-    override func dismissNotification(completion: @escaping () -> Void) {
+    override func dismissNotification(withDuration duration: TimeInterval?, completion: @escaping () -> Void) {
         let noticeView = try! XCTUnwrap(lastNoticeView)
         lastNoticeView = nil
         actionLog.append(.dismiss(noticeView.message))

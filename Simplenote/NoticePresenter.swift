@@ -108,13 +108,15 @@ class NoticePresenter {
 
     // MARK: Dismissing Methods
     //
-    func dismissNotification(completion: @escaping () -> Void) {
+    func dismissNotification(withDuration duration: TimeInterval?, completion: @escaping () -> Void) {
         guard let containerView = containerView,
               let noticeView = noticeView else {
             return
         }
 
-        UIView.animate(withDuration: UIKitConstants.animationLongDuration, delay: .zero, options: [.allowUserInteraction]) {
+        UIView.animate(withDuration: duration ?? UIKitConstants.animationLongDuration,
+                       delay: .zero,
+                       options: [.allowUserInteraction]) {
             noticeView.alpha = 0
             containerView.alpha = 0
         } completion: { (_) in
