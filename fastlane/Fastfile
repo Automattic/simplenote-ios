@@ -609,7 +609,9 @@ end
     deployment_target_version: options[:ios_version],
     prelaunch_simulator: true,
     reset_simulator: true,
-    only_testing: "SimplenoteUITests/SimplenoteUISmokeTestsLogin/testLogInWithCorrectCredentials"
+    only_testing: [
+      "SimplenoteUITests/SimplenoteUISmokeTestsLogin", 
+      "SimplenoteUITests/SimplenoteUISmokeTestsNoteEditor"]
   )
   end
 end
