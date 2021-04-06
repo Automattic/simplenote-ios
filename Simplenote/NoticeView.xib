@@ -30,9 +30,8 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PEr-q4-fDe">
-                            <rect key="frame" x="202" y="60" width="46" height="18"/>
+                            <rect key="frame" x="194" y="60" width="54" height="18"/>
                             <directionalEdgeInsets key="directionalLayoutMargins" top="16" leading="8" bottom="16" trailing="0.0"/>
-                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                             <inset key="contentEdgeInsets" minX="0.0" minY="-6" maxX="0.0" maxY="-6"/>
                             <state key="normal" title="Button">
                                 <color key="titleColor" systemColor="linkColor"/>
