@@ -158,7 +158,7 @@ workflows:
           filters:
             branches:
               only:
-                - /[UI-tests]]/
+                - /^UI-tests.*/
   Installable Build:
     jobs:
       - Hold:
