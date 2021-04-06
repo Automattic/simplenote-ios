@@ -158,8 +158,7 @@ workflows:
           filters:
             branches:
               only:
-                - develop
-                - /^release.*/
+                - /[UI-testss]]/
   Installable Build:
     jobs:
       - Hold:
