@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-03-08 11:32:12+0000 */
+/* Translation-Revision-Date: 2021-03-16 18:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: nl */
@@ -216,7 +216,7 @@
 "Diagnostics" = "Diagnoses";
 
 /* Footer -> Sign up verification screen. Parameter: %1$@ - support email address */
-"Didn't get an email? You may already have an account. Contact %1$@ for help." = "Didn't get an email? You may already have an account. Contact %1$@ for help.";
+"Didn't get an email? You may already have an account. Contact %1$@ for help." = "Niet ontvangen? Misschien heb je al een account. Neem voor hulp contact op met %1$@.";
 
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "Markdown-opmaak uitschakelen";
@@ -688,7 +688,7 @@
 "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "We hebben een verificatiemail verzonden naar %1$@. Controleer je postvak IN en volg de instructies.";
 
 /* Message -> Sign up verification screen. Parameter: %1$@ - email address */
-"We’ve sent an email to %1$@. Please check your inbox and follow the instructions." = "We’ve sent an email to %1$@. Please check your inbox and follow the instructions.";
+"We’ve sent an email to %1$@. Please check your inbox and follow the instructions." = "We hebben een e-mail verzonden naar %1$@. Controleer je postvak IN en volg de instructies.";
 
 /* Rating view initial title */
 "What do you think about Simplenote?" = "Wat vind je van Simplenote?";

@@ -84,12 +84,6 @@
 + (void)trackUserSignedIn;
 + (void)trackUserSignedOut;
 
-#pragma mark - Keychain Migration
-+ (void)trackKeychainMigrationSucceeded;
-+ (void)trackKeychainMigrationFailed;
-+ (void)trackKeychainFailsafeSucceeded;
-+ (void)trackKeychainFailsafeFailed;
-
 #pragma mark - WP.com Sign In
 + (void)trackWPCCButtonPressed;
 + (void)trackWPCCLoginSucceeded;

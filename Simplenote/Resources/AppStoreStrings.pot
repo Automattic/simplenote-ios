@@ -66,11 +66,8 @@ msgctxt "app_store_keywords"
 msgid "simplenote,note,taking,taker,notes,sync,share,simple,markdown,tag,to-do,list,lock,cloud,writing"
 msgstr ""
 
-msgctxt "v4.33-whats-new"
+msgctxt "v4.34-whats-new"
 msgid ""
-"- Updating new-note and collaborate icons\n"
-"- Updating tags editor\n"
-"- Updating sort bar\n"
-"- Removing trailing comma from tags when used as delimiter\n"
+"- VoiceOver now reads note contextual actions names correctly\n"
 msgstr ""
 

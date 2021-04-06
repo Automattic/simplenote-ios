@@ -1,0 +1,1 @@
+– VoiceOver läser nu namn för sammanhangsåtgärder korrekt

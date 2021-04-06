@@ -21,7 +21,7 @@ lines = NOTES.lines
 
 def replace_pr_number_with_markdown_link(string)
   string.gsub(/\#\d*$/) do |pr_number|
-    "[#{GITHUB_URL}/pull/#{pr_number.gsub('#', '')}](#{pr_number})"
+    "[#{pr_number}](#{GITHUB_URL}/pull/#{pr_number.gsub('#', '')})"
   end
 end
 

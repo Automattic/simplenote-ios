@@ -1,0 +1,1 @@
+- Ahora, VoiceOver lee los nombres de las acciones contextuales de las notas correctamente
