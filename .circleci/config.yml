@@ -113,7 +113,7 @@ jobs:
             failure_message: '${SLACK_FAILURE_MESSAGE}'
             success_message: '${SLACK_SUCCESS_MESSAGE}'
   UI Tests:
-    # Props to work done by others here and in
+    # Props to work done by others in this file and in
     # https://github.com/wordpress-mobile/WordPress-iOS/blob/develop/.circleci/config.yml
     # this is a combined rip-off from both
     parameters:     

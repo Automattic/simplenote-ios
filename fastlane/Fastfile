@@ -598,10 +598,10 @@ end
   # UI tests lanes
   #####################################################################################
 
-    # Props to work done by others here and in
+    # Props to work done by others in this file and in
     # https://github.com/wordpress-mobile/WordPress-iOS/blob/develop/fastlane/Fastfile
     # this is a combined rip-off from both
-    
+
     #####################################################################################
     # run_UI_tests
     # -----------------------------------------------------------------------------------
