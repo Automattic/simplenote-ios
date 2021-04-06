@@ -44,6 +44,7 @@ jobs:
           workspace: Simplenote.xcworkspace
           scheme: Simplenote
           device: iPhone 11
+
   Installable Build:
     executor:
       name: ios/default
@@ -154,6 +155,11 @@ workflows:
       - UI Tests:
           name: UI Tests (iPhone 12)
           device: "iPhone 12"
+          filters:
+            branches:
+              only:
+                - develop
+                - /^release.*/
   Installable Build:
     jobs:
       - Hold:
