@@ -112,15 +112,14 @@ jobs:
             failure_message: '${SLACK_FAILURE_MESSAGE}'
             success_message: '${SLACK_SUCCESS_MESSAGE}'
   UI Tests:
+    # Props to work done by others here and in
+    # https://github.com/wordpress-mobile/WordPress-iOS/blob/develop/.circleci/config.yml
+    # this is a combined rip-off from both
     parameters:     
       device:
         description: The device (e.g. "iPhone 12") to use when running tests.
         type: string
         default: "iPhone 12"
-      ios-version:
-        description: The iOS version (e.g. "14.4") of the device used to run tests.
-        type: string
-        default: "14.4"
     executor:
       name: ios/default
       xcode-version: "12.4.0"
@@ -142,7 +141,7 @@ jobs:
       # END: Swift Package Manager Workaround
       - run:
           name: Fastlane
-          command: bundle exec fastlane $FASTLANE_LANE device:'<< parameters.device >>' ios-version:'<< parameters.ios-version >>'
+          command: bundle exec fastlane $FASTLANE_LANE device:'<< parameters.device >>'
       - store_artifacts:
           path: output
       - store_test_results:
@@ -154,8 +153,7 @@ workflows:
       - Test
       - UI Tests:
           name: UI Tests (iPhone 12)
-          device: iPhone 12
-          ios-version: "14.4"
+          device: "iPhone 12"
   Installable Build:
     jobs:
       - Hold:
