@@ -88,7 +88,7 @@ class NoticePresenter {
     private func display(view: UIView, in containerView: UIView, completion: @escaping () -> Void) {
         prepareConstraintFor(view: view, in: containerView)
 
-        UIView.animate(withDuration: UIKitConstants.animationLongDuration, animations: {
+        UIView.animate(withDuration: UIKitConstants.animationShortDuration, animations: {
             containerView.layoutIfNeeded()
         }, completion: { _ in
             completion()
