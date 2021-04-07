@@ -12,8 +12,6 @@ class NoticePresenter {
     private var keyboardFloats: Bool = false
     private var keyboardNotificationTokens: [Any]?
 
-    var onExternalTap: (() -> Void)?
-
     private var keyWindow: UIWindow? {
         return UIApplication.shared.windows.first(where: { $0.isKeyWindow })
     }
@@ -70,7 +68,6 @@ class NoticePresenter {
         }
 
         let containerView = PassthruView(frame: .zero)
-        containerView.onInteraction = onExternalTap
         self.containerView = containerView
 
         keyWindow.addFillingSubview(containerView)

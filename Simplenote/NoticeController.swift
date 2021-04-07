@@ -29,14 +29,13 @@ class NoticeController {
 
     func setupNoticeController() {
         noticePresenter.startListeningToKeyboardNotifications()
-        noticePresenter.onExternalTap = { [weak self] in
-            self?.dismiss(withDuration: UIKitConstants.animationQuickDuration)
-        }
     }
 
     // MARK: Presenting
     //
     func present(_ notice: Notice) {
+        dismissNoticeIfNeeded()
+
         if isPresenting {
             appendToQueueIfNew(notice)
             return
