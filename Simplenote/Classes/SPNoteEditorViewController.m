@@ -211,9 +211,14 @@ CGFloat const SPSelectedAreaPadding = 20;
 {
     [super viewWillDisappear:animated];
     [self.navigationController setToolbarHidden:YES animated:YES];
-    [self stopListeningToKeyboardNotifications];
 
     [self saveScrollPosition];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [self stopListeningToKeyboardNotifications];
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
