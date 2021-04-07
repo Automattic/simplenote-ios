@@ -462,6 +462,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 - (UIViewController *)nextViewControllerForInteractivePush
 {
+    [self endEditing];
     SPMarkdownPreviewViewController *previewViewController = [SPMarkdownPreviewViewController new];
     previewViewController.markdownText = [self.noteEditorTextView plainText];
     
