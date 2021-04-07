@@ -41,7 +41,7 @@ class NoticeControllerTests: XCTestCase {
         let noticeA = Notice(message: "Message A", action: nil)
         let noticeB = Notice(message: "Message B", action: nil)
 
-        // Should not enqueue a notice that is presenting or enqueued
+        // Should not enqueue a notice that is enqueued
         controller.present(noticeA)
         controller.present(noticeA)
         controller.present(noticeB)
@@ -54,12 +54,13 @@ class NoticeControllerTests: XCTestCase {
 
         try XCTUnwrap(timerFactory.timer).fire()
         expectedActions.append(.dismiss(noticeA.message))
-        expectedActions.append(.present(noticeB.message))
+        expectedActions.append(.present(noticeA.message))
 
         XCTAssertEqual(expectedActions, presenter.actionLog)
 
         try XCTUnwrap(timerFactory.timer).fire()
-        expectedActions.append(.dismiss(noticeB.message))
+        expectedActions.append(.dismiss(noticeA.message))
+        expectedActions.append(.present(noticeB.message))
 
         XCTAssertEqual(expectedActions, presenter.actionLog)
     }
@@ -180,6 +181,25 @@ class NoticeControllerTests: XCTestCase {
         ]
 
         XCTAssertEqual(expectedActions, presenter.actionLog)
+    }
+
+    func testDismissibleNoticeWillDismissOnPresent() {
+        let noticeA = Notice(message: "Message A", action: nil, isDismissible: true)
+        let noticeB = Notice(message: "Message B", action: nil)
+
+        controller.present(noticeA)
+
+        var expectedActions: [MockNoticePresenter.Action] = [
+            .present(noticeA.message)
+        ]
+        XCTAssertEqual(presenter.actionLog, expectedActions)
+
+        controller.present(noticeB)
+
+        expectedActions.append(.dismiss(noticeA.message))
+        expectedActions.append(.present(noticeB.message))
+
+        XCTAssertEqual(presenter.actionLog, expectedActions)
     }
 }
 
