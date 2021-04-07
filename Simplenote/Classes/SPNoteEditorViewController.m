@@ -217,6 +217,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 - (void)viewDidDisappear:(BOOL)animated
 {
+    [super viewDidDisappear:animated];
     [self stopListeningToKeyboardNotifications];
 }
 
