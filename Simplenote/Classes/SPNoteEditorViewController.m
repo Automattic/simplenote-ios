@@ -462,7 +462,6 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 - (UIViewController *)nextViewControllerForInteractivePush
 {
-    [self endEditing];
     SPMarkdownPreviewViewController *previewViewController = [SPMarkdownPreviewViewController new];
     previewViewController.markdownText = [self.noteEditorTextView plainText];
     
@@ -489,6 +488,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 - (void)interactivePushPopAnimationControllerWillBeginPush:(SPInteractivePushPopAnimationController *)controller
 {
+    [self endEditing];
     // This dispatch is to prevent the animations executed when ending editing
     // from happening interactively along with the push on iOS 9.
     dispatch_async(dispatch_get_main_queue(), ^{
