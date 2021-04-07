@@ -52,14 +52,21 @@ class NoticeController {
         }
     }
 
+    private func dismissNoticeIfNeeded() {
+        guard let current = current,
+              current.isDismissible else {
+            return
+        }
+
+        timer?.invalidate()
+        dismiss(withDuration: UIKitConstants.animationQuickDuration)
+
+    }
+
     /// Confirms if a notice is already contained in notices queue. Appends to queue if new
     ///
     private func appendToQueueIfNew(_ notice: Notice) {
         if notices.contains(notice) {
-            return
-        }
-
-        if notice == current {
             return
         }
 
