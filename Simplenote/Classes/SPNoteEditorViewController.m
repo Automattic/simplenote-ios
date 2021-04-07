@@ -211,9 +211,13 @@ CGFloat const SPSelectedAreaPadding = 20;
 {
     [super viewWillDisappear:animated];
     [self.navigationController setToolbarHidden:YES animated:YES];
-    [self stopListeningToKeyboardNotifications];
 
     [self saveScrollPosition];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [self stopListeningToKeyboardNotifications];
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
@@ -488,7 +492,6 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 - (void)interactivePushPopAnimationControllerWillBeginPush:(SPInteractivePushPopAnimationController *)controller
 {
-    [self endEditing];
     // This dispatch is to prevent the animations executed when ending editing
     // from happening interactively along with the push on iOS 9.
     dispatch_async(dispatch_get_main_queue(), ^{
