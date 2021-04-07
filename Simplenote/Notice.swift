@@ -4,7 +4,7 @@ struct Notice {
 
     let message: String
     let action: NoticeAction?
-    let isDismissible: Bool
+    var isDismissible: Bool = false
 
     var hasAction: Bool {
         return action != nil
