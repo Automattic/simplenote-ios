@@ -1,9 +1,10 @@
 import Foundation
 
 struct Notice {
-    
+
     let message: String
     let action: NoticeAction?
+    let isDismissible: Bool
 
     var hasAction: Bool {
         return action != nil
