@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/wordpress-mobile/release-toolkit
-  revision: 8401cc75c5cd2d02235cfebafb5ce2a0519754bc
-  ref: 8401cc75c5cd2d02235cfebafb5ce2a0519754bc
+  revision: ec9d311dd90db58fde3e60e64fd98a58f38df4a9
+  tag: 0.17.0
   specs:
-    fastlane-plugin-wpmreleasetoolkit (0.15.0)
+    fastlane-plugin-wpmreleasetoolkit (0.17.0)
       activesupport (~> 5)
       bigdecimal (~> 1.4)
       chroma (= 0.2.0)
@@ -234,10 +234,10 @@ GEM
     nap (1.1.0)
     naturally (2.2.1)
     netrc (0.11.0)
-    nokogiri (1.11.2)
+    nokogiri (1.11.3)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
-    nokogiri (1.11.2-x86_64-darwin)
+    nokogiri (1.11.3-x86_64-darwin)
       racc (~> 1.4)
     octokit (4.18.0)
       faraday (>= 0.9)
@@ -328,4 +328,4 @@ DEPENDENCIES
   xcpretty-travis-formatter
 
 BUNDLED WITH
-   2.2.10
+   2.2.11
