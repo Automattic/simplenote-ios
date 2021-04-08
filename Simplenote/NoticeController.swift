@@ -53,8 +53,7 @@ class NoticeController {
     }
 
     private func dismissNoticeIfNeeded() {
-        guard let current = current,
-              current.isDismissible else {
+        guard isPresenting else {
             return
         }
 

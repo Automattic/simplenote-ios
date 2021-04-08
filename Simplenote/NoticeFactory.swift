@@ -1,31 +1,31 @@
 import Foundation
 
 struct NoticeFactory {
-    static func linkCopied(dismissible: Bool = false) -> Notice {
-        Notice(message: Messages.linkCopied, action: nil, isDismissible: dismissible)
+    static func linkCopied() -> Notice {
+        Notice(message: Messages.linkCopied, action: nil)
     }
 
-    static func publishing(dismissible: Bool = false) -> Notice {
-        Notice(message: Messages.publishing, action: nil, isDismissible: dismissible)
+    static func publishing() -> Notice {
+        Notice(message: Messages.publishing, action: nil)
     }
 
-    static func unpublishing(dismissible: Bool = false) -> Notice {
-        Notice(message: Messages.unpublishing, action: nil, isDismissible: dismissible)
+    static func unpublishing() -> Notice {
+        Notice(message: Messages.unpublishing, action: nil)
     }
 
-    static func noteTrashed(_ note: Note, dismissible: Bool = false, onUndo: @escaping ()-> Void) -> Notice {
+    static func noteTrashed(_ note: Note, onUndo: @escaping ()-> Void) -> Notice {
         let action = NoticeAction(title: Messages.undo, handler: onUndo)
-        return Notice(message: Messages.trashed, action: action, isDismissible: dismissible)
+        return Notice(message: Messages.trashed, action: action)
     }
 
-    static func unpublished(_ note: Note, dismissible: Bool = false, onUndo: @escaping ()-> Void) -> Notice {
+    static func unpublished(_ note: Note, onUndo: @escaping ()-> Void) -> Notice {
         let action = NoticeAction(title: Messages.undo, handler: onUndo)
-        return Notice(message: Messages.unpublished, action: action, isDismissible: dismissible)
+        return Notice(message: Messages.unpublished, action: action)
     }
 
-    static func published(_ note: Note, dismissible: Bool = false, onCopy: @escaping ()-> Void) -> Notice {
+    static func published(_ note: Note, onCopy: @escaping ()-> Void) -> Notice {
         let action = NoticeAction(title: Messages.copyLink, handler: onCopy)
-        return Notice(message: Messages.published, action: action, isDismissible: dismissible)
+        return Notice(message: Messages.published, action: action)
     }
 }
 
