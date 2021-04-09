@@ -70,6 +70,7 @@ class NoticeView: UIView {
         noticeButton.setTitleColor(.simplenoteCardDismissButtonHighlightedBackgroundColor, for: .highlighted)
         noticeButton.isHidden = true
         noticeButton.titleLabel?.font = UIFont.preferredFont(for: .subheadline, weight: .semibold)
+        noticeButton.titleLabel?.adjustsFontForContentSizeCategory = true
 
     }
 
