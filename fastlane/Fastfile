@@ -9,6 +9,7 @@ end
 
 USER_ENV_FILE_PATH = File.join(Dir.home, '.simplenoteios-env.default')
 PROJECT_ENV_FILE_PATH = File.expand_path(File.join(Dir.pwd, '../.configure-files/project.env'))
+UI_TESTS_SCHEME = "SimplenoteUITests"
 
 before_all do
   # Check that the env files exist
@@ -618,7 +619,7 @@ end
   lane :run_ui_tests do | options |
   scan(
     workspace: workspace_name,
-    scheme: ui_tests_scheme,
+    scheme: UI_TESTS_SCHEME,
     device: options[:device],
     prelaunch_simulator: true,
     reset_simulator: true,
@@ -734,10 +735,6 @@ end
 
 def screenshots_scheme
   "SimplenoteScreenshots"
-end
-
-def ui_tests_scheme
-  "SimplenoteUITests"
 end
 
 def workspace_path
