@@ -620,7 +620,7 @@ end
   scan(
     workspace: workspace_name,
     scheme: UI_TESTS_SCHEME,
-    device: options[:device],
+    device: options[:device] || "iPhone 12",
     prelaunch_simulator: true,
     reset_simulator: true,
     only_testing: "SimplenoteUITests/SimplenoteUISmokeTestsLogin"
