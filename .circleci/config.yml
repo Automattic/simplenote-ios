@@ -144,6 +144,7 @@ jobs:
           command: bundle exec fastlane run_ui_tests device:'<< parameters.device >>'
       - store_artifacts:
           path: output/scan/report.html
+      - store_artifacts:
           path: output/scan/report.junit
       - store_test_results:
           path: output/scan
