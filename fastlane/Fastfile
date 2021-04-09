@@ -603,16 +603,16 @@ end
   # this is a combined rip-off from both
 
   #####################################################################################
-  # run_UI_tests
+  # run_ui_tests
   # -----------------------------------------------------------------------------------
   # A lane to run a subset of automated UI tests. Since only login tests are
   # selected for now, there will be no credentials race condition.
   # -----------------------------------------------------------------------------------
   # Usage:
-  # bundle exec fastlane run_UI_tests [device:<Name of the iOS Simulator >]
+  # bundle exec fastlane run_ui_tests [device:<Name of the iOS Simulator >]
   #
   # Example:
-  # bundle exec fastlane run_UI_tests device:"iPhone 12"
+  # bundle exec fastlane run_ui_tests device:"iPhone 12"
   #####################################################################################
   desc "Run UI tests"
   lane :run_ui_tests do | options |
