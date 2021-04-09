@@ -78,6 +78,8 @@ class NoticeController {
     //
     @objc
     private func dismiss() {
+        self.timer = nil
+
         noticePresenter.dismissNotification {
             self.current = nil
 
