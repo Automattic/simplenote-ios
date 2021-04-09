@@ -598,19 +598,19 @@ end
   # UI tests lanes
   #####################################################################################
 
-    # Props to work done by others in this file and in
-    # https://github.com/wordpress-mobile/WordPress-iOS/blob/develop/fastlane/Fastfile
-    # this is a combined rip-off from both
+  # Props to work done by others in this file and in
+  # https://github.com/wordpress-mobile/WordPress-iOS/blob/develop/fastlane/Fastfile
+  # this is a combined rip-off from both
 
-    #####################################################################################
-    # run_UI_tests
-    # -----------------------------------------------------------------------------------
-    # Usage:
-    # bundle exec fastlane run_UI_tests [device:<Name of the iOS Simulator >]
-    #
-    # Example:
-    # bundle exec fastlane run_UI_tests device:"iPhone 12"
-    #####################################################################################
+  #####################################################################################
+  # run_UI_tests
+  # -----------------------------------------------------------------------------------
+  # Usage:
+  # bundle exec fastlane run_UI_tests [device:<Name of the iOS Simulator >]
+  #
+  # Example:
+  # bundle exec fastlane run_UI_tests device:"iPhone 12"
+  #####################################################################################
   # A lane to run a subset of automated UI tests. Since only login tests are
   # selected for now, there will be no credentials race condition.
   desc "Run UI tests"
