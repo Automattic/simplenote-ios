@@ -614,7 +614,7 @@ end
   # A lane to run a subset of automated UI tests. Since only login tests are
   # selected for now, there will be no credentials race condition.
   desc "Run UI tests"
-  lane :run_UI_tests do | options |
+  lane :run_ui_tests do | options |
   scan(
     workspace: workspace_name,
     scheme: ui_tests_scheme,
