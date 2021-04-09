@@ -82,6 +82,7 @@ class SimplenoteUISmokeTestsLogin: XCTestCase {
         EmailLogin.open()
         EmailLogin.logIn(email: testDataExistingEmail, password: testDataExistingPassword)
         NoteListAssert.allNotesShown()
+        XCTFail()
     }
 
     func testLogOut() throws {
