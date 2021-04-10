@@ -76,7 +76,7 @@ private struct Localization {
         String(format: messageTemplate, email)
     }
 
-    private static let footerTemplate = NSLocalizedString("Didn't get an email? You may already have an account. Contact %1$@ for help.", comment: "Footer -> Sign up verification screen. Parameter: %1$@ - support email address")
+    private static let footerTemplate = NSLocalizedString("Didn't get an email? There may already be an account associated with this email address. Contact %1$@ for help.", comment: "Footer -> Sign up verification screen. Parameter: %1$@ - support email address")
 
     static func footer(with email: String) -> String {
         String(format: footerTemplate, email)
