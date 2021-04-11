@@ -595,7 +595,18 @@ private extension SPNoteListViewController {
                 return nil
         }
 
-        return DateFormatter.listDateFormatter.string(from: date)
+        return dateSortPrefix() + DateFormatter.listDateFormatter.string(from: date)
+    }
+
+    private func dateSortPrefix() -> String {
+        switch notesListController.sortMode {
+        case .createdNewest, .createdOldest:
+            return "Created: "
+        case .modifiedNewest, .modifiedOldest:
+            return "Modified: "
+        default:
+            return ""
+        }
     }
 }
 
