@@ -26,14 +26,6 @@ class OptionsTests: XCTestCase {
         XCTAssert(options.listSortMode == .alphabeticallyAscending)
     }
 
-    func testEmptySearchSortModeYieldsListSortMode() {
-        let options = Options(defaults: defaults)
-        XCTAssertEqual(options.listSortMode, options.searchSortMode)
-
-        options.listSortMode = .alphabeticallyDescending
-        XCTAssertEqual(options.searchSortMode, .alphabeticallyDescending)
-    }
-
     func testLegacyUnspecifiedThemeIsProperlyMigrated() {
         let options = Options(defaults: defaults)
 

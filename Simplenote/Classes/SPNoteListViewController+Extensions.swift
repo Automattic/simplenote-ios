@@ -3,25 +3,6 @@ import CoreSpotlight
 import UIKit
 import SimplenoteSearch
 
-
-// MARK: - View Lifecycle
-//
-extension SPNoteListViewController {
-
-    open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-
-        coordinator.animate(alongsideTransition: { [weak self] _ in
-            guard let popoverController = self?.popoverController, let sortBar = self?.sortBar else {
-                return
-            }
-
-            popoverController.sourceRect = sortBar.dividerView.frame
-        }, completion: nil)
-    }
-}
-
-
 // MARK: - Components Initialization
 //
 extension SPNoteListViewController {
@@ -54,18 +35,6 @@ extension SPNoteListViewController {
         tableView.register(SPNoteTableViewCell.loadNib(), forCellReuseIdentifier: SPNoteTableViewCell.reuseIdentifier)
         tableView.register(SPTagTableViewCell.loadNib(), forCellReuseIdentifier: SPTagTableViewCell.reuseIdentifier)
         tableView.register(SPSectionHeaderView.self, forHeaderFooterViewReuseIdentifier: SPSectionHeaderView.reuseIdentifier)
-    }
-
-    /// Sets up the Sort Bar
-    ///
-    @objc
-    func configureSortBar() {
-        sortBar = SPSortBar.instantiateFromNib()
-
-        sortBar.isHidden = true
-        sortBar.onSortModePress = { [weak self] in
-            self?.sortModeWasPressed()
-        }
     }
 
     /// Sets up the Results Controller
@@ -103,14 +72,12 @@ extension SPNoteListViewController {
         navigationBarBackground.translatesAutoresizingMaskIntoConstraints = false
         placeholderView.translatesAutoresizingMaskIntoConstraints = false
         searchBarStackView.translatesAutoresizingMaskIntoConstraints = false
-        sortBar.translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
 
         view.addSubview(tableView)
         view.addSubview(placeholderView)
         view.addSubview(navigationBarBackground)
         view.addSubview(searchBarStackView)
-        view.addSubview(sortBar)
 
         NSLayoutConstraint.activate([
             searchBarStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -147,11 +114,6 @@ extension SPNoteListViewController {
             placeholderView.bottomAnchor.constraint(lessThanOrEqualTo: view.layoutMarginsGuide.bottomAnchor)
         ])
 
-        NSLayoutConstraint.activate([
-            sortBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            sortBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            sortBar.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-        ])
     }
 
     /// Initializes the UITableView <> NoteListController Link. Should be called once both UITableView + ListController have been initialized
@@ -242,7 +204,6 @@ extension SPNoteListViewController {
 
         notesListController.filter = filter
         notesListController.sortMode = Options.shared.listSortMode
-        notesListController.searchSortMode = Options.shared.searchSortMode
         notesListController.performFetch()
 
         reloadTableData()
@@ -277,13 +238,6 @@ extension SPNoteListViewController {
         let updated = searchBar.text?.replaceLastWord(with: keyword) ?? keyword
 
         searchController.updateSearchText(searchText: updated + .space)
-    }
-
-    /// Refreshes the SortBar's Description Text
-    ///
-    @objc
-    func refreshSortBarText() {
-        sortBar.descriptionText = Options.shared.searchSortMode.description
     }
 
     /// Displays the Emtpy State Placeholders, when / if needed
@@ -636,7 +590,7 @@ private extension SPNoteListViewController {
     ///
     func prefixText(for note: Note) -> String? {
         guard case .searching = notesListController.state,
-            let date = note.date(for: notesListController.searchSortMode)
+            let date = note.date(for: notesListController.sortMode)
             else {
                 return nil
         }
@@ -833,21 +787,6 @@ extension SPNoteListViewController {
 }
 
 
-// MARK: - Sort Bar
-//
-extension SPNoteListViewController {
-
-    @objc
-    func updateSortBarVisibility() {
-        let wasHidden = sortBar.isHidden
-        sortBar.animateVisibility(isHidden: searchQuery == nil)
-        if wasHidden != sortBar.isHidden {
-            refreshTableViewBottomInsets()
-        }
-    }
-}
-
-
 // MARK: - Keyboard Handling
 //
 extension SPNoteListViewController {
@@ -888,7 +827,7 @@ extension SPNoteListViewController {
     var bottomInsetsForTableView: CGFloat {
         // Keyboard offScreen + Search Active: Seriously, consider the Search Bar
         guard keyboardHeight > .zero else {
-            return sortBar.isHidden ? .zero : sortBar.frame.height
+            return .zero
         }
 
         // Keyboard onScreen: the SortBar falls below the keyboard
@@ -917,18 +856,6 @@ extension SPNoteListViewController {
         presenter.dismissOnContainerFrameChange = true
         presenter.centerContentRelativeToAnchor = view.frame.width > Constants.centeredSortPopoverThreshold
         return presenter
-    }
-
-    private func sortModeWasPressed() {
-        let presenter = popoverPresenter
-
-        let viewController = SortModePickerViewController(currentSelection: Options.shared.searchSortMode)
-        viewController.onSelectionCallback = { sortMode in
-            Options.shared.searchSortMode = sortMode
-            presenter.dismiss()
-        }
-
-        presenter.show(viewController, around: sortBar.convert(sortBar.bounds, to: nil))
     }
 }
 

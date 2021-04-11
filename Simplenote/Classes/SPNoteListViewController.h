@@ -18,12 +18,10 @@
 @property (nonatomic, strong) SPPlaceholderView                             *placeholderView;
 @property (nonatomic, strong) NSLayoutConstraint                            *placeholderViewVerticalCenterConstraint;
 @property (nonatomic, strong) NSLayoutConstraint                            *placeholderViewTopConstraint;
-@property (nonatomic, strong) SPSortBar                                     *sortBar;
 @property (nonatomic, strong) UITableView                                   *tableView;
 @property (nonatomic, strong) UIStackView                                   *searchBarStackView;
 @property (nonatomic, strong, readonly) SearchDisplayController             *searchController;
 @property (nonatomic, strong) NotesListController                           *notesListController;
-@property (nonatomic, weak) UIPopoverPresentationController                 *popoverController;
 @property (nonatomic) CGFloat                                               noteRowHeight;
 @property (nonatomic) CGFloat                                               tagRowHeight;
 @property (nonatomic) CGFloat                                               keyboardHeight;
