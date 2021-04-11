@@ -124,6 +124,15 @@ class NoticePresenter {
             completion()
         }
     }
+
+    func cancel() {
+        containerView?.layer.removeAllAnimations()
+        noticeView?.layer.removeAllAnimations()
+        containerView?.removeFromSuperview()
+        noticeView?.removeFromSuperview()
+        containerView = nil
+        noticeView = nil
+    }
 }
 
 // MARK: Keyboard Observable

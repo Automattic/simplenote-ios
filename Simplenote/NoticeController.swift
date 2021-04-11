@@ -20,6 +20,8 @@ class NoticeController {
         current != nil
     }
 
+    private var isDismissing: Bool = false
+
     // MARK: Life Cycle
     //
     init(presenter: NoticePresenter = NoticePresenter(), timerFactory: TimerFactory = TimerFactory()) {
@@ -53,13 +55,18 @@ class NoticeController {
     }
 
     private func dismissNoticeIfNeeded() {
-        guard isPresenting else {
+        if isDismissing {
+            current = nil
+            timer = nil
+            noticePresenter.cancel()
             return
         }
 
-        timer?.invalidate()
-        dismiss(withDuration: UIKitConstants.animationQuickDuration)
-
+        if isPresenting && !isDismissing {
+            timer = nil
+            dismiss(withDuration: UIKitConstants.animationQuickDuration)
+            return
+        }
     }
 
     /// Confirms if a notice is already contained in notices queue. Appends to queue if new
@@ -85,8 +92,12 @@ class NoticeController {
     // MARK: Dismissing
     //
     func dismiss(withDuration duration: TimeInterval? = nil) {
+        timer = nil
+        isDismissing = true
+
         noticePresenter.dismissNotification(withDuration: duration) {
             self.current = nil
+            self.isDismissing = false
 
             if !self.notices.isEmpty {
                 self.present(self.notices.removeFirst())
