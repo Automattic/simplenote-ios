@@ -106,17 +106,16 @@ class NoticeController {
 
     // MARK: Dismissing
     //
-    func dismiss(withDuration duration: TimeInterval? = nil) {
+    func dismiss(withDuration duration: TimeInterval, completion: (() -> Void)? = nil) {
+        state = .dismissing
         timer = nil
-        isDismissing = true
 
         noticePresenter.dismissNotification(withDuration: duration) {
+            self.state = .inactive
             self.current = nil
-            self.isDismissing = false
 
-            if !self.notices.isEmpty {
-                self.present(self.notices.removeFirst())
-            }
+            completion?()
+            self.presentNextIfPossible()
         }
     }
 }
