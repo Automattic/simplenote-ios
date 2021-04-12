@@ -124,20 +124,17 @@ class NoticeController {
 //
 extension NoticeController: NoticeInteractionDelegate {
     func noticePressBegan() {
-        if !isPresenting {
-            return
-        }
         timer = nil
     }
 
     func noticePressEnded() {
         timer = timerFactory.scheduledTimer(with: Times.shortDelay, completion: {
-            self.dismiss()
+            self.dismiss(withDuration: self.animationDuration())
         })
     }
 
     func actionWasTapped() {
-        dismiss()
+        dismiss(withDuration: animationDuration())
     }
 }
 
