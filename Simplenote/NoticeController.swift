@@ -38,22 +38,20 @@ class NoticeController {
     // MARK: Presenting
     //
     func present(_ notice: Notice) {
-        dismissNoticeIfNeeded()
+        appendToQueueIfNew(notice)
+        dismissNoticeIfNeeded {
+            self.presentNextIfPossible()
+        }
+    }
 
-        if isPresenting {
-            appendToQueueIfNew(notice)
+    /// Confirms if a notice is already contained in notices queue. Appends to queue if new
+    ///
+    private func appendToQueueIfNew(_ notice: Notice) {
+        if notices.contains(notice) {
             return
         }
 
-        current = notice
-        let noticeView = makeNoticeView(from: notice)
-
-        noticePresenter.presentNoticeView(noticeView) { () in
-            let delay = self.current?.action == nil ? Times.shortDelay : Times.longDelay
-            self.timer = self.timerFactory.scheduledTimer(with: delay, completion: {
-                self.dismiss()
-            })
-        }
+        notices.append(notice)
     }
 
     private func dismissNoticeIfNeeded(completion: (() -> Void)?) {
@@ -69,24 +67,31 @@ class NoticeController {
             completion?()
         }
     }
+
+    private func presentNextIfPossible() {
+        guard !notices.isEmpty else {
             return
         }
+        state = .presenting
+        let notice = notices.removeFirst()
 
-        if isPresenting && !isDismissing {
-            timer = nil
-            dismiss(withDuration: UIKitConstants.animationQuickDuration)
-            return
+        current = notice
+        let noticeView = makeNoticeView(from: notice)
+
+        noticePresenter.presentNoticeView(noticeView) { () in
+            self.timer = self.timerFactory.scheduledTimer(with: self.delayTime(), completion: {
+                self.dismiss(withDuration: self.animationDuration())
+            })
         }
     }
 
-    /// Confirms if a notice is already contained in notices queue. Appends to queue if new
-    ///
-    private func appendToQueueIfNew(_ notice: Notice) {
-        if notices.contains(notice) {
-            return
-        }
+    private func delayTime() -> TimeInterval {
+        let delay = current?.action == nil ? Times.shortDelay : Times.longDelay
+        return notices.isEmpty ? delay : .zero
+    }
 
-        notices.append(notice)
+    private func animationDuration() -> TimeInterval {
+        return notices.isEmpty ? UIKitConstants.animationLongDuration : UIKitConstants.animationShortDuration
     }
 
     private func makeNoticeView(from notice: Notice) -> NoticeView {
