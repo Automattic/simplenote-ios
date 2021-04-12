@@ -205,11 +205,6 @@
     [self trackAutomatticEventWithName:@"settings_note_list_sort_mode" properties:@{ @"description" : description }];
 }
 
-+ (void)trackSettingsSearchSortMode:(NSString *)description
-{
-    [self trackAutomatticEventWithName:@"settings_search_sort_mode" properties:@{ @"description" : description }];
-}
-
 + (void)trackSettingsThemeUpdated:(NSString *)themeName
 {
     NSParameterAssert(themeName);

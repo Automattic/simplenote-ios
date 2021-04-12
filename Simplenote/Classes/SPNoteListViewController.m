@@ -56,7 +56,6 @@
         [self configureTableView];
         [self configureSearchController];
         [self configureSearchStackView];
-        [self configureSortBar];
         [self configureRootView];
         [self updateTableViewMetrics];
         [self startListeningToNotifications];
@@ -193,7 +192,6 @@
     // Condensed Notes
     [nc addObserver:self selector:@selector(condensedPreferenceWasUpdated:) name:SPCondensedNoteListPreferenceChangedNotification object:nil];
     [nc addObserver:self selector:@selector(sortModePreferenceWasUpdated:) name:SPNotesListSortModeChangedNotification object:nil];
-    [nc addObserver:self selector:@selector(sortModePreferenceWasUpdated:) name:SPSearchSortModeChangedNotification object:nil];
 
     // Register for keyboard notifications
     [nc addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
@@ -336,7 +334,6 @@
     NSTimeInterval const delay = 0.2;
     self.searchTimer = [NSTimer scheduledTimerWithTimeInterval:delay repeats:NO block:^(NSTimer * _Nonnull timer) {
         [self performSearchWithKeyword:keyword];
-        [self updateSortBarVisibility];
     }];    
 }
 
@@ -348,7 +345,6 @@
     // Note: We avoid switching to SearchMode in `shouldBegin` because it might cause layout issues!
     [self.notesListController beginSearch];
     [self reloadTableData];
-    [self updateSortBarVisibility];
     [self refreshTitle];
 }
 
@@ -367,7 +363,6 @@
     [self.notesListController endSearch];
     [self update];
 
-    [self updateSortBarVisibility];
 }
 
 
@@ -488,7 +483,6 @@
     [self refreshListController];
     [self refreshTitle];
     [self refreshSearchBar];
-    [self refreshSortBarText];
 
     BOOL isTrashOnScreen = self.isDeletedFilterActive;
 

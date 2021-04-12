@@ -15,5 +15,4 @@
 NSString *const SPAlphabeticalTagSortPreferenceChangedNotification  = @"SPAlphabeticalTagSortPreferenceChangedNotification";
 NSString *const SPCondensedNoteListPreferenceChangedNotification    = @"SPCondensedNoteListPreferenceChangedNotification";
 NSString *const SPNotesListSortModeChangedNotification              = @"SPNotesListSortModeChangedNotification";
-NSString *const SPSearchSortModeChangedNotification                 = @"SPSearchSortModeChangedNotification";
 NSString *const SPSimplenoteThemeChangedNotification                = @"SPSimplenoteThemeChangedNotification";

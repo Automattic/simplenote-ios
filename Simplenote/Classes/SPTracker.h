@@ -54,7 +54,6 @@
 + (void)trackSettingsPinlockEnabled:(BOOL)isOn;
 + (void)trackSettingsListCondensedEnabled:(BOOL)isOn;
 + (void)trackSettingsNoteListSortMode:(NSString *)description;
-+ (void)trackSettingsSearchSortMode:(NSString *)description;
 + (void)trackSettingsThemeUpdated:(NSString *)themeName;
 
 #pragma mark - Sidebar

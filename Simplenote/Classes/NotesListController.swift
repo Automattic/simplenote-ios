@@ -67,22 +67,6 @@ class NotesListController: NSObject {
         }
     }
 
-    /// SortMode to be applied to Search Results
-    ///
-    var searchSortMode: SortMode = .alphabeticallyAscending {
-        didSet {
-            guard case .searching = state else {
-                return
-            }
-
-            guard oldValue != searchSortMode else {
-                return
-            }
-
-            refreshSortDescriptors()
-        }
-    }
-
     /// Callback to be executed whenever the NotesController or TagsController were updated
     /// - NOTE: This only happens as long as the current state must render such entities!
     ///
@@ -244,7 +228,7 @@ private extension NotesListController {
     }
 
     func refreshSortDescriptors() {
-        notesController.sortDescriptors = state.descriptorsForNotes(sortMode: sortModeForActiveState)
+        notesController.sortDescriptors = state.descriptorsForNotes(sortMode: sortMode)
         tagsController.sortDescriptors = state.descriptorsForTags()
     }
 
@@ -297,16 +281,5 @@ private extension NotesListController {
         }
 
         onBatchChanges?(sectionsChangeset, objectsChangeset)
-    }
-
-    /// Sort Mode might differ in Results / Search!
-    ///
-    var sortModeForActiveState: SortMode {
-        switch state {
-        case .searching:
-            return searchSortMode
-        case .results:
-            return sortMode
-        }
     }
 }
