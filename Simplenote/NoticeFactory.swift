@@ -33,8 +33,8 @@ extension NoticeFactory {
     private enum Messages {
         static let copyLink = NSLocalizedString("Copy link", comment: "Copy link action")
         static let linkCopied = NSLocalizedString("Link copied", comment: "Link Copied alert")
-        static let publishing = NSLocalizedString("Publishing...", comment: "Notice of publishing action")
-        static let unpublishing = NSLocalizedString("Unpublishing...", comment: "Notice of unpublishing action")
+        static let publishing = NSLocalizedString("Publishing note...", comment: "Notice of publishing action")
+        static let unpublishing = NSLocalizedString("Unpublishing note...", comment: "Notice of unpublishing action")
         static let undo = NSLocalizedString("Undo", comment: "Undo action")
         static let trashed = NSLocalizedString("Note Trashed", comment: "Note trashed notification")
         static let unpublished = NSLocalizedString("Unpublish successful", comment: "Notice of publishing unsuccessful")
