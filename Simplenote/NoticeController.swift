@@ -1,6 +1,13 @@
 import UIKit
 
 class NoticeController {
+
+    private enum State {
+        case inactive
+        case presenting
+        case dismissing
+    }
+
     // MARK: Proerties
     //
     static let shared = NoticeController()
@@ -9,18 +16,13 @@ class NoticeController {
     private var current: Notice?
     private let noticePresenter: NoticePresenter
     private let timerFactory: TimerFactory
+    private var state: State = .inactive
 
     private var timer: Timer? {
         didSet {
             oldValue?.invalidate()
         }
     }
-
-    private var isPresenting: Bool {
-        current != nil
-    }
-
-    private var isDismissing: Bool = false
 
     // MARK: Life Cycle
     //
