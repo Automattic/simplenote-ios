@@ -112,8 +112,8 @@ class NoticePresenter {
         }
 
         UIView.animate(withDuration: duration, delay: .zero, options: [.allowUserInteraction]) {
-            noticeView.alpha = 0
-            containerView.alpha = 0
+            noticeView.alpha = UIKitConstants.alpha0_0
+            containerView.alpha = UIKitConstants.alpha0_0
         } completion: { (_) in
             noticeView.removeFromSuperview()
             containerView.removeFromSuperview()
