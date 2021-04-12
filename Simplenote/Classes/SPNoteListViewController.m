@@ -304,21 +304,6 @@
     self.searchController.searchBar.accessibilityIdentifier = @"search-bar";
 }
 
-- (void)configureNewNoteBar {
-    UIImage *newNoteIcon = [UIImage imageWithName:UIImageNameNewNote];
-    UIBarButtonItem *newNoteBar = [[UIBarButtonItem alloc] initWithImage:newNoteIcon
-                                                                   style:UIBarButtonItemStylePlain
-                                                                  target:self
-                                                                  action:@selector(newNote)];
-
-    [self setToolbarItems:@[newNoteBar] animated:NO];
-    [self.navigationController setToolbarHidden:NO];
-}
-
-- (void)newNote {
-
-}
-
 #pragma mark - BarButtonActions
 
 - (void)addButtonAction:(id)sender {
