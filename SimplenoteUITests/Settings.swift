@@ -18,7 +18,8 @@ enum SettingsScreen: String {
 }
 
 class Settings {
-    class func condensedModeEnable() {
+
+    static func condensedModeEnable() {
         let condensedModeSwitch = SettingsScreen.condensedModeSwitch.element
         let switchValue = condensedModeSwitch.value as? String
 
@@ -27,7 +28,7 @@ class Settings {
         }
     }
 
-    class func condensedModeDisable() {
+    static func condensedModeDisable() {
         let condensedModeSwitch = SettingsScreen.condensedModeSwitch.element
         let switchValue = condensedModeSwitch.value as? String
 
@@ -36,11 +37,11 @@ class Settings {
         }
     }
 
-    class func close() {
+    static func close() {
         SettingsScreen.doneButton.element.tap()
     }
 
-    class func open() {
+    static func open() {
         Sidebar.open()
         Sidebar.getButtonSettings().tap()
     }
