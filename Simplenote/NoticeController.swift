@@ -56,11 +56,19 @@ class NoticeController {
         }
     }
 
-    private func dismissNoticeIfNeeded() {
-        if isDismissing {
+    private func dismissNoticeIfNeeded(completion: (() -> Void)?) {
+        switch state {
+        case .inactive:
+            presentNextIfPossible()
+        case .presenting:
+            dismiss(withDuration: UIKitConstants.animationQuickDuration, completion: completion)
+        case .dismissing:
             current = nil
             timer = nil
             noticePresenter.cancel()
+            completion?()
+        }
+    }
             return
         }
 
