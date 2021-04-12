@@ -51,6 +51,7 @@
         [self configureImpactGenerator];
         [self configureNavigationButtons];
         [self configureNavigationBarBackground];
+        [self configureNavigationToolbar];
         [self configureResultsController];
         [self configurePlaceholderView];
         [self configureTableView];
@@ -90,7 +91,6 @@
 {
     [super viewWillAppear:animated];
     [self.searchController hideNavigationBarIfNecessary];
-    [self addNewNoteBarWith:@selector(createNewNote)];
     [self.navigationController setToolbarHidden:NO];
     if (!self.navigatingUsingKeyboard) {
         [self.tableView deselectSelectedRowAnimated:YES];
@@ -278,6 +278,10 @@
     //  -   Therefore we must inject the blur on a VC per VC basis.
     //
     self.navigationBarBackground = [SPBlurEffectView navigationBarBlurView];
+}
+
+- (void)configureNavigationToolbar {
+    [self configureNewNoteBarWith:@selector(createNewNote)];
 }
 
 - (void)configureSearchController {
