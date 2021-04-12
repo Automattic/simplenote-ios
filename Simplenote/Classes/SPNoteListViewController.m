@@ -90,7 +90,8 @@
 {
     [super viewWillAppear:animated];
     [self.searchController hideNavigationBarIfNecessary];
-    [self configureToolbarAsNewNoteBar];
+    [self addNewNoteBarWith:@selector(createNewNote)];
+    [self.navigationController setToolbarHidden:NO];
     if (!self.navigatingUsingKeyboard) {
         [self.tableView deselectSelectedRowAnimated:YES];
         self.selectedNote = nil;

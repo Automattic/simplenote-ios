@@ -115,22 +115,6 @@ extension SPNoteEditorViewController {
                                 viewportProvider: viewportProvider,
                                 siblingView: navigationBarBackground)
     }
-
-    /// Configures New Note Bar
-    ///
-    @objc
-    func configureNewNoteBar() {
-        let newNoteImage = UIImage(named: UIImageName.newNote.lightAssetFilename)
-        let newNoteButton = UIBarButtonItem.init(image: newNoteImage,
-                                            style: .plain,
-                                            target: self,
-                                            action: #selector(handleTapOnCreateNewNoteButton))
-        newNoteButton.accessibilityLabel = NSLocalizedString("New note", comment: "Label to create a new note")
-
-        let flexibleSpace = UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-
-        setToolbarItems([flexibleSpace, newNoteButton], animated: true)
-    }
 }
 
 

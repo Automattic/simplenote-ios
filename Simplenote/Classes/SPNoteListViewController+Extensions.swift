@@ -344,19 +344,6 @@ extension SPNoteListViewController {
 
         emptyTrashButton.isEnabled = isTrashOnScreen && isNotEmpty
     }
-
-    /// Configures navigation controller toolbar to display new note button
-    ///
-    @objc
-    func configureToolbarAsNewNoteBar() {
-        let image = UIImage(named: UIImageName.newNote.lightAssetFilename)
-        let newNoteButton = UIBarButtonItem.init(image: image, style: .plain, target: self, action: #selector(createNewNote))
-
-        let flexibleSpace = UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-
-        setToolbarItems([flexibleSpace, newNoteButton], animated: true)
-        navigationController?.setToolbarHidden(false, animated: true)
-    }
 }
 
 

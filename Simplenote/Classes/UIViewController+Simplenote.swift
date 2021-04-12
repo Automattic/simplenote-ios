@@ -87,4 +87,24 @@ extension UIViewController {
             taskBlock()
         }
     }
+
+    /// Sets up a new note bar with given selector
+    ///
+    @objc
+    func addNewNoteBar(with selector: Selector) {
+        let newNoteImage = UIImage(named: UIImageName.newNote.lightAssetFilename)
+        let newNoteButton = UIBarButtonItem.init(image: newNoteImage,
+                                            style: .plain,
+                                            target: self,
+                                            action: selector)
+        newNoteButton.accessibilityLabel = Strings.newNoteLabel
+
+        let flexibleSpace = UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+
+        setToolbarItems([flexibleSpace, newNoteButton], animated: true)
+    }
+}
+
+private struct Strings {
+    static let newNoteLabel = NSLocalizedString("New note", comment: "Label to create a new note")
 }

@@ -97,11 +97,9 @@ CGFloat const SPSelectedAreaPadding = 20;
     [self configureNavigationBarItems];
     [self configureNavigationBarBackground];
     [self configureRootView];
-    [self configureSearchToolbar];
     [self configureLayout];
     [self configureTagListViewController];
     [self configureInterlinksProcessor];
-    [self configureNewNoteBar];
     
     [self configureTextViewKeyboard];
 
@@ -152,7 +150,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     if (self.searching) {
         [self configureSearchToolbar];
     } else {
-        [self configureNewNoteBar];
+        [self addNewNoteBarWith: @selector(handleTapOnCreateNewNoteButton)];
     }
 
     [self.navigationController setToolbarHidden:NO animated:YES];
