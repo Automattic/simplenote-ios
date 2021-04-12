@@ -30,6 +30,7 @@
 @property (nonatomic, strong) SPBlurEffectView                      *navigationBarBackground;
 @property (nonatomic, strong) UIBarButtonItem                       *addButton;
 @property (nonatomic, strong) UIBarButtonItem                       *sidebarButton;
+@property (nonatomic, strong) UIBarButtonItem                       *toolbarActionButton;
 
 @property (nonatomic, strong) SearchDisplayController               *searchController;
 @property (nonatomic, strong) UIActivityIndicatorView               *activityIndicator;
@@ -90,7 +91,7 @@
 {
     [super viewWillAppear:animated];
     [self.searchController hideNavigationBarIfNecessary];
-
+    [self configureToolbarAsNewNoteBar];
     if (!self.navigatingUsingKeyboard) {
         [self.tableView deselectSelectedRowAnimated:YES];
         self.selectedNote = nil;
@@ -303,6 +304,20 @@
     self.searchController.searchBar.accessibilityIdentifier = @"search-bar";
 }
 
+- (void)configureNewNoteBar {
+    UIImage *newNoteIcon = [UIImage imageWithName:UIImageNameNewNote];
+    UIBarButtonItem *newNoteBar = [[UIBarButtonItem alloc] initWithImage:newNoteIcon
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:self
+                                                                  action:@selector(newNote)];
+
+    [self setToolbarItems:@[newNoteBar] animated:NO];
+    [self.navigationController setToolbarHidden:NO];
+}
+
+- (void)newNote {
+
+}
 
 #pragma mark - BarButtonActions
 
