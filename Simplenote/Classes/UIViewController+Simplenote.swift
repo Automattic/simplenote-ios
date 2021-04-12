@@ -91,7 +91,7 @@ extension UIViewController {
     /// Sets up a new note bar with given selector
     ///
     @objc
-    func addNewNoteBar(with selector: Selector) {
+    func configureNewNoteBar(with selector: Selector) {
         let newNoteImage = UIImage(named: UIImageName.newNote.lightAssetFilename)
         let newNoteButton = UIBarButtonItem.init(image: newNoteImage,
                                             style: .plain,

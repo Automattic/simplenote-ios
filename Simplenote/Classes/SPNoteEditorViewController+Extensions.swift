@@ -49,6 +49,14 @@ extension SPNoteEditorViewController {
         keyboardButton.accessibilityLabel = NSLocalizedString("Dismiss keyboard", comment: "Dismiss Keyboard Button")
     }
 
+    /// Setups the bottom toolbar in navigation contorller.
+    /// Will show search navigation bar if search enabled, and new notebar if not search
+    ///
+    @objc
+    func configureNewNoteBar() {
+        configureNewNoteBar(with: #selector(handleTapOnCreateNewNoteButton))
+    }
+
     /// Sets up the Root ViewController
     ///
     @objc

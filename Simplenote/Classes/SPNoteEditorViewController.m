@@ -100,6 +100,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     [self configureLayout];
     [self configureTagListViewController];
     [self configureInterlinksProcessor];
+    [self configureNavigationToolbar];
     
     [self configureTextViewKeyboard];
 
@@ -142,17 +143,15 @@ CGFloat const SPSelectedAreaPadding = 20;
     self.navigationBarBackground = [SPBlurEffectView navigationBarBlurView];
 }
 
+- (void)configureNavigationToolbar
+{
+    [self refreshNavigationToolbar];
+}
+
 - (void)setupNavigationController
 {
     // Note: Our navigationBar *may* be hidden, as per SPSearchController in the Notes List
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-
-    if (self.searching) {
-        [self configureSearchToolbar];
-    } else {
-        [self addNewNoteBarWith: @selector(handleTapOnCreateNewNoteButton)];
-    }
-
     [self.navigationController setToolbarHidden:NO animated:YES];
 }
 
@@ -426,6 +425,15 @@ CGFloat const SPSelectedAreaPadding = 20;
     self.navigationItem.rightBarButtonItems = buttons;
 }
 
+- (void)refreshNavigationToolbar
+{
+    if (self.searching) {
+        [self configureSearchToolbar];
+    } else {
+        [self configureNewNoteBar];
+    }
+}
+
 - (BOOL)shouldHideKeyboardButton
 {
     if ([UIDevice isPad]) {
@@ -578,7 +586,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     
     self.searching = NO;
 
-    [self setupNavigationController];
+    [self refreshNavigationToolbar];
     self.searchDetailLabel.text = nil;
 }
 
