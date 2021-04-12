@@ -45,9 +45,6 @@ extension SPNoteEditorViewController {
         informationButton = UIBarButtonItem(image: .image(name: .info), style: .plain, target: self, action: #selector(noteInformationWasPressed(_:)))
         informationButton.accessibilityLabel = NSLocalizedString("Information", comment: "Note Information Button (metrics + references)")
 
-        createNoteButton = UIBarButtonItem(image: .image(name: .newNote), style: .plain, target: self, action: #selector(handleTapOnCreateNewNoteButton))
-        createNoteButton.accessibilityLabel = NSLocalizedString("New note", comment: "Label to create a new note")
-
         keyboardButton = UIBarButtonItem(image: .image(name: .hideKeyboard), style: .plain, target: self, action: #selector(keyboardButtonAction(_:)))
         keyboardButton.accessibilityLabel = NSLocalizedString("Dismiss keyboard", comment: "Dismiss Keyboard Button")
     }
@@ -133,7 +130,6 @@ extension SPNoteEditorViewController {
         let flexibleSpace = UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
 
         setToolbarItems([flexibleSpace, newNoteButton], animated: true)
-        
     }
 }
 
@@ -750,7 +746,7 @@ extension SPNoteEditorViewController {
         tagListViewController = NoteEditorTagListViewController(note: note, popoverPresenter: popoverPresenter)
 
         addChild(tagListViewController)
-        
+
         tagView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tagView)
 

@@ -414,9 +414,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 {
     NSMutableArray *buttons = [NSMutableArray array];
 
-    if (self.shouldHideKeyboardButton) {
-        [buttons addObject:self.createNoteButton];
-    } else {
+    if (!self.shouldHideKeyboardButton) {
         [buttons addObject:self.keyboardButton];
     }
 

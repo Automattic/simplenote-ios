@@ -22,7 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIBarButtonItem *actionButton;
 @property (nonatomic, strong) UIBarButtonItem *checklistButton;
 @property (nonatomic, strong) UIBarButtonItem *keyboardButton;
-@property (nonatomic, strong) UIBarButtonItem *createNoteButton;
 @property (nonatomic, strong) UIBarButtonItem *informationButton;
 
 @property (nonatomic, strong, readonly) Note *note;
