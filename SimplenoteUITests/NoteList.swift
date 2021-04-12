@@ -13,16 +13,23 @@ class NoteList {
         return navBar.identifier
     }
 
-    class func isAllNotesListOpen() -> Bool {
-        return app.navigationBars[UID.NavBar.allNotes].exists
-    }
-
     class func isNoteListOpen(forTag tag: String) -> Bool {
         return app.navigationBars[tag].exists
     }
 
+    class func getNoteCell(_ noteName: String) -> XCUIElement {
+        return Table.getCell(label: noteName)
+    }
+
+    class func isNotePresent(_ noteName: String) -> Bool {
+        return NoteList.getNoteCell(noteName).exists
+    }
+
+    class func getNoteCellHeight(_ noteName: String) -> CGFloat {
+        return NoteList.getNoteCell(noteName).frame.height
+    }
+
     class func openAllNotes() {
-        guard !NoteList.isAllNotesListOpen() else { return }
         print(">>> Opening \"All Notes\"")
         Sidebar.open()
         app.tables.staticTexts[UID.Button.allNotes].tap()
@@ -188,6 +195,11 @@ class NoteListAssert {
         XCTAssertEqual(actualNotesNumber, expectedNotesNumber, numberOfNotesInAllNotesNotExpected)
     }
 
+    class func noteHeight(_ note: NoteData, _ noteHeight: CGFloat) {
+        print(">>> Asserting that note height is \(noteHeight)")
+        XCTAssertEqual(NoteList.getNoteCellHeight(note.name), noteHeight)
+    }
+
     class func tagsSuggestionsNumber(number: Int) {
         let actualNumber = NoteList.getTagsSuggestionsNumber()
         XCTAssertEqual(actualNumber, number, numberOfTagsSuggestionsNotExpected)
@@ -212,14 +224,27 @@ class NoteListAssert {
         NoteListAssert.noteListShown(forSelection: UID.NavBar.trash)
     }
 
+    class func noteContentIsShown(_ note: NoteData) {
+        noteContentIsShownInSearch(noteName: note.name, expectedContent: note.content)
+    }
+
     class func noteContentIsShownInSearch(noteName: String, expectedContent: String) {
-        print(">>> Asserting that note '\(noteName)' shows the following content:")
-        print(">>>> " + expectedContent)
+        print(">>> Asserting that note '\(noteName)' has the following content:")
+        print(">>>> \"\(expectedContent)\"")
+
+        guard NoteList.isNotePresent(noteName) else {
+            XCTFail(">>>> Note not found")
+            return
+        }
 
         if let noteContent = Table.getContentOfCell(noteName: noteName) {
-            XCTAssertTrue(noteContent.contains(expectedContent), "Content NOT found")
+            XCTAssertTrue(noteContent.contains(expectedContent), "Content is different.")
+        } else if expectedContent.isEmpty {
+            /// If note content is nil, but we assert for empty content, we should not fail
+            XCTAssert(true, "Content is not empty.")
         } else {
-            XCTFail("Could not find note")
+            /// Otherwise, we should fail
+            XCTFail("Note has no content. Only title.")
         }
     }
 
