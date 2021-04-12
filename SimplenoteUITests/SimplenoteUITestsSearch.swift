@@ -45,9 +45,6 @@ class SimplenoteUISmokeTestsSearch: XCTestCase {
         Trash.empty()
         Sidebar.open()
         Sidebar.tagsDeleteAll()
-        Settings.open()
-        Settings.condensedModeDisable()
-        Settings.close()
         NoteList.openAllNotes()
 
         allNotes.forEach { NoteList.createNoteThenLeaveEditor($0) }

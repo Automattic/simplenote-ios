@@ -18,6 +18,12 @@ class SimplenoteUISmokeTestsSettings: XCTestCase {
         NoteList.openAllNotes()
     }
 
+    override class func tearDown() {
+        Settings.open()
+        Settings.condensedModeDisable()
+        Settings.close()
+    }
+
     func testUsingCondensedNoteList() throws {
         trackTest()
         let note = NoteData(
