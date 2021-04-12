@@ -13,6 +13,12 @@ class NoteList {
         return navBar.identifier
     }
 
+    class func isAllNotesListOpen() -> Bool {
+        let navBar = app.navigationBars[UID.NavBar.allNotes]
+        guard navBar.exists else { return false}
+        return navBar.frame.minX == 0.0
+    }
+
     class func isNoteListOpen(forTag tag: String) -> Bool {
         return app.navigationBars[tag].exists
     }
@@ -30,6 +36,7 @@ class NoteList {
     }
 
     class func openAllNotes() {
+        guard !NoteList.isAllNotesListOpen() else { return }
         print(">>> Opening \"All Notes\"")
         Sidebar.open()
         app.tables.staticTexts[UID.Button.allNotes].tap()
