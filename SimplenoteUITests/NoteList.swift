@@ -32,6 +32,13 @@ class NoteList {
         app.navigationBars.buttons[UID.Button.newNote].tap()
     }
 
+    static func createNoteThenLeaveEditor(_ note: NoteData) {
+        NoteList.createNoteAndLeaveEditor(
+            noteName: note.formattedForAutomatedInput,
+            tags: note.tags
+        )
+    }
+
     class func createNoteAndLeaveEditor(noteName: String, tags: [String] = []) {
         print(">>> Creating a note: " + noteName)
         NoteList.addNoteTap()
@@ -150,6 +157,14 @@ class NoteListAssert {
         for tag in tags {
             NoteListAssert.tagSuggestionExists(tag: tag)
         }
+    }
+
+    static func noteExists(_ note: NoteData) {
+        notesExist([note])
+    }
+
+    static func notesExist(_ notes: [NoteData]) {
+        notesExist(names: notes.map { $0.name })
     }
 
     class func noteExists(noteName: String) {
