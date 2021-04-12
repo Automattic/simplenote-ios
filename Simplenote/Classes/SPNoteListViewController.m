@@ -28,7 +28,6 @@
 @property (nonatomic, strong) NSTimer                               *searchTimer;
 
 @property (nonatomic, strong) SPBlurEffectView                      *navigationBarBackground;
-@property (nonatomic, strong) UIBarButtonItem                       *addButton;
 @property (nonatomic, strong) UIBarButtonItem                       *sidebarButton;
 @property (nonatomic, strong) UIBarButtonItem                       *toolbarActionButton;
 
@@ -233,7 +232,7 @@
 }
 
 - (void)updateNavigationBar {
-    UIBarButtonItem *rightButton = (self.isDeletedFilterActive) ? self.emptyTrashButton : self.addButton;
+    UIBarButtonItem *rightButton = (self.isDeletedFilterActive) ? self.emptyTrashButton : nil;
 
     [self.navigationItem setRightBarButtonItem:rightButton animated:YES];
     [self.navigationItem setLeftBarButtonItem:self.sidebarButton animated:YES];
@@ -243,19 +242,8 @@
 #pragma mark - Interface Initialization
 
 - (void)configureNavigationButtons {
-    NSAssert(_addButton == nil, @"_addButton is already initialized!");
     NSAssert(_sidebarButton == nil, @"_sidebarButton is already initialized!");
     NSAssert(_emptyTrashButton == nil, @"_emptyTrashButton is already initialized!");
-
-    /// Button: New Note
-    ///
-    self.addButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageWithName:UIImageNameNewNote]
-                                                      style:UIBarButtonItemStylePlain
-                                                     target:self
-                                                     action:@selector(addButtonAction:)];
-    self.addButton.isAccessibilityElement = YES;
-    self.addButton.accessibilityLabel = NSLocalizedString(@"New note", nil);
-    self.addButton.accessibilityHint = NSLocalizedString(@"Create a new note", nil);
 
     /// Button: Display Tags
     ///
@@ -305,10 +293,6 @@
 }
 
 #pragma mark - BarButtonActions
-
-- (void)addButtonAction:(id)sender {
-    [self createNewNote];
-}
 
 - (void)sidebarButtonAction:(id)sender {
     
