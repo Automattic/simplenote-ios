@@ -137,6 +137,42 @@ jobs:
             include_visit_job_action: false
             failure_message: '${SLACK_FAILURE_MESSAGE}'
             success_message: '${SLACK_SUCCESS_MESSAGE}'
+  UI Tests:
+    # Props to work done by others in this file and in
+    # https://github.com/wordpress-mobile/WordPress-iOS/blob/develop/.circleci/config.yml
+    # this is a combined rip-off from both
+    parameters:     
+      device:
+        description: The device (e.g. "iPhone 12") to use when running tests.
+        type: string
+        default: "iPhone 12"
+    executor:
+      name: ios/default
+      xcode-version: "12.4.0"
+    environment:
+      FL_OUTPUT_DIR: output
+    steps:
+      - git/shallow-checkout
+      - ios/install-dependencies:
+            bundle-install: true
+            pod-install: true
+      - run:
+          name: Copy Secrets
+          command: bundle exec fastlane run configure_apply
+      # Start: Swift Package Manager Workaround
+      # Ref. https://support.circleci.com/hc/en-us/articles/360044709573-Swift-Package-Manager-fails-to-clone-from-private-Git-repositories
+      - run: rm ~/.ssh/id_rsa
+      - run: for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts || true
+      # END: Swift Package Manager Workaround
+      - run:
+          name: Fastlane
+          command: bundle exec fastlane run_ui_tests device:'<< parameters.device >>'
+      - store_artifacts:
+          path: output/scan/report.html
+      - store_artifacts:
+          path: output/scan/report.junit
+      - store_test_results:
+          path: output/scan
 
 workflows:
   simplenote_ios:
@@ -146,6 +182,12 @@ workflows:
          - not: << pipeline.parameters.release_build >>
     jobs:
       - Test
+      - UI Tests:
+          name: UI Tests (iPhone 12)
+          device: "iPhone 12"
+          filters:
+            branches:
+              only: /.*UI-tests.*/
   Installable Build:
     when:
        and:
