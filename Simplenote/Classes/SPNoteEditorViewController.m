@@ -101,6 +101,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     [self configureLayout];
     [self configureTagListViewController];
     [self configureInterlinksProcessor];
+    [self configureNewNoteBar];
     
     [self configureTextViewKeyboard];
 
@@ -147,7 +148,14 @@ CGFloat const SPSelectedAreaPadding = 20;
 {
     // Note: Our navigationBar *may* be hidden, as per SPSearchController in the Notes List
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-    [self.navigationController setToolbarHidden:!self.searching animated:YES];
+
+    if (self.searching) {
+        [self configureSearchToolbar];
+    } else {
+        [self configureNewNoteBar];
+    }
+
+    [self.navigationController setToolbarHidden:NO animated:YES];
 }
 
 - (void)ensureEditorIsFirstResponder
@@ -574,7 +582,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     
     self.searching = NO;
 
-    [self.navigationController setToolbarHidden:YES animated:YES];
+    [self setupNavigationController];
     self.searchDetailLabel.text = nil;
 }
 
