@@ -203,8 +203,8 @@ class NoteListAssert {
     }
 
     class func note(_ note: NoteData, hasHeight height: CGFloat) {
-        print(">>> Asserting that note height is \(noteHeight)")
-        XCTAssertEqual(NoteList.getNoteCellHeight(note.name), noteHeight)
+        print(">>> Asserting that note height is \(height)")
+        XCTAssertEqual(NoteList.getNoteCellHeight(note.name), height)
     }
 
     class func tagsSuggestionsNumber(number: Int) {

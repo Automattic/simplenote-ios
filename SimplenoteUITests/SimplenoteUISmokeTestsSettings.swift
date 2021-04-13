@@ -44,7 +44,7 @@ class SimplenoteUISmokeTestsSettings: XCTestCase {
         Settings.close()
         NoteList.openAllNotes()
         NoteListAssert.noteContentIsShownInSearch(noteName: note.name, expectedContent: "")
-        NoteListAssert.noteHeight(note, cellHeightCondensed)
+        NoteListAssert.note(note, hasHeight: cellHeightCondensed)
 
         trackStep()
         Settings.open()
@@ -52,7 +52,7 @@ class SimplenoteUISmokeTestsSettings: XCTestCase {
         Settings.close()
         NoteList.openAllNotes()
         NoteListAssert.noteContentIsShown(note)
-        NoteListAssert.noteHeight(note, cellHeightUsual)
+        NoteListAssert.note(note, hasHeight: cellHeightUsual)
     }
 
 
