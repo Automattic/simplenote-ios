@@ -1,12 +1,11 @@
 import XCTest
 @testable import UITestsHelper
 
+// This test doesn't do anything; it's here only to keep the testing scaffolding in place were we to
+// need unit tests for the package.
 final class UITestsHelperTests: XCTestCase {
     func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertEqual(UITestsHelper().text, "Hello, World!")
+        XCTAssert(true)
     }
 
     static var allTests = [
