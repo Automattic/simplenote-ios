@@ -55,6 +55,8 @@
 		3F1BB4A0242DB81E006D1A04 /* ScreenshotsCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1BB49F242DB81E006D1A04 /* ScreenshotsCredentials.swift */; };
 		3F1BB4A3242DC162006D1A04 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1BB4A2242DC162006D1A04 /* SnapshotHelper.swift */; };
 		3F3CA91426255E2000F6316F /* UITestHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F3CA91226255E2000F6316F /* UITestHelpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3F3CA93F26255F7200F6316F /* XCUIApplication+Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3CA93E26255F7200F6316F /* XCUIApplication+Device.swift */; };
+		3F3CA94926255FA800F6316F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F3CA94826255FA800F6316F /* XCTest.framework */; };
 		3F5EDD0C2435A3AE00959576 /* XCTest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5EDD0B2435A3AE00959576 /* XCTest+Extensions.swift */; };
 		3FA17B5626240FF000C11C46 /* NoteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA17B5526240FF000C11C46 /* NoteData.swift */; };
 		3FA6013C242C5AAE0068FC52 /* SimplenoteScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6013B242C5AAE0068FC52 /* SimplenoteScreenshots.swift */; };
@@ -555,6 +557,8 @@
 		3F3CA91026255E1F00F6316F /* UITestHelpers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UITestHelpers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F3CA91226255E2000F6316F /* UITestHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UITestHelpers.h; sourceTree = "<group>"; };
 		3F3CA91326255E2000F6316F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3F3CA93E26255F7200F6316F /* XCUIApplication+Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+Device.swift"; sourceTree = "<group>"; };
+		3F3CA94826255FA800F6316F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		3F5EDD0B2435A3AE00959576 /* XCTest+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTest+Extensions.swift"; sourceTree = "<group>"; };
 		3F6CECDC2FEA90B9E5C920F5 /* Pods-SimplenoteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplenoteTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests.release.xcconfig"; sourceTree = "<group>"; };
 		3FA17B5526240FF000C11C46 /* NoteData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteData.swift; sourceTree = "<group>"; };
@@ -1019,6 +1023,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F3CA94926255FA800F6316F /* XCTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1134,6 +1139,7 @@
 			children = (
 				3F3CA91226255E2000F6316F /* UITestHelpers.h */,
 				3F3CA91326255E2000F6316F /* Info.plist */,
+				3F3CA93E26255F7200F6316F /* XCUIApplication+Device.swift */,
 			);
 			path = UITestHelpers;
 			sourceTree = "<group>";
@@ -2016,6 +2022,7 @@
 		E29ADD3A17848E8500E55842 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3F3CA94826255FA800F6316F /* XCTest.framework */,
 				B5CFFFE322AA9B1900B968CD /* CoreServices.framework */,
 				B51889A31E0DB01E00E71B83 /* ContactsUI.framework */,
 				B518899F1E0D5F2200E71B83 /* Contacts.framework */,
@@ -2324,6 +2331,7 @@
 					};
 					3F3CA90F26255E1F00F6316F = {
 						CreatedOnToolsVersion = 12.4;
+						LastSwiftMigration = 1240;
 					};
 					3FA60138242C5AAD0068FC52 = {
 						CreatedOnToolsVersion = 11.3.1;
@@ -2683,6 +2691,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F3CA93F26255F7200F6316F /* XCUIApplication+Device.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3196,6 +3205,7 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
@@ -3240,6 +3250,7 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
@@ -3279,6 +3290,7 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
@@ -3318,6 +3330,7 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
@@ -3357,6 +3370,7 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
