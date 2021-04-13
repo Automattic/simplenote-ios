@@ -3,6 +3,7 @@ import XCTest
 class Preview {
 
     class func getText() -> String {
+        // swiftlint:disable:next force_cast
         return app.webViews.descendants(matching: .staticText).element.value as! String
     }
 
@@ -53,9 +54,18 @@ class PreviewAssert {
     class func previewShown() {
         let previewNavBar = app.navigationBars[UID.NavBar.noteEditorPreview]
 
-        XCTAssertTrue(previewNavBar.waitForExistence(timeout: minLoadTimeout), UID.NavBar.noteEditorPreview + navBarNotFound)
-        XCTAssertTrue(previewNavBar.buttons[UID.Button.back].waitForExistence(timeout: minLoadTimeout), UID.Button.back + buttonNotFound)
-        XCTAssertTrue(previewNavBar.staticTexts[UID.Text.noteEditorPreview].waitForExistence(timeout: minLoadTimeout), UID.Text.noteEditorPreview + labelNotFound)
+        XCTAssertTrue(
+            previewNavBar.waitForExistence(timeout: minLoadTimeout),
+            UID.NavBar.noteEditorPreview + navBarNotFound
+        )
+        XCTAssertTrue(
+            previewNavBar.buttons[UID.Button.back].waitForExistence(timeout: minLoadTimeout),
+            UID.Button.back + buttonNotFound
+        )
+        XCTAssertTrue(
+            previewNavBar.staticTexts[UID.Text.noteEditorPreview].waitForExistence(timeout: minLoadTimeout),
+            UID.Text.noteEditorPreview + labelNotFound
+        )
     }
 
     class func wholeTextShown(text: String) {
