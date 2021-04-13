@@ -1,3 +1,4 @@
+import UITestHelpers
 import XCTest
 
 class Preview {
