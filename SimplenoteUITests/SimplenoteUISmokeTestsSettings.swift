@@ -36,7 +36,7 @@ class SimplenoteUISmokeTestsSettings: XCTestCase {
         trackStep()
         NoteList.openAllNotes()
         NoteList.createNoteThenLeaveEditor(note)
-        NoteListAssert.noteContentIsShown(note)
+        NoteListAssert.contentIsShown(for: note)
 
         trackStep()
         Settings.open()
@@ -51,7 +51,7 @@ class SimplenoteUISmokeTestsSettings: XCTestCase {
         Settings.condensedModeDisable()
         Settings.close()
         NoteList.openAllNotes()
-        NoteListAssert.noteContentIsShown(note)
+        NoteListAssert.contentIsShown(for: note)
         NoteListAssert.note(note, hasHeight: cellHeightUsual)
     }
 

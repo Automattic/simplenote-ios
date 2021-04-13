@@ -231,7 +231,7 @@ class NoteListAssert {
         NoteListAssert.noteListShown(forSelection: UID.NavBar.trash)
     }
 
-    class func noteContentIsShown(_ note: NoteData) {
+    class func contentIsShown(for note: NoteData) {
         noteContentIsShownInSearch(noteName: note.name, expectedContent: note.content)
     }
 
