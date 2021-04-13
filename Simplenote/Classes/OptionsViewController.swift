@@ -52,7 +52,6 @@ class OptionsViewController: UIViewController {
     ///
     weak var delegate: OptionsControllerDelegate?
 
-
     /// Designated Initializer
     ///
     init(note: Note) {
@@ -356,6 +355,7 @@ private extension OptionsViewController {
     func copyInterlinkWasPressed() {
         SPTracker.trackEditorCopiedInternalLink()
         UIPasteboard.general.copyInternalLink(to: note)
+        NoticeController.shared.present(NoticeFactory.linkCopied())
         dismiss(animated: true, completion: nil)
     }
 
@@ -372,7 +372,8 @@ private extension OptionsViewController {
     @IBAction
     func publishWasPressed(_ newState: Bool) {
         SPTracker.trackEditorNotePublishEnabled(newState)
-        SPObjectManager.shared().updatePublishedState(newState, note: note)
+        let publishController = SPAppDelegate.shared().publishController
+        publishController.updatePublishState(for: note, to: newState)
         pendingUpdate = true
     }
 
@@ -384,6 +385,7 @@ private extension OptionsViewController {
 
         SPTracker.trackEditorCopiedPublicLink()
         UIPasteboard.general.copyPublicLink(to: note)
+        NoticeController.shared.present(NoticeFactory.linkCopied())
         dismiss(animated: true, completion: nil)
     }
 

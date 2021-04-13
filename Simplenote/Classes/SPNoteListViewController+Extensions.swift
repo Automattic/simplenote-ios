@@ -669,6 +669,7 @@ private extension SPNoteListViewController {
 
             UIContextualAction(style: .normal, title: ActionTitle.copyLink, image: .image(name: .link), backgroundColor: .simplenoteTertiaryActionColor) { [weak self] (_, _, completion) in
                 self?.copyInternalLink(to: note)
+                NoticeController.shared.present(NoticeFactory.linkCopied())
                 completion(true)
             },
 
@@ -691,6 +692,7 @@ private extension SPNoteListViewController {
     func contextMenu(for note: Note) -> UIMenu {
         let copy = UIAction(title: ActionTitle.copyLink, image: .image(name: .link)) { [weak self] _ in
             self?.copyInternalLink(to: note)
+            NoticeController.shared.present(NoticeFactory.linkCopied())
         }
 
         let share = UIAction(title: ActionTitle.share, image: .image(name: .share)) { [weak self] _ in
@@ -728,6 +730,9 @@ private extension SPNoteListViewController {
         SPTracker.trackListNoteDeleted()
         SPObjectManager.shared().trashNote(note)
         CSSearchableIndex.default().deleteSearchableNote(note)
+        NoticeController.shared.present(NoticeFactory.noteTrashed(note, onUndo: {
+            SPObjectManager.shared().restoreNote(note)
+        }))
     }
 
     func copyInternalLink(to note: Note) {

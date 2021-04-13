@@ -67,6 +67,14 @@ extension SPAppDelegate {
     func configureVersionsController() {
         versionsController = VersionsController(bucket: simperium.notesBucket)
     }
+
+    @objc
+    func configurePublishController() {
+        publishController = PublishController()
+        publishController.onUpdate = { (note) in
+            PublishNoticePresenter.presentNotice(for: note)
+        }
+    }
 }
 
 // MARK: - URL Handlers and Deep Linking
@@ -147,6 +155,11 @@ extension SPAppDelegate {
         if navigationController.viewControllers.contains(noteListViewController) {
             navigationController.popToViewController(noteListViewController, animated: animated)
         }
+    }
+
+    @objc
+    func setupNoticeController() {
+        NoticeController.shared.setupNoticeController()
     }
 }
 
