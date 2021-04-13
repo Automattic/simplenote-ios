@@ -2,7 +2,7 @@
 struct NoteData {
     let name: String
     let content: String
-    let tags: [String]
+    var tags: [String] = []
 
     var formattedForAutomatedInput: String { "\(name)\n\n\(content)" }
 }

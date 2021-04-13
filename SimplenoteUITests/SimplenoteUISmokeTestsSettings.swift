@@ -26,10 +26,11 @@ class SimplenoteUISmokeTestsSettings: XCTestCase {
 
     func testUsingCondensedNoteList() throws {
         trackTest()
+        let cellHeightCondensed: CGFloat = 44.0
+        let cellHeightUsual: CGFloat = 81.0
         let note = NoteData(
             name: "Condensed Mode Test",
-            content: "Condensed Mode Content",
-            tags: []
+            content: "Condensed Mode Content"
         )
 
         trackStep()
@@ -43,7 +44,7 @@ class SimplenoteUISmokeTestsSettings: XCTestCase {
         Settings.close()
         NoteList.openAllNotes()
         NoteListAssert.noteContentIsShownInSearch(noteName: note.name, expectedContent: "")
-        NoteListAssert.noteHeight(note, 44.0)
+        NoteListAssert.noteHeight(note, cellHeightCondensed)
 
         trackStep()
         Settings.open()
@@ -51,6 +52,8 @@ class SimplenoteUISmokeTestsSettings: XCTestCase {
         Settings.close()
         NoteList.openAllNotes()
         NoteListAssert.noteContentIsShown(note)
-        NoteListAssert.noteHeight(note, 81.0)
+        NoteListAssert.noteHeight(note, cellHeightUsual)
     }
+
+
 }
