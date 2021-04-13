@@ -57,6 +57,7 @@
 		3F3CA91426255E2000F6316F /* UITestHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F3CA91226255E2000F6316F /* UITestHelpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3F3CA93F26255F7200F6316F /* XCUIApplication+Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3CA93E26255F7200F6316F /* XCUIApplication+Device.swift */; };
 		3F3CA94926255FA800F6316F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F3CA94826255FA800F6316F /* XCTest.framework */; };
+		3F3CA95226255FFF00F6316F /* UITestHelpers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F3CA91026255E1F00F6316F /* UITestHelpers.framework */; };
 		3F5EDD0C2435A3AE00959576 /* XCTest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5EDD0B2435A3AE00959576 /* XCTest+Extensions.swift */; };
 		3FA17B5626240FF000C11C46 /* NoteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA17B5526240FF000C11C46 /* NoteData.swift */; };
 		3FA6013C242C5AAE0068FC52 /* SimplenoteScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6013B242C5AAE0068FC52 /* SimplenoteScreenshots.swift */; };
@@ -1031,6 +1032,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F3CA95226255FFF00F6316F /* UITestHelpers.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
