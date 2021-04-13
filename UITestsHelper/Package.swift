@@ -9,11 +9,12 @@ let package = Package(
     // the constraint if necessary.
     platforms: [.iOS(.v12)],
     products: [
-        .library(name: "UITestsHelper", targets: ["UITestsHelper"]),
+        .library(name: "UITestsHelper", targets: ["UITestsHelper"])
     ],
     dependencies: [],
     targets: [
         .target(name: "UITestsHelper", dependencies: []),
-        .testTarget(name: "UITestsHelperTests", dependencies: ["UITestsHelper"]),
-    ]
+        .testTarget(name: "UITestsHelperTests", dependencies: ["UITestsHelper"])
+    ],
+    swiftLanguageVersions: [.v5]
 )
