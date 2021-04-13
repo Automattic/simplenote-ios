@@ -57,6 +57,7 @@
 		3F5EDD0C2435A3AE00959576 /* XCTest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5EDD0B2435A3AE00959576 /* XCTest+Extensions.swift */; };
 		3FA17B5626240FF000C11C46 /* NoteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA17B5526240FF000C11C46 /* NoteData.swift */; };
 		3FA6013C242C5AAE0068FC52 /* SimplenoteScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6013B242C5AAE0068FC52 /* SimplenoteScreenshots.swift */; };
+		3FD88B3B262563A4000242E6 /* UITestsHelper in Frameworks */ = {isa = PBXBuildFile; productRef = 3FD88B3A262563A4000242E6 /* UITestsHelper */; };
 		4352BA0867E0E416EB5FF6B9 /* Pods_Automattic_Simplenote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3318C36BBA08D53624E27EFC /* Pods_Automattic_Simplenote.framework */; };
 		46A3C96317DFA81A002865AE /* NSString+Metadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 467D9C771788D0FF00785EF3 /* NSString+Metadata.m */; };
 		46A3C96617DFA81A002865AE /* SPAcitivitySafari.m in Sources */ = {isa = PBXBuildFile; fileRef = E283709917D7B46300AB562D /* SPAcitivitySafari.m */; };
@@ -1015,6 +1016,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FD88B3B262563A4000242E6 /* UITestsHelper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2165,6 +2167,9 @@
 				3FA6013F242C5AAE0068FC52 /* PBXTargetDependency */,
 			);
 			name = SimplenoteScreenshots;
+			packageProductDependencies = (
+				3FD88B3A262563A4000242E6 /* UITestsHelper */,
+			);
 			productName = SimplenoteScreenshots;
 			productReference = 3FA60139242C5AAD0068FC52 /* SimplenoteScreenshots.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -4526,6 +4531,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3FD88B3A262563A4000242E6 /* UITestsHelper */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = UITestsHelper;
+		};
 		B50D2FB524E6DFAC00163FC3 /* SimplenoteSearch */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B50D2FB424E6DFAC00163FC3 /* XCRemoteSwiftPackageReference "SimplenoteSearch-Swift" */;
