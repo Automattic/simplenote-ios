@@ -1,28 +1,19 @@
 // swift-tools-version:5.3
-// The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
     name: "UITestsHelper",
+    // iOS 12 is the minimum deployment target for what's currently the only
+    // consumer of the package, Simplenote iOS. It might be possible to lower
+    // the constraint if necessary.
+    platforms: [.iOS(.v12)],
     products: [
-        // Products define the executables and libraries a package produces, and make them visible to other packages.
-        .library(
-            name: "UITestsHelper",
-            targets: ["UITestsHelper"]),
+        .library(name: "UITestsHelper", targets: ["UITestsHelper"]),
     ],
-    dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
-    ],
+    dependencies: [],
     targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages this package depends on.
-        .target(
-            name: "UITestsHelper",
-            dependencies: []),
-        .testTarget(
-            name: "UITestsHelperTests",
-            dependencies: ["UITestsHelper"]),
+        .target(name: "UITestsHelper", dependencies: []),
+        .testTarget(name: "UITestsHelperTests", dependencies: ["UITestsHelper"]),
     ]
 )
