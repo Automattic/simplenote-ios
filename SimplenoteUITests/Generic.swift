@@ -39,6 +39,14 @@ func getToAllNotes() {
     NoteEditor.leaveEditor()
 }
 
+func toggleSwitchIfNeeded(_ switchElement: XCUIElement, _ value: String) {
+    let switchValue = switchElement.value as? String
+
+    guard switchValue != value else { return }
+
+    switchElement.tap()
+}
+
 class Table {
 
     class func getAllCells() -> XCUIElementQuery {
