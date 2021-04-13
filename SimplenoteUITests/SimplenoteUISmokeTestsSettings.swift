@@ -36,7 +36,7 @@ class SimplenoteUISmokeTestsSettings: XCTestCase {
         trackStep()
         NoteList.openAllNotes()
         NoteList.createNoteThenLeaveEditor(note)
-        NoteListAssert.contentIsShown(for: note)
+        NoteListAssert.noteExists(note)
 
         trackStep()
         Settings.open()

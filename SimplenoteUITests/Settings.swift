@@ -2,43 +2,37 @@ import XCTest
 
 let screenName = "Settings"
 
-enum SettingsScreen: String {
-
-    case doneButton = "Done"
-    case condensedModeSwitch = "Condensed Note List"
-
-    var element: XCUIElement {
-        switch self {
-        case .doneButton:
-            return app.navigationBars[screenName].buttons[self.rawValue]
-        case .condensedModeSwitch:
-            return app.tables.cells.containing(.staticText, identifier: self.rawValue).firstMatch
-        }
-    }
-}
-
 class Settings {
 
-    static func condensedModeEnable() {
-        let condensedModeSwitch = SettingsScreen.condensedModeSwitch.element
-        let switchValue = condensedModeSwitch.value as? String
+    enum Elements: String {
 
-        if switchValue == "0" {
-            condensedModeSwitch.tap()
+        case doneButton = "Done"
+        case condensedModeSwitch = "Condensed Note List"
+
+        var element: XCUIElement {
+            switch self {
+            case .doneButton:
+                return app.navigationBars[screenName].buttons[self.rawValue]
+            case .condensedModeSwitch:
+                return app.tables.cells.containing(.staticText, identifier: self.rawValue).firstMatch
+            }
         }
+    }
+
+    static func condensedModeEnable() {
+        switchCondensedModeIfNeeded(value: "1")
     }
 
     static func condensedModeDisable() {
-        let condensedModeSwitch = SettingsScreen.condensedModeSwitch.element
-        let switchValue = condensedModeSwitch.value as? String
+        switchCondensedModeIfNeeded(value: "0")
+    }
 
-        if switchValue == "1" {
-            condensedModeSwitch.tap()
-        }
+    static func switchCondensedModeIfNeeded(value: String) {
+        toggleSwitchIfNeeded(Elements.condensedModeSwitch.element, value)
     }
 
     static func close() {
-        SettingsScreen.doneButton.element.tap()
+        Elements.doneButton.element.tap()
     }
 
     static func open() {
