@@ -100,7 +100,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     [self configureLayout];
     [self configureTagListViewController];
     [self configureInterlinksProcessor];
-    [self configureNavigationToolbar];
+    [self configureNavigationControllerToolbar];
     
     [self configureTextViewKeyboard];
 
@@ -143,9 +143,9 @@ CGFloat const SPSelectedAreaPadding = 20;
     self.navigationBarBackground = [SPBlurEffectView navigationBarBlurView];
 }
 
-- (void)configureNavigationToolbar
+- (void)configureNavigationControllerToolbar
 {
-    [self refreshNavigationToolbar];
+    [self refreshNavigationControllerToolbar];
 }
 
 - (void)setupNavigationController
@@ -425,7 +425,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     self.navigationItem.rightBarButtonItems = buttons;
 }
 
-- (void)refreshNavigationToolbar
+- (void)refreshNavigationControllerToolbar
 {
     if (self.searching) {
         [self configureSearchToolbar];
@@ -586,7 +586,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     
     self.searching = NO;
 
-    [self refreshNavigationToolbar];
+    [self refreshNavigationControllerToolbar];
     self.searchDetailLabel.text = nil;
 }
 

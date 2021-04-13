@@ -51,7 +51,7 @@
         [self configureImpactGenerator];
         [self configureNavigationButtons];
         [self configureNavigationBarBackground];
-        [self configureNavigationToolbar];
+        [self configureNavigationControllerToolbar];
         [self configureResultsController];
         [self configurePlaceholderView];
         [self configureTableView];
@@ -280,7 +280,7 @@
     self.navigationBarBackground = [SPBlurEffectView navigationBarBlurView];
 }
 
-- (void)configureNavigationToolbar {
+- (void)configureNavigationControllerToolbar {
     [self configureNewNoteBarWith:@selector(createNewNote)];
 }
 
