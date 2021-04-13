@@ -1,6 +1,6 @@
 import XCTest
 
-extension XCUIApplication {
+public extension XCUIApplication {
 
     func isDeviceIPhone8Plus(_ device: XCUIDevice = .shared) -> Bool {
         let iPhone8PlusScreenHeight = CGFloat(736)
