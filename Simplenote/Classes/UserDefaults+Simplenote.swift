@@ -11,7 +11,6 @@ extension UserDefaults {
         case listSortMode
         case listSortModeLegacy = "SPAlphabeticalSortPref"
         case markdown = "MarkdownDefault"
-        case searchSortMode
         case theme
         case themeLegacy = "SPThemePref"
         case wordPressSessionKey = "SPAuthSessionKey"

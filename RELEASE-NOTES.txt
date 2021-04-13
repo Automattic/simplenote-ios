@@ -2,6 +2,7 @@
 -----
 -   Simplenote's Icons have been revamped #919
 -   Added in app notifications to alert users of different activities in the app #1228
+-   Changed search sort settings to use the general sort setting. #1209
 
 4.34
 -----

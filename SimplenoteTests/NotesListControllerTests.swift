@@ -63,7 +63,6 @@ class NotesListControllerTests: XCTestCase {
         XCTAssertEqual(noteListController.numberOfObjects, notes.count)
 
         noteListController.sortMode = .alphabeticallyDescending
-        noteListController.searchSortMode = .alphabeticallyDescending
         noteListController.performFetch()
 
         let reversedNotes = Array(notes.reversed())
@@ -260,30 +259,6 @@ class NotesListControllerTests: XCTestCase {
             XCTAssertEqual(noteListController.indexPath(forObject: note), IndexPath(row: row, section: 1))
         }
     }
-
-    /// Verifies that the SortMode property properly applies the specified order mode to the retrieved entities
-    ///
-    func testListControllerProperlyAppliesSearchSortModeToSearchResults() {
-        let (notes, _, _) = insertSampleEntities(count: 100)
-
-        storage.save()
-        noteListController.beginSearch()
-
-        // Search Mode: Expect an inverted collection (regardless of the regular sort mode)
-        noteListController.sortMode = .alphabeticallyAscending
-        noteListController.searchSortMode = .alphabeticallyDescending
-
-        // This is a specific keyword contained by eeeevery siiiiinnnnngle entity!
-        noteListController.refreshSearchResults(keyword: "0")
-
-        let reversedNotes = Array(notes.reversed())
-        let retrievedNotes = noteListController.sections.first!.objects.compactMap { $0 as? Note }
-
-        for (index, note) in retrievedNotes.enumerated() {
-            XCTAssertEqual(note.content, reversedNotes[index].content)
-        }
-    }
-
 
     // MARK: - Tests: onBatchChanges
 
