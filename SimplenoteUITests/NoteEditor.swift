@@ -24,12 +24,18 @@ class NoteEditor {
     }
 
     class func clearAndEnterText(enteredValue: String, viaPaste: Bool = false) {
+        let noteContentTextView = app.textViews.element
+        guard noteContentTextView.exists else { return }
+
         if viaPaste {
             UIPasteboard.general.strings = []
-            app.textViews.element.paste(text: enteredValue)
-            app.textViews.element.swipeUp(velocity: .fast)
+            noteContentTextView.clearText()
+            noteContentTextView.paste(text: enteredValue)
+            /// Swipe up fast to show tags input, which diappears if pasted text is large
+            /// enough to push it off screen
+            noteContentTextView.swipeUp(velocity: .fast)
         } else {
-            app.textViews.element.clearAndEnterText(text: enteredValue)
+            noteContentTextView.clearAndEnterText(text: enteredValue)
         }
     }
 
