@@ -46,17 +46,18 @@ class NoteList {
         app.navigationBars.buttons[UID.Button.newNote].tap()
     }
 
-    static func createNoteThenLeaveEditor(_ note: NoteData) {
+    static func createNoteThenLeaveEditor(_ note: NoteData, viaPaste: Bool = false) {
         NoteList.createNoteAndLeaveEditor(
             noteName: note.formattedForAutomatedInput,
-            tags: note.tags
+            tags: note.tags,
+            viaPaste: viaPaste
         )
     }
 
-    class func createNoteAndLeaveEditor(noteName: String, tags: [String] = []) {
+    class func createNoteAndLeaveEditor(noteName: String, tags: [String] = [], viaPaste: Bool = false) {
         print(">>> Creating a note: " + noteName)
         NoteList.addNoteTap()
-        NoteEditor.clearAndEnterText(enteredValue: noteName)
+        NoteEditor.clearAndEnterText(enteredValue: noteName, viaPaste: viaPaste)
 
         for tag in tags {
             NoteEditor.addTag(tagName: tag)
@@ -65,9 +66,9 @@ class NoteList {
         NoteEditor.leaveEditor()
     }
 
-    class func createNotes(names: [String]) {
+    class func createNotes(names: [String], viaPaste: Bool = false) {
         for noteName in names {
-            createNoteAndLeaveEditor(noteName: noteName)
+            createNoteAndLeaveEditor(noteName: noteName, viaPaste: viaPaste)
         }
     }
 

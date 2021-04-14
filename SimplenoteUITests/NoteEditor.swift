@@ -23,8 +23,14 @@ class NoteEditor {
         app.textViews.element.clearAndEnterText(text: "")
     }
 
-    class func clearAndEnterText(enteredValue: String) {
-        app.textViews.element.clearAndEnterText(text: enteredValue)
+    class func clearAndEnterText(enteredValue: String, viaPaste: Bool = false) {
+        if viaPaste {
+            UIPasteboard.general.strings = []
+            app.textViews.element.paste(text: enteredValue)
+            app.textViews.element.swipeUp(velocity: .fast)
+        } else {
+            app.textViews.element.clearAndEnterText(text: enteredValue)
+        }
     }
 
     class func getEditorText() -> String {
