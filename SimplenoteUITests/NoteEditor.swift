@@ -30,8 +30,8 @@ class NoteEditor {
             UIPasteboard.general.strings = []
             noteContentTextView.clearText()
             noteContentTextView.paste(text: enteredValue)
-            /// Swipe up fast to show tags input, which diappears if pasted text is large
-            /// enough to push it off screen
+            /// Swipe up fast to show tags input, which disappears if pasted text is large
+            /// enough to push tags input off screen
             noteContentTextView.swipeUp(velocity: .fast)
         } else {
             noteContentTextView.clearAndEnterText(text: enteredValue)
