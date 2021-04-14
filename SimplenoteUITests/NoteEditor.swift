@@ -25,7 +25,6 @@ class NoteEditor {
 
     class func clearAndEnterText(enteredValue: String, viaPaste: Bool = false) {
         let noteContentTextView = app.textViews.element
-        guard noteContentTextView.exists else { return }
 
         if viaPaste {
             UIPasteboard.general.strings = []
