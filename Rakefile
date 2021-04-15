@@ -8,9 +8,32 @@ require 'tmpdir'
 require 'rake/clean'
 require 'yaml'
 require 'digest'
+require 'json'
 PROJECT_DIR = File.expand_path(File.dirname(__FILE__))
 
 task default: %w[test]
+
+task :test_check_ignore do
+  files = JSON.parse(File.read('./.configure'))['files_to_copy']
+    .map { |json| json['destination'] }
+
+  errors = []
+  files.each do |f|
+    begin
+      sh("git check-ignore #{f} > /dev/null", verbose: false)
+    rescue => e
+      errors.push({ file: f, error: e })
+    end
+  end
+
+  unless errors.empty?
+    puts 'Not all secret files are ignored!'
+    puts ''
+    puts 'The following secrets are not ignored:'
+    errors.each { |e| puts "- #{e[:file]}" }
+    exit 1
+  end
+end
 
 desc "Install required dependencies"
 task :dependencies => %w[dependencies:check]
