@@ -291,16 +291,4 @@ extension XCUIElement {
         // one.
         return app.isDeviceIPhone8Plus()
     }
-
-    private func paste(text: String) -> Void {
-        let previousPasteboardContents = UIPasteboard.general.string
-        UIPasteboard.general.string = text
-
-        self.press(forDuration: 1.2)
-        XCUIApplication().menuItems.firstMatch.tap()
-
-        if let string = previousPasteboardContents {
-            UIPasteboard.general.string = string
-        }
-    }
 }
