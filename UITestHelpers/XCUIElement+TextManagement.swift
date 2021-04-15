@@ -19,6 +19,7 @@ extension XCUIElement {
         self.typeText(text)
     }
 
+    // Credits to: https://stackoverflow.com/a/32894080
     public func clearText() {
         guard let stringValue = self.value as? String else {
             XCTFail("Tried to clear and enter text into a non string value")
