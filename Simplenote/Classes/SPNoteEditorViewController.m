@@ -116,7 +116,6 @@ CGFloat const SPSelectedAreaPadding = 20;
 {
     [super viewWillAppear:animated];
 
-    [self setupNavigationController];
     [self highlightSearchResultsIfNeeded];
     [self startListeningToKeyboardNotifications];
     [self refreshNavigationBarButtons];
@@ -214,7 +213,6 @@ CGFloat const SPSelectedAreaPadding = 20;
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self.navigationController setToolbarHidden:YES animated:YES];
 
     [self saveScrollPosition];
 }

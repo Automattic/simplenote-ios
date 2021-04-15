@@ -245,6 +245,8 @@
 
         BOOL toolbarShouldHide = self.isSearchActive || self.isDeletedFilterActive;
         [self.navigationController setToolbarHidden:toolbarShouldHide animated:YES];
+    } else {
+        [self.navigationController setToolbarHidden:YES animated:YES];
     }
 }
 
