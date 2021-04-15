@@ -89,8 +89,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.searchController hideNavigationBarIfNecessary];
 
+    [self refreshNavigationControllerToolbar];
     if (!self.navigatingUsingKeyboard) {
         [self.tableView deselectSelectedRowAnimated:YES];
         self.selectedNote = nil;
@@ -231,8 +231,20 @@
     [self.searchBar applySimplenoteStyle];
 }
 
+- (void)refreshNavigationControllerToolbar
+{
+    if (!UIDevice.isPad) {
+        UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+        NSArray *toolbarItems = [NSArray arrayWithObjects:flexibleSpace, self.addButton, nil];
+        [self setToolbarItems:toolbarItems animated:YES];
+
+        [self.navigationController setToolbarHidden:self.isSearchActive animated:YES];
+    }
+}
+
 - (void)updateNavigationBar {
-    UIBarButtonItem *rightButton = (self.isDeletedFilterActive) ? self.emptyTrashButton : self.addButton;
+    UIBarButtonItem *ipadAddButton = UIDevice.isPad ? self.addButton : nil;
+    UIBarButtonItem *rightButton = (self.isDeletedFilterActive) ? self.emptyTrashButton : ipadAddButton;
 
     [self.navigationItem setRightBarButtonItem:rightButton animated:YES];
     [self.navigationItem setLeftBarButtonItem:self.sidebarButton animated:YES];
@@ -346,6 +358,7 @@
     [self.notesListController beginSearch];
     [self reloadTableData];
     [self refreshTitle];
+    [self refreshNavigationControllerToolbar];
 }
 
 - (void)searchDisplayControllerDidEndSearch:(SearchDisplayController *)controller
@@ -361,6 +374,7 @@
     /// Ref. https://github.com/Automattic/simplenote-ios/issues/777
     ///
     [self.notesListController endSearch];
+    [self refreshNavigationControllerToolbar];
     [self update];
 
 }
