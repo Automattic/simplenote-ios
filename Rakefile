@@ -13,6 +13,18 @@ PROJECT_DIR = File.expand_path(File.dirname(__FILE__))
 
 task default: %w[test]
 
+task :test_soft_links do
+  path = File.join(File.expand_path(ENV['HOME']), '.test')
+  content = 'test'
+  sh("echo '#{content}' > #{path}")
+  local_path = 'local_test'
+  sh("echo #{local_path} >> .gitignore")
+  sh("ln -s #{path} #{local_path}")
+
+  puts "The following line should be '#{content}'"
+  puts File.read(local_path)
+end
+
 task :test_check_ignore do
   files = JSON.parse(File.read('./.configure'))['files_to_copy']
     .map { |json| json['destination'] }
