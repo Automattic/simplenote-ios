@@ -90,7 +90,7 @@
 {
     [super viewWillAppear:animated];
 
-    [self refreshNavigationControllerToolbar];
+    [self refershNavigationButtons];
     if (!self.navigatingUsingKeyboard) {
         [self.tableView deselectSelectedRowAnimated:YES];
         self.selectedNote = nil;
@@ -231,6 +231,11 @@
     [self.searchBar applySimplenoteStyle];
 }
 
+- (void)refershNavigationButtons {
+    [self updateNavigationBar];
+    [self refreshNavigationControllerToolbar];
+}
+
 - (void)refreshNavigationControllerToolbar
 {
     if (!UIDevice.isPad) {
@@ -238,13 +243,14 @@
         NSArray *toolbarItems = [NSArray arrayWithObjects:flexibleSpace, self.addButton, nil];
         [self setToolbarItems:toolbarItems animated:YES];
 
-        [self.navigationController setToolbarHidden:self.isSearchActive animated:YES];
+        BOOL toolbarShouldHide = self.isSearchActive || self.isDeletedFilterActive;
+        [self.navigationController setToolbarHidden:toolbarShouldHide animated:YES];
     }
 }
 
 - (void)updateNavigationBar {
-    UIBarButtonItem *ipadAddButton = UIDevice.isPad ? self.addButton : nil;
-    UIBarButtonItem *rightButton = (self.isDeletedFilterActive) ? self.emptyTrashButton : ipadAddButton;
+    UIBarButtonItem *possibleAddButton = UIDevice.isPad ? self.addButton : nil;
+    UIBarButtonItem *rightButton = (self.isDeletedFilterActive) ? self.emptyTrashButton : possibleAddButton;
 
     [self.navigationItem setRightBarButtonItem:rightButton animated:YES];
     [self.navigationItem setLeftBarButtonItem:self.sidebarButton animated:YES];
@@ -358,7 +364,7 @@
     [self.notesListController beginSearch];
     [self reloadTableData];
     [self refreshTitle];
-    [self refreshNavigationControllerToolbar];
+    [self refershNavigationButtons];
 }
 
 - (void)searchDisplayControllerDidEndSearch:(SearchDisplayController *)controller
@@ -374,7 +380,7 @@
     /// Ref. https://github.com/Automattic/simplenote-ios/issues/777
     ///
     [self.notesListController endSearch];
-    [self refreshNavigationControllerToolbar];
+    [self refershNavigationButtons];
     [self update];
 
 }
@@ -504,7 +510,7 @@
     self.tableView.allowsSelection = !isTrashOnScreen;
     
     [self displayPlaceholdersIfNeeded];
-    [self updateNavigationBar];
+    [self refershNavigationButtons];
     [self hideRatingViewIfNeeded];
 }
 
