@@ -97,7 +97,6 @@ CGFloat const SPSelectedAreaPadding = 20;
     [self configureNavigationBarItems];
     [self configureNavigationBarBackground];
     [self configureRootView];
-    [self configureSearchToolbar];
     [self configureLayout];
     [self configureTagListViewController];
     [self configureInterlinksProcessor];
@@ -120,9 +119,9 @@ CGFloat const SPSelectedAreaPadding = 20;
     [self setupNavigationController];
     [self highlightSearchResultsIfNeeded];
     [self startListeningToKeyboardNotifications];
-
     [self refreshNavigationBarButtons];
-
+    [self configureNavigationControllerToolbar];
+    [self setupNavigationController];
     // Async here to make sure all the frames are correct
     dispatch_async(dispatch_get_main_queue(), ^{
         [self restoreScrollPosition];
@@ -132,7 +131,6 @@ CGFloat const SPSelectedAreaPadding = 20;
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-
     self.userActivity = [NSUserActivity openNoteActivityFor:self.note];
     [self ensureEditorIsFirstResponder];
 }
@@ -147,7 +145,13 @@ CGFloat const SPSelectedAreaPadding = 20;
 {
     // Note: Our navigationBar *may* be hidden, as per SPSearchController in the Notes List
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-    [self.navigationController setToolbarHidden:!self.searching animated:YES];
+
+    if (UIDevice.isPad) {
+        [self.navigationController setToolbarHidden:!self.searching animated:YES];
+    } else {
+        [self.navigationController setToolbarHidden:NO animated:YES];
+    }
+
 }
 
 - (void)ensureEditorIsFirstResponder
@@ -304,6 +308,20 @@ CGFloat const SPSelectedAreaPadding = 20;
     [self setToolbarItems:@[self.doneSearchButton, flexibleSpace, detailButton, flexibleSpaceTwo, self.prevSearchButton, self.nextSearchButton] animated:NO];
 }
 
+- (void)configureNavigationControllerToolbar
+{
+    if (UIDevice.isPad) {
+        [self configureSearchToolbar];
+        return;
+    }
+
+    if (self.searching) {
+        [self configureSearchToolbar];
+    } else {
+        [self configureNewNoteBar];
+    }
+}
+
 - (void)ensureNoteIsVisibleInList
 {
     // TODO: This should definitely be handled by the Note List itself. Please!
@@ -407,7 +425,9 @@ CGFloat const SPSelectedAreaPadding = 20;
     NSMutableArray *buttons = [NSMutableArray array];
 
     if (self.shouldHideKeyboardButton) {
-        [buttons addObject:self.createNoteButton];
+        if (UIDevice.isPad) {
+            [buttons addObject:self.createNoteButton];
+        }
     } else {
         [buttons addObject:self.keyboardButton];
     }
@@ -574,7 +594,11 @@ CGFloat const SPSelectedAreaPadding = 20;
     
     self.searching = NO;
 
-    [self.navigationController setToolbarHidden:YES animated:YES];
+    if (UIDevice.isPad) {
+        [self.navigationController setToolbarHidden:YES animated:YES];
+    } else {
+        [self configureNavigationControllerToolbar];
+    }
     self.searchDetailLabel.text = nil;
 }
 
