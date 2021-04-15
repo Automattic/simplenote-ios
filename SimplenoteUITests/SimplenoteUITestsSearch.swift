@@ -47,7 +47,7 @@ class SimplenoteUISmokeTestsSearch: XCTestCase {
         Sidebar.tagsDeleteAll()
         NoteList.openAllNotes()
 
-        allNotes.forEach { NoteList.createNoteThenLeaveEditor($0, viaPaste: true) }
+        allNotes.forEach { NoteList.createNoteThenLeaveEditor($0, usingPaste: true) }
 }
 
     override func setUpWithError() throws {

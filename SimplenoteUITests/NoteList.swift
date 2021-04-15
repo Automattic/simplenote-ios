@@ -46,18 +46,18 @@ class NoteList {
         app.navigationBars.buttons[UID.Button.newNote].tap()
     }
 
-    static func createNoteThenLeaveEditor(_ note: NoteData, viaPaste: Bool = false) {
+    static func createNoteThenLeaveEditor(_ note: NoteData, usingPaste: Bool = false) {
         NoteList.createNoteAndLeaveEditor(
             noteName: note.formattedForAutomatedInput,
             tags: note.tags,
-            viaPaste: viaPaste
+            usingPaste: usingPaste
         )
     }
 
-    class func createNoteAndLeaveEditor(noteName: String, tags: [String] = [], viaPaste: Bool = false) {
+    class func createNoteAndLeaveEditor(noteName: String, tags: [String] = [], usingPaste: Bool = false) {
         print(">>> Creating a note: " + noteName)
         NoteList.addNoteTap()
-        NoteEditor.clearAndEnterText(enteredValue: noteName, viaPaste: viaPaste)
+        NoteEditor.clearAndEnterText(enteredValue: noteName, usingPaste: usingPaste)
 
         for tag in tags {
             NoteEditor.addTag(tagName: tag)
@@ -66,9 +66,9 @@ class NoteList {
         NoteEditor.leaveEditor()
     }
 
-    class func createNotes(names: [String], viaPaste: Bool = false) {
+    class func createNotes(names: [String], usingPaste: Bool = false) {
         for noteName in names {
-            createNoteAndLeaveEditor(noteName: noteName, viaPaste: viaPaste)
+            createNoteAndLeaveEditor(noteName: noteName, usingPaste: usingPaste)
         }
     }
 
@@ -247,10 +247,10 @@ class NoteListAssert {
         if let noteContent = Table.getContentOfCell(noteName: noteName) {
             XCTAssertTrue(noteContent.contains(expectedContent), "Content is different.")
         } else if expectedContent.isEmpty {
-            /// If note content is nil, but we assert for empty content, we should not fail
+            // If note content is nil, but we assert for empty content, we should not fail
             XCTAssert(true, "Content is not empty.")
         } else {
-            /// Otherwise, we should fail
+            // Otherwise, we should fail
             XCTFail("Note has no content. Only title.")
         }
     }
