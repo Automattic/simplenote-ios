@@ -97,6 +97,7 @@
     }
 
     self.navigatingUsingKeyboard = NO;
+    [self refreshStyle];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -229,6 +230,9 @@
 
     // Refresh the SearchBar's UI
     [self.searchBar applySimplenoteStyle];
+
+    self.navigationController.toolbar.translucent = false;
+    self.navigationController.toolbar.barTintColor = [UIColor simplenoteSortBarBackgroundColor];
 }
 
 - (void)refershNavigationButtons {

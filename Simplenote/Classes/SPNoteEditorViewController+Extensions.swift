@@ -828,6 +828,8 @@ extension SPNoteEditorViewController {
         noteEditorTextView.keyboardAppearance = .simplenoteKeyboardAppearance
         noteEditorTextView.checklistsFont = .preferredFont(forTextStyle: .headline)
         noteEditorTextView.checklistsTintColor = .simplenoteNoteBodyPreviewColor
+        navigationController?.toolbar.isTranslucent = false
+        navigationController?.toolbar.barTintColor = .simplenoteSortBarBackgroundColor
     }
 
     private func refreshTagsEditor() {
