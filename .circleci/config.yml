@@ -9,9 +9,9 @@ orbs:
 parameters:
   beta_build:
     type: boolean
-    default: false 
+    default: false
   release_build:
-    type: boolean 
+    type: boolean
     default: false
 
 xcode_version: &xcode_version
@@ -115,7 +115,7 @@ jobs:
             APP_VERSION=$(cat ./config/Version.Public.xcconfig | grep "^VERSION_LONG" | cut -d "=" -f2)
             echo "export SLACK_FAILURE_MESSAGE=':red_circle: Build for Simplenote $APP_VERSION failed!'" >> $BASH_ENV
             echo "export SLACK_SUCCESS_MESSAGE=':tada: Simplenote $APP_VERSION has been deployed!'" >> $BASH_ENV
-      - when: 
+      - when:
           condition: << pipeline.parameters.beta_build >>
           steps:
             - run:
@@ -123,12 +123,12 @@ jobs:
                 command: |
                   bundle exec fastlane build_and_upload_beta_release skip_confirm:true create_gh_release:true
                 no_output_timeout: 60m
-      - when: 
+      - when:
           condition: << pipeline.parameters.release_build >>
           steps:
             - run:
                 name: Build
-                command: | 
+                command: |
                   bundle exec fastlane build_and_upload_stable_release skip_confirm:true create_gh_release:true
                 no_output_timeout: 60m
       - slack/status:
@@ -141,7 +141,7 @@ jobs:
     # Props to work done by others in this file and in
     # https://github.com/wordpress-mobile/WordPress-iOS/blob/develop/.circleci/config.yml
     # this is a combined rip-off from both
-    parameters:     
+    parameters:
       device:
         description: The device (e.g. "iPhone 12") to use when running tests.
         type: string
@@ -205,7 +205,7 @@ workflows:
             branches:
               ignore: /pull\/[0-9]+/
   Release Build:
-    when: 
+    when:
        or: [ << pipeline.parameters.beta_build >>, << pipeline.parameters.release_build >> ]
     jobs:
       - Release Build
