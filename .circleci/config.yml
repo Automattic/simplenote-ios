@@ -208,4 +208,6 @@ workflows:
     when:
        or: [ << pipeline.parameters.beta_build >>, << pipeline.parameters.release_build >> ]
     jobs:
-      - Release Build
+      - Test
+      - Release Build:
+          requires: ['Test']
