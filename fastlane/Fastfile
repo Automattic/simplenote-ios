@@ -83,7 +83,7 @@ end
 
     ios_localize_project()
     trigger_beta_build(branch_to_build: "release/#{new_version}")
-    get_prs_list(repository:GHHELPER_REPO, start_tag:"#{old_version}", report_path:"#{File.expand_path('~')}/simplenoteios_prs_list_#{old_version}_#{new_version}.txt")
+    get_prs_list(repository:GHHELPER_REPO, milestone:"#{old_version}", report_path:"#{File.expand_path('~')}/simplenoteios_prs_list_#{old_version}_#{new_version}.txt")
 
     UI.user_error! 'You run a hacked version of the code_freeze lane. Please fix the source issue before continuing.'
   end
