@@ -66,26 +66,17 @@ end
   #####################################################################################
   desc "Creates a new release branch from the current develop"
   lane :code_freeze do | options |
-    # This is an hacked version of the lane to work around an issue I
-    # experienced during the first run, see
-    # https://github.com/wordpress-mobile/release-toolkit/pull/236
+    old_version = ios_codefreeze_prechecks(options)
 
-    # old_version = ios_codefreeze_prechecks(options)
-
-    # ios_bump_version_release()
-    # new_version = ios_get_app_version()
-    # ios_update_release_notes(new_version: new_version)
-    # setbranchprotection(repository:GHHELPER_REPO, branch: "release/#{new_version}")
-    # setfrozentag(repository:GHHELPER_REPO, milestone: new_version)
-
-    old_version = '4.34'
-    new_version = '4.35'
+    ios_bump_version_release()
+    new_version = ios_get_app_version()
+    ios_update_release_notes(new_version: new_version)
+    setbranchprotection(repository:GHHELPER_REPO, branch: "release/#{new_version}")
+    setfrozentag(repository:GHHELPER_REPO, milestone: new_version)
 
     ios_localize_project()
     trigger_beta_build(branch_to_build: "release/#{new_version}")
     get_prs_list(repository:GHHELPER_REPO, milestone:"#{old_version}", report_path:"#{File.expand_path('~')}/simplenoteios_prs_list_#{old_version}_#{new_version}.txt")
-
-    UI.user_error! 'You run a hacked version of the code_freeze lane. Please fix the source issue before continuing.'
   end
 
   #####################################################################################
