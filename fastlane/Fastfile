@@ -35,9 +35,9 @@ Dotenv.load(PROJECT_ENV_FILE_PATH)
 ENV[GHHELPER_REPO="Automattic/simplenote-ios"]
 ENV["PROJECT_NAME"]="Simplenote"
 ENV["PROJECT_ROOT_FOLDER"]="./"
+ENV['APP_STORE_STRINGS_FILE_NAME']='AppStoreStrings.pot'
 ENV["PUBLIC_CONFIG_FILE"]="./config/Version.Public.xcconfig"
 ENV["DOWNLOAD_METADATA"]="./fastlane/download_metadata.swift"
-ENV["PROJECT_ROOT_FOLDER"]="./"
 REPOSITORY_NAME="simplenote-ios"
 
 # Use this instead of getting values from ENV directly
@@ -76,7 +76,7 @@ end
 
     ios_localize_project()
     trigger_beta_build(branch_to_build: "release/#{new_version}")
-    get_prs_list(repository:GHHELPER_REPO, start_tag:"#{old_version}", report_path:"#{File.expand_path('~')}/simplenoteios_prs_list_#{old_version}_#{new_version}.txt")
+    get_prs_list(repository:GHHELPER_REPO, milestone:"#{old_version}", report_path:"#{File.expand_path('~')}/simplenoteios_prs_list_#{old_version}_#{new_version}.txt")
   end
 
   #####################################################################################

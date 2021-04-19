@@ -146,6 +146,9 @@
    Copies the Note's Interlink */
 "Copy Internal Link" = "Copy Internal Link";
 
+/* Copy link action */
+"Copy link" = "Copy link";
+
 /* Copies the Note's Public Link */
 "Copy Link" = "Copy Link";
 
@@ -217,7 +220,7 @@
 "Diagnostics" = "Diagnostics";
 
 /* Footer -> Sign up verification screen. Parameter: %1$@ - support email address */
-"Didn't get an email? You may already have an account. Contact %1$@ for help." = "Didn't get an email? You may already have an account. Contact %1$@ for help.";
+"Didn't get an email? There may already be an account associated with this email address. Contact %1$@ for help." = "Didn't get an email? There may already be an account associated with this email address. Contact %1$@ for help.";
 
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "Disable Markdown formatting";
@@ -324,6 +327,9 @@
 /* Theme: Light */
 "Light" = "Light";
 
+/* Link Copied alert */
+"Link copied" = "Link copied";
+
 /* Setting for when the passcode lock should enable */
 "Lock Timeout" = "Lock Timeout";
 
@@ -407,6 +413,9 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "No untagged notes";
 
+/* Note trashed notification */
+"Note Trashed" = "Note Trashed";
+
 /* Notes Header (Search Mode) */
 "Notes" = "Notes";
 
@@ -486,6 +495,12 @@
 
 /* Publish Accessibility Hint */
 "Publish note" = "Publish note";
+
+/* Notice up succesful publishing */
+"Publish Successful" = "Publish Successful";
+
+/* Notice of publishing action */
+"Publishing note..." = "Publishing note...";
 
 /* Indicates the Note is being published */
 "Publishing..." = "Publishing...";
@@ -655,6 +670,9 @@
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "Turn off Passcode";
 
+/* Undo action */
+"Undo" = "Undo";
+
 /* Unpins a note */
 "Unpin" = "Unpin";
 
@@ -663,6 +681,12 @@
 
 /* Publish Accessibility Hint */
 "Unpublish note" = "Unpublish note";
+
+/* Notice of publishing unsuccessful */
+"Unpublish successful" = "Unpublish successful";
+
+/* Notice of unpublishing action */
+"Unpublishing note..." = "Unpublishing note...";
 
 /* Indicates the Note is being unpublished */
 "Unpublishing..." = "Unpublishing...";

@@ -51,7 +51,16 @@ lines = lines[3...]
 
 # Isolate the current version by looking for the first new line
 release_lines = []
-lines[2...].each do |line|
+
+# Find the start of the releases by looking for the line with the '-----'
+# sequence. This accounts for the edge case in which more new lines make it
+# into the release notes file than expected.
+index = 0
+until lines[index].start_with? '-----'
+  index += 1
+end
+
+lines[(index+1)...].each do |line|
   break if line.strip == ''
   release_lines.push line
 end
