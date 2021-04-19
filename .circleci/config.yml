@@ -187,7 +187,9 @@ workflows:
           device: "iPhone 12"
           filters:
             branches:
-              only: /.*UI-tests.*/
+              only:
+                - /.*UI-tests.*/
+                - /release\/*/
   Installable Build:
     when:
        and:
