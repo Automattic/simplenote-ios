@@ -1,26 +1,28 @@
 ## Testing
 Note: (A) means Automated Test. If automated UI tests were executed for the app, there's no need to run tests marked with (A) manually.
 
-### Login
+### Login/Signup
 
 - [ ] Logout (A)
 - [ ] Login with wrong password fails (A)
 - [ ] Login with correct password succeeds (A)
+- [ ] Signup with unique email address succeeds, welcome note is shown after
 
 ### Sync
 
-- [ ] Create new note appears in other device
+- [ ] Created note appears in other device
 - [ ] Changes to new note sync to/from other device
 - [ ] New tag immediately syncs to/from other device
 - [ ] Removed tag immediately syncs to/from other device
 - [ ] Note publishes with link
 - [ ] Note unpublishes
-- [ ] Note publish change syncs _from_ other device
+- [ ] Note publish change syncs _from_ other device (visible with dialog open)
 - [ ] Markdown setting syncs to/from other device
 - [ ] Preview mode disappears/reappears when receiving remote changes to markdown setting
 - [ ] Note pinning syncs immediately to/from other device
 - [ ] Note pinning works regardless if selecting in list view or from note info
-- [ ] Restoring history immediately syncs note from both directions
+- [ ] Viewing history on one device leaves note unchanged on other device
+- [ ] Restoring history immediately syncs note to/from other device
 - [ ] After disabling network connectivity and making changes, selecting Log Out triggers an `Unsynced Notes Detected` alert
 - [ ] After going back online, changes sync
 
@@ -61,6 +63,8 @@ Note: (A) means Automated Test. If automated UI tests were executed for the app,
 
 - [ ] Can change analytics sharing setting
 - [ ] Changing `Condensed Note List` mode immediately updates and reflects in note list (A)
+- [ ] Changing `Sort Order` immediately updates and reflects in note list
+- [ ] Changing `Tag Sorting` immediately updates and reflects in tag list
 - [ ] For each sort type the pinned notes appear first in the note list
 - [ ] Changing `Theme` immediately updates app for desired color scheme
 - [ ] After setting a passcode, passcode (or Touch/Face ID if also enabled) is required to resume the app
