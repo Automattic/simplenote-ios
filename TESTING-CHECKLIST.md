@@ -3,7 +3,7 @@ Note: (A) means Automated Test. If automated UI tests were executed for the app,
 
 ### Setup 
 
-- [ ] Sign up using mixed-capitalization in the email address. Use this account to run tests below.
+- [ ] Sign up using mixed-capitalization in the email address. Use this account to run all tests below.
 
 #### Login/Signup
 
