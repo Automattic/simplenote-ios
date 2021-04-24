@@ -656,28 +656,33 @@ private extension SPNoteListViewController {
         let pinImageName: UIImageName = note.pinned ? .unpin : .pin
         let pinActionTitle: String = note.pinned ? ActionTitle.unpin : ActionTitle.pin
 
-        return [
-            UIContextualAction(style: .destructive, title: ActionTitle.delete, image: .image(name: .trash), backgroundColor: .simplenoteDestructiveActionColor) { [weak self] (_, _, completion) in
+        let trashAction = UIContextualAction(style: .destructive, title: nil, image: .image(name: .trash), backgroundColor: .simplenoteDestructiveActionColor) { [weak self] (_, _, completion) in
                 self?.delete(note: note)
                 completion(true)
-            },
+        }
+        trashAction.accessibilityLabel = ActionTitle.trash
 
-            UIContextualAction(style: .normal, title: pinActionTitle, image: .image(name: pinImageName), backgroundColor: .simplenoteSecondaryActionColor) { [weak self] (_, _, completion) in
+        let pinAction = UIContextualAction(style: .normal, title: nil, image: .image(name: pinImageName), backgroundColor: .simplenoteSecondaryActionColor) { [weak self] (_, _, completion) in
                 self?.togglePinnedState(note: note)
                 completion(true)
-            },
+            }
+        pinAction.accessibilityLabel = pinActionTitle
 
-            UIContextualAction(style: .normal, title: ActionTitle.copyLink, image: .image(name: .link), backgroundColor: .simplenoteTertiaryActionColor) { [weak self] (_, _, completion) in
+        let copyAction = UIContextualAction(style: .normal, title: nil, image: .image(name: .link), backgroundColor: .simplenoteTertiaryActionColor) { [weak self] (_, _, completion) in
                 self?.copyInternalLink(to: note)
                 NoticeController.shared.present(NoticeFactory.linkCopied())
                 completion(true)
-            },
+            }
+        copyAction.accessibilityLabel = ActionTitle.copyLink
 
-            UIContextualAction(style: .normal, title: ActionTitle.share, image: .image(name: .share), backgroundColor: .simplenoteQuaternaryActionColor) { [weak self] (_, _, completion) in
+        let shareAction = UIContextualAction(style: .normal, title: nil, image: .image(name: .share), backgroundColor: .simplenoteQuaternaryActionColor) { [weak self] (_, _, completion) in
                 self?.share(note: note)
                 completion(true)
             }
-        ]
+        shareAction.accessibilityLabel = ActionTitle.share
+
+
+        return [trashAction, pinAction, copyAction, shareAction]
     }
 }
 
