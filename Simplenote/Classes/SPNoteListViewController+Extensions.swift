@@ -637,19 +637,22 @@ private extension SPNoteListViewController {
     }
 
     func deletedContextActions(for note: Note) -> [UIContextualAction] {
-        return [
-            UIContextualAction(style: .normal, image: .image(name: .restore), backgroundColor: .simplenoteRestoreActionColor) { (_, _, completion) in
+
+        let restoreAction = UIContextualAction(style: .normal, image: .image(name: .restore), backgroundColor: .simplenoteRestoreActionColor) { (_, _, completion) in
                 SPObjectManager.shared().restoreNote(note)
                 CSSearchableIndex.default().indexSearchableNote(note)
                 completion(true)
-            },
+            }
+        restoreAction.accessibilityLabel = ActionTitle.restore
 
-            UIContextualAction(style: .destructive, image: .image(name: .trash), backgroundColor: .simplenoteDestructiveActionColor) { (_, _, completion) in
+        let deleteAction = UIContextualAction(style: .destructive, image: .image(name: .trash), backgroundColor: .simplenoteDestructiveActionColor) { (_, _, completion) in
                 SPTracker.trackListNoteDeleted()
                 SPObjectManager.shared().permenentlyDeleteNote(note)
                 completion(true)
             }
-        ]
+        deleteAction.accessibilityLabel = ActionTitle.delete
+
+        return [restoreAction, deleteAction]
     }
 
     func regularContextActions(for note: Note) -> [UIContextualAction] {
@@ -941,10 +944,12 @@ private extension SPNoteListViewController {
 private enum ActionTitle {
     static let cancel = NSLocalizedString("Cancel", comment: "Dismissing an interface")
     static let copyLink = NSLocalizedString("Copy Internal Link", comment: "Copies Link to a Note")
-    static let delete = NSLocalizedString("Move to Trash", comment: "Deletes a note")
+    static let trash = NSLocalizedString("Move to Trash", comment: "Deletes a note")
     static let pin = NSLocalizedString("Pin to Top", comment: "Pins a note")
     static let share = NSLocalizedString("Share...", comment: "Shares a note")
     static let unpin = NSLocalizedString("Unpin", comment: "Unpins a note")
+    static let restore = NSLocalizedString("Restore Note", comment: "Restore a note from trash")
+    static let delete = NSLocalizedString("Delete Note", comment: "Delet a note from trash")
 }
 
 private enum Constants {
