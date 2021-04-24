@@ -141,7 +141,7 @@ extension NoteEditorTagListViewController: TagViewDelegate {
 
         let isEmailAddress = (tagName as NSString).isValidEmailAddress
         guard !isEmailAddress else {
-            let alertController = UIAlertController(title: Localization.CollaborationAlert.title.localizedUppercase,
+            let alertController = UIAlertController(title: Localization.CollaborationAlert.title,
                                                     message: Localization.CollaborationAlert.message,
                                                     preferredStyle: .alert)
             alertController.addCancelActionWithTitle(Localization.CollaborationAlert.cancelAction)
