@@ -29,6 +29,11 @@ static const NSInteger SPNavigationBarBackgroundPositionZ = -1000;
     }
 }
 
+//- (void)viewDidDisappear:(BOOL)animated
+//{
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"SPNavigationControllerDidChangeView" object:nil];
+//}
+
 - (void)setDisplaysBlurEffect:(BOOL)displaysBlurEffect
 {
     if (_displaysBlurEffect == displaysBlurEffect) {

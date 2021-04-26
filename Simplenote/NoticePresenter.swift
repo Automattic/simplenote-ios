@@ -39,6 +39,10 @@ class NoticePresenter {
         keyboardNotificationTokens = addKeyboardObservers()
     }
 
+    func setupNavigationControllerNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(navigationControllerDidUpdate), name: .SPNavigationControllerWillDismiss, object: nil)
+    }
+
     func stopListeningToKeyboardNotifications() {
         guard let tokens = keyboardNotificationTokens else {
             return
@@ -48,12 +52,30 @@ class NoticePresenter {
         keyboardNotificationTokens = nil
     }
 
+    @objc
+    private func navigationControllerDidUpdate() {
+        print("From notice presenter notification")
+        updateBottomConstraint(viewIsDimssing: true)
+    }
+
     // MARK: Presenting Methods
     //
     func presentNoticeView(_ noticeView: NoticeView, completion: @escaping () -> Void) {
         guard let containerView = prepareContainerView() else {
             return
         }
+//
+//        let nav = SPAppDelegate.shared().navigationController
+//
+//        if !nav.isToolbarHidden {
+//            print("toolbar not hidden")
+//
+//            if let first = nav.visibleViewController as? SPNoteListViewController {
+//                print("note list")
+//            }
+//        }
+
+
         self.noticeView = noticeView
         add(view: noticeView, into: containerView)
 
@@ -98,9 +120,40 @@ class NoticePresenter {
     private func prepareConstraintFor(view: UIView, in containerView: UIView) {
         noticeVariableConstraint?.isActive = false
 
-        let constant = bottomConstraintConstant
+        let constant = bottomConstraintConstant - constraintWithVisibleToolbar()
         noticeVariableConstraint = view.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: constant)
         noticeVariableConstraint?.isActive = true
+    }
+
+    private func updateBottomConstraint(viewIsDimssing: Bool = false) {
+        guard let noticeView = noticeView,
+              let containerView = containerView else {
+            return
+        }
+//        prepareConstraintFor(view: noticeView, in: containerView)
+        noticeVariableConstraint?.isActive = false
+        if viewIsDimssing == true {
+            let constant = bottomConstraintConstant - constraintWithVisibleToolbar()
+            noticeVariableConstraint = noticeView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: constant)
+            noticeVariableConstraint?.isActive = true
+        }
+
+        UIView.animate(withDuration: UIKitConstants.animationQuickDuration) {
+            containerView.layoutIfNeeded()
+        }
+    }
+
+    private func constraintWithVisibleToolbar() -> CGFloat {
+        let navigationController = SPAppDelegate.shared().navigationController
+        if navigationController.isToolbarHidden {
+            return .zero
+        }
+
+        if (navigationController.visibleViewController as? OptionsViewController) != nil {
+            return .zero
+        }
+
+        return navigationController.toolbar.frame.height
     }
 
     // MARK: Dismissing Methods

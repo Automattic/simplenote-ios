@@ -478,6 +478,7 @@ private extension SPNoteEditorViewController {
         let oldMarkdownState = note.markdown
         navigationController.onWillDismiss = { [weak self] in
             self?.bounceMarkdownPreviewIfNeeded(note: note, oldMarkdownState: oldMarkdownState)
+            NotificationCenter.default.post(name: .SPNavigationControllerWillDismiss, object: nil)
         }
 
         dismissKeyboardAndSave()

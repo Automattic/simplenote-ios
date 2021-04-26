@@ -70,6 +70,15 @@ NSString *const SPTransitionControllerPopGestureTriggeredNotificationName = @"SP
     return self.pushPopAnimationController.interactiveTransition;
 }
 
+//- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+//{
+//    printf("view did show");
+//}
+//
+//- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+//{
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"SPNavigationControllerDidChangeView" object:nil];
+//}
 
 #pragma mark - Gesture Recognizers
 

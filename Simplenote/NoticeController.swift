@@ -29,6 +29,7 @@ class NoticeController {
 
     func setupNoticeController() {
         noticePresenter.startListeningToKeyboardNotifications()
+        noticePresenter.setupNavigationControllerNotification()
     }
 
     // MARK: Presenting
