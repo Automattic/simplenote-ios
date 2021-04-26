@@ -34,9 +34,8 @@ class NoticeController {
     //
     func present(_ notice: Notice) {
         if isPresenting {
-            dismiss {
+            dismiss(withDuration: UIKitConstants.animationQuickDuration) {
                 self.present(notice)
-                print("canceled")
             }
             return
         }
@@ -48,7 +47,6 @@ class NoticeController {
             let delay = self.current?.action == nil ? Times.shortDelay : Times.longDelay
             self.timer = self.timerFactory.scheduledTimer(with: delay, completion: {
                 self.dismiss {
-                    print("full process")
                 }
             })
         }
@@ -67,10 +65,10 @@ class NoticeController {
     // MARK: Dismissing
     //
     @objc
-    private func dismiss(completion: (() -> Void)? = nil) {
+    private func dismiss(withDuration duration: TimeInterval = UIKitConstants.animationLongDuration, completion: (() -> Void)? = nil) {
         self.timer = nil
 
-        noticePresenter.dismissNotification {
+        noticePresenter.dismissNotification(withDuration: duration) {
             self.current = nil
             completion?()
         }
