@@ -4,6 +4,7 @@ protocol NoticeInteractionDelegate: class {
     func noticePressBegan()
     func noticePressEnded()
     func actionWasTapped()
+    func noticeWasTapped(_ noticeView: NoticeView)
 }
 
 class NoticeView: UIView {
@@ -56,7 +57,9 @@ class NoticeView: UIView {
 
     private func setupGestureRecognizers() {
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(viewWasLongPressed(_:)))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(noticeWasTapped))
         addGestureRecognizer(longPressGesture)
+        addGestureRecognizer(tapGesture)
     }
 
     private func setupViewStyles() {
@@ -82,13 +85,12 @@ class NoticeView: UIView {
     }
 }
 
-// NOTE: long press recognizing has not been connected to anything yet
-// Currently just prints to log that a press event happened.
 extension NoticeView {
 
-    // MARK: Long Press Gesture Recognizer
+    // MARK: Gesture Recognizers
     //
-    @objc private func viewWasLongPressed(_ gesture: UIGestureRecognizer) {
+    @objc
+    private func viewWasLongPressed(_ gesture: UIGestureRecognizer) {
         switch gesture.state {
         case .began:
             longPressBegan()
@@ -105,6 +107,11 @@ extension NoticeView {
 
     private func longPressEnded() {
         delegate?.noticePressEnded()
+    }
+
+    @objc
+    private func noticeWasTapped() {
+        delegate?.noticeWasTapped(self)
     }
 }
 

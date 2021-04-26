@@ -121,6 +121,16 @@ class NoticePresenter {
             completion()
         }
     }
+
+    func dismiss(_ noticeView: NoticeView) {
+        UIView.animate(withDuration: UIKitConstants.animationQuickDuration) {
+            noticeView.alpha = .zero
+        } completion: { (_) in
+            noticeView.removeFromSuperview()
+            self.noticeView = nil
+            self.containerView = nil
+        }
+    }
 }
 
 // MARK: Keyboard Observable

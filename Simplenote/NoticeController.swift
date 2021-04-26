@@ -94,6 +94,12 @@ extension NoticeController: NoticeInteractionDelegate {
     func actionWasTapped() {
         dismiss()
     }
+
+    func noticeWasTapped(_ noticeView: NoticeView) {
+        if !isPresenting {
+            noticePresenter.dismiss(noticeView)
+        }
+    }
 }
 
 private struct Times {
