@@ -35,7 +35,10 @@ class NoticeController {
     //
     func present(_ notice: Notice) {
         if isPresenting {
-            appendToQueueIfNew(notice)
+            dismiss {
+                self.present(notice)
+                print("canceled")
+            }
             return
         }
 
@@ -45,7 +48,9 @@ class NoticeController {
         noticePresenter.presentNoticeView(noticeView) { () in
             let delay = self.current?.action == nil ? Times.shortDelay : Times.longDelay
             self.timer = self.timerFactory.scheduledTimer(with: delay, completion: {
-                self.dismiss()
+                self.dismiss {
+                    print("full process")
+                }
             })
         }
     }
@@ -77,15 +82,12 @@ class NoticeController {
     // MARK: Dismissing
     //
     @objc
-    private func dismiss() {
+    private func dismiss(completion: (() -> Void)? = nil) {
         self.timer = nil
 
         noticePresenter.dismissNotification {
             self.current = nil
-
-            if !self.notices.isEmpty {
-                self.present(self.notices.removeFirst())
-            }
+            completion?()
         }
     }
 }
