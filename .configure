@@ -15,7 +15,7 @@
     },
     {
       "file": "shared/google_cloud_keys.json",
-      "destination": ".configure-files/google_cloud_keys.json",
+      "destination": "~/.automattic/simplenote-ios/secrets/google_cloud_keys.json",
       "encrypt": true
     },
     {
