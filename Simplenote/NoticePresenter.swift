@@ -110,7 +110,9 @@ class NoticePresenter {
               let noticeView = noticeView else {
             return
         }
-        UIView.animate(withDuration: duration) {
+        UIView.animate(withDuration: duration,
+                       delay: .zero,
+                       options: [.allowUserInteraction]) {
             noticeView.alpha = .zero
             containerView.alpha = .zero
         } completion: { (_) in
