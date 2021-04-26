@@ -43,6 +43,11 @@ jobs:
           bundle-install: true
           pod-install: true
       - run:
+          name: "Verify decoding to ~ works"
+          command: |
+            bundle exec fastlane run configure_apply
+            bundle exec fastlane test_match
+      - run:
           name: Copy demo SPCredentials
           command: mkdir -p Simplenote/Credentials && cp Simplenote/SPCredentials-demo.swift Simplenote/Credentials/SPCredentials.swift
       # Start: Swift Package Manager Workaround
