@@ -5,7 +5,6 @@ class NoticeController {
     //
     static let shared = NoticeController()
 
-    private var notices: [Notice] = []
     private var current: Notice?
     private let noticePresenter: NoticePresenter
     private let timerFactory: TimerFactory
@@ -53,20 +52,6 @@ class NoticeController {
                 }
             })
         }
-    }
-
-    /// Confirms if a notice is already contained in notices queue. Appends to queue if new
-    ///
-    private func appendToQueueIfNew(_ notice: Notice) {
-        if notices.contains(notice) {
-            return
-        }
-
-        if notice == current {
-            return
-        }
-
-        notices.append(notice)
     }
 
     private func makeNoticeView(from notice: Notice) -> NoticeView {
