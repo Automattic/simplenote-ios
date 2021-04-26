@@ -637,47 +637,55 @@ private extension SPNoteListViewController {
     }
 
     func deletedContextActions(for note: Note) -> [UIContextualAction] {
-        return [
-            UIContextualAction(style: .normal, image: .image(name: .restore), backgroundColor: .simplenoteRestoreActionColor) { (_, _, completion) in
+
+        let restoreAction = UIContextualAction(style: .normal, image: .image(name: .restore), backgroundColor: .simplenoteRestoreActionColor) { (_, _, completion) in
                 SPObjectManager.shared().restoreNote(note)
                 CSSearchableIndex.default().indexSearchableNote(note)
                 completion(true)
-            },
+            }
+        restoreAction.accessibilityLabel = ActionTitle.restore
 
-            UIContextualAction(style: .destructive, image: .image(name: .trash), backgroundColor: .simplenoteDestructiveActionColor) { (_, _, completion) in
+        let deleteAction = UIContextualAction(style: .destructive, image: .image(name: .trash), backgroundColor: .simplenoteDestructiveActionColor) { (_, _, completion) in
                 SPTracker.trackListNoteDeleted()
                 SPObjectManager.shared().permenentlyDeleteNote(note)
                 completion(true)
             }
-        ]
+        deleteAction.accessibilityLabel = ActionTitle.delete
+
+        return [restoreAction, deleteAction]
     }
 
     func regularContextActions(for note: Note) -> [UIContextualAction] {
         let pinImageName: UIImageName = note.pinned ? .unpin : .pin
         let pinActionTitle: String = note.pinned ? ActionTitle.unpin : ActionTitle.pin
 
-        return [
-            UIContextualAction(style: .destructive, title: ActionTitle.delete, image: .image(name: .trash), backgroundColor: .simplenoteDestructiveActionColor) { [weak self] (_, _, completion) in
+        let trashAction = UIContextualAction(style: .destructive, title: nil, image: .image(name: .trash), backgroundColor: .simplenoteDestructiveActionColor) { [weak self] (_, _, completion) in
                 self?.delete(note: note)
                 completion(true)
-            },
+        }
+        trashAction.accessibilityLabel = ActionTitle.trash
 
-            UIContextualAction(style: .normal, title: pinActionTitle, image: .image(name: pinImageName), backgroundColor: .simplenoteSecondaryActionColor) { [weak self] (_, _, completion) in
+        let pinAction = UIContextualAction(style: .normal, title: nil, image: .image(name: pinImageName), backgroundColor: .simplenoteSecondaryActionColor) { [weak self] (_, _, completion) in
                 self?.togglePinnedState(note: note)
                 completion(true)
-            },
+            }
+        pinAction.accessibilityLabel = pinActionTitle
 
-            UIContextualAction(style: .normal, title: ActionTitle.copyLink, image: .image(name: .link), backgroundColor: .simplenoteTertiaryActionColor) { [weak self] (_, _, completion) in
+        let copyAction = UIContextualAction(style: .normal, title: nil, image: .image(name: .link), backgroundColor: .simplenoteTertiaryActionColor) { [weak self] (_, _, completion) in
                 self?.copyInternalLink(to: note)
                 NoticeController.shared.present(NoticeFactory.linkCopied())
                 completion(true)
-            },
+            }
+        copyAction.accessibilityLabel = ActionTitle.copyLink
 
-            UIContextualAction(style: .normal, title: ActionTitle.share, image: .image(name: .share), backgroundColor: .simplenoteQuaternaryActionColor) { [weak self] (_, _, completion) in
+        let shareAction = UIContextualAction(style: .normal, title: nil, image: .image(name: .share), backgroundColor: .simplenoteQuaternaryActionColor) { [weak self] (_, _, completion) in
                 self?.share(note: note)
                 completion(true)
             }
-        ]
+        shareAction.accessibilityLabel = ActionTitle.share
+
+
+        return [trashAction, pinAction, copyAction, shareAction]
     }
 }
 
@@ -936,10 +944,12 @@ private extension SPNoteListViewController {
 private enum ActionTitle {
     static let cancel = NSLocalizedString("Cancel", comment: "Dismissing an interface")
     static let copyLink = NSLocalizedString("Copy Internal Link", comment: "Copies Link to a Note")
-    static let delete = NSLocalizedString("Move to Trash", comment: "Deletes a note")
+    static let trash = NSLocalizedString("Move to Trash", comment: "Deletes a note")
     static let pin = NSLocalizedString("Pin to Top", comment: "Pins a note")
     static let share = NSLocalizedString("Share...", comment: "Shares a note")
     static let unpin = NSLocalizedString("Unpin", comment: "Unpins a note")
+    static let restore = NSLocalizedString("Restore Note", comment: "Restore a note from trash")
+    static let delete = NSLocalizedString("Delete Note", comment: "Delet a note from trash")
 }
 
 private enum Constants {
