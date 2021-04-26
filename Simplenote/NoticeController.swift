@@ -71,12 +71,6 @@ class NoticeController {
             completion?()
         }
     }
-
-    private func dismiss(_ noticeView: NoticeView) {
-        self.timer = nil
-        current = nil
-        noticePresenter.dismiss(noticeView)
-    }
 }
 
 // MARK: NoticePresenting Delegate
@@ -94,12 +88,6 @@ extension NoticeController: NoticeInteractionDelegate {
 
     func actionWasTapped() {
         dismiss()
-    }
-
-    func noticeWasTapped(_ noticeView: NoticeView) {
-        if !presenting {
-            dismiss(noticeView)
-        }
     }
 }
 
