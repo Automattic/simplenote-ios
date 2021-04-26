@@ -15,7 +15,7 @@ class NoticeController {
         }
     }
 
-    private var isPresenting: Bool {
+    private var presenting: Bool {
         current != nil
     }
 
@@ -43,11 +43,10 @@ class NoticeController {
         current = notice
         let noticeView = makeNoticeView(from: notice)
 
-        noticePresenter.presentNoticeView(noticeView) { () in
+        noticePresenter.presentNoticeView(noticeView) {
             let delay = self.current?.action == nil ? Times.shortDelay : Times.longDelay
             self.timer = self.timerFactory.scheduledTimer(with: delay, completion: {
-                self.dismiss {
-                }
+                self.dismiss()
             })
         }
     }
@@ -64,7 +63,6 @@ class NoticeController {
 
     // MARK: Dismissing
     //
-    @objc
     private func dismiss(withDuration duration: TimeInterval = UIKitConstants.animationLongDuration, completion: (() -> Void)? = nil) {
         self.timer = nil
 
@@ -73,15 +71,18 @@ class NoticeController {
             completion?()
         }
     }
+
+    private func dismiss(_ noticeView: NoticeView) {
+        self.timer = nil
+        current = nil
+        noticePresenter.dismiss(noticeView)
+    }
 }
 
 // MARK: NoticePresenting Delegate
 //
 extension NoticeController: NoticeInteractionDelegate {
     func noticePressBegan() {
-        if !isPresenting {
-            return
-        }
         timer = nil
     }
 
