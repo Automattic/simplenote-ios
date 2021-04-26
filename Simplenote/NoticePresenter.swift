@@ -125,10 +125,14 @@ class NoticePresenter {
     }
 
     func dismiss(_ noticeView: NoticeView) {
+        let containerView = noticeView.superview as? PassthruView
+
         UIView.animate(withDuration: UIKitConstants.animationQuickDuration) {
+            containerView?.alpha = .zero
             noticeView.alpha = .zero
         } completion: { (_) in
             noticeView.removeFromSuperview()
+            containerView?.removeFromSuperview()
             self.noticeView = nil
             self.containerView = nil
         }

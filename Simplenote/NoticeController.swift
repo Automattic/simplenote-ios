@@ -33,8 +33,8 @@ class NoticeController {
     // MARK: Presenting
     //
     func present(_ notice: Notice) {
-        if isPresenting {
-            dismiss(withDuration: UIKitConstants.animationQuickDuration) {
+        if presenting {
+            dismiss(withDuration: .zero) {
                 self.present(notice)
             }
             return
@@ -97,8 +97,8 @@ extension NoticeController: NoticeInteractionDelegate {
     }
 
     func noticeWasTapped(_ noticeView: NoticeView) {
-        if !isPresenting {
-            noticePresenter.dismiss(noticeView)
+        if !presenting {
+            dismiss(noticeView)
         }
     }
 }
