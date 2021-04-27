@@ -118,7 +118,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     [super viewWillAppear:animated];
 
     [self highlightSearchResultsIfNeeded];
-    [self setupNavigationController];
+    [self configureNavigationController];
     [self startListeningToKeyboardNotifications];
     [self refreshNavigationBarButtons];
     // Async here to make sure all the frames are correct
@@ -140,7 +140,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     self.navigationBarBackground = [SPBlurEffectView navigationBarBlurView];
 }
 
-- (void)setupNavigationController
+- (void)configureNavigationController
 {
     // Note: Our navigationBar *may* be hidden, as per SPSearchController in the Notes List
     [self.navigationController setNavigationBarHidden:NO animated:YES];
@@ -592,11 +592,9 @@ CGFloat const SPSelectedAreaPadding = 20;
     
     self.searching = NO;
 
-    if (UIDevice.isPad) {
-        [self.navigationController setToolbarHidden:YES animated:YES];
-    } else {
-        [self configureNavigationControllerToolbar];
-    }
+    [self configureNavigationController];
+    [self configureNavigationControllerToolbar];
+
     self.searchDetailLabel.text = nil;
 }
 
