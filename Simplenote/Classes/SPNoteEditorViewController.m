@@ -96,6 +96,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 
     [self configureNavigationBarItems];
     [self configureNavigationBarBackground];
+    [self configureNavigationControllerToolbar];
     [self configureRootView];
     [self configureLayout];
     [self configureTagListViewController];
@@ -117,10 +118,9 @@ CGFloat const SPSelectedAreaPadding = 20;
     [super viewWillAppear:animated];
 
     [self highlightSearchResultsIfNeeded];
+    [self setupNavigationController];
     [self startListeningToKeyboardNotifications];
     [self refreshNavigationBarButtons];
-    [self configureNavigationControllerToolbar];
-    [self setupNavigationController];
     // Async here to make sure all the frames are correct
     dispatch_async(dispatch_get_main_queue(), ^{
         [self restoreScrollPosition];
