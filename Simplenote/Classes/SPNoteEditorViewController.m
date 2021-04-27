@@ -145,12 +145,8 @@ CGFloat const SPSelectedAreaPadding = 20;
     // Note: Our navigationBar *may* be hidden, as per SPSearchController in the Notes List
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 
-    if (UIDevice.isPad) {
-        [self.navigationController setToolbarHidden:!self.searching animated:YES];
-    } else {
-        [self.navigationController setToolbarHidden:NO animated:YES];
-    }
-
+    BOOL mustHideToolbar = UIDevice.isPad && !self.searching;
+    [self.navigationController setToolbarHidden:mustHideToolbar animated:YES];
 }
 
 - (void)ensureEditorIsFirstResponder
@@ -308,14 +304,11 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 - (void)configureNavigationControllerToolbar
 {
-    if (UIDevice.isPad) {
-        [self configureSearchToolbar];
-        return;
-    }
+    BOOL isPad = UIDevice.isPad;
 
-    if (self.searching) {
+    if (isPad || self.searching) {
         [self configureSearchToolbar];
-    } else {
+    } else if (!isPad) {
         [self configureNewNoteBar];
     }
 }

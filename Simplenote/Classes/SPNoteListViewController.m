@@ -244,13 +244,14 @@
 {
     if (UIDevice.isPad) {
         [self.navigationController setToolbarHidden:YES animated:YES];
-    } else {
-        UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-        NSArray *toolbarItems = [NSArray arrayWithObjects:flexibleSpace, self.addButton, nil];
-        [self setToolbarItems:toolbarItems animated:YES];
-
-        [self.navigationController setToolbarHidden:self.isSearchActive animated:YES];
+        return;
     }
+    
+    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    NSArray *toolbarItems = [NSArray arrayWithObjects:flexibleSpace, self.addButton, nil];
+    [self setToolbarItems:toolbarItems animated:YES];
+
+    [self.navigationController setToolbarHidden:self.isSearchActive animated:YES];
 }
 
 - (void)updateNavigationBar {
