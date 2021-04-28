@@ -14,6 +14,11 @@
       "encrypt": true
     },
     {
+      "file": "iOS/simplenote/ScreenshotsCredentials.swift",
+      "destination": "./ScreenshotsCredentials.swift",
+      "encrypt": true
+    },
+    {
       "file": "shared/google_cloud_keys.json",
       "destination": ".configure-files/google_cloud_keys.json",
       "encrypt": true
