@@ -65,9 +65,9 @@ class NoticeController {
     //
     private func dismiss(withDuration duration: TimeInterval = UIKitConstants.animationLongDuration, completion: (() -> Void)? = nil) {
         self.timer = nil
+        self.current = nil
 
         noticePresenter.dismissNotification(withDuration: duration) {
-            self.current = nil
             completion?()
         }
     }

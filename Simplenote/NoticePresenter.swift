@@ -118,10 +118,11 @@ class NoticePresenter {
         } completion: { (_) in
             noticeView.removeFromSuperview()
             containerView.removeFromSuperview()
-            self.noticeView = nil
-            self.containerView = nil
             completion()
         }
+
+        self.noticeView = nil
+        self.containerView = nil
     }
 }
 
