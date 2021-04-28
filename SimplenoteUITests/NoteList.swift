@@ -43,7 +43,7 @@ class NoteList {
     }
 
     class func addNoteTap() {
-        app.navigationBars.buttons[UID.Button.newNote].tap()
+        app.buttons[UID.Button.newNote].tap()
     }
 
     static func createNoteThenLeaveEditor(_ note: NoteData, usingPaste: Bool = false) {

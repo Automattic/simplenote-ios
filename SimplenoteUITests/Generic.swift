@@ -80,7 +80,7 @@ class Table {
         // (https://github.com/Automattic/simplenote-ios/pull/1191).
         // To use the correct label, we need to know where we are.
         let deleteButtonLabel = app.navigationBars[UID.NavBar.trash].exists ?
-            UID.Button.itemTrash : UID.Button.noteTrash
+            UID.Button.deleteNote : UID.Button.trashNote
         let noteCell = Table.getCell(label: noteName)
 
         noteCell.swipeLeft()
