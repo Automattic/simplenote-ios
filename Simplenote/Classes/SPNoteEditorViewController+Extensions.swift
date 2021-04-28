@@ -109,6 +109,15 @@ extension SPNoteEditorViewController {
         }
     }
 
+    /// Sets up new note bar
+    ///
+    @objc
+    func configureNewNoteBar() {
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let navigationItems = [flexibleSpace, createNoteButton]
+        setToolbarItems(navigationItems, animated: true)
+    }
+
     private var popoverPresenter: PopoverPresenter {
         let viewportProvider = { [weak self] () -> CGRect in
             self?.noteEditorTextView.editingRectInWindow() ?? .zero
@@ -819,6 +828,8 @@ extension SPNoteEditorViewController {
         noteEditorTextView.keyboardAppearance = .simplenoteKeyboardAppearance
         noteEditorTextView.checklistsFont = .preferredFont(forTextStyle: .headline)
         noteEditorTextView.checklistsTintColor = .simplenoteNoteBodyPreviewColor
+        navigationController?.toolbar.isTranslucent = false
+        navigationController?.toolbar.barTintColor = .simplenoteSortBarBackgroundColor
     }
 
     private func refreshTagsEditor() {
