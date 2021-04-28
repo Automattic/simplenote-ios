@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/wordpress-mobile/release-toolkit
-  revision: 413bdfd2a22e1f1371a4e2845320afb2b0559667
-  tag: 0.17.1
+  revision: 10738d03a543bdbf0c68aa0185dfd325612a6a4a
+  branch: prevent-decryption-to-path-that-is-not-ignored
   specs:
     fastlane-plugin-wpmreleasetoolkit (0.17.1)
       activesupport (~> 5)
@@ -242,7 +242,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.11.3-x86_64-darwin)
       racc (~> 1.4)
-    octokit (4.20.0)
+    octokit (4.21.0)
       faraday (>= 0.9)
       sawyer (~> 0.8.0, >= 0.5.3)
     oj (3.11.5)
