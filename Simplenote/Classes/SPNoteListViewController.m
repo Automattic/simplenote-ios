@@ -371,6 +371,7 @@
     [self reloadTableData];
     [self refreshTitle];
     [self refershNavigationButtons];
+    [self setEditing:NO animated:YES];
 }
 
 - (void)searchDisplayControllerDidEndSearch:(SearchDisplayController *)controller
