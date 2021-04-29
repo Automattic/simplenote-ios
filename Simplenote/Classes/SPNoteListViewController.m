@@ -28,7 +28,6 @@
 @property (nonatomic, strong) NSTimer                               *searchTimer;
 
 @property (nonatomic, strong) SPBlurEffectView                      *navigationBarBackground;
-@property (nonatomic, strong) UIBarButtonItem                       *addButton;
 @property (nonatomic, strong) UIBarButtonItem                       *sidebarButton;
 
 @property (nonatomic, strong) SearchDisplayController               *searchController;
@@ -247,9 +246,7 @@
         return;
     }
     
-    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    NSArray *toolbarItems = [NSArray arrayWithObjects:flexibleSpace, self.addButton, nil];
-    [self setToolbarItems:toolbarItems animated:YES];
+    [self configureNavigationToolbarButton];
 
     [self.navigationController setToolbarHidden:self.isSearchActive animated:YES];
 }
@@ -301,6 +298,14 @@
     self.emptyTrashButton.isAccessibilityElement = YES;
     self.emptyTrashButton.accessibilityLabel = NSLocalizedString(@"Empty trash", @"Remove all notes from the trash");
     self.emptyTrashButton.accessibilityHint = NSLocalizedString(@"Remove all notes from trash", nil);
+
+    self.trashButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageWithName:UIImageNameTrash]
+                                                        style:UIBarButtonItemStylePlain
+                                                       target:self
+                                                       action:@selector(trashSelectedNotes)];
+    self.trashButton.isAccessibilityElement = YES;
+    self.trashButton.accessibilityLabel = NSLocalizedString(@"Trash Notes", @"Move selected notes to trash");
+    self.trashButton.accessibilityHint = NSLocalizedString(@"Move selected notes to trash", @"Accessibility hint for trash selected notes button");
 }
 
 - (void)configureNavigationBarBackground {

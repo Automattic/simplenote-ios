@@ -28,6 +28,8 @@
 @property (nonatomic) BOOL                                                  firstLaunch;
 @property (nonatomic) BOOL                                                  mustScrollToFirstRow;
 @property (nonatomic, strong) UIBarButtonItem                               *emptyTrashButton;
+@property (nonatomic, strong) UIBarButtonItem                               *trashButton;
+@property (nonatomic, strong) UIBarButtonItem                               *addButton;
 @property (nonatomic, weak) Note                                            *selectedNote;
 @property (nonatomic) BOOL                                                  navigatingUsingKeyboard;
 

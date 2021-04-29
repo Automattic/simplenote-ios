@@ -346,6 +346,38 @@ extension SPNoteListViewController {
 
         emptyTrashButton.isEnabled = isTrashOnScreen && isNotEmpty
     }
+
+    /// Delete selected notes
+    ///
+    @objc
+    func trashSelectedNotes() {
+        guard let selectedIndicies = tableView.indexPathsForSelectedRows else {
+            return
+        }
+
+        var selectedNotes: [Note] = []
+
+        for indexPath in selectedIndicies {
+            if let note = notesListController.object(at: indexPath) as? Note {
+                selectedNotes.append(note)
+            }
+        }
+        
+        delete(notes: selectedNotes)
+    }
+
+    /// Setup Navigation toolbar buttons
+    ///
+    @objc
+    func configureNavigationToolbarButton() {
+        guard let trashButton = trashButton,
+              let addButton = addButton else {
+            return
+        }
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let actionButton = isEditing ? trashButton : addButton
+        setToolbarItems([flexibleSpace, actionButton], animated: true)
+    }
 }
 
 
@@ -632,6 +664,7 @@ extension SPNoteListViewController {
     open override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         tableView.setEditing(editing, animated: animated)
+        configureNavigationToolbarButton()
     }
 }
 
@@ -792,6 +825,12 @@ private extension SPNoteListViewController {
         editorViewController.update(withSearchQuery: searchQuery)
 
         return editorViewController
+    }
+
+    func delete(notes: [Note]) {
+        for note in notes {
+            delete(note: note)
+        }
     }
 }
 
