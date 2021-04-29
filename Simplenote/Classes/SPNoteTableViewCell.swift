@@ -25,7 +25,7 @@ class SPNoteTableViewCell: UITableViewCell {
 
     /// Multi Select Checkbox ImageView
     ///
-    @IBOutlet weak var multiSelectCheckbox: UIImageView!
+    @IBOutlet private weak var multiSelectCheckbox: UIImageView!
 
     /// Acccesory LeftImage's Height
     ///
@@ -45,6 +45,12 @@ class SPNoteTableViewCell: UITableViewCell {
             accessoryLeftImageView.image = newValue
             refreshAccessoriesVisibility()
         }
+    }
+
+    /// Multi select image
+    ///
+    var multiSelectionCheckboxImage: UIImage? {
+        isSelected ? .image(name: .taskChecked) : .image(name: .taskUnchecked)
     }
 
     /// Left AccessoryImage's Tint
@@ -78,6 +84,17 @@ class SPNoteTableViewCell: UITableViewCell {
         }
         set {
             accessoryRightImageView.tintColor = newValue
+        }
+    }
+
+    /// Multi select image tint
+    ///
+    var multiSelectTintColor: UIColor? {
+        get {
+            multiSelectCheckbox.tintColor
+        }
+        set {
+            multiSelectCheckbox.tintColor = newValue
         }
     }
 
@@ -219,6 +236,12 @@ class SPNoteTableViewCell: UITableViewCell {
                        }, completion: nil)
         setNeedsLayout()
     }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        multiSelectCheckbox.image = multiSelectionCheckboxImage
+    }
 }
 
 
@@ -248,10 +271,7 @@ private extension SPNoteTableViewCell {
 
     func setupMultiCheckbox() {
         multiSelectCheckbox.translatesAutoresizingMaskIntoConstraints = false
-
-        let image = isSelected ? UIImage(named: UIImageName.taskChecked.lightAssetFilename) : UIImage(named: (UIImageName.taskUnchecked.lightAssetFilename))
-        multiSelectCheckbox.image = image
-
+        multiSelectCheckbox.image = multiSelectionCheckboxImage
         multiSelectCheckbox.isHidden = true
     }
 }

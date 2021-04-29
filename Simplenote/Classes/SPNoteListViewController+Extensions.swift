@@ -35,6 +35,8 @@ extension SPNoteListViewController {
         tableView.register(SPNoteTableViewCell.loadNib(), forCellReuseIdentifier: SPNoteTableViewCell.reuseIdentifier)
         tableView.register(SPTagTableViewCell.loadNib(), forCellReuseIdentifier: SPTagTableViewCell.reuseIdentifier)
         tableView.register(SPSectionHeaderView.self, forHeaderFooterViewReuseIdentifier: SPSectionHeaderView.reuseIdentifier)
+
+        tableView.allowsMultipleSelectionDuringEditing = true
     }
 
     /// Sets up the Results Controller
@@ -495,16 +497,18 @@ extension SPNoteListViewController: UITableViewDelegate {
     }
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedNote = nil
+        if !isEditing {
+            selectedNote = nil
 
-        switch notesListController.object(at: indexPath) {
-        case let note as Note:
-            SPRatingsHelper.sharedInstance()?.incrementSignificantEvent()
-            open(note, animated: true)
-        case let tag as Tag:
-            refreshSearchText(appendFilterFor: tag)
-        default:
-            break
+            switch notesListController.object(at: indexPath) {
+            case let note as Note:
+                SPRatingsHelper.sharedInstance()?.incrementSignificantEvent()
+                open(note, animated: true)
+            case let tag as Tag:
+                refreshSearchText(appendFilterFor: tag)
+            default:
+                break
+            }
         }
     }
 
@@ -569,6 +573,8 @@ private extension SPNoteListViewController {
         cell.keywordsTintColor = .simplenoteTintColor
 
         cell.prefixText = prefixText(for: note)
+
+        cell.multiSelectTintColor = .simplenoteNotePinStatusImageColor
 
         cell.refreshAttributedStrings()
 
