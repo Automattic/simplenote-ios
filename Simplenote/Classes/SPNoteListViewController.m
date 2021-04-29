@@ -255,7 +255,7 @@
 }
 
 - (void)updateNavigationBar {
-    UIBarButtonItem *possibleAddButton = UIDevice.isPad ? self.addButton : nil;
+    UIBarButtonItem *possibleAddButton = UIDevice.isPad ? self.addButton : self.editButtonItem;
     UIBarButtonItem *rightButton = (self.isDeletedFilterActive) ? self.emptyTrashButton : possibleAddButton;
 
     [self.navigationItem setRightBarButtonItem:rightButton animated:YES];
@@ -500,7 +500,6 @@
 	[self.emptyTrashButton setEnabled:NO];
     [self displayPlaceholdersIfNeeded];
 }
-
 
 #pragma mark - NoteListController
 

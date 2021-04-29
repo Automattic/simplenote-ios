@@ -622,6 +622,11 @@ extension SPNoteListViewController {
             notesListController.object(at: indexPath) as? Note
         }
     }
+
+    open override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        tableView.setEditing(editing, animated: animated)
+    }
 }
 
 // MARK: - Row Actions
