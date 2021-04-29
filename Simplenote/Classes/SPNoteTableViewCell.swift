@@ -23,6 +23,10 @@ class SPNoteTableViewCell: UITableViewCell {
     ///
     @IBOutlet private var accessoryRightImageView: UIImageView!
 
+    /// Multi Select Checkbox ImageView
+    ///
+    @IBOutlet weak var multiSelectCheckbox: UIImageView!
+
     /// Acccesory LeftImage's Height
     ///
     @IBOutlet private var accessoryLeftImageViewHeightConstraint: NSLayoutConstraint!
@@ -140,6 +144,7 @@ class SPNoteTableViewCell: UITableViewCell {
         super.awakeFromNib()
         setupMargins()
         setupTextViews()
+        setupMultiCheckbox()
         refreshStyle()
         refreshConstraints()
     }
@@ -200,6 +205,20 @@ class SPNoteTableViewCell: UITableViewCell {
 
         bodyLabel.attributedText = bodyString
     }
+
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(false, animated: true)
+        let multiplier: CGFloat = editing ? 1 : -1
+
+        UIView.animate(withDuration: UIKitConstants.animationQuickDuration,
+                       delay: .zero,
+                       options: [.allowUserInteraction],
+                       animations: {
+                        self.multiSelectCheckbox.isHidden = !editing
+                        self.separatorInset.left += CGFloat(57) * multiplier
+                       }, completion: nil)
+        setNeedsLayout()
+    }
 }
 
 
@@ -225,6 +244,15 @@ private extension SPNoteTableViewCell {
 
         bodyLabel.numberOfLines = Style.maximumNumberOfBodyLines
         bodyLabel.lineBreakMode = .byWordWrapping
+    }
+
+    func setupMultiCheckbox() {
+        multiSelectCheckbox.translatesAutoresizingMaskIntoConstraints = false
+
+        let image = isSelected ? UIImage(named: UIImageName.taskChecked.lightAssetFilename) : UIImage(named: (UIImageName.taskUnchecked.lightAssetFilename))
+        multiSelectCheckbox.image = image
+
+        multiSelectCheckbox.isHidden = true
     }
 }
 
