@@ -1,1 +1,0 @@
-- Agora o VoiceOver lê os nomes de ações contextuais de anotações corretamente

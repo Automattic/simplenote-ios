@@ -1,1 +1,0 @@
-- VoiceOver now reads note contextual actions names correctly

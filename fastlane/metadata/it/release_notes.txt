@@ -1,1 +1,0 @@
-- VoiceOver ora legge correttamente i nomi delle azioni contestuali delle note
