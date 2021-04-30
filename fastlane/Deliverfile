@@ -17,7 +17,7 @@ privacy_url({
   'default' => 'https://simplenote.com/privacy/',
 })
 
-copyright('2020 Automattic')
+copyright('2021 Automattic')
 
 skip_binary_upload true
 overwrite_screenshots true
