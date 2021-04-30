@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-03-17 15:54:04+0000 */
+/* Translation-Revision-Date: 2021-04-28 11:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: it */
@@ -151,6 +151,9 @@
 /* Copies the Note's Public Link */
 "Copy Link" = "Copia link";
 
+/* Copy link action */
+"Copy link" = "Copia link";
+
 /* Rating view - initial - could be better button */
 "Could be better" = "Potrebbe essere meglio";
 
@@ -216,7 +219,7 @@
 "Diagnostics" = "Diagnostica";
 
 /* Footer -> Sign up verification screen. Parameter: %1$@ - support email address */
-"Didn't get an email? You may already have an account. Contact %1$@ for help." = "Non ti è arrivata alcuna e-mail? Potresti già avere un account. Contatta %1$@ per assistenza.";
+"Didn't get an email? There may already be an account associated with this email address. Contact %1$@ for help." = "Non ti è arrivata alcuna e-mail? Potrebbe già essere presente un account associato a questo indirizzo email. Contatta %1$@ per assistenza.";
 
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "Disabilita formattazione Markdown";
@@ -323,6 +326,9 @@
 /* Theme: Light */
 "Light" = "Chiaro";
 
+/* Link Copied alert */
+"Link copied" = "Link copiato";
+
 /* Setting for when the passcode lock should enable */
 "Lock Timeout" = "Timeout di blocco";
 
@@ -406,6 +412,9 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "Nessuna nota senza tag";
 
+/* Note trashed notification */
+"Note Trashed" = "Nota spostata nel cestino";
+
 /* Notes Header (Search Mode) */
 "Notes" = "Note";
 
@@ -483,8 +492,14 @@
 /* Publishes a Note to the Web */
 "Publish" = "Pubblica";
 
+/* Notice up succesful publishing */
+"Publish Successful" = "Pubblicazione completata";
+
 /* Publish Accessibility Hint */
 "Publish note" = "Pubblica nota";
+
+/* Notice of publishing action */
+"Publishing note..." = "Pubblicazione della nota in corso...";
 
 /* Indicates the Note is being published */
 "Publishing..." = "Pubblicazione in corso...";
@@ -645,6 +660,9 @@
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "Disabilita il PIN";
 
+/* Undo action */
+"Undo" = "Annulla";
+
 /* Unpins a note */
 "Unpin" = "Sgancia";
 
@@ -653,6 +671,12 @@
 
 /* Publish Accessibility Hint */
 "Unpublish note" = "Non pubblicare la nota";
+
+/* Notice of publishing unsuccessful */
+"Unpublish successful" = "Annullamento della pubblicazione completato";
+
+/* Notice of unpublishing action */
+"Unpublishing note..." = "Annullamento della pubblicazione della nota in corso...";
 
 /* Indicates the Note is being unpublished */
 "Unpublishing..." = "Rimuovendo dalla pubblicazione";

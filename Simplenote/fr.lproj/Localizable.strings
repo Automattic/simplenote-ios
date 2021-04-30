@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-03-17 13:54:03+0000 */
+/* Translation-Revision-Date: 2021-04-28 17:54:59+0000 */
 /* Plural-Forms: nplurals=2; plural=n > 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: fr */
@@ -151,6 +151,9 @@
 /* Copies the Note's Public Link */
 "Copy Link" = "Copier le lien";
 
+/* Copy link action */
+"Copy link" = "Copier le lien";
+
 /* Rating view - initial - could be better button */
 "Could be better" = "Pourrait être améliorée";
 
@@ -216,7 +219,7 @@
 "Diagnostics" = "Diagnostic";
 
 /* Footer -> Sign up verification screen. Parameter: %1$@ - support email address */
-"Didn't get an email? You may already have an account. Contact %1$@ for help." = "Vous n’avez pas reçu d’e-mail ? Vous avez peut-être déjà un compte. Contactez %1$@ pour obtenir de l’aide.";
+"Didn't get an email? There may already be an account associated with this email address. Contact %1$@ for help." = "Vous n’avez pas reçu d’e-mail ? Un autre compte est peut-être déjà associé à cette adresse e-mail. Contactez %1$@ pour obtenir de l’aide.";
 
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "Désactiver le formatage Markdown";
@@ -323,6 +326,9 @@
 /* Theme: Light */
 "Light" = "Clair";
 
+/* Link Copied alert */
+"Link copied" = "Lien copié";
+
 /* Setting for when the passcode lock should enable */
 "Lock Timeout" = "Expiration du verrouillage";
 
@@ -406,6 +412,9 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "Aucune note sans étiquette";
 
+/* Note trashed notification */
+"Note Trashed" = "Note placée dans la corbeille";
+
 /* Notes Header (Search Mode) */
 "Notes" = "Notes";
 
@@ -483,8 +492,14 @@
 /* Publishes a Note to the Web */
 "Publish" = "Publier";
 
+/* Notice up succesful publishing */
+"Publish Successful" = "Publication réussie";
+
 /* Publish Accessibility Hint */
 "Publish note" = "Publier la note";
+
+/* Notice of publishing action */
+"Publishing note..." = "Publication de la note...";
 
 /* Indicates the Note is being published */
 "Publishing..." = "Publication...";
@@ -645,6 +660,9 @@
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "Désactiver le code PIN";
 
+/* Undo action */
+"Undo" = "Annuler";
+
 /* Unpins a note */
 "Unpin" = "Désépingler";
 
@@ -653,6 +671,12 @@
 
 /* Publish Accessibility Hint */
 "Unpublish note" = "Dépublier la note";
+
+/* Notice of publishing unsuccessful */
+"Unpublish successful" = "Réussite de l’annulation de la publication";
+
+/* Notice of unpublishing action */
+"Unpublishing note..." = "Annulation de la publication de la note...";
 
 /* Indicates the Note is being unpublished */
 "Unpublishing..." = "Dépublication...";

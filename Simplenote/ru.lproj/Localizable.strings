@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-03-16 14:54:03+0000 */
+/* Translation-Revision-Date: 2021-04-28 11:54:03+0000 */
 /* Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ru */
@@ -151,6 +151,9 @@
 /* Copies the Note's Public Link */
 "Copy Link" = "Копировать ссылку";
 
+/* Copy link action */
+"Copy link" = "Скопировать ссылку";
+
 /* Rating view - initial - could be better button */
 "Could be better" = "Нужно доработать";
 
@@ -216,7 +219,7 @@
 "Diagnostics" = "Диагностика";
 
 /* Footer -> Sign up verification screen. Parameter: %1$@ - support email address */
-"Didn't get an email? You may already have an account. Contact %1$@ for help." = "Письмо не пришло? Возможно, у вас уже есть учётная запись. Обратитесь за помощью по адресу %1$@.";
+"Didn't get an email? There may already be an account associated with this email address. Contact %1$@ for help." = "Письмо не пришло? С этим адресом электронной почты уже может быть связана учетная запись. Обратитесь за помощью по адресу %1$@.";
 
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "Выключить форматирование Markdown";
@@ -323,6 +326,9 @@
 /* Theme: Light */
 "Light" = "Светлая";
 
+/* Link Copied alert */
+"Link copied" = "Ссылка скопирована";
+
 /* Setting for when the passcode lock should enable */
 "Lock Timeout" = "Время до блокировки";
 
@@ -406,6 +412,9 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "Нет заметок без тегов";
 
+/* Note trashed notification */
+"Note Trashed" = "Заметка перемещена в корзину";
+
 /* Notes Header (Search Mode) */
 "Notes" = "Заметки";
 
@@ -483,8 +492,14 @@
 /* Publishes a Note to the Web */
 "Publish" = "Публикация";
 
+/* Notice up succesful publishing */
+"Publish Successful" = "Публикация успешно выполнена";
+
 /* Publish Accessibility Hint */
 "Publish note" = "Публикация заметки";
+
+/* Notice of publishing action */
+"Publishing note..." = "Публикация заметки...";
 
 /* Indicates the Note is being published */
 "Publishing..." = "Публикация…";
@@ -645,6 +660,9 @@
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "Отключить пароль";
 
+/* Undo action */
+"Undo" = "Назад";
+
 /* Unpins a note */
 "Unpin" = "Открепить";
 
@@ -653,6 +671,12 @@
 
 /* Publish Accessibility Hint */
 "Unpublish note" = "Не публиковать заметку";
+
+/* Notice of publishing unsuccessful */
+"Unpublish successful" = "Публикация успешно отменена";
+
+/* Notice of unpublishing action */
+"Unpublishing note..." = "Отмена публикации...";
 
 /* Indicates the Note is being unpublished */
 "Unpublishing..." = "Отмена публикации…";
