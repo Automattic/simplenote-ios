@@ -665,6 +665,7 @@ extension SPNoteListViewController {
         super.setEditing(editing, animated: animated)
         tableView.setEditing(editing, animated: animated)
         configureNavigationToolbarButton()
+        tableView.reloadData()
     }
 }
 
@@ -705,6 +706,10 @@ private extension SPNoteListViewController {
 
         let trashAction = UIContextualAction(style: .destructive, title: nil, image: .image(name: .trash), backgroundColor: .simplenoteDestructiveActionColor) { [weak self] (_, _, completion) in
                 self?.delete(note: note)
+                NoticeController.shared.present(NoticeFactory.noteTrashed(onUndo: {
+                    SPObjectManager.shared().restoreNote(note)
+                    self?.tableView.reloadData()
+                }))
                 completion(true)
         }
         trashAction.accessibilityLabel = ActionTitle.trash
@@ -768,6 +773,10 @@ private extension SPNoteListViewController {
 
         let delete = UIAction(title: ActionTitle.delete, image: .image(name: .trash), attributes: .destructive) { [weak self] _ in
             self?.delete(note: note)
+            NoticeController.shared.present(NoticeFactory.noteTrashed(onUndo: {
+                SPObjectManager.shared().restoreNote(note)
+                self?.tableView.reloadData()
+            }))
         }
 
         return UIMenu(title: "", children: [share, copy, pin, delete])
@@ -782,9 +791,6 @@ private extension SPNoteListViewController {
         SPTracker.trackListNoteDeleted()
         SPObjectManager.shared().trashNote(note)
         CSSearchableIndex.default().deleteSearchableNote(note)
-        NoticeController.shared.present(NoticeFactory.noteTrashed(note, onUndo: {
-            SPObjectManager.shared().restoreNote(note)
-        }))
     }
 
     func copyInternalLink(to note: Note) {
@@ -831,6 +837,14 @@ private extension SPNoteListViewController {
         for note in notes {
             delete(note: note)
         }
+        setEditing(false, animated: true)
+
+        NoticeController.shared.present(NoticeFactory.notesTrashed(notes, onUndo: {
+            for note in notes {
+                SPObjectManager.shared().restoreNote(note)
+            }
+            self.tableView.reloadData()
+        }))
     }
 }
 

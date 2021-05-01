@@ -13,9 +13,14 @@ struct NoticeFactory {
         Notice(message: Messages.unpublishing, action: nil)
     }
 
-    static func noteTrashed(_ note: Note, onUndo: @escaping ()-> Void) -> Notice {
+    static func noteTrashed(onUndo: @escaping ()-> Void) -> Notice {
         let action = NoticeAction(title: Messages.undo, handler: onUndo)
         return Notice(message: Messages.trashed, action: action)
+    }
+
+    static func notesTrashed(_ notes: [Note], onUndo: @escaping ()-> Void) -> Notice {
+        let action = NoticeAction(title: Messages.undo, handler: onUndo)
+        return Notice(message: Messages.notesTrashed(notes.count), action: action)
     }
 
     static func unpublished(_ note: Note, onUndo: @escaping ()-> Void) -> Notice {
@@ -39,5 +44,13 @@ extension NoticeFactory {
         static let trashed = NSLocalizedString("Note Trashed", comment: "Note trashed notification")
         static let unpublished = NSLocalizedString("Unpublish successful", comment: "Notice of publishing unsuccessful")
         static let published = NSLocalizedString("Publish Successful", comment: "Notice up succesful publishing")
+
+        static let noteTrashed = NSLocalizedString("%i Note Trashed", comment: "Note trashed notification")
+        static let notesTrashed = NSLocalizedString("%i Notes Trashed", comment: "Notes trashed notification")
+
+        static func notesTrashed(_ count: Int) -> String {
+            let template = count > 1 ? notesTrashed : noteTrashed
+            return String(format: template, count)
+        }
     }
 }
