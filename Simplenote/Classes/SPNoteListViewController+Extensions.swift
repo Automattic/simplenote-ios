@@ -362,8 +362,9 @@ extension SPNoteListViewController {
                 selectedNotes.append(note)
             }
         }
-        
+
         delete(notes: selectedNotes)
+        setEditing(false, animated: true)
     }
 
     /// Setup Navigation toolbar buttons
@@ -663,8 +664,16 @@ extension SPNoteListViewController {
 
     open override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-        tableView.setEditing(editing, animated: animated)
-        configureNavigationToolbarButton()
+
+        // Reloading data ensures that no cells are selected and the current data is up to date
+        tableView.reloadData()
+
+        // Dispatches to asyncAfter because reloadData will override the animations if not complete
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+            self.tableView.deselectSelectedRow(animated: true)
+            self.tableView.setEditing(editing, animated: animated)
+            self.configureNavigationToolbarButton()
+        })
     }
 }
 
