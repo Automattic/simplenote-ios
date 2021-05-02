@@ -376,6 +376,7 @@
     [self reloadTableData];
     [self refreshTitle];
     [self refershNavigationButtons];
+    [self.editButtonItem setEnabled:NO];
     [self setEditing:NO animated:YES];
 }
 
@@ -394,7 +395,7 @@
     [self.notesListController endSearch];
     [self refershNavigationButtons];
     [self update];
-
+    [self.editButtonItem setEnabled:YES];
 }
 
 

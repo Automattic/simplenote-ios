@@ -530,18 +530,28 @@ extension SPNoteListViewController: UITableViewDelegate {
     }
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if !isEditing {
-            selectedNote = nil
+        if isEditing {
+            setListViewTitle()
+            return
+        }
 
-            switch notesListController.object(at: indexPath) {
-            case let note as Note:
-                SPRatingsHelper.sharedInstance()?.incrementSignificantEvent()
-                open(note, animated: true)
-            case let tag as Tag:
-                refreshSearchText(appendFilterFor: tag)
-            default:
-                break
-            }
+        selectedNote = nil
+
+        switch notesListController.object(at: indexPath) {
+        case let note as Note:
+            SPRatingsHelper.sharedInstance()?.incrementSignificantEvent()
+            open(note, animated: true)
+        case let tag as Tag:
+            refreshSearchText(appendFilterFor: tag)
+        default:
+            break
+        }
+
+    }
+
+    public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if isEditing {
+            setListViewTitle()
         }
     }
 
@@ -682,6 +692,15 @@ extension SPNoteListViewController {
             self.tableView.setEditing(editing, animated: animated)
             self.configureNavigationToolbarButton()
         })
+        setListViewTitle()
+    }
+
+    private func setListViewTitle() {
+        guard let selectedIndicies = tableView.indexPathsForSelectedRows else {
+            title = notesListController.filter.title
+            return
+        }
+        title = Localization.selectedTitle(with: selectedIndicies.count)
     }
 }
 
@@ -1059,5 +1078,10 @@ private enum Localization {
         static func searchAction(with searchTerm: String) -> String {
             return String(format: NSLocalizedString("Create a new note titled “%@”", comment: "Tappable message shown when no notes match a search string. Parameter: %@ - search term"), searchTerm)
         }
+    }
+
+    static func selectedTitle(with count: Int) -> String {
+        let string = NSLocalizedString("%i Selected", comment: "Count of currently selected notes")
+        return String(format: string, count)
     }
 }

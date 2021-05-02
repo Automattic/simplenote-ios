@@ -124,6 +124,16 @@ extension UITableView {
 
         deselectRow(at: indexPath, animated: animated)
     }
+
+    func deselectSelectedRows(animated: Bool = false) {
+        guard let selectedIndicies = indexPathsForVisibleRows else {
+            return
+        }
+
+        for indexPath in selectedIndicies {
+            deselectRow(at: indexPath, animated: animated)
+        }
+    }
 }
 
 // MARK: - Navigation (Private)
