@@ -227,14 +227,10 @@ class SPNoteTableViewCell: UITableViewCell {
 
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(false, animated: true)
-        let multiplier: CGFloat = editing ? 1 : -1
 
         UIView.animate(withDuration: UIKitConstants.animationQuickDuration,
-                       delay: .zero,
-                       options: [.allowUserInteraction],
                        animations: {
                         self.checkboxContainingView.isHidden = !editing
-                        self.separatorInset.left += CGFloat(57) * multiplier
                        }, completion: nil)
         setNeedsLayout()
     }

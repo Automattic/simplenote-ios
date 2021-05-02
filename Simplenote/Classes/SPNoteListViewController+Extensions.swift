@@ -572,8 +572,16 @@ extension SPNoteListViewController: UITableViewDelegate {
     }
 
     public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let cell = cell as? SPNoteTableViewCell else {
+            return
+        }
         var insets = SPNoteTableViewCell.separatorInsets
         insets.left -= cell.layoutMargins.left
+
+        if isEditing {
+            insets.left += cell.checkboxContainingView.frame.width
+        }
+
         cell.separatorInset = insets
     }
 }
@@ -666,11 +674,11 @@ extension SPNoteListViewController {
         super.setEditing(editing, animated: animated)
 
         // Reloading data ensures that no cells are selected and the current data is up to date
-        tableView.reloadData()
+        let rows = tableView.indexPathsForVisibleRows
+        tableView.reloadRows(at: rows!, with: .automatic)
 
         // Dispatches to asyncAfter because reloadData will override the animations if not complete
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-            self.tableView.deselectSelectedRow(animated: true)
             self.tableView.setEditing(editing, animated: animated)
             self.configureNavigationToolbarButton()
         })
