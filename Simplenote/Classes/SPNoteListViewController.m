@@ -341,7 +341,7 @@
 
 - (void)sidebarButtonAction:(id)sender {
     
-    [self.tableView setEditing:NO];
+    [self setEditing:NO];
 
     [SPTracker trackSidebarButtonPresed];
     [[[SPAppDelegate sharedDelegate] sidebarViewController] toggleSidebar];

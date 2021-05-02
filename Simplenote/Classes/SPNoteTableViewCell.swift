@@ -228,10 +228,11 @@ class SPNoteTableViewCell: UITableViewCell {
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(false, animated: true)
 
-        UIView.animate(withDuration: UIKitConstants.animationQuickDuration,
-                       animations: {
-                        self.checkboxContainingView.isHidden = !editing
-                       }, completion: nil)
+        UIView.animate(
+            withDuration: UIKitConstants.animationQuickDuration,
+            animations: {
+                self.checkboxContainingView.isHidden = !editing
+            })
         setNeedsLayout()
     }
 
