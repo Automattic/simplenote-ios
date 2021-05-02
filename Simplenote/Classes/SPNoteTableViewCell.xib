@@ -89,7 +89,7 @@ Body L2</string>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="hr4-XQ-BeJ" firstAttribute="leading" secondItem="TZs-9B-NXz" secondAttribute="trailing" constant="6" id="3b6-gJ-z8V"/>
                                             <constraint firstAttribute="trailing" secondItem="hr4-XQ-BeJ" secondAttribute="trailing" constant="16" id="76G-Nd-65P"/>
