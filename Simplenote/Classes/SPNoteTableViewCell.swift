@@ -27,6 +27,8 @@ class SPNoteTableViewCell: UITableViewCell {
     ///
     @IBOutlet private weak var multiSelectCheckbox: UIImageView!
 
+    @IBOutlet weak var checkboxContainingView: UIView!
+
     /// Acccesory LeftImage's Height
     ///
     @IBOutlet private var accessoryLeftImageViewHeightConstraint: NSLayoutConstraint!
@@ -231,7 +233,7 @@ class SPNoteTableViewCell: UITableViewCell {
                        delay: .zero,
                        options: [.allowUserInteraction],
                        animations: {
-                        self.multiSelectCheckbox.isHidden = !editing
+                        self.checkboxContainingView.isHidden = !editing
                         self.separatorInset.left += CGFloat(57) * multiplier
                        }, completion: nil)
         setNeedsLayout()
@@ -272,7 +274,6 @@ private extension SPNoteTableViewCell {
     func setupMultiCheckbox() {
         multiSelectCheckbox.translatesAutoresizingMaskIntoConstraints = false
         multiSelectCheckbox.image = multiSelectionCheckboxImage
-        multiSelectCheckbox.isHidden = true
     }
 }
 
