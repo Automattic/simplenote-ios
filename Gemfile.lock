@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/wordpress-mobile/release-toolkit
-  revision: 155ad828760d8aba998690116cbba6638b55c7fe
+  revision: 0239b8d6f9b2a79d0e8a7588c8341accbd5d8f03
   branch: return-full-path-from-localized-glob
   specs:
     fastlane-plugin-wpmreleasetoolkit (0.18.0)
