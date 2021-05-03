@@ -252,6 +252,8 @@
 }
 
 - (void)updateNavigationBar {
+    [self.navigationController setNavigationBarHidden: self.isSearchActive animated:YES];
+    
     UIBarButtonItem *possibleAddButton = UIDevice.isPad ? self.addButton : self.editButtonItem;
     UIBarButtonItem *rightButton = (self.isDeletedFilterActive) ? self.emptyTrashButton : possibleAddButton;
 
