@@ -25,7 +25,7 @@ extension SPObjectManager {
     }
 
     @objc
-    func notesWithTag(_ tag: Tag?) -> [Note] {
+    func notesWithTag(_ tag: Tag?, includeDeleted: Bool) -> [Note] {
         guard let tagName = tag?.name else {
             return []
         }
@@ -33,9 +33,14 @@ extension SPObjectManager {
         let request = NSFetchRequest<Note>(entityName: Note.entityName)
         request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
             .predicateForNotes(tag: tagName),
-            .predicateForNotes(deleted: false)
+            .predicateForNotes(deleted: includeDeleted)
         ])
 
         return (try? managedObjectContext.fetch(request)) ?? []
+    }
+
+    @objc
+    func notesWithTag(_ tag: Tag?) -> [Note] {
+        return notesWithTag(tag, includeDeleted: false)
     }
 }
