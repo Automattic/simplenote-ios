@@ -725,11 +725,13 @@ extension SPNoteListViewController {
     }
 
     private func setListViewTitle() {
-        guard let selectedIndicies = tableView.indexPathsForSelectedRows else {
-            title = notesListController.filter.title
+        if isEditing {
+            let count = tableView.indexPathsForSelectedRows?.count ?? 0
+            title = count > 0 ? Localization.selectedTitle(with: count) : notesListController.filter.title
             return
         }
-        title = Localization.selectedTitle(with: selectedIndicies.count)
+
+        title = notesListController.filter.title
     }
 }
 
