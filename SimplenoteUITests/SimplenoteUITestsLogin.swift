@@ -21,7 +21,7 @@ class SimplenoteUISmokeTestsLogin: XCTestCase {
 
         trackStep()
         EmailLogin.open()
-        EmailLogin.logIn(email: "", password: "")
+        EmailLogin.logIn("", "")
         Assert.labelExists(labelText: Text.loginEmailInvalid)
         Assert.labelExists(labelText: Text.loginPasswordShort)
     }
@@ -31,7 +31,7 @@ class SimplenoteUISmokeTestsLogin: XCTestCase {
 
         trackStep()
         EmailLogin.open()
-        EmailLogin.logIn(email: "", password: testDataExistingPassword)
+        EmailLogin.logIn("", testDataPassword)
         Assert.labelExists(labelText: Text.loginEmailInvalid)
         Assert.labelAbsent(labelText: Text.loginPasswordShort)
     }
@@ -41,7 +41,7 @@ class SimplenoteUISmokeTestsLogin: XCTestCase {
 
         trackStep()
         EmailLogin.open()
-        EmailLogin.logIn(email: testDataInvalidEmail, password: testDataExistingPassword)
+        EmailLogin.logIn(testDataInvalidEmail, testDataPassword)
         Assert.labelExists(labelText: Text.loginEmailInvalid)
         Assert.labelAbsent(labelText: Text.loginPasswordShort)
     }
@@ -51,7 +51,7 @@ class SimplenoteUISmokeTestsLogin: XCTestCase {
 
         trackStep()
         EmailLogin.open()
-        EmailLogin.logIn(email: testDataExistingEmail, password: "")
+        EmailLogin.logIn(testDataEmail, "")
         Assert.labelAbsent(labelText: Text.loginEmailInvalid)
         Assert.labelExists(labelText: Text.loginPasswordShort)
     }
@@ -61,7 +61,7 @@ class SimplenoteUISmokeTestsLogin: XCTestCase {
 
         trackStep()
         EmailLogin.open()
-        EmailLogin.logIn(email: testDataExistingEmail, password: testDataInvalidPassword)
+        EmailLogin.logIn(testDataEmail, testDataInvalidPassword)
         Assert.labelAbsent(labelText: Text.loginEmailInvalid)
         Assert.labelExists(labelText: Text.loginPasswordShort)
     }
@@ -71,7 +71,7 @@ class SimplenoteUISmokeTestsLogin: XCTestCase {
 
         trackStep()
         EmailLogin.open()
-        EmailLogin.logIn(email: testDataExistingEmail, password: testDataNotExistingPassword)
+        EmailLogin.logIn(testDataEmail, testDataNotExistingPassword)
         Assert.alertExistsAndClose(headingText: Text.alertHeadingSorry, content: Text.alertContentLoginFailed, buttonText: UID.Button.accept)
     }
 
@@ -80,7 +80,7 @@ class SimplenoteUISmokeTestsLogin: XCTestCase {
 
         trackStep()
         EmailLogin.open()
-        EmailLogin.logIn(email: testDataExistingEmail, password: testDataExistingPassword)
+        EmailLogin.logIn(testDataEmail, testDataPassword)
         NoteListAssert.allNotesShown()
     }
 
@@ -89,7 +89,7 @@ class SimplenoteUISmokeTestsLogin: XCTestCase {
 
         trackStep()
         EmailLogin.open()
-        EmailLogin.logIn(email: testDataExistingEmail, password: testDataExistingPassword)
+        EmailLogin.logIn(testDataEmail, testDataPassword)
         NoteListAssert.allNotesShown()
 
         trackStep()

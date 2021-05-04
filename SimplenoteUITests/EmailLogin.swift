@@ -14,7 +14,18 @@ class EmailLogin {
         backButton.tap()
     }
 
-    class func logIn(email: String, password: String) {
+    class func logIn() {
+        var testAccount = ProcessInfo.processInfo.environment["UI_TEST_ACCOUNT"]!
+
+        // Use 'default' account if test account was not passed via environment variable
+        if testAccount.isEmpty {
+            testAccount = testDataEmail
+        }
+
+        EmailLogin.logIn(testAccount, testDataPassword)
+    }
+
+    class func logIn(_ email: String, _ password: String) {
         enterEmail(enteredValue: email)
         enterPassword(enteredValue: password)
         app.buttons[UID.Button.logIn].tap()
