@@ -365,19 +365,11 @@ extension SPNoteListViewController {
     ///
     @objc
     func trashSelectedNotes() {
-        guard let selectedIndicies = tableView.indexPathsForSelectedRows else {
+        guard let notes = tableView.indexPathsForSelectedRows?.compactMap({ notesListController.object(at: $0) as? Note }) else {
             return
         }
 
-        var selectedNotes: [Note] = []
-
-        for indexPath in selectedIndicies {
-            if let note = notesListController.object(at: indexPath) as? Note {
-                selectedNotes.append(note)
-            }
-        }
-
-        delete(notes: selectedNotes)
+        delete(notes: notes)
         setEditing(false, animated: true)
     }
 
@@ -720,8 +712,9 @@ extension SPNoteListViewController {
         updateNavigationBar()
 
         // Reloading data ensures that no cells are selected and the current data is up to date
-        let rows = tableView.indexPathsForVisibleRows
-        tableView.reloadRows(at: rows!, with: .automatic)
+        if let rows = tableView.indexPathsForVisibleRows {
+            tableView.reloadRows(at: rows, with: .automatic)
+        }
 
         // Dispatches to asyncAfter because reloadData will override the animations if not complete
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
