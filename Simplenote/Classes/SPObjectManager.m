@@ -108,7 +108,7 @@
         return tagRemoved;
     }
     
-    NSArray *notes = [self notesWithTag: tag];
+    NSArray *notes = [self notesWithTag: tag includeDeleted:YES];
 	
     // Strip this tag from all notes
 	for (Note *note in notes) {
