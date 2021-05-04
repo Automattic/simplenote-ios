@@ -82,13 +82,12 @@ class NoticeView: UIView {
     }
 }
 
-// NOTE: long press recognizing has not been connected to anything yet
-// Currently just prints to log that a press event happened.
 extension NoticeView {
 
-    // MARK: Long Press Gesture Recognizer
+    // MARK: Gesture Recognizers
     //
-    @objc private func viewWasLongPressed(_ gesture: UIGestureRecognizer) {
+    @objc
+    private func viewWasLongPressed(_ gesture: UIGestureRecognizer) {
         switch gesture.state {
         case .began:
             longPressBegan()

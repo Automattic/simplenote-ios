@@ -23,45 +23,19 @@ class NoticeControllerTests: XCTestCase {
         XCTAssertEqual(presenter.lastNoticeView?.message, notice.message)
     }
 
-    func testControlDoesNotPresentNewNoticeIfPresenting() {
+    func testControllerDissmissesNoticeIfAlreadyPresenting() {
         let noticeA = Notice(message: "Message A", action: nil)
         let noticeB = Notice(message: "Message B", action: nil)
-        let expectedActions: [MockNoticePresenter.Action] = [
-            .present(noticeA.message)
-        ]
+        var expectedActions: [MockNoticePresenter.Action] = []
 
         controller.present(noticeA)
+        expectedActions.append(.present(noticeA.message))
         controller.present(noticeB)
-
-        XCTAssertEqual(expectedActions, presenter.actionLog)
-        XCTAssertEqual(presenter.lastNoticeView?.message, noticeA.message)
-    }
-
-    func testAppendToQueueIfNewDoesNotQueueDuplicateNotices() throws {
-        let noticeA = Notice(message: "Message A", action: nil)
-        let noticeB = Notice(message: "Message B", action: nil)
-
-        // Should not enqueue a notice that is presenting or enqueued
-        controller.present(noticeA)
-        controller.present(noticeA)
-        controller.present(noticeB)
-        controller.present(noticeB)
-
-        var expectedActions: [MockNoticePresenter.Action] = [
-            .present(noticeA.message)
-        ]
-        XCTAssertEqual(expectedActions, presenter.actionLog)
-
-        try XCTUnwrap(timerFactory.timer).fire()
         expectedActions.append(.dismiss(noticeA.message))
         expectedActions.append(.present(noticeB.message))
 
         XCTAssertEqual(expectedActions, presenter.actionLog)
-
-        try XCTUnwrap(timerFactory.timer).fire()
-        expectedActions.append(.dismiss(noticeB.message))
-
-        XCTAssertEqual(expectedActions, presenter.actionLog)
+        XCTAssertEqual(presenter.lastNoticeView?.message, noticeB.message)
     }
 
     func testMakeNoticeView() throws {
@@ -110,30 +84,6 @@ class NoticeControllerTests: XCTestCase {
         expectedActions.append(.dismiss(noticeA.message))
 
         XCTAssertEqual(expectedActions, presenter.actionLog)
-    }
-
-    func testDismissContinuesToNextNotice() throws {
-        let noticeA = Notice(message: "Message A", action: nil)
-        let noticeB = Notice(message: "Message B", action: nil)
-
-        controller.present(noticeA)
-        controller.present(noticeB)
-
-        var expectedActions: [MockNoticePresenter.Action] = [
-            .present(noticeA.message)
-        ]
-        XCTAssertEqual(presenter.actionLog, expectedActions)
-
-        try XCTUnwrap(timerFactory.timer).fire()
-
-        expectedActions.append(.dismiss(noticeA.message))
-        expectedActions.append(.present(noticeB.message))
-        XCTAssertEqual(presenter.actionLog, expectedActions)
-
-        try XCTUnwrap(timerFactory.timer).fire()
-
-        expectedActions.append(.dismiss(noticeB.message))
-        XCTAssertEqual(presenter.actionLog, expectedActions)
     }
 
     func testPressingOnActionDismissesNotice() {
@@ -205,11 +155,11 @@ class MockNoticePresenter: NoticePresenter {
         completion()
     }
 
-    override func dismissNotification(completion: @escaping () -> Void) {
+    override func dismissNotification(withDuration duration: TimeInterval = UIKitConstants.animationLongDuration, completion: (() -> Void)? = nil) {
         let noticeView = try! XCTUnwrap(lastNoticeView)
         lastNoticeView = nil
         actionLog.append(.dismiss(noticeView.message))
-        completion()
+        completion?()
     }
 
     override func startListeningToKeyboardNotifications() {

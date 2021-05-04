@@ -5,7 +5,6 @@ class NoticeController {
     //
     static let shared = NoticeController()
 
-    private var notices: [Notice] = []
     private var current: Notice?
     private let noticePresenter: NoticePresenter
     private let timerFactory: TimerFactory
@@ -16,7 +15,7 @@ class NoticeController {
         }
     }
 
-    private var isPresenting: Bool {
+    private var presenting: Bool {
         current != nil
     }
 
@@ -34,34 +33,22 @@ class NoticeController {
     // MARK: Presenting
     //
     func present(_ notice: Notice) {
-        if isPresenting {
-            appendToQueueIfNew(notice)
+        if presenting {
+            dismiss(withDuration: .zero) {
+                self.present(notice)
+            }
             return
         }
 
         current = notice
         let noticeView = makeNoticeView(from: notice)
 
-        noticePresenter.presentNoticeView(noticeView) { () in
+        noticePresenter.presentNoticeView(noticeView) {
             let delay = self.current?.action == nil ? Times.shortDelay : Times.longDelay
             self.timer = self.timerFactory.scheduledTimer(with: delay, completion: {
                 self.dismiss()
             })
         }
-    }
-
-    /// Confirms if a notice is already contained in notices queue. Appends to queue if new
-    ///
-    private func appendToQueueIfNew(_ notice: Notice) {
-        if notices.contains(notice) {
-            return
-        }
-
-        if notice == current {
-            return
-        }
-
-        notices.append(notice)
     }
 
     private func makeNoticeView(from notice: Notice) -> NoticeView {
@@ -76,16 +63,12 @@ class NoticeController {
 
     // MARK: Dismissing
     //
-    @objc
-    private func dismiss() {
-        self.timer = nil
+    private func dismiss(withDuration duration: TimeInterval = UIKitConstants.animationLongDuration, completion: (() -> Void)? = nil) {
+        timer = nil
+        current = nil
 
-        noticePresenter.dismissNotification {
-            self.current = nil
-
-            if !self.notices.isEmpty {
-                self.present(self.notices.removeFirst())
-            }
+        noticePresenter.dismissNotification(withDuration: duration) {
+            completion?()
         }
     }
 }
@@ -94,9 +77,6 @@ class NoticeController {
 //
 extension NoticeController: NoticeInteractionDelegate {
     func noticePressBegan() {
-        if !isPresenting {
-            return
-        }
         timer = nil
     }
 
