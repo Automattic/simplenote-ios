@@ -227,6 +227,7 @@ class SPNoteTableViewCell: UITableViewCell {
 
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(false, animated: true)
+        selectionStyle = editing ? .none : .default
 
         UIView.animate(
             withDuration: UIKitConstants.animationQuickDuration,
