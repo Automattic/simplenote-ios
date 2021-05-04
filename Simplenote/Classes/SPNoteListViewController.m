@@ -235,6 +235,7 @@
 }
 
 - (void)refershNavigationButtons {
+    [self refreshNavigationBarLabels];
     [self updateNavigationBar];
     [self refreshNavigationControllerToolbar];
 }

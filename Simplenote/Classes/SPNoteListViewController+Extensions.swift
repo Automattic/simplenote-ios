@@ -398,13 +398,19 @@ extension SPNoteListViewController {
     func selectAllWasTapped() {
 
         if notesListController.numberOfObjects == tableView.indexPathsForSelectedRows?.count {
-            tableView.deselectSelectedRows(animated: true)
-            refreshSelectAllLabels()
+            tableView.deselectAll()
+            refreshNavigationBarLabels()
 
             return
         }
 
         tableView.selectAll(nil)
+        refreshNavigationBarLabels()
+    }
+
+    @objc
+    func refreshNavigationBarLabels() {
+        setListViewTitle()
         refreshSelectAllLabels()
     }
 }
@@ -559,8 +565,7 @@ extension SPNoteListViewController: UITableViewDelegate {
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if isEditing {
-            setListViewTitle()
-            refreshSelectAllLabels()
+            refreshNavigationBarLabels()
             return
         }
 
@@ -580,8 +585,7 @@ extension SPNoteListViewController: UITableViewDelegate {
 
     public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         if isEditing {
-            setListViewTitle()
-            refreshSelectAllLabels()
+            refreshNavigationBarLabels()
         }
     }
 
@@ -712,6 +716,7 @@ extension SPNoteListViewController {
 
     open override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
+        tableView.deselectAll()
         updateNavigationBar()
 
         // Reloading data ensures that no cells are selected and the current data is up to date

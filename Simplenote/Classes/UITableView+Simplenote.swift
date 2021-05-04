@@ -143,6 +143,15 @@ extension UITableView {
             selectRow(at: indexpath, animated: true, scrollPosition: .none)
         }
     }
+
+    func deselectAll() {
+        let rows = numberOfRows(inSection: 0)
+
+        for row in 0..<rows {
+            let indexpath = IndexPath(row: row, section: 0)
+            deselectRow(at: indexpath, animated: true)
+        }
+    }
 }
 
 // MARK: - Navigation (Private)
