@@ -30,6 +30,7 @@
 @property (nonatomic, strong) UIBarButtonItem                               *emptyTrashButton;
 @property (nonatomic, strong) UIBarButtonItem                               *trashButton;
 @property (nonatomic, strong) UIBarButtonItem                               *addButton;
+@property (nonatomic, strong) UIBarButtonItem                               *selectAllButton;
 @property (nonatomic, weak) Note                                            *selectedNote;
 @property (nonatomic) BOOL                                                  navigatingUsingKeyboard;
 
@@ -39,5 +40,6 @@
 - (void)setWaitingForIndex:(BOOL)waiting;
 - (void)startSearching;
 - (void)endSearching;
+- (void)updateNavigationBar;
 
 @end

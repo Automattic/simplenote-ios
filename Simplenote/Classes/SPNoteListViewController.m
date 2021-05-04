@@ -257,8 +257,10 @@
     UIBarButtonItem *possibleAddButton = UIDevice.isPad ? self.addButton : self.editButtonItem;
     UIBarButtonItem *rightButton = (self.isDeletedFilterActive) ? self.emptyTrashButton : possibleAddButton;
 
+    UIBarButtonItem *leftButton = self.isEditing ? self.selectAllButton : self.sidebarButton;
+
     [self.navigationItem setRightBarButtonItem:rightButton animated:YES];
-    [self.navigationItem setLeftBarButtonItem:self.sidebarButton animated:YES];
+    [self.navigationItem setLeftBarButtonItem:leftButton animated:YES];
 }
 
 
@@ -268,6 +270,7 @@
     NSAssert(_addButton == nil, @"_addButton is already initialized!");
     NSAssert(_sidebarButton == nil, @"_sidebarButton is already initialized!");
     NSAssert(_emptyTrashButton == nil, @"_emptyTrashButton is already initialized!");
+    NSAssert(_selectAllButton == nil, @"_selectAllButton is already initialized!");
 
     /// Button: New Note
     ///
@@ -308,6 +311,12 @@
     self.trashButton.isAccessibilityElement = YES;
     self.trashButton.accessibilityLabel = NSLocalizedString(@"Trash Notes", @"Move selected notes to trash");
     self.trashButton.accessibilityHint = NSLocalizedString(@"Move selected notes to trash", @"Accessibility hint for trash selected notes button");
+
+    NSString *selectAllTitle = NSLocalizedString(@"Select All", @"Select all button title");
+    self.selectAllButton = [[UIBarButtonItem alloc] initWithTitle: selectAllTitle
+                                                           style:UIBarButtonItemStylePlain
+                                                           target:self
+                                                           action:@selector(selectAllWasTapped)];
 }
 
 - (void)configureNavigationBarBackground {

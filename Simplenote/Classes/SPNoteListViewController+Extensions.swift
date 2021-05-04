@@ -257,6 +257,20 @@ extension SPNoteListViewController {
         updatePlaceholderPosition()
     }
 
+    func refreshSelectAllLabels() {
+        var deselect = false
+        let numberOfSelectedRows = tableView.indexPathsForSelectedRows?.count ?? 0
+
+        if notesListController.numberOfObjects == numberOfSelectedRows {
+            deselect = true
+        }
+
+        selectAllButton.title = Localization.selectAllLabel(deselect: deselect)
+        selectAllButton.isAccessibilityElement = true
+        selectAllButton.accessibilityLabel = Localization.selectAllLabel(deselect: deselect)
+        selectAllButton.accessibilityHint = Localization.selectAllAccessibilityHint
+    }
+
     private var placeholderDisplayMode: SPPlaceholderView.DisplayMode {
         if isIndexingNotes || SPAppDelegate.shared().bSigningUserOut {
             return .generic
@@ -378,6 +392,20 @@ extension SPNoteListViewController {
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let actionButton = isEditing ? trashButton : addButton
         setToolbarItems([flexibleSpace, actionButton], animated: true)
+    }
+
+    @objc
+    func selectAllWasTapped() {
+
+        if notesListController.numberOfObjects == tableView.indexPathsForSelectedRows?.count {
+            tableView.deselectSelectedRows(animated: true)
+            refreshSelectAllLabels()
+
+            return
+        }
+
+        tableView.selectAll(nil)
+        refreshSelectAllLabels()
     }
 }
 
@@ -532,6 +560,7 @@ extension SPNoteListViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if isEditing {
             setListViewTitle()
+            refreshSelectAllLabels()
             return
         }
 
@@ -552,6 +581,7 @@ extension SPNoteListViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         if isEditing {
             setListViewTitle()
+            refreshSelectAllLabels()
         }
     }
 
@@ -682,6 +712,7 @@ extension SPNoteListViewController {
 
     open override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
+        updateNavigationBar()
 
         // Reloading data ensures that no cells are selected and the current data is up to date
         let rows = tableView.indexPathsForVisibleRows
@@ -1097,4 +1128,12 @@ private enum Localization {
         let string = NSLocalizedString("%i Selected", comment: "Count of currently selected notes")
         return String(format: string, count)
     }
+
+    static func selectAllLabel(deselect: Bool) -> String {
+        let selectLabel = NSLocalizedString("Select All", comment: "Select all Button Label")
+        let deselectLabel = NSLocalizedString("Deselect All", comment: "Deselect all Button Label")
+        return deselect ? deselectLabel : selectLabel
+    }
+
+    static let selectAllAccessibilityHint = NSLocalizedString("Tap button to select or deselect all notes", comment: "Accessibility hint for the select/deselect all button")
 }
