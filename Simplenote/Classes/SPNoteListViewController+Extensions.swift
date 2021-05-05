@@ -390,13 +390,13 @@ extension SPNoteListViewController {
     func selectAllWasTapped() {
 
         if notesListController.numberOfObjects == tableView.indexPathsForSelectedRows?.count {
-            tableView.deselectAll()
+            tableView.deselectAllRows(inSection: 0, animated: false)
             refreshNavigationBarLabels()
 
             return
         }
 
-        tableView.selectAll(nil)
+        tableView.selectAllRows(inSection: 0, animated: false)
         refreshNavigationBarLabels()
     }
 
@@ -711,7 +711,7 @@ extension SPNoteListViewController {
     open override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
 
-        tableView.deselectAll()
+        tableView.deselectAllRows(inSection: 0, animated: false)
         updateNavigationBar()
 
         tableView.allowsMultipleSelection = editing

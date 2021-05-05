@@ -135,21 +135,24 @@ extension UITableView {
         }
     }
 
-    open override func selectAll(_ sender: Any?) {
-        let rows = numberOfRows(inSection: 0)
-
-        for row in 0..<rows {
-            let indexpath = IndexPath(row: row, section: 0)
-            selectRow(at: indexpath, animated: true, scrollPosition: .none)
+    open func selectAllRows(inSection section: Int, animated: Bool) {
+        forEachIndexPathIn(section: section) { indexPath in
+            selectRow(at: indexPath, animated: animated, scrollPosition: .none)
         }
     }
 
-    func deselectAll() {
-        let rows = numberOfRows(inSection: 0)
+    func deselectAllRows(inSection section: Int, animated: Bool) {
+        forEachIndexPathIn(section: section) { indexPath in
+            deselectRow(at: indexPath, animated: animated)
+        }
+    }
 
-        for row in 0..<rows {
-            let indexpath = IndexPath(row: row, section: 0)
-            deselectRow(at: indexpath, animated: true)
+    func forEachIndexPathIn(section: Int, doAction action: (IndexPath)-> Void) {
+        let rows = numberOfRows(inSection: section)
+
+        for row in Int.zero..<rows {
+            let indexpath = IndexPath(row: row, section: section)
+            action(indexpath)
         }
     }
 }
