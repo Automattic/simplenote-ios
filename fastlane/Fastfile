@@ -713,7 +713,7 @@ end
         prelaunch_simulator: true,
         reset_simulator: true,
         only_testing: "SimplenoteUITests/SimplenoteUISmokeTestsTrash",
-        xcargs: "UI_TEST_ACCOUNT='#{options[:test_account] || ""}'"
+        xcargs: { UI_TEST_ACCOUNT: #{options[:test_account] || '' }
       )
     rescue => ex
        UI.error(ex)
