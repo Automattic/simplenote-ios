@@ -26,10 +26,10 @@ class EmailLogin {
             testAccount = value.isEmpty ? testDataEmail : value
         }
 
-        EmailLogin.logIn(testAccount, testDataPassword)
+        EmailLogin.logIn(email: testAccount, password: testDataPassword)
     }
 
-    class func logIn(_ email: String, _ password: String) {
+    class func logIn(email: String, password: String) {
         enterEmail(enteredValue: email)
         enterPassword(enteredValue: password)
         app.buttons[UID.Button.logIn].tap()
