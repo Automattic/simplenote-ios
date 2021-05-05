@@ -224,15 +224,16 @@ class SPNoteTableViewCell: UITableViewCell {
 
         bodyLabel.attributedText = bodyString
     }
-    
+
     func setMultiSelectEditing(_ editing: Bool) {
-        selectionStyle = editing ? .none : .default
 
         UIView.animate(
             withDuration: UIKitConstants.animationQuickDuration,
             animations: {
                 self.checkboxContainingView.isHidden = !editing
+                self.checkboxContainingView.superview?.layoutIfNeeded()
             })
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
