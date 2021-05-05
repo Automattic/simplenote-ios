@@ -715,10 +715,20 @@ extension SPNoteListViewController {
         updateNavigationBar()
 
         tableView.allowsMultipleSelection = editing
-        tableView.setMultiSelectEditing(editing)
+        toggleMultiSelectEditingTo(editing)
 
         configureNavigationToolbarButton()
         setListViewTitle()
+    }
+
+    func toggleMultiSelectEditingTo(_ editing: Bool) {
+        guard let noteCells = tableView.visibleCells as? [SPNoteTableViewCell] else {
+            return
+        }
+
+        for cell in noteCells {
+            cell.setMultiSelectEditing(editing)
+        }
     }
 
     private func setListViewTitle() {

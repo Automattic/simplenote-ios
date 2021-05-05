@@ -152,16 +152,6 @@ extension UITableView {
             deselectRow(at: indexpath, animated: true)
         }
     }
-
-    func setMultiSelectEditing(_ editing: Bool) {
-        guard let noteCells = visibleCells as? [SPNoteTableViewCell] else {
-            return
-        }
-
-        for cell in noteCells {
-            cell.setMultiSelectEditing(editing)
-        }
-    }
 }
 
 // MARK: - Navigation (Private)
