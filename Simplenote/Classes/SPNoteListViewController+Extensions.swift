@@ -655,6 +655,8 @@ private extension SPNoteListViewController {
 
         cell.refreshAttributedStrings()
 
+        cell.checkboxContainingView.isHidden = !isEditing
+
         return cell
     }
 
@@ -708,19 +710,14 @@ extension SPNoteListViewController {
 
     open override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
+
         tableView.deselectAll()
         updateNavigationBar()
 
-        // Reloading data ensures that no cells are selected and the current data is up to date
-        if let rows = tableView.indexPathsForVisibleRows {
-            tableView.reloadRows(at: rows, with: .automatic)
-        }
+        tableView.allowsMultipleSelection = editing
+        tableView.setMultiSelectEditing(editing)
 
-        // Dispatches to asyncAfter because reloadData will override the animations if not complete
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-            self.tableView.setEditing(editing, animated: animated)
-            self.configureNavigationToolbarButton()
-        })
+        configureNavigationToolbarButton()
         setListViewTitle()
     }
 
