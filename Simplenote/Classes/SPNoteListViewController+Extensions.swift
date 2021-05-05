@@ -910,14 +910,14 @@ private extension SPNoteListViewController {
         for note in notes {
             delete(note: note)
         }
-        setEditing(false, animated: true)
 
         NoticeController.shared.present(NoticeFactory.notesTrashed(notes, onUndo: {
             for note in notes {
                 SPObjectManager.shared().restoreNote(note)
             }
-            self.tableView.reloadData()
         }))
+
+        setEditing(false, animated: true)
     }
 }
 
