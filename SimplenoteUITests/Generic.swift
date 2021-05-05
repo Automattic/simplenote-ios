@@ -89,7 +89,7 @@ class Table {
 
     class func getCell(label: String) -> XCUIElement {
         let predicate = NSPredicate(format: "label LIKE '\(label)'")
-        let cell = app.tables.cells.element(matching: predicate)
+        let cell = app.tables.cells.element(matching: predicate).firstMatch
         return cell
     }
 

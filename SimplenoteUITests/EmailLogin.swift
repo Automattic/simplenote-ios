@@ -15,11 +15,15 @@ class EmailLogin {
     }
 
     class func logIn() {
-        var testAccount = ProcessInfo.processInfo.environment["UI_TEST_ACCOUNT"]!
+        let testAccountKey = "UI_TEST_ACCOUNT"
+        let testAccount: String
 
-        // Use 'default' account if test account was not passed via environment variable
-        if testAccount.isEmpty {
-            testAccount = testDataEmail
+        switch ProcessInfo.processInfo.environment[testAccountKey] {
+        case .none:
+            fatalError("Expected \(testAccountKey) environment variable to be defined in the scheme")
+        case .some(let value):
+            // Use 'default' account if test account was not passed via environment variable
+            testAccount = value.isEmpty ? testDataEmail : value
         }
 
         EmailLogin.logIn(testAccount, testDataPassword)
