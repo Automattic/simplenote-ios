@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,52 +11,53 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" verticalHuggingPriority="253" id="iN0-l3-epB" customClass="NoticeView" customModule="Simplenote" customModuleProvider="target">
+        <view contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB" customClass="NoticeView" customModule="Simplenote" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="275" height="94"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mtf-MV-bkZ">
                     <rect key="frame" x="0.0" y="0.0" width="275" height="94"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                </view>
-                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="SfY-hE-pTa">
-                    <rect key="frame" x="0.0" y="0.0" width="275" height="94"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" insetsLayoutMarginsFromSafeArea="NO" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VzW-UO-SDt">
-                            <rect key="frame" x="28" y="60" width="102" height="18"/>
-                            <directionalEdgeInsets key="directionalLayoutMargins" top="0.0" leading="0.0" bottom="0.0" trailing="8"/>
-                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PEr-q4-fDe">
-                            <rect key="frame" x="202" y="60" width="46" height="18"/>
-                            <directionalEdgeInsets key="directionalLayoutMargins" top="16" leading="8" bottom="16" trailing="0.0"/>
-                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                            <inset key="contentEdgeInsets" minX="0.0" minY="-6" maxX="0.0" maxY="-6"/>
-                            <state key="normal" title="Button">
-                                <color key="titleColor" systemColor="linkColor"/>
-                            </state>
-                            <connections>
-                                <action selector="noticeButtonWasTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="ZvQ-Fn-B9S"/>
-                            </connections>
-                        </button>
+                        <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="SfY-hE-pTa">
+                            <rect key="frame" x="0.0" y="0.0" width="275" height="94"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" insetsLayoutMarginsFromSafeArea="NO" text="Label" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="150" translatesAutoresizingMaskIntoConstraints="NO" id="VzW-UO-SDt">
+                                    <rect key="frame" x="28" y="60" width="166" height="18"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PEr-q4-fDe" customClass="MultilineTitleButton" customModule="Simplenote" customModuleProvider="target">
+                                    <rect key="frame" x="210" y="60" width="38" height="18"/>
+                                    <directionalEdgeInsets key="directionalLayoutMargins" top="16" leading="8" bottom="16" trailing="0.0"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                    <inset key="contentEdgeInsets" minX="0.0" minY="-6" maxX="0.0" maxY="-6"/>
+                                    <state key="normal" title="Button">
+                                        <color key="titleColor" systemColor="linkColor"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="noticeButtonWasTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="ZvQ-Fn-B9S"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <directionalEdgeInsets key="directionalLayoutMargins" top="16" leading="28" bottom="16" trailing="27"/>
+                        </stackView>
                     </subviews>
-                    <directionalEdgeInsets key="directionalLayoutMargins" top="16" leading="28" bottom="16" trailing="27"/>
-                </stackView>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="SfY-hE-pTa" secondAttribute="trailing" id="FhL-FI-A8e"/>
+                        <constraint firstItem="SfY-hE-pTa" firstAttribute="leading" secondItem="Mtf-MV-bkZ" secondAttribute="leading" id="GdU-6a-Cr6"/>
+                        <constraint firstAttribute="bottom" secondItem="SfY-hE-pTa" secondAttribute="bottom" id="ieP-he-Frw"/>
+                        <constraint firstItem="SfY-hE-pTa" firstAttribute="top" secondItem="Mtf-MV-bkZ" secondAttribute="top" id="va1-Kp-hw2"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="SfY-hE-pTa" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="3cf-qp-9v0"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Mtf-MV-bkZ" secondAttribute="bottom" id="4Ts-m4-1eX"/>
-                <constraint firstItem="SfY-hE-pTa" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="AlF-qz-1e0"/>
-                <constraint firstItem="Mtf-MV-bkZ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Ejv-Yu-vUy"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="SfY-hE-pTa" secondAttribute="trailing" id="Pol-l0-5yu"/>
+                <constraint firstAttribute="bottom" secondItem="Mtf-MV-bkZ" secondAttribute="bottom" id="4Ts-m4-1eX"/>
+                <constraint firstItem="Mtf-MV-bkZ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Ejv-Yu-vUy"/>
                 <constraint firstItem="Mtf-MV-bkZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="iNX-Ma-nI3"/>
-                <constraint firstItem="SfY-hE-pTa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="izk-mh-sTq"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Mtf-MV-bkZ" secondAttribute="trailing" id="seD-19-rKA"/>
-                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="x3c-Xa-ZMj"/>
+                <constraint firstAttribute="trailing" secondItem="Mtf-MV-bkZ" secondAttribute="trailing" id="seD-19-rKA"/>
                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="335" id="y3n-Q5-KCj"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
