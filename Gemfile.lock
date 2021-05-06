@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/wordpress-mobile/release-toolkit
-  revision: ce59a5e7b4fa75f6bb694bcfa333f85175294c3c
-  tag: 0.18.0
+  revision: 0d7d48a229f14a3383d25f9e4dd6d3f0eae3784c
+  branch: allow-paths-outside-project-folder
   specs:
-    fastlane-plugin-wpmreleasetoolkit (0.18.0)
+    fastlane-plugin-wpmreleasetoolkit (0.18.1)
       activesupport (~> 5)
       bigdecimal (~> 1.4)
       chroma (= 0.2.0)
@@ -21,7 +21,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     CFPropertyList (3.0.3)
-    activesupport (5.2.5)
+    activesupport (5.2.6)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
@@ -332,4 +332,4 @@ DEPENDENCIES
   xcpretty-travis-formatter
 
 BUNDLED WITH
-   2.2.11
+   2.2.16
