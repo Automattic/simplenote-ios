@@ -405,6 +405,11 @@ extension SPNoteListViewController {
         setListViewTitle()
         refreshSelectAllLabels()
     }
+
+    @objc
+    func refreshEditButtonTitle() {
+        editButtonItem.title = isEditing ? Localization.cancelTitle : Localization.editTitle
+    }
 }
 
 
@@ -611,14 +616,7 @@ extension SPNoteListViewController: UITableViewDelegate {
         guard let cell = cell as? SPNoteTableViewCell else {
             return
         }
-        var insets = SPNoteTableViewCell.separatorInsets
-        insets.left -= cell.layoutMargins.left
-
-        if isEditing {
-            insets.left += cell.checkboxContainingView.frame.width
-        }
-
-        cell.separatorInset = insets
+        cell.refreshEdgeInsets(editing: isEditing)
     }
 }
 
@@ -710,7 +708,8 @@ extension SPNoteListViewController {
 
     open override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-
+        refreshEditButtonTitle()
+        
         tableView.deselectAllRows(inSection: 0, animated: false)
         updateNavigationBar()
 
@@ -1143,4 +1142,8 @@ private enum Localization {
     }
 
     static let selectAllAccessibilityHint = NSLocalizedString("Tap button to select or deselect all notes", comment: "Accessibility hint for the select/deselect all button")
+
+    static let editTitle = NSLocalizedString("Edit", comment: "Edit button title")
+
+    static let cancelTitle = NSLocalizedString("Cancel", comment: "Cancel button title")
 }

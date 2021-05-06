@@ -318,6 +318,8 @@
                                                            style:UIBarButtonItemStylePlain
                                                            target:self
                                                            action:@selector(selectAllWasTapped)];
+
+    [self refreshEditButtonTitle];
 }
 
 - (void)configureNavigationBarBackground {
