@@ -8,7 +8,9 @@ unless FastlaneCore::Helper.bundler?
 end
 
 USER_ENV_FILE_PATH = File.join(Dir.home, '.simplenoteios-env.default')
-PROJECT_ENV_FILE_PATH = File.expand_path(File.join(Dir.pwd, '../.configure-files/project.env'))
+PROJECT_ENV_FILE_PATH = File.join(
+  Dir.home, '.configure', 'simplenote-ios', 'secrets', 'project.env'
+)
 UI_TESTS_SCHEME = "SimplenoteUITests"
 UI_TESTS_ACCOUNTS_URL = "https://api.keyvalue.xyz/82649691/simplenoteuitest-ios"
 $used_test_account_index = nil
