@@ -20,7 +20,7 @@
     },
     {
       "file": "iOS/simplenote/project.env",
-      "destination": ".configure-files/project.env",
+      "destination": "~/.configure/simplenote-ios/secrets/project.env",
       "encrypt": true
     },
     {
