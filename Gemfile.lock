@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/wordpress-mobile/release-toolkit
-  revision: 0d7d48a229f14a3383d25f9e4dd6d3f0eae3784c
+  revision: cff1192d2f8a1fd331ace5bf7a632073d871f6ff
   branch: allow-paths-outside-project-folder
   specs:
     fastlane-plugin-wpmreleasetoolkit (0.18.1)
