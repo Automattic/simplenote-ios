@@ -174,6 +174,14 @@ class SPNoteTableViewCell: UITableViewCell {
         refreshConstraints()
     }
 
+    func refreshEdgeInsets(editing: Bool = false) {
+        var insets = SPNoteTableViewCell.separatorInsets
+        insets.left -= layoutMargins.left
+        insets.left += editing ? checkboxContainingView.frame.width : .zero
+
+        separatorInset = insets
+    }
+
     /// Refreshed the Label(s) Attributed Strings: Keywords, Bullets and the Body Prefix will be taken into consideration
     ///
     func refreshAttributedStrings() {
@@ -230,6 +238,7 @@ class SPNoteTableViewCell: UITableViewCell {
         UIView.animate(
             withDuration: UIKitConstants.animationQuickDuration,
             animations: {
+                self.refreshEdgeInsets(editing: editing)
                 self.checkboxContainingView.isHidden = !editing
                 self.checkboxContainingView.superview?.layoutIfNeeded()
             })
