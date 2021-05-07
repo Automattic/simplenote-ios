@@ -1,0 +1,3 @@
+– Ikonerna i Simplenote har ändrats
+– Lade till meddelanden i appen för att avisera användare om olika aktiviteter i appen
+– Ändrade sorteringsinställningarna för sökning så de använder sig av den allmänna sorteringsinställningen.

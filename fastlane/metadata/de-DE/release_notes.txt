@@ -1,0 +1,3 @@
+- Simplenote-Icons wurden überarbeitet
+- In-App-Benachrichtigungen wurden hinzugefügt, die Benutzer über verschiedene Aktivitäten in der App informieren
+- Sortierungseinstellungen in der Suche wurden geändert und verwenden nun die allgemeinen Sortierungseinstellungen.
