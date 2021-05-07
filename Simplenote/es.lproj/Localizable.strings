@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-04-28 15:54:56+0000 */
+/* Translation-Revision-Date: 2021-04-30 15:43:57+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: es */
@@ -81,7 +81,7 @@
 "Appearance" = "Apariencia";
 
 /* Automattic hiring description */
-"Are you a developer? We’re hiring." = "¿Eres desarrollador? Buscamos personal.";
+"Are you a developer? We’re hiring." = "Trabaja con nosotros.";
 
 /* Title of deletion confirmation message for a tag. Parameters: %1$@ - tag name */
 "Are you sure you want to delete \"%1$@\"?" = "¿Seguro que quieres eliminar \"%1$@\"?";
@@ -252,7 +252,7 @@
 "Email in use" = "Correo electrónico en uso";
 
 /* Verb - empty causes all notes to be removed permenently from the trash */
-"Empty" = "Vacio";
+"Empty" = "Vaciar";
 
 /* Remove all notes from the trash */
 "Empty trash" = "Vaciar Papelera";
@@ -566,7 +566,7 @@
 
 /* Settings button
    Title of options screen */
-"Settings" = "Configuracion";
+"Settings" = "Configuración";
 
 /* Opens the Share Sheet
    Share Action */
