@@ -698,21 +698,22 @@ end
   # selected for now, there will be no credentials race condition.
   # -----------------------------------------------------------------------------------
   # Usage:
-  # bundle exec fastlane run_ui_tests [device:<Name of the iOS Simulator >]
+  # bundle exec fastlane run_ui_tests [device:<Name of the iOS Simulator>] [test_account:<Test account email>]
   #
   # Example:
-  # bundle exec fastlane run_ui_tests device:"iPhone 12"
+  # bundle exec fastlane run_ui_tests device:"iPhone 12" test_account:"test.account@test.com"
   #####################################################################################
   desc "Run UI tests"
   lane :run_ui_tests do | options |
-  scan(
-    workspace: workspace_name,
-    scheme: UI_TESTS_SCHEME,
-    device: options[:device] || "iPhone 12",
-    prelaunch_simulator: true,
-    reset_simulator: true,
-    only_testing: "SimplenoteUITests/SimplenoteUISmokeTestsLogin"
-  )
+    scan(
+      workspace: workspace_name,
+      scheme: UI_TESTS_SCHEME,
+      device: options[:device] || "iPhone 12",
+      prelaunch_simulator: true,
+      reset_simulator: true,
+      only_testing: "SimplenoteUITests/SimplenoteUISmokeTestsTrash",
+      xcargs: { UI_TEST_ACCOUNT: options[:test_account] || '' }
+    )
   end
 end
 

@@ -73,5 +73,5 @@ enum Text {
     static let loginPasswordShort = "Password must contain at least 4 characters"
 }
 
-let testDataExistingEmail = "simplenoteuitest@mailinator.com"
-let testDataExistingPassword = "qazxswedc"
+let testDataEmail = "simplenoteuitest@mailinator.com"
+let testDataPassword = "qazxswedc"

@@ -14,6 +14,21 @@ class EmailLogin {
         backButton.tap()
     }
 
+    class func logIn() {
+        let testAccountKey = "UI_TEST_ACCOUNT"
+        let testAccount: String
+
+        switch ProcessInfo.processInfo.environment[testAccountKey] {
+        case .none:
+            fatalError("Expected \(testAccountKey) environment variable to be defined in the scheme")
+        case .some(let value):
+            // Use 'default' account if test account was not passed via environment variable
+            testAccount = value.isEmpty ? testDataEmail : value
+        }
+
+        EmailLogin.logIn(email: testAccount, password: testDataPassword)
+    }
+
     class func logIn(email: String, password: String) {
         enterEmail(enteredValue: email)
         enterPassword(enteredValue: password)

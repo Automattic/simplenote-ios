@@ -7,7 +7,7 @@ class SimplenoteUISmokeTestsSettings: XCTestCase {
         getToAllNotes()
         _ = attemptLogOut()
         EmailLogin.open()
-        EmailLogin.logIn(email: testDataExistingEmail, password: testDataExistingPassword)
+        EmailLogin.logIn()
         NoteList.waitForLoad()
     }
 

@@ -15,7 +15,7 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         getToAllNotes()
         let _ = attemptLogOut()
         EmailLogin.open()
-        EmailLogin.logIn(email: testDataExistingEmail, password: testDataExistingPassword)
+        EmailLogin.logIn()
         NoteList.waitForLoad()
     }
 
