@@ -705,19 +705,15 @@ end
   #####################################################################################
   desc "Run UI tests"
   lane :run_ui_tests do | options |
-    begin
-      scan(
-        workspace: workspace_name,
-        scheme: UI_TESTS_SCHEME,
-        device: options[:device] || "iPhone 12",
-        prelaunch_simulator: true,
-        reset_simulator: true,
-        only_testing: "SimplenoteUITests/SimplenoteUISmokeTestsTrash",
-        xcargs: { UI_TEST_ACCOUNT: options[:test_account] || '' }
-      )
-    rescue => ex
-       UI.error(ex)
-    end
+    scan(
+      workspace: workspace_name,
+      scheme: UI_TESTS_SCHEME,
+      device: options[:device] || "iPhone 12",
+      prelaunch_simulator: true,
+      reset_simulator: true,
+      only_testing: "SimplenoteUITests/SimplenoteUISmokeTestsTrash",
+      xcargs: { UI_TEST_ACCOUNT: options[:test_account] || '' }
+    )
   end
 end
 
