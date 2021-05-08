@@ -50,6 +50,7 @@ class NoticeView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         setupViewStyles()
         setupGestureRecognizers()
+        configureStackView()
 
         layoutIfNeeded()
     }
@@ -72,6 +73,15 @@ class NoticeView: UIView {
         noticeButton.titleLabel?.font = UIFont.preferredFont(for: .subheadline, weight: .semibold)
         noticeButton.titleLabel?.adjustsFontForContentSizeCategory = true
 
+    }
+
+    private func configureStackView() {
+        switch traitCollection.preferredContentSizeCategory {
+        case .accessibilityExtraExtraExtraLarge, .accessibilityExtraExtraLarge, .accessibilityExtraLarge:
+            stackView.axis = .vertical
+        default:
+            break
+        }
     }
 
     // MARK: Action
