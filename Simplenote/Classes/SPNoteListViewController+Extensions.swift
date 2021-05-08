@@ -35,8 +35,6 @@ extension SPNoteListViewController {
         tableView.register(SPNoteTableViewCell.loadNib(), forCellReuseIdentifier: SPNoteTableViewCell.reuseIdentifier)
         tableView.register(SPTagTableViewCell.loadNib(), forCellReuseIdentifier: SPTagTableViewCell.reuseIdentifier)
         tableView.register(SPSectionHeaderView.self, forHeaderFooterViewReuseIdentifier: SPSectionHeaderView.reuseIdentifier)
-
-        tableView.allowsMultipleSelectionDuringEditing = true
     }
 
     /// Sets up the Results Controller
