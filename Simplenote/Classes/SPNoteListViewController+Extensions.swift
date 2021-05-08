@@ -258,12 +258,8 @@ extension SPNoteListViewController {
     }
 
     func refreshSelectAllLabels() {
-        var deselect = false
         let numberOfSelectedRows = tableView.indexPathsForSelectedRows?.count ?? 0
-
-        if notesListController.numberOfObjects == numberOfSelectedRows {
-            deselect = true
-        }
+        let deselect = notesListController.numberOfObjects == numberOfSelectedRows
 
         selectAllButton.title = Localization.selectAllLabel(deselect: deselect)
         selectAllButton.isAccessibilityElement = true
@@ -388,9 +384,8 @@ extension SPNoteListViewController {
 
     @objc
     func selectAllWasTapped() {
-
         if notesListController.numberOfObjects == tableView.indexPathsForSelectedRows?.count {
-            tableView.deselectAllRows(inSection: 0, animated: false)
+            tableView.deselectAllRows(inSection: .zero, animated: false)
             refreshNavigationBarLabels()
 
             return
@@ -709,18 +704,18 @@ extension SPNoteListViewController {
     open override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         refreshEditButtonTitle()
-        
-        tableView.deselectAllRows(inSection: 0, animated: false)
+
+        tableView.deselectAllRows(inSection: .zero, animated: false)
         updateNavigationBar()
 
         tableView.allowsMultipleSelection = editing
-        toggleMultiSelectEditingTo(editing)
+        toggleVisibleCells(to: editing)
 
         configureNavigationToolbarButton()
         setListViewTitle()
     }
 
-    func toggleMultiSelectEditingTo(_ editing: Bool) {
+    func toggleVisibleCells(to editing: Bool) {
         guard let noteCells = tableView.visibleCells as? [SPNoteTableViewCell] else {
             return
         }

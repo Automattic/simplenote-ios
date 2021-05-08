@@ -136,18 +136,18 @@ extension UITableView {
     }
 
     open func selectAllRows(inSection section: Int, animated: Bool) {
-        forEachIndexPathIn(section: section) { indexPath in
+        forEachIndexPath(in: section) { indexPath in
             selectRow(at: indexPath, animated: animated, scrollPosition: .none)
         }
     }
 
     func deselectAllRows(inSection section: Int, animated: Bool) {
-        forEachIndexPathIn(section: section) { indexPath in
+        forEachIndexPath(in: section) { indexPath in
             deselectRow(at: indexPath, animated: animated)
         }
     }
 
-    func forEachIndexPathIn(section: Int, doAction action: (IndexPath)-> Void) {
+    func forEachIndexPath(in section: Int, doAction action: (IndexPath)-> Void) {
         let rows = numberOfRows(inSection: section)
 
         for row in Int.zero..<rows {
