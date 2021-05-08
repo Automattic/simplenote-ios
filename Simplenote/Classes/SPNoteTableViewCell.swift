@@ -234,11 +234,12 @@ class SPNoteTableViewCell: UITableViewCell {
     }
 
     func setMultiSelectEditing(_ editing: Bool) {
+        self.refreshEdgeInsets(editing: editing)
+        self.checkboxContainingView.isHidden = !editing
+
         UIView.animate(
             withDuration: UIKitConstants.animationQuickDuration,
             animations: {
-                self.refreshEdgeInsets(editing: editing)
-                self.checkboxContainingView.isHidden = !editing
                 self.contentView.layoutIfNeeded()
             })
 
