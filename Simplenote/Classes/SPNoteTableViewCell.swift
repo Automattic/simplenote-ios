@@ -27,7 +27,7 @@ class SPNoteTableViewCell: UITableViewCell {
     ///
     @IBOutlet private weak var multiSelectCheckbox: UIImageView!
 
-    @IBOutlet weak var checkboxContainingView: UIView!
+    @IBOutlet private weak var checkboxContainingView: UIView!
 
     /// Acccesory LeftImage's Height
     ///
@@ -234,13 +234,12 @@ class SPNoteTableViewCell: UITableViewCell {
     }
 
     func setMultiSelectEditing(_ editing: Bool) {
-
         UIView.animate(
             withDuration: UIKitConstants.animationQuickDuration,
             animations: {
                 self.refreshEdgeInsets(editing: editing)
                 self.checkboxContainingView.isHidden = !editing
-                self.checkboxContainingView.superview?.layoutIfNeeded()
+                self.contentView.layoutIfNeeded()
             })
 
     }

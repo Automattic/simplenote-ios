@@ -648,7 +648,7 @@ private extension SPNoteListViewController {
 
         cell.refreshAttributedStrings()
 
-        cell.checkboxContainingView.isHidden = !isEditing
+        cell.setMultiSelectEditing(isEditing)
 
         return cell
     }
@@ -725,14 +725,16 @@ extension SPNoteListViewController {
         }
     }
 
-    private func setListViewTitle() {
-        if isEditing {
-            let count = tableView.indexPathsForSelectedRows?.count ?? 0
-            title = count > 0 ? Localization.selectedTitle(with: count) : notesListController.filter.title
-            return
-        }
 
-        title = notesListController.filter.title
+    private func setListViewTitle() {
+        title = {
+            guard isEditing else {
+                return notesListController.filter.title
+            }
+
+            let count = tableView.indexPathsForSelectedRows?.count ?? .zero
+            return count > 0 ? Localization.selectedTitle(with: count) : notesListController.filter.title
+        }()
     }
 }
 
