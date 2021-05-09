@@ -50,7 +50,7 @@ class NoticeView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         setupViewStyles()
         setupGestureRecognizers()
-        configureStackView()
+        configureViewForAccessibility()
 
         layoutIfNeeded()
     }
@@ -75,10 +75,11 @@ class NoticeView: UIView {
 
     }
 
-    private func configureStackView() {
+    private func configureViewForAccessibility() {
         switch traitCollection.preferredContentSizeCategory {
         case .accessibilityExtraExtraExtraLarge, .accessibilityExtraExtraLarge, .accessibilityExtraLarge:
             stackView.axis = .vertical
+            noticeLabel.preferredMaxLayoutWidth = Constants.fullWidth
         default:
             break
         }
@@ -120,6 +121,7 @@ extension NoticeView {
 private struct Constants {
     static let cornerRadius = CGFloat(25)
     static let nibName = "NoticeView"
+    static let fullWidth = CGFloat(335)
 }
 
 
