@@ -3,7 +3,19 @@ import Foundation
 // MARK: - SignupRemote
 //
 class SignupRemote {
-    enum Result {
+    enum Result: Equatable {
+        static func == (lhs: SignupRemote.Result, rhs: SignupRemote.Result) -> Bool {
+            switch (lhs, rhs) {
+            case (.success, .success):
+                return true
+            case (.failure(let code1, let error1), .failure(let code2, let error2)):
+                return code1 == code2 && error1?.localizedDescription == error2?.localizedDescription
+            default:
+                return false
+            }
+
+        }
+
         case success
         case failure(_ statusCode: Int, _ error: Error?)
     }
