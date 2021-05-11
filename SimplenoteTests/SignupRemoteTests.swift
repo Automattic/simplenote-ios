@@ -60,7 +60,7 @@ class SignupRemoteTests: XCTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 1, handler: nil)
+        waitForExpectations(timeout: Constants.expectationTimeout, handler: nil)
     }
 
     private func response(with statusCode: Int?) -> HTTPURLResponse? {
