@@ -10,6 +10,8 @@ end
 USER_ENV_FILE_PATH = File.join(Dir.home, '.simplenoteios-env.default')
 PROJECT_ENV_FILE_PATH = File.expand_path(File.join(Dir.pwd, '../.configure-files/project.env'))
 UI_TESTS_SCHEME = "SimplenoteUITests"
+UI_TESTS_ACCOUNTS_KEY = "https://api.keyvalue.xyz/82649691/simplenoteuitest-ios"
+$used_test_account_index = nil
 
 before_all do
   # Check that the env files exist
@@ -24,6 +26,14 @@ before_all do
   # It is skipped if this isn't running on CI
   # See https://circleci.com/docs/2.0/ios-codesigning/
   setup_circle_ci
+end
+
+after_each do |lane, options|
+  free_occupied_test_account if lane == :run_ui_tests
+end
+
+error do |lane, exception, options|
+  free_occupied_test_account if lane == :run_ui_tests
 end
 
 platform :ios do
@@ -715,6 +725,25 @@ end
       xcargs: { UI_TEST_ACCOUNT: options[:test_account] || '' }
     )
   end
+
+  #####################################################################################
+  # pick_test_account_and_run_ui_tests
+  # -----------------------------------------------------------------------------------
+  # Firstly tries to occupy a free test account, and then passes the account to 
+  # `run_ui_tests` lane. Frees up the account afterwards.
+  # -----------------------------------------------------------------------------------
+  # Usage:
+  # bundle exec fastlane pick_test_account_and_run_ui_tests [device:<Name of the iOS Simulator>]
+  #
+  # Example:
+  # bundle exec fastlane pick_test_account_and_run_ui_tests device:"iPhone 12"
+  #####################################################################################
+  desc "Occupy a free test account and run UI tests with it"
+  lane :pick_test_account_and_run_ui_tests do | options |
+    occupy_test_account
+    run_ui_tests(options.merge({ test_account: "simplenoteuitest-ios-#{$used_test_account_index+1}@a8c.com" }))
+    free_occupied_test_account
+  end
 end
 
 ########################################################################
@@ -849,4 +878,63 @@ end
 
 def simulator_version
   '14.4'
+end
+
+def occupy_test_account
+  UI.message("Looking for a free test account...")
+  find_free_test_account
+  change_test_account_availability("T")
+end
+
+def free_occupied_test_account
+  return if $used_test_account_index == nil
+  UI.message("Freeing used test account")
+  change_test_account_availability("F")
+  $used_test_account_index = nil
+end
+
+# Returns the value of test accounts key, which is 
+# expected to look like a series of Fs and Ts.
+# Example:
+#   get_test_accounts_state
+#     => "TFF"
+def get_test_accounts_state
+  uri = URI.parse(UI_TESTS_ACCOUNTS_KEY)
+  response = Net::HTTP.get_response(uri)
+  accounts_state = response.body.gsub("\n","")
+  UI.message("State of test accounts: #{accounts_state}")
+  accounts_state
+end
+
+# Returns the index of first "F" (Free) occurence in the test
+# accounts keyvalue, or crashes fastlane if it was not found.
+# Example:
+#   get_free_test_account_index
+#     => 2
+def find_free_test_account
+  $used_test_account_index = get_test_accounts_state.index("F")
+  UI.user_error!("Could not find free UI Test account. Quitting.") if $used_test_account_index.nil? 
+  UI.message("Free account index: #{$used_test_account_index}")
+end
+
+# Replaces a character at `index` with `availability` value.
+# Example:
+#   change_test_account_availability("F")
+#     => FTT 
+def change_test_account_availability(availability)
+  accounts_state = get_test_accounts_state
+  accounts_state[$used_test_account_index] = availability
+  UI.message("Writing new account state: #{accounts_state}")
+  uri = URI.parse(UI_TESTS_ACCOUNTS_KEY + "/" + accounts_state)
+  request = Net::HTTP::Post.new(uri)
+
+  req_options = {
+    use_ssl: uri.scheme == "https",
+  }
+
+  response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+    http.request(request)
+  end
+
+  get_test_accounts_state
 end
