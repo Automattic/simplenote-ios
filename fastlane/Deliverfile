@@ -17,8 +17,18 @@ privacy_url({
   'default' => 'https://simplenote.com/privacy/',
 })
 
-copyright('2020 Automattic')
+copyright('2021 Automattic')
 
 skip_binary_upload true
 overwrite_screenshots true
 phased_release true
+
+# We are using the API key to upload the metadata to ASC via Deliver, but, as
+# the tool reports:
+#
+# > [!] Precheck cannot check In-app purchases with the App Store Connect API
+# > Key (yet). Exclude In-app purchases from precheck, disable the precheck step
+# > in your build step, or use Apple ID login
+#
+# Simplenote iOS doesn't use IAPs, for the moment, so we can safely skip them.
+precheck_include_in_app_purchases false

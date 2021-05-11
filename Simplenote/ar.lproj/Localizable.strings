@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-03-16 14:54:04+0000 */
+/* Translation-Revision-Date: 2021-04-28 13:54:04+0000 */
 /* Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ar */
@@ -151,6 +151,9 @@
 /* Copies the Note's Public Link */
 "Copy Link" = "نسخ الرابط";
 
+/* Copy link action */
+"Copy link" = "نسخ الرابط";
+
 /* Rating view - initial - could be better button */
 "Could be better" = "قد يكون أفضل";
 
@@ -216,7 +219,7 @@
 "Diagnostics" = "التشخيصات";
 
 /* Footer -> Sign up verification screen. Parameter: %1$@ - support email address */
-"Didn't get an email? You may already have an account. Contact %1$@ for help." = "ألم يصلك بريدٌ إلكترونيٌ؟ ربما يكون لديك حساب بالفعل. اتصل بـ %1$@ للحصول على مساعدة.";
+"Didn't get an email? There may already be an account associated with this email address. Contact %1$@ for help." = "ألم يصلك بريدٌ إلكترونيٌ؟ ربما يوجد حساب بالفعل مقترن بعنوان البريد الإلكتروني هذا. اتصل بـ %1$@ للحصول على مساعدة.";
 
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "تعطيل تنسيق الضبط";
@@ -323,6 +326,9 @@
 /* Theme: Light */
 "Light" = "فاتح";
 
+/* Link Copied alert */
+"Link copied" = "تم نسخ الرابط";
+
 /* Setting for when the passcode lock should enable */
 "Lock Timeout" = "انتهاء مهلة الحظر";
 
@@ -406,6 +412,9 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "لا توجد أي ملاحظات غير موسومة";
 
+/* Note trashed notification */
+"Note Trashed" = "لم يتم النقل إلى سلة المهملات";
+
 /* Notes Header (Search Mode) */
 "Notes" = "ملاحظات";
 
@@ -483,8 +492,14 @@
 /* Publishes a Note to the Web */
 "Publish" = "نشر";
 
+/* Notice up succesful publishing */
+"Publish Successful" = "تم النشر بنجاح";
+
 /* Publish Accessibility Hint */
 "Publish note" = "نشر الملاحظة";
+
+/* Notice of publishing action */
+"Publishing note..." = "جارٍ نشر ملحوظة...";
 
 /* Indicates the Note is being published */
 "Publishing..." = "جار النشر...";
@@ -645,6 +660,9 @@
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "إيقاف رمز المرور";
 
+/* Undo action */
+"Undo" = "تراجع";
+
 /* Unpins a note */
 "Unpin" = "إلغاء التثبيت";
 
@@ -653,6 +671,12 @@
 
 /* Publish Accessibility Hint */
 "Unpublish note" = "إلغاء نشر الملاحظة";
+
+/* Notice of publishing unsuccessful */
+"Unpublish successful" = "تم إلغاء النشر بنجاح";
+
+/* Notice of unpublishing action */
+"Unpublishing note..." = "جارٍ إلغاء نشر الملحوظة...";
 
 /* Indicates the Note is being unpublished */
 "Unpublishing..." = "جارٍ إلغاء النشر...";

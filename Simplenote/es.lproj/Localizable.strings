@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-03-16 11:54:39+0000 */
+/* Translation-Revision-Date: 2021-04-30 15:43:57+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: es */
@@ -81,7 +81,7 @@
 "Appearance" = "Apariencia";
 
 /* Automattic hiring description */
-"Are you a developer? We’re hiring." = "¿Eres desarrollador? Buscamos personal.";
+"Are you a developer? We’re hiring." = "Trabaja con nosotros.";
 
 /* Title of deletion confirmation message for a tag. Parameters: %1$@ - tag name */
 "Are you sure you want to delete \"%1$@\"?" = "¿Seguro que quieres eliminar \"%1$@\"?";
@@ -151,6 +151,9 @@
 /* Copies the Note's Public Link */
 "Copy Link" = "Copiar enlace";
 
+/* Copy link action */
+"Copy link" = "Copiar enlace";
+
 /* Rating view - initial - could be better button */
 "Could be better" = "Podría ser mejor";
 
@@ -216,7 +219,7 @@
 "Diagnostics" = "Diagnósticos";
 
 /* Footer -> Sign up verification screen. Parameter: %1$@ - support email address */
-"Didn't get an email? You may already have an account. Contact %1$@ for help." = "¿No has recibido un correo electrónico? Es posible que ya tengas una cuenta. Ponte en contacto con %1$@ para obtener ayuda.";
+"Didn't get an email? There may already be an account associated with this email address. Contact %1$@ for help." = "¿No has recibido un correo electrónico? Es posible que ya exista una cuenta asociada a esta dirección de correo electrónico. Ponte en contacto con %1$@ para obtener ayuda.";
 
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "Desactivar el formato de Markdown";
@@ -249,7 +252,7 @@
 "Email in use" = "Correo electrónico en uso";
 
 /* Verb - empty causes all notes to be removed permenently from the trash */
-"Empty" = "Vacio";
+"Empty" = "Vaciar";
 
 /* Remove all notes from the trash */
 "Empty trash" = "Vaciar Papelera";
@@ -322,6 +325,9 @@
 
 /* Theme: Light */
 "Light" = "Claro";
+
+/* Link Copied alert */
+"Link copied" = "Enlace copiado";
 
 /* Setting for when the passcode lock should enable */
 "Lock Timeout" = "Tiempo de espera de bloqueo";
@@ -406,6 +412,9 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "No se han encontrado notas sin etiquetar";
 
+/* Note trashed notification */
+"Note Trashed" = "Nota movida a la papelera";
+
 /* Notes Header (Search Mode) */
 "Notes" = "Notas";
 
@@ -483,8 +492,14 @@
 /* Publishes a Note to the Web */
 "Publish" = "Publicar";
 
+/* Notice up succesful publishing */
+"Publish Successful" = "Publicación correcta";
+
 /* Publish Accessibility Hint */
 "Publish note" = "Publicar Nota";
+
+/* Notice of publishing action */
+"Publishing note..." = "Publicando la nota…";
 
 /* Indicates the Note is being published */
 "Publishing..." = "Publicando...";
@@ -551,7 +566,7 @@
 
 /* Settings button
    Title of options screen */
-"Settings" = "Configuracion";
+"Settings" = "Configuración";
 
 /* Opens the Share Sheet
    Share Action */
@@ -645,6 +660,9 @@
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "Remover Contraseña";
 
+/* Undo action */
+"Undo" = "Deshacer";
+
 /* Unpins a note */
 "Unpin" = "Desanclar";
 
@@ -653,6 +671,12 @@
 
 /* Publish Accessibility Hint */
 "Unpublish note" = "Despublicar Nota";
+
+/* Notice of publishing unsuccessful */
+"Unpublish successful" = "Publicación anulada correctamente";
+
+/* Notice of unpublishing action */
+"Unpublishing note..." = "Anulando la publicación de la nota…";
 
 /* Indicates the Note is being unpublished */
 "Unpublishing..." = "Despublicando...";

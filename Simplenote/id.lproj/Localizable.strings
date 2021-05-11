@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-03-16 09:54:05+0000 */
+/* Translation-Revision-Date: 2021-04-27 09:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n > 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: id */
@@ -151,6 +151,9 @@
 /* Copies the Note's Public Link */
 "Copy Link" = "Salin tautan";
 
+/* Copy link action */
+"Copy link" = "Salin tautan";
+
 /* Rating view - initial - could be better button */
 "Could be better" = "Bisa Lebih Baik";
 
@@ -216,7 +219,7 @@
 "Diagnostics" = "Diagnostik";
 
 /* Footer -> Sign up verification screen. Parameter: %1$@ - support email address */
-"Didn't get an email? You may already have an account. Contact %1$@ for help." = "Belum menerima email? Sepertinya Anda telah memiliki akun. Hubungi %1$@ untuk mendapatkan bantuan.";
+"Didn't get an email? There may already be an account associated with this email address. Contact %1$@ for help." = "Belum menerima email? Mungkin sudah ada akun yang dikaitkan dengan alamat email ini. Hubungi %1$@ untuk mendapatkan bantuan.";
 
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "Nonaktifkan pemformatan Markdown";
@@ -323,6 +326,9 @@
 /* Theme: Light */
 "Light" = "Terang";
 
+/* Link Copied alert */
+"Link copied" = "Tautan disalin";
+
 /* Setting for when the passcode lock should enable */
 "Lock Timeout" = "Waktu Habis Penguncian";
 
@@ -406,6 +412,9 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "Tidak ada catatan tanpa tag";
 
+/* Note trashed notification */
+"Note Trashed" = "Catatan Dibuang";
+
 /* Notes Header (Search Mode) */
 "Notes" = "Catatan";
 
@@ -483,8 +492,14 @@
 /* Publishes a Note to the Web */
 "Publish" = "Terbitkan";
 
+/* Notice up succesful publishing */
+"Publish Successful" = "Penerbitan Berhasil";
+
 /* Publish Accessibility Hint */
 "Publish note" = "Terbitkan catatan";
+
+/* Notice of publishing action */
+"Publishing note..." = "Menerbitkan catatan...";
 
 /* Indicates the Note is being published */
 "Publishing..." = "Menerbitkan...";
@@ -645,6 +660,9 @@
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "Matikan Kode Sandi";
 
+/* Undo action */
+"Undo" = "Urungkan";
+
 /* Unpins a note */
 "Unpin" = "Lapas sematan";
 
@@ -653,6 +671,12 @@
 
 /* Publish Accessibility Hint */
 "Unpublish note" = "Batalkan menerbitkan catatan";
+
+/* Notice of publishing unsuccessful */
+"Unpublish successful" = "Pembatalan penerbitan berhasil";
+
+/* Notice of unpublishing action */
+"Unpublishing note..." = "Membatalkan penerbitan catatan...";
 
 /* Indicates the Note is being unpublished */
 "Unpublishing..." = "Batal menerbitkan...";
