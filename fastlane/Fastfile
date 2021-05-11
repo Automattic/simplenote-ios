@@ -28,12 +28,8 @@ before_all do
   setup_circle_ci
 end
 
-after_each do |lane, options|
-  free_occupied_test_account if lane == :run_ui_tests
-end
-
 error do |lane, exception, options|
-  free_occupied_test_account if lane == :run_ui_tests
+  deoccupy_test_account if lane == :run_ui_tests
 end
 
 platform :ios do
@@ -742,7 +738,7 @@ end
   lane :pick_test_account_and_run_ui_tests do | options |
     occupy_test_account
     run_ui_tests(options.merge({ test_account: "simplenoteuitest-ios-#{$used_test_account_index+1}@a8c.com" }))
-    free_occupied_test_account
+    deoccupy_test_account
   end
 end
 
@@ -886,7 +882,7 @@ def occupy_test_account
   change_test_account_availability("T")
 end
 
-def free_occupied_test_account
+def deoccupy_test_account
   return if $used_test_account_index == nil
   UI.message("Freeing used test account")
   change_test_account_availability("F")
