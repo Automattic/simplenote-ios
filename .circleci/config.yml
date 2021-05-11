@@ -166,7 +166,7 @@ jobs:
       # END: Swift Package Manager Workaround
       - run:
           name: Fastlane
-          command: bundle exec fastlane run_ui_tests device:'<< parameters.device >>'
+          command: bundle exec fastlane pick_test_account_and_run_ui_tests device:'<< parameters.device >>'
       - store_artifacts:
           path: output/scan/report.html
       - store_artifacts:
