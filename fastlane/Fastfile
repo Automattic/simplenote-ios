@@ -893,9 +893,9 @@ end
 # expected to look like a series of Fs and Ts.
 # Example:
 #   get_test_accounts_state
-#     => "TFF"
+#     => "TFFFF"
 def get_test_accounts_state
-  uri = URI.parse(UI_TESTS_ACCOUNTS_KEY)
+  uri = URI.parse(UI_TEST_ACCOUNTS_KEY)
   response = Net::HTTP.get_response(uri)
   accounts_state = response.body.gsub("\n","")
   UI.message("State of test accounts: #{accounts_state}")
@@ -916,7 +916,7 @@ end
 # Replaces a character at `index` with `availability` value.
 # Example:
 #   change_test_account_availability("F")
-#     => FTT 
+#     => FFFFF
 def change_test_account_availability(availability)
   accounts_state = get_test_accounts_state
   accounts_state[$used_test_account_index] = availability
