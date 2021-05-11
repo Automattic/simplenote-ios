@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-03-18 10:54:03+0000 */
+/* Translation-Revision-Date: 2021-04-30 09:54:03+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ja_JP */
@@ -151,6 +151,9 @@
 /* Copies the Note's Public Link */
 "Copy Link" = "リンクをコピー";
 
+/* Copy link action */
+"Copy link" = "リンクをコピー";
+
 /* Rating view - initial - could be better button */
 "Could be better" = "不満がある";
 
@@ -216,7 +219,7 @@
 "Diagnostics" = "診断";
 
 /* Footer -> Sign up verification screen. Parameter: %1$@ - support email address */
-"Didn't get an email? You may already have an account. Contact %1$@ for help." = "メールが届きませんでしたか ? すでにアカウントをお持ちの可能性があります。 サポートについては %1$@ までお問い合わせください。";
+"Didn't get an email? There may already be an account associated with this email address. Contact %1$@ for help." = "メールが届きませんでしたか ? このメールアドレスに関連付けられているアカウントがすでに存在する可能性があります。 %1$@ に問い合わせてサポートを受けてください。";
 
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "Markdown フォーマットを無効化";
@@ -323,6 +326,9 @@
 /* Theme: Light */
 "Light" = "ライト";
 
+/* Link Copied alert */
+"Link copied" = "リンクをコピーしました";
+
 /* Setting for when the passcode lock should enable */
 "Lock Timeout" = "タイムアウトをロック";
 
@@ -406,6 +412,9 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "タグが付けられていないメモはありません";
 
+/* Note trashed notification */
+"Note Trashed" = "ノートをゴミ箱に入れました";
+
 /* Notes Header (Search Mode) */
 "Notes" = "メモ";
 
@@ -483,8 +492,14 @@
 /* Publishes a Note to the Web */
 "Publish" = "公開";
 
+/* Notice up succesful publishing */
+"Publish Successful" = "公開に成功しました";
+
 /* Publish Accessibility Hint */
 "Publish note" = "ノートを公開";
+
+/* Notice of publishing action */
+"Publishing note..." = "ノートを公開しています...";
 
 /* Indicates the Note is being published */
 "Publishing..." = "公開中";
@@ -645,6 +660,9 @@
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "パスコードを無効化";
 
+/* Undo action */
+"Undo" = "元に戻す";
+
 /* Unpins a note */
 "Unpin" = "ピンを外す";
 
@@ -653,6 +671,12 @@
 
 /* Publish Accessibility Hint */
 "Unpublish note" = "ノートを非公開";
+
+/* Notice of publishing unsuccessful */
+"Unpublish successful" = "非公開に成功しました";
+
+/* Notice of unpublishing action */
+"Unpublishing note..." = "ノートを非公開にしています...";
 
 /* Indicates the Note is being unpublished */
 "Unpublishing..." = "非公開設定中…";

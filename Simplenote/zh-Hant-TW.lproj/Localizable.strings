@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-03-17 09:54:03+0000 */
+/* Translation-Revision-Date: 2021-04-28 11:54:03+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: zh_TW */
@@ -151,6 +151,9 @@
 /* Copies the Note's Public Link */
 "Copy Link" = "複製連結";
 
+/* Copy link action */
+"Copy link" = "複製連結";
+
 /* Rating view - initial - could be better button */
 "Could be better" = "可以再好一點";
 
@@ -216,7 +219,7 @@
 "Diagnostics" = "診斷";
 
 /* Footer -> Sign up verification screen. Parameter: %1$@ - support email address */
-"Didn't get an email? You may already have an account. Contact %1$@ for help." = "沒收到電子郵件嗎？ 你可能已有帳號。 聯絡 %1$@ 尋求協助。";
+"Didn't get an email? There may already be an account associated with this email address. Contact %1$@ for help." = "沒收到電子郵件嗎？ 可能已有一個與此電子郵件地址關聯的帳號。 請與 %1$@ 聯絡尋求協助。";
 
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "停用 Markdown 格式";
@@ -323,6 +326,9 @@
 /* Theme: Light */
 "Light" = "淡色系";
 
+/* Link Copied alert */
+"Link copied" = "已複製連結";
+
 /* Setting for when the passcode lock should enable */
 "Lock Timeout" = "鎖定逾時";
 
@@ -406,6 +412,9 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "沒有未標籤筆記";
 
+/* Note trashed notification */
+"Note Trashed" = "筆記已移至垃圾桶";
+
 /* Notes Header (Search Mode) */
 "Notes" = "筆記";
 
@@ -483,8 +492,14 @@
 /* Publishes a Note to the Web */
 "Publish" = "發表";
 
+/* Notice up succesful publishing */
+"Publish Successful" = "發表成功";
+
 /* Publish Accessibility Hint */
 "Publish note" = "發表筆記";
+
+/* Notice of publishing action */
+"Publishing note..." = "正在發表筆記…";
 
 /* Indicates the Note is being published */
 "Publishing..." = "正在發表…";
@@ -645,6 +660,9 @@
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "關閉密碼";
 
+/* Undo action */
+"Undo" = "復原";
+
 /* Unpins a note */
 "Unpin" = "取消釘選";
 
@@ -653,6 +671,12 @@
 
 /* Publish Accessibility Hint */
 "Unpublish note" = "取消發表筆記";
+
+/* Notice of publishing unsuccessful */
+"Unpublish successful" = "取消發表成功";
+
+/* Notice of unpublishing action */
+"Unpublishing note..." = "正在取消發表筆記…";
 
 /* Indicates the Note is being unpublished */
 "Unpublishing..." = "正在取消發表...";

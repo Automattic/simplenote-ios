@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-03-16 18:54:03+0000 */
+/* Translation-Revision-Date: 2021-04-28 13:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: nl */
@@ -151,6 +151,9 @@
 /* Copies the Note's Public Link */
 "Copy Link" = "Link kopiëren";
 
+/* Copy link action */
+"Copy link" = "Link kopiëren";
+
 /* Rating view - initial - could be better button */
 "Could be better" = "Kan beter";
 
@@ -216,7 +219,7 @@
 "Diagnostics" = "Diagnoses";
 
 /* Footer -> Sign up verification screen. Parameter: %1$@ - support email address */
-"Didn't get an email? You may already have an account. Contact %1$@ for help." = "Niet ontvangen? Misschien heb je al een account. Neem voor hulp contact op met %1$@.";
+"Didn't get an email? There may already be an account associated with this email address. Contact %1$@ for help." = "Geen e-mail ontvangen? Misschien is er al een account gekoppeld aan dit e-mailadres. Neem voor hulp contact op met %1$@.";
 
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "Markdown-opmaak uitschakelen";
@@ -323,6 +326,9 @@
 /* Theme: Light */
 "Light" = "Licht";
 
+/* Link Copied alert */
+"Link copied" = "Link gekopieerd";
+
 /* Setting for when the passcode lock should enable */
 "Lock Timeout" = "Time-out voor vergrendeling";
 
@@ -406,6 +412,9 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "Geen niet-getagde opmerkingen";
 
+/* Note trashed notification */
+"Note Trashed" = "Notitie in prullenbak";
+
 /* Notes Header (Search Mode) */
 "Notes" = "Notities";
 
@@ -483,8 +492,14 @@
 /* Publishes a Note to the Web */
 "Publish" = "Publiceren";
 
+/* Notice up succesful publishing */
+"Publish Successful" = "Gepubliceerd";
+
 /* Publish Accessibility Hint */
 "Publish note" = "Notitie publiceren";
+
+/* Notice of publishing action */
+"Publishing note..." = "Notitie publiceren...";
 
 /* Indicates the Note is being published */
 "Publishing..." = "Publiceren...";
@@ -645,6 +660,9 @@
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "Wachtwoordcode uitschakelen";
 
+/* Undo action */
+"Undo" = "Ongedaan maken";
+
 /* Unpins a note */
 "Unpin" = "Losgemaakt";
 
@@ -653,6 +671,12 @@
 
 /* Publish Accessibility Hint */
 "Unpublish note" = "Notitie verwijderen";
+
+/* Notice of publishing unsuccessful */
+"Unpublish successful" = "Verwijderd";
+
+/* Notice of unpublishing action */
+"Unpublishing note..." = "Notitie verwijderen...";
 
 /* Indicates the Note is being unpublished */
 "Unpublishing..." = "Verwijderen ...";

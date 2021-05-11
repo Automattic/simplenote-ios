@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-03-17 11:54:04+0000 */
+/* Translation-Revision-Date: 2021-04-28 11:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=(n > 1); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: tr */
@@ -151,6 +151,9 @@
 /* Copies the Note's Public Link */
 "Copy Link" = "Bağlantıyı kopyala";
 
+/* Copy link action */
+"Copy link" = "Bağlantıyı kopyala";
+
 /* Rating view - initial - could be better button */
 "Could be better" = "Daha İyi Olabilir";
 
@@ -216,7 +219,7 @@
 "Diagnostics" = "Tanılamalar";
 
 /* Footer -> Sign up verification screen. Parameter: %1$@ - support email address */
-"Didn't get an email? You may already have an account. Contact %1$@ for help." = "E-postayı almadınız mı? Zaten bir hesabınız olabilir. Yardım için %1$@ ile iletişime geçin.";
+"Didn't get an email? There may already be an account associated with this email address. Contact %1$@ for help." = "E-postayı almadınız mı? Bu e-posta adresiyle ilişkilendirilmiş bir hesap mevcut olabilir. Yardım için %1$@ ile iletişime geçin.";
 
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "Markdown biçimlendirmesini devre dışı bırak";
@@ -323,6 +326,9 @@
 /* Theme: Light */
 "Light" = "Açık";
 
+/* Link Copied alert */
+"Link copied" = "Bağlantı kopyalandı";
+
 /* Setting for when the passcode lock should enable */
 "Lock Timeout" = "Kilitlenme Zaman Aşımı";
 
@@ -406,6 +412,9 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "Etiketsiz not yok";
 
+/* Note trashed notification */
+"Note Trashed" = "Not Çöp Kutusuna Gönderildi";
+
 /* Notes Header (Search Mode) */
 "Notes" = "Notlar";
 
@@ -483,8 +492,14 @@
 /* Publishes a Note to the Web */
 "Publish" = "Yayınla";
 
+/* Notice up succesful publishing */
+"Publish Successful" = "Başarıyla yayımlandı";
+
 /* Publish Accessibility Hint */
 "Publish note" = "Notu yayınla";
+
+/* Notice of publishing action */
+"Publishing note..." = "Not yayımlanıyor...";
 
 /* Indicates the Note is being published */
 "Publishing..." = "Yayınlanıyor…";
@@ -645,6 +660,9 @@
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "Parolayı Kapat";
 
+/* Undo action */
+"Undo" = "Geri al";
+
 /* Unpins a note */
 "Unpin" = "Sabitlemeyi kaldır";
 
@@ -653,6 +671,12 @@
 
 /* Publish Accessibility Hint */
 "Unpublish note" = "Notu yayından kaldır";
+
+/* Notice of publishing unsuccessful */
+"Unpublish successful" = "Başarıyla yayından kaldırıldı";
+
+/* Notice of unpublishing action */
+"Unpublishing note..." = "Not yayından kaldırılıyor...";
 
 /* Indicates the Note is being unpublished */
 "Unpublishing..." = "Yayından kaldırılıyor...";
