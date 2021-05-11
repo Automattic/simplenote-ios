@@ -22,8 +22,8 @@ class SignupRemoteTests: XCTestCase {
         signupRemote.signup(with: "EMAIL@gmail.com", completion: { _ in })
 
         let expecation = "email@gmail.com"
-        let body = try XCTUnwrap(urlSession.decodedHtmlBodyInLastRequest(outputType: Dictionary<String, String>.self))
-        let decodedEmail = body["username"]
+        let body: Dictionary<String, String> = try XCTUnwrap(urlSession.lastRequest?.decodeHtmlBody())
+        let decodedEmail = try XCTUnwrap(body["username"])
 
         XCTAssertEqual(expecation, decodedEmail)
     }
@@ -32,8 +32,8 @@ class SignupRemoteTests: XCTestCase {
         signupRemote.signup(with: "EMAIL123456@#$%^@gmail.com", completion: { _ in })
 
         let expecation = "email123456@#$%^@gmail.com"
-        let body = try XCTUnwrap(urlSession.decodedHtmlBodyInLastRequest(outputType: Dictionary<String, String>.self))
-        let decodedEmail = body["username"]
+        let body: Dictionary<String, String> = try XCTUnwrap(urlSession.lastRequest?.decodeHtmlBody())
+        let decodedEmail = try XCTUnwrap(body["username"])
 
         XCTAssertEqual(expecation, decodedEmail)
     }
@@ -42,8 +42,8 @@ class SignupRemoteTests: XCTestCase {
         signupRemote.signup(with: "eMaIl@gmail.com", completion: { _ in })
 
         let expecation = "email@gmail.com"
-        let body = try XCTUnwrap(urlSession.decodedHtmlBodyInLastRequest(outputType: Dictionary<String, String>.self))
-        let decodedEmail = body["username"]
+        let body: Dictionary<String, String> = try XCTUnwrap(urlSession.lastRequest?.decodeHtmlBody())
+        let decodedEmail = try XCTUnwrap(body["username"])
 
         XCTAssertEqual(expecation, decodedEmail)
     }

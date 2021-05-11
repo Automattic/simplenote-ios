@@ -420,6 +420,7 @@
 		BA55B05A25F067DF0042582B /* NoticePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA55B05925F067DF0042582B /* NoticePresenter.swift */; };
 		BA55B06325F068650042582B /* NoticeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA55B06225F068650042582B /* NoticeController.swift */; };
 		BA5C1C0725BF9D6C006E3820 /* SPDragBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5C1C0625BF9D6C006E3820 /* SPDragBar.swift */; };
+		BA5E5B7D264A148C00D0EE19 /* URLRequest+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5E5B7C264A148C00D0EE19 /* URLRequest+Simplenote.swift */; };
 		BA83478325F59F8B0059B797 /* markdown-default-contrast.css in Resources */ = {isa = PBXBuildFile; fileRef = BA83478225F59F8B0059B797 /* markdown-default-contrast.css */; };
 		BA83478C25F59FE90059B797 /* markdown-dark-contrast.css in Resources */ = {isa = PBXBuildFile; fileRef = BA83478B25F59FE90059B797 /* markdown-dark-contrast.css */; };
 		BAA4856925D5E40900F3BDB9 /* SearchQuery+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */; };
@@ -955,6 +956,7 @@
 		BA55B05925F067DF0042582B /* NoticePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticePresenter.swift; sourceTree = "<group>"; };
 		BA55B06225F068650042582B /* NoticeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeController.swift; sourceTree = "<group>"; };
 		BA5C1C0625BF9D6C006E3820 /* SPDragBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPDragBar.swift; sourceTree = "<group>"; };
+		BA5E5B7C264A148C00D0EE19 /* URLRequest+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Simplenote.swift"; sourceTree = "<group>"; };
 		BA83478225F59F8B0059B797 /* markdown-default-contrast.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "markdown-default-contrast.css"; sourceTree = "<group>"; };
 		BA83478B25F59FE90059B797 /* markdown-dark-contrast.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "markdown-dark-contrast.css"; sourceTree = "<group>"; };
 		BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchQuery+Simplenote.swift"; sourceTree = "<group>"; };
@@ -1700,6 +1702,7 @@
 				A6C0DFB425C1581D00B9BE39 /* UIScrollView+Simplenote.swift */,
 				A6A8968D25D5779D00A7B390 /* FileManager+Simplenote.swift */,
 				BAE08625261282D1009D40CD /* Note+Publish.swift */,
+				BA5E5B7C264A148C00D0EE19 /* URLRequest+Simplenote.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -2891,6 +2894,7 @@
 				B56E763622BD565700C5AA47 /* UIView+Simplenote.swift in Sources */,
 				B5E4082D235DE41A00D4E1DF /* UIColor+Studio.swift in Sources */,
 				A6CDF900256B9CB900CF2F27 /* ViewSpinner.swift in Sources */,
+				BA5E5B7D264A148C00D0EE19 /* URLRequest+Simplenote.swift in Sources */,
 				375D24B721E01131007AB25A /* stack.c in Sources */,
 				373AD30821C4739500A4EA89 /* NSMutableAttributedString+Styling.m in Sources */,
 				B524AE112352CC7900EA11D4 /* UIScreen+Simplenote.swift in Sources */,

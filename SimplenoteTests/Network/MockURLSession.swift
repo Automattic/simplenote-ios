@@ -12,13 +12,4 @@ class MockURLSession: URLSession {
             completionHandler(self.data?.0, self.data?.1, self.data?.2)
         }
     }
-
-    func decodedHtmlBodyInLastRequest<T: Decodable>(outputType: T.Type) throws -> T? {
-        guard let lastRequest = lastRequest,
-              let data = lastRequest.httpBody else {
-            return nil
-        }
-
-        return try JSONDecoder().decode(outputType, from: data)
-    }
 }
