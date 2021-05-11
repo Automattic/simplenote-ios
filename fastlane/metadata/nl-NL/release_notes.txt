@@ -1,0 +1,3 @@
+- De pictogrammen van Simplenote zijn vernieuwd
+- Meldingen binnen de app toegevoegd om gebruikers op bepaalde activiteiten binnen de app te wijzen
+- De instellingen voor het ordenen van zoekresultaten gewijzigd: de algemene instellingen voor het ordenen worden gebruikt.

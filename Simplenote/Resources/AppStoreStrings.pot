@@ -66,8 +66,10 @@ msgctxt "app_store_keywords"
 msgid "simplenote,note,taking,taker,notes,sync,share,simple,markdown,tag,to-do,list,lock,cloud,writing"
 msgstr ""
 
-msgctxt "v4.34-whats-new"
+msgctxt "v4.35-whats-new"
 msgid ""
-"- VoiceOver now reads note contextual actions names correctly\n"
+"- Simplenote's Icons have been revamped\n"
+"- Added in app notifications to alert users of different activities in the app\n"
+"- Changed search sort settings to use the general sort setting.\n"
 msgstr ""
 

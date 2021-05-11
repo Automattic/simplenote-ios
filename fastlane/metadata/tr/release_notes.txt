@@ -1,1 +1,3 @@
-- VoiceOver artık bağlamsal not eylem adlarını doğru şekilde okuyor
+- Simplenote Simgeleri yenilendi
+- Kullanıcıları uygulamadaki farklı etkinlikler konusunda uyarmak için uygulama bildirimlerine eklendi
+- Arama sıralama ayarları genel sıralama ayarını kullanacak şekilde değiştirildi.

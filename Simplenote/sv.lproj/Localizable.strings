@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-03-08 11:32:12+0000 */
+/* Translation-Revision-Date: 2021-04-28 09:54:59+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: sv_SE */
@@ -151,6 +151,9 @@
 /* Copies the Note's Public Link */
 "Copy Link" = "Kopiera länk";
 
+/* Copy link action */
+"Copy link" = "Kopiera länk";
+
 /* Rating view - initial - could be better button */
 "Could be better" = "Kunde vara bättre";
 
@@ -216,7 +219,7 @@
 "Diagnostics" = "Diagnostik";
 
 /* Footer -> Sign up verification screen. Parameter: %1$@ - support email address */
-"Didn't get an email? You may already have an account. Contact %1$@ for help." = "Didn't get an email? You may already have an account. Contact %1$@ for help.";
+"Didn't get an email? There may already be an account associated with this email address. Contact %1$@ for help." = "Har du inte fått något e-postmeddelande? Det kan hända att det redan finns ett konto kopplat till den här e-postadressen. Kontakta %1$@ för att få hjälp.";
 
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "Inaktivera Markdown-formatering";
@@ -323,6 +326,9 @@
 /* Theme: Light */
 "Light" = "Ljus";
 
+/* Link Copied alert */
+"Link copied" = "Länk kopierad";
+
 /* Setting for when the passcode lock should enable */
 "Lock Timeout" = "Timeout för lås";
 
@@ -406,6 +412,9 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "Inga omärkta anteckningar";
 
+/* Note trashed notification */
+"Note Trashed" = "Anteckning borttagen";
+
 /* Notes Header (Search Mode) */
 "Notes" = "Anteckningar";
 
@@ -483,8 +492,14 @@
 /* Publishes a Note to the Web */
 "Publish" = "Publicera";
 
+/* Notice up succesful publishing */
+"Publish Successful" = "Publicering slutförd";
+
 /* Publish Accessibility Hint */
 "Publish note" = "Publicera anteckning";
+
+/* Notice of publishing action */
+"Publishing note..." = "Publicerar anteckning...";
 
 /* Indicates the Note is being published */
 "Publishing..." = "Publicerar...";
@@ -645,6 +660,9 @@
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "Stäng av lösenkod";
 
+/* Undo action */
+"Undo" = "Ångra";
+
 /* Unpins a note */
 "Unpin" = "Lossa";
 
@@ -653,6 +671,12 @@
 
 /* Publish Accessibility Hint */
 "Unpublish note" = "Sluta publicera anteckning";
+
+/* Notice of publishing unsuccessful */
+"Unpublish successful" = "Avpublicering slutförd";
+
+/* Notice of unpublishing action */
+"Unpublishing note..." = "Avpublicerar anteckning...";
 
 /* Indicates the Note is being unpublished */
 "Unpublishing..." = "Slutar publicera...";
@@ -688,7 +712,7 @@
 "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "Vi har skickat en e-postverifiering till %1$@. Kontrollera din inkorg och följ instruktionerna.";
 
 /* Message -> Sign up verification screen. Parameter: %1$@ - email address */
-"We’ve sent an email to %1$@. Please check your inbox and follow the instructions." = "We’ve sent an email to %1$@. Please check your inbox and follow the instructions.";
+"We’ve sent an email to %1$@. Please check your inbox and follow the instructions." = "Vi har skickat ett e-postmeddelande till %1$@. Kontrollera din inkorg och följ instruktionerna.";
 
 /* Rating view initial title */
 "What do you think about Simplenote?" = "Vad tycker du om Simplenote?";

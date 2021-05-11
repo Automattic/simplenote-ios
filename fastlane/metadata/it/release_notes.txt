@@ -1,1 +1,3 @@
-- VoiceOver ora legge correttamente i nomi delle azioni contestuali delle note
+- Le icone di Simplenote sono state rinnovate
+- Aggiunte notifiche nell'app per avvisare gli utenti delle differenti attività nell'app
+- Impostazioni di ordinamento della ricerca modificate per l'utilizzo dell'impostazione di ordinamento generale.

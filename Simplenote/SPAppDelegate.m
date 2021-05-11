@@ -135,6 +135,7 @@
     [self setupAppCenter];
     [self setupCrashLogging];
     [self configureVersionsController];
+    [self configurePublishController];
     [self setupDefaultWindow];
     [self configureStateRestoration];
 
@@ -166,6 +167,8 @@
 
     // Index (All of the) Spotlight Items if the user upgraded
     [self indexSpotlightItemsIfNeeded];
+
+    [self setupNoticeController];
 
     return YES;
 }
@@ -424,6 +427,10 @@
                 if ([key isEqualToString:self.noteEditorViewController.note.simperiumKey]) {
                     [self.noteEditorViewController didReceiveNewContent];
                 }
+
+                [self.publishController didReceiveUpdateNotificationForKey:key withMemberNames:memberNames];
+
+
                 Note *note = [bucket objectForKey:key];
                 if (note && !note.deleted) {
                     [[CSSearchableIndex defaultSearchableIndex] indexSearchableNote:note];
@@ -439,6 +446,10 @@
                 if ([key isEqualToString:self.noteEditorViewController.note.simperiumKey]) {
                     [self.noteEditorViewController didDeleteCurrentNote];
                 }
+
+                [self.publishController didReceiveDeleteNotificationsForKey:key];
+
+
                 [[CSSearchableIndex defaultSearchableIndex] deleteSearchableItemsWithIdentifiers:@[key] completionHandler:nil];
             }
 				break;

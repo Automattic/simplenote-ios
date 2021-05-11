@@ -60,7 +60,7 @@ Note: (A) means Automated Test. If automated UI tests were executed for the app,
 ### Settings
 
 - [ ] Can change analytics sharing setting
-- [ ] Changing `Condensed Note List` mode immediately updates and reflects in note list
+- [ ] Changing `Condensed Note List` mode immediately updates and reflects in note list (A)
 - [ ] For each sort type the pinned notes appear first in the note list
 - [ ] Changing `Theme` immediately updates app for desired color scheme
 - [ ] After setting a passcode, passcode (or Touch/Face ID if also enabled) is required to resume the app

@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-03-17 13:54:03+0000 */
+/* Translation-Revision-Date: 2021-04-29 09:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: he_IL */
@@ -151,6 +151,9 @@
 /* Copies the Note's Public Link */
 "Copy Link" = "להעתיק את הקישור";
 
+/* Copy link action */
+"Copy link" = "להעתיק את הקישור";
+
 /* Rating view - initial - could be better button */
 "Could be better" = "יכול להיות יותר טוב";
 
@@ -216,7 +219,7 @@
 "Diagnostics" = "אבחונים";
 
 /* Footer -> Sign up verification screen. Parameter: %1$@ - support email address */
-"Didn't get an email? You may already have an account. Contact %1$@ for help." = "לא קיבלת את הודעת האימייל? ייתכן שכבר יש לך חשבון. ניתן ליצור קשר עם %1$@ לעזרה.";
+"Didn't get an email? There may already be an account associated with this email address. Contact %1$@ for help." = "לא קיבלת את הודעת האימייל? ייתכן שכבר יש חשבון שמשויך לכתובת אימייל זו. ניתן ליצור קשר עם %1$@ לעזרה.";
 
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "להשבית את העיצוב של Markdown";
@@ -323,6 +326,9 @@
 /* Theme: Light */
 "Light" = "צבעים בהירים";
 
+/* Link Copied alert */
+"Link copied" = "הקישור הועתק";
+
 /* Setting for when the passcode lock should enable */
 "Lock Timeout" = "זמן קצוב לנעילה";
 
@@ -406,6 +412,9 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "אין פתקים ללא תגיות";
 
+/* Note trashed notification */
+"Note Trashed" = "הפתק הועבר לפח";
+
 /* Notes Header (Search Mode) */
 "Notes" = "פתקים";
 
@@ -483,8 +492,14 @@
 /* Publishes a Note to the Web */
 "Publish" = "לפרסם";
 
+/* Notice up succesful publishing */
+"Publish Successful" = "הפרסום בוצע בהצלחה";
+
 /* Publish Accessibility Hint */
 "Publish note" = "פרסום פתק";
+
+/* Notice of publishing action */
+"Publishing note..." = "מפרסם את הפתק...";
 
 /* Indicates the Note is being published */
 "Publishing..." = "מפרסם...";
@@ -645,6 +660,9 @@
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "השבתת קוד סיסמה";
 
+/* Undo action */
+"Undo" = "ביטול פעולה אחרונה";
+
 /* Unpins a note */
 "Unpin" = "להסיר את הנעץ";
 
@@ -653,6 +671,12 @@
 
 /* Publish Accessibility Hint */
 "Unpublish note" = "ביטול פרסום פתק";
+
+/* Notice of publishing unsuccessful */
+"Unpublish successful" = "הפרסום בוטל בהצלחה";
+
+/* Notice of unpublishing action */
+"Unpublishing note..." = "מבטל את הפרסום של הפתק...";
 
 /* Indicates the Note is being unpublished */
 "Unpublishing..." = "ביטול פרסום...";

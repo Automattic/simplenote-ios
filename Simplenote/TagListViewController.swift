@@ -695,6 +695,15 @@ private extension TagListViewController {
                 return
             }
 
+            // If the change includes deleting the tag that is currently being edited
+            // remove the reselect rename tag, disable editing and reload tableView
+            if let renameTag = self.renameTag, !self.resultsController.fetchedObjects.contains(renameTag) {
+                self.renameTag = nil
+                self.setEditing(false)
+                self.reloadTableView()
+                return
+            }
+
             self.reloadTable(with: sectionsChangeset.transposed(toSection: Section.tags.rawValue),
                              objectsChangeset: objectsChangeset.transposed(toSection: Section.tags.rawValue))
         }

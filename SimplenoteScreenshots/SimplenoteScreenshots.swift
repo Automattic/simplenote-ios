@@ -1,3 +1,4 @@
+import UITestHelpers
 import XCTest
 
 class SimplenoteScreenshots: XCTestCase {
@@ -289,31 +290,5 @@ extension XCUIElement {
         // Of those, the only one requiring the secure text field workaround is the iPhone 8 Plus
         // one.
         return app.isDeviceIPhone8Plus()
-    }
-
-    private func paste(text: String) -> Void {
-        let previousPasteboardContents = UIPasteboard.general.string
-        UIPasteboard.general.string = text
-
-        self.press(forDuration: 1.2)
-        XCUIApplication().menuItems.firstMatch.tap()
-
-        if let string = previousPasteboardContents {
-            UIPasteboard.general.string = string
-        }
-    }
-}
-
-extension XCUIApplication {
-
-    func isDeviceIPhone8Plus(_ device: XCUIDevice = .shared) -> Bool {
-        let iPhone8PlusScreenHeight = CGFloat(736)
-
-        let frame = windows.element(boundBy: 0).frame
-
-        switch device.orientation {
-        case .landscapeLeft, .landscapeRight: return frame.width == iPhone8PlusScreenHeight
-        case _: return frame.height == iPhone8PlusScreenHeight
-        }
     }
 }

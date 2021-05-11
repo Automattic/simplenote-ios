@@ -14,11 +14,25 @@ class NoteList {
     }
 
     class func isAllNotesListOpen() -> Bool {
-        return app.navigationBars[UID.NavBar.allNotes].exists
+        let navBar = app.navigationBars[UID.NavBar.allNotes]
+        guard navBar.exists else { return false}
+        return navBar.frame.minX == 0.0
     }
 
     class func isNoteListOpen(forTag tag: String) -> Bool {
         return app.navigationBars[tag].exists
+    }
+
+    class func getNoteCell(_ noteName: String) -> XCUIElement {
+        return Table.getCell(label: noteName)
+    }
+
+    class func isNotePresent(_ noteName: String) -> Bool {
+        return NoteList.getNoteCell(noteName).exists
+    }
+
+    class func getNoteCellHeight(_ noteName: String) -> CGFloat {
+        return NoteList.getNoteCell(noteName).frame.height
     }
 
     class func openAllNotes() {
@@ -32,10 +46,18 @@ class NoteList {
         app.navigationBars.buttons[UID.Button.newNote].tap()
     }
 
-    class func createNoteAndLeaveEditor(noteName: String, tags: [String] = []) {
+    static func createNoteThenLeaveEditor(_ note: NoteData, usingPaste: Bool = false) {
+        NoteList.createNoteAndLeaveEditor(
+            noteName: note.formattedForAutomatedInput,
+            tags: note.tags,
+            usingPaste: usingPaste
+        )
+    }
+
+    class func createNoteAndLeaveEditor(noteName: String, tags: [String] = [], usingPaste: Bool = false) {
         print(">>> Creating a note: " + noteName)
         NoteList.addNoteTap()
-        NoteEditor.clearAndEnterText(enteredValue: noteName)
+        NoteEditor.clearAndEnterText(enteredValue: noteName, usingPaste: usingPaste)
 
         for tag in tags {
             NoteEditor.addTag(tagName: tag)
@@ -44,9 +66,9 @@ class NoteList {
         NoteEditor.leaveEditor()
     }
 
-    class func createNotes(names: [String]) {
+    class func createNotes(names: [String], usingPaste: Bool = false) {
         for noteName in names {
-            createNoteAndLeaveEditor(noteName: noteName)
+            createNoteAndLeaveEditor(noteName: noteName, usingPaste: usingPaste)
         }
     }
 
@@ -55,7 +77,7 @@ class NoteList {
     }
 
     class func getNotesNumber() -> Int {
-        return Table.getVisibleLabelledCellsNumber()
+        return Table.getVisibleLabelledCells().count
     }
 
     class func getTagsSuggestionsNumber() -> Int {
@@ -69,25 +91,9 @@ class NoteList {
 
     class func trashAllNotes() {
         NoteList.openAllNotes()
-
-        let notesNumber = NoteList.getNotesNumber()
-        let cellsNum = app.tables.element.children(matching: .cell).count
-        var startingIndex: Int
-
-        if notesNumber == cellsNum {
-            // Depending on what happened before, the cells numbering
-            // might not include "All Notes", "Trash" and "Settings" cells...
-            startingIndex = 0
-        } else {
-            // Or might include them
-            startingIndex = 3
-        }
-
-        for _ in 0..<notesNumber {
-            let cell = app.tables.cells.element(boundBy: startingIndex)
-            cell.swipeLeft()
-            cell.buttons[UID.Button.itemTrash].tap()
-        }
+        Table
+            .getVisibleLabelledCellsNames()
+            .forEach { Table.trashCell(noteName: $0) }
     }
 
     class func waitForLoad() {
@@ -168,6 +174,14 @@ class NoteListAssert {
         }
     }
 
+    static func noteExists(_ note: NoteData) {
+        notesExist([note])
+    }
+
+    static func notesExist(_ notes: [NoteData]) {
+        notesExist(names: notes.map { $0.name })
+    }
+
     class func noteExists(noteName: String) {
         print(">>> Asserting that note is shown once: " + noteName)
         let matches = Table.getCellsWithExactLabelCount(label: noteName)
@@ -187,6 +201,11 @@ class NoteListAssert {
     class func notesNumber(expectedNotesNumber: Int) {
         let actualNotesNumber = NoteList.getNotesNumber()
         XCTAssertEqual(actualNotesNumber, expectedNotesNumber, numberOfNotesInAllNotesNotExpected)
+    }
+
+    class func note(_ note: NoteData, hasHeight height: CGFloat) {
+        print(">>> Asserting that note height is \(height)")
+        XCTAssertEqual(NoteList.getNoteCellHeight(note.name), height)
     }
 
     class func tagsSuggestionsNumber(number: Int) {
@@ -213,14 +232,26 @@ class NoteListAssert {
         NoteListAssert.noteListShown(forSelection: UID.NavBar.trash)
     }
 
+    class func contentIsShown(for note: NoteData) {
+        noteContentIsShownInSearch(noteName: note.name, expectedContent: note.content)
+    }
+
     class func noteContentIsShownInSearch(noteName: String, expectedContent: String) {
-        print(">>> Asserting that note '\(noteName)' shows the following content:")
-        print(">>>> " + expectedContent)
+        print(">>> Asserting that note '\(noteName)' has the following content:")
+        print(">>>> \"\(expectedContent)\"")
+
+        guard NoteList.isNotePresent(noteName) else {
+            return XCTFail(">>>> Note not found")
+        }
 
         if let noteContent = Table.getContentOfCell(noteName: noteName) {
-            XCTAssertTrue(noteContent.contains(expectedContent), "Content NOT found")
+            XCTAssertTrue(noteContent.contains(expectedContent), "Content is different.")
+        } else if expectedContent.isEmpty {
+            // If note content is nil, but we assert for empty content, we should not fail
+            XCTAssert(true, "Content is not empty.")
         } else {
-            XCTFail("Could not find note")
+            // Otherwise, we should fail
+            XCTFail("Note has no content. Only title.")
         }
     }
 

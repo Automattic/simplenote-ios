@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-03-17 09:54:03+0000 */
+/* Translation-Revision-Date: 2021-04-28 11:54:03+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ko_KR */
@@ -151,6 +151,9 @@
 /* Copies the Note's Public Link */
 "Copy Link" = "링크 복사";
 
+/* Copy link action */
+"Copy link" = "링크 복사";
+
 /* Rating view - initial - could be better button */
 "Could be better" = "별로";
 
@@ -216,7 +219,7 @@
 "Diagnostics" = "진단";
 
 /* Footer -> Sign up verification screen. Parameter: %1$@ - support email address */
-"Didn't get an email? You may already have an account. Contact %1$@ for help." = "이메일을 받지 못하셨나요? 이미 계정이 있을 수도 있습니다. %1$@에 도움말을 문의하세요.";
+"Didn't get an email? There may already be an account associated with this email address. Contact %1$@ for help." = "이메일을 받지 못하셨나요? 이 이메일 주소와 연결된 계정이 이미 있을 수 있습니다. %1$@에 도움말을 문의하세요.";
 
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "마크다운 형식 사용 안 함";
@@ -323,6 +326,9 @@
 /* Theme: Light */
 "Light" = "밝음";
 
+/* Link Copied alert */
+"Link copied" = "링크 복사됨";
+
 /* Setting for when the passcode lock should enable */
 "Lock Timeout" = "잠금 타임아웃";
 
@@ -406,6 +412,9 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "태그 없는 메모 없음";
 
+/* Note trashed notification */
+"Note Trashed" = "메모 삭제됨";
+
 /* Notes Header (Search Mode) */
 "Notes" = "메모";
 
@@ -483,8 +492,14 @@
 /* Publishes a Note to the Web */
 "Publish" = "게시";
 
+/* Notice up succesful publishing */
+"Publish Successful" = "공개 성공";
+
 /* Publish Accessibility Hint */
 "Publish note" = "메모 게시";
+
+/* Notice of publishing action */
+"Publishing note..." = "메모 공개 중...";
 
 /* Indicates the Note is being published */
 "Publishing..." = "게시 중...";
@@ -645,6 +660,9 @@
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "패스코드 사용 끄기";
 
+/* Undo action */
+"Undo" = "실행 취소";
+
 /* Unpins a note */
 "Unpin" = "고정 해제";
 
@@ -653,6 +671,12 @@
 
 /* Publish Accessibility Hint */
 "Unpublish note" = "메모 게시 취소";
+
+/* Notice of publishing unsuccessful */
+"Unpublish successful" = "공개 취소 성공";
+
+/* Notice of unpublishing action */
+"Unpublishing note..." = "메모 공개 취소 중...";
 
 /* Indicates the Note is being unpublished */
 "Unpublishing..." = "게시 취소 중...";

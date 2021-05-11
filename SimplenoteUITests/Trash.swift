@@ -27,7 +27,7 @@ class Trash {
     }
 
     class func getNotesNumber() -> Int {
-        return Table.getVisibleLabelledCellsNumber()
+        return Table.getVisibleLabelledCells().count
     }
 }
 
