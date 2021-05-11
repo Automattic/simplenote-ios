@@ -3,7 +3,19 @@ import Foundation
 // MARK: - SignupRemote
 //
 class SignupRemote {
-    enum Result {
+    enum Result: Equatable {
+        static func == (lhs: SignupRemote.Result, rhs: SignupRemote.Result) -> Bool {
+            switch (lhs, rhs) {
+            case (.success, .success):
+                return true
+            case (.failure(let code1, _), .failure(let code2, _)):
+                return code1 == code2
+            default:
+                return false
+            }
+
+        }
+
         case success
         case failure(_ statusCode: Int, _ error: Error?)
     }
@@ -49,7 +61,7 @@ class SignupRemote {
                                  timeoutInterval: RemoteConstants.timeout)
         request.httpMethod = RemoteConstants.Method.POST
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try? JSONEncoder().encode(["username": email])
+        request.httpBody = try? JSONEncoder().encode(["username": email.lowercased()])
 
         return request
     }
