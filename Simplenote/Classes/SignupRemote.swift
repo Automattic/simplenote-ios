@@ -8,8 +8,8 @@ class SignupRemote {
             switch (lhs, rhs) {
             case (.success, .success):
                 return true
-            case (.failure(let code1, let error1), .failure(let code2, let error2)):
-                return code1 == code2 && error1?.localizedDescription == error2?.localizedDescription
+            case (.failure(let code1, _), .failure(let code2, _)):
+                return code1 == code2
             default:
                 return false
             }
