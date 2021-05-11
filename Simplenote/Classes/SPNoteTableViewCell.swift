@@ -23,12 +23,6 @@ class SPNoteTableViewCell: UITableViewCell {
     ///
     @IBOutlet private var accessoryRightImageView: UIImageView!
 
-    /// Multi Select Checkbox ImageView
-    ///
-    @IBOutlet private weak var multiSelectCheckbox: UIImageView!
-
-    @IBOutlet private weak var checkboxContainingView: UIView!
-
     /// Acccesory LeftImage's Height
     ///
     @IBOutlet private var accessoryLeftImageViewHeightConstraint: NSLayoutConstraint!
@@ -47,12 +41,6 @@ class SPNoteTableViewCell: UITableViewCell {
             accessoryLeftImageView.image = newValue
             refreshAccessoriesVisibility()
         }
-    }
-
-    /// Multi select image
-    ///
-    var multiSelectionCheckboxImage: UIImage? {
-        isSelected ? .image(name: .taskChecked) : .image(name: .taskUnchecked)
     }
 
     /// Left AccessoryImage's Tint
@@ -86,17 +74,6 @@ class SPNoteTableViewCell: UITableViewCell {
         }
         set {
             accessoryRightImageView.tintColor = newValue
-        }
-    }
-
-    /// Multi select image tint
-    ///
-    var multiSelectTintColor: UIColor? {
-        get {
-            multiSelectCheckbox.tintColor
-        }
-        set {
-            multiSelectCheckbox.tintColor = newValue
         }
     }
 
@@ -163,7 +140,6 @@ class SPNoteTableViewCell: UITableViewCell {
         super.awakeFromNib()
         setupMargins()
         setupTextViews()
-        setupMultiCheckbox()
         refreshStyle()
         refreshConstraints()
     }
@@ -174,13 +150,12 @@ class SPNoteTableViewCell: UITableViewCell {
         refreshConstraints()
     }
 
-    func refreshEdgeInsets(editing: Bool = false) {
-        var insets = SPNoteTableViewCell.separatorInsets
-        insets.left -= layoutMargins.left
-        insets.left += editing ? checkboxContainingView.frame.width : .zero
-
-        separatorInset = insets
-    }
+//    func refreshEdgeInsets(editing: Bool = false) {
+//        var insets = SPNoteTableViewCell.separatorInsets
+//        insets.left -= layoutMargins.left
+//
+//        separatorInset = insets
+//    }
 
     /// Refreshed the Label(s) Attributed Strings: Keywords, Bullets and the Body Prefix will be taken into consideration
     ///
@@ -233,23 +208,23 @@ class SPNoteTableViewCell: UITableViewCell {
         bodyLabel.attributedText = bodyString
     }
 
-    func setMultiSelectEditing(_ editing: Bool) {
-        self.refreshEdgeInsets(editing: editing)
-        self.checkboxContainingView.isHidden = !editing
+//    func setMultiSelectEditing(_ editing: Bool) {
+//        self.refreshEdgeInsets(editing: editing)
+//        self.checkboxContainingView.isHidden = !editing
+//
+//        UIView.animate(
+//            withDuration: UIKitConstants.animationQuickDuration,
+//            animations: {
+//                self.contentView.layoutIfNeeded()
+//            })
+//
+//    }
 
-        UIView.animate(
-            withDuration: UIKitConstants.animationQuickDuration,
-            animations: {
-                self.contentView.layoutIfNeeded()
-            })
-
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        multiSelectCheckbox.image = multiSelectionCheckboxImage
-    }
+//    override func setSelected(_ selected: Bool, animated: Bool) {
+//        super.setSelected(selected, animated: animated)
+//
+//        multiSelectCheckbox.image = multiSelectionCheckboxImage
+//    }
 }
 
 
@@ -275,11 +250,6 @@ private extension SPNoteTableViewCell {
 
         bodyLabel.numberOfLines = Style.maximumNumberOfBodyLines
         bodyLabel.lineBreakMode = .byWordWrapping
-    }
-
-    func setupMultiCheckbox() {
-        multiSelectCheckbox.translatesAutoresizingMaskIntoConstraints = false
-        multiSelectCheckbox.image = multiSelectionCheckboxImage
     }
 }
 
