@@ -606,10 +606,18 @@ extension SPNoteListViewController: UITableViewDelegate {
     }
 
     public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let cell = cell as? SPNoteTableViewCell else {
+            return
+        }
+        
         var insets = SPNoteTableViewCell.separatorInsets
         insets.left -= cell.layoutMargins.left
 
         cell.separatorInset = insets
+
+        if indexPath.row == notesListController.numberOfObjects - 1 {
+            cell.shouldDisplayBottomSeparator = false
+        }
     }
 }
 

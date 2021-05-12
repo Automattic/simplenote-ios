@@ -35,6 +35,21 @@ class SPNoteTableViewCell: UITableViewCell {
     ///
     @IBOutlet weak var textAreaStackView: UIStackView!
 
+    /// Separator View
+    ///
+    private var separatorsView: SeparatorsView!
+
+    /// Bottom Separator Visible
+    ///
+    var shouldDisplayBottomSeparator: Bool {
+        get {
+            separatorsView.bottomVisible
+        }
+        set {
+            separatorsView.bottomVisible = newValue
+        }
+    }
+
     /// Left Accessory Image
     ///
     var accessoryLeftImage: UIImage? {
@@ -233,18 +248,18 @@ private extension SPNoteTableViewCell {
     }
 
     private func setupCellSeparatorView() {
-        let separatorView = SeparatorsView()
-        separatorView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(separatorView)
+        separatorsView = SeparatorsView()
+        separatorsView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(separatorsView)
         NSLayoutConstraint.activate([
-            separatorView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            separatorView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            separatorView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            separatorView.leadingAnchor.constraint(equalTo: textAreaStackView.leadingAnchor)
+            separatorsView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            separatorsView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            separatorsView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            separatorsView.leadingAnchor.constraint(equalTo: textAreaStackView.leadingAnchor)
         ])
 
-        contentView.sendSubviewToBack(separatorView)
-        separatorView.bottomVisible = true
+        contentView.sendSubviewToBack(separatorsView)
+        separatorsView.bottomVisible = true
     }
 }
 
