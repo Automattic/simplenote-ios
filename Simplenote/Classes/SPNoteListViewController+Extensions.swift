@@ -698,6 +698,12 @@ extension SPNoteListViewController {
     }
 
     open override func setEditing(_ editing: Bool, animated: Bool) {
+        // tableView could be in edit mode already if a single cell is displaying a slide out menu
+        // Check if tableView and NoteListVC have the same isEditing value
+        // If not set them to the same before continuing
+        if tableView.isEditing != isEditing {
+            tableView.setEditing(isEditing, animated: true)
+        }
 
         super.setEditing(editing, animated: animated)
         tableView.setEditing(editing, animated: animated)
