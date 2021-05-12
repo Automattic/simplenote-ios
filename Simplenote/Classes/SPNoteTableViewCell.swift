@@ -31,6 +31,10 @@ class SPNoteTableViewCell: UITableViewCell {
     ///
     @IBOutlet private var accessoryRightImageViewHeightConstraint: NSLayoutConstraint!
 
+    /// Main text area stack view
+    ///
+    @IBOutlet weak var textAreaStackView: UIStackView!
+
     /// Left Accessory Image
     ///
     var accessoryLeftImage: UIImage? {
@@ -140,6 +144,7 @@ class SPNoteTableViewCell: UITableViewCell {
         super.awakeFromNib()
         setupMargins()
         setupTextViews()
+        setupCellSeparatorView()
         refreshStyle()
         refreshConstraints()
     }
@@ -149,13 +154,6 @@ class SPNoteTableViewCell: UITableViewCell {
         refreshStyle()
         refreshConstraints()
     }
-
-//    func refreshEdgeInsets(editing: Bool = false) {
-//        var insets = SPNoteTableViewCell.separatorInsets
-//        insets.left -= layoutMargins.left
-//
-//        separatorInset = insets
-//    }
 
     /// Refreshed the Label(s) Attributed Strings: Keywords, Bullets and the Body Prefix will be taken into consideration
     ///
@@ -232,6 +230,21 @@ private extension SPNoteTableViewCell {
 
         bodyLabel.numberOfLines = Style.maximumNumberOfBodyLines
         bodyLabel.lineBreakMode = .byWordWrapping
+    }
+
+    private func setupCellSeparatorView() {
+        let separatorView = SeparatorsView()
+        separatorView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(separatorView)
+        NSLayoutConstraint.activate([
+            separatorView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            separatorView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            separatorView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            separatorView.leadingAnchor.constraint(equalTo: textAreaStackView.leadingAnchor)
+        ])
+
+        contentView.sendSubviewToBack(separatorView)
+        separatorView.bottomVisible = true
     }
 }
 

@@ -119,6 +119,7 @@ Body L2</string>
                 <outlet property="accessoryRightImageView" destination="JkE-9h-IB9" id="C8T-9a-MyY"/>
                 <outlet property="accessoryRightImageViewHeightConstraint" destination="ugA-mm-Glv" id="59a-zM-gKJ"/>
                 <outlet property="bodyLabel" destination="Vjk-4O-P68" id="hJu-fn-IhG"/>
+                <outlet property="textAreaStackView" destination="hr4-XQ-BeJ" id="JiL-cj-4io"/>
                 <outlet property="titleLabel" destination="eEk-9d-8ay" id="ZG4-CB-3jJ"/>
             </connections>
             <point key="canvasLocation" x="135" y="166.37323943661971"/>
