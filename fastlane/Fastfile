@@ -8,7 +8,9 @@ unless FastlaneCore::Helper.bundler?
 end
 
 USER_ENV_FILE_PATH = File.join(Dir.home, '.simplenoteios-env.default')
-PROJECT_ENV_FILE_PATH = File.expand_path(File.join(Dir.pwd, '../.configure-files/project.env'))
+PROJECT_ENV_FILE_PATH = File.join(
+  Dir.home, '.configure', 'simplenote-ios', 'secrets', 'project.env'
+)
 UI_TESTS_SCHEME = "SimplenoteUITests"
 
 before_all do
