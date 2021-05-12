@@ -207,24 +207,6 @@ class SPNoteTableViewCell: UITableViewCell {
 
         bodyLabel.attributedText = bodyString
     }
-
-//    func setMultiSelectEditing(_ editing: Bool) {
-//        self.refreshEdgeInsets(editing: editing)
-//        self.checkboxContainingView.isHidden = !editing
-//
-//        UIView.animate(
-//            withDuration: UIKitConstants.animationQuickDuration,
-//            animations: {
-//                self.contentView.layoutIfNeeded()
-//            })
-//
-//    }
-
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//
-//        multiSelectCheckbox.image = multiSelectionCheckboxImage
-//    }
 }
 
 

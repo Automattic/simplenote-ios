@@ -35,6 +35,8 @@ extension SPNoteListViewController {
         tableView.register(SPNoteTableViewCell.loadNib(), forCellReuseIdentifier: SPNoteTableViewCell.reuseIdentifier)
         tableView.register(SPTagTableViewCell.loadNib(), forCellReuseIdentifier: SPTagTableViewCell.reuseIdentifier)
         tableView.register(SPSectionHeaderView.self, forHeaderFooterViewReuseIdentifier: SPSectionHeaderView.reuseIdentifier)
+
+        tableView.allowsMultipleSelectionDuringEditing = true
     }
 
     /// Sets up the Results Controller
@@ -606,10 +608,10 @@ extension SPNoteListViewController: UITableViewDelegate {
     }
 
     public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let cell = cell as? SPNoteTableViewCell else {
-            return
-        }
-        cell.refreshEdgeInsets(editing: isEditing)
+        var insets = SPNoteTableViewCell.separatorInsets
+        insets.left -= cell.layoutMargins.left
+
+        cell.separatorInset = insets
     }
 }
 
@@ -642,11 +644,7 @@ private extension SPNoteListViewController {
 
         cell.prefixText = prefixText(for: note)
 
-        cell.multiSelectTintColor = .simplenoteNotePinStatusImageColor
-
         cell.refreshAttributedStrings()
-
-        cell.setMultiSelectEditing(isEditing)
 
         return cell
     }
@@ -700,27 +698,16 @@ extension SPNoteListViewController {
     }
 
     open override func setEditing(_ editing: Bool, animated: Bool) {
+
         super.setEditing(editing, animated: animated)
+        tableView.setEditing(editing, animated: animated)
         refreshEditButtonTitle()
 
         tableView.deselectAllRows(inSection: .zero, animated: false)
         updateNavigationBar()
 
-        tableView.allowsMultipleSelection = editing
-        toggleVisibleCells(to: editing)
-
         configureNavigationToolbarButton()
         setListViewTitle()
-    }
-
-    func toggleVisibleCells(to editing: Bool) {
-        guard let noteCells = tableView.visibleCells as? [SPNoteTableViewCell] else {
-            return
-        }
-
-        for cell in noteCells {
-            cell.setMultiSelectEditing(editing)
-        }
     }
 
 
