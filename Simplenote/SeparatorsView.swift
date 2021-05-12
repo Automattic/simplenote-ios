@@ -2,57 +2,57 @@ import Foundation
 
 open class SeparatorsView: UIView {
     // MARK: - Public Properties
-    @objc open var leftVisible = false {
+    open var leftVisible = false {
         didSet {
             setNeedsDisplay()
         }
     }
-    @objc open var leftColor = UIColor.simplenoteDividerColor {
+    open var leftColor = UIColor.simplenoteDividerColor {
         didSet {
             setNeedsDisplay()
         }
     }
-    @objc open var leftWidthInPoints = CGFloat(3) {
+     open var leftWidthInPoints = CGFloat(3) {
         didSet {
             setNeedsDisplay()
         }
     }
-    @objc open var topVisible = false {
+     open var topVisible = false {
         didSet {
             setNeedsDisplay()
         }
     }
-    @objc open var topColor = UIColor.simplenoteDividerColor {
+    open var topColor = UIColor.simplenoteDividerColor {
         didSet {
             setNeedsDisplay()
         }
     }
-    @objc open var topHeightInPixels = CGFloat(1) {
+    open var topHeightInPixels = CGFloat(1) {
         didSet {
             setNeedsDisplay()
         }
     }
-    @objc open var topInsets = UIEdgeInsets.zero {
+    open var topInsets = UIEdgeInsets.zero {
         didSet {
             setNeedsDisplay()
         }
     }
-    @objc open var bottomVisible = false {
+    open var bottomVisible = false {
         didSet {
             setNeedsDisplay()
         }
     }
-    @objc open var bottomColor = UIColor.simplenoteDividerColor {
+    open var bottomColor = UIColor.simplenoteDividerColor {
         didSet {
             setNeedsDisplay()
         }
     }
-    @objc open var bottomHeightInPixels = CGFloat(1) {
+    open var bottomHeightInPixels = CGFloat(1) {
         didSet {
             setNeedsDisplay()
         }
     }
-    @objc open var bottomInsets = UIEdgeInsets.zero {
+    open var bottomInsets = UIEdgeInsets.zero {
         didSet {
             setNeedsDisplay()
         }

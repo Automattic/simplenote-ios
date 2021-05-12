@@ -609,7 +609,7 @@ extension SPNoteListViewController: UITableViewDelegate {
         guard let cell = cell as? SPNoteTableViewCell else {
             return
         }
-        
+
         var insets = SPNoteTableViewCell.separatorInsets
         insets.left -= cell.layoutMargins.left
 
