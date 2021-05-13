@@ -709,6 +709,7 @@ extension SPNoteListViewController {
         super.setEditing(editing, animated: animated)
         tableView.setEditing(editing, animated: animated)
         refreshEditButtonTitle()
+        refreshSelectAllLabels()
 
         tableView.deselectAllRows(inSection: .zero, animated: false)
         updateNavigationBar()
