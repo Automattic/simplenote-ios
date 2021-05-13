@@ -384,12 +384,9 @@ extension SPNoteListViewController {
     func selectAllWasTapped() {
         if notesListController.numberOfObjects == tableView.indexPathsForSelectedRows?.count {
             tableView.deselectAllRows(inSection: .zero, animated: false)
-            refreshNavigationBarLabels()
-
-            return
+        } else {
+            tableView.selectAllRows(inSection: 0, animated: false)
         }
-
-        tableView.selectAllRows(inSection: 0, animated: false)
         refreshNavigationBarLabels()
     }
 
@@ -615,9 +612,7 @@ extension SPNoteListViewController: UITableViewDelegate {
 
         cell.separatorInset = insets
 
-        if indexPath.row == notesListController.numberOfObjects - 1 {
-            cell.shouldDisplayBottomSeparator = false
-        }
+        cell.shouldDisplayBottomSeparator = indexPath.row < notesListController.numberOfObjects - 1
     }
 }
 

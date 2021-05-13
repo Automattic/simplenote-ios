@@ -37,7 +37,7 @@ class SPNoteTableViewCell: UITableViewCell {
 
     /// Separator View
     ///
-    private var separatorsView: SeparatorsView!
+    private let separatorsView = SeparatorsView()
 
     /// Bottom Separator Visible
     ///
@@ -248,7 +248,6 @@ private extension SPNoteTableViewCell {
     }
 
     private func setupCellSeparatorView() {
-        separatorsView = SeparatorsView()
         separatorsView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(separatorsView)
         NSLayoutConstraint.activate([

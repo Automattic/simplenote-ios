@@ -82,43 +82,46 @@ open class SeparatorsView: UIView {
     open override func draw(_ rect: CGRect) {
         super.draw(rect)
 
+        guard let ctx = UIGraphicsGetCurrentContext() else {
+            return
+        }
         let scale = UIScreen.main.scale
-        let ctx = UIGraphicsGetCurrentContext()
-        ctx!.clear(rect)
-        ctx!.setShouldAntialias(false)
+
+        ctx.clear(rect)
+        ctx.setShouldAntialias(false)
 
         // Background
         if backgroundColor != nil {
             backgroundColor?.setFill()
-            ctx!.fill(rect)
+            ctx.fill(rect)
         }
 
         // Left Separator
         if leftVisible {
             leftColor.setStroke()
-            ctx!.setLineWidth(leftWidthInPoints * scale)
-            ctx!.move(to: CGPoint(x: bounds.minX, y: bounds.minY))
-            ctx!.addLine(to: CGPoint(x: bounds.minX, y: bounds.maxY))
-            ctx!.strokePath()
+            ctx.setLineWidth(leftWidthInPoints * scale)
+            ctx.move(to: CGPoint(x: bounds.minX, y: bounds.minY))
+            ctx.addLine(to: CGPoint(x: bounds.minX, y: bounds.maxY))
+            ctx.strokePath()
         }
 
         // Top Separator
         if topVisible {
             topColor.setStroke()
             let lineWidth = topHeightInPixels / scale
-            ctx!.setLineWidth(lineWidth)
-            ctx!.move(to: CGPoint(x: topInsets.left, y: lineWidth))
-            ctx!.addLine(to: CGPoint(x: bounds.maxX - topInsets.right, y: lineWidth))
-            ctx!.strokePath()
+            ctx.setLineWidth(lineWidth)
+            ctx.move(to: CGPoint(x: topInsets.left, y: lineWidth))
+            ctx.addLine(to: CGPoint(x: bounds.maxX - topInsets.right, y: lineWidth))
+            ctx.strokePath()
         }
 
         // Bottom Separator
         if bottomVisible {
             bottomColor.setStroke()
-            ctx!.setLineWidth(bottomHeightInPixels / scale)
-            ctx!.move(to: CGPoint(x: bottomInsets.left, y: bounds.height))
-            ctx!.addLine(to: CGPoint(x: bounds.maxX - bottomInsets.right, y: bounds.height))
-            ctx!.strokePath()
+            ctx.setLineWidth(bottomHeightInPixels / scale)
+            ctx.move(to: CGPoint(x: bottomInsets.left, y: bounds.height))
+            ctx.addLine(to: CGPoint(x: bounds.maxX - bottomInsets.right, y: bounds.height))
+            ctx.strokePath()
         }
     }
 
