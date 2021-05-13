@@ -578,7 +578,7 @@ extension SPNoteListViewController: UITableViewDelegate {
 
     @available(iOS 13.0, *)
     public func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        guard isDeletedFilterActive == false, let note = notesListController.object(at: indexPath) as? Note else {
+        guard isDeletedFilterActive == false, isEditing == false, let note = notesListController.object(at: indexPath) as? Note else {
             return nil
         }
 
