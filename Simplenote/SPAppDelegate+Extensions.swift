@@ -231,14 +231,16 @@ extension SPAppDelegate: UIViewControllerRestoration {
 //
 extension SPAppDelegate: SimperiumDelegate {
 
-    public func simperiumDidLogin(_ simperium: Simperium!) {
-        // Store the Token: Required by the Share Extension!
-        if let token = simperium.user.authToken {
-            KeychainManager.extensionToken = token
+    public func simperiumDidLogin(_ simperium: Simperium) {
+        guard let user = simperium.user else {
+            fatalError()
         }
 
+        // Store the Token: Required by the Share Extension!
+        KeychainManager.extensionToken = user.authToken
+
         // Tracker!
-        SPTracker.refreshMetadata(withEmail: simperium.user.email)
+        SPTracker.refreshMetadata(withEmail: user.email)
 
         // Shortcuts!
         ShortcutsHandler.shared.registerSimplenoteActivities()
@@ -246,13 +248,13 @@ extension SPAppDelegate: SimperiumDelegate {
 
         // Now that the user info is present, cache it for use by the crash logging system.
         let analyticsEnabled = simperium.preferencesObject()?.analytics_enabled?.boolValue ?? true
-        CrashLoggingShim.cacheUser(simperium.user)
+        CrashLoggingShim.cacheUser(user)
         CrashLoggingShim.cacheOptOutSetting(!analyticsEnabled)
 
         setupVerificationController()
     }
 
-    public func simperiumDidLogout(_ simperium: Simperium!) {
+    public func simperiumDidLogout(_ simperium: Simperium) {
         // Nuke Extension Token
         KeychainManager.extensionToken = nil
 
@@ -265,7 +267,7 @@ extension SPAppDelegate: SimperiumDelegate {
         destroyVerificationController()
     }
 
-    public func simperium(_ simperium: Simperium!, didFailWithError error: Error!) {
+    public func simperium(_ simperium: Simperium, didFailWithError error: Error) {
         SPTracker.refreshMetadataForAnonymousUser()
     }
 }

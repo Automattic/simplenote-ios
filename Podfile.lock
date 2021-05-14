@@ -23,17 +23,17 @@ PODS:
   - Sentry (4.5.0):
     - Sentry/Core (= 4.5.0)
   - Sentry/Core (4.5.0)
-  - Simperium (1.6.0):
-    - Simperium/DiffMatchPach (= 1.6.0)
-    - Simperium/JRSwizzle (= 1.6.0)
-    - Simperium/SocketTrust (= 1.6.0)
-    - Simperium/SPReachability (= 1.6.0)
-    - Simperium/SSKeychain (= 1.6.0)
-  - Simperium/DiffMatchPach (1.6.0)
-  - Simperium/JRSwizzle (1.6.0)
-  - Simperium/SocketTrust (1.6.0)
-  - Simperium/SPReachability (1.6.0)
-  - Simperium/SSKeychain (1.6.0)
+  - Simperium (1.8.0):
+    - Simperium/DiffMatchPach (= 1.8.0)
+    - Simperium/JRSwizzle (= 1.8.0)
+    - Simperium/SocketTrust (= 1.8.0)
+    - Simperium/SPReachability (= 1.8.0)
+    - Simperium/SSKeychain (= 1.8.0)
+  - Simperium/DiffMatchPach (1.8.0)
+  - Simperium/JRSwizzle (1.8.0)
+  - Simperium/SocketTrust (1.8.0)
+  - Simperium/SPReachability (1.8.0)
+  - Simperium/SSKeychain (1.8.0)
   - Sodium-Fork (0.8.2)
   - UIDeviceIdentifier (1.6.0)
   - WordPress-Ratings-iOS (0.0.2)
@@ -44,7 +44,7 @@ DEPENDENCIES:
   - AppCenter/Distribute (~> 2.5.1)
   - Automattic-Tracks-iOS (~> 0.6)
   - Gridicons (~> 0.18)
-  - Simperium (= 1.6)
+  - Simperium (from `https://github.com/Simperium/simperium-ios.git`, branch `issue/custom-endpoint`)
   - WordPress-Ratings-iOS (= 0.0.2)
   - ZIPFoundation (~> 0.9.9)
 
@@ -56,11 +56,20 @@ SPEC REPOS:
     - Gridicons
     - Reachability
     - Sentry
-    - Simperium
     - Sodium-Fork
     - UIDeviceIdentifier
     - WordPress-Ratings-iOS
     - ZIPFoundation
+
+EXTERNAL SOURCES:
+  Simperium:
+    :branch: issue/custom-endpoint
+    :git: https://github.com/Simperium/simperium-ios.git
+
+CHECKOUT OPTIONS:
+  Simperium:
+    :commit: f3deee7a6962dfd508d7e09649cae985a8b283d7
+    :git: https://github.com/Simperium/simperium-ios.git
 
 SPEC CHECKSUMS:
   AppCenter: 765ff38c4d360fc5ec61b61a8be24d74cd6d4d83
@@ -69,12 +78,12 @@ SPEC CHECKSUMS:
   Gridicons: dc92efbe5fd60111d2e8ea051d84a60cca552abc
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   Sentry: ab6c209f23700d1460691dbc90e19ed0a05d496b
-  Simperium: 70be14ff8a8ec08d9078279706d84f143be7fa82
+  Simperium: a9cae2ac607858fc09103b444494ca15b56c3f6c
   Sodium-Fork: 45fe3a7c675898ca0635af4eadcb34985477e868
   UIDeviceIdentifier: f4bf3b343581a1beacdbf5fb1a8825bd5f05a4a4
   WordPress-Ratings-iOS: 9f83dbba6e728c5121b1fd21b5683cf2fd120646
   ZIPFoundation: b1f0de4eed33e74a676f76e12559ab6b75990197
 
-PODFILE CHECKSUM: 2a6dc64c6c783376a96f3382d080fb7a3d4ca027
+PODFILE CHECKSUM: aaaed8f3c239e37d018b17f6a37e4f121dda836b
 
 COCOAPODS: 1.10.0

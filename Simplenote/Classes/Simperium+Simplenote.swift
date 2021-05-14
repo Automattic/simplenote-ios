@@ -14,35 +14,35 @@ extension Simperium {
     ///
     @objc
     var accountBucket: SPBucket {
-        bucket(forName: Simperium.accountBucketName)
+        bucket(forName: Simperium.accountBucketName)!
     }
 
     /// Bucket: Notes
     ///
     @objc
     var notesBucket: SPBucket {
-        bucket(forName: Note.classNameWithoutNamespaces)
+        bucket(forName: Note.classNameWithoutNamespaces)!
     }
 
     /// Bucket: Preferences
     ///
     @objc
     var preferencesBucket: SPBucket {
-        bucket(forName: Preferences.classNameWithoutNamespaces)
+        bucket(forName: Preferences.classNameWithoutNamespaces)!
     }
 
     /// Bucket: Settings
     ///
     @objc
     var settingsBucket: SPBucket {
-        bucket(forName: Settings.classNameWithoutNamespaces)
+        bucket(forName: Settings.classNameWithoutNamespaces)!
     }
 
     /// Bucket: Tags
     ///
     @objc
     var tagsBucket: SPBucket {
-        bucket(forName: Tag.classNameWithoutNamespaces)
+        bucket(forName: Tag.classNameWithoutNamespaces)!
     }
 }
 
