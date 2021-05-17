@@ -394,7 +394,7 @@ extension SPNoteListViewController {
 
     @objc
     func refreshNavigationBarLabels() {
-        setListViewTitle()
+        refreshListViewTitle()
         refreshSelectAllLabels()
     }
 
@@ -701,13 +701,7 @@ extension SPNoteListViewController {
     }
 
     open override func setEditing(_ editing: Bool, animated: Bool) {
-        // tableView could be in edit mode already if a single cell is displaying a slide out menu
-        // Check if tableView and NoteListVC have the same isEditing value
-        // If not set them to the same before continuing
-        if tableView.isEditing != isEditing {
-            tableView.setEditing(isEditing, animated: true)
-        }
-
+        ensureTableViewEditingIsInSync()
         super.setEditing(editing, animated: animated)
         tableView.setEditing(editing, animated: animated)
         refreshEditButtonTitle()
@@ -717,11 +711,22 @@ extension SPNoteListViewController {
         updateNavigationBar()
 
         configureNavigationToolbarButton()
-        setListViewTitle()
+        refreshListViewTitle()
     }
 
+    private func ensureTableViewEditingIsInSync() {
+        // If a swipe action is active, the tableView will already be set to isEditing == true
+        // The edit button is still active while the swipe actions are active, if pressed
+        // the VC and the tableview will get set to true, but since the tableView is already
+        // editing nothind will happen.
+        // This method ensures the tableview and VC are in sync when the edit button is tapped
+        guard tableView.isEditing != isEditing else {
+            return
+        }
+        tableView.setEditing(isEditing, animated: false)
+    }
 
-    private func setListViewTitle() {
+    private func refreshListViewTitle() {
         title = {
             guard isEditing else {
                 return notesListController.filter.title
