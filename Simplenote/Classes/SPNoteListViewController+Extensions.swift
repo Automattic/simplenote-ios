@@ -371,8 +371,10 @@ extension SPNoteListViewController {
     ///
     @objc
     func configureNavigationToolbarButton() {
-        guard let trashButton = trashButton,
-              let addButton = addButton else {
+        // TODO: When multi select is added to iPad, revist the conditionals here
+        guard navigationController?.isToolbarHidden == false,
+            let trashButton = trashButton,
+            let addButton = addButton else {
             return
         }
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)

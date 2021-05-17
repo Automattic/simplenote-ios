@@ -253,6 +253,7 @@
 }
 
 - (void)updateNavigationBar {
+    // TODO: When multi select is added to iPad, revist the conditionals here
     [self.navigationController setNavigationBarHidden: self.isSearchActive animated:YES];
     
     UIBarButtonItem *possibleAddButton = UIDevice.isPad ? self.addButton : self.editButtonItem;
