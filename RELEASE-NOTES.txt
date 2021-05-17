@@ -5,7 +5,7 @@
 4.36
 -----
 -   New Note Bar #1246
--   Fixed an occasional issue with the contexual menu rendering #1258
+-   Fixed an occasional issue with the contextual menu rendering #1258
 -   Removed all caps from collaboration alert title #1260
 -   Fixed issue where notices wouldn't be shown in some cases #1262
 -   Fixed an issue where tags would not be deleted on trashed notes #1268
