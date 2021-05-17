@@ -1,6 +1,6 @@
 import UIKit
 
-protocol NoticeInteractionDelegate: class {
+protocol NoticeInteractionDelegate: AnyObject {
     func noticePressBegan()
     func noticePressEnded()
     func actionWasTapped()

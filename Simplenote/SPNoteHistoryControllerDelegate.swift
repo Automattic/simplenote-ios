@@ -2,7 +2,7 @@ import Foundation
 
 // MARK: - SPNoteHistoryControllerDelegate
 //
-protocol SPNoteHistoryControllerDelegate: class {
+protocol SPNoteHistoryControllerDelegate: AnyObject {
 
     /// Cancel
     ///
