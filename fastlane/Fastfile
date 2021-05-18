@@ -10,7 +10,7 @@ end
 USER_ENV_FILE_PATH = File.join(Dir.home, '.simplenoteios-env.default')
 PROJECT_ENV_FILE_PATH = File.expand_path(File.join(Dir.pwd, '../.configure-files/project.env'))
 UI_TESTS_SCHEME = "SimplenoteUITests"
-UI_TESTS_ACCOUNTS_KEY = "https://api.keyvalue.xyz/82649691/simplenoteuitest-ios"
+UI_TESTS_ACCOUNTS_URL = "https://api.keyvalue.xyz/82649691/simplenoteuitest-ios"
 $used_test_account_index = nil
 
 before_all do
@@ -737,7 +737,7 @@ end
   desc "Occupy a free test account and run UI tests with it"
   lane :pick_test_account_and_run_ui_tests do | options |
     occupy_test_account
-    run_ui_tests(options.merge({ test_account: "simplenoteuitest-ios-#{$used_test_account_index+1}@a8c.com" }))
+    run_ui_tests(options.merge({ test_account: "simplenoteuitest-ios-#{$used_test_account_index}@a8c.com" }))
     deoccupy_test_account
   end
 end
@@ -895,7 +895,7 @@ end
 #   get_test_accounts_state
 #     => "TFFFF"
 def get_test_accounts_state
-  uri = URI.parse(UI_TESTS_ACCOUNTS_KEY)
+  uri = URI.parse(UI_TESTS_ACCOUNTS_URL)
   response = Net::HTTP.get_response(uri)
   accounts_state = response.body.chomp
   UI.message("State of test accounts: #{accounts_state}")
@@ -905,7 +905,7 @@ end
 # Returns the index of first "F" (Free) occurence in the test
 # accounts keyvalue, or crashes fastlane if it was not found.
 # Example:
-#   get_free_test_account_index
+#   find_free_test_account
 #     => 2
 def find_free_test_account
   $used_test_account_index = get_test_accounts_state.index("F")
@@ -921,7 +921,7 @@ def change_test_account_availability(availability)
   accounts_state = get_test_accounts_state
   accounts_state[$used_test_account_index] = availability
   UI.message("Writing new account state: #{accounts_state}")
-  uri = URI.parse(UI_TESTS_ACCOUNTS_KEY + "/" + accounts_state)
+  uri = URI.parse(UI_TESTS_ACCOUNTS_URL + "/" + accounts_state)
   request = Net::HTTP::Post.new(uri)
 
   req_options = {
