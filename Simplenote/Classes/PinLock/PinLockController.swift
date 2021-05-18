@@ -13,7 +13,7 @@ struct PinLockControllerConfiguration: Equatable {
 
 // MARK: - PinLockController
 //
-protocol PinLockController: class {
+protocol PinLockController: AnyObject {
     /// Observer for configuration changes. Provides updated configuration and optional animation
     ///
     var configurationObserver: ((PinLockControllerConfiguration, UIView.ReloadAnimation?) -> Void)? { get set }

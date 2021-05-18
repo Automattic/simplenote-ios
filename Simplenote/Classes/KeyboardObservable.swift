@@ -5,7 +5,7 @@ import UIKit
 /// Adopters of this protocol will recieve interactive keyboard-based notifications
 /// by implmenting the provided functions within.
 ///
-public protocol KeyboardObservable: class {
+public protocol KeyboardObservable: AnyObject {
 
     /// Called during a Keyboard Repositioning Notification.
     ///

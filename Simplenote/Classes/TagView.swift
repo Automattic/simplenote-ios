@@ -3,7 +3,7 @@ import UIKit
 
 // MARK: - TagViewDelegate
 //
-protocol TagViewDelegate: class {
+protocol TagViewDelegate: AnyObject {
     func tagView(_ tagView: TagView, wantsToCreateTagWithName name: String)
     func tagView(_ tagView: TagView, wantsToRemoveTagWithName name: String)
 

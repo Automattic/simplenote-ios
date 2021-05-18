@@ -15,7 +15,7 @@ enum SPCardDismissalReason {
 
 // MARK: - SPCardPresentationControllerDelegate
 //
-protocol SPCardPresentationControllerDelegate: class {
+protocol SPCardPresentationControllerDelegate: AnyObject {
     func cardDidDismiss(_ viewController: UIViewController, reason: SPCardDismissalReason)
 }
 

@@ -2,7 +2,7 @@ import Foundation
 
 // MARK: - PinLockRemoveControllerDelegate
 //
-protocol PinLockRemoveControllerDelegate: class {
+protocol PinLockRemoveControllerDelegate: AnyObject {
     func pinLockRemoveControllerDidComplete(_ controller: PinLockRemoveController)
     func pinLockRemoveControllerDidCancel(_ controller: PinLockRemoveController)
 }
