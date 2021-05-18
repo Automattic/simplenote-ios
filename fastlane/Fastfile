@@ -897,7 +897,7 @@ end
 def get_test_accounts_state
   uri = URI.parse(UI_TESTS_ACCOUNTS_KEY)
   response = Net::HTTP.get_response(uri)
-  accounts_state = response.body.gsub("\n","")
+  accounts_state = response.body.chomp
   UI.message("State of test accounts: #{accounts_state}")
   accounts_state
 end
