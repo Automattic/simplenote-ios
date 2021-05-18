@@ -416,6 +416,7 @@
 		BA4499B325ED8AB0000C563E /* NoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4499B225ED8AB0000C563E /* NoticeView.swift */; };
 		BA4499BC25ED95D0000C563E /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4499BB25ED95D0000C563E /* Notice.swift */; };
 		BA4499C525ED95E5000C563E /* NoticeAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4499C425ED95E5000C563E /* NoticeAction.swift */; };
+		BA4C6CFC264C744300B723A7 /* SeparatorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4C6CFB264C744300B723A7 /* SeparatorsView.swift */; };
 		BA55124E2600210B00D8F882 /* TimerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA55124D2600210B00D8F882 /* TimerFactory.swift */; };
 		BA55B05A25F067DF0042582B /* NoticePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA55B05925F067DF0042582B /* NoticePresenter.swift */; };
 		BA55B06325F068650042582B /* NoticeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA55B06225F068650042582B /* NoticeController.swift */; };
@@ -952,6 +953,7 @@
 		BA4499B225ED8AB0000C563E /* NoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeView.swift; sourceTree = "<group>"; };
 		BA4499BB25ED95D0000C563E /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
 		BA4499C425ED95E5000C563E /* NoticeAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeAction.swift; sourceTree = "<group>"; };
+		BA4C6CFB264C744300B723A7 /* SeparatorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorsView.swift; sourceTree = "<group>"; };
 		BA55124D2600210B00D8F882 /* TimerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFactory.swift; sourceTree = "<group>"; };
 		BA55B05925F067DF0042582B /* NoticePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticePresenter.swift; sourceTree = "<group>"; };
 		BA55B06225F068650042582B /* NoticeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeController.swift; sourceTree = "<group>"; };
@@ -1875,6 +1877,7 @@
 				A694ABAA25D1549D00CC3A2D /* FileStorage.swift */,
 				BA55124D2600210B00D8F882 /* TimerFactory.swift */,
 				BAB01791260AAE93007A9CC3 /* NoticeFactory.swift */,
+				BA4C6CFB264C744300B723A7 /* SeparatorsView.swift */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -2849,6 +2852,7 @@
 				B59FFB43231851C700567627 /* UIGestureRecognizer+Simplenote.swift in Sources */,
 				B550F93622BA7E9100091939 /* NSUserActivity+Simplenote.swift in Sources */,
 				B5BE054E1AB75902002417BF /* NSProcessInfo+Util.m in Sources */,
+				BA4C6CFC264C744300B723A7 /* SeparatorsView.swift in Sources */,
 				375D24B821E01131007AB25A /* hash.c in Sources */,
 				A6D5AE6525483F8A00326C76 /* NSTextStorage+Simplenote.swift in Sources */,
 				A61471A825D6BC700065D849 /* NoteEditorTagSuggestionsViewController.swift in Sources */,

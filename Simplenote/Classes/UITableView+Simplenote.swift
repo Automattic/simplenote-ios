@@ -124,6 +124,37 @@ extension UITableView {
 
         deselectRow(at: indexPath, animated: animated)
     }
+
+    func deselectSelectedRows(animated: Bool = false) {
+        guard let selectedIndicies = indexPathsForVisibleRows else {
+            return
+        }
+
+        for indexPath in selectedIndicies {
+            deselectRow(at: indexPath, animated: animated)
+        }
+    }
+
+    open func selectAllRows(inSection section: Int, animated: Bool) {
+        forEachIndexPath(in: section) { indexPath in
+            selectRow(at: indexPath, animated: animated, scrollPosition: .none)
+        }
+    }
+
+    func deselectAllRows(inSection section: Int, animated: Bool) {
+        forEachIndexPath(in: section) { indexPath in
+            deselectRow(at: indexPath, animated: animated)
+        }
+    }
+
+    func forEachIndexPath(in section: Int, doAction action: (IndexPath)-> Void) {
+        let rows = numberOfRows(inSection: section)
+
+        for row in Int.zero..<rows {
+            let indexpath = IndexPath(row: row, section: section)
+            action(indexpath)
+        }
+    }
 }
 
 // MARK: - Navigation (Private)

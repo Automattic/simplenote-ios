@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -65,13 +65,13 @@ Body L2</string>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="hr4-XQ-BeJ" firstAttribute="leading" secondItem="TZs-9B-NXz" secondAttribute="trailing" constant="6" id="0tK-Xg-kjU"/>
-                            <constraint firstItem="DcU-7T-Fcq" firstAttribute="centerY" secondItem="TZs-9B-NXz" secondAttribute="centerY" id="1DO-qS-dlY"/>
-                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="hr4-XQ-BeJ" secondAttribute="bottom" id="5Ty-3U-NG6"/>
+                            <constraint firstItem="hr4-XQ-BeJ" firstAttribute="leading" secondItem="TZs-9B-NXz" secondAttribute="trailing" constant="6" id="5aB-AG-6On"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="hr4-XQ-BeJ" secondAttribute="bottom" id="5oe-mc-CTa"/>
+                            <constraint firstItem="hr4-XQ-BeJ" firstAttribute="top" secondItem="1kl-z0-0K0" secondAttribute="top" id="Fql-eF-1Tp"/>
+                            <constraint firstAttribute="trailing" secondItem="hr4-XQ-BeJ" secondAttribute="trailing" id="Ip9-NG-4Z3"/>
+                            <constraint firstItem="TZs-9B-NXz" firstAttribute="leading" secondItem="1kl-z0-0K0" secondAttribute="leading" id="PS6-m6-HsX"/>
                             <constraint firstAttribute="width" priority="999" constant="640" id="SKQ-O4-NUA"/>
-                            <constraint firstItem="TZs-9B-NXz" firstAttribute="leading" secondItem="1kl-z0-0K0" secondAttribute="leading" id="VNt-8A-Lx6"/>
-                            <constraint firstItem="hr4-XQ-BeJ" firstAttribute="top" secondItem="1kl-z0-0K0" secondAttribute="top" id="i2g-uy-UlT"/>
-                            <constraint firstAttribute="trailing" secondItem="hr4-XQ-BeJ" secondAttribute="trailing" id="xVp-8W-gqR"/>
+                            <constraint firstItem="TZs-9B-NXz" firstAttribute="centerY" secondItem="DcU-7T-Fcq" secondAttribute="centerY" id="zAi-4S-Irf"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -119,6 +119,7 @@ Body L2</string>
                 <outlet property="accessoryRightImageView" destination="JkE-9h-IB9" id="C8T-9a-MyY"/>
                 <outlet property="accessoryRightImageViewHeightConstraint" destination="ugA-mm-Glv" id="59a-zM-gKJ"/>
                 <outlet property="bodyLabel" destination="Vjk-4O-P68" id="hJu-fn-IhG"/>
+                <outlet property="textAreaStackView" destination="hr4-XQ-BeJ" id="JiL-cj-4io"/>
                 <outlet property="titleLabel" destination="eEk-9d-8ay" id="ZG4-CB-3jJ"/>
             </connections>
             <point key="canvasLocation" x="135" y="166.37323943661971"/>
