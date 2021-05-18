@@ -1,5 +1,15 @@
+4.37
+-----
+
+
 4.36
 -----
+-   New Note Bar #1246
+-   Fixed an occasional issue with the contextual menu rendering #1258
+-   Removed all caps from collaboration alert title #1260
+-   Fixed issue where notices wouldn't be shown in some cases #1262
+-   Fixed an issue where tags would not be deleted on trashed notes #1268
+-   Improved dynamic font size support in notices #1278
 
 
 4.35
