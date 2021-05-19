@@ -2749,7 +2749,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "SOURCE_PATH=~/.configure/simplenote-ios/secrets/SPCredentials.swift\nTARGET_FOLDER=${SRCROOT}/Simplenote/Credentials\nTARGET_PATH=${TARGET_FOLDER}/SPCredentials.swift\n\ngit check-ignore \"${TARGET_PATH}\" > /dev/null\nGIT_IGNORE_EXIT_CODE=$?\nif [ $GIT_IGNORE_EXIT_CODE -ne 0 ]; then\n    echo \"error: Attempting to store secret file in path that is not ignored by Git (${TARGET_PATH}).\"\n    exit 1\nelse\n    echo \"warning: Exit code was $EXIT_CODE\"\nfi\n\nif [ ! -f ${SOURCE_PATH} ]; then\n    echo \"error: Unable to copy credentials. Could not find ${SOURCE_PATH}.\"\n    exit 1\nelse\n    echo \"Copying credentials...\"\n    mkdir -p ${TARGET_FOLDER}\n    cp ${SOURCE_PATH} ${TARGET_PATH}\nfi\n";
+			shellScript = "${SRCROOT}/Scripts/Build-Phases/copy-secret.sh \\\n    ~/.configure/simplenote-ios/secrets/SPCredentials.swift \\\n    ${SRCROOT}/Simplenote/Credentials/SPCredentials.swift\n";
 		};
 		C62AC7EF4EA894D0C1FAFFC0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
