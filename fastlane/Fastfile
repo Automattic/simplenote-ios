@@ -57,6 +57,10 @@ def get_required_env(key)
   ENV[key]
 end
 
+lane :test_lane do
+  UI.success('This is a test lane. If you are reading this, all of the Fastlane setup worked correctly')
+end
+
 ########################################################################
 # Release Lanes
 ########################################################################
@@ -256,8 +260,8 @@ end
   # it for both internal and external distribution
   # -----------------------------------------------------------------------------------
   # Usage:
-  # bundle exec fastlane build_and_upload_beta_release [skip_confirm:<skip confirm>] 
-  #   [create_gh_release:<create release on GH>] 
+  # bundle exec fastlane build_and_upload_beta_release [skip_confirm:<skip confirm>]
+  #   [create_gh_release:<create release on GH>]
   #
   # Example:
   # bundle exec fastlane build_and_upload_beta_release
@@ -267,7 +271,7 @@ end
   desc "Builds and uploads a beta release for distribution"
   lane :build_and_upload_beta_release do | options |
     build_and_upload_release(
-      skip_confirm: options[:skip_confirm], 
+      skip_confirm: options[:skip_confirm],
       create_gh_release: options[:create_gh_release],
       beta_release: true)
   end
@@ -279,8 +283,8 @@ end
   # it for distribution
   # -----------------------------------------------------------------------------------
   # Usage:
-  # bundle exec fastlane build_and_upload_stable_release [skip_confirm:<skip confirm>] 
-  #   [create_gh_release:<create release on GH>] 
+  # bundle exec fastlane build_and_upload_stable_release [skip_confirm:<skip confirm>]
+  #   [create_gh_release:<create release on GH>]
   #
   # Example:
   # bundle exec fastlane build_and_upload_stable_release
@@ -290,7 +294,7 @@ end
   desc "Builds and uploads a stable release for distribution"
   lane :build_and_upload_stable_release do | options |
     build_and_upload_release(
-      skip_confirm: options[:skip_confirm], 
+      skip_confirm: options[:skip_confirm],
       create_gh_release: options[:create_gh_release],
       beta_release: false)
   end
@@ -301,7 +305,7 @@ end
   # This lane builds the app and uploads it for both internal and external distribution
   # -----------------------------------------------------------------------------------
   # Usage:
-  # bundle exec fastlane build_and_upload_release [skip_confirm:<skip confirm>] 
+  # bundle exec fastlane build_and_upload_release [skip_confirm:<skip confirm>]
   #   [create_gh_release:<create release on GH>] [beta_release:<is a beta release>]
   #
   # Example:
@@ -447,8 +451,8 @@ end
   #####################################################################################
   lane :trigger_beta_build do | options |
     circleci_trigger_job(
-      circle_ci_token: ENV["CIRCLE_CI_AUTH_TOKEN"], 
-      repository: REPOSITORY_NAME, 
+      circle_ci_token: ENV["CIRCLE_CI_AUTH_TOKEN"],
+      repository: REPOSITORY_NAME,
       organization: "Automattic",
       branch: options[:branch_to_build],
       job_params: {"beta_build" => true}
@@ -466,8 +470,8 @@ end
   #####################################################################################
   lane :trigger_release_build do | options |
     circleci_trigger_job(
-      circle_ci_token: ENV["CIRCLE_CI_AUTH_TOKEN"], 
-      repository: REPOSITORY_NAME, 
+      circle_ci_token: ENV["CIRCLE_CI_AUTH_TOKEN"],
+      repository: REPOSITORY_NAME,
       organization: "Automattic",
       branch: options[:branch_to_build],
       job_params: {"release_build" => true}
@@ -727,7 +731,7 @@ end
   #####################################################################################
   # pick_test_account_and_run_ui_tests
   # -----------------------------------------------------------------------------------
-  # Firstly tries to occupy a free test account, and then passes the account to 
+  # Firstly tries to occupy a free test account, and then passes the account to
   # `run_ui_tests` lane. Frees up the account afterwards.
   # -----------------------------------------------------------------------------------
   # Usage:
@@ -891,7 +895,7 @@ def deoccupy_test_account
   $used_test_account_index = nil
 end
 
-# Returns the value of test accounts key, which is 
+# Returns the value of test accounts key, which is
 # expected to look like a series of Fs and Ts.
 # Example:
 #   get_test_accounts_state
@@ -911,7 +915,7 @@ end
 #     => 2
 def find_free_test_account
   $used_test_account_index = get_test_accounts_state.index("F")
-  UI.user_error!("Could not find free UI Test account. Quitting.") if $used_test_account_index.nil? 
+  UI.user_error!("Could not find free UI Test account. Quitting.") if $used_test_account_index.nil?
   UI.message("Free account index: #{$used_test_account_index}")
 end
 
