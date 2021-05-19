@@ -22,7 +22,7 @@
 			isa = PBXAggregateTarget;
 			buildConfigurationList = B5C7BF98230C59F5000DEC91 /* Build configuration list for PBXAggregateTarget "SimplenoteSecrets" */;
 			buildPhases = (
-				B5C7BF9E230C5A79000DEC91 /* Run Script */,
+				B5C7BF9E230C5A79000DEC91 /* Copy Secrets */,
 			);
 			dependencies = (
 			);
@@ -2731,7 +2731,7 @@
 			shellPath = /bin/sh;
 			shellScript = "cd \"${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\"\nif [[ -d \"Frameworks\" ]]; then\nrm -fr Frameworks\nfi\n";
 		};
-		B5C7BF9E230C5A79000DEC91 /* Run Script */ = {
+		B5C7BF9E230C5A79000DEC91 /* Copy Secrets */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2741,7 +2741,7 @@
 			inputPaths = (
 				"~/.mobile-secrets/iOS/simplenote/SPCredentials.swift",
 			);
-			name = "Run Script";
+			name = "Copy Secrets";
 			outputFileListPaths = (
 			);
 			outputPaths = (
