@@ -804,7 +804,7 @@ end
     match(
       type: "enterprise",
       team_id: get_required_env("INT_EXPORT_TEAM_ID"),
-      readonly: options[:readonly] || is_ci,
+      readonly: true,
       app_identifier: ["com.codality.NotationalFlow.Alpha",
                       "com.codality.NotationalFlow.Alpha.Share"])
   end
@@ -813,7 +813,7 @@ end
     match(
       type: "enterprise",
       team_id: get_required_env("INT_EXPORT_TEAM_ID"),
-      readonly: options[:readonly] || is_ci,
+      readonly: true,
       app_identifier: ["com.codality.NotationalFlow.Internal",
                        "com.codality.NotationalFlow.Internal.Share"])
   end
@@ -822,7 +822,7 @@ end
     match(
       type: "appstore",
       team_id: get_required_env("EXT_EXPORT_TEAM_ID"),
-      readonly: options[:readonly] || is_ci,
+      readonly: true,
       app_identifier: ["com.codality.NotationalFlow",
                        "com.codality.NotationalFlow.Share"],
       template_name: "NotationalFlow Keychain Access (Distribution)",
