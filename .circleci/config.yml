@@ -43,8 +43,8 @@ jobs:
           bundle-install: true
           pod-install: true
       - run:
-          name: Copy demo SPCredentials
-          command: mkdir -p Simplenote/Credentials && cp Simplenote/SPCredentials-demo.swift Simplenote/Credentials/SPCredentials.swift
+          name: Copy Secrets
+          command: bundle exec configure_apply
       # Start: Swift Package Manager Workaround
       # Ref. https://support.circleci.com/hc/en-us/articles/360044709573-Swift-Package-Manager-fails-to-clone-from-private-Git-repositories
       - run: rm ~/.ssh/id_rsa
