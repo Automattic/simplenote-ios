@@ -49,8 +49,11 @@ jobs:
           pod-install: true
       - copy_secrets
       - run:
-          name: Test Fastlane Work
+          name: Test Fastlane work
           command: bundle exec fastlane test_lane
+      - run:
+          name: Test ASC and Google keys work
+          command: bundle exec fastlane alpha_code_signing
       # Start: Swift Package Manager Workaround
       # Ref. https://support.circleci.com/hc/en-us/articles/360044709573-Swift-Package-Manager-fails-to-clone-from-private-Git-repositories
       - run: rm ~/.ssh/id_rsa
