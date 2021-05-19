@@ -2739,17 +2739,17 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"~/.mobile-secrets/iOS/simplenote/SPCredentials.swift",
+				"${HOME}/.configure/simplenote-ios/secrets/SPCredentials.swift",
 			);
 			name = "Copy Secrets";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(SRCROOT)/Simplenote/Credentials/SPCredentials.swift",
+				"${SRCROOT}/Simplenote/Credentials/SPCredentials.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "${SRCROOT}/Scripts/Build-Phases/copy-secret.sh \\\n    ~/.configure/simplenote-ios/secrets/SPCredentials.swift \\\n    ${SRCROOT}/Simplenote/Credentials/SPCredentials.swift\n";
+			shellScript = "${SRCROOT}/Scripts/Build-Phases/copy-secret.sh \\\n    $SCRIPT_INPUT_FILE_0 \\\n    $SCRIPT_OUTPUT_FILE_0\n";
 		};
 		C62AC7EF4EA894D0C1FAFFC0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

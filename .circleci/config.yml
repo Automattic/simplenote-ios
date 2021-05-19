@@ -18,6 +18,11 @@ xcode_version: &xcode_version
   xcode-version: "12.0"
 
 commands:
+  copy_secrets:
+    steps:
+      - run:
+          name: Copy Secrets
+          command: bundle exec fastlane run configure_apply
   fix-path:
     steps:
       - run:
@@ -42,9 +47,7 @@ jobs:
       - ios/install-dependencies:
           bundle-install: true
           pod-install: true
-      - run:
-          name: Copy Secrets
-          command: bundle exec configure_apply
+      - copy_secrets
       # Start: Swift Package Manager Workaround
       # Ref. https://support.circleci.com/hc/en-us/articles/360044709573-Swift-Package-Manager-fails-to-clone-from-private-Git-repositories
       - run: rm ~/.ssh/id_rsa
@@ -65,9 +68,7 @@ jobs:
       - ios/install-dependencies:
             bundle-install: true
             pod-install: true
-      - run:
-          name: Copy Secrets
-          command: bundle exec fastlane run configure_apply
+      - copy_secrets
       # Start: Swift Package Manager Workaround
       # Ref. https://support.circleci.com/hc/en-us/articles/360044709573-Swift-Package-Manager-fails-to-clone-from-private-Git-repositories
       - run: rm ~/.ssh/id_rsa
@@ -95,9 +96,7 @@ jobs:
       - ios/install-dependencies:
             bundle-install: true
             pod-install: true
-      - run:
-          name: Copy Secrets
-          command: bundle exec fastlane run configure_apply
+      - copy_secrets
       # Start: Swift Package Manager Workaround
       # Ref. https://support.circleci.com/hc/en-us/articles/360044709573-Swift-Package-Manager-fails-to-clone-from-private-Git-repositories
       - run: rm ~/.ssh/id_rsa
@@ -156,9 +155,7 @@ jobs:
       - ios/install-dependencies:
             bundle-install: true
             pod-install: true
-      - run:
-          name: Copy Secrets
-          command: bundle exec fastlane run configure_apply
+      - copy_secrets
       # Start: Swift Package Manager Workaround
       # Ref. https://support.circleci.com/hc/en-us/articles/360044709573-Swift-Package-Manager-fails-to-clone-from-private-Git-repositories
       - run: rm ~/.ssh/id_rsa
