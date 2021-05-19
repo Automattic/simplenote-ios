@@ -5,7 +5,7 @@
   "files_to_copy": [
     {
       "file": "iOS/simplenote/SPCredentials.swift",
-      "destination": "Simplenote/Credentials/SPCredentials.swift",
+      "destination": "~/.configure/simplenote-ios/secrets/SPCredentials.swift",
       "encrypt": true
     },
     {
