@@ -11,7 +11,7 @@
 			isa = PBXAggregateTarget;
 			buildConfigurationList = 3F1BB4B4243199FF006D1A04 /* Build configuration list for PBXAggregateTarget "ScreenshotsSecrets" */;
 			buildPhases = (
-				3F1BB4B524319A04006D1A04 /* ShellScript */,
+				3F1BB4B524319A04006D1A04 /* Copy Secrets */,
 			);
 			dependencies = (
 			);
@@ -2615,7 +2615,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3F1BB4B524319A04006D1A04 /* ShellScript */ = {
+		3F1BB4B524319A04006D1A04 /* Copy Secrets */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2623,14 +2623,17 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"${HOME}/.configure/simplenote-ios/secrets/ScreenshotsCredentials.swift",
 			);
+			name = "Copy Secrets";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${SRCROOT}/SimplenoteScreenshots/Credentials/ScreenshotsCredentials.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "SOURCE_PATH=~/.mobile-secrets/iOS/simplenote/ScreenshotsCredentials.swift\nTARGET_FOLDER=${SRCROOT}/SimplenoteScreenshots/Credentials\nTARGET_PATH=${TARGET_FOLDER}/ScreenshotsCredentials.swift\n\nif [ ! -f ${SOURCE_PATH} ]; then\n    echo \"Unable to Copy Credentials =(\"\nelse\n    echo \"Copying Credentials...\"\n    mkdir -p ${TARGET_FOLDER}\n    cp ${SOURCE_PATH} ${TARGET_PATH}\nfi\n";
+			shellScript = "${SRCROOT}/Scripts/Build-Phases/copy-secret.sh \\\n    $SCRIPT_INPUT_FILE_0 \\\n    $SCRIPT_OUTPUT_FILE_0\n";
 		};
 		730A1CB888B6254066EA8CAA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

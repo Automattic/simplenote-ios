@@ -10,7 +10,7 @@
     },
     {
       "file": "iOS/simplenote/ScreenshotsCredentials.swift",
-      "destination": "SimplenoteScreenshots/Credentials/ScreenshotsCredentials.swift",
+      "destination": "~/.configure/simplenote-ios/secrets/ScreenshotsCredentials.swift",
       "encrypt": true
     },
     {
