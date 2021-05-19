@@ -60,4 +60,12 @@ extension SPTracker {
     static func trackShortcutToggleChecklist() {
         trackShortcut("toggle_checklist")
     }
+
+    static func trackNoticePresented(_ value: String) {
+        trackAutomatticEvent(withName: "notice_presented", properties: ["notice_message": value])
+    }
+
+    static func trackNoticeActionTapped(_ value: String) {
+        trackAutomatticEvent(withName: "notice_tapped", properties: ["notice_message": value])
+    }
 }

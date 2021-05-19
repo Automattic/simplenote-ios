@@ -43,6 +43,7 @@ class NoticeController {
         current = notice
         let noticeView = makeNoticeView(from: notice)
 
+        SPTracker.trackNoticePresented(notice.message)
         noticePresenter.presentNoticeView(noticeView) {
             let delay = self.current?.action == nil ? Times.shortDelay : Times.longDelay
             self.timer = self.timerFactory.scheduledTimer(with: delay, completion: {
@@ -86,7 +87,8 @@ extension NoticeController: NoticeInteractionDelegate {
         })
     }
 
-    func actionWasTapped() {
+    func actionWasTapped(_ sender: NoticeView) {
+        SPTracker.trackNoticeActionTapped(sender.message ?? "")
         dismiss()
     }
 }
