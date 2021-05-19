@@ -805,6 +805,7 @@ end
 # Fastlane match code signing
 ########################################################################
   lane :alpha_code_signing do |options|
+    setup_circle_ci
     match(
       type: "enterprise",
       team_id: get_required_env("INT_EXPORT_TEAM_ID"),
