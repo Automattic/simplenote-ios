@@ -25,7 +25,7 @@
     },
     {
       "file": "iOS/app_store_connect_fastlane_api_key.json",
-      "destination": ".configure-files/app_store_connect_fastlane_api_key.json",
+      "destination": "~/.configure/simplenote-ios/secrets/app_store_connect_fastlane_api_key.json",
       "encrypt": true
     }
   ],
