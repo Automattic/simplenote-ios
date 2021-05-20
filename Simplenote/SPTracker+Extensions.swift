@@ -28,12 +28,56 @@ extension SPTracker {
         trackAutomatticEvent(withName: "verification_dismissed", properties: nil)
     }
 
-    static func trackNoticePresented(_ value: String) {
-        trackAutomatticEvent(withName: "notice_presented", properties: ["message": value])
+    static func trackNotice(_ value: String) {
+        trackAutomatticEvent(withName: "notice_presented", properties: ["notice": value])
     }
 
-    static func trackNoticeActionTapped(_ value: String) {
-        trackAutomatticEvent(withName: "notice_action_tapped", properties: ["message": value])
+    static func trackNoticeAction(_ value: String, action: String) {
+        trackAutomatticEvent(withName: "notice_action_tapped", properties: ["notice": value, "action": action])
+    }
+
+    static func trackNoticeLinkCopied() {
+        trackNotice("Link Copied")
+    }
+
+    static func trackNoticePublishing() {
+        trackNotice("Publishing")
+    }
+
+    static func trackNoticeUnpublishing() {
+        trackNotice("Unpublishing")
+    }
+
+    static func trackNoticeNoteTrashed() {
+        trackNotice("Note Trashed")
+    }
+
+    static func trackNoticeNotesTrashed() {
+        trackNotice("Notes Trashed")
+    }
+
+    static func trackNoticeUnpublished() {
+        trackNotice("Unpublished")
+    }
+
+    static func trackNoticePublished() {
+        trackNotice("Published")
+    }
+
+    static func trackNoticeActionTrashUndo() {
+        trackNoticeAction("Note Trashed", action: "Undo")
+    }
+
+    static func trackNoticeActionMultipleTrashUndo() {
+        trackNoticeAction("Notes Trashed", action: "Undo")
+    }
+
+    static func trackNoticeActionUnpublished() {
+        trackNoticeAction("Unpublished", action: "Undo")
+    }
+
+    static func trackNoticeActionPublished() {
+        trackNoticeAction("Published", action: "Copy Link")
     }
 }
 
