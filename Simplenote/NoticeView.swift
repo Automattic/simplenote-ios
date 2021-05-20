@@ -14,6 +14,7 @@ class NoticeView: UIView {
     @IBOutlet private weak var stackView: UIStackView!
     @IBOutlet private weak var noticeLabel: UILabel!
     @IBOutlet private weak var noticeButton: UIButton!
+    private let blurView = SPBlurEffectView(effect: .simplenoteBlurEffect)
 
     var message: String? {
         get {
@@ -63,8 +64,16 @@ class NoticeView: UIView {
     private func setupViewStyles() {
         backgroundColor = .clear
 
+        blurView.layer.cornerRadius = Constants.cornerRadius
+        blurView.clipsToBounds = true
+        blurView.tintColor = .simplenoteNoticeViewBackgroundColor
+        blurView.backgroundColor = .clear
+        addFillingSubview(blurView)
+        sendSubviewToBack(blurView)
+
         backgroundView.backgroundColor = .simplenoteNoticeViewBackgroundColor
         backgroundView.layer.cornerRadius = Constants.cornerRadius
+        backgroundView.alpha = 0.5
 
         noticeLabel.textColor = .simplenoteTextColor
         noticeButton.setTitleColor(.simplenoteTintColor, for: .normal)
