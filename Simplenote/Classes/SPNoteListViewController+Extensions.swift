@@ -777,8 +777,10 @@ private extension SPNoteListViewController {
                 self?.delete(note: note)
                 NoticeController.shared.present(NoticeFactory.noteTrashed(onUndo: {
                     SPObjectManager.shared().restoreNote(note)
+                    SPTracker.trackNoticeNoteTrashed()
                     self?.tableView.reloadData()
                 }))
+                SPTracker.trackNoticeNoteTrashed()
                 completion(true)
         }
         trashAction.accessibilityLabel = ActionTitle.trash
@@ -792,6 +794,7 @@ private extension SPNoteListViewController {
         let copyAction = UIContextualAction(style: .normal, title: nil, image: .image(name: .link), backgroundColor: .simplenoteTertiaryActionColor) { [weak self] (_, _, completion) in
                 self?.copyInternalLink(to: note)
                 NoticeController.shared.present(NoticeFactory.linkCopied())
+                SPTracker.trackNoticeLinkCopied()
                 completion(true)
             }
         copyAction.accessibilityLabel = ActionTitle.copyLink
@@ -819,6 +822,7 @@ private extension SPNoteListViewController {
         let copy = UIAction(title: ActionTitle.copyLink, image: .image(name: .link)) { [weak self] _ in
             self?.copyInternalLink(to: note)
             NoticeController.shared.present(NoticeFactory.linkCopied())
+            SPTracker.trackNoticeLinkCopied()
         }
 
         let share = UIAction(title: ActionTitle.share, image: .image(name: .share)) { [weak self] _ in
@@ -846,6 +850,7 @@ private extension SPNoteListViewController {
                 SPObjectManager.shared().restoreNote(note)
                 self?.tableView.reloadData()
             }))
+            SPTracker.trackNoticeNoteTrashed()
         }
 
         return UIMenu(title: "", children: [share, copy, pin, delete])
@@ -911,7 +916,9 @@ private extension SPNoteListViewController {
             for note in notes {
                 SPObjectManager.shared().restoreNote(note)
             }
+            SPTracker.trackNoticeActionMultipleTrashUndo()
         }))
+        SPTracker.trackNoticeNotesTrashed()
 
         setEditing(false, animated: true)
     }

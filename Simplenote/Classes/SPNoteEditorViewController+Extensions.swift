@@ -521,7 +521,9 @@ extension SPNoteEditorViewController {
         CSSearchableIndex.default().deleteSearchableNote(note)
         NoticeController.shared.present(NoticeFactory.noteTrashed(onUndo: {
             SPObjectManager.shared().restoreNote(note)
+            SPTracker.trackNoticeActionMultipleTrashUndo()
         }))
+        SPTracker.trackNoticeNoteTrashed()
     }
 
     @objc

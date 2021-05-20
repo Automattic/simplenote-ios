@@ -356,6 +356,7 @@ private extension OptionsViewController {
         SPTracker.trackEditorCopiedInternalLink()
         UIPasteboard.general.copyInternalLink(to: note)
         NoticeController.shared.present(NoticeFactory.linkCopied())
+        SPTracker.trackNoticeLinkCopied()
         dismiss(animated: true, completion: nil)
     }
 
@@ -386,6 +387,7 @@ private extension OptionsViewController {
         SPTracker.trackEditorCopiedPublicLink()
         UIPasteboard.general.copyPublicLink(to: note)
         NoticeController.shared.present(NoticeFactory.linkCopied())
+        SPTracker.trackNoticeLinkCopied()
         dismiss(animated: true, completion: nil)
     }
 
