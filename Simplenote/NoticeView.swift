@@ -3,7 +3,7 @@ import UIKit
 protocol NoticeInteractionDelegate: AnyObject {
     func noticePressBegan()
     func noticePressEnded()
-    func actionWasTapped(_ sender: NoticeView)
+    func actionWasTapped()
 }
 
 class NoticeView: UIView {
@@ -87,7 +87,7 @@ class NoticeView: UIView {
     // MARK: Action
     //
     @IBAction func noticeButtonWasTapped(_ sender: Any) {
-        delegate?.actionWasTapped(self)
+        delegate?.actionWasTapped()
         handler?()
     }
 }
