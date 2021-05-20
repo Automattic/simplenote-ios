@@ -33,7 +33,7 @@ extension SPTracker {
     }
 
     static func trackNoticeAction(_ value: String, action: String) {
-        trackAutomatticEvent(withName: "notice_action_tapped", properties: ["notice": value, "action": action])
+        trackAutomatticEvent(withName: "notice_action_tapped", properties: ["notice": value, "notice_action": action])
     }
 
     static func trackNoticeLinkCopied() {
