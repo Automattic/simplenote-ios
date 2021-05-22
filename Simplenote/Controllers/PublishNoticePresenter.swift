@@ -5,25 +5,25 @@ class PublishNoticePresenter {
         switch note.publishState {
         case .publishing:
             NoticeController.shared.present(NoticeFactory.publishing())
-            SPTracker.trackNoticePublishing()
+            SPTracker.trackPresentedNotice(kind: .publishing)
         case .published:
             let notice = NoticeFactory.published(note, onCopy: {
                 UIPasteboard.general.copyPublicLink(to: note)
                 NoticeController.shared.present(NoticeFactory.linkCopied())
-                SPTracker.trackNoticeActionPublished()
+                SPTracker.trackPreformedNoticeAction(kind: .published, action: .copyLink)
             })
             NoticeController.shared.present(notice)
-            SPTracker.trackNoticePublished()
+            SPTracker.trackPresentedNotice(kind: .published)
         case .unpublishing:
             NoticeController.shared.present(NoticeFactory.unpublishing())
-            SPTracker.trackNoticeUnpublishing()
+            SPTracker.trackPresentedNotice(kind: .unpublishing)
         case .unpublished:
             let notice = NoticeFactory.unpublished(note, onUndo: {
                 SPAppDelegate.shared().publishController.updatePublishState(for: note, to: true)
-                SPTracker.trackNoticeActionUnpublished()
+                SPTracker.trackPreformedNoticeAction(kind: .unpublished, action: .undo)
             })
             NoticeController.shared.present(notice)
-            SPTracker.trackNoticeUnpublished()
+            SPTracker.trackPresentedNotice(kind: .unpublished)
         }
     }
 }

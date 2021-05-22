@@ -28,56 +28,27 @@ extension SPTracker {
         trackAutomatticEvent(withName: "verification_dismissed", properties: nil)
     }
 
-    static func trackNotice(_ value: String) {
-        trackAutomatticEvent(withName: "notice_presented", properties: ["notice": value])
+    static func trackPresentedNotice(kind: NoticeType) {
+        trackAutomatticEvent(withName: "notice_presented", properties: ["notice": kind.rawValue])
     }
 
-    static func trackNoticeAction(_ value: String, action: String) {
-        trackAutomatticEvent(withName: "notice_action_tapped", properties: ["notice": value, "notice_action": action])
+    static func trackPreformedNoticeAction(kind: NoticeType, action: NoticeActionType) {
+        trackAutomatticEvent(withName: "notice_action_tapped", properties: ["notice": kind.rawValue, "notice_action": action.rawValue])
     }
 
-    static func trackNoticeLinkCopied() {
-        trackNotice("Link Copied")
+    enum NoticeType: String {
+        case linkCopied = "link_copied"
+        case publishing
+        case unpublishing
+        case noteTrashed = "note_trashed"
+        case multipleNotesTrashed = "multi_notes_trashed"
+        case unpublished
+        case published
     }
 
-    static func trackNoticePublishing() {
-        trackNotice("Publishing")
-    }
-
-    static func trackNoticeUnpublishing() {
-        trackNotice("Unpublishing")
-    }
-
-    static func trackNoticeNoteTrashed() {
-        trackNotice("Note Trashed")
-    }
-
-    static func trackNoticeNotesTrashed() {
-        trackNotice("Notes Trashed")
-    }
-
-    static func trackNoticeUnpublished() {
-        trackNotice("Unpublished")
-    }
-
-    static func trackNoticePublished() {
-        trackNotice("Published")
-    }
-
-    static func trackNoticeActionTrashUndo() {
-        trackNoticeAction("Note Trashed", action: "Undo")
-    }
-
-    static func trackNoticeActionMultipleTrashUndo() {
-        trackNoticeAction("Notes Trashed", action: "Undo")
-    }
-
-    static func trackNoticeActionUnpublished() {
-        trackNoticeAction("Unpublished", action: "Undo")
-    }
-
-    static func trackNoticeActionPublished() {
-        trackNoticeAction("Published", action: "Copy Link")
+    enum NoticeActionType: String {
+        case undo
+        case copyLink = "copy_link"
     }
 }
 

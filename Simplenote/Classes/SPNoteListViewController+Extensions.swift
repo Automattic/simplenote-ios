@@ -777,10 +777,10 @@ private extension SPNoteListViewController {
                 self?.delete(note: note)
                 NoticeController.shared.present(NoticeFactory.noteTrashed(onUndo: {
                     SPObjectManager.shared().restoreNote(note)
-                    SPTracker.trackNoticeNoteTrashed()
+                    SPTracker.trackPreformedNoticeAction(kind: .noteTrashed, action: .undo)
                     self?.tableView.reloadData()
                 }))
-                SPTracker.trackNoticeNoteTrashed()
+                SPTracker.trackPresentedNotice(kind: .noteTrashed)
                 completion(true)
         }
         trashAction.accessibilityLabel = ActionTitle.trash
@@ -794,7 +794,7 @@ private extension SPNoteListViewController {
         let copyAction = UIContextualAction(style: .normal, title: nil, image: .image(name: .link), backgroundColor: .simplenoteTertiaryActionColor) { [weak self] (_, _, completion) in
                 self?.copyInternalLink(to: note)
                 NoticeController.shared.present(NoticeFactory.linkCopied())
-                SPTracker.trackNoticeLinkCopied()
+                SPTracker.trackPresentedNotice(kind: .linkCopied)
                 completion(true)
             }
         copyAction.accessibilityLabel = ActionTitle.copyLink
@@ -822,7 +822,7 @@ private extension SPNoteListViewController {
         let copy = UIAction(title: ActionTitle.copyLink, image: .image(name: .link)) { [weak self] _ in
             self?.copyInternalLink(to: note)
             NoticeController.shared.present(NoticeFactory.linkCopied())
-            SPTracker.trackNoticeLinkCopied()
+            SPTracker.trackPresentedNotice(kind: .linkCopied)
         }
 
         let share = UIAction(title: ActionTitle.share, image: .image(name: .share)) { [weak self] _ in
@@ -848,9 +848,10 @@ private extension SPNoteListViewController {
             self?.delete(note: note)
             NoticeController.shared.present(NoticeFactory.noteTrashed(onUndo: {
                 SPObjectManager.shared().restoreNote(note)
+                SPTracker.trackPreformedNoticeAction(kind: .noteTrashed, action: .undo)
                 self?.tableView.reloadData()
             }))
-            SPTracker.trackNoticeNoteTrashed()
+            SPTracker.trackPresentedNotice(kind: .noteTrashed)
         }
 
         return UIMenu(title: "", children: [share, copy, pin, delete])
@@ -916,9 +917,9 @@ private extension SPNoteListViewController {
             for note in notes {
                 SPObjectManager.shared().restoreNote(note)
             }
-            SPTracker.trackNoticeActionMultipleTrashUndo()
+            SPTracker.trackPreformedNoticeAction(kind: .multipleNotesTrashed, action: .undo)
         }))
-        SPTracker.trackNoticeNotesTrashed()
+        SPTracker.trackPresentedNotice(kind: .multipleNotesTrashed)
 
         setEditing(false, animated: true)
     }
