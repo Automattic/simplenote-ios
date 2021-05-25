@@ -261,7 +261,7 @@ extension UIColor {
 
     @objc
     static var simplenoteNoticeViewBackgroundColor: UIColor {
-        UIColor(lightColor: .spGray3, darkColor: .darkGray2)
+        UIColor(lightColor: .spGray3, darkColor: .darkGray3)
     }
 
     @objc
