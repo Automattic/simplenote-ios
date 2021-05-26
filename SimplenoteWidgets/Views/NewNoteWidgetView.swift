@@ -3,8 +3,6 @@ import WidgetKit
 
 @available(iOS 14.0, *)
 struct NewNoteWidgetView: View {
-//    let entry: NewNoteWidgetEntry
-
     var body: some View {
         ZStack {
             VStack(alignment: .leading) {
@@ -21,7 +19,7 @@ struct NewNoteWidgetView: View {
                     .font(.headline)
                     .foregroundColor(.white)
             }
-            .padding(16)
+            .padding(Constants.overallPadding)
         }
         .background(Color(UIColor(studioColor: .spBlue50)))
         .widgetURL(URL(string: SimplenoteConstants.simplenoteScheme + "://" + Constants.newNoteHost))
@@ -38,6 +36,7 @@ struct NewNoteView_Previews: PreviewProvider {
 
 private struct Constants {
     static let side = CGFloat(48)
+    static let overallPadding = CGFloat(16)
     static let newNoteImage = "icon_new_note"
     static let newNoteText = "New Note..."
     static let newNoteHost = "new"
