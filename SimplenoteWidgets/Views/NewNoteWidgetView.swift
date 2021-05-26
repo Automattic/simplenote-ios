@@ -3,7 +3,7 @@ import WidgetKit
 
 @available(iOS 14.0, *)
 struct NewNoteWidgetView: View {
-    let entry: NewNoteWidgetEntry
+//    let entry: NewNoteWidgetEntry
 
     var body: some View {
         ZStack {
@@ -31,7 +31,7 @@ struct NewNoteWidgetView: View {
 @available(iOS 14.0, *)
 struct NewNoteView_Previews: PreviewProvider {
     static var previews: some View {
-        NewNoteWidgetView(entry: NewNoteWidgetEntry(date: Date()))
+        NewNoteWidgetView()
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }

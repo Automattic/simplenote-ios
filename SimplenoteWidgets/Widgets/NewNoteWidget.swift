@@ -13,7 +13,7 @@ import WidgetKit
 struct NewNoteWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: Constants.configurationKind, provider: NewNoteTimelineProvider()) { entry in
-            NewNoteWidgetView(entry: entry)
+            NewNoteWidgetView()
         }
         .configurationDisplayName(Constants.displayName)
         .description(Constants.description)
