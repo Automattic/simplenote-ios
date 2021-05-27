@@ -28,13 +28,20 @@ extension SPAppDelegate {
             bucket.delegate = self
         }
     }
-}
 
     @objc
     func setupAuthenticator() {
         let authenticator = simperium.authenticator
 
         authenticator.providerString = "simplenote.com"
+
+        if let simperiumAuthURL = Bundle.main.simperiumAuthURL {
+            authenticator.authURL = simperiumAuthURL
+        }
+
+        if let simperiumHost = Bundle.main.simperiumHost {
+            authenticator.customHTTPHeaders = ["Host": simperiumHost]
+        }
     }
 }
 
