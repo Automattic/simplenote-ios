@@ -1,7 +1,7 @@
 {
   "project_name": "simplenote-ios",
   "branch": "trunk",
-  "pinned_hash": "22b584c6e99946ef9fb20ce62b8f729c5bea16b7",
+  "pinned_hash": "98173d8c839743cfd3a9569ad1c87a3ca934dd2f",
   "files_to_copy": [
     {
       "file": "iOS/simplenote/SPCredentials.swift",
@@ -26,6 +26,11 @@
     {
       "file": "iOS/app_store_connect_fastlane_api_key.json",
       "destination": "~/.configure/simplenote-ios/secrets/app_store_connect_fastlane_api_key.json",
+      "encrypt": true
+    },
+    {
+      "file": "iOS/simplenote/URLs.internal.xcconfig",
+      "destination": ".configure-files/URLs.internal.xcconfig",
       "encrypt": true
     }
   ],
