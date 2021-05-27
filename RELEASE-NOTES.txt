@@ -1,6 +1,6 @@
 4.37
 -----
-
+-   Adds a home screen widget to start a new note with a single tap #
 
 4.36
 -----
