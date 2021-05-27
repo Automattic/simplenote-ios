@@ -72,6 +72,11 @@ class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
         super.viewWillAppear(animated)
         ensureNavigationBarIsHidden()
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        displayEngineAlertIfNeeded()
+    }
 }
 
 
@@ -120,6 +125,25 @@ private extension SPOnboardingViewController {
         headerLabel.textColor = UIColor.simplenoteGray50Color
         headerLabel.adjustsFontSizeToFitWidth = true
         headerLabel.font = .preferredFont(forTextStyle: .title3)
+    }
+
+    func displayEngineAlertIfNeeded() {
+        guard let engineBaseURL = Bundle.main.engineBaseURL, let simperiumAuthURL = Bundle.main.simperiumAuthURL else {
+            return
+        }
+
+        let titleText   = NSLocalizedString("⚠️ Important", comment: "Warning Title")
+        let acceptText  = NSLocalizedString("Accept", comment: "Accept Action")
+        let messageText = NSLocalizedString("AppEngine Endpoints", comment: "Engine URL Message")
+                            + String.newline + engineBaseURL
+                            + String.newline + String.newline
+                            + NSLocalizedString("Authentication Endpoints", comment: "Engine URL Message")
+                            + String.newline + simperiumAuthURL
+
+        let alert = UIAlertController(title: titleText, message: messageText, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: acceptText, style: .default, handler: .none))
+
+        present(alert, animated: true, completion: .none)
     }
 
     func displayDebugMessage(enabled: Bool) {
