@@ -60,7 +60,7 @@ Simplenote is powered by the [Simperium Sync'ing protocol](https://www.simperium
 After you've created your own Simperium application, copy the sample config. For example:
 
 ```
-mkdir -p Simplenote/Credentials && cp Simplenote/SPCredentials-demo.swift Simplenote/Credentials/SPCredentials.swift
+mkdir -p ~/.configure/simplenote-ios/secrets && cp Simplenote/SPCredentials-demo.swift ~/.configure/simplenote-ios/secrets/SPCredentials.swift
 ```
 
 Then edit the new `Simplenote/Credentials/SPCredentials.swift` file and change the `simperiumAppID` and `simperiumApiKey` fields to the correct values for your new app.
@@ -74,7 +74,7 @@ _Note: Simplenote API features such as sharing and publishing will not work with
 If you want to try the screenshots generation locally, also create your own testing credentials for that target:
 
 ```
-mkdir -p SimplenoteScreenshots/Credentials && cp SimplenoteScreenshots/ScreenshotsCredentials-demo.swift SimplenoteScreenshots/Credentials/ScreenshotsCredentials.swift
+mkdir -p ~/.configure/simplenote-ios/secrets && cp Simplenote/ScreenshotsCredentials-demo.swift ~/.configure/simplenote-ios/secrets/ScreenshotsCredentials.swift
 ```
 
 ## Style Guidelines

@@ -8,7 +8,9 @@ unless FastlaneCore::Helper.bundler?
 end
 
 USER_ENV_FILE_PATH = File.join(Dir.home, '.simplenoteios-env.default')
-PROJECT_ENV_FILE_PATH = File.expand_path(File.join(Dir.pwd, '../.configure-files/project.env'))
+PROJECT_ENV_FILE_PATH = File.join(
+  Dir.home, '.configure', 'simplenote-ios', 'secrets', 'project.env'
+)
 UI_TESTS_SCHEME = "SimplenoteUITests"
 UI_TESTS_ACCOUNTS_URL = "https://api.keyvalue.xyz/82649691/simplenoteuitest-ios"
 $used_test_account_index = nil
@@ -802,7 +804,7 @@ end
     match(
       type: "enterprise",
       team_id: get_required_env("INT_EXPORT_TEAM_ID"),
-      readonly: options[:readonly] || is_ci,
+      readonly: true,
       app_identifier: ["com.codality.NotationalFlow.Alpha",
                       "com.codality.NotationalFlow.Alpha.Share"])
   end
@@ -811,7 +813,7 @@ end
     match(
       type: "enterprise",
       team_id: get_required_env("INT_EXPORT_TEAM_ID"),
-      readonly: options[:readonly] || is_ci,
+      readonly: true,
       app_identifier: ["com.codality.NotationalFlow.Internal",
                        "com.codality.NotationalFlow.Internal.Share"])
   end
@@ -820,7 +822,7 @@ end
     match(
       type: "appstore",
       team_id: get_required_env("EXT_EXPORT_TEAM_ID"),
-      readonly: options[:readonly] || is_ci,
+      readonly: true,
       app_identifier: ["com.codality.NotationalFlow",
                        "com.codality.NotationalFlow.Share"],
       template_name: "NotationalFlow Keychain Access (Distribution)",
