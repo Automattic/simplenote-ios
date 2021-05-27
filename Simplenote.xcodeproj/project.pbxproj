@@ -577,6 +577,7 @@
 		3D0CDFF82DFBC35A68B2C1C7 /* Pods-Automattic-SimplenoteShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-SimplenoteShare.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-SimplenoteShare/Pods-Automattic-SimplenoteShare.release.xcconfig"; sourceTree = "<group>"; };
 		3F1BB49F242DB81E006D1A04 /* ScreenshotsCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenshotsCredentials.swift; sourceTree = "<group>"; };
 		3F1BB4A2242DC162006D1A04 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
+		3F23BEE9265F585E005E78CF /* Simplenote.internal.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Simplenote.internal.xcconfig; sourceTree = "<group>"; };
 		3F3CA91026255E1F00F6316F /* UITestHelpers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UITestHelpers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F3CA91226255E2000F6316F /* UITestHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UITestHelpers.h; sourceTree = "<group>"; };
 		3F3CA91326255E2000F6316F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1301,6 +1302,7 @@
 			children = (
 				8C573B0D22CD1AD6005BC6F5 /* Version.Public.xcconfig */,
 				8C573B0A22CD1A61005BC6F5 /* Simplenote.debug.xcconfig */,
+				3F23BEE9265F585E005E78CF /* Simplenote.internal.xcconfig */,
 				8C573B0B22CD1A6F005BC6F5 /* Simplenote.release.xcconfig */,
 			);
 			path = config;
@@ -4074,7 +4076,7 @@
 		};
 		B50789FA1C1F4F63009F097A /* Distribution Internal */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8C573B0B22CD1A6F005BC6F5 /* Simplenote.release.xcconfig */;
+			baseConfigurationReference = 3F23BEE9265F585E005E78CF /* Simplenote.internal.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ALWAYS_SEARCH_USER_PATHS = NO;
