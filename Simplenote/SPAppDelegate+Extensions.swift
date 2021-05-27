@@ -19,9 +19,7 @@ extension SPAppDelegate {
         simperium.verboseLoggingEnabled = false
 #endif
 
-        simperium.authenticationViewControllerClass    = SPOnboardingViewController.self
-        simperium.authenticator.providerString         = "simplenote.com"
-
+        simperium.authenticationViewControllerClass = SPOnboardingViewController.self
         simperium.authenticationShouldBeEmbeddedInNavigationController = true
         simperium.delegate = self
 
@@ -32,6 +30,13 @@ extension SPAppDelegate {
     }
 }
 
+    @objc
+    func setupAuthenticator() {
+        let authenticator = simperium.authenticator
+
+        authenticator.providerString = "simplenote.com"
+    }
+}
 
 // MARK: - Internal Methods
 //
