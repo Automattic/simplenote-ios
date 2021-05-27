@@ -1,2 +1,0 @@
-#include "Simplenote.release.xcconfig"
-#include "../.configure-files/URLs.internal.xcconfig"

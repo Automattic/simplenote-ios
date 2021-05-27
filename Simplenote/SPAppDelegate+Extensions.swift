@@ -35,13 +35,12 @@ extension SPAppDelegate {
 
         authenticator.providerString = "simplenote.com"
 
-        if let simperiumAuthURL = Bundle.main.simperiumAuthURL {
-            authenticator.authURL = simperiumAuthURL
+        guard BuildConfiguration.current == .internal else {
+            return
         }
 
-        if let simperiumHost = Bundle.main.simperiumHost {
-            authenticator.customHTTPHeaders = ["Host": simperiumHost]
-        }
+        authenticator.authURL = SPCredentials.experimentalAuthURL
+        authenticator.customHTTPHeaders = ["Host": SPCredentials.experimentalAuthHost]
     }
 }
 

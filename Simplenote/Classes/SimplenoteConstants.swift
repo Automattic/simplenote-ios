@@ -28,8 +28,9 @@ class SimplenoteConstants: NSObject {
 
     /// AppEngine: Base URL
     ///
-    static let defaultEngineBaseURL = "https://app.simplenote.com"
-    static let currentEngineBaseURL = Bundle.main.engineBaseURL ?? defaultEngineBaseURL
+    static let currentEngineBaseURL: String = {
+        BuildConfiguration.current == .internal ? SPCredentials.experimentalEngineURL : SPCredentials.defaultEngineURL
+    }()
 
     /// AppEngine: Endpoints
     ///

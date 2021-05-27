@@ -128,17 +128,17 @@ private extension SPOnboardingViewController {
     }
 
     func displayEngineAlertIfNeeded() {
-        guard let engineBaseURL = Bundle.main.engineBaseURL, let simperiumAuthURL = Bundle.main.simperiumAuthURL else {
+        guard BuildConfiguration.current == .internal else {
             return
         }
 
         let titleText   = NSLocalizedString("⚠️ Important", comment: "Warning Title")
         let acceptText  = NSLocalizedString("Accept", comment: "Accept Action")
         let messageText = NSLocalizedString("AppEngine Endpoints", comment: "Engine URL Message")
-                            + String.newline + engineBaseURL
+                            + String.newline + SPCredentials.experimentalEngineURL
                             + String.newline + String.newline
                             + NSLocalizedString("Authentication Endpoints", comment: "Engine URL Message")
-                            + String.newline + simperiumAuthURL
+                            + String.newline + SPCredentials.experimentalAuthURL
 
         let alert = UIAlertController(title: titleText, message: messageText, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: acceptText, style: .default, handler: .none))
