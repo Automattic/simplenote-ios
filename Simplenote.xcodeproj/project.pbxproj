@@ -417,6 +417,7 @@
 		BA122DC1265EF4C5003D3BC5 /* UITraitCollection+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52AC185233587F8007B2E75 /* UITraitCollection+Simplenote.swift */; };
 		BA122DC2265EF4E5003D3BC5 /* SPUserInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52893BA2360B91200DF2571 /* SPUserInterface.swift */; };
 		BA122DC7265EF92D003D3BC5 /* NewNoteWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA122DC5265EF90C003D3BC5 /* NewNoteWidgetView.swift */; };
+		BA122DCA265F2E2D003D3BC5 /* UIColorSimplenoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA122DC9265F2E2D003D3BC5 /* UIColorSimplenoteTests.swift */; };
 		BA18532826488DBC00D9A347 /* SignupRemoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA18532726488DBC00D9A347 /* SignupRemoteTests.swift */; };
 		BA2D82C6261522F100A1695B /* PublishNoticePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2D82C5261522F100A1695B /* PublishNoticePresenter.swift */; };
 		BA3FB8CF25FEA0C500EA9A1B /* NoticeControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3FB8CE25FEA0C500EA9A1B /* NoticeControllerTests.swift */; };
@@ -971,6 +972,7 @@
 		B5F3000123F4502C007A7C59 /* SPSortBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPSortBar.xib; path = Classes/SPSortBar.xib; sourceTree = "<group>"; };
 		B5F3FFFE23F44679007A7C59 /* SPSortBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPSortBar.swift; path = Classes/SPSortBar.swift; sourceTree = "<group>"; };
 		BA122DC5265EF90C003D3BC5 /* NewNoteWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNoteWidgetView.swift; sourceTree = "<group>"; };
+		BA122DC9265F2E2D003D3BC5 /* UIColorSimplenoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorSimplenoteTests.swift; sourceTree = "<group>"; };
 		BA18532726488DBC00D9A347 /* SignupRemoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupRemoteTests.swift; sourceTree = "<group>"; };
 		BA2D82C5261522F100A1695B /* PublishNoticePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishNoticePresenter.swift; sourceTree = "<group>"; };
 		BA3FB8CE25FEA0C500EA9A1B /* NoticeControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeControllerTests.swift; sourceTree = "<group>"; };
@@ -1883,6 +1885,7 @@
 			isa = PBXGroup;
 			children = (
 				B5B9AB4622EE9CC2001CB0AD /* UIImageSimplenoteTests.swift */,
+				BA122DC9265F2E2D003D3BC5 /* UIColorSimplenoteTests.swift */,
 			);
 			name = Themes;
 			sourceTree = "<group>";
@@ -3197,6 +3200,7 @@
 				B52F35D322F356F500724793 /* UserDefaults+Tests.swift in Sources */,
 				B511AEE9255A0A5E005B2159 /* InterlinkResultsControllerTests.swift in Sources */,
 				374F5EF521BF057E00B57E8B /* NSMutableAttributedStringStylingTests.swift in Sources */,
+				BA122DCA265F2E2D003D3BC5 /* UIColorSimplenoteTests.swift in Sources */,
 				B5B9AB4722EE9CC2001CB0AD /* UIImageSimplenoteTests.swift in Sources */,
 				A6E6CE9F25A5BBC1005A92DB /* PinLockVerifyControllerTests.swift in Sources */,
 				A6E6CE6C25A5ABD6005A92DB /* PinLockSetupControllerTests.swift in Sources */,
