@@ -28,14 +28,15 @@ class SimplenoteConstants: NSObject {
 
     /// AppEngine: Base URL
     ///
-    static let currentEngineBaseURL: String = {
-        BuildConfiguration.current == .internal ? SPCredentials.experimentalEngineURL : SPCredentials.defaultEngineURL
+    static let currentEngineBaseURL: NSString = {
+        let output = BuildConfiguration.current == .internal ? SPCredentials.experimentalEngineURL : SPCredentials.defaultEngineURL
+        return output as NSString
     }()
 
     /// AppEngine: Endpoints
     ///
-    static let resetPasswordURL     = currentEngineBaseURL + "/reset/?redirect=simplenote://launch&email="
-    static let settingsURL          = currentEngineBaseURL + "/settings"
-    static let signupURL            = currentEngineBaseURL + "/account/request-signup"
-    static let verificationURL      = currentEngineBaseURL + "/account/verify-email/"
+    static let resetPasswordURL     = currentEngineBaseURL.appendingPathComponent("/reset/?redirect=simplenote://launch&email=")
+    static let settingsURL          = currentEngineBaseURL.appendingPathComponent("/settings")
+    static let signupURL            = currentEngineBaseURL.appendingPathComponent("/account/request-signup")
+    static let verificationURL      = currentEngineBaseURL.appendingPathComponent("/account/verify-email/")
 }
