@@ -132,6 +132,7 @@
     // Setup Frameworks
     [self setupThemeNotifications];
     [self setupSimperium];
+    [self setupAuthenticator];
     [self setupAppCenter];
     [self setupCrashLogging];
     [self configureVersionsController];
