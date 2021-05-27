@@ -17,19 +17,19 @@ extension Bundle {
     /// AppEngine Base URL
     ///
     var engineBaseURL: String? {
-        infoDictionary?[Keys.engineBaseURL] as? String
+        infoDictionary?.nonEmptyString(forKey: Keys.engineBaseURL)
     }
 
     /// Simperium: Authentication Endpoint
     ///
     var simperiumAuthURL: String? {
-        infoDictionary?[Keys.simperiumAuthURL] as? String
+        infoDictionary?.nonEmptyString(forKey: Keys.simperiumAuthURL)
     }
 
     /// Simperium: Host Header
     ///
     var simperiumHost: String? {
-        infoDictionary?[Keys.simperiumHost] as? String
+        infoDictionary?.nonEmptyString(forKey: Keys.simperiumHost)
     }
 }
 
