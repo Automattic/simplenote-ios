@@ -832,9 +832,13 @@ end
 ########################################################################
 # Helper Lanes
 ########################################################################
-desc "Get a list of pull request from `start_tag` to the current state"
+desc "Get a list of pull request from `milestone` to the current state"
 lane :get_pullrequests_list do | options |
-  get_prs_list(repository:GHHELPER_REPO, start_tag:"#{options[:start_tag]}", report_path:"#{File.expand_path('~')}/simplenoteios_prs_list.txt")
+  get_prs_list(
+    repository:GHHELPER_REPO,
+    milestone: options[:milestone],
+    report_path: File.join(Dir.home, 'simplenoteios_prs_list.txt')
+  )
 end
 
 def fastlane_directory()
