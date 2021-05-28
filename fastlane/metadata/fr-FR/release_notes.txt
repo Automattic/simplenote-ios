@@ -1,3 +1,6 @@
-- Les icônes de Simplenote ont été repensées
-- Des notifications intégrées à l’application ont été ajoutées afin d’alerter les utilisateurs sur les différentes activités qui s’y déroulent
-- Les réglages du tri des résultats de recherche ont changé et utilisent désormais la configuration de tri générale.
+- Nouvelle barre de notes
+- Correction d’un problème occasionnel avec le rendu du menu contextuel
+- Suppression de toutes les majuscules du titre de l’alerte de collaboration
+- Correction d’un problème de non-affichage des notifications dans certains cas
+- Correction d’un problème de non-suppression des étiquettes sur les notes déplacées vers la corbeille
+- Amélioration de la prise en charge de la taille de police dynamique dans les notifications
