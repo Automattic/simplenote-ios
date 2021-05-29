@@ -78,8 +78,16 @@
 		<string>com.codality.NotationalFlow.newNote</string>
 		<string>com.codality.NotationalFlow.openNote</string>
 	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>com.codality.NotationalFlow.backgroundRefresh</string>
+	</array>
 	<key>UIPrerenderedIcon</key>
 	<true/>
 	<key>UIRequiredDeviceCapabilities</key>

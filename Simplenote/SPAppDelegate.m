@@ -166,6 +166,11 @@
         [self showPasscodeLockIfNecessary];
     }
 
+    // Register background refresh task to system
+    if (@available(iOS 13.0, *)) {
+        [self registerBackgroundRefreshTask];
+    }
+
     // Index (All of the) Spotlight Items if the user upgraded
     [self indexSpotlightItemsIfNeeded];
 
@@ -190,6 +195,9 @@
 
     [self showPasscodeLockIfNecessary];
     [self cleanupScrollPositionCache];
+
+    //Schedule background refresh
+    [self scheduleAppRefresh];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

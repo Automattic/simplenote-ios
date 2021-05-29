@@ -1,4 +1,5 @@
 import Foundation
+import BackgroundTasks
 
 
 // MARK: - Initialization
@@ -404,4 +405,51 @@ extension SPAppDelegate {
         }
         EditorFactory.shared.scrollPositionCache.cleanup(keeping: allIdentifiers)
     }
+}
+
+// MARK: - Background Fetch
+//
+@available(iOS 13.0, *)
+extension SPAppDelegate {
+    @objc
+    func registerBackgroundRefreshTask() {
+        BGTaskScheduler.shared.register(forTaskWithIdentifier: BackgroundRefreshConstants.identifier, using: .main) { task in
+            guard let task = task as? BGAppRefreshTask else {
+                return
+            }
+            self.handleAppRefresh(task: task)
+        }
+    }
+
+    private func handleAppRefresh(task: BGAppRefreshTask) {
+        scheduleAppRefresh()
+        print("Ran handle app refersh")
+        simperium.backgroundFetch { result in
+            if result == .failed {
+                NSLog("<< Background Fetch: New Data Received")
+                task.setTaskCompleted(success: false)
+                return
+            } else if result == .noData {
+                NSLog("<< Background Fetch: No Data Received")
+            }
+            task.setTaskCompleted(success: true)
+        }
+    }
+
+
+    @objc
+    func scheduleAppRefresh() {
+        let request = BGAppRefreshTaskRequest(identifier: BackgroundRefreshConstants.identifier)
+        request.earliestBeginDate = Date(timeIntervalSinceNow: BackgroundRefreshConstants.earliestBeginDate) //15 minutes
+        do {
+            try BGTaskScheduler.shared.submit(request)
+        } catch {
+            print("Couldn't schedule app refersh: \(error)")
+        }
+    }
+}
+
+private struct BackgroundRefreshConstants {
+    static let identifier = "com.codality.NotationalFlow.backgroundRefresh"
+    static let earliestBeginDate = 900.0
 }
