@@ -599,7 +599,6 @@
                 }
             }
         }
-        [_simperium save];
         
         [self presentNote:newNote animated:NO];
     }
