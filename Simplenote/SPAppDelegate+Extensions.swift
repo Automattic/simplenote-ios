@@ -436,11 +436,10 @@ extension SPAppDelegate {
         }
     }
 
-
     @objc
     func scheduleAppRefresh() {
         let request = BGAppRefreshTaskRequest(identifier: BackgroundRefreshConstants.identifier)
-        request.earliestBeginDate = Date(timeIntervalSinceNow: BackgroundRefreshConstants.earliestBeginDate) //15 minutes
+        request.earliestBeginDate = Date(timeIntervalSinceNow: BackgroundRefreshConstants.earliestBeginDate)
         do {
             try BGTaskScheduler.shared.submit(request)
         } catch {
@@ -451,5 +450,5 @@ extension SPAppDelegate {
 
 private struct BackgroundRefreshConstants {
     static let identifier = "com.codality.NotationalFlow.backgroundRefresh"
-    static let earliestBeginDate = 900.0
+    static let earliestBeginDate = 1800.0 //30 minutes
 }
