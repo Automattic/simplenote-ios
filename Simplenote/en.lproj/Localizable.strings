@@ -10,11 +10,20 @@
 /* Number of failed entries entering in passcode */
 "%i Failed Passcode Attempts" = "%i Failed Passcode Attempts";
 
+/* Note trashed notification */
+"%i Note Trashed" = "%i Note Trashed";
+
+/* Notes trashed notification */
+"%i Notes Trashed" = "%i Notes Trashed";
+
 /* Count of interlink references to a note */
 "%i Reference" = "%i Reference";
 
 /* Count of interlink references to a note */
 "%i References" = "%i References";
+
+/* Count of currently selected notes */
+"%i Selected" = "%i Selected";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- Minimum of 8 characters";
@@ -75,6 +84,9 @@
 /* No comment provided by engineer. */
 "Appearance" = "Appearance";
 
+/* Engine URL Message */
+"AppEngine Endpoints" = "AppEngine Endpoints";
+
 /* Automattic hiring description */
 "Are you a developer? We’re hiring." = "Are you a developer? We’re hiring.";
 
@@ -87,6 +99,9 @@
 /* User Authenticated */
 "Authenticated" = "Authenticated";
 
+/* Engine URL Message */
+"Authentication Endpoints" = "Authentication Endpoints";
+
 /* The Simplenote blog */
 "Blog" = "Blog";
 
@@ -94,6 +109,7 @@
 "By creating an account you agree to our" = "By creating an account you agree to our";
 
 /* Cancel Action
+   Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
    PinLock screen \"cancel\" button
@@ -219,6 +235,9 @@
 /* Warning message shown when current note is deleted on another device */
 "deleted-note-warning" = "This note was deleted on another device.";
 
+/* Deselect all Button Label */
+"Deselect All" = "Deselect All";
+
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "Diagnostics";
 
@@ -246,7 +265,8 @@
    Done toolbar button */
 "Done" = "Done";
 
-/* Edit Tags Action: Visible in the Tags List */
+/* Edit button title
+   Edit Tags Action: Visible in the Tags List */
 "Edit" = "Edit";
 
 /* Email TextField Placeholder */
@@ -377,6 +397,9 @@
 
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "Modified: Oldest";
+
+/* Accessibility hint for trash selected notes button */
+"Move selected notes to trash" = "Move selected notes to trash";
 
 /* Delete Action
    Deletes a note */
@@ -564,6 +587,10 @@
 /* Accessibility label describing a slider used to reset the current note to a previous version */
 "Select a Version" = "Select a Version";
 
+/* Select all Button Label
+   Select all button title */
+"Select All" = "Select All";
+
 /* For debugging use */
 "Send a Test Crash" = "Send a Test Crash";
 
@@ -635,6 +662,9 @@
 /* Tags List Header */
 "Tags" = "Tags";
 
+/* Accessibility hint for the select/deselect all button */
+"Tap button to select or deselect all notes" = "Tap button to select or deselect all notes";
+
 /* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
 "Terms and Conditions" = "Terms and Conditions";
 
@@ -667,6 +697,9 @@
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Touch ID";
+
+/* Move selected notes to trash */
+"Trash Notes" = "Trash Notes";
 
 /* Title: Trash Tag is selected
    Trash filter button */
@@ -752,6 +785,9 @@
 
 /* Message shown in note list when no notes are in the trash */
 "Your trash is empty" = "Your trash is empty";
+
+/* Warning Title */
+"⚠️ Important" = "⚠️ Important";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞 Debug Enabled 🐞";
