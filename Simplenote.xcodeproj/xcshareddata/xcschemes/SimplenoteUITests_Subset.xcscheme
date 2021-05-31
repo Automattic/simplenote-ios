@@ -44,10 +44,10 @@
                   Identifier = "SimplenoteUISmokeTestsNoteEditor/testAddedURLIsLinkified()">
                </Test>
                <Test
-                  Identifier = "SimplenoteUISmokeTestsNoteEditor/testCanFlipToEditMode()">
+                  Identifier = "SimplenoteUISmokeTestsNoteEditor/testBulletedLists()">
                </Test>
                <Test
-                  Identifier = "SimplenoteUISmokeTestsNoteEditor/testCreateCheckedItem()">
+                  Identifier = "SimplenoteUISmokeTestsNoteEditor/testCanFlipToEditMode()">
                </Test>
                <Test
                   Identifier = "SimplenoteUISmokeTestsNoteEditor/testCreateUncheckedItem()">
