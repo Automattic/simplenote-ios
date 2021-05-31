@@ -668,18 +668,19 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 
 - (UIAlertController*)pinLockRequiredAlert
 {
-    NSString* alertTitle = NSLocalizedString(([NSString stringWithFormat:@"To enable %@, you must have a passcode setup first.", self.biometryTitle]),
-                                             @"Prompt to setup passcode before biomtery lock");
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:self.biometryTitle
+    NSString *alertTitleTemplate = NSLocalizedString(@"To enable %1$@, you must have a passcode setup first.",
+                                                     @"Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID");
+    NSString *alertTitle = [NSString stringWithFormat:alertTitleTemplate, self.biometryTitle];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:self.biometryTitle
                                                                    message:alertTitle
                                                             preferredStyle:UIAlertControllerStyleAlert];
 
-    NSString* setupTitle = NSLocalizedString(@"Set up Passcode", @"Setup a passcode action button");
+    NSString *setupTitle = NSLocalizedString(@"Set up Passcode", @"Setup a passcode action button");
     [alert addActionWithTitle:setupTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self showPinLockViewController];
     }];
 
-    NSString* cancelTitle = NSLocalizedString(@"Cancel", @"Cancel action button");
+    NSString *cancelTitle = NSLocalizedString(@"Cancel", @"Cancel action button");
     [alert addCancelActionWithTitle:cancelTitle handler:^(UIAlertAction * action) {
         [self.biometrySwitch setOn:NO];
     }];
