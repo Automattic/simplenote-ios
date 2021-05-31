@@ -711,7 +711,7 @@ end
   lane :run_ui_tests do | options |
     scan(
       workspace: workspace_name,
-      scheme: options[:sheme] || "SimplenoteUITests_Subset",
+      scheme: options[:scheme] || "SimplenoteUITests_Subset",
       device: options[:device] || "iPhone 12",
       prelaunch_simulator: true,
       reset_simulator: true,
