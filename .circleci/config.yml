@@ -188,14 +188,14 @@ workflows:
       - Test
       - UI Tests:
           name: UI Tests Subset (iPhone 12)
-          device: "iPhone 12"
-          scheme: "SimplenoteUITests_Subset"
+          device: iPhone 12
+          scheme: SimplenoteUITests_Subset
       - Optional Full UI Test:
           type: approval
       - UI Tests:
           name: UI Tests Full (iPhone 12)
-          device: "iPhone 12"
-          scheme: "SimplenoteUITests"
+          device: iPhone 12
+          scheme: SimplenoteUITests
           requires: [ "Optional Full UI Test" ]
   Installable Build:
     when:
