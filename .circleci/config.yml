@@ -146,6 +146,10 @@ jobs:
         description: The device (e.g. "iPhone 12") to use when running tests.
         type: string
         default: "iPhone 12"
+      scheme:
+        description: Xcode scheme with tests.
+        type: string
+        default: "SimplenoteUITests_Subset"
     executor:
       name: ios/default
       xcode-version: "12.4.0"
@@ -166,7 +170,7 @@ jobs:
       # END: Swift Package Manager Workaround
       - run:
           name: Fastlane
-          command: bundle exec fastlane pick_test_account_and_run_ui_tests device:'<< parameters.device >>'
+          command: bundle exec fastlane pick_test_account_and_run_ui_tests scheme:'<< parameters.scheme >>' device:'<< parameters.device >>'
       - store_artifacts:
           path: output/scan/report.html
       - store_artifacts:
@@ -183,8 +187,14 @@ workflows:
     jobs:
       - Test
       - UI Tests:
-          name: UI Tests (iPhone 12)
+          name: UI Tests Subset (iPhone 12)
           device: "iPhone 12"
+          scheme: "SimplenoteUITests_Subset"
+      - UI Tests:
+          type: approval
+          name: UI Tests Full (iPhone 12)
+          device: "iPhone 12"
+          scheme: "SimplenoteUITests"
   Installable Build:
     when:
        and:

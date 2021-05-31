@@ -9,7 +9,6 @@ end
 
 USER_ENV_FILE_PATH = File.join(Dir.home, '.simplenoteios-env.default')
 PROJECT_ENV_FILE_PATH = File.expand_path(File.join(Dir.pwd, '../.configure-files/project.env'))
-UI_TESTS_SCHEME = "SimplenoteUITests"
 $used_test_account_index = nil
 
 before_all do
@@ -703,20 +702,19 @@ end
   # selected for now, there will be no credentials race condition.
   # -----------------------------------------------------------------------------------
   # Usage:
-  # bundle exec fastlane run_ui_tests [device:<Name of the iOS Simulator>] [test_account:<Test account email>]
+  # bundle exec fastlane run_ui_tests [sheme:<Xcode scheme with UI tests>] [device:<Name of the iOS Simulator>] [test_account:<Test account email>]
   #
   # Example:
-  # bundle exec fastlane run_ui_tests device:"iPhone 12" test_account:"test.account@test.com"
+  # bundle exec fastlane run_ui_tests sheme:"SimplenoteUITests_Subset" device:"iPhone 12" test_account:"test.account@test.com"
   #####################################################################################
   desc "Run UI tests"
   lane :run_ui_tests do | options |
     scan(
       workspace: workspace_name,
-      scheme: UI_TESTS_SCHEME,
+      scheme: options[:sheme] || "SimplenoteUITests_Subset",
       device: options[:device] || "iPhone 12",
       prelaunch_simulator: true,
       reset_simulator: true,
-      only_testing: "SimplenoteUITests/SimplenoteUISmokeTestsTrash",
       xcargs: { UI_TEST_ACCOUNT: options[:test_account] || '' }
     )
   end
