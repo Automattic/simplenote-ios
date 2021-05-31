@@ -1,3 +1,6 @@
-- Ikon Simplenote telah diperbarui
-- Pemberitahuan di aplikasi ditambahkan untuk memberi tahu pengguna terkait berbagai aktivitas di aplikasi
-- Pengaturan pengurutan pencarian diubah ke pengaturan pengurutan umum.
+- Bilah Catatan Baru
+- Masalah rendering menu konteks yang terkadang muncul sudah diatasi
+- Judul peringatan kolaborasi tidak lagi berhuruf kapital
+- Masalah pemberitahuan yang tidak ditampilkan dalam beberapa kasus sudah diatasi
+- Masalah tag yang tidak dapat dihapus untuk catatan yang telah dipindah ke tong sampah sudah diatasi
+- Peningkatan dukungan ukuran font dinamis pada pemberitahuan

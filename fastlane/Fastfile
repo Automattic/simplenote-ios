@@ -71,12 +71,12 @@ end
     ios_bump_version_release()
     new_version = ios_get_app_version()
     ios_update_release_notes(new_version: new_version)
+    get_prs_list(repository:GHHELPER_REPO, milestone: new_version, report_path:"#{File.expand_path('~')}/simplenoteios_prs_list_#{old_version}_#{new_version}.txt")
     setbranchprotection(repository:GHHELPER_REPO, branch: "release/#{new_version}")
     setfrozentag(repository:GHHELPER_REPO, milestone: new_version)
 
     ios_localize_project()
     trigger_beta_build(branch_to_build: "release/#{new_version}")
-    get_prs_list(repository:GHHELPER_REPO, milestone:"#{old_version}", report_path:"#{File.expand_path('~')}/simplenoteios_prs_list_#{old_version}_#{new_version}.txt")
   end
 
   #####################################################################################
@@ -698,21 +698,22 @@ end
   # selected for now, there will be no credentials race condition.
   # -----------------------------------------------------------------------------------
   # Usage:
-  # bundle exec fastlane run_ui_tests [device:<Name of the iOS Simulator >]
+  # bundle exec fastlane run_ui_tests [device:<Name of the iOS Simulator>] [test_account:<Test account email>]
   #
   # Example:
-  # bundle exec fastlane run_ui_tests device:"iPhone 12"
+  # bundle exec fastlane run_ui_tests device:"iPhone 12" test_account:"test.account@test.com"
   #####################################################################################
   desc "Run UI tests"
   lane :run_ui_tests do | options |
-  scan(
-    workspace: workspace_name,
-    scheme: UI_TESTS_SCHEME,
-    device: options[:device] || "iPhone 12",
-    prelaunch_simulator: true,
-    reset_simulator: true,
-    only_testing: "SimplenoteUITests/SimplenoteUISmokeTestsLogin"
-  )
+    scan(
+      workspace: workspace_name,
+      scheme: UI_TESTS_SCHEME,
+      device: options[:device] || "iPhone 12",
+      prelaunch_simulator: true,
+      reset_simulator: true,
+      only_testing: "SimplenoteUITests/SimplenoteUISmokeTestsTrash",
+      xcargs: { UI_TEST_ACCOUNT: options[:test_account] || '' }
+    )
   end
 end
 

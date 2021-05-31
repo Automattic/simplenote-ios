@@ -39,7 +39,7 @@ class SimplenoteUISmokeTestsSearch: XCTestCase {
         app.launch()
         _ = attemptLogOut()
         EmailLogin.open()
-        EmailLogin.logIn(email: testDataExistingEmail, password: testDataExistingPassword)
+        EmailLogin.logIn()
         NoteList.waitForLoad()
         NoteList.trashAllNotes()
         Trash.empty()

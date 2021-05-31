@@ -1,3 +1,6 @@
-- Se han actualizado los iconos de Simplenote.
-- Se han añadido notificaciones dentro de la aplicación para avisar a los usuarios sobre las distintas actividades en la aplicación.
-- Se han cambiado los ajustes de ordenación de los resultados de búsqueda para usar la configuración de ordenación general.
+- Nueva barra de notas
+- Se ha corregido un problema ocasional que afectaba a la apariencia del menú contextual
+- Se han quitado las mayúsculas del título de la alerta de colaboración
+- Se ha corregido un problema que hacía que los avisos no aparecieran en algunos casos
+- Se ha corregido un problema que hacía que las etiquetas no se eliminaran de las notas movidas a la papelera
+- Se ha mejorado la compatibilidad con tamaños de fuente dinámicos en los avisos

@@ -10,7 +10,7 @@ class Trash {
 
     class func restoreNote(noteName: String) {
         app.tables.cells[noteName].swipeLeft()
-        app.tables.cells[noteName].buttons[UID.Button.trashRestore].tap()
+        app.tables.cells[noteName].buttons[UID.Button.restoreNote].tap()
     }
 
     class func deleteNote(noteName: String) {

@@ -35,8 +35,9 @@ enum UID {
         static let noteEditorInformation = "Information"
         static let noteEditorMenu = "note-menu"
         static let itemTrash = "icon trash"
-        static let noteTrash = "Move to Trash"
-        static let trashRestore = "icon restore"
+        static let trashNote = "Move to Trash"
+        static let restoreNote = "Restore Note"
+        static let deleteNote = "Delete Note"
         static let trashEmptyTrash = "Empty"
         static let clearText = "Clear text"
         static let cancel = "Cancel"
@@ -72,5 +73,5 @@ enum Text {
     static let loginPasswordShort = "Password must contain at least 4 characters"
 }
 
-let testDataExistingEmail = "simplenoteuitest@mailinator.com"
-let testDataExistingPassword = "qazxswedc"
+let testDataEmail = "simplenoteuitest@mailinator.com"
+let testDataPassword = "qazxswedc"

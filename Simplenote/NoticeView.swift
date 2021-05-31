@@ -50,6 +50,7 @@ class NoticeView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         setupViewStyles()
         setupGestureRecognizers()
+        configureAccessibilityIfNeeded()
 
         layoutIfNeeded()
     }
@@ -74,6 +75,15 @@ class NoticeView: UIView {
 
     }
 
+    private func configureAccessibilityIfNeeded() {
+        switch traitCollection.preferredContentSizeCategory {
+        case .accessibilityLarge, .accessibilityExtraLarge, .accessibilityExtraExtraLarge, .accessibilityExtraExtraExtraLarge:
+            stackView.axis = .vertical
+        default:
+            return
+        }
+    }
+
     // MARK: Action
     //
     @IBAction func noticeButtonWasTapped(_ sender: Any) {
@@ -82,13 +92,12 @@ class NoticeView: UIView {
     }
 }
 
-// NOTE: long press recognizing has not been connected to anything yet
-// Currently just prints to log that a press event happened.
 extension NoticeView {
 
-    // MARK: Long Press Gesture Recognizer
+    // MARK: Gesture Recognizers
     //
-    @objc private func viewWasLongPressed(_ gesture: UIGestureRecognizer) {
+    @objc
+    private func viewWasLongPressed(_ gesture: UIGestureRecognizer) {
         switch gesture.state {
         case .began:
             longPressBegan()

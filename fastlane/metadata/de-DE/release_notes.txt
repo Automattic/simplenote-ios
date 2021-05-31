@@ -1,3 +1,6 @@
-- Simplenote-Icons wurden überarbeitet
-- In-App-Benachrichtigungen wurden hinzugefügt, die Benutzer über verschiedene Aktivitäten in der App informieren
-- Sortierungseinstellungen in der Suche wurden geändert und verwenden nun die allgemeinen Sortierungseinstellungen.
+- Neue Notizenleiste
+- Gelegentlich auftretendes Problem mit dem kontextuellen Menü-Rendering behoben
+- Kapitalschrift vom Titel des Zusammenarbeitshinweises entfernt
+- Problem mit der Anzeige von Hinweisen behoben
+- Problem behoben, durch das Schlagwörter von Notizen im Papierkorb nicht gelöscht wurden
+- Verbesserte dynamische Schriftgrößenunterstützung in den Hinweisen

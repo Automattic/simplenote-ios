@@ -89,14 +89,15 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.searchController hideNavigationBarIfNecessary];
 
+    [self refershNavigationButtons];
     if (!self.navigatingUsingKeyboard) {
         [self.tableView deselectSelectedRowAnimated:YES];
         self.selectedNote = nil;
     }
 
     self.navigatingUsingKeyboard = NO;
+    [self refreshStyle];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -229,10 +230,33 @@
 
     // Refresh the SearchBar's UI
     [self.searchBar applySimplenoteStyle];
+
+    self.navigationController.toolbar.translucent = false;
+    self.navigationController.toolbar.barTintColor = [UIColor simplenoteSortBarBackgroundColor];
+}
+
+- (void)refershNavigationButtons {
+    [self updateNavigationBar];
+    [self refreshNavigationControllerToolbar];
+}
+
+- (void)refreshNavigationControllerToolbar
+{
+    if (UIDevice.isPad) {
+        [self.navigationController setToolbarHidden:YES animated:YES];
+        return;
+    }
+    
+    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    NSArray *toolbarItems = [NSArray arrayWithObjects:flexibleSpace, self.addButton, nil];
+    [self setToolbarItems:toolbarItems animated:YES];
+
+    [self.navigationController setToolbarHidden:self.isSearchActive animated:YES];
 }
 
 - (void)updateNavigationBar {
-    UIBarButtonItem *rightButton = (self.isDeletedFilterActive) ? self.emptyTrashButton : self.addButton;
+    UIBarButtonItem *possibleAddButton = UIDevice.isPad ? self.addButton : nil;
+    UIBarButtonItem *rightButton = (self.isDeletedFilterActive) ? self.emptyTrashButton : possibleAddButton;
 
     [self.navigationItem setRightBarButtonItem:rightButton animated:YES];
     [self.navigationItem setLeftBarButtonItem:self.sidebarButton animated:YES];
@@ -346,6 +370,7 @@
     [self.notesListController beginSearch];
     [self reloadTableData];
     [self refreshTitle];
+    [self refershNavigationButtons];
 }
 
 - (void)searchDisplayControllerDidEndSearch:(SearchDisplayController *)controller
@@ -361,6 +386,7 @@
     /// Ref. https://github.com/Automattic/simplenote-ios/issues/777
     ///
     [self.notesListController endSearch];
+    [self refershNavigationButtons];
     [self update];
 
 }
@@ -490,7 +516,7 @@
     self.tableView.allowsSelection = !isTrashOnScreen;
     
     [self displayPlaceholdersIfNeeded];
-    [self updateNavigationBar];
+    [self refershNavigationButtons];
     [self hideRatingViewIfNeeded];
 }
 

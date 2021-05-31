@@ -141,7 +141,7 @@ extension NoteEditorTagListViewController: TagViewDelegate {
 
         let isEmailAddress = (tagName as NSString).isValidEmailAddress
         guard !isEmailAddress else {
-            let alertController = UIAlertController(title: Localization.CollaborationAlert.title.localizedUppercase,
+            let alertController = UIAlertController(title: Localization.CollaborationAlert.title,
                                                     message: Localization.CollaborationAlert.message,
                                                     preferredStyle: .alert)
             alertController.addCancelActionWithTitle(Localization.CollaborationAlert.cancelAction)
@@ -211,8 +211,8 @@ private struct Constants {
 //
 private struct Localization {
     enum CollaborationAlert {
-        static let title = NSLocalizedString("Collaboration has moved", comment: "")
-        static let message = NSLocalizedString("Sharing notes is now accessed through the action menu from the toolbar.", comment: "")
-        static let cancelAction = NSLocalizedString("OK", comment: "");
+        static let title = NSLocalizedString("Collaboration has moved", comment: "Alert title that collaboration has moved")
+        static let message = NSLocalizedString("Sharing notes is now accessed through the action menu from the toolbar.", comment: "Alert message that collaboration has moved")
+        static let cancelAction = NSLocalizedString("OK", comment: "Alert confirmation button title")
     }
 }
