@@ -118,7 +118,7 @@ class NoteList {
         }
 
         searchField.typeText(text)
-        sleep(2)
+        sleep(5)
     }
 
     class func searchCancel() {
