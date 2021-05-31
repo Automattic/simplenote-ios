@@ -246,10 +246,9 @@
         [self.navigationController setToolbarHidden:YES animated:YES];
         return;
     }
-    
-    [self configureNavigationToolbarButton];
 
     [self.navigationController setToolbarHidden:self.isSearchActive animated:YES];
+    [self configureNavigationToolbarButton];
 }
 
 - (void)updateNavigationBar {
