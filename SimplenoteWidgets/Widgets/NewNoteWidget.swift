@@ -16,6 +16,6 @@ struct NewNoteWidget: Widget {
 
 private struct Constants {
     static let configurationKind = "NewNoteWidget"
-    static let displayName = "New Note"
-    static let description = "Create a new note instantly with one tap."
+    static let displayName = NSLocalizedString("New Note", comment: "New Note Widget Title")
+    static let description = NSLocalizedString("Create a new note instantly with one tap.", comment: "New Note Widget Description")
 }
