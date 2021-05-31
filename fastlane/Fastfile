@@ -28,6 +28,11 @@ before_all do
   # It is skipped if this isn't running on CI
   # See https://circleci.com/docs/2.0/ios-codesigning/
   setup_circle_ci
+
+  # Hack to safely complete the 4.37 code freeze – Will require extra cleanup
+  # afterwards
+  ENV['APP_STORE_CONNECT_API_KEY_PATH'] = File.join(Dir.home, '.configure', 'simplenote-ios', 'secrets', 'app_store_connect_fastlane_api_key.json')
+  # End hack
 end
 
 error do |lane, exception, options|
