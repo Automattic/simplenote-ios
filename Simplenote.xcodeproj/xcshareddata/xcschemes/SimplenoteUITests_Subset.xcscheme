@@ -47,7 +47,7 @@
                   Identifier = "SimplenoteUISmokeTestsNoteEditor/testBulletedLists()">
                </Test>
                <Test
-                  Identifier = "SimplenoteUISmokeTestsNoteEditor/testCanFlipToEditMode()">
+                  Identifier = "SimplenoteUISmokeTestsNoteEditor/testCanPreviewMarkdownBySwiping()">
                </Test>
                <Test
                   Identifier = "SimplenoteUISmokeTestsNoteEditor/testCreateUncheckedItem()">

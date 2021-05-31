@@ -145,11 +145,9 @@ jobs:
       device:
         description: The device (e.g. "iPhone 12") to use when running tests.
         type: string
-        default: "iPhone 12"
       scheme:
         description: Xcode scheme with tests.
         type: string
-        default: "SimplenoteUITests_Subset"
     executor:
       name: ios/default
       xcode-version: "12.4.0"
