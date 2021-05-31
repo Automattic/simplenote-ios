@@ -44,7 +44,7 @@ extension UIColor {
         let hexString = hexString.trimmingCharacters(in: .whitespacesAndNewlines)
         let scanner = Scanner(string: hexString)
 
-        let characters = CharacterSet.init(charactersIn: "#")
+        let characters = CharacterSet(charactersIn: "#")
         scanner.charactersToBeSkipped = .some(characters)
 
         var color: UInt64 = 0

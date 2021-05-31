@@ -1,7 +1,7 @@
 import WidgetKit
 
 struct NewNoteWidgetEntry: TimelineEntry {
-    var date: Date
+    let date: Date
 }
 
 struct NewNoteTimelineProvider: TimelineProvider {
