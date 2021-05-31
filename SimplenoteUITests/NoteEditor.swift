@@ -57,7 +57,7 @@ class NoteEditor {
 
     class func swipeToPreview() {
         app.textViews.firstMatch.swipeLeft()
-        sleep(1)
+        sleep(2)
     }
 
     class func leaveEditor() {
