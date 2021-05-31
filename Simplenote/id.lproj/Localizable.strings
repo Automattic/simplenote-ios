@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-04-27 09:54:03+0000 */
+/* Translation-Revision-Date: 2021-05-27 15:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=n > 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: id */
@@ -126,7 +126,7 @@
 /* Opens the Collaborate UI */
 "Collaborate" = "Kolaborasi";
 
-/* No comment provided by engineer. */
+/* Alert title that collaboration has moved */
 "Collaboration has moved" = "Kolaborasi telah dipindah";
 
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
@@ -208,6 +208,9 @@
 
 /* PinLock screen \"delete\" button */
 "Delete" = "Hapus";
+
+/* Delet a note from trash */
+"Delete Note" = "Hapus Catatan";
 
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Hapus Catatan";
@@ -418,7 +421,8 @@
 /* Notes Header (Search Mode) */
 "Notes" = "Catatan";
 
-/* Closes alert controller for spinner on About view
+/* Alert confirmation button title
+   Closes alert controller for spinner on About view
    Dismisses an AlertController */
 "OK" = "OK";
 
@@ -534,7 +538,8 @@
 /* Response Title */
 "Response" = "Respons";
 
-/* Restore a note to a previous version */
+/* Restore a note from trash
+   Restore a note to a previous version */
 "Restore Note" = "Pulihkan Catatan";
 
 /* Title -> Review you account screen */
@@ -578,7 +583,7 @@
 /* Shares a note */
 "Share..." = "Bagikan...";
 
-/* No comment provided by engineer. */
+/* Alert message that collaboration has moved */
 "Sharing notes is now accessed through the action menu from the toolbar." = "Berbagi catatan kini dapat diakses melalui menu tindakan dari bilah peralatan.";
 
 /* UI region to the left of the note list which shows all of a users tags */

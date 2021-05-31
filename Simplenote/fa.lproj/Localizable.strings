@@ -126,7 +126,7 @@
 /* Opens the Collaborate UI */
 "Collaborate" = "Collaborate";
 
-/* No comment provided by engineer. */
+/* Alert title that collaboration has moved */
 "Collaboration has moved" = "Collaboration has moved";
 
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
@@ -208,6 +208,9 @@
 
 /* PinLock screen \"delete\" button */
 "Delete" = "Delete";
+
+/* Delet a note from trash */
+"Delete Note" = "Delete Note";
 
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Delete Notes";
@@ -418,7 +421,8 @@
 /* Notes Header (Search Mode) */
 "Notes" = "Notes";
 
-/* Closes alert controller for spinner on About view
+/* Alert confirmation button title
+   Closes alert controller for spinner on About view
    Dismisses an AlertController */
 "OK" = "OK";
 
@@ -534,7 +538,8 @@
 /* Response Title */
 "Response" = "Response";
 
-/* Restore a note to a previous version */
+/* Restore a note from trash
+   Restore a note to a previous version */
 "Restore Note" = "Restore Note";
 
 /* Title -> Review you account screen */
@@ -578,7 +583,7 @@
 /* Shares a note */
 "Share..." = "Share...";
 
-/* No comment provided by engineer. */
+/* Alert message that collaboration has moved */
 "Sharing notes is now accessed through the action menu from the toolbar." = "Sharing notes is now accessed through the action menu from the toolbar.";
 
 /* UI region to the left of the note list which shows all of a users tags */

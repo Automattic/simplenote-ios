@@ -1,3 +1,6 @@
-– Ikonerna i Simplenote har ändrats
-– Lade till meddelanden i appen för att avisera användare om olika aktiviteter i appen
-– Ändrade sorteringsinställningarna för sökning så de använder sig av den allmänna sorteringsinställningen.
+– Nytt anteckningsfält
+– Åtgärdade ett ibland förekommande fel med rendering av snabbmenyn
+– Tog bort enbart versaler i rubriken för samarbetsaviseringen
+– Åtgärdade problemet där meddelanden inte visades i vissa fall
+– Åtgärdade ett problem där taggar inte togs bort när anteckningar raderades
+– Förbättrade stöd för dynamisk teckensnittsstorlek i meddelanden
