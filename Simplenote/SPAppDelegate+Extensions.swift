@@ -459,7 +459,7 @@ extension SPAppDelegate {
 }
 
 private struct BackgroundRefreshConstants {
-    static let earliestBeginDate = TimeInterval(60) //30 minutes
+    static let earliestBeginDate = TimeInterval(1800.0) //30 minutes
     static let timeOut = TimeInterval(25)
     static let bundleIdentifier = Bundle.main.bundleIdentifier ?? "com.codality.NotationalFlow"
     static let bgTaskIdentifier = bundleIdentifier + ".refresh"
