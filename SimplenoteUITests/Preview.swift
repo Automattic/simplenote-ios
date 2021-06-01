@@ -23,7 +23,7 @@ class Preview {
         // Should be replaced with proper way to determine if page is loaded
         let link = app.descendants(matching: .link).element(matching: .link, identifier: linkText)
         link.tap()
-        sleep(4)
+        sleep(5)
     }
 
     class func getStaticTextsWithExactValueCount(value: String) -> Int {
