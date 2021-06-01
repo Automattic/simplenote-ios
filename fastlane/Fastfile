@@ -937,13 +937,11 @@ def change_test_account_availability(availability)
   else
     UI.message("Availability should be either \"taken\" or \"free\"")
   end
-
-  #accounts_state[$used_test_account_index] = availability
   
   UI.message("Writing new account state: #{accounts_hash}")
   uri = URI.parse(get_required_env("UI_TESTS_ACCOUNTS_HASH_URL"))
   request = Net::HTTP::Post.new(uri)
-  request.body = accounts_hash
+  request.body = accounts_hash.to_s
 
   req_options = {
     use_ssl: uri.scheme == "https",
