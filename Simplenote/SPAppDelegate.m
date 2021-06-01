@@ -196,8 +196,10 @@
     [self showPasscodeLockIfNecessary];
     [self cleanupScrollPositionCache];
 
-    //Schedule background refresh
-    [self scheduleAppRefresh];
+    // Schedule background refresh
+    if (@available(iOS 13.0, *)) {
+        [self scheduleAppRefresh];
+    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

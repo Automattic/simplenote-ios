@@ -413,7 +413,12 @@ extension SPAppDelegate {
 extension SPAppDelegate {
     @objc
     func registerBackgroundRefreshTask() {
-        BGTaskScheduler.shared.register(forTaskWithIdentifier: BackgroundRefreshConstants.identifier, using: .main) { task in
+        guard BuildConfiguration.current == .debug else {
+            return
+        }
+
+        NSLog("Registered background task with identifier \(BackgroundRefreshConstants.bgTaskIdentifier)")
+        BGTaskScheduler.shared.register(forTaskWithIdentifier: BackgroundRefreshConstants.bgTaskIdentifier, using: .main) { task in
             guard let task = task as? BGAppRefreshTask else {
                 return
             }
@@ -422,23 +427,28 @@ extension SPAppDelegate {
     }
 
     private func handleAppRefresh(task: BGAppRefreshTask) {
+        NSLog("Did fire handle app refresh")
+        guard BuildConfiguration.current == .debug else {
+            return
+        }
+
+        NSLog("Background refresh intiated")
         scheduleAppRefresh()
-        print("Ran handle app refersh")
-        simperium.backgroundFetch { result in
-            if result == .failed {
-                NSLog("<< Background Fetch: New Data Received")
-                task.setTaskCompleted(success: false)
-                return
-            } else if result == .noData {
-                NSLog("<< Background Fetch: No Data Received")
-            }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + BackgroundRefreshConstants.timeOut) {
+            NSLog("Background refresh finishing")
             task.setTaskCompleted(success: true)
         }
     }
 
     @objc
     func scheduleAppRefresh() {
-        let request = BGAppRefreshTaskRequest(identifier: BackgroundRefreshConstants.identifier)
+        guard BuildConfiguration.current == .debug else {
+            return
+        }
+
+        NSLog("Background refresh scheduled")
+        let request = BGAppRefreshTaskRequest(identifier: BackgroundRefreshConstants.bgTaskIdentifier)
         request.earliestBeginDate = Date(timeIntervalSinceNow: BackgroundRefreshConstants.earliestBeginDate)
         do {
             try BGTaskScheduler.shared.submit(request)
@@ -449,6 +459,8 @@ extension SPAppDelegate {
 }
 
 private struct BackgroundRefreshConstants {
-    static let identifier = "com.codality.NotationalFlow.backgroundRefresh"
-    static let earliestBeginDate = 1800.0 //30 minutes
+    static let earliestBeginDate = TimeInterval(60) //30 minutes
+    static let timeOut = TimeInterval(25)
+    static let bundleIdentifier = Bundle.main.bundleIdentifier ?? "com.codality.NotationalFlow"
+    static let bgTaskIdentifier = bundleIdentifier + ".refresh"
 }
