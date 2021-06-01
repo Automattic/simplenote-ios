@@ -880,13 +880,13 @@ end
 def occupy_test_account
   UI.message("Looking for a free test account...")
   find_free_test_account
-  change_test_account_availability("T")
+  change_test_account_availability("taken")
 end
 
 def deoccupy_test_account
   return if $used_test_account_index == nil
   UI.message("Freeing used test account")
-  change_test_account_availability("F")
+  change_test_account_availability("free")
   $used_test_account_index = nil
 end
 
@@ -896,7 +896,7 @@ end
 #   get_test_accounts_state
 #     => "TFFFF"
 def get_test_accounts_state
-  uri = URI.parse(get_required_env("UI_TESTS_ACCOUNTS_URL"))
+  uri = URI.parse(get_required_env("UI_TESTS_ACCOUNTS_HASH_URL"))
   response = Net::HTTP.get_response(uri)
   accounts_state = response.body.chomp
   UI.message("State of test accounts: #{accounts_state}")
@@ -909,7 +909,15 @@ end
 #   find_free_test_account
 #     => 2
 def find_free_test_account
-  $used_test_account_index = get_test_accounts_state.index("F")
+  accounts_hash = eval(get_test_accounts_state)
+
+  accounts_hash.each do |key, value|
+    if value == "free"
+      $used_test_account_index = key.to_i 
+      break
+    end
+  end
+
   UI.user_error!("Could not find free UI Test account. Quitting.") if $used_test_account_index.nil? 
   UI.message("Free account index: #{$used_test_account_index}")
 end
@@ -919,12 +927,23 @@ end
 #   change_test_account_availability("F")
 #     => FFFFF
 def change_test_account_availability(availability)
-  accounts_state = get_test_accounts_state
-  accounts_state[$used_test_account_index] = availability
-  UI.message("Writing new account state: #{accounts_state}")
-  uri = URI.parse(get_required_env("UI_TESTS_ACCOUNTS_URL"))
+  accounts_hash = eval(get_test_accounts_state)
+
+  case availability
+  when "taken"
+    accounts_hash[$used_test_account_index] = "#{get_required_env("CIRCLE_BUILD_NUM")}"
+  when "free"
+    accounts_hash[$used_test_account_index] = availability
+  else
+    UI.message("Availability should be either \"taken\" or \"free\"")
+  end
+
+  #accounts_state[$used_test_account_index] = availability
+  
+  UI.message("Writing new account state: #{accounts_hash}")
+  uri = URI.parse(get_required_env("UI_TESTS_ACCOUNTS_HASH_URL"))
   request = Net::HTTP::Post.new(uri)
-  request.body = accounts_state
+  request.body = accounts_hash
 
   req_options = {
     use_ssl: uri.scheme == "https",
