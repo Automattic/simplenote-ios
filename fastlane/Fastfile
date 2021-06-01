@@ -31,7 +31,7 @@ error do |lane, exception, options|
 end
 
 after_each do |lane, options|
-  UI.message "TEST_TEST" if lane == :run_ui_tests
+  UI.message "TEST_" if lane == :run_ui_tests
 end
 
 platform :ios do
