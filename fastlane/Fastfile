@@ -928,7 +928,7 @@ end
 #     => FFFFF
 def change_test_account_availability(availability)
   accounts_hash = JSON.parse(get_test_accounts_state)
-  accounts_hash[$used_test_account_index] = availability
+  accounts_hash[$used_test_account_index.to_s] = availability
 
   UI.message("Writing new account state: #{accounts_hash}")
   uri = URI.parse(get_required_env("UI_TESTS_ACCOUNTS_HASH_URL"))
