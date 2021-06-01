@@ -731,7 +731,7 @@ end
   # Example:
   # bundle exec fastlane pick_test_account_and_run_ui_tests device:"iPhone 12"
   #####################################################################################
-  desc "Occupy a free test account and run UI tests using it"
+  desc "Occupy a free test account and run UI tests with it"
   lane :pick_test_account_and_run_ui_tests do | options |
     if is_ci
       occupy_test_account
