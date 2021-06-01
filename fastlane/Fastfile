@@ -9,7 +9,7 @@ end
 
 USER_ENV_FILE_PATH = File.join(Dir.home, '.simplenoteios-env.default')
 PROJECT_ENV_FILE_PATH = File.expand_path(File.join(Dir.pwd, '../.configure-files/project.env'))
-$used_test_account = ""
+$used_test_account_index = nil
 
 before_all do
   # Check that the env files exist
@@ -735,7 +735,7 @@ end
   lane :pick_test_account_and_run_ui_tests do | options |
     if is_ci
       occupy_test_account
-      run_ui_tests(options.merge({ test_account: get_required_env("UI_TESTS_ACCOUNT_EMAIL").sub("X", $used_test_account)}))
+      run_ui_tests(options.merge({ test_account: get_required_env("UI_TESTS_ACCOUNT_EMAIL").sub("X", $used_test_account_index.to_s)}))
       deoccupy_test_account
     else
       UI.message("This lane runs only on CI")
@@ -884,10 +884,10 @@ def occupy_test_account
 end
 
 def deoccupy_test_account
-  return if $used_test_account == nil
+  return if $used_test_account_index == nil
   UI.message("Freeing used test account")
   change_test_account_availability("free")
-  $used_test_account = nil
+  $used_test_account_index = nil
 end
 
 # Returns the value of test accounts key, which is 
@@ -913,13 +913,13 @@ def find_free_test_account
 
   accounts_hash.each do |key, value|
     if value == "free"
-      $used_test_account_index = key 
+      $used_test_account_index = key.to_i 
       break
     end
   end
 
-  UI.user_error!("Could not find free UI Test account. Quitting.") if $used_test_account.nil? 
-  UI.message("Free account index: #{$used_test_account}")
+  UI.user_error!("Could not find free UI Test account. Quitting.") if $used_test_account_index.nil? 
+  UI.message("Free account index: #{$used_test_account_index}")
 end
 
 # Replaces a character at `index` with `availability` value.
@@ -928,7 +928,7 @@ end
 #     => FFFFF
 def change_test_account_availability(availability)
   accounts_hash = eval(get_test_accounts_state)
-  accounts_hash[$used_test_account] = availability
+  accounts_hash[$used_test_account_index] = availability
 
   UI.message("Writing new account state: #{accounts_hash}")
   uri = URI.parse(get_required_env("UI_TESTS_ACCOUNTS_HASH_URL"))
