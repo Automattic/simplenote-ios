@@ -30,10 +30,6 @@ error do |lane, exception, options|
   deoccupy_test_account if lane == :run_ui_tests
 end
 
-after_each do |lane, options|
-  UI.message "TEST_" if lane == :run_ui_tests
-end
-
 platform :ios do
 ########################################################################
 # Environment
