@@ -896,11 +896,11 @@ end
 #   get_test_accounts_state
 #     => "TFFFF"
 def get_test_accounts_state
-  uri = URI.parse(get_required_env("UI_TESTS_ACCOUNTS_HASH_URL"))
+  uri = URI.parse(get_required_env("UI_TESTS_ACCOUNTS_JSON_URL"))
   response = Net::HTTP.get_response(uri)
   accounts_state = response.body.chomp
   UI.message("State of test accounts: #{accounts_state}")
-  accounts_state
+  JSON.parse(accounts_state)
 end
 
 # Returns the index of first "F" (Free) occurence in the test
@@ -909,7 +909,7 @@ end
 #   find_free_test_account
 #     => 2
 def find_free_test_account
-  accounts_hash = JSON.parse(get_test_accounts_state)
+  accounts_hash = get_test_accounts_state
 
   accounts_hash.each do |key, value|
     if value == "free"
@@ -927,11 +927,11 @@ end
 #   change_test_account_availability("F")
 #     => FFFFF
 def change_test_account_availability(availability)
-  accounts_hash = JSON.parse(get_test_accounts_state)
+  accounts_hash = get_test_accounts_state
   accounts_hash[$used_test_account_index.to_s] = availability
-
+  
   UI.message("Writing new account state: #{accounts_hash}")
-  uri = URI.parse(get_required_env("UI_TESTS_ACCOUNTS_HASH_URL"))
+  uri = URI.parse(get_required_env("UI_TESTS_ACCOUNTS_JSON_URL"))
   request = Net::HTTP::Post.new(uri)
   request.body = accounts_hash.to_json
 
