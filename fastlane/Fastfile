@@ -909,7 +909,7 @@ end
 #   find_free_test_account
 #     => 2
 def find_free_test_account
-  accounts_hash = eval(get_test_accounts_state)
+  accounts_hash = JSON.parse(get_test_accounts_state)
 
   accounts_hash.each do |key, value|
     if value == "free"
@@ -927,13 +927,13 @@ end
 #   change_test_account_availability("F")
 #     => FFFFF
 def change_test_account_availability(availability)
-  accounts_hash = eval(get_test_accounts_state)
+  accounts_hash = JSON.parse(get_test_accounts_state)
   accounts_hash[$used_test_account_index] = availability
 
   UI.message("Writing new account state: #{accounts_hash}")
   uri = URI.parse(get_required_env("UI_TESTS_ACCOUNTS_HASH_URL"))
   request = Net::HTTP::Post.new(uri)
-  request.body = accounts_hash.to_s
+  request.body = accounts_hash.to_json
 
   req_options = {
     use_ssl: uri.scheme == "https",
