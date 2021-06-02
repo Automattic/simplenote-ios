@@ -734,6 +734,7 @@ end
   desc "Occupy a free test account and run UI tests using it"
   lane :pick_test_account_and_run_ui_tests do | options |
     if is_ci
+      sanitize_test_accounts
       occupy_test_account
       run_ui_tests(options.merge({ test_account: get_required_env("UI_TESTS_ACCOUNT_EMAIL").sub("X", $used_test_account_index.to_s)}))
       deoccupy_test_account
@@ -894,9 +895,9 @@ end
 # the account index, and values are either "free" or CIRCLE_BUILD_NUM, in case if account
 # was occupied by a buld. Returns the hash.
 # Example:
-#   get_test_accounts_state
+#   get_test_accounts_hash
 #     => {"0"=>"4079", "1"=>"free", "2"=>"free", "3"=>"free"}
-def get_test_accounts_state
+def get_test_accounts_hash
   uri = URI.parse(get_required_env("UI_TESTS_ACCOUNTS_JSON_URL"))
   response = Net::HTTP.get_response(uri)
   accounts_state = response.body.chomp
@@ -904,13 +905,13 @@ def get_test_accounts_state
   JSON.parse(accounts_state)
 end
 
-# Returns the index of first "free" occurence in the test
-# accounts hash, or crashes fastlane if it was not found.
+# Return the index of the first free account from accounts hash
+# or crash fastlane if it was not found.
 # Example:
 #   find_free_test_account
 #     => 2
 def find_free_test_account
-  get_test_accounts_state.each do |key, value|
+  get_test_accounts_hash.each do |key, value|
     break $used_test_account_index = key.to_i if value == "free"
   end
 
@@ -918,15 +919,41 @@ def find_free_test_account
   UI.message("Free account index: #{$used_test_account_index}")
 end
 
-# Replaces a character at `index` with `availability` value.
+# Replace a value in a key which is equal to $used_test_account_index global variable
 # Example:
-#   change_test_account_availability("F")
-#     => FFFFF
+#   change_test_account_availability("free")
+#     => {"0"=>"free", "1"=>"free", "2"=>"free", "3"=>"free"}
+#
+#   change_test_account_availability("4820")
+#     => {"0"=>"4820", "1"=>"free", "2"=>"free", "3"=>"free"}
 def change_test_account_availability(availability)
-  accounts_hash = get_test_accounts_state
+  accounts_hash = get_test_accounts_hash
   accounts_hash[$used_test_account_index.to_s] = availability
-  
-  UI.message("Writing new account state: #{accounts_hash}")
+  submit_accounts_hash(accounts_hash)
+end
+
+def sanitize_test_accounts
+  accounts_hash = get_test_accounts_state
+  accounts_hash.each do |key, value|
+    if value != "free" && !is_job_running(value)
+      accounts_hash[key] = "free"
+      submit_accounts_hash(accounts_hash)
+    end
+  end
+end
+
+def is_job_running(job_number)
+  uri = URI.parse("https://circleci.com/api/v2/project/gh/Automattic/simplenote-ios/job/#{job_number}")
+  response = Net::HTTP.get_response(uri)
+  return if response.code != "200"
+
+  response_hash = JSON.parse(response.body)
+  puts "Status of Job Number #{job_number} is #{response_hash["status"]}"
+  parsed["status"] == "running"
+end
+
+def submit_accounts_hash(accounts_hash)
+  UI.message("Writing new accounts state: #{accounts_hash}")
   uri = URI.parse(get_required_env("UI_TESTS_ACCOUNTS_JSON_URL"))
   request = Net::HTTP::Post.new(uri)
   request.body = accounts_hash.to_json
@@ -939,5 +966,9 @@ def change_test_account_availability(availability)
     http.request(request)
   end
 
-  get_test_accounts_state
+  get_test_accounts_hash
 end
+
+
+
+
