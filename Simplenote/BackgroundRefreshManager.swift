@@ -1,20 +1,52 @@
 import Foundation
 import BackgroundTasks
 
+class BackgroundRefreshManager: NSObject {
+    private var timer: Timer? {
+        didSet {
+            oldValue?.invalidate()
+        }
+    }
 
-class SPBackgroundRefresh: NSObject {
+    private var handler: (()->Void)?
+
+    var finished: Bool = false {
+        didSet {
+            if finished == true {
+                handler?()
+            }
+        }
+    }
+
+    @objc
+    func refreshTimer() {
+        // If refresh is not running there will be no handler
+        guard handler != nil else {
+            return
+        }
+
+        timer = Timer.scheduledTimer(timeInterval: Constants.timerTimeOut, target: self, selector: #selector(finishRefresh), userInfo: nil, repeats: false)
+    }
+
+    @objc
+    private func finishRefresh() {
+        guard finished == true, let handler = handler else {
+            return
+        }
+
+        handler()
+
+        finished = false
+        self.handler = nil
+    }
 }
 
 @available(iOS 13.0, *)
-extension SPBackgroundRefresh {
+extension BackgroundRefreshManager {
     // MARK: - Background Fetch
     //
     @objc
     func registerBackgroundRefreshTask() {
-        guard BuildConfiguration.current == .debug else {
-            return
-        }
-
         NSLog("Registered background task with identifier \(Constants.bgTaskIdentifier)")
         BGTaskScheduler.shared.register(forTaskWithIdentifier: Constants.bgTaskIdentifier, using: .main) { task in
             guard let task = task as? BGAppRefreshTask else {
@@ -26,17 +58,18 @@ extension SPBackgroundRefresh {
 
     private func handleAppRefresh(task: BGAppRefreshTask) {
         NSLog("Did fire handle app refresh")
-        guard BuildConfiguration.current == .debug else {
-            return
+        handler = {
+            task.setTaskCompleted(success: true)
+        }
+
+        task.expirationHandler = {
+            self.finishRefresh()
         }
 
         NSLog("Background refresh intiated")
         scheduleAppRefresh()
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + Constants.timeOut) {
-            NSLog("Background refresh finishing")
-            task.setTaskCompleted(success: true)
-        }
+        refreshTimer()
     }
 
     @objc

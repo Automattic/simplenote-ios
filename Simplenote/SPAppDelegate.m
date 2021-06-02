@@ -44,7 +44,7 @@
 @property (strong, nonatomic) NSManagedObjectModel          *managedObjectModel;
 @property (strong, nonatomic) NSPersistentStoreCoordinator  *persistentStoreCoordinator;
 @property (weak,   nonatomic) SPModalActivityIndicator      *signOutActivityIndicator;
-@property (strong, nonatomic) SPBackgroundRefresh           *backgroundRefresh;
+@property (strong, nonatomic) BackgroundRefreshManager      *refreshManager;
 
 @end
 
@@ -169,7 +169,7 @@
 
     // Register background refresh task to system
     if (@available(iOS 13.0, *)) {
-        [self.backgroundRefresh registerBackgroundRefreshTask];
+        [self.refreshManager registerBackgroundRefreshTask];
     }
 
     // Index (All of the) Spotlight Items if the user upgraded
@@ -199,7 +199,7 @@
 
     // Schedule background refresh
     if (@available(iOS 13.0, *)) {
-        [self.backgroundRefresh scheduleAppRefresh];
+        [self.refreshManager scheduleAppRefresh];
     }
 }
 
@@ -431,6 +431,10 @@
 
 - (void)bucket:(SPBucket *)bucket didChangeObjectForKey:(NSString *)key forChangeType:(SPBucketChangeType)change memberNames:(NSArray *)memberNames
 {
+    if (@available(iOS 13.0, *)) {
+        [self.refreshManager refreshTimer];
+    }
+
     if ([bucket isEqual:[_simperium notesBucket]]) {
         // Note change
         switch (change) {
