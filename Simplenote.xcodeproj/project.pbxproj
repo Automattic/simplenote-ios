@@ -416,6 +416,7 @@
 		BA4499B325ED8AB0000C563E /* NoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4499B225ED8AB0000C563E /* NoticeView.swift */; };
 		BA4499BC25ED95D0000C563E /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4499BB25ED95D0000C563E /* Notice.swift */; };
 		BA4499C525ED95E5000C563E /* NoticeAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4499C425ED95E5000C563E /* NoticeAction.swift */; };
+		BA471060266821C0001A91A5 /* SPBackgroundRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA47105F266821C0001A91A5 /* SPBackgroundRefresh.swift */; };
 		BA4C6CFC264C744300B723A7 /* SeparatorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4C6CFB264C744300B723A7 /* SeparatorsView.swift */; };
 		BA55124E2600210B00D8F882 /* TimerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA55124D2600210B00D8F882 /* TimerFactory.swift */; };
 		BA55B05A25F067DF0042582B /* NoticePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA55B05925F067DF0042582B /* NoticePresenter.swift */; };
@@ -954,6 +955,7 @@
 		BA4499B225ED8AB0000C563E /* NoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeView.swift; sourceTree = "<group>"; };
 		BA4499BB25ED95D0000C563E /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
 		BA4499C425ED95E5000C563E /* NoticeAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeAction.swift; sourceTree = "<group>"; };
+		BA47105F266821C0001A91A5 /* SPBackgroundRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPBackgroundRefresh.swift; sourceTree = "<group>"; };
 		BA4C6CFB264C744300B723A7 /* SeparatorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorsView.swift; sourceTree = "<group>"; };
 		BA55124D2600210B00D8F882 /* TimerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFactory.swift; sourceTree = "<group>"; };
 		BA55B05925F067DF0042582B /* NoticePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticePresenter.swift; sourceTree = "<group>"; };
@@ -1880,6 +1882,7 @@
 				BA55124D2600210B00D8F882 /* TimerFactory.swift */,
 				BAB01791260AAE93007A9CC3 /* NoticeFactory.swift */,
 				BA4C6CFB264C744300B723A7 /* SeparatorsView.swift */,
+				BA47105F266821C0001A91A5 /* SPBackgroundRefresh.swift */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -2968,6 +2971,7 @@
 				BAA4856925D5E40900F3BDB9 /* SearchQuery+Simplenote.swift in Sources */,
 				B56B357F1AC3565600B9F365 /* UITextView+Simplenote.m in Sources */,
 				B5C9F71E193E75FE00FD2491 /* SPDebugViewController.m in Sources */,
+				BA471060266821C0001A91A5 /* SPBackgroundRefresh.swift in Sources */,
 				B5A6166F2150855300CBE47B /* Preferences.m in Sources */,
 				46A3C98E17DFA81A002865AE /* SPObjectManager.m in Sources */,
 				B5DF734F22A599D100602CE7 /* SPNotifications.m in Sources */,
