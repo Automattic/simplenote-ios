@@ -933,6 +933,7 @@ def change_test_account_availability(availability)
 end
 
 def sanitize_test_accounts
+  UI.message("Sanitizing stale test accounts...")
   accounts_hash = get_test_accounts_hash
   accounts_hash.each do |key, value|
     if value != "free" && !is_job_running(value)
@@ -949,7 +950,7 @@ def is_job_running(job_number)
 
   response_hash = JSON.parse(response.body)
   puts "Status of Job Number #{job_number} is #{response_hash["status"]}"
-  parsed["status"] == "running"
+  response_hash["status"] == "running"
 end
 
 def submit_accounts_hash(accounts_hash)
