@@ -966,7 +966,3 @@ def submit_accounts_hash(accounts_hash)
 
   UI.message("Accounts state after write: #{get_test_accounts_hash}")
 end
-
-
-
-
