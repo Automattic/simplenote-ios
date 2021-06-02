@@ -880,7 +880,7 @@ end
 
 def deoccupy_test_account
   return if $used_test_account_index == nil
-  UI.message("Freeing used test account")
+  UI.message("Freeing used test account #{$used_test_account_index}")
   change_test_account_availability("free")
   $used_test_account_index = nil
 end
