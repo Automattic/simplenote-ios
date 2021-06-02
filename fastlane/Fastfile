@@ -803,8 +803,12 @@ end
       type: "enterprise",
       team_id: get_required_env("INT_EXPORT_TEAM_ID"),
       readonly: options[:readonly] || is_ci,
-      app_identifier: ["com.codality.NotationalFlow.Alpha",
-                      "com.codality.NotationalFlow.Alpha.Share"])
+      app_identifier: [
+        "com.codality.NotationalFlow.Alpha",
+        "com.codality.NotationalFlow.Alpha.Share",
+        "com.codality.NotationalFlow.Alpha.Widgets",
+      ]
+    )
   end
 
   private_lane :internal_code_signing do |options|
@@ -812,8 +816,12 @@ end
       type: "enterprise",
       team_id: get_required_env("INT_EXPORT_TEAM_ID"),
       readonly: options[:readonly] || is_ci,
-      app_identifier: ["com.codality.NotationalFlow.Internal",
-                       "com.codality.NotationalFlow.Internal.Share"])
+      app_identifier: [
+        "com.codality.NotationalFlow.Internal",
+        "com.codality.NotationalFlow.Internal.Share",
+        "com.codality.NotationalFlow.Internal.Widgets",
+      ]
+    )
   end
 
   private_lane :appstore_code_signing do |options|
@@ -821,8 +829,11 @@ end
       type: "appstore",
       team_id: get_required_env("EXT_EXPORT_TEAM_ID"),
       readonly: options[:readonly] || is_ci,
-      app_identifier: ["com.codality.NotationalFlow",
-                       "com.codality.NotationalFlow.Share"],
+      app_identifier: [
+        "com.codality.NotationalFlow",
+        "com.codality.NotationalFlow.Share",
+        "com.codality.NotationalFlow.Widgets",
+      ],
       template_name: "NotationalFlow Keychain Access (Distribution)",
     )
   end
