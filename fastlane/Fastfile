@@ -890,11 +890,12 @@ def deoccupy_test_account
   $used_test_account_index = nil
 end
 
-# Returns the value of test accounts key, which is 
-# expected to look like a series of Fs and Ts.
+# Test accounts info is stored in JSON-formatted string, where keys represent
+# the account index, and values are either "free" or CIRCLE_BUILD_NUM, in case if account
+# was occupied by a buld. Returns the hash.
 # Example:
 #   get_test_accounts_state
-#     => "TFFFF"
+#     => {"0"=>"4079", "1"=>"free", "2"=>"free", "3"=>"free"}
 def get_test_accounts_state
   uri = URI.parse(get_required_env("UI_TESTS_ACCOUNTS_JSON_URL"))
   response = Net::HTTP.get_response(uri)
@@ -903,19 +904,14 @@ def get_test_accounts_state
   JSON.parse(accounts_state)
 end
 
-# Returns the index of first "F" (Free) occurence in the test
-# accounts keyvalue, or crashes fastlane if it was not found.
+# Returns the index of first "free" occurence in the test
+# accounts hash, or crashes fastlane if it was not found.
 # Example:
 #   find_free_test_account
 #     => 2
 def find_free_test_account
-  accounts_hash = get_test_accounts_state
-
-  accounts_hash.each do |key, value|
-    if value == "free"
-      $used_test_account_index = key.to_i 
-      break
-    end
+  get_test_accounts_state.each do |key, value|
+    break $used_test_account_index = key.to_i if value == "free"
   end
 
   UI.user_error!("Could not find free UI Test account. Quitting.") if $used_test_account_index.nil? 
