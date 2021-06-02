@@ -735,7 +735,7 @@ end
   lane :pick_test_account_and_run_ui_tests do | options |
     if is_ci
       sanitize_test_accounts
-      occupy_test_account
+      find_free_test_account
       run_ui_tests(options.merge({ test_account: get_required_env("UI_TESTS_ACCOUNT_EMAIL").sub("X", $used_test_account_index.to_s)}))
       deoccupy_test_account
     else
@@ -878,11 +878,6 @@ def simulator_version
   '14.4'
 end
 
-def occupy_test_account
-  find_free_test_account
-  change_test_account_availability("#{get_required_env("CIRCLE_BUILD_NUM")}")
-end
-
 def deoccupy_test_account
   return if $used_test_account_index == nil
   UI.message("Freeing used test account")
@@ -903,11 +898,8 @@ def get_test_accounts_hash
   JSON.parse(accounts_state)
 end
 
-# Return the index of the first free account from accounts hash
-# or crash fastlane if it was not found.
-# Example:
-#   find_free_test_account
-#     => 2
+# Finds the index of first free account in accounts hash, and marks it as accupied by current build.
+# Crashed fastlane if free account was not found.
 def find_free_test_account
   accounts_hash = get_test_accounts_hash
   UI.message("Looking for a free test account...")
@@ -919,6 +911,7 @@ def find_free_test_account
 
   UI.user_error!("Could not find free UI Test account. Quitting.") if $used_test_account_index.nil? 
   UI.message("Free account index: #{$used_test_account_index}")
+  change_test_account_availability("#{get_required_env("CIRCLE_BUILD_NUM")}")
 end
 
 # Replace a value in a key which is equal to $used_test_account_index global variable
@@ -940,7 +933,7 @@ def sanitize_test_accounts
   UI.message("Accounts before sanitizing: #{accounts_hash}")
 
   accounts_hash.each do |key, value|
-    if value != "free" && !is_job_running(value)
+    if value != "free" && is_job_running(value) == false
       accounts_hash[key] = "free"
       submit_accounts_hash(accounts_hash)
     end
