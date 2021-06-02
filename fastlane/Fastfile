@@ -879,7 +879,6 @@ def simulator_version
 end
 
 def occupy_test_account
-  UI.message("Looking for a free test account...")
   find_free_test_account
   change_test_account_availability("#{get_required_env("CIRCLE_BUILD_NUM")}")
 end
@@ -901,7 +900,6 @@ def get_test_accounts_hash
   uri = URI.parse(get_required_env("UI_TESTS_ACCOUNTS_JSON_URL"))
   response = Net::HTTP.get_response(uri)
   accounts_state = response.body.chomp
-  UI.message("State of test accounts: #{accounts_state}")
   JSON.parse(accounts_state)
 end
 
@@ -911,7 +909,11 @@ end
 #   find_free_test_account
 #     => 2
 def find_free_test_account
-  get_test_accounts_hash.each do |key, value|
+  accounts_hash = get_test_accounts_hash
+  UI.message("Looking for a free test account...")
+  UI.message("Accounts state: #{accounts_hash}")
+
+  accounts_hash.each do |key, value|
     break $used_test_account_index = key.to_i if value == "free"
   end
 
@@ -933,8 +935,10 @@ def change_test_account_availability(availability)
 end
 
 def sanitize_test_accounts
-  UI.message("Sanitizing stale test accounts...")
   accounts_hash = get_test_accounts_hash
+  UI.message("Sanitizing stale test accounts...")
+  UI.message("Accounts before sanitizing: #{accounts_hash}")
+
   accounts_hash.each do |key, value|
     if value != "free" && !is_job_running(value)
       accounts_hash[key] = "free"
@@ -967,7 +971,7 @@ def submit_accounts_hash(accounts_hash)
     http.request(request)
   end
 
-  get_test_accounts_hash
+  UI.message("Accounts state after write: #{get_test_accounts_hash}")
 end
 
 
