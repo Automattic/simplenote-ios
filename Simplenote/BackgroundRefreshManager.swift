@@ -24,15 +24,16 @@ class BackgroundRefreshManager: NSObject {
         guard handler != nil else {
             return
         }
-
+        NSLog("Refresh Timer Called")
         timer = Timer.scheduledTimer(timeInterval: Constants.timerTimeOut, target: self, selector: #selector(finishRefresh), userInfo: nil, repeats: false)
     }
 
     @objc
     private func finishRefresh() {
-        guard finished == true, let handler = handler else {
+        guard let handler = handler else {
             return
         }
+        NSLog("Finish Refresh Called")
 
         handler()
 
@@ -83,6 +84,7 @@ extension BackgroundRefreshManager {
         request.earliestBeginDate = Date(timeIntervalSinceNow: Constants.earliestBeginDate)
         do {
             try BGTaskScheduler.shared.submit(request)
+            NSLog("Background refresh submitted")
         } catch {
             print("Couldn't schedule app refersh: \(error)")
         }

@@ -48,7 +48,6 @@
 
 @end
 
-
 #pragma mark ================================================================================
 #pragma mark Simplenote AppDelegate
 #pragma mark ================================================================================
@@ -666,6 +665,22 @@
 + (SPAppDelegate *)sharedDelegate
 {
     return (SPAppDelegate *)[[UIApplication sharedApplication] delegate];
+}
+
+
+#pragma mark ================================================================================
+#pragma mark Background Refresh
+#pragma mark ================================================================================
+
+- (BackgroundRefreshManager *)refreshManager
+{
+    if (_refreshManager != nil) {
+        return _refreshManager;
+    }
+
+    _refreshManager = [[BackgroundRefreshManager alloc] init];
+
+    return _refreshManager;
 }
 
 @end
