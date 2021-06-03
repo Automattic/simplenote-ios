@@ -5,6 +5,7 @@
 4.37
 -----
 -   Update in-app notifications color for better readability in dark mode #1288
+-   Added the ability to select and delete multiple notes at a time from the note list  #1267
 
 4.36
 -----
