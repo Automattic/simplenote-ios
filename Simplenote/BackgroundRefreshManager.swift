@@ -10,16 +10,7 @@ class BackgroundRefreshManager: NSObject {
 
     private var handler: (()->Void)?
 
-    var finished: Bool = false {
-        didSet {
-            if finished == true {
-                handler?()
-            }
-        }
-    }
-
-    @objc
-    func refreshTimer() {
+    private func refreshTimer() {
         // If refresh is not running there will be no handler
         guard handler != nil else {
             return
@@ -37,8 +28,13 @@ class BackgroundRefreshManager: NSObject {
 
         handler()
 
-        finished = false
         self.handler = nil
+        self.timer = nil
+    }
+
+    @objc
+    func onSimperiumChange() {
+        refreshTimer()
     }
 }
 
