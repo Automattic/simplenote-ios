@@ -146,7 +146,7 @@ jobs:
         description: The device (e.g. "iPhone 12") to use when running tests.
         type: string
       scheme:
-        description: Xcode scheme with tests.
+        description: Xcode scheme to use to run the tests.
         type: string
     executor:
       name: ios/default
