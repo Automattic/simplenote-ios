@@ -85,13 +85,17 @@ extension BackgroundRefreshManager {
             print("Couldn't schedule app refersh: \(error)")
         }
     }
+
+    @objc
+    func cancelPendingRefreshTasks() {
+        BGTaskScheduler.shared.cancel(taskRequestWithIdentifier: Constants.bgTaskIdentifier)
+    }
 }
 
 
 private struct Constants {
     static let earliestBeginDate = TimeInterval(60) //30 minutes
-    static let timeOut = TimeInterval(25)
     static let bundleIdentifier = Bundle.main.bundleIdentifier ?? "com.codality.NotationalFlow"
     static let bgTaskIdentifier = bundleIdentifier + ".refresh"
-    static let timerTimeOut = TimeInterval(5)
+    static let timerTimeOut = TimeInterval(8)
 }
