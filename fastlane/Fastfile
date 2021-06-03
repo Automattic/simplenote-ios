@@ -702,7 +702,7 @@ end
   # selected for now, there will be no credentials race condition.
   # -----------------------------------------------------------------------------------
   # Usage:
-  # bundle exec fastlane run_ui_tests [sheme:<Xcode scheme with UI tests>] [device:<Name of the iOS Simulator>] [test_account:<Test account email>]
+  # bundle exec fastlane run_ui_tests [scheme:<Xcode scheme with UI tests>] [device:<Name of the iOS Simulator>] [test_account:<Test account email>]
   #
   # Example:
   # bundle exec fastlane run_ui_tests sheme:"SimplenoteUITests_Subset" device:"iPhone 12" test_account:"test.account@test.com"
