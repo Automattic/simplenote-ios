@@ -1,3 +1,7 @@
+4.38
+-----
+
+
 4.37
 -----
 -   Update in-app notifications color for better readability in dark mode #1288

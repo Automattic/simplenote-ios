@@ -407,7 +407,10 @@ end
       }
     )
 
-    testflight(skip_waiting_for_build_processing: true)
+    testflight(
+      skip_waiting_for_build_processing: true,
+      api_key_path: File.join(Dir.home, '.configure', 'simplenote-ios', 'secrets', 'app_store_connect_fastlane_api_key.json')
+    )
 
     sh("rm ../Simplenote.ipa")
     dSYM_PATH = File.dirname(Dir.pwd) + "/Simplenote.app.dSYM.zip"
