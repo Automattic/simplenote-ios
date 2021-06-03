@@ -435,7 +435,7 @@
 - (void)bucket:(SPBucket *)bucket didChangeObjectForKey:(NSString *)key forChangeType:(SPBucketChangeType)change memberNames:(NSArray *)memberNames
 {
     if (@available(iOS 13.0, *)) {
-        [self.refreshManager refreshTimer];
+        [self.refreshManager onSimperiumChange];
     }
 
     if ([bucket isEqual:[_simperium notesBucket]]) {
