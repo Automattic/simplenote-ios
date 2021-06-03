@@ -62,8 +62,8 @@ extension BackgroundRefreshManager {
             task.setTaskCompleted(success: true)
         }
 
-        task.expirationHandler = {
-            self.finishRefresh()
+        task.expirationHandler = { [weak self] in
+            self?.finishRefresh()
         }
 
         NSLog("Background refresh intiated")
