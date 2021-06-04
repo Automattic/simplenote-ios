@@ -929,14 +929,16 @@ end
 
 def sanitize_test_accounts
   accounts_hash = get_test_accounts_hash
+  final_accounts_hash = accounts_hash
   UI.message("Sanitizing stale test accounts...")
   UI.message("Accounts before sanitizing: #{accounts_hash}")
 
   accounts_hash.each do |key, value|
     next if value == "free" || is_job_running(value)
-    accounts_hash[key] = "free"
-    submit_accounts_hash(accounts_hash)
+    final_accounts_hash[key] = "free"
   end
+
+  submit_accounts_hash(final_accounts_hash) if final_accounts_hash != accounts_hash
 end
 
 def is_job_running(job_number)
