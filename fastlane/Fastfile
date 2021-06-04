@@ -905,7 +905,7 @@ def find_free_test_account
   UI.message("Looking for a free test account...")
   UI.message("Accounts state: #{accounts_hash}")
 
-$used_test_account_index = accounts_hash.key('free')
+  $used_test_account_index = accounts_hash.key('free')
 
   UI.user_error!("Could not find free UI Test account. Quitting.") if $used_test_account_index.nil? 
   UI.message("Free account index: #{$used_test_account_index}")
@@ -931,7 +931,7 @@ def sanitize_test_accounts
   UI.message("Sanitizing stale test accounts...")
   UI.message("Accounts before sanitizing: #{accounts_hash}")
 
-  accounts_hash.each do |key, value|
+  final_accounts_hash.each do |key, value|
     next if value == "free" || is_job_running(value)
     final_accounts_hash[key] = "free"
   end
