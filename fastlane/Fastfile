@@ -933,10 +933,9 @@ def sanitize_test_accounts
   UI.message("Accounts before sanitizing: #{accounts_hash}")
 
   accounts_hash.each do |key, value|
-    if value != "free" && is_job_running(value) == false
-      accounts_hash[key] = "free"
-      submit_accounts_hash(accounts_hash)
-    end
+    next if value == "free" || is_job_running(value)
+    accounts_hash[key] = "free"
+    submit_accounts_hash(accounts_hash)
   end
 end
 
