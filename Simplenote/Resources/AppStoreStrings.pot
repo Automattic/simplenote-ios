@@ -69,5 +69,6 @@ msgstr ""
 msgctxt "v4.37-whats-new"
 msgid ""
 "- Update in-app notifications color for better readability in dark mode\n"
+"- Added the ability to select and delete multiple notes at a time from the note list\n"
 msgstr ""
 
