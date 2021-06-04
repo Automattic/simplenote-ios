@@ -73,3 +73,5 @@ Note: (A) means Automated Test. If automated UI tests were executed for the app,
 - [ ] Changing `Theme` immediately updates app for desired color scheme.
 - [ ] After setting a passcode, passcode (or Touch/Face ID if also enabled) is required to resume the app.
 - [ ] Can turn passcode lock off with correct 4-digit passcode (also disables Touch/Face ID).
+#### Scroller
+-[] Verify that scroller functionality is working fine in Desktop , iOS and Android Device
