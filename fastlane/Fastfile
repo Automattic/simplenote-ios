@@ -887,7 +887,7 @@ end
 
 # Test accounts info is stored in JSON-formatted string, where keys represent
 # the account index, and values are either "free" or CIRCLE_BUILD_NUM, in case if account
-# was occupied by a buld. Returns the hash.
+# was occupied by a build. Returns the hash.
 # Example:
 #   get_test_accounts_hash
 #     => {"0"=>"4079", "1"=>"free", "2"=>"free", "3"=>"free"}
