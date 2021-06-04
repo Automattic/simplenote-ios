@@ -936,7 +936,7 @@ def sanitize_test_accounts
     final_accounts_hash[key] = "free"
   end
 
-  submit_accounts_hash(final_accounts_hash) if final_accounts_hash != accounts_hash
+  submit_accounts_hash(final_accounts_hash)
 end
 
 def is_job_running(job_number)
