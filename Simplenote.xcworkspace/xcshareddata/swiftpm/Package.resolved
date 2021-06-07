@@ -27,6 +27,15 @@
           "revision": "499d2809d169fcbeb9ff75568d9f1f937f290ffc",
           "version": "1.3.0"
         }
+      },
+      {
+        "package": "UITestsHelpers",
+        "repositoryURL": "https://github.com/Automattic/SwiftUITestsHelpers",
+        "state": {
+          "branch": "trunk",
+          "revision": "1baf4e58db97093fad311796e02b3fc537e09b40",
+          "version": null
+        }
       }
     ]
   },

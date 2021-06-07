@@ -1,4 +1,4 @@
-import UITestHelpers
+import UITestsHelpers
 import XCTest
 
 class SimplenoteScreenshots: XCTestCase {
