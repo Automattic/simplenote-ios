@@ -740,7 +740,7 @@ end
       run_ui_tests(options.merge({ test_account: get_required_env("UI_TESTS_ACCOUNT_EMAIL").sub("X", $used_test_account_index.to_s)}))
       deoccupy_test_account
     else
-      UI.user_error!("This lane runs only on CI")
+      UI.user_error!("This lane should be run only from CI")
     end
   end
 end
