@@ -943,7 +943,7 @@ def is_job_running(job_number)
   return if response.code != "200"
 
   response_hash = JSON.parse(response.body)
-  puts "Status of Job Number #{job_number} is #{response_hash["status"]}"
+  UI.message("Status of CircleCI Job Number #{job_number} is #{response_hash['status']}")
   response_hash["status"] == "running"
 end
 
