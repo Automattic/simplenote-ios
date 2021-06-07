@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-04-28 17:55:00+0000 */
+/* Translation-Revision-Date: 2021-05-26 20:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=(n > 1); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: pt_BR */
@@ -126,7 +126,7 @@
 /* Opens the Collaborate UI */
 "Collaborate" = "Colaborar";
 
-/* No comment provided by engineer. */
+/* Alert title that collaboration has moved */
 "Collaboration has moved" = "A colaboração mudou";
 
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
@@ -208,6 +208,9 @@
 
 /* PinLock screen \"delete\" button */
 "Delete" = "Excluir";
+
+/* Delet a note from trash */
+"Delete Note" = "Excluir anotação";
 
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Apagar notas";
@@ -418,7 +421,8 @@
 /* Notes Header (Search Mode) */
 "Notes" = "Anotações";
 
-/* Closes alert controller for spinner on About view
+/* Alert confirmation button title
+   Closes alert controller for spinner on About view
    Dismisses an AlertController */
 "OK" = "OK";
 
@@ -534,7 +538,8 @@
 /* Response Title */
 "Response" = "Resposta";
 
-/* Restore a note to a previous version */
+/* Restore a note from trash
+   Restore a note to a previous version */
 "Restore Note" = "Restaurar anotação";
 
 /* Title -> Review you account screen */
@@ -578,7 +583,7 @@
 /* Shares a note */
 "Share..." = "Compartilhar...";
 
-/* No comment provided by engineer. */
+/* Alert message that collaboration has moved */
 "Sharing notes is now accessed through the action menu from the toolbar." = "Agora, o compartilhamento de notas é acessado através do menu de ação da barra de ferramentas.";
 
 /* UI region to the left of the note list which shows all of a users tags */

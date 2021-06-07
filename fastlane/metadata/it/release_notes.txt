@@ -1,3 +1,6 @@
-- Le icone di Simplenote sono state rinnovate
-- Aggiunte notifiche nell'app per avvisare gli utenti delle differenti attività nell'app
-- Impostazioni di ordinamento della ricerca modificate per l'utilizzo dell'impostazione di ordinamento generale.
+- Nuova barra delle note
+- Risolto un problema occasionale con il rendering del menu contestuale
+- Rimosso il maiuscolo dal titolo dell'avviso di collaborazione
+- Risolto un problema relativo alla mancata visualizzazione degli avvisi in alcuni casi
+- Risolto un problema di mancata eliminazione dei tag nelle note spostate nel cestino
+- Migliorato il supporto delle dimensioni dei caratteri dinamici negli avvisi

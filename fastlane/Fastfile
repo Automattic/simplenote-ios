@@ -8,7 +8,9 @@ unless FastlaneCore::Helper.bundler?
 end
 
 USER_ENV_FILE_PATH = File.join(Dir.home, '.simplenoteios-env.default')
-PROJECT_ENV_FILE_PATH = File.expand_path(File.join(Dir.pwd, '../.configure-files/project.env'))
+PROJECT_ENV_FILE_PATH = File.join(
+  Dir.home, '.configure', 'simplenote-ios', 'secrets', 'project.env'
+)
 $used_test_account_index = nil
 
 before_all do
@@ -403,7 +405,10 @@ end
       }
     )
 
-    testflight(skip_waiting_for_build_processing: true)
+    testflight(
+      skip_waiting_for_build_processing: true,
+      api_key_path: File.join(Dir.home, '.configure', 'simplenote-ios', 'secrets', 'app_store_connect_fastlane_api_key.json')
+    )
 
     sh("rm ../Simplenote.ipa")
     dSYM_PATH = File.dirname(Dir.pwd) + "/Simplenote.app.dSYM.zip"
@@ -739,7 +744,7 @@ end
       run_ui_tests(options.merge({ test_account: get_required_env("UI_TESTS_ACCOUNT_EMAIL").sub("X", $used_test_account_index.to_s)}))
       deoccupy_test_account
     else
-      UI.message("This lane runs only on CI")
+      UI.user_error!("This lane should be run only from CI")
     end
   end
 end
@@ -804,7 +809,7 @@ end
     match(
       type: "enterprise",
       team_id: get_required_env("INT_EXPORT_TEAM_ID"),
-      readonly: options[:readonly] || is_ci,
+      readonly: true,
       app_identifier: ["com.codality.NotationalFlow.Alpha",
                       "com.codality.NotationalFlow.Alpha.Share"])
   end
@@ -813,7 +818,7 @@ end
     match(
       type: "enterprise",
       team_id: get_required_env("INT_EXPORT_TEAM_ID"),
-      readonly: options[:readonly] || is_ci,
+      readonly: true,
       app_identifier: ["com.codality.NotationalFlow.Internal",
                        "com.codality.NotationalFlow.Internal.Share"])
   end
@@ -822,7 +827,7 @@ end
     match(
       type: "appstore",
       team_id: get_required_env("EXT_EXPORT_TEAM_ID"),
-      readonly: options[:readonly] || is_ci,
+      readonly: true,
       app_identifier: ["com.codality.NotationalFlow",
                        "com.codality.NotationalFlow.Share"],
       template_name: "NotationalFlow Keychain Access (Distribution)",
@@ -832,9 +837,13 @@ end
 ########################################################################
 # Helper Lanes
 ########################################################################
-desc "Get a list of pull request from `start_tag` to the current state"
+desc "Get a list of pull request from `milestone` to the current state"
 lane :get_pullrequests_list do | options |
-  get_prs_list(repository:GHHELPER_REPO, start_tag:"#{options[:start_tag]}", report_path:"#{File.expand_path('~')}/simplenoteios_prs_list.txt")
+  get_prs_list(
+    repository:GHHELPER_REPO,
+    milestone: options[:milestone],
+    report_path: File.join(Dir.home, 'simplenoteios_prs_list.txt')
+  )
 end
 
 def fastlane_directory()

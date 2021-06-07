@@ -11,7 +11,7 @@
 			isa = PBXAggregateTarget;
 			buildConfigurationList = 3F1BB4B4243199FF006D1A04 /* Build configuration list for PBXAggregateTarget "ScreenshotsSecrets" */;
 			buildPhases = (
-				3F1BB4B524319A04006D1A04 /* ShellScript */,
+				3F1BB4B524319A04006D1A04 /* Copy Secrets */,
 			);
 			dependencies = (
 			);
@@ -22,7 +22,7 @@
 			isa = PBXAggregateTarget;
 			buildConfigurationList = B5C7BF98230C59F5000DEC91 /* Build configuration list for PBXAggregateTarget "SimplenoteSecrets" */;
 			buildPhases = (
-				B5C7BF9E230C5A79000DEC91 /* ShellScript */,
+				B5C7BF9E230C5A79000DEC91 /* Copy Secrets */,
 			);
 			dependencies = (
 			);
@@ -874,6 +874,7 @@
 		B594E61321508247001577EE /* Preferences.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Preferences.m; sourceTree = "<group>"; };
 		B594E61421508247001577EE /* Preferences.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Preferences.h; sourceTree = "<group>"; };
 		B59560DF251A46D500A06788 /* KeychainManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainManager.swift; path = Classes/KeychainManager.swift; sourceTree = "<group>"; };
+		B59C676C2660252000E6DD9B /* Simplenote.internal.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Simplenote.internal.xcconfig; sourceTree = "<group>"; };
 		B59FFB42231851C700567627 /* UIGestureRecognizer+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIGestureRecognizer+Simplenote.swift"; path = "Classes/UIGestureRecognizer+Simplenote.swift"; sourceTree = "<group>"; };
 		B5A6846C23CE84D400398BBC /* NotesListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotesListController.swift; path = Classes/NotesListController.swift; sourceTree = "<group>"; };
 		B5AB169722FA124F00B4EBA5 /* SPSheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPSheetController.swift; path = Classes/SPSheetController.swift; sourceTree = "<group>"; };
@@ -1302,6 +1303,7 @@
 				8C573B0D22CD1AD6005BC6F5 /* Version.Public.xcconfig */,
 				8C573B0A22CD1A61005BC6F5 /* Simplenote.debug.xcconfig */,
 				8C573B0B22CD1A6F005BC6F5 /* Simplenote.release.xcconfig */,
+				B59C676C2660252000E6DD9B /* Simplenote.internal.xcconfig */,
 			);
 			path = config;
 			sourceTree = "<group>";
@@ -2615,7 +2617,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3F1BB4B524319A04006D1A04 /* ShellScript */ = {
+		3F1BB4B524319A04006D1A04 /* Copy Secrets */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2623,14 +2625,17 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"${HOME}/.configure/simplenote-ios/secrets/ScreenshotsCredentials.swift",
 			);
+			name = "Copy Secrets";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${SRCROOT}/SimplenoteScreenshots/Credentials/ScreenshotsCredentials.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "SOURCE_PATH=~/.mobile-secrets/iOS/simplenote/ScreenshotsCredentials.swift\nTARGET_FOLDER=${SRCROOT}/SimplenoteScreenshots/Credentials\nTARGET_PATH=${TARGET_FOLDER}/ScreenshotsCredentials.swift\n\nif [ ! -f ${SOURCE_PATH} ]; then\n    echo \"Unable to Copy Credentials =(\"\nelse\n    echo \"Copying Credentials...\"\n    mkdir -p ${TARGET_FOLDER}\n    cp ${SOURCE_PATH} ${TARGET_PATH}\nfi\n";
+			shellScript = "${SRCROOT}/Scripts/Build-Phases/copy-secret.sh \\\n    $SCRIPT_INPUT_FILE_0 \\\n    $SCRIPT_OUTPUT_FILE_0\n";
 		};
 		730A1CB888B6254066EA8CAA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2731,7 +2736,7 @@
 			shellPath = /bin/sh;
 			shellScript = "cd \"${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\"\nif [[ -d \"Frameworks\" ]]; then\nrm -fr Frameworks\nfi\n";
 		};
-		B5C7BF9E230C5A79000DEC91 /* ShellScript */ = {
+		B5C7BF9E230C5A79000DEC91 /* Copy Secrets */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2739,16 +2744,17 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"~/.mobile-secrets/iOS/simplenote/SPCredentials.swift",
+				"${HOME}/.configure/simplenote-ios/secrets/SPCredentials.swift",
 			);
+			name = "Copy Secrets";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(SRCROOT)/Simplenote/Credentials/SPCredentials.swift",
+				"${SRCROOT}/Simplenote/Credentials/SPCredentials.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "SOURCE_PATH=~/.mobile-secrets/iOS/simplenote/SPCredentials.swift\nTARGET_FOLDER=${SRCROOT}/Simplenote/Credentials\nTARGET_PATH=${TARGET_FOLDER}/SPCredentials.swift\n\nif [ ! -f ${SOURCE_PATH} ]; then\n    echo \"Unable to Copy Credentials =(\"\nelse\n    echo \"Copying Credentials...\"\n    mkdir -p ${TARGET_FOLDER}\n    cp ${SOURCE_PATH} ${TARGET_PATH}\nfi\n";
+			shellScript = "${SRCROOT}/Scripts/Build-Phases/copy-secret.sh \\\n    $SCRIPT_INPUT_FILE_0 \\\n    $SCRIPT_OUTPUT_FILE_0\n";
 		};
 		C62AC7EF4EA894D0C1FAFFC0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4070,7 +4076,7 @@
 		};
 		B50789FA1C1F4F63009F097A /* Distribution Internal */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8C573B0B22CD1A6F005BC6F5 /* Simplenote.release.xcconfig */;
+			baseConfigurationReference = B59C676C2660252000E6DD9B /* Simplenote.internal.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ALWAYS_SEARCH_USER_PATHS = NO;

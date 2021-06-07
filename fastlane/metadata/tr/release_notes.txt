@@ -1,3 +1,6 @@
-- Simplenote Simgeleri yenilendi
-- Kullanıcıları uygulamadaki farklı etkinlikler konusunda uyarmak için uygulama bildirimlerine eklendi
-- Arama sıralama ayarları genel sıralama ayarını kullanacak şekilde değiştirildi.
+- Yeni Not Çubuğu
+- Bağlamsal menü oluşturmada ara sıra meydana gelen bir sorun düzeltildi
+- İşbirliği uyarısı başlığındaki tüm büyük harfler kaldırıldı
+- Bazı durumlarda bildirimlerin gösterilmemesi sorunu düzeltildi
+- Çöpe atılan notlarda etiketlerin silinmemesine neden olan bir sorun düzeltildi
+- Bildirimlerde dinamik yazı tipi boyutu desteği geliştirildi

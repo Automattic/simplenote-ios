@@ -1,3 +1,6 @@
-- De pictogrammen van Simplenote zijn vernieuwd
-- Meldingen binnen de app toegevoegd om gebruikers op bepaalde activiteiten binnen de app te wijzen
-- De instellingen voor het ordenen van zoekresultaten gewijzigd: de algemene instellingen voor het ordenen worden gebruikt.
+- Nieuwe notitiebalk
+- Probleem opgelost met weergave contextueel menu
+- Alle hoofdletters titel samenwerkingsmelding verwijderd
+- Probleem opgelost waarbij er in sommige gevallen geen meldingen werden weergegeven
+- Probleem opgelost waarbij tags niet verwijderd werden voor verwijderde opmerkingen
+- Verbeterde ondersteuning voor dynamische lettertypegrootte voor opmerkingen  

@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-04-28 11:54:03+0000 */
+/* Translation-Revision-Date: 2021-05-28 09:54:04+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ko_KR */
@@ -126,7 +126,7 @@
 /* Opens the Collaborate UI */
 "Collaborate" = "협업";
 
-/* No comment provided by engineer. */
+/* Alert title that collaboration has moved */
 "Collaboration has moved" = "협업이 이동됨";
 
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
@@ -208,6 +208,9 @@
 
 /* PinLock screen \"delete\" button */
 "Delete" = "삭제";
+
+/* Delet a note from trash */
+"Delete Note" = "메모 삭제";
 
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "메모 삭제";
@@ -418,7 +421,8 @@
 /* Notes Header (Search Mode) */
 "Notes" = "메모";
 
-/* Closes alert controller for spinner on About view
+/* Alert confirmation button title
+   Closes alert controller for spinner on About view
    Dismisses an AlertController */
 "OK" = "확인";
 
@@ -534,7 +538,8 @@
 /* Response Title */
 "Response" = "응답";
 
-/* Restore a note to a previous version */
+/* Restore a note from trash
+   Restore a note to a previous version */
 "Restore Note" = "메모 복구";
 
 /* Title -> Review you account screen */
@@ -578,7 +583,7 @@
 /* Shares a note */
 "Share..." = "공유...";
 
-/* No comment provided by engineer. */
+/* Alert message that collaboration has moved */
 "Sharing notes is now accessed through the action menu from the toolbar." = "이제 도구 모음에서 작업 메뉴를 통해 메모 공유에 액세스할 수 있습니다.";
 
 /* UI region to the left of the note list which shows all of a users tags */
