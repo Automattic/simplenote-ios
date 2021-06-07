@@ -12,7 +12,6 @@ PROJECT_ENV_FILE_PATH = File.join(
   Dir.home, '.configure', 'simplenote-ios', 'secrets', 'project.env'
 )
 UI_TESTS_SCHEME = "SimplenoteUITests"
-UI_TESTS_ACCOUNTS_URL = "https://api.keyvalue.xyz/82649691/simplenoteuitest-ios"
 $used_test_account_index = nil
 
 before_all do
@@ -741,9 +740,13 @@ end
   #####################################################################################
   desc "Occupy a free test account and run UI tests with it"
   lane :pick_test_account_and_run_ui_tests do | options |
-    occupy_test_account
-    run_ui_tests(options.merge({ test_account: "simplenoteuitest-ios-#{$used_test_account_index}@a8c.com" }))
-    deoccupy_test_account
+    if is_ci
+      occupy_test_account
+      run_ui_tests(options.merge({ test_account: get_required_env("UI_TESTS_ACCOUNT_EMAIL").sub("X", $used_test_account_index.to_s)}))
+      deoccupy_test_account
+    else
+      UI.user_error!("This lane should be run only from CI")
+    end
   end
 end
 
@@ -904,7 +907,7 @@ end
 #   get_test_accounts_state
 #     => "TFFFF"
 def get_test_accounts_state
-  uri = URI.parse(UI_TESTS_ACCOUNTS_URL)
+  uri = URI.parse(get_required_env("UI_TESTS_ACCOUNTS_URL"))
   response = Net::HTTP.get_response(uri)
   accounts_state = response.body.chomp
   UI.message("State of test accounts: #{accounts_state}")
@@ -930,8 +933,9 @@ def change_test_account_availability(availability)
   accounts_state = get_test_accounts_state
   accounts_state[$used_test_account_index] = availability
   UI.message("Writing new account state: #{accounts_state}")
-  uri = URI.parse(UI_TESTS_ACCOUNTS_URL + "/" + accounts_state)
+  uri = URI.parse(get_required_env("UI_TESTS_ACCOUNTS_URL"))
   request = Net::HTTP::Post.new(uri)
+  request.body = accounts_state
 
   req_options = {
     use_ssl: uri.scheme == "https",

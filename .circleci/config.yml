@@ -182,9 +182,6 @@ workflows:
       - UI Tests:
           name: UI Tests (iPhone 12)
           device: "iPhone 12"
-          filters:
-            branches:
-              only: /.*UI-tests.*/
   Installable Build:
     when:
        and:
