@@ -155,9 +155,7 @@ end
         # with different commas in the future
       end
 
-      until keywords.length <=
-          app_store_connect_keywords_length_limit do
-      UI.error(keywords)
+      until keywords.length <= app_store_connect_keywords_length_limit do
         keywords = keywords.split(english_comma)[0...-1].join(english_comma)
       end
 
