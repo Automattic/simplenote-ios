@@ -431,6 +431,11 @@
 		BA55B06325F068650042582B /* NoticeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA55B06225F068650042582B /* NoticeController.swift */; };
 		BA5C1C0725BF9D6C006E3820 /* SPDragBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5C1C0625BF9D6C006E3820 /* SPDragBar.swift */; };
 		BA5E5B7D264A148C00D0EE19 /* URLRequest+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5E5B7C264A148C00D0EE19 /* URLRequest+Simplenote.swift */; };
+		BA6F580E26715D1A002AEB04 /* SPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B59314D61A486B3800B651ED /* SPConstants.m */; };
+		BA6F581926715D24002AEB04 /* SPCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E196BA230F522D00F5658A /* SPCredentials.swift */; };
+		BA6F582426715D25002AEB04 /* SPCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E196BA230F522D00F5658A /* SPCredentials.swift */; };
+		BA6F584926715DAC002AEB04 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E29ADD3B17848E8500E55842 /* Foundation.framework */; };
+		BA6F584A26715DB5002AEB04 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E29ADD3B17848E8500E55842 /* Foundation.framework */; };
 		BA83478325F59F8B0059B797 /* markdown-default-contrast.css in Resources */ = {isa = PBXBuildFile; fileRef = BA83478225F59F8B0059B797 /* markdown-default-contrast.css */; };
 		BA83478C25F59FE90059B797 /* markdown-dark-contrast.css in Resources */ = {isa = PBXBuildFile; fileRef = BA83478B25F59FE90059B797 /* markdown-dark-contrast.css */; };
 		BAA4856925D5E40900F3BDB9 /* SearchQuery+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */; };
@@ -448,6 +453,8 @@
 		BAB5768726703EA000B0C56F /* NotePreviewWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5767B26703E8100B0C56F /* NotePreviewWidgetView.swift */; };
 		BAB576A826703F4500B0C56F /* NotePreviewWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5769226703F0E00B0C56F /* NotePreviewWidgetProvider.swift */; };
 		BAB576C92670514500B0C56F /* NotePreviewWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB576BD2670512C00B0C56F /* NotePreviewWidget.swift */; };
+		BAB577062670665600B0C56F /* SimperiumAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB577052670665600B0C56F /* SimperiumAPIClient.swift */; };
+		BAB577272670680800B0C56F /* SPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B59314D61A486B3800B651ED /* SPConstants.m */; };
 		BAE08626261282D1009D40CD /* Note+Publish.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE08625261282D1009D40CD /* Note+Publish.swift */; };
 		BAFA93DA265DCFCA0009DCFB /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAFA93D9265DCFCA0009DCFB /* WidgetKit.framework */; };
 		BAFA93DC265DCFCA0009DCFB /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAFA93DB265DCFCA0009DCFB /* SwiftUI.framework */; };
@@ -528,20 +535,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = B5EB1EEB1C204EBD0080A1B3;
 			remoteInfo = SimplenoteShare;
-		};
-		BAB5762926703C8200B0C56F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E29ADD3017848E8500E55842 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = BAB5762126703C8100B0C56F;
-			remoteInfo = SimplenoteIntents;
-		};
-		BAFA93E3265DCFCD0009DCFB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E29ADD3017848E8500E55842 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = BAFA93D7265DCFCA0009DCFB;
-			remoteInfo = SimplenoteWidgetsExtension;
 		};
 		D864B15925CAE25000F9B73E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1023,6 +1016,7 @@
 		BAB5767B26703E8100B0C56F /* NotePreviewWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotePreviewWidgetView.swift; sourceTree = "<group>"; };
 		BAB5769226703F0E00B0C56F /* NotePreviewWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotePreviewWidgetProvider.swift; sourceTree = "<group>"; };
 		BAB576BD2670512C00B0C56F /* NotePreviewWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotePreviewWidget.swift; sourceTree = "<group>"; };
+		BAB577052670665600B0C56F /* SimperiumAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimperiumAPIClient.swift; sourceTree = "<group>"; };
 		BAE08625261282D1009D40CD /* Note+Publish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+Publish.swift"; sourceTree = "<group>"; };
 		BAFA93D8265DCFCA0009DCFB /* SimplenoteWidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SimplenoteWidgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAFA93D9265DCFCA0009DCFB /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -1191,6 +1185,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BAB5762426703C8100B0C56F /* Intents.framework in Frameworks */,
+				BA6F584A26715DB5002AEB04 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1199,6 +1194,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BAFA93DC265DCFCA0009DCFB /* SwiftUI.framework in Frameworks */,
+				BA6F584926715DAC002AEB04 /* Foundation.framework in Frameworks */,
 				BAFA93DA265DCFCA0009DCFB /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2112,9 +2108,18 @@
 			path = SimplenoteIntents;
 			sourceTree = "<group>";
 		};
+		BAB577042670663400B0C56F /* Simperium */ = {
+			isa = PBXGroup;
+			children = (
+				BAB577052670665600B0C56F /* SimperiumAPIClient.swift */,
+			);
+			path = Simperium;
+			sourceTree = "<group>";
+		};
 		BAFA93DD265DCFCA0009DCFB /* SimplenoteWidgets */ = {
 			isa = PBXGroup;
 			children = (
+				BAB577042670663400B0C56F /* Simperium */,
 				BAFA93EC265DE3810009DCFB /* SimplenoteWidgets.swift */,
 				BA122DC4265EF8F1003D3BC5 /* Views */,
 				BA122DC3265EF8E4003D3BC5 /* Widgets */,
@@ -2479,8 +2484,6 @@
 			dependencies = (
 				B5C7BFA0230C5AC9000DEC91 /* PBXTargetDependency */,
 				B5EB1EF51C204EBD0080A1B3 /* PBXTargetDependency */,
-				BAFA93E4265DCFCD0009DCFB /* PBXTargetDependency */,
-				BAB5762A26703C8200B0C56F /* PBXTargetDependency */,
 			);
 			name = Simplenote;
 			packageProductDependencies = (
@@ -3369,6 +3372,8 @@
 			files = (
 				BAB5762726703C8200B0C56F /* IntentHandler.swift in Sources */,
 				BAB5765C26703D0600B0C56F /* NotePreviewWidgetIntent.intentdefinition in Sources */,
+				BA6F580E26715D1A002AEB04 /* SPConstants.m in Sources */,
+				BA6F582426715D25002AEB04 /* SPCredentials.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3379,6 +3384,7 @@
 				BAB5765B26703D0600B0C56F /* NotePreviewWidgetIntent.intentdefinition in Sources */,
 				BAFA93F3265DE4A40009DCFB /* NewNoteWidget.swift in Sources */,
 				BA122DBD265EF412003D3BC5 /* UIColor+Studio.swift in Sources */,
+				BAB577062670665600B0C56F /* SimperiumAPIClient.swift in Sources */,
 				BA122DBE265EF421003D3BC5 /* UIKitConstants.swift in Sources */,
 				BA122DBB265EF40E003D3BC5 /* UIColor+Helpers.swift in Sources */,
 				BA122DBA265EF402003D3BC5 /* SimplenoteConstants.swift in Sources */,
@@ -3388,7 +3394,9 @@
 				BAB5768726703EA000B0C56F /* NotePreviewWidgetView.swift in Sources */,
 				BAFA93F2265DE4A10009DCFB /* SimplenoteWidgets.swift in Sources */,
 				BA122DC2265EF4E5003D3BC5 /* SPUserInterface.swift in Sources */,
+				BA6F581926715D24002AEB04 /* SPCredentials.swift in Sources */,
 				BAB576A826703F4500B0C56F /* NotePreviewWidgetProvider.swift in Sources */,
+				BAB577272670680800B0C56F /* SPConstants.m in Sources */,
 				BAB5764626703D0000B0C56F /* IntentHandler.swift in Sources */,
 				BAB576C92670514500B0C56F /* NotePreviewWidget.swift in Sources */,
 				BA122DC7265EF92D003D3BC5 /* NewNoteWidgetView.swift in Sources */,
@@ -3451,16 +3459,6 @@
 			isa = PBXTargetDependency;
 			target = B5EB1EEB1C204EBD0080A1B3 /* SimplenoteShare */;
 			targetProxy = B5EB1EF41C204EBD0080A1B3 /* PBXContainerItemProxy */;
-		};
-		BAB5762A26703C8200B0C56F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = BAB5762126703C8100B0C56F /* SimplenoteIntents */;
-			targetProxy = BAB5762926703C8200B0C56F /* PBXContainerItemProxy */;
-		};
-		BAFA93E4265DCFCD0009DCFB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = BAFA93D7265DCFCA0009DCFB /* SimplenoteWidgetsExtension */;
-			targetProxy = BAFA93E3265DCFCD0009DCFB /* PBXContainerItemProxy */;
 		};
 		D864B15A25CAE25000F9B73E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
