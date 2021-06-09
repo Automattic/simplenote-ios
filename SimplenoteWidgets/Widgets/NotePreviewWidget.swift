@@ -7,11 +7,14 @@ struct NotePreviewWidget: Widget {
         IntentConfiguration(kind: Constants.configurationKind, intent: SPNoteWidgetIntent.self, provider: NotePreviewWidgetProvider()) { (entry) in
             NotePreviewWidgetView(entry: entry)
         }
+        .configurationDisplayName(Constants.displayName)
+        .description(Constants.description)
+        .supportedFamilies([.systemSmall, .systemMedium])
     }
 }
 
 private struct Constants {
     static let configurationKind = "NotePreviewWidget"
-    static let displayName = NSLocalizedString("New Note", comment: "New Note Widget Title")
-    static let description = NSLocalizedString("Create a new note instantly with one tap.", comment: "New Note Widget Description")
+    static let displayName = NSLocalizedString("Note", comment: "Note Widget Title")
+    static let description = NSLocalizedString("Get quick access to one of your notes.", comment: "Note Widget Description")
 }
