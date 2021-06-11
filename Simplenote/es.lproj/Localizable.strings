@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-05-25 14:54:04+0000 */
+/* Translation-Revision-Date: 2021-06-10 09:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: es */
@@ -15,11 +15,20 @@
 /* Number of failed entries entering in passcode */
 "%i Failed Passcode Attempts" = "%i Intentos Fallidos";
 
+/* Note trashed notification */
+"%i Note Trashed" = "%i nota movida a la papelera";
+
+/* Notes trashed notification */
+"%i Notes Trashed" = "%i notas movidas a la papelera";
+
 /* Count of interlink references to a note */
 "%i Reference" = "%i Referencia";
 
 /* Count of interlink references to a note */
 "%i References" = "%i Referencias";
+
+/* Count of currently selected notes */
+"%i Selected" = "%i seleccionada(s)";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- Debe tener 8 caracteres como mínimo";
@@ -77,6 +86,9 @@
 /* Sign in error message */
 "An error was encountered while signing in." = "No se ha podido iniciar sesión.";
 
+/* Engine URL Message */
+"AppEngine Endpoints" = "Variables de AppEngine";
+
 /* No comment provided by engineer. */
 "Appearance" = "Apariencia";
 
@@ -92,6 +104,9 @@
 /* User Authenticated */
 "Authenticated" = "Autenticado";
 
+/* Engine URL Message */
+"Authentication Endpoints" = "Variables de autenticación";
+
 /* The Simplenote blog */
 "Blog" = "Blog";
 
@@ -99,6 +114,7 @@
 "By creating an account you agree to our" = "Al crear una cuenta, aceptas nuestros";
 
 /* Cancel Action
+   Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
    PinLock screen \"cancel\" button
@@ -218,6 +234,9 @@
 /* Confirmation button of deletion confirmation message for a tag. */
 "Delete Tag" = "Borrar etiqueta";
 
+/* Deselect all Button Label */
+"Deselect All" = "Anular todas las selecciones";
+
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "Diagnósticos";
 
@@ -245,7 +264,8 @@
    Done toolbar button */
 "Done" = "Listo";
 
-/* Edit Tags Action: Visible in the Tags List */
+/* Edit button title
+   Edit Tags Action: Visible in the Tags List */
 "Edit" = "Editar";
 
 /* Email TextField Placeholder */
@@ -376,6 +396,9 @@
 
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "Modificado: Más antiguo";
+
+/* Accessibility hint for trash selected notes button */
+"Move selected notes to trash" = "Mover las notas seleccionadas a la papelera";
 
 /* Delete Action
    Deletes a note */
@@ -560,6 +583,10 @@
 /* No comment provided by engineer. */
 "Security" = "Seguridad";
 
+/* Select all Button Label
+   Select all button title */
+"Select All" = "Elegir todo";
+
 /* Accessibility label describing a slider used to reset the current note to a previous version */
 "Select a Version" = "Elige una versión";
 
@@ -625,6 +652,9 @@
 /* Tags List Header */
 "Tags" = "Etiquetas";
 
+/* Accessibility hint for the select/deselect all button */
+"Tap button to select or deselect all notes" = "Toca el botón para elegir o anular la selección de todas las notas";
+
 /* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
 "Terms and Conditions" = "Términos y condiciones";
 
@@ -657,6 +687,9 @@
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Touch ID";
+
+/* Move selected notes to trash */
+"Trash Notes" = "Mover notas a la papelera";
 
 /* Title: Trash Tag is selected
    Trash filter button */
@@ -757,6 +790,9 @@
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "etiqueta:";
+
+/* Warning Title */
+"⚠️ Important" = "⚠️ Importante";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞 Depuración activada 🐞";

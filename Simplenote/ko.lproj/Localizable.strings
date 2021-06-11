@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-05-28 09:54:04+0000 */
+/* Translation-Revision-Date: 2021-06-10 15:54:04+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ko_KR */
@@ -15,11 +15,20 @@
 /* Number of failed entries entering in passcode */
 "%i Failed Passcode Attempts" = "실패한 패스코드 시도 %i번";
 
+/* Note trashed notification */
+"%i Note Trashed" = "%i개 메모 삭제됨";
+
+/* Notes trashed notification */
+"%i Notes Trashed" = "%i개 메모 삭제됨";
+
 /* Count of interlink references to a note */
 "%i Reference" = "%i 참조";
 
 /* Count of interlink references to a note */
 "%i References" = "%i 참조";
+
+/* Count of currently selected notes */
+"%i Selected" = "%i개 선택됨";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- 최소 8자";
@@ -77,6 +86,9 @@
 /* Sign in error message */
 "An error was encountered while signing in." = "로그인하는 중에 오류가 발생했습니다.";
 
+/* Engine URL Message */
+"AppEngine Endpoints" = "AppEngine 엔드포인트";
+
 /* No comment provided by engineer. */
 "Appearance" = "모양";
 
@@ -92,6 +104,9 @@
 /* User Authenticated */
 "Authenticated" = "인증됨";
 
+/* Engine URL Message */
+"Authentication Endpoints" = "인증 엔드포인트";
+
 /* The Simplenote blog */
 "Blog" = "블로그";
 
@@ -99,6 +114,7 @@
 "By creating an account you agree to our" = "계정을 만들면 다음에 동의하는 것입니다.";
 
 /* Cancel Action
+   Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
    PinLock screen \"cancel\" button
@@ -218,6 +234,9 @@
 /* Confirmation button of deletion confirmation message for a tag. */
 "Delete Tag" = "태그 삭제";
 
+/* Deselect all Button Label */
+"Deselect All" = "모두 선택 해제";
+
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "진단";
 
@@ -245,7 +264,8 @@
    Done toolbar button */
 "Done" = "완료";
 
-/* Edit Tags Action: Visible in the Tags List */
+/* Edit button title
+   Edit Tags Action: Visible in the Tags List */
 "Edit" = "편집";
 
 /* Email TextField Placeholder */
@@ -376,6 +396,9 @@
 
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "수정됨: 오래된 항목";
+
+/* Accessibility hint for trash selected notes button */
+"Move selected notes to trash" = "선택한 메모를 휴지통으로 이동";
 
 /* Delete Action
    Deletes a note */
@@ -560,6 +583,10 @@
 /* No comment provided by engineer. */
 "Security" = "보안";
 
+/* Select all Button Label
+   Select all button title */
+"Select All" = "모두 선택";
+
 /* Accessibility label describing a slider used to reset the current note to a previous version */
 "Select a Version" = "버전 선택";
 
@@ -625,6 +652,9 @@
 /* Tags List Header */
 "Tags" = "태그";
 
+/* Accessibility hint for the select/deselect all button */
+"Tap button to select or deselect all notes" = "버튼을 눌러 모든 메모 선택 또는 선택 해제";
+
 /* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
 "Terms and Conditions" = "이용 약관";
 
@@ -657,6 +687,9 @@
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Touch ID";
+
+/* Move selected notes to trash */
+"Trash Notes" = "메모 삭제";
 
 /* Title: Trash Tag is selected
    Trash filter button */
@@ -757,6 +790,9 @@
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "태그:";
+
+/* Warning Title */
+"⚠️ Important" = "⚠️ 중요";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞 디버그 활성화 🐞";

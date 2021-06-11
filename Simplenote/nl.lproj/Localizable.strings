@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-05-26 16:54:49+0000 */
+/* Translation-Revision-Date: 2021-06-10 15:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: nl */
@@ -15,11 +15,20 @@
 /* Number of failed entries entering in passcode */
 "%i Failed Passcode Attempts" = "%i mislukte wachtwoordcodepogingen";
 
+/* Note trashed notification */
+"%i Note Trashed" = "%i Notitie in prullenbak";
+
+/* Notes trashed notification */
+"%i Notes Trashed" = "%i Notities in prullenbak";
+
 /* Count of interlink references to a note */
 "%i Reference" = "%i Referentie";
 
 /* Count of interlink references to a note */
 "%i References" = "%i Referenties";
+
+/* Count of currently selected notes */
+"%i Selected" = "%i Geselecteerd";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- Minimaal 8 tekens";
@@ -77,6 +86,9 @@
 /* Sign in error message */
 "An error was encountered while signing in." = "Er is een aanmeldfout opgetreden.";
 
+/* Engine URL Message */
+"AppEngine Endpoints" = "AppEngine-eindpunten";
+
 /* No comment provided by engineer. */
 "Appearance" = "Weergave";
 
@@ -92,6 +104,9 @@
 /* User Authenticated */
 "Authenticated" = "Geverifieerd";
 
+/* Engine URL Message */
+"Authentication Endpoints" = "Verificatie-eindpunten";
+
 /* The Simplenote blog */
 "Blog" = "Blog";
 
@@ -99,6 +114,7 @@
 "By creating an account you agree to our" = "Door een account aan te maken, ga je akkoord met onze";
 
 /* Cancel Action
+   Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
    PinLock screen \"cancel\" button
@@ -218,6 +234,9 @@
 /* Confirmation button of deletion confirmation message for a tag. */
 "Delete Tag" = "Tag verwijderen";
 
+/* Deselect all Button Label */
+"Deselect All" = "Alles deselecteren";
+
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "Diagnoses";
 
@@ -245,7 +264,8 @@
    Done toolbar button */
 "Done" = "Klaar";
 
-/* Edit Tags Action: Visible in the Tags List */
+/* Edit button title
+   Edit Tags Action: Visible in the Tags List */
 "Edit" = "Bewerken";
 
 /* Email TextField Placeholder */
@@ -376,6 +396,9 @@
 
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "Aangepast op: Oudste";
+
+/* Accessibility hint for trash selected notes button */
+"Move selected notes to trash" = "Verplaats de geselecteerde notities naar de prullenbak";
 
 /* Delete Action
    Deletes a note */
@@ -560,6 +583,10 @@
 /* No comment provided by engineer. */
 "Security" = "Beveiliging";
 
+/* Select all Button Label
+   Select all button title */
+"Select All" = "Alles selecteren";
+
 /* Accessibility label describing a slider used to reset the current note to a previous version */
 "Select a Version" = "Kies een versie";
 
@@ -625,6 +652,9 @@
 /* Tags List Header */
 "Tags" = "Tags";
 
+/* Accessibility hint for the select/deselect all button */
+"Tap button to select or deselect all notes" = "Tik op de knop om alle notities te selecteren of deselecteren";
+
 /* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
 "Terms and Conditions" = "Algemene voorwaarden";
 
@@ -657,6 +687,9 @@
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Touch ID";
+
+/* Move selected notes to trash */
+"Trash Notes" = "Notities verwijderen";
 
 /* Title: Trash Tag is selected
    Trash filter button */
@@ -757,6 +790,9 @@
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "tag:";
+
+/* Warning Title */
+"⚠️ Important" = "⚠️ Belangrijk";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞 Debug ingeschakeld 🐞";

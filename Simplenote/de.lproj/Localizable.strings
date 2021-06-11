@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-05-27 11:54:04+0000 */
+/* Translation-Revision-Date: 2021-06-09 11:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: de */
@@ -15,11 +15,20 @@
 /* Number of failed entries entering in passcode */
 "%i Failed Passcode Attempts" = "%i fehlgeschlagene Passcode-Versuche";
 
+/* Note trashed notification */
+"%i Note Trashed" = "%i Notiz in den Papierkorb verschoben";
+
+/* Notes trashed notification */
+"%i Notes Trashed" = "%i Notizen in den Papierkorb verschoben";
+
 /* Count of interlink references to a note */
 "%i Reference" = "%i Referenz";
 
 /* Count of interlink references to a note */
 "%i References" = "%i Referenzen";
+
+/* Count of currently selected notes */
+"%i Selected" = "%i Ausgewählt";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "– Es muss mindestens 8 Zeichen lang sein.";
@@ -77,6 +86,9 @@
 /* Sign in error message */
 "An error was encountered while signing in." = "Bei der Anmeldung ist ein Fehler aufgetreten.";
 
+/* Engine URL Message */
+"AppEngine Endpoints" = "AppEngine-Endpunkte";
+
 /* No comment provided by engineer. */
 "Appearance" = "Design";
 
@@ -92,6 +104,9 @@
 /* User Authenticated */
 "Authenticated" = "Authentifiziert";
 
+/* Engine URL Message */
+"Authentication Endpoints" = "Authentifizierungs-Endpunkte";
+
 /* The Simplenote blog */
 "Blog" = "Blog";
 
@@ -99,6 +114,7 @@
 "By creating an account you agree to our" = "Indem du ein Konto erstellst, stimmst du Folgendem zu:";
 
 /* Cancel Action
+   Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
    PinLock screen \"cancel\" button
@@ -218,6 +234,9 @@
 /* Confirmation button of deletion confirmation message for a tag. */
 "Delete Tag" = "Schlagwort löschen";
 
+/* Deselect all Button Label */
+"Deselect All" = "Alle abwählen";
+
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "Diagnose";
 
@@ -245,7 +264,8 @@
    Done toolbar button */
 "Done" = "Fertig";
 
-/* Edit Tags Action: Visible in the Tags List */
+/* Edit button title
+   Edit Tags Action: Visible in the Tags List */
 "Edit" = "Bearbeiten";
 
 /* Email TextField Placeholder */
@@ -376,6 +396,9 @@
 
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "Geändert: Älteste";
+
+/* Accessibility hint for trash selected notes button */
+"Move selected notes to trash" = "Verschiebe die ausgewählten Notizen in den Papierkorb";
 
 /* Delete Action
    Deletes a note */
@@ -560,6 +583,10 @@
 /* No comment provided by engineer. */
 "Security" = "Sicherheit";
 
+/* Select all Button Label
+   Select all button title */
+"Select All" = "Alle auswählen";
+
 /* Accessibility label describing a slider used to reset the current note to a previous version */
 "Select a Version" = "Wähle eine Version aus";
 
@@ -625,6 +652,9 @@
 /* Tags List Header */
 "Tags" = "Schlagwörter";
 
+/* Accessibility hint for the select/deselect all button */
+"Tap button to select or deselect all notes" = "Tippe auf den Button, um alle Notizen aus- oder abzuwählen";
+
 /* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
 "Terms and Conditions" = "Geschäftsbedingungen";
 
@@ -657,6 +687,9 @@
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Touch ID";
+
+/* Move selected notes to trash */
+"Trash Notes" = "Verschieben von Notizen in den Papierkorb";
 
 /* Title: Trash Tag is selected
    Trash filter button */
@@ -757,6 +790,9 @@
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "Schlagwort:";
+
+/* Warning Title */
+"⚠️ Important" = "⚠️ Wichtig";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞 Fehlersuche aktiviert 🐞";
