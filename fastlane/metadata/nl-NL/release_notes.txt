@@ -1,6 +1,2 @@
-- Nieuwe notitiebalk
-- Probleem opgelost met weergave contextueel menu
-- Alle hoofdletters titel samenwerkingsmelding verwijderd
-- Probleem opgelost waarbij er in sommige gevallen geen meldingen werden weergegeven
-- Probleem opgelost waarbij tags niet verwijderd werden voor verwijderde opmerkingen
-- Verbeterde ondersteuning voor dynamische lettertypegrootte voor opmerkingen  
+- De kleur van meldingen in de app is bijgewerkt voor betere leesbaarheid in de nachtmodus
+- De mogelijkheid is toegevoegd om in de notitielijst meerdere notities tegelijk te selecteren en te verwijderen
