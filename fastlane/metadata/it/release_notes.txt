@@ -1,6 +1,2 @@
-- Nuova barra delle note
-- Risolto un problema occasionale con il rendering del menu contestuale
-- Rimosso il maiuscolo dal titolo dell'avviso di collaborazione
-- Risolto un problema relativo alla mancata visualizzazione degli avvisi in alcuni casi
-- Risolto un problema di mancata eliminazione dei tag nelle note spostate nel cestino
-- Migliorato il supporto delle dimensioni dei caratteri dinamici negli avvisi
+- Ora puoi modificare il colore delle notifiche nell'app per una migliore leggibilità in Dark Mode
+- Aggiunta la possibilità di selezionare e cancellare simultaneamente più note dalla lista

@@ -1,6 +1,2 @@
-- Nueva barra de notas
-- Se ha corregido un problema ocasional que afectaba a la apariencia del menú contextual
-- Se han quitado las mayúsculas del título de la alerta de colaboración
-- Se ha corregido un problema que hacía que los avisos no aparecieran en algunos casos
-- Se ha corregido un problema que hacía que las etiquetas no se eliminaran de las notas movidas a la papelera
-- Se ha mejorado la compatibilidad con tamaños de fuente dinámicos en los avisos
+- Actualizamos el color de las notificaciones en la aplicación para que se lean mejor en  modo oscuro.
+- Ahora puedes seleccionar y borrar múltiples notas desde la lista de notas.

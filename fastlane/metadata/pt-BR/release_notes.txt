@@ -1,6 +1,2 @@
-- Nova barra de notas
-- Correção de um problema ocasional com a renderização do menu contextual
-- Remoção das maiúsculas do título do alerta de colaboração
-- Correção do problema de avisos não serem exibidos em alguns casos
-- Correção do problema de tags não serem excluídas das notas na lixeira
-- Aprimoramento do suporte ao tamanho dinâmico de fontes em avisos
+- Atualização da cor das notificações no aplicativo para uma melhor leitura no modo escuro
+- Adicionamos a possibilidade de selecionar e excluir diversas notas ao mesmo tempo na lista de notas

@@ -1,6 +1,2 @@
-- Neue Notizenleiste
-- Gelegentlich auftretendes Problem mit dem kontextuellen Menü-Rendering behoben
-- Kapitalschrift vom Titel des Zusammenarbeitshinweises entfernt
-- Problem mit der Anzeige von Hinweisen behoben
-- Problem behoben, durch das Schlagwörter von Notizen im Papierkorb nicht gelöscht wurden
-- Verbesserte dynamische Schriftgrößenunterstützung in den Hinweisen
+- Farbe der Benachrichtigungen in der App aktualisiert, um Lesbarkeit im dunklen Modus zu verbessern
+- Option zum Auswählen und Löschen mehrerer Notizen gleichzeitig aus der Notizenliste hinzugefügt

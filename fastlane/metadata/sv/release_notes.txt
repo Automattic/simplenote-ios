@@ -1,6 +1,2 @@
-– Nytt anteckningsfält
-– Åtgärdade ett ibland förekommande fel med rendering av snabbmenyn
-– Tog bort enbart versaler i rubriken för samarbetsaviseringen
-– Åtgärdade problemet där meddelanden inte visades i vissa fall
-– Åtgärdade ett problem där taggar inte togs bort när anteckningar raderades
-– Förbättrade stöd för dynamisk teckensnittsstorlek i meddelanden
+- Uppdaterat aviseringsfärgen i appen för bättre läsbarhet i mörkt läge
+- Lagt till möjligheten att välja och ta bort flera anteckningar åt gången från listan med anteckningar
