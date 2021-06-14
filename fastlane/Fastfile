@@ -14,6 +14,9 @@ PROJECT_ENV_FILE_PATH = File.join(
 $used_test_account_index = nil
 
 before_all do
+  # Ensure we use the latest version of the toolkit
+  check_for_toolkit_updates unless is_ci || ENV['FASTLANE_SKIP_TOOLKIT_UPDATE_CHECK']
+
   # Check that the env files exist
   unless is_ci || File.file?(USER_ENV_FILE_PATH)
     UI.user_error!("~/.simplenoteios-env.default not found: Please copy env/user.env-example to #{USER_ENV_FILE_PATH} and fill in the values")
