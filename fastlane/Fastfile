@@ -11,6 +11,7 @@ USER_ENV_FILE_PATH = File.join(Dir.home, '.simplenoteios-env.default')
 PROJECT_ENV_FILE_PATH = File.join(
   Dir.home, '.configure', 'simplenote-ios', 'secrets', 'project.env'
 )
+PROJECT_ROOT_FOLDER = File.dirname(File.expand_path(__dir__))
 $used_test_account_index = nil
 
 before_all do
