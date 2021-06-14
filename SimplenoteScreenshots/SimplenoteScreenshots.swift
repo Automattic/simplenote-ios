@@ -1,5 +1,5 @@
-import UITestsHelpers
 import XCTest
+import XCUITestHelpers
 
 class SimplenoteScreenshots: XCTestCase {
 

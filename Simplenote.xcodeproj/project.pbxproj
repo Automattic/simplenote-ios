@@ -55,10 +55,10 @@
 		3F1BB4A0242DB81E006D1A04 /* ScreenshotsCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1BB49F242DB81E006D1A04 /* ScreenshotsCredentials.swift */; };
 		3F1BB4A3242DC162006D1A04 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1BB4A2242DC162006D1A04 /* SnapshotHelper.swift */; };
 		3F5EDD0C2435A3AE00959576 /* XCTest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5EDD0B2435A3AE00959576 /* XCTest+Extensions.swift */; };
+		3F762E8F2677F19C0088CD45 /* XCUITestHelpers in Frameworks */ = {isa = PBXBuildFile; productRef = 3F762E8E2677F19C0088CD45 /* XCUITestHelpers */; };
+		3F762E912677F1AA0088CD45 /* XCUITestHelpers in Frameworks */ = {isa = PBXBuildFile; productRef = 3F762E902677F1AA0088CD45 /* XCUITestHelpers */; };
 		3FA17B5626240FF000C11C46 /* NoteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA17B5526240FF000C11C46 /* NoteData.swift */; };
 		3FA6013C242C5AAE0068FC52 /* SimplenoteScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6013B242C5AAE0068FC52 /* SimplenoteScreenshots.swift */; };
-		3FF14301266DE2B100138163 /* UITestsHelpers in Frameworks */ = {isa = PBXBuildFile; productRef = 3FF14300266DE2B100138163 /* UITestsHelpers */; };
-		3FF1430A266DE2C600138163 /* UITestsHelpers in Frameworks */ = {isa = PBXBuildFile; productRef = 3FF14309266DE2C600138163 /* UITestsHelpers */; };
 		4352BA0867E0E416EB5FF6B9 /* Pods_Automattic_Simplenote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3318C36BBA08D53624E27EFC /* Pods_Automattic_Simplenote.framework */; };
 		46A3C96317DFA81A002865AE /* NSString+Metadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 467D9C771788D0FF00785EF3 /* NSString+Metadata.m */; };
 		46A3C96617DFA81A002865AE /* SPAcitivitySafari.m in Sources */ = {isa = PBXBuildFile; fileRef = E283709917D7B46300AB562D /* SPAcitivitySafari.m */; };
@@ -1057,7 +1057,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3FF1430A266DE2C600138163 /* UITestsHelpers in Frameworks */,
+				3F762E912677F1AA0088CD45 /* XCUITestHelpers in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1108,7 +1108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3FF14301266DE2B100138163 /* UITestsHelpers in Frameworks */,
+				3F762E8F2677F19C0088CD45 /* XCUITestHelpers in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2247,7 +2247,7 @@
 			);
 			name = SimplenoteScreenshots;
 			packageProductDependencies = (
-				3FF14309266DE2C600138163 /* UITestsHelpers */,
+				3F762E902677F1AA0088CD45 /* XCUITestHelpers */,
 			);
 			productName = SimplenoteScreenshots;
 			productReference = 3FA60139242C5AAD0068FC52 /* SimplenoteScreenshots.xctest */;
@@ -2337,7 +2337,7 @@
 			);
 			name = SimplenoteUITests;
 			packageProductDependencies = (
-				3FF14300266DE2B100138163 /* UITestsHelpers */,
+				3F762E8E2677F19C0088CD45 /* XCUITestHelpers */,
 			);
 			productName = SimplenoteUITests;
 			productReference = D864B15425CAE25000F9B73E /* SimplenoteUITests.xctest */;
@@ -2440,7 +2440,7 @@
 				B5BAF9EB24E4D0D2000917C0 /* XCRemoteSwiftPackageReference "SimplenoteFoundation-Swift" */,
 				B50D2FB424E6DFAC00163FC3 /* XCRemoteSwiftPackageReference "SimplenoteSearch-Swift" */,
 				B59CACFA2541E05400958330 /* XCRemoteSwiftPackageReference "SimplenoteInterlinks-Swift" */,
-				3FF142FF266DE2B100138163 /* XCRemoteSwiftPackageReference "SwiftUITestsHelpers" */,
+				3F762E8D2677F19C0088CD45 /* XCRemoteSwiftPackageReference "XCUITestHelpers" */,
 			);
 			productRefGroup = E29ADD3917848E8500E55842 /* Products */;
 			projectDirPath = "";
@@ -4610,9 +4610,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3FF142FF266DE2B100138163 /* XCRemoteSwiftPackageReference "SwiftUITestsHelpers" */ = {
+		3F762E8D2677F19C0088CD45 /* XCRemoteSwiftPackageReference "XCUITestHelpers" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Automattic/SwiftUITestsHelpers";
+			repositoryURL = "https://github.com/Automattic/XCUITestHelpers";
 			requirement = {
 				branch = trunk;
 				kind = branch;
@@ -4645,15 +4645,15 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3FF14300266DE2B100138163 /* UITestsHelpers */ = {
+		3F762E8E2677F19C0088CD45 /* XCUITestHelpers */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3FF142FF266DE2B100138163 /* XCRemoteSwiftPackageReference "SwiftUITestsHelpers" */;
-			productName = UITestsHelpers;
+			package = 3F762E8D2677F19C0088CD45 /* XCRemoteSwiftPackageReference "XCUITestHelpers" */;
+			productName = XCUITestHelpers;
 		};
-		3FF14309266DE2C600138163 /* UITestsHelpers */ = {
+		3F762E902677F1AA0088CD45 /* XCUITestHelpers */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3FF142FF266DE2B100138163 /* XCRemoteSwiftPackageReference "SwiftUITestsHelpers" */;
-			productName = UITestsHelpers;
+			package = 3F762E8D2677F19C0088CD45 /* XCRemoteSwiftPackageReference "XCUITestHelpers" */;
+			productName = XCUITestHelpers;
 		};
 		B50D2FB524E6DFAC00163FC3 /* SimplenoteSearch */ = {
 			isa = XCSwiftPackageProductDependency;
