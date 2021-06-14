@@ -794,7 +794,7 @@ private extension SPNoteListViewController {
         let copyAction = UIContextualAction(style: .normal, title: nil, image: .image(name: .link), backgroundColor: .simplenoteTertiaryActionColor) { [weak self] (_, _, completion) in
                 self?.copyInternalLink(to: note)
                 NoticeController.shared.present(NoticeFactory.linkCopied())
-                SPTracker.trackPresentedNotice(kind: .linkCopied)
+                SPTracker.trackPresentedNotice(kind: .linkCopied, additionalProperties: ["link_type": "internal_link"])
                 completion(true)
             }
         copyAction.accessibilityLabel = ActionTitle.copyLink
@@ -822,7 +822,7 @@ private extension SPNoteListViewController {
         let copy = UIAction(title: ActionTitle.copyLink, image: .image(name: .link)) { [weak self] _ in
             self?.copyInternalLink(to: note)
             NoticeController.shared.present(NoticeFactory.linkCopied())
-            SPTracker.trackPresentedNotice(kind: .linkCopied)
+            SPTracker.trackPresentedNotice(kind: .linkCopied, additionalProperties: ["link_type": "internal_link"])
         }
 
         let share = UIAction(title: ActionTitle.share, image: .image(name: .share)) { [weak self] _ in

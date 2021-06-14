@@ -27,9 +27,21 @@ extension SPTracker {
     static func trackVerificationDismissed() {
         trackAutomatticEvent(withName: "verification_dismissed", properties: nil)
     }
+}
 
-    static func trackPresentedNotice(kind: NoticeType) {
-        trackAutomatticEvent(withName: "notice_presented", properties: ["notice": kind.rawValue])
+// MARK: - In App Notifications
+//
+extension SPTracker {
+
+    static func trackPresentedNotice(kind: NoticeType, additionalProperties: [String: String]? = nil) {
+        var properties = ["notice": kind.rawValue]
+
+        if let additionalProperties = additionalProperties {
+            for key in additionalProperties.keys {
+                properties[key] = additionalProperties[key]
+            }
+        }
+        trackAutomatticEvent(withName: "notice_presented", properties: properties)
     }
 
     static func trackPreformedNoticeAction(kind: NoticeType, action: NoticeActionType) {
