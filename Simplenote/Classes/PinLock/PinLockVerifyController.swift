@@ -2,7 +2,7 @@ import Foundation
 
 // MARK: - PinLockVerifyControllerDelegate
 //
-protocol PinLockVerifyControllerDelegate: class {
+protocol PinLockVerifyControllerDelegate: AnyObject {
     func pinLockVerifyControllerDidComplete(_ controller: PinLockVerifyController)
 }
 

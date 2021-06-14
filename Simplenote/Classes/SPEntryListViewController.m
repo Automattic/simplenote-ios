@@ -213,7 +213,7 @@ static CGFloat const EntryListCellHeight = 44;
         
         finalCell = cell;;
     }
-    finalCell.selectionStyle = UITableViewCellAccessoryNone;
+    finalCell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return finalCell;
 }

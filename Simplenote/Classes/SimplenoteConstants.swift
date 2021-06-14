@@ -10,22 +10,6 @@ class SimplenoteConstants: NSObject {
     ///
     static let passwordRules = "minlength: 8; maxlength: 50;"
 
-    /// Password Reset URL
-    ///
-    static let resetPasswordURL = "https://app.simplenote.com/reset/?redirect=simplenote://launch&email="
-
-    /// Settings URL
-    ///
-    static let settingsURL = "https://app.simplenote.com/settings"
-
-    /// Verification URL
-    ///
-    static let verificationURL = "https://app.simplenote.com/account/verify-email/"
-
-    /// Signup URL
-    ///
-    static let signupURL = "https://app.simplenote.com/account/request-signup"
-
     /// Simplenote: Scheme
     ///
     static let simplenoteScheme = "simplenote"
@@ -41,4 +25,18 @@ class SimplenoteConstants: NSObject {
     /// Simplenote: Published Notes base URL
     ///
     static let simplenotePublishedBaseURL = "http://simp.ly/publish/"
+
+    /// AppEngine: Base URL
+    ///
+    static let currentEngineBaseURL: NSString = {
+        let output = BuildConfiguration.current == .internal ? SPCredentials.experimentalEngineURL : SPCredentials.defaultEngineURL
+        return output as NSString
+    }()
+
+    /// AppEngine: Endpoints
+    ///
+    static let resetPasswordURL     = currentEngineBaseURL.appendingPathComponent("/reset/?redirect=simplenote://launch&email=")
+    static let settingsURL          = currentEngineBaseURL.appendingPathComponent("/settings")
+    static let signupURL            = currentEngineBaseURL.appendingPathComponent("/account/request-signup")
+    static let verificationURL      = currentEngineBaseURL.appendingPathComponent("/account/verify-email/")
 }

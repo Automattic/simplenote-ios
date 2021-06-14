@@ -2,7 +2,7 @@ import UIKit
 
 // MARK: - NoteEditorTagListViewControllerDelegate
 //
-protocol NoteEditorTagListViewControllerDelegate: class {
+protocol NoteEditorTagListViewControllerDelegate: AnyObject {
     func tagListDidUpdate(_ tagList: NoteEditorTagListViewController)
     func tagListIsEditing(_ tagList: NoteEditorTagListViewController)
 }

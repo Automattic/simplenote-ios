@@ -1,6 +1,2 @@
-- New Note Bar
-- Fixed an occasional issue with the contextual menu rendering
-- Removed all caps from collaboration alert title
-- Fixed issue where notices wouldn't be shown in some cases
-- Fixed an issue where tags would not be deleted on trashed notes
-- Improved dynamic font size support in notices
+- Update in-app notifications color for better readability in dark mode
+- Added the ability to select and delete multiple notes at a time from the note list

@@ -1,6 +1,2 @@
-- Bilah Catatan Baru
-- Masalah rendering menu konteks yang terkadang muncul sudah diatasi
-- Judul peringatan kolaborasi tidak lagi berhuruf kapital
-- Masalah pemberitahuan yang tidak ditampilkan dalam beberapa kasus sudah diatasi
-- Masalah tag yang tidak dapat dihapus untuk catatan yang telah dipindah ke tong sampah sudah diatasi
-- Peningkatan dukungan ukuran font dinamis pada pemberitahuan
+- Memperbarui warna pemberitahuan dalam aplikasi untuk keterbacaan yang lebih baik pada mode gelap
+- Menambah fitur untuk memilih dan menghapus beberapa notes sekaligus dari daftar note.

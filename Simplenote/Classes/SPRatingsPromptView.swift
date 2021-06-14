@@ -5,7 +5,7 @@ import UIKit
 // MARK: - SPRatingsPromptDelegate
 //
 @objc
-protocol SPRatingsPromptDelegate: class {
+protocol SPRatingsPromptDelegate: AnyObject {
     func simplenoteWasLiked()
     func simplenoteWasDisliked()
     func displayReviewUI()

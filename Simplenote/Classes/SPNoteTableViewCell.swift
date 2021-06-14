@@ -31,6 +31,25 @@ class SPNoteTableViewCell: UITableViewCell {
     ///
     @IBOutlet private var accessoryRightImageViewHeightConstraint: NSLayoutConstraint!
 
+    /// Main text area stack view
+    ///
+    @IBOutlet weak var textAreaStackView: UIStackView!
+
+    /// Separator View
+    ///
+    private let separatorsView = SeparatorsView()
+
+    /// Bottom Separator Visible
+    ///
+    var shouldDisplayBottomSeparator: Bool {
+        get {
+            separatorsView.bottomVisible
+        }
+        set {
+            separatorsView.bottomVisible = newValue
+        }
+    }
+
     /// Left Accessory Image
     ///
     var accessoryLeftImage: UIImage? {
@@ -140,6 +159,7 @@ class SPNoteTableViewCell: UITableViewCell {
         super.awakeFromNib()
         setupMargins()
         setupTextViews()
+        setupCellSeparatorView()
         refreshStyle()
         refreshConstraints()
     }
@@ -225,6 +245,20 @@ private extension SPNoteTableViewCell {
 
         bodyLabel.numberOfLines = Style.maximumNumberOfBodyLines
         bodyLabel.lineBreakMode = .byWordWrapping
+    }
+
+    private func setupCellSeparatorView() {
+        separatorsView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(separatorsView)
+        NSLayoutConstraint.activate([
+            separatorsView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            separatorsView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            separatorsView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            separatorsView.leadingAnchor.constraint(equalTo: textAreaStackView.leadingAnchor)
+        ])
+
+        contentView.sendSubviewToBack(separatorsView)
+        separatorsView.bottomVisible = true
     }
 }
 

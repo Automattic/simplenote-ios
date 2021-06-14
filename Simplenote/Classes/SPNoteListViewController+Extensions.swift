@@ -28,13 +28,13 @@ extension SPNoteListViewController {
         tableView.tableFooterView = UIView()
 
         tableView.layoutMargins = .zero
-        tableView.separatorInset = .zero
-        tableView.separatorInsetReference = .fromAutomaticInsets
-        tableView.separatorStyle = UIDevice.sp_isPad() ? .none : .singleLine
+        tableView.separatorStyle = .none
 
         tableView.register(SPNoteTableViewCell.loadNib(), forCellReuseIdentifier: SPNoteTableViewCell.reuseIdentifier)
         tableView.register(SPTagTableViewCell.loadNib(), forCellReuseIdentifier: SPTagTableViewCell.reuseIdentifier)
         tableView.register(SPSectionHeaderView.self, forHeaderFooterViewReuseIdentifier: SPSectionHeaderView.reuseIdentifier)
+
+        tableView.allowsMultipleSelectionDuringEditing = true
     }
 
     /// Sets up the Results Controller
@@ -255,6 +255,16 @@ extension SPNoteListViewController {
         updatePlaceholderPosition()
     }
 
+    func refreshSelectAllLabels() {
+        let numberOfSelectedRows = tableView.indexPathsForSelectedRows?.count ?? 0
+        let deselect = notesListController.numberOfObjects == numberOfSelectedRows
+
+        selectAllButton.title = Localization.selectAllLabel(deselect: deselect)
+        selectAllButton.isAccessibilityElement = true
+        selectAllButton.accessibilityLabel = Localization.selectAllLabel(deselect: deselect)
+        selectAllButton.accessibilityHint = Localization.selectAllAccessibilityHint
+    }
+
     private var placeholderDisplayMode: SPPlaceholderView.DisplayMode {
         if isIndexingNotes || SPAppDelegate.shared().bSigningUserOut {
             return .generic
@@ -343,6 +353,54 @@ extension SPNoteListViewController {
         let isNotEmpty = !self.isListEmpty
 
         emptyTrashButton.isEnabled = isTrashOnScreen && isNotEmpty
+    }
+
+    /// Delete selected notes
+    ///
+    @objc
+    func trashSelectedNotes() {
+        guard let notes = tableView.indexPathsForSelectedRows?.compactMap({ notesListController.object(at: $0) as? Note }) else {
+            return
+        }
+
+        delete(notes: notes)
+        setEditing(false, animated: true)
+    }
+
+    /// Setup Navigation toolbar buttons
+    ///
+    @objc
+    func configureNavigationToolbarButton() {
+        // TODO: When multi select is added to iPad, revist the conditionals here
+        guard navigationController?.isToolbarHidden == false,
+            let trashButton = trashButton,
+            let addButton = addButton else {
+            return
+        }
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let actionButton = isEditing ? trashButton : addButton
+        setToolbarItems([flexibleSpace, actionButton], animated: true)
+    }
+
+    @objc
+    func selectAllWasTapped() {
+        if notesListController.numberOfObjects == tableView.indexPathsForSelectedRows?.count {
+            tableView.deselectAllRows(inSection: .zero, animated: false)
+        } else {
+            tableView.selectAllRows(inSection: 0, animated: false)
+        }
+        refreshNavigationBarLabels()
+    }
+
+    @objc
+    func refreshNavigationBarLabels() {
+        refreshListViewTitle()
+        refreshSelectAllLabels()
+    }
+
+    @objc
+    func refreshEditButtonTitle() {
+        editButtonItem.title = isEditing ? Localization.cancelTitle : Localization.editTitle
     }
 }
 
@@ -495,6 +553,11 @@ extension SPNoteListViewController: UITableViewDelegate {
     }
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if isEditing {
+            refreshNavigationBarLabels()
+            return
+        }
+
         selectedNote = nil
 
         switch notesListController.object(at: indexPath) {
@@ -506,11 +569,18 @@ extension SPNoteListViewController: UITableViewDelegate {
         default:
             break
         }
+
+    }
+
+    public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if isEditing {
+            refreshNavigationBarLabels()
+        }
     }
 
     @available(iOS 13.0, *)
     public func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        guard isDeletedFilterActive == false, let note = notesListController.object(at: indexPath) as? Note else {
+        guard isDeletedFilterActive == false, isEditing == false, let note = notesListController.object(at: indexPath) as? Note else {
             return nil
         }
 
@@ -535,9 +605,16 @@ extension SPNoteListViewController: UITableViewDelegate {
     }
 
     public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let cell = cell as? SPNoteTableViewCell else {
+            return
+        }
+
         var insets = SPNoteTableViewCell.separatorInsets
         insets.left -= cell.layoutMargins.left
+
         cell.separatorInset = insets
+
+        cell.shouldDisplayBottomSeparator = indexPath.row < notesListController.numberOfObjects - 1
     }
 }
 
@@ -622,6 +699,43 @@ extension SPNoteListViewController {
             notesListController.object(at: indexPath) as? Note
         }
     }
+
+    open override func setEditing(_ editing: Bool, animated: Bool) {
+        ensureTableViewEditingIsInSync()
+        super.setEditing(editing, animated: animated)
+        tableView.setEditing(editing, animated: animated)
+        refreshEditButtonTitle()
+        refreshSelectAllLabels()
+
+        tableView.deselectAllRows(inSection: .zero, animated: false)
+        updateNavigationBar()
+
+        configureNavigationToolbarButton()
+        refreshListViewTitle()
+    }
+
+    private func ensureTableViewEditingIsInSync() {
+        // If a swipe action is active, the tableView will already be set to isEditing == true
+        // The edit button is still active while the swipe actions are active, if pressed
+        // the VC and the tableview will get set to true, but since the tableView is already
+        // editing nothind will happen.
+        // This method ensures the tableview and VC are in sync when the edit button is tapped
+        guard tableView.isEditing != isEditing else {
+            return
+        }
+        tableView.setEditing(isEditing, animated: false)
+    }
+
+    private func refreshListViewTitle() {
+        title = {
+            guard isEditing else {
+                return notesListController.filter.title
+            }
+
+            let count = tableView.indexPathsForSelectedRows?.count ?? .zero
+            return count > 0 ? Localization.selectedTitle(with: count) : notesListController.filter.title
+        }()
+    }
 }
 
 // MARK: - Row Actions
@@ -661,6 +775,10 @@ private extension SPNoteListViewController {
 
         let trashAction = UIContextualAction(style: .destructive, title: nil, image: .image(name: .trash), backgroundColor: .simplenoteDestructiveActionColor) { [weak self] (_, _, completion) in
                 self?.delete(note: note)
+                NoticeController.shared.present(NoticeFactory.noteTrashed(onUndo: {
+                    SPObjectManager.shared().restoreNote(note)
+                    self?.tableView.reloadData()
+                }))
                 completion(true)
         }
         trashAction.accessibilityLabel = ActionTitle.trash
@@ -724,6 +842,10 @@ private extension SPNoteListViewController {
 
         let delete = UIAction(title: ActionTitle.delete, image: .image(name: .trash), attributes: .destructive) { [weak self] _ in
             self?.delete(note: note)
+            NoticeController.shared.present(NoticeFactory.noteTrashed(onUndo: {
+                SPObjectManager.shared().restoreNote(note)
+                self?.tableView.reloadData()
+            }))
         }
 
         return UIMenu(title: "", children: [share, copy, pin, delete])
@@ -738,9 +860,6 @@ private extension SPNoteListViewController {
         SPTracker.trackListNoteDeleted()
         SPObjectManager.shared().trashNote(note)
         CSSearchableIndex.default().deleteSearchableNote(note)
-        NoticeController.shared.present(NoticeFactory.noteTrashed(note, onUndo: {
-            SPObjectManager.shared().restoreNote(note)
-        }))
     }
 
     func copyInternalLink(to note: Note) {
@@ -781,6 +900,20 @@ private extension SPNoteListViewController {
         editorViewController.update(withSearchQuery: searchQuery)
 
         return editorViewController
+    }
+
+    func delete(notes: [Note]) {
+        for note in notes {
+            delete(note: note)
+        }
+
+        NoticeController.shared.present(NoticeFactory.notesTrashed(notes, onUndo: {
+            for note in notes {
+                SPObjectManager.shared().restoreNote(note)
+            }
+        }))
+
+        setEditing(false, animated: true)
     }
 }
 
@@ -993,4 +1126,21 @@ private enum Localization {
             return String(format: NSLocalizedString("Create a new note titled “%@”", comment: "Tappable message shown when no notes match a search string. Parameter: %@ - search term"), searchTerm)
         }
     }
+
+    static func selectedTitle(with count: Int) -> String {
+        let string = NSLocalizedString("%i Selected", comment: "Count of currently selected notes")
+        return String(format: string, count)
+    }
+
+    static func selectAllLabel(deselect: Bool) -> String {
+        let selectLabel = NSLocalizedString("Select All", comment: "Select all Button Label")
+        let deselectLabel = NSLocalizedString("Deselect All", comment: "Deselect all Button Label")
+        return deselect ? deselectLabel : selectLabel
+    }
+
+    static let selectAllAccessibilityHint = NSLocalizedString("Tap button to select or deselect all notes", comment: "Accessibility hint for the select/deselect all button")
+
+    static let editTitle = NSLocalizedString("Edit", comment: "Edit button title")
+
+    static let cancelTitle = NSLocalizedString("Cancel", comment: "Cancel button title")
 }

@@ -9,7 +9,7 @@ enum TagListViewCellDeletionSource {
 
 // MARK: - TagListViewCellDelegate
 //
-protocol TagListViewCellDelegate: class {
+protocol TagListViewCellDelegate: AnyObject {
     func tagListViewCellShouldDeleteTag(_ cell: TagListViewCell, source: TagListViewCellDeletionSource)
     func tagListViewCellShouldRenameTag(_ cell: TagListViewCell)
 }

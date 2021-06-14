@@ -5,7 +5,7 @@ import SimplenoteFoundation
 
 // MARK: - OptionsControllerDelegate
 //
-protocol OptionsControllerDelegate: class {
+protocol OptionsControllerDelegate: AnyObject {
     func optionsControllerDidPressHistory(_ sender: OptionsViewController)
     func optionsControllerDidPressShare(_ sender: OptionsViewController)
     func optionsControllerDidPressTrash(_ sender: OptionsViewController)
