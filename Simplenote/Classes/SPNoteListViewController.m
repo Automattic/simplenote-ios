@@ -242,11 +242,6 @@
 
 - (void)refreshNavigationControllerToolbar
 {
-    if (UIDevice.isPad) {
-        [self.navigationController setToolbarHidden:YES animated:YES];
-        return;
-    }
-
     [self.navigationController setToolbarHidden:!self.isEditing animated:YES];
     [self configureNavigationToolbarButton];
 }
