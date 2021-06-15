@@ -143,16 +143,22 @@ end
 
       UI.message "#{keywords_path} has more than #{app_store_connect_keywords_length_limit} characters. Trimming it..."
 
+      english_comma = ','
       case File.basename(locale_dir)
       when 'ar-SA'
+        # Replace Arabic comma with English one as per App Store
+        # Connect requirement
         separator = '،'
+        keywords = keywords.split(separator).join(english_comma)
       else
-        separator = ','
+        # Nothing do do here, but we might have more languages
+        # with different commas in the future
       end
 
-      until keywords.length <= app_store_connect_keywords_length_limit do
-        keywords = keywords.split(separator)[0...-1].join(separator)
-        puts keywords
+      until keywords.length <=
+          app_store_connect_keywords_length_limit do
+      UI.error(keywords)
+        keywords = keywords.split(english_comma)[0...-1].join(english_comma)
       end
 
       File.write(keywords_path, keywords)
