@@ -828,7 +828,7 @@ private extension SPNoteListViewController {
             self?.togglePinnedState(note: note)
         }
 
-        let select = UIAction(title: ActionTitle.select, image: .image(name: .checkmarkChecked)) { [weak self] _ in
+        let select = UIAction(title: ActionTitle.select, image: .image(name: .success)) { [weak self] _ in
             self?.setEditing(true, animated: true)
         }
 
