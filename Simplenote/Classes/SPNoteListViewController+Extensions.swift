@@ -372,14 +372,11 @@ extension SPNoteListViewController {
     @objc
     func configureNavigationToolbarButton() {
         // TODO: When multi select is added to iPad, revist the conditionals here
-        guard navigationController?.isToolbarHidden == false,
-            let trashButton = trashButton,
-            let addButton = addButton else {
+        guard let trashButton = trashButton else {
             return
         }
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let actionButton = isEditing ? trashButton : addButton
-        setToolbarItems([flexibleSpace, actionButton], animated: true)
+        setToolbarItems([flexibleSpace, trashButton], animated: true)
     }
 
     @objc
@@ -711,6 +708,7 @@ extension SPNoteListViewController {
         updateNavigationBar()
 
         configureNavigationToolbarButton()
+        navigationController?.setToolbarHidden(!editing, animated: true)
         refreshListViewTitle()
     }
 

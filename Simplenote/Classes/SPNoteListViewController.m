@@ -247,7 +247,7 @@
         return;
     }
 
-    [self.navigationController setToolbarHidden:self.isSearchActive animated:YES];
+    [self.navigationController setToolbarHidden:!self.isEditing animated:YES];
     [self configureNavigationToolbarButton];
 }
 
@@ -255,8 +255,8 @@
     // TODO: When multi select is added to iPad, revist the conditionals here
     [self.navigationController setNavigationBarHidden: self.isSearchActive animated:YES];
     
-    UIBarButtonItem *possibleAddButton = UIDevice.isPad ? self.addButton : self.editButtonItem;
-    UIBarButtonItem *rightButton = (self.isDeletedFilterActive) ? self.emptyTrashButton : possibleAddButton;
+    UIBarButtonItem *addOrEditButton = self.isEditing ? self.editButtonItem : self.addButton;
+    UIBarButtonItem *rightButton = (self.isDeletedFilterActive) ? self.emptyTrashButton : addOrEditButton;
 
     UIBarButtonItem *leftButton = self.isEditing ? self.selectAllButton : self.sidebarButton;
 
