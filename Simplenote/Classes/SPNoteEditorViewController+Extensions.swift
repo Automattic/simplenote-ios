@@ -109,15 +109,6 @@ extension SPNoteEditorViewController {
         }
     }
 
-    /// Sets up new note bar
-    ///
-    @objc
-    func configureNewNoteBar() {
-        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let navigationItems = [flexibleSpace, createNoteButton]
-        setToolbarItems(navigationItems, animated: true)
-    }
-
     private var popoverPresenter: PopoverPresenter {
         let viewportProvider = { [weak self] () -> CGRect in
             self?.noteEditorTextView.editingRectInWindow() ?? .zero
