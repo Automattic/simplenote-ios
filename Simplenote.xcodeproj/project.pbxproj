@@ -4614,8 +4614,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Automattic/XCUITestHelpers";
 			requirement = {
-				branch = trunk;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.0;
 			};
 		};
 		B50D2FB424E6DFAC00163FC3 /* XCRemoteSwiftPackageReference "SimplenoteSearch-Swift" */ = {
