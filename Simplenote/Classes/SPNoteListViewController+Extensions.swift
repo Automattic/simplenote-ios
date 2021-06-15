@@ -830,6 +830,10 @@ private extension SPNoteListViewController {
             self?.togglePinnedState(note: note)
         }
 
+        let select = UIAction(title: ActionTitle.select, image: .image(name: .checkmarkChecked)) { [weak self] _ in
+            self?.setEditing(true, animated: true)
+        }
+
         /// NOTE:
         /// iOS 13 exhibits a broken animation when performing a Delete OP from a ContextMenu.
         /// Since this appears to be fixed in iOS 14, quick workaround is: remove Delete from the Contextual Actions for iOS 13.
@@ -837,7 +841,7 @@ private extension SPNoteListViewController {
         /// Ref.: https://github.com/Automattic/simplenote-ios/pull/902/files
         ///
         guard #available(iOS 14.0, *) else {
-            return UIMenu(title: "", children: [share, copy, pin])
+            return UIMenu(title: "", children: [select, share, copy, pin])
         }
 
         let delete = UIAction(title: ActionTitle.delete, image: .image(name: .trash), attributes: .destructive) { [weak self] _ in
@@ -848,7 +852,7 @@ private extension SPNoteListViewController {
             }))
         }
 
-        return UIMenu(title: "", children: [share, copy, pin, delete])
+        return UIMenu(title: "", children: [select, share, copy, pin, delete])
     }
 }
 
@@ -1083,6 +1087,7 @@ private enum ActionTitle {
     static let unpin = NSLocalizedString("Unpin", comment: "Unpins a note")
     static let restore = NSLocalizedString("Restore Note", comment: "Restore a note from trash")
     static let delete = NSLocalizedString("Delete Note", comment: "Delet a note from trash")
+    static let select = NSLocalizedString("Select Notes", comment: "Select multiple notes at once")
 }
 
 private enum Constants {
