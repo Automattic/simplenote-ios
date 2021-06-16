@@ -387,6 +387,7 @@ extension SPNoteListViewController {
             tableView.selectAllRows(inSection: 0, animated: false)
         }
         refreshNavigationBarLabels()
+        refreshTrashButton()
     }
 
     @objc
@@ -398,6 +399,14 @@ extension SPNoteListViewController {
     @objc
     func refreshEditButtonTitle() {
         editButtonItem.title = isEditing ? Localization.cancelTitle : Localization.editTitle
+    }
+
+    func refreshTrashButton() {
+        guard let selectedRows = tableView.indexPathsForSelectedRows else {
+            trashButton.isEnabled = false
+            return
+        }
+        trashButton.isEnabled = selectedRows.count > 0
     }
 }
 
@@ -552,6 +561,7 @@ extension SPNoteListViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if isEditing {
             refreshNavigationBarLabels()
+            refreshTrashButton()
             return
         }
 
@@ -572,6 +582,7 @@ extension SPNoteListViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         if isEditing {
             refreshNavigationBarLabels()
+            refreshTrashButton()
         }
     }
 
@@ -832,6 +843,7 @@ private extension SPNoteListViewController {
             print(indexPath)
             self?.setEditing(true, animated: true)
             self?.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .bottom)
+            self?.refreshTrashButton()
         }
 
         /// NOTE:
