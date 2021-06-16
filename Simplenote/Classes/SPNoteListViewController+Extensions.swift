@@ -614,7 +614,7 @@ extension SPNoteListViewController: UITableViewDelegate {
 
         cell.separatorInset = insets
 
-        cell.shouldDisplayBottomSeparator = indexPath.row < notesListController.numberOfObjects - 1
+        cell.shouldDisplayBottomSeparator = indexPath.row < notesListController.numberOfObjects - 1 && !UIDevice.isPad
     }
 }
 
