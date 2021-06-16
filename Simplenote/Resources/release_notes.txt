@@ -1,2 +1,3 @@
-- Update in-app notifications color for better readability in dark mode
-- Added the ability to select and delete multiple notes at a time from the note list
+-   Fixed a bug in which the New Note button might not appear
+-   New Biometry Lock Flow
+

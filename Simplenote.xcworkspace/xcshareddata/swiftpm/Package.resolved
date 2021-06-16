@@ -27,6 +27,15 @@
           "revision": "499d2809d169fcbeb9ff75568d9f1f937f290ffc",
           "version": "1.3.0"
         }
+      },
+      {
+        "package": "XCUITestHelpers",
+        "repositoryURL": "https://github.com/Automattic/XCUITestHelpers",
+        "state": {
+          "branch": "trunk",
+          "revision": "47d688b0b2a6356361a16836c4d23f12d6643a73",
+          "version": null
+        }
       }
     ]
   },

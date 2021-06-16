@@ -57,7 +57,7 @@ class NoteEditor {
 
     class func swipeToPreview() {
         app.textViews.firstMatch.swipeLeft()
-        sleep(1)
+        sleep(5)
     }
 
     class func leaveEditor() {
@@ -98,7 +98,7 @@ class NoteEditor {
     class func pressLink(containerText: String, linkifiedText: String) {
         // Should be replaced with proper way to determine if page is loaded
         app.textViews[containerText].links[linkifiedText].press(forDuration: 1.3)
-        sleep(4)
+        sleep(5)
     }
 
     class func getAllTextViews() -> XCUIElementQuery {
