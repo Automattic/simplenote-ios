@@ -840,7 +840,6 @@ private extension SPNoteListViewController {
         }
 
         let select = UIAction(title: ActionTitle.select, image: .image(name: .success)) { [weak self] _ in
-            print(indexPath)
             self?.setEditing(true, animated: true)
             self?.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .bottom)
             self?.refreshTrashButton()
