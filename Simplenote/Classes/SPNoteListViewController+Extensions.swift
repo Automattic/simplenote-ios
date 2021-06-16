@@ -585,7 +585,7 @@ extension SPNoteListViewController: UITableViewDelegate {
             return self.previewingViewController(for: note)
 
         }, actionProvider: { suggestedActions in
-            return self.contextMenu(for: note)
+            return self.contextMenu(for: note, at: indexPath)
         })
     }
 
@@ -813,7 +813,7 @@ private extension SPNoteListViewController {
 
     /// Invoked by the Long Press UITableView Mechanism (ex 3d Touch)
     ///
-    func contextMenu(for note: Note) -> UIMenu {
+    func contextMenu(for note: Note, at indexPath: IndexPath) -> UIMenu {
         let copy = UIAction(title: ActionTitle.copyLink, image: .image(name: .link)) { [weak self] _ in
             self?.copyInternalLink(to: note)
             NoticeController.shared.present(NoticeFactory.linkCopied())
@@ -829,7 +829,9 @@ private extension SPNoteListViewController {
         }
 
         let select = UIAction(title: ActionTitle.select, image: .image(name: .success)) { [weak self] _ in
+            print(indexPath)
             self?.setEditing(true, animated: true)
+            self?.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .bottom)
         }
 
         /// NOTE:
