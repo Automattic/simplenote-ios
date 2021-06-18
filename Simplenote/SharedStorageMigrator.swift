@@ -19,7 +19,9 @@ class SharedStorageMigrator {
         // Testing prints
         // TODO: Remove prints later
         print("oldDb exists \(FileManager.default.fileExists(atPath: oldDbURL.path))")
+        print(oldDbURL.path)
         print("newDb exists \(FileManager.default.fileExists(atPath: newDbURL.path))")
+        print(newDbURL.path)
 
         let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: SPAppDelegate.shared().managedObjectModel)
 
@@ -49,10 +51,10 @@ class SharedStorageMigrator {
             NSLog("Beginning database migration")
 
             // Option 1: Migrated old DB to new location
-//            migrateDatabase(from: oldDbURL, to: newDbURL, coordinator: persistentStoreCoordinator)
+            migrateDatabase(from: oldDbURL, to: groupDocumemntsDirectory, coordinator: persistentStoreCoordinator)
 
             // Option 2: Migrate old DB FILES to new location
-            migrateCoreDataFiles(from: documentsURL, to: groupDocumemntsDirectory)
+//            migrateCoreDataFiles(from: documentsURL, to: groupDocumemntsDirectory)
         }
     }
 
@@ -73,6 +75,8 @@ class SharedStorageMigrator {
         }
 
         do {
+            try FileManager.default.createDirectory(at: newUrl, withIntermediateDirectories: false, attributes: nil)
+
             try coordinator.migratePersistentStore(store, to: newUrl, options: nil, withType: NSSQLiteStoreType)
             NSLog("Migration Succeeded")
         } catch {

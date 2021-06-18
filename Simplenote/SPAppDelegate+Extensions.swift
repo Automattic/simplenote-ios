@@ -45,10 +45,11 @@ extension SPAppDelegate {
 
     @objc
     func migrateCoreDataToAppGroupIfNeeded() {
-        guard let groupDocumemntsDirectory = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Constants.sharedDirectoryDomain + Constants.groupIdentifier) else {
+        guard let groupDirectory = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Constants.sharedDirectoryDomain + Constants.groupIdentifier) else {
             return
         }
-        let newDbURL = groupDocumemntsDirectory.appendingPathComponent(Constants.sqlFile)
+        let groupDocumentsDirectory = groupDirectory.appendingPathComponent(Constants.documentDirectory)
+        let newDbURL = groupDocumentsDirectory.appendingPathComponent(Constants.sqlFile)
 
         // Confirm if the app group DB exists
         if FileManager.default.fileExists(atPath: newDbURL.path) {
@@ -428,4 +429,5 @@ private struct Constants {
     static let groupIdentifier = Bundle.main.bundleIdentifier ?? Constants.defaultBundleIdentifier
     static let sharedDirectoryDomain = "group."
     static let sqlFile = "Simplenote.sqlite"
+    static let documentDirectory = "Documents"
 }
