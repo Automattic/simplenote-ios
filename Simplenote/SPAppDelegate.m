@@ -326,7 +326,8 @@
     // Setup path for shared group document directory core data database
     NSString *group = @"group.";
     NSString *identifier = [group stringByAppendingString:[[NSBundle mainBundle] bundleIdentifier]];
-    NSURL *groupDocumentsDirectory = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier: identifier];
+    NSURL *groupDirectory = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier: identifier];
+    NSURL *groupDocumentsDirectory = [groupDirectory URLByAppendingPathComponent: @"Documents"];
     NSURL *groupPath = [groupDocumentsDirectory URLByAppendingPathComponent:@"Simplenote.sqlite"];
 
     // Check for the existence of the new database

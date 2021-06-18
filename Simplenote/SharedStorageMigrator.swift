@@ -9,9 +9,10 @@ class SharedStorageMigrator {
     @objc
     static func migrateCoreDataToAppGroup() {
         guard let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first,
-              let groupDocumemntsDirectory = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Constants.sharedDirectoryDomain + Constants.groupIdentifier) else {
+              let groupDirectory = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Constants.sharedDirectoryDomain + Constants.groupIdentifier) else {
             return
         }
+        let groupDocumemntsDirectory = groupDirectory.appendingPathComponent(Constants.documentDirectory)
         let oldDbURL = documentsURL.appendingPathComponent(Constants.sqlFile)
         let newDbURL = groupDocumemntsDirectory.appendingPathComponent(Constants.sqlFile)
 
@@ -47,8 +48,11 @@ class SharedStorageMigrator {
             NSLog("Database needs migration to app group")
             NSLog("Beginning database migration")
 
-            // Migrated old DB to new location
-            migrateDatabase(from: oldDbURL, to: newDbURL, coordinator: persistentStoreCoordinator)
+            // Option 1: Migrated old DB to new location
+//            migrateDatabase(from: oldDbURL, to: newDbURL, coordinator: persistentStoreCoordinator)
+
+            // Option 2: Migrate old DB FILES to new location
+            migrateCoreDataFiles(from: documentsURL, to: groupDocumemntsDirectory)
         }
     }
 
@@ -78,17 +82,25 @@ class SharedStorageMigrator {
         }
     }
 
-    private func migrateCoreDataFiles(from url: URL, to newURL: URL) {
+    private static func migrateCoreDataFiles(from oldUrl: URL, to newURL: URL) {
         let fileManager = FileManager.default
 
+        // Testing prints
+        // TODO: Remove prints later
+        print(oldUrl)
+        print(newURL)
+
         do {
-            let files = try fileManager.contentsOfDirectory(atPath: url.path)
+            try fileManager.createDirectory(at: newURL, withIntermediateDirectories: false, attributes: nil)
+
+            let files = try fileManager.contentsOfDirectory(atPath: oldUrl.path)
             try files.forEach { (file) in
-                let oldPath = url.appendingPathComponent(file)
+                let oldPath = oldUrl.appendingPathComponent(file)
                 let newPath = newURL.appendingPathComponent(file)
-                try fileManager.moveItem(at: oldPath, to: newPath)
+                try fileManager.copyItem(at: oldPath, to: newPath)
             }
         } catch {
+            // TODO: if migration fails confirm the new dir is deleted
             NSLog("Could not migrate core data files")
             NSLog(error.localizedDescription)
         }
@@ -100,4 +112,5 @@ private struct Constants {
     static let groupIdentifier = Bundle.main.bundleIdentifier ?? Constants.defaultBundleIdentifier
     static let sharedDirectoryDomain = "group."
     static let sqlFile = "Simplenote.sqlite"
+    static let documentDirectory = "Documents"
 }
