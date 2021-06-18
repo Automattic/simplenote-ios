@@ -75,6 +75,22 @@ class SharedStorageMigrator {
             NSLog(error.localizedDescription)
         }
     }
+
+    private func migrateCoreDataFiles(from url: URL, to newURL: URL) {
+        let fileManager = FileManager.default
+
+        do {
+            let files = try fileManager.contentsOfDirectory(atPath: url.path)
+            try files.forEach { (file) in
+                let oldPath = url.appendingPathComponent(file)
+                let newPath = newURL.appendingPathComponent(file)
+                try fileManager.moveItem(at: oldPath, to: newPath)
+            }
+        } catch {
+            NSLog("Could not migrate core data files")
+            NSLog(error.localizedDescription)
+        }
+    }
 }
 
 private struct Constants {
