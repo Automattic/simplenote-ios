@@ -15,29 +15,64 @@ class SharedStorageMigrator {
         let oldDbURL = documentsURL.appendingPathComponent(Constants.sqlFile)
         let newDbURL = groupDocumemntsDirectory.appendingPathComponent(Constants.sqlFile)
 
-        let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: SPAppDelegate.shared().managedObjectModel)
-        addPersistentStore(to: persistentStoreCoordinator, from: oldDbURL)
+        // Testing prints
+        // TODO: Remove prints later
+        print("oldDb exists \(FileManager.default.fileExists(atPath: oldDbURL.path))")
+        print("newDb exists \(FileManager.default.fileExists(atPath: newDbURL.path))")
 
-        // migrate DB if app group database doesn't exist
-        print("Migrating Core Data store to app group directory")
-        if let oldStore = persistentStoreCoordinator.persistentStore(for: oldDbURL) {
-            do {
-                try persistentStoreCoordinator.migratePersistentStore(oldStore, to: newDbURL, options: nil, withType: NSSQLiteStoreType)
-                print("Migrate successful")
-            } catch {
-                print("Failed to migrate database from: \(oldDbURL) to \(newDbURL)")
-                print(error.localizedDescription)
-            }
-        } else {
-            print("Couldn't find data store")
+        let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: SPAppDelegate.shared().managedObjectModel)
+
+        if FileManager.default.fileExists(atPath: newDbURL.path) {
+            // Migration previously completed
+            NSLog("Database migration not needed")
+
+            // exit
+            return
+        }
+
+        if !FileManager.default.fileExists(atPath: oldDbURL.path) && !FileManager.default.fileExists(atPath: newDbURL.path) {
+            NSLog("New database needed")
+            NSLog("Creating database in app group")
+
+            // No DB exists
+            // Create new DB in shared group
+            addPersistentStore(to: persistentStoreCoordinator, at: newDbURL)
+
+            // Exit
+            return
+        }
+
+        if FileManager.default.fileExists(atPath: oldDbURL.path) && !FileManager.default.fileExists(atPath: newDbURL.path) {
+            // Old DB.  Needs Mirgation
+            NSLog("Database needs migration to app group")
+            NSLog("Beginning database migration")
+
+            // Migrated old DB to new location
+            migrateDatabase(to: newDbURL, coordinator: persistentStoreCoordinator)
         }
     }
 
-    private static func addPersistentStore(to store: NSPersistentStoreCoordinator, from url: URL) {
+    @discardableResult private static func addPersistentStore(to coordinator: NSPersistentStoreCoordinator, at url: URL) -> NSPersistentStore? {
         do {
-            try store.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: nil)
+            return try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: nil)
         } catch {
             print(error.localizedDescription)
+            return nil
+        }
+    }
+
+    private static func migrateDatabase(to url: URL, coordinator: NSPersistentStoreCoordinator) {
+        guard let store = addPersistentStore(to: coordinator, at: url) else {
+            NSLog("Could not get persistent store")
+            NSLog("Database migration failed")
+            return
+        }
+
+        do {
+            try coordinator.migratePersistentStore(store, to: url, options: nil, withType: NSSQLiteStoreType)
+        } catch {
+            NSLog("Migration Failed")
+            NSLog(error.localizedDescription)
         }
     }
 }
