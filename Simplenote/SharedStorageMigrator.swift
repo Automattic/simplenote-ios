@@ -48,7 +48,7 @@ class SharedStorageMigrator {
             NSLog("Beginning database migration")
 
             // Migrated old DB to new location
-            migrateDatabase(to: newDbURL, coordinator: persistentStoreCoordinator)
+            migrateDatabase(from: oldDbURL, to: newDbURL, coordinator: persistentStoreCoordinator)
         }
     }
 
@@ -61,16 +61,18 @@ class SharedStorageMigrator {
         }
     }
 
-    private static func migrateDatabase(to url: URL, coordinator: NSPersistentStoreCoordinator) {
-        guard let store = addPersistentStore(to: coordinator, at: url) else {
+    private static func migrateDatabase(from oldURL: URL, to newUrl: URL, coordinator: NSPersistentStoreCoordinator) {
+        guard let store = addPersistentStore(to: coordinator, at: oldURL) else {
             NSLog("Could not get persistent store")
             NSLog("Database migration failed")
             return
         }
 
         do {
-            try coordinator.migratePersistentStore(store, to: url, options: nil, withType: NSSQLiteStoreType)
+            try coordinator.migratePersistentStore(store, to: newUrl, options: nil, withType: NSSQLiteStoreType)
+            NSLog("Migration Succeeded")
         } catch {
+            // TODO: if migrating fails, confirm the directory exists at the new url.  If it does delete it or the app will load w/o data
             NSLog("Migration Failed")
             NSLog(error.localizedDescription)
         }
