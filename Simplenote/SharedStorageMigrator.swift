@@ -39,6 +39,7 @@ class SharedStorageMigrator {
 
             // No DB exists
             // Create new DB in shared group
+            createAppGroupDirectory(at: groupDocumemntsDirectory)
             addPersistentStore(to: persistentStoreCoordinator, at: newDbURL)
 
             // Exit
@@ -50,11 +51,21 @@ class SharedStorageMigrator {
             NSLog("Database needs migration to app group")
             NSLog("Beginning database migration")
 
+            createAppGroupDirectory(at: groupDocumemntsDirectory)
+
             // Option 1: Migrated old DB to new location
-            migrateDatabase(from: oldDbURL, to: groupDocumemntsDirectory, coordinator: persistentStoreCoordinator)
+            migrateDatabase(from: oldDbURL, to: newDbURL, coordinator: persistentStoreCoordinator)
 
             // Option 2: Migrate old DB FILES to new location
 //            migrateCoreDataFiles(from: documentsURL, to: groupDocumemntsDirectory)
+        }
+    }
+
+    private static func createAppGroupDirectory(at url: URL) {
+        do {
+            try FileManager.default.createDirectory(at: url, withIntermediateDirectories: false, attributes: nil)
+        } catch {
+            print(error.localizedDescription)
         }
     }
 
@@ -75,8 +86,6 @@ class SharedStorageMigrator {
         }
 
         do {
-            try FileManager.default.createDirectory(at: newUrl, withIntermediateDirectories: false, attributes: nil)
-
             try coordinator.migratePersistentStore(store, to: newUrl, options: nil, withType: NSSQLiteStoreType)
             NSLog("Migration Succeeded")
         } catch {
@@ -95,8 +104,6 @@ class SharedStorageMigrator {
         print(newURL)
 
         do {
-            try fileManager.createDirectory(at: newURL, withIntermediateDirectories: false, attributes: nil)
-
             let files = try fileManager.contentsOfDirectory(atPath: oldUrl.path)
             try files.forEach { (file) in
                 let oldPath = oldUrl.appendingPathComponent(file)
