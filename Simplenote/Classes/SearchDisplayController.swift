@@ -79,6 +79,11 @@ class SearchDisplayController: NSObject {
     func hideNavigationBarIfNecessary() {
         updateNavigationBar(hidden: active)
     }
+
+    func setEnabled(_ enabled: Bool) {
+        searchBar.isUserInteractionEnabled = enabled
+        searchBar.alpha = enabled ? UIKitConstants.alpha1_0 : UIKitConstants.alpha0_5
+    }
 }
 
 

@@ -721,6 +721,7 @@ extension SPNoteListViewController {
         configureNavigationToolbarButton()
         navigationController?.setToolbarHidden(!editing, animated: true)
         refreshListViewTitle()
+        searchController.setEnabled(!editing)
     }
 
     private func ensureTableViewEditingIsInSync() {
