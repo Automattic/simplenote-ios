@@ -1098,8 +1098,8 @@ private enum ActionTitle {
     static let share = NSLocalizedString("Share...", comment: "Shares a note")
     static let unpin = NSLocalizedString("Unpin", comment: "Unpins a note")
     static let restore = NSLocalizedString("Restore Note", comment: "Restore a note from trash")
-    static let delete = NSLocalizedString("Delete Note", comment: "Delet a note from trash")
-    static let select = NSLocalizedString("Select Notes", comment: "Select multiple notes at once")
+    static let delete = NSLocalizedString("Delete Note", comment: "Delete a note from trash")
+    static let select = NSLocalizedString("Select", comment: "Select multiple notes at once")
 }
 
 private enum Constants {
