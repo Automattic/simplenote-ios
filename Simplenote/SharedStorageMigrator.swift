@@ -3,18 +3,45 @@ import CoreData
 
 class SharedStorageMigrator {
 
+    static let documentsURL: URL? = {
+        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+    }()
+
+    static let groupDirectory: URL? = {
+        FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Constants.sharedDirectoryDomain + Constants.groupIdentifier)
+    }()
+
+    static let groupDocumentsDirectory: URL? = {
+        guard let groupDirectory = groupDirectory else {
+            return nil
+        }
+        return groupDirectory.appendingPathComponent(Constants.documentDirectory)
+    }()
+
+    static let oldDbURL: URL? = {
+        guard let documentsURL = documentsURL else {
+            return nil
+        }
+
+        return documentsURL.appendingPathComponent(Constants.sqlFile)
+    }()
+
+    static let newDbURL: URL? = {
+        guard let groupDocumentsDirectory = groupDocumentsDirectory else {
+            return nil
+        }
+        return groupDocumentsDirectory.appendingPathComponent(Constants.sqlFile)
+    }()
+
     /// Database Migration
     /// To be able to share data with app extensions, the CoreData database needs to be migrated to an app group
     /// Must run before Simperium is setup
-    @objc
     static func migrateCoreDataToAppGroup() {
-        guard let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first,
-              let groupDirectory = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Constants.sharedDirectoryDomain + Constants.groupIdentifier) else {
+        guard let oldDbURL = oldDbURL,
+              let groupDocumentsDirectory = groupDocumentsDirectory,
+              let newDbURL = newDbURL else {
             return
         }
-        let groupDocumemntsDirectory = groupDirectory.appendingPathComponent(Constants.documentDirectory)
-        let oldDbURL = documentsURL.appendingPathComponent(Constants.sqlFile)
-        let newDbURL = groupDocumemntsDirectory.appendingPathComponent(Constants.sqlFile)
 
         // Testing prints
         // TODO: Remove prints later
@@ -39,7 +66,7 @@ class SharedStorageMigrator {
 
             // No DB exists
             // Create new DB in shared group
-            createAppGroupDirectory(at: groupDocumemntsDirectory)
+            createAppGroupDirectory(at: groupDocumentsDirectory)
             addPersistentStore(to: persistentStoreCoordinator, at: newDbURL)
 
             // Exit
@@ -51,7 +78,7 @@ class SharedStorageMigrator {
             NSLog("Database needs migration to app group")
             NSLog("Beginning database migration")
 
-            createAppGroupDirectory(at: groupDocumemntsDirectory)
+            createAppGroupDirectory(at: groupDocumentsDirectory)
 
             // Option 1: Migrated old DB to new location
             migrateDatabase(from: oldDbURL, to: newDbURL, coordinator: persistentStoreCoordinator)

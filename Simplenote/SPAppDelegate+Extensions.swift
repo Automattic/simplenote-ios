@@ -45,11 +45,9 @@ extension SPAppDelegate {
 
     @objc
     func migrateCoreDataToAppGroupIfNeeded() {
-        guard let groupDirectory = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Constants.sharedDirectoryDomain + Constants.groupIdentifier) else {
+        guard let newDbURL = SharedStorageMigrator.newDbURL else {
             return
         }
-        let groupDocumentsDirectory = groupDirectory.appendingPathComponent(Constants.documentDirectory)
-        let newDbURL = groupDocumentsDirectory.appendingPathComponent(Constants.sqlFile)
 
         // Confirm if the app group DB exists
         if FileManager.default.fileExists(atPath: newDbURL.path) {
@@ -421,13 +419,4 @@ extension SPAppDelegate {
         }
         EditorFactory.shared.scrollPositionCache.cleanup(keeping: allIdentifiers)
     }
-}
-
-
-private struct Constants {
-    static let defaultBundleIdentifier = "com.codality.NationalFlow"
-    static let groupIdentifier = Bundle.main.bundleIdentifier ?? Constants.defaultBundleIdentifier
-    static let sharedDirectoryDomain = "group."
-    static let sqlFile = "Simplenote.sqlite"
-    static let documentDirectory = "Documents"
 }
