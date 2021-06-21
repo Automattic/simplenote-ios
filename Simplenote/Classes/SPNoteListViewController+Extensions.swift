@@ -842,7 +842,8 @@ private extension SPNoteListViewController {
 
         let select = UIAction(title: ActionTitle.select, image: .image(name: .success)) { [weak self] _ in
             self?.setEditing(true, animated: true)
-            self?.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .bottom)
+            self?.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+            self?.tableView.scrollToNearestSelectedRow(at: .none, animated: false)
             self?.refreshTrashButton()
         }
         if isSearchActive {
