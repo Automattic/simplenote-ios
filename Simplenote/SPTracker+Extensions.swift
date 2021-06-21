@@ -33,15 +33,8 @@ extension SPTracker {
 //
 extension SPTracker {
 
-    static func trackPresentedNotice(kind: NoticeType, additionalProperties: [String: String]? = nil) {
-        var properties = ["notice": kind.rawValue]
-
-        if let additionalProperties = additionalProperties {
-            for key in additionalProperties.keys {
-                properties[key] = additionalProperties[key]
-            }
-        }
-        trackAutomatticEvent(withName: "notice_presented", properties: properties)
+    static func trackPresentedNotice(kind: NoticeType) {
+        trackAutomatticEvent(withName: "notice_presented", properties: ["notice": kind.rawValue])
     }
 
     static func trackPreformedNoticeAction(kind: NoticeType, action: NoticeActionType) {
@@ -49,7 +42,8 @@ extension SPTracker {
     }
 
     enum NoticeType: String {
-        case linkCopied = "link_copied"
+        case internalLinkCopied = "internal_link_copied"
+        case publicLinkCopied = "public_link_copied"
         case publishing
         case unpublishing
         case noteTrashed = "note_trashed"
