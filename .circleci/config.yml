@@ -15,7 +15,7 @@ parameters:
     default: false
 
 xcode_version: &xcode_version
-  xcode-version: "12.0"
+  xcode-version: "12.5.0"
 
 commands:
   copy_secrets:
@@ -149,7 +149,7 @@ jobs:
         type: string
     executor:
       name: ios/default
-      xcode-version: "12.4.0"
+      <<: *xcode_version
     environment:
       FL_OUTPUT_DIR: output
     steps:
