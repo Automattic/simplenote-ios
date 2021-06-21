@@ -337,6 +337,7 @@
 
     self.searchBar.placeholder = NSLocalizedString(@"Search notes or tags", @"SearchBar's Placeholder Text");
     [self.searchBar applySimplenoteStyle];
+    [self.searchBar refreshPlaceholderStyleWithSearchEnabled:YES];
 
     self.searchController.searchBar.accessibilityIdentifier = @"search-bar";
 }

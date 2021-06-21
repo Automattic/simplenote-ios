@@ -82,7 +82,7 @@ class SearchDisplayController: NSObject {
 
     func setEnabled(_ enabled: Bool) {
         searchBar.isUserInteractionEnabled = enabled
-        searchBar.alpha = enabled ? UIKitConstants.alpha1_0 : UIKitConstants.alpha0_5
+        searchBar.refreshPlaceholderStyle(searchEnabled: enabled)
     }
 }
 
