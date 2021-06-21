@@ -845,6 +845,9 @@ private extension SPNoteListViewController {
             self?.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .bottom)
             self?.refreshTrashButton()
         }
+        if isSearchActive {
+            select.attributes = .disabled
+        }
 
         /// NOTE:
         /// iOS 13 exhibits a broken animation when performing a Delete OP from a ContextMenu.
