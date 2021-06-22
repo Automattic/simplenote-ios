@@ -30,17 +30,6 @@ extension SPAppDelegate {
             bucket.delegate = self
         }
     }
-
-    @objc
-    func migrateCoreDataToAppGroupIfNeeded() {
-        // Confirm if the app group DB exists
-        if FileManager.default.fileExists(atPath: CoreDataManager.groupStorageURL.path) {
-            print("Core Data Migration already complete")
-            return
-        }
-
-        SharedStorageMigrator.migrateCoreDataToAppGroup()
-    }
 }
 
 
