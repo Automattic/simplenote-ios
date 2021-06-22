@@ -53,9 +53,6 @@
                   Identifier = "SimplenoteUISmokeTestsNoteEditor/testCreateUncheckedItem()">
                </Test>
                <Test
-                  Identifier = "SimplenoteUISmokeTestsNoteEditor/testLongTappingOnLinkOpensLinkInNewWindow()">
-               </Test>
-               <Test
                   Identifier = "SimplenoteUISmokeTestsNoteEditor/testTappingOnLinkInPreviewOpensLinkInNewWindow()">
                </Test>
                <Test

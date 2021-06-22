@@ -28,6 +28,16 @@ class Preview {
 
     class func getStaticTextsWithExactValueCount(value: String) -> Int {
         let predicate = NSPredicate(format: "value == '" + value + "'")
+
+        // We wait for at least one element with exact value to appear before counting
+        // all occurences. The downside is loosing 5 sec in cases when we expect element
+        // not to appear, and also executing on search more in every call
+        let _ = app
+            .webViews
+            .descendants(matching: .staticText)
+            .element(matching: predicate)
+            .waitForExistence(timeout: averageLoadTimeout)
+
         let matchingStaticTexts = app.webViews.descendants(matching: .staticText).matching(predicate)
         let matches = matchingStaticTexts.count
         print(">>> Found \(matches) StaticTexts(s) with '\(value)' value")

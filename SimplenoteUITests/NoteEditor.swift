@@ -117,6 +117,15 @@ class NoteEditor {
     }
 
     class func getTextViewsWithExactValueCount(value: String) -> Int {
+        // We wait for at least one element with exact value to appear before counting
+        // all occurences. The downside is loosing 5 sec in cases when we expect element
+        // not to appear, and also executing on search more in every call
+        let predicate = NSPredicate(format: "value == '" + value + "'")
+        let _ = app
+            .descendants(matching: .textView)
+            .element(matching: predicate)
+            .waitForExistence(timeout: averageLoadTimeout)
+
         let matchingTextViews = getAllTextViews()
             .compactMap { ($0.value as? String)?.strippingUnicodeObjectReplacementCharacter() }
             .filter { $0 == value }
@@ -129,6 +138,12 @@ class NoteEditor {
     class func getTextViewsWithExactLabelCount(label: String) -> Int {
         let _ = getAllTextViews()// To initialize the editor
         let predicate = NSPredicate(format: "label == '" + label + "'")
+
+        // We wait for at least one element with exact label to appear before counting
+        // all occurences. The downside if loosing 5 sec in casees when we expect element
+        // not to appear.
+        let _ = app.textViews[label].waitForExistence(timeout: averageLoadTimeout)
+
         let matchingTextViews = app.textViews.matching(predicate)
         let matches = matchingTextViews.count
         print(">>> Found \(matches) TextView(s) with '\(label)' label")
