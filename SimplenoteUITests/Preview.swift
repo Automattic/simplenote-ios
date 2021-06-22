@@ -30,8 +30,7 @@ class Preview {
         let predicate = NSPredicate(format: "value == '" + value + "'")
 
         // We wait for at least one element with exact value to appear before counting
-        // all occurences. The downside is loosing 5 sec in cases when we expect element
-        // not to appear, and also executing on search more in every call
+        // all occurences. The downside is having one extra call before the actual count.
         let _ = app
             .webViews
             .descendants(matching: .staticText)
