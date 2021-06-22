@@ -844,6 +844,7 @@ private extension SPNoteListViewController {
             self?.setEditing(true, animated: true)
             self?.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
             self?.tableView.scrollToNearestSelectedRow(at: .none, animated: false)
+            self?.refreshListViewTitle()
             self?.refreshTrashButton()
         }
         if isSearchActive {
