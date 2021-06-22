@@ -12,11 +12,10 @@ extension SPSidebarContainerViewController {
             return nil
         }
 
-        var commands = [
-            UIKeyCommand(input: "n", modifierFlags: [.command], action: #selector(keyboardCreateNewNote), title: Localization.Shortcuts.newNote),
-        ]
+        var commands: [UIKeyCommand] = []
 
         if !noteListIsEditing() {
+            commands.append(UIKeyCommand(input: "n", modifierFlags: [.command], action: #selector(keyboardCreateNewNote), title: Localization.Shortcuts.newNote))
             commands.append(UIKeyCommand(input: "f", modifierFlags: [.command, .shift], action: #selector(keyboardStartSearching), title: Localization.Shortcuts.search))
         }
 
