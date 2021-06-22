@@ -2,57 +2,20 @@ import Foundation
 import CoreData
 
 class SharedStorageMigrator {
-
-    static let documentsURL: URL? = {
-        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
-    }()
-
-    static let groupDirectory: URL? = {
-        FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Constants.sharedDirectoryDomain + Constants.groupIdentifier)
-    }()
-
-    static let groupDocumentsDirectory: URL? = {
-        guard let groupDirectory = groupDirectory else {
-            return nil
-        }
-        return groupDirectory.appendingPathComponent(Constants.documentDirectory)
-    }()
-
-    static let oldDbURL: URL? = {
-        guard let documentsURL = documentsURL else {
-            return nil
-        }
-
-        return documentsURL.appendingPathComponent(Constants.sqlFile)
-    }()
-
-    static let newDbURL: URL? = {
-        guard let groupDocumentsDirectory = groupDocumentsDirectory else {
-            return nil
-        }
-        return groupDocumentsDirectory.appendingPathComponent(Constants.sqlFile)
-    }()
-
     /// Database Migration
     /// To be able to share data with app extensions, the CoreData database needs to be migrated to an app group
     /// Must run before Simperium is setup
     static func migrateCoreDataToAppGroup() {
-        guard let oldDbURL = oldDbURL,
-              let groupDocumentsDirectory = groupDocumentsDirectory,
-              let newDbURL = newDbURL else {
-            return
-        }
-
         // Testing prints
         // TODO: Remove prints later
-        print("oldDb exists \(FileManager.default.fileExists(atPath: oldDbURL.path))")
-        print(oldDbURL.path)
-        print("newDb exists \(FileManager.default.fileExists(atPath: newDbURL.path))")
-        print(newDbURL.path)
+        print("oldDb exists \(FileManager.default.fileExists(atPath: CoreDataManager.appStorageURL.path))")
+        print(CoreDataManager.appStorageURL.path)
+        print("newDb exists \(FileManager.default.fileExists(atPath: CoreDataManager.groupStorageURL.path))")
+        print(CoreDataManager.groupStorageURL.path)
 
         let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: SPAppDelegate.shared().managedObjectModel)
 
-        if FileManager.default.fileExists(atPath: newDbURL.path) {
+        if FileManager.default.fileExists(atPath: CoreDataManager.groupStorageURL.path) {
             // Migration previously completed
             NSLog("Database migration not needed")
 
@@ -60,28 +23,28 @@ class SharedStorageMigrator {
             return
         }
 
-        if !FileManager.default.fileExists(atPath: oldDbURL.path) && !FileManager.default.fileExists(atPath: newDbURL.path) {
+        if !FileManager.default.fileExists(atPath: CoreDataManager.appStorageURL.path) && !FileManager.default.fileExists(atPath: CoreDataManager.groupStorageURL.path) {
             NSLog("New database needed")
             NSLog("Creating database in app group")
 
             // No DB exists
             // Create new DB in shared group
-            createAppGroupDirectory(at: groupDocumentsDirectory)
-            addPersistentStore(to: persistentStoreCoordinator, at: newDbURL)
+            createAppGroupDirectory(at: CoreDataManager.groupDocumentsDirectory)
+            addPersistentStore(to: persistentStoreCoordinator, at: CoreDataManager.groupStorageURL)
 
             // Exit
             return
         }
 
-        if FileManager.default.fileExists(atPath: oldDbURL.path) && !FileManager.default.fileExists(atPath: newDbURL.path) {
+        if FileManager.default.fileExists(atPath: CoreDataManager.appStorageURL.path) && !FileManager.default.fileExists(atPath: CoreDataManager.groupStorageURL.path) {
             // Old DB.  Needs Mirgation
             NSLog("Database needs migration to app group")
             NSLog("Beginning database migration")
 
-            createAppGroupDirectory(at: groupDocumentsDirectory)
+            createAppGroupDirectory(at: CoreDataManager.groupDocumentsDirectory)
 
             // Option 1: Migrated old DB to new location
-            migrateDatabase(from: oldDbURL, to: newDbURL, coordinator: persistentStoreCoordinator)
+            migrateDatabase(from: CoreDataManager.appStorageURL, to: CoreDataManager.groupStorageURL, coordinator: persistentStoreCoordinator)
 
             // Option 2: Migrate old DB FILES to new location
 //            migrateCoreDataFiles(from: documentsURL, to: groupDocumemntsDirectory)

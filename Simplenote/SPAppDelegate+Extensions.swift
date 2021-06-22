@@ -45,12 +45,8 @@ extension SPAppDelegate {
 
     @objc
     func migrateCoreDataToAppGroupIfNeeded() {
-        guard let newDbURL = SharedStorageMigrator.newDbURL else {
-            return
-        }
-
         // Confirm if the app group DB exists
-        if FileManager.default.fileExists(atPath: newDbURL.path) {
+        if FileManager.default.fileExists(atPath: CoreDataManager.groupStorageURL.path) {
             print("Core Data Migration already complete")
             return
         }
