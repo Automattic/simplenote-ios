@@ -420,6 +420,7 @@
 		BA122DCA265F2E2D003D3BC5 /* UIColorSimplenoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA122DC9265F2E2D003D3BC5 /* UIColorSimplenoteTests.swift */; };
 		BA18532826488DBC00D9A347 /* SignupRemoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA18532726488DBC00D9A347 /* SignupRemoteTests.swift */; };
 		BA2D82C6261522F100A1695B /* PublishNoticePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2D82C5261522F100A1695B /* PublishNoticePresenter.swift */; };
+		BA3856CD2681715700F388CC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3856CC2681715700F388CC /* CoreDataManager.swift */; };
 		BA3FB8CF25FEA0C500EA9A1B /* NoticeControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3FB8CE25FEA0C500EA9A1B /* NoticeControllerTests.swift */; };
 		BA4499AA25ED8821000C563E /* NoticeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA4499A925ED8821000C563E /* NoticeView.xib */; };
 		BA4499B325ED8AB0000C563E /* NoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4499B225ED8AB0000C563E /* NoticeView.swift */; };
@@ -997,6 +998,7 @@
 		BA122DC9265F2E2D003D3BC5 /* UIColorSimplenoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorSimplenoteTests.swift; sourceTree = "<group>"; };
 		BA18532726488DBC00D9A347 /* SignupRemoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupRemoteTests.swift; sourceTree = "<group>"; };
 		BA2D82C5261522F100A1695B /* PublishNoticePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishNoticePresenter.swift; sourceTree = "<group>"; };
+		BA3856CC2681715700F388CC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		BA3FB8CE25FEA0C500EA9A1B /* NoticeControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeControllerTests.swift; sourceTree = "<group>"; };
 		BA4499A925ED8821000C563E /* NoticeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoticeView.xib; sourceTree = "<group>"; };
 		BA4499B225ED8AB0000C563E /* NoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeView.swift; sourceTree = "<group>"; };
@@ -1963,6 +1965,7 @@
 				BAB01791260AAE93007A9CC3 /* NoticeFactory.swift */,
 				BA4C6CFB264C744300B723A7 /* SeparatorsView.swift */,
 				BA8FC2A4267AC7470082962E /* SharedStorageMigrator.swift */,
+				BA3856CC2681715700F388CC /* CoreDataManager.swift */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -3043,6 +3046,7 @@
 				B52BB74E22CFD1660042C162 /* SimplenoteActivityItemSource.swift in Sources */,
 				B537730F252E14C600BC78C5 /* OptionsViewController.swift in Sources */,
 				B56A696722F9D55F00B90398 /* UIView+Animations.swift in Sources */,
+				BA3856CD2681715700F388CC /* CoreDataManager.swift in Sources */,
 				A60DF30825A44F0F00FDADF3 /* PinLockRemoveController.swift in Sources */,
 				A694ABAB25D1549D00CC3A2D /* FileStorage.swift in Sources */,
 				B513FB2422EF6A4B00B178AC /* SPUserInterface.swift in Sources */,
