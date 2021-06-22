@@ -39,8 +39,9 @@ class NoteList {
         guard !NoteList.isAllNotesListOpen() else { return }
         print(">>> Opening \"All Notes\"")
         Sidebar.open()
-        guard app.tables.staticTexts[UID.Button.allNotes].waitForExistence(timeout: averageLoadTimeout) else { return }
-        app.tables.staticTexts[UID.Button.allNotes].tap()
+        let allNotesButton = app.tables.staticTexts[UID.Button.allNotes]
+        guard allNotesButton.waitForExistence(timeout: averageLoadTimeout) else { return }
+        allNotesButton.tap()
     }
 
     class func addNoteTap() {
