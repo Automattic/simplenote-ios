@@ -43,14 +43,19 @@ class CoreDataManager: NSObject {
         groupDocumentsDirectory.appendingPathComponent(Constants.sqlFile)
     }()
 
+    /// Bool checking if the in app database exsists
+    ///
     static let oldDbExists: Bool = {
         FileManager.default.fileExists(atPath: CoreDataManager.appStorageURL.path)
     }()
 
+    /// Bool checking if the app group database exsists
+    ///
     static let appGroupDbExists: Bool = {
         FileManager.default.fileExists(atPath: CoreDataManager.groupStorageURL.path)
     }()
 
+    // MARK: Core Data
     lazy var managedObjectModel: NSManagedObjectModel = {
         guard let modelURL = CoreDataManager.modelURL,
               let mom = NSManagedObjectModel(contentsOf: modelURL) else {
