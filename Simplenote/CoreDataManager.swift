@@ -43,6 +43,14 @@ class CoreDataManager: NSObject {
         groupDocumentsDirectory.appendingPathComponent(Constants.sqlFile)
     }()
 
+    static let oldDbExists: Bool = {
+        FileManager.default.fileExists(atPath: CoreDataManager.appStorageURL.path)
+    }()
+
+    static let appGroupDbExists: Bool = {
+        FileManager.default.fileExists(atPath: CoreDataManager.groupStorageURL.path)
+    }()
+
     lazy var managedObjectModel: NSManagedObjectModel = {
         guard let modelURL = CoreDataManager.modelURL,
               let mom = NSManagedObjectModel(contentsOf: modelURL) else {
@@ -62,6 +70,10 @@ class CoreDataManager: NSObject {
 
         var storeURL: URL = FileManager.default.fileExists(atPath: CoreDataManager.groupStorageURL.path) ? CoreDataManager.groupStorageURL : CoreDataManager.appStorageURL
         let options = [NSMigratePersistentStoresAutomaticallyOption: true, NSInferMappingModelAutomaticallyOption: true]
+
+        // Testing logs
+        //
+        NSLog("storage URL: \(storeURL)")
 
         do {
             try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: options)
