@@ -409,6 +409,15 @@
 		B5EB1EFF1C205A800080A1B3 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5EB1EFD1C205A800080A1B3 /* Icons.xcassets */; };
 		B5F3000223F4502C007A7C59 /* SPSortBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5F3000123F4502C007A7C59 /* SPSortBar.xib */; };
 		B5F3FFFF23F44679007A7C59 /* SPSortBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F3FFFE23F44679007A7C59 /* SPSortBar.swift */; };
+		BA122DBA265EF402003D3BC5 /* SimplenoteConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5095DC824632E3300812711 /* SimplenoteConstants.swift */; };
+		BA122DBB265EF40E003D3BC5 /* UIColor+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575736B232D454300443C2E /* UIColor+Helpers.swift */; };
+		BA122DBC265EF410003D3BC5 /* ColorStudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E4082A235DDFC800D4E1DF /* ColorStudio.swift */; };
+		BA122DBD265EF412003D3BC5 /* UIColor+Studio.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E4082C235DE41A00D4E1DF /* UIColor+Studio.swift */; };
+		BA122DBE265EF421003D3BC5 /* UIKitConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB169B22FB2DF300B4EBA5 /* UIKitConstants.swift */; };
+		BA122DC1265EF4C5003D3BC5 /* UITraitCollection+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52AC185233587F8007B2E75 /* UITraitCollection+Simplenote.swift */; };
+		BA122DC2265EF4E5003D3BC5 /* SPUserInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52893BA2360B91200DF2571 /* SPUserInterface.swift */; };
+		BA122DC7265EF92D003D3BC5 /* NewNoteWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA122DC5265EF90C003D3BC5 /* NewNoteWidgetView.swift */; };
+		BA122DCA265F2E2D003D3BC5 /* UIColorSimplenoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA122DC9265F2E2D003D3BC5 /* UIColorSimplenoteTests.swift */; };
 		BA18532826488DBC00D9A347 /* SignupRemoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA18532726488DBC00D9A347 /* SignupRemoteTests.swift */; };
 		BA2D82C6261522F100A1695B /* PublishNoticePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2D82C5261522F100A1695B /* PublishNoticePresenter.swift */; };
 		BA3FB8CF25FEA0C500EA9A1B /* NoticeControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3FB8CE25FEA0C500EA9A1B /* NoticeControllerTests.swift */; };
@@ -431,6 +440,14 @@
 		BAB0179B260AD591007A9CC3 /* PublishControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB0179A260AD591007A9CC3 /* PublishControllerTests.swift */; };
 		BAB017AB260ADDEB007A9CC3 /* MockTimerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB017AA260ADDEB007A9CC3 /* MockTimerFactory.swift */; };
 		BAE08626261282D1009D40CD /* Note+Publish.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE08625261282D1009D40CD /* Note+Publish.swift */; };
+		BAFA93DA265DCFCA0009DCFB /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAFA93D9265DCFCA0009DCFB /* WidgetKit.framework */; };
+		BAFA93DC265DCFCA0009DCFB /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAFA93DB265DCFCA0009DCFB /* SwiftUI.framework */; };
+		BAFA93E1265DCFCD0009DCFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAFA93E0265DCFCD0009DCFB /* Assets.xcassets */; };
+		BAFA93E5265DCFCD0009DCFB /* SimplenoteWidgetsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = BAFA93D8265DCFCA0009DCFB /* SimplenoteWidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		BAFA93F2265DE4A10009DCFB /* SimplenoteWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFA93EC265DE3810009DCFB /* SimplenoteWidgets.swift */; };
+		BAFA93F3265DE4A40009DCFB /* NewNoteWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFA93EE265DE3B90009DCFB /* NewNoteWidget.swift */; };
+		BAFA93F4265DE4A70009DCFB /* NewNoteWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFA93F0265DE45D0009DCFB /* NewNoteWidgetProvider.swift */; };
+		BAFA93FA265DE8920009DCFB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E29ADD4D17848E8500E55842 /* Images.xcassets */; };
 		D435D38FCA5863E8447D5C2C /* Pods_Automattic_SimplenoteShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183BAB896957F07FDCAB6DF5 /* Pods_Automattic_SimplenoteShare.framework */; };
 		D82BFE4B2624A8AB003DFA32 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82BFE4A2624A8AB003DFA32 /* Settings.swift */; };
 		D82BFE542624A8C5003DFA32 /* SimplenoteUISmokeTestsSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82BFE532624A8C5003DFA32 /* SimplenoteUISmokeTestsSettings.swift */; };
@@ -503,6 +520,13 @@
 			remoteGlobalIDString = B5EB1EEB1C204EBD0080A1B3;
 			remoteInfo = SimplenoteShare;
 		};
+		BAFA93E3265DCFCD0009DCFB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E29ADD3017848E8500E55842 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BAFA93D7265DCFCA0009DCFB;
+			remoteInfo = SimplenoteWidgetsExtension;
+		};
 		D864B15925CAE25000F9B73E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E29ADD3017848E8500E55842 /* Project object */;
@@ -519,6 +543,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				BAFA93E5265DCFCD0009DCFB /* SimplenoteWidgetsExtension.appex in Embed App Extensions */,
 				B5EB1EF61C204EBD0080A1B3 /* SimplenoteShare.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -537,6 +562,10 @@
 		17C421D01BE0BABE00752B56 /* SPMarkdownPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPMarkdownPreviewViewController.h; path = Classes/SPMarkdownPreviewViewController.h; sourceTree = "<group>"; };
 		17C421D11BE0BABE00752B56 /* SPMarkdownPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPMarkdownPreviewViewController.m; path = Classes/SPMarkdownPreviewViewController.m; sourceTree = "<group>"; };
 		183BAB896957F07FDCAB6DF5 /* Pods_Automattic_SimplenoteShare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Automattic_SimplenoteShare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		241709BB266827A800F6E2B1 /* SimplenoteWidgetsExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SimplenoteWidgetsExtension.entitlements; sourceTree = "<group>"; };
+		241709BC266827BA00F6E2B1 /* SimplenoteWidgetsExtensionDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SimplenoteWidgetsExtensionDebug.entitlements; sourceTree = "<group>"; };
+		241709C7266829CD00F6E2B1 /* SimplenoteWidgetsExtensionDistributionAlpha.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SimplenoteWidgetsExtensionDistributionAlpha.entitlements; sourceTree = "<group>"; };
+		241709D126682AED00F6E2B1 /* SimplenoteWidgetsExtensionDistributionInternal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SimplenoteWidgetsExtensionDistributionInternal.entitlements; sourceTree = "<group>"; };
 		30BBEDD4EB11FC7D576AE690 /* Pods-SimplenoteTests.distribution internal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplenoteTests.distribution internal.xcconfig"; path = "Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests.distribution internal.xcconfig"; sourceTree = "<group>"; };
 		3318C36BBA08D53624E27EFC /* Pods_Automattic_Simplenote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Automattic_Simplenote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		371A862F213DF00E002E9120 /* SPPinLockManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPPinLockManager.swift; sourceTree = "<group>"; };
@@ -946,6 +975,8 @@
 		B5EB1EFD1C205A800080A1B3 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = ../Icons.xcassets; sourceTree = "<group>"; };
 		B5F3000123F4502C007A7C59 /* SPSortBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPSortBar.xib; path = Classes/SPSortBar.xib; sourceTree = "<group>"; };
 		B5F3FFFE23F44679007A7C59 /* SPSortBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPSortBar.swift; path = Classes/SPSortBar.swift; sourceTree = "<group>"; };
+		BA122DC5265EF90C003D3BC5 /* NewNoteWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNoteWidgetView.swift; sourceTree = "<group>"; };
+		BA122DC9265F2E2D003D3BC5 /* UIColorSimplenoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorSimplenoteTests.swift; sourceTree = "<group>"; };
 		BA18532726488DBC00D9A347 /* SignupRemoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupRemoteTests.swift; sourceTree = "<group>"; };
 		BA2D82C5261522F100A1695B /* PublishNoticePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishNoticePresenter.swift; sourceTree = "<group>"; };
 		BA3FB8CE25FEA0C500EA9A1B /* NoticeControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeControllerTests.swift; sourceTree = "<group>"; };
@@ -968,6 +999,14 @@
 		BAB0179A260AD591007A9CC3 /* PublishControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishControllerTests.swift; sourceTree = "<group>"; };
 		BAB017AA260ADDEB007A9CC3 /* MockTimerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTimerFactory.swift; sourceTree = "<group>"; };
 		BAE08625261282D1009D40CD /* Note+Publish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+Publish.swift"; sourceTree = "<group>"; };
+		BAFA93D8265DCFCA0009DCFB /* SimplenoteWidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SimplenoteWidgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		BAFA93D9265DCFCA0009DCFB /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		BAFA93DB265DCFCA0009DCFB /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		BAFA93E0265DCFCD0009DCFB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BAFA93E2265DCFCD0009DCFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BAFA93EC265DE3810009DCFB /* SimplenoteWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplenoteWidgets.swift; sourceTree = "<group>"; };
+		BAFA93EE265DE3B90009DCFB /* NewNoteWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNoteWidget.swift; sourceTree = "<group>"; };
+		BAFA93F0265DE45D0009DCFB /* NewNoteWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNoteWidgetProvider.swift; sourceTree = "<group>"; };
 		C07B32800E3C783BDF105B3A /* Pods-Automattic-SimplenoteShare.distribution alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-SimplenoteShare.distribution alpha.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-SimplenoteShare/Pods-Automattic-SimplenoteShare.distribution alpha.xcconfig"; sourceTree = "<group>"; };
 		D82BFE4A2624A8AB003DFA32 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		D82BFE532624A8C5003DFA32 /* SimplenoteUISmokeTestsSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplenoteUISmokeTestsSettings.swift; sourceTree = "<group>"; };
@@ -1119,6 +1158,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				D435D38FCA5863E8447D5C2C /* Pods_Automattic_SimplenoteShare.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BAFA93D5265DCFCA0009DCFB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BAFA93DC265DCFCA0009DCFB /* SwiftUI.framework in Frameworks */,
+				BAFA93DA265DCFCA0009DCFB /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1841,6 +1889,7 @@
 			isa = PBXGroup;
 			children = (
 				B5B9AB4622EE9CC2001CB0AD /* UIImageSimplenoteTests.swift */,
+				BA122DC9265F2E2D003D3BC5 /* UIColorSimplenoteTests.swift */,
 			);
 			name = Themes;
 			sourceTree = "<group>";
@@ -1969,6 +2018,30 @@
 			name = SortBar;
 			sourceTree = "<group>";
 		};
+		BA122DC3265EF8E4003D3BC5 /* Widgets */ = {
+			isa = PBXGroup;
+			children = (
+				BAFA93EE265DE3B90009DCFB /* NewNoteWidget.swift */,
+			);
+			path = Widgets;
+			sourceTree = "<group>";
+		};
+		BA122DC4265EF8F1003D3BC5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BA122DC5265EF90C003D3BC5 /* NewNoteWidgetView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BA122DC8265EFA72003D3BC5 /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				BAFA93F0265DE45D0009DCFB /* NewNoteWidgetProvider.swift */,
+			);
+			path = Providers;
+			sourceTree = "<group>";
+		};
 		BA3FB8CD25FEA09F00EA9A1B /* Notice */ = {
 			isa = PBXGroup;
 			children = (
@@ -1984,6 +2057,19 @@
 				BA4499B225ED8AB0000C563E /* NoticeView.swift */,
 			);
 			name = Notices;
+			sourceTree = "<group>";
+		};
+		BAFA93DD265DCFCA0009DCFB /* SimplenoteWidgets */ = {
+			isa = PBXGroup;
+			children = (
+				BAFA93EC265DE3810009DCFB /* SimplenoteWidgets.swift */,
+				BA122DC4265EF8F1003D3BC5 /* Views */,
+				BA122DC3265EF8E4003D3BC5 /* Widgets */,
+				BA122DC8265EFA72003D3BC5 /* Providers */,
+				BAFA93E0265DCFCD0009DCFB /* Assets.xcassets */,
+				BAFA93E2265DCFCD0009DCFB /* Info.plist */,
+			);
+			path = SimplenoteWidgets;
 			sourceTree = "<group>";
 		};
 		D864B15525CAE25000F9B73E /* SimplenoteUITests */ = {
@@ -2080,6 +2166,7 @@
 				3FA6013A242C5AAE0068FC52 /* SimplenoteScreenshots */,
 				D864B15525CAE25000F9B73E /* SimplenoteUITests */,
 				3F3CA91126255E2000F6316F /* UITestHelpers */,
+				BAFA93DD265DCFCA0009DCFB /* SimplenoteWidgets */,
 				E29ADD3A17848E8500E55842 /* Frameworks */,
 				E29ADD3917848E8500E55842 /* Products */,
 				564CAA42AA330D16FDBDD081 /* Pods */,
@@ -2096,6 +2183,7 @@
 				3FA60139242C5AAD0068FC52 /* SimplenoteScreenshots.xctest */,
 				D864B15425CAE25000F9B73E /* SimplenoteUITests.xctest */,
 				3F3CA91026255E1F00F6316F /* UITestHelpers.framework */,
+				BAFA93D8265DCFCA0009DCFB /* SimplenoteWidgetsExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2129,6 +2217,8 @@
 				3318C36BBA08D53624E27EFC /* Pods_Automattic_Simplenote.framework */,
 				183BAB896957F07FDCAB6DF5 /* Pods_Automattic_SimplenoteShare.framework */,
 				F6184665CE9AF426D43E2C02 /* Pods_SimplenoteTests.framework */,
+				BAFA93D9265DCFCA0009DCFB /* WidgetKit.framework */,
+				BAFA93DB265DCFCA0009DCFB /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2168,6 +2258,10 @@
 				46A3C9DC17DFA866002865AE /* Simplenote-Info.plist */,
 				B5D3ADB21FC8C11A00F84B31 /* Simplenote.entitlements */,
 				B5250A6B22B922F900AE7797 /* Simplenote-Internal.entitlements */,
+				241709BB266827A800F6E2B1 /* SimplenoteWidgetsExtension.entitlements */,
+				241709BC266827BA00F6E2B1 /* SimplenoteWidgetsExtensionDebug.entitlements */,
+				241709D126682AED00F6E2B1 /* SimplenoteWidgetsExtensionDistributionInternal.entitlements */,
+				241709C7266829CD00F6E2B1 /* SimplenoteWidgetsExtensionDistributionAlpha.entitlements */,
 				E29ADD4417848E8500E55842 /* InfoPlist.strings */,
 				E29ADD4717848E8500E55842 /* main.m */,
 				E29ADD4917848E8500E55842 /* Simplenote-Prefix.pch */,
@@ -2328,6 +2422,7 @@
 			dependencies = (
 				B5C7BFA0230C5AC9000DEC91 /* PBXTargetDependency */,
 				B5EB1EF51C204EBD0080A1B3 /* PBXTargetDependency */,
+				BAFA93E4265DCFCD0009DCFB /* PBXTargetDependency */,
 			);
 			name = Simplenote;
 			packageProductDependencies = (
@@ -2379,6 +2474,23 @@
 			productReference = B5EB1EEC1C204EBD0080A1B3 /* SimplenoteShare.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		BAFA93D7265DCFCA0009DCFB /* SimplenoteWidgetsExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BAFA93EB265DCFCD0009DCFB /* Build configuration list for PBXNativeTarget "SimplenoteWidgetsExtension" */;
+			buildPhases = (
+				BAFA93D4265DCFCA0009DCFB /* Sources */,
+				BAFA93D5265DCFCA0009DCFB /* Frameworks */,
+				BAFA93D6265DCFCA0009DCFB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SimplenoteWidgetsExtension;
+			productName = SimplenoteWidgetsExtension;
+			productReference = BAFA93D8265DCFCA0009DCFB /* SimplenoteWidgetsExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		D864B15325CAE25000F9B73E /* SimplenoteUITests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D864B16025CAE25000F9B73E /* Build configuration list for PBXNativeTarget "SimplenoteUITests" */;
@@ -2404,7 +2516,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = SP;
-				LastSwiftUpdateCheck = 1240;
+				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1210;
 				ORGANIZATIONNAME = Automattic;
 				TargetAttributes = {
@@ -2460,6 +2572,9 @@
 							};
 						};
 					};
+					BAFA93D7265DCFCA0009DCFB = {
+						CreatedOnToolsVersion = 12.5;
+					};
 					D864B15325CAE25000F9B73E = {
 						CreatedOnToolsVersion = 12.4;
 						TestTargetID = 46A3C96017DFA81A002865AE;
@@ -2511,6 +2626,7 @@
 				3F1BB4AD243199FF006D1A04 /* ScreenshotsSecrets */,
 				D864B15325CAE25000F9B73E /* SimplenoteUITests */,
 				3F3CA90F26255E1F00F6316F /* UITestHelpers */,
+				BAFA93D7265DCFCA0009DCFB /* SimplenoteWidgetsExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -2585,6 +2701,15 @@
 				B5B06F3C1C31E119006F4495 /* SimplenoteShare-AppStore.entitlements in Resources */,
 				B5EB1EFF1C205A800080A1B3 /* Icons.xcassets in Resources */,
 				B5EB1EF21C204EBD0080A1B3 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BAFA93D6265DCFCA0009DCFB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BAFA93E1265DCFCD0009DCFB /* Assets.xcassets in Resources */,
+				BAFA93FA265DE8920009DCFB /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3083,6 +3208,7 @@
 				B52F35D322F356F500724793 /* UserDefaults+Tests.swift in Sources */,
 				B511AEE9255A0A5E005B2159 /* InterlinkResultsControllerTests.swift in Sources */,
 				374F5EF521BF057E00B57E8B /* NSMutableAttributedStringStylingTests.swift in Sources */,
+				BA122DCA265F2E2D003D3BC5 /* UIColorSimplenoteTests.swift in Sources */,
 				B5B9AB4722EE9CC2001CB0AD /* UIImageSimplenoteTests.swift in Sources */,
 				A6E6CE9F25A5BBC1005A92DB /* PinLockVerifyControllerTests.swift in Sources */,
 				A6E6CE6C25A5ABD6005A92DB /* PinLockSetupControllerTests.swift in Sources */,
@@ -3151,6 +3277,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BAFA93D4265DCFCA0009DCFB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BAFA93F3265DE4A40009DCFB /* NewNoteWidget.swift in Sources */,
+				BA122DBD265EF412003D3BC5 /* UIColor+Studio.swift in Sources */,
+				BA122DBE265EF421003D3BC5 /* UIKitConstants.swift in Sources */,
+				BA122DBB265EF40E003D3BC5 /* UIColor+Helpers.swift in Sources */,
+				BA122DBA265EF402003D3BC5 /* SimplenoteConstants.swift in Sources */,
+				BA122DBC265EF410003D3BC5 /* ColorStudio.swift in Sources */,
+				BA122DC1265EF4C5003D3BC5 /* UITraitCollection+Simplenote.swift in Sources */,
+				BAFA93F4265DE4A70009DCFB /* NewNoteWidgetProvider.swift in Sources */,
+				BAFA93F2265DE4A10009DCFB /* SimplenoteWidgets.swift in Sources */,
+				BA122DC2265EF4E5003D3BC5 /* SPUserInterface.swift in Sources */,
+				BA122DC7265EF92D003D3BC5 /* NewNoteWidgetView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D864B15025CAE25000F9B73E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3207,6 +3351,11 @@
 			isa = PBXTargetDependency;
 			target = B5EB1EEB1C204EBD0080A1B3 /* SimplenoteShare */;
 			targetProxy = B5EB1EF41C204EBD0080A1B3 /* PBXContainerItemProxy */;
+		};
+		BAFA93E4265DCFCD0009DCFB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BAFA93D7265DCFCA0009DCFB /* SimplenoteWidgetsExtension */;
+			targetProxy = BAFA93E3265DCFCD0009DCFB /* PBXContainerItemProxy */;
 		};
 		D864B15A25CAE25000F9B73E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -4499,6 +4648,211 @@
 			};
 			name = "Distribution AppStore";
 		};
+		BAFA93E6265DCFCD0009DCFB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = Simplenote/SimplenoteWidgetsExtensionDebug.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 4.36.0.0;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = PZYM8XX95Q;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = SimplenoteWidgets/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 4.36;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codality.NotationalFlow.Development.Widgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "Simplenote Development Widgets";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BAFA93E7265DCFCD0009DCFB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = Simplenote/SimplenoteWidgetsExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Distribution: Automattic, Inc. (PZYM8XX95Q)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Automattic, Inc. (PZYM8XX95Q)";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 4.36.0.0;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = PZYM8XX95Q;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = SimplenoteWidgets/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 4.36;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codality.NotationalFlow.Widgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.codality.NotationalFlow.Widgets";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		BAFA93E8265DCFCD0009DCFB /* Distribution Internal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "Simplenote/SimplenoteWidgetsExtensionDistributionInternal.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Automattic, Inc.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Automattic, Inc.";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 4.36.0.0;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 99KV9Z6BKV;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = SimplenoteWidgets/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 4.36;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codality.NotationalFlow.Internal.Widgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "match InHouse com.codality.NotationalFlow.Internal.Widgets";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Distribution Internal";
+		};
+		BAFA93E9265DCFCD0009DCFB /* Distribution Alpha */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = Simplenote/SimplenoteWidgetsExtensionDistributionAlpha.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Automattic, Inc.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Automattic, Inc.";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 4.36.0.0;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 99KV9Z6BKV;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = SimplenoteWidgets/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 4.36;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codality.NotationalFlow.Alpha.Widgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "match InHouse com.codality.NotationalFlow.Alpha.Widgets";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Distribution Alpha";
+		};
+		BAFA93EA265DCFCD0009DCFB /* Distribution AppStore */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = Simplenote/SimplenoteWidgetsExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Distribution: Automattic, Inc. (PZYM8XX95Q)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Automattic, Inc. (PZYM8XX95Q)";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 4.36.0.0;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = PZYM8XX95Q;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = SimplenoteWidgets/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 4.36;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codality.NotationalFlow.Widgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.codality.NotationalFlow.Widgets";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Distribution AppStore";
+		};
 		D864B15B25CAE25000F9B73E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4867,6 +5221,18 @@
 				B5EB1EF91C204EBE0080A1B3 /* Distribution Internal */,
 				8C3FEBDE23EAE03A00EE55E6 /* Distribution Alpha */,
 				B5EB1EFA1C204EBE0080A1B3 /* Distribution AppStore */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BAFA93EB265DCFCD0009DCFB /* Build configuration list for PBXNativeTarget "SimplenoteWidgetsExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BAFA93E6265DCFCD0009DCFB /* Debug */,
+				BAFA93E7265DCFCD0009DCFB /* Release */,
+				BAFA93E8265DCFCD0009DCFB /* Distribution Internal */,
+				BAFA93E9265DCFCD0009DCFB /* Distribution Alpha */,
+				BAFA93EA265DCFCD0009DCFB /* Distribution AppStore */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

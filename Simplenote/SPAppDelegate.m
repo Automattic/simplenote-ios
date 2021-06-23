@@ -573,34 +573,12 @@
     }
 
     // Support opening Simplenote and optionally creating a new note
-    if ([[url host] isEqualToString:@"new"]) {
+    NSURLComponents *components = [NSURLComponents componentsWithURL:url resolvingAgainstBaseURL:NO];
+
+    if ([[components host] isEqualToString:@"new"]) {
         
-        Note *newNote = [[SPObjectManager sharedManager] newDefaultNote];
-        
-        NSArray *params = [[url query] componentsSeparatedByString:@"&"];
-        for (NSString *param in params) {
-            NSArray *paramArray = [param componentsSeparatedByString:@"="];
-            if ([paramArray count] < 2) {
-                continue;
-            }
-            
-            NSString *key = [paramArray objectAtIndex:0];
-            NSString *value = [[paramArray objectAtIndex:1] stringByRemovingPercentEncoding];
-            
-            if ([key isEqualToString:@"content"]) {
-                newNote.content = value;
-            } else if ([key isEqualToString:@"tag"]) {
-                NSArray *tags = [value componentsSeparatedByString:@" "];
-                for (NSString *tag in tags) {
-                    if (tag.length == 0)
-                        continue;
-                    [newNote addTag:tag];
-                    [[SPObjectManager sharedManager] createTagFromString:tag];
-                }
-            }
-        }
-        [_simperium save];
-        
+        Note *newNote = [[SPObjectManager sharedManager] newNoteFrom:components];
+
         [self presentNote:newNote animated:NO];
     }
     
