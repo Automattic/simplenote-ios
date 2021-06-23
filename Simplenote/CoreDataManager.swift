@@ -10,47 +10,24 @@ class CoreDataManager: NSObject {
         Bundle.main.url(forResource: Constants.resourceName, withExtension: Constants.resourceType)!
     }()
 
-    /// URL for the in app documents directory
+    /// In app core data storage URL
     ///
-    static let documentsDirectory: URL = {
-        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-    }()
-
-    /// In app core data storge URL
-    ///
-    static let appStorageURL: URL = {
-        documentsDirectory.appendingPathComponent(Constants.sqlFile)
-    }()
-
-    /// URL for Simplenote's shared app group directory
-    ///
-    static let groupDirectory: URL = {
-        FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Constants.sharedDirectoryDomain + Constants.groupIdentifier)!
-    }()
-
-    /// URL for Simplenote's shared app group documents directory
-    ///
-    static let groupDocumentsDirectory: URL = {
-        groupDirectory.appendingPathComponent(Constants.documentDirectory)
+    static let legacyStorageURL: URL = {
+        FileManager.default.documentsURL.appendingPathComponent(Constants.sqlFile)
     }()
 
     /// URL for core data storage in shared app group documents directory
     ///
     static let groupStorageURL: URL = {
-        groupDocumentsDirectory.appendingPathComponent(Constants.sqlFile)
+        FileManager.default.groupDocumentsDirectory.appendingPathComponent(Constants.sqlFile)
     }()
 
-    /// Bool checking if the in app database exsists
-    ///
-    static let oldDbExists: Bool = {
-        FileManager.default.fileExists(atPath: CoreDataManager.appStorageURL.path)
-    }()
-
-    /// Bool checking if the app group database exsists
-    ///
-    static let appGroupDbExists: Bool = {
-        FileManager.default.fileExists(atPath: CoreDataManager.groupStorageURL.path)
-    }()
+    var storageURL: URL {
+        if SharedStorageMigrator.migrationNeeded {
+            return CoreDataManager.legacyStorageURL
+        }
+        return CoreDataManager.groupStorageURL
+    }
 
     // MARK: Core Data
     private(set) lazy var managedObjectModel: NSManagedObjectModel = {
@@ -69,16 +46,14 @@ class CoreDataManager: NSObject {
     private(set) lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         let psc = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
 
-        let mustUseOldDb = CoreDataManager.oldDbExists && !CoreDataManager.appGroupDbExists
-        var storeURL: URL = mustUseOldDb ? CoreDataManager.appStorageURL : CoreDataManager.groupStorageURL
         let options = [NSMigratePersistentStoresAutomaticallyOption: true, NSInferMappingModelAutomaticallyOption: true]
 
         // Testing logs
         //
-        NSLog("storage URL: \(storeURL)")
+        NSLog("storage URL: \(storageURL)")
 
         do {
-            try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: options)
+            try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storageURL, options: options)
         } catch {
             NSLog("Unresolved Error")
         }
@@ -90,9 +65,5 @@ class CoreDataManager: NSObject {
 private struct Constants {
     static let resourceName = "Simplenote"
     static let resourceType = "momd"
-    static let defaultBundleIdentifier = "com.codality.NationalFlow"
-    static let groupIdentifier = Bundle.main.bundleIdentifier ?? Constants.defaultBundleIdentifier
-    static let sharedDirectoryDomain = "group."
     static let sqlFile = "Simplenote.sqlite"
-    static let documentDirectory = "Documents"
 }
