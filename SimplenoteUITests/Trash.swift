@@ -19,8 +19,7 @@ class Trash {
 
     class func empty() {
         Trash.open()
-        let predicate = NSPredicate(format: "label LIKE '\(UID.Button.trashEmptyTrash)'")
-        let emptyTrashButton = app.buttons.element(matching: predicate).firstMatch
+        let emptyTrashButton = app.buttons[UID.Button.trashEmptyTrash]
         guard emptyTrashButton.isEnabled else { return }
 
         emptyTrashButton.tap()

@@ -140,7 +140,7 @@ class NoteEditor {
 
         // We wait for at least one element with exact label to appear before counting
         // all occurences. The downside is having one extra call before the actual count.
-        let _ = app.textViews[label].waitForExistence(timeout: averageLoadTimeout)
+        _ = app.textViews[label].waitForExistence(timeout: averageLoadTimeout)
 
         let matchingTextViews = app.textViews.matching(predicate)
         let matches = matchingTextViews.count
