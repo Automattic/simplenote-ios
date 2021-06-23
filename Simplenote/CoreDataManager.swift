@@ -53,21 +53,20 @@ class CoreDataManager: NSObject {
     }()
 
     // MARK: Core Data
-    lazy var managedObjectModel: NSManagedObjectModel = {
-        guard let modelURL = CoreDataManager.modelURL,
-              let mom = NSManagedObjectModel(contentsOf: modelURL) else {
+    private(set) lazy var managedObjectModel: NSManagedObjectModel = {
+        guard let mom = NSManagedObjectModel(contentsOf: CoreDataManager.modelURL) else {
             fatalError()
         }
         return mom
     }()
 
-    lazy var managedObjectContext: NSManagedObjectContext = {
+    private(set) lazy var managedObjectContext: NSManagedObjectContext = {
         let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         moc.undoManager = nil
         return moc
     }()
 
-    lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
+    private(set) lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         let psc = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
 
         let mustUseOldDb = CoreDataManager.oldDbExists && !CoreDataManager.appGroupDbExists
