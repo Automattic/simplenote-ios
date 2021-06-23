@@ -6,11 +6,8 @@ class CoreDataManager: NSObject {
 
     /// URL for the managed object model resource
     ///
-    static private let modelURL: URL? = {
-        guard let path = Bundle.main.path(forResource: Constants.resourceName, ofType: Constants.resourceType) else {
-            return nil
-        }
-        return URL(string: path)
+    static private let modelURL: URL = {
+        Bundle.main.url(forResource: Constants.resourceName, withExtension: Constants.resourceType)!
     }()
 
     /// URL for the in app documents directory
