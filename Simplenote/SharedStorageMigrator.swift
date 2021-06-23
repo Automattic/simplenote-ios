@@ -79,8 +79,8 @@ class SharedStorageMigrator: NSObject {
         }
     }
 
-    @discardableResult private func addPersistentStore(to coordinator: NSPersistentStoreCoordinator, at url: URL) throws -> NSPersistentStore? {
-        return try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: nil)
+    private func addPersistentStore(to coordinator: NSPersistentStoreCoordinator, at url: URL) throws {
+        try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: nil)
     }
 
     private func migrateCoreDataStore(from oldURL: URL, to newURL: URL) throws {
