@@ -31,7 +31,7 @@ class SharedStorageMigrator: NSObject {
         print("newDb exists \(FileManager.default.fileExists(atPath: CoreDataManager.groupStorageURL.path))")
         print(CoreDataManager.groupStorageURL.path)
 
-        let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: SPAppDelegate.shared().managedObjectModel)
+        let persistentStoreCoordinator = SPAppDelegate.shared().coreDataManager.persistentStoreCoordinator
 
         if FileManager.default.fileExists(atPath: CoreDataManager.groupStorageURL.path) {
             // Migration previously completed
