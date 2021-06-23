@@ -1,7 +1,7 @@
 import Foundation
 import CoreData
 
-@objc
+@objcMembers
 class CoreDataManager: NSObject {
 
     /// URL for the managed object model resource
