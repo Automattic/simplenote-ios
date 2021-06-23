@@ -11,7 +11,7 @@ class SharedStorageMigrator: NSObject {
     func performMigrationIfNeeded() {
         // Confirm if the app group DB exists
         guard mustPerformMigration else {
-            NSLog("Core Data Migration already complete")
+            NSLog("Core Data Migration not required")
             return
         }
 
@@ -19,7 +19,7 @@ class SharedStorageMigrator: NSObject {
     }
 
     private var mustPerformMigration: Bool {
-        !CoreDataManager.appGroupDbExists
+        !CoreDataManager.appGroupDbExists && CoreDataManager.oldDbExists
     }
 
 
@@ -30,25 +30,6 @@ class SharedStorageMigrator: NSObject {
         print(CoreDataManager.appStorageURL.path)
         print("newDb exists \(FileManager.default.fileExists(atPath: CoreDataManager.groupStorageURL.path))")
         print(CoreDataManager.groupStorageURL.path)
-
-        let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: SPAppDelegate.shared().coreDataManager.managedObjectModel)
-
-        if !CoreDataManager.oldDbExists && !CoreDataManager.appGroupDbExists {
-            NSLog("New database needed")
-            NSLog("Creating database in app group")
-
-            // No DB exists
-            // Create new DB in shared group
-            do {
-                try prepareNewDataBase(at: CoreDataManager.groupDocumentsDirectory, storeCoordintator: persistentStoreCoordinator)
-            } catch {
-                NSLog("Could not create new database in app group")
-                NSLog(error.localizedDescription)
-            }
-
-            // Exit
-            return
-        }
 
         if CoreDataManager.oldDbExists && !CoreDataManager.appGroupDbExists {
             // Old DB.  Needs Mirgation
