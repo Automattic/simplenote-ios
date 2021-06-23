@@ -119,10 +119,10 @@ class NoteEditor {
     class func getTextViewsWithExactValueCount(value: String) -> Int {
         // We wait for at least one element with exact value to appear before counting
         // all occurences. The downside is having one extra call before the actual count.
-        let predicate = NSPredicate(format: "value == '" + value + "'")
+        let equalValuePredicate = NSPredicate(format: "value == '" + value + "'")
         _ = app
             .descendants(matching: .textView)
-            .element(matching: predicate)
+            .element(matching: equalValuePredicate)
             .waitForExistence(timeout: averageLoadTimeout)
 
         let matchingTextViews = getAllTextViews()
@@ -136,13 +136,13 @@ class NoteEditor {
 
     class func getTextViewsWithExactLabelCount(label: String) -> Int {
         let _ = getAllTextViews()// To initialize the editor
-        let predicate = NSPredicate(format: "label == '" + label + "'")
+        let equalLabelPredicate = NSPredicate(format: "label == '" + label + "'")
 
         // We wait for at least one element with exact label to appear before counting
         // all occurences. The downside is having one extra call before the actual count.
         _ = app.textViews[label].waitForExistence(timeout: averageLoadTimeout)
 
-        let matchingTextViews = app.textViews.matching(predicate)
+        let matchingTextViews = app.textViews.matching(equalLabelPredicate)
         let matches = matchingTextViews.count
         print(">>> Found \(matches) TextView(s) with '\(label)' label")
         return matches
