@@ -45,21 +45,12 @@ class SharedStorageMigrator: NSObject {
         }
     }
 
-    private func prepareNewDataBase(at newUrl: URL, storeCoordintator: NSPersistentStoreCoordinator) throws {
-        try createAppGroupDirectory(at: newUrl)
-        try addPersistentStore(to: storeCoordintator, at: newUrl)
-    }
-
     private func createAppGroupDirectory(at url: URL) throws {
         do {
             try FileManager.default.createDirectory(at: url, withIntermediateDirectories: false, attributes: nil)
         } catch {
             print(error.localizedDescription)
         }
-    }
-
-    private func addPersistentStore(to coordinator: NSPersistentStoreCoordinator, at url: URL) throws {
-        try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: nil)
     }
 
     private func migrateCoreDataStore(from oldURL: URL, to newURL: URL) throws {
