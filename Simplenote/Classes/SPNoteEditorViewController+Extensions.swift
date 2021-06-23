@@ -86,7 +86,7 @@ extension SPNoteEditorViewController {
     ///
     @objc
     func configureInterlinksProcessor() {
-        interlinkProcessor = InterlinkProcessor(viewContext: SPAppDelegate.shared().managedObjectContext,
+        interlinkProcessor = InterlinkProcessor(viewContext: SPAppDelegate.shared().coreDataManager.managedObjectContext,
                                                 popoverPresenter: popoverPresenter,
                                                 parentTextView: noteEditorTextView,
                                                 excludedEntityID: note.objectID)

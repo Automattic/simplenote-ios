@@ -10,7 +10,7 @@ extension SPAppDelegate {
     ///
     @objc
     func setupSimperium() {
-        simperium = Simperium(model: managedObjectModel, context: managedObjectContext, coordinator: persistentStoreCoordinator)
+        simperium = Simperium(model: coreDataManager.managedObjectModel, context: coreDataManager.managedObjectContext, coordinator: coreDataManager.persistentStoreCoordinator)
 
 #if USE_VERBOSE_LOGGING
         simperium.verboseLoggingEnabled = true
