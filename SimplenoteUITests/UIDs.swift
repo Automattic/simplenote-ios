@@ -38,7 +38,7 @@ enum UID {
         static let trashNote = "Move to Trash"
         static let restoreNote = "Restore Note"
         static let deleteNote = "Delete Note"
-        static let trashEmptyTrash = "Empty"
+        static let trashEmptyTrash = "Empty trash"
         static let clearText = "Clear text"
         static let cancel = "Cancel"
         static let dismissKeyboard = "Dismiss keyboard"

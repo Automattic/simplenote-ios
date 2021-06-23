@@ -29,6 +29,35 @@ extension SPTracker {
     }
 }
 
+// MARK: - In App Notifications
+//
+extension SPTracker {
+
+    static func trackPresentedNotice(ofType type: NoticeType) {
+        trackAutomatticEvent(withName: "notice_presented", properties: ["notice": type.rawValue])
+    }
+
+    static func trackPreformedNoticeAction(ofType type: NoticeType, noticeType: NoticeActionType) {
+        trackAutomatticEvent(withName: "notice_action_tapped", properties: ["notice": noticeType.rawValue, "notice_action": type.rawValue])
+    }
+
+    enum NoticeType: String {
+        case internalLinkCopied = "internal_link_copied"
+        case publicLinkCopied = "public_link_copied"
+        case publishing
+        case unpublishing
+        case noteTrashed = "note_trashed"
+        case multipleNotesTrashed = "multi_notes_trashed"
+        case unpublished
+        case published
+    }
+
+    enum NoticeActionType: String {
+        case undo
+        case copyLink = "copy_link"
+    }
+}
+
 
 // MARK: - Shortcuts
 //
