@@ -10,7 +10,7 @@ class SharedStorageMigrator: NSObject {
     @objc
     func performMigrationIfNeeded() {
         // Confirm if the app group DB exists
-        guard mustPerformMigration else {
+        guard SharedStorageMigrator.migrationNeeded else {
             NSLog("Core Data Migration not required")
             return
         }
@@ -18,26 +18,23 @@ class SharedStorageMigrator: NSObject {
         migrateCoreDataToAppGroup()
     }
 
-    private var mustPerformMigration: Bool {
-        !CoreDataManager.appGroupDbExists && CoreDataManager.oldDbExists
+    static var migrationNeeded: Bool {
+        FileManager.default.fileExists(atPath: CoreDataManager.legacyStorageURL.path) && !FileManager.default.fileExists(atPath: CoreDataManager.groupStorageURL.path)
     }
-
 
     func migrateCoreDataToAppGroup() {
         // Testing prints
         // TODO: Remove prints later
-        print("oldDb exists \(FileManager.default.fileExists(atPath: CoreDataManager.appStorageURL.path))")
-        print(CoreDataManager.appStorageURL.path)
+        print("oldDb exists \(FileManager.default.fileExists(atPath: CoreDataManager.legacyStorageURL.path))")
+        print(CoreDataManager.legacyStorageURL.path)
         print("newDb exists \(FileManager.default.fileExists(atPath: CoreDataManager.groupStorageURL.path))")
         print(CoreDataManager.groupStorageURL.path)
 
-        // Old DB.  Needs Mirgation
         NSLog("Database needs migration to app group")
         NSLog("Beginning database migration")
 
-        // Option 2: Migrate old DB FILES to new location
         do {
-            try migrateCoreDataStore(from: CoreDataManager.documentsDirectory, to: CoreDataManager.groupDocumentsDirectory)
+            try migrateCoreDataStore()
             NSLog("Database migration successful!!")
         } catch {
             NSLog("Could not migrate database to app group")
@@ -45,32 +42,24 @@ class SharedStorageMigrator: NSObject {
         }
     }
 
-    private func createAppGroupDirectory(at url: URL) throws {
-        do {
-            try FileManager.default.createDirectory(at: url, withIntermediateDirectories: false, attributes: nil)
-        } catch {
-            print(error.localizedDescription)
-        }
+    private func migrateCoreDataStore() throws {
+        try createAppGroupDirectory()
+        try migrateCoreDataFiles()
     }
 
-    private func migrateCoreDataStore(from oldURL: URL, to newURL: URL) throws {
-        try createAppGroupDirectory(at: newURL)
-        try migrateCoreDataFiles(from: oldURL, to: newURL)
+    private func createAppGroupDirectory() throws {
+        let destinationURL = FileManager.default.groupDirectory
+        try FileManager.default.createDirectory(at: destinationURL, withIntermediateDirectories: false, attributes: nil)
     }
 
-    private func migrateCoreDataFiles(from oldUrl: URL, to newURL: URL) throws {
+    private func migrateCoreDataFiles() throws {
         let fileManager = FileManager.default
 
-        // Testing prints
-        // TODO: Remove prints later
-        print(oldUrl)
-        print(newURL)
-
         do {
-            let files = try fileManager.contentsOfDirectory(atPath: oldUrl.path)
+            let files = try fileManager.contentsOfDirectory(atPath: fileManager.documentsURL.path)
             try files.forEach { (file) in
-                let oldPath = oldUrl.appendingPathComponent(file)
-                let newPath = newURL.appendingPathComponent(file)
+                let oldPath = fileManager.documentsURL.appendingPathComponent(file)
+                let newPath = fileManager.groupDocumentsDirectory.appendingPathComponent(file)
                 try fileManager.copyItem(at: oldPath, to: newPath)
             }
         } catch {

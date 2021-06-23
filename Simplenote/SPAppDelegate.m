@@ -127,11 +127,11 @@
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey,id> *)launchOptions
 {
 
-    SharedStorageMigrator *storageMigrator = [[SharedStorageMigrator alloc] init];
+    SharedStorageMigrator *storageMigrator = [SharedStorageMigrator new];
     [storageMigrator performMigrationIfNeeded];
     
     // Setup Frameworks
-    self.coreDataManager = [[CoreDataManager alloc] init];
+    self.coreDataManager = [CoreDataManager new];
     [self setupThemeNotifications];
     [self setupSimperium];
     [self setupAppCenter];
