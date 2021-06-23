@@ -31,19 +31,17 @@ class SharedStorageMigrator: NSObject {
         print("newDb exists \(FileManager.default.fileExists(atPath: CoreDataManager.groupStorageURL.path))")
         print(CoreDataManager.groupStorageURL.path)
 
-        if CoreDataManager.oldDbExists && !CoreDataManager.appGroupDbExists {
-            // Old DB.  Needs Mirgation
-            NSLog("Database needs migration to app group")
-            NSLog("Beginning database migration")
+        // Old DB.  Needs Mirgation
+        NSLog("Database needs migration to app group")
+        NSLog("Beginning database migration")
 
-            // Option 2: Migrate old DB FILES to new location
-            do {
-                try migrateCoreDataStore(from: CoreDataManager.documentsDirectory, to: CoreDataManager.groupDocumentsDirectory)
-                NSLog("Database migration successful!!")
-            } catch {
-                NSLog("Could not migrate database to app group")
-                NSLog(error.localizedDescription)
-            }
+        // Option 2: Migrate old DB FILES to new location
+        do {
+            try migrateCoreDataStore(from: CoreDataManager.documentsDirectory, to: CoreDataManager.groupDocumentsDirectory)
+            NSLog("Database migration successful!!")
+        } catch {
+            NSLog("Could not migrate database to app group")
+            NSLog(error.localizedDescription)
         }
     }
 
