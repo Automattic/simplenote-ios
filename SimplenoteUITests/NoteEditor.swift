@@ -120,7 +120,7 @@ class NoteEditor {
         // We wait for at least one element with exact value to appear before counting
         // all occurences. The downside is having one extra call before the actual count.
         let predicate = NSPredicate(format: "value == '" + value + "'")
-        let _ = app
+        _ = app
             .descendants(matching: .textView)
             .element(matching: predicate)
             .waitForExistence(timeout: averageLoadTimeout)
