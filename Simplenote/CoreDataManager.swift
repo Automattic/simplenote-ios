@@ -74,7 +74,7 @@ class CoreDataManager: NSObject {
         let psc = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
 
         let mustUseOldDb = CoreDataManager.oldDbExists && !CoreDataManager.appGroupDbExists
-        var storeURL: URL = mustUseOldDb ? CoreDataManager.appStorageURL : CoreDataManager.appStorageURL
+        var storeURL: URL = mustUseOldDb ? CoreDataManager.appStorageURL : CoreDataManager.groupStorageURL
         let options = [NSMigratePersistentStoresAutomaticallyOption: true, NSInferMappingModelAutomaticallyOption: true]
 
         // Testing logs
