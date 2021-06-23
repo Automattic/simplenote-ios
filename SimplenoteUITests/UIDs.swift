@@ -38,7 +38,7 @@ enum UID {
         static let trashNote = "Move to Trash"
         static let restoreNote = "Restore Note"
         static let deleteNote = "Delete Note"
-
+      
         // "Empty Trash" button label is generated
         // differently by Xcode 12.4 and 12.5 (runs iOS 14.5+)
         static private(set) var trashEmptyTrash: String = {
