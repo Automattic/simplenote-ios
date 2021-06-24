@@ -142,9 +142,12 @@ class WebViewAssert {
 
     class func textShownOnScreen(text: String) {
         let textPredicate = NSPredicate(format: "label MATCHES '" + text + "'")
-        let staticText = app.staticTexts.element(matching: textPredicate)
+        let staticTextExists = app
+            .staticTexts
+            .element(matching: textPredicate)
+            .waitForExistence(timeout: averageLoadTimeout)
 
-        XCTAssertTrue(staticText.exists, "\"" + text + textNotFoundInWebView)
+        XCTAssertTrue(staticTextExists, "\"" + text + textNotFoundInWebView)
     }
 
     class func textsShownOnScreen(texts: [String]) {
