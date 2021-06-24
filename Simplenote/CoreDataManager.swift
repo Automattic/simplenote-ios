@@ -50,7 +50,7 @@ class CoreDataManager: NSObject {
 
         // Testing logs
         //
-        NSLog("storage URL: \(storageURL)")
+        NSLog("🎯 Loading PersistentStore at URL: \(storageURL)")
 
         do {
             try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storageURL, options: options)
