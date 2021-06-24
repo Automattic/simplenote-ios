@@ -16,14 +16,14 @@ extension FileManager {
 
     /// URL for Simplenote's shared app group directory
     ///
-    var groupDirectory: URL {
+    var sharedContainerURL: URL {
         containerURL(forSecurityApplicationGroupIdentifier: Constants.sharedDirectoryDomain + Constants.groupIdentifier)!
     }
 
     /// URL for Simplenote's shared app group documents directory
     ///
-    var groupDocumentsDirectory: URL {
-        groupDirectory.appendingPathComponent(Constants.documentDirectory)
+    var sharedDocumentsDirectory: URL {
+        sharedContainerURL.appendingPathComponent(Constants.documentDirectory)
     }
 }
 
