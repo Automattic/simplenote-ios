@@ -37,7 +37,6 @@ class SharedStorageMigrator: NSObject {
             try migrateCoreDataStore()
             NSLog("Database migration successful!!")
         } catch {
-            // TODO: if migration fails confirm the new dir is deleted
             NSLog("Could not migrate database to app group")
             NSLog(error.localizedDescription)
             cleanUpGroupStorage()
@@ -74,6 +73,7 @@ class SharedStorageMigrator: NSObject {
 
         do {
             try fileManager.removeItem(at: fileManager.sharedDocumentsDirectory)
+            NSLog("File cleanup successful!!")
         } catch {
             NSLog("Could not remove directory at: \(fileManager.sharedDocumentsDirectory)")
             NSLog(error.localizedDescription)
