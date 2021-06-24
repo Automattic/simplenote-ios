@@ -11,7 +11,7 @@ final class TagListViewController: UIViewController {
     private lazy var tagsHeaderView: SPTagHeaderView = SPTagHeaderView.instantiateFromNib()
 
     private lazy var resultsController: ResultsController<Tag> = {
-        let mainContext = SPAppDelegate.shared().coreDataManager.managedObjectContext
+        let mainContext = SPAppDelegate.shared().managedObjectContext()
         return ResultsController(viewContext: mainContext,
                                  sortedBy: sortDescriptors)
     }()

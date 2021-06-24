@@ -6,7 +6,7 @@ import SimplenoteFoundation
 extension SPObjectManager {
 
     var managedObjectContext: NSManagedObjectContext {
-        return SPAppDelegate.shared().coreDataManager.managedObjectContext
+        return SPAppDelegate.shared().managedObjectContext()
     }
 
     @objc

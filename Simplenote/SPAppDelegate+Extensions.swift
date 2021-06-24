@@ -394,3 +394,11 @@ extension SPAppDelegate {
         EditorFactory.shared.scrollPositionCache.cleanup(keeping: allIdentifiers)
     }
 }
+
+// MARK: - Core Data
+//
+extension SPAppDelegate {
+    func managedObjectContext() -> NSManagedObjectContext {
+        coreDataManager.managedObjectContext
+    }
+}
