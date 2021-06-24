@@ -34,23 +34,12 @@ class SharedStorageMigrator: NSObject {
         NSLog("Beginning database migration")
 
         do {
-            try migrateCoreDataStore()
+            try migrateCoreDataFiles()
             NSLog("Database migration successful!!")
         } catch {
             NSLog("Could not migrate database to app group")
             NSLog(error.localizedDescription)
-            cleanUpGroupStorage()
         }
-    }
-
-    private func migrateCoreDataStore() throws {
-        try createAppGroupDirectory()
-        try migrateCoreDataFiles()
-    }
-
-    private func createAppGroupDirectory() throws {
-        let destinationURL = FileManager.default.sharedDocumentsDirectory
-        try FileManager.default.createDirectory(at: destinationURL, withIntermediateDirectories: false, attributes: nil)
     }
 
     private func migrateCoreDataFiles() throws {
@@ -59,24 +48,8 @@ class SharedStorageMigrator: NSObject {
         let files = try fileManager.contentsOfDirectory(atPath: fileManager.documentsURL.path)
         try files.forEach { (file) in
             let oldPath = fileManager.documentsURL.appendingPathComponent(file)
-            let newPath = fileManager.sharedDocumentsDirectory.appendingPathComponent(file)
+            let newPath = fileManager.sharedContainerURL.appendingPathComponent(file)
             try fileManager.copyItem(at: oldPath, to: newPath)
-        }
-    }
-
-    private func cleanUpGroupStorage() {
-        let fileManager = FileManager.default
-
-        guard fileManager.fileExists(atPath: fileManager.sharedDocumentsDirectory.path) else {
-            return
-        }
-
-        do {
-            try fileManager.removeItem(at: fileManager.sharedDocumentsDirectory)
-            NSLog("File cleanup successful!!")
-        } catch {
-            NSLog("Could not remove directory at: \(fileManager.sharedDocumentsDirectory)")
-            NSLog(error.localizedDescription)
         }
     }
 }
