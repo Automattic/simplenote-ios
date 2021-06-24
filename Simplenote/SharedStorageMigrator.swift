@@ -19,7 +19,7 @@ class SharedStorageMigrator: NSObject {
     }
 
     static var migrationNeeded: Bool {
-        FileManager.default.fileExists(atPath: CoreDataManager.legacyStorageURL.path) && !FileManager.default.fileExists(atPath: CoreDataManager.groupStorageURL.path)
+        FileManager.default.fileExists(atPath: CoreDataManager.legacyStorageURL.path) && !FileManager.default.fileExists(atPath: CoreDataManager.sharedStorageURL.path)
     }
 
     func migrateCoreDataToAppGroup() {
@@ -27,8 +27,8 @@ class SharedStorageMigrator: NSObject {
         // TODO: Remove prints later
         print("oldDb exists \(FileManager.default.fileExists(atPath: CoreDataManager.legacyStorageURL.path))")
         print(CoreDataManager.legacyStorageURL.path)
-        print("newDb exists \(FileManager.default.fileExists(atPath: CoreDataManager.groupStorageURL.path))")
-        print(CoreDataManager.groupStorageURL.path)
+        print("newDb exists \(FileManager.default.fileExists(atPath: CoreDataManager.sharedStorageURL.path))")
+        print(CoreDataManager.sharedStorageURL.path)
 
         NSLog("Database needs migration to app group")
         NSLog("Beginning database migration")
@@ -40,6 +40,7 @@ class SharedStorageMigrator: NSObject {
             // TODO: if migration fails confirm the new dir is deleted
             NSLog("Could not migrate database to app group")
             NSLog(error.localizedDescription)
+            cleanUpGroupStorage()
         }
     }
 
@@ -49,7 +50,7 @@ class SharedStorageMigrator: NSObject {
     }
 
     private func createAppGroupDirectory() throws {
-        let destinationURL = FileManager.default.groupDocumentsDirectory
+        let destinationURL = FileManager.default.sharedDocumentsDirectory
         try FileManager.default.createDirectory(at: destinationURL, withIntermediateDirectories: false, attributes: nil)
     }
 
@@ -59,8 +60,23 @@ class SharedStorageMigrator: NSObject {
         let files = try fileManager.contentsOfDirectory(atPath: fileManager.documentsURL.path)
         try files.forEach { (file) in
             let oldPath = fileManager.documentsURL.appendingPathComponent(file)
-            let newPath = fileManager.groupDocumentsDirectory.appendingPathComponent(file)
+            let newPath = fileManager.sharedDocumentsDirectory.appendingPathComponent(file)
             try fileManager.copyItem(at: oldPath, to: newPath)
+        }
+    }
+
+    private func cleanUpGroupStorage() {
+        let fileManager = FileManager.default
+
+        guard fileManager.fileExists(atPath: fileManager.sharedDocumentsDirectory.path) else {
+            return
+        }
+
+        do {
+            try fileManager.removeItem(at: fileManager.sharedDocumentsDirectory)
+        } catch {
+            NSLog("Could not remove directory at: \(fileManager.sharedDocumentsDirectory)")
+            NSLog(error.localizedDescription)
         }
     }
 }

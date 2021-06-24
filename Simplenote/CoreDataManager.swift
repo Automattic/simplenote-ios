@@ -18,15 +18,15 @@ class CoreDataManager: NSObject {
 
     /// URL for core data storage in shared app group documents directory
     ///
-    static let groupStorageURL: URL = {
-        FileManager.default.groupDocumentsDirectory.appendingPathComponent(Constants.sqlFile)
+    static let sharedStorageURL: URL = {
+        FileManager.default.sharedDocumentsDirectory.appendingPathComponent(Constants.sqlFile)
     }()
 
     var storageURL: URL {
         if SharedStorageMigrator.migrationNeeded {
             return CoreDataManager.legacyStorageURL
         }
-        return CoreDataManager.groupStorageURL
+        return CoreDataManager.sharedStorageURL
     }
 
     // MARK: Core Data
