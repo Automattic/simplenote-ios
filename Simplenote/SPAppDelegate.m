@@ -124,7 +124,7 @@
     StorageSettings *storageSettings = [StorageSettings new];
     SharedStorageMigrator *storageMigrator = [[SharedStorageMigrator alloc] initWithStorageSettings:storageSettings];
     [storageMigrator performMigrationIfNeeded];
-    
+
     self.coreDataManager = [[CoreDataManager alloc] initWithStorageSettings:storageSettings];
 }
 
@@ -146,12 +146,6 @@
     [self configureStateRestoration];
 
     return YES;
-}
-
-- (void)test
-{
-    StorageSettings *storageSettings = [StorageSettings new];
-    self.coreDataManager = [[CoreDataManager alloc] initWithStorageSettings:storageSettings];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
