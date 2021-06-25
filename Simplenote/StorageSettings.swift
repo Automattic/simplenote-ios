@@ -2,6 +2,12 @@ import Foundation
 
 @objcMembers
 class StorageSettings: NSObject {
+
+    /// URL for the managed object model resource
+    ///
+    let modelURL: URL = {
+        Bundle.main.url(forResource: Constants.resourceName, withExtension: Constants.resourceType)!
+    }()
     /// In app core data storage URL
     ///
     let legacyStorageURL: URL = {
@@ -32,4 +38,6 @@ class StorageSettings: NSObject {
 
 private struct Constants {
     static let sqlFile = "Simplenote.sqlite"
+    static let resourceName = "Simplenote"
+    static let resourceType = "momd"
 }

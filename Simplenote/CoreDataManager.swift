@@ -4,12 +4,6 @@ import CoreData
 @objcMembers
 class CoreDataManager: NSObject {
 
-    /// URL for the managed object model resource
-    ///
-    static private let modelURL: URL = {
-        Bundle.main.url(forResource: Constants.resourceName, withExtension: Constants.resourceType)!
-    }()
-
     /// Storage Settings
     ///
     let storageSettings: StorageSettings
@@ -22,7 +16,7 @@ class CoreDataManager: NSObject {
 
     // MARK: Core Data
     private(set) lazy var managedObjectModel: NSManagedObjectModel = {
-        guard let mom = NSManagedObjectModel(contentsOf: CoreDataManager.modelURL) else {
+        guard let mom = NSManagedObjectModel(contentsOf: storageSettings.modelURL) else {
             fatalError()
         }
         return mom
@@ -37,7 +31,7 @@ class CoreDataManager: NSObject {
     private(set) lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         let psc = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
 
-        let options = [NSMigratePersistentStoresAutomaticallyOption: true, NSInferMappingModelAutomaticallyOption: true]
+        let options = [NSMigratePersistentStoresAutomaticallyOption: true, NSInferMappingModelAutomaticallyOption: true, NSSQLitePragmasOption: [Constants.journalMode: Constants.journalSetting]] as [AnyHashable: Any]
 
         // Testing logs
         //
@@ -54,6 +48,6 @@ class CoreDataManager: NSObject {
 }
 
 private struct Constants {
-    static let resourceName = "Simplenote"
-    static let resourceType = "momd"
+    static let journalMode = "journal_mode"
+    static let journalSetting = "DELETE"
 }

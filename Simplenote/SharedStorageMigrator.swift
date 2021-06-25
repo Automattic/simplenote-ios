@@ -26,7 +26,7 @@ class SharedStorageMigrator: NSObject {
     }
 
     var migrationNeeded: Bool {
-        storageSettings.legacyStorageExists && !storageSettings.sharedStorageExists
+        return storageSettings.legacyStorageExists && !storageSettings.sharedStorageExists
     }
 
     func migrateCoreDataToAppGroup() {
@@ -41,6 +41,7 @@ class SharedStorageMigrator: NSObject {
         NSLog("Beginning database migration")
 
         do {
+            try disableJournaling()
             try migrateCoreDataFiles()
             NSLog("Database migration successful!!")
         } catch {
@@ -49,14 +50,18 @@ class SharedStorageMigrator: NSObject {
         }
     }
 
-    private func migrateCoreDataFiles() throws {
-        let fileManager = FileManager.default
-
-        let files = try fileManager.contentsOfDirectory(atPath: fileManager.documentsURL.path)
-        try files.forEach { (file) in
-            let oldPath = fileManager.documentsURL.appendingPathComponent(file)
-            let newPath = fileManager.sharedContainerURL.appendingPathComponent(file)
-            try fileManager.copyItem(at: oldPath, to: newPath)
+    private func disableJournaling() throws {
+        guard let mom = NSManagedObjectModel(contentsOf: storageSettings.modelURL) else {
+            return
         }
+        let psc = NSPersistentStoreCoordinator(managedObjectModel: mom)
+
+        let options = [NSSQLitePragmasOption: ["journal_mode": "DELETE"]] as [AnyHashable: Any]
+
+        try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storageSettings.legacyStorageURL, options: options)
+    }
+
+    private func migrateCoreDataFiles() throws {
+        try FileManager.default.copyItem(at: storageSettings.legacyStorageURL, to: storageSettings.sharedStorageURL)
     }
 }
