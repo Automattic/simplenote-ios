@@ -119,6 +119,19 @@
     [nc addObserver:self selector:@selector(themeDidChange) name:SPSimplenoteThemeChangedNotification object:nil];
 }
 
+- (void)setupStorageMigrator
+{
+    StorageSettings *storageSettings = [StorageSettings new];
+    SharedStorageMigrator *storageMigrator = [[SharedStorageMigrator alloc] initWithStorageSettings:storageSettings];
+    [storageMigrator performMigrationIfNeeded];
+}
+
+- (void)setupStorage
+{
+    StorageSettings *storageSettings = [StorageSettings new];
+
+    self.coreDataManager = [[CoreDataManager alloc] initWithStorageSettings:storageSettings];
+}
 
 #pragma mark ================================================================================
 #pragma mark AppDelegate Methods
@@ -126,12 +139,9 @@
 
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey,id> *)launchOptions
 {
-
-    SharedStorageMigrator *storageMigrator = [SharedStorageMigrator new];
-    [storageMigrator performMigrationIfNeeded];
-    
+    [self setupStorageMigrator];
     // Setup Frameworks
-    self.coreDataManager = [CoreDataManager new];
+    [self setupStorage];
     [self setupThemeNotifications];
     [self setupSimperium];
     [self setupAppCenter];
@@ -142,6 +152,12 @@
     [self configureStateRestoration];
 
     return YES;
+}
+
+- (void)test
+{
+    StorageSettings *storageSettings = [StorageSettings new];
+    self.coreDataManager = [[CoreDataManager alloc] initWithStorageSettings:storageSettings];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
