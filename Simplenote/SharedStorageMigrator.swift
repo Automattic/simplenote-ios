@@ -3,6 +3,13 @@ import CoreData
 
 @objc
 class SharedStorageMigrator: NSObject {
+    let storageSettings: StorageSettings
+
+    @objc
+    init(storageSettings: StorageSettings) {
+        self.storageSettings = storageSettings
+    }
+
     /// Database Migration
     /// To be able to share data with app extensions, the CoreData database needs to be migrated to an app group
     /// Must run before Simperium is setup
@@ -10,7 +17,7 @@ class SharedStorageMigrator: NSObject {
     @objc
     func performMigrationIfNeeded() {
         // Confirm if the app group DB exists
-        guard SharedStorageMigrator.migrationNeeded else {
+        guard migrationNeeded else {
             NSLog("Core Data Migration not required")
             return
         }
@@ -18,17 +25,17 @@ class SharedStorageMigrator: NSObject {
         migrateCoreDataToAppGroup()
     }
 
-    static var migrationNeeded: Bool {
-        FileManager.default.fileExists(atPath: CoreDataManager.legacyStorageURL.path) && !FileManager.default.fileExists(atPath: CoreDataManager.sharedStorageURL.path)
+    var migrationNeeded: Bool {
+        storageSettings.legacyStorageExists && !storageSettings.sharedStorageExists
     }
 
     func migrateCoreDataToAppGroup() {
         // Testing prints
         // TODO: Remove prints later
-        print("oldDb exists \(FileManager.default.fileExists(atPath: CoreDataManager.legacyStorageURL.path))")
-        print(CoreDataManager.legacyStorageURL.path)
-        print("newDb exists \(FileManager.default.fileExists(atPath: CoreDataManager.sharedStorageURL.path))")
-        print(CoreDataManager.sharedStorageURL.path)
+        print("oldDb exists \(FileManager.default.fileExists(atPath: storageSettings.legacyStorageURL.path))")
+        print(storageSettings.legacyStorageURL.path)
+        print("newDb exists \(FileManager.default.fileExists(atPath: storageSettings.sharedStorageURL.path))")
+        print(storageSettings.sharedStorageURL.path)
 
         NSLog("Database needs migration to app group")
         NSLog("Beginning database migration")

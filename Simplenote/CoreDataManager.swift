@@ -10,23 +10,14 @@ class CoreDataManager: NSObject {
         Bundle.main.url(forResource: Constants.resourceName, withExtension: Constants.resourceType)!
     }()
 
-    /// In app core data storage URL
+    /// Storage Settings
     ///
-    static let legacyStorageURL: URL = {
-        FileManager.default.documentsURL.appendingPathComponent(Constants.sqlFile)
-    }()
+    let storageSettings: StorageSettings
 
-    /// URL for core data storage in shared app group documents directory
-    ///
-    static let sharedStorageURL: URL = {
-        FileManager.default.sharedContainerURL.appendingPathComponent(Constants.sqlFile)
-    }()
-
-    var storageURL: URL {
-        if SharedStorageMigrator.migrationNeeded {
-            return CoreDataManager.legacyStorageURL
-        }
-        return CoreDataManager.sharedStorageURL
+    @objc
+    init(storageSettings: StorageSettings) {
+        self.storageSettings = storageSettings
+        super.init()
     }
 
     // MARK: Core Data
@@ -50,10 +41,10 @@ class CoreDataManager: NSObject {
 
         // Testing logs
         //
-        NSLog("🎯 Loading PersistentStore at URL: \(storageURL)")
+        NSLog("🎯 Loading PersistentStore at URL: \(storageSettings.storageURL)")
 
         do {
-            try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storageURL, options: options)
+            try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storageSettings.storageURL, options: options)
         } catch {
             NSLog("Unresolved Error")
         }
@@ -65,5 +56,4 @@ class CoreDataManager: NSObject {
 private struct Constants {
     static let resourceName = "Simplenote"
     static let resourceType = "momd"
-    static let sqlFile = "Simplenote.sqlite"
 }
