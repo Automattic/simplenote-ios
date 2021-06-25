@@ -165,6 +165,11 @@ extension UIColor {
     }
 
     @objc
+    static var simplenoteDisabledPlaceholderTextColor: UIColor {
+        UIColor(lightColor: .gray50, darkColor: .gray30, lightColorAlpha: 0.5, darkColorAlpha: 0.5)
+    }
+
+    @objc
     static var simplenoteSearchBarBackgroundColor: UIColor {
         UIColor(lightColor: .gray10, darkColor: .darkGray4)
     }

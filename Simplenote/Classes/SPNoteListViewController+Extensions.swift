@@ -372,14 +372,11 @@ extension SPNoteListViewController {
     @objc
     func configureNavigationToolbarButton() {
         // TODO: When multi select is added to iPad, revist the conditionals here
-        guard navigationController?.isToolbarHidden == false,
-            let trashButton = trashButton,
-            let addButton = addButton else {
+        guard let trashButton = trashButton else {
             return
         }
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let actionButton = isEditing ? trashButton : addButton
-        setToolbarItems([flexibleSpace, actionButton], animated: true)
+        setToolbarItems([flexibleSpace, trashButton], animated: true)
     }
 
     @objc
@@ -390,6 +387,7 @@ extension SPNoteListViewController {
             tableView.selectAllRows(inSection: 0, animated: false)
         }
         refreshNavigationBarLabels()
+        refreshTrashButton()
     }
 
     @objc
@@ -401,6 +399,14 @@ extension SPNoteListViewController {
     @objc
     func refreshEditButtonTitle() {
         editButtonItem.title = isEditing ? Localization.cancelTitle : Localization.editTitle
+    }
+
+    func refreshTrashButton() {
+        guard let selectedRows = tableView.indexPathsForSelectedRows else {
+            trashButton.isEnabled = false
+            return
+        }
+        trashButton.isEnabled = selectedRows.count > 0
     }
 }
 
@@ -555,6 +561,7 @@ extension SPNoteListViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if isEditing {
             refreshNavigationBarLabels()
+            refreshTrashButton()
             return
         }
 
@@ -575,6 +582,7 @@ extension SPNoteListViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         if isEditing {
             refreshNavigationBarLabels()
+            refreshTrashButton()
         }
     }
 
@@ -588,7 +596,7 @@ extension SPNoteListViewController: UITableViewDelegate {
             return self.previewingViewController(for: note)
 
         }, actionProvider: { suggestedActions in
-            return self.contextMenu(for: note)
+            return self.contextMenu(for: note, at: indexPath)
         })
     }
 
@@ -711,7 +719,9 @@ extension SPNoteListViewController {
         updateNavigationBar()
 
         configureNavigationToolbarButton()
+        navigationController?.setToolbarHidden(!editing, animated: true)
         refreshListViewTitle()
+        searchController.setEnabled(!editing)
     }
 
     private func ensureTableViewEditingIsInSync() {
@@ -818,7 +828,7 @@ private extension SPNoteListViewController {
 
     /// Invoked by the Long Press UITableView Mechanism (ex 3d Touch)
     ///
-    func contextMenu(for note: Note) -> UIMenu {
+    func contextMenu(for note: Note, at indexPath: IndexPath) -> UIMenu {
         let copy = UIAction(title: ActionTitle.copyLink, image: .image(name: .link)) { [weak self] _ in
             self?.copyInternalLink(to: note)
             NoticeController.shared.present(NoticeFactory.linkCopied())
@@ -834,6 +844,17 @@ private extension SPNoteListViewController {
             self?.togglePinnedState(note: note)
         }
 
+        let select = UIAction(title: ActionTitle.select, image: .image(name: .success)) { [weak self] _ in
+            self?.setEditing(true, animated: true)
+            self?.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+            self?.tableView.scrollToNearestSelectedRow(at: .none, animated: false)
+            self?.refreshListViewTitle()
+            self?.refreshTrashButton()
+        }
+        if isSearchActive {
+            select.attributes = .disabled
+        }
+
         /// NOTE:
         /// iOS 13 exhibits a broken animation when performing a Delete OP from a ContextMenu.
         /// Since this appears to be fixed in iOS 14, quick workaround is: remove Delete from the Contextual Actions for iOS 13.
@@ -841,7 +862,7 @@ private extension SPNoteListViewController {
         /// Ref.: https://github.com/Automattic/simplenote-ios/pull/902/files
         ///
         guard #available(iOS 14.0, *) else {
-            return UIMenu(title: "", children: [share, copy, pin])
+            return UIMenu(title: "", children: [select, share, copy, pin])
         }
 
         let delete = UIAction(title: ActionTitle.delete, image: .image(name: .trash), attributes: .destructive) { [weak self] _ in
@@ -854,7 +875,7 @@ private extension SPNoteListViewController {
             SPTracker.trackPresentedNotice(ofType: .noteTrashed)
         }
 
-        return UIMenu(title: "", children: [share, copy, pin, delete])
+        return UIMenu(title: "", children: [select, share, copy, pin, delete])
     }
 }
 
@@ -1090,7 +1111,8 @@ private enum ActionTitle {
     static let share = NSLocalizedString("Share...", comment: "Shares a note")
     static let unpin = NSLocalizedString("Unpin", comment: "Unpins a note")
     static let restore = NSLocalizedString("Restore Note", comment: "Restore a note from trash")
-    static let delete = NSLocalizedString("Delete Note", comment: "Delet a note from trash")
+    static let delete = NSLocalizedString("Delete Note", comment: "Delete a note from trash")
+    static let select = NSLocalizedString("Select", comment: "Select multiple notes at once")
 }
 
 private enum Constants {
