@@ -119,17 +119,12 @@
     [nc addObserver:self selector:@selector(themeDidChange) name:SPSimplenoteThemeChangedNotification object:nil];
 }
 
-- (void)setupStorageMigrator
+- (void)setupStorage
 {
     StorageSettings *storageSettings = [StorageSettings new];
     SharedStorageMigrator *storageMigrator = [[SharedStorageMigrator alloc] initWithStorageSettings:storageSettings];
     [storageMigrator performMigrationIfNeeded];
-}
-
-- (void)setupStorage
-{
-    StorageSettings *storageSettings = [StorageSettings new];
-
+    
     self.coreDataManager = [[CoreDataManager alloc] initWithStorageSettings:storageSettings];
 }
 
@@ -139,7 +134,6 @@
 
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey,id> *)launchOptions
 {
-    [self setupStorageMigrator];
     // Setup Frameworks
     [self setupStorage];
     [self setupThemeNotifications];
