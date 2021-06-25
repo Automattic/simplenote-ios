@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-06-09 11:54:04+0000 */
+/* Translation-Revision-Date: 2021-06-23 09:54:03+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: zh_TW */
@@ -114,6 +114,7 @@
 "By creating an account you agree to our" = "建立帳號即表示你同意我們的";
 
 /* Cancel Action
+   Cancel action button
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
@@ -596,6 +597,9 @@
 /* Rating view - disliked - send feedback button */
 "Send feedback" = "傳送回饋意見";
 
+/* Setup a passcode action button */
+"Set up Passcode" = "設定密碼";
+
 /* Settings button
    Title of options screen */
 "Settings" = "設定";
@@ -672,6 +676,9 @@
 
 /* Simplenote Themes */
 "Themes" = "佈景主題";
+
+/* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
+"To enable %1$@, you must have a passcode setup first." = "若要啟用 %1$@，必須先設定密碼。";
 
 /* Touch ID reason/explanation */
 "To unlock the application" = "若要解鎖應用程式";

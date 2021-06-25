@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-06-10 15:54:04+0000 */
+/* Translation-Revision-Date: 2021-06-24 15:59:06+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ko_KR */
@@ -114,6 +114,7 @@
 "By creating an account you agree to our" = "계정을 만들면 다음에 동의하는 것입니다.";
 
 /* Cancel Action
+   Cancel action button
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
@@ -596,6 +597,9 @@
 /* Rating view - disliked - send feedback button */
 "Send feedback" = "의견 보내기";
 
+/* Setup a passcode action button */
+"Set up Passcode" = "패스코드 설정";
+
 /* Settings button
    Title of options screen */
 "Settings" = "설정";
@@ -672,6 +676,9 @@
 
 /* Simplenote Themes */
 "Themes" = "테마";
+
+/* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
+"To enable %1$@, you must have a passcode setup first." = "%1$@을(를) 활성화하려면 먼저 패스코드를 설정해야 합니다.";
 
 /* Touch ID reason/explanation */
 "To unlock the application" = "애플리케이션 잠금 방법";
