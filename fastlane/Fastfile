@@ -143,16 +143,12 @@ end
 
       UI.message "#{keywords_path} has more than #{app_store_connect_keywords_length_limit} characters. Trimming it..."
 
-      case File.basename(locale_dir)
-      when 'ar-SA'
-        separator = '،'
-      else
-        separator = ','
-      end
+      english_comma = ','
+      arabic_comma = '،'
+      keywords = keywords.gsub(arabic_comma, english_comma) if File.basename(locale_dir) == 'ar-SA'
 
-      until keywords.length <= app_store_connect_keywords_length_limit do
-        keywords = keywords.split(separator)[0...-1].join(separator)
-        puts keywords
+      until keywords.length <= app_store_connect_keywords_length_limit
+        keywords = keywords.split(english_comma)[0...-1].join(english_comma)
       end
 
       File.write(keywords_path, keywords)
