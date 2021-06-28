@@ -398,6 +398,7 @@ extension SPAppDelegate {
 // MARK: - Core Data
 //
 extension SPAppDelegate {
+    @objc
     func managedObjectContext() -> NSManagedObjectContext {
         coreDataManager.managedObjectContext
     }
