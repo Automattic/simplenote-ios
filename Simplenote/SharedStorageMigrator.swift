@@ -1,5 +1,6 @@
 import Foundation
 import CoreData
+import AutomatticTracks
 
 @objc
 class SharedStorageMigrator: NSObject {
@@ -47,6 +48,7 @@ class SharedStorageMigrator: NSObject {
         } catch {
             NSLog("Could not migrate database to app group")
             NSLog(error.localizedDescription)
+            CrashLogging.logError(error)
         }
     }
 

@@ -1,5 +1,6 @@
 import Foundation
 import CoreData
+import AutomatticTracks
 
 @objcMembers
 class CoreDataManager: NSObject {
@@ -40,7 +41,8 @@ class CoreDataManager: NSObject {
         do {
             try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storageSettings.storageURL, options: options)
         } catch {
-            NSLog("Unresolved Error")
+            NSLog("Error loading PersistentStore at URL: \(storageSettings.storageURL)")
+            CrashLogging.crash()
         }
 
         return psc
