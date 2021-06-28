@@ -1,2 +1,3 @@
-- De kleur van meldingen in de app is bijgewerkt voor betere leesbaarheid in de nachtmodus
-- De mogelijkheid is toegevoegd om in de notitielijst meerdere notities tegelijk te selecteren en te verwijderen
+-   Bug verwijderd waardoor de knop Nieuwe notitie soms niet werd weergeven
+-   Nieuwe flow voor Biometrievergrendeling
+

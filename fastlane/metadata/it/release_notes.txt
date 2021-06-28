@@ -1,2 +1,3 @@
-- Ora puoi modificare il colore delle notifiche nell'app per una migliore leggibilità in Dark Mode
-- Aggiunta la possibilità di selezionare e cancellare simultaneamente più note dalla lista
+-   Corretto un bug a causa del quale il pulsante Nuova nota poteva non essere visualizzato
+-   Nuovo flusso di blocco della biometria
+

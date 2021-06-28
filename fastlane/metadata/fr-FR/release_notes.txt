@@ -1,2 +1,3 @@
-- Mise à jour de la couleur des notifications dans l’application pour une meilleure lisibilité en mode sombre ;
-- Possibilité de sélectionner et supprimer simultanément plusieurs notes de la liste.
+-   Résolution d’un bogue dans lequel le bouton Nouvelle note pouvait ne pas apparaître
+-   Nouveau flux de verrouillage biométrique
+
