@@ -87,7 +87,7 @@
         [note addTag: newTitle];
         [note createPreview];
 	}
-    NSManagedObjectContext *managedObjectContext = [[SPAppDelegate sharedDelegate] coreDataManager].managedObjectContext;
+    NSManagedObjectContext *managedObjectContext = [[SPAppDelegate sharedDelegate] managedObjectContext];
     [managedObjectContext deleteObject:tag];
     
     [self save];
@@ -125,7 +125,7 @@
             tagToUpdate.index = [NSNumber numberWithInt:currentIndex-1];
         }
     }
-    NSManagedObjectContext *managedObjectContext = [[SPAppDelegate sharedDelegate] coreDataManager].managedObjectContext;
+    NSManagedObjectContext *managedObjectContext = [[SPAppDelegate sharedDelegate] managedObjectContext];
     [managedObjectContext deleteObject:tag];
     tagRemoved = tag.isDeleted;
     [self save];
@@ -227,14 +227,14 @@
 
 - (void)permenentlyDeleteNote:(Note *)note
 {
-    NSManagedObjectContext *managedObjectContext = [[SPAppDelegate sharedDelegate] coreDataManager].managedObjectContext;
+    NSManagedObjectContext *managedObjectContext = [[SPAppDelegate sharedDelegate] managedObjectContext];
     [managedObjectContext deleteObject:note];
     [self save];
 }
 
 - (void)emptyTrash
 {
-    NSManagedObjectContext *context = [[SPAppDelegate sharedDelegate] coreDataManager].managedObjectContext;
+    NSManagedObjectContext *context = [[SPAppDelegate sharedDelegate] managedObjectContext];
 	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deleted == YES"];
     NSArray *notesToDelete = [context fetchObjectsForEntityName:@"Note" withPredicate:predicate];
 
