@@ -22,7 +22,7 @@ extension FileManager {
 }
 
 private struct Constants {
-    static let defaultBundleIdentifier = "com.codality.NationalFlow"
+    static let defaultBundleIdentifier = "com.codality.NotationalFlow"
     static let groupIdentifier = Bundle.main.bundleIdentifier ?? Constants.defaultBundleIdentifier
     static let sharedDirectoryDomain = "group."
 }
