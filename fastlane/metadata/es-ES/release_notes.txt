@@ -1,2 +1,3 @@
-- Actualizamos el color de las notificaciones en la aplicación para que se lean mejor en  modo oscuro.
-- Ahora puedes seleccionar y borrar múltiples notas desde la lista de notas.
+-   Se ha corregido un error por el que desaparecía el botón Nueva nota
+-   Nuevo flujo de bloqueo biométrico
+

@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-06-08 09:54:03+0000 */
+/* Translation-Revision-Date: 2021-06-24 15:58:16+0000 */
 /* Plural-Forms: nplurals=2; plural=(n > 1); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: tr */
@@ -114,6 +114,7 @@
 "By creating an account you agree to our" = "Hesap oluşturarak şunları kabul etmiş olursunuz:";
 
 /* Cancel Action
+   Cancel action button
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
@@ -596,6 +597,9 @@
 /* Rating view - disliked - send feedback button */
 "Send feedback" = "Geri Bildirim Gönder";
 
+/* Setup a passcode action button */
+"Set up Passcode" = "Parola Ayarlama";
+
 /* Settings button
    Title of options screen */
 "Settings" = "Ayarlar";
@@ -672,6 +676,9 @@
 
 /* Simplenote Themes */
 "Themes" = "Temalar";
+
+/* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
+"To enable %1$@, you must have a passcode setup first." = "%1$@ özelliğini etkinleştirmek için önce bir parola ayarlamalısınız.";
 
 /* Touch ID reason/explanation */
 "To unlock the application" = "Uygulamanın kilidini açmak için";

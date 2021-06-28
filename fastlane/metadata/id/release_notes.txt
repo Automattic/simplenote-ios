@@ -1,2 +1,3 @@
-- Memperbarui warna pemberitahuan dalam aplikasi untuk keterbacaan yang lebih baik pada mode gelap
-- Menambah fitur untuk memilih dan menghapus beberapa notes sekaligus dari daftar note.
+-   Perbaikan bug yang membuat tombol Catatan Baru tidak tampak
+-   Alur Kunci Biometri yang Baru
+

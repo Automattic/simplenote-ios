@@ -1,2 +1,3 @@
-- Uppdaterat aviseringsfärgen i appen för bättre läsbarhet i mörkt läge
-- Lagt till möjligheten att välja och ta bort flera anteckningar åt gången från listan med anteckningar
+-   Ett fel som gjorde att knappen Ny anteckning inte visades har korrigerats
+-   Nytt flöde med biometriskt lås
+

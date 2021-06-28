@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-06-09 17:55:12+0000 */
+/* Translation-Revision-Date: 2021-06-23 09:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=(n > 1); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: pt_BR */
@@ -114,6 +114,7 @@
 "By creating an account you agree to our" = "Ao criar uma conta, você concorda com os";
 
 /* Cancel Action
+   Cancel action button
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
@@ -596,6 +597,9 @@
 /* Rating view - disliked - send feedback button */
 "Send feedback" = "Enviar feedback";
 
+/* Setup a passcode action button */
+"Set up Passcode" = "Definir senha";
+
 /* Settings button
    Title of options screen */
 "Settings" = "Configurações";
@@ -672,6 +676,9 @@
 
 /* Simplenote Themes */
 "Themes" = "Temas";
+
+/* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
+"To enable %1$@, you must have a passcode setup first." = "Para ativar %1$@, primeiro é preciso definir uma senha.";
 
 /* Touch ID reason/explanation */
 "To unlock the application" = "Para desbloquear o aplicativo";

@@ -1,2 +1,3 @@
-- Farbe der Benachrichtigungen in der App aktualisiert, um Lesbarkeit im dunklen Modus zu verbessern
-- Option zum Auswählen und Löschen mehrerer Notizen gleichzeitig aus der Notizenliste hinzugefügt
+-   Fehler behoben, durch den der Button für neue Notizen nicht angezeigt wurde
+-   Neuer Biometriesperrvorgang
+

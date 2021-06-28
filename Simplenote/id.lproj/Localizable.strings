@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-06-10 11:54:03+0000 */
+/* Translation-Revision-Date: 2021-06-22 09:54:50+0000 */
 /* Plural-Forms: nplurals=2; plural=n > 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: id */
@@ -114,6 +114,7 @@
 "By creating an account you agree to our" = "Dengan membuat akun, Anda menyetujui";
 
 /* Cancel Action
+   Cancel action button
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
@@ -596,6 +597,9 @@
 /* Rating view - disliked - send feedback button */
 "Send feedback" = "Kirim Masukan";
 
+/* Setup a passcode action button */
+"Set up Passcode" = "Siapkan Kode Sandi";
+
 /* Settings button
    Title of options screen */
 "Settings" = "Settings";
@@ -672,6 +676,9 @@
 
 /* Simplenote Themes */
 "Themes" = "Tema";
+
+/* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
+"To enable %1$@, you must have a passcode setup first." = "Untuk mengaktifkan %1$@, Anda harus menyiapkan kode sandi terlebih dahulu.";
 
 /* Touch ID reason/explanation */
 "To unlock the application" = "Untuk membuka aplikasi";

@@ -1,2 +1,3 @@
-- Atualização da cor das notificações no aplicativo para uma melhor leitura no modo escuro
-- Adicionamos a possibilidade de selecionar e excluir diversas notas ao mesmo tempo na lista de notas
+-   Corrigido um problema em que o botão Nova anotação às vezes não aparecia
+-   Novo fluxo de bloqueio por biometria
+

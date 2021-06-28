@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-06-08 09:54:08+0000 */
+/* Translation-Revision-Date: 2021-06-23 13:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: sv_SE */
@@ -114,6 +114,7 @@
 "By creating an account you agree to our" = "Genom att skapa ett konto godkänner du våra";
 
 /* Cancel Action
+   Cancel action button
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
@@ -596,6 +597,9 @@
 /* Rating view - disliked - send feedback button */
 "Send feedback" = "Skicka feedback";
 
+/* Setup a passcode action button */
+"Set up Passcode" = "Konfigurera lösenkod";
+
 /* Settings button
    Title of options screen */
 "Settings" = "Inställningar";
@@ -672,6 +676,9 @@
 
 /* Simplenote Themes */
 "Themes" = "Teman";
+
+/* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
+"To enable %1$@, you must have a passcode setup first." = "För att aktivera %1$@ måste du först konfigurera en lösenkod.";
 
 /* Touch ID reason/explanation */
 "To unlock the application" = "För att låsa upp applikationen";

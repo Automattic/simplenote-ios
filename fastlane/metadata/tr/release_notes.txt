@@ -1,2 +1,3 @@
-- Karanlık modda daha iyi okunabilirlik için uygulama içi bildirim rengi güncellendi
-- Birden fazla not seçme ve silme özelliği eklendi
+-   Yeni Not düğmesinin görünmesini engelleyen bir hata düzeltildi
+-   Yeni Biyometri Kilit Akışı
+

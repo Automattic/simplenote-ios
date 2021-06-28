@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-06-10 09:54:03+0000 */
+/* Translation-Revision-Date: 2021-06-17 17:22:39+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: es */
@@ -114,6 +114,7 @@
 "By creating an account you agree to our" = "Al crear una cuenta, aceptas nuestros";
 
 /* Cancel Action
+   Cancel action button
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
@@ -155,7 +156,7 @@
 "Confirm" = "Confirmar";
 
 /* Title on the PinLock screen asking to confirm a passcode */
-"Confirm your passcode" = "Confirma tu contraseña";
+"Confirm your passcode" = "Confirma tu código de acceso";
 
 /* Contribute to the Simplenote apps on github */
 "Contribute" = "Contribuir";
@@ -392,10 +393,10 @@
 "Modified" = "Modificado";
 
 /* Sort Mode: Modified Date, descending */
-"Modified: Newest" = "Modificado: Más nuevo";
+"Modified: Newest" = "Modificación: Más nuevo";
 
 /* Sort Mode: Modified Date, ascending */
-"Modified: Oldest" = "Modificado: Más antiguo";
+"Modified: Oldest" = "Modificación: Más antiguo";
 
 /* Accessibility hint for trash selected notes button */
 "Move selected notes to trash" = "Mover las notas seleccionadas a la papelera";
@@ -596,6 +597,9 @@
 /* Rating view - disliked - send feedback button */
 "Send feedback" = "Enviar comentario";
 
+/* Setup a passcode action button */
+"Set up Passcode" = "Establecer código";
+
 /* Settings button
    Title of options screen */
 "Settings" = "Configuración";
@@ -672,6 +676,9 @@
 
 /* Simplenote Themes */
 "Themes" = "Temas";
+
+/* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
+"To enable %1$@, you must have a passcode setup first." = "Para habilitar %1$@ debe configurar un código de acceso primero.";
 
 /* Touch ID reason/explanation */
 "To unlock the application" = "Para desbloquear la aplicación";
