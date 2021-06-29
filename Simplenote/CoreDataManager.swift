@@ -7,7 +7,7 @@ class CoreDataManager: NSObject {
 
     /// Storage Settings
     ///
-    let storageSettings: StorageSettings
+    private let storageSettings: StorageSettings
 
     @objc
     init(storageSettings: StorageSettings) {

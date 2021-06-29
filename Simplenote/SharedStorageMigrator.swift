@@ -4,7 +4,7 @@ import AutomatticTracks
 
 @objc
 class SharedStorageMigrator: NSObject {
-    let storageSettings: StorageSettings
+    private let storageSettings: StorageSettings
 
     @objc
     init(storageSettings: StorageSettings) {
@@ -26,7 +26,7 @@ class SharedStorageMigrator: NSObject {
         migrateCoreDataToAppGroup()
     }
 
-    var migrationNeeded: Bool {
+    private var migrationNeeded: Bool {
         return storageSettings.legacyStorageExists && !storageSettings.sharedStorageExists
     }
 
