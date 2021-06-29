@@ -66,10 +66,8 @@ msgctxt "app_store_keywords"
 msgid "simplenote,note,taking,taker,notes,sync,share,simple,markdown,tag,to-do,list,lock,cloud,writing"
 msgstr ""
 
-msgctxt "v4.38-whats-new"
+msgctxt "v4.39-whats-new"
 msgid ""
-"-   Fixed a bug in which the New Note button might not appear\n"
-"-   New Biometry Lock Flow\n"
-"\n"
+"- Moved edit mode into a long press action and removed the new note bar\n"
 msgstr ""
 

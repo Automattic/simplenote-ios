@@ -1,8 +1,7 @@
-4.39
+4.40
 -----
 
-
-4.38
+4.39
 -----
 -   Moved edit mode into a long press action and removed the new note bar #1328
 
