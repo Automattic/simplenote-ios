@@ -1,3 +1,2 @@
--   Fixed a bug in which the New Note button might not appear
--   New Biometry Lock Flow
+
 
