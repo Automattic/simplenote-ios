@@ -60,7 +60,10 @@ class SharedStorageMigrator: NSObject {
 
         let options = [NSSQLitePragmasOption: ["journal_mode": "DELETE"]] as [AnyHashable: Any]
 
-        try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storageSettings.legacyStorageURL, options: options)
+        try psc.addPersistentStore(ofType: NSSQLiteStoreType,
+                                   configurationName: nil,
+                                   at: storageSettings.legacyStorageURL,
+                                   options: options)
     }
 
     private func migrateCoreDataFiles() throws {

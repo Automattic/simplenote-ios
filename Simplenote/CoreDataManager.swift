@@ -32,14 +32,19 @@ class CoreDataManager: NSObject {
     private(set) lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         let psc = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
 
-        let options = [NSMigratePersistentStoresAutomaticallyOption: true, NSInferMappingModelAutomaticallyOption: true, NSSQLitePragmasOption: [Constants.journalMode: Constants.journalSetting]] as [AnyHashable: Any]
+        let options = [NSMigratePersistentStoresAutomaticallyOption: true,
+                       NSInferMappingModelAutomaticallyOption: true,
+                       NSSQLitePragmasOption: [Constants.journalMode: Constants.journalSetting]] as [AnyHashable: Any]
 
         // Testing logs
         //
         NSLog("🎯 Loading PersistentStore at URL: \(storageSettings.storageURL)")
 
         do {
-            try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storageSettings.storageURL, options: options)
+            try psc.addPersistentStore(ofType: NSSQLiteStoreType,
+                                       configurationName: nil,
+                                       at: storageSettings.storageURL,
+                                       options: options)
         } catch {
             NSLog("Error loading PersistentStore at URL: \(storageSettings.storageURL)")
             CrashLogging.crash()
