@@ -435,6 +435,9 @@
 		BA6331AB268BCA5600ECFFDE /* Simplenote.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 467D9C5C1788A4FB00785EF3 /* Simplenote.xcdatamodeld */; };
 		BA6331B6268BCAD800ECFFDE /* StorageSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B59012685549F00DAD1ED /* StorageSettings.swift */; };
 		BA6331C1268BCB3800ECFFDE /* FileManager+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A8968D25D5779D00A7B390 /* FileManager+Simplenote.swift */; };
+		BA6331CC268BCCAF00ECFFDE /* StorageSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B59012685549F00DAD1ED /* StorageSettings.swift */; };
+		BA6331D7268BCCB900ECFFDE /* Simplenote.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 467D9C5C1788A4FB00785EF3 /* Simplenote.xcdatamodeld */; };
+		BA6331E2268BCCC700ECFFDE /* FileManager+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A8968D25D5779D00A7B390 /* FileManager+Simplenote.swift */; };
 		BA83478325F59F8B0059B797 /* markdown-default-contrast.css in Resources */ = {isa = PBXBuildFile; fileRef = BA83478225F59F8B0059B797 /* markdown-default-contrast.css */; };
 		BA83478C25F59FE90059B797 /* markdown-dark-contrast.css in Resources */ = {isa = PBXBuildFile; fileRef = BA83478B25F59FE90059B797 /* markdown-dark-contrast.css */; };
 		BA8FC2A5267AC7470082962E /* SharedStorageMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8FC2A4267AC7470082962E /* SharedStorageMigrator.swift */; };
@@ -3384,6 +3387,9 @@
 			files = (
 				BAB5762726703C8200B0C56F /* IntentHandler.swift in Sources */,
 				BAB5765C26703D0600B0C56F /* NotePreviewWidgetIntent.intentdefinition in Sources */,
+				BA6331E2268BCCC700ECFFDE /* FileManager+Simplenote.swift in Sources */,
+				BA6331CC268BCCAF00ECFFDE /* StorageSettings.swift in Sources */,
+				BA6331D7268BCCB900ECFFDE /* Simplenote.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
