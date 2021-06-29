@@ -64,6 +64,17 @@ class SharedStorageMigrator: NSObject {
                                    configurationName: nil,
                                    at: storageSettings.legacyStorageURL,
                                    options: options)
+
+        // Remove the persistent store before exiting
+        // If removing fails, the migration can still continue so not throwing the errors
+        do {
+            for store in psc.persistentStores {
+                try psc.remove(store)
+            }
+        } catch {
+            NSLog("Could not remove temporary persistent Store")
+            NSLog(error.localizedDescription)
+        }
     }
 
     private func migrateCoreDataFiles() throws {
