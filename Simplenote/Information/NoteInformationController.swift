@@ -43,7 +43,7 @@ final class NoteInformationController {
     /// Main Context
     ///
     private var mainContext: NSManagedObjectContext {
-        SPAppDelegate.shared().managedObjectContext()
+        SPAppDelegate.shared().managedObjectContext
     }
 
     /// Note changes observer
