@@ -43,7 +43,7 @@ extension SPNoteListViewController {
     func configureResultsController() {
         assert(notesListController == nil, "listController is already initialized!")
 
-        notesListController = NotesListController(viewContext: SPAppDelegate.shared().managedObjectContext())
+        notesListController = NotesListController(viewContext: SPAppDelegate.shared().managedObjectContext)
         notesListController.performFetch()
     }
 

@@ -22,7 +22,7 @@ class OptionsViewController: UIViewController {
 
     /// EntityObserver: Allows us to listen to changes applied to the associated entity
     ///
-    private lazy var entityObserver = EntityObserver(context: SPAppDelegate.shared().managedObjectContext(), object: note)
+    private lazy var entityObserver = EntityObserver(context: SPAppDelegate.shared().managedObjectContext, object: note)
 
     /// Sections onScreen
     ///
