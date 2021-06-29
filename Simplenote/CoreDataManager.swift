@@ -34,7 +34,7 @@ class CoreDataManager: NSObject {
 
         let options = [NSMigratePersistentStoresAutomaticallyOption: true,
                        NSInferMappingModelAutomaticallyOption: true,
-                       NSSQLitePragmasOption: [Constants.journalMode: Constants.journalSetting]] as [AnyHashable: Any]
+                       NSSQLitePragmasOption: storageSettings.journalModeDisabled] as [AnyHashable: Any]
 
         // Testing logs
         //
@@ -52,9 +52,4 @@ class CoreDataManager: NSObject {
 
         return psc
     }()
-}
-
-private struct Constants {
-    static let journalMode = "journal_mode"
-    static let journalSetting = "DELETE"
 }

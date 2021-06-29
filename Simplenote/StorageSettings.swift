@@ -29,10 +29,14 @@ class StorageSettings: NSObject {
         }
         return sharedStorageURL
     }
+
+    let journalModeDisabled = [Constants.journalMode: Constants.journalSetting]
 }
 
 private struct Constants {
     static let sqlFile = "Simplenote.sqlite"
     static let resourceName = "Simplenote"
     static let resourceType = "momd"
+    static let journalMode = "journal_mode"
+    static let journalSetting = "DELETE"
 }
