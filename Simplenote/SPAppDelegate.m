@@ -40,7 +40,6 @@
 
 @interface SPAppDelegate ()
 
-@property (strong, nonatomic) CoreDataManager               *coreDataManager;
 @property (weak,   nonatomic) SPModalActivityIndicator      *signOutActivityIndicator;
 
 @end
@@ -117,15 +116,6 @@
 {
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(themeDidChange) name:SPSimplenoteThemeChangedNotification object:nil];
-}
-
-- (void)setupStorage
-{
-    StorageSettings *storageSettings = [StorageSettings new];
-    SharedStorageMigrator *storageMigrator = [[SharedStorageMigrator alloc] initWithStorageSettings:storageSettings];
-    [storageMigrator performMigrationIfNeeded];
-
-    self.coreDataManager = [[CoreDataManager alloc] initWithStorageSettings:storageSettings];
 }
 
 #pragma mark ================================================================================

@@ -30,7 +30,7 @@ class SharedStorageMigrator: NSObject {
         return storageSettings.legacyStorageExists && !storageSettings.sharedStorageExists
     }
 
-    func migrateCoreDataToAppGroup() {
+    private func migrateCoreDataToAppGroup() {
         // Testing prints
         // TODO: Remove prints later
         print("oldDb exists \(FileManager.default.fileExists(atPath: storageSettings.legacyStorageURL.path))")

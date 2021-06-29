@@ -402,4 +402,20 @@ extension SPAppDelegate {
     var managedObjectContext: NSManagedObjectContext {
         coreDataManager.managedObjectContext
     }
+
+    @objc
+    func setupStorage() {
+        let settings = StorageSettings()
+        ensureStoageIsShared(with: settings)
+        setupCoreData(with: settings)
+    }
+
+    private func ensureStoageIsShared(with settings: StorageSettings) {
+        let storageMigrator = SharedStorageMigrator(storageSettings: settings)
+        storageMigrator.performMigrationIfNeeded()
+    }
+
+    private func setupCoreData(with settings: StorageSettings) {
+        coreDataManager = CoreDataManager(storageSettings: settings)
+    }
 }

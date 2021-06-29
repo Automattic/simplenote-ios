@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, strong, nonatomic) UIWindow *pinLockWindow;
 
 @property (strong, nonatomic) Simperium						            *simperium;
-@property (strong, nonatomic, readonly) CoreDataManager                 *coreDataManager;
+@property (strong, nonatomic) CoreDataManager                           *coreDataManager;
 
 @property (strong, nonatomic) SPSidebarContainerViewController          *sidebarViewController;
 @property (strong, nonatomic) TagListViewController                     *tagListViewController;
