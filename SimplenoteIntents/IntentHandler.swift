@@ -1,6 +1,27 @@
 import Intents
+import CoreData
 
 class IntentHandler: INExtension {
+    private var dataManager: CoreDataManager = {
+        let storageSettings = StorageSettings()
+        let coreDataManager = CoreDataManager(storageSettings: storageSettings)
+        coreDataManager.managedObjectContext.persistentStoreCoordinator = coreDataManager.persistentStoreCoordinator
+
+        return coreDataManager
+    }()
+
+    private func fetchedResultsController<T: SPManagedObject>(ofType type: T.Type) -> NSFetchedResultsController<T> {
+        let fetchRequest = NSFetchRequest<T>()
+        let sortDescriptor = NSSortDescriptor(key: "modificationDate", ascending: false)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+
+        let entityDescription = NSEntityDescription.entity(forEntityName: String(describing: type.self), in: dataManager.managedObjectContext)
+        fetchRequest.entity = entityDescription
+
+        return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataManager.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+
+    }
+
     override func handler(for intent: INIntent) -> Any {
         return self
     }
@@ -8,16 +29,16 @@ class IntentHandler: INExtension {
 
 extension IntentHandler: SPNoteWidgetIntentHandling {
     func provideNoteOptionsCollection(for intent: SPNoteWidgetIntent, with completion: @escaping (INObjectCollection<SPNote>?, Error?) -> Void) {
-        // This is placeholder code to confirm the dynamic intent selection is working
-        // TODO: add logic to fetch the available notes for account
+        let frc = fetchedResultsController(ofType: Note.self)
 
-        let placeholderNoteData = ["Note 1", "Note 2", "Note 3", "Note 4"]
+        try? frc.performFetch()
 
         var notes: [SPNote] = []
-
-        for placeholder in placeholderNoteData {
-            let spNote = SPNote(identifier: placeholder, display: placeholder)
-            notes.append(spNote)
+        if let fetchedObjects = frc.fetchedObjects {
+            for object in fetchedObjects {
+                let spNote = SPNote(identifier: object.remoteId, display: object.content ?? "New Note")
+                notes.append(spNote)
+            }
         }
 
         let collection = INObjectCollection(items: notes)
