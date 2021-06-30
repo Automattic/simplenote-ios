@@ -1,6 +1,8 @@
 import Foundation
 import CoreData
-import AutomatticTracks
+// Commented out for now,
+// TODO: figure out if I want to include tracks here
+//import AutomatticTracks
 
 @objcMembers
 class CoreDataManager: NSObject {
@@ -34,7 +36,7 @@ class CoreDataManager: NSObject {
 
         let options = [NSMigratePersistentStoresAutomaticallyOption: true,
                        NSInferMappingModelAutomaticallyOption: true,
-                       NSSQLitePragmasOption: [Constants.journalMode: Constants.journalSetting]] as [AnyHashable: Any]
+                       NSSQLitePragmasOption: storageSettings.journalModeDisabled] as [AnyHashable: Any]
 
         // Testing logs
         //
@@ -47,14 +49,10 @@ class CoreDataManager: NSObject {
                                        options: options)
         } catch {
             NSLog("Error loading PersistentStore at URL: \(storageSettings.storageURL)")
-            CrashLogging.crash()
+//            CrashLogging.crash()
+            fatalError()
         }
 
         return psc
     }()
-}
-
-private struct Constants {
-    static let journalMode = "journal_mode"
-    static let journalSetting = "DELETE"
 }

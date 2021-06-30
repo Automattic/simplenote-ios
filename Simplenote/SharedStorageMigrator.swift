@@ -58,7 +58,7 @@ class SharedStorageMigrator: NSObject {
         }
         let psc = NSPersistentStoreCoordinator(managedObjectModel: mom)
 
-        let options = [NSSQLitePragmasOption: ["journal_mode": "DELETE"]] as [AnyHashable: Any]
+        let options = [NSSQLitePragmasOption: storageSettings.journalModeDisabled] as [AnyHashable: Any]
 
         try psc.addPersistentStore(ofType: NSSQLiteStoreType,
                                    configurationName: nil,
