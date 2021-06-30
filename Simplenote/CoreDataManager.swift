@@ -1,6 +1,8 @@
 import Foundation
 import CoreData
-import AutomatticTracks
+// Commented out for now,
+// TODO: figure out if I want to include tracks here
+//import AutomatticTracks
 
 @objcMembers
 class CoreDataManager: NSObject {
@@ -47,7 +49,8 @@ class CoreDataManager: NSObject {
                                        options: options)
         } catch {
             NSLog("Error loading PersistentStore at URL: \(storageSettings.storageURL)")
-            CrashLogging.crash()
+//            CrashLogging.crash()
+            fatalError()
         }
 
         return psc
