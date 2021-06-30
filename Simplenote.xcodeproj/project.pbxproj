@@ -440,8 +440,6 @@
 		BA6331E2268BCCC700ECFFDE /* FileManager+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A8968D25D5779D00A7B390 /* FileManager+Simplenote.swift */; };
 		BA6331F8268BCDC900ECFFDE /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3856CC2681715700F388CC /* CoreDataManager.swift */; };
 		BA633233268BD1F900ECFFDE /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3856CC2681715700F388CC /* CoreDataManager.swift */; };
-		BA633256268BD51C00ECFFDE /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA633240268BD3C200ECFFDE /* Note.swift */; };
-		BA633261268BD51D00ECFFDE /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA633240268BD3C200ECFFDE /* Note.swift */; };
 		BA83478325F59F8B0059B797 /* markdown-default-contrast.css in Resources */ = {isa = PBXBuildFile; fileRef = BA83478225F59F8B0059B797 /* markdown-default-contrast.css */; };
 		BA83478C25F59FE90059B797 /* markdown-dark-contrast.css in Resources */ = {isa = PBXBuildFile; fileRef = BA83478B25F59FE90059B797 /* markdown-dark-contrast.css */; };
 		BA8FC2A5267AC7470082962E /* SharedStorageMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8FC2A4267AC7470082962E /* SharedStorageMigrator.swift */; };
@@ -1046,7 +1044,6 @@
 		BA5C1C0625BF9D6C006E3820 /* SPDragBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPDragBar.swift; sourceTree = "<group>"; };
 		BA5E5B7C264A148C00D0EE19 /* URLRequest+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Simplenote.swift"; sourceTree = "<group>"; };
 		BA633203268BD04B00ECFFDE /* AutomatticTracks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AutomatticTracks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA633240268BD3C200ECFFDE /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		BA83478225F59F8B0059B797 /* markdown-default-contrast.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "markdown-default-contrast.css"; sourceTree = "<group>"; };
 		BA83478B25F59FE90059B797 /* markdown-dark-contrast.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "markdown-dark-contrast.css"; sourceTree = "<group>"; };
 		BA8FC2A4267AC7470082962E /* SharedStorageMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStorageMigrator.swift; sourceTree = "<group>"; };
@@ -2169,7 +2166,6 @@
 				BAE19977268C40E200164954 /* SPManagedObject+CoreDataProperties.swift */,
 				BAE1997C268C40E200164954 /* Tag+CoreDataClass.swift */,
 				BAE1997A268C40E200164954 /* Tag+CoreDataProperties.swift */,
-				BA633240268BD3C200ECFFDE /* Note.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3459,7 +3455,6 @@
 				BAE19988268C40E300164954 /* Note+CoreDataProperties.swift in Sources */,
 				BA6331F8268BCDC900ECFFDE /* CoreDataManager.swift in Sources */,
 				BAB5762726703C8200B0C56F /* IntentHandler.swift in Sources */,
-				BA633261268BD51D00ECFFDE /* Note.swift in Sources */,
 				BAE1998E268C40E300164954 /* Settings+CoreDataProperties.swift in Sources */,
 				BAB5765C26703D0600B0C56F /* NotePreviewWidgetIntent.intentdefinition in Sources */,
 				BAE19982268C40E300164954 /* Settings+CoreDataClass.swift in Sources */,
@@ -3481,7 +3476,6 @@
 				BAFA93F3265DE4A40009DCFB /* NewNoteWidget.swift in Sources */,
 				BAE1998B268C40E300164954 /* Tag+CoreDataProperties.swift in Sources */,
 				BAE19983268C40E300164954 /* SPManagedObject+CoreDataClass.swift in Sources */,
-				BA633256268BD51C00ECFFDE /* Note.swift in Sources */,
 				BA122DBD265EF412003D3BC5 /* UIColor+Studio.swift in Sources */,
 				BAE1997D268C40E300164954 /* Preferences+CoreDataClass.swift in Sources */,
 				BA6331C1268BCB3800ECFFDE /* FileManager+Simplenote.swift in Sources */,
