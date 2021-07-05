@@ -104,6 +104,8 @@
 	<key>INTypes</key>
 	<array>
 		<dict>
+			<key>INTypeClassName</key>
+			<string>WidgetNote</string>
 			<key>INTypeClassPrefix</key>
 			<string>SP</string>
 			<key>INTypeDisplayName</key>
