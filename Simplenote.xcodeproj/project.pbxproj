@@ -443,8 +443,8 @@
 		BAB5762726703C8200B0C56F /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5762626703C8200B0C56F /* IntentHandler.swift */; };
 		BAB5762B26703C8200B0C56F /* SimplenoteIntents.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = BAB5762226703C8100B0C56F /* SimplenoteIntents.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		BAB5764626703D0000B0C56F /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5762626703C8200B0C56F /* IntentHandler.swift */; };
-		BAB5765B26703D0600B0C56F /* NotePreviewWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BAB5760A26703C0C00B0C56F /* NotePreviewWidgetIntent.intentdefinition */; };
-		BAB5765C26703D0600B0C56F /* NotePreviewWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BAB5760A26703C0C00B0C56F /* NotePreviewWidgetIntent.intentdefinition */; };
+		BAB5765B26703D0600B0C56F /* NoteWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BAB5760A26703C0C00B0C56F /* NoteWidgetIntent.intentdefinition */; };
+		BAB5765C26703D0600B0C56F /* NoteWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BAB5760A26703C0C00B0C56F /* NoteWidgetIntent.intentdefinition */; };
 		BAB5768726703EA000B0C56F /* NotePreviewWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5767B26703E8100B0C56F /* NotePreviewWidgetView.swift */; };
 		BAB576A826703F4500B0C56F /* NotePreviewWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5769226703F0E00B0C56F /* NotePreviewWidgetProvider.swift */; };
 		BAB576C92670514500B0C56F /* NotePreviewWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB576BD2670512C00B0C56F /* NotePreviewWidget.swift */; };
@@ -1015,7 +1015,7 @@
 		BAB01791260AAE93007A9CC3 /* NoticeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeFactory.swift; sourceTree = "<group>"; };
 		BAB0179A260AD591007A9CC3 /* PublishControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishControllerTests.swift; sourceTree = "<group>"; };
 		BAB017AA260ADDEB007A9CC3 /* MockTimerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTimerFactory.swift; sourceTree = "<group>"; };
-		BAB5760A26703C0C00B0C56F /* NotePreviewWidgetIntent.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = NotePreviewWidgetIntent.intentdefinition; sourceTree = "<group>"; };
+		BAB5760A26703C0C00B0C56F /* NoteWidgetIntent.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = NoteWidgetIntent.intentdefinition; sourceTree = "<group>"; };
 		BAB5762226703C8100B0C56F /* SimplenoteIntents.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SimplenoteIntents.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAB5762326703C8100B0C56F /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
 		BAB5762626703C8200B0C56F /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
@@ -2098,7 +2098,7 @@
 		BAB5760926703BE100B0C56F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				BAB5760A26703C0C00B0C56F /* NotePreviewWidgetIntent.intentdefinition */,
+				BAB5760A26703C0C00B0C56F /* NoteWidgetIntent.intentdefinition */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -3368,7 +3368,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BAB5762726703C8200B0C56F /* IntentHandler.swift in Sources */,
-				BAB5765C26703D0600B0C56F /* NotePreviewWidgetIntent.intentdefinition in Sources */,
+				BAB5765C26703D0600B0C56F /* NoteWidgetIntent.intentdefinition in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3376,7 +3376,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAB5765B26703D0600B0C56F /* NotePreviewWidgetIntent.intentdefinition in Sources */,
+				BAB5765B26703D0600B0C56F /* NoteWidgetIntent.intentdefinition in Sources */,
 				BAFA93F3265DE4A40009DCFB /* NewNoteWidget.swift in Sources */,
 				BA122DBD265EF412003D3BC5 /* UIColor+Studio.swift in Sources */,
 				BA122DBE265EF421003D3BC5 /* UIKitConstants.swift in Sources */,

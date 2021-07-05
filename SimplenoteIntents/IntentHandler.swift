@@ -6,8 +6,8 @@ class IntentHandler: INExtension {
     }
 }
 
-extension IntentHandler: SPNoteWidgetIntentHandling {
-    func provideNoteOptionsCollection(for intent: SPNoteWidgetIntent, with completion: @escaping (INObjectCollection<SPNote>?, Error?) -> Void) {
+extension IntentHandler: NoteWidgetIntentHandling {
+    func provideNoteOptionsCollection(for intent: NoteWidgetIntent, with completion: @escaping (INObjectCollection<SPNote>?, Error?) -> Void) {
         // This is placeholder code to confirm the dynamic intent selection is working
         // TODO: add logic to fetch the available notes for account
 

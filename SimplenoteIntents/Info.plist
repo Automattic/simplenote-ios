@@ -30,7 +30,7 @@
 			<array/>
 			<key>IntentsSupported</key>
 			<array>
-				<string>SPNoteWidgetIntent</string>
+				<string>NoteWidgetIntent</string>
 			</array>
 		</dict>
 		<key>NSExtensionPointIdentifier</key>

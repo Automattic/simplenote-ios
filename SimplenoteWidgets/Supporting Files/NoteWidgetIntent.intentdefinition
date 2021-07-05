@@ -19,10 +19,12 @@
 		<dict>
 			<key>INIntentCategory</key>
 			<string>information</string>
+			<key>INIntentClassName</key>
+			<string>NoteWidgetIntent</string>
 			<key>INIntentClassPrefix</key>
 			<string>SP</string>
 			<key>INIntentDescription</key>
-			<string>Note Preview Widget Intent</string>
+			<string>Note Widget Intent</string>
 			<key>INIntentDescriptionID</key>
 			<string>nznGJr</string>
 			<key>INIntentEligibleForWidgets</key>
@@ -63,26 +65,6 @@
 							<true/>
 							<key>INIntentParameterPromptDialogType</key>
 							<string>Primary</string>
-						</dict>
-						<dict>
-							<key>INIntentParameterPromptDialogCustom</key>
-							<true/>
-							<key>INIntentParameterPromptDialogFormatString</key>
-							<string>There are ${count} options matching ‘${note}’.</string>
-							<key>INIntentParameterPromptDialogFormatStringID</key>
-							<string>MbnL8F</string>
-							<key>INIntentParameterPromptDialogType</key>
-							<string>DisambiguationIntroduction</string>
-						</dict>
-						<dict>
-							<key>INIntentParameterPromptDialogCustom</key>
-							<true/>
-							<key>INIntentParameterPromptDialogFormatString</key>
-							<string>Just to confirm, you wanted ‘${note}’?</string>
-							<key>INIntentParameterPromptDialogFormatStringID</key>
-							<string>wXTWew</string>
-							<key>INIntentParameterPromptDialogType</key>
-							<string>Confirmation</string>
 						</dict>
 					</array>
 					<key>INIntentParameterSupportsDynamicEnumeration</key>
