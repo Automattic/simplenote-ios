@@ -350,7 +350,8 @@ end
         method: "enterprise",
         provisioningProfiles: {
           "com.codality.NotationalFlow.Internal" => "match InHouse com.codality.NotationalFlow.Internal",
-          "com.codality.NotationalFlow.Internal.Share" => "match InHouse com.codality.NotationalFlow.Internal.Share"
+          "com.codality.NotationalFlow.Internal.Share" => "match InHouse com.codality.NotationalFlow.Internal.Share",
+          "#{APP_STORE_BUNDLE_IDENTIFIER}.Internal.Intents" => "match InHouse #{APP_STORE_BUNDLE_IDENTIFIER}.Internal.Intents"
       }})
 
     sh("mv ../build/Simplenote.ipa \"../build/Simplenote Internal.ipa\"")
@@ -400,7 +401,8 @@ end
         export_team_id: ENV["EXT_EXPORT_TEAM_ID"],
         provisioningProfiles: {
           "com.codality.NotationalFlow" => "match AppStore com.codality.NotationalFlow",
-          "com.codality.NotationalFlow.Share" => "match AppStore com.codality.NotationalFlow.Share"
+          "com.codality.NotationalFlow.Share" => "match AppStore com.codality.NotationalFlow.Share",
+          "#{APP_STORE_BUNDLE_IDENTIFIER}.Intents" => "match InHouse #{APP_STORE_BUNDLE_IDENTIFIER}.Intents"
         }
       }
     )
@@ -515,7 +517,8 @@ end
         method: "enterprise",
         provisioningProfiles: {
           "com.codality.NotationalFlow.Alpha" => "match InHouse com.codality.NotationalFlow.Alpha",
-          "com.codality.NotationalFlow.Alpha.Share" => "match InHouse com.codality.NotationalFlow.Alpha.Share"
+          "com.codality.NotationalFlow.Alpha.Share" => "match InHouse com.codality.NotationalFlow.Alpha.Share",
+          "#{APP_STORE_BUNDLE_IDENTIFIER}.Alpha.Intents" => "match InHouse #{APP_STORE_BUNDLE_IDENTIFIER}.Alpha.Intents"
       }})
 
     sh("mv ../build/Simplenote.ipa \"../build/Simplenote Alpha.ipa\"")
@@ -833,7 +836,8 @@ end
     [
       root_bundle_id,
       "#{root_bundle_id}.Share",
-      "#{root_bundle_id}.Widgets"
+      "#{root_bundle_id}.Widgets",
+      "#{root_bundle_id}.Intents"
     ]
   end
 
