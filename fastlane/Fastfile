@@ -798,16 +798,15 @@ end
 ########################################################################
 # Fastlane match code signing
 ########################################################################
+
+  APP_STORE_BUNDLE_IDENTIFIER = 'com.codality.NotationalFlow'.freeze
+
   private_lane :alpha_code_signing do |options|
     match(
       type: "enterprise",
       team_id: get_required_env("INT_EXPORT_TEAM_ID"),
       readonly: options[:readonly] || is_ci,
-      app_identifier: [
-        "com.codality.NotationalFlow.Alpha",
-        "com.codality.NotationalFlow.Alpha.Share",
-        "com.codality.NotationalFlow.Alpha.Widgets",
-      ]
+      app_identifier: simplenote_app_identifiers(root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Alpha")
     )
   end
 
@@ -816,11 +815,7 @@ end
       type: "enterprise",
       team_id: get_required_env("INT_EXPORT_TEAM_ID"),
       readonly: options[:readonly] || is_ci,
-      app_identifier: [
-        "com.codality.NotationalFlow.Internal",
-        "com.codality.NotationalFlow.Internal.Share",
-        "com.codality.NotationalFlow.Internal.Widgets",
-      ]
+      app_identifier: simplenote_app_identifiers(root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Internal")
     )
   end
 
@@ -829,13 +824,17 @@ end
       type: "appstore",
       team_id: get_required_env("EXT_EXPORT_TEAM_ID"),
       readonly: options[:readonly] || is_ci,
-      app_identifier: [
-        "com.codality.NotationalFlow",
-        "com.codality.NotationalFlow.Share",
-        "com.codality.NotationalFlow.Widgets",
-      ],
+      app_identifier: simplenote_app_identifiers(root_bundle_id: APP_STORE_BUNDLE_IDENTIFIER),
       template_name: "NotationalFlow Keychain Access (Distribution)",
     )
+  end
+
+  def simplenote_app_identifiers(root_bundle_id:)
+    [
+      root_bundle_id,
+      "#{root_bundle_id}.Share",
+      "#{root_bundle_id}.Widgets"
+    ]
   end
 
 ########################################################################
