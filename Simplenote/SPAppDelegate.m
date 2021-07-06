@@ -133,7 +133,7 @@
     [self configurePublishController];
     [self setupDefaultWindow];
     [self configureStateRestoration];
-    NSLog(@"selected tag: %@", self.selectedTag);
+    
     return YES;
 }
 
