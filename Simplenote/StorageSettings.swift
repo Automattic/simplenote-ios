@@ -19,25 +19,10 @@ class StorageSettings: NSObject {
         fileManager.documentsURL.appendingPathComponent(Constants.sqlFile)
     }
 
-    var legacyStorageExists: Bool {
-        fileManager.fileExists(atPath: legacyStorageURL.path)
-    }
-
     /// URL for core data storage in shared app group documents directory
     ///
     var sharedStorageURL: URL {
         fileManager.sharedContainerURL.appendingPathComponent(Constants.sqlFile)
-    }
-
-    var sharedStorageExists: Bool {
-        fileManager.fileExists(atPath: sharedStorageURL.path)
-    }
-
-    var storageURL: URL {
-        if legacyStorageExists && !sharedStorageExists {
-            return legacyStorageURL
-        }
-        return sharedStorageURL
     }
 
     let journalModeDisabled = [Constants.journalMode: Constants.journalSetting]

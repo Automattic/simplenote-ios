@@ -5,10 +5,19 @@ import AutomatticTracks
 @objc
 class SharedStorageMigrator: NSObject {
     private let storageSettings: StorageSettings
+    private let fileManager: FileManager
 
-    @objc
-    init(storageSettings: StorageSettings) {
+    init(storageSettings: StorageSettings = StorageSettings(), fileManager: FileManager = FileManager.default) {
         self.storageSettings = storageSettings
+        self.fileManager = fileManager
+    }
+
+    var legacyStorageExists: Bool {
+        fileManager.fileExists(atPath: storageSettings.legacyStorageURL.path)
+    }
+
+    var sharedStorageExists: Bool {
+        fileManager.fileExists(atPath: storageSettings.sharedStorageURL.path)
     }
 
     /// Database Migration
@@ -27,7 +36,7 @@ class SharedStorageMigrator: NSObject {
     }
 
     private var migrationNeeded: Bool {
-        return storageSettings.legacyStorageExists && !storageSettings.sharedStorageExists
+        return legacyStorageExists && !sharedStorageExists
     }
 
     private func migrateCoreDataToAppGroup() {
