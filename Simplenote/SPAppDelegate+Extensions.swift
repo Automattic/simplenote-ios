@@ -416,6 +416,10 @@ extension SPAppDelegate {
     }
 
     private func setupCoreData(with settings: StorageSettings) {
-        coreDataManager = CoreDataManager(storageSettings: settings)
+        do {
+            coreDataManager = try CoreDataManager(settings.sharedStorageURL)
+        } catch let error as NSError {
+            fatalError(error.localizedDescription)
+        }
     }
 }
