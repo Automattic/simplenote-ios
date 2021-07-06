@@ -64,7 +64,7 @@ class SharedStorageMigrator: NSObject {
 
     private func disableJournaling() throws {
         guard let mom = NSManagedObjectModel(contentsOf: storageSettings.modelURL) else {
-            return
+            throw NSError(domain: "SharedStorageMigrator", code: 100, userInfo: nil)
         }
         let psc = NSPersistentStoreCoordinator(managedObjectModel: mom)
 
