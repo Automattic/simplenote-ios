@@ -405,19 +405,18 @@ extension SPAppDelegate {
 
     @objc
     func setupStorage() {
-        let settings = StorageSettings()
-
-        let storageMigrator = SharedStorageMigrator()
-        let migrationResult = storageMigrator.performMigrationIfNeeded()
+        let migrationResult = SharedStorageMigrator().performMigrationIfNeeded()
 
         do {
-            try setupCoreData(with: settings, migrationResult: migrationResult)
+            try setupCoreData(migrationResult: migrationResult)
         } catch {
             fatalError(error.localizedDescription)
         }
     }
 
-    private func setupCoreData(with settings: StorageSettings, migrationResult: MigrationResult) throws {
+    private func setupCoreData(migrationResult: MigrationResult) throws {
+        let settings = StorageSettings()
+
         switch migrationResult {
         case .notNeeded, .success:
             coreDataManager = try CoreDataManager(settings.sharedStorageURL)
