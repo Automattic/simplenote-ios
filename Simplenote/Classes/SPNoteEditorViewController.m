@@ -55,7 +55,6 @@ CGFloat const SPSelectedAreaPadding = 20;
 @property (nonatomic, strong) NSMutableDictionary       *noteVersionData;
 
 // Search
-@property (nonatomic, assign) NSInteger                 highlightedSearchResultIndex;
 @property (nonatomic, strong) NSArray                   *searchResultRanges;
 @property (nonatomic, strong) SearchQuery               *searchQuery;
 
@@ -222,6 +221,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     [self refreshTagEditorOffsetWithCoordinator:coordinator];
     [self refreshInterlinkLookupWithCoordinator:coordinator];
+    [self refreshSearchHighlightIfNeededWithCoordinator:coordinator];
 }
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
@@ -258,6 +258,17 @@ CGFloat const SPSelectedAreaPadding = 20;
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         [self.tagListViewController scrollEntryFieldToVisibleAnimated:NO];
     } completion:nil];
+}
+
+- (void)refreshSearchHighlightIfNeededWithCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    if (!self.searching) {
+        return;
+    }
+
+    [coordinator animateAlongsideTransition:nil completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        [self refershSearchHighlight];
+    }];
 }
 
 - (void)configureSearchToolbar
