@@ -1,6 +1,3 @@
-- Nuova barra delle note
-- Risolto un problema occasionale con il rendering del menu contestuale
-- Rimosso il maiuscolo dal titolo dell'avviso di collaborazione
-- Risolto un problema relativo alla mancata visualizzazione degli avvisi in alcuni casi
-- Risolto un problema di mancata eliminazione dei tag nelle note spostate nel cestino
-- Migliorato il supporto delle dimensioni dei caratteri dinamici negli avvisi
+-   Corretto un bug a causa del quale il pulsante Nuova nota poteva non essere visualizzato
+-   Nuovo flusso di blocco della biometria
+

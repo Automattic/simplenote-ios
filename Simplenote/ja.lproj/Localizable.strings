@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-05-28 09:54:04+0000 */
+/* Translation-Revision-Date: 2021-06-24 15:59:18+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ja_JP */
@@ -15,11 +15,20 @@
 /* Number of failed entries entering in passcode */
 "%i Failed Passcode Attempts" = "パスコードを%i回誤入力しました";
 
+/* Note trashed notification */
+"%i Note Trashed" = "%i件のメモをゴミ箱に入れました";
+
+/* Notes trashed notification */
+"%i Notes Trashed" = "%i件のメモをゴミ箱に入れました";
+
 /* Count of interlink references to a note */
 "%i Reference" = "%i 参考資料";
 
 /* Count of interlink references to a note */
 "%i References" = "%i 参考資料";
+
+/* Count of currently selected notes */
+"%i Selected" = "%i件選択済み";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- 8文字以上入力してください";
@@ -77,6 +86,9 @@
 /* Sign in error message */
 "An error was encountered while signing in." = "ログイン時にエラーが発生しました。";
 
+/* Engine URL Message */
+"AppEngine Endpoints" = "AppEngine エンドポイント";
+
 /* No comment provided by engineer. */
 "Appearance" = "外観";
 
@@ -92,6 +104,9 @@
 /* User Authenticated */
 "Authenticated" = "認証済み";
 
+/* Engine URL Message */
+"Authentication Endpoints" = "認証エンドポイント";
+
 /* The Simplenote blog */
 "Blog" = "ブログ";
 
@@ -99,6 +114,8 @@
 "By creating an account you agree to our" = "アカウントを作成すると次に合意したものとみなされます";
 
 /* Cancel Action
+   Cancel action button
+   Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
    PinLock screen \"cancel\" button
@@ -218,6 +235,9 @@
 /* Confirmation button of deletion confirmation message for a tag. */
 "Delete Tag" = "タグを削除";
 
+/* Deselect all Button Label */
+"Deselect All" = "すべて選択解除";
+
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "診断";
 
@@ -245,7 +265,8 @@
    Done toolbar button */
 "Done" = "完了";
 
-/* Edit Tags Action: Visible in the Tags List */
+/* Edit button title
+   Edit Tags Action: Visible in the Tags List */
 "Edit" = "編集";
 
 /* Email TextField Placeholder */
@@ -376,6 +397,9 @@
 
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "更新日 :最も古い";
+
+/* Accessibility hint for trash selected notes button */
+"Move selected notes to trash" = "選択したメモをゴミ箱に移動";
 
 /* Delete Action
    Deletes a note */
@@ -560,6 +584,10 @@
 /* No comment provided by engineer. */
 "Security" = "セキュリティ";
 
+/* Select all Button Label
+   Select all button title */
+"Select All" = "すべてを選択";
+
 /* Accessibility label describing a slider used to reset the current note to a previous version */
 "Select a Version" = "バージョンを選択";
 
@@ -568,6 +596,9 @@
 
 /* Rating view - disliked - send feedback button */
 "Send feedback" = "意見を送る";
+
+/* Setup a passcode action button */
+"Set up Passcode" = "パスコードを設定する";
 
 /* Settings button
    Title of options screen */
@@ -625,6 +656,9 @@
 /* Tags List Header */
 "Tags" = "タグ";
 
+/* Accessibility hint for the select/deselect all button */
+"Tap button to select or deselect all notes" = "ボタンをタップしてすべての注意事項を選択または選択解除";
+
 /* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
 "Terms and Conditions" = "利用規約";
 
@@ -643,6 +677,9 @@
 /* Simplenote Themes */
 "Themes" = "テーマ";
 
+/* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
+"To enable %1$@, you must have a passcode setup first." = "%1$@ を有効にするには、まずパスコードを設定する必要があります。";
+
 /* Touch ID reason/explanation */
 "To unlock the application" = "アプリケーションのロックを解除するには";
 
@@ -657,6 +694,9 @@
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Touch ID";
+
+/* Move selected notes to trash */
+"Trash Notes" = "ゴミ箱に関する注意";
 
 /* Title: Trash Tag is selected
    Trash filter button */
@@ -757,6 +797,9 @@
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "タグ :";
+
+/* Warning Title */
+"⚠️ Important" = "⚠️ 重要";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞 デバッグ有効 🐞";

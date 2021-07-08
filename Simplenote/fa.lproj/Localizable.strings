@@ -15,11 +15,20 @@
 /* Number of failed entries entering in passcode */
 "%i Failed Passcode Attempts" = "%i Failed Passcode Attempts";
 
+/* Note trashed notification */
+"%i Note Trashed" = "%i Note Trashed";
+
+/* Notes trashed notification */
+"%i Notes Trashed" = "%i Notes Trashed";
+
 /* Count of interlink references to a note */
 "%i Reference" = "%i Reference";
 
 /* Count of interlink references to a note */
 "%i References" = "%i References";
+
+/* Count of currently selected notes */
+"%i Selected" = "%i Selected";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- دست‌ِکم ۸ نویسه";
@@ -77,6 +86,9 @@
 /* Sign in error message */
 "An error was encountered while signing in." = "An error was encountered while signing in.";
 
+/* Engine URL Message */
+"AppEngine Endpoints" = "AppEngine Endpoints";
+
 /* No comment provided by engineer. */
 "Appearance" = "نما";
 
@@ -92,6 +104,9 @@
 /* User Authenticated */
 "Authenticated" = "Authenticated";
 
+/* Engine URL Message */
+"Authentication Endpoints" = "Authentication Endpoints";
+
 /* The Simplenote blog */
 "Blog" = "وب‌نوشت";
 
@@ -99,6 +114,8 @@
 "By creating an account you agree to our" = "By creating an account you agree to our";
 
 /* Cancel Action
+   Cancel action button
+   Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
    PinLock screen \"cancel\" button
@@ -218,6 +235,9 @@
 /* Confirmation button of deletion confirmation message for a tag. */
 "Delete Tag" = "Delete Tag";
 
+/* Deselect all Button Label */
+"Deselect All" = "Deselect All";
+
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "Diagnostics";
 
@@ -245,7 +265,8 @@
    Done toolbar button */
 "Done" = "Done";
 
-/* Edit Tags Action: Visible in the Tags List */
+/* Edit button title
+   Edit Tags Action: Visible in the Tags List */
 "Edit" = "ویرایش";
 
 /* Email TextField Placeholder */
@@ -376,6 +397,9 @@
 
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "Modified: Oldest";
+
+/* Accessibility hint for trash selected notes button */
+"Move selected notes to trash" = "Move selected notes to trash";
 
 /* Delete Action
    Deletes a note */
@@ -560,6 +584,10 @@
 /* No comment provided by engineer. */
 "Security" = "امنیت";
 
+/* Select all Button Label
+   Select all button title */
+"Select All" = "Select All";
+
 /* Accessibility label describing a slider used to reset the current note to a previous version */
 "Select a Version" = "Select a Version";
 
@@ -568,6 +596,9 @@
 
 /* Rating view - disliked - send feedback button */
 "Send feedback" = "Send feedback";
+
+/* Setup a passcode action button */
+"Set up Passcode" = "Set up Passcode";
 
 /* Settings button
    Title of options screen */
@@ -625,6 +656,9 @@
 /* Tags List Header */
 "Tags" = "برچسب‌ها";
 
+/* Accessibility hint for the select/deselect all button */
+"Tap button to select or deselect all notes" = "Tap button to select or deselect all notes";
+
 /* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
 "Terms and Conditions" = "Terms and Conditions";
 
@@ -643,6 +677,9 @@
 /* Simplenote Themes */
 "Themes" = "پوسته‌ها";
 
+/* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
+"To enable %1$@, you must have a passcode setup first." = "To enable %1$@, you must have a passcode setup first.";
+
 /* Touch ID reason/explanation */
 "To unlock the application" = "To unlock the application";
 
@@ -657,6 +694,9 @@
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Touch ID";
+
+/* Move selected notes to trash */
+"Trash Notes" = "Trash Notes";
 
 /* Title: Trash Tag is selected
    Trash filter button */
@@ -757,6 +797,9 @@
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "برچسب:";
+
+/* Warning Title */
+"⚠️ Important" = "";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "";

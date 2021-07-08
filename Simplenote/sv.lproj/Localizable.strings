@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-05-19 13:35:54+0000 */
+/* Translation-Revision-Date: 2021-06-23 13:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: sv_SE */
@@ -15,11 +15,20 @@
 /* Number of failed entries entering in passcode */
 "%i Failed Passcode Attempts" = "%i felaktiga inmatningar";
 
+/* Note trashed notification */
+"%i Note Trashed" = "%i Anteckning borttagen";
+
+/* Notes trashed notification */
+"%i Notes Trashed" = "%i Anteckningar borttagna";
+
 /* Count of interlink references to a note */
 "%i Reference" = "%i Referenser";
 
 /* Count of interlink references to a note */
 "%i References" = "%i Referenser";
+
+/* Count of currently selected notes */
+"%i Selected" = "%i Valt";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- Minst 8 tecken";
@@ -77,6 +86,9 @@
 /* Sign in error message */
 "An error was encountered while signing in." = "Ett fel uppstod vid inloggningen.";
 
+/* Engine URL Message */
+"AppEngine Endpoints" = "AppEngine-slutpunkter";
+
 /* No comment provided by engineer. */
 "Appearance" = "Utseende";
 
@@ -92,6 +104,9 @@
 /* User Authenticated */
 "Authenticated" = "Autentiserad";
 
+/* Engine URL Message */
+"Authentication Endpoints" = "Autentiseringsslutpunkter";
+
 /* The Simplenote blog */
 "Blog" = "Blogg";
 
@@ -99,6 +114,8 @@
 "By creating an account you agree to our" = "Genom att skapa ett konto godkänner du våra";
 
 /* Cancel Action
+   Cancel action button
+   Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
    PinLock screen \"cancel\" button
@@ -218,6 +235,9 @@
 /* Confirmation button of deletion confirmation message for a tag. */
 "Delete Tag" = "Ta bort etikett";
 
+/* Deselect all Button Label */
+"Deselect All" = "Avmarkera alla";
+
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "Diagnostik";
 
@@ -245,7 +265,8 @@
    Done toolbar button */
 "Done" = "Klar";
 
-/* Edit Tags Action: Visible in the Tags List */
+/* Edit button title
+   Edit Tags Action: Visible in the Tags List */
 "Edit" = "Redigera";
 
 /* Email TextField Placeholder */
@@ -376,6 +397,9 @@
 
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "Modifierad: Äldsta";
+
+/* Accessibility hint for trash selected notes button */
+"Move selected notes to trash" = "Flytta markerade anteckningar till papperskorgen";
 
 /* Delete Action
    Deletes a note */
@@ -560,6 +584,10 @@
 /* No comment provided by engineer. */
 "Security" = "Säkerhet";
 
+/* Select all Button Label
+   Select all button title */
+"Select All" = "Välj alla";
+
 /* Accessibility label describing a slider used to reset the current note to a previous version */
 "Select a Version" = "Välj en version";
 
@@ -568,6 +596,9 @@
 
 /* Rating view - disliked - send feedback button */
 "Send feedback" = "Skicka feedback";
+
+/* Setup a passcode action button */
+"Set up Passcode" = "Konfigurera lösenkod";
 
 /* Settings button
    Title of options screen */
@@ -625,6 +656,9 @@
 /* Tags List Header */
 "Tags" = "Etiketter";
 
+/* Accessibility hint for the select/deselect all button */
+"Tap button to select or deselect all notes" = "Tryck på knappen för att markera eller avmarkera alla anteckningar";
+
 /* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
 "Terms and Conditions" = "Villkor";
 
@@ -643,6 +677,9 @@
 /* Simplenote Themes */
 "Themes" = "Teman";
 
+/* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
+"To enable %1$@, you must have a passcode setup first." = "För att aktivera %1$@ måste du först konfigurera en lösenkod.";
+
 /* Touch ID reason/explanation */
 "To unlock the application" = "För att låsa upp applikationen";
 
@@ -657,6 +694,9 @@
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Touch ID";
+
+/* Move selected notes to trash */
+"Trash Notes" = "Ta bort anteckningar";
 
 /* Title: Trash Tag is selected
    Trash filter button */
@@ -757,6 +797,9 @@
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "etikett:";
+
+/* Warning Title */
+"⚠️ Important" = " Viktigt";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞 Felsökning aktiverad 🐞";

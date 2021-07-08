@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-05-26 08:54:56+0000 */
+/* Translation-Revision-Date: 2021-06-23 09:54:03+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: zh_TW */
@@ -15,11 +15,20 @@
 /* Number of failed entries entering in passcode */
 "%i Failed Passcode Attempts" = "嘗試輸入密碼失敗 %i 次";
 
+/* Note trashed notification */
+"%i Note Trashed" = "%i 筆記已移至垃圾桶";
+
+/* Notes trashed notification */
+"%i Notes Trashed" = "%i 筆記已移至垃圾桶";
+
 /* Count of interlink references to a note */
 "%i Reference" = "%i 參考";
 
 /* Count of interlink references to a note */
 "%i References" = "%i 參考資料";
+
+/* Count of currently selected notes */
+"%i Selected" = "%i 已選取";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- 長度至少為 8 個字元";
@@ -77,6 +86,9 @@
 /* Sign in error message */
 "An error was encountered while signing in." = "登入時發生錯誤。";
 
+/* Engine URL Message */
+"AppEngine Endpoints" = "AppEngine 端點";
+
 /* No comment provided by engineer. */
 "Appearance" = "外觀";
 
@@ -92,6 +104,9 @@
 /* User Authenticated */
 "Authenticated" = "已驗證";
 
+/* Engine URL Message */
+"Authentication Endpoints" = "驗證端點";
+
 /* The Simplenote blog */
 "Blog" = "網誌";
 
@@ -99,6 +114,8 @@
 "By creating an account you agree to our" = "建立帳號即表示你同意我們的";
 
 /* Cancel Action
+   Cancel action button
+   Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
    PinLock screen \"cancel\" button
@@ -218,6 +235,9 @@
 /* Confirmation button of deletion confirmation message for a tag. */
 "Delete Tag" = "刪除標籤";
 
+/* Deselect all Button Label */
+"Deselect All" = "取消全選";
+
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "診斷";
 
@@ -245,7 +265,8 @@
    Done toolbar button */
 "Done" = "完成";
 
-/* Edit Tags Action: Visible in the Tags List */
+/* Edit button title
+   Edit Tags Action: Visible in the Tags List */
 "Edit" = "編輯";
 
 /* Email TextField Placeholder */
@@ -376,6 +397,9 @@
 
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "修改時間：最舊";
+
+/* Accessibility hint for trash selected notes button */
+"Move selected notes to trash" = "將選取的筆記移至垃圾桶";
 
 /* Delete Action
    Deletes a note */
@@ -560,6 +584,10 @@
 /* No comment provided by engineer. */
 "Security" = "安全性";
 
+/* Select all Button Label
+   Select all button title */
+"Select All" = "全部選取";
+
 /* Accessibility label describing a slider used to reset the current note to a previous version */
 "Select a Version" = "選取版本";
 
@@ -568,6 +596,9 @@
 
 /* Rating view - disliked - send feedback button */
 "Send feedback" = "傳送回饋意見";
+
+/* Setup a passcode action button */
+"Set up Passcode" = "設定密碼";
 
 /* Settings button
    Title of options screen */
@@ -625,6 +656,9 @@
 /* Tags List Header */
 "Tags" = "標籤";
 
+/* Accessibility hint for the select/deselect all button */
+"Tap button to select or deselect all notes" = "點選按鈕以選取或取消選取所有筆記";
+
 /* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
 "Terms and Conditions" = "條款與條件";
 
@@ -643,6 +677,9 @@
 /* Simplenote Themes */
 "Themes" = "佈景主題";
 
+/* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
+"To enable %1$@, you must have a passcode setup first." = "若要啟用 %1$@，必須先設定密碼。";
+
 /* Touch ID reason/explanation */
 "To unlock the application" = "若要解鎖應用程式";
 
@@ -657,6 +694,9 @@
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Touch ID";
+
+/* Move selected notes to trash */
+"Trash Notes" = "移除筆記";
 
 /* Title: Trash Tag is selected
    Trash filter button */
@@ -757,6 +797,9 @@
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "標籤：";
+
+/* Warning Title */
+"⚠️ Important" = "⚠️ 重要";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞偵錯模式已啟用🐞";

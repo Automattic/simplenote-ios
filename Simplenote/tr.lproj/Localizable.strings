@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-05-28 13:54:50+0000 */
+/* Translation-Revision-Date: 2021-06-24 15:58:16+0000 */
 /* Plural-Forms: nplurals=2; plural=(n > 1); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: tr */
@@ -15,11 +15,20 @@
 /* Number of failed entries entering in passcode */
 "%i Failed Passcode Attempts" = "%i Başarısız Parola Denemesi";
 
+/* Note trashed notification */
+"%i Note Trashed" = "%i Not Çöp Kutusuna Gönderildi";
+
+/* Notes trashed notification */
+"%i Notes Trashed" = "%i Not Çöp Kutusuna Gönderildi ";
+
 /* Count of interlink references to a note */
 "%i Reference" = "%i Referans";
 
 /* Count of interlink references to a note */
 "%i References" = "%i Referanslar";
+
+/* Count of currently selected notes */
+"%i Selected" = "%i Seçilen";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "En az 8 karakter";
@@ -77,6 +86,9 @@
 /* Sign in error message */
 "An error was encountered while signing in." = "Oturum açılırken bir hata oluştu.";
 
+/* Engine URL Message */
+"AppEngine Endpoints" = "AppEngine Uç Noktaları";
+
 /* No comment provided by engineer. */
 "Appearance" = "Görünüm";
 
@@ -92,6 +104,9 @@
 /* User Authenticated */
 "Authenticated" = "Kimliği Doğrulandı";
 
+/* Engine URL Message */
+"Authentication Endpoints" = "Kimlik Doğrulama Uç Noktaları";
+
 /* The Simplenote blog */
 "Blog" = "Blog";
 
@@ -99,6 +114,8 @@
 "By creating an account you agree to our" = "Hesap oluşturarak şunları kabul etmiş olursunuz:";
 
 /* Cancel Action
+   Cancel action button
+   Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
    PinLock screen \"cancel\" button
@@ -218,6 +235,9 @@
 /* Confirmation button of deletion confirmation message for a tag. */
 "Delete Tag" = "Etiketi sil";
 
+/* Deselect all Button Label */
+"Deselect All" = "Tüm Seçimleri Kaldır";
+
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "Tanılamalar";
 
@@ -245,7 +265,8 @@
    Done toolbar button */
 "Done" = "Bitti";
 
-/* Edit Tags Action: Visible in the Tags List */
+/* Edit button title
+   Edit Tags Action: Visible in the Tags List */
 "Edit" = "Düzenle";
 
 /* Email TextField Placeholder */
@@ -376,6 +397,9 @@
 
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "Değiştirme Tarihi: Eski";
+
+/* Accessibility hint for trash selected notes button */
+"Move selected notes to trash" = "Seçili notları çöp kutusuna taşı";
 
 /* Delete Action
    Deletes a note */
@@ -560,6 +584,10 @@
 /* No comment provided by engineer. */
 "Security" = "Güvenlik";
 
+/* Select all Button Label
+   Select all button title */
+"Select All" = "Tümünü Seç";
+
 /* Accessibility label describing a slider used to reset the current note to a previous version */
 "Select a Version" = "Sürüm Seç";
 
@@ -568,6 +596,9 @@
 
 /* Rating view - disliked - send feedback button */
 "Send feedback" = "Geri Bildirim Gönder";
+
+/* Setup a passcode action button */
+"Set up Passcode" = "Parola Ayarlama";
 
 /* Settings button
    Title of options screen */
@@ -625,6 +656,9 @@
 /* Tags List Header */
 "Tags" = "Etiketler";
 
+/* Accessibility hint for the select/deselect all button */
+"Tap button to select or deselect all notes" = "Tüm notları seçmek veya seçimlerini kaldırmak için düğmeye dokunun";
+
 /* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
 "Terms and Conditions" = "Hüküm ve Koşullar";
 
@@ -643,6 +677,9 @@
 /* Simplenote Themes */
 "Themes" = "Temalar";
 
+/* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
+"To enable %1$@, you must have a passcode setup first." = "%1$@ özelliğini etkinleştirmek için önce bir parola ayarlamalısınız.";
+
 /* Touch ID reason/explanation */
 "To unlock the application" = "Uygulamanın kilidini açmak için";
 
@@ -657,6 +694,9 @@
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Touch ID";
+
+/* Move selected notes to trash */
+"Trash Notes" = "Notları Çöp Kutusuna Gönder";
 
 /* Title: Trash Tag is selected
    Trash filter button */
@@ -757,6 +797,9 @@
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "etiket:";
+
+/* Warning Title */
+"⚠️ Important" = "⚠️ Önemli";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞 Hata Ayıklama Etkinleştirildi 🐞";

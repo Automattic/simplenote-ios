@@ -1,6 +1,3 @@
-– Nytt anteckningsfält
-– Åtgärdade ett ibland förekommande fel med rendering av snabbmenyn
-– Tog bort enbart versaler i rubriken för samarbetsaviseringen
-– Åtgärdade problemet där meddelanden inte visades i vissa fall
-– Åtgärdade ett problem där taggar inte togs bort när anteckningar raderades
-– Förbättrade stöd för dynamisk teckensnittsstorlek i meddelanden
+-   Ett fel som gjorde att knappen Ny anteckning inte visades har korrigerats
+-   Nytt flöde med biometriskt lås
+

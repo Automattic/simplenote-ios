@@ -1,6 +1,15 @@
+4.40
+-----
+
+4.39
+-----
+-   Moved edit mode into a long press action and removed the new note bar #1328
+
 4.38
 -----
 
+-   Fixed a bug in which the New Note button might not appear #1298
+-   New Biometry Lock Flow #1299
 
 4.37
 -----

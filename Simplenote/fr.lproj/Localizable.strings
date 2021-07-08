@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-05-26 14:54:04+0000 */
+/* Translation-Revision-Date: 2021-06-23 13:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n > 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: fr */
@@ -15,11 +15,20 @@
 /* Number of failed entries entering in passcode */
 "%i Failed Passcode Attempts" = "%i échecs de code PIN";
 
+/* Note trashed notification */
+"%i Note Trashed" = "%i note placée dans la corbeille";
+
+/* Notes trashed notification */
+"%i Notes Trashed" = "%i notes placées dans la corbeille";
+
 /* Count of interlink references to a note */
 "%i Reference" = "%i Référence";
 
 /* Count of interlink references to a note */
 "%i References" = "%i Références";
+
+/* Count of currently selected notes */
+"%i Selected" = "%i sélectionné";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- 8 caractères minimum";
@@ -77,6 +86,9 @@
 /* Sign in error message */
 "An error was encountered while signing in." = "Une erreur est survenue lors de la connexion.";
 
+/* Engine URL Message */
+"AppEngine Endpoints" = "Points de terminaison AppEngine";
+
 /* No comment provided by engineer. */
 "Appearance" = "Apparence";
 
@@ -92,6 +104,9 @@
 /* User Authenticated */
 "Authenticated" = "Authentifié";
 
+/* Engine URL Message */
+"Authentication Endpoints" = "Points de terminaison d’authentification";
+
 /* The Simplenote blog */
 "Blog" = "Blog";
 
@@ -99,6 +114,8 @@
 "By creating an account you agree to our" = "En créant un compte, vous acceptez nos";
 
 /* Cancel Action
+   Cancel action button
+   Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
    PinLock screen \"cancel\" button
@@ -218,6 +235,9 @@
 /* Confirmation button of deletion confirmation message for a tag. */
 "Delete Tag" = "Supprimer le tag";
 
+/* Deselect all Button Label */
+"Deselect All" = "Tout désélectionner";
+
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "Diagnostic";
 
@@ -245,7 +265,8 @@
    Done toolbar button */
 "Done" = "Terminé";
 
-/* Edit Tags Action: Visible in the Tags List */
+/* Edit button title
+   Edit Tags Action: Visible in the Tags List */
 "Edit" = "Modifier";
 
 /* Email TextField Placeholder */
@@ -376,6 +397,9 @@
 
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "Modification : Plus anciennes";
+
+/* Accessibility hint for trash selected notes button */
+"Move selected notes to trash" = "Déplacer les notes sélectionnées vers la corbeille";
 
 /* Delete Action
    Deletes a note */
@@ -560,6 +584,10 @@
 /* No comment provided by engineer. */
 "Security" = "Sécurité";
 
+/* Select all Button Label
+   Select all button title */
+"Select All" = "Tout sélectionner";
+
 /* Accessibility label describing a slider used to reset the current note to a previous version */
 "Select a Version" = "Sélectionner une version";
 
@@ -568,6 +596,9 @@
 
 /* Rating view - disliked - send feedback button */
 "Send feedback" = "Envoyez votre avis";
+
+/* Setup a passcode action button */
+"Set up Passcode" = "Configurer un code d’accès";
 
 /* Settings button
    Title of options screen */
@@ -625,6 +656,9 @@
 /* Tags List Header */
 "Tags" = "Étiquettes";
 
+/* Accessibility hint for the select/deselect all button */
+"Tap button to select or deselect all notes" = "Appuyer sur le bouton pour sélectionner ou désélectionner toutes les notes";
+
 /* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
 "Terms and Conditions" = "Conditions générales";
 
@@ -643,6 +677,9 @@
 /* Simplenote Themes */
 "Themes" = "Thèmes";
 
+/* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
+"To enable %1$@, you must have a passcode setup first." = "Pour activer %1$@, vous devez d’abord avoir configuré un code d’accès.";
+
 /* Touch ID reason/explanation */
 "To unlock the application" = "Pour déverrouiller l’application";
 
@@ -657,6 +694,9 @@
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Touch ID";
+
+/* Move selected notes to trash */
+"Trash Notes" = "Déplacer des notes vers la corbeille";
 
 /* Title: Trash Tag is selected
    Trash filter button */
@@ -757,6 +797,9 @@
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "étiquette :";
+
+/* Warning Title */
+"⚠️ Important" = "⚠️ Important";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞 Débogage activé 🐞";

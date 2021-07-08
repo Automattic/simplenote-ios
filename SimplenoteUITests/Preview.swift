@@ -1,5 +1,5 @@
-import UITestHelpers
 import XCTest
+import XCUITestHelpers
 
 class Preview {
 
@@ -28,6 +28,15 @@ class Preview {
 
     class func getStaticTextsWithExactValueCount(value: String) -> Int {
         let predicate = NSPredicate(format: "value == '" + value + "'")
+
+        // We wait for at least one element with exact value to appear before counting
+        // all occurences. The downside is having one extra call before the actual count.
+        _ = app
+            .webViews
+            .descendants(matching: .staticText)
+            .element(matching: predicate)
+            .waitForExistence(timeout: averageLoadTimeout)
+
         let matchingStaticTexts = app.webViews.descendants(matching: .staticText).matching(predicate)
         let matches = matchingStaticTexts.count
         print(">>> Found \(matches) StaticTexts(s) with '\(value)' value")

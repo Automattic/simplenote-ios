@@ -38,7 +38,17 @@ enum UID {
         static let trashNote = "Move to Trash"
         static let restoreNote = "Restore Note"
         static let deleteNote = "Delete Note"
-        static let trashEmptyTrash = "Empty"
+      
+        // "Empty Trash" button label is generated
+        // differently by Xcode 12.4 and 12.5 (runs iOS 14.5+)
+        static private(set) var trashEmptyTrash: String = {
+            if #available(iOS 14.5, *) {
+                return "Empty trash"
+            } else {
+                return "Empty"
+            }
+        }()
+
         static let clearText = "Clear text"
         static let cancel = "Cancel"
         static let dismissKeyboard = "Dismiss keyboard"

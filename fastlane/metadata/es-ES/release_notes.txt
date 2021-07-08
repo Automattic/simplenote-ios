@@ -1,6 +1,3 @@
-- Nueva barra de notas
-- Se ha corregido un problema ocasional que afectaba a la apariencia del menú contextual
-- Se han quitado las mayúsculas del título de la alerta de colaboración
-- Se ha corregido un problema que hacía que los avisos no aparecieran en algunos casos
-- Se ha corregido un problema que hacía que las etiquetas no se eliminaran de las notas movidas a la papelera
-- Se ha mejorado la compatibilidad con tamaños de fuente dinámicos en los avisos
+-   Se ha corregido un error por el que desaparecía el botón Nueva nota
+-   Nuevo flujo de bloqueo biométrico
+

@@ -1,6 +1,3 @@
-- Neue Notizenleiste
-- Gelegentlich auftretendes Problem mit dem kontextuellen Menü-Rendering behoben
-- Kapitalschrift vom Titel des Zusammenarbeitshinweises entfernt
-- Problem mit der Anzeige von Hinweisen behoben
-- Problem behoben, durch das Schlagwörter von Notizen im Papierkorb nicht gelöscht wurden
-- Verbesserte dynamische Schriftgrößenunterstützung in den Hinweisen
+-   Fehler behoben, durch den der Button für neue Notizen nicht angezeigt wurde
+-   Neuer Biometriesperrvorgang
+

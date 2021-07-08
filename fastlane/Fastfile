@@ -11,9 +11,13 @@ USER_ENV_FILE_PATH = File.join(Dir.home, '.simplenoteios-env.default')
 PROJECT_ENV_FILE_PATH = File.join(
   Dir.home, '.configure', 'simplenote-ios', 'secrets', 'project.env'
 )
+PROJECT_ROOT_FOLDER = File.dirname(File.expand_path(__dir__))
 $used_test_account_index = nil
 
 before_all do
+  # Ensure we use the latest version of the toolkit
+  check_for_toolkit_updates unless is_ci || ENV['FASTLANE_SKIP_TOOLKIT_UPDATE_CHECK']
+
   # Check that the env files exist
   unless is_ci || File.file?(USER_ENV_FILE_PATH)
     UI.user_error!("~/.simplenoteios-env.default not found: Please copy env/user.env-example to #{USER_ENV_FILE_PATH} and fill in the values")
@@ -76,6 +80,9 @@ end
 
     ios_bump_version_release()
     new_version = ios_get_app_version()
+    extract_release_notes_for_version(version: new_version,
+      release_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'RELEASE-NOTES.txt'),
+      extracted_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt'))
     ios_update_release_notes(new_version: new_version)
     get_prs_list(repository:GHHELPER_REPO, milestone: new_version, report_path:"#{File.expand_path('~')}/simplenoteios_prs_list_#{old_version}_#{new_version}.txt")
     setbranchprotection(repository:GHHELPER_REPO, branch: "release/#{new_version}")
@@ -136,16 +143,12 @@ end
 
       UI.message "#{keywords_path} has more than #{app_store_connect_keywords_length_limit} characters. Trimming it..."
 
-      case File.basename(locale_dir)
-      when 'ar-SA'
-        separator = '،'
-      else
-        separator = ','
-      end
+      english_comma = ','
+      arabic_comma = '،'
+      keywords = keywords.gsub(arabic_comma, english_comma) if File.basename(locale_dir) == 'ar-SA'
 
-      until keywords.length <= app_store_connect_keywords_length_limit do
-        keywords = keywords.split(separator)[0...-1].join(separator)
-        puts keywords
+      until keywords.length <= app_store_connect_keywords_length_limit
+        keywords = keywords.split(english_comma)[0...-1].join(english_comma)
       end
 
       File.write(keywords_path, keywords)
@@ -216,8 +219,8 @@ end
   #####################################################################################
   # finalize_release
   # -----------------------------------------------------------------------------------
-  # This lane finalize a release: updates store metadata, pushes the final tag and
-  # cleans all the temp ones
+  # This lane finalize a release: updates store metadata, bump final version number,
+  # remove branch protection and close milestone, then trigger the final release on CI
   # -----------------------------------------------------------------------------------
   # Usage:
   # bundle exec fastlane finalize_release [skip_confirm:<skip confirm>] [version:<version>]
@@ -226,7 +229,7 @@ end
   # bundle exec fastlane finalize_release
   # bundle exec fastlane finalize_release skip_confirm:true
   #####################################################################################
-  desc "Removes all the temp tags and puts the final one"
+  desc 'Trigger the final release build on CI'
   lane :finalize_release do | options |
     ios_finalize_prechecks(options)
     unless ios_current_branch_is_hotfix
@@ -241,7 +244,6 @@ end
 
     # Wrap up
     version = ios_get_app_version()
-    ios_clear_intermediate_tags(version: version)
     removebranchprotection(repository:GHHELPER_REPO, branch: "release/#{version}")
     setfrozentag(repository:GHHELPER_REPO, milestone: version, freeze: false)
     create_new_milestone(repository:GHHELPER_REPO)
@@ -258,8 +260,8 @@ end
   # it for both internal and external distribution
   # -----------------------------------------------------------------------------------
   # Usage:
-  # bundle exec fastlane build_and_upload_beta_release [skip_confirm:<skip confirm>] 
-  #   [create_gh_release:<create release on GH>] 
+  # bundle exec fastlane build_and_upload_beta_release [skip_confirm:<skip confirm>]
+  #   [create_gh_release:<create release on GH>]
   #
   # Example:
   # bundle exec fastlane build_and_upload_beta_release
@@ -269,7 +271,7 @@ end
   desc "Builds and uploads a beta release for distribution"
   lane :build_and_upload_beta_release do | options |
     build_and_upload_release(
-      skip_confirm: options[:skip_confirm], 
+      skip_confirm: options[:skip_confirm],
       create_gh_release: options[:create_gh_release],
       beta_release: true)
   end
@@ -281,8 +283,8 @@ end
   # it for distribution
   # -----------------------------------------------------------------------------------
   # Usage:
-  # bundle exec fastlane build_and_upload_stable_release [skip_confirm:<skip confirm>] 
-  #   [create_gh_release:<create release on GH>] 
+  # bundle exec fastlane build_and_upload_stable_release [skip_confirm:<skip confirm>]
+  #   [create_gh_release:<create release on GH>]
   #
   # Example:
   # bundle exec fastlane build_and_upload_stable_release
@@ -292,7 +294,7 @@ end
   desc "Builds and uploads a stable release for distribution"
   lane :build_and_upload_stable_release do | options |
     build_and_upload_release(
-      skip_confirm: options[:skip_confirm], 
+      skip_confirm: options[:skip_confirm],
       create_gh_release: options[:create_gh_release],
       beta_release: false)
   end
@@ -303,7 +305,7 @@ end
   # This lane builds the app and uploads it for both internal and external distribution
   # -----------------------------------------------------------------------------------
   # Usage:
-  # bundle exec fastlane build_and_upload_release [skip_confirm:<skip confirm>] 
+  # bundle exec fastlane build_and_upload_release [skip_confirm:<skip confirm>]
   #   [create_gh_release:<create release on GH>] [beta_release:<is a beta release>]
   #
   # Example:
@@ -320,7 +322,8 @@ end
 
     ios_build_preflight()
     build_and_upload_internal(skip_prechecks: true, skip_confirm: options[:skip_confirm]) if options[:beta_release]
-    build_and_upload_itc(skip_prechecks: true, skip_confirm: options[:skip_confirm], create_release: options[:create_gh_release])
+    build_and_upload_itc(skip_prechecks: true, skip_confirm: options[:skip_confirm],
+                         beta_release: options[:beta_release], create_release: options[:create_gh_release])
   end
 
   #####################################################################################
@@ -382,7 +385,7 @@ end
   # This lane builds the app and upload it for external distribution
   # -----------------------------------------------------------------------------------
   # Usage:
-  # bundle exec fastlane build_and_upload_itc [skip_confirm:<skip confirm>] [create_release:<Create release on GH> ]
+  # bundle exec fastlane build_and_upload_itc [skip_confirm:<skip confirm>] [create_release:<Create release on GH>] [beta_release:<intermediate beta?>]
   #
   # Example:
   # bundle exec fastlane build_and_upload_itc
@@ -430,11 +433,12 @@ end
       archive_zip_path = File.dirname(Dir.pwd) + "/Simplenote.xarchive.zip"
       zip(path: lane_context[SharedValues::XCODEBUILD_ARCHIVE], output_path: archive_zip_path)
 
-      version = ios_get_app_version()
+      version = options[:beta_release] ? ios_get_build_version : ios_get_app_version
       create_release(repository:GHHELPER_REPO,
         version: version,
-        release_notes_file_path:'./Simplenote/Resources/release_notes.txt',
-        release_assets:"#{archive_zip_path}"
+        release_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt'),
+        release_assets: archive_zip_path.to_s,
+        prerelease: options[:beta_release]
       )
 
       sh("rm #{archive_zip_path}")
@@ -452,8 +456,8 @@ end
   #####################################################################################
   lane :trigger_beta_build do | options |
     circleci_trigger_job(
-      circle_ci_token: ENV["CIRCLE_CI_AUTH_TOKEN"], 
-      repository: REPOSITORY_NAME, 
+      circle_ci_token: ENV["CIRCLE_CI_AUTH_TOKEN"],
+      repository: REPOSITORY_NAME,
       organization: "Automattic",
       branch: options[:branch_to_build],
       job_params: {"beta_build" => true}
@@ -471,8 +475,8 @@ end
   #####################################################################################
   lane :trigger_release_build do | options |
     circleci_trigger_job(
-      circle_ci_token: ENV["CIRCLE_CI_AUTH_TOKEN"], 
-      repository: REPOSITORY_NAME, 
+      circle_ci_token: ENV["CIRCLE_CI_AUTH_TOKEN"],
+      repository: REPOSITORY_NAME,
       organization: "Automattic",
       branch: options[:branch_to_build],
       job_params: {"release_build" => true}
@@ -731,7 +735,7 @@ end
   #####################################################################################
   # pick_test_account_and_run_ui_tests
   # -----------------------------------------------------------------------------------
-  # Firstly tries to occupy a free test account, and then passes the account to 
+  # Firstly tries to occupy a free test account, and then passes the account to
   # `run_ui_tests` lane. Frees up the account afterwards.
   # -----------------------------------------------------------------------------------
   # Usage:
@@ -888,7 +892,7 @@ def screenshot_devices()
 end
 
 def simulator_version
-  '14.4'
+  '14.5'
 end
 
 def deoccupy_test_account
@@ -920,7 +924,7 @@ def find_free_test_account
 
   $used_test_account_index = accounts_hash.key('free')
 
-  UI.user_error!("Could not find free UI Test account. Quitting.") if $used_test_account_index.nil? 
+  UI.user_error!("Could not find free UI Test account. Quitting.") if $used_test_account_index.nil?
   UI.message("Free account index: #{$used_test_account_index}")
   change_test_account_availability("#{get_required_env("CIRCLE_BUILD_NUM")}")
 end
@@ -947,7 +951,7 @@ def sanitize_test_accounts
     next if value == "free" || is_job_running(value)
     accounts_hash[key] = "free"
     submit_accounts_hash(accounts_hash)
-  end  
+  end
 end
 
 def is_job_running(job_number)

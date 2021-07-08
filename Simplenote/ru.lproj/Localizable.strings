@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-05-26 11:54:03+0000 */
+/* Translation-Revision-Date: 2021-06-23 17:54:50+0000 */
 /* Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ru */
@@ -15,11 +15,20 @@
 /* Number of failed entries entering in passcode */
 "%i Failed Passcode Attempts" = "Неудачные попытки ввода кода доступа: %i";
 
+/* Note trashed notification */
+"%i Note Trashed" = "%i Заметка перемещена в корзину";
+
+/* Notes trashed notification */
+"%i Notes Trashed" = "Заметки (%i) перемещены в корзину.";
+
 /* Count of interlink references to a note */
 "%i Reference" = "%i Указатель";
 
 /* Count of interlink references to a note */
 "%i References" = "%i Ссылки";
+
+/* Count of currently selected notes */
+"%i Selected" = "%i Выбрано";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "— Не менее 8 символов";
@@ -77,6 +86,9 @@
 /* Sign in error message */
 "An error was encountered while signing in." = "Во время входа произошла ошибка.";
 
+/* Engine URL Message */
+"AppEngine Endpoints" = "Конечные точки AppEngine";
+
 /* No comment provided by engineer. */
 "Appearance" = "Внешний вид";
 
@@ -92,6 +104,9 @@
 /* User Authenticated */
 "Authenticated" = "Прошедший проверку";
 
+/* Engine URL Message */
+"Authentication Endpoints" = "Конечные точки аутентификации";
+
 /* The Simplenote blog */
 "Blog" = "Блог";
 
@@ -99,6 +114,8 @@
 "By creating an account you agree to our" = "Создавая учетную запись, вы принимаете наши";
 
 /* Cancel Action
+   Cancel action button
+   Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
    PinLock screen \"cancel\" button
@@ -218,6 +235,9 @@
 /* Confirmation button of deletion confirmation message for a tag. */
 "Delete Tag" = "Удалить метку";
 
+/* Deselect all Button Label */
+"Deselect All" = "Снять выделение";
+
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "Диагностика";
 
@@ -245,7 +265,8 @@
    Done toolbar button */
 "Done" = "Готово";
 
-/* Edit Tags Action: Visible in the Tags List */
+/* Edit button title
+   Edit Tags Action: Visible in the Tags List */
 "Edit" = "Редактирование";
 
 /* Email TextField Placeholder */
@@ -376,6 +397,9 @@
 
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "Дата изменения: сначала старые";
+
+/* Accessibility hint for trash selected notes button */
+"Move selected notes to trash" = "Перемещение выбранных заметок в корзину";
 
 /* Delete Action
    Deletes a note */
@@ -560,6 +584,10 @@
 /* No comment provided by engineer. */
 "Security" = "Безопасность";
 
+/* Select all Button Label
+   Select all button title */
+"Select All" = "Выбрать Все";
+
 /* Accessibility label describing a slider used to reset the current note to a previous version */
 "Select a Version" = "Выбрать версию";
 
@@ -568,6 +596,9 @@
 
 /* Rating view - disliked - send feedback button */
 "Send feedback" = "Отправить отзыв";
+
+/* Setup a passcode action button */
+"Set up Passcode" = "Установить код доступа";
 
 /* Settings button
    Title of options screen */
@@ -625,6 +656,9 @@
 /* Tags List Header */
 "Tags" = "Метки";
 
+/* Accessibility hint for the select/deselect all button */
+"Tap button to select or deselect all notes" = "Нажмите кнопку, чтобы выбрать все заметки или снять выделение";
+
 /* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
 "Terms and Conditions" = "Правила и условия";
 
@@ -643,6 +677,9 @@
 /* Simplenote Themes */
 "Themes" = "Темы";
 
+/* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
+"To enable %1$@, you must have a passcode setup first." = "Чтобы включить %1$@, сначала установите код доступа.";
+
 /* Touch ID reason/explanation */
 "To unlock the application" = "Для разблокировки приложения";
 
@@ -657,6 +694,9 @@
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Идентификатор прикосновения";
+
+/* Move selected notes to trash */
+"Trash Notes" = "Переместить заметки в корзину";
 
 /* Title: Trash Tag is selected
    Trash filter button */
@@ -757,6 +797,9 @@
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "метка:";
+
+/* Warning Title */
+"⚠️ Important" = "⚠️ Важно";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞 Отладка включена 🐞";

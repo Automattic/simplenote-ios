@@ -12,10 +12,12 @@ extension SPSidebarContainerViewController {
             return nil
         }
 
-        var commands = [
-            UIKeyCommand(input: "n", modifierFlags: [.command], action: #selector(keyboardCreateNewNote), title: Localization.Shortcuts.newNote),
-            UIKeyCommand(input: "f", modifierFlags: [.command, .shift], action: #selector(keyboardStartSearching), title: Localization.Shortcuts.search),
-        ]
+        var commands: [UIKeyCommand] = []
+
+        if !noteListIsEditing() {
+            commands.append(UIKeyCommand(input: "n", modifierFlags: [.command], action: #selector(keyboardCreateNewNote), title: Localization.Shortcuts.newNote))
+            commands.append(UIKeyCommand(input: "f", modifierFlags: [.command, .shift], action: #selector(keyboardStartSearching), title: Localization.Shortcuts.search))
+        }
 
         let currentFirstResponder = UIResponder.currentFirstResponder
         if !(currentFirstResponder is UITextView) &&
@@ -40,6 +42,10 @@ extension SPSidebarContainerViewController {
         }
 
         showSidebar()
+    }
+
+    private func noteListIsEditing() -> Bool {
+        return SPAppDelegate.shared().noteListViewController.isEditing
     }
 
     @objc

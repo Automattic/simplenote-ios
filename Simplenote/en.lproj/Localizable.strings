@@ -109,6 +109,7 @@
 "By creating an account you agree to our" = "By creating an account you agree to our";
 
 /* Cancel Action
+   Cancel action button
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
@@ -223,7 +224,7 @@
 /* PinLock screen \"delete\" button */
 "Delete" = "Delete";
 
-/* Delet a note from trash */
+/* Delete a note from trash */
 "Delete Note" = "Delete Note";
 
 /* Verb: Delete notes and log out of the app */
@@ -584,6 +585,9 @@
 /* No comment provided by engineer. */
 "Security" = "Security";
 
+/* Select multiple notes at once */
+"Select" = "Select";
+
 /* Accessibility label describing a slider used to reset the current note to a previous version */
 "Select a Version" = "Select a Version";
 
@@ -596,6 +600,9 @@
 
 /* Rating view - disliked - send feedback button */
 "Send feedback" = "Send feedback";
+
+/* Setup a passcode action button */
+"Set up Passcode" = "Set up Passcode";
 
 /* Settings button
    Title of options screen */
@@ -682,6 +689,9 @@
 
 /* Simplenote Themes */
 "Themes" = "Themes";
+
+/* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
+"To enable %1$@, you must have a passcode setup first." = "To enable %1$@, you must have a passcode setup first.";
 
 /* Touch ID reason/explanation */
 "To unlock the application" = "To unlock the application";

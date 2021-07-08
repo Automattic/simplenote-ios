@@ -1,6 +1,3 @@
-- Nieuwe notitiebalk
-- Probleem opgelost met weergave contextueel menu
-- Alle hoofdletters titel samenwerkingsmelding verwijderd
-- Probleem opgelost waarbij er in sommige gevallen geen meldingen werden weergegeven
-- Probleem opgelost waarbij tags niet verwijderd werden voor verwijderde opmerkingen
-- Verbeterde ondersteuning voor dynamische lettertypegrootte voor opmerkingen  
+-   Bug verwijderd waardoor de knop Nieuwe notitie soms niet werd weergeven
+-   Nieuwe flow voor Biometrievergrendeling
+

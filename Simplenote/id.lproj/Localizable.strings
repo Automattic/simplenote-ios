@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-05-27 15:54:04+0000 */
+/* Translation-Revision-Date: 2021-06-22 09:54:50+0000 */
 /* Plural-Forms: nplurals=2; plural=n > 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: id */
@@ -15,11 +15,20 @@
 /* Number of failed entries entering in passcode */
 "%i Failed Passcode Attempts" = "%i Upaya Kode Sandi Gagal";
 
+/* Note trashed notification */
+"%i Note Trashed" = "%i Catatan Dibuang";
+
+/* Notes trashed notification */
+"%i Notes Trashed" = "%i Catatan Dibuang";
+
 /* Count of interlink references to a note */
 "%i Reference" = "%i Referensi";
 
 /* Count of interlink references to a note */
 "%i References" = "%i Referensi";
+
+/* Count of currently selected notes */
+"%i Selected" = "%i Terpilih";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- Minimum 8 karakter";
@@ -77,6 +86,9 @@
 /* Sign in error message */
 "An error was encountered while signing in." = "Terjadi error saat mencoba masuk.";
 
+/* Engine URL Message */
+"AppEngine Endpoints" = "Titik Akhir App Engine";
+
 /* No comment provided by engineer. */
 "Appearance" = "Tampilan";
 
@@ -92,6 +104,9 @@
 /* User Authenticated */
 "Authenticated" = "Diautentikasi";
 
+/* Engine URL Message */
+"Authentication Endpoints" = "Titik Akhir Autentikasi";
+
 /* The Simplenote blog */
 "Blog" = "Blog";
 
@@ -99,6 +114,8 @@
 "By creating an account you agree to our" = "Dengan membuat akun, Anda menyetujui";
 
 /* Cancel Action
+   Cancel action button
+   Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
    PinLock screen \"cancel\" button
@@ -218,6 +235,9 @@
 /* Confirmation button of deletion confirmation message for a tag. */
 "Delete Tag" = "Hapus label";
 
+/* Deselect all Button Label */
+"Deselect All" = "Batalkan semua pilihan";
+
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "Diagnostik";
 
@@ -245,7 +265,8 @@
    Done toolbar button */
 "Done" = "Selesai";
 
-/* Edit Tags Action: Visible in the Tags List */
+/* Edit button title
+   Edit Tags Action: Visible in the Tags List */
 "Edit" = "Sunting";
 
 /* Email TextField Placeholder */
@@ -376,6 +397,9 @@
 
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "Diubah: Paling lama";
+
+/* Accessibility hint for trash selected notes button */
+"Move selected notes to trash" = "Pindahkan catatan yang dipilih ke tong sampah";
 
 /* Delete Action
    Deletes a note */
@@ -560,6 +584,10 @@
 /* No comment provided by engineer. */
 "Security" = "Keamanan";
 
+/* Select all Button Label
+   Select all button title */
+"Select All" = "Pilih Semua";
+
 /* Accessibility label describing a slider used to reset the current note to a previous version */
 "Select a Version" = "Pilih Versi";
 
@@ -568,6 +596,9 @@
 
 /* Rating view - disliked - send feedback button */
 "Send feedback" = "Kirim Masukan";
+
+/* Setup a passcode action button */
+"Set up Passcode" = "Siapkan Kode Sandi";
 
 /* Settings button
    Title of options screen */
@@ -625,6 +656,9 @@
 /* Tags List Header */
 "Tags" = "Tag";
 
+/* Accessibility hint for the select/deselect all button */
+"Tap button to select or deselect all notes" = "Ketuk tombol untuk memilih atau membatalkan pilihan semua catatan";
+
 /* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
 "Terms and Conditions" = "Syarat dan Ketentuan";
 
@@ -643,6 +677,9 @@
 /* Simplenote Themes */
 "Themes" = "Tema";
 
+/* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
+"To enable %1$@, you must have a passcode setup first." = "Untuk mengaktifkan %1$@, Anda harus menyiapkan kode sandi terlebih dahulu.";
+
 /* Touch ID reason/explanation */
 "To unlock the application" = "Untuk membuka aplikasi";
 
@@ -657,6 +694,9 @@
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "ID Sentuhan";
+
+/* Move selected notes to trash */
+"Trash Notes" = "Buang Catatan";
 
 /* Title: Trash Tag is selected
    Trash filter button */
@@ -757,6 +797,9 @@
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "tag:";
+
+/* Warning Title */
+"⚠️ Important" = "⚠️ Penting";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞 Debug Diaktifkan 🐞";
