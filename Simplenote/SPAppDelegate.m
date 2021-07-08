@@ -128,8 +128,8 @@
 
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey,id> *)launchOptions
 {
-
-    [self migrateCoreDataToAppGroupIfNeeded];
+    SharedStorageMigrator *storageMigrator = [[SharedStorageMigrator alloc] init];
+    [storageMigrator performMigrationIfNeeded];
     
     // Setup Frameworks
     [self setupThemeNotifications];

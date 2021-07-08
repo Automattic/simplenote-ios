@@ -1,11 +1,29 @@
 import Foundation
 import CoreData
 
-class SharedStorageMigrator {
+@objc
+class SharedStorageMigrator: NSObject {
     /// Database Migration
     /// To be able to share data with app extensions, the CoreData database needs to be migrated to an app group
     /// Must run before Simperium is setup
-    static func migrateCoreDataToAppGroup() {
+
+
+    private var mustPerformMigration: Bool {
+        FileManager.default.fileExists(atPath: CoreDataManager.groupStorageURL.path)
+    }
+
+    @objc
+    func performMigrationIfNeeded() {
+        // Confirm if the app group DB exists
+        guard mustPerformMigration else {
+            NSLog("Core Data Migration already complete")
+            return
+        }
+
+        migrateCoreDataToAppGroup()
+    }
+
+    func migrateCoreDataToAppGroup() {
         // Testing prints
         // TODO: Remove prints later
         print("oldDb exists \(FileManager.default.fileExists(atPath: CoreDataManager.appStorageURL.path))")
@@ -51,7 +69,7 @@ class SharedStorageMigrator {
         }
     }
 
-    private static func createAppGroupDirectory(at url: URL) {
+    private func createAppGroupDirectory(at url: URL) {
         do {
             try FileManager.default.createDirectory(at: url, withIntermediateDirectories: false, attributes: nil)
         } catch {
@@ -59,7 +77,7 @@ class SharedStorageMigrator {
         }
     }
 
-    @discardableResult private static func addPersistentStore(to coordinator: NSPersistentStoreCoordinator, at url: URL) -> NSPersistentStore? {
+    @discardableResult private func addPersistentStore(to coordinator: NSPersistentStoreCoordinator, at url: URL) -> NSPersistentStore? {
         do {
             return try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: nil)
         } catch {
@@ -68,7 +86,7 @@ class SharedStorageMigrator {
         }
     }
 
-    private static func migrateDatabase(from oldURL: URL, to newUrl: URL, coordinator: NSPersistentStoreCoordinator) {
+    private func migrateDatabase(from oldURL: URL, to newUrl: URL, coordinator: NSPersistentStoreCoordinator) {
         guard let store = addPersistentStore(to: coordinator, at: oldURL) else {
             NSLog("Could not get persistent store")
             NSLog("Database migration failed")
@@ -85,7 +103,7 @@ class SharedStorageMigrator {
         }
     }
 
-    private static func migrateCoreDataFiles(from oldUrl: URL, to newURL: URL) {
+    private func migrateCoreDataFiles(from oldUrl: URL, to newURL: URL) {
         let fileManager = FileManager.default
 
         // Testing prints

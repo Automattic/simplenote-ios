@@ -42,17 +42,6 @@ extension SPAppDelegate {
         authenticator.authURL = SPCredentials.experimentalAuthURL
         authenticator.customHTTPHeaders = ["Host": SPCredentials.experimentalAuthHost]
     }
-
-    @objc
-    func migrateCoreDataToAppGroupIfNeeded() {
-        // Confirm if the app group DB exists
-        if FileManager.default.fileExists(atPath: CoreDataManager.groupStorageURL.path) {
-            print("Core Data Migration already complete")
-            return
-        }
-
-        SharedStorageMigrator.migrateCoreDataToAppGroup()
-    }
 }
 
 // MARK: - Internal Methods
