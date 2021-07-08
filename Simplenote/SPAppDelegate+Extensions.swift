@@ -42,6 +42,22 @@ extension SPAppDelegate {
         authenticator.authURL = SPCredentials.experimentalAuthURL
         authenticator.customHTTPHeaders = ["Host": SPCredentials.experimentalAuthHost]
     }
+
+    @objc
+    func migrateCoreDataToAppGroupIfNeeded() {
+        guard let groupDocumemntsDirectory = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Constants.sharedDirectoryDomain + Constants.groupIdentifier) else {
+            return
+        }
+        let newDbURL = groupDocumemntsDirectory.appendingPathComponent(Constants.sqlFile)
+
+        // Confirm if the app group DB exists
+        if FileManager.default.fileExists(atPath: newDbURL.path) {
+            print("Core Data Migration already complete")
+            return
+        }
+
+        SharedStorageMigrator.migrateCoreDataToAppGroup()
+    }
 }
 
 // MARK: - Internal Methods
@@ -404,4 +420,12 @@ extension SPAppDelegate {
         }
         EditorFactory.shared.scrollPositionCache.cleanup(keeping: allIdentifiers)
     }
+}
+
+
+private struct Constants {
+    static let defaultBundleIdentifier = "com.codality.NationalFlow"
+    static let groupIdentifier = Bundle.main.bundleIdentifier ?? Constants.defaultBundleIdentifier
+    static let sharedDirectoryDomain = "group."
+    static let sqlFile = "Simplenote.sqlite"
 }

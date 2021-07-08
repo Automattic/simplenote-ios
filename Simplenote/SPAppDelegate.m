@@ -129,6 +129,8 @@
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey,id> *)launchOptions
 {
 
+    [self migrateCoreDataToAppGroupIfNeeded];
+    
     // Setup Frameworks
     [self setupThemeNotifications];
     [self setupSimperium];
@@ -314,18 +316,34 @@
     if (_persistentStoreCoordinator != nil) {
         return _persistentStoreCoordinator;
     }
-    
-    //NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Simplenote.sqlite"];
+
+    // Setup path for document directory core data database
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *path = [documentsDirectory stringByAppendingPathComponent:@"Simplenote.sqlite"];
-    NSURL *storeURL = [NSURL fileURLWithPath:path];
     NSError *error = nil;
+
+    // Setup path for shared group document directory core data database
+    NSString *group = @"group.";
+    NSString *identifier = [group stringByAppendingString:[[NSBundle mainBundle] bundleIdentifier]];
+    NSURL *groupDocumentsDirectory = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier: identifier];
+    NSURL *groupPath = [groupDocumentsDirectory URLByAppendingPathComponent:@"Simplenote.sqlite"];
+
+    // Check for the existence of the new database
+    // If it exists return the new URL
+    NSURL *storeURL;
+    if ([[NSFileManager defaultManager] fileExistsAtPath:[groupPath path]]) {
+        NSLog(@"New URL");
+        storeURL = [NSURL fileURLWithPath: [groupPath path]];
+    } else {
+        NSLog(@"Old URL");
+        storeURL = [NSURL fileURLWithPath:path];
+    }
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    
+
     // Perform automatic, lightweight migration
     NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
-    
+
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error])
     {
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
