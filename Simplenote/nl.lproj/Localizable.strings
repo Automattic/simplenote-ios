@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-06-24 15:57:49+0000 */
+/* Translation-Revision-Date: 2021-06-29 11:32:19+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: nl */
@@ -226,7 +226,7 @@
 /* PinLock screen \"delete\" button */
 "Delete" = "Verwijderen";
 
-/* Delet a note from trash */
+/* Delete a note from trash */
 "Delete Note" = "Notitie verwijderen";
 
 /* Verb: Delete notes and log out of the app */
@@ -583,6 +583,9 @@
 
 /* No comment provided by engineer. */
 "Security" = "Beveiliging";
+
+/* Select multiple notes at once */
+"Select" = "Selecteer";
 
 /* Select all Button Label
    Select all button title */
