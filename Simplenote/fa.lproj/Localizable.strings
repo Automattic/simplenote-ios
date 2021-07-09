@@ -226,7 +226,7 @@
 /* PinLock screen \"delete\" button */
 "Delete" = "Delete";
 
-/* Delet a note from trash */
+/* Delete a note from trash */
 "Delete Note" = "Delete Note";
 
 /* Verb: Delete notes and log out of the app */
@@ -583,6 +583,9 @@
 
 /* No comment provided by engineer. */
 "Security" = "امنیت";
+
+/* Select multiple notes at once */
+"Select" = "Select";
 
 /* Select all Button Label
    Select all button title */

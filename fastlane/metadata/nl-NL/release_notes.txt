@@ -1,3 +1,1 @@
--   Bug verwijderd waardoor de knop Nieuwe notitie soms niet werd weergeven
--   Nieuwe flow voor Biometrievergrendeling
-
+- Bewerkingsmodus verplaatst naar een handeling met lang indrukken en de nieuwe notitiebalk verwijderd

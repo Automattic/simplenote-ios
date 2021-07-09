@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-06-23 13:54:03+0000 */
+/* Translation-Revision-Date: 2021-06-29 11:32:19+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: zh_CN */
@@ -226,7 +226,7 @@
 /* PinLock screen \"delete\" button */
 "Delete" = "删除";
 
-/* Delet a note from trash */
+/* Delete a note from trash */
 "Delete Note" = "删除笔记";
 
 /* Verb: Delete notes and log out of the app */
@@ -583,6 +583,9 @@
 
 /* No comment provided by engineer. */
 "Security" = "安全";
+
+/* Select multiple notes at once */
+"Select" = "选择";
 
 /* Select all Button Label
    Select all button title */

@@ -1,3 +1,1 @@
--   Résolution d’un bogue dans lequel le bouton Nouvelle note pouvait ne pas apparaître
--   Nouveau flux de verrouillage biométrique
-
+- Remplacement du mode modification par une action d’appui prolongé et suppression de la nouvelle barre de notes
