@@ -833,12 +833,11 @@ end
   end
 
   def simplenote_app_identifiers(root_bundle_id:)
-    [
-      root_bundle_id,
-      "#{root_bundle_id}.Share",
-      "#{root_bundle_id}.Widgets",
-      "#{root_bundle_id}.Intents"
-    ]
+    extension_bundle_ids =
+      %w[Share Widgets Intents]
+      .map { |suffix| "#{root_bundle_id}.#{suffix}" }
+
+    [root_bundle_id, *extension_bundle_ids]
   end
 
 ########################################################################
