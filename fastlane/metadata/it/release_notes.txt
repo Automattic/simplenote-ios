@@ -1,3 +1,1 @@
--   Corretto un bug a causa del quale il pulsante Nuova nota poteva non essere visualizzato
--   Nuovo flusso di blocco della biometria
-
+- La modalità di modifica è stata trasformata in un'azione che richiede una pressione prolungata e la nuova barra delle note è stata rimossa

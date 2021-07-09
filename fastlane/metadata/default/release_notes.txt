@@ -1,3 +1,1 @@
--   Fixed a bug in which the New Note button might not appear
--   New Biometry Lock Flow
-
+- Moved edit mode into a long press action and removed the new note bar
