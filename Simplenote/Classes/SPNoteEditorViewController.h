@@ -51,6 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, getter=isPreviewing) BOOL previewing;
 @property (nonatomic, assign) BOOL modified;
 @property (nonatomic, readonly) BOOL searching;
+@property (nonatomic, assign) NSInteger highlightedSearchResultIndex;
 
 @property (nonatomic, strong) NoteScrollPositionCache *scrollPositionCache;
 
