@@ -31,8 +31,7 @@ class CoreDataManager: NSObject {
 
         let psc = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
         let options = [NSMigratePersistentStoresAutomaticallyOption: true,
-                       NSInferMappingModelAutomaticallyOption: true,
-                       NSSQLitePragmasOption: storageSettings.journalModeDisabled] as [AnyHashable: Any]
+                       NSInferMappingModelAutomaticallyOption: true]
 
         // Testing logs
         //
