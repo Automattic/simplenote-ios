@@ -849,7 +849,7 @@ extension SPNoteEditorViewController {
     }
 
     @objc
-    func refershSearchHighlight() {
+    func refreshSearchHighlight() {
         noteEditorTextView.clearHighlights(false)
         highlightSearchResult(at: highlightedSearchResultIndex, animated: false)
     }

@@ -266,9 +266,9 @@ CGFloat const SPSelectedAreaPadding = 20;
         return;
     }
 
-    [coordinator animateAlongsideTransition:nil completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        [self refershSearchHighlight];
-    }];
+    [coordinator animateAlongsideTransitionInView:nil animation:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        [self refreshSearchHighlight];
+    } completion:nil];
 }
 
 - (void)configureSearchToolbar
