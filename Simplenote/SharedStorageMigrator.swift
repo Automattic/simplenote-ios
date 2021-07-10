@@ -12,11 +12,11 @@ class SharedStorageMigrator: NSObject {
         self.fileManager = fileManager
     }
 
-    var legacyStorageExists: Bool {
+    private var legacyStorageExists: Bool {
         fileManager.fileExists(atPath: storageSettings.legacyStorageURL.path)
     }
 
-    var sharedStorageExists: Bool {
+    private var sharedStorageExists: Bool {
         fileManager.fileExists(atPath: storageSettings.sharedStorageURL.path)
     }
 
@@ -39,15 +39,8 @@ class SharedStorageMigrator: NSObject {
     }
 
     private func migrateCoreDataToAppGroup() -> MigrationResult {
-        // Testing prints
-        // TODO: Remove prints later
-        print("oldDb exists \(FileManager.default.fileExists(atPath: storageSettings.legacyStorageURL.path))")
-        print(storageSettings.legacyStorageURL.path)
-        print("newDb exists \(FileManager.default.fileExists(atPath: storageSettings.sharedStorageURL.path))")
-        print(storageSettings.sharedStorageURL.path)
-
         NSLog("Database needs migration to app group")
-        NSLog("Beginning database migration")
+        NSLog("Beginning database migration from: \(storageSettings.legacyStorageURL.path) to: \(storageSettings.sharedStorageURL.path)")
 
         do {
             try disableJournaling()
@@ -55,13 +48,16 @@ class SharedStorageMigrator: NSObject {
             NSLog("Database migration successful!!")
             return .success
         } catch {
-            NSLog("Could not migrate database to app group")
-            NSLog(error.localizedDescription)
+            NSLog("Could not migrate database to app group " + error.localizedDescription)
             CrashLogging.logError(error)
             return .failed
         }
     }
 
+    /// This method disables journaling on the core data database
+    /// Per this doc: https://developer.apple.com/library/archive/qa/qa1809/_index.html
+    /// Core data databases have journaling enabled by default, without disabling the journaling first it is possible some notes may get lost in migration
+    ///
     private func disableJournaling() throws {
         guard let mom = NSManagedObjectModel(contentsOf: storageSettings.modelURL) else {
             throw NSError(domain: "SharedStorageMigrator", code: 100, userInfo: nil)
@@ -82,13 +78,12 @@ class SharedStorageMigrator: NSObject {
                 try psc.remove(store)
             }
         } catch {
-            NSLog("Could not remove temporary persistent Store")
-            NSLog(error.localizedDescription)
+            NSLog("Could not remove temporary persistent Store " + error.localizedDescription)
         }
     }
 
     private func migrateCoreDataFiles() throws {
-        try FileManager.default.copyItem(at: storageSettings.legacyStorageURL, to: storageSettings.sharedStorageURL)
+        try fileManager.copyItem(at: storageSettings.legacyStorageURL, to: storageSettings.sharedStorageURL)
     }
 }
 

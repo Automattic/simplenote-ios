@@ -11,7 +11,7 @@ class StorageSettings: NSObject {
 
     /// URL for the managed object model resource
     ///
-    let modelURL = Bundle.main.url(forResource: Constants.resourceName, withExtension: Constants.resourceType)!
+    let modelURL = Bundle.main.url(forResource: Constants.modelName, withExtension: Constants.modelExtension)!
 
     /// In app core data storage URL
     ///
@@ -28,6 +28,6 @@ class StorageSettings: NSObject {
 
 private struct Constants {
     static let sqlFile = "Simplenote.sqlite"
-    static let resourceName = "Simplenote"
-    static let resourceType = "momd"
+    static let modelName = "Simplenote"
+    static let modelExtension = "momd"
 }

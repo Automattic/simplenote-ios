@@ -22,7 +22,7 @@ class CoreDataManager: NSObject {
 
     private func setupCoreDataStack(at url: URL) throws {
         guard let mom = NSManagedObjectModel(contentsOf: storageSettings.modelURL) else {
-            throw NSError(domain: "CoreDataManager", code: 100, userInfo: nil)
+            fatalError("Cannot load model")
         }
         managedObjectModel = mom
 
