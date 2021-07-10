@@ -68,7 +68,7 @@ class SharedStorageMigrator: NSObject {
         }
         let psc = NSPersistentStoreCoordinator(managedObjectModel: mom)
 
-        let options = [NSSQLitePragmasOption: storageSettings.journalModeDisabled] as [AnyHashable: Any]
+        let options = [NSSQLitePragmasOption: Constants.journalModeDisabled]
 
         try psc.addPersistentStore(ofType: NSSQLiteStoreType,
                                    configurationName: nil,
@@ -96,4 +96,10 @@ enum MigrationResult {
     case success
     case notNeeded
     case failed
+}
+
+private struct Constants {
+    static let journalMode = "journal_mode"
+    static let journalSetting = "DELETE"
+    static let journalModeDisabled = [Constants.journalMode: Constants.journalSetting]
 }
