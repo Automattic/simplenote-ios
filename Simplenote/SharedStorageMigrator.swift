@@ -45,11 +45,14 @@ class SharedStorageMigrator: NSObject {
         do {
             try disableJournaling()
             try migrateCoreDataFiles()
+            try attemptCreationOfCoreDataStack()
             NSLog("Database migration successful!!")
             return .success
         } catch {
             NSLog("Could not migrate database to app group " + error.localizedDescription)
             CrashLogging.logError(error)
+
+            removeFailedMigrationFilesIfNeeded()
             return .failed
         }
     }
@@ -84,6 +87,23 @@ class SharedStorageMigrator: NSObject {
 
     private func migrateCoreDataFiles() throws {
         try fileManager.copyItem(at: storageSettings.legacyStorageURL, to: storageSettings.sharedStorageURL)
+    }
+
+    private func attemptCreationOfCoreDataStack() throws {
+        NSLog("Confirming migrated database can be loaded at: \(storageSettings.sharedStorageURL)")
+        let _ = try CoreDataManager(storageSettings.sharedStorageURL)
+    }
+
+    private func removeFailedMigrationFilesIfNeeded() {
+        guard sharedStorageExists else {
+            return
+        }
+
+        do {
+            try fileManager.removeItem(at: storageSettings.sharedStorageURL)
+        } catch {
+            NSLog("Could not delete files from failed migration " + error.localizedDescription)
+        }
     }
 }
 

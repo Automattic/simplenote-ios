@@ -4,15 +4,10 @@ import CoreData
 @objcMembers
 class CoreDataManager: NSObject {
 
-    /// Storage Settings
-    ///
-    private let storageSettings: StorageSettings
-
     init(_ storageURL: URL, storageSettings: StorageSettings = StorageSettings()) throws {
-        self.storageSettings = storageSettings
         super.init()
 
-        try setupCoreDataStack(at: storageURL)
+        try setupCoreDataStack(at: storageURL, modelURL: storageSettings.modelURL)
     }
 
     // MARK: Core Data
@@ -20,8 +15,8 @@ class CoreDataManager: NSObject {
     private(set) var managedObjectContext: NSManagedObjectContext!
     private(set) var persistentStoreCoordinator: NSPersistentStoreCoordinator!
 
-    private func setupCoreDataStack(at url: URL) throws {
-        guard let mom = NSManagedObjectModel(contentsOf: storageSettings.modelURL) else {
+    private func setupCoreDataStack(at url: URL, modelURL: URL) throws {
+        guard let mom = NSManagedObjectModel(contentsOf: modelURL) else {
             fatalError("Cannot load model")
         }
         managedObjectModel = mom

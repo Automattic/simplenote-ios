@@ -430,11 +430,7 @@ extension SPAppDelegate {
 
         switch migrationResult {
         case .notNeeded, .success:
-            do {
-                coreDataManager = try CoreDataManager(settings.sharedStorageURL)
-            } catch {
-                coreDataManager = try CoreDataManager(settings.legacyStorageURL)
-            }
+            coreDataManager = try CoreDataManager(settings.sharedStorageURL)
         case .failed:
             coreDataManager = try CoreDataManager(settings.legacyStorageURL)
         }
