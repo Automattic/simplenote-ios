@@ -79,12 +79,6 @@
     self.window.backgroundColor = [UIColor simplenoteWindowBackgroundColor];
     self.window.tintColor = [UIColor simplenoteTintColor];
 
-    // check to see if the app terminated with a previously selected tag
-    NSString *selectedTag = [[NSUserDefaults standardUserDefaults] objectForKey:kSelectedTagKey];
-    if (selectedTag != nil) {
-		_selectedTag = selectedTag;
-	}
-
     self.tagListViewController = [TagListViewController new];
     self.noteListViewController = [SPNoteListViewController new];
 
@@ -139,7 +133,7 @@
     [self configurePublishController];
     [self setupDefaultWindow];
     [self configureStateRestoration];
-
+    
     return YES;
 }
 
@@ -218,11 +212,6 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    // Save the current note and tag
-    if (_selectedTag) {
-        [[NSUserDefaults standardUserDefaults] setObject:_selectedTag forKey:kSelectedTagKey];
-    }
-
     // Save any pending changes
     [self.noteEditorViewController save];
 }
@@ -374,10 +363,6 @@
             [self.navigationController popToRootViewControllerAnimated:YES];
             self.selectedTag = nil;
             [self.noteListViewController update];
-			
-			NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-			[defaults removeObjectForKey:kSelectedTagKey];
-			[defaults synchronize];
 			
             [[CSSearchableIndex defaultSearchableIndex] deleteAllSearchableItemsWithCompletionHandler:nil];
             
