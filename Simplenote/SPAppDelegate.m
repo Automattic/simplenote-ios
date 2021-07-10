@@ -44,9 +44,9 @@
 @property (strong, nonatomic) NSManagedObjectModel          *managedObjectModel;
 @property (strong, nonatomic) NSPersistentStoreCoordinator  *persistentStoreCoordinator;
 @property (weak,   nonatomic) SPModalActivityIndicator      *signOutActivityIndicator;
+@property (strong, nonatomic) BackgroundRefreshManager      *refreshManager;
 
 @end
-
 
 #pragma mark ================================================================================
 #pragma mark Simplenote AppDelegate
@@ -166,6 +166,11 @@
         [self showPasscodeLockIfNecessary];
     }
 
+    // Register background refresh task to system
+    if (@available(iOS 13.0, *)) {
+        [self.refreshManager registerBackgroundRefreshTask];
+    }
+
     // Index (All of the) Spotlight Items if the user upgraded
     [self indexSpotlightItemsIfNeeded];
 
@@ -190,11 +195,20 @@
 
     [self showPasscodeLockIfNecessary];
     [self cleanupScrollPositionCache];
+
+    // Schedule background refresh
+    if (@available(iOS 13.0, *)) {
+        [self.refreshManager scheduleAppRefresh];
+    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     [self dismissPasscodeLockIfPossible];
+
+    if (@available(iOS 13.0, *)) {
+        [self.refreshManager cancelPendingRefreshTasks];
+    }
 }
 
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler
@@ -420,6 +434,10 @@
 
 - (void)bucket:(SPBucket *)bucket didChangeObjectForKey:(NSString *)key forChangeType:(SPBucketChangeType)change memberNames:(NSArray *)memberNames
 {
+    if (@available(iOS 13.0, *)) {
+        [self.refreshManager onSimperiumChange];
+    }
+
     if ([bucket isEqual:[_simperium notesBucket]]) {
         // Note change
         switch (change) {
@@ -651,6 +669,22 @@
 + (SPAppDelegate *)sharedDelegate
 {
     return (SPAppDelegate *)[[UIApplication sharedApplication] delegate];
+}
+
+
+#pragma mark ================================================================================
+#pragma mark Background Refresh
+#pragma mark ================================================================================
+
+- (BackgroundRefreshManager *)refreshManager
+{
+    if (_refreshManager != nil) {
+        return _refreshManager;
+    }
+
+    _refreshManager = [[BackgroundRefreshManager alloc] init];
+
+    return _refreshManager;
 }
 
 @end
