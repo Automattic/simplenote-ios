@@ -364,10 +364,6 @@
             self.selectedTag = nil;
             [self.noteListViewController update];
 			
-			NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-			[defaults removeObjectForKey:kSelectedTagKey];
-			[defaults synchronize];
-			
             [[CSSearchableIndex defaultSearchableIndex] deleteAllSearchableItemsWithCompletionHandler:nil];
             
             // Nuke all of the User Preferences
