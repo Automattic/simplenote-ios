@@ -111,6 +111,7 @@ extension SPSettingsViewController {
             return
         }
 
+        SPTracker.trackDeleteAccountButttonTapped()
         DeleteAccountRemote().requestDelete(user) { (result) in
             switch result {
             case .success:
