@@ -33,10 +33,17 @@ class SimplenoteConstants: NSObject {
         return output as NSString
     }()
 
+    // TODO: remove when account deletion api is set
+    // Replace with currentEngineBaseURL
+    static let testingAccountDeletionBaseURL: NSString = {
+        return NSString(string: "https://pr-418-dot-simple-note-hrd.appspot.com/")
+    }()
+
     /// AppEngine: Endpoints
     ///
     static let resetPasswordURL     = currentEngineBaseURL.appendingPathComponent("/reset/?redirect=simplenote://launch&email=")
     static let settingsURL          = currentEngineBaseURL.appendingPathComponent("/settings")
     static let signupURL            = currentEngineBaseURL.appendingPathComponent("/account/request-signup")
     static let verificationURL      = currentEngineBaseURL.appendingPathComponent("/account/verify-email/")
+    static let accountDeletion      = testingAccountDeletionBaseURL.appendingPathComponent("/account/request-delete/")
 }
