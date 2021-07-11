@@ -2,53 +2,14 @@ import Foundation
 
 // MARK: - SignupRemote
 //
-class SignupRemote {
-    enum Result: Equatable {
-        static func == (lhs: SignupRemote.Result, rhs: SignupRemote.Result) -> Bool {
-            switch (lhs, rhs) {
-            case (.success, .success):
-                return true
-            case (.failure(let code1, _), .failure(let code2, _)):
-                return code1 == code2
-            default:
-                return false
-            }
-
-        }
-
-        case success
-        case failure(_ statusCode: Int, _ error: Error?)
-    }
-
-    private let urlSession: URLSession
-
-    init(urlSession: URLSession = URLSession.shared) {
-        self.urlSession = urlSession
-    }
-
-    /// Send signup request for specified email address
-    ///
+class SignupRemote: Remote {
     func signup(with email: String, completion: @escaping (_ result: Result) -> Void) {
         guard let request = request(with: email) else {
             completion(.failure(0, nil))
             return
         }
 
-        let dataTask = urlSession.dataTask(with: request) { (data, response, error) in
-            DispatchQueue.main.async {
-                let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
-
-                // Check for 2xx status code
-                guard statusCode / 100 == 2 else {
-                    completion(.failure(statusCode, error))
-                    return
-                }
-
-                completion(.success)
-            }
-        }
-
-        dataTask.resume()
+        task(with: request, completion: completion)
     }
 
     private func request(with email: String) -> URLRequest? {
