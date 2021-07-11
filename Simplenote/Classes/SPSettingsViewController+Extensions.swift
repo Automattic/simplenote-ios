@@ -88,3 +88,63 @@ private extension BiometricAuthentication.Biometry {
         }
     }
 }
+
+// MARK: - Account Deletion
+extension SPSettingsViewController {
+
+    @objc
+    func presentDeleteAccountConfirmation() {
+        let alert = UIAlertController(title: AccountDeletion.deleteAccount, message: AccountDeletion.confirmAlertMessage, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: AccountDeletion.deleteAccount, style: .destructive) { ( _ ) in
+            self.requestAccountDeletion()
+        }
+        let cancelAction = UIAlertAction(title: AccountDeletion.cancel, style: .cancel, handler: nil)
+
+        alert.addAction(confirmAction)
+        alert.addAction(cancelAction)
+
+        present(alert, animated: true, completion: nil)
+    }
+
+    private func requestAccountDeletion() {
+        guard let user = SPAppDelegate.shared().simperium.user else {
+            return
+        }
+
+        DeleteAccountRemote().requestDelete(user) { (result) in
+            switch result {
+            case .success:
+                self.presentSuccessAlert(email: user.email)
+            case .failure(let status, let error):
+                self.presentRequestFailedAlert()
+                NSLog("Delete Account Request Failed with status: %i Error: %@", [status, error?.localizedDescription ?? "Unknown Error"])
+            }
+        }
+    }
+
+    private func presentSuccessAlert(email: String) {
+        let alert = UIAlertController(title: AccountDeletion.succesAlertTitle, message: AccountDeletion.successMessage(email: email), preferredStyle: .alert)
+        present(alert, animated: true, completion: nil)
+    }
+
+    private func presentRequestFailedAlert() {
+        let alert = UIAlertController(title: AccountDeletion.failureAlertTitle, message: AccountDeletion.failureAlertMessage, preferredStyle: .alert)
+        present(alert, animated: true, completion: nil)
+    }
+}
+
+private struct AccountDeletion {
+    static let deleteAccount = NSLocalizedString("Delete Account", comment: "Delete account title and action")
+    static let confirmAlertMessage = NSLocalizedString("By deleting your account, all notes created with this account will be permanently deleted. This action is not reversible", comment: "Delete account confirmation alert message")
+    static let cancel = NSLocalizedString("Cancel", comment: "Cancel button title")
+
+    static let succesAlertTitle = NSLocalizedString("Delete Account", comment: "Title for delete account alert")
+    static let successAlertMessage = NSLocalizedString("An email has been sent to %@. check your inbox and follow the instructions to confirm account deletion.", comment: "Delete account confirmation instructions")
+
+    static func successMessage(email: String) -> String {
+        String(format: successAlertMessage, email)
+    }
+
+    static let failureAlertTitle = NSLocalizedString("Account Closure Error", comment: "Account deletion failed alert title")
+    static let failureAlertMessage = NSLocalizedString("Could not request account closure, please try again later", comment: "Account deletion failed alert message")
+}
