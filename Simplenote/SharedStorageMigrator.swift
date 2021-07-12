@@ -62,16 +62,21 @@ class SharedStorageMigrator: NSObject {
     /// Core data databases have journaling enabled by default, without disabling the journaling first it is possible some notes may get lost in migration
     ///
     private func disableJournaling() throws {
+        NSLog("Attempting to disable journaling on persistent store at \(storageSettings.legacyStorageURL)")
+        try loadPersistentStorage(at: storageSettings.legacyStorageURL, journaling: false)
+    }
+
+    private func loadPersistentStorage(at storagePath: URL, journaling: Bool) throws {
         guard let mom = NSManagedObjectModel(contentsOf: storageSettings.modelURL) else {
             throw NSError(domain: "SharedStorageMigrator", code: 100, userInfo: nil)
         }
         let psc = NSPersistentStoreCoordinator(managedObjectModel: mom)
 
-        let options = [NSSQLitePragmasOption: Constants.journalModeDisabled]
+        let options = journaling ? nil : [NSSQLitePragmasOption: Constants.journalModeDisabled]
 
         try psc.addPersistentStore(ofType: NSSQLiteStoreType,
                                    configurationName: nil,
-                                   at: storageSettings.legacyStorageURL,
+                                   at: storagePath,
                                    options: options)
 
         // Remove the persistent store before exiting
@@ -91,7 +96,7 @@ class SharedStorageMigrator: NSObject {
 
     private func attemptCreationOfCoreDataStack() throws {
         NSLog("Confirming migrated database can be loaded at: \(storageSettings.sharedStorageURL)")
-        let _ = try CoreDataManager(storageSettings.sharedStorageURL)
+        try loadPersistentStorage(at: storageSettings.sharedStorageURL, journaling: true)
     }
 
     private func removeFailedMigrationFilesIfNeeded() {
