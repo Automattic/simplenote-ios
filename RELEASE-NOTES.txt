@@ -1,5 +1,6 @@
 4.40
 -----
+-   Added In app account deletion #1354
 
 4.39
 -----
