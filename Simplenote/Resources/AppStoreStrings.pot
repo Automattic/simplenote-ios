@@ -66,8 +66,9 @@ msgctxt "app_store_keywords"
 msgid "simplenote,note,taking,taker,notes,sync,share,simple,markdown,tag,to-do,list,lock,cloud,writing"
 msgstr ""
 
-msgctxt "v4.39-whats-new"
+msgctxt "v4.40-whats-new"
 msgid ""
-"- Moved edit mode into a long press action and removed the new note bar\n"
+"-   Some bug fixes #1345, #1347, #1348\n"
+"\n"
 msgstr ""
 
