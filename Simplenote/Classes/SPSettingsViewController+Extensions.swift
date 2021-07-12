@@ -95,13 +95,10 @@ extension SPSettingsViewController {
     @objc
     func presentDeleteAccountConfirmation() {
         let alert = UIAlertController(title: AccountDeletion.deleteAccount, message: AccountDeletion.confirmAlertMessage, preferredStyle: .alert)
-        let confirmAction = UIAlertAction(title: AccountDeletion.deleteAccount, style: .destructive) { ( _ ) in
+        alert.addDestructiveActionWithTitle(AccountDeletion.deleteAccount) { ( _ ) in
             self.requestAccountDeletion()
         }
-        let cancelAction = UIAlertAction(title: AccountDeletion.cancel, style: .cancel, handler: nil)
-
-        alert.addAction(confirmAction)
-        alert.addAction(cancelAction)
+        alert.addCancelActionWithTitle(AccountDeletion.cancel, handler: nil)
 
         present(alert, animated: true, completion: nil)
     }
