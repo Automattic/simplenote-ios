@@ -98,7 +98,7 @@ extension SPSettingsViewController {
         alert.addDestructiveActionWithTitle(AccountDeletion.deleteAccount) { ( _ ) in
             self.requestAccountDeletion()
         }
-        alert.addCancelActionWithTitle(AccountDeletion.cancel, handler: nil)
+        alert.addCancelActionWithTitle(AccountDeletion.cancel)
 
         present(alert, animated: true, completion: nil)
     }
@@ -122,11 +122,13 @@ extension SPSettingsViewController {
 
     private func presentSuccessAlert(email: String) {
         let alert = UIAlertController(title: AccountDeletion.succesAlertTitle, message: AccountDeletion.successMessage(email: email), preferredStyle: .alert)
+        alert.addCancelActionWithTitle(AccountDeletion.ok)
         present(alert, animated: true, completion: nil)
     }
 
     private func presentRequestFailedAlert() {
         let alert = UIAlertController(title: AccountDeletion.failureAlertTitle, message: AccountDeletion.failureAlertMessage, preferredStyle: .alert)
+        alert.addCancelActionWithTitle(AccountDeletion.ok)
         present(alert, animated: true, completion: nil)
     }
 }
@@ -137,7 +139,8 @@ private struct AccountDeletion {
     static let cancel = NSLocalizedString("Cancel", comment: "Cancel button title")
 
     static let succesAlertTitle = NSLocalizedString("Delete Account", comment: "Title for delete account alert")
-    static let successAlertMessage = NSLocalizedString("An email has been sent to %@. check your inbox and follow the instructions to confirm account deletion.", comment: "Delete account confirmation instructions")
+    static let successAlertMessage = NSLocalizedString("An email has been sent to %@ Check your inbox and follow the instructions to confirm account deletion.", comment: "Delete account confirmation instructions")
+    static let ok = NSLocalizedString("Ok", comment: "Confirm alert message")
 
     static func successMessage(email: String) -> String {
         String(format: successAlertMessage, email)
