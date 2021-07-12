@@ -1,10 +1,8 @@
 import Foundation
 
-// MARK: - SignupRemote
-//
-class SignupRemote: Remote {
-    func signup(with email: String, completion: @escaping (_ result: Result) -> Void) {
-        guard let request = request(with: email) else {
+class DeleteAccountRemote: Remote {
+    func requestDelete(_ user: SPUser, completion: @escaping (_ result: Result) -> Void) {
+        guard let request = request(with: user) else {
             completion(.failure(0, nil))
             return
         }
@@ -12,8 +10,8 @@ class SignupRemote: Remote {
         task(with: request, completion: completion)
     }
 
-    private func request(with email: String) -> URLRequest? {
-        guard let url = URL(string: SimplenoteConstants.signupURL) else {
+    private func request(with user: SPUser) -> URLRequest? {
+        guard let url = URL(string: SimplenoteConstants.accountDeletion) else {
             return nil
         }
 
@@ -22,7 +20,12 @@ class SignupRemote: Remote {
                                  timeoutInterval: RemoteConstants.timeout)
         request.httpMethod = RemoteConstants.Method.POST
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try? JSONEncoder().encode(["username": email.lowercased()])
+
+        let body = [
+            "username": user.email.lowercased(),
+            "token": user.authToken
+        ]
+        request.httpBody = try? JSONEncoder().encode(body)
 
         return request
     }
