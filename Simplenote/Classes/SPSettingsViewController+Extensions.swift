@@ -93,41 +93,35 @@ private extension BiometricAuthentication.Biometry {
 extension SPSettingsViewController {
 
     @objc
-    func presentDeleteAccountConfirmation() {
-        let alert = UIAlertController(title: AccountDeletion.deleteAccount, message: AccountDeletion.confirmAlertMessage, preferredStyle: .alert)
+    func deleteAccount() {
+        guard let user = SPAppDelegate.shared().simperium.user else {
+            return
+        }
+
+        let deletionController = accountDeletionController(for: user)
+
+        let alert = UIAlertController(title: AccountDeletion.deleteAccount,
+                                      message: AccountDeletion.confirmAlertMessage,
+                                      preferredStyle: .alert)
         alert.addDestructiveActionWithTitle(AccountDeletion.deleteAccount) { ( _ ) in
-            self.requestAccountDeletion()
+            deletionController.requestAccountDeletion(user)
         }
         alert.addCancelActionWithTitle(AccountDeletion.cancel)
 
         present(alert, animated: true, completion: nil)
     }
 
-    private func requestAccountDeletion() {
-        guard let user = SPAppDelegate.shared().simperium.user else {
-            return
+    private func accountDeletionController(for user: SPUser) -> AccountDeletionController {
+        let deletionController = AccountDeletionController()
+        deletionController.successHandler = {
+            self.presentSuccessAlert(for: user)
         }
 
-        SPTracker.trackDeleteAccountButttonTapped()
-        DeleteAccountRemote().requestDelete(user) { (result) in
-            switch result {
-            case .success:
-                self.presentSuccessAlert(email: user.email)
-            case .failure(let status, let error):
-                self.presentRequestFailedAlert()
-                NSLog("Delete Account Request Failed with status: %i Error: %@", [status, error?.localizedDescription ?? "Unknown Error"])
-            }
-        }
+        return deletionController
     }
 
-    private func presentSuccessAlert(email: String) {
-        let alert = UIAlertController(title: AccountDeletion.succesAlertTitle, message: AccountDeletion.successMessage(email: email), preferredStyle: .alert)
-        alert.addCancelActionWithTitle(AccountDeletion.ok)
-        present(alert, animated: true, completion: nil)
-    }
-
-    private func presentRequestFailedAlert() {
-        let alert = UIAlertController(title: AccountDeletion.failureAlertTitle, message: AccountDeletion.failureAlertMessage, preferredStyle: .alert)
+    private func presentSuccessAlert(for user: SPUser) {
+        let alert = UIAlertController(title: AccountDeletion.succesAlertTitle, message: AccountDeletion.successMessage(email: user.email), preferredStyle: .alert)
         alert.addCancelActionWithTitle(AccountDeletion.ok)
         present(alert, animated: true, completion: nil)
     }
@@ -145,7 +139,4 @@ private struct AccountDeletion {
     static func successMessage(email: String) -> String {
         String(format: successAlertMessage, email)
     }
-
-    static let failureAlertTitle = NSLocalizedString("Account Closure Error", comment: "Account deletion failed alert title")
-    static let failureAlertMessage = NSLocalizedString("Could not request account closure, please try again later", comment: "Account deletion failed alert message")
 }

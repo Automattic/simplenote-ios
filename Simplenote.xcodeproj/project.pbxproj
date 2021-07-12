@@ -418,6 +418,7 @@
 		BA55B06325F068650042582B /* NoticeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA55B06225F068650042582B /* NoticeController.swift */; };
 		BA5768DA269A7E90008B510E /* DeleteAccountRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5768D9269A7E90008B510E /* DeleteAccountRemote.swift */; };
 		BA5768E3269A803F008B510E /* Remote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5768E2269A803F008B510E /* Remote.swift */; };
+		BA5768EC269BE4D0008B510E /* AccountDeletionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5768EB269BE4D0008B510E /* AccountDeletionHandler.swift */; };
 		BA5C1C0725BF9D6C006E3820 /* SPDragBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5C1C0625BF9D6C006E3820 /* SPDragBar.swift */; };
 		BA5E5B7D264A148C00D0EE19 /* URLRequest+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5E5B7C264A148C00D0EE19 /* URLRequest+Simplenote.swift */; };
 		BA83478325F59F8B0059B797 /* markdown-default-contrast.css in Resources */ = {isa = PBXBuildFile; fileRef = BA83478225F59F8B0059B797 /* markdown-default-contrast.css */; };
@@ -952,6 +953,7 @@
 		BA55B06225F068650042582B /* NoticeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeController.swift; sourceTree = "<group>"; };
 		BA5768D9269A7E90008B510E /* DeleteAccountRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountRemote.swift; sourceTree = "<group>"; };
 		BA5768E2269A803F008B510E /* Remote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Remote.swift; sourceTree = "<group>"; };
+		BA5768EB269BE4D0008B510E /* AccountDeletionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDeletionHandler.swift; sourceTree = "<group>"; };
 		BA5C1C0625BF9D6C006E3820 /* SPDragBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPDragBar.swift; sourceTree = "<group>"; };
 		BA5E5B7C264A148C00D0EE19 /* URLRequest+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Simplenote.swift"; sourceTree = "<group>"; };
 		BA83478225F59F8B0059B797 /* markdown-default-contrast.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "markdown-default-contrast.css"; sourceTree = "<group>"; };
@@ -1855,6 +1857,7 @@
 				BA4C6CFB264C744300B723A7 /* SeparatorsView.swift */,
 				BA5768D9269A7E90008B510E /* DeleteAccountRemote.swift */,
 				BA5768E2269A803F008B510E /* Remote.swift */,
+				BA5768EB269BE4D0008B510E /* AccountDeletionHandler.swift */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -2789,6 +2792,7 @@
 				B5BE054E1AB75902002417BF /* NSProcessInfo+Util.m in Sources */,
 				BA4C6CFC264C744300B723A7 /* SeparatorsView.swift in Sources */,
 				375D24B821E01131007AB25A /* hash.c in Sources */,
+				BA5768EC269BE4D0008B510E /* AccountDeletionHandler.swift in Sources */,
 				A6D5AE6525483F8A00326C76 /* NSTextStorage+Simplenote.swift in Sources */,
 				A61471A825D6BC700065D849 /* NoteEditorTagSuggestionsViewController.swift in Sources */,
 				A6E02758256E52F3002054DF /* PinLockController.swift in Sources */,
