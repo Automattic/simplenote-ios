@@ -36,11 +36,11 @@ class AccountVerificationController: NSObject {
 
     /// Remote service
     ///
-    private let remote: AccountVerificationRemote
+    private let remote: AccountRemote
 
     /// Initialize with user's email
     ///
-    init(email: String, remote: AccountVerificationRemote = .init()) {
+    init(email: String, remote: AccountRemote = .init()) {
         self.email = email
         self.remote = remote
         super.init()

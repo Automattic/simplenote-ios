@@ -5,7 +5,7 @@ class AccountDeletionController {
 
     func requestAccountDeletion(_ user: SPUser) {
         SPTracker.trackDeleteAccountButttonTapped()
-        DeleteAccountRemote().requestDelete(user) { (result) in
+        AccountRemote().requestDelete(user) { (result) in
             switch result {
             case .success:
                 self.successHandler?()

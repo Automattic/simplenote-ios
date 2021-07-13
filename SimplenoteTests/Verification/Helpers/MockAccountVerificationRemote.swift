@@ -1,7 +1,7 @@
 import XCTest
 @testable import Simplenote
 
-class MockAccountVerificationRemote: AccountVerificationRemote {
+class MockAccountVerificationRemote: AccountRemote {
     private var pendingVerifications: [(email: String, completion: (Remote.Result) -> Void)] = []
 
     override func verify(email: String, completion: @escaping (Remote.Result) -> Void) {

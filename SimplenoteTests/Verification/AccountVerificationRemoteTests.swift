@@ -5,7 +5,7 @@ import XCTest
 //
 class AccountVerificationRemoteTests: XCTestCase {
     private lazy var urlSession = MockURLSession()
-    private lazy var remote = AccountVerificationRemote(urlSession: urlSession)
+    private lazy var remote = AccountRemote(urlSession: urlSession)
 
     func testSuccessWhenStatusCodeIs2xx() {
         for _ in 0..<5 {
