@@ -97,6 +97,7 @@ extension SPSettingsViewController {
         guard let user = SPAppDelegate.shared().simperium.user else {
             return
         }
+        SPTracker.trackDeleteAccountButttonTapped()
 
         let deletionController = accountDeletionController(for: user)
 
