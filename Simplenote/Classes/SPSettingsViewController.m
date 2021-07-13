@@ -556,7 +556,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
         } case SPOptionsViewSectionsDelete: {
             switch (indexPath.row) {
                 case SPOptionsDeleteRowTitle: {
-                    [self deleteAccount];
+                    [self deleteAccountWasPressed];
                     break;
                 }
             }

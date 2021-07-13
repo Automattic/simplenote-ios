@@ -93,32 +93,30 @@ private extension BiometricAuthentication.Biometry {
 extension SPSettingsViewController {
 
     @objc
-    func deleteAccount() {
+    func deleteAccountWasPressed() {
         guard let user = SPAppDelegate.shared().simperium.user else {
             return
         }
         SPTracker.trackDeleteAccountButttonTapped()
 
-        let deletionController = accountDeletionController(for: user)
-
-        let alert = UIAlertController(title: AccountDeletion.deleteAccount,
-                                      message: AccountDeletion.confirmAlertMessage,
-                                      preferredStyle: .alert)
-        alert.addDestructiveActionWithTitle(AccountDeletion.deleteAccount) { ( _ ) in
-            deletionController.requestAccountDeletion(user)
-        }
-        alert.addCancelActionWithTitle(AccountDeletion.cancel)
-
-        present(alert, animated: true, completion: nil)
-    }
-
-    private func accountDeletionController(for user: SPUser) -> AccountDeletionController {
         let deletionController = AccountDeletionController()
         deletionController.successHandler = {
             self.presentSuccessAlert(for: user)
         }
 
-        return deletionController
+        presentAccountDeletionConfirmation { (_) in
+            deletionController.requestAccountDeletion(user)
+        }
+    }
+
+    private func presentAccountDeletionConfirmation(onConfirm: @escaping ((UIAlertAction) -> Void)) {
+        let alert = UIAlertController(title: AccountDeletion.deleteAccount,
+                                      message: AccountDeletion.confirmAlertMessage,
+                                      preferredStyle: .alert)
+        alert.addDestructiveActionWithTitle(AccountDeletion.deleteAccount, handler: onConfirm)
+        alert.addCancelActionWithTitle(AccountDeletion.cancel)
+
+        present(alert, animated: true, completion: nil)
     }
 
     private func presentSuccessAlert(for user: SPUser) {
