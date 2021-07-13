@@ -42,7 +42,8 @@ class NoteEditor {
             }
 
             let expectation = XCTNSPredicateExpectation(predicate: isHittablePredicate, object: .none)
-            XCTWaiter().wait(for: [expectation], timeout: 0.5)
+            XCTWaiter().wait(for: [expectation], timeout: averageLoadTimeout)
+            // end of wait
 
             // Swipe up fast to show tags input, which disappears if pasted text is large
             // enough to push tags input off screen
@@ -57,7 +58,15 @@ class NoteEditor {
     }
 
     class func setFocus() {
-        _ = app.textViews.firstMatch.waitForExistence(timeout: averageLoadTimeout)
+        // Waiting for the TextView to become hittable before using it:
+        let isHittablePredicate = NSPredicate { _, _ in
+            app.textViews.firstMatch.isHittable == true
+        }
+
+        let expectation = XCTNSPredicateExpectation(predicate: isHittablePredicate, object: .none)
+        XCTWaiter().wait(for: [expectation], timeout: averageLoadTimeout)
+        // end of wait
+
         app.textViews.firstMatch.tap()
     }
 
