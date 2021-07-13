@@ -9,21 +9,22 @@ class AccountVerificationRemoteTests: XCTestCase {
 
     func testSuccessWhenStatusCodeIs2xx() {
         for _ in 0..<5 {
-            test(withStatusCode: Int.random(in: 200..<300), expectedResult: true)
+            test(withStatusCode: Int.random(in: 200..<300), expectedResult: Remote.Result.success)
         }
     }
 
     func testFailureWhenStatusCodeIs4xxOr5xx() {
         for _ in 0..<5 {
-            test(withStatusCode: Int.random(in: 400..<600), expectedResult: false)
+            let statusCode = Int.random(in: 400..<600)
+            test(withStatusCode: statusCode, expectedResult: Remote.Result.failure(statusCode, nil))
         }
     }
 
     func testFailureWhenNoResponse() {
-        test(withStatusCode: nil, expectedResult: false)
+        test(withStatusCode: nil, expectedResult: Remote.Result.failure(0, nil))
     }
 
-    private func test(withStatusCode statusCode: Int?, expectedResult: Bool) {
+    private func test(withStatusCode statusCode: Int?, expectedResult: Remote.Result) {
         urlSession.data = (nil,
                            response(with: statusCode),
                            nil)
@@ -35,7 +36,7 @@ class AccountVerificationRemoteTests: XCTestCase {
             expectation.fulfill()
         }
 
-        waitForExpectations(timeout: 1, handler: nil)
+        waitForExpectations(timeout: 3, handler: nil)
     }
 
     private func response(with statusCode: Int?) -> HTTPURLResponse? {
