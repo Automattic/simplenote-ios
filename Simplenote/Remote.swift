@@ -16,15 +16,6 @@ class Remote {
 
         case success
         case failure(_ statusCode: Int, _ error: Error?)
-
-        static func random() -> Result {
-            let random = arc4random_uniform(1)
-            if random == 0 {
-                return .failure(0, nil)
-            } else {
-                return .success
-            }
-        }
     }
 
     private let urlSession: URLSession
