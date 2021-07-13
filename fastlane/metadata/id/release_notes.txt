@@ -1,3 +1,1 @@
--   Perbaikan bug yang membuat tombol Catatan Baru tidak tampak
--   Alur Kunci Biometri yang Baru
-
+- Mode edit dipindahkan ke aksi tekan lama dan bilah catatan baru dihapus

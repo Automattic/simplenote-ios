@@ -1,3 +1,1 @@
--   Fehler behoben, durch den der Button für neue Notizen nicht angezeigt wurde
--   Neuer Biometriesperrvorgang
-
+- Wir haben den Bearbeitungsmodus in ein langes Betätigen der Taste verschoben und die neue Notizleiste entfernt

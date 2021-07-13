@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-06-23 17:54:50+0000 */
+/* Translation-Revision-Date: 2021-06-29 11:32:19+0000 */
 /* Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ru */
@@ -226,7 +226,7 @@
 /* PinLock screen \"delete\" button */
 "Delete" = "Удалить";
 
-/* Delet a note from trash */
+/* Delete a note from trash */
 "Delete Note" = "Удалить заметку";
 
 /* Verb: Delete notes and log out of the app */
@@ -583,6 +583,9 @@
 
 /* No comment provided by engineer. */
 "Security" = "Безопасность";
+
+/* Select multiple notes at once */
+"Select" = "Выбор";
 
 /* Select all Button Label
    Select all button title */
