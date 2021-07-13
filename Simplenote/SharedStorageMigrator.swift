@@ -68,7 +68,7 @@ class SharedStorageMigrator: NSObject {
 
     private func loadPersistentStorage(at storagePath: URL, journaling: Bool) throws {
         guard let mom = NSManagedObjectModel(contentsOf: storageSettings.modelURL) else {
-            throw NSError(domain: "SharedStorageMigrator", code: 100, userInfo: nil)
+            fatalError("Could not load Managed Object Model at path: \(storagePath.path)")
         }
         let psc = NSPersistentStoreCoordinator(managedObjectModel: mom)
 
