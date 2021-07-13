@@ -1333,7 +1333,6 @@
 				A6A648A225AC3AC00074A094 /* AccountVerificationViewController.swift */,
 				A6A648A325AC3AC00074A094 /* AccountVerificationViewController.xib */,
 				A6A648BA25AC85D40074A094 /* AccountVerificationController.swift */,
-				A6CC0B0625B8287F00F12A85 /* AccountVerificationRemote.swift */,
 			);
 			path = Verification;
 			sourceTree = "<group>";
@@ -1697,7 +1696,6 @@
 				B56A695E22F9D53300B90398 /* SPAuthViewController.xib */,
 				B5AB169722FA124F00B4EBA5 /* SPSheetController.swift */,
 				B5AB169922FA128000B4EBA5 /* SPSheetController.xib */,
-				A6C7647F25E9131C00A39067 /* SignupRemote.swift */,
 				A6CDD9C725F0163D00E0BC4D /* MagicLinkAuthenticator.swift */,
 				A628BEB425ECD97900121B64 /* SignupVerificationViewController.swift */,
 				A628BEB525ECD97900121B64 /* SignupVerificationViewController.xib */,
@@ -1825,6 +1823,7 @@
 		B5BE053E1AB751FD002417BF /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				BA57692A269D2103008B510E /* Remotes */,
 				B51F6DCF2460C3D80074DDD9 /* Onboarding */,
 				B5CBEF3F22D3AD92009DBE67 /* MigrationsHandler.swift */,
 				B5D3FCCF201F96AC00A813B7 /* StatusChecker.h */,
@@ -1855,8 +1854,6 @@
 				BA55124D2600210B00D8F882 /* TimerFactory.swift */,
 				BAB01791260AAE93007A9CC3 /* NoticeFactory.swift */,
 				BA4C6CFB264C744300B723A7 /* SeparatorsView.swift */,
-				BA5768D9269A7E90008B510E /* DeleteAccountRemote.swift */,
-				BA5768E2269A803F008B510E /* Remote.swift */,
 				BA5768EB269BE4D0008B510E /* AccountDeletionHandler.swift */,
 			);
 			name = Tools;
@@ -1964,6 +1961,17 @@
 				BA4499B225ED8AB0000C563E /* NoticeView.swift */,
 			);
 			name = Notices;
+			sourceTree = "<group>";
+		};
+		BA57692A269D2103008B510E /* Remotes */ = {
+			isa = PBXGroup;
+			children = (
+				A6C7647F25E9131C00A39067 /* SignupRemote.swift */,
+				A6CC0B0625B8287F00F12A85 /* AccountVerificationRemote.swift */,
+				BA5768D9269A7E90008B510E /* DeleteAccountRemote.swift */,
+				BA5768E2269A803F008B510E /* Remote.swift */,
+			);
+			name = Remotes;
 			sourceTree = "<group>";
 		};
 		D864B15525CAE25000F9B73E /* SimplenoteUITests */ = {
