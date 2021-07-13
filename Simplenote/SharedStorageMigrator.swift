@@ -128,7 +128,5 @@ enum MigrationResult {
 }
 
 private struct Constants {
-    static let journalMode = "journal_mode"
-    static let journalSetting = "DELETE"
-    static let journalModeDisabled = [Constants.journalMode: Constants.journalSetting]
+    static let journalModeDisabled = ["journal_mode": "DELETE"]
 }
