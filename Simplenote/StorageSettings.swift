@@ -24,10 +24,17 @@ class StorageSettings: NSObject {
     var sharedStorageURL: URL {
         fileManager.sharedContainerURL.appendingPathComponent(Constants.sqlFile)
     }
+
+    /// URL for backing up the legacy storage
+    ///
+    var legacyBackupURL: URL {
+        legacyStorageURL.appendingPathExtension(Constants.oldExtension)
+    }
 }
 
 private struct Constants {
     static let sqlFile = "Simplenote.sqlite"
     static let modelName = "Simplenote"
     static let modelExtension = "momd"
+    static let oldExtension = "old"
 }
