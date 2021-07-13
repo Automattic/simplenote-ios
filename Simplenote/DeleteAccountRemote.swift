@@ -7,7 +7,7 @@ class DeleteAccountRemote: Remote {
             return
         }
 
-        task(with: request, completion: completion)
+        performDataTask(with: request, completion: completion)
     }
 
     private func request(with user: SPUser) -> URLRequest? {

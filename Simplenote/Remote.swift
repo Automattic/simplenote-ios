@@ -27,7 +27,7 @@ class Remote {
     /// Send  task for remote
     /// Sublcassing Notes: To be able to send a task it is required to first setup the URL request for the task to use
     ///
-    func task(with request: URLRequest, completion: @escaping (_ result: Result) -> Void) {
+    func performDataTask(with request: URLRequest, completion: @escaping (_ result: Result) -> Void) {
         let dataTask = urlSession.dataTask(with: request) { (data, response, error) in
             DispatchQueue.main.async {
                 let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
