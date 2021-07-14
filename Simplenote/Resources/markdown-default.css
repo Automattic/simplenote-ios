@@ -74,7 +74,6 @@ html {
 
 .note-detail-markdown h5, .note-detail-markdown h6 {
     font-size: 1em;
-    text-transform: uppercase;
 }
 
 .note-detail-markdown #title {
