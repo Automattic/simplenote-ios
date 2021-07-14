@@ -45,6 +45,7 @@ ENV['APP_STORE_STRINGS_FILE_NAME']='AppStoreStrings.pot'
 ENV["PUBLIC_CONFIG_FILE"]="./config/Version.Public.xcconfig"
 ENV["DOWNLOAD_METADATA"]="./fastlane/download_metadata.swift"
 REPOSITORY_NAME="simplenote-ios"
+APP_STORE_BUNDLE_IDENTIFIER = 'com.codality.NotationalFlow'.freeze
 
 # Use this instead of getting values from ENV directly
 # It will throw an error if the requested value is missing
@@ -348,10 +349,12 @@ end
       export_team_id: ENV["INT_EXPORT_TEAM_ID"],
       export_options: {
         method: "enterprise",
-        provisioningProfiles: {
-          "com.codality.NotationalFlow.Internal" => "match InHouse com.codality.NotationalFlow.Internal",
-          "com.codality.NotationalFlow.Internal.Share" => "match InHouse com.codality.NotationalFlow.Internal.Share"
-      }})
+        provisioningProfiles: simplenote_provisioning_profiles(
+          root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Internal",
+          match_type: 'InHouse'
+        )
+      }
+    )
 
     sh("mv ../build/Simplenote.ipa \"../build/Simplenote Internal.ipa\"")
 
@@ -398,10 +401,7 @@ end
       export_options: {
         method: "app-store",
         export_team_id: ENV["EXT_EXPORT_TEAM_ID"],
-        provisioningProfiles: {
-          "com.codality.NotationalFlow" => "match AppStore com.codality.NotationalFlow",
-          "com.codality.NotationalFlow.Share" => "match AppStore com.codality.NotationalFlow.Share"
-        }
+        provisioningProfiles: simplenote_provisioning_profiles
       }
     )
 
@@ -513,10 +513,12 @@ end
       export_team_id: ENV["INT_EXPORT_TEAM_ID"],
       export_options: {
         method: "enterprise",
-        provisioningProfiles: {
-          "com.codality.NotationalFlow.Alpha" => "match InHouse com.codality.NotationalFlow.Alpha",
-          "com.codality.NotationalFlow.Alpha.Share" => "match InHouse com.codality.NotationalFlow.Alpha.Share"
-      }})
+        provisioningProfiles: simplenote_provisioning_profiles(
+          root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Alpha",
+          match_type: 'InHouse'
+        )
+      }
+    )
 
     sh("mv ../build/Simplenote.ipa \"../build/Simplenote Alpha.ipa\"")
 
@@ -798,16 +800,13 @@ end
 ########################################################################
 # Fastlane match code signing
 ########################################################################
+
   private_lane :alpha_code_signing do |options|
     match(
       type: "enterprise",
       team_id: get_required_env("INT_EXPORT_TEAM_ID"),
       readonly: options[:readonly] || is_ci,
-      app_identifier: [
-        "com.codality.NotationalFlow.Alpha",
-        "com.codality.NotationalFlow.Alpha.Share",
-        "com.codality.NotationalFlow.Alpha.Widgets",
-      ]
+      app_identifier: simplenote_app_identifiers(root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Alpha")
     )
   end
 
@@ -816,11 +815,7 @@ end
       type: "enterprise",
       team_id: get_required_env("INT_EXPORT_TEAM_ID"),
       readonly: options[:readonly] || is_ci,
-      app_identifier: [
-        "com.codality.NotationalFlow.Internal",
-        "com.codality.NotationalFlow.Internal.Share",
-        "com.codality.NotationalFlow.Internal.Widgets",
-      ]
+      app_identifier: simplenote_app_identifiers(root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Internal")
     )
   end
 
@@ -829,13 +824,34 @@ end
       type: "appstore",
       team_id: get_required_env("EXT_EXPORT_TEAM_ID"),
       readonly: options[:readonly] || is_ci,
-      app_identifier: [
-        "com.codality.NotationalFlow",
-        "com.codality.NotationalFlow.Share",
-        "com.codality.NotationalFlow.Widgets",
-      ],
+      app_identifier: simplenote_app_identifiers,
       template_name: "NotationalFlow Keychain Access (Distribution)",
     )
+  end
+
+  # Compiles the array of bundle identifiers for the different targets that
+  # make up the Simplenote app, to be used as the `app_identifier` parameter
+  # for the `match` action.
+  def simplenote_app_identifiers(root_bundle_id: APP_STORE_BUNDLE_IDENTIFIER)
+    extension_bundle_ids =
+      %w[Share Widgets Intents]
+      .map { |suffix| "#{root_bundle_id}.#{suffix}" }
+
+    [root_bundle_id, *extension_bundle_ids]
+  end
+
+  # Compiles the dictionary mapping of the bundle identifiers and provisioning
+  # profiles to be used in the `export_options > provisioningProfiles`
+  # parameter for the `build_app`/`gym` action.
+  def simplenote_provisioning_profiles(root_bundle_id: APP_STORE_BUNDLE_IDENTIFIER, match_type: 'AppStore')
+    # FIXME: replace the array below with the following call once established
+    # the impact of adding the mapping for the Widgets extension, which is
+    # something we haven't had up to this point.
+    #
+    # simplenote_app_identifiers(root_bundle_id: root_bundle_id)
+    [root_bundle_id, "#{root_bundle_id}.Share", "#{root_bundle_id}.Intents"]
+      .map { |key| [key, "match #{match_type} #{key}"] }
+      .to_h
   end
 
 ########################################################################
