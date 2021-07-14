@@ -844,15 +844,14 @@ end
   # profiles to be used in the `export_options > provisioningProfiles`
   # parameter for the `build_app`/`gym` action.
   def simplenote_provisioning_profiles(root_bundle_id: APP_STORE_BUNDLE_IDENTIFIER, match_type: 'AppStore')
-    # FIXME: replace the array below with the following once established the
-    # impact of adding the mapping for the Widgets extension, which is
+    # FIXME: replace the array below with the following call once established
+    # the impact of adding the mapping for the Widgets extension, which is
     # something we haven't had up to this point.
     #
-    # bundle_ids = simplenote_app_identifiers(root_bundle_id: root_bundle_id)
-    bundle_ids = [
-      root_bundle_id, "#{root_bundle_id}.Share", "#{root_bundle_id}.Intents"
-    ]
-    bundle_ids.map { |key| [key, "match #{match_type} #{key}"] }.to_h
+    # simplenote_app_identifiers(root_bundle_id: root_bundle_id)
+    [root_bundle_id, "#{root_bundle_id}.Share", "#{root_bundle_id}.Intents"]
+      .map { |key| [key, "match #{match_type} #{key}"] }
+      .to_h
   end
 
 ########################################################################
