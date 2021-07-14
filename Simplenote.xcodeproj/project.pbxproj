@@ -452,6 +452,7 @@
 		BAB5768726703EA000B0C56F /* NotePreviewWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5767B26703E8100B0C56F /* NotePreviewWidgetView.swift */; };
 		BAB576A826703F4500B0C56F /* NotePreviewWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5769226703F0E00B0C56F /* NotePreviewWidgetProvider.swift */; };
 		BAB576C92670514500B0C56F /* NotePreviewWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB576BD2670512C00B0C56F /* NotePreviewWidget.swift */; };
+		BAB74CC1269E79C100EC04AF /* NoteListWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB74CC0269E79C100EC04AF /* NoteListWidget.swift */; };
 		BAE08626261282D1009D40CD /* Note+Publish.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE08625261282D1009D40CD /* Note+Publish.swift */; };
 		BAFA93DA265DCFCA0009DCFB /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAFA93D9265DCFCA0009DCFB /* WidgetKit.framework */; };
 		BAFA93DC265DCFCA0009DCFB /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAFA93DB265DCFCA0009DCFB /* SwiftUI.framework */; };
@@ -1031,6 +1032,7 @@
 		BAB5767B26703E8100B0C56F /* NotePreviewWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotePreviewWidgetView.swift; sourceTree = "<group>"; };
 		BAB5769226703F0E00B0C56F /* NotePreviewWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotePreviewWidgetProvider.swift; sourceTree = "<group>"; };
 		BAB576BD2670512C00B0C56F /* NotePreviewWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotePreviewWidget.swift; sourceTree = "<group>"; };
+		BAB74CC0269E79C100EC04AF /* NoteListWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListWidget.swift; sourceTree = "<group>"; };
 		BAE08625261282D1009D40CD /* Note+Publish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+Publish.swift"; sourceTree = "<group>"; };
 		BAFA93D8265DCFCA0009DCFB /* SimplenoteWidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SimplenoteWidgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAFA93D9265DCFCA0009DCFB /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -2064,6 +2066,7 @@
 			children = (
 				BAFA93EE265DE3B90009DCFB /* NewNoteWidget.swift */,
 				BAB576BD2670512C00B0C56F /* NotePreviewWidget.swift */,
+				BAB74CC0269E79C100EC04AF /* NoteListWidget.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -3388,6 +3391,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAB74CC1269E79C100EC04AF /* NoteListWidget.swift in Sources */,
 				BA1D03AA269D5E0600DD1B65 /* NoteListWidgetProvider.swift in Sources */,
 				BA1D039E269D5D5800DD1B65 /* NoteListWidgetView.swift in Sources */,
 				BAB5765B26703D0600B0C56F /* NoteWidgetIntent.intentdefinition in Sources */,
