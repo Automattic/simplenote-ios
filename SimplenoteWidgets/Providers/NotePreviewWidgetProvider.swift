@@ -2,7 +2,8 @@ import WidgetKit
 
 struct NotePreviewWidgetEntry: TimelineEntry {
     let date: Date
-    let text: String
+    let title: String
+    let body: String
 }
 
 struct NotePreviewWidgetProvider: IntentTimelineProvider {
@@ -10,11 +11,11 @@ struct NotePreviewWidgetProvider: IntentTimelineProvider {
     typealias Entry = NotePreviewWidgetEntry
 
     func placeholder(in context: Context) -> NotePreviewWidgetEntry {
-        return NotePreviewWidgetEntry(date: Date(), text: "Placeholder")
+        return NotePreviewWidgetEntry(date: Date(), title: "Placeholder", body: "Body Placeholder")
     }
 
     func getSnapshot(for configuration: NoteWidgetIntent, in context: Context, completion: @escaping (NotePreviewWidgetEntry) -> Void) {
-        let entry = NotePreviewWidgetEntry(date: Date(), text: "Placeholder")
+        let entry = NotePreviewWidgetEntry(date: Date(), title: "Placeholder", body: "Body Placehoder")
 
         completion(entry)
     }
@@ -24,7 +25,7 @@ struct NotePreviewWidgetProvider: IntentTimelineProvider {
             return
         }
 
-        let entry = NotePreviewWidgetEntry(date: Date(), text: note.identifier ?? "Error")
+        let entry = NotePreviewWidgetEntry(date: Date(), title: note.identifier ?? "Error", body: note.displayString )
         let timeline = Timeline(entries: [entry], policy: .never)
 
         completion(timeline)
