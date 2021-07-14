@@ -4,18 +4,20 @@ import WidgetKit
 struct NotePreviewWidgetView: View {
     var entry: NotePreviewWidgetEntry
     var body: some View {
-        HStack(alignment: .top) {
-            VStack(alignment: .leading) {
-                WidgetHeaderView(text: entry.title)
-                    .padding(.bottom, 22)
-                Text(entry.body)
-                    .font(.body)
+        GeometryReader() { geometry in
+            HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: 0) {
+                    WidgetHeaderView(text: entry.title)
+                        .padding(.bottom, 22)
+                    Text(entry.body)
+                        .font(.body)
+                }
+                .padding(.leading, 20)
+                .padding(.trailing, 20)
+                .padding(.top, 20)
             }
-            .padding(.leading, 20)
-            .padding(.trailing, 20)
-            .padding(.top, 20)
+            .ignoresSafeArea()
         }
-        .ignoresSafeArea()
     }
 }
 
