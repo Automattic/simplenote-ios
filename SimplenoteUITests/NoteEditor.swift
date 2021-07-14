@@ -58,7 +58,7 @@ class NoteEditor {
     }
 
     class func setFocus() {
-        // Waiting for the TextView to become hittable before using it:
+        // Waiting for the TextView to become hittable before using it
         let isHittablePredicate = NSPredicate { _, _ in
             app.textViews.firstMatch.isHittable == true
         }
