@@ -7,25 +7,34 @@ struct NoteListWidgetEntry: TimelineEntry {
 }
 
 struct NoteListWidgetProvider: IntentTimelineProvider {
-    typealias Intent = NoteWidgetIntent
+    typealias Intent = ListWidgetIntent
     typealias Entry = NoteListWidgetEntry
 
     func placeholder(in context: Context) -> NoteListWidgetEntry {
         return NoteListWidgetEntry(date: Date(), title: "Placeholder", noteList: ["Body Placeholder"])
     }
 
-    func getSnapshot(for configuration: NoteWidgetIntent, in context: Context, completion: @escaping (NoteListWidgetEntry) -> Void) {
+    func getSnapshot(for configuration: ListWidgetIntent, in context: Context, completion: @escaping (NoteListWidgetEntry) -> Void) {
         let entry = NoteListWidgetEntry(date: Date(), title: "Placeholder", noteList: ["Body Placeholder"])
 
         completion(entry)
     }
 
-    func getTimeline(for configuration: NoteWidgetIntent, in context: Context, completion: @escaping (Timeline<NoteListWidgetEntry>) -> Void) {
-        guard let note = configuration.note else {
+    func getTimeline(for configuration: ListWidgetIntent, in context: Context, completion: @escaping (Timeline<NoteListWidgetEntry>) -> Void) {
+        guard let list = configuration.list else {
             return
         }
 
-        let entry = NoteListWidgetEntry(date: Date(), title: note.identifier ?? "Error", noteList: [""] )
+        let entry = NoteListWidgetEntry(date: Date(), title: list.identifier ?? "No List", noteList: [
+            "Twelve Tone Serialism",
+            "Lorem Ipsum",
+            "Post Draft",
+            "Meeting Notes, Apr 21",
+            "Brain Anatomy",
+            "Color Quotes",
+            "The Valet’s Tragedy",
+            "Lorem Ipsum"
+        ] )
         let timeline = Timeline(entries: [entry], policy: .never)
 
         completion(timeline)

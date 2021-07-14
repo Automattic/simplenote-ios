@@ -25,7 +25,10 @@ struct NotePreviewWidgetProvider: IntentTimelineProvider {
             return
         }
 
-        let entry = NotePreviewWidgetEntry(date: Date(), title: note.identifier ?? "Error", body: note.displayString )
+        let title = "Twelve Tone Serialism"
+        let body = "The twelve-tone technique is often closely related with the compositional style, serialism. Fundamentally, twelve-tone serialism is a compositional technique where all 12 notes of the chromatic scale are played with equal frequency throughout the piece without any emphasis on any one note. For this reason, twelve-tone serialism avoids being in any key. Arnold Schoenberg was arguably the most influential composers who embraced the twelve-tone technique. Schoenberg described the system as a “Method of composing with twelve tones which are related only with one another.”"
+
+        let entry = NotePreviewWidgetEntry(date: Date(), title: title, body: body )
         let timeline = Timeline(entries: [entry], policy: .never)
 
         completion(timeline)
