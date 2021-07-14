@@ -824,7 +824,7 @@ end
       type: "appstore",
       team_id: get_required_env("EXT_EXPORT_TEAM_ID"),
       readonly: options[:readonly] || is_ci,
-      app_identifier: simplenote_app_identifiers(root_bundle_id: APP_STORE_BUNDLE_IDENTIFIER),
+      app_identifier: simplenote_app_identifiers,
       template_name: "NotationalFlow Keychain Access (Distribution)",
     )
   end
