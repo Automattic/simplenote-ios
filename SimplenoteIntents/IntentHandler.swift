@@ -24,3 +24,19 @@ extension IntentHandler: NoteWidgetIntentHandling {
         completion(collection, nil)
     }
 }
+
+extension IntentHandler: ListWidgetIntentHandling {
+    func provideListOptionsCollection(for intent: ListWidgetIntent, with completion: @escaping (INObjectCollection<SPList>?, Error?) -> Void) {
+        let titles =  ["All Notes", "Composition"]
+
+        var lists: [SPList] = []
+
+        for placeholder in titles {
+            let list = SPList(identifier: placeholder, display: placeholder)
+            lists.append(list)
+        }
+
+        let collection = INObjectCollection(items: lists)
+        completion(collection, nil)
+    }
+}
