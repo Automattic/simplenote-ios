@@ -233,6 +233,18 @@ end
   lane :finalize_release do | options |
     ios_finalize_prechecks(options)
     unless ios_current_branch_is_hotfix
+      UI.message('Checking app strings translation status...')
+      check_translation_progress(
+        glotpress_url: 'https://translate.wordpress.com/projects/simplenote/ios/',
+        abort_on_violations: false
+      )
+
+      UI.message("Checking release notes strings translation status...")
+      check_translation_progress(
+        glotpress_url: 'https://translate.wordpress.com/projects/simplenote/ios/release-notes/',
+        abort_on_violations: false
+      )
+
       ios_update_metadata(options)
       ios_lint_localizations(input_dir: 'Simplenote', allow_retry: true)
       ios_bump_version_beta() unless ios_current_branch_is_hotfix
