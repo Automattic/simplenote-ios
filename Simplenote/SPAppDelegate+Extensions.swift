@@ -10,7 +10,7 @@ extension SPAppDelegate {
     ///
     @objc
     func setupSimperium() {
-        simperium = Simperium(model: managedObjectModel, context: managedObjectContext, coordinator: persistentStoreCoordinator)
+        simperium = Simperium(model: coreDataManager.managedObjectModel, context: coreDataManager.managedObjectContext, coordinator: coreDataManager.persistentStoreCoordinator)
 
 #if USE_VERBOSE_LOGGING
         simperium.verboseLoggingEnabled = true
@@ -403,5 +403,36 @@ extension SPAppDelegate {
             note.deleted ? nil : note.simperiumKey
         }
         EditorFactory.shared.scrollPositionCache.cleanup(keeping: allIdentifiers)
+    }
+}
+
+// MARK: - Core Data
+//
+extension SPAppDelegate {
+    @objc
+    var managedObjectContext: NSManagedObjectContext {
+        coreDataManager.managedObjectContext
+    }
+
+    @objc
+    func setupStorage() {
+        let migrationResult = SharedStorageMigrator().performMigrationIfNeeded()
+
+        do {
+            try setupCoreData(migrationResult: migrationResult)
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }
+
+    private func setupCoreData(migrationResult: MigrationResult) throws {
+        let settings = StorageSettings()
+
+        switch migrationResult {
+        case .notNeeded, .success:
+            coreDataManager = try CoreDataManager(settings.sharedStorageURL)
+        case .failed:
+            coreDataManager = try CoreDataManager(settings.legacyStorageURL)
+        }
     }
 }

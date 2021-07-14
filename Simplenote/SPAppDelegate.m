@@ -40,9 +40,6 @@
 
 @interface SPAppDelegate ()
 
-@property (strong, nonatomic) NSManagedObjectContext        *managedObjectContext;
-@property (strong, nonatomic) NSManagedObjectModel          *managedObjectModel;
-@property (strong, nonatomic) NSPersistentStoreCoordinator  *persistentStoreCoordinator;
 @property (weak,   nonatomic) SPModalActivityIndicator      *signOutActivityIndicator;
 
 @end
@@ -115,15 +112,14 @@
     [nc addObserver:self selector:@selector(themeDidChange) name:SPSimplenoteThemeChangedNotification object:nil];
 }
 
-
 #pragma mark ================================================================================
 #pragma mark AppDelegate Methods
 #pragma mark ================================================================================
 
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey,id> *)launchOptions
 {
-
     // Setup Frameworks
+    [self setupStorage];
     [self setupThemeNotifications];
     [self setupSimperium];
     [self setupAuthenticator];
@@ -267,63 +263,6 @@
     self.window.backgroundColor = [UIColor simplenoteBackgroundColor];
     self.window.tintColor = [UIColor simplenoteTintColor];
 }
-
-
-#pragma mark ================================================================================
-#pragma mark Core Data stack
-#pragma mark ================================================================================
-
-- (NSManagedObjectContext *)managedObjectContext
-{
-    if (_managedObjectContext != nil) {
-        return _managedObjectContext;
-    }
-    
-    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (coordinator != nil) {
-        _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-        [_managedObjectContext setUndoManager:nil];
-    }
-    return _managedObjectContext;
-}
-
-- (NSManagedObjectModel *)managedObjectModel
-{
-    if (_managedObjectModel != nil) {
-        return _managedObjectModel;
-    }
-	
-    NSURL *modelURL = [NSURL fileURLWithPath: [[NSBundle mainBundle]  pathForResource:@"Simplenote" ofType:@"momd"]];
-    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
-    return _managedObjectModel;
-}
-
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinator
-{
-    if (_persistentStoreCoordinator != nil) {
-        return _persistentStoreCoordinator;
-    }
-    
-    //NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Simplenote.sqlite"];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *path = [documentsDirectory stringByAppendingPathComponent:@"Simplenote.sqlite"];
-    NSURL *storeURL = [NSURL fileURLWithPath:path];
-    NSError *error = nil;
-    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    
-    // Perform automatic, lightweight migration
-    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
-    
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error])
-    {
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
-
-    return _persistentStoreCoordinator;
-}
-
 
 #pragma mark ================================================================================
 #pragma mark Other
