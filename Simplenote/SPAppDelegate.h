@@ -39,6 +39,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, strong, nonatomic) NSString                        *selectedTag;
 @property (assign, nonatomic) BOOL										bSigningUserOut;
 
+@property (nullable, strong, nonatomic) NSDate                          *accountDeletionRequestDate;
+
 - (void)presentSettingsViewController;
 
 - (void)save;

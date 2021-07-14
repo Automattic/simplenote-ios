@@ -195,7 +195,7 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     [self dismissPasscodeLockIfPossible];
-    [self.simperium authenticateIfNecessary];
+    [self authenticateLoginTokenIfNeeded];
 }
 
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler

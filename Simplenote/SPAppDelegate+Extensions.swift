@@ -405,3 +405,25 @@ extension SPAppDelegate {
         EditorFactory.shared.scrollPositionCache.cleanup(keeping: allIdentifiers)
     }
 }
+
+// MARK: - Account Deletion
+//
+extension SPAppDelegate {
+    @objc
+    func authenticateLoginTokenIfNeeded() {
+        guard let accountDeletionRequestDate = accountDeletionRequestDate else {
+            return
+        }
+        let requestDate = accountDeletionRequestDate as Date
+
+        guard let accountDeletionRequestExpiration = requestDate.increased(by: 1) else {
+            return
+        }
+
+        if Date() < accountDeletionRequestExpiration {
+            simperium.authenticateIfNecessary()
+        } else {
+            self.accountDeletionRequestDate = nil
+        }
+    }
+}

@@ -4,6 +4,8 @@ class AccountDeletionController {
     var successHandler: (() -> Void)?
 
     func requestAccountDeletion(_ user: SPUser) {
+        SPAppDelegate.shared().accountDeletionRequestDate = Date()
+
         AccountRemote().requestDelete(user) { (result) in
             switch result {
             case .success:
