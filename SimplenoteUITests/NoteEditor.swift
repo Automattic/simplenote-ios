@@ -36,7 +36,7 @@ class NoteEditor {
 
             // Once the text is pasted, there might be an info bubble shown at the note top,
             // saying "Simplenote pasted from Simplenote-UITestsRunner". Since it covers all
-            // navbar buttons, we have to wait for it to disappear:
+            // NavBar buttons, we have to wait for it to disappear:
             let isHittablePredicate = NSPredicate { _, _ in
                 app.buttons[UID.Button.dismissKeyboard].isHittable == true
             }
