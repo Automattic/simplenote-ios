@@ -264,7 +264,7 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         NoteList.addNoteTap()
         NoteEditorAssert.editorShown()
         NoteEditor.markdownEnable()
-        
+
         trackStep()
         NoteEditor.clearAndEnterText(enteredValue: noteTitle + noteContent)
         NoteEditor.leaveEditor()
