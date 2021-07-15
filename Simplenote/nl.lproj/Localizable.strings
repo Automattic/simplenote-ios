@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-04-28 13:54:04+0000 */
+/* Translation-Revision-Date: 2021-06-29 11:32:19+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: nl */
@@ -15,11 +15,20 @@
 /* Number of failed entries entering in passcode */
 "%i Failed Passcode Attempts" = "%i mislukte wachtwoordcodepogingen";
 
+/* Note trashed notification */
+"%i Note Trashed" = "%i Notitie in prullenbak";
+
+/* Notes trashed notification */
+"%i Notes Trashed" = "%i Notities in prullenbak";
+
 /* Count of interlink references to a note */
 "%i Reference" = "%i Referentie";
 
 /* Count of interlink references to a note */
 "%i References" = "%i Referenties";
+
+/* Count of currently selected notes */
+"%i Selected" = "%i Geselecteerd";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- Minimaal 8 tekens";
@@ -77,6 +86,9 @@
 /* Sign in error message */
 "An error was encountered while signing in." = "Er is een aanmeldfout opgetreden.";
 
+/* Engine URL Message */
+"AppEngine Endpoints" = "AppEngine-eindpunten";
+
 /* No comment provided by engineer. */
 "Appearance" = "Weergave";
 
@@ -92,6 +104,9 @@
 /* User Authenticated */
 "Authenticated" = "Geverifieerd";
 
+/* Engine URL Message */
+"Authentication Endpoints" = "Verificatie-eindpunten";
+
 /* The Simplenote blog */
 "Blog" = "Blog";
 
@@ -99,6 +114,8 @@
 "By creating an account you agree to our" = "Door een account aan te maken, ga je akkoord met onze";
 
 /* Cancel Action
+   Cancel action button
+   Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
    PinLock screen \"cancel\" button
@@ -126,7 +143,7 @@
 /* Opens the Collaborate UI */
 "Collaborate" = "Samenwerken";
 
-/* No comment provided by engineer. */
+/* Alert title that collaboration has moved */
 "Collaboration has moved" = "Samenwerking is verplaatst";
 
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
@@ -209,11 +226,17 @@
 /* PinLock screen \"delete\" button */
 "Delete" = "Verwijderen";
 
+/* Delete a note from trash */
+"Delete Note" = "Notitie verwijderen";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Notities verwijderen";
 
 /* Confirmation button of deletion confirmation message for a tag. */
 "Delete Tag" = "Tag verwijderen";
+
+/* Deselect all Button Label */
+"Deselect All" = "Alles deselecteren";
 
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "Diagnoses";
@@ -242,7 +265,8 @@
    Done toolbar button */
 "Done" = "Klaar";
 
-/* Edit Tags Action: Visible in the Tags List */
+/* Edit button title
+   Edit Tags Action: Visible in the Tags List */
 "Edit" = "Bewerken";
 
 /* Email TextField Placeholder */
@@ -374,6 +398,9 @@
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "Aangepast op: Oudste";
 
+/* Accessibility hint for trash selected notes button */
+"Move selected notes to trash" = "Verplaats de geselecteerde notities naar de prullenbak";
+
 /* Delete Action
    Deletes a note */
 "Move to Trash" = "Verplaatsen naar prullenbak";
@@ -418,7 +445,8 @@
 /* Notes Header (Search Mode) */
 "Notes" = "Notities";
 
-/* Closes alert controller for spinner on About view
+/* Alert confirmation button title
+   Closes alert controller for spinner on About view
    Dismisses an AlertController */
 "OK" = "OK";
 
@@ -534,7 +562,8 @@
 /* Response Title */
 "Response" = "Antwoord";
 
-/* Restore a note to a previous version */
+/* Restore a note from trash
+   Restore a note to a previous version */
 "Restore Note" = "Notitie herstellen";
 
 /* Title -> Review you account screen */
@@ -555,6 +584,13 @@
 /* No comment provided by engineer. */
 "Security" = "Beveiliging";
 
+/* Select multiple notes at once */
+"Select" = "Selecteer";
+
+/* Select all Button Label
+   Select all button title */
+"Select All" = "Alles selecteren";
+
 /* Accessibility label describing a slider used to reset the current note to a previous version */
 "Select a Version" = "Kies een versie";
 
@@ -563,6 +599,9 @@
 
 /* Rating view - disliked - send feedback button */
 "Send feedback" = "Stuur feedback";
+
+/* Setup a passcode action button */
+"Set up Passcode" = "Pincode instellen";
 
 /* Settings button
    Title of options screen */
@@ -578,7 +617,7 @@
 /* Shares a note */
 "Share..." = "Delen";
 
-/* No comment provided by engineer. */
+/* Alert message that collaboration has moved */
 "Sharing notes is now accessed through the action menu from the toolbar." = "Je kunt vanaf nu notities delen via het actiemenu vanuit de werkbalk.";
 
 /* UI region to the left of the note list which shows all of a users tags */
@@ -620,6 +659,9 @@
 /* Tags List Header */
 "Tags" = "Tags";
 
+/* Accessibility hint for the select/deselect all button */
+"Tap button to select or deselect all notes" = "Tik op de knop om alle notities te selecteren of deselecteren";
+
 /* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
 "Terms and Conditions" = "Algemene voorwaarden";
 
@@ -638,6 +680,9 @@
 /* Simplenote Themes */
 "Themes" = "Thema's";
 
+/* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
+"To enable %1$@, you must have a passcode setup first." = "Om %1$@ in te schakelen, moet je eerst een pincode instellen.";
+
 /* Touch ID reason/explanation */
 "To unlock the application" = "Om de toepassing te ontgrendelen";
 
@@ -652,6 +697,9 @@
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Touch ID";
+
+/* Move selected notes to trash */
+"Trash Notes" = "Notities verwijderen";
 
 /* Title: Trash Tag is selected
    Trash filter button */
@@ -752,6 +800,9 @@
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "tag:";
+
+/* Warning Title */
+"⚠️ Important" = "⚠️ Belangrijk";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞 Debug ingeschakeld 🐞";

@@ -109,15 +109,6 @@ extension SPNoteEditorViewController {
         }
     }
 
-    /// Sets up new note bar
-    ///
-    @objc
-    func configureNewNoteBar() {
-        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let navigationItems = [flexibleSpace, createNoteButton]
-        setToolbarItems(navigationItems, animated: true)
-    }
-
     private var popoverPresenter: PopoverPresenter {
         let viewportProvider = { [weak self] () -> CGRect in
             self?.noteEditorTextView.editingRectInWindow() ?? .zero
@@ -521,7 +512,9 @@ extension SPNoteEditorViewController {
         CSSearchableIndex.default().deleteSearchableNote(note)
         NoticeController.shared.present(NoticeFactory.noteTrashed(onUndo: {
             SPObjectManager.shared().restoreNote(note)
+            SPTracker.trackPreformedNoticeAction(ofType: .noteTrashed, noticeType: .undo)
         }))
+        SPTracker.trackPresentedNotice(ofType: .noteTrashed)
     }
 
     @objc
@@ -853,6 +846,12 @@ extension SPNoteEditorViewController {
             .font: headlineFont,
             .foregroundColor: textColor,
         ]
+    }
+
+    @objc
+    func refreshSearchHighlight() {
+        noteEditorTextView.clearHighlights(false)
+        highlightSearchResult(at: highlightedSearchResultIndex, animated: false)
     }
 
     private var backgroundColor: UIColor {

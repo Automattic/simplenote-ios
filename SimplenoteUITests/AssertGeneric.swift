@@ -53,7 +53,8 @@ let assertSearchHeaderNotShown = ">>> Asserting that search results header is NO
 let foundNoNavBar = "Could not find any navigation bar"
 
 let maxLoadTimeout = 20.0,
-    minLoadTimeout = 1.0
+    averageLoadTimeout = 10.0,
+    minLoadTimeout = 5.0
 
 class Assert {
 

@@ -87,8 +87,8 @@
         [note addTag: newTitle];
         [note createPreview];
 	}
-
-    [[SPAppDelegate sharedDelegate].managedObjectContext deleteObject:tag];
+    NSManagedObjectContext *managedObjectContext = [[SPAppDelegate sharedDelegate] managedObjectContext];
+    [managedObjectContext deleteObject:tag];
     
     [self save];
 }
@@ -125,8 +125,8 @@
             tagToUpdate.index = [NSNumber numberWithInt:currentIndex-1];
         }
     }
-    
-    [[SPAppDelegate sharedDelegate].managedObjectContext deleteObject:tag];
+    NSManagedObjectContext *managedObjectContext = [[SPAppDelegate sharedDelegate] managedObjectContext];
+    [managedObjectContext deleteObject:tag];
     tagRemoved = tag.isDeleted;
     [self save];
 
@@ -227,7 +227,8 @@
 
 - (void)permenentlyDeleteNote:(Note *)note
 {
-    [[[SPAppDelegate sharedDelegate] managedObjectContext] deleteObject:note];
+    NSManagedObjectContext *managedObjectContext = [[SPAppDelegate sharedDelegate] managedObjectContext];
+    [managedObjectContext deleteObject:note];
     [self save];
 }
 

@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-04-29 09:54:04+0000 */
+/* Translation-Revision-Date: 2021-06-29 11:32:20+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: he_IL */
@@ -15,11 +15,20 @@
 /* Number of failed entries entering in passcode */
 "%i Failed Passcode Attempts" = "%i ניסיונות קוד סיסמה שנכשלו";
 
+/* Note trashed notification */
+"%i Note Trashed" = "פתק %i הועבר לפח";
+
+/* Notes trashed notification */
+"%i Notes Trashed" = "%i פתקים הועברו לפח";
+
 /* Count of interlink references to a note */
 "%i Reference" = "הפניה %i";
 
 /* Count of interlink references to a note */
 "%i References" = "%i הפניות";
+
+/* Count of currently selected notes */
+"%i Selected" = "%i נבחר";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- לפחות שמונה תווים";
@@ -77,6 +86,9 @@
 /* Sign in error message */
 "An error was encountered while signing in." = "נתקלנו בשגיאה בתהליך ההתחברות.";
 
+/* Engine URL Message */
+"AppEngine Endpoints" = "נקודות קצה של AppEngine";
+
 /* No comment provided by engineer. */
 "Appearance" = "מראה";
 
@@ -92,6 +104,9 @@
 /* User Authenticated */
 "Authenticated" = "האימות בוצע";
 
+/* Engine URL Message */
+"Authentication Endpoints" = "נקודות קצה לאימות";
+
 /* The Simplenote blog */
 "Blog" = "בלוג";
 
@@ -99,6 +114,8 @@
 "By creating an account you agree to our" = "יצירת חשבון מהווה את הסכמתך אל";
 
 /* Cancel Action
+   Cancel action button
+   Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
    PinLock screen \"cancel\" button
@@ -126,7 +143,7 @@
 /* Opens the Collaborate UI */
 "Collaborate" = "שיתוף פעולה בעריכה";
 
-/* No comment provided by engineer. */
+/* Alert title that collaboration has moved */
 "Collaboration has moved" = "שיתוף הפעולה עבר למקום אחר";
 
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
@@ -209,11 +226,17 @@
 /* PinLock screen \"delete\" button */
 "Delete" = "מחיקה";
 
+/* Delete a note from trash */
+"Delete Note" = "למחוק את הפתק";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "למחוק את הפתקים";
 
 /* Confirmation button of deletion confirmation message for a tag. */
 "Delete Tag" = "למחוק תגית";
+
+/* Deselect all Button Label */
+"Deselect All" = "לבטל את הבחירה בכל הפריטים";
 
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "אבחונים";
@@ -242,7 +265,8 @@
    Done toolbar button */
 "Done" = "בוצע";
 
-/* Edit Tags Action: Visible in the Tags List */
+/* Edit button title
+   Edit Tags Action: Visible in the Tags List */
 "Edit" = "עריכה";
 
 /* Email TextField Placeholder */
@@ -374,6 +398,9 @@
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "עודכן: הישן ביותר";
 
+/* Accessibility hint for trash selected notes button */
+"Move selected notes to trash" = "להעביר את הפתקים שנבחרו לפח";
+
 /* Delete Action
    Deletes a note */
 "Move to Trash" = "העברה לפח";
@@ -418,7 +445,8 @@
 /* Notes Header (Search Mode) */
 "Notes" = "פתקים";
 
-/* Closes alert controller for spinner on About view
+/* Alert confirmation button title
+   Closes alert controller for spinner on About view
    Dismisses an AlertController */
 "OK" = "אישור";
 
@@ -534,7 +562,8 @@
 /* Response Title */
 "Response" = "תשובה";
 
-/* Restore a note to a previous version */
+/* Restore a note from trash
+   Restore a note to a previous version */
 "Restore Note" = "שחזור פתק";
 
 /* Title -> Review you account screen */
@@ -555,6 +584,13 @@
 /* No comment provided by engineer. */
 "Security" = "אבטחה";
 
+/* Select multiple notes at once */
+"Select" = "בחירה";
+
+/* Select all Button Label
+   Select all button title */
+"Select All" = "לבחור הכול";
+
 /* Accessibility label describing a slider used to reset the current note to a previous version */
 "Select a Version" = "לבחור גרסה";
 
@@ -563,6 +599,9 @@
 
 /* Rating view - disliked - send feedback button */
 "Send feedback" = "שליחת משוב";
+
+/* Setup a passcode action button */
+"Set up Passcode" = "להגדיר קוד סיסמה";
 
 /* Settings button
    Title of options screen */
@@ -578,7 +617,7 @@
 /* Shares a note */
 "Share..." = "לשתף...";
 
-/* No comment provided by engineer. */
+/* Alert message that collaboration has moved */
 "Sharing notes is now accessed through the action menu from the toolbar." = "ניתן כעת לגשת לשיתוף הפתקים דרך תפריט הפעולות מסרגל הכלים.";
 
 /* UI region to the left of the note list which shows all of a users tags */
@@ -620,6 +659,9 @@
 /* Tags List Header */
 "Tags" = "תגיות";
 
+/* Accessibility hint for the select/deselect all button */
+"Tap button to select or deselect all notes" = "יש להקיש על הכפתור כדי לבחור את כל הכפתורים או לבטל את הבחירה בהם";
+
 /* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
 "Terms and Conditions" = "תנאים והתניות";
 
@@ -638,6 +680,9 @@
 /* Simplenote Themes */
 "Themes" = "ערכות עיצוב";
 
+/* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
+"To enable %1$@, you must have a passcode setup first." = "כדי להפעיל את %1$@, עליך ראשית להגדיר קוד סיסמה.";
+
 /* Touch ID reason/explanation */
 "To unlock the application" = "כדי לבטל את נעילת האפליקציה";
 
@@ -652,6 +697,9 @@
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "מזהה מגע";
+
+/* Move selected notes to trash */
+"Trash Notes" = "להעביר פתקים לפח";
 
 /* Title: Trash Tag is selected
    Trash filter button */
@@ -752,6 +800,9 @@
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "תגית:";
+
+/* Warning Title */
+"⚠️ Important" = "⚠️ חשוב";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞האפשרות לאיתור באגים מופעלת 🐞";

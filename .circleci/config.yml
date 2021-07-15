@@ -9,15 +9,20 @@ orbs:
 parameters:
   beta_build:
     type: boolean
-    default: false 
+    default: false
   release_build:
-    type: boolean 
+    type: boolean
     default: false
 
 xcode_version: &xcode_version
-  xcode-version: "12.0"
+  xcode-version: "12.5.0"
 
 commands:
+  copy_secrets:
+    steps:
+      - run:
+          name: Copy Secrets
+          command: bundle exec fastlane run configure_apply
   fix-path:
     steps:
       - run:
@@ -42,9 +47,7 @@ jobs:
       - ios/install-dependencies:
           bundle-install: true
           pod-install: true
-      - run:
-          name: Copy demo SPCredentials
-          command: mkdir -p Simplenote/Credentials && cp Simplenote/SPCredentials-demo.swift Simplenote/Credentials/SPCredentials.swift
+      - copy_secrets
       # Start: Swift Package Manager Workaround
       # Ref. https://support.circleci.com/hc/en-us/articles/360044709573-Swift-Package-Manager-fails-to-clone-from-private-Git-repositories
       - run: rm ~/.ssh/id_rsa
@@ -65,9 +68,7 @@ jobs:
       - ios/install-dependencies:
             bundle-install: true
             pod-install: true
-      - run:
-          name: Copy Secrets
-          command: bundle exec fastlane run configure_apply
+      - copy_secrets
       # Start: Swift Package Manager Workaround
       # Ref. https://support.circleci.com/hc/en-us/articles/360044709573-Swift-Package-Manager-fails-to-clone-from-private-Git-repositories
       - run: rm ~/.ssh/id_rsa
@@ -95,9 +96,7 @@ jobs:
       - ios/install-dependencies:
             bundle-install: true
             pod-install: true
-      - run:
-          name: Copy Secrets
-          command: bundle exec fastlane run configure_apply
+      - copy_secrets
       # Start: Swift Package Manager Workaround
       # Ref. https://support.circleci.com/hc/en-us/articles/360044709573-Swift-Package-Manager-fails-to-clone-from-private-Git-repositories
       - run: rm ~/.ssh/id_rsa
@@ -115,7 +114,7 @@ jobs:
             APP_VERSION=$(cat ./config/Version.Public.xcconfig | grep "^VERSION_LONG" | cut -d "=" -f2)
             echo "export SLACK_FAILURE_MESSAGE=':red_circle: Build for Simplenote $APP_VERSION failed!'" >> $BASH_ENV
             echo "export SLACK_SUCCESS_MESSAGE=':tada: Simplenote $APP_VERSION has been deployed!'" >> $BASH_ENV
-      - when: 
+      - when:
           condition: << pipeline.parameters.beta_build >>
           steps:
             - run:
@@ -123,12 +122,12 @@ jobs:
                 command: |
                   bundle exec fastlane build_and_upload_beta_release skip_confirm:true create_gh_release:true
                 no_output_timeout: 60m
-      - when: 
+      - when:
           condition: << pipeline.parameters.release_build >>
           steps:
             - run:
                 name: Build
-                command: | 
+                command: |
                   bundle exec fastlane build_and_upload_stable_release skip_confirm:true create_gh_release:true
                 no_output_timeout: 60m
       - slack/status:
@@ -141,14 +140,16 @@ jobs:
     # Props to work done by others in this file and in
     # https://github.com/wordpress-mobile/WordPress-iOS/blob/develop/.circleci/config.yml
     # this is a combined rip-off from both
-    parameters:     
+    parameters:
       device:
         description: The device (e.g. "iPhone 12") to use when running tests.
         type: string
-        default: "iPhone 12"
+      scheme:
+        description: Xcode scheme to use to run the tests.
+        type: string
     executor:
       name: ios/default
-      xcode-version: "12.4.0"
+      <<: *xcode_version
     environment:
       FL_OUTPUT_DIR: output
     steps:
@@ -156,9 +157,7 @@ jobs:
       - ios/install-dependencies:
             bundle-install: true
             pod-install: true
-      - run:
-          name: Copy Secrets
-          command: bundle exec fastlane run configure_apply
+      - copy_secrets
       # Start: Swift Package Manager Workaround
       # Ref. https://support.circleci.com/hc/en-us/articles/360044709573-Swift-Package-Manager-fails-to-clone-from-private-Git-repositories
       - run: rm ~/.ssh/id_rsa
@@ -166,7 +165,7 @@ jobs:
       # END: Swift Package Manager Workaround
       - run:
           name: Fastlane
-          command: bundle exec fastlane pick_test_account_and_run_ui_tests device:'<< parameters.device >>'
+          command: bundle exec fastlane pick_test_account_and_run_ui_tests scheme:'<< parameters.scheme >>' device:'<< parameters.device >>'
       - store_artifacts:
           path: output/scan/report.html
       - store_artifacts:
@@ -183,11 +182,16 @@ workflows:
     jobs:
       - Test
       - UI Tests:
-          name: UI Tests (iPhone 12)
-          device: "iPhone 12"
-          filters:
-            branches:
-              only: /.*UI-tests.*/
+          name: UI Tests Subset (iPhone 12)
+          device: iPhone 12
+          scheme: SimplenoteUITests_Subset
+      - Optional Full UI Test:
+          type: approval
+      - UI Tests:
+          name: UI Tests Full (iPhone 12)
+          device: iPhone 12
+          scheme: SimplenoteUITests
+          requires: [ "Optional Full UI Test" ]
   Installable Build:
     when:
        and:
@@ -205,7 +209,7 @@ workflows:
             branches:
               ignore: /pull\/[0-9]+/
   Release Build:
-    when: 
+    when:
        or: [ << pipeline.parameters.beta_build >>, << pipeline.parameters.release_build >> ]
     jobs:
       - Release Build

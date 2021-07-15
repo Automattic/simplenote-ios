@@ -1,3 +1,1 @@
-- Les icônes de Simplenote ont été repensées
-- Des notifications intégrées à l’application ont été ajoutées afin d’alerter les utilisateurs sur les différentes activités qui s’y déroulent
-- Les réglages du tri des résultats de recherche ont changé et utilisent désormais la configuration de tri générale.
+- Remplacement du mode modification par une action d’appui prolongé et suppression de la nouvelle barre de notes

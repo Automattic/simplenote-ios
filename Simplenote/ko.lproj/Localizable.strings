@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-04-28 11:54:03+0000 */
+/* Translation-Revision-Date: 2021-06-29 11:32:19+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ko_KR */
@@ -15,11 +15,20 @@
 /* Number of failed entries entering in passcode */
 "%i Failed Passcode Attempts" = "실패한 패스코드 시도 %i번";
 
+/* Note trashed notification */
+"%i Note Trashed" = "%i개 메모 삭제됨";
+
+/* Notes trashed notification */
+"%i Notes Trashed" = "%i개 메모 삭제됨";
+
 /* Count of interlink references to a note */
 "%i Reference" = "%i 참조";
 
 /* Count of interlink references to a note */
 "%i References" = "%i 참조";
+
+/* Count of currently selected notes */
+"%i Selected" = "%i개 선택됨";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- 최소 8자";
@@ -77,6 +86,9 @@
 /* Sign in error message */
 "An error was encountered while signing in." = "로그인하는 중에 오류가 발생했습니다.";
 
+/* Engine URL Message */
+"AppEngine Endpoints" = "AppEngine 엔드포인트";
+
 /* No comment provided by engineer. */
 "Appearance" = "모양";
 
@@ -92,6 +104,9 @@
 /* User Authenticated */
 "Authenticated" = "인증됨";
 
+/* Engine URL Message */
+"Authentication Endpoints" = "인증 엔드포인트";
+
 /* The Simplenote blog */
 "Blog" = "블로그";
 
@@ -99,6 +114,8 @@
 "By creating an account you agree to our" = "계정을 만들면 다음에 동의하는 것입니다.";
 
 /* Cancel Action
+   Cancel action button
+   Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
    PinLock screen \"cancel\" button
@@ -126,7 +143,7 @@
 /* Opens the Collaborate UI */
 "Collaborate" = "협업";
 
-/* No comment provided by engineer. */
+/* Alert title that collaboration has moved */
 "Collaboration has moved" = "협업이 이동됨";
 
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
@@ -209,11 +226,17 @@
 /* PinLock screen \"delete\" button */
 "Delete" = "삭제";
 
+/* Delete a note from trash */
+"Delete Note" = "메모 삭제";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "메모 삭제";
 
 /* Confirmation button of deletion confirmation message for a tag. */
 "Delete Tag" = "태그 삭제";
+
+/* Deselect all Button Label */
+"Deselect All" = "모두 선택 해제";
 
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "진단";
@@ -242,7 +265,8 @@
    Done toolbar button */
 "Done" = "완료";
 
-/* Edit Tags Action: Visible in the Tags List */
+/* Edit button title
+   Edit Tags Action: Visible in the Tags List */
 "Edit" = "편집";
 
 /* Email TextField Placeholder */
@@ -374,6 +398,9 @@
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "수정됨: 오래된 항목";
 
+/* Accessibility hint for trash selected notes button */
+"Move selected notes to trash" = "선택한 메모를 휴지통으로 이동";
+
 /* Delete Action
    Deletes a note */
 "Move to Trash" = "휴지통으로 이동";
@@ -418,7 +445,8 @@
 /* Notes Header (Search Mode) */
 "Notes" = "메모";
 
-/* Closes alert controller for spinner on About view
+/* Alert confirmation button title
+   Closes alert controller for spinner on About view
    Dismisses an AlertController */
 "OK" = "확인";
 
@@ -534,7 +562,8 @@
 /* Response Title */
 "Response" = "응답";
 
-/* Restore a note to a previous version */
+/* Restore a note from trash
+   Restore a note to a previous version */
 "Restore Note" = "메모 복구";
 
 /* Title -> Review you account screen */
@@ -555,6 +584,13 @@
 /* No comment provided by engineer. */
 "Security" = "보안";
 
+/* Select multiple notes at once */
+"Select" = "선택";
+
+/* Select all Button Label
+   Select all button title */
+"Select All" = "모두 선택";
+
 /* Accessibility label describing a slider used to reset the current note to a previous version */
 "Select a Version" = "버전 선택";
 
@@ -563,6 +599,9 @@
 
 /* Rating view - disliked - send feedback button */
 "Send feedback" = "의견 보내기";
+
+/* Setup a passcode action button */
+"Set up Passcode" = "패스코드 설정";
 
 /* Settings button
    Title of options screen */
@@ -578,7 +617,7 @@
 /* Shares a note */
 "Share..." = "공유...";
 
-/* No comment provided by engineer. */
+/* Alert message that collaboration has moved */
 "Sharing notes is now accessed through the action menu from the toolbar." = "이제 도구 모음에서 작업 메뉴를 통해 메모 공유에 액세스할 수 있습니다.";
 
 /* UI region to the left of the note list which shows all of a users tags */
@@ -620,6 +659,9 @@
 /* Tags List Header */
 "Tags" = "태그";
 
+/* Accessibility hint for the select/deselect all button */
+"Tap button to select or deselect all notes" = "버튼을 눌러 모든 메모 선택 또는 선택 해제";
+
 /* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
 "Terms and Conditions" = "이용 약관";
 
@@ -638,6 +680,9 @@
 /* Simplenote Themes */
 "Themes" = "테마";
 
+/* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
+"To enable %1$@, you must have a passcode setup first." = "%1$@을(를) 활성화하려면 먼저 패스코드를 설정해야 합니다.";
+
 /* Touch ID reason/explanation */
 "To unlock the application" = "애플리케이션 잠금 방법";
 
@@ -652,6 +697,9 @@
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Touch ID";
+
+/* Move selected notes to trash */
+"Trash Notes" = "메모 삭제";
 
 /* Title: Trash Tag is selected
    Trash filter button */
@@ -752,6 +800,9 @@
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "태그:";
+
+/* Warning Title */
+"⚠️ Important" = "⚠️ 중요";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞 디버그 활성화 🐞";

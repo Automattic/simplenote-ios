@@ -55,7 +55,6 @@ CGFloat const SPSelectedAreaPadding = 20;
 @property (nonatomic, strong) NSMutableDictionary       *noteVersionData;
 
 // Search
-@property (nonatomic, assign) NSInteger                 highlightedSearchResultIndex;
 @property (nonatomic, strong) NSArray                   *searchResultRanges;
 @property (nonatomic, strong) SearchQuery               *searchQuery;
 
@@ -144,9 +143,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 {
     // Note: Our navigationBar *may* be hidden, as per SPSearchController in the Notes List
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-
-    BOOL mustHideToolbar = UIDevice.isPad && !self.searching;
-    [self.navigationController setToolbarHidden:mustHideToolbar animated:YES];
+    [self.navigationController setToolbarHidden:!self.searching animated:YES];
 }
 
 - (void)ensureEditorIsFirstResponder
@@ -224,6 +221,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     [self refreshTagEditorOffsetWithCoordinator:coordinator];
     [self refreshInterlinkLookupWithCoordinator:coordinator];
+    [self refreshSearchHighlightIfNeededWithCoordinator:coordinator];
 }
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
@@ -259,6 +257,17 @@ CGFloat const SPSelectedAreaPadding = 20;
 
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         [self.tagListViewController scrollEntryFieldToVisibleAnimated:NO];
+    } completion:nil];
+}
+
+- (void)refreshSearchHighlightIfNeededWithCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    if (!self.searching) {
+        return;
+    }
+
+    [coordinator animateAlongsideTransitionInView:nil animation:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        [self refreshSearchHighlight];
     } completion:nil];
 }
 
@@ -304,12 +313,8 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 - (void)configureNavigationControllerToolbar
 {
-    BOOL isPad = UIDevice.isPad;
-
-    if (isPad || self.searching) {
+    if (self.searching) {
         [self configureSearchToolbar];
-    } else if (!isPad) {
-        [self configureNewNoteBar];
     }
 }
 
@@ -416,9 +421,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     NSMutableArray *buttons = [NSMutableArray array];
 
     if (self.shouldHideKeyboardButton) {
-        if (UIDevice.isPad) {
-            [buttons addObject:self.createNoteButton];
-        }
+        [buttons addObject:self.createNoteButton];
     } else {
         [buttons addObject:self.keyboardButton];
     }

@@ -1,3 +1,1 @@
-- Reformulação dos ícones do Simplenote
-- Inclusão de notificações para alertar os usuários sobre diferentes atividades no aplicativo
-- Alteração das configurações de ordenação de pesquisa para usar a classificação de ordenação geral.
+- Transferência do modo de edição para uma ação de pressionar por alguns segundos e remoção da nova barra de anotações

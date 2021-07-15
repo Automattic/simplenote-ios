@@ -1,3 +1,1 @@
-- Se han actualizado los iconos de Simplenote.
-- Se han añadido notificaciones dentro de la aplicación para avisar a los usuarios sobre las distintas actividades en la aplicación.
-- Se han cambiado los ajustes de ordenación de los resultados de búsqueda para usar la configuración de ordenación general.
+- Se ha pasado del modo de edición a una acción de pulsación larga y se ha eliminado la nueva barra de notas

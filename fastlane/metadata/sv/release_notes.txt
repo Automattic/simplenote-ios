@@ -1,3 +1,1 @@
-– Ikonerna i Simplenote har ändrats
-– Lade till meddelanden i appen för att avisera användare om olika aktiviteter i appen
-– Ändrade sorteringsinställningarna för sökning så de använder sig av den allmänna sorteringsinställningen.
+- Redigeringsläget har flyttats till en lång tryckning och fältet för nya anteckningar ha tagits bort

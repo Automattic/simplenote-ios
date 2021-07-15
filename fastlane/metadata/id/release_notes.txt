@@ -1,3 +1,1 @@
-- Ikon Simplenote telah diperbarui
-- Pemberitahuan di aplikasi ditambahkan untuk memberi tahu pengguna terkait berbagai aktivitas di aplikasi
-- Pengaturan pengurutan pencarian diubah ke pengaturan pengurutan umum.
+- Mode edit dipindahkan ke aksi tekan lama dan bilah catatan baru dihapus

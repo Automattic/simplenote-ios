@@ -1,3 +1,1 @@
-- Simplenote's Icons have been revamped
-- Added in app notifications to alert users of different activities in the app
-- Changed search sort settings to use the general sort setting.
+- Moved edit mode into a long press action and removed the new note bar

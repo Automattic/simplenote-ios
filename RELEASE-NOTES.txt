@@ -1,6 +1,26 @@
-4.37
+4.41
+-----
+
+
+4.40
+-----
+-   Some bug fixes #1345, #1347, #1348
+
+4.39
 -----
 -   Adds a home screen widget to start a new note with a single tap #1293
+-   Moved edit mode into a long press action and removed the new note bar #1328
+
+4.38
+-----
+
+-   Fixed a bug in which the New Note button might not appear #1298
+-   New Biometry Lock Flow #1299
+
+4.37
+-----
+-   Update in-app notifications color for better readability in dark mode #1288
+-   Added the ability to select and delete multiple notes at a time from the note list  #1267
 
 4.36
 -----

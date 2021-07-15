@@ -12,6 +12,7 @@
 @class AccountVerificationViewController;
 @class PublishController;
 @class PublishStateObserver;
+@class CoreDataManager;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,9 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, strong, nonatomic) UIWindow *pinLockWindow;
 
 @property (strong, nonatomic) Simperium						            *simperium;
-@property (strong, nonatomic, readonly) NSManagedObjectContext			*managedObjectContext;
-@property (strong, nonatomic, readonly) NSManagedObjectModel			*managedObjectModel;
-@property (strong, nonatomic, readonly) NSPersistentStoreCoordinator	*persistentStoreCoordinator;
+@property (strong, nonatomic) CoreDataManager                           *coreDataManager;
 
 @property (strong, nonatomic) SPSidebarContainerViewController          *sidebarViewController;
 @property (strong, nonatomic) TagListViewController                     *tagListViewController;

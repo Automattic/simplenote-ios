@@ -1,3 +1,1 @@
-- Le icone di Simplenote sono state rinnovate
-- Aggiunte notifiche nell'app per avvisare gli utenti delle differenti attività nell'app
-- Impostazioni di ordinamento della ricerca modificate per l'utilizzo dell'impostazione di ordinamento generale.
+- La modalità di modifica è stata trasformata in un'azione che richiede una pressione prolungata e la nuova barra delle note è stata rimossa

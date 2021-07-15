@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-04-28 17:55:00+0000 */
+/* Translation-Revision-Date: 2021-06-29 11:32:19+0000 */
 /* Plural-Forms: nplurals=2; plural=(n > 1); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: pt_BR */
@@ -15,11 +15,20 @@
 /* Number of failed entries entering in passcode */
 "%i Failed Passcode Attempts" = "%i tentativas de senha com falha";
 
+/* Note trashed notification */
+"%i Note Trashed" = "%i nota excluída";
+
+/* Notes trashed notification */
+"%i Notes Trashed" = "%i notas excluídas";
+
 /* Count of interlink references to a note */
 "%i Reference" = "%i Referência";
 
 /* Count of interlink references to a note */
 "%i References" = "%i Referências";
+
+/* Count of currently selected notes */
+"%i Selected" = "%i selecionadas";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- Mínimo de oito caracteres";
@@ -77,6 +86,9 @@
 /* Sign in error message */
 "An error was encountered while signing in." = "Foi encontrado um erro ao fazer login.";
 
+/* Engine URL Message */
+"AppEngine Endpoints" = "AppEngine Endpoints";
+
 /* No comment provided by engineer. */
 "Appearance" = "Aparência";
 
@@ -92,6 +104,9 @@
 /* User Authenticated */
 "Authenticated" = "Autenticado";
 
+/* Engine URL Message */
+"Authentication Endpoints" = "Endpoints de autenticação";
+
 /* The Simplenote blog */
 "Blog" = "Blog";
 
@@ -99,6 +114,8 @@
 "By creating an account you agree to our" = "Ao criar uma conta, você concorda com os";
 
 /* Cancel Action
+   Cancel action button
+   Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
    PinLock screen \"cancel\" button
@@ -126,7 +143,7 @@
 /* Opens the Collaborate UI */
 "Collaborate" = "Colaborar";
 
-/* No comment provided by engineer. */
+/* Alert title that collaboration has moved */
 "Collaboration has moved" = "A colaboração mudou";
 
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
@@ -209,11 +226,17 @@
 /* PinLock screen \"delete\" button */
 "Delete" = "Excluir";
 
+/* Delete a note from trash */
+"Delete Note" = "Excluir anotação";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Apagar notas";
 
 /* Confirmation button of deletion confirmation message for a tag. */
 "Delete Tag" = "Excluir tag";
+
+/* Deselect all Button Label */
+"Deselect All" = "Desselecionar todas";
 
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "Diagnóstico";
@@ -242,7 +265,8 @@
    Done toolbar button */
 "Done" = "Concluído";
 
-/* Edit Tags Action: Visible in the Tags List */
+/* Edit button title
+   Edit Tags Action: Visible in the Tags List */
 "Edit" = "Editar";
 
 /* Email TextField Placeholder */
@@ -374,6 +398,9 @@
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "Modificado: mais antiga";
 
+/* Accessibility hint for trash selected notes button */
+"Move selected notes to trash" = "Mover as notas selecionadas para a lixeira";
+
 /* Delete Action
    Deletes a note */
 "Move to Trash" = "Mover para a lixeira";
@@ -418,7 +445,8 @@
 /* Notes Header (Search Mode) */
 "Notes" = "Anotações";
 
-/* Closes alert controller for spinner on About view
+/* Alert confirmation button title
+   Closes alert controller for spinner on About view
    Dismisses an AlertController */
 "OK" = "OK";
 
@@ -534,7 +562,8 @@
 /* Response Title */
 "Response" = "Resposta";
 
-/* Restore a note to a previous version */
+/* Restore a note from trash
+   Restore a note to a previous version */
 "Restore Note" = "Restaurar anotação";
 
 /* Title -> Review you account screen */
@@ -555,6 +584,13 @@
 /* No comment provided by engineer. */
 "Security" = "Segurança";
 
+/* Select multiple notes at once */
+"Select" = "Selecionar";
+
+/* Select all Button Label
+   Select all button title */
+"Select All" = "Selecionar todas";
+
 /* Accessibility label describing a slider used to reset the current note to a previous version */
 "Select a Version" = "Selecione uma versão";
 
@@ -563,6 +599,9 @@
 
 /* Rating view - disliked - send feedback button */
 "Send feedback" = "Enviar feedback";
+
+/* Setup a passcode action button */
+"Set up Passcode" = "Definir senha";
 
 /* Settings button
    Title of options screen */
@@ -578,7 +617,7 @@
 /* Shares a note */
 "Share..." = "Compartilhar...";
 
-/* No comment provided by engineer. */
+/* Alert message that collaboration has moved */
 "Sharing notes is now accessed through the action menu from the toolbar." = "Agora, o compartilhamento de notas é acessado através do menu de ação da barra de ferramentas.";
 
 /* UI region to the left of the note list which shows all of a users tags */
@@ -620,6 +659,9 @@
 /* Tags List Header */
 "Tags" = "Tags";
 
+/* Accessibility hint for the select/deselect all button */
+"Tap button to select or deselect all notes" = "Toque no botão para selecionar ou desselecionar todas as notas";
+
 /* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
 "Terms and Conditions" = "Termos e condições";
 
@@ -638,6 +680,9 @@
 /* Simplenote Themes */
 "Themes" = "Temas";
 
+/* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
+"To enable %1$@, you must have a passcode setup first." = "Para ativar %1$@, primeiro é preciso definir uma senha.";
+
 /* Touch ID reason/explanation */
 "To unlock the application" = "Para desbloquear o aplicativo";
 
@@ -652,6 +697,9 @@
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Identificação por toque";
+
+/* Move selected notes to trash */
+"Trash Notes" = "Excluir notas";
 
 /* Title: Trash Tag is selected
    Trash filter button */
@@ -752,6 +800,9 @@
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "tag:";
+
+/* Warning Title */
+"⚠️ Important" = "⚠️ Importante";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞 Depuração ativada 🐞";

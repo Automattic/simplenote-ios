@@ -242,22 +242,16 @@
 
 - (void)refreshNavigationControllerToolbar
 {
-    if (UIDevice.isPad) {
-        [self.navigationController setToolbarHidden:YES animated:YES];
-        return;
-    }
-    
+    [self.navigationController setToolbarHidden:!self.isEditing animated:YES];
     [self configureNavigationToolbarButton];
-
-    [self.navigationController setToolbarHidden:self.isSearchActive animated:YES];
 }
 
 - (void)updateNavigationBar {
     // TODO: When multi select is added to iPad, revist the conditionals here
     [self.navigationController setNavigationBarHidden: self.isSearchActive animated:YES];
     
-    UIBarButtonItem *possibleAddButton = UIDevice.isPad ? self.addButton : self.editButtonItem;
-    UIBarButtonItem *rightButton = (self.isDeletedFilterActive) ? self.emptyTrashButton : possibleAddButton;
+    UIBarButtonItem *addOrEditButton = self.isEditing ? self.editButtonItem : self.addButton;
+    UIBarButtonItem *rightButton = (self.isDeletedFilterActive) ? self.emptyTrashButton : addOrEditButton;
 
     UIBarButtonItem *leftButton = self.isEditing ? self.selectAllButton : self.sidebarButton;
 
@@ -343,6 +337,7 @@
 
     self.searchBar.placeholder = NSLocalizedString(@"Search notes or tags", @"SearchBar's Placeholder Text");
     [self.searchBar applySimplenoteStyle];
+    [self.searchBar refreshPlaceholderStyleWithSearchEnabled:YES];
 
     self.searchController.searchBar.accessibilityIdentifier = @"search-bar";
 }

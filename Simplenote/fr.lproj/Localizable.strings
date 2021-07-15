@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-04-28 17:54:59+0000 */
+/* Translation-Revision-Date: 2021-06-29 11:32:20+0000 */
 /* Plural-Forms: nplurals=2; plural=n > 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: fr */
@@ -15,11 +15,20 @@
 /* Number of failed entries entering in passcode */
 "%i Failed Passcode Attempts" = "%i échecs de code PIN";
 
+/* Note trashed notification */
+"%i Note Trashed" = "%i note placée dans la corbeille";
+
+/* Notes trashed notification */
+"%i Notes Trashed" = "%i notes placées dans la corbeille";
+
 /* Count of interlink references to a note */
 "%i Reference" = "%i Référence";
 
 /* Count of interlink references to a note */
 "%i References" = "%i Références";
+
+/* Count of currently selected notes */
+"%i Selected" = "%i sélectionné";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- 8 caractères minimum";
@@ -77,6 +86,9 @@
 /* Sign in error message */
 "An error was encountered while signing in." = "Une erreur est survenue lors de la connexion.";
 
+/* Engine URL Message */
+"AppEngine Endpoints" = "Points de terminaison AppEngine";
+
 /* No comment provided by engineer. */
 "Appearance" = "Apparence";
 
@@ -92,6 +104,9 @@
 /* User Authenticated */
 "Authenticated" = "Authentifié";
 
+/* Engine URL Message */
+"Authentication Endpoints" = "Points de terminaison d’authentification";
+
 /* The Simplenote blog */
 "Blog" = "Blog";
 
@@ -99,6 +114,8 @@
 "By creating an account you agree to our" = "En créant un compte, vous acceptez nos";
 
 /* Cancel Action
+   Cancel action button
+   Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
    PinLock screen \"cancel\" button
@@ -126,7 +143,7 @@
 /* Opens the Collaborate UI */
 "Collaborate" = "Collaborer";
 
-/* No comment provided by engineer. */
+/* Alert title that collaboration has moved */
 "Collaboration has moved" = "Collaboration déplacée";
 
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
@@ -209,11 +226,17 @@
 /* PinLock screen \"delete\" button */
 "Delete" = "Supprimer";
 
+/* Delete a note from trash */
+"Delete Note" = "Supprimer la note";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "Supprimer les notes";
 
 /* Confirmation button of deletion confirmation message for a tag. */
 "Delete Tag" = "Supprimer le tag";
+
+/* Deselect all Button Label */
+"Deselect All" = "Tout désélectionner";
 
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "Diagnostic";
@@ -242,7 +265,8 @@
    Done toolbar button */
 "Done" = "Terminé";
 
-/* Edit Tags Action: Visible in the Tags List */
+/* Edit button title
+   Edit Tags Action: Visible in the Tags List */
 "Edit" = "Modifier";
 
 /* Email TextField Placeholder */
@@ -374,6 +398,9 @@
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "Modification : Plus anciennes";
 
+/* Accessibility hint for trash selected notes button */
+"Move selected notes to trash" = "Déplacer les notes sélectionnées vers la corbeille";
+
 /* Delete Action
    Deletes a note */
 "Move to Trash" = "Mettre dans la Corbeille";
@@ -418,7 +445,8 @@
 /* Notes Header (Search Mode) */
 "Notes" = "Notes";
 
-/* Closes alert controller for spinner on About view
+/* Alert confirmation button title
+   Closes alert controller for spinner on About view
    Dismisses an AlertController */
 "OK" = "OK";
 
@@ -534,7 +562,8 @@
 /* Response Title */
 "Response" = "Réponse";
 
-/* Restore a note to a previous version */
+/* Restore a note from trash
+   Restore a note to a previous version */
 "Restore Note" = "Restaurer la note";
 
 /* Title -> Review you account screen */
@@ -555,6 +584,13 @@
 /* No comment provided by engineer. */
 "Security" = "Sécurité";
 
+/* Select multiple notes at once */
+"Select" = "Sélectionner";
+
+/* Select all Button Label
+   Select all button title */
+"Select All" = "Tout sélectionner";
+
 /* Accessibility label describing a slider used to reset the current note to a previous version */
 "Select a Version" = "Sélectionner une version";
 
@@ -563,6 +599,9 @@
 
 /* Rating view - disliked - send feedback button */
 "Send feedback" = "Envoyez votre avis";
+
+/* Setup a passcode action button */
+"Set up Passcode" = "Configurer un code d’accès";
 
 /* Settings button
    Title of options screen */
@@ -578,7 +617,7 @@
 /* Shares a note */
 "Share..." = "Partager...";
 
-/* No comment provided by engineer. */
+/* Alert message that collaboration has moved */
 "Sharing notes is now accessed through the action menu from the toolbar." = "Le partage des notes peut désormais être accédé depuis le menu d’actions de la barre d’outils.";
 
 /* UI region to the left of the note list which shows all of a users tags */
@@ -620,6 +659,9 @@
 /* Tags List Header */
 "Tags" = "Étiquettes";
 
+/* Accessibility hint for the select/deselect all button */
+"Tap button to select or deselect all notes" = "Appuyer sur le bouton pour sélectionner ou désélectionner toutes les notes";
+
 /* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
 "Terms and Conditions" = "Conditions générales";
 
@@ -638,6 +680,9 @@
 /* Simplenote Themes */
 "Themes" = "Thèmes";
 
+/* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
+"To enable %1$@, you must have a passcode setup first." = "Pour activer %1$@, vous devez d’abord avoir configuré un code d’accès.";
+
 /* Touch ID reason/explanation */
 "To unlock the application" = "Pour déverrouiller l’application";
 
@@ -652,6 +697,9 @@
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Touch ID";
+
+/* Move selected notes to trash */
+"Trash Notes" = "Déplacer des notes vers la corbeille";
 
 /* Title: Trash Tag is selected
    Trash filter button */
@@ -752,6 +800,9 @@
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "étiquette :";
+
+/* Warning Title */
+"⚠️ Important" = "⚠️ Important";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞 Débogage activé 🐞";

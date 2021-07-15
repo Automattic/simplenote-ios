@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-04-28 13:54:04+0000 */
+/* Translation-Revision-Date: 2021-06-29 11:32:20+0000 */
 /* Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ar */
@@ -15,11 +15,20 @@
 /* Number of failed entries entering in passcode */
 "%i Failed Passcode Attempts" = "%i محاولات فاشلة لإدخال رمز المرور";
 
+/* Note trashed notification */
+"%i Note Trashed" = "%i لم يتم النقل إلى سلة المهملات";
+
+/* Notes trashed notification */
+"%i Notes Trashed" = "تم نقل %i من الملحوظات إلى سلة المهملات";
+
 /* Count of interlink references to a note */
 "%i Reference" = "%i المرجع";
 
 /* Count of interlink references to a note */
 "%i References" = "%i المرجع";
+
+/* Count of currently selected notes */
+"%i Selected" = "%i مُحدَّد";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- 8 أحرف بحد أقصى";
@@ -77,6 +86,9 @@
 /* Sign in error message */
 "An error was encountered while signing in." = "تمت مصادفة خطأ أثناء تسجيل الدخول.";
 
+/* Engine URL Message */
+"AppEngine Endpoints" = "نقاط النهاية الخاصة بـ AppEngine";
+
 /* No comment provided by engineer. */
 "Appearance" = "المظهر";
 
@@ -92,6 +104,9 @@
 /* User Authenticated */
 "Authenticated" = "مصادَق عليه";
 
+/* Engine URL Message */
+"Authentication Endpoints" = "نقاط النهاية الخاصة بالمصادقة";
+
 /* The Simplenote blog */
 "Blog" = "المدونة";
 
@@ -99,6 +114,8 @@
 "By creating an account you agree to our" = "بموجب إنشائك لحساب فأنت توافق على";
 
 /* Cancel Action
+   Cancel action button
+   Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
    PinLock screen \"cancel\" button
@@ -126,7 +143,7 @@
 /* Opens the Collaborate UI */
 "Collaborate" = "تشارك";
 
-/* No comment provided by engineer. */
+/* Alert title that collaboration has moved */
 "Collaboration has moved" = "تم نقل التعاون";
 
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
@@ -209,11 +226,17 @@
 /* PinLock screen \"delete\" button */
 "Delete" = "حذف";
 
+/* Delete a note from trash */
+"Delete Note" = "حذف ملحوظة";
+
 /* Verb: Delete notes and log out of the app */
 "Delete Notes" = "حذف الملاحظات";
 
 /* Confirmation button of deletion confirmation message for a tag. */
 "Delete Tag" = "حذف الوسم";
+
+/* Deselect all Button Label */
+"Deselect All" = "إلغاء تحديد الكل";
 
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "التشخيصات";
@@ -242,7 +265,8 @@
    Done toolbar button */
 "Done" = "تم";
 
-/* Edit Tags Action: Visible in the Tags List */
+/* Edit button title
+   Edit Tags Action: Visible in the Tags List */
 "Edit" = "تحرير";
 
 /* Email TextField Placeholder */
@@ -374,6 +398,9 @@
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "تاريخ التعديل: الأقدم";
 
+/* Accessibility hint for trash selected notes button */
+"Move selected notes to trash" = "نقل الملحوظات المحدَّدة إلى سلة المهملات";
+
 /* Delete Action
    Deletes a note */
 "Move to Trash" = "نقل إلى سلة المهملات";
@@ -418,7 +445,8 @@
 /* Notes Header (Search Mode) */
 "Notes" = "ملاحظات";
 
-/* Closes alert controller for spinner on About view
+/* Alert confirmation button title
+   Closes alert controller for spinner on About view
    Dismisses an AlertController */
 "OK" = "موافق";
 
@@ -534,7 +562,8 @@
 /* Response Title */
 "Response" = "الاستجابة";
 
-/* Restore a note to a previous version */
+/* Restore a note from trash
+   Restore a note to a previous version */
 "Restore Note" = "استعادة الملاحظة";
 
 /* Title -> Review you account screen */
@@ -555,6 +584,13 @@
 /* No comment provided by engineer. */
 "Security" = "الأمان";
 
+/* Select multiple notes at once */
+"Select" = "تحديد";
+
+/* Select all Button Label
+   Select all button title */
+"Select All" = "تحديد الكل";
+
 /* Accessibility label describing a slider used to reset the current note to a previous version */
 "Select a Version" = "تحديد نسخة";
 
@@ -563,6 +599,9 @@
 
 /* Rating view - disliked - send feedback button */
 "Send feedback" = "إرسال الملاحظات";
+
+/* Setup a passcode action button */
+"Set up Passcode" = "إعداد رمز المرور";
 
 /* Settings button
    Title of options screen */
@@ -578,7 +617,7 @@
 /* Shares a note */
 "Share..." = "مشاركة...";
 
-/* No comment provided by engineer. */
+/* Alert message that collaboration has moved */
 "Sharing notes is now accessed through the action menu from the toolbar." = "يمكن الوصول إلى مشاركة الملاحظات من خلال قائمة الإجراءات من شريط الأدوات.";
 
 /* UI region to the left of the note list which shows all of a users tags */
@@ -620,6 +659,9 @@
 /* Tags List Header */
 "Tags" = "الوسوم";
 
+/* Accessibility hint for the select/deselect all button */
+"Tap button to select or deselect all notes" = "الضغط على الزر لتحديد جميع الملحوظات أو إلغاء تحديدها";
+
 /* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
 "Terms and Conditions" = "الشروط والأحكام";
 
@@ -638,6 +680,9 @@
 /* Simplenote Themes */
 "Themes" = "القوالب";
 
+/* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
+"To enable %1$@, you must have a passcode setup first." = "لتمكين %1$@، يجب أن يكون لديك رمز مرور تم إعداده أولاً.";
+
 /* Touch ID reason/explanation */
 "To unlock the application" = "لإلغاء تأمين التطبيق";
 
@@ -652,6 +697,9 @@
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "معرف اللمس";
+
+/* Move selected notes to trash */
+"Trash Notes" = "نقل الملحوظات إلى سلة المهملات";
 
 /* Title: Trash Tag is selected
    Trash filter button */
@@ -752,6 +800,9 @@
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "وسم:";
+
+/* Warning Title */
+"⚠️ Important" = "⚠️ مهم";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞 تم تمكين تصحيح الأخطاء 🐞";
