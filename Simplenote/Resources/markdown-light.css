@@ -1,6 +1,7 @@
+
 html {
-    background: 1f2123;
-    color: #DDDDDD;
+    background: #FFFFFF;
+    color: #111111;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -8,7 +9,7 @@ html {
 }
 
 .note-detail-markdown a {
-    color: #618df2;
+    color: #3361cc;
 }
 
 .note-detail-markdown hr {
@@ -16,7 +17,7 @@ html {
 }
 
 .note-detail-markdown code {
-    color: #84878a;
+    color: #899199;
 }
 
 .note-detail-markdown pre {
@@ -28,9 +29,9 @@ html {
 }
 
 .note-detail-markdown table tr:nth-child(2n) {
-    background-color: #383d41;
+    background-color: #f6f7f8;
 }
 
 .note-detail-markdown table th, .note-detail-markdown table td {
-    border-color: #575e65;
+    border-color: #c0c4c8;
 }

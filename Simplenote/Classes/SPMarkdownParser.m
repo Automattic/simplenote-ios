@@ -50,7 +50,19 @@
             "<style media=\"screen\" type=\"text/css\">\n";
     NSString *headerEnd = @"</style></head><body><div class=\"note-detail-markdown\">";
 
+    NSString *css = [self cssForMarkdown];
+
+    return [[headerStart stringByAppendingString:css] stringByAppendingString:headerEnd];
+}
+
++ (NSString *)cssForMarkdown
+{
     NSString *css = [self loadCSSAtPath:self.cssPath];
+
+    // Load CSS colors
+    //
+    NSString *colors = [self loadCSSAtPath:self.cssColorPath];
+    css = [css stringByAppendingString:colors];
 
     // Check if increase contrast is enabled.  If enabled amend CSS to include high contrast colors
     //
@@ -60,8 +72,8 @@
             css = [css stringByAppendingString:contrast];
         }
     }
-    
-    return [[headerStart stringByAppendingString:css] stringByAppendingString:headerEnd];
+
+    return css;
 }
 
 + (NSString *)loadCSSAtPath:(NSString *)path
@@ -72,11 +84,15 @@
 
 + (NSString *)cssPath
 {
+    return @"markdown-default.css";
+}
+
++ (NSString *)cssColorPath
+{
     if (SPUserInterface.isDark) {
         return @"markdown-dark.css";
     }
-
-    return @"markdown-default.css";
+    return @"markdown-light.css";
 }
 
 + (NSString *)contrastCssPath
