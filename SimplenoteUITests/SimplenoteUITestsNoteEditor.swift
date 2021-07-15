@@ -263,6 +263,7 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         trackStep()
         NoteList.addNoteTap()
         NoteEditorAssert.editorShown()
+        NoteEditor.markdownEnable()
 
         trackStep()
         NoteEditor.clearAndEnterText(enteredValue: noteTitle + noteContent)
@@ -276,7 +277,6 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         NoteEditorAssert.textViewWithExactLabelsShownOnce(labels: ["* Asterisk1", "* Asterisk2", "* Asterisk3"])
 
         trackStep()
-        NoteEditor.markdownEnable()
         NoteEditor.swipeToPreview()
         PreviewAssert.staticTextWithExactValuesShownOnce(values: ["• Minus1", "• Minus2", "• Minus3"])
         PreviewAssert.staticTextWithExactValuesShownOnce(values: ["• Plus1", "• Plus2", "• Plus3"])
