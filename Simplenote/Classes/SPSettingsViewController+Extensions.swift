@@ -129,25 +129,26 @@ extension SPSettingsViewController {
     }
 
     func activityIndicatorAlertController() -> UIAlertController {
-        let pending = UIAlertController(title: "", message: nil, preferredStyle: .alert)
+        let activityIndicatorAlert = UIAlertController(title: "", message: nil, preferredStyle: .alert)
+
         NSLayoutConstraint.activate([
-            pending.view.widthAnchor.constraint(equalToConstant: 125),
-            pending.view.heightAnchor.constraint(equalToConstant: 100)
+            activityIndicatorAlert.view.widthAnchor.constraint(equalToConstant: 125),
+            activityIndicatorAlert.view.heightAnchor.constraint(equalToConstant: 100)
         ])
 
-        let indicator = UIActivityIndicatorView(frame: pending.view.bounds)
-        pending.view.addSubview(indicator)
+        let indicator = UIActivityIndicatorView(frame: activityIndicatorAlert.view.bounds)
+        activityIndicatorAlert.view.addSubview(indicator)
 
         indicator.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            indicator.centerXAnchor.constraint(equalTo: pending.view.centerXAnchor),
-            indicator.centerYAnchor.constraint(equalTo: pending.view.centerYAnchor)
+            indicator.centerXAnchor.constraint(equalTo: activityIndicatorAlert.view.centerXAnchor),
+            indicator.centerYAnchor.constraint(equalTo: activityIndicatorAlert.view.centerYAnchor)
         ])
 
         indicator.isUserInteractionEnabled = false
         indicator.startAnimating()
 
-        return pending
+        return activityIndicatorAlert
     }
 }
 
