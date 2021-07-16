@@ -419,6 +419,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                 }
                 case SPOptionsAccountRowLogout: {
                     cell.textLabel.text = NSLocalizedString(@"Log Out", @"Log out of the active account in the app");
+                    cell.textLabel.textColor = [UIColor simplenoteTintColor];
                     break;
                 }
                 default:
@@ -432,7 +433,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
             switch (indexPath.row) {
                 case SPOptionsDeleteRowTitle: {
                     cell.textLabel.text = NSLocalizedString(@"Delete Account", @"Display Delete Account Alert");
-                    cell.textLabel.textColor = [UIColor simplenoteRed50Color];
+                    cell.textLabel.textColor = [UIColor simplenoteRedButtonColor];
                     break;
                 }
             }
