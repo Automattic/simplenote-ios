@@ -98,13 +98,16 @@ extension SPSettingsViewController {
             return
         }
         SPTracker.trackDeleteAccountButttonTapped()
+        let pendingAlert = activityIndicatorAlertController()
 
         let deletionController = AccountDeletionController()
         deletionController.successHandler = {
+            pendingAlert.dismiss(animated: true, completion: nil)
             self.presentSuccessAlert(for: user)
         }
 
         presentAccountDeletionConfirmation { (_) in
+            self.present(pendingAlert, animated: true, completion: nil)
             deletionController.requestAccountDeletion(user)
         }
     }
@@ -123,6 +126,28 @@ extension SPSettingsViewController {
         let alert = UIAlertController(title: AccountDeletion.succesAlertTitle, message: AccountDeletion.successMessage(email: user.email), preferredStyle: .alert)
         alert.addCancelActionWithTitle(AccountDeletion.ok)
         present(alert, animated: true, completion: nil)
+    }
+
+    func activityIndicatorAlertController() -> UIAlertController {
+        let pending = UIAlertController(title: "", message: nil, preferredStyle: .alert)
+        NSLayoutConstraint.activate([
+            pending.view.widthAnchor.constraint(equalToConstant: 125),
+            pending.view.heightAnchor.constraint(equalToConstant: 100)
+        ])
+
+        let indicator = UIActivityIndicatorView(frame: pending.view.bounds)
+        pending.view.addSubview(indicator)
+
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            indicator.centerXAnchor.constraint(equalTo: pending.view.centerXAnchor),
+            indicator.centerYAnchor.constraint(equalTo: pending.view.centerYAnchor)
+        ])
+
+        indicator.isUserInteractionEnabled = false
+        indicator.startAnimating()
+
+        return pending
     }
 }
 
