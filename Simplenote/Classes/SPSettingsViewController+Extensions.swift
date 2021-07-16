@@ -116,7 +116,7 @@ extension SPSettingsViewController {
         let alert = UIAlertController(title: AccountDeletion.deleteAccount,
                                       message: AccountDeletion.confirmAlertMessage,
                                       preferredStyle: .alert)
-        alert.addDestructiveActionWithTitle(AccountDeletion.deleteAccount, handler: onConfirm)
+        alert.addDestructiveActionWithTitle(AccountDeletion.deleteAccountButton, handler: onConfirm)
         alert.addCancelActionWithTitle(AccountDeletion.cancel)
 
         present(alert, animated: true, completion: nil)
@@ -154,10 +154,11 @@ extension SPSettingsViewController {
 private struct AccountDeletion {
     static let deleteAccount = NSLocalizedString("Delete Account", comment: "Delete account title and action")
     static let confirmAlertMessage = NSLocalizedString("By deleting your account, all notes created with this account will be permanently deleted. This action is not reversible", comment: "Delete account confirmation alert message")
+    static let deleteAccountButton = NSLocalizedString("Request Account Deletion", comment: "Title for account deletion confirm button")
     static let cancel = NSLocalizedString("Cancel", comment: "Cancel button title")
 
-    static let succesAlertTitle = NSLocalizedString("Delete Account", comment: "Title for delete account alert")
-    static let successAlertMessage = NSLocalizedString("An email has been sent to %@ Check your inbox and follow the instructions to confirm account deletion.", comment: "Delete account confirmation instructions")
+    static let succesAlertTitle = NSLocalizedString("Request Received", comment: "Title for delete account succes alert")
+    static let successAlertMessage = NSLocalizedString("An email has been sent to %@ Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation", comment: "Delete account confirmation instructions")
     static let ok = NSLocalizedString("Ok", comment: "Confirm alert message")
 
     static func successMessage(email: String) -> String {
