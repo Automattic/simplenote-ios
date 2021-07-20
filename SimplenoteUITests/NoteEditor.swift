@@ -43,7 +43,6 @@ class NoteEditor {
 
             let expectation = XCTNSPredicateExpectation(predicate: isHittablePredicate, object: .none)
             XCTWaiter().wait(for: [expectation], timeout: averageLoadTimeout)
-            // end of wait
 
             // Swipe up fast to show tags input, which disappears if pasted text is large
             // enough to push tags input off screen
