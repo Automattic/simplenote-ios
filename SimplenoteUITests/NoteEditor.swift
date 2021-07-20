@@ -64,7 +64,6 @@ class NoteEditor {
 
         let expectation = XCTNSPredicateExpectation(predicate: isHittablePredicate, object: .none)
         XCTWaiter().wait(for: [expectation], timeout: averageLoadTimeout)
-        // end of wait
 
         app.textViews.firstMatch.tap()
     }
