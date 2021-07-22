@@ -422,6 +422,7 @@
 		BA5E5B7D264A148C00D0EE19 /* URLRequest+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5E5B7C264A148C00D0EE19 /* URLRequest+Simplenote.swift */; };
 		BA83478325F59F8B0059B797 /* markdown-default-contrast.css in Resources */ = {isa = PBXBuildFile; fileRef = BA83478225F59F8B0059B797 /* markdown-default-contrast.css */; };
 		BA83478C25F59FE90059B797 /* markdown-dark-contrast.css in Resources */ = {isa = PBXBuildFile; fileRef = BA83478B25F59FE90059B797 /* markdown-dark-contrast.css */; };
+		BA9B19F926A8EF3200692366 /* ActivityIndicatorAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B19F826A8EF3200692366 /* ActivityIndicatorAlertViewController.swift */; };
 		BAA4856925D5E40900F3BDB9 /* SearchQuery+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */; };
 		BAA59E79269F9FE30068BD3D /* Date+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA59E78269F9FE30068BD3D /* Date+Simplenote.swift */; };
 		BAA63C3325EEDA83001589D7 /* NoteLinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA63C3225EEDA83001589D7 /* NoteLinkTests.swift */; };
@@ -958,6 +959,7 @@
 		BA5E5B7C264A148C00D0EE19 /* URLRequest+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Simplenote.swift"; sourceTree = "<group>"; };
 		BA83478225F59F8B0059B797 /* markdown-default-contrast.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "markdown-default-contrast.css"; sourceTree = "<group>"; };
 		BA83478B25F59FE90059B797 /* markdown-dark-contrast.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "markdown-dark-contrast.css"; sourceTree = "<group>"; };
+		BA9B19F826A8EF3200692366 /* ActivityIndicatorAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorAlertViewController.swift; sourceTree = "<group>"; };
 		BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchQuery+Simplenote.swift"; sourceTree = "<group>"; };
 		BAA59E78269F9FE30068BD3D /* Date+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Simplenote.swift"; sourceTree = "<group>"; };
 		BAA63C3225EEDA83001589D7 /* NoteLinkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteLinkTests.swift; sourceTree = "<group>"; };
@@ -2215,6 +2217,7 @@
 				A6F489C725DA5B21005FBD1A /* PopoverPresenter.swift */,
 				BA55B05925F067DF0042582B /* NoticePresenter.swift */,
 				BA55B06225F068650042582B /* NoticeController.swift */,
+				BA9B19F826A8EF3200692366 /* ActivityIndicatorAlertViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -2976,6 +2979,7 @@
 				B5AB169C22FB2DF300B4EBA5 /* UIKitConstants.swift in Sources */,
 				B56A695922F9CD1500B90398 /* SPOnboardingViewController.swift in Sources */,
 				BA55B06325F068650042582B /* NoticeController.swift in Sources */,
+				BA9B19F926A8EF3200692366 /* ActivityIndicatorAlertViewController.swift in Sources */,
 				46A3C9A317DFA81A002865AE /* SPTagEntryField.m in Sources */,
 				A6E1E7A224BDE456008A44BC /* SPCardPresentationAnimator.swift in Sources */,
 				A6C0589B24AD5205006BC572 /* SPNoteHistoryController.swift in Sources */,

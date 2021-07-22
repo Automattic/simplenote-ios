@@ -98,10 +98,12 @@ extension SPSettingsViewController {
             return
         }
         SPTracker.trackDeleteAccountButttonTapped()
-        let pendingAlert = activityIndicatorAlertController()
+        let pendingAlert = ActivityIndicatorAlertViewController()
+        pendingAlert.startAnimating()
 
         let deletionController = AccountDeletionController()
         deletionController.successHandler = {
+            pendingAlert.stopAnimating()
             pendingAlert.dismiss(animated: true, completion: nil)
             self.presentSuccessAlert(for: user)
         }
