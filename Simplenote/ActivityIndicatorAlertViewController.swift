@@ -54,8 +54,8 @@ class ActivityIndicatorAlertViewController: UIViewController {
         }
 
         view.backgroundColor = UIColor(studioColor: .gray50, alpha: 0.5)
-
         alertView.backgroundColor = UIColor(studioColor: .white, alpha: 1)
+        activityIndicator.color = .black
     }
 
     func startAnimating() {
