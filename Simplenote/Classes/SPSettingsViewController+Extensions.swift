@@ -129,29 +129,6 @@ extension SPSettingsViewController {
         alert.addCancelActionWithTitle(AccountDeletion.ok)
         present(alert, animated: true, completion: nil)
     }
-
-    func activityIndicatorAlertController() -> UIAlertController {
-        let activityIndicatorAlert = UIAlertController(title: "", message: nil, preferredStyle: .alert)
-
-        NSLayoutConstraint.activate([
-            activityIndicatorAlert.view.widthAnchor.constraint(equalToConstant: 125),
-            activityIndicatorAlert.view.heightAnchor.constraint(equalToConstant: 100)
-        ])
-
-        let indicator = UIActivityIndicatorView(frame: activityIndicatorAlert.view.bounds)
-        activityIndicatorAlert.view.addSubview(indicator)
-
-        indicator.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            indicator.centerXAnchor.constraint(equalTo: activityIndicatorAlert.view.centerXAnchor),
-            indicator.centerYAnchor.constraint(equalTo: activityIndicatorAlert.view.centerYAnchor)
-        ])
-
-        indicator.isUserInteractionEnabled = false
-        indicator.startAnimating()
-
-        return activityIndicatorAlert
-    }
 }
 
 private struct AccountDeletion {
