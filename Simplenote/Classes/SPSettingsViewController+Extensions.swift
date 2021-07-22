@@ -108,6 +108,18 @@ extension SPSettingsViewController {
             self.presentSuccessAlert(for: user)
         }
 
+        deletionController.failureHandler = { status in
+            if status == 0 {
+                pendingAlert.stopAnimating()
+                pendingAlert.dismiss(animated: true, completion: nil)
+                NoticeController.shared.present(NoticeFactory.networkError())
+                return
+            }
+
+            let alert = UIAlertController(title: AccountDeletion.errorTitle, message: AccountDeletion.errorMessage, preferredStyle: .alert)
+            alert.addDefaultActionWithTitle(AccountDeletion.ok)
+        }
+
         presentAccountDeletionConfirmation { (_) in
             self.present(pendingAlert, animated: true, completion: nil)
             deletionController.requestAccountDeletion(user)
@@ -118,7 +130,9 @@ extension SPSettingsViewController {
         let alert = UIAlertController(title: AccountDeletion.deleteAccount,
                                       message: AccountDeletion.confirmAlertMessage,
                                       preferredStyle: .alert)
-        alert.addDestructiveActionWithTitle(AccountDeletion.deleteAccountButton, handler: onConfirm)
+        let deleteAccountButton = UIAlertAction(title: AccountDeletion.deleteAccountButton, style: .destructive, handler: onConfirm)
+        deleteAccountButton.setValue(UIColor.simplenoteRedButtonColor, forKey: "titleTextColor")
+        alert.addAction(deleteAccountButton)
         alert.addCancelActionWithTitle(AccountDeletion.cancel)
 
         present(alert, animated: true, completion: nil)
@@ -140,6 +154,9 @@ private struct AccountDeletion {
     static let succesAlertTitle = NSLocalizedString("Request Received", comment: "Title for delete account succes alert")
     static let successAlertMessage = NSLocalizedString("An email has been sent to %@ Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation", comment: "Delete account confirmation instructions")
     static let ok = NSLocalizedString("Ok", comment: "Confirm alert message")
+
+    static let errorTitle = NSLocalizedString("Error", comment: "Deletion Error Title")
+    static let errorMessage = NSLocalizedString("An error occured. Please, try again. If the problem continues, contact us at support@simplenote.com for help.", comment: "Deletion error message")
 
     static func successMessage(email: String) -> String {
         String(format: successAlertMessage, email)

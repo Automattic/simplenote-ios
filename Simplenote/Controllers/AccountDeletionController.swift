@@ -2,6 +2,7 @@ import Foundation
 
 class AccountDeletionController {
     var successHandler: (() -> Void)?
+    var failureHandler: ((Int) -> Void)?
 
     func requestAccountDeletion(_ user: SPUser) {
         SPAppDelegate.shared().accountDeletionRequestDate = Date()
@@ -11,7 +12,9 @@ class AccountDeletionController {
             case .success:
                 self.successHandler?()
             case .failure(let status, let error):
-                NSLog("Delete Account Request Failed with status: %i Error: %@", [status, error?.localizedDescription ?? "Unknown Error"])
+                NSLog("Delete Account Request Failed with status: %i", status)
+                NSLog("Error: ", error?.localizedDescription ?? "Generic Error")
+                self.failureHandler?(status)
             }
         }
     }
