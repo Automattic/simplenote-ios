@@ -1,1 +1,1 @@
-simplenote,aantekening,maken,synchroniseren,delen,markdown,tag,takenlijst,vergrendel,cloud,schrijven
+notities,cloud,eenvoudig,notitieblok,tekst,to-do,planner,dagboek,synchroniseren,notepad,tag,schrijven,memo

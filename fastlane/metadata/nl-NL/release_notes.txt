@@ -1,1 +1,2 @@
-- Bewerkingsmodus verplaatst naar een handeling met lang indrukken en de nieuwe notitiebalk verwijderd
+-   Enkele bugs verholpen: #1345, #1347, #1348
+

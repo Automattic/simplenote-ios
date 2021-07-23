@@ -1,1 +1,2 @@
-- La modalità di modifica è stata trasformata in un'azione che richiede una pressione prolungata e la nuova barra delle note è stata rimossa
+-   Alcune correzioni di bug n. 1345, n. 1347, n. 1348
+

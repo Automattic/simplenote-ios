@@ -1,1 +1,1 @@
-Simplenote,note,prendre des notes,synchronisation,partage,simple,markdown,étiquette,cloud,écriture
+notes,cloud,simple,notebook,texte,à faire,planificateur,journal,agenda,sync,notepad,étiquette,écriture,mémo
