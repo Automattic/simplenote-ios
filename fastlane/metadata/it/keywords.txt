@@ -1,1 +1,1 @@
-note,cloud,semplice,notebook,testo,dafare,dafare,planner,diario,giornaliero,sincronizzazione,blocconote,tag,scrittura,promemoria
+note,cloud,semplice,notebook,testo,dafare,dafare,planner,diario,giornaliero,sincronizzazione,tag
