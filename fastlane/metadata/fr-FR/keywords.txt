@@ -1,1 +1,1 @@
-notes,cloud,simple,notebook,texte,à faire,planificateur,journal,agenda,sync,notepad,étiquette,écriture,mémo
+notes,cloud,simple,notebook,texte,à faire,planificateur,journal,agenda,sync,notepad,écriture,mémo
