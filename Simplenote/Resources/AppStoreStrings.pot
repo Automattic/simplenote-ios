@@ -68,6 +68,6 @@ msgstr ""
 
 msgctxt "v4.40-whats-new"
 msgid ""
-"-   Some bug fixes #1345, #1347, #1348\n"
+"-   Some bug fixes\n"
 "\n"
 msgstr ""

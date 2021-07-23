@@ -1,1 +1,2 @@
-- Wir haben den Bearbeitungsmodus in ein langes Betätigen der Taste verschoben und die neue Notizleiste entfernt
+-   Ein paar Fehlerkorrekturen
+

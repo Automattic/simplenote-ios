@@ -1,1 +1,2 @@
-- Remplacement du mode modification par une action d’appui prolongé et suppression de la nouvelle barre de notes
+-   Résolution de certains bugs
+

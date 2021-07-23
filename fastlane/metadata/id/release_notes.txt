@@ -1,1 +1,2 @@
-- Mode edit dipindahkan ke aksi tekan lama dan bilah catatan baru dihapus
+-   Perbaikan beberapa bug
+

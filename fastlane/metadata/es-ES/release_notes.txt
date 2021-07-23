@@ -1,1 +1,2 @@
-- Se ha pasado del modo de edición a una acción de pulsación larga y se ha eliminado la nueva barra de notas
+-   Se han solucionado varios errores
+
