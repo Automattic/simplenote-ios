@@ -1,2 +1,2 @@
--   Se han solucionado varios errores, 1345, 1347 y 1348
+-   Se han solucionado varios errores
 

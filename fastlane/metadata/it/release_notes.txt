@@ -1,2 +1,2 @@
--   Alcune correzioni di bug n. 1345, n. 1347, n. 1348
+-   Alcune correzioni di bug
 

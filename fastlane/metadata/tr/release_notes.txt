@@ -1,2 +1,2 @@
--   Bazı hatalar giderildi #1345, #1347, #1348
+-   Bazı hatalar giderildi
 

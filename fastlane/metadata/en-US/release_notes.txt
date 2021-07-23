@@ -1,2 +1,2 @@
--   Some bug fixes #1345, #1347, #1348
+- Some bug fixes
 

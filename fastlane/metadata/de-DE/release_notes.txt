@@ -1,2 +1,2 @@
--   Ein paar Fehlerkorrekturen #1345, #1347, #1348
+-   Ein paar Fehlerkorrekturen
 

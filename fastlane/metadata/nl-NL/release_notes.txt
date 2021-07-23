@@ -1,2 +1,2 @@
--   Enkele bugs verholpen: #1345, #1347, #1348
+-   Enkele bugs verholpen
 

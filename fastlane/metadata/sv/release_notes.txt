@@ -1,2 +1,2 @@
--   Vissa buggkorrigeringar #1345, #1347, #1348
+-   Vissa buggkorrigeringar
 

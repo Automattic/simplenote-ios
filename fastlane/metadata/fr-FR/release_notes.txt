@@ -1,2 +1,2 @@
--   Résolution de certains bugs : n° 1345, n° 1347, n° 1348
+-   Résolution de certains bugs
 

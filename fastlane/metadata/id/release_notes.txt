@@ -1,2 +1,2 @@
--   Perbaikan beberapa bug #1345, #1347, #1348
+-   Perbaikan beberapa bug
 
