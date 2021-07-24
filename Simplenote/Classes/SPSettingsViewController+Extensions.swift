@@ -104,14 +104,14 @@ extension SPSettingsViewController {
         let deletionController = AccountDeletionController()
         deletionController.successHandler = {
             pendingAlert.stopAnimating()
-            pendingAlert.dismiss(animated: true, completion: nil)
+            pendingAlert.dismiss(animated: false, completion: nil)
             self.presentSuccessAlert(for: user)
         }
 
         deletionController.failureHandler = { status in
             if status == 0 {
                 pendingAlert.stopAnimating()
-                pendingAlert.dismiss(animated: true, completion: nil)
+                pendingAlert.dismiss(animated: false, completion: nil)
                 NoticeController.shared.present(NoticeFactory.networkError())
                 return
             }
@@ -121,7 +121,7 @@ extension SPSettingsViewController {
         }
 
         presentAccountDeletionConfirmation { (_) in
-            self.present(pendingAlert, animated: true, completion: nil)
+            self.present(pendingAlert, animated: false, completion: nil)
             deletionController.requestAccountDeletion(user)
         }
     }
