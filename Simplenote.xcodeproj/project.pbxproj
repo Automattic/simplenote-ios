@@ -470,6 +470,8 @@
 		BAF8D45A26AE10FC00CA9383 /* SPManagedObject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42A26AE10F200CA9383 /* SPManagedObject+CoreDataClass.swift */; };
 		BAF8D46426AE118800CA9383 /* SPCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E196BA230F522D00F5658A /* SPCredentials.swift */; };
 		BAF8D46E26AE118800CA9383 /* SPCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E196BA230F522D00F5658A /* SPCredentials.swift */; };
+		BAF8D4E026AE145E00CA9383 /* BuildConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D4CC26AE144700CA9383 /* BuildConfiguration.swift */; };
+		BAF8D4E126AE145E00CA9383 /* BuildConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D4CC26AE144700CA9383 /* BuildConfiguration.swift */; };
 		BAFA93DA265DCFCA0009DCFB /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAFA93D9265DCFCA0009DCFB /* WidgetKit.framework */; };
 		BAFA93DC265DCFCA0009DCFB /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAFA93DB265DCFCA0009DCFB /* SwiftUI.framework */; };
 		BAFA93E1265DCFCD0009DCFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAFA93E0265DCFCD0009DCFB /* Assets.xcassets */; };
@@ -1053,6 +1055,9 @@
 		BAF8D42826AE10F200CA9383 /* Preferences+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Preferences+CoreDataClass.swift"; sourceTree = "<group>"; };
 		BAF8D42926AE10F200CA9383 /* Settings+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Settings+CoreDataClass.swift"; sourceTree = "<group>"; };
 		BAF8D42A26AE10F200CA9383 /* SPManagedObject+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SPManagedObject+CoreDataClass.swift"; sourceTree = "<group>"; };
+		BAF8D48126AE125B00CA9383 /* Simplenote-Widgets-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Simplenote-Widgets-Bridging-Header.h"; sourceTree = "<group>"; };
+		BAF8D4AD26AE136D00CA9383 /* Simplenote-Intents-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Simplenote-Intents-Bridging-Header.h"; sourceTree = "<group>"; };
+		BAF8D4CC26AE144700CA9383 /* BuildConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildConfiguration.swift; sourceTree = "<group>"; };
 		BAFA93D8265DCFCA0009DCFB /* SimplenoteWidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SimplenoteWidgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAFA93D9265DCFCA0009DCFB /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		BAFA93DB265DCFCA0009DCFB /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -2120,6 +2125,7 @@
 			children = (
 				BAB5762626703C8200B0C56F /* IntentHandler.swift */,
 				BAB5762826703C8200B0C56F /* Info.plist */,
+				BAF8D4AD26AE136D00CA9383 /* Simplenote-Intents-Bridging-Header.h */,
 			);
 			path = SimplenoteIntents;
 			sourceTree = "<group>";
@@ -2141,17 +2147,27 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		BAF8D4CB26AE142C00CA9383 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				BAF8D4CC26AE144700CA9383 /* BuildConfiguration.swift */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
 		BAFA93DD265DCFCA0009DCFB /* SimplenoteWidgets */ = {
 			isa = PBXGroup;
 			children = (
-				BAF8D42026AE10D400CA9383 /* Models */,
 				BAFA93EC265DE3810009DCFB /* SimplenoteWidgets.swift */,
+				BAF8D42026AE10D400CA9383 /* Models */,
 				BA122DC4265EF8F1003D3BC5 /* Views */,
 				BA122DC3265EF8E4003D3BC5 /* Widgets */,
 				BA122DC8265EFA72003D3BC5 /* Providers */,
+				BAF8D4CB26AE142C00CA9383 /* Tools */,
 				BAB5760926703BE100B0C56F /* Supporting Files */,
 				BAFA93E0265DCFCD0009DCFB /* Assets.xcassets */,
 				BAFA93E2265DCFCD0009DCFB /* Info.plist */,
+				BAF8D48126AE125B00CA9383 /* Simplenote-Widgets-Bridging-Header.h */,
 			);
 			path = SimplenoteWidgets;
 			sourceTree = "<group>";
@@ -3367,6 +3383,7 @@
 				BAF8D46E26AE118800CA9383 /* SPCredentials.swift in Sources */,
 				BAF8D45226AE10FC00CA9383 /* Tag+CoreDataProperties.swift in Sources */,
 				BAF8D45626AE10FC00CA9383 /* Note+CoreDataClass.swift in Sources */,
+				BAF8D4E126AE145E00CA9383 /* BuildConfiguration.swift in Sources */,
 				BAB5765C26703D0600B0C56F /* NoteWidgetIntent.intentdefinition in Sources */,
 				BAF8D45526AE10FC00CA9383 /* Tag+CoreDataClass.swift in Sources */,
 				BAF8D45826AE10FC00CA9383 /* Note+CoreDataProperties.swift in Sources */,
@@ -3378,6 +3395,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAF8D4E026AE145E00CA9383 /* BuildConfiguration.swift in Sources */,
 				BAB5765B26703D0600B0C56F /* NoteWidgetIntent.intentdefinition in Sources */,
 				BAFA93F3265DE4A40009DCFB /* NewNoteWidget.swift in Sources */,
 				BAF8D44F26AE10FC00CA9383 /* Settings+CoreDataProperties.swift in Sources */,
@@ -4595,6 +4613,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "Simplenote Development Intents";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "SimplenoteIntents/Simplenote-Intents-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -4631,6 +4650,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.codality.NotationalFlow.Intents";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "SimplenoteIntents/Simplenote-Intents-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -4666,6 +4686,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match InHouse com.codality.NotationalFlow.Internal.Intents";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "SimplenoteIntents/Simplenote-Intents-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -4701,6 +4722,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match InHouse com.codality.NotationalFlow.Alpha.Intents";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "SimplenoteIntents/Simplenote-Intents-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -4736,6 +4758,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.codality.NotationalFlow.Intents";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "SimplenoteIntents/Simplenote-Intents-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -4780,6 +4803,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "Simplenote Development Widgets";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "SimplenoteWidgets/Simplenote-Widgets-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -4821,6 +4845,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.codality.NotationalFlow.Widgets";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "SimplenoteWidgets/Simplenote-Widgets-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -4861,6 +4886,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match InHouse com.codality.NotationalFlow.Internal.Widgets";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "SimplenoteWidgets/Simplenote-Widgets-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -4901,6 +4927,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match InHouse com.codality.NotationalFlow.Alpha.Widgets";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "SimplenoteWidgets/Simplenote-Widgets-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -4941,6 +4968,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.codality.NotationalFlow.Widgets";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "SimplenoteWidgets/Simplenote-Widgets-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

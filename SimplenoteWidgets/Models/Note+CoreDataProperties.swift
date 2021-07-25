@@ -10,7 +10,7 @@ extension Note {
 
     @NSManaged public var content: String?
     @NSManaged public var creationDate: Date?
-    @NSManaged public var deleted: NSNumber?
+    @NSManaged public override var isDeleted: Bool
     @NSManaged public var lastPosition: NSNumber?
     @NSManaged public var modificationDate: Date?
     @NSManaged public var noteSynced: NSNumber?
