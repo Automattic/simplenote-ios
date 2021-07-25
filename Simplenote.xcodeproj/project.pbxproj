@@ -472,6 +472,14 @@
 		BAF8D46E26AE118800CA9383 /* SPCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E196BA230F522D00F5658A /* SPCredentials.swift */; };
 		BAF8D4E026AE145E00CA9383 /* BuildConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D4CC26AE144700CA9383 /* BuildConfiguration.swift */; };
 		BAF8D4E126AE145E00CA9383 /* BuildConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D4CC26AE144700CA9383 /* BuildConfiguration.swift */; };
+		BAF8D4F626AE171400CA9383 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3856CC2681715700F388CC /* CoreDataManager.swift */; };
+		BAF8D50026AE171400CA9383 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3856CC2681715700F388CC /* CoreDataManager.swift */; };
+		BAF8D50A26AE172600CA9383 /* StorageSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B59012685549F00DAD1ED /* StorageSettings.swift */; };
+		BAF8D51426AE172600CA9383 /* StorageSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B59012685549F00DAD1ED /* StorageSettings.swift */; };
+		BAF8D51E26AE173D00CA9383 /* FileManager+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A8968D25D5779D00A7B390 /* FileManager+Simplenote.swift */; };
+		BAF8D52826AE173D00CA9383 /* FileManager+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A8968D25D5779D00A7B390 /* FileManager+Simplenote.swift */; };
+		BAF8D53226AE175B00CA9383 /* Bundle+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CBEF4122D3B419009DBE67 /* Bundle+Simplenote.swift */; };
+		BAF8D53C26AE175C00CA9383 /* Bundle+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CBEF4122D3B419009DBE67 /* Bundle+Simplenote.swift */; };
 		BAFA93DA265DCFCA0009DCFB /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAFA93D9265DCFCA0009DCFB /* WidgetKit.framework */; };
 		BAFA93DC265DCFCA0009DCFB /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAFA93DB265DCFCA0009DCFB /* SwiftUI.framework */; };
 		BAFA93E1265DCFCD0009DCFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAFA93E0265DCFCD0009DCFB /* Assets.xcassets */; };
@@ -3375,10 +3383,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				BAF8D45126AE10FC00CA9383 /* SPManagedObject+CoreDataProperties.swift in Sources */,
+				BAF8D52826AE173D00CA9383 /* FileManager+Simplenote.swift in Sources */,
 				BAF8D45A26AE10FC00CA9383 /* SPManagedObject+CoreDataClass.swift in Sources */,
 				BAF8D45726AE10FC00CA9383 /* Preferences+CoreDataProperties.swift in Sources */,
+				BAF8D50026AE171400CA9383 /* CoreDataManager.swift in Sources */,
 				BAF8D45326AE10FC00CA9383 /* Settings+CoreDataClass.swift in Sources */,
 				BAF8D45426AE10FC00CA9383 /* Preferences+CoreDataClass.swift in Sources */,
+				BAF8D51426AE172600CA9383 /* StorageSettings.swift in Sources */,
 				BAB5762726703C8200B0C56F /* IntentHandler.swift in Sources */,
 				BAF8D46E26AE118800CA9383 /* SPCredentials.swift in Sources */,
 				BAF8D45226AE10FC00CA9383 /* Tag+CoreDataProperties.swift in Sources */,
@@ -3388,6 +3399,7 @@
 				BAF8D45526AE10FC00CA9383 /* Tag+CoreDataClass.swift in Sources */,
 				BAF8D45826AE10FC00CA9383 /* Note+CoreDataProperties.swift in Sources */,
 				BAF8D45926AE10FC00CA9383 /* Settings+CoreDataProperties.swift in Sources */,
+				BAF8D53C26AE175C00CA9383 /* Bundle+Simplenote.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3397,6 +3409,7 @@
 			files = (
 				BAF8D4E026AE145E00CA9383 /* BuildConfiguration.swift in Sources */,
 				BAB5765B26703D0600B0C56F /* NoteWidgetIntent.intentdefinition in Sources */,
+				BAF8D50A26AE172600CA9383 /* StorageSettings.swift in Sources */,
 				BAFA93F3265DE4A40009DCFB /* NewNoteWidget.swift in Sources */,
 				BAF8D44F26AE10FC00CA9383 /* Settings+CoreDataProperties.swift in Sources */,
 				BA122DBD265EF412003D3BC5 /* UIColor+Studio.swift in Sources */,
@@ -3404,6 +3417,7 @@
 				BAF8D44726AE10FC00CA9383 /* SPManagedObject+CoreDataProperties.swift in Sources */,
 				BA122DBB265EF40E003D3BC5 /* UIColor+Helpers.swift in Sources */,
 				BA122DBA265EF402003D3BC5 /* SimplenoteConstants.swift in Sources */,
+				BAF8D51E26AE173D00CA9383 /* FileManager+Simplenote.swift in Sources */,
 				BAF8D44926AE10FC00CA9383 /* Settings+CoreDataClass.swift in Sources */,
 				BA122DBC265EF410003D3BC5 /* ColorStudio.swift in Sources */,
 				BAF8D46426AE118800CA9383 /* SPCredentials.swift in Sources */,
@@ -3416,10 +3430,12 @@
 				BAF8D44B26AE10FC00CA9383 /* Tag+CoreDataClass.swift in Sources */,
 				BAF8D45026AE10FC00CA9383 /* SPManagedObject+CoreDataClass.swift in Sources */,
 				BAFA93F2265DE4A10009DCFB /* SimplenoteWidgets.swift in Sources */,
+				BAF8D53226AE175B00CA9383 /* Bundle+Simplenote.swift in Sources */,
 				BAF8D44E26AE10FC00CA9383 /* Note+CoreDataProperties.swift in Sources */,
 				BA122DC2265EF4E5003D3BC5 /* SPUserInterface.swift in Sources */,
 				BAB576A826703F4500B0C56F /* NotePreviewWidgetProvider.swift in Sources */,
 				BAF8D44A26AE10FC00CA9383 /* Preferences+CoreDataClass.swift in Sources */,
+				BAF8D4F626AE171400CA9383 /* CoreDataManager.swift in Sources */,
 				BAB5764626703D0000B0C56F /* IntentHandler.swift in Sources */,
 				BAB576C92670514500B0C56F /* NotePreviewWidget.swift in Sources */,
 				BA122DC7265EF92D003D3BC5 /* NewNoteWidgetView.swift in Sources */,
