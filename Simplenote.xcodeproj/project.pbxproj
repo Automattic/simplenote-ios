@@ -480,6 +480,8 @@
 		BAF8D52826AE173D00CA9383 /* FileManager+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A8968D25D5779D00A7B390 /* FileManager+Simplenote.swift */; };
 		BAF8D53226AE175B00CA9383 /* Bundle+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CBEF4122D3B419009DBE67 /* Bundle+Simplenote.swift */; };
 		BAF8D53C26AE175C00CA9383 /* Bundle+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CBEF4122D3B419009DBE67 /* Bundle+Simplenote.swift */; };
+		BAF8D5BB26AE254000CA9383 /* Simplenote.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 467D9C5C1788A4FB00785EF3 /* Simplenote.xcdatamodeld */; };
+		BAF8D5C526AE254100CA9383 /* Simplenote.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 467D9C5C1788A4FB00785EF3 /* Simplenote.xcdatamodeld */; };
 		BAFA93DA265DCFCA0009DCFB /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAFA93D9265DCFCA0009DCFB /* WidgetKit.framework */; };
 		BAFA93DC265DCFCA0009DCFB /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAFA93DB265DCFCA0009DCFB /* SwiftUI.framework */; };
 		BAFA93E1265DCFCD0009DCFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAFA93E0265DCFCD0009DCFB /* Assets.xcassets */; };
@@ -3394,6 +3396,7 @@
 				BAF8D46E26AE118800CA9383 /* SPCredentials.swift in Sources */,
 				BAF8D45226AE10FC00CA9383 /* Tag+CoreDataProperties.swift in Sources */,
 				BAF8D45626AE10FC00CA9383 /* Note+CoreDataClass.swift in Sources */,
+				BAF8D5C526AE254100CA9383 /* Simplenote.xcdatamodeld in Sources */,
 				BAF8D4E126AE145E00CA9383 /* BuildConfiguration.swift in Sources */,
 				BAB5765C26703D0600B0C56F /* NoteWidgetIntent.intentdefinition in Sources */,
 				BAF8D45526AE10FC00CA9383 /* Tag+CoreDataClass.swift in Sources */,
@@ -3415,6 +3418,7 @@
 				BA122DBD265EF412003D3BC5 /* UIColor+Studio.swift in Sources */,
 				BA122DBE265EF421003D3BC5 /* UIKitConstants.swift in Sources */,
 				BAF8D44726AE10FC00CA9383 /* SPManagedObject+CoreDataProperties.swift in Sources */,
+				BAF8D5BB26AE254000CA9383 /* Simplenote.xcdatamodeld in Sources */,
 				BA122DBB265EF40E003D3BC5 /* UIColor+Helpers.swift in Sources */,
 				BA122DBA265EF402003D3BC5 /* SimplenoteConstants.swift in Sources */,
 				BAF8D51E26AE173D00CA9383 /* FileManager+Simplenote.swift in Sources */,
