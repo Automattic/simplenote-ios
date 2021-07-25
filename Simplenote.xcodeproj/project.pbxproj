@@ -448,6 +448,28 @@
 		BAB576A826703F4500B0C56F /* NotePreviewWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5769226703F0E00B0C56F /* NotePreviewWidgetProvider.swift */; };
 		BAB576C92670514500B0C56F /* NotePreviewWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB576BD2670512C00B0C56F /* NotePreviewWidget.swift */; };
 		BAE08626261282D1009D40CD /* Note+Publish.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE08625261282D1009D40CD /* Note+Publish.swift */; };
+		BAF8D44726AE10FC00CA9383 /* SPManagedObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42626AE10F200CA9383 /* SPManagedObject+CoreDataProperties.swift */; };
+		BAF8D44826AE10FC00CA9383 /* Tag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42726AE10F200CA9383 /* Tag+CoreDataProperties.swift */; };
+		BAF8D44926AE10FC00CA9383 /* Settings+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42926AE10F200CA9383 /* Settings+CoreDataClass.swift */; };
+		BAF8D44A26AE10FC00CA9383 /* Preferences+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42826AE10F200CA9383 /* Preferences+CoreDataClass.swift */; };
+		BAF8D44B26AE10FC00CA9383 /* Tag+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42226AE10F100CA9383 /* Tag+CoreDataClass.swift */; };
+		BAF8D44C26AE10FC00CA9383 /* Note+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42326AE10F100CA9383 /* Note+CoreDataClass.swift */; };
+		BAF8D44D26AE10FC00CA9383 /* Preferences+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42126AE10F100CA9383 /* Preferences+CoreDataProperties.swift */; };
+		BAF8D44E26AE10FC00CA9383 /* Note+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42426AE10F100CA9383 /* Note+CoreDataProperties.swift */; };
+		BAF8D44F26AE10FC00CA9383 /* Settings+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42526AE10F200CA9383 /* Settings+CoreDataProperties.swift */; };
+		BAF8D45026AE10FC00CA9383 /* SPManagedObject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42A26AE10F200CA9383 /* SPManagedObject+CoreDataClass.swift */; };
+		BAF8D45126AE10FC00CA9383 /* SPManagedObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42626AE10F200CA9383 /* SPManagedObject+CoreDataProperties.swift */; };
+		BAF8D45226AE10FC00CA9383 /* Tag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42726AE10F200CA9383 /* Tag+CoreDataProperties.swift */; };
+		BAF8D45326AE10FC00CA9383 /* Settings+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42926AE10F200CA9383 /* Settings+CoreDataClass.swift */; };
+		BAF8D45426AE10FC00CA9383 /* Preferences+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42826AE10F200CA9383 /* Preferences+CoreDataClass.swift */; };
+		BAF8D45526AE10FC00CA9383 /* Tag+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42226AE10F100CA9383 /* Tag+CoreDataClass.swift */; };
+		BAF8D45626AE10FC00CA9383 /* Note+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42326AE10F100CA9383 /* Note+CoreDataClass.swift */; };
+		BAF8D45726AE10FC00CA9383 /* Preferences+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42126AE10F100CA9383 /* Preferences+CoreDataProperties.swift */; };
+		BAF8D45826AE10FC00CA9383 /* Note+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42426AE10F100CA9383 /* Note+CoreDataProperties.swift */; };
+		BAF8D45926AE10FC00CA9383 /* Settings+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42526AE10F200CA9383 /* Settings+CoreDataProperties.swift */; };
+		BAF8D45A26AE10FC00CA9383 /* SPManagedObject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42A26AE10F200CA9383 /* SPManagedObject+CoreDataClass.swift */; };
+		BAF8D46426AE118800CA9383 /* SPCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E196BA230F522D00F5658A /* SPCredentials.swift */; };
+		BAF8D46E26AE118800CA9383 /* SPCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E196BA230F522D00F5658A /* SPCredentials.swift */; };
 		BAFA93DA265DCFCA0009DCFB /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAFA93D9265DCFCA0009DCFB /* WidgetKit.framework */; };
 		BAFA93DC265DCFCA0009DCFB /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAFA93DB265DCFCA0009DCFB /* SwiftUI.framework */; };
 		BAFA93E1265DCFCD0009DCFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAFA93E0265DCFCD0009DCFB /* Assets.xcassets */; };
@@ -1021,6 +1043,16 @@
 		BAB5769226703F0E00B0C56F /* NotePreviewWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotePreviewWidgetProvider.swift; sourceTree = "<group>"; };
 		BAB576BD2670512C00B0C56F /* NotePreviewWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotePreviewWidget.swift; sourceTree = "<group>"; };
 		BAE08625261282D1009D40CD /* Note+Publish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+Publish.swift"; sourceTree = "<group>"; };
+		BAF8D42126AE10F100CA9383 /* Preferences+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Preferences+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		BAF8D42226AE10F100CA9383 /* Tag+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tag+CoreDataClass.swift"; sourceTree = "<group>"; };
+		BAF8D42326AE10F100CA9383 /* Note+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataClass.swift"; sourceTree = "<group>"; };
+		BAF8D42426AE10F100CA9383 /* Note+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		BAF8D42526AE10F200CA9383 /* Settings+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Settings+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		BAF8D42626AE10F200CA9383 /* SPManagedObject+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SPManagedObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		BAF8D42726AE10F200CA9383 /* Tag+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tag+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		BAF8D42826AE10F200CA9383 /* Preferences+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Preferences+CoreDataClass.swift"; sourceTree = "<group>"; };
+		BAF8D42926AE10F200CA9383 /* Settings+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Settings+CoreDataClass.swift"; sourceTree = "<group>"; };
+		BAF8D42A26AE10F200CA9383 /* SPManagedObject+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SPManagedObject+CoreDataClass.swift"; sourceTree = "<group>"; };
 		BAFA93D8265DCFCA0009DCFB /* SimplenoteWidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SimplenoteWidgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAFA93D9265DCFCA0009DCFB /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		BAFA93DB265DCFCA0009DCFB /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -2092,9 +2124,27 @@
 			path = SimplenoteIntents;
 			sourceTree = "<group>";
 		};
+		BAF8D42026AE10D400CA9383 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BAF8D42326AE10F100CA9383 /* Note+CoreDataClass.swift */,
+				BAF8D42426AE10F100CA9383 /* Note+CoreDataProperties.swift */,
+				BAF8D42826AE10F200CA9383 /* Preferences+CoreDataClass.swift */,
+				BAF8D42126AE10F100CA9383 /* Preferences+CoreDataProperties.swift */,
+				BAF8D42926AE10F200CA9383 /* Settings+CoreDataClass.swift */,
+				BAF8D42526AE10F200CA9383 /* Settings+CoreDataProperties.swift */,
+				BAF8D42A26AE10F200CA9383 /* SPManagedObject+CoreDataClass.swift */,
+				BAF8D42626AE10F200CA9383 /* SPManagedObject+CoreDataProperties.swift */,
+				BAF8D42226AE10F100CA9383 /* Tag+CoreDataClass.swift */,
+				BAF8D42726AE10F200CA9383 /* Tag+CoreDataProperties.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		BAFA93DD265DCFCA0009DCFB /* SimplenoteWidgets */ = {
 			isa = PBXGroup;
 			children = (
+				BAF8D42026AE10D400CA9383 /* Models */,
 				BAFA93EC265DE3810009DCFB /* SimplenoteWidgets.swift */,
 				BA122DC4265EF8F1003D3BC5 /* Views */,
 				BA122DC3265EF8E4003D3BC5 /* Widgets */,
@@ -2199,7 +2249,6 @@
 				467D9C6F1788CF2400785EF3 /* External */,
 				3FA6013A242C5AAE0068FC52 /* SimplenoteScreenshots */,
 				D864B15525CAE25000F9B73E /* SimplenoteUITests */,
-				3F3CA91126255E2000F6316F /* UITestHelpers */,
 				BAFA93DD265DCFCA0009DCFB /* SimplenoteWidgets */,
 				BAB5762526703C8200B0C56F /* SimplenoteIntents */,
 				E29ADD3A17848E8500E55842 /* Frameworks */,
@@ -2217,7 +2266,6 @@
 				B58218971FCC45170094ECA1 /* SimplenoteTests.xctest */,
 				3FA60139242C5AAD0068FC52 /* SimplenoteScreenshots.xctest */,
 				D864B15425CAE25000F9B73E /* SimplenoteUITests.xctest */,
-				3F3CA91026255E1F00F6316F /* UITestHelpers.framework */,
 				BAFA93D8265DCFCA0009DCFB /* SimplenoteWidgetsExtension.appex */,
 				BAB5762226703C8100B0C56F /* SimplenoteIntents.appex */,
 			);
@@ -2657,7 +2705,6 @@
 				B5C7BF97230C59F5000DEC91 /* SimplenoteSecrets */,
 				3F1BB4AD243199FF006D1A04 /* ScreenshotsSecrets */,
 				D864B15325CAE25000F9B73E /* SimplenoteUITests */,
-				3F3CA90F26255E1F00F6316F /* UITestHelpers */,
 				BAFA93D7265DCFCA0009DCFB /* SimplenoteWidgetsExtension */,
 				BAB5762126703C8100B0C56F /* SimplenoteIntents */,
 			);
@@ -3311,8 +3358,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAF8D45126AE10FC00CA9383 /* SPManagedObject+CoreDataProperties.swift in Sources */,
+				BAF8D45A26AE10FC00CA9383 /* SPManagedObject+CoreDataClass.swift in Sources */,
+				BAF8D45726AE10FC00CA9383 /* Preferences+CoreDataProperties.swift in Sources */,
+				BAF8D45326AE10FC00CA9383 /* Settings+CoreDataClass.swift in Sources */,
+				BAF8D45426AE10FC00CA9383 /* Preferences+CoreDataClass.swift in Sources */,
 				BAB5762726703C8200B0C56F /* IntentHandler.swift in Sources */,
+				BAF8D46E26AE118800CA9383 /* SPCredentials.swift in Sources */,
+				BAF8D45226AE10FC00CA9383 /* Tag+CoreDataProperties.swift in Sources */,
+				BAF8D45626AE10FC00CA9383 /* Note+CoreDataClass.swift in Sources */,
 				BAB5765C26703D0600B0C56F /* NoteWidgetIntent.intentdefinition in Sources */,
+				BAF8D45526AE10FC00CA9383 /* Tag+CoreDataClass.swift in Sources */,
+				BAF8D45826AE10FC00CA9383 /* Note+CoreDataProperties.swift in Sources */,
+				BAF8D45926AE10FC00CA9383 /* Settings+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3322,17 +3380,28 @@
 			files = (
 				BAB5765B26703D0600B0C56F /* NoteWidgetIntent.intentdefinition in Sources */,
 				BAFA93F3265DE4A40009DCFB /* NewNoteWidget.swift in Sources */,
+				BAF8D44F26AE10FC00CA9383 /* Settings+CoreDataProperties.swift in Sources */,
 				BA122DBD265EF412003D3BC5 /* UIColor+Studio.swift in Sources */,
 				BA122DBE265EF421003D3BC5 /* UIKitConstants.swift in Sources */,
+				BAF8D44726AE10FC00CA9383 /* SPManagedObject+CoreDataProperties.swift in Sources */,
 				BA122DBB265EF40E003D3BC5 /* UIColor+Helpers.swift in Sources */,
 				BA122DBA265EF402003D3BC5 /* SimplenoteConstants.swift in Sources */,
+				BAF8D44926AE10FC00CA9383 /* Settings+CoreDataClass.swift in Sources */,
 				BA122DBC265EF410003D3BC5 /* ColorStudio.swift in Sources */,
+				BAF8D46426AE118800CA9383 /* SPCredentials.swift in Sources */,
+				BAF8D44D26AE10FC00CA9383 /* Preferences+CoreDataProperties.swift in Sources */,
+				BAF8D44826AE10FC00CA9383 /* Tag+CoreDataProperties.swift in Sources */,
 				BA122DC1265EF4C5003D3BC5 /* UITraitCollection+Simplenote.swift in Sources */,
 				BAFA93F4265DE4A70009DCFB /* NewNoteWidgetProvider.swift in Sources */,
 				BAB5768726703EA000B0C56F /* NotePreviewWidgetView.swift in Sources */,
+				BAF8D44C26AE10FC00CA9383 /* Note+CoreDataClass.swift in Sources */,
+				BAF8D44B26AE10FC00CA9383 /* Tag+CoreDataClass.swift in Sources */,
+				BAF8D45026AE10FC00CA9383 /* SPManagedObject+CoreDataClass.swift in Sources */,
 				BAFA93F2265DE4A10009DCFB /* SimplenoteWidgets.swift in Sources */,
+				BAF8D44E26AE10FC00CA9383 /* Note+CoreDataProperties.swift in Sources */,
 				BA122DC2265EF4E5003D3BC5 /* SPUserInterface.swift in Sources */,
 				BAB576A826703F4500B0C56F /* NotePreviewWidgetProvider.swift in Sources */,
+				BAF8D44A26AE10FC00CA9383 /* Preferences+CoreDataClass.swift in Sources */,
 				BAB5764626703D0000B0C56F /* IntentHandler.swift in Sources */,
 				BAB576C92670514500B0C56F /* NotePreviewWidget.swift in Sources */,
 				BA122DC7265EF92D003D3BC5 /* NewNoteWidgetView.swift in Sources */,
