@@ -109,9 +109,10 @@ extension SPSettingsViewController {
         }
 
         deletionController.failureHandler = { status in
+            pendingAlert.stopAnimating()
+            pendingAlert.dismiss(animated: false, completion: nil)
+            
             if status == 0 {
-                pendingAlert.stopAnimating()
-                pendingAlert.dismiss(animated: false, completion: nil)
                 NoticeController.shared.present(NoticeFactory.networkError())
                 return
             }
