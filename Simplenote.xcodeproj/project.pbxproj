@@ -414,6 +414,8 @@
 		BA122DC2265EF4E5003D3BC5 /* SPUserInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52893BA2360B91200DF2571 /* SPUserInterface.swift */; };
 		BA122DC7265EF92D003D3BC5 /* NewNoteWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA122DC5265EF90C003D3BC5 /* NewNoteWidgetView.swift */; };
 		BA122DCA265F2E2D003D3BC5 /* UIColorSimplenoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA122DC9265F2E2D003D3BC5 /* UIColorSimplenoteTests.swift */; };
+		BA12B06F26B0D0150026F31D /* SPManagedObject+Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA12B06C26B0D0150026F31D /* SPManagedObject+Widget.swift */; };
+		BA12B07026B0D0150026F31D /* SPManagedObject+Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA12B06C26B0D0150026F31D /* SPManagedObject+Widget.swift */; };
 		BA18532826488DBC00D9A347 /* SignupRemoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA18532726488DBC00D9A347 /* SignupRemoteTests.swift */; };
 		BA2D82C6261522F100A1695B /* PublishNoticePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2D82C5261522F100A1695B /* PublishNoticePresenter.swift */; };
 		BA3856CD2681715700F388CC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3856CC2681715700F388CC /* CoreDataManager.swift */; };
@@ -448,26 +450,10 @@
 		BAB576A826703F4500B0C56F /* NotePreviewWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5769226703F0E00B0C56F /* NotePreviewWidgetProvider.swift */; };
 		BAB576C92670514500B0C56F /* NotePreviewWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB576BD2670512C00B0C56F /* NotePreviewWidget.swift */; };
 		BAE08626261282D1009D40CD /* Note+Publish.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE08625261282D1009D40CD /* Note+Publish.swift */; };
-		BAF8D44726AE10FC00CA9383 /* SPManagedObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42626AE10F200CA9383 /* SPManagedObject+CoreDataProperties.swift */; };
-		BAF8D44826AE10FC00CA9383 /* Tag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42726AE10F200CA9383 /* Tag+CoreDataProperties.swift */; };
-		BAF8D44926AE10FC00CA9383 /* Settings+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42926AE10F200CA9383 /* Settings+CoreDataClass.swift */; };
-		BAF8D44A26AE10FC00CA9383 /* Preferences+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42826AE10F200CA9383 /* Preferences+CoreDataClass.swift */; };
-		BAF8D44B26AE10FC00CA9383 /* Tag+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42226AE10F100CA9383 /* Tag+CoreDataClass.swift */; };
-		BAF8D44C26AE10FC00CA9383 /* Note+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42326AE10F100CA9383 /* Note+CoreDataClass.swift */; };
-		BAF8D44D26AE10FC00CA9383 /* Preferences+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42126AE10F100CA9383 /* Preferences+CoreDataProperties.swift */; };
-		BAF8D44E26AE10FC00CA9383 /* Note+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42426AE10F100CA9383 /* Note+CoreDataProperties.swift */; };
-		BAF8D44F26AE10FC00CA9383 /* Settings+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42526AE10F200CA9383 /* Settings+CoreDataProperties.swift */; };
-		BAF8D45026AE10FC00CA9383 /* SPManagedObject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42A26AE10F200CA9383 /* SPManagedObject+CoreDataClass.swift */; };
-		BAF8D45126AE10FC00CA9383 /* SPManagedObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42626AE10F200CA9383 /* SPManagedObject+CoreDataProperties.swift */; };
-		BAF8D45226AE10FC00CA9383 /* Tag+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42726AE10F200CA9383 /* Tag+CoreDataProperties.swift */; };
-		BAF8D45326AE10FC00CA9383 /* Settings+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42926AE10F200CA9383 /* Settings+CoreDataClass.swift */; };
-		BAF8D45426AE10FC00CA9383 /* Preferences+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42826AE10F200CA9383 /* Preferences+CoreDataClass.swift */; };
-		BAF8D45526AE10FC00CA9383 /* Tag+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42226AE10F100CA9383 /* Tag+CoreDataClass.swift */; };
-		BAF8D45626AE10FC00CA9383 /* Note+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42326AE10F100CA9383 /* Note+CoreDataClass.swift */; };
-		BAF8D45726AE10FC00CA9383 /* Preferences+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42126AE10F100CA9383 /* Preferences+CoreDataProperties.swift */; };
-		BAF8D45826AE10FC00CA9383 /* Note+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42426AE10F100CA9383 /* Note+CoreDataProperties.swift */; };
-		BAF8D45926AE10FC00CA9383 /* Settings+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42526AE10F200CA9383 /* Settings+CoreDataProperties.swift */; };
-		BAF8D45A26AE10FC00CA9383 /* SPManagedObject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42A26AE10F200CA9383 /* SPManagedObject+CoreDataClass.swift */; };
+		BAF8D44B26AE10FC00CA9383 /* Tag+Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42226AE10F100CA9383 /* Tag+Widget.swift */; };
+		BAF8D44C26AE10FC00CA9383 /* Note+Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42326AE10F100CA9383 /* Note+Widget.swift */; };
+		BAF8D45526AE10FC00CA9383 /* Tag+Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42226AE10F100CA9383 /* Tag+Widget.swift */; };
+		BAF8D45626AE10FC00CA9383 /* Note+Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42326AE10F100CA9383 /* Note+Widget.swift */; };
 		BAF8D46426AE118800CA9383 /* SPCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E196BA230F522D00F5658A /* SPCredentials.swift */; };
 		BAF8D46E26AE118800CA9383 /* SPCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E196BA230F522D00F5658A /* SPCredentials.swift */; };
 		BAF8D4E026AE145E00CA9383 /* BuildConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D4CC26AE144700CA9383 /* BuildConfiguration.swift */; };
@@ -1022,6 +1008,7 @@
 		B5F3FFFE23F44679007A7C59 /* SPSortBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPSortBar.swift; path = Classes/SPSortBar.swift; sourceTree = "<group>"; };
 		BA122DC5265EF90C003D3BC5 /* NewNoteWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNoteWidgetView.swift; sourceTree = "<group>"; };
 		BA122DC9265F2E2D003D3BC5 /* UIColorSimplenoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorSimplenoteTests.swift; sourceTree = "<group>"; };
+		BA12B06C26B0D0150026F31D /* SPManagedObject+Widget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SPManagedObject+Widget.swift"; sourceTree = "<group>"; };
 		BA18532726488DBC00D9A347 /* SignupRemoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupRemoteTests.swift; sourceTree = "<group>"; };
 		BA2D82C5261522F100A1695B /* PublishNoticePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishNoticePresenter.swift; sourceTree = "<group>"; };
 		BA3856CC2681715700F388CC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -1055,16 +1042,8 @@
 		BAB5769226703F0E00B0C56F /* NotePreviewWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotePreviewWidgetProvider.swift; sourceTree = "<group>"; };
 		BAB576BD2670512C00B0C56F /* NotePreviewWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotePreviewWidget.swift; sourceTree = "<group>"; };
 		BAE08625261282D1009D40CD /* Note+Publish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+Publish.swift"; sourceTree = "<group>"; };
-		BAF8D42126AE10F100CA9383 /* Preferences+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Preferences+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		BAF8D42226AE10F100CA9383 /* Tag+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tag+CoreDataClass.swift"; sourceTree = "<group>"; };
-		BAF8D42326AE10F100CA9383 /* Note+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataClass.swift"; sourceTree = "<group>"; };
-		BAF8D42426AE10F100CA9383 /* Note+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		BAF8D42526AE10F200CA9383 /* Settings+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Settings+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		BAF8D42626AE10F200CA9383 /* SPManagedObject+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SPManagedObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		BAF8D42726AE10F200CA9383 /* Tag+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tag+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		BAF8D42826AE10F200CA9383 /* Preferences+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Preferences+CoreDataClass.swift"; sourceTree = "<group>"; };
-		BAF8D42926AE10F200CA9383 /* Settings+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Settings+CoreDataClass.swift"; sourceTree = "<group>"; };
-		BAF8D42A26AE10F200CA9383 /* SPManagedObject+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SPManagedObject+CoreDataClass.swift"; sourceTree = "<group>"; };
+		BAF8D42226AE10F100CA9383 /* Tag+Widget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tag+Widget.swift"; sourceTree = "<group>"; };
+		BAF8D42326AE10F100CA9383 /* Note+Widget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Note+Widget.swift"; sourceTree = "<group>"; };
 		BAF8D48126AE125B00CA9383 /* Simplenote-Widgets-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Simplenote-Widgets-Bridging-Header.h"; sourceTree = "<group>"; };
 		BAF8D4AD26AE136D00CA9383 /* Simplenote-Intents-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Simplenote-Intents-Bridging-Header.h"; sourceTree = "<group>"; };
 		BAF8D4CC26AE144700CA9383 /* BuildConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildConfiguration.swift; sourceTree = "<group>"; };
@@ -2143,16 +2122,9 @@
 		BAF8D42026AE10D400CA9383 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				BAF8D42326AE10F100CA9383 /* Note+CoreDataClass.swift */,
-				BAF8D42426AE10F100CA9383 /* Note+CoreDataProperties.swift */,
-				BAF8D42826AE10F200CA9383 /* Preferences+CoreDataClass.swift */,
-				BAF8D42126AE10F100CA9383 /* Preferences+CoreDataProperties.swift */,
-				BAF8D42926AE10F200CA9383 /* Settings+CoreDataClass.swift */,
-				BAF8D42526AE10F200CA9383 /* Settings+CoreDataProperties.swift */,
-				BAF8D42A26AE10F200CA9383 /* SPManagedObject+CoreDataClass.swift */,
-				BAF8D42626AE10F200CA9383 /* SPManagedObject+CoreDataProperties.swift */,
-				BAF8D42226AE10F100CA9383 /* Tag+CoreDataClass.swift */,
-				BAF8D42726AE10F200CA9383 /* Tag+CoreDataProperties.swift */,
+				BAF8D42326AE10F100CA9383 /* Note+Widget.swift */,
+				BA12B06C26B0D0150026F31D /* SPManagedObject+Widget.swift */,
+				BAF8D42226AE10F100CA9383 /* Tag+Widget.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3384,24 +3356,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAF8D45126AE10FC00CA9383 /* SPManagedObject+CoreDataProperties.swift in Sources */,
 				BAF8D52826AE173D00CA9383 /* FileManager+Simplenote.swift in Sources */,
-				BAF8D45A26AE10FC00CA9383 /* SPManagedObject+CoreDataClass.swift in Sources */,
-				BAF8D45726AE10FC00CA9383 /* Preferences+CoreDataProperties.swift in Sources */,
 				BAF8D50026AE171400CA9383 /* CoreDataManager.swift in Sources */,
-				BAF8D45326AE10FC00CA9383 /* Settings+CoreDataClass.swift in Sources */,
-				BAF8D45426AE10FC00CA9383 /* Preferences+CoreDataClass.swift in Sources */,
 				BAF8D51426AE172600CA9383 /* StorageSettings.swift in Sources */,
 				BAB5762726703C8200B0C56F /* IntentHandler.swift in Sources */,
+				BA12B07026B0D0150026F31D /* SPManagedObject+Widget.swift in Sources */,
 				BAF8D46E26AE118800CA9383 /* SPCredentials.swift in Sources */,
-				BAF8D45226AE10FC00CA9383 /* Tag+CoreDataProperties.swift in Sources */,
-				BAF8D45626AE10FC00CA9383 /* Note+CoreDataClass.swift in Sources */,
+				BAF8D45626AE10FC00CA9383 /* Note+Widget.swift in Sources */,
 				BAF8D5C526AE254100CA9383 /* Simplenote.xcdatamodeld in Sources */,
 				BAF8D4E126AE145E00CA9383 /* BuildConfiguration.swift in Sources */,
 				BAB5765C26703D0600B0C56F /* NoteWidgetIntent.intentdefinition in Sources */,
-				BAF8D45526AE10FC00CA9383 /* Tag+CoreDataClass.swift in Sources */,
-				BAF8D45826AE10FC00CA9383 /* Note+CoreDataProperties.swift in Sources */,
-				BAF8D45926AE10FC00CA9383 /* Settings+CoreDataProperties.swift in Sources */,
+				BAF8D45526AE10FC00CA9383 /* Tag+Widget.swift in Sources */,
 				BAF8D53C26AE175C00CA9383 /* Bundle+Simplenote.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3414,31 +3379,24 @@
 				BAB5765B26703D0600B0C56F /* NoteWidgetIntent.intentdefinition in Sources */,
 				BAF8D50A26AE172600CA9383 /* StorageSettings.swift in Sources */,
 				BAFA93F3265DE4A40009DCFB /* NewNoteWidget.swift in Sources */,
-				BAF8D44F26AE10FC00CA9383 /* Settings+CoreDataProperties.swift in Sources */,
 				BA122DBD265EF412003D3BC5 /* UIColor+Studio.swift in Sources */,
 				BA122DBE265EF421003D3BC5 /* UIKitConstants.swift in Sources */,
-				BAF8D44726AE10FC00CA9383 /* SPManagedObject+CoreDataProperties.swift in Sources */,
 				BAF8D5BB26AE254000CA9383 /* Simplenote.xcdatamodeld in Sources */,
 				BA122DBB265EF40E003D3BC5 /* UIColor+Helpers.swift in Sources */,
 				BA122DBA265EF402003D3BC5 /* SimplenoteConstants.swift in Sources */,
 				BAF8D51E26AE173D00CA9383 /* FileManager+Simplenote.swift in Sources */,
-				BAF8D44926AE10FC00CA9383 /* Settings+CoreDataClass.swift in Sources */,
 				BA122DBC265EF410003D3BC5 /* ColorStudio.swift in Sources */,
 				BAF8D46426AE118800CA9383 /* SPCredentials.swift in Sources */,
-				BAF8D44D26AE10FC00CA9383 /* Preferences+CoreDataProperties.swift in Sources */,
-				BAF8D44826AE10FC00CA9383 /* Tag+CoreDataProperties.swift in Sources */,
 				BA122DC1265EF4C5003D3BC5 /* UITraitCollection+Simplenote.swift in Sources */,
+				BA12B06F26B0D0150026F31D /* SPManagedObject+Widget.swift in Sources */,
 				BAFA93F4265DE4A70009DCFB /* NewNoteWidgetProvider.swift in Sources */,
 				BAB5768726703EA000B0C56F /* NotePreviewWidgetView.swift in Sources */,
-				BAF8D44C26AE10FC00CA9383 /* Note+CoreDataClass.swift in Sources */,
-				BAF8D44B26AE10FC00CA9383 /* Tag+CoreDataClass.swift in Sources */,
-				BAF8D45026AE10FC00CA9383 /* SPManagedObject+CoreDataClass.swift in Sources */,
+				BAF8D44C26AE10FC00CA9383 /* Note+Widget.swift in Sources */,
+				BAF8D44B26AE10FC00CA9383 /* Tag+Widget.swift in Sources */,
 				BAFA93F2265DE4A10009DCFB /* SimplenoteWidgets.swift in Sources */,
 				BAF8D53226AE175B00CA9383 /* Bundle+Simplenote.swift in Sources */,
-				BAF8D44E26AE10FC00CA9383 /* Note+CoreDataProperties.swift in Sources */,
 				BA122DC2265EF4E5003D3BC5 /* SPUserInterface.swift in Sources */,
 				BAB576A826703F4500B0C56F /* NotePreviewWidgetProvider.swift in Sources */,
-				BAF8D44A26AE10FC00CA9383 /* Preferences+CoreDataClass.swift in Sources */,
 				BAF8D4F626AE171400CA9383 /* CoreDataManager.swift in Sources */,
 				BAB5764626703D0000B0C56F /* IntentHandler.swift in Sources */,
 				BAB576C92670514500B0C56F /* NotePreviewWidget.swift in Sources */,

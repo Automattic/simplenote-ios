@@ -1,6 +1,14 @@
+// This file contains the required class structure to be able to fetch and use core data files in widgets and intents
+// We have collapsed the auto generated core data files into a single file as it is unlikely that the files will need to
+// be regenerated.  Contained in this file is the generated class files Note+CoreDataClass.swift and Note+CoreDataProperties.swift
+
 import Foundation
 import CoreData
 
+@objc(Note)
+public class Note: SPManagedObject {
+
+}
 
 extension Note {
 
