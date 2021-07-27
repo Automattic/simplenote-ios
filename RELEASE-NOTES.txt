@@ -5,7 +5,7 @@
 4.41
 -----
 -   Some bug fixes #1359
--   Migrated core data database to secure shared directory #1349
+-   [Internal] Migrated core data database to secure shared directory #1349
 
 4.40
 -----
