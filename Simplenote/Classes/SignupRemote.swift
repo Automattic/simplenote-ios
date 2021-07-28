@@ -3,9 +3,9 @@ import Foundation
 // MARK: - SignupRemote
 //
 class SignupRemote: Remote {
-    func signup(with email: String, completion: @escaping (_ result: Result<Int, RemoteError>) -> Void) {
+    func signup(with email: String, completion: @escaping (_ result: Result) -> Void) {
         guard let request = request(with: email) else {
-            completion(.failure(RemoteError(statusCode: 0)))
+            completion(.failure(0, nil))
             return
         }
 

@@ -72,8 +72,8 @@ class SPAuthHandler {
             switch result {
             case .success:
                 onCompletion(nil)
-            case .failure(let error):
-                let error = SPAuthError(signupErrorCode: error.statusCode, response: nil, error: error)
+            case .failure(let statusCode, let error):
+                let error = SPAuthError(signupErrorCode: statusCode, response: nil, error: error)
                 onCompletion(error)
             }
         }

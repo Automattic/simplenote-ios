@@ -7,15 +7,14 @@ class SignupRemoteTests: XCTestCase {
 
     func testSuccessWhenStatusCodeIs2xx() {
         for _ in 0..<5 {
-            let statusCode = Int.random(in: 200..<300)
-            test(withStatusCode: statusCode, email: "email@gmail.com", expectedResult: Result.success(statusCode))
+            test(withStatusCode: Int.random(in: 200..<300), email: "email@gmail.com", expectedResult: SignupRemote.Result.success)
         }
     }
 
     func testFailureWhenStatusCodeIs4xxOr5xx() {
         for _ in 0..<5 {
             let statusCode = Int.random(in: 400..<600)
-            test(withStatusCode: statusCode, email: "email@gmail.com", expectedResult: Result.failure(RemoteError(statusCode: statusCode)))
+            test(withStatusCode: statusCode, email: "email@gmail.com", expectedResult: SignupRemote.Result.failure(statusCode, nil))
         }
     }
 
@@ -49,7 +48,7 @@ class SignupRemoteTests: XCTestCase {
         XCTAssertEqual(expecation, decodedEmail)
     }
 
-    private func test(withStatusCode statusCode: Int?, email: String, expectedResult: Result<Int, RemoteError>) {
+    private func test(withStatusCode statusCode: Int?, email: String, expectedResult: SignupRemote.Result) {
         urlSession.data = (nil,
                            response(with: statusCode),
                            nil)
