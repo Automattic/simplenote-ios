@@ -11,10 +11,10 @@ class AccountDeletionController {
             switch result {
             case .success:
                 self.successHandler?()
-            case .failure(let status, let error):
-                NSLog("Delete Account Request Failed with status: %i", status)
-                NSLog("Error: ", error?.localizedDescription ?? "Generic Error")
-                self.failureHandler?(status)
+            case .failure(let error):
+                NSLog("Delete Account Request Failed with status: %i", error.statusCode)
+                NSLog("Error: ", error.localizedDescription)
+                self.failureHandler?(error.statusCode)
             }
         }
     }

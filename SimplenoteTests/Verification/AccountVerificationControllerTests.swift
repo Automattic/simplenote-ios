@@ -20,8 +20,8 @@ class AccountVerificationControllerTests: XCTestCase {
 extension AccountVerificationControllerTests {
     func testVerifyCallsRemoteWithProvidedEmail() {
         // When
-        let expectedResult = Remote.Result.random()
-        var verificationResult: Remote.Result?
+        let expectedResult = controller.randomResult()
+        var verificationResult: Result<Int, RemoteError>?
         controller.verify { (result) in
             verificationResult = result
         }

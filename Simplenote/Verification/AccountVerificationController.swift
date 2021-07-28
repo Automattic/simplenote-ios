@@ -72,7 +72,7 @@ class AccountVerificationController: NSObject {
 
     /// Send verification request
     ///
-    func verify(completion: @escaping (_ success: Remote.Result) -> Void) {
+    func verify(completion: @escaping (_ success: Result<Int, RemoteError>) -> Void) {
         remote.verify(email: email, completion: completion)
     }
 }

@@ -1,13 +1,13 @@
 import Foundation
 @testable import Simplenote
 
-extension Remote.Result {
-    static func random() -> Remote.Result {
+extension AccountVerificationController {
+    func randomResult() -> Result<Int, RemoteError> {
         let random = arc4random_uniform(1)
         if random == 0 {
-            return .failure(0, nil)
+            return .failure(RemoteError(statusCode: 0))
         } else {
-            return .success
+            return .success(1)
         }
     }
 }
