@@ -53,8 +53,8 @@ class SpinnerViewController: UIViewController {
             activityIndicator.style = .gray
         }
 
-        view.backgroundColor = UIColor(studioColor: .gray50, alpha: 0.5)
-        alertView.backgroundColor = UIColor(studioColor: .white, alpha: 1)
+        view.backgroundColor = UIColor(studioColor: .gray50, alpha: UIKitConstants.alpha0_5)
+        alertView.backgroundColor = UIColor(studioColor: .white, alpha: UIKitConstants.alpha1_0)
         activityIndicator.color = .black
     }
 
