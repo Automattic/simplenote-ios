@@ -119,6 +119,7 @@ extension SPSettingsViewController {
 
             let alert = UIAlertController(title: AccountDeletion.errorTitle, message: AccountDeletion.errorMessage, preferredStyle: .alert)
             alert.addDefaultActionWithTitle(AccountDeletion.ok)
+            self.present(alert, animated: true, completion: nil)
         }
 
         presentAccountDeletionConfirmation { (_) in
