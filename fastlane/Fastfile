@@ -175,6 +175,7 @@ end
   lane :new_beta_release do | options |
     ios_betabuild_prechecks(options)
     ios_update_metadata(options)
+    sanitize_appstore_keywords(options)
     ios_lint_localizations(input_dir: 'Simplenote', allow_retry: true)
     ios_bump_version_beta()
     ios_tag_build()
@@ -246,6 +247,7 @@ end
       )
 
       ios_update_metadata(options)
+      sanitize_appstore_keywords(options)
       ios_lint_localizations(input_dir: 'Simplenote', allow_retry: true)
       ios_bump_version_beta() unless ios_current_branch_is_hotfix
     end
