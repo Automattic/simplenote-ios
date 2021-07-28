@@ -1,6 +1,11 @@
-4.41
+4.42
 -----
 
+
+4.41
+-----
+-   Some bug fixes #1359
+-   [Internal] Migrated core data database to secure shared directory #1349
 
 4.40
 -----
