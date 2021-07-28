@@ -1,6 +1,6 @@
 import UIKit
 
-class ActivityIndicatorAlertViewController: UIViewController {
+class SpinnerViewController: UIViewController {
     private var alertView: UIView!
     private var activityIndicator: UIActivityIndicatorView!
 
