@@ -98,33 +98,31 @@ extension SPSettingsViewController {
             return
         }
         SPTracker.trackDeleteAccountButttonTapped()
-        let pendingAlert = SpinnerViewController()
-        pendingAlert.startAnimating()
+        spinnerViewController = SpinnerViewController()
+        spinnerViewController.startAnimating()
 
         let deletionController = AccountDeletionController()
-        deletionController.successHandler = {
-            pendingAlert.stopAnimating()
-            pendingAlert.dismiss(animated: false, completion: nil)
-            self.presentSuccessAlert(for: user)
+        presentAccountDeletionConfirmation { (_) in
+            self.present(self.spinnerViewController, animated: false, completion: nil)
+            deletionController.requestAccountDeletion(user) { [weak self] (result) in
+                self?.handleDeletionResult(user: user, result)
+            }
         }
+    }
 
-        deletionController.failureHandler = { status in
-            pendingAlert.stopAnimating()
-            pendingAlert.dismiss(animated: false, completion: nil)
-            
-            if status == 0 {
+    private func handleDeletionResult(user: SPUser, _ result: Result<Data, RemoteError>) {
+        spinnerViewController.stopAnimating()
+        spinnerViewController.dismiss(animated: false, completion: nil)
+        switch result {
+        case .success:
+            presentSuccessAlert(for: user)
+        case .failure(let error):
+            if error.statusCode == 0 {
                 NoticeController.shared.present(NoticeFactory.networkError())
                 return
             }
 
-            let alert = UIAlertController(title: AccountDeletion.errorTitle, message: AccountDeletion.errorMessage, preferredStyle: .alert)
-            alert.addDefaultActionWithTitle(AccountDeletion.ok)
-            self.present(alert, animated: true, completion: nil)
-        }
-
-        presentAccountDeletionConfirmation { (_) in
-            self.present(pendingAlert, animated: false, completion: nil)
-            deletionController.requestAccountDeletion(user)
+            presentRequestErrorAlert()
         }
     }
 
@@ -144,6 +142,12 @@ extension SPSettingsViewController {
         let alert = UIAlertController(title: AccountDeletion.succesAlertTitle, message: AccountDeletion.successMessage(email: user.email), preferredStyle: .alert)
         alert.addCancelActionWithTitle(AccountDeletion.ok)
         present(alert, animated: true, completion: nil)
+    }
+
+    private func presentRequestErrorAlert() {
+        let alert = UIAlertController(title: AccountDeletion.errorTitle, message: AccountDeletion.errorMessage, preferredStyle: .alert)
+        alert.addDefaultActionWithTitle(AccountDeletion.ok)
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
