@@ -34,13 +34,6 @@ extension SPAppDelegate {
         let authenticator = simperium.authenticator
 
         authenticator.providerString = "simplenote.com"
-
-        guard BuildConfiguration.current == .internal else {
-            return
-        }
-
-        authenticator.authURL = SPCredentials.experimentalAuthURL
-        authenticator.customHTTPHeaders = ["Host": SPCredentials.experimentalAuthHost]
     }
 }
 
