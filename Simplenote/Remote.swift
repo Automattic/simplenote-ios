@@ -1,23 +1,6 @@
 import Foundation
 
 class Remote {
-    enum Result: Equatable {
-        static func == (lhs: Remote.Result, rhs: Remote.Result) -> Bool {
-            switch (lhs, rhs) {
-            case (.success, .success):
-                return true
-            case (.failure(let code1, _), .failure(let code2, _)):
-                return code1 == code2
-            default:
-                return false
-            }
-
-        }
-
-        case success
-        case failure(_ statusCode: Int, _ error: Error?)
-    }
-
     private let urlSession: URLSession
 
     init(urlSession: URLSession = URLSession.shared) {
@@ -27,21 +10,34 @@ class Remote {
     /// Send  task for remote
     /// Sublcassing Notes: To be able to send a task it is required to first setup the URL request for the task to use
     ///
-    func performDataTask(with request: URLRequest, completion: @escaping (_ result: Result) -> Void) {
+    func performDataTask(with request: URLRequest, completion: @escaping (_ result: Result<Data, RemoteError>) -> Void) {
         let dataTask = urlSession.dataTask(with: request) { (data, response, error) in
             DispatchQueue.main.async {
                 let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
 
                 // Check for 2xx status code
-                guard statusCode / 100 == 2 else {
-                    completion(.failure(statusCode, error))
+                guard statusCode / 100 == 2,
+                      let data = data else {
+                    let error = RemoteError(statusCode: statusCode,dataTaskError: error)
+                    completion(.failure(error))
                     return
                 }
 
-                completion(.success)
+                completion(.success(data))
             }
         }
 
         dataTask.resume()
+    }
+}
+
+
+struct RemoteError: Error {
+    let statusCode: Int
+    let dataTaskError: Error?
+
+    init(statusCode: Int, dataTaskError: Error? = nil) {
+        self.statusCode = statusCode
+        self.dataTaskError = dataTaskError
     }
 }

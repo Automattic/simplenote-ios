@@ -7,8 +7,9 @@ class AccountRemote: Remote {
 
     /// Send verification request for specified email address
     ///
-    func verify(email: String, completion: @escaping (_ result: Result) -> Void) {
+    func verify(email: String, completion: @escaping (_ result: Result<Data, RemoteError>) -> Void) {
         guard let request = verificationURLRequest(with: email) else {
+            completion(.failure(RemoteError(statusCode: 0)))
             return
         }
 
@@ -17,9 +18,9 @@ class AccountRemote: Remote {
 
     /// Send account deletion request for user
     ///
-    func requestDelete(_ user: SPUser, completion: @escaping (_ result: Result) -> Void) {
+    func requestDelete(_ user: SPUser, completion: @escaping (_ result: Result<Data, RemoteError>) -> Void) {
         guard let request = deleteRequest(with: user) else {
-            completion(.failure(0, nil))
+            completion(.failure(RemoteError(statusCode: 0)))
             return
         }
 
