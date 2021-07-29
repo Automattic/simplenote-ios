@@ -1,7 +1,7 @@
 import Foundation
 
 extension Date {
-    func increased(by days: Int) -> Date? {
+    func increased(byDays days: Int) -> Date? {
         var components = DateComponents()
         components.day = days
         let calendar = Calendar.current

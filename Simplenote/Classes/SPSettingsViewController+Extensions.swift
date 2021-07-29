@@ -102,6 +102,8 @@ extension SPSettingsViewController {
         spinnerViewController.startAnimating()
 
         let deletionController = AccountDeletionController()
+        SPAppDelegate.shared().accountDeletionController = deletionController
+
         presentAccountDeletionConfirmation { (_) in
             self.present(self.spinnerViewController, animated: false, completion: nil)
             deletionController.requestAccountDeletion(user) { [weak self] (result) in

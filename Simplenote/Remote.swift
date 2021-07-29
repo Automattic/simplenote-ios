@@ -18,7 +18,7 @@ class Remote {
                 // Check for 2xx status code
                 guard statusCode / 100 == 2,
                       let data = data else {
-                    let error = RemoteError(statusCode: statusCode,dataTaskError: error)
+                    let error = RemoteError(statusCode: statusCode, dataTaskError: error)
                     completion(.failure(error))
                     return
                 }

@@ -12,6 +12,7 @@
 @class AccountVerificationViewController;
 @class PublishController;
 @class PublishStateObserver;
+@class AccountDeletionController;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -39,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, strong, nonatomic) NSString                        *selectedTag;
 @property (assign, nonatomic) BOOL										bSigningUserOut;
 
-@property (nullable, strong, nonatomic) NSDate                          *accountDeletionRequestDate;
+@property (nullable, strong, nonatomic) AccountDeletionController                          *accountDeletionController;
 
 - (void)presentSettingsViewController;
 

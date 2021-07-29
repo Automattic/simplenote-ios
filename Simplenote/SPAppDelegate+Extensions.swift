@@ -411,19 +411,15 @@ extension SPAppDelegate {
 extension SPAppDelegate {
     @objc
     func authenticateLoginTokenIfNeeded() {
-        guard let accountDeletionRequestDate = accountDeletionRequestDate else {
-            return
-        }
-        let requestDate = accountDeletionRequestDate as Date
-
-        guard let accountDeletionRequestExpiration = requestDate.increased(by: 1) else {
+        guard let deletionController = accountDeletionController else {
             return
         }
 
-        if Date() < accountDeletionRequestExpiration {
-            simperium.authenticateIfNecessary()
-        } else {
-            self.accountDeletionRequestDate = nil
+        if deletionController.deletionTokenHasExpired {
+            self.accountDeletionController = nil
+            return
         }
+
+        simperium.authenticateIfNecessary()
     }
 }
