@@ -112,7 +112,7 @@ extension SPSettingsViewController {
         }
     }
 
-    private func handleDeletionResult(user: SPUser, _ result: Result<Data, RemoteError>) {
+    private func handleDeletionResult(user: SPUser, _ result: Result<Data?, RemoteError>) {
         spinnerViewController.stopAnimating()
         spinnerViewController.dismiss(animated: false, completion: nil)
         switch result {

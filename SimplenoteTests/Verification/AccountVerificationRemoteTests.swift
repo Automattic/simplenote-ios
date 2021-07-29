@@ -9,22 +9,22 @@ class AccountVerificationRemoteTests: XCTestCase {
 
     func testSuccessWhenStatusCodeIs2xx() {
         for _ in 0..<5 {
-            test(withStatusCode: Int.random(in: 200..<300), expectedResult: Remote.Result.success)
+            test(withStatusCode: Int.random(in: 200..<300), expectedResult: .success(nil))
         }
     }
 
     func testFailureWhenStatusCodeIs4xxOr5xx() {
         for _ in 0..<5 {
             let statusCode = Int.random(in: 400..<600)
-            test(withStatusCode: statusCode, expectedResult: Remote.Result.failure(statusCode, nil))
+            test(withStatusCode: statusCode, expectedResult: .failure(RemoteError(statusCode: statusCode)))
         }
     }
 
     func testFailureWhenNoResponse() {
-        test(withStatusCode: nil, expectedResult: Remote.Result.failure(0, nil))
+        test(withStatusCode: nil, expectedResult: .failure(RemoteError(statusCode: 0)))
     }
 
-    private func test(withStatusCode statusCode: Int?, expectedResult: Remote.Result) {
+    private func test(withStatusCode statusCode: Int?, expectedResult: Result<Data?, RemoteError>) {
         urlSession.data = (nil,
                            response(with: statusCode),
                            nil)

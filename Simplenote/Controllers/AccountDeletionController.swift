@@ -11,7 +11,7 @@ class AccountDeletionController {
         return Date() > expirationDate
     }
 
-    func requestAccountDeletion(_ user: SPUser, completion: @escaping (_ result: Result<Data, RemoteError>) -> Void) {
+    func requestAccountDeletion(_ user: SPUser, completion: @escaping (_ result: Result<Data?, RemoteError>) -> Void) {
 
         AccountRemote().requestDelete(user, completion: completion)
     }
