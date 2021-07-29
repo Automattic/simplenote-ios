@@ -10,7 +10,6 @@ public class Tag: SPManagedObject {
 
 }
 
-
 extension Tag {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Tag> {
@@ -20,5 +19,4 @@ extension Tag {
     @NSManaged public var index: NSNumber?
     @NSManaged public var name: String?
     @NSManaged public var share: String?
-
 }

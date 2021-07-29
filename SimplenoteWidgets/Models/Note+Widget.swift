@@ -29,5 +29,4 @@ extension Note {
     @NSManaged public var shareURL: String?
     @NSManaged public var systemTags: String?
     @NSManaged public var tags: String?
-
 }
