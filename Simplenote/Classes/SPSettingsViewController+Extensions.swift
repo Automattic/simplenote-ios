@@ -133,7 +133,7 @@ extension SPSettingsViewController {
                                       message: AccountDeletion.confirmAlertMessage,
                                       preferredStyle: .alert)
         let deleteAccountButton = UIAlertAction(title: AccountDeletion.deleteAccountButton, style: .destructive, handler: onConfirm)
-        deleteAccountButton.setValue(UIColor.simplenoteRedButtonColor, forKey: "titleTextColor")
+
         alert.addAction(deleteAccountButton)
         alert.addCancelActionWithTitle(AccountDeletion.cancel)
 
