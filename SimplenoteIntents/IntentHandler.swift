@@ -12,6 +12,7 @@ extension IntentHandler: NoteWidgetIntentHandling {
         var notes: [WidgetNote] = []
 
         // TODO: add intent core data implementation.
+        let sortMode = UserDefaults(suiteName: SimplenoteConstants.sharedGroupDomain)?.integer(forKey: .listSortMode)
 
         let collection = INObjectCollection(items: notes)
         completion(collection, nil)
