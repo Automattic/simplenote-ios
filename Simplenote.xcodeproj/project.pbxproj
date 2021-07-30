@@ -438,6 +438,15 @@
 		BA86621826B3A73D00466746 /* UserDefaults+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */; };
 		BA86622326B3AE4A00466746 /* WidgetDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA86622226B3AE4A00466746 /* WidgetDataController.swift */; };
 		BA86622426B3AE4A00466746 /* WidgetDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA86622226B3AE4A00466746 /* WidgetDataController.swift */; };
+		BA86624926B3B05100466746 /* SimplenoteConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5095DC824632E3300812711 /* SimplenoteConstants.swift */; };
+		BA86625326B3B14800466746 /* SortMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DF734522A5713600602CE7 /* SortMode.swift */; };
+		BA86625D26B3B14900466746 /* SortMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DF734522A5713600602CE7 /* SortMode.swift */; };
+		BA86626726B3B1B600466746 /* NSSortDescriptor+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B543C7E423CF775C00003A80 /* NSSortDescriptor+Simplenote.swift */; };
+		BA86627226B3B1B700466746 /* NSSortDescriptor+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B543C7E423CF775C00003A80 /* NSSortDescriptor+Simplenote.swift */; };
+		BA8662AA26B3B40800466746 /* SimplenoteFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = BA8662A926B3B40800466746 /* SimplenoteFoundation */; };
+		BA8662B526B3B41500466746 /* SimplenoteFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = BA8662B426B3B41500466746 /* SimplenoteFoundation */; };
+		BA8662C026B3B63B00466746 /* SimplenoteSearch in Frameworks */ = {isa = PBXBuildFile; productRef = BA8662BF26B3B63B00466746 /* SimplenoteSearch */; };
+		BA8662C226B3B63F00466746 /* SimplenoteSearch in Frameworks */ = {isa = PBXBuildFile; productRef = BA8662C126B3B63F00466746 /* SimplenoteSearch */; };
 		BA8FC2A5267AC7470082962E /* SharedStorageMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8FC2A4267AC7470082962E /* SharedStorageMigrator.swift */; };
 		BA9B59022685549F00DAD1ED /* StorageSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B59012685549F00DAD1ED /* StorageSettings.swift */; };
 		BAA4856925D5E40900F3BDB9 /* SearchQuery+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */; };
@@ -1213,6 +1222,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BAB5762426703C8100B0C56F /* Intents.framework in Frameworks */,
+				BA8662C026B3B63B00466746 /* SimplenoteSearch in Frameworks */,
+				BA8662AA26B3B40800466746 /* SimplenoteFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1221,6 +1232,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BAFA93DC265DCFCA0009DCFB /* SwiftUI.framework in Frameworks */,
+				BA8662B526B3B41500466746 /* SimplenoteFoundation in Frameworks */,
+				BA8662C226B3B63F00466746 /* SimplenoteSearch in Frameworks */,
 				BAFA93DA265DCFCA0009DCFB /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2557,6 +2570,10 @@
 			dependencies = (
 			);
 			name = SimplenoteIntents;
+			packageProductDependencies = (
+				BA8662A926B3B40800466746 /* SimplenoteFoundation */,
+				BA8662BF26B3B63B00466746 /* SimplenoteSearch */,
+			);
 			productName = SimplenoteIntents;
 			productReference = BAB5762226703C8100B0C56F /* SimplenoteIntents.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -2574,6 +2591,10 @@
 			dependencies = (
 			);
 			name = SimplenoteWidgetsExtension;
+			packageProductDependencies = (
+				BA8662B426B3B41500466746 /* SimplenoteFoundation */,
+				BA8662C126B3B63F00466746 /* SimplenoteSearch */,
+			);
 			productName = SimplenoteWidgetsExtension;
 			productReference = BAFA93D8265DCFCA0009DCFB /* SimplenoteWidgetsExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -3374,12 +3395,15 @@
 				BAF8D51426AE172600CA9383 /* StorageSettings.swift in Sources */,
 				BA86616326B35CF000466746 /* BuildConfiguration.swift in Sources */,
 				BAB5762726703C8200B0C56F /* IntentHandler.swift in Sources */,
+				BA86625D26B3B14900466746 /* SortMode.swift in Sources */,
 				BA12B07026B0D0150026F31D /* SPManagedObject+Widget.swift in Sources */,
 				BA86622426B3AE4A00466746 /* WidgetDataController.swift in Sources */,
 				BAF8D46E26AE118800CA9383 /* SPCredentials.swift in Sources */,
 				BAF8D45626AE10FC00CA9383 /* Note+Widget.swift in Sources */,
 				BAF8D5C526AE254100CA9383 /* Simplenote.xcdatamodeld in Sources */,
+				BA86624926B3B05100466746 /* SimplenoteConstants.swift in Sources */,
 				BAB5765C26703D0600B0C56F /* NoteWidgetIntent.intentdefinition in Sources */,
+				BA86627226B3B1B700466746 /* NSSortDescriptor+Simplenote.swift in Sources */,
 				BAF8D45526AE10FC00CA9383 /* Tag+Widget.swift in Sources */,
 				BAF8D53C26AE175C00CA9383 /* Bundle+Simplenote.swift in Sources */,
 			);
@@ -3390,6 +3414,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BAB5765B26703D0600B0C56F /* NoteWidgetIntent.intentdefinition in Sources */,
+				BA86625326B3B14800466746 /* SortMode.swift in Sources */,
 				BAF8D50A26AE172600CA9383 /* StorageSettings.swift in Sources */,
 				BAFA93F3265DE4A40009DCFB /* NewNoteWidget.swift in Sources */,
 				BA122DBD265EF412003D3BC5 /* UIColor+Studio.swift in Sources */,
@@ -3401,6 +3426,7 @@
 				BAF8D51E26AE173D00CA9383 /* FileManager+Simplenote.swift in Sources */,
 				BA86615926B35CEF00466746 /* BuildConfiguration.swift in Sources */,
 				BA122DBC265EF410003D3BC5 /* ColorStudio.swift in Sources */,
+				BA86626726B3B1B600466746 /* NSSortDescriptor+Simplenote.swift in Sources */,
 				BAF8D46426AE118800CA9383 /* SPCredentials.swift in Sources */,
 				BA122DC1265EF4C5003D3BC5 /* UITraitCollection+Simplenote.swift in Sources */,
 				BA12B06F26B0D0150026F31D /* SPManagedObject+Widget.swift in Sources */,
@@ -5456,6 +5482,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B5BAF9EB24E4D0D2000917C0 /* XCRemoteSwiftPackageReference "SimplenoteFoundation-Swift" */;
 			productName = SimplenoteFoundation;
+		};
+		BA8662A926B3B40800466746 /* SimplenoteFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B5BAF9EB24E4D0D2000917C0 /* XCRemoteSwiftPackageReference "SimplenoteFoundation-Swift" */;
+			productName = SimplenoteFoundation;
+		};
+		BA8662B426B3B41500466746 /* SimplenoteFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B5BAF9EB24E4D0D2000917C0 /* XCRemoteSwiftPackageReference "SimplenoteFoundation-Swift" */;
+			productName = SimplenoteFoundation;
+		};
+		BA8662BF26B3B63B00466746 /* SimplenoteSearch */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B50D2FB424E6DFAC00163FC3 /* XCRemoteSwiftPackageReference "SimplenoteSearch-Swift" */;
+			productName = SimplenoteSearch;
+		};
+		BA8662C126B3B63F00466746 /* SimplenoteSearch */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B50D2FB424E6DFAC00163FC3 /* XCRemoteSwiftPackageReference "SimplenoteSearch-Swift" */;
+			productName = SimplenoteSearch;
 		};
 /* End XCSwiftPackageProductDependency section */
 
