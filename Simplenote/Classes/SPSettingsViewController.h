@@ -10,8 +10,6 @@
     NSNumber *numPreviewLinesPref;
 }
 
-@property (strong, nonatomic) SpinnerViewController           *spinnerViewController;
-
 @end
 
 extern NSString *const SPAlphabeticalTagSortPref;

@@ -44,6 +44,15 @@ class SpinnerViewController: UIViewController {
         ])
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        activityIndicator.startAnimating()
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        activityIndicator.stopAnimating()
+    }
+
+
     private func setupViewAppearance() {
         modalPresentationStyle = .overFullScreen
 
@@ -56,13 +65,5 @@ class SpinnerViewController: UIViewController {
         view.backgroundColor = UIColor(studioColor: .gray50, alpha: UIKitConstants.alpha0_5)
         alertView.backgroundColor = UIColor(studioColor: .white, alpha: UIKitConstants.alpha1_0)
         activityIndicator.color = .black
-    }
-
-    func startAnimating() {
-        activityIndicator.startAnimating()
-    }
-
-    func stopAnimating() {
-        activityIndicator.stopAnimating()
     }
 }

@@ -98,23 +98,21 @@ extension SPSettingsViewController {
             return
         }
         SPTracker.trackDeleteAccountButttonTapped()
-        spinnerViewController = SpinnerViewController()
-        spinnerViewController.startAnimating()
+        let spinnerViewController = SpinnerViewController()
 
         let deletionController = AccountDeletionController()
         SPAppDelegate.shared().accountDeletionController = deletionController
 
         presentAccountDeletionConfirmation { (_) in
-            self.present(self.spinnerViewController, animated: false, completion: nil)
+            self.present(spinnerViewController, animated: false, completion: nil)
             deletionController.requestAccountDeletion(user) { [weak self] (result) in
+                spinnerViewController.dismiss(animated: false, completion: nil)
                 self?.handleDeletionResult(user: user, result)
             }
         }
     }
 
     private func handleDeletionResult(user: SPUser, _ result: Result<Data?, RemoteError>) {
-        spinnerViewController.stopAnimating()
-        spinnerViewController.dismiss(animated: false, completion: nil)
         switch result {
         case .success:
             presentSuccessAlert(for: user)
