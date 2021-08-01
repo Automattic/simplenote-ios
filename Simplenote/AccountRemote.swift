@@ -9,7 +9,7 @@ class AccountRemote: Remote {
     ///
     func verify(email: String, completion: @escaping (_ result: Result<Data?, RemoteError>) -> Void) {
         guard let request = verificationURLRequest(with: email) else {
-            completion(.failure(RemoteError(statusCode: 0)))
+            completion(.failure(RemoteError.network))
             return
         }
 
@@ -20,7 +20,7 @@ class AccountRemote: Remote {
     ///
     func requestDelete(_ user: SPUser, completion: @escaping (_ result: Result<Data?, RemoteError>) -> Void) {
         guard let request = deleteRequest(with: user) else {
-            completion(.failure(RemoteError(statusCode: 0)))
+            completion(.failure(RemoteError.network))
             return
         }
 

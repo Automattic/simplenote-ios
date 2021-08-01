@@ -117,12 +117,7 @@ extension SPSettingsViewController {
         case .success:
             presentSuccessAlert(for: user)
         case .failure(let error):
-            if error.statusCode == 0 {
-                NoticeController.shared.present(NoticeFactory.networkError())
-                return
-            }
-
-            presentRequestErrorAlert()
+            handleError(error)
         }
     }
 
@@ -136,6 +131,15 @@ extension SPSettingsViewController {
         alert.addCancelActionWithTitle(AccountDeletion.cancel)
 
         present(alert, animated: true, completion: nil)
+    }
+
+    private func handleError(_ error: RemoteError) {
+        switch error {
+        case .network:
+            NoticeController.shared.present(NoticeFactory.networkError())
+        case .requestError:
+            presentRequestErrorAlert()
+        }
     }
 
     private func presentSuccessAlert(for user: SPUser) {
