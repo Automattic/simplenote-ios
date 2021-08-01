@@ -319,6 +319,8 @@
                 [self.simperium authenticateIfNecessary];
                 self.bSigningUserOut = NO;
 			}];
+
+            [[[NSUserDefaults alloc] initWithSuiteName:[SimplenoteConstants sharedGroupDomain]] setValue:false forKey:@"accountIsLoggedIn"];
 		}];
     });
 }
