@@ -282,4 +282,22 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         PreviewAssert.staticTextWithExactValuesShownOnce(values: ["• Plus1", "• Plus2", "• Plus3"])
         PreviewAssert.staticTextWithExactValuesShownOnce(values: ["• Asterisk1", "• Asterisk2", "• Asterisk3"])
     }
+
+    func testSelectAllAndTrashNotes() throws {
+        trackTest()
+        let noteTitle = "Note Title "
+
+        trackStep()
+        populateNotesList(title: noteTitle, numberToCreate: 2)
+
+        trackStep()
+        NoteList.longPressNote(title: noteTitle + "1")
+        NoteList.selectNote()
+        NoteList.selectAll()
+        NoteListAssert.isDeselectAllButtonDisplayed()
+
+        trackStep()
+        NoteList.tapTrashButton()
+        NoteListAssert.notesNumber(expectedNotesNumber: 0)
+    }
 }
