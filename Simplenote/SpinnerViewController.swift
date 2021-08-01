@@ -1,8 +1,8 @@
 import UIKit
 
 class SpinnerViewController: UIViewController {
-    private var alertView: UIView!
-    private var activityIndicator: UIActivityIndicatorView!
+    private var alertView = UIView()
+    private var activityIndicator = UIActivityIndicatorView()
 
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -30,8 +30,8 @@ class SpinnerViewController: UIViewController {
         NSLayoutConstraint.activate([
             alertView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             alertView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            alertView.widthAnchor.constraint(equalToConstant: 150),
-            alertView.heightAnchor.constraint(equalToConstant: 115)
+            alertView.widthAnchor.constraint(equalToConstant: Constants.width),
+            alertView.heightAnchor.constraint(equalToConstant: Constants.height)
         ])
         alertView.layer.cornerRadius = 15
 
@@ -66,4 +66,9 @@ class SpinnerViewController: UIViewController {
         alertView.backgroundColor = UIColor(studioColor: .white, alpha: UIKitConstants.alpha1_0)
         activityIndicator.color = .black
     }
+}
+
+private struct Constants {
+    static let width: CGFloat = 150
+    static let height: CGFloat = 115
 }
