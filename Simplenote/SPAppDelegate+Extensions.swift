@@ -410,7 +410,7 @@ extension SPAppDelegate {
 //
 extension SPAppDelegate {
     @objc
-    func authenticateLoginTokenIfNeeded() {
+    func authenticateSimperiumIfNeeded() {
         guard let deletionController = accountDeletionController else {
             return
         }
