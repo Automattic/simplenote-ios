@@ -3,11 +3,10 @@ import Foundation
 
 extension Remote {
     static func randomResult() -> Result<Data?, RemoteError> {
-        let random = arc4random_uniform(1)
-        if random == 0 {
-            return .failure(RemoteError(statusCode: 0))
-        } else {
+        if Bool.random() {
             return .success(nil)
         }
+
+        return .failure(RemoteError(statusCode: 0))
     }
 }
