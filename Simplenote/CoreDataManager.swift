@@ -25,10 +25,14 @@ class CoreDataManager: NSObject {
                        NSInferMappingModelAutomaticallyOption: true]
 
         NSLog("🎯 Loading PersistentStore at URL: \(storageURL)")
-        try psc.addPersistentStore(ofType: NSSQLiteStoreType,
+        do {
+            try psc.addPersistentStore(ofType: NSSQLiteStoreType,
                                        configurationName: nil,
                                        at: storageURL,
                                        options: options)
+        } catch {
+            throw StorageError.attachingPersistentStoreFailure
+        }
 
         persistentStoreCoordinator = psc
     }
