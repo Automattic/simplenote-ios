@@ -1,4 +1,5 @@
 import Foundation
+import WidgetKit
 
 
 // MARK: - Initialization
@@ -433,6 +434,33 @@ extension SPAppDelegate {
             coreDataManager = try CoreDataManager(settings.sharedStorageURL)
         case .failed:
             coreDataManager = try CoreDataManager(settings.legacyStorageURL)
+        }
+    }
+}
+
+// MARK: - Widget Kit
+
+@available(iOS 14.0, *)
+extension SPAppDelegate {
+    @objc
+    func resetWidgetTimelines() {
+        WidgetCenter.shared.getCurrentConfigurations { result in
+            guard case .success(let widgets) = result else {
+                return
+            }
+
+            if widgets.contains(where: { (widget) -> Bool in
+                if widget.configuration as? NoteWidgetIntent != nil {
+                    return true
+                }
+
+                // Add check for ListWidgetIntent when created later
+
+                return false
+            }) {
+                NSLog("Reloading all widgets")
+                WidgetCenter.shared.reloadAllTimelines()
+            }
         }
     }
 }

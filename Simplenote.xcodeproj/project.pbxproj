@@ -493,6 +493,10 @@
 		BAFA93F3265DE4A40009DCFB /* NewNoteWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFA93EE265DE3B90009DCFB /* NewNoteWidget.swift */; };
 		BAFA93F4265DE4A70009DCFB /* NewNoteWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFA93F0265DE45D0009DCFB /* NewNoteWidgetProvider.swift */; };
 		BAFA93FA265DE8920009DCFB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E29ADD4D17848E8500E55842 /* Images.xcassets */; };
+		BAFDBBD826B88BD200119615 /* Date+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFDBBD726B88BD200119615 /* Date+Simplenote.swift */; };
+		BAFDBBD926B88BD200119615 /* Date+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFDBBD726B88BD200119615 /* Date+Simplenote.swift */; };
+		BAFDBBDA26B88BD200119615 /* Date+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFDBBD726B88BD200119615 /* Date+Simplenote.swift */; };
+		BAFDBBE426B88F1300119615 /* NoteWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BAB5760A26703C0C00B0C56F /* NoteWidgetIntent.intentdefinition */; };
 		D435D38FCA5863E8447D5C2C /* Pods_Automattic_SimplenoteShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183BAB896957F07FDCAB6DF5 /* Pods_Automattic_SimplenoteShare.framework */; };
 		D82BFE4B2624A8AB003DFA32 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82BFE4A2624A8AB003DFA32 /* Settings.swift */; };
 		D82BFE542624A8C5003DFA32 /* SimplenoteUISmokeTestsSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82BFE532624A8C5003DFA32 /* SimplenoteUISmokeTestsSettings.swift */; };
@@ -1078,6 +1082,7 @@
 		BAFA93EC265DE3810009DCFB /* SimplenoteWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplenoteWidgets.swift; sourceTree = "<group>"; };
 		BAFA93EE265DE3B90009DCFB /* NewNoteWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNoteWidget.swift; sourceTree = "<group>"; };
 		BAFA93F0265DE45D0009DCFB /* NewNoteWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNoteWidgetProvider.swift; sourceTree = "<group>"; };
+		BAFDBBD726B88BD200119615 /* Date+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Simplenote.swift"; sourceTree = "<group>"; };
 		C07B32800E3C783BDF105B3A /* Pods-Automattic-SimplenoteShare.distribution alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-SimplenoteShare.distribution alpha.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-SimplenoteShare/Pods-Automattic-SimplenoteShare.distribution alpha.xcconfig"; sourceTree = "<group>"; };
 		D82BFE4A2624A8AB003DFA32 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		D82BFE532624A8C5003DFA32 /* SimplenoteUISmokeTestsSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplenoteUISmokeTestsSettings.swift; sourceTree = "<group>"; };
@@ -1816,6 +1821,7 @@
 				A6A8968D25D5779D00A7B390 /* FileManager+Simplenote.swift */,
 				BAE08625261282D1009D40CD /* Note+Publish.swift */,
 				BA5E5B7C264A148C00D0EE19 /* URLRequest+Simplenote.swift */,
+				BAFDBBD726B88BD200119615 /* Date+Simplenote.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -3211,6 +3217,7 @@
 				B5BD6AF51BF66093004ECE33 /* SPMarkdownPreviewViewController.m in Sources */,
 				B5F3FFFF23F44679007A7C59 /* SPSortBar.swift in Sources */,
 				BA4499C525ED95E5000C563E /* NoticeAction.swift in Sources */,
+				BAFDBBD826B88BD200119615 /* Date+Simplenote.swift in Sources */,
 				A6E02778256E9487002054DF /* PinLockSetupController.swift in Sources */,
 				B513F2B42319A8D50021CFA4 /* SPNoteTableViewCell.swift in Sources */,
 				375D24B321E01131007AB25A /* autolink.c in Sources */,
@@ -3227,6 +3234,7 @@
 				B5E951E124FEDAD4004B10B8 /* UIPasteboard+Note.swift in Sources */,
 				A6C7648025E9131C00A39067 /* SignupRemote.swift in Sources */,
 				A681C73C2541AC8D00F369C2 /* HuggableTableView.swift in Sources */,
+				BAFDBBE426B88F1300119615 /* NoteWidgetIntent.intentdefinition in Sources */,
 				46A3C99917DFA81A002865AE /* SPTransitionController.m in Sources */,
 				B56A695B22F9CD4E00B90398 /* UINavigationBar+Simplenote.swift in Sources */,
 				46A3C99B17DFA81A002865AE /* Tag.m in Sources */,
@@ -3413,6 +3421,7 @@
 				BA86624926B3B05100466746 /* SimplenoteConstants.swift in Sources */,
 				BAB5765C26703D0600B0C56F /* NoteWidgetIntent.intentdefinition in Sources */,
 				BA32A91926B746A200727247 /* StorageError.swift in Sources */,
+				BAFDBBDA26B88BD200119615 /* Date+Simplenote.swift in Sources */,
 				BA86627226B3B1B700466746 /* NSSortDescriptor+Simplenote.swift in Sources */,
 				BAF8D45526AE10FC00CA9383 /* Tag+Widget.swift in Sources */,
 				BAF8D53C26AE175C00CA9383 /* Bundle+Simplenote.swift in Sources */,
@@ -3447,6 +3456,7 @@
 				BA32A91A26B746A300727247 /* StorageError.swift in Sources */,
 				BA86621826B3A73D00466746 /* UserDefaults+Simplenote.swift in Sources */,
 				BAF8D44B26AE10FC00CA9383 /* Tag+Widget.swift in Sources */,
+				BAFDBBD926B88BD200119615 /* Date+Simplenote.swift in Sources */,
 				BAFA93F2265DE4A10009DCFB /* SimplenoteWidgets.swift in Sources */,
 				BAF8D53226AE175B00CA9383 /* Bundle+Simplenote.swift in Sources */,
 				BA122DC2265EF4E5003D3BC5 /* SPUserInterface.swift in Sources */,

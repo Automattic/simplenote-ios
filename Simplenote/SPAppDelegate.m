@@ -180,6 +180,7 @@
 
     [self showPasscodeLockIfNecessary];
     [self cleanupScrollPositionCache];
+    [self resetWidgetTimelines];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

@@ -43,9 +43,15 @@ struct NoteWidgetProvider: IntentTimelineProvider {
             return
         }
 
-        // Prepare timeline entry
-        let entry = NoteWidgetEntry(date: Date(), title: note.title, content: note.body)
-        let timeline = Timeline(entries: [entry], policy: .never)
+        // Prepare timeline entry for every hour for the next 6 hours
+        // Create a new set of entries at the end of the 6 entries
+        var entries: [NoteWidgetEntry] = []
+        for int in 0..<6 {
+            if let date = Date().increased(byHours: int) {
+                entries.append(NoteWidgetEntry(date: date, title: note.title, content: note.body))
+            }
+        }
+        let timeline = Timeline(entries: entries, policy: .atEnd)
 
         completion(timeline)
     }
