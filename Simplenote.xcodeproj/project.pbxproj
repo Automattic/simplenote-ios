@@ -450,6 +450,7 @@
 		BA8662B526B3B41500466746 /* SimplenoteFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = BA8662B426B3B41500466746 /* SimplenoteFoundation */; };
 		BA8662C026B3B63B00466746 /* SimplenoteSearch in Frameworks */ = {isa = PBXBuildFile; productRef = BA8662BF26B3B63B00466746 /* SimplenoteSearch */; };
 		BA8662C226B3B63F00466746 /* SimplenoteSearch in Frameworks */ = {isa = PBXBuildFile; productRef = BA8662C126B3B63F00466746 /* SimplenoteSearch */; };
+		BA88765126B79324001C9C9E /* DemoContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA88765026B79324001C9C9E /* DemoContent.swift */; };
 		BA8FC2A5267AC7470082962E /* SharedStorageMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8FC2A4267AC7470082962E /* SharedStorageMigrator.swift */; };
 		BA9B59022685549F00DAD1ED /* StorageSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B59012685549F00DAD1ED /* StorageSettings.swift */; };
 		BAA4856925D5E40900F3BDB9 /* SearchQuery+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */; };
@@ -1047,6 +1048,7 @@
 		BA8661D726B3A0A000466746 /* SimplenoteIntentsRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SimplenoteIntentsRelease.entitlements; sourceTree = "<group>"; };
 		BA8661D826B3A0B000466746 /* SimplenoteIntentsDistribution Internal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SimplenoteIntentsDistribution Internal.entitlements"; sourceTree = "<group>"; };
 		BA86622226B3AE4A00466746 /* WidgetDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDataController.swift; sourceTree = "<group>"; };
+		BA88765026B79324001C9C9E /* DemoContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoContent.swift; sourceTree = "<group>"; };
 		BA8FC2A4267AC7470082962E /* SharedStorageMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStorageMigrator.swift; sourceTree = "<group>"; };
 		BA9B59012685549F00DAD1ED /* StorageSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageSettings.swift; sourceTree = "<group>"; };
 		BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchQuery+Simplenote.swift"; sourceTree = "<group>"; };
@@ -2163,6 +2165,7 @@
 			isa = PBXGroup;
 			children = (
 				BA86622226B3AE4A00466746 /* WidgetDataController.swift */,
+				BA88765026B79324001C9C9E /* DemoContent.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -3425,6 +3428,7 @@
 				BAF8D50A26AE172600CA9383 /* StorageSettings.swift in Sources */,
 				BAFA93F3265DE4A40009DCFB /* NewNoteWidget.swift in Sources */,
 				BA122DBD265EF412003D3BC5 /* UIColor+Studio.swift in Sources */,
+				BA88765126B79324001C9C9E /* DemoContent.swift in Sources */,
 				BA122DBE265EF421003D3BC5 /* UIKitConstants.swift in Sources */,
 				BAF8D5BB26AE254000CA9383 /* Simplenote.xcdatamodeld in Sources */,
 				BA122DBB265EF40E003D3BC5 /* UIColor+Helpers.swift in Sources */,
