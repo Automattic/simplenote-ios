@@ -1,6 +1,7 @@
 import Foundation
 
-class AccountDeletionController {
+@objc
+class AccountDeletionController: NSObject {
     private let accountDeletionRequestDate = Date()
 
     var deletionTokenHasExpired: Bool {

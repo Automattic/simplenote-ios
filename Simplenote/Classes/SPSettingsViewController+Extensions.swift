@@ -94,14 +94,12 @@ extension SPSettingsViewController {
 
     @objc
     func deleteAccountWasPressed() {
-        guard let user = SPAppDelegate.shared().simperium.user else {
+        guard let user = SPAppDelegate.shared().simperium.user,
+              let deletionController = SPAppDelegate.shared().accountDeletionController else {
             return
         }
         SPTracker.trackDeleteAccountButttonTapped()
         let spinnerViewController = SpinnerViewController()
-
-        let deletionController = AccountDeletionController()
-        SPAppDelegate.shared().accountDeletionController = deletionController
 
         presentAccountDeletionConfirmation { (_) in
             self.present(spinnerViewController, animated: false, completion: nil)
