@@ -19,8 +19,9 @@ struct NoteWidgetView: View {
                     }
                     .padding([.leading, .trailing, .top], Sizes.overallPadding)
                 }
-                .ignoresSafeArea()
             }
+            .frame(width: geometry.size.width, height: geometry.size.height + Sizes.overallPadding, alignment: .top)
+            .ignoresSafeArea()
         }
     }
 }
