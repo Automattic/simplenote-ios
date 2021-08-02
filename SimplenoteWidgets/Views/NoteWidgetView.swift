@@ -23,6 +23,15 @@ struct NoteWidgetView: View {
             .frame(width: geometry.size.width, height: geometry.size.height + Sizes.overallPadding, alignment: .top)
             .ignoresSafeArea()
         }
+        .widgetURL(prepareWidgetURL(from: entry.simperiumKey))
+    }
+
+    private func prepareWidgetURL(from simperiumKey: String?) -> URL {
+        guard let simperiumKey = simperiumKey,
+              let url = URL(string: SimplenoteConstants.simplenoteScheme + "://" + simperiumKey) else {
+            return URL(string: SimplenoteConstants.simplenoteScheme)!
+        }
+        return url
     }
 }
 
@@ -35,9 +44,9 @@ struct NoteWidgetView_Previews: PreviewProvider {
     static var previews: some View {
 
         Group {
-            NoteWidgetView(entry: NoteWidgetEntry(date: Date(), title: DemoContent.singleNoteTitle, content: DemoContent.singleNoteContent))
+            NoteWidgetView(entry: NoteWidgetEntry(date: Date(), title: DemoContent.singleNoteTitle, content: DemoContent.singleNoteContent, simperiumKey: nil))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
-            NoteWidgetView(entry: NoteWidgetEntry(date: Date(), title: DemoContent.singleNoteTitle, content: DemoContent.singleNoteContent))
+            NoteWidgetView(entry: NoteWidgetEntry(date: Date(), title: DemoContent.singleNoteTitle, content: DemoContent.singleNoteContent, simperiumKey: nil))
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
         }
     }

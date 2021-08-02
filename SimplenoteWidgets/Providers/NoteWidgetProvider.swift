@@ -4,6 +4,7 @@ struct NoteWidgetEntry: TimelineEntry {
     let date: Date
     let title: String
     let content: String
+    let simperiumKey: String?
 }
 
 struct NoteWidgetProvider: IntentTimelineProvider {
@@ -11,11 +12,11 @@ struct NoteWidgetProvider: IntentTimelineProvider {
     typealias Entry = NoteWidgetEntry
 
     func placeholder(in context: Context) -> NoteWidgetEntry {
-        return NoteWidgetEntry(date: Date(), title: DemoContent.singleNoteTitle, content: DemoContent.singleNoteContent)
+        return NoteWidgetEntry(date: Date(), title: DemoContent.singleNoteTitle, content: DemoContent.singleNoteContent, simperiumKey: nil)
     }
 
     func getSnapshot(for configuration: NoteWidgetIntent, in context: Context, completion: @escaping (NoteWidgetEntry) -> Void) {
-        let entry = NoteWidgetEntry(date: Date(), title: DemoContent.singleNoteTitle, content: DemoContent.singleNoteContent)
+        let entry = NoteWidgetEntry(date: Date(), title: DemoContent.singleNoteTitle, content: DemoContent.singleNoteContent, simperiumKey: nil)
 
         completion(entry)
     }
@@ -48,7 +49,7 @@ struct NoteWidgetProvider: IntentTimelineProvider {
         var entries: [NoteWidgetEntry] = []
         for int in 0..<6 {
             if let date = Date().increased(byHours: int) {
-                entries.append(NoteWidgetEntry(date: date, title: note.title, content: note.body))
+                entries.append(NoteWidgetEntry(date: date, title: note.title, content: note.body, simperiumKey: note.simperiumKey))
             }
         }
         let timeline = Timeline(entries: entries, policy: .atEnd)

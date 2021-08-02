@@ -14,7 +14,7 @@ struct NoteWidget: Widget {
 }
 
 private struct Constants {
-    static let configurationKind = "NotePreviewWidget"
+    static let configurationKind = "NoteWidget"
     static let displayName = NSLocalizedString("Note", comment: "Note Widget Title")
     static let description = NSLocalizedString("Get quick access to one of your notes.", comment: "Note Widget Description")
 }
