@@ -22,22 +22,25 @@ struct NoteWidgetView: View {
             }
             .frame(width: geometry.size.width, height: geometry.size.height + Sizes.overallPadding, alignment: .top)
             .ignoresSafeArea()
+            .widgetURL(prepareWidgetURL(from: entry.simperiumKey))
         }
-        .widgetURL(prepareWidgetURL(from: entry.simperiumKey))
     }
 
-    private func prepareWidgetURL(from simperiumKey: String?) -> URL {
-        guard let simperiumKey = simperiumKey,
-              let url = URL(string: SimplenoteConstants.simplenoteScheme + "://" + simperiumKey) else {
-            return URL(string: SimplenoteConstants.simplenoteScheme)!
+    private func prepareWidgetURL(from simperiumKey: String?) -> URL? {
+        guard let simperiumKey = simperiumKey else {
+            return URL(string: SimplenoteConstants.simplenoteScheme + "://")!
         }
-        return url
+        return URL(string: Constants.linkUrlBase + simperiumKey)
     }
 }
 
 private struct Sizes {
     static let overallPadding = CGFloat(20)
     static let headerPadding = CGFloat(10)
+}
+
+private struct Constants {
+    static let linkUrlBase = SimplenoteConstants.simplenoteScheme + "://" + SimplenoteConstants.simplenoteInterlinkHost + "/"
 }
 
 struct NoteWidgetView_Previews: PreviewProvider {
