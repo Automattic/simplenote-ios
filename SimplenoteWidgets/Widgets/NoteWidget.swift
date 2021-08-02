@@ -2,10 +2,10 @@ import SwiftUI
 import WidgetKit
 
 @available(iOS 14.0, *)
-struct NotePreviewWidget: Widget {
+struct NoteWidget: Widget {
     var body: some WidgetConfiguration {
-        IntentConfiguration(kind: Constants.configurationKind, intent: NoteWidgetIntent.self, provider: NotePreviewWidgetProvider()) { (entry) in
-            NotePreviewWidgetView(entry: entry)
+        IntentConfiguration(kind: Constants.configurationKind, intent: NoteWidgetIntent.self, provider: NoteWidgetProvider()) { (entry) in
+            NoteWidgetView(entry: entry)
         }
         .configurationDisplayName(Constants.displayName)
         .description(Constants.description)

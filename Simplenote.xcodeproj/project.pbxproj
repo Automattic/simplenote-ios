@@ -464,9 +464,9 @@
 		BAB5764626703D0000B0C56F /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5762626703C8200B0C56F /* IntentHandler.swift */; };
 		BAB5765B26703D0600B0C56F /* NoteWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BAB5760A26703C0C00B0C56F /* NoteWidgetIntent.intentdefinition */; };
 		BAB5765C26703D0600B0C56F /* NoteWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BAB5760A26703C0C00B0C56F /* NoteWidgetIntent.intentdefinition */; };
-		BAB5768726703EA000B0C56F /* NotePreviewWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5767B26703E8100B0C56F /* NotePreviewWidgetView.swift */; };
-		BAB576A826703F4500B0C56F /* NotePreviewWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5769226703F0E00B0C56F /* NotePreviewWidgetProvider.swift */; };
-		BAB576C92670514500B0C56F /* NotePreviewWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB576BD2670512C00B0C56F /* NotePreviewWidget.swift */; };
+		BAB5768726703EA000B0C56F /* NoteWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5767B26703E8100B0C56F /* NoteWidgetView.swift */; };
+		BAB576A826703F4500B0C56F /* NoteWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5769226703F0E00B0C56F /* NoteWidgetProvider.swift */; };
+		BAB576C92670514500B0C56F /* NoteWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB576BD2670512C00B0C56F /* NoteWidget.swift */; };
 		BAE08626261282D1009D40CD /* Note+Publish.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE08625261282D1009D40CD /* Note+Publish.swift */; };
 		BAF8D44B26AE10FC00CA9383 /* Tag+Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42226AE10F100CA9383 /* Tag+Widget.swift */; };
 		BAF8D44C26AE10FC00CA9383 /* Note+Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42326AE10F100CA9383 /* Note+Widget.swift */; };
@@ -1060,9 +1060,9 @@
 		BAB5762326703C8100B0C56F /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
 		BAB5762626703C8200B0C56F /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
 		BAB5762826703C8200B0C56F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BAB5767B26703E8100B0C56F /* NotePreviewWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotePreviewWidgetView.swift; sourceTree = "<group>"; };
-		BAB5769226703F0E00B0C56F /* NotePreviewWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotePreviewWidgetProvider.swift; sourceTree = "<group>"; };
-		BAB576BD2670512C00B0C56F /* NotePreviewWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotePreviewWidget.swift; sourceTree = "<group>"; };
+		BAB5767B26703E8100B0C56F /* NoteWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteWidgetView.swift; sourceTree = "<group>"; };
+		BAB5769226703F0E00B0C56F /* NoteWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteWidgetProvider.swift; sourceTree = "<group>"; };
+		BAB576BD2670512C00B0C56F /* NoteWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteWidget.swift; sourceTree = "<group>"; };
 		BAE08625261282D1009D40CD /* Note+Publish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+Publish.swift"; sourceTree = "<group>"; };
 		BAF8D42226AE10F100CA9383 /* Tag+Widget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tag+Widget.swift"; sourceTree = "<group>"; };
 		BAF8D42326AE10F100CA9383 /* Note+Widget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Note+Widget.swift"; sourceTree = "<group>"; };
@@ -2087,7 +2087,7 @@
 			isa = PBXGroup;
 			children = (
 				BAFA93EE265DE3B90009DCFB /* NewNoteWidget.swift */,
-				BAB576BD2670512C00B0C56F /* NotePreviewWidget.swift */,
+				BAB576BD2670512C00B0C56F /* NoteWidget.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -2095,7 +2095,7 @@
 		BA122DC4265EF8F1003D3BC5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				BAB5767B26703E8100B0C56F /* NotePreviewWidgetView.swift */,
+				BAB5767B26703E8100B0C56F /* NoteWidgetView.swift */,
 				BA122DC5265EF90C003D3BC5 /* NewNoteWidgetView.swift */,
 			);
 			path = Views;
@@ -2105,7 +2105,7 @@
 			isa = PBXGroup;
 			children = (
 				BAFA93F0265DE45D0009DCFB /* NewNoteWidgetProvider.swift */,
-				BAB5769226703F0E00B0C56F /* NotePreviewWidgetProvider.swift */,
+				BAB5769226703F0E00B0C56F /* NoteWidgetProvider.swift */,
 			);
 			path = Providers;
 			sourceTree = "<group>";
@@ -3438,7 +3438,7 @@
 				BA122DC1265EF4C5003D3BC5 /* UITraitCollection+Simplenote.swift in Sources */,
 				BA12B06F26B0D0150026F31D /* SPManagedObject+Widget.swift in Sources */,
 				BAFA93F4265DE4A70009DCFB /* NewNoteWidgetProvider.swift in Sources */,
-				BAB5768726703EA000B0C56F /* NotePreviewWidgetView.swift in Sources */,
+				BAB5768726703EA000B0C56F /* NoteWidgetView.swift in Sources */,
 				BAF8D44C26AE10FC00CA9383 /* Note+Widget.swift in Sources */,
 				BA32A91A26B746A300727247 /* StorageError.swift in Sources */,
 				BA86621826B3A73D00466746 /* UserDefaults+Simplenote.swift in Sources */,
@@ -3446,10 +3446,10 @@
 				BAFA93F2265DE4A10009DCFB /* SimplenoteWidgets.swift in Sources */,
 				BAF8D53226AE175B00CA9383 /* Bundle+Simplenote.swift in Sources */,
 				BA122DC2265EF4E5003D3BC5 /* SPUserInterface.swift in Sources */,
-				BAB576A826703F4500B0C56F /* NotePreviewWidgetProvider.swift in Sources */,
+				BAB576A826703F4500B0C56F /* NoteWidgetProvider.swift in Sources */,
 				BAF8D4F626AE171400CA9383 /* CoreDataManager.swift in Sources */,
 				BAB5764626703D0000B0C56F /* IntentHandler.swift in Sources */,
-				BAB576C92670514500B0C56F /* NotePreviewWidget.swift in Sources */,
+				BAB576C92670514500B0C56F /* NoteWidget.swift in Sources */,
 				BA122DC7265EF92D003D3BC5 /* NewNoteWidgetView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

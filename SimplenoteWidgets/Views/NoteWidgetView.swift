@@ -1,8 +1,8 @@
 import SwiftUI
 import WidgetKit
 
-struct NotePreviewWidgetView: View {
-    var entry: NotePreviewWidgetEntry
+struct NoteWidgetView: View {
+    var entry: NoteWidgetEntry
     var body: some View {
         VStack {
             Text(entry.title)
@@ -11,13 +11,13 @@ struct NotePreviewWidgetView: View {
     }
 }
 
-struct NotePreviewWidgetView_Previews: PreviewProvider {
+struct NoteWidgetView_Previews: PreviewProvider {
     static var previews: some View {
 
         Group {
-            NotePreviewWidgetView(entry: NotePreviewWidgetEntry(date: Date(), title: "Title", content: "Content"))
+            NoteWidgetView(entry: NoteWidgetEntry(date: Date(), title: "Title", content: "Content"))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
-            NotePreviewWidgetView(entry: NotePreviewWidgetEntry(date: Date(), title: "Title", content: "Content"))
+            NoteWidgetView(entry: NoteWidgetEntry(date: Date(), title: "Title", content: "Content"))
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
         }
     }

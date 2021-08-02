@@ -1,26 +1,26 @@
 import WidgetKit
 
-struct NotePreviewWidgetEntry: TimelineEntry {
+struct NoteWidgetEntry: TimelineEntry {
     let date: Date
     let title: String
     let content: String
 }
 
-struct NotePreviewWidgetProvider: IntentTimelineProvider {
+struct NoteWidgetProvider: IntentTimelineProvider {
     typealias Intent = NoteWidgetIntent
-    typealias Entry = NotePreviewWidgetEntry
+    typealias Entry = NoteWidgetEntry
 
-    func placeholder(in context: Context) -> NotePreviewWidgetEntry {
-        return NotePreviewWidgetEntry(date: Date(), title: "Title", content: "Content")
+    func placeholder(in context: Context) -> NoteWidgetEntry {
+        return NoteWidgetEntry(date: Date(), title: "Title", content: "Content")
     }
 
-    func getSnapshot(for configuration: NoteWidgetIntent, in context: Context, completion: @escaping (NotePreviewWidgetEntry) -> Void) {
-        let entry = NotePreviewWidgetEntry(date: Date(), title: "Title", content: "Content")
+    func getSnapshot(for configuration: NoteWidgetIntent, in context: Context, completion: @escaping (NoteWidgetEntry) -> Void) {
+        let entry = NoteWidgetEntry(date: Date(), title: "Title", content: "Content")
 
         completion(entry)
     }
 
-    func getTimeline(for configuration: NoteWidgetIntent, in context: Context, completion: @escaping (Timeline<NotePreviewWidgetEntry>) -> Void) {
+    func getTimeline(for configuration: NoteWidgetIntent, in context: Context, completion: @escaping (Timeline<NoteWidgetEntry>) -> Void) {
         // Confirm valid configuration
         guard let widgetNote = configuration.note,
               let simperiumKey = widgetNote.identifier else {
@@ -44,7 +44,7 @@ struct NotePreviewWidgetProvider: IntentTimelineProvider {
         }
 
         // Prepare timeline entry
-        let entry = NotePreviewWidgetEntry(date: Date(), title: note.title, content: note.body)
+        let entry = NoteWidgetEntry(date: Date(), title: note.title, content: note.body)
         let timeline = Timeline(entries: [entry], policy: .never)
 
         completion(timeline)
