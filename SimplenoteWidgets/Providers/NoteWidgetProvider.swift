@@ -11,11 +11,11 @@ struct NoteWidgetProvider: IntentTimelineProvider {
     typealias Entry = NoteWidgetEntry
 
     func placeholder(in context: Context) -> NoteWidgetEntry {
-        return NoteWidgetEntry(date: Date(), title: "Title", content: "Content")
+        return NoteWidgetEntry(date: Date(), title: DemoContent.singleNoteTitle, content: DemoContent.singleNoteContent)
     }
 
     func getSnapshot(for configuration: NoteWidgetIntent, in context: Context, completion: @escaping (NoteWidgetEntry) -> Void) {
-        let entry = NoteWidgetEntry(date: Date(), title: "Title", content: "Content")
+        let entry = NoteWidgetEntry(date: Date(), title: DemoContent.singleNoteTitle, content: DemoContent.singleNoteContent)
 
         completion(entry)
     }
