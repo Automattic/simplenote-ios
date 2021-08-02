@@ -46,7 +46,7 @@ extension Note {
             return Constants.defaultTitle
         }
 
-        return first.count > 0 ? first : Constants.defaultTitle
+        return first.count > .zero ? first : Constants.defaultTitle
     }
 
     var body: String {

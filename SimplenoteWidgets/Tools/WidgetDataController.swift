@@ -41,12 +41,11 @@ class WidgetDataController {
 
 
     // MARK: Public Methods
-    //
 
     /// Fetch notes with given tag and limit
     /// If no tag is specified, will fetch notes that are not deleted. If there is no limit specified it will fetch all of the notes
     ///
-    func notes(withTag tag: String? = nil, limit: Int = 0) throws -> [Note] {
+    func notes(withTag tag: String? = nil, limit: Int = .zero) throws -> [Note] {
         notesController.limit = limit
 
         if let tag = tag {
