@@ -9,31 +9,37 @@ class IntentHandler: INExtension {
 
 extension IntentHandler: NoteWidgetIntentHandling {
     func provideNoteOptionsCollection(for intent: NoteWidgetIntent, with completion: @escaping (INObjectCollection<WidgetNote>?, Error?) -> Void) {
-        var notes: [WidgetNote] = []
 
-        // TODO: add intent core data implementation.
-        // NOTE: This core data implementation is just to prove that the shared database is accessible and is not intended to be used in production.
+        // Prepare data controller for intents
         let dataController: WidgetDataController
-
         do {
-            dataController = try WidgetDataController()
+            let coreDataManager = try CoreDataManager(StorageSettings().sharedStorageURL)
+            dataController = try WidgetDataController(coreDataManager: coreDataManager, state: .intents)
         } catch {
             completion(nil, error)
             return
         }
 
-        let fetchedNotes = dataController.notes()
-
-        for fetchedNote in fetchedNotes {
-            var display = fetchedNote.content ?? "Untitled Note"
-            if display.count < 1 {
-                display = "Untitled Note"
-            }
-
-            let spNote = WidgetNote(identifier: fetchedNote.simperiumKey, display: display)
-            notes.append(spNote)
+        // Fetch notes
+        var notes: [Note] = []
+        do {
+            notes = try dataController.notes()
+        } catch {
+            completion(nil, error)
         }
-        let collection = INObjectCollection(items: notes)
+
+
+        // Return collection to intents
+        let collection = widgetNoteInObjectCollection(from: notes)
         completion(collection, nil)
+    }
+
+    private func widgetNoteInObjectCollection(from notes: [Note]) -> INObjectCollection<WidgetNote> {
+        var widgetNotes: [WidgetNote] = []
+        for note in notes {
+            let spNote = WidgetNote(identifier: note.simperiumKey, display: note.title)
+            widgetNotes.append(spNote)
+        }
+        return INObjectCollection(items: widgetNotes)
     }
 }

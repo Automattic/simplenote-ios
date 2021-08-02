@@ -3,43 +3,58 @@ import SimplenoteFoundation
 import SimplenoteSearch
 
 class WidgetDataController {
+
+    /// Data Controller
+    ///
     let coreDataManager: CoreDataManager
 
+    /// Notes Controller
+    ///
     private lazy var notesController = ResultsController<Note>(
         viewContext: coreDataManager.managedObjectContext,
-        sortedBy: [NSSortDescriptor.descriptorForNotes(sortMode: sortMode)]
+        matching: state.predicateForNotes(searchKey: searchKey),
+        sortedBy: [NSSortDescriptor.descriptorForNotes(sortMode: noteSortMode)],
+        limit: state.fetchLimitForNotes()
     )
 
-    init() throws {
-        // TODO: Check if main app is logged in, if not throw
+    init(coreDataManager: CoreDataManager, state: WidgetState) throws {
+        guard let isLoggedIn = UserDefaults(suiteName: SimplenoteConstants.sharedGroupDomain)?.bool(forKey: .accountIsLoggedIn),
+              isLoggedIn else {
+            throw StorageError.appConfigurationError
+        }
 
-        self.coreDataManager = try CoreDataManager(StorageSettings().sharedStorageURL)
+        self.coreDataManager = coreDataManager
         coreDataManager.managedObjectContext.persistentStoreCoordinator = coreDataManager.persistentStoreCoordinator
 
-        setupNotesController()
+        self.state = state
     }
 
-    private var sortMode: SortMode {
-        let sortModeSetting = UserDefaults(suiteName: SimplenoteConstants.sharedGroupDomain)?.integer(forKey: .listSortMode) ?? 0
-        return SortMode(rawValue: sortModeSetting) ?? SortMode.alphabeticallyAscending
-    }
-
-    var excludeDeletedNotes = true
-
-    private func setupNotesController() {
-        if excludeDeletedNotes {
-            notesController.predicate = NSPredicate.predicateForNotes(deleted: false)
+    private var noteSortMode: SortMode {
+        guard let defaults = UserDefaults(suiteName: SimplenoteConstants.sharedGroupDomain) else {
+            return SortMode.alphabeticallyAscending
         }
+
+        return SortMode(rawValue: defaults.integer(forKey: .listSortMode))
+            ?? SortMode.alphabeticallyAscending
     }
 
-    func notes() -> [Note] {
+    let state: WidgetState
+    
+    var searchKey: String?
+
+    func notes() throws -> [Note] {
         do {
             try notesController.performFetch()
         } catch {
-            #warning("Need to do a better job of error handling")
-            NSLog("Couldn't fetch")
+            throw StorageError.fetchError
         }
 
         return notesController.fetchedObjects
+    }
+
+    func note(forSimperiumKey key: String) -> Note? {
+        return notesController.fetchedObjects.first { note in
+            note.simperiumKey == key
+        }
     }
 }

@@ -30,3 +30,34 @@ extension Note {
     @NSManaged public var systemTags: String?
     @NSManaged public var tags: String?
 }
+
+extension Note {
+    private var lines: [String]? {
+        guard let content = content else {
+            return nil
+        }
+
+        return content.components(separatedBy: .newlines)
+    }
+
+    var title: String {
+        guard let lines = lines,
+              let first = lines.first else {
+            return Constants.defaultTitle
+        }
+
+        return first.count > 0 ? first : Constants.defaultTitle
+    }
+
+    var body: String {
+        guard var lines = lines else {
+            return String()
+        }
+        lines.removeFirst()
+        return lines.joined()
+    }
+}
+
+private struct Constants {
+    static let defaultTitle = NSLocalizedString("Untitled Note", comment: "Default title for notes")
+}

@@ -418,6 +418,11 @@
 		BA12B07026B0D0150026F31D /* SPManagedObject+Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA12B06C26B0D0150026F31D /* SPManagedObject+Widget.swift */; };
 		BA18532826488DBC00D9A347 /* SignupRemoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA18532726488DBC00D9A347 /* SignupRemoteTests.swift */; };
 		BA2D82C6261522F100A1695B /* PublishNoticePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2D82C5261522F100A1695B /* PublishNoticePresenter.swift */; };
+		BA32A90F26B7469F00727247 /* StorageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32A90E26B7469F00727247 /* StorageError.swift */; };
+		BA32A91926B746A200727247 /* StorageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32A90E26B7469F00727247 /* StorageError.swift */; };
+		BA32A91A26B746A300727247 /* StorageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32A90E26B7469F00727247 /* StorageError.swift */; };
+		BA32A94826B784E800727247 /* WidgetState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32A93D26B784CC00727247 /* WidgetState.swift */; };
+		BA32A95226B784E800727247 /* WidgetState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32A93D26B784CC00727247 /* WidgetState.swift */; };
 		BA3856CD2681715700F388CC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3856CC2681715700F388CC /* CoreDataManager.swift */; };
 		BA3FB8CF25FEA0C500EA9A1B /* NoticeControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3FB8CE25FEA0C500EA9A1B /* NoticeControllerTests.swift */; };
 		BA4499AA25ED8821000C563E /* NoticeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA4499A925ED8821000C563E /* NoticeView.xib */; };
@@ -1024,6 +1029,8 @@
 		BA12B06C26B0D0150026F31D /* SPManagedObject+Widget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SPManagedObject+Widget.swift"; sourceTree = "<group>"; };
 		BA18532726488DBC00D9A347 /* SignupRemoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupRemoteTests.swift; sourceTree = "<group>"; };
 		BA2D82C5261522F100A1695B /* PublishNoticePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishNoticePresenter.swift; sourceTree = "<group>"; };
+		BA32A90E26B7469F00727247 /* StorageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageError.swift; sourceTree = "<group>"; };
+		BA32A93D26B784CC00727247 /* WidgetState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetState.swift; sourceTree = "<group>"; };
 		BA3856CC2681715700F388CC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		BA3FB8CE25FEA0C500EA9A1B /* NoticeControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeControllerTests.swift; sourceTree = "<group>"; };
 		BA4499A925ED8821000C563E /* NoticeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoticeView.xib; sourceTree = "<group>"; };
@@ -1987,6 +1994,7 @@
 				BA8FC2A4267AC7470082962E /* SharedStorageMigrator.swift */,
 				BA3856CC2681715700F388CC /* CoreDataManager.swift */,
 				BA9B59012685549F00DAD1ED /* StorageSettings.swift */,
+				BA32A90E26B7469F00727247 /* StorageError.swift */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -2158,6 +2166,7 @@
 			isa = PBXGroup;
 			children = (
 				BA86622226B3AE4A00466746 /* WidgetDataController.swift */,
+				BA32A93D26B784CC00727247 /* WidgetState.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -3071,6 +3080,7 @@
 				B52AC186233587F8007B2E75 /* UITraitCollection+Simplenote.swift in Sources */,
 				A6A648BB25AC85D40074A094 /* AccountVerificationController.swift in Sources */,
 				A6BBDA3E25502FE3005C8343 /* NSAttributedStringToMarkdownConverter.swift in Sources */,
+				BA32A90F26B7469F00727247 /* StorageError.swift in Sources */,
 				B56A696922F9D57200B90398 /* NSMutableAttributedString+Simplenote.swift in Sources */,
 				B535F2E72399BFB600C1DDCA /* SPRatingsPromptView.swift in Sources */,
 				B5D982D222F8644000C37C29 /* SPSquaredButton.swift in Sources */,
@@ -3398,11 +3408,13 @@
 				BA86625D26B3B14900466746 /* SortMode.swift in Sources */,
 				BA12B07026B0D0150026F31D /* SPManagedObject+Widget.swift in Sources */,
 				BA86622426B3AE4A00466746 /* WidgetDataController.swift in Sources */,
+				BA32A95226B784E800727247 /* WidgetState.swift in Sources */,
 				BAF8D46E26AE118800CA9383 /* SPCredentials.swift in Sources */,
 				BAF8D45626AE10FC00CA9383 /* Note+Widget.swift in Sources */,
 				BAF8D5C526AE254100CA9383 /* Simplenote.xcdatamodeld in Sources */,
 				BA86624926B3B05100466746 /* SimplenoteConstants.swift in Sources */,
 				BAB5765C26703D0600B0C56F /* NoteWidgetIntent.intentdefinition in Sources */,
+				BA32A91926B746A200727247 /* StorageError.swift in Sources */,
 				BA86627226B3B1B700466746 /* NSSortDescriptor+Simplenote.swift in Sources */,
 				BAF8D45526AE10FC00CA9383 /* Tag+Widget.swift in Sources */,
 				BAF8D53C26AE175C00CA9383 /* Bundle+Simplenote.swift in Sources */,
@@ -3430,9 +3442,11 @@
 				BAF8D46426AE118800CA9383 /* SPCredentials.swift in Sources */,
 				BA122DC1265EF4C5003D3BC5 /* UITraitCollection+Simplenote.swift in Sources */,
 				BA12B06F26B0D0150026F31D /* SPManagedObject+Widget.swift in Sources */,
+				BA32A94826B784E800727247 /* WidgetState.swift in Sources */,
 				BAFA93F4265DE4A70009DCFB /* NewNoteWidgetProvider.swift in Sources */,
 				BAB5768726703EA000B0C56F /* NotePreviewWidgetView.swift in Sources */,
 				BAF8D44C26AE10FC00CA9383 /* Note+Widget.swift in Sources */,
+				BA32A91A26B746A300727247 /* StorageError.swift in Sources */,
 				BA86621826B3A73D00466746 /* UserDefaults+Simplenote.swift in Sources */,
 				BAF8D44B26AE10FC00CA9383 /* Tag+Widget.swift in Sources */,
 				BAFA93F2265DE4A10009DCFB /* SimplenoteWidgets.swift in Sources */,
