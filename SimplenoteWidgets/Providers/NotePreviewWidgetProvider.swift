@@ -21,12 +21,14 @@ struct NotePreviewWidgetProvider: IntentTimelineProvider {
     }
 
     func getTimeline(for configuration: NoteWidgetIntent, in context: Context, completion: @escaping (Timeline<NotePreviewWidgetEntry>) -> Void) {
+        // Confirm valid configuration
         guard let widgetNote = configuration.note,
               let simperiumKey = widgetNote.identifier else {
             NSLog("Couldn't find configuration or identifier")
             return
         }
 
+        // Prepare data controller
         var dataController: WidgetDataController
         do {
             let coreDataManager = try CoreDataManager(StorageSettings().sharedStorageURL)
@@ -36,10 +38,12 @@ struct NotePreviewWidgetProvider: IntentTimelineProvider {
             return
         }
 
+        // Fetch note
         guard let note = dataController.note(forSimperiumKey: simperiumKey) else {
             return
         }
 
+        // Prepare timeline entry
         let entry = NotePreviewWidgetEntry(date: Date(), title: note.title, content: note.body)
         let timeline = Timeline(entries: [entry], policy: .never)
 
