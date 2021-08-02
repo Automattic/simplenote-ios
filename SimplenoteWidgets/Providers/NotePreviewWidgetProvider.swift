@@ -2,7 +2,8 @@ import WidgetKit
 
 struct NotePreviewWidgetEntry: TimelineEntry {
     let date: Date
-    let text: String
+    let title: String
+    let content: String
 }
 
 struct NotePreviewWidgetProvider: IntentTimelineProvider {
@@ -10,21 +11,36 @@ struct NotePreviewWidgetProvider: IntentTimelineProvider {
     typealias Entry = NotePreviewWidgetEntry
 
     func placeholder(in context: Context) -> NotePreviewWidgetEntry {
-        return NotePreviewWidgetEntry(date: Date(), text: "Placeholder")
+        return NotePreviewWidgetEntry(date: Date(), title: "Title", content: "Content")
     }
 
     func getSnapshot(for configuration: NoteWidgetIntent, in context: Context, completion: @escaping (NotePreviewWidgetEntry) -> Void) {
-        let entry = NotePreviewWidgetEntry(date: Date(), text: "Placeholder")
+        let entry = NotePreviewWidgetEntry(date: Date(), title: "Title", content: "Content")
 
         completion(entry)
     }
 
     func getTimeline(for configuration: NoteWidgetIntent, in context: Context, completion: @escaping (Timeline<NotePreviewWidgetEntry>) -> Void) {
-        guard let note = configuration.note else {
+        guard let widgetNote = configuration.note,
+              let simperiumKey = widgetNote.identifier else {
+            NSLog("Couldn't find configuration or identifier")
             return
         }
 
-        let entry = NotePreviewWidgetEntry(date: Date(), text: note.identifier ?? "Error")
+        var dataController: WidgetDataController
+        do {
+            let coreDataManager = try CoreDataManager(StorageSettings().sharedStorageURL)
+            dataController = try WidgetDataController(coreDataManager: coreDataManager)
+        } catch {
+            NSLog("Couldn't setup dataController")
+            return
+        }
+
+        guard let note = dataController.note(forSimperiumKey: simperiumKey) else {
+            return
+        }
+
+        let entry = NotePreviewWidgetEntry(date: Date(), title: note.title, content: note.body)
         let timeline = Timeline(entries: [entry], policy: .never)
 
         completion(timeline)

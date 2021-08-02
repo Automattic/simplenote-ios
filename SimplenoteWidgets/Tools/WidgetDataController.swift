@@ -12,12 +12,11 @@ class WidgetDataController {
     ///
     private lazy var notesController = ResultsController<Note>(
         viewContext: coreDataManager.managedObjectContext,
-        matching: state.predicateForNotes(searchKey: searchKey),
-        sortedBy: [NSSortDescriptor.descriptorForNotes(sortMode: noteSortMode)],
-        limit: state.fetchLimitForNotes()
+        matching: predicateForNotes(),
+        sortedBy: [NSSortDescriptor.descriptorForNotes(sortMode: noteSortMode)]
     )
 
-    init(coreDataManager: CoreDataManager, state: WidgetState) throws {
+    init(coreDataManager: CoreDataManager) throws {
         guard let isLoggedIn = UserDefaults(suiteName: SimplenoteConstants.sharedGroupDomain)?.bool(forKey: .accountIsLoggedIn),
               isLoggedIn else {
             throw StorageError.appConfigurationError
@@ -25,8 +24,6 @@ class WidgetDataController {
 
         self.coreDataManager = coreDataManager
         coreDataManager.managedObjectContext.persistentStoreCoordinator = coreDataManager.persistentStoreCoordinator
-
-        self.state = state
     }
 
     private var noteSortMode: SortMode {
@@ -38,11 +35,13 @@ class WidgetDataController {
             ?? SortMode.alphabeticallyAscending
     }
 
-    let state: WidgetState
-    
-    var searchKey: String?
+    func notes(withTag tag: String? = nil, limit: Int = 0) throws -> [Note] {
+        notesController.limit = limit
 
-    func notes() throws -> [Note] {
+        if let tag = tag {
+            notesController.predicate = predicateForNotes(withTag: tag)
+        }
+
         do {
             try notesController.performFetch()
         } catch {
@@ -53,8 +52,23 @@ class WidgetDataController {
     }
 
     func note(forSimperiumKey key: String) -> Note? {
+        notesController.predicate = predicateForNotes()
+
+        do {
+            try notesController.performFetch()
+        } catch {
+            return nil
+        }
+
         return notesController.fetchedObjects.first { note in
             note.simperiumKey == key
         }
+    }
+
+    private func predicateForNotes(withTag tag: String? = nil) -> NSPredicate {
+        guard let tag = tag else {
+            return NSPredicate.predicateForNotes(deleted: false)
+        }
+        return NSPredicate.predicateForNotes(tag: tag)
     }
 }

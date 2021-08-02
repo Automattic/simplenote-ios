@@ -14,7 +14,7 @@ extension IntentHandler: NoteWidgetIntentHandling {
         let dataController: WidgetDataController
         do {
             let coreDataManager = try CoreDataManager(StorageSettings().sharedStorageURL)
-            dataController = try WidgetDataController(coreDataManager: coreDataManager, state: .intents)
+            dataController = try WidgetDataController(coreDataManager: coreDataManager)
         } catch {
             completion(nil, error)
             return
