@@ -1,3 +1,2 @@
--   Perbaikan bug yang membuat tombol Catatan Baru tidak tampak
--   Alur Kunci Biometri yang Baru
+-   Perbaikan beberapa bug
 

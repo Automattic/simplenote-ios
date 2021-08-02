@@ -1,3 +1,2 @@
--   Yeni Not düğmesinin görünmesini engelleyen bir hata düzeltildi
--   Yeni Biyometri Kilit Akışı
+-   Bazı hatalar giderildi
 

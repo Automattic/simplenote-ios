@@ -1,3 +1,2 @@
--   Résolution d’un bogue dans lequel le bouton Nouvelle note pouvait ne pas apparaître
--   Nouveau flux de verrouillage biométrique
+-   Résolution de certains bugs
 

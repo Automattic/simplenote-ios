@@ -1,3 +1,2 @@
--   Bug verwijderd waardoor de knop Nieuwe notitie soms niet werd weergeven
--   Nieuwe flow voor Biometrievergrendeling
+-   Enkele bugs verholpen
 

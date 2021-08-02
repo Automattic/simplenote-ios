@@ -1,3 +1,2 @@
--   Corretto un bug a causa del quale il pulsante Nuova nota poteva non essere visualizzato
--   Nuovo flusso di blocco della biometria
+-   Alcune correzioni di bug
 

@@ -1,3 +1,2 @@
--   Ett fel som gjorde att knappen Ny anteckning inte visades har korrigerats
--   Nytt flöde med biometriskt lås
+-   Vissa buggkorrigeringar
 

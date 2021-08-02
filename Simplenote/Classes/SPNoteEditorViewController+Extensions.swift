@@ -848,6 +848,12 @@ extension SPNoteEditorViewController {
         ]
     }
 
+    @objc
+    func refreshSearchHighlight() {
+        noteEditorTextView.clearHighlights(false)
+        highlightSearchResult(at: highlightedSearchResultIndex, animated: false)
+    }
+
     private var backgroundColor: UIColor {
         isPreviewing ? .simplenoteBackgroundPreviewColor : .simplenoteBackgroundColor
     }

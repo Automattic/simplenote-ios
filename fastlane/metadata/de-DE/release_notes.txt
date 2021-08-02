@@ -1,3 +1,2 @@
--   Fehler behoben, durch den der Button für neue Notizen nicht angezeigt wurde
--   Neuer Biometriesperrvorgang
+-   Ein paar Fehlerkorrekturen
 

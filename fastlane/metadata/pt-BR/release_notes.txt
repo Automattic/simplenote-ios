@@ -1,3 +1,2 @@
--   Corrigido um problema em que o botão Nova anotação às vezes não aparecia
--   Novo fluxo de bloqueio por biometria
+-   Algumas correções de bug
 

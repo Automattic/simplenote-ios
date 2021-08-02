@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-06-22 17:54:04+0000 */
+/* Translation-Revision-Date: 2021-06-29 11:32:20+0000 */
 /* Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ar */
@@ -226,7 +226,7 @@
 /* PinLock screen \"delete\" button */
 "Delete" = "حذف";
 
-/* Delet a note from trash */
+/* Delete a note from trash */
 "Delete Note" = "حذف ملحوظة";
 
 /* Verb: Delete notes and log out of the app */
@@ -583,6 +583,9 @@
 
 /* No comment provided by engineer. */
 "Security" = "الأمان";
+
+/* Select multiple notes at once */
+"Select" = "تحديد";
 
 /* Select all Button Label
    Select all button title */

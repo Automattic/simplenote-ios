@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-06-23 09:54:03+0000 */
+/* Translation-Revision-Date: 2021-07-12 17:43:07+0000 */
 /* Plural-Forms: nplurals=2; plural=(n > 1); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: pt_BR */
@@ -16,10 +16,10 @@
 "%i Failed Passcode Attempts" = "%i tentativas de senha com falha";
 
 /* Note trashed notification */
-"%i Note Trashed" = "%i nota excluída";
+"%i Note Trashed" = "%i anotação enviada para a lixeira";
 
 /* Notes trashed notification */
-"%i Notes Trashed" = "%i notas excluídas";
+"%i Notes Trashed" = "%i anotações enviadas para a lixeira";
 
 /* Count of interlink references to a note */
 "%i Reference" = "%i Referência";
@@ -28,7 +28,7 @@
 "%i References" = "%i Referências";
 
 /* Count of currently selected notes */
-"%i Selected" = "%i selecionadas";
+"%i Selected" = "%i selecionada(s)";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- Mínimo de oito caracteres";
@@ -87,7 +87,7 @@
 "An error was encountered while signing in." = "Foi encontrado um erro ao fazer login.";
 
 /* Engine URL Message */
-"AppEngine Endpoints" = "AppEngine Endpoints";
+"AppEngine Endpoints" = "Endpoints do AppEngine";
 
 /* No comment provided by engineer. */
 "Appearance" = "Aparência";
@@ -190,16 +190,16 @@
 "Couldn't Sign In" = "Não foi possível entrar";
 
 /* Siri Suggestion to create a New Note */
-"Create a New Note" = "Criar uma nova nota";
+"Create a New Note" = "Criar uma nova anotação";
 
 /* No comment provided by engineer. */
 "Create a new note" = "Criar uma nova anotação";
 
 /* Tappable message shown when no notes match a search string. Parameter: %@ - search term */
-"Create a new note titled “%@”" = "Criar uma nova nota com o título “%@”";
+"Create a new note titled “%@”" = "Criar uma nova anotação com o título “%@”";
 
 /* Message shown in note list when no notes are in the current view */
-"Create your first note" = "Crie sua primeira nota";
+"Create your first note" = "Crie sua primeira anotação";
 
 /* Note Creation Date */
 "Created" = "Criação";
@@ -226,7 +226,7 @@
 /* PinLock screen \"delete\" button */
 "Delete" = "Excluir";
 
-/* Delet a note from trash */
+/* Delete a note from trash */
 "Delete Note" = "Excluir anotação";
 
 /* Verb: Delete notes and log out of the app */
@@ -236,7 +236,7 @@
 "Delete Tag" = "Excluir tag";
 
 /* Deselect all Button Label */
-"Deselect All" = "Desselecionar todas";
+"Deselect All" = "Desmarcar todas";
 
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "Diagnóstico";
@@ -399,7 +399,7 @@
 "Modified: Oldest" = "Modificado: mais antiga";
 
 /* Accessibility hint for trash selected notes button */
-"Move selected notes to trash" = "Mover as notas selecionadas para a lixeira";
+"Move selected notes to trash" = "Mova as anotações selecionadas para a lixeira";
 
 /* Delete Action
    Deletes a note */
@@ -413,7 +413,7 @@
 
 /* Home screen quick action: New Note
    Keyboard shortcut: New Note */
-"New Note" = "Nova nota";
+"New Note" = "Nova anotação";
 
 /* Label to create a new note */
 "New note" = "Nova anotação";
@@ -431,13 +431,13 @@
 "No Results" = "Nenhum resultado";
 
 /* Message shown in note list when no notes are tagged with the provided tag. Parameter: %@ - tag */
-"No notes tagged “%@”" = "Nenhuma nota com a tag “%@”";
+"No notes tagged “%@”" = "Nenhuma anotação com a tag “%@”";
 
 /* Rating view - liked or disliked - no thanks button */
 "No thanks" = "Não, obrigado!";
 
 /* Message shown in note list when no notes are untagged */
-"No untagged notes" = "Nenhuma nota sem tags";
+"No untagged notes" = "Nenhuma anotação sem tag";
 
 /* Note trashed notification */
 "Note Trashed" = "Anotação enviada para a lixeira";
@@ -584,6 +584,9 @@
 /* No comment provided by engineer. */
 "Security" = "Segurança";
 
+/* Select multiple notes at once */
+"Select" = "Selecionar";
+
 /* Select all Button Label
    Select all button title */
 "Select All" = "Selecionar todas";
@@ -657,7 +660,7 @@
 "Tags" = "Tags";
 
 /* Accessibility hint for the select/deselect all button */
-"Tap button to select or deselect all notes" = "Toque no botão para selecionar ou desselecionar todas as notas";
+"Tap button to select or deselect all notes" = "Toque no botão para selecionar ou desmarcar todas as notas";
 
 /* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
 "Terms and Conditions" = "Termos e condições";
@@ -696,7 +699,7 @@
 "Touch ID" = "Identificação por toque";
 
 /* Move selected notes to trash */
-"Trash Notes" = "Excluir notas";
+"Trash Notes" = "Excluir anotações";
 
 /* Title: Trash Tag is selected
    Trash filter button */

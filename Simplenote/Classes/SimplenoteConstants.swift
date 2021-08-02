@@ -28,10 +28,7 @@ class SimplenoteConstants: NSObject {
 
     /// AppEngine: Base URL
     ///
-    static let currentEngineBaseURL: NSString = {
-        let output = BuildConfiguration.current == .internal ? SPCredentials.experimentalEngineURL : SPCredentials.defaultEngineURL
-        return output as NSString
-    }()
+    static let currentEngineBaseURL = SPCredentials.defaultEngineURL as NSString
 
     /// AppEngine: Endpoints
     ///
