@@ -16,6 +16,12 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         let _ = attemptLogOut()
         EmailLogin.open()
         EmailLogin.logIn()
+
+        // Extra check for certain emails
+        if testDataEmail.contains("trial") {
+            dismissVerifyEmailIfNeeded(using: app)
+        }
+
         NoteList.waitForLoad()
     }
 
@@ -288,7 +294,7 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         let noteTitle = "Note Title "
 
         trackStep()
-        populateNotesList(title: noteTitle, numberToCreate: 2)
+        populateNoteList(title: noteTitle, numberToCreate: 2)
 
         trackStep()
         NoteList.longPressNote(title: noteTitle + "1")

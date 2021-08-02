@@ -47,7 +47,12 @@ func toggleSwitchIfNeeded(_ switchElement: XCUIElement, _ value: String) {
     switchElement.tap()
 }
 
-func populateNotesList(title: String, numberToCreate: Int) {
+func dismissVerifyEmailIfNeeded(using app: XCUIApplication) {
+    guard app.staticTexts["Review Your Account"].waitForExistence(timeout: 15) else { return }
+    app.buttons["icon cross"].tap()
+}
+
+func populateNoteList(title: String, numberToCreate: Int) {
     for i in 1...numberToCreate {
         let noteTitle = title + String(i)
         let noteContent = "\n\nSome content here for note " + String(i)
