@@ -30,9 +30,9 @@ struct NoteWidgetProvider: IntentTimelineProvider {
         }
 
         // Prepare data controller
-        var dataController: WidgetDataController
+        let dataController: WidgetDataController
         do {
-            let coreDataManager = try CoreDataManager(StorageSettings().sharedStorageURL)
+            let coreDataManager = try CoreDataManager(StorageSettings().sharedStorageURL, for: .widgets)
             dataController = try WidgetDataController(coreDataManager: coreDataManager)
         } catch {
             NSLog("Couldn't setup dataController")

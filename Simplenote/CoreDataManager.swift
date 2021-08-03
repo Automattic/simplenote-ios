@@ -1,6 +1,12 @@
 import Foundation
 import CoreData
 
+enum CoreDataUsageType {
+    case standard
+    case intents
+    case widgets
+}
+
 @objcMembers
 class CoreDataManager: NSObject {
 
@@ -9,7 +15,7 @@ class CoreDataManager: NSObject {
     private(set) var managedObjectContext: NSManagedObjectContext!
     private(set) var persistentStoreCoordinator: NSPersistentStoreCoordinator!
 
-    init(_ storageURL: URL, storageSettings: StorageSettings = StorageSettings()) throws {
+    init(_ storageURL: URL, storageSettings: StorageSettings = StorageSettings(), for usageType: CoreDataUsageType = .standard) throws {
         super.init()
 
         guard let mom = NSManagedObjectModel(contentsOf: storageSettings.modelURL) else {
@@ -35,5 +41,12 @@ class CoreDataManager: NSObject {
         }
 
         persistentStoreCoordinator = psc
+
+        switch usageType {
+        case .standard:
+            break
+        case .intents, .widgets:
+            managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
+        }
     }
 }
