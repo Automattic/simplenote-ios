@@ -25,7 +25,6 @@ class WidgetDataController {
         }
 
         self.coreDataManager = coreDataManager
-        coreDataManager.managedObjectContext.persistentStoreCoordinator = coreDataManager.persistentStoreCoordinator
     }
 
     /// Sort mode for widgets.  Fetched from main apps sort setting
