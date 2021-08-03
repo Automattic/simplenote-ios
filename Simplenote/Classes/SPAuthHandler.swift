@@ -80,7 +80,7 @@ class SPAuthHandler {
 
     private func handleRemoteError(_ error: RemoteError) -> SPAuthError {
         switch error {
-        case .network:
+        case .network, .urlRequestError:
             return SPAuthError(signupErrorCode: 0, response: nil, error: nil)
         case .requestError(let statusCode, let error):
             return SPAuthError(loginErrorCode: statusCode, response: error?.localizedDescription, error: error)

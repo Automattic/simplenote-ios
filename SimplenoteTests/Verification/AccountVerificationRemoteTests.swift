@@ -16,12 +16,12 @@ class AccountVerificationRemoteTests: XCTestCase {
     func testFailureWhenStatusCodeIs4xxOr5xx() {
         for _ in 0..<5 {
             let statusCode = Int.random(in: 400..<600)
-            test(withStatusCode: statusCode, expectedResult: .failure(RemoteError(statusCode: statusCode)))
+            test(withStatusCode: statusCode, expectedResult: .failure(RemoteError.requestError(statusCode, nil)))
         }
     }
 
     func testFailureWhenNoResponse() {
-        test(withStatusCode: nil, expectedResult: .failure(RemoteError(statusCode: 0)))
+        test(withStatusCode: nil, expectedResult: .failure(RemoteError.network))
     }
 
     private func test(withStatusCode statusCode: Int?, expectedResult: Result<Data?, RemoteError>) {

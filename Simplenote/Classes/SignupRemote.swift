@@ -5,7 +5,7 @@ import Foundation
 class SignupRemote: Remote {
     func signup(with email: String, completion: @escaping (_ result: Result<Data?, RemoteError>) -> Void) {
         guard let request = request(with: email) else {
-            completion(.failure(RemoteError.network))
+            completion(.failure(RemoteError.urlRequestError))
             return
         }
 
