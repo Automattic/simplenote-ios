@@ -1,8 +1,6 @@
 #import <UIKit/UIKit.h>
 #import "SPTableViewController.h"
 
-@class SpinnerViewController;
-
 @interface SPSettingsViewController : SPTableViewController <UIPickerViewDelegate, UIPickerViewDataSource> {
     
     //Preferences
