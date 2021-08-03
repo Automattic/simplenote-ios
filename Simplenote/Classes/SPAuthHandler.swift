@@ -72,13 +72,22 @@ class SPAuthHandler {
             switch result {
             case .success:
                 onCompletion(nil)
-            case .failure(let statusCode, let error):
-                let error = SPAuthError(signupErrorCode: statusCode, response: nil, error: error)
-                onCompletion(error)
+            case .failure(let error):
+                onCompletion(self.authenticationError(for: error))
             }
         }
     }
 
+    private func authenticationError(for remoteError: RemoteError) -> SPAuthError {
+        switch remoteError {
+        case .network:
+            return SPAuthError.network
+        case .urlRequestError:
+            return SPAuthError.urlRequestError
+        case .requestError(let statusCode, let error):
+            return SPAuthError(signupErrorCode: statusCode, response: error?.localizedDescription, error: error)
+        }
+    }
 
     /// Presents the Password Reset (Web) Interface
     ///

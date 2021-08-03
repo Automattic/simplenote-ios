@@ -90,3 +90,10 @@ extension SPTracker {
         trackShortcut("toggle_checklist")
     }
 }
+
+// MARK: Account Deletion
+extension SPTracker {
+    static func trackDeleteAccountButttonTapped() {
+        trackAutomatticEvent(withName: "spios_delete_account_button_clicked", properties: nil)
+    }
+}

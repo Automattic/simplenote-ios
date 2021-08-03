@@ -9,6 +9,7 @@
 
 4.40
 -----
+-   Added In app account deletion #1354
 -   Some bug fixes #1345, #1347, #1348
 
 4.39

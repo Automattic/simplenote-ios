@@ -36,11 +36,11 @@ class AccountVerificationController: NSObject {
 
     /// Remote service
     ///
-    private let remote: AccountVerificationRemote
+    private let remote: AccountRemote
 
     /// Initialize with user's email
     ///
-    init(email: String, remote: AccountVerificationRemote = .init()) {
+    init(email: String, remote: AccountRemote = .init()) {
         self.email = email
         self.remote = remote
         super.init()
@@ -72,7 +72,7 @@ class AccountVerificationController: NSObject {
 
     /// Send verification request
     ///
-    func verify(completion: @escaping (_ success: Bool) -> Void) {
+    func verify(completion: @escaping (_ result: Result<Data?, RemoteError>) -> Void) {
         remote.verify(email: email, completion: completion)
     }
 }

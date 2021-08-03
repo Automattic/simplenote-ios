@@ -7,6 +7,8 @@ enum SPAuthError: Error {
     case loginBadCredentials
     case signupBadCredentials
     case signupUserAlreadyExists
+    case network
+    case urlRequestError
     case unknown(statusCode: Int, response: String?, error: Error?)
 }
 
@@ -66,6 +68,10 @@ extension SPAuthError {
             return NSLocalizedString("Could not create an account with the provided email address and password.", comment: "Error for bad email or password")
         case .signupUserAlreadyExists:
             return NSLocalizedString("The email you've entered is already associated with a Simplenote account.", comment: "Error when address is in use")
+        case .network:
+            return NSLocalizedString("The network could not be reached.", comment: "Error when the network is inaccessible")
+        case .urlRequestError:
+            return NSLocalizedString("Could not prepare URL request.", comment: "Error when url request can't be made")
         case .unknown:
             return NSLocalizedString("We're having problems. Please try again soon.", comment: "Generic error")
         }

@@ -399,6 +399,24 @@ extension SPAppDelegate {
     }
 }
 
+// MARK: - Account Deletion
+//
+extension SPAppDelegate {
+    @objc
+    func authenticateSimperiumIfNeeded() {
+        guard let deletionController = accountDeletionController else {
+            return
+        }
+
+        if deletionController.deletionTokenHasExpired {
+            self.accountDeletionController = nil
+            return
+        }
+
+        simperium.authenticateIfNecessary()
+    }
+}
+
 // MARK: - Core Data
 //
 extension SPAppDelegate {
