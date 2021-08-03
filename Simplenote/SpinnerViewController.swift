@@ -33,7 +33,7 @@ class SpinnerViewController: UIViewController {
             alertView.widthAnchor.constraint(equalToConstant: Constants.width),
             alertView.heightAnchor.constraint(equalToConstant: Constants.height)
         ])
-        alertView.layer.cornerRadius = 15
+        alertView.layer.cornerRadius = Constants.cornerRadius
 
 
         alertView.addSubview(activityIndicator)
@@ -72,4 +72,5 @@ class SpinnerViewController: UIViewController {
 private struct Constants {
     static let width: CGFloat = 150
     static let height: CGFloat = 115
+    static let cornerRadius: CGFloat = 15
 }
