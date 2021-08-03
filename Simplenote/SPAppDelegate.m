@@ -167,6 +167,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     [SPTracker trackApplicationOpened];
+    [self syncWidgetDefaults];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application

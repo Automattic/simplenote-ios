@@ -470,6 +470,10 @@ extension SPAppDelegate {
             return
         }
 
+        // Set listsortmode default
         widgetDefaults.set(UserDefaults.standard.integer(forKey: .listSortMode), forKey: .listSortMode)
+
+        // User is logged in
+        widgetDefaults.set(simperium.user != nil, forKey: .accountIsLoggedIn)
     }
 }

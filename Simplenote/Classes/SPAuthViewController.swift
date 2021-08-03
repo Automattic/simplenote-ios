@@ -377,7 +377,6 @@ private extension SPAuthViewController {
             } else {
                 SPTracker.trackUserSignedIn()
             }
-            UserDefaults(suiteName: SimplenoteConstants.sharedGroupDomain)?.set(true, forKey: .accountIsLoggedIn)
             self.unlockInterface()
         }
     }
