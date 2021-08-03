@@ -73,17 +73,19 @@ class SPAuthHandler {
             case .success:
                 onCompletion(nil)
             case .failure(let error):
-                onCompletion(self.handleRemoteError(error))
+                onCompletion(self.authenticationError(for: error))
             }
         }
     }
 
-    private func handleRemoteError(_ error: RemoteError) -> SPAuthError {
-        switch error {
-        case .network, .urlRequestError:
-            return SPAuthError(signupErrorCode: 0, response: nil, error: nil)
+    private func authenticationError(for remoteError: RemoteError) -> SPAuthError {
+        switch remoteError {
+        case .network:
+            return SPAuthError.network
+        case .urlRequestError:
+            return SPAuthError.urlRequestError
         case .requestError(let statusCode, let error):
-            return SPAuthError(loginErrorCode: statusCode, response: error?.localizedDescription, error: error)
+            return SPAuthError(signupErrorCode: statusCode, response: error?.localizedDescription, error: error)
         }
     }
 
