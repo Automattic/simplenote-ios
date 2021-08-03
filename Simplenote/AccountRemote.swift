@@ -44,7 +44,7 @@ class AccountRemote: Remote {
     }
 
     private func deleteRequest(with user: SPUser) -> URLRequest? {
-        guard let url = URL(string: SimplenoteConstants.accountDeletion) else {
+        guard let url = URL(string: SimplenoteConstants.accountDeletionURL) else {
             return nil
         }
 
