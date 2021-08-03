@@ -438,7 +438,7 @@ extension SPAppDelegate {
     }
 }
 
-// MARK: - Widget Kit
+// MARK: - Widgets
 
 @available(iOS 14.0, *)
 extension SPAppDelegate {
@@ -462,5 +462,14 @@ extension SPAppDelegate {
                 WidgetCenter.shared.reloadAllTimelines()
             }
         }
+    }
+
+    @objc
+    func syncWidgetDefaults() {
+        guard let widgetDefaults = UserDefaults(suiteName: SimplenoteConstants.sharedGroupDomain) else {
+            return
+        }
+
+        widgetDefaults.set(UserDefaults.standard.integer(forKey: .listSortMode), forKey: .listSortMode)
     }
 }
