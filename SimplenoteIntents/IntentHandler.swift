@@ -35,11 +35,9 @@ extension IntentHandler: NoteWidgetIntentHandling {
     }
 
     private func widgetNoteInObjectCollection(from notes: [Note]) -> INObjectCollection<WidgetNote> {
-        var widgetNotes: [WidgetNote] = []
-        for note in notes {
-            let spNote = WidgetNote(identifier: note.simperiumKey, display: note.title)
-            widgetNotes.append(spNote)
-        }
+        let widgetNotes = notes.map({ note in
+            WidgetNote(identifier: note.simperiumKey, display: note.title)
+        })
         return INObjectCollection(items: widgetNotes)
     }
 }
