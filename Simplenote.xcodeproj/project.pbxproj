@@ -459,6 +459,8 @@
 		BAB01792260AAE93007A9CC3 /* NoticeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB01791260AAE93007A9CC3 /* NoticeFactory.swift */; };
 		BAB0179B260AD591007A9CC3 /* PublishControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB0179A260AD591007A9CC3 /* PublishControllerTests.swift */; };
 		BAB017AB260ADDEB007A9CC3 /* MockTimerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB017AA260ADDEB007A9CC3 /* MockTimerFactory.swift */; };
+		BAB27BD626BA425C00AE4ACC /* Color+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB27BD526BA425C00AE4ACC /* Color+Simplenote.swift */; };
+		BAB27BD726BA425C00AE4ACC /* Color+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB27BD526BA425C00AE4ACC /* Color+Simplenote.swift */; };
 		BAB5762426703C8100B0C56F /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAB5762326703C8100B0C56F /* Intents.framework */; };
 		BAB5762726703C8200B0C56F /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5762626703C8200B0C56F /* IntentHandler.swift */; };
 		BAB5762B26703C8200B0C56F /* SimplenoteIntents.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = BAB5762226703C8100B0C56F /* SimplenoteIntents.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -1061,6 +1063,7 @@
 		BAB01791260AAE93007A9CC3 /* NoticeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeFactory.swift; sourceTree = "<group>"; };
 		BAB0179A260AD591007A9CC3 /* PublishControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishControllerTests.swift; sourceTree = "<group>"; };
 		BAB017AA260ADDEB007A9CC3 /* MockTimerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTimerFactory.swift; sourceTree = "<group>"; };
+		BAB27BD526BA425C00AE4ACC /* Color+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Simplenote.swift"; sourceTree = "<group>"; };
 		BAB5760A26703C0C00B0C56F /* NoteWidgetIntent.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = NoteWidgetIntent.intentdefinition; sourceTree = "<group>"; };
 		BAB5762226703C8100B0C56F /* SimplenoteIntents.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SimplenoteIntents.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAB5762326703C8100B0C56F /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
@@ -1822,6 +1825,7 @@
 				BAE08625261282D1009D40CD /* Note+Publish.swift */,
 				BA5E5B7C264A148C00D0EE19 /* URLRequest+Simplenote.swift */,
 				BAFDBBD726B88BD200119615 /* Date+Simplenote.swift */,
+				BAB27BD526BA425C00AE4ACC /* Color+Simplenote.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -3181,6 +3185,7 @@
 				B56A696322F9D53400B90398 /* SPAuthViewController.swift in Sources */,
 				B50789FE1C1F5517009F097A /* SPInteractivePushPopAnimationController.m in Sources */,
 				B5D3FCD0201F96AC00A813B7 /* StatusChecker.m in Sources */,
+				BAB27BD626BA425C00AE4ACC /* Color+Simplenote.swift in Sources */,
 				B57DE27825013C6600B4D435 /* Simperium+Simplenote.swift in Sources */,
 				A6E4875025BEEC9F00D0CE3B /* SPSidebarViewController+Extensions.swift in Sources */,
 				A6F4881B25A8881B0050CFA8 /* TagListTextField.swift in Sources */,
@@ -3451,6 +3456,7 @@
 				BA122DC1265EF4C5003D3BC5 /* UITraitCollection+Simplenote.swift in Sources */,
 				BA12B06F26B0D0150026F31D /* SPManagedObject+Widget.swift in Sources */,
 				BAFA93F4265DE4A70009DCFB /* NewNoteWidgetProvider.swift in Sources */,
+				BAB27BD726BA425C00AE4ACC /* Color+Simplenote.swift in Sources */,
 				BAB5768726703EA000B0C56F /* NoteWidgetView.swift in Sources */,
 				BAF8D44C26AE10FC00CA9383 /* Note+Widget.swift in Sources */,
 				BA32A91A26B746A300727247 /* StorageError.swift in Sources */,

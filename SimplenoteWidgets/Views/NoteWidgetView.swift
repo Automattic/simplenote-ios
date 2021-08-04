@@ -4,25 +4,27 @@ import WidgetKit
 struct NoteWidgetView: View {
     var entry: NoteWidgetEntry
     @Environment(\.widgetFamily) var widgetFamily
+    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         GeometryReader { geometry in
-            VStack {
-                HStack(alignment: .top) {
-                    VStack(alignment: .leading) {
-                        Text(entry.title)
-                            .font(widgetFamily == .systemSmall ? .subheadline : .body)
-                            .fontWeight(.bold)
-                            .padding(.bottom, Sizes.headerPadding)
-                        Text(entry.content)
-                            .font(.subheadline)
-                    }
-                    .padding([.leading, .trailing, .top], Sizes.overallPadding)
+            ZStack {
+                VStack(alignment: .leading) {
+                    Text(entry.title)
+                        .font(widgetFamily == .systemSmall ? .subheadline : .body)
+                        .fontWeight(.bold)
+                        .foregroundColor(Color(for: colorScheme, light: .gray100, dark: .white))
+                        .padding(.bottom, Sizes.headerPadding)
+                    Text(entry.content)
+                        .font(.subheadline)
+                        .foregroundColor(Color(for: colorScheme, light: .gray100, dark: .white))
                 }
+                .padding([.leading, .trailing, .top], Sizes.overallPadding)
+                .frame(width: geometry.size.width, height: geometry.size.height + Sizes.overallPadding, alignment: .top)
+                .ignoresSafeArea()
+                .widgetURL(prepareWidgetURL(from: entry.simperiumKey))
             }
-            .frame(width: geometry.size.width, height: geometry.size.height + Sizes.overallPadding, alignment: .top)
-            .ignoresSafeArea()
-            .widgetURL(prepareWidgetURL(from: entry.simperiumKey))
+            .background(Color(for: colorScheme, light: .white, dark: .darkGray1))
         }
     }
 
@@ -50,7 +52,7 @@ struct NoteWidgetView_Previews: PreviewProvider {
             NoteWidgetView(entry: NoteWidgetEntry(date: Date(), title: DemoContent.singleNoteTitle, content: DemoContent.singleNoteContent, simperiumKey: nil))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
             NoteWidgetView(entry: NoteWidgetEntry(date: Date(), title: DemoContent.singleNoteTitle, content: DemoContent.singleNoteContent, simperiumKey: nil))
-                .previewContext(WidgetPreviewContext(family: .systemMedium))
+                .previewContext(WidgetPreviewContext(family: .systemMedium)).colorScheme(.dark)
         }
     }
 }
