@@ -414,7 +414,6 @@ extension SPAppDelegate {
         }
 
         if deletionController.deletionTokenHasExpired {
-            self.accountDeletionController = nil
             return
         }
 
