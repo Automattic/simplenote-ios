@@ -1,8 +1,7 @@
 import WidgetKit
 
-class WidgetController: NSObject {
+struct WidgetController {
     @available(iOS 14.0, *)
-    @objc
     static func resetWidgetTimelines() {
         WidgetCenter.shared.getCurrentConfigurations { result in
             guard case .success(let widgets) = result else {
@@ -24,7 +23,6 @@ class WidgetController: NSObject {
         }
     }
 
-    @objc
     static func syncWidgetDefaults(isLoggedIn loggedIn: Bool) {
         guard let widgetDefaults = UserDefaults(suiteName: SimplenoteConstants.sharedGroupDomain) else {
             return
