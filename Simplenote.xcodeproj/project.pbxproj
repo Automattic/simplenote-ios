@@ -474,6 +474,7 @@
 		BAB6C04326BA4994007495C4 /* ContentSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64DE6E8255D1C9F001D0526 /* ContentSlice.swift */; };
 		BAB6C04426BA49F3007495C4 /* ContentSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64DE6E8255D1C9F001D0526 /* ContentSlice.swift */; };
 		BAB6C04526BA4A04007495C4 /* String+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5476BC023D8E5D0000E7723 /* String+Simplenote.swift */; };
+		BAB6C04726BA4CAF007495C4 /* WidgetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6C04626BA4CAF007495C4 /* WidgetController.swift */; };
 		BAE08626261282D1009D40CD /* Note+Publish.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE08625261282D1009D40CD /* Note+Publish.swift */; };
 		BAF8D44B26AE10FC00CA9383 /* Tag+Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42226AE10F100CA9383 /* Tag+Widget.swift */; };
 		BAF8D44C26AE10FC00CA9383 /* Note+Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42326AE10F100CA9383 /* Note+Widget.swift */; };
@@ -1076,6 +1077,7 @@
 		BAB5767B26703E8100B0C56F /* NoteWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteWidgetView.swift; sourceTree = "<group>"; };
 		BAB5769226703F0E00B0C56F /* NoteWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteWidgetProvider.swift; sourceTree = "<group>"; };
 		BAB576BD2670512C00B0C56F /* NoteWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteWidget.swift; sourceTree = "<group>"; };
+		BAB6C04626BA4CAF007495C4 /* WidgetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetController.swift; sourceTree = "<group>"; };
 		BAE08625261282D1009D40CD /* Note+Publish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+Publish.swift"; sourceTree = "<group>"; };
 		BAF8D42226AE10F100CA9383 /* Tag+Widget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tag+Widget.swift"; sourceTree = "<group>"; };
 		BAF8D42326AE10F100CA9383 /* Note+Widget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Note+Widget.swift"; sourceTree = "<group>"; };
@@ -1459,6 +1461,7 @@
 				A6900345253D87060087D0D2 /* VersionsController.swift */,
 				BAB017712609456D007A9CC3 /* PublishController.swift */,
 				BA2D82C5261522F100A1695B /* PublishNoticePresenter.swift */,
+				BAB6C04626BA4CAF007495C4 /* WidgetController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -3182,6 +3185,7 @@
 				375D24BA21E01131007AB25A /* document.c in Sources */,
 				46A3C98317DFA81A002865AE /* main.m in Sources */,
 				B58C9F5723F2FCEC008C3480 /* SPPlaceholderView.swift in Sources */,
+				BAB6C04726BA4CAF007495C4 /* WidgetController.swift in Sources */,
 				A6E1E79E24BDE401008A44BC /* SPCardTransitioningManager.swift in Sources */,
 				74388F4622CFFA8B001C5EC0 /* NSObject+Helpers.swift in Sources */,
 				46A3C98617DFA81A002865AE /* SPEntryListViewController.m in Sources */,
