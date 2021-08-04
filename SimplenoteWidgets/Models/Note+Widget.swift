@@ -54,7 +54,7 @@ extension Note {
             return String()
         }
         lines.removeFirst()
-        return lines.joined()
+        return lines.joined(separator: .newline)
     }
 }
 

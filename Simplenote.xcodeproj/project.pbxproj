@@ -470,6 +470,10 @@
 		BAB5768726703EA000B0C56F /* NoteWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5767B26703E8100B0C56F /* NoteWidgetView.swift */; };
 		BAB576A826703F4500B0C56F /* NoteWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5769226703F0E00B0C56F /* NoteWidgetProvider.swift */; };
 		BAB576C92670514500B0C56F /* NoteWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB576BD2670512C00B0C56F /* NoteWidget.swift */; };
+		BAB6C04226BA496F007495C4 /* String+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5476BC023D8E5D0000E7723 /* String+Simplenote.swift */; };
+		BAB6C04326BA4994007495C4 /* ContentSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64DE6E8255D1C9F001D0526 /* ContentSlice.swift */; };
+		BAB6C04426BA49F3007495C4 /* ContentSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64DE6E8255D1C9F001D0526 /* ContentSlice.swift */; };
+		BAB6C04526BA4A04007495C4 /* String+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5476BC023D8E5D0000E7723 /* String+Simplenote.swift */; };
 		BAE08626261282D1009D40CD /* Note+Publish.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE08625261282D1009D40CD /* Note+Publish.swift */; };
 		BAF8D44B26AE10FC00CA9383 /* Tag+Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42226AE10F100CA9383 /* Tag+Widget.swift */; };
 		BAF8D44C26AE10FC00CA9383 /* Note+Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42326AE10F100CA9383 /* Note+Widget.swift */; };
@@ -3423,8 +3427,10 @@
 				BAF8D46E26AE118800CA9383 /* SPCredentials.swift in Sources */,
 				BAF8D45626AE10FC00CA9383 /* Note+Widget.swift in Sources */,
 				BAF8D5C526AE254100CA9383 /* Simplenote.xcdatamodeld in Sources */,
+				BAB6C04426BA49F3007495C4 /* ContentSlice.swift in Sources */,
 				BA86624926B3B05100466746 /* SimplenoteConstants.swift in Sources */,
 				BAB5765C26703D0600B0C56F /* NoteWidgetIntent.intentdefinition in Sources */,
+				BAB6C04526BA4A04007495C4 /* String+Simplenote.swift in Sources */,
 				BA32A91926B746A200727247 /* StorageError.swift in Sources */,
 				BAFDBBDA26B88BD200119615 /* Date+Simplenote.swift in Sources */,
 				BA86627226B3B1B700466746 /* NSSortDescriptor+Simplenote.swift in Sources */,
@@ -3445,6 +3451,8 @@
 				BA88765126B79324001C9C9E /* DemoContent.swift in Sources */,
 				BA122DBE265EF421003D3BC5 /* UIKitConstants.swift in Sources */,
 				BAF8D5BB26AE254000CA9383 /* Simplenote.xcdatamodeld in Sources */,
+				BAB6C04326BA4994007495C4 /* ContentSlice.swift in Sources */,
+				BAB6C04226BA496F007495C4 /* String+Simplenote.swift in Sources */,
 				BA122DBB265EF40E003D3BC5 /* UIColor+Helpers.swift in Sources */,
 				BA86622326B3AE4A00466746 /* WidgetDataController.swift in Sources */,
 				BA122DBA265EF402003D3BC5 /* SimplenoteConstants.swift in Sources */,
