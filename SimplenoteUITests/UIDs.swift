@@ -56,7 +56,8 @@ enum UID {
         static let select = "Select"
         static let selectAll = "Select All"
         static let deselectAll = "Deselect All"
-        static let trashIcon = "Trash Notes"
+        static let trashNotes = "Trash Notes"
+        static let crossIcon = "icon cross"
     }
 
     enum Text {
@@ -83,6 +84,7 @@ enum Text {
     static let appTagline = "The simplest way to keep notes."
     static let alertHeadingSorry = "Sorry!"
     static let alertContentLoginFailed = "Could not login with the provided email address and password."
+    static let alertReviewAccount = "Review Your Account"
     static let loginEmailInvalid = "Your email address is not valid"
     static let loginPasswordShort = "Password must contain at least 4 characters"
 }

@@ -19,7 +19,7 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
 
         // Extra check for certain emails
         if testDataEmail.contains("trial") {
-            dismissVerifyEmailIfNeeded(using: app)
+            dismissVerifyEmailIfNeeded()
         }
 
         NoteList.waitForLoad()
@@ -291,19 +291,23 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
 
     func testSelectAllAndTrashNotes() throws {
         trackTest()
-        let noteTitle = "Note Title "
+        let noteTitle = "Note Title"
 
         trackStep()
         populateNoteList(title: noteTitle, numberToCreate: 2)
 
         trackStep()
-        NoteList.longPressNote(title: noteTitle + "1")
-        NoteList.selectNote()
+        NoteList.longPressNote(title: noteTitle + "-1")
+        NoteList.selectNoteFromContextMenu()
         NoteList.selectAll()
-        NoteListAssert.isDeselectAllButtonDisplayed()
+        NoteListAssert.deselectAllButtonDisplayed()
 
         trackStep()
-        NoteList.tapTrashButton()
+        NoteList.tapTrashNotesButton()
         NoteListAssert.notesNumber(expectedNotesNumber: 0)
+
+        trackStep()
+        Trash.open()
+        NoteListAssert.notesNumber(expectedNotesNumber: 2)
     }
 }

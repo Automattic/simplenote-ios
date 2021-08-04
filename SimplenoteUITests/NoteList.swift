@@ -134,7 +134,7 @@ class NoteList {
         app.tables.cells[title].press(forDuration: 3)
     }
 
-    class func selectNote() {
+    class func selectNoteFromContextMenu() {
         let selectButton = app.buttons[UID.Button.select]
         guard selectButton.exists else { return }
         selectButton.tap()
@@ -146,10 +146,10 @@ class NoteList {
         selectAllButton.tap()
     }
 
-    class func tapTrashButton() {
-        let trashIcon = app.buttons[UID.Button.trashIcon]
-        guard trashIcon.exists else { return }
-        trashIcon.tap()
+    class func tapTrashNotesButton() {
+        let trashNotesButton = app.buttons[UID.Button.trashNotes]
+        guard trashNotesButton.exists else { return }
+        trashNotesButton.tap()
     }
 }
 
@@ -297,7 +297,7 @@ class NoteListAssert {
         XCTAssertEqual(actualSearchString, searchString)
     }
 
-    class func isDeselectAllButtonDisplayed() {
+    class func deselectAllButtonDisplayed() {
         XCTAssertTrue(app.buttons[UID.Button.deselectAll].waitForExistence(timeout: maxLoadTimeout))
     }
 }
