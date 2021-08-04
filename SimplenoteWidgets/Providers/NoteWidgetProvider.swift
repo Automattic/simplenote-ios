@@ -11,6 +11,20 @@ struct NoteWidgetProvider: IntentTimelineProvider {
     typealias Intent = NoteWidgetIntent
     typealias Entry = NoteWidgetEntry
 
+    let coreDataManager: CoreDataManager!
+    let dataController: WidgetDataController!
+
+    init() {
+        NSLog("Created a provider")
+        do {
+            self.coreDataManager = try CoreDataManager(StorageSettings().sharedStorageURL, for: .widgets)
+            self.dataController = try WidgetDataController(coreDataManager: coreDataManager)
+        } catch {
+            fatalError("Couldn't setup dataController")
+        }
+    }
+
+
     func placeholder(in context: Context) -> NoteWidgetEntry {
         return NoteWidgetEntry(date: Date(), title: DemoContent.singleNoteTitle, content: DemoContent.singleNoteContent, simperiumKey: nil)
     }
@@ -24,18 +38,9 @@ struct NoteWidgetProvider: IntentTimelineProvider {
     func getTimeline(for configuration: NoteWidgetIntent, in context: Context, completion: @escaping (Timeline<NoteWidgetEntry>) -> Void) {
         // Confirm valid configuration
         guard let widgetNote = configuration.note,
-              let simperiumKey = widgetNote.identifier else {
+              let simperiumKey = widgetNote.identifier,
+              let dataController = dataController else {
             NSLog("Couldn't find configuration or identifier")
-            return
-        }
-
-        // Prepare data controller
-        let dataController: WidgetDataController
-        do {
-            let coreDataManager = try CoreDataManager(StorageSettings().sharedStorageURL, for: .widgets)
-            dataController = try WidgetDataController(coreDataManager: coreDataManager)
-        } catch {
-            NSLog("Couldn't setup dataController")
             return
         }
 
