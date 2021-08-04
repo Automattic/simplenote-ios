@@ -17,15 +17,20 @@ class CoreDataManager: NSObject {
 
     init(_ storageURL: URL, storageSettings: StorageSettings = StorageSettings(), for usageType: CoreDataUsageType = .standard) throws {
         super.init()
+        managedObjectModel = NSManagedObjectModel(contentsOf: storageSettings.modelURL)!
+        managedObjectContext = objectContext()
+        persistentStoreCoordinator = try storeCoordinator(with: managedObjectModel, storageURL: storageURL)
 
-        guard let mom = NSManagedObjectModel(contentsOf: storageSettings.modelURL) else {
-            fatalError("Cannot load model")
-        }
-        managedObjectModel = mom
+        setupStackIfNeeded(mainContext: managedObjectContext, psc: persistentStoreCoordinator, for: usageType)
+    }
 
-        managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-        managedObjectContext.undoManager = nil
+    private func objectContext() -> NSManagedObjectContext {
+        let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        moc.undoManager = nil
+        return moc
+    }
 
+    private func storeCoordinator(with model: NSManagedObjectModel, storageURL: URL) throws -> NSPersistentStoreCoordinator {
         let psc = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
         let options = [NSMigratePersistentStoresAutomaticallyOption: true,
                        NSInferMappingModelAutomaticallyOption: true]
@@ -39,9 +44,10 @@ class CoreDataManager: NSObject {
         } catch {
             throw StorageError.attachingPersistentStoreFailure
         }
+        return psc
+    }
 
-        persistentStoreCoordinator = psc
-
+    private func setupStackIfNeeded(mainContext: NSManagedObjectContext, psc: NSPersistentStoreCoordinator, for usageType: CoreDataUsageType) {
         switch usageType {
         case .standard:
             break
