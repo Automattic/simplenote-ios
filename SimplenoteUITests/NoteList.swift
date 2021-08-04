@@ -129,6 +129,28 @@ class NoteList {
         guard searchCancelButton.exists else { return }
         searchCancelButton.tap()
     }
+
+    class func longPressNote(title: String) {
+        app.tables.cells[title].press(forDuration: 3)
+    }
+
+    class func selectNoteFromContextMenu() {
+        let selectButton = app.buttons[UID.Button.select]
+        guard selectButton.exists else { return }
+        selectButton.tap()
+    }
+
+    class func selectAll() {
+        let selectAllButton = app.buttons[UID.Button.selectAll]
+        guard selectAllButton.exists else { return }
+        selectAllButton.tap()
+    }
+
+    class func tapTrashNotesButton() {
+        let trashNotesButton = app.buttons[UID.Button.trashNotes]
+        guard trashNotesButton.exists else { return }
+        trashNotesButton.tap()
+    }
 }
 
 class NoteListAssert {
@@ -273,5 +295,9 @@ class NoteListAssert {
 
         print(">>> Actual search string is '\(actualSearchString)'")
         XCTAssertEqual(actualSearchString, searchString)
+    }
+
+    class func deselectAllButtonDisplayed() {
+        XCTAssertTrue(app.buttons[UID.Button.deselectAll].waitForExistence(timeout: maxLoadTimeout))
     }
 }

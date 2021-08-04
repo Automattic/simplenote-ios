@@ -47,6 +47,22 @@ func toggleSwitchIfNeeded(_ switchElement: XCUIElement, _ value: String) {
     switchElement.tap()
 }
 
+func dismissVerifyEmailIfNeeded() {
+    guard app.staticTexts[Text.alertReviewAccount].waitForExistence(timeout: 15) else { return }
+    app.buttons[UID.Button.crossIcon].tap()
+}
+
+func populateNoteList(title: String, numberToCreate: Int) {
+    for i in 1...numberToCreate {
+        let noteTitle = title + "-" + String(i)
+        let noteContent = "\n\nSome content here for note " + String(i)
+
+        NoteList.addNoteTap()
+        NoteEditor.clearAndEnterText(enteredValue: noteTitle + noteContent)
+        NoteEditor.leaveEditor()
+    }
+}
+
 class Table {
 
     class func getAllCells() -> XCUIElementQuery {

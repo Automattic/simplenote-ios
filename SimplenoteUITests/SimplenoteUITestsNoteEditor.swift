@@ -16,6 +16,12 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         let _ = attemptLogOut()
         EmailLogin.open()
         EmailLogin.logIn()
+
+        // Extra check for certain emails
+        if testDataEmail.contains("trial") {
+            dismissVerifyEmailIfNeeded()
+        }
+
         NoteList.waitForLoad()
     }
 
@@ -281,5 +287,29 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         PreviewAssert.staticTextWithExactValuesShownOnce(values: ["• Minus1", "• Minus2", "• Minus3"])
         PreviewAssert.staticTextWithExactValuesShownOnce(values: ["• Plus1", "• Plus2", "• Plus3"])
         PreviewAssert.staticTextWithExactValuesShownOnce(values: ["• Asterisk1", "• Asterisk2", "• Asterisk3"])
+    }
+
+    func testSelectAllAndTrashNotes() throws {
+        trackTest()
+        let noteTitle = "Note Title"
+
+        trackStep()
+        populateNoteList(title: noteTitle, numberToCreate: 2)
+
+        trackStep()
+        NoteList.longPressNote(title: noteTitle + "-1")
+        NoteList.selectNoteFromContextMenu()
+        NoteList.selectAll()
+        NoteListAssert.deselectAllButtonDisplayed()
+
+        trackStep()
+        NoteList.tapTrashNotesButton()
+        NoteListAssert.notesNumber(expectedNotesNumber: 0)
+
+        trackStep()
+        Trash.open()
+        TrashAssert.notesNumber(expectedNotesNumber: 2)
+        TrashAssert.noteExists(noteName: noteTitle + "-1")
+        TrashAssert.noteExists(noteName: noteTitle + "-2")
     }
 }
