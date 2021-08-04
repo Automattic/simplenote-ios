@@ -308,6 +308,8 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
 
         trackStep()
         Trash.open()
-        NoteListAssert.notesNumber(expectedNotesNumber: 2)
+        TrashAssert.notesNumber(expectedNotesNumber: 2)
+        TrashAssert.noteExists(noteName: noteTitle + "-1")
+        TrashAssert.noteExists(noteName: noteTitle + "-2")
     }
 }
