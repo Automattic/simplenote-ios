@@ -16,6 +16,13 @@ class WidgetDataController {
         sortedBy: [NSSortDescriptor.descriptorForNotes(sortMode: noteSortMode)]
     )
 
+    /// Tags Controller
+    ///
+    private lazy var tagsController = ResultsController<Tag>(
+        viewContext: coreDataManager.managedObjectContext,
+        sortedBy: [NSSortDescriptor.descriptorForTags()]
+    )
+
     /// Initialization
     ///
     init(coreDataManager: CoreDataManager, isPreview: Bool = false) throws {
@@ -50,9 +57,7 @@ class WidgetDataController {
             throw StorageError.fetchError
         }
     }
-
-
-    // MARK: Public Methods
+    // MARK: - Notes
 
     /// Fetch notes with given tag and limit
     /// If no tag is specified, will fetch notes that are not deleted. If there is no limit specified it will fetch all of the notes
@@ -96,5 +101,17 @@ class WidgetDataController {
             return NSPredicate.predicateForNotes(deleted: false)
         }
         return NSPredicate.predicateForNotes(tag: tag)
+    }
+
+    // MARK: - Tags
+
+    func tags() throws -> [Tag] {
+        do {
+            try tagsController.performFetch()
+        } catch {
+            throw StorageError.fetchError
+        }
+
+        return tagsController.fetchedObjects
     }
 }

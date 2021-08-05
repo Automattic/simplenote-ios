@@ -55,7 +55,7 @@ extension IntentHandler: NoteWidgetIntentHandling {
 
 extension IntentHandler: ListWidgetIntentHandling {
     func provideTagOptionsCollection(for intent: ListWidgetIntent, with completion: @escaping (INObjectCollection<WidgetTag>?, Error?) -> Void) {
-        
+
         // Prepare data controller for intents
         let dataController: WidgetDataController
         do {
@@ -67,12 +67,23 @@ extension IntentHandler: ListWidgetIntentHandling {
         }
 
         // Fetch Tags
-
+        var tags: [Tag] = []
+        do {
+            try tags = dataController.tags()
+        } catch {
+            completion(nil, error)
+        }
 
         // Return collection to intents
-
-//        completion(collection, nil)
+        let collection = tagNoteInObjectCollection(from: tags)
+        completion(collection, nil)
     }
 
+    private func tagNoteInObjectCollection(from tags: [Tag]) -> INObjectCollection<WidgetTag> {
+        let widgetTags = tags.map({ tag in
+            WidgetTag(identifier: tag.name ?? "Unamed Tag", display: tag.name ?? "Unamed Tag")
+        })
+        return INObjectCollection(items: widgetTags)
+    }
 
 }
