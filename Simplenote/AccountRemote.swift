@@ -8,7 +8,7 @@ class AccountRemote: Remote {
     /// Send verification request for specified email address
     ///
     func verify(email: String, completion: @escaping (_ result: Result<Data?, RemoteError>) -> Void) {
-        let request = verificationURLRequest(with: email)!
+        let request = verificationURLRequest(with: email)
 
         performDataTask(with: request, completion: completion)
     }
@@ -16,17 +16,14 @@ class AccountRemote: Remote {
     /// Send account deletion request for user
     ///
     func requestDelete(_ user: SPUser, completion: @escaping (_ result: Result<Data?, RemoteError>) -> Void) {
-        let request = deleteRequest(with: user)!
-
+        let request = deleteRequest(with: user)
         performDataTask(with: request, completion: completion)
     }
 
     // MARK: URL Requests
 
-    private func verificationURLRequest(with email: String) -> URLRequest? {
-        guard let base64EncodedEmail = email.data(using: .utf8)?.base64EncodedString() else {
-            return nil
-        }
+    private func verificationURLRequest(with email: String) -> URLRequest {
+        let base64EncodedEmail = email.data(using: .utf8)!.base64EncodedString()
         let verificationURL = URL(string: SimplenoteConstants.verificationURL)!
 
         var request = URLRequest(url: verificationURL.appendingPathComponent(base64EncodedEmail),
@@ -37,7 +34,7 @@ class AccountRemote: Remote {
         return request
     }
 
-    private func deleteRequest(with user: SPUser) -> URLRequest? {
+    private func deleteRequest(with user: SPUser) -> URLRequest {
         let url = URL(string: SimplenoteConstants.accountDeletionURL)!
 
         var request = URLRequest(url: url,

@@ -4,15 +4,13 @@ import Foundation
 //
 class SignupRemote: Remote {
     func signup(with email: String, completion: @escaping (_ result: Result<Data?, RemoteError>) -> Void) {
-        let urlRequest = request(with: email)!
+        let urlRequest = request(with: email)
 
         performDataTask(with: urlRequest, completion: completion)
     }
 
-    private func request(with email: String) -> URLRequest? {
-        guard let url = URL(string: SimplenoteConstants.signupURL) else {
-            return nil
-        }
+    private func request(with email: String) -> URLRequest {
+        let url = URL(string: SimplenoteConstants.signupURL)!
 
         var request = URLRequest(url: url,
                                  cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
