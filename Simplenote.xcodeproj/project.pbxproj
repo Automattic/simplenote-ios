@@ -436,6 +436,8 @@
 		BA75D8A326C084E900883FFA /* Text+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA75D87D26C0843600883FFA /* Text+Simplenote.swift */; };
 		BA75D8AE26C0862E00883FFA /* View+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA75D8AD26C0862E00883FFA /* View+Simplenote.swift */; };
 		BA75D8BA26C0865C00883FFA /* Filling.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA75D8B926C0865C00883FFA /* Filling.swift */; };
+		BA7071E526BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BA7071E426BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition */; };
+		BA7071E626BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BA7071E426BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition */; };
 		BA83478325F59F8B0059B797 /* markdown-default-contrast.css in Resources */ = {isa = PBXBuildFile; fileRef = BA83478225F59F8B0059B797 /* markdown-default-contrast.css */; };
 		BA83478C25F59FE90059B797 /* markdown-dark-contrast.css in Resources */ = {isa = PBXBuildFile; fileRef = BA83478B25F59FE90059B797 /* markdown-dark-contrast.css */; };
 		BA86615926B35CEF00466746 /* BuildConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F920265A2294661C0061B1DE /* BuildConfiguration.swift */; };
@@ -1058,6 +1060,7 @@
 		BA75D87D26C0843600883FFA /* Text+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Simplenote.swift"; sourceTree = "<group>"; };
 		BA75D8AD26C0862E00883FFA /* View+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Simplenote.swift"; sourceTree = "<group>"; };
 		BA75D8B926C0865C00883FFA /* Filling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filling.swift; sourceTree = "<group>"; };
+		BA7071E426BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = ListWidgetIntent.intentdefinition; sourceTree = "<group>"; };
 		BA83478225F59F8B0059B797 /* markdown-default-contrast.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "markdown-default-contrast.css"; sourceTree = "<group>"; };
 		BA83478B25F59FE90059B797 /* markdown-dark-contrast.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "markdown-dark-contrast.css"; sourceTree = "<group>"; };
 		BA8661D526B3A00B00466746 /* SimplenoteIntents.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SimplenoteIntents.entitlements; sourceTree = "<group>"; };
@@ -2173,6 +2176,7 @@
 			isa = PBXGroup;
 			children = (
 				BAB5760A26703C0C00B0C56F /* NoteWidgetIntent.intentdefinition */,
+				BA7071E426BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -3452,6 +3456,7 @@
 				BAB5762726703C8200B0C56F /* IntentHandler.swift in Sources */,
 				BA86625D26B3B14900466746 /* SortMode.swift in Sources */,
 				BA12B07026B0D0150026F31D /* SPManagedObject+Widget.swift in Sources */,
+				BA7071E626BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition in Sources */,
 				BA86622426B3AE4A00466746 /* WidgetDataController.swift in Sources */,
 				BAF8D46E26AE118800CA9383 /* SPCredentials.swift in Sources */,
 				BAF8D45626AE10FC00CA9383 /* Note+Widget.swift in Sources */,
@@ -3502,6 +3507,7 @@
 				BA32A91A26B746A300727247 /* StorageError.swift in Sources */,
 				BA86621826B3A73D00466746 /* UserDefaults+Simplenote.swift in Sources */,
 				BAF8D44B26AE10FC00CA9383 /* Tag+Widget.swift in Sources */,
+				BA7071E526BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition in Sources */,
 				BAFDBBD926B88BD200119615 /* Date+Simplenote.swift in Sources */,
 				BAFA93F2265DE4A10009DCFB /* SimplenoteWidgets.swift in Sources */,
 				BAF8D53226AE175B00CA9383 /* Bundle+Simplenote.swift in Sources */,
