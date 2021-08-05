@@ -436,6 +436,9 @@
 		BA75D8A326C084E900883FFA /* Text+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA75D87D26C0843600883FFA /* Text+Simplenote.swift */; };
 		BA75D8AE26C0862E00883FFA /* View+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA75D8AD26C0862E00883FFA /* View+Simplenote.swift */; };
 		BA75D8BA26C0865C00883FFA /* Filling.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA75D8B926C0865C00883FFA /* Filling.swift */; };
+		BA608EF526BB6E0200A9D94E /* ListWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA608EF426BB6E0200A9D94E /* ListWidget.swift */; };
+		BA608EF726BB6E7400A9D94E /* ListWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA608EF626BB6E7400A9D94E /* ListWidgetProvider.swift */; };
+		BA608EF926BB6F4C00A9D94E /* ListWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA608EF826BB6F4C00A9D94E /* ListWidgetView.swift */; };
 		BA7071E526BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BA7071E426BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition */; };
 		BA7071E626BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BA7071E426BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition */; };
 		BA83478325F59F8B0059B797 /* markdown-default-contrast.css in Resources */ = {isa = PBXBuildFile; fileRef = BA83478225F59F8B0059B797 /* markdown-default-contrast.css */; };
@@ -1060,6 +1063,9 @@
 		BA75D87D26C0843600883FFA /* Text+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Simplenote.swift"; sourceTree = "<group>"; };
 		BA75D8AD26C0862E00883FFA /* View+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Simplenote.swift"; sourceTree = "<group>"; };
 		BA75D8B926C0865C00883FFA /* Filling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filling.swift; sourceTree = "<group>"; };
+		BA608EF426BB6E0200A9D94E /* ListWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWidget.swift; sourceTree = "<group>"; };
+		BA608EF626BB6E7400A9D94E /* ListWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWidgetProvider.swift; sourceTree = "<group>"; };
+		BA608EF826BB6F4C00A9D94E /* ListWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWidgetView.swift; sourceTree = "<group>"; };
 		BA7071E426BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = ListWidgetIntent.intentdefinition; sourceTree = "<group>"; };
 		BA83478225F59F8B0059B797 /* markdown-default-contrast.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "markdown-default-contrast.css"; sourceTree = "<group>"; };
 		BA83478B25F59FE90059B797 /* markdown-dark-contrast.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "markdown-dark-contrast.css"; sourceTree = "<group>"; };
@@ -2116,6 +2122,7 @@
 			children = (
 				BAFA93EE265DE3B90009DCFB /* NewNoteWidget.swift */,
 				BAB576BD2670512C00B0C56F /* NoteWidget.swift */,
+				BA608EF426BB6E0200A9D94E /* ListWidget.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -2125,6 +2132,7 @@
 			children = (
 				BAB5767B26703E8100B0C56F /* NoteWidgetView.swift */,
 				BA122DC5265EF90C003D3BC5 /* NewNoteWidgetView.swift */,
+				BA608EF826BB6F4C00A9D94E /* ListWidgetView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2134,6 +2142,7 @@
 			children = (
 				BAFA93F0265DE45D0009DCFB /* NewNoteWidgetProvider.swift */,
 				BAB5769226703F0E00B0C56F /* NoteWidgetProvider.swift */,
+				BA608EF626BB6E7400A9D94E /* ListWidgetProvider.swift */,
 			);
 			path = Providers;
 			sourceTree = "<group>";
@@ -3479,6 +3488,7 @@
 			files = (
 				BA75D8AE26C0862E00883FFA /* View+Simplenote.swift in Sources */,
 				BAB5765B26703D0600B0C56F /* NoteWidgetIntent.intentdefinition in Sources */,
+				BA608EF526BB6E0200A9D94E /* ListWidget.swift in Sources */,
 				BA86625326B3B14800466746 /* SortMode.swift in Sources */,
 				BAF8D50A26AE172600CA9383 /* StorageSettings.swift in Sources */,
 				BAFA93F3265DE4A40009DCFB /* NewNoteWidget.swift in Sources */,
@@ -3486,6 +3496,7 @@
 				BA88765126B79324001C9C9E /* DemoContent.swift in Sources */,
 				BA122DBE265EF421003D3BC5 /* UIKitConstants.swift in Sources */,
 				BAF8D5BB26AE254000CA9383 /* Simplenote.xcdatamodeld in Sources */,
+				BA608EF726BB6E7400A9D94E /* ListWidgetProvider.swift in Sources */,
 				BAB6C04326BA4994007495C4 /* ContentSlice.swift in Sources */,
 				BAB6C04226BA496F007495C4 /* String+Simplenote.swift in Sources */,
 				BA122DBB265EF40E003D3BC5 /* UIColor+Helpers.swift in Sources */,
@@ -3495,6 +3506,7 @@
 				BAF8D51E26AE173D00CA9383 /* FileManager+Simplenote.swift in Sources */,
 				BA86615926B35CEF00466746 /* BuildConfiguration.swift in Sources */,
 				BA122DBC265EF410003D3BC5 /* ColorStudio.swift in Sources */,
+				BA608EF926BB6F4C00A9D94E /* ListWidgetView.swift in Sources */,
 				BA86626726B3B1B600466746 /* NSSortDescriptor+Simplenote.swift in Sources */,
 				BAF8D46426AE118800CA9383 /* SPCredentials.swift in Sources */,
 				BA122DC1265EF4C5003D3BC5 /* UITraitCollection+Simplenote.swift in Sources */,
