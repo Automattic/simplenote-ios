@@ -13,8 +13,19 @@ struct NoteWidgetProvider: IntentTimelineProvider {
     typealias Intent = NoteWidgetIntent
     typealias Entry = NoteWidgetEntry
 
-    let coreDataManager: CoreDataManager!
-    let dataController: WidgetDataController!
+    #warning("Restore these properties after UI is set")
+//    let coreDataManager: CoreDataManager!
+//    let dataController: WidgetDataController!
+//
+//    init() {
+//        NSLog("Created a provider")
+//        do {
+//            self.coreDataManager = try CoreDataManager(StorageSettings().sharedStorageURL, for: .widgets)
+//            self.dataController = try WidgetDataController(coreDataManager: coreDataManager)
+//        } catch {
+//            fatalError("Couldn't setup dataController")
+//        }
+//    }
 
     init() {
         do {
@@ -48,6 +59,7 @@ struct NoteWidgetProvider: IntentTimelineProvider {
             NSLog("Couldn't find configuration or identifier")
             return
         }
+         */
 
         // Fetch note
         guard let note = dataController.note(forSimperiumKey: simperiumKey) else {
