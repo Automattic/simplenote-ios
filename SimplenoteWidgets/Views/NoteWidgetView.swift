@@ -14,7 +14,6 @@ struct NoteWidgetView: View {
                         .font(widgetFamily == .systemSmall ? .subheadline : .body)
                         .fontWeight(.bold)
                         .foregroundColor(Color(for: colorScheme, light: .gray100, dark: .white))
-                        .padding(.bottom, Sizes.headerPadding)
                     Text(entry.content)
                         .font(.subheadline)
                         .foregroundColor(Color(for: colorScheme, light: .gray100, dark: .white))
@@ -38,7 +37,6 @@ struct NoteWidgetView: View {
 
 private struct Sizes {
     static let overallPadding = CGFloat(20)
-    static let headerPadding = CGFloat(10)
 }
 
 private struct Constants {
