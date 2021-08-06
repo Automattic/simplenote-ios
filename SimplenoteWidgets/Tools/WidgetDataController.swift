@@ -97,9 +97,11 @@ class WidgetDataController {
     /// Creates a predicate for notes given a tag name.  If not specified the predicate is for all notes that are not deleted
     ///
     private func predicateForNotes(withTag tag: String? = nil) -> NSPredicate {
-        guard let tag = tag else {
+        guard let tag = tag,
+              tag != "All Notes" else {
             return NSPredicate.predicateForNotes(deleted: false)
         }
+
         return NSPredicate.predicateForNotes(tag: tag)
     }
 
