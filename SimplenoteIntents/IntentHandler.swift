@@ -76,4 +76,8 @@ extension IntentHandler: ListWidgetIntentHandling {
         return INObjectCollection(items: widgetTags)
     }
 
+    func defaultTag(for intent: ListWidgetIntent) -> WidgetTag? {
+        WidgetTag(identifier: "All Notes", display: "All Notes")
+    }
+
 }
