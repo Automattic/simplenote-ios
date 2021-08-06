@@ -38,6 +38,14 @@ class WidgetDataController {
             ?? SortMode.alphabeticallyAscending
     }
 
+    private func performFetch() throws {
+        do {
+            try notesController.performFetch()
+        } catch {
+            throw StorageError.fetchError
+        }
+    }
+
 
     // MARK: Public Methods
 
@@ -50,12 +58,7 @@ class WidgetDataController {
         if let tag = tag {
             notesController.predicate = predicateForNotes(withTag: tag)
         }
-
-        do {
-            try notesController.performFetch()
-        } catch {
-            throw StorageError.fetchError
-        }
+        try performFetch()
 
         return notesController.fetchedObjects
     }
@@ -74,6 +77,11 @@ class WidgetDataController {
         return notesController.fetchedObjects.first { note in
             note.simperiumKey == key
         }
+    }
+
+    func firstNote() throws -> Note? {
+        let fetched = try notes(withTag: nil, limit: 1)
+        return fetched.first
     }
 
     /// Creates a predicate for notes given a tag name.  If not specified the predicate is for all notes that are not deleted

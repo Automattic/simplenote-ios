@@ -40,8 +40,15 @@ extension IntentHandler: NoteWidgetIntentHandling {
 
     private func widgetNoteInObjectCollection(from notes: [Note]) -> INObjectCollection<WidgetNote> {
         let widgetNotes = notes.map({ note in
-            WidgetNote(identifier: note.simperiumKey, display: note.title)
+            WidgetNote(identifier: note.simperiumKey, display: note.limitedTitle)
         })
         return INObjectCollection(items: widgetNotes)
+    }
+
+    func defaultNote(for intent: NoteWidgetIntent) -> WidgetNote? {
+        guard let note = try? dataController.firstNote() else {
+            return nil
+        }
+        return WidgetNote(identifier: note.simperiumKey, display: note.limitedTitle)
     }
 }
