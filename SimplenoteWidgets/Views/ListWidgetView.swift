@@ -15,7 +15,10 @@ struct ListWidgetView: View {
                         .padding(.trailing, 20)
                         .padding([.bottom, .top], 10)
                      ForEach(0..<numberOfRows) { index in
-                         NoteListRow(noteTitle: "string", width: geometry.size.width)
+                        let proxy = entry.noteProxys[index]
+                        Link(destination: URL(string: proxy.url)!) {
+                            NoteListRow(noteTitle: proxy.title, width: geometry.size.width)
+                        }
                      }
                      .multilineTextAlignment(.leading)
                  }
@@ -33,24 +36,10 @@ struct ListWidgetView_Previews: PreviewProvider {
     static var previews: some View {
 
         Group {
-            ListWidgetView(entry: ListWidgetEntry(date: Date(), tag: DemoListContent.tag))
+            ListWidgetView(entry: ListWidgetEntry(date: Date(), tag: DemoContent.listTag, noteProxys: DemoContent.listProxies))
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
-            ListWidgetView(entry: ListWidgetEntry(date: Date(), tag: DemoListContent.tag))
-                .previewContext(WidgetPreviewContext(family: .systemLarge)).colorScheme(.dark)
+            ListWidgetView(entry: ListWidgetEntry(date: Date(), tag: DemoContent.listTag, noteProxys: DemoContent.listProxies))
+                .previewContext(WidgetPreviewContext(family: .systemLarge))
         }
     }
-}
-
-private struct DemoListContent {
-    static let tag = "Composition"
-    static let notes = [
-        "Twelve Tone Serialism",
-        "Lorem Ipsum",
-        "Post Draft",
-        "Meeting Notes, Apr 21",
-        "Brain Anatomy",
-        "Color Quotes",
-        "The Valet's Tragedy",
-        "Lorem Ipsum"
-    ]
 }
