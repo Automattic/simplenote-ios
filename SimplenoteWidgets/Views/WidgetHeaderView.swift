@@ -12,7 +12,9 @@ struct WidgetHeaderView: View {
                 .font(.headline)
             if widgetFamily != .systemSmall {
                 Spacer()
-                NewNoteButton(size: Constants.side, foregroundColor: Constants.foregroundColor, backgroundColor: .white)
+                Link(destination: URL(string: SimplenoteConstants.simplenoteScheme + "://" + Constants.newNoteHost)!) {
+                    NewNoteButton(size: Constants.side, foregroundColor: Constants.foregroundColor, backgroundColor: .white)
+                }
             }
         }
     }
@@ -28,4 +30,5 @@ struct NotePreviewHeaderView_Previews: PreviewProvider {
 private struct Constants {
     static let side = CGFloat(19)
     static let foregroundColor = Color(UIColor(studioColor: .spBlue50))
+    static let newNoteHost = "new"
 }
