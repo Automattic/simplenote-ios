@@ -18,7 +18,12 @@ class WidgetDataController {
 
     /// Initialization
     ///
-    init(coreDataManager: CoreDataManager) throws {
+    init(coreDataManager: CoreDataManager, isPreview: Bool = false) throws {
+        guard !isPreview else {
+            self.coreDataManager = coreDataManager
+            return
+        }
+
         guard let isLoggedIn = UserDefaults(suiteName: SimplenoteConstants.sharedGroupDomain)?.bool(forKey: .accountIsLoggedIn),
               isLoggedIn else {
             throw StorageError.appConfigurationError

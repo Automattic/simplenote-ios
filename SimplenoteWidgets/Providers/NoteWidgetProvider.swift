@@ -15,15 +15,14 @@ struct NoteWidgetProvider: IntentTimelineProvider {
     let dataController: WidgetDataController!
 
     init() {
-        NSLog("Created a provider")
         do {
             self.coreDataManager = try CoreDataManager(StorageSettings().sharedStorageURL, for: .widgets)
-            self.dataController = try WidgetDataController(coreDataManager: coreDataManager)
+            let isPreview = ProcessInfo.processInfo.environment[Constants.environmentXcodePreviewsKey] != Constants.isPreviews
+            self.dataController = try WidgetDataController(coreDataManager: coreDataManager, isPreview: isPreview)
         } catch {
             fatalError("Couldn't setup dataController")
         }
     }
-
 
     func placeholder(in context: Context) -> NoteWidgetEntry {
         return NoteWidgetEntry(date: Date(), title: DemoContent.singleNoteTitle, content: DemoContent.singleNoteContent, simperiumKey: nil)
@@ -36,16 +35,6 @@ struct NoteWidgetProvider: IntentTimelineProvider {
     }
 
     func getTimeline(for configuration: NoteWidgetIntent, in context: Context, completion: @escaping (Timeline<NoteWidgetEntry>) -> Void) {
-        // NOTE: When generating SwiftUI previews, the Intent Provider is not instantiated.
-        // SO.... storing the core data manager and data controller cause the guard to fail when the previews are generated.
-        // This first guard is here to confirm the build is not in previews.
-        guard ProcessInfo.processInfo.environment[Constants.environmentXcodePreviewsKey] != Constants.isPreviews else {
-            let entries = NoteWidgetEntry(date: Date(), title: DemoContent.singleNoteTitle, content: DemoContent.singleNoteContent, simperiumKey: nil)
-            let timeline = Timeline(entries: [entries], policy: .never)
-            completion(timeline)
-            return
-        }
-
         // Confirm valid configuration
         guard let widgetNote = configuration.note,
               let simperiumKey = widgetNote.identifier,
