@@ -1,1 +1,1 @@
-notes,texte,planificateur,journal,synchronisation,choses à faire,cloud,notebook,simple,bloc-notes,terme,à faire,écrire,mémo
+notes,texte,planificateur,journal,synchronisation,choses à faire,cloud,notebook,simple,bloc-notes

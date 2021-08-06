@@ -1,1 +1,1 @@
-note,testo,agenda,diario,sincronizzazione,da-fare,cloud,blocco-note,semplice,bloc-notes,tag,cose-da-fare,scrittura,memo
+note,testo,agenda,diario,sincronizzazione,da-fare,cloud,blocco-note,semplice,bloc-notes,tag
