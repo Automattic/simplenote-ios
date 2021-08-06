@@ -8,7 +8,7 @@ struct ListWidgetEntry: TimelineEntry {
 
 struct ListWidgetNoteProxy {
     let title: String
-    let url: String
+    let url: URL
 }
 
 struct ListWidgetProvider: IntentTimelineProvider {
@@ -41,7 +41,35 @@ struct ListWidgetProvider: IntentTimelineProvider {
     }
 
     func getTimeline(for configuration: ListWidgetIntent, in context: Context, completion: @escaping (Timeline<ListWidgetEntry>) -> Void) {
-        let timeline = Timeline(entries: [ListWidgetEntry(date: Date(), tag: DemoContent.listTag, noteProxys: DemoContent.listProxies)], policy: .atEnd)
+        // Confirm valid configuration
+        guard let tag = configuration.tag?.identifier,
+              let dataController = dataController else {
+            NSLog("Couldn't find configuration or identifier")
+            return
+        }
+
+        // Fetch note
+        var notes: [Note]
+        do {
+            notes = try dataController.notes(withTag: tag, limit: 8)
+        } catch {
+            NSLog("Couldn't fetch notes from core data")
+            return
+        }
+
+        let proxies: [ListWidgetNoteProxy] = notes.map { (note) -> ListWidgetNoteProxy in
+            ListWidgetNoteProxy(title: note.title, url: note.url)
+        }
+
+        // Prepare timeline entry for every hour for the next 6 hours
+        // Create a new set of entries at the end of the 6 entries
+        var entries: [ListWidgetEntry] = []
+        for int in 0..<6 {
+            if let date = Date().increased(byHours: int) {
+                entries.append(ListWidgetEntry(date: date, tag: tag, noteProxys: proxies))
+            }
+        }
+        let timeline = Timeline(entries: entries, policy: .atEnd)
 
         completion(timeline)
     }

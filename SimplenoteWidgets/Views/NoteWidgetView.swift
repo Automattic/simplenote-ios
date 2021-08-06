@@ -49,13 +49,13 @@ struct NoteWidgetView_Previews: PreviewProvider {
                             date: Date(),
                             title: DemoContent.singleNoteTitle,
                             content: DemoContent.singleNoteContent,
-                            url: DemoContent.singleNoteURL))
+                            url: DemoContent.demoURL))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
             NoteWidgetView(entry: NoteWidgetEntry(
                             date: Date(),
                             title: DemoContent.singleNoteTitle,
                             content: DemoContent.singleNoteContent,
-                            url: DemoContent.singleNoteURL))
+                            url: DemoContent.demoURL))
                 .previewContext(WidgetPreviewContext(family: .systemMedium)).colorScheme(.dark)
         }
     }

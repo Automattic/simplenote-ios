@@ -16,7 +16,7 @@ struct ListWidgetView: View {
                         .padding([.bottom, .top], 10)
                      ForEach(0..<numberOfRows) { index in
                         let proxy = entry.noteProxys[index]
-                        Link(destination: URL(string: proxy.url)!) {
+                        Link(destination: proxy.url) {
                             NoteListRow(noteTitle: proxy.title, width: geometry.size.width)
                         }
                      }

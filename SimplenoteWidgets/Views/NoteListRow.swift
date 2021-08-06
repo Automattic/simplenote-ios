@@ -1,11 +1,3 @@
-//
-//  NoteListRow.swift
-//  SimplenoteWidgetsExtension
-//
-//  Created by Charlie Scheer on 8/5/21.
-//  Copyright © 2021 Automattic. All rights reserved.
-//
-
 import SwiftUI
 
 struct NoteListRow: View {
