@@ -40,13 +40,15 @@ extension Note {
         return content.components(separatedBy: .newlines)
     }
 
-    var title: String {
-        guard let lines = lines,
-              let first = lines.first else {
+    private var firstLine: String {
+        guard let lines = lines else {
             return Constants.defaultTitle
         }
+        return lines.first ?? String()
+    }
 
-        return first.count > .zero ? first : Constants.defaultTitle
+    var title: String {
+        return firstLine.count > .zero ? firstLine : Constants.defaultTitle
     }
 
     var body: String {
@@ -55,6 +57,13 @@ extension Note {
         }
         lines.removeFirst()
         return lines.joined(separator: .newline)
+    }
+
+    var limitedTitle: String {
+        guard firstLine.count > .zero else {
+            return Constants.defaultTitle
+        }
+        return String(firstLine.prefix(50))
     }
 }
 
