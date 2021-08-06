@@ -17,7 +17,7 @@ struct ListWidgetProvider: IntentTimelineProvider {
         do {
             self.coreDataManager = try CoreDataManager(StorageSettings().sharedStorageURL, for: .widgets)
             let isPreview = ProcessInfo.processInfo.environment[Constants.environmentXcodePreviewsKey] != Constants.isPreviews
-            self.dataController = try WidgetDataController(coreDataManager: coreDataManager)
+            self.dataController = try WidgetDataController(coreDataManager: coreDataManager, isPreview: isPreview)
         } catch {
             fatalError("Couldn't setup dataController")
         }
@@ -43,4 +43,6 @@ struct ListWidgetProvider: IntentTimelineProvider {
 
 private struct Constants {
     static let tag = "Composition"
+    static let environmentXcodePreviewsKey = "XCODE_RUNNING_FOR_PREVIEWS"
+    static let isPreviews = "1"
 }
