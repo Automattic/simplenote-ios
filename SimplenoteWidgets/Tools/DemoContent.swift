@@ -6,6 +6,8 @@ struct DemoContent {
     static let singleNoteContentAlt = "- [] Check item one \n- [] check item two\n- [] check item three"
     static let singleNoteURL = URL(string: SimplenoteConstants.simplenoteScheme + "://")!
 
+    static let demoURL = URL(string: SimplenoteConstants.simplenoteScheme + "://")!
+
     static let listTag = "Composition"
     static let listTitles = [
         "Twelve Tone Serialism",
@@ -17,8 +19,7 @@ struct DemoContent {
         "The Valet's Tragedy",
         "Lorem Ipsum"
     ]
-    static let listDemoKey = "1234568arstdh"
     static let listProxies: [ListWidgetNoteProxy] = listTitles.map { (title) in
-        ListWidgetNoteProxy(title: title, url: listDemoKey)
+        ListWidgetNoteProxy(title: title, url: demoURL)
     }
 }
