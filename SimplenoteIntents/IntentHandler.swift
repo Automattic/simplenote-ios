@@ -2,6 +2,20 @@ import Intents
 import CoreData
 
 class IntentHandler: INExtension {
+    let coreDataManager: CoreDataManager
+    let dataController: WidgetDataController
+
+    override init() {
+        do {
+            self.coreDataManager = try CoreDataManager(StorageSettings().sharedStorageURL, for: .intents)
+            self.dataController = try WidgetDataController(coreDataManager: coreDataManager)
+        } catch {
+            fatalError()
+        }
+        super.init()
+    }
+
+
     override func handler(for intent: INIntent) -> Any {
         return self
     }
@@ -9,16 +23,6 @@ class IntentHandler: INExtension {
 
 extension IntentHandler: NoteWidgetIntentHandling {
     func provideNoteOptionsCollection(for intent: NoteWidgetIntent, with completion: @escaping (INObjectCollection<WidgetNote>?, Error?) -> Void) {
-
-        // Prepare data controller for intents
-        let dataController: WidgetDataController
-        do {
-            let coreDataManager = try CoreDataManager(StorageSettings().sharedStorageURL, for: .intents)
-            dataController = try WidgetDataController(coreDataManager: coreDataManager)
-        } catch {
-            completion(nil, error)
-            return
-        }
 
         // Fetch notes
         var notes: [Note] = []
