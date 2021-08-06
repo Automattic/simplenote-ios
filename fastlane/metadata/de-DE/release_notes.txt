@@ -1,2 +1,1 @@
--   Ein paar Fehlerkorrekturen
-
+- Ein paar Fehlerkorrekturen

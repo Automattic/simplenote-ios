@@ -1,1 +1,1 @@
-anteckningar,moln,enkel,anteckningsbok,text,att göra,planerare,dagbok,synkronisering,etikett,skriva
+anteckningar, text, planerare, dagbok, synkronisering, att göra, moln, anteckningsbok, enkel, anteckningsblock, etikett, skriva, memo

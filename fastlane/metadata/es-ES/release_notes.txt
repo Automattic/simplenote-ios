@@ -1,2 +1,1 @@
--   Se han solucionado varios errores
-
+- Se han corregido algunos errores

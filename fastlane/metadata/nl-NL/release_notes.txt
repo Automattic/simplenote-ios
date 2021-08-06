@@ -1,2 +1,1 @@
--   Enkele bugs verholpen
-
+- Enkele bugs verholpen

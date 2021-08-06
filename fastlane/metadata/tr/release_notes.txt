@@ -1,2 +1,1 @@
--   Bazı hatalar giderildi
-
+- Bazı hata düzeltmeleri

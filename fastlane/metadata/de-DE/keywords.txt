@@ -1,1 +1,1 @@
-notizen,cloud,simple,notizbuch,text,to-do,todo,planer,tagebuch,sync,notepad,tag,schreiben,memo
+Notizen,Text,Planer,Tagebuch,synchronisieren,To-do,Cloud,Notizbuch,einfach,Notepad,Schlagwort,Todo,Schreiben,Memo

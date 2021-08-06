@@ -1,2 +1,1 @@
--   Alcune correzioni di bug
-
+- Correzioni di alcuni bug

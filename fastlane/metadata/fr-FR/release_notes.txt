@@ -1,2 +1,1 @@
--   Résolution de certains bugs
-
+- Quelques résolutions de bugs
