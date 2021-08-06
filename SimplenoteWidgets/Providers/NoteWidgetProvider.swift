@@ -36,6 +36,16 @@ struct NoteWidgetProvider: IntentTimelineProvider {
     }
 
     func getTimeline(for configuration: NoteWidgetIntent, in context: Context, completion: @escaping (Timeline<NoteWidgetEntry>) -> Void) {
+        // NOTE: When generating SwiftUI previews, the Intent Provider is not instantiated.
+        // SO.... storing the core data manager and data controller cause the guard to fail when the previews are generated.
+        // This first guard is here to confirm the build is not in previews.
+        guard ProcessInfo.processInfo.environment[Constants.environmentXcodePreviewsKey] != Constants.isPreviews else {
+            let entries = NoteWidgetEntry(date: Date(), title: DemoContent.singleNoteTitle, content: DemoContent.singleNoteContent, simperiumKey: nil)
+            let timeline = Timeline(entries: [entries], policy: .never)
+            completion(timeline)
+            return
+        }
+
         // Confirm valid configuration
         guard let widgetNote = configuration.note,
               let simperiumKey = widgetNote.identifier,
@@ -61,4 +71,9 @@ struct NoteWidgetProvider: IntentTimelineProvider {
 
         completion(timeline)
     }
+}
+
+private struct Constants {
+    static let environmentXcodePreviewsKey = "XCODE_RUNNING_FOR_PREVIEWS"
+    static let isPreviews = "1"
 }
