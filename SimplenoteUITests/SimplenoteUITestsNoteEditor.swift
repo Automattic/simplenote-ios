@@ -318,10 +318,10 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         let noteName = "Note Title"
 
         trackStep()
-        populateNoteList(noteName: noteName, numberToCreate: 1)
+        populateNoteList(title: noteName, numberToCreate: 1)
 
         trackStep()
-        NoteList.longPressNote(noteName: noteName + "-1")
+        NoteList.longPressNote(title: noteName + "-1")
         NoteList.deleteNoteFromContextMenu()
         NoteListAssert.notesNumber(expectedNotesNumber: 0)
 
@@ -337,10 +337,10 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         let toPasteNoteTitle = "Test Paste Internal Link Note Title\n"
 
         trackStep()
-        populateNoteList(noteName: toCopyNoteTitle, numberToCreate: 1)
+        populateNoteList(title: toCopyNoteTitle, numberToCreate: 1)
 
         trackStep()
-        NoteList.longPressNote(noteName: toCopyNoteTitle + "-1")
+        NoteList.longPressNote(title: toCopyNoteTitle + "-1")
         NoteList.copyInternalLinkFromContextMenu()
 
         trackStep()
@@ -348,7 +348,7 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         NoteEditor.enterTitle(enteredValue: toPasteNoteTitle)
         NoteEditor.pasteNoteContent()
         NoteEditor.leaveEditor()
-        
+
         trackStep()
         // todo: add validation here
     }
