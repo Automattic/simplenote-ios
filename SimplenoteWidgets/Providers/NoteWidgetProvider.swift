@@ -6,7 +6,7 @@ struct NoteWidgetEntry: TimelineEntry {
     let date: Date
     let title: String
     let content: String
-    let simperiumKey: String?
+    let url: URL
 }
 
 struct NoteWidgetProvider: IntentTimelineProvider {
@@ -59,7 +59,7 @@ struct NoteWidgetProvider: IntentTimelineProvider {
         var entries: [NoteWidgetEntry] = []
         for int in 0..<6 {
             if let date = Date().increased(byHours: int) {
-                entries.append(NoteWidgetEntry(date: date, title: note.title, content: note.body, simperiumKey: note.simperiumKey))
+                entries.append(NoteWidgetEntry(date: date, title: note.title, content: note.body, url: note.url))
             }
         }
         let timeline = Timeline(entries: entries, policy: .atEnd)

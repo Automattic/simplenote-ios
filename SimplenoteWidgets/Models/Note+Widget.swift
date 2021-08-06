@@ -66,8 +66,16 @@ extension Note {
         }
         return String(firstLine.prefix(50))
     }
+
+    var url: URL {
+        guard let simperiumKey = simperiumKey else {
+            return URL(string: SimplenoteConstants.simplenoteScheme + "://")!
+        }
+        return URL(string: Constants.linkUrlBase + simperiumKey)!
+    }
 }
 
 private struct Constants {
     static let defaultTitle = NSLocalizedString("Untitled Note", comment: "Default title for notes")
+    static let linkUrlBase = SimplenoteConstants.simplenoteScheme + "://" + SimplenoteConstants.simplenoteInterlinkHost + "/"
 }
