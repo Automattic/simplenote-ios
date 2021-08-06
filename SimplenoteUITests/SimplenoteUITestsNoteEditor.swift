@@ -312,4 +312,44 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         TrashAssert.noteExists(noteName: noteTitle + "-1")
         TrashAssert.noteExists(noteName: noteTitle + "-2")
     }
+
+    func testUndoTrashFromSnackbar() throws {
+        trackTest()
+        let noteName = "Note Title"
+
+        trackStep()
+        populateNoteList(noteName: noteName, numberToCreate: 1)
+
+        trackStep()
+        NoteList.longPressNote(noteName: noteName + "-1")
+        NoteList.deleteNoteFromContextMenu()
+        NoteListAssert.notesNumber(expectedNotesNumber: 0)
+
+        trackStep()
+        NoteList.tapUndoOnSnackbar()
+        NoteListAssert.notesNumber(expectedNotesNumber: 1)
+        NoteListAssert.noteExists(noteName: noteName + "-1")
+    }
+
+    func testCopyAndPasteInterlink() throws {
+        trackTest()
+        let toCopyNoteTitle = "Test Copy Internal Link Note Title"
+        let toPasteNoteTitle = "Test Paste Internal Link Note Title\n"
+
+        trackStep()
+        populateNoteList(noteName: toCopyNoteTitle, numberToCreate: 1)
+
+        trackStep()
+        NoteList.longPressNote(noteName: toCopyNoteTitle + "-1")
+        NoteList.copyInternalLinkFromContextMenu()
+
+        trackStep()
+        NoteList.addNoteTap()
+        NoteEditor.enterTitle(enteredValue: toPasteNoteTitle)
+        NoteEditor.pasteNoteContent()
+        NoteEditor.leaveEditor()
+        
+        trackStep()
+        // todo: add validation here
+    }
 }

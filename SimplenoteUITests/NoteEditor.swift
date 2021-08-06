@@ -52,6 +52,17 @@ class NoteEditor {
         }
     }
 
+    class func enterTitle(enteredValue: String) {
+        let noteContentTextView = app.textViews.element
+
+        noteContentTextView.clearAndEnterText(text: enteredValue)
+    }
+
+    class func pasteNoteContent() {
+        app.press(forDuration: 1.2)
+        app.menuItems["Paste"].tap()
+    }
+
     class func getEditorText() -> String {
         return app.textViews.element.value as! String
     }

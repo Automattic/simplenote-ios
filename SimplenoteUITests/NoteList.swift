@@ -140,6 +140,18 @@ class NoteList {
         selectButton.tap()
     }
 
+    class func deleteNoteFromContextMenu() {
+        let deleteNoteButton = app.buttons[UID.Button.deleteNote]
+        guard deleteNoteButton.exists else { return }
+        deleteNoteButton.tap()
+    }
+
+    class func copyInternalLinkFromContextMenu() {
+        let copyInternalLinkButton = app.buttons[UID.Button.copyInternalLink]
+        guard copyInternalLinkButton.exists else { return }
+        copyInternalLinkButton.tap()
+    }
+
     class func selectAll() {
         let selectAllButton = app.buttons[UID.Button.selectAll]
         guard selectAllButton.exists else { return }
@@ -150,6 +162,12 @@ class NoteList {
         let trashNotesButton = app.buttons[UID.Button.trashNotes]
         guard trashNotesButton.exists else { return }
         trashNotesButton.tap()
+    }
+
+    class func tapUndoOnSnackbar() {
+        let undoButton = app.buttons[UID.Button.undoTrashButton]
+        guard undoButton.exists else { return }
+        undoButton.tap()
     }
 }
 
