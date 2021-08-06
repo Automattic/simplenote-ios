@@ -3,6 +3,12 @@ import WidgetKit
 struct ListWidgetEntry: TimelineEntry {
     let date: Date
     let tag: String
+    let noteProxys: [ListWidgetNoteProxy]
+}
+
+struct ListWidgetNoteProxy {
+    let title: String
+    let url: String
 }
 
 struct ListWidgetProvider: IntentTimelineProvider {
@@ -25,17 +31,17 @@ struct ListWidgetProvider: IntentTimelineProvider {
 
 
     func placeholder(in context: Context) -> ListWidgetEntry {
-        return ListWidgetEntry(date: Date(), tag: Constants.tag)
+        return ListWidgetEntry(date: Date(), tag: DemoContent.listTag, noteProxys: DemoContent.listProxies)
     }
 
     func getSnapshot(for configuration: ListWidgetIntent, in context: Context, completion: @escaping (ListWidgetEntry) -> Void) {
-        let entry = ListWidgetEntry(date: Date(), tag: Constants.tag)
+        let entry = ListWidgetEntry(date: Date(), tag: DemoContent.listTag, noteProxys: DemoContent.listProxies)
 
         completion(entry)
     }
 
     func getTimeline(for configuration: ListWidgetIntent, in context: Context, completion: @escaping (Timeline<ListWidgetEntry>) -> Void) {
-        let timeline = Timeline(entries: [ListWidgetEntry(date: Date(), tag: Constants.tag)], policy: .atEnd)
+        let timeline = Timeline(entries: [ListWidgetEntry(date: Date(), tag: DemoContent.listTag, noteProxys: DemoContent.listProxies)], policy: .atEnd)
 
         completion(timeline)
     }
