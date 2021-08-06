@@ -79,6 +79,11 @@ extension SPAppDelegate {
             PublishNoticePresenter.presentNotice(for: note)
         }
     }
+
+    @objc
+    func configureAccountDeletionController() {
+        accountDeletionController = AccountDeletionController()
+    }
 }
 
 // MARK: - URL Handlers and Deep Linking
@@ -409,7 +414,6 @@ extension SPAppDelegate {
         }
 
         if deletionController.deletionTokenHasExpired {
-            self.accountDeletionController = nil
             return
         }
 

@@ -127,6 +127,7 @@
     [self setupCrashLogging];
     [self configureVersionsController];
     [self configurePublishController];
+    [self configureAccountDeletionController];
     [self setupDefaultWindow];
     [self configureStateRestoration];
     
@@ -576,18 +577,6 @@
 + (SPAppDelegate *)sharedDelegate
 {
     return (SPAppDelegate *)[[UIApplication sharedApplication] delegate];
-}
-
-#pragma mark ================================================================================
-#pragma mark Deletion Controller
-#pragma mark ================================================================================
-
-- (AccountDeletionController *)accountDeletionController {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _accountDeletionController = [AccountDeletionController new];
-    });
-    return _accountDeletionController;
 }
 
 @end
