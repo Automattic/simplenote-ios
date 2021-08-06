@@ -56,16 +56,6 @@ extension IntentHandler: NoteWidgetIntentHandling {
 extension IntentHandler: ListWidgetIntentHandling {
     func provideTagOptionsCollection(for intent: ListWidgetIntent, with completion: @escaping (INObjectCollection<WidgetTag>?, Error?) -> Void) {
 
-        // Prepare data controller for intents
-        let dataController: WidgetDataController
-        do {
-            let coreDataManager = try CoreDataManager(StorageSettings().sharedStorageURL, for: .intents)
-            dataController = try WidgetDataController(coreDataManager: coreDataManager)
-        } catch {
-            completion(nil, error)
-            return
-        }
-
         // Fetch Tags
         var tags: [Tag] = []
         do {
