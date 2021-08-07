@@ -79,6 +79,10 @@ enum UID {
     enum SearchField {
         static let search = "Search notes or tags"
     }
+
+    enum ContextMenuItem {
+        static let paste = "Paste"
+    }
 }
 
 enum Text {

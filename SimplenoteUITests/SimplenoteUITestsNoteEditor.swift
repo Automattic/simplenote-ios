@@ -333,8 +333,12 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
 
     func testCopyAndPasteInterlink() throws {
         trackTest()
-        let toCopyNoteTitle = "Test Copy Internal Link Note Title"
-        let toPasteNoteTitle = "Test Paste Internal Link Note Title\n"
+        let toCopyNoteTitle = "Copy Internal Link Title"
+        let toPasteNoteTitle = "Paste Internal Link Title\n"
+        let note = NoteData(
+            name: "Paste Internal Link Title",
+            content: "[Copy Internal Link Title-1](simplenote://note/"
+        )
 
         trackStep()
         populateNoteList(title: toCopyNoteTitle, numberToCreate: 1)
@@ -350,6 +354,7 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         NoteEditor.leaveEditor()
 
         trackStep()
-        // todo: add validation here
+        NoteListAssert.notesNumber(expectedNotesNumber: 2)
+        NoteListAssert.contentIsShown(for: note)
     }
 }

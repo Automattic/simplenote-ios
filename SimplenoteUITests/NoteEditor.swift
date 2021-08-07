@@ -60,7 +60,7 @@ class NoteEditor {
 
     class func pasteNoteContent() {
         app.press(forDuration: 1.2)
-        app.menuItems["Paste"].tap()
+        app.menuItems[UID.ContextMenuItem.paste].tap()
     }
 
     class func getEditorText() -> String {
