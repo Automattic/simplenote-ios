@@ -433,7 +433,9 @@
 		BA55B06325F068650042582B /* NoticeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA55B06225F068650042582B /* NoticeController.swift */; };
 		BA5C1C0725BF9D6C006E3820 /* SPDragBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5C1C0625BF9D6C006E3820 /* SPDragBar.swift */; };
 		BA5E5B7D264A148C00D0EE19 /* URLRequest+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5E5B7C264A148C00D0EE19 /* URLRequest+Simplenote.swift */; };
-		BA75D87E26C0843600883FFA /* Text+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA75D87D26C0843600883FFA /* Text+Simplenote.swift */; };
+		BA75D8A326C084E900883FFA /* Text+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA75D87D26C0843600883FFA /* Text+Simplenote.swift */; };
+		BA75D8AE26C0862E00883FFA /* View+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA75D8AD26C0862E00883FFA /* View+Simplenote.swift */; };
+		BA75D8BA26C0865C00883FFA /* Filling.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA75D8B926C0865C00883FFA /* Filling.swift */; };
 		BA83478325F59F8B0059B797 /* markdown-default-contrast.css in Resources */ = {isa = PBXBuildFile; fileRef = BA83478225F59F8B0059B797 /* markdown-default-contrast.css */; };
 		BA83478C25F59FE90059B797 /* markdown-dark-contrast.css in Resources */ = {isa = PBXBuildFile; fileRef = BA83478B25F59FE90059B797 /* markdown-dark-contrast.css */; };
 		BA86615926B35CEF00466746 /* BuildConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F920265A2294661C0061B1DE /* BuildConfiguration.swift */; };
@@ -1054,6 +1056,8 @@
 		BA5C1C0625BF9D6C006E3820 /* SPDragBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPDragBar.swift; sourceTree = "<group>"; };
 		BA5E5B7C264A148C00D0EE19 /* URLRequest+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Simplenote.swift"; sourceTree = "<group>"; };
 		BA75D87D26C0843600883FFA /* Text+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Simplenote.swift"; sourceTree = "<group>"; };
+		BA75D8AD26C0862E00883FFA /* View+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Simplenote.swift"; sourceTree = "<group>"; };
+		BA75D8B926C0865C00883FFA /* Filling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filling.swift; sourceTree = "<group>"; };
 		BA83478225F59F8B0059B797 /* markdown-default-contrast.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "markdown-default-contrast.css"; sourceTree = "<group>"; };
 		BA83478B25F59FE90059B797 /* markdown-dark-contrast.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "markdown-dark-contrast.css"; sourceTree = "<group>"; };
 		BA8661D526B3A00B00466746 /* SimplenoteIntents.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SimplenoteIntents.entitlements; sourceTree = "<group>"; };
@@ -2152,8 +2156,17 @@
 			isa = PBXGroup;
 			children = (
 				BA75D87D26C0843600883FFA /* Text+Simplenote.swift */,
+				BA75D8AD26C0862E00883FFA /* View+Simplenote.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		BA75D8B826C0864F00883FFA /* ViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+				BA75D8B926C0865C00883FFA /* Filling.swift */,
+			);
+			path = ViewModifiers;
 			sourceTree = "<group>";
 		};
 		BAB5760926703BE100B0C56F /* Supporting Files */ = {
@@ -2200,6 +2213,7 @@
 		BAFA93DD265DCFCA0009DCFB /* SimplenoteWidgets */ = {
 			isa = PBXGroup;
 			children = (
+				BA75D8B826C0864F00883FFA /* ViewModifiers */,
 				BAFA93EC265DE3810009DCFB /* SimplenoteWidgets.swift */,
 				BAF8D42026AE10D400CA9383 /* Models */,
 				BA122DC4265EF8F1003D3BC5 /* Views */,
@@ -3230,7 +3244,6 @@
 				A6E6CE0025A4B0A9005A92DB /* PinLockVerifyController.swift in Sources */,
 				BA55124E2600210B00D8F882 /* TimerFactory.swift in Sources */,
 				B5476BB923D89B28000E7723 /* UITableViewHeaderFooterView+Simplenote.swift in Sources */,
-				BA75D87E26C0843600883FFA /* Text+Simplenote.swift in Sources */,
 				BAA4856925D5E40900F3BDB9 /* SearchQuery+Simplenote.swift in Sources */,
 				B56B357F1AC3565600B9F365 /* UITextView+Simplenote.m in Sources */,
 				B5C9F71E193E75FE00FD2491 /* SPDebugViewController.m in Sources */,
@@ -3459,6 +3472,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA75D8AE26C0862E00883FFA /* View+Simplenote.swift in Sources */,
 				BAB5765B26703D0600B0C56F /* NoteWidgetIntent.intentdefinition in Sources */,
 				BA86625326B3B14800466746 /* SortMode.swift in Sources */,
 				BAF8D50A26AE172600CA9383 /* StorageSettings.swift in Sources */,
@@ -3470,6 +3484,7 @@
 				BAB6C04326BA4994007495C4 /* ContentSlice.swift in Sources */,
 				BAB6C04226BA496F007495C4 /* String+Simplenote.swift in Sources */,
 				BA122DBB265EF40E003D3BC5 /* UIColor+Helpers.swift in Sources */,
+				BA75D8BA26C0865C00883FFA /* Filling.swift in Sources */,
 				BA86622326B3AE4A00466746 /* WidgetDataController.swift in Sources */,
 				BA122DBA265EF402003D3BC5 /* SimplenoteConstants.swift in Sources */,
 				BAF8D51E26AE173D00CA9383 /* FileManager+Simplenote.swift in Sources */,
@@ -3483,6 +3498,7 @@
 				BAB27BD726BA425C00AE4ACC /* Color+Simplenote.swift in Sources */,
 				BAB5768726703EA000B0C56F /* NoteWidgetView.swift in Sources */,
 				BAF8D44C26AE10FC00CA9383 /* Note+Widget.swift in Sources */,
+				BA75D8A326C084E900883FFA /* Text+Simplenote.swift in Sources */,
 				BA32A91A26B746A300727247 /* StorageError.swift in Sources */,
 				BA86621826B3A73D00466746 /* UserDefaults+Simplenote.swift in Sources */,
 				BAF8D44B26AE10FC00CA9383 /* Tag+Widget.swift in Sources */,
