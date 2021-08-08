@@ -11,15 +11,13 @@ struct NoteWidgetView: View {
             ZStack {
                 VStack(alignment: .leading) {
                     Text(entry.title)
-                        .font(widgetFamily == .systemSmall ? .subheadline : .body)
-                        .fontWeight(.bold)
-                        .foregroundColor(Color(for: colorScheme, light: .gray100, dark: .white))
+                        .widgetHeader(widgetFamily,
+                                      color: Color(for: colorScheme, light: .gray100, dark: .white))
                     Text(entry.content)
-                        .font(.subheadline)
-                        .foregroundColor(Color(for: colorScheme, light: .gray100, dark: .white))
+                        .subheadline(color: Color(for: colorScheme, light: .gray100, dark: .white))
                 }
                 .padding([.leading, .trailing, .top], Sizes.overallPadding)
-                .frame(width: geometry.size.width, height: geometry.size.height + Sizes.overallPadding, alignment: .top)
+                .filling()
                 .ignoresSafeArea()
                 .widgetURL(prepareWidgetURL(from: entry.simperiumKey))
             }
