@@ -53,7 +53,8 @@ extension Note {
 
     var body: String {
         guard var lines = lines else {
-            return String()
+            // Note. Swift UI Text will crash if given String() so need to use this version of an empty string
+            return ""
         }
         lines.removeFirst()
         return lines.joined(separator: .newline)

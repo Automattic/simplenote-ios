@@ -16,8 +16,8 @@ struct NoteWidgetView: View {
                     Text(entry.content)
                         .subheadline(color: Color(for: colorScheme, light: .gray100, dark: .white))
                 }
-                .padding([.leading, .trailing, .top], Sizes.overallPadding)
                 .filling()
+                .padding([.leading, .trailing, .top], Sizes.overallPadding)
                 .ignoresSafeArea()
                 .widgetURL(prepareWidgetURL(from: entry.simperiumKey))
             }
@@ -47,7 +47,7 @@ struct NoteWidgetView_Previews: PreviewProvider {
         Group {
             NoteWidgetView(entry: NoteWidgetEntry(date: Date(), title: DemoContent.singleNoteTitle, content: DemoContent.singleNoteContent, simperiumKey: nil))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
-            NoteWidgetView(entry: NoteWidgetEntry(date: Date(), title: DemoContent.singleNoteTitle, content: DemoContent.singleNoteContent, simperiumKey: nil))
+            NoteWidgetView(entry: NoteWidgetEntry(date: Date(), title: DemoContent.singleNoteTitle, content: DemoContent.singleNoteContentAlt, simperiumKey: nil))
                 .previewContext(WidgetPreviewContext(family: .systemMedium)).colorScheme(.dark)
         }
     }

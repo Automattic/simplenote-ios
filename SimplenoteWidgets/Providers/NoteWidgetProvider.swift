@@ -1,6 +1,8 @@
 import WidgetKit
 
 struct NoteWidgetEntry: TimelineEntry {
+    static let placeholder = NoteWidgetEntry(date: Date(), title: DemoContent.singleNoteTitle, content: DemoContent.singleNoteContent, simperiumKey: nil)
+
     let date: Date
     let title: String
     let content: String
@@ -25,13 +27,17 @@ struct NoteWidgetProvider: IntentTimelineProvider {
     }
 
     func placeholder(in context: Context) -> NoteWidgetEntry {
-        return NoteWidgetEntry(date: Date(), title: DemoContent.singleNoteTitle, content: DemoContent.singleNoteContent, simperiumKey: nil)
+        return NoteWidgetEntry.placeholder
     }
 
     func getSnapshot(for configuration: NoteWidgetIntent, in context: Context, completion: @escaping (NoteWidgetEntry) -> Void) {
-        let entry = NoteWidgetEntry(date: Date(), title: DemoContent.singleNoteTitle, content: DemoContent.singleNoteContent, simperiumKey: nil)
+        guard let dataController = dataController,
+              let note = try? dataController.firstNote() else {
+            completion(NoteWidgetEntry.placeholder)
+            return
+        }
 
-        completion(entry)
+        completion(NoteWidgetEntry(date: Date(), title: note.title, content: note.body, simperiumKey: nil))
     }
 
     func getTimeline(for configuration: NoteWidgetIntent, in context: Context, completion: @escaping (Timeline<NoteWidgetEntry>) -> Void) {
