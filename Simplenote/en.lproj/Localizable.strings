@@ -55,6 +55,9 @@
 /* 5 minutes passcode lock timeout */
 "5 Minutes" = "5 Minutes";
 
+/* Network connection issue notificaiton */
+"A network connection is required. Please, check your connection and try again." = "A network connection is required. Please, check your connection and try again.";
+
 /* Display app about screen */
 "About" = "About";
 
@@ -78,14 +81,17 @@
    Title: No filters applied */
 "All Notes" = "All Notes";
 
+/* Delete account confirmation instructions */
+"An email has been sent to %@ Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation" = "An email has been sent to %@ Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation";
+
+/* Deletion error message */
+"An error occured. Please, try again. If the problem continues, contact us at support@simplenote.com for help." = "An error occured. Please, try again. If the problem continues, contact us at support@simplenote.com for help.";
+
 /* Sign in error message */
 "An error was encountered while signing in." = "An error was encountered while signing in.";
 
 /* No comment provided by engineer. */
 "Appearance" = "Appearance";
-
-/* Engine URL Message */
-"AppEngine Endpoints" = "AppEngine Endpoints";
 
 /* Automattic hiring description */
 "Are you a developer? We’re hiring." = "Are you a developer? We’re hiring.";
@@ -99,14 +105,14 @@
 /* User Authenticated */
 "Authenticated" = "Authenticated";
 
-/* Engine URL Message */
-"Authentication Endpoints" = "Authentication Endpoints";
-
 /* The Simplenote blog */
 "Blog" = "Blog";
 
 /* Terms of Service Legend *PREFIX*: printed in dark color */
 "By creating an account you agree to our" = "By creating an account you agree to our";
+
+/* Delete account confirmation alert message */
+"By deleting your account, all notes created with this account will be permanently deleted. This action is not reversible" = "By deleting your account, all notes created with this account will be permanently deleted. This action is not reversible";
 
 /* Cancel Action
    Cancel action button
@@ -131,6 +137,9 @@
 
 /* Number of characters in the note */
 "Characters" = "Characters";
+
+/* Title for delete account succes alert */
+"Check Your Email" = "Check Your Email";
 
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "Choose a 4 digit passcode";
@@ -224,6 +233,10 @@
 /* PinLock screen \"delete\" button */
 "Delete" = "Delete";
 
+/* Delete account title and action
+   Display Delete Account Alert */
+"Delete Account" = "Delete Account";
+
 /* Delete a note from trash */
 "Delete Note" = "Delete Note";
 
@@ -294,7 +307,8 @@
 /* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "Enter your passcode";
 
-/* Error Title */
+/* Deletion Error Title
+   Error Title */
 "Error" = "Error";
 
 /* Offer to enable Face ID support if available and passcode is on. */
@@ -454,6 +468,9 @@
    Dismisses an AlertController */
 "OK" = "OK";
 
+/* Confirm alert message */
+"Ok" = "Ok";
+
 /* No comment provided by engineer. */
 "On" = "On";
 
@@ -550,6 +567,9 @@
 
 /* Rename a tag */
 "Rename" = "Rename";
+
+/* Title for account deletion confirm button */
+"Request Account Deletion" = "Request Account Deletion";
 
 /* Resend email button -> Verify your email screen */
 "Resend Email" = "Resend Email";
@@ -681,6 +701,9 @@
 /* Error when address is in use */
 "The email you've entered is already associated with a Simplenote account." = "The email you've entered is already associated with a Simplenote account.";
 
+/* Error when the network is inaccessible */
+"The network could not be reached." = "The network could not be reached.";
+
 /* Onboarding Header Text */
 "The simplest way to keep notes." = "The simplest way to keep notes.";
 
@@ -795,9 +818,6 @@
 
 /* Message shown in note list when no notes are in the trash */
 "Your trash is empty" = "Your trash is empty";
-
-/* Warning Title */
-"⚠️ Important" = "⚠️ Important";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞 Debug Enabled 🐞";
