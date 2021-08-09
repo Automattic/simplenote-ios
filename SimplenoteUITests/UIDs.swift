@@ -58,6 +58,8 @@ enum UID {
         static let deselectAll = "Deselect All"
         static let trashNotes = "Trash Notes"
         static let crossIcon = "icon cross"
+        static let undoTrashButton = "Undo"
+        static let copyInternalLink = "Copy Internal Link"
     }
 
     enum Text {
@@ -76,6 +78,10 @@ enum UID {
 
     enum SearchField {
         static let search = "Search notes or tags"
+    }
+
+    enum ContextMenuItem {
+        static let paste = "Paste"
     }
 }
 

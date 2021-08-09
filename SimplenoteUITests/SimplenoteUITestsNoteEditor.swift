@@ -295,8 +295,6 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
 
         trackStep()
         populateNoteList(title: noteTitle, numberToCreate: 2)
-
-        trackStep()
         NoteList.longPressNote(title: noteTitle + "-1")
         NoteList.selectNoteFromContextMenu()
         NoteList.selectAll()
@@ -311,5 +309,45 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         TrashAssert.notesNumber(expectedNotesNumber: 2)
         TrashAssert.noteExists(noteName: noteTitle + "-1")
         TrashAssert.noteExists(noteName: noteTitle + "-2")
+    }
+
+    func testUndoTrashFromSnackbar() throws {
+        trackTest()
+        let noteName = "Note Title"
+
+        trackStep()
+        NoteList.createNoteAndLeaveEditor(noteName: noteName)
+        NoteList.longPressNote(title: noteName)
+        NoteList.deleteNoteFromContextMenu()
+        NoteListAssert.notesNumber(expectedNotesNumber: 0)
+
+        trackStep()
+        NoteList.tapUndoOnSnackbar()
+        NoteListAssert.notesNumber(expectedNotesNumber: 1)
+        NoteListAssert.noteExists(noteName: noteName)
+    }
+
+    func testCopyAndPasteInternalLink() throws {
+        trackTest()
+        let originalNoteTitle = "Original Note Title"
+        let referringNoteTitle = "Referring Note Title"
+        let referringNoteData = NoteData(
+                name: referringNoteTitle,
+                content: "[\(originalNoteTitle)](simplenote://note/"
+            )
+
+        trackStep()
+        NoteList.createNoteAndLeaveEditor(noteName: originalNoteTitle)
+        NoteList.longPressNote(title: originalNoteTitle)
+        NoteList.copyInternalLinkFromContextMenu()
+        NoteListAssert.notesNumber(expectedNotesNumber: 1)
+
+        trackStep()
+        NoteList.addNoteTap()
+        NoteEditor.enterTitle(enteredValue: referringNoteTitle)
+        NoteEditor.pasteNoteContent()
+        NoteEditor.leaveEditor()
+        NoteListAssert.notesNumber(expectedNotesNumber: 2)
+        NoteListAssert.contentIsShown(for: referringNoteData)
     }
 }
