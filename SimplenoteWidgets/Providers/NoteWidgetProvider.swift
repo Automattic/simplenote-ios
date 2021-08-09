@@ -1,7 +1,24 @@
 import WidgetKit
 
 struct NoteWidgetEntry: TimelineEntry {
-    static let placeholder = NoteWidgetEntry(date: Date(), title: DemoContent.singleNoteTitle, content: DemoContent.singleNoteContent, url: DemoContent.demoURL)
+    static let placeholder = NoteWidgetEntry(date: Date(),
+                                             title: DemoContent.singleNoteTitle,
+                                             content: DemoContent.singleNoteContent,
+                                             url: DemoContent.demoURL)
+
+    init(date: Date, note: Note) {
+        self.init(date: date,
+                  title: note.title,
+                  content: note.body,
+                  url: note.url)
+    }
+
+    init(date: Date, title: String, content: String, url: URL) {
+        self.date = date
+        self.title = title
+        self.content = content
+        self.url = url
+    }
 
     let date: Date
     let title: String
@@ -37,7 +54,7 @@ struct NoteWidgetProvider: IntentTimelineProvider {
             return
         }
 
-        completion(NoteWidgetEntry(date: Date(), title: note.title, content: note.body, url: DemoContent.demoURL))
+        completion(NoteWidgetEntry(date: Date(), note: note))
     }
 
     func getTimeline(for configuration: NoteWidgetIntent, in context: Context, completion: @escaping (Timeline<NoteWidgetEntry>) -> Void) {
@@ -59,7 +76,7 @@ struct NoteWidgetProvider: IntentTimelineProvider {
         var entries: [NoteWidgetEntry] = []
         for int in 0..<6 {
             if let date = Date().increased(byHours: int) {
-                entries.append(NoteWidgetEntry(date: date, title: note.title, content: note.body, url: note.url))
+                entries.append(NoteWidgetEntry(date: date, note: note))
             }
         }
         let timeline = Timeline(entries: entries, policy: .atEnd)
