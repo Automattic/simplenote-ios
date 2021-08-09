@@ -8,28 +8,38 @@ struct ListWidgetView: View {
 
     var body: some View {
         GeometryReader { geometry in
-            let numberOfRows: Int = (widgetFamily == .systemLarge) ? 8 : 3
+            let numberOfRows: Int = rows(for: widgetFamily)
              HStack(alignment: .top) {
-                 VStack(alignment: .leading, spacing: 0) {
+                VStack(alignment: .leading, spacing: .zero) {
                     WidgetHeaderView(text: entry.tag)
-                        .padding(.trailing, 20)
-                        .padding([.bottom, .top], 10)
-                     ForEach(0..<numberOfRows) { index in
-                        let proxy = entry.noteProxys[index]
-                        Link(destination: proxy.url) {
-                            NoteListRow(noteTitle: proxy.title, width: geometry.size.width)
-                        }
-                     }
+                        .padding(.trailing, Constants.sidePadding)
+                        .padding([.bottom, .top], Constants.topAndBottomPadding)
+                    NoteListTable(entry: entry,
+                                  numberOfRows: numberOfRows,
+                                  geometry: geometry)
                      .multilineTextAlignment(.leading)
                  }
-                 .padding(.leading, 20)
+                .padding(.leading, Constants.sidePadding)
              }
+        }
+    }
+
+    func rows(for widgetFamily: WidgetFamily) -> Int {
+        switch widgetFamily {
+        case .systemLarge:
+            return Constants.largeRows
+        default:
+            return Constants.mediumRows
         }
     }
 }
 
 private struct Constants {
     static let linkUrlBase = SimplenoteConstants.simplenoteScheme + "://" + SimplenoteConstants.simplenoteInterlinkHost + "/"
+    static let mediumRows = 3
+    static let largeRows = 8
+    static let sidePadding = CGFloat(20)
+    static let topAndBottomPadding = CGFloat(10)
 }
 
 struct ListWidgetView_Previews: PreviewProvider {

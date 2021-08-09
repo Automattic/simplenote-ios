@@ -7,7 +7,7 @@ struct WidgetHeaderView: View {
     @Environment(\.widgetFamily) var widgetFamily
 
     var body: some View {
-        HStack {
+        HStack(alignment: .center) {
             Text(text)
                 .font(.headline)
             if widgetFamily != .systemSmall {
@@ -17,6 +17,7 @@ struct WidgetHeaderView: View {
                 }
             }
         }
+        .padding(0)
     }
 }
 

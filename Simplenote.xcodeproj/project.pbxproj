@@ -405,6 +405,7 @@
 		B5EB1EFF1C205A800080A1B3 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5EB1EFD1C205A800080A1B3 /* Icons.xcassets */; };
 		B5F3000223F4502C007A7C59 /* SPSortBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5F3000123F4502C007A7C59 /* SPSortBar.xib */; };
 		B5F3FFFF23F44679007A7C59 /* SPSortBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F3FFFE23F44679007A7C59 /* SPSortBar.swift */; };
+		BA02A59226C0AE92005FF36E /* NoteListTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA02A59126C0AE92005FF36E /* NoteListTable.swift */; };
 		BA0890A526BB9B680035CA48 /* NoteListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0890A426BB9B680035CA48 /* NoteListRow.swift */; };
 		BA0890A726BB9BE20035CA48 /* WidgetHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0890A626BB9BE20035CA48 /* WidgetHeaderView.swift */; };
 		BA0890A926BB9BF80035CA48 /* NewNoteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0890A826BB9BF80035CA48 /* NewNoteButton.swift */; };
@@ -1045,6 +1046,7 @@
 		B5EB1EFD1C205A800080A1B3 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Icons.xcassets; path = ../Icons.xcassets; sourceTree = "<group>"; };
 		B5F3000123F4502C007A7C59 /* SPSortBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPSortBar.xib; path = Classes/SPSortBar.xib; sourceTree = "<group>"; };
 		B5F3FFFE23F44679007A7C59 /* SPSortBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPSortBar.swift; path = Classes/SPSortBar.swift; sourceTree = "<group>"; };
+		BA02A59126C0AE92005FF36E /* NoteListTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListTable.swift; sourceTree = "<group>"; };
 		BA0890A426BB9B680035CA48 /* NoteListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListRow.swift; sourceTree = "<group>"; };
 		BA0890A626BB9BE20035CA48 /* WidgetHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetHeaderView.swift; sourceTree = "<group>"; };
 		BA0890A826BB9BF80035CA48 /* NewNoteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNoteButton.swift; sourceTree = "<group>"; };
@@ -2142,6 +2144,7 @@
 				BA0890A426BB9B680035CA48 /* NoteListRow.swift */,
 				BA0890A626BB9BE20035CA48 /* WidgetHeaderView.swift */,
 				BA0890A826BB9BF80035CA48 /* NewNoteButton.swift */,
+				BA02A59126C0AE92005FF36E /* NoteListTable.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2235,8 +2238,8 @@
 		BAFA93DD265DCFCA0009DCFB /* SimplenoteWidgets */ = {
 			isa = PBXGroup;
 			children = (
-				BA75D8B826C0864F00883FFA /* ViewModifiers */,
 				BAFA93EC265DE3810009DCFB /* SimplenoteWidgets.swift */,
+				BA75D8B826C0864F00883FFA /* ViewModifiers */,
 				BAF8D42026AE10D400CA9383 /* Models */,
 				BA122DC4265EF8F1003D3BC5 /* Views */,
 				BA122DC3265EF8E4003D3BC5 /* Widgets */,
@@ -3533,6 +3536,7 @@
 				BAF8D44B26AE10FC00CA9383 /* Tag+Widget.swift in Sources */,
 				BA7071E526BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition in Sources */,
 				BAFDBBD926B88BD200119615 /* Date+Simplenote.swift in Sources */,
+				BA02A59226C0AE92005FF36E /* NoteListTable.swift in Sources */,
 				BAFA93F2265DE4A10009DCFB /* SimplenoteWidgets.swift in Sources */,
 				BAF8D53226AE175B00CA9383 /* Bundle+Simplenote.swift in Sources */,
 				BA122DC2265EF4E5003D3BC5 /* SPUserInterface.swift in Sources */,
