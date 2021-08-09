@@ -1,1 +1,1 @@
-notlar,bulut,basit,defter,metin,yapılacaklar,ajanda,günlük,senkronize,not defteri,etiket,yazı,anı
+notlar,metin,planlayıcı,günlük,eşitleme,yapılacaklar,bulut,defter,basit,not defteri,etiket

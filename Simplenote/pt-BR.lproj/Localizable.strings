@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-07-12 17:43:07+0000 */
+/* Translation-Revision-Date: 2021-07-30 16:56:19+0000 */
 /* Plural-Forms: nplurals=2; plural=(n > 1); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: pt_BR */
@@ -654,7 +654,7 @@
 "Status Code" = "Código do status";
 
 /* Theme: Matches iOS Settings */
-"System Default" = "Sistema padrão";
+"System Default" = "Padrão do sistema ";
 
 /* Tags List Header */
 "Tags" = "Tags";
