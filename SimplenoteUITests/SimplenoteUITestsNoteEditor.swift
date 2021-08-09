@@ -331,30 +331,27 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         NoteListAssert.noteExists(noteName: noteName + "-1")
     }
 
-    func testCopyAndPasteInterlink() throws {
+    func testCopyAndPasteInternalLink() throws {
         trackTest()
-        let toCopyNoteTitle = "Copy Internal Link Title"
-        let toPasteNoteTitle = "Paste Internal Link Title\n"
-        let note = NoteData(
-            name: "Paste Internal Link Title",
-            content: "[Copy Internal Link Title-1](simplenote://note/"
-        )
+        let originalNoteTitle = "Original Note Title"
+        let referringNoteTitle = "Referring Note Title"
+        let referringNoteData = NoteData(
+                name: referringNoteTitle,
+                content: "[\(originalNoteTitle)](simplenote://note/"
+            )
 
         trackStep()
-        populateNoteList(title: toCopyNoteTitle, numberToCreate: 1)
-
-        trackStep()
-        NoteList.longPressNote(title: toCopyNoteTitle + "-1")
+        NoteList.createNoteAndLeaveEditor(noteName: originalNoteTitle)
+        NoteList.longPressNote(title: originalNoteTitle)
         NoteList.copyInternalLinkFromContextMenu()
+        NoteListAssert.notesNumber(expectedNotesNumber: 1)
 
         trackStep()
         NoteList.addNoteTap()
-        NoteEditor.enterTitle(enteredValue: toPasteNoteTitle)
+        NoteEditor.enterTitle(enteredValue: referringNoteTitle)
         NoteEditor.pasteNoteContent()
         NoteEditor.leaveEditor()
-
-        trackStep()
         NoteListAssert.notesNumber(expectedNotesNumber: 2)
-        NoteListAssert.contentIsShown(for: note)
+        NoteListAssert.contentIsShown(for: referringNoteData)
     }
 }

@@ -55,7 +55,7 @@ class NoteEditor {
     class func enterTitle(enteredValue: String) {
         let noteContentTextView = app.textViews.element
 
-        noteContentTextView.clearAndEnterText(text: enteredValue)
+        noteContentTextView.clearAndEnterText(text: enteredValue + "\n")
     }
 
     class func pasteNoteContent() {
