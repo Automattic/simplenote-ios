@@ -10,11 +10,9 @@ struct WidgetHeaderView: View {
         HStack(alignment: .center) {
             Text(text)
                 .font(.headline)
-            if widgetFamily != .systemSmall {
-                Spacer()
-                Link(destination: URL(string: SimplenoteConstants.simplenoteScheme + "://" + Constants.newNoteHost)!) {
-                    NewNoteButton(size: Constants.side, foregroundColor: Constants.foregroundColor, backgroundColor: .white)
-                }
+            Spacer()
+            Link(destination: URL.newNoteURL) {
+                NewNoteButton(size: Constants.side, foregroundColor: Constants.foregroundColor, backgroundColor: .white)
             }
         }
         .padding(0)
