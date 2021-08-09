@@ -1,12 +1,12 @@
 import WidgetKit
 
 struct NoteWidgetEntry: TimelineEntry {
-    static let placeholder = NoteWidgetEntry(date: Date(), title: DemoContent.singleNoteTitle, content: DemoContent.singleNoteContent, simperiumKey: nil)
+    static let placeholder = NoteWidgetEntry(date: Date(), title: DemoContent.singleNoteTitle, content: DemoContent.singleNoteContent, url: DemoContent.demoURL)
 
     let date: Date
     let title: String
     let content: String
-    let simperiumKey: String?
+    let url: URL
 }
 
 struct NoteWidgetProvider: IntentTimelineProvider {
@@ -37,7 +37,7 @@ struct NoteWidgetProvider: IntentTimelineProvider {
             return
         }
 
-        completion(NoteWidgetEntry(date: Date(), title: note.title, content: note.body, simperiumKey: nil))
+        completion(NoteWidgetEntry(date: Date(), title: note.title, content: note.body, url: DemoContent.demoURL))
     }
 
     func getTimeline(for configuration: NoteWidgetIntent, in context: Context, completion: @escaping (Timeline<NoteWidgetEntry>) -> Void) {
@@ -59,7 +59,7 @@ struct NoteWidgetProvider: IntentTimelineProvider {
         var entries: [NoteWidgetEntry] = []
         for int in 0..<6 {
             if let date = Date().increased(byHours: int) {
-                entries.append(NoteWidgetEntry(date: date, title: note.title, content: note.body, simperiumKey: note.simperiumKey))
+                entries.append(NoteWidgetEntry(date: date, title: note.title, content: note.body, url: note.url))
             }
         }
         let timeline = Timeline(entries: entries, policy: .atEnd)

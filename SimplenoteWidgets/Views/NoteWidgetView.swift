@@ -19,17 +19,10 @@ struct NoteWidgetView: View {
                 .filling()
                 .padding([.leading, .trailing, .top], Sizes.overallPadding)
                 .ignoresSafeArea()
-                .widgetURL(prepareWidgetURL(from: entry.simperiumKey))
+                .widgetURL(entry.url)
             }
             .background(Color(for: colorScheme, light: .white, dark: .darkGray1))
         }
-    }
-
-    private func prepareWidgetURL(from simperiumKey: String?) -> URL? {
-        guard let simperiumKey = simperiumKey else {
-            return URL(string: SimplenoteConstants.simplenoteScheme + "://")!
-        }
-        return URL(string: Constants.linkUrlBase + simperiumKey)
     }
 }
 
@@ -37,17 +30,13 @@ private struct Sizes {
     static let overallPadding = CGFloat(20)
 }
 
-private struct Constants {
-    static let linkUrlBase = SimplenoteConstants.simplenoteScheme + "://" + SimplenoteConstants.simplenoteInterlinkHost + "/"
-}
-
 struct NoteWidgetView_Previews: PreviewProvider {
     static var previews: some View {
 
         Group {
-            NoteWidgetView(entry: NoteWidgetEntry(date: Date(), title: DemoContent.singleNoteTitle, content: DemoContent.singleNoteContent, simperiumKey: nil))
+            NoteWidgetView(entry: NoteWidgetEntry(date: Date(), title: DemoContent.singleNoteTitle, content: DemoContent.singleNoteContent, url: DemoContent.demoURL))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
-            NoteWidgetView(entry: NoteWidgetEntry(date: Date(), title: DemoContent.singleNoteTitle, content: DemoContent.singleNoteContentAlt, simperiumKey: nil))
+            NoteWidgetView(entry: NoteWidgetEntry(date: Date(), title: DemoContent.singleNoteTitle, content: DemoContent.singleNoteContentAlt, url: DemoContent.demoURL))
                 .previewContext(WidgetPreviewContext(family: .systemMedium)).colorScheme(.dark)
         }
     }
