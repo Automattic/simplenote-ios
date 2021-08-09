@@ -1,6 +1,10 @@
 import WidgetKit
 
 struct ListWidgetEntry: TimelineEntry {
+    static let placeholder = ListWidgetEntry(date: Date(),
+                                             tag: DemoContent.listTag,
+                                             noteProxys: DemoContent.listProxies)
+
     let date: Date
     let tag: String
     let noteProxys: [ListWidgetNoteProxy]
@@ -31,13 +35,25 @@ struct ListWidgetProvider: IntentTimelineProvider {
 
 
     func placeholder(in context: Context) -> ListWidgetEntry {
-        return ListWidgetEntry(date: Date(), tag: DemoContent.listTag, noteProxys: DemoContent.listProxies)
+        return ListWidgetEntry.placeholder
     }
 
     func getSnapshot(for configuration: ListWidgetIntent, in context: Context, completion: @escaping (ListWidgetEntry) -> Void) {
-        let entry = ListWidgetEntry(date: Date(), tag: DemoContent.listTag, noteProxys: DemoContent.listProxies)
+        guard let dataController = dataController else {
+            completion(ListWidgetEntry.placeholder)
+            return
+        }
 
-        completion(entry)
+        guard let allNotes = try? dataController.notes() else {
+            completion(ListWidgetEntry.placeholder)
+            return
+        }
+
+        let proxies: [ListWidgetNoteProxy] = allNotes.map { (note) -> ListWidgetNoteProxy in
+            ListWidgetNoteProxy(title: note.title, url: note.url)
+        }
+
+        completion(ListWidgetEntry(date: Date(), tag: "All Notes", noteProxys: proxies))
     }
 
     func getTimeline(for configuration: ListWidgetIntent, in context: Context, completion: @escaping (Timeline<ListWidgetEntry>) -> Void) {
