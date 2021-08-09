@@ -318,17 +318,15 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         let noteName = "Note Title"
 
         trackStep()
-        populateNoteList(title: noteName, numberToCreate: 1)
-
-        trackStep()
-        NoteList.longPressNote(title: noteName + "-1")
+        NoteList.createNoteAndLeaveEditor(noteName: noteName)
+        NoteList.longPressNote(title: noteName)
         NoteList.deleteNoteFromContextMenu()
         NoteListAssert.notesNumber(expectedNotesNumber: 0)
 
         trackStep()
         NoteList.tapUndoOnSnackbar()
         NoteListAssert.notesNumber(expectedNotesNumber: 1)
-        NoteListAssert.noteExists(noteName: noteName + "-1")
+        NoteListAssert.noteExists(noteName: noteName)
     }
 
     func testCopyAndPasteInternalLink() throws {
