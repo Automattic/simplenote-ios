@@ -2,7 +2,7 @@ import SwiftUI
 import WidgetKit
 
 
-struct WidgetHeaderView: View {
+struct NoteWidgetHeaderView: View {
     let text: String
     @Environment(\.widgetFamily) var widgetFamily
 
