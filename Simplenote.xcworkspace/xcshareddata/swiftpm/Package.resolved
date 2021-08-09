@@ -32,9 +32,9 @@
         "package": "XCUITestHelpers",
         "repositoryURL": "https://github.com/Automattic/XCUITestHelpers",
         "state": {
-          "branch": null,
-          "revision": "47d688b0b2a6356361a16836c4d23f12d6643a73",
-          "version": "0.1.0"
+          "branch": "add-is-dark-mode",
+          "revision": "4c4bb89a44417e98dfcda276eaff18d71e8fdb0e",
+          "version": null
         }
       }
     ]
