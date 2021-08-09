@@ -406,6 +406,8 @@
 		B5F3000223F4502C007A7C59 /* SPSortBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5F3000123F4502C007A7C59 /* SPSortBar.xib */; };
 		B5F3FFFF23F44679007A7C59 /* SPSortBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F3FFFE23F44679007A7C59 /* SPSortBar.swift */; };
 		BA02A59226C0AE92005FF36E /* NoteListTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA02A59126C0AE92005FF36E /* NoteListTable.swift */; };
+		BA02A5D226C0B4B0005FF36E /* URL+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA02A5C726C0B4A0005FF36E /* URL+Simplenote.swift */; };
+		BA02A5DC26C0B4B1005FF36E /* URL+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA02A5C726C0B4A0005FF36E /* URL+Simplenote.swift */; };
 		BA0890A526BB9B680035CA48 /* NoteListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0890A426BB9B680035CA48 /* NoteListRow.swift */; };
 		BA0890A726BB9BE20035CA48 /* WidgetHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0890A626BB9BE20035CA48 /* WidgetHeaderView.swift */; };
 		BA0890A926BB9BF80035CA48 /* NewNoteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0890A826BB9BF80035CA48 /* NewNoteButton.swift */; };
@@ -1047,6 +1049,7 @@
 		B5F3000123F4502C007A7C59 /* SPSortBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPSortBar.xib; path = Classes/SPSortBar.xib; sourceTree = "<group>"; };
 		B5F3FFFE23F44679007A7C59 /* SPSortBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPSortBar.swift; path = Classes/SPSortBar.swift; sourceTree = "<group>"; };
 		BA02A59126C0AE92005FF36E /* NoteListTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListTable.swift; sourceTree = "<group>"; };
+		BA02A5C726C0B4A0005FF36E /* URL+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Simplenote.swift"; sourceTree = "<group>"; };
 		BA0890A426BB9B680035CA48 /* NoteListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListRow.swift; sourceTree = "<group>"; };
 		BA0890A626BB9BE20035CA48 /* WidgetHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetHeaderView.swift; sourceTree = "<group>"; };
 		BA0890A826BB9BF80035CA48 /* NewNoteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNoteButton.swift; sourceTree = "<group>"; };
@@ -1794,6 +1797,7 @@
 		B569DBFE1C03411500EC1FE8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				BA02A5C726C0B4A0005FF36E /* URL+Simplenote.swift */,
 				B5E951E224FEE25A004B10B8 /* Links */,
 				B5CBEF4122D3B419009DBE67 /* Bundle+Simplenote.swift */,
 				B536988C25646C9400817E30 /* CGRect+Simplenote.swift */,
@@ -3306,6 +3310,7 @@
 				A6E4875825BEF3C700D0CE3B /* UIResponder+Simplenote.swift in Sources */,
 				46A3C99C17DFA81A002865AE /* NSString+Bullets.m in Sources */,
 				B58BF1FB23D78ADF00515B50 /* UIContextualAction+Simplenote.swift in Sources */,
+				BA02A5DC26C0B4B1005FF36E /* URL+Simplenote.swift in Sources */,
 				E215C79A180B130B00AD36B5 /* SPTableViewController.m in Sources */,
 				BA4499BC25ED95D0000C563E /* Notice.swift in Sources */,
 				BA5C1C0725BF9D6C006E3820 /* SPDragBar.swift in Sources */,
@@ -3511,6 +3516,7 @@
 				BAF8D5BB26AE254000CA9383 /* Simplenote.xcdatamodeld in Sources */,
 				BA608EF726BB6E7400A9D94E /* ListWidgetProvider.swift in Sources */,
 				BA0890A726BB9BE20035CA48 /* WidgetHeaderView.swift in Sources */,
+				BA02A5D226C0B4B0005FF36E /* URL+Simplenote.swift in Sources */,
 				BAB6C04326BA4994007495C4 /* ContentSlice.swift in Sources */,
 				BAB6C04226BA496F007495C4 /* String+Simplenote.swift in Sources */,
 				BA122DBB265EF40E003D3BC5 /* UIColor+Helpers.swift in Sources */,

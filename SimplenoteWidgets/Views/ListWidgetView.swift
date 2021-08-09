@@ -35,7 +35,6 @@ struct ListWidgetView: View {
 }
 
 private struct Constants {
-    static let linkUrlBase = SimplenoteConstants.simplenoteScheme + "://" + SimplenoteConstants.simplenoteInterlinkHost + "/"
     static let mediumRows = 3
     static let largeRows = 8
     static let sidePadding = CGFloat(20)
