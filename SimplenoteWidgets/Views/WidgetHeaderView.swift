@@ -12,7 +12,9 @@ struct WidgetHeaderView: View {
                 .font(.headline)
             Spacer()
             Link(destination: URL.newNoteURL) {
-                NewNoteButton(size: Constants.side, foregroundColor: Constants.foregroundColor, backgroundColor: .white)
+                NewNoteImage(size: Constants.side,
+                             foregroundColor: Constants.foregroundColor,
+                             backgroundColor: .white)
             }
         }
         .padding(0)

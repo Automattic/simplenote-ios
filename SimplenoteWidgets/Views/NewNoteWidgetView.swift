@@ -7,11 +7,9 @@ struct NewNoteWidgetView: View {
         ZStack {
             VStack(alignment: .leading) {
                 HStack {
-                    Image(Constants.newNoteImage)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .foregroundColor(.white)
-                        .frame(width: Constants.side, height: Constants.side, alignment: .center)
+                    NewNoteImage(size: Constants.side,
+                                 foregroundColor: .white,
+                                 backgroundColor: Color(studioColor: .spBlue50))
                     Spacer()
                 }
                 Spacer()

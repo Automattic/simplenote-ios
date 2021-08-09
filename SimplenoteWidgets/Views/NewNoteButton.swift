@@ -1,7 +1,7 @@
 import SwiftUI
 import WidgetKit
 
-struct NewNoteButton: View {
+struct NewNoteImage: View {
     let size: CGFloat
     let foregroundColor: Color
     let backgroundColor: Color
@@ -12,7 +12,7 @@ struct NewNoteButton: View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .foregroundColor(foregroundColor)
-                .frame(width: size, height: size, alignment: .center)
+                .frame(side: size)
         }
         .background(Color(UIColor(backgroundColor)))
     }
@@ -20,7 +20,7 @@ struct NewNoteButton: View {
 
 struct NewNoteButton_Previews: PreviewProvider {
     static var previews: some View {
-        NewNoteButton(size: 48, foregroundColor: .white, backgroundColor: .blue)
+        NewNoteImage(size: 48, foregroundColor: .white, backgroundColor: .blue)
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }
