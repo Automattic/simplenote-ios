@@ -2,19 +2,24 @@ import SwiftUI
 import WidgetKit
 
 
-struct WidgetHeaderView: View {
+struct ListWidgetHeaderView: View {
     let text: String
+    
+    @Environment(\.colorScheme) var colorScheme
     @Environment(\.widgetFamily) var widgetFamily
 
     var body: some View {
         HStack(alignment: .center) {
             Text(text)
                 .font(.headline)
+                .foregroundColor(Color(for: colorScheme,
+                                       light: .gray100,
+                                       dark: .white))
             Spacer()
             Link(destination: URL.newNoteURL) {
                 NewNoteImage(size: Constants.side,
                              foregroundColor: Constants.foregroundColor,
-                             backgroundColor: .white)
+                             backgroundColor: Color(for: colorScheme, light: .white, dark: .darkGray1))
             }
         }
         .padding(.zero)
@@ -23,7 +28,7 @@ struct WidgetHeaderView: View {
 
 struct NotePreviewHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        WidgetHeaderView(text: "Header")
+        ListWidgetHeaderView(text: "Header")
             .previewContext(WidgetPreviewContext(family: .systemMedium))
     }
 }

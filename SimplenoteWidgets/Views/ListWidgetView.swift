@@ -7,20 +7,25 @@ struct ListWidgetView: View {
     @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
+        let numberOfRows = rows(for: widgetFamily)
+
         GeometryReader { geometry in
-            let numberOfRows = rows(for: widgetFamily)
-             HStack(alignment: .top) {
-                VStack(alignment: .leading, spacing: .zero) {
-                    WidgetHeaderView(text: entry.tag)
-                        .padding(.trailing, Constants.sidePadding)
-                        .padding([.bottom, .top], Constants.topAndBottomPadding)
-                    NoteListTable(entry: entry,
-                                  numberOfRows: numberOfRows,
-                                  geometry: geometry)
-                     .multilineTextAlignment(.leading)
-                 }
-                .padding(.leading, Constants.sidePadding)
-             }
+            ZStack {
+                HStack(alignment: .top) {
+                    VStack(alignment: .leading, spacing: .zero) {
+                        ListWidgetHeaderView(text: entry.tag)
+                            .padding(.trailing, Constants.sidePadding)
+                            .padding([.bottom, .top], Constants.topAndBottomPadding)
+                        NoteListTable(entry: entry,
+                                      numberOfRows: numberOfRows,
+                                      geometry: geometry)
+                            .multilineTextAlignment(.leading)
+                    }
+                    .padding(.leading, Constants.sidePadding)
+                }
+            }
+            .filling()
+            .background(Color(for: colorScheme, light: .white, dark: .darkGray1))
         }
     }
 
@@ -49,6 +54,7 @@ struct ListWidgetView_Previews: PreviewProvider {
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
             ListWidgetView(entry: ListWidgetEntry(date: Date(), tag: DemoContent.listTag, noteProxys: DemoContent.listProxies))
                 .previewContext(WidgetPreviewContext(family: .systemLarge))
+                .colorScheme(.dark)
         }
     }
 }
