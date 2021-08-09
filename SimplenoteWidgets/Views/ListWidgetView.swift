@@ -8,7 +8,7 @@ struct ListWidgetView: View {
 
     var body: some View {
         GeometryReader { geometry in
-            let numberOfRows: Int = rows(for: widgetFamily)
+            let numberOfRows = rows(for: widgetFamily)
              HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: .zero) {
                     WidgetHeaderView(text: entry.tag)

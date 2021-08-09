@@ -24,13 +24,6 @@ struct NoteWidgetView: View {
             .background(Color(for: colorScheme, light: .white, dark: .darkGray1))
         }
     }
-
-    private func prepareWidgetURL(from simperiumKey: String?) -> URL? {
-        guard let simperiumKey = simperiumKey else {
-            return URL(string: SimplenoteConstants.simplenoteScheme + "://")!
-        }
-        return URL(string: Constants.linkUrlBase + simperiumKey)
-    }
 }
 
 private struct Sizes {

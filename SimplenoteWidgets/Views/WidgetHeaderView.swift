@@ -17,7 +17,7 @@ struct WidgetHeaderView: View {
                              backgroundColor: .white)
             }
         }
-        .padding(0)
+        .padding(.zero)
     }
 }
 
