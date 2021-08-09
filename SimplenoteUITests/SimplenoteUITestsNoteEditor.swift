@@ -295,8 +295,6 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
 
         trackStep()
         populateNoteList(title: noteTitle, numberToCreate: 2)
-
-        trackStep()
         NoteList.longPressNote(title: noteTitle + "-1")
         NoteList.selectNoteFromContextMenu()
         NoteList.selectAll()
