@@ -70,14 +70,18 @@ extension IntentHandler: ListWidgetIntentHandling {
     }
 
     private func tagNoteInObjectCollection(from tags: [Tag]) -> INObjectCollection<WidgetTag> {
-        let widgetTags = tags.map({ tag in
+        let allNotesWidgetTag: [WidgetTag] = [WidgetTag(identifier: Constants.allNotes, display: Constants.allNotes)]
+        let fetchedWidgetTags = tags.map({ tag in
             WidgetTag(identifier: tag.name ?? "Unamed Tag", display: tag.name ?? "Unamed Tag")
         })
-        return INObjectCollection(items: widgetTags)
+        return INObjectCollection(items: allNotesWidgetTag + fetchedWidgetTags)
     }
 
     func defaultTag(for intent: ListWidgetIntent) -> WidgetTag? {
-        WidgetTag(identifier: "All Notes", display: "All Notes")
+        WidgetTag(identifier: Constants.allNotes, display: Constants.allNotes)
     }
+}
 
+private struct Constants {
+    static let allNotes = "All Notes"
 }
