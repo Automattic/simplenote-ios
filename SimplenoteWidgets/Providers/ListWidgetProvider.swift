@@ -67,7 +67,7 @@ struct ListWidgetProvider: IntentTimelineProvider {
         // Fetch note
         var notes: [Note]
         do {
-            notes = try dataController.notes(withTag: tag, limit: 8)
+            notes = try dataController.notes(withFilter: TagsFilter(from: tag), limit: 8)
         } catch {
             NSLog("Couldn't fetch notes from core data")
             return

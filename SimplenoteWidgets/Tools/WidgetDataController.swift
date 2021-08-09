@@ -62,12 +62,10 @@ class WidgetDataController {
     /// Fetch notes with given tag and limit
     /// If no tag is specified, will fetch notes that are not deleted. If there is no limit specified it will fetch all of the notes
     ///
-    func notes(withTag tag: String? = nil, limit: Int = .zero) throws -> [Note] {
+    func notes(withFilter tagsFilter: TagsFilter = .allNotes, limit: Int = .zero) throws -> [Note] {
         notesController.limit = limit
 
-        if let tag = tag {
-            notesController.predicate = predicateForNotes(withTag: tag)
-        }
+        notesController.predicate = predicateForNotes(filteredBy: tagsFilter)
         try performFetch()
 
         return notesController.fetchedObjects
@@ -90,19 +88,19 @@ class WidgetDataController {
     }
 
     func firstNote() throws -> Note? {
-        let fetched = try notes(withTag: nil, limit: 1)
+        let fetched = try notes(limit: 1)
         return fetched.first
     }
 
     /// Creates a predicate for notes given a tag name.  If not specified the predicate is for all notes that are not deleted
     ///
-    private func predicateForNotes(withTag tag: String? = nil) -> NSPredicate {
-        guard let tag = tag,
-              tag != "All Notes" else {
+    private func predicateForNotes(filteredBy tagFilter: TagsFilter = .allNotes) -> NSPredicate {
+        switch tagFilter {
+        case .allNotes:
             return NSPredicate.predicateForNotes(deleted: false)
+        case .tag(let tag):
+            return NSPredicate.predicateForNotes(tag: tag)
         }
-
-        return NSPredicate.predicateForNotes(tag: tag)
     }
 
     // MARK: - Tags
@@ -115,5 +113,21 @@ class WidgetDataController {
         }
 
         return tagsController.fetchedObjects
+    }
+}
+
+enum TagsFilter {
+    case allNotes
+    case tag(String)
+}
+
+extension TagsFilter {
+    init(from tag: String) {
+        switch tag {
+        case "All Notes":
+            self = .allNotes
+        default:
+            self = .tag(tag)
+        }
     }
 }
