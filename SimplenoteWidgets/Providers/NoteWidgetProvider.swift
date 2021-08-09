@@ -1,7 +1,10 @@
 import WidgetKit
 
 struct NoteWidgetEntry: TimelineEntry {
-    static let placeholder = NoteWidgetEntry(date: Date(), title: DemoContent.singleNoteTitle, content: DemoContent.singleNoteContent, simperiumKey: nil)
+    static let placeholder = NoteWidgetEntry(date: Date(),
+                                             title: DemoContent.singleNoteTitle,
+                                             content: DemoContent.singleNoteContent,
+                                             url: DemoContent.demoURL)
 
     let date: Date
     let title: String
@@ -37,7 +40,7 @@ struct NoteWidgetProvider: IntentTimelineProvider {
             return
         }
 
-        completion(NoteWidgetEntry(date: Date(), title: note.title, content: note.body, simperiumKey: nil))
+        completion(NoteWidgetEntry(date: Date(), title: note.title, content: note.body, url: note.url))
     }
 
     func getTimeline(for configuration: NoteWidgetIntent, in context: Context, completion: @escaping (Timeline<NoteWidgetEntry>) -> Void) {
