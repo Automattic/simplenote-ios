@@ -31,10 +31,14 @@ extension SPObjectManager {
         }
 
         let request = NSFetchRequest<Note>(entityName: Note.entityName)
-        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
-            .predicateForNotes(tag: tagName),
-            .predicateForNotes(deleted: includeDeleted)
-        ])
+
+        var predicates: [NSPredicate] = []
+        predicates.append(.predicateForNotes(tag: tagName))
+        if includeDeleted == false {
+            predicates.append(.predicateForNotes(deleted: includeDeleted))
+        }
+
+        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
 
         return (try? managedObjectContext.fetch(request)) ?? []
     }
