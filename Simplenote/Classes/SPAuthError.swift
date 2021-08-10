@@ -22,7 +22,7 @@ extension SPAuthError {
     init(loginErrorCode: Int, response: String?, error: Error?) {
         switch loginErrorCode {
         case 401:
-            self = response == "compromised password" ? .compromisedPassword : .loginBadCredentials
+            self = response == Constants.compromisedPassword ? .compromisedPassword : .loginBadCredentials
         default:
             self = .unknown(statusCode: loginErrorCode, response: response, error: error)
         }
@@ -78,4 +78,8 @@ extension SPAuthError {
             return NSLocalizedString("We're having problems. Please try again soon.", comment: "Generic error")
         }
     }
+}
+
+private struct Constants {
+    static let compromisedPassword = "compromised password"
 }
