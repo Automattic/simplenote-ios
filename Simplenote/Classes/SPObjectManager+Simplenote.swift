@@ -37,7 +37,7 @@ extension SPObjectManager {
         if includeDeleted == false {
             predicates.append(.predicateForNotes(deleted: includeDeleted))
         }
-        
+
         request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
 
         return (try? managedObjectContext.fetch(request)) ?? []
