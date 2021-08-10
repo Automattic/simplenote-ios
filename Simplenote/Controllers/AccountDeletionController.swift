@@ -20,4 +20,9 @@ class AccountDeletionController: NSObject {
             completion(result)
         }
     }
+
+    @objc
+    func clearRequestToken() {
+        accountDeletionRequestDate = nil
+    }
 }

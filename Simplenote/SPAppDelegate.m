@@ -315,6 +315,8 @@
 			
 			// hide sidebar of notelist
             [self.sidebarViewController hideSidebarWithAnimation:NO];
+
+            [self.accountDeletionController clearRequestToken];
 			
 			[self dismissAllModalsAnimated:YES completion:^{
 				
