@@ -34,6 +34,7 @@ NSString *const kShareExtensionGroupName            = @"group.com.codality.Notat
 NSString *const kSimplenoteTrashKey                 = @"__##__trash__##__";
 NSString *const kSimplenoteUntaggedKey              = @"__##__untagged__##__";
 NSString *const kSimplenoteWPServiceName            = @"simplenote-wpcom";
+NSString *const SPUsername                          = @"SPUsername";
 
 NSString *const kSignInErrorNotificationName        = @"SPSignInErrorNotificationName";
 

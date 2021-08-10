@@ -186,7 +186,7 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     [self dismissPasscodeLockIfPossible];
-    [self authenticateSimperiumIfNeeded];
+    [self authenticateSimperiumIfAccountDeletionRequested];
 }
 
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler
@@ -289,7 +289,7 @@
     self.signOutActivityIndicator = [SPModalActivityIndicator show];
     
     // Remove WordPress token
-    [SPKeychain deletePasswordForService:kSimplenoteWPServiceName account:self.simperium.user.email];
+    [self removeStoredCredentialsFromKeychain];
 
     // Remove Siri Shortcuts
     [[ShortcutsHandler shared] unregisterSimplenoteActivities];
@@ -323,6 +323,12 @@
 			}];
 		}];
     });
+}
+
+-(void)removeStoredCredentialsFromKeychain
+{
+    [self.simperium.authenticator reset];
+    [SPKeychain deletePasswordForService:kSimplenoteWPServiceName account:self.simperium.user.email];
 }
 
 - (void)save
