@@ -8,6 +8,7 @@ enum SPAuthError: Error {
     case signupBadCredentials
     case signupUserAlreadyExists
     case network
+    case compromisedPassword
     case unknown(statusCode: Int, response: String?, error: Error?)
 }
 
@@ -21,7 +22,7 @@ extension SPAuthError {
     init(loginErrorCode: Int, response: String?, error: Error?) {
         switch loginErrorCode {
         case 401:
-            self = .loginBadCredentials
+            self = response == "compromised password" ? .compromisedPassword : .loginBadCredentials
         default:
             self = .unknown(statusCode: loginErrorCode, response: response, error: error)
         }
@@ -52,6 +53,8 @@ extension SPAuthError {
         switch self {
         case .signupUserAlreadyExists:
             return NSLocalizedString("Email in use", comment: "Email Taken Alert Title")
+        case .compromisedPassword:
+            return NSLocalizedString("Compromised Password", comment: "Compromised password alert title")
         default:
             return NSLocalizedString("Sorry!", comment: "Authentication Error Alert Title")
         }
@@ -69,6 +72,8 @@ extension SPAuthError {
             return NSLocalizedString("The email you've entered is already associated with a Simplenote account.", comment: "Error when address is in use")
         case .network:
             return NSLocalizedString("The network could not be reached.", comment: "Error when the network is inaccessible")
+        case .compromisedPassword:
+            return NSLocalizedString("This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately.", comment: "error for compromised password")
         case .unknown:
             return NSLocalizedString("We're having problems. Please try again soon.", comment: "Generic error")
         }
