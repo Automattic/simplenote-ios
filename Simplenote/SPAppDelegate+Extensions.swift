@@ -278,7 +278,18 @@ extension SPAppDelegate: SimperiumDelegate {
 
     public func simperium(_ simperium: Simperium, didFailWithError error: Error) {
         SPTracker.refreshMetadataForAnonymousUser()
-        logOutIfAccountDeletionRequested()
+
+        guard let simperiumError = SPSimperiumErrors(rawValue: (error as NSError).code) else {
+            return
+        }
+
+        switch simperiumError {
+        case .invalidToken:
+            logOutIfAccountDeletionRequested()
+            break
+        default:
+            break
+        }
     }
 }
 
