@@ -289,7 +289,7 @@
     self.signOutActivityIndicator = [SPModalActivityIndicator show];
     
     // Remove WordPress token
-    [self removeStoredCredentialsFromKeychain];
+    [SPKeychain deletePasswordForService:kSimplenoteWPServiceName account:self.simperium.user.email];
 
     // Remove Siri Shortcuts
     [[ShortcutsHandler shared] unregisterSimplenoteActivities];
@@ -325,12 +325,6 @@
 			}];
 		}];
     });
-}
-
--(void)removeStoredCredentialsFromKeychain
-{
-    [self.simperium.authenticator reset];
-    [SPKeychain deletePasswordForService:kSimplenoteWPServiceName account:self.simperium.user.email];
 }
 
 - (void)save

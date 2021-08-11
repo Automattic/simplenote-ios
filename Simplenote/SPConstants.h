@@ -23,7 +23,6 @@ extern NSString *const kAutomatticAnalyticLearnMoreURL;
 
 extern NSString *const kShareExtensionGroupName;
 extern NSString *const kSimplenoteWPServiceName;
-extern NSString *const SPUsername;
 
 extern NSString *const kSelectedTagKey;
 extern NSString *const kSimplenoteTrashKey;

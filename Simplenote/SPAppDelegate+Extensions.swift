@@ -420,10 +420,7 @@ extension SPAppDelegate {
 
     @objc
     func logOutIfAccountDeletionRequested() {
-        guard let deletionController = accountDeletionController,
-              deletionController.hasValidDeletionRequest,
-              let user = simperium.user,
-              user.authenticated() else {
+        guard accountDeletionController?.hasValidDeletionRequest == true else {
             return
         }
 
