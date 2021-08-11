@@ -413,6 +413,8 @@ private extension SPAuthViewController {
         switch error {
         case .signupUserAlreadyExists:
             presentUserAlreadyExistsError(error: error)
+        case .compromisedPassword:
+            presentPasswordCompromisedError(error: error)
         case .unknown(let statusCode, let response, let error) where debugEnabled:
             let details = NSAttributedString.stringFromNetworkError(statusCode: statusCode, response: response, error: error)
             presentDebugDetails(details: details)
@@ -427,6 +429,16 @@ private extension SPAuthViewController {
         alertController.addDefaultActionWithTitle(AuthenticationStrings.loginActionText) { _ in
             self.attemptLoginWithCurrentCredentials()
         }
+
+        present(alertController, animated: true, completion: nil)
+    }
+
+    func presentPasswordCompromisedError(error: SPAuthError) {
+        let alertController = UIAlertController(title: error.title, message: error.message, preferredStyle: .alert)
+        alertController.addDefaultActionWithTitle(AuthenticationStrings.compromisedAlertReset) { _ in
+            self.presentPasswordReset()
+        }
+        alertController.addCancelActionWithTitle(AuthenticationStrings.compromisedAlertCancel)
 
         present(alertController, animated: true, completion: nil)
     }
@@ -656,6 +668,8 @@ private enum AuthenticationStrings {
     static let acceptActionText             = NSLocalizedString("Accept", comment: "Accept Action")
     static let cancelActionText             = NSLocalizedString("Cancel", comment: "Cancel Action")
     static let loginActionText              = NSLocalizedString("Log In", comment: "Log In Action")
+    static let compromisedAlertCancel       = NSLocalizedString("Not Yet", comment: "Cancel action for password alert")
+    static let compromisedAlertReset        = NSLocalizedString("Change Password", comment: "Change password action")
 }
 
 
