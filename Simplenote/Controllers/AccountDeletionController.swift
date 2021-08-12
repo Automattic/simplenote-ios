@@ -6,7 +6,7 @@ class AccountDeletionController: NSObject {
 
     var hasValidDeletionRequest: Bool {
         guard let expirationDate = accountDeletionRequestDate?.increased(byDays: 1) else {
-            return true
+            return false
         }
 
         return Date() < expirationDate

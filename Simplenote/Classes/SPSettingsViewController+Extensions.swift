@@ -160,7 +160,7 @@ private struct AccountDeletion {
     static let cancel = NSLocalizedString("Cancel", comment: "Cancel button title")
 
     static let succesAlertTitle = NSLocalizedString("Check Your Email", comment: "Title for delete account succes alert")
-    static let successAlertMessage = NSLocalizedString("An email has been sent to %@ Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation", comment: "Delete account confirmation instructions")
+    static let successAlertMessage = NSLocalizedString("An email has been sent to %@. Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation.", comment: "Delete account confirmation instructions")
     static let ok = NSLocalizedString("Ok", comment: "Confirm alert message")
 
     static let errorTitle = NSLocalizedString("Error", comment: "Deletion Error Title")
