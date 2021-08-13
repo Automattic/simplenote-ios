@@ -8,7 +8,7 @@ struct NoteListRow: View {
 
     var body: some View {
         Text(noteTitle)
-            .font(.body)
+            .font(.subheadline)
             .lineLimit(1)
             .frame(width: width, height: height, alignment: .leading)
         Divider()
