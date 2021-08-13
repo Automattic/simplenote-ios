@@ -124,7 +124,7 @@ enum TagsFilter {
 extension TagsFilter {
     init(from tag: String) {
         switch tag {
-        case "All Notes":
+        case WidgetConstants.allNotesIdentifier:
             self = .allNotes
         default:
             self = .tag(tag)

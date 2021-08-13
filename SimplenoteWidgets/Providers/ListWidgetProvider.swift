@@ -53,7 +53,7 @@ struct ListWidgetProvider: IntentTimelineProvider {
             ListWidgetNoteProxy(title: note.title, url: note.url)
         }
 
-        completion(ListWidgetEntry(date: Date(), tag: "All Notes", noteProxys: proxies))
+        completion(ListWidgetEntry(date: Date(), tag: WidgetConstants.allNotesIdentifier, noteProxys: proxies))
     }
 
     func getTimeline(for configuration: ListWidgetIntent, in context: Context, completion: @escaping (Timeline<ListWidgetEntry>) -> Void) {
@@ -63,7 +63,6 @@ struct ListWidgetProvider: IntentTimelineProvider {
             NSLog("Couldn't find configuration or identifier")
             return
         }
-
         // Fetch note
         var notes: [Note]
         do {

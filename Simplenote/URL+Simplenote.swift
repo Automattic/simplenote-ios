@@ -9,7 +9,7 @@ extension URL {
     }
 
     static func tagQuery(for tag: String) -> String {
-        Constants.tagQueryBase + tag.addingPercentEncoding(withAllowedCharacters: .alphanumerics)!
+        Constants.tagQueryBase + tag
     }
 
     static func newNoteURL(withTag tag: String? = nil) -> URL {
@@ -24,5 +24,5 @@ extension URL {
 }
 
 private struct Constants {
-    static let tagQueryBase = "?=tag"
+    static let tagQueryBase = "?tag="
 }

@@ -13,7 +13,7 @@ struct ListWidgetView: View {
             ZStack {
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: .zero) {
-                        ListWidgetHeaderView(text: entry.tag)
+                        ListWidgetHeaderView(tag: entry.tag)
                             .padding(.trailing, Constants.sidePadding)
                             .padding([.bottom, .top], Constants.topAndBottomPadding)
                         NoteListTable(entry: entry,
