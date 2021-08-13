@@ -41,5 +41,4 @@ struct NotePreviewHeaderView_Previews: PreviewProvider {
 
 private struct Constants {
     static let side = CGFloat(24)
-    static let newNoteHost = "new"
 }

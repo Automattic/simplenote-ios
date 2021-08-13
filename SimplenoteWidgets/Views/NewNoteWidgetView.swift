@@ -35,7 +35,5 @@ struct NewNoteView_Previews: PreviewProvider {
 private struct Constants {
     static let side = CGFloat(48)
     static let overallPadding = CGFloat(16)
-    static let newNoteImage = "icon_new_note"
-    static let newNoteText = "New Note..."
-    static let newNoteHost = "new"
+    static let newNoteText = NSLocalizedString("New Note...", comment: "Text for new note button")
 }

@@ -30,9 +30,6 @@ private struct Sizes {
     static let overallPadding = CGFloat(20)
 }
 
-private struct Constants {
-    static let linkUrlBase = SimplenoteConstants.simplenoteScheme + "://" + SimplenoteConstants.simplenoteInterlinkHost + "/"
-}
 
 struct NoteWidgetView_Previews: PreviewProvider {
     static var previews: some View {
