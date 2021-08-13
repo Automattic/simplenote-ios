@@ -4,21 +4,23 @@ import WidgetKit
 
 struct ListWidgetHeaderView: View {
     let text: String
-    
+
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.widgetFamily) var widgetFamily
 
     var body: some View {
         HStack(alignment: .center) {
-            Text(text)
-                .font(.headline)
-                .foregroundColor(Color(for: colorScheme,
-                                       light: .gray100,
-                                       dark: .white))
-            Spacer()
-            Link(destination: URL.newNoteURL) {
+            Link(destination: URL.internalUrl(for: text)) {
+                Text(text)
+                    .font(.headline)
+                    .foregroundColor(Color(for: colorScheme,
+                                           light: .gray100,
+                                           dark: .white))
+                Spacer()
+            }
+            Link(destination: URL.newNoteURL(withTag: text)) {
                 NewNoteImage(size: Constants.side,
-                             foregroundColor: Constants.foregroundColor,
+                             foregroundColor: Color(UIColor(studioColor: .spBlue50)),
                              backgroundColor: Color(for: colorScheme, light: .white, dark: .darkGray1))
             }
         }

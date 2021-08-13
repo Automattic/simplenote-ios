@@ -20,7 +20,7 @@ struct NewNoteWidgetView: View {
             .padding(Constants.overallPadding)
         }
         .background(Color(studioColor: .spBlue50))
-        .widgetURL(URL.newNoteURL)
+        .widgetURL(URL.newNoteURL())
     }
 }
 
