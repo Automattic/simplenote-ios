@@ -502,6 +502,10 @@
         return YES;
     }
 
+    if ([self handleOpenTagListWithUrl:url]) {
+        return YES;
+    }
+
     // Support opening Simplenote and optionally creating a new note
     NSURLComponents *components = [NSURLComponents componentsWithURL:url resolvingAgainstBaseURL:NO];
 

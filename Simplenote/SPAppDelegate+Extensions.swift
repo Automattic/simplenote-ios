@@ -107,6 +107,27 @@ extension SPAppDelegate {
         return true
     }
 
+    /// Opens the Note list displaying a tag associated with a given URL instance, when possible
+    ///
+    @objc
+    func handleOpenTagList(url: NSURL) -> Bool {
+        guard let tag = url.internalTagKey else {
+            return false
+        }
+
+        let request = NSFetchRequest<Tag>()
+        request.entity = Tag.entity()
+        request.predicate = NSPredicate(format: "name = %@", tag)
+        let tagExists = (try? coreDataManager.managedObjectContext.count(for: request) > 0) ?? false
+
+        selectedTag = tagExists ? tag : nil
+
+        navigationController.presentedViewController?.dismiss(animated: true, completion: nil)
+        navigationController.popToRootViewController(animated: true)
+
+        return true
+    }
+
     /// Opens search
     ///
     func presentSearch(animated: Bool = false) {
