@@ -318,8 +318,11 @@
 
             [self.accountDeletionController clearRequestToken];
 
-            [self.simperium authenticateIfNecessary];
-            self.bSigningUserOut = NO;
+            [self dismissAllModalsAnimated:YES completion:^{
+
+                [self.simperium authenticateIfNecessary];
+                self.bSigningUserOut = NO;
+            }];
 		}];
     });
 }
