@@ -4,7 +4,6 @@ import WidgetKit
 struct NoteWidgetView: View {
     var entry: NoteWidgetEntry
     @Environment(\.widgetFamily) var widgetFamily
-    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         GeometryReader { geometry in
@@ -12,16 +11,16 @@ struct NoteWidgetView: View {
                 VStack(alignment: .leading) {
                     Text(entry.title)
                         .widgetHeader(widgetFamily,
-                                      color: Color(for: colorScheme, light: .gray100, dark: .white))
+                                      color: Color(UIColor.simplenoteTextColor))
                     Text(entry.content)
-                        .subheadline(color: Color(for: colorScheme, light: .gray100, dark: .white))
+                        .subheadline(color: Color(UIColor.simplenoteTextColor))
                 }
                 .filling()
                 .padding([.leading, .trailing, .top], Sizes.overallPadding)
                 .ignoresSafeArea()
                 .widgetURL(entry.url)
             }
-            .background(Color(for: colorScheme, light: .white, dark: .darkGray1))
+            .background(Color(UIColor.simplenoteWidgetBackgroundColor))
         }
     }
 }

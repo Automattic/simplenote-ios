@@ -4,7 +4,6 @@ import WidgetKit
 struct ListWidgetView: View {
     var entry: ListWidgetEntry
     @Environment(\.widgetFamily) var widgetFamily
-    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         let numberOfRows = rows(for: widgetFamily)
@@ -25,7 +24,7 @@ struct ListWidgetView: View {
                 }
             }
             .filling()
-            .background(Color(for: colorScheme, light: .white, dark: .darkGray1))
+            .background(Color(UIColor.simplenoteWidgetBackgroundColor))
         }
     }
 

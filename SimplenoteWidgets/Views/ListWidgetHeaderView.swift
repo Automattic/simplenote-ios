@@ -5,7 +5,6 @@ import WidgetKit
 struct ListWidgetHeaderView: View {
     let tag: String
 
-    @Environment(\.colorScheme) var colorScheme
     @Environment(\.widgetFamily) var widgetFamily
 
     var body: some View {
@@ -13,15 +12,13 @@ struct ListWidgetHeaderView: View {
             Link(destination: URL.internalUrl(for: tag)) {
                 Text(displayName(for: tag))
                     .font(.headline)
-                    .foregroundColor(Color(for: colorScheme,
-                                           light: .gray100,
-                                           dark: .white))
+                    .foregroundColor(Color(UIColor.simplenoteTextColor))
                 Spacer()
             }
             Link(destination: URL.newNoteURL(withTag: tag)) {
                 NewNoteImage(size: Constants.side,
-                             foregroundColor: Color(UIColor(studioColor: .spBlue50)),
-                             backgroundColor: Color(for: colorScheme, light: .white, dark: .darkGray1))
+                             foregroundColor: Color(UIColor.simplenoteTintColor),
+                             backgroundColor: Color(UIColor.simplenoteWidgetBackgroundColor))
             }
         }
         .padding(.zero)
