@@ -628,27 +628,27 @@ extension AuthenticationMode {
     /// Login Operation Mode: Contains all of the strings + delegate wirings, so that the AuthUI handles authentication scenarios.
     ///
     static var login: AuthenticationMode {
-        return .init(title:                         AuthenticationStrings.loginTitle,
-                     validationStyle:               .legacy,
-                     primaryActionSelector:         #selector(SPAuthViewController.performLogIn),
-                     primaryActionText:             AuthenticationStrings.loginPrimaryAction,
-                     secondaryActionSelector:       #selector(SPAuthViewController.presentPasswordReset),
-                     secondaryActionText:           AuthenticationStrings.loginSecondaryAction,
+        return .init(title: AuthenticationStrings.loginTitle,
+                     validationStyle: .legacy,
+                     primaryActionSelector: #selector(SPAuthViewController.performLogIn),
+                     primaryActionText: AuthenticationStrings.loginPrimaryAction,
+                     secondaryActionSelector: #selector(SPAuthViewController.presentPasswordReset),
+                     secondaryActionText: AuthenticationStrings.loginSecondaryAction,
                      secondaryActionAttributedText: nil,
-                     isPasswordHidden:              false)
+                     isPasswordHidden: false)
     }
 
     /// Signup Operation Mode: Contains all of the strings + delegate wirings, so that the AuthUI handles user account creation scenarios.
     ///
     static var signup: AuthenticationMode {
-        return .init(title:                         AuthenticationStrings.signupTitle,
-                     validationStyle:               .strong,
-                     primaryActionSelector:         #selector(SPAuthViewController.performSignUp),
-                     primaryActionText:             AuthenticationStrings.signupPrimaryAction,
-                     secondaryActionSelector:       #selector(SPAuthViewController.presentTermsOfService),
-                     secondaryActionText:           nil,
+        return .init(title: AuthenticationStrings.signupTitle,
+                     validationStyle: .strong,
+                     primaryActionSelector: #selector(SPAuthViewController.performSignUp),
+                     primaryActionText: AuthenticationStrings.signupPrimaryAction,
+                     secondaryActionSelector: #selector(SPAuthViewController.presentTermsOfService),
+                     secondaryActionText: nil,
                      secondaryActionAttributedText: AuthenticationStrings.signupSecondaryAttributedAction,
-                     isPasswordHidden:              true)
+                     isPasswordHidden: true)
     }
 }
 
