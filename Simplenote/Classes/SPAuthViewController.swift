@@ -415,6 +415,8 @@ private extension SPAuthViewController {
             presentUserAlreadyExistsError(error: error)
         case .compromisedPassword:
             presentPasswordCompromisedError(error: error)
+        case .unverifiedEmail:
+            presentUserUnverifiedError(error: error)
         case .unknown(let statusCode, let response, let error) where debugEnabled:
             let details = NSAttributedString.stringFromNetworkError(statusCode: statusCode, response: response, error: error)
             presentDebugDetails(details: details)
@@ -439,6 +441,16 @@ private extension SPAuthViewController {
             self.presentPasswordReset()
         }
         alertController.addCancelActionWithTitle(AuthenticationStrings.compromisedAlertCancel)
+
+        present(alertController, animated: true, completion: nil)
+    }
+
+    func presentUserUnverifiedError(error: SPAuthError) {
+        let alertController = UIAlertController(title: error.title, message: error.message, preferredStyle: .alert)
+        alertController.addCancelActionWithTitle(AuthenticationStrings.unverifiedCancelText)
+        alertController.addDefaultActionWithTitle(AuthenticationStrings.unverifiedActionText) { _ in
+            AccountRemote().verify(email: self.email) { _ in }
+        }
 
         present(alertController, animated: true, completion: nil)
     }
@@ -670,6 +682,8 @@ private enum AuthenticationStrings {
     static let loginActionText              = NSLocalizedString("Log In", comment: "Log In Action")
     static let compromisedAlertCancel       = NSLocalizedString("Not Yet", comment: "Cancel action for password alert")
     static let compromisedAlertReset        = NSLocalizedString("Change Password", comment: "Change password action")
+    static let unverifiedCancelText         = NSLocalizedString("Okay", comment: "Email unverified alert dismiss")
+    static let unverifiedActionText         = NSLocalizedString("Resend Verification Email", comment: "Send email verificaiton action")
 }
 
 
