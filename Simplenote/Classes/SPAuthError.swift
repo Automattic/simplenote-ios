@@ -9,6 +9,7 @@ enum SPAuthError: Error {
     case signupUserAlreadyExists
     case network
     case compromisedPassword
+    case unverifiedEmail
     case unknown(statusCode: Int, response: String?, error: Error?)
 }
 
@@ -23,6 +24,8 @@ extension SPAuthError {
         switch loginErrorCode {
         case 401:
             self = response == Constants.compromisedPassword ? .compromisedPassword : .loginBadCredentials
+        case 403:
+            self = .unverifiedEmail
         default:
             self = .unknown(statusCode: loginErrorCode, response: response, error: error)
         }
@@ -55,6 +58,8 @@ extension SPAuthError {
             return NSLocalizedString("Email in use", comment: "Email Taken Alert Title")
         case .compromisedPassword:
             return NSLocalizedString("Compromised Password", comment: "Compromised password alert title")
+        case .unverifiedEmail:
+            return NSLocalizedString("Account Verification Required", comment: "Email verification required alert title")
         default:
             return NSLocalizedString("Sorry!", comment: "Authentication Error Alert Title")
         }
@@ -74,6 +79,8 @@ extension SPAuthError {
             return NSLocalizedString("The network could not be reached.", comment: "Error when the network is inaccessible")
         case .compromisedPassword:
             return NSLocalizedString("This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately.", comment: "error for compromised password")
+        case .unverifiedEmail:
+            return NSLocalizedString("You must verify your email before being able to login.", comment: "Erro for un verified email")
         case .unknown:
             return NSLocalizedString("We're having problems. Please try again soon.", comment: "Generic error")
         }
