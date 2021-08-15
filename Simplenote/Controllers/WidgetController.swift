@@ -13,7 +13,9 @@ struct WidgetController {
                     return true
                 }
 
-                // Add check for ListWidgetIntent when created later
+                if widget.configuration as? ListWidgetIntent != nil {
+                    return true
+                }
 
                 return false
             }) {
