@@ -249,9 +249,8 @@ class SimplenoteScreenshots: XCTestCase {
         text.forEach { app.keyboards.firstMatch.keys[String($0)].tap() }
     }
 
-    // See https://github.com/woocommerce/woocommerce-ios/blob/mokagio-gems-update-test/WooCommerce/WooCommerceScreenshots/WooCommerceScreenshots.swift#L66-L79
     func takeScreenshot(_ title: String) {
-        let mode = isDarkMode ? "dark" : "light"
+        let mode = XCUIDevice.inDarkMode ? "dark" : "light"
 
         snapshot("\(title)-\(mode)")
     }
