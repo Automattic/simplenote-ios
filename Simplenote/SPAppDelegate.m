@@ -290,11 +290,10 @@
     [self dismissAllModalsAnimated:YES completion:nil];
     self.signOutActivityIndicator = [SPModalActivityIndicator show];
     
-    // Remove WordPress token
+    // Reset State
     [SPKeychain deletePasswordForService:kSimplenoteWPServiceName account:self.simperium.user.email];
-
-    // Remove Siri Shortcuts
     [[ShortcutsHandler shared] unregisterSimplenoteActivities];
+    [self.accountDeletionController clearRequestToken];
 
     // Actual Simperium Logout
     double delayInSeconds = 0.75;
@@ -318,8 +317,6 @@
 			// hide sidebar of notelist
             [self.sidebarViewController hideSidebarWithAnimation:NO];
             [self.signOutActivityIndicator dismiss:YES completion:nil];
-
-            [self.accountDeletionController clearRequestToken];
 
             [self.simperium authenticateIfNecessary];
             self.bSigningUserOut = NO;
