@@ -29,7 +29,8 @@ abstract_target 'Automattic' do
 		#
 		pod 'Automattic-Tracks-iOS', '~> 0.6'
 #		pod 'Automattic-Tracks-iOS', :git => 'https://github.com/Automattic/Automattic-Tracks-iOS.git', :branch => 'add/support-for-tracking-crashes'
-		pod 'Simperium', '1.8.0'
+		# pod 'Simperium', '1.8.0'
+		pod 'Simperium', :git => 'https://github.com/Simperium/simperium-ios.git', :commit => 'f3a6b32714e32c68eae0dd915217eb4c20a23158'
 		pod 'WordPress-Ratings-iOS', '0.0.2'
 
 		# Testing Target
