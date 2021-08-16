@@ -28,5 +28,5 @@ struct NoteListTable: View {
 
 private struct Constants {
     static let sidePadding = CGFloat(20)
-    static let headerSize = CGFloat(45)
+    static let headerSize = CGFloat(46)
 }
