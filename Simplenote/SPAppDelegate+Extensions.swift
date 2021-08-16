@@ -286,7 +286,6 @@ extension SPAppDelegate: SimperiumDelegate {
         switch simperiumError {
         case .invalidToken:
             logOutIfAccountDeletionRequested()
-            break
         default:
             break
         }

@@ -286,6 +286,8 @@
 - (void)logoutAndReset:(id)sender
 {
     self.bSigningUserOut = YES;
+
+    [self dismissAllModalsAnimated:YES completion:nil];
     self.signOutActivityIndicator = [SPModalActivityIndicator show];
     
     // Remove WordPress token
@@ -320,7 +322,7 @@
 
             [self.simperium authenticateIfNecessary];
             self.bSigningUserOut = NO;
-		}];
+        }];
     });
 }
 
