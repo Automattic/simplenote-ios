@@ -25,7 +25,9 @@ extension SPAuthError {
         case 401:
             self = response == Constants.compromisedPassword ? .compromisedPassword : .loginBadCredentials
         case 403:
-            self = .unverifiedEmail
+            self = response == Constants.requiresVerification ?
+                .unverifiedEmail :
+                .unknown(statusCode: loginErrorCode, response: response, error: error)
         default:
             self = .unknown(statusCode: loginErrorCode, response: response, error: error)
         }
@@ -89,4 +91,5 @@ extension SPAuthError {
 
 private struct Constants {
     static let compromisedPassword = "compromised password"
+    static let requiresVerification = "requires verification"
 }
