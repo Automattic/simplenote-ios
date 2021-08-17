@@ -278,6 +278,17 @@ extension SPAppDelegate: SimperiumDelegate {
 
     public func simperium(_ simperium: Simperium, didFailWithError error: Error) {
         SPTracker.refreshMetadataForAnonymousUser()
+
+        guard let simperiumError = SPSimperiumErrors(rawValue: (error as NSError).code) else {
+            return
+        }
+
+        switch simperiumError {
+        case .invalidToken:
+            logOutIfAccountDeletionRequested()
+        default:
+            break
+        }
     }
 }
 
@@ -408,16 +419,22 @@ extension SPAppDelegate {
 //
 extension SPAppDelegate {
     @objc
-    func authenticateSimperiumIfNeeded() {
-        guard let deletionController = accountDeletionController else {
-            return
-        }
-
-        if deletionController.deletionTokenHasExpired {
+    func authenticateSimperiumIfAccountDeletionRequested() {
+        guard let deletionController = accountDeletionController,
+              deletionController.hasValidDeletionRequest else {
             return
         }
 
         simperium.authenticateIfNecessary()
+    }
+
+    @objc
+    func logOutIfAccountDeletionRequested() {
+        guard accountDeletionController?.hasValidDeletionRequest == true else {
+            return
+        }
+
+        logoutAndReset(self)
     }
 }
 

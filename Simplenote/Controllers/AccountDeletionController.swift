@@ -4,12 +4,12 @@ import Foundation
 class AccountDeletionController: NSObject {
     private var accountDeletionRequestDate: Date?
 
-    var deletionTokenHasExpired: Bool {
+    var hasValidDeletionRequest: Bool {
         guard let expirationDate = accountDeletionRequestDate?.increased(byDays: 1) else {
-            return true
+            return false
         }
 
-        return Date() > expirationDate
+        return Date() < expirationDate
     }
 
     func requestAccountDeletion(_ user: SPUser, completion: @escaping (_ result: Result<Data?, RemoteError>) -> Void) {
@@ -19,5 +19,10 @@ class AccountDeletionController: NSObject {
             }
             completion(result)
         }
+    }
+
+    @objc
+    func clearRequestToken() {
+        accountDeletionRequestDate = nil
     }
 }
