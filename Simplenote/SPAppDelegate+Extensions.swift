@@ -449,6 +449,6 @@ extension SPAppDelegate {
 
     @objc
     func syncWidgetDefaults() {
-        WidgetController.syncWidgetDefaults(isLoggedIn: simperium.user != nil)
+        WidgetController.syncWidgetDefaults(authenticated: simperium.user != nil)
     }
 }

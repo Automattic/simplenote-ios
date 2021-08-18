@@ -8,30 +8,20 @@ struct WidgetController {
                 return
             }
 
-            if widgets.contains(where: { (widget) -> Bool in
-                if widget.configuration as? NoteWidgetIntent != nil {
-                    return true
-                }
-
-                // Add check for ListWidgetIntent when created later
-
-                return false
+            if widgets.contains(where: { widget in
+                widget.configuration as? NoteWidgetIntent != nil
             }) {
-                NSLog("Reloading all widgets")
                 WidgetCenter.shared.reloadAllTimelines()
             }
         }
     }
 
-    static func syncWidgetDefaults(isLoggedIn loggedIn: Bool) {
+    static func syncWidgetDefaults(authenticated: Bool) {
         guard let widgetDefaults = UserDefaults(suiteName: SimplenoteConstants.sharedGroupDomain) else {
             return
         }
-
-        // Set listsortmode default
         widgetDefaults.set(UserDefaults.standard.integer(forKey: .listSortMode), forKey: .listSortMode)
 
-        // User is logged in
-        widgetDefaults.set(loggedIn, forKey: .accountIsLoggedIn)
+        widgetDefaults.set(authenticated, forKey: .accountIsLoggedIn)
     }
 }
