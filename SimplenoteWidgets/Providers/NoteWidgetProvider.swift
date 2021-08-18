@@ -74,7 +74,7 @@ struct NoteWidgetProvider: IntentTimelineProvider {
         // Prepare timeline entry for every hour for the next 6 hours
         // Create a new set of entries at the end of the 6 entries
         var entries: [NoteWidgetEntry] = []
-        for int in 0..<6 {
+        for int in Constants.entryRange {
             if let date = Date().increased(byHours: int) {
                 entries.append(NoteWidgetEntry(date: date, note: note))
             }
@@ -88,4 +88,5 @@ struct NoteWidgetProvider: IntentTimelineProvider {
 private struct Constants {
     static let environmentXcodePreviewsKey = "XCODE_RUNNING_FOR_PREVIEWS"
     static let isPreviews = "1"
+    static let entryRange = 0..<6
 }
