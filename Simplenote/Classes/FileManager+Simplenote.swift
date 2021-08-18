@@ -17,12 +17,6 @@ extension FileManager {
     /// URL for Simplenote's shared app group directory
     ///
     var sharedContainerURL: URL {
-        containerURL(forSecurityApplicationGroupIdentifier: Constants.sharedDirectoryDomain + Constants.groupIdentifier)!
+        containerURL(forSecurityApplicationGroupIdentifier: SimplenoteConstants.sharedGroupDomain)!
     }
-}
-
-private struct Constants {
-    static let defaultBundleIdentifier = "com.codality.NotationalFlow"
-    static let groupIdentifier = Bundle.main.rootBundleIdentifier ?? Constants.defaultBundleIdentifier
-    static let sharedDirectoryDomain = "group."
 }
