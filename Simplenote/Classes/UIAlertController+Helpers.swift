@@ -26,4 +26,12 @@ extension UIAlertController {
 
         return action
     }
+
+    static func dismissableAlert(title: String,
+                                        message: String,
+                                        style: UIAlertController.Style = .alert) -> UIAlertController {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: style)
+        alert.addCancelActionWithTitle("Okay")
+        return alert
+    }
 }
