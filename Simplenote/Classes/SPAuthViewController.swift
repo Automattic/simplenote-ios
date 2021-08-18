@@ -700,7 +700,7 @@ private enum AuthenticationStrings {
     static let unverifiedCancelText         = NSLocalizedString("Okay", comment: "Email unverified alert dismiss")
     static let unverifiedActionText         = NSLocalizedString("Resend Verification Email", comment: "Send email verificaiton action")
     static let unverifriedErrorTitle        = NSLocalizedString("Request Error", comment: "Request error alert title")
-    static let unverifiedErrorMessage       = NSLocalizedString("There was an error processing your login, please try again later", comment: "Request error alert message")
+    static let unverifiedErrorMessage       = NSLocalizedString("There was an preparing your verification email, please try again later", comment: "Request error alert message")
     static let verificationSentTitle        = NSLocalizedString("Check your Email", comment: "Vefification sent alert title")
     static let verificationSentTemplate     = NSLocalizedString("We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions.", comment: "Confirmation that an email has been sent")
 }
