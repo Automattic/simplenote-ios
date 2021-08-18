@@ -18,19 +18,19 @@ class CoreDataManager: NSObject {
     init(_ storageURL: URL, storageSettings: StorageSettings = StorageSettings(), for usageType: CoreDataUsageType = .standard) throws {
         super.init()
         managedObjectModel = NSManagedObjectModel(contentsOf: storageSettings.modelURL)!
-        managedObjectContext = objectContext()
-        persistentStoreCoordinator = try storeCoordinator(with: managedObjectModel, storageURL: storageURL)
+        managedObjectContext = buildMainContext()
+        persistentStoreCoordinator = try buildStoreCoordinator(with: managedObjectModel, storageURL: storageURL)
 
         setupStackIfNeeded(mainContext: managedObjectContext, psc: persistentStoreCoordinator, for: usageType)
     }
 
-    private func objectContext() -> NSManagedObjectContext {
+    private func buildMainContext() -> NSManagedObjectContext {
         let moc = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         moc.undoManager = nil
         return moc
     }
 
-    private func storeCoordinator(with model: NSManagedObjectModel, storageURL: URL) throws -> NSPersistentStoreCoordinator {
+    private func buildStoreCoordinator(with model: NSManagedObjectModel, storageURL: URL) throws -> NSPersistentStoreCoordinator {
         let psc = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
         let options = [NSMigratePersistentStoresAutomaticallyOption: true,
                        NSInferMappingModelAutomaticallyOption: true]
