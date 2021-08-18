@@ -22,12 +22,12 @@ extension SPAuthError {
     ///
     init(loginErrorCode: Int, response: String?, error: Error?) {
         switch loginErrorCode {
+        case 401 where response == Constants.compromisedPassword:
+            self = .compromisedPassword
         case 401:
-            self = response == Constants.compromisedPassword ? .compromisedPassword : .loginBadCredentials
-        case 403:
-            self = response == Constants.requiresVerification ?
-                .unverifiedEmail :
-                .unknown(statusCode: loginErrorCode, response: response, error: error)
+            self = .loginBadCredentials
+        case 403 where response == Constants.requiresVerification:
+            self = .unverifiedEmail
         default:
             self = .unknown(statusCode: loginErrorCode, response: response, error: error)
         }
