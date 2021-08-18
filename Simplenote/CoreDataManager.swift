@@ -42,7 +42,7 @@ class CoreDataManager: NSObject {
                                        at: storageURL,
                                        options: options)
         } catch {
-            throw StorageError.attachingPersistentStoreFailure
+            throw NSError(domain: Constants.errorDomain, code: .zero, userInfo: nil)
         }
         return psc
     }
@@ -55,4 +55,8 @@ class CoreDataManager: NSObject {
             managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
         }
     }
+}
+
+private struct Constants {
+    static let errorDomain = "CoreDataManager"
 }
