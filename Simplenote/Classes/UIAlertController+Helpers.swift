@@ -31,7 +31,7 @@ extension UIAlertController {
                                         message: String,
                                         style: UIAlertController.Style = .alert) -> UIAlertController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: style)
-        alert.addCancelActionWithTitle("Okay")
+        alert.addCancelActionWithTitle(NSLocalizedString("Ok", comment: "Alert dismiss action"))
         return alert
     }
 }
