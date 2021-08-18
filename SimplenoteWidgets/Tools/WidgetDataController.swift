@@ -26,7 +26,7 @@ class WidgetDataController {
 
         guard let isLoggedIn = UserDefaults(suiteName: SimplenoteConstants.sharedGroupDomain)?.bool(forKey: .accountIsLoggedIn),
               isLoggedIn else {
-            throw StorageError.appConfigurationError
+            throw WidgetError.appConfigurationError
         }
 
         self.coreDataManager = coreDataManager
@@ -47,7 +47,7 @@ class WidgetDataController {
         do {
             try notesController.performFetch()
         } catch {
-            throw StorageError.fetchError
+            throw WidgetError.fetchError
         }
     }
 
