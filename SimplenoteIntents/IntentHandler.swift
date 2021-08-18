@@ -30,6 +30,7 @@ extension IntentHandler: NoteWidgetIntentHandling {
             notes = try dataController.notes()
         } catch {
             completion(nil, error)
+            return
         }
 
 
