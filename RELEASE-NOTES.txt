@@ -1,5 +1,6 @@
 4.43
 -----
+-   Some bug fixes #1397 #1395 #1391
 -   [Internal] added login alert for compromised password #1394
 -   [Internal] added error response case on login for unverified emails #1398
 
