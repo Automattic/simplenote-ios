@@ -8,7 +8,7 @@ class SimplenoteScreenshots: XCTestCase {
         UIPasteboard.general.strings = []
     }
 
-    func testScreenshots() {
+    func testScreenshots() throws {
         let app = XCUIApplication()
         setupSnapshot(app)
         app.launch()
@@ -140,12 +140,12 @@ class SimplenoteScreenshots: XCTestCase {
         searchCancelButton.tap()
 
         openMenu(using: app)
-        loadPasscodeScreen(using: app)
+        let passcodeScreen = try loadPasscodeScreen(using: app)
         // Set the passcode
         // Writing the value here in clear because one can see it being typed anyways.
-        typeOnPassCodeScreen(1234, using: app)
+        passcodeScreen.type(passcode: 1234)
         // Confirm it
-        typeOnPassCodeScreen(1234, using: app)
+        passcodeScreen.type(passcode: 1234)
 
         // Kill the app and relaunch it so we can take a screenshot of the lock screen
         app.terminate()
@@ -153,18 +153,17 @@ class SimplenoteScreenshots: XCTestCase {
 
         // The screenshot for the passcode should have only 3 characters inserted.
         // (Typing in the passcode screen also ensures it's visible first)
-        typeOnPassCodeScreen(123, using: app)
+        passcodeScreen.type(passcode: 123)
 
         takeScreenshot("6-passcode")
 
-        typeOnPassCodeScreen(4, using: app)
+        passcodeScreen.type(passcode: 4)
 
         dismissVerifyEmailIfNeeded(using: app)
 
         // Now, disable the passcode so we're not blocked by it on next launch.
         openMenu(using: app)
-        loadPasscodeScreen(using: app)
-        typeOnPassCodeScreen(1234, using: app)
+        try loadPasscodeScreen(using: app).type(passcode: 1234)
     }
 
     func dismissVerifyEmailIfNeeded(using app: XCUIApplication) {
@@ -200,7 +199,7 @@ class SimplenoteScreenshots: XCTestCase {
         return menu
     }
 
-    func loadPasscodeScreen(using app: XCUIApplication) {
+    func loadPasscodeScreen(using app: XCUIApplication) throws -> PasscodeScreen {
         let settingsMenuInput = app.cells["settings"]
         XCTAssertTrue(settingsMenuInput.waitForExistence(timeout: 3))
         settingsMenuInput.tap()
@@ -209,39 +208,16 @@ class SimplenoteScreenshots: XCTestCase {
         XCTAssertTrue(passcodeCell.waitForExistence(timeout: 3))
         passcodeCell.tap()
 
-        let expectation = XCTNSPredicateExpectation(
-            predicate: NSPredicate { _, _ in self.isPasscodeScreenVisible(using: app) },
-            object: .none
-        )
-        wait(for: [expectation], timeout: 5)
+        return try PasscodeScreen(app: app)
     }
 
     func dismissPasscodeScreenIfNeeded(using app: XCUIApplication) {
-        guard isPasscodeScreenVisible(using: app) else { return }
-        typeOnPassCodeScreen(1234, using: app)
-    }
+        guard PasscodeScreen.isLoaded(in: app) else { return }
 
-    func isPasscodeScreenVisible(using app: XCUIApplication) -> Bool {
-        // Check there's a button for each line of the custom number keypad.
-        //
-        // We only need to wait for the first number, if that's on screen, then the others should be
-        // on screen already, too.
-        return app.staticTexts["1"].waitForExistence(timeout: 3)
-            && app.staticTexts["4"].exists
-            && app.staticTexts["7"].exists
-            && app.staticTexts["0"].exists
-    }
-
-    func typeOnPassCodeScreen(_ input: Int, using app: XCUIApplication) {
-        // This converts an Int into an [Int] of its digits
-        let digits = "\(input.magnitude)".compactMap(\.wholeNumberValue)
-
-        digits.forEach { digit in
-            let input = app.staticTexts["\(digit)"]
-            XCTAssertTrue(input.waitForExistence(timeout: 3))
-            // Both the custom UIButton and its UILabel match the "\(digit)" query. We need to pick
-            // one for the tap to work.
-            input.firstMatch.tap()
+        do {
+            try PasscodeScreen(app: app).type(passcode: 1234)
+        } catch {
+            XCTFail("Expected passcode screen to exist but it did not.")
         }
     }
 
