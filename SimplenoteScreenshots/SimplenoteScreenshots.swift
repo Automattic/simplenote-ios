@@ -235,7 +235,7 @@ extension XCUIElement {
 
     /// Workaround to type text into secure text fields due to the different behaviors across
     /// Simulators.
-    func typeSecureText(_ text: String, using app: XCUIApplication) -> Void {
+    func typeSecureText(_ text: String, using app: XCUIApplication) {
         tap()
 
         // At the time of writing, typing in a secure text field didn't work in some of the
