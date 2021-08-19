@@ -1,6 +1,8 @@
 4.43
 -----
--   Some bug fixes #1397 #1395 #1391
+-   Fixed a bug where non http/https urls crashed when opened from markdown #1397
+-   Account Deletion Support #1395
+-   Tags are now removed from deleted Notes #1391
 -   [Internal] added login alert for compromised password #1394
 -   [Internal] added error response case on login for unverified emails #1398
 
