@@ -34,6 +34,15 @@ NSString *const SPHeadlineTokenName = @"SPHeadlineTokenName";
 - (void)replaceCharactersInRange:(NSRange)range withString:(NSString *)str
 {
     [self beginEditing];
+
+    // This fixes https://github.com/Automattic/simplenote-ios/issues/682
+    // When undoing paste of text that includes AttributeText attachments (checkboxes)
+    // the range count may be longer than the store length
+    // causing a crash.  This corrects the length on the range
+    if ((range.location + range.length) > _backingStore.length) {
+        range.length = _backingStore.length - range.location;
+    }
+
     [_backingStore replaceCharactersInRange:range withString:str];
     [self edited:NSTextStorageEditedCharacters|NSTextStorageEditedAttributes range:range changeInLength:str.length - range.length];
     _dynamicTextNeedsUpdate = YES;
