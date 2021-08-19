@@ -245,10 +245,6 @@ class SimplenoteScreenshots: XCTestCase {
         }
     }
 
-    func type(_ text: String, onFirstKeyboardOf app: XCUIApplication) {
-        text.forEach { app.keyboards.firstMatch.keys[String($0)].tap() }
-    }
-
     func takeScreenshot(_ title: String) {
         let mode = XCUIDevice.inDarkMode ? "dark" : "light"
 
