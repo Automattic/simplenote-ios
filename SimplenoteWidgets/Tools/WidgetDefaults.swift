@@ -1,9 +1,27 @@
-//
-//  File.swift
-//  Simplenote
-//
-//  Created by Charlie Scheer on 8/20/21.
-//  Copyright © 2021 Automattic. All rights reserved.
-//
+class WidgetDefaults {
 
-import Foundation
+    static let shared = WidgetDefaults()
+
+    private let defaults = UserDefaults(suiteName: SimplenoteConstants.sharedGroupDomain)
+
+    private init() { }
+
+    var loggedIn: Bool {
+        get {
+            defaults?.bool(forKey: .accountIsLoggedIn) ?? false
+        }
+        set {
+            defaults?.set(newValue, forKey: .accountIsLoggedIn)
+        }
+    }
+
+    var sortMode: SortMode {
+        get {
+            SortMode(rawValue: defaults?.integer(forKey: .listSortMode) ?? 0) ?? .alphabeticallyAscending
+        }
+        set {
+            let payload = newValue.rawValue
+            defaults?.set(payload, forKey: .listSortMode)
+        }
+    }
+}

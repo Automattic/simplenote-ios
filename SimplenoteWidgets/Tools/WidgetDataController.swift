@@ -13,7 +13,7 @@ class WidgetDataController {
     private lazy var notesController = ResultsController<Note>(
         viewContext: coreDataManager.managedObjectContext,
         matching: predicateForNotes(),
-        sortedBy: [NSSortDescriptor.descriptorForNotes(sortMode: noteSortMode)]
+        sortedBy: [NSSortDescriptor.descriptorForNotes(sortMode: WidgetDefaults.shared.sortMode)]
     )
 
     /// Initialization
@@ -26,17 +26,6 @@ class WidgetDataController {
         }
 
         self.coreDataManager = coreDataManager
-    }
-
-    /// Sort mode for widgets.  Fetched from main apps sort setting
-    ///
-    private var noteSortMode: SortMode {
-        guard let defaults = UserDefaults(suiteName: SimplenoteConstants.sharedGroupDomain) else {
-            return SortMode.alphabeticallyAscending
-        }
-
-        return SortMode(rawValue: defaults.integer(forKey: .listSortMode))
-            ?? SortMode.alphabeticallyAscending
     }
 
     private func performFetch() throws {

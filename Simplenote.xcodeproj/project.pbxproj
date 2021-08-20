@@ -478,6 +478,9 @@
 		BAB6C04426BA49F3007495C4 /* ContentSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64DE6E8255D1C9F001D0526 /* ContentSlice.swift */; };
 		BAB6C04526BA4A04007495C4 /* String+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5476BC023D8E5D0000E7723 /* String+Simplenote.swift */; };
 		BAB6C04726BA4CAF007495C4 /* WidgetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6C04626BA4CAF007495C4 /* WidgetController.swift */; };
+		BABFFF2226CF9094003A4C25 /* WidgetDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABFFF2126CF9094003A4C25 /* WidgetDefaults.swift */; };
+		BABFFF2326CF9094003A4C25 /* WidgetDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABFFF2126CF9094003A4C25 /* WidgetDefaults.swift */; };
+		BABFFF2426CF9094003A4C25 /* WidgetDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABFFF2126CF9094003A4C25 /* WidgetDefaults.swift */; };
 		BAE08626261282D1009D40CD /* Note+Publish.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE08625261282D1009D40CD /* Note+Publish.swift */; };
 		BAF8D44B26AE10FC00CA9383 /* Tag+Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42226AE10F100CA9383 /* Tag+Widget.swift */; };
 		BAF8D44C26AE10FC00CA9383 /* Note+Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42326AE10F100CA9383 /* Note+Widget.swift */; };
@@ -1084,6 +1087,7 @@
 		BAB5769226703F0E00B0C56F /* NoteWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteWidgetProvider.swift; sourceTree = "<group>"; };
 		BAB576BD2670512C00B0C56F /* NoteWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteWidget.swift; sourceTree = "<group>"; };
 		BAB6C04626BA4CAF007495C4 /* WidgetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetController.swift; sourceTree = "<group>"; };
+		BABFFF2126CF9094003A4C25 /* WidgetDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDefaults.swift; sourceTree = "<group>"; };
 		BAE08625261282D1009D40CD /* Note+Publish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+Publish.swift"; sourceTree = "<group>"; };
 		BAF8D42226AE10F100CA9383 /* Tag+Widget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tag+Widget.swift"; sourceTree = "<group>"; };
 		BAF8D42326AE10F100CA9383 /* Note+Widget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Note+Widget.swift"; sourceTree = "<group>"; };
@@ -2206,6 +2210,7 @@
 			children = (
 				BA86622226B3AE4A00466746 /* WidgetDataController.swift */,
 				BA88765026B79324001C9C9E /* DemoContent.swift */,
+				BABFFF2126CF9094003A4C25 /* WidgetDefaults.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -3281,6 +3286,7 @@
 				A6E4875825BEF3C700D0CE3B /* UIResponder+Simplenote.swift in Sources */,
 				46A3C99C17DFA81A002865AE /* NSString+Bullets.m in Sources */,
 				B58BF1FB23D78ADF00515B50 /* UIContextualAction+Simplenote.swift in Sources */,
+				BABFFF2226CF9094003A4C25 /* WidgetDefaults.swift in Sources */,
 				E215C79A180B130B00AD36B5 /* SPTableViewController.m in Sources */,
 				BA4499BC25ED95D0000C563E /* Notice.swift in Sources */,
 				BA5C1C0725BF9D6C006E3820 /* SPDragBar.swift in Sources */,
@@ -3453,6 +3459,7 @@
 				BA86625D26B3B14900466746 /* SortMode.swift in Sources */,
 				BA12B07026B0D0150026F31D /* SPManagedObject+Widget.swift in Sources */,
 				BA86622426B3AE4A00466746 /* WidgetDataController.swift in Sources */,
+				BABFFF2426CF9094003A4C25 /* WidgetDefaults.swift in Sources */,
 				BAF8D46E26AE118800CA9383 /* SPCredentials.swift in Sources */,
 				BAF8D45626AE10FC00CA9383 /* Note+Widget.swift in Sources */,
 				BAF8D5C526AE254100CA9383 /* Simplenote.xcdatamodeld in Sources */,
@@ -3477,6 +3484,7 @@
 				BA86625326B3B14800466746 /* SortMode.swift in Sources */,
 				BAF8D50A26AE172600CA9383 /* StorageSettings.swift in Sources */,
 				BAFA93F3265DE4A40009DCFB /* NewNoteWidget.swift in Sources */,
+				BABFFF2326CF9094003A4C25 /* WidgetDefaults.swift in Sources */,
 				BA122DBD265EF412003D3BC5 /* UIColor+Studio.swift in Sources */,
 				BA88765126B79324001C9C9E /* DemoContent.swift in Sources */,
 				BA122DBE265EF421003D3BC5 /* UIKitConstants.swift in Sources */,

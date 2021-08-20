@@ -17,11 +17,8 @@ struct WidgetController {
     }
 
     static func syncWidgetDefaults(authenticated: Bool) {
-        guard let widgetDefaults = UserDefaults(suiteName: SimplenoteConstants.sharedGroupDomain) else {
-            return
-        }
-        widgetDefaults.set(UserDefaults.standard.integer(forKey: .listSortMode), forKey: .listSortMode)
-
-        widgetDefaults.set(authenticated, forKey: .accountIsLoggedIn)
+        let widgetDefaults = WidgetDefaults.shared
+        widgetDefaults.sortMode = Options.shared.listSortMode
+        widgetDefaults.loggedIn = authenticated
     }
 }
