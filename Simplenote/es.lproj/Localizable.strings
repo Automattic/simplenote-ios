@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-06-29 11:32:20+0000 */
+/* Translation-Revision-Date: 2021-08-19 20:49:15+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: es */
@@ -60,6 +60,9 @@
 /* 5 minutes passcode lock timeout */
 "5 Minutes" = "5 minutos";
 
+/* Network connection issue notificaiton */
+"A network connection is required. Please, check your connection and try again." = "Es necesaria una conexión de red. Comprueba tu conexión e inténtalo de nuevo.";
+
 /* Display app about screen */
 "About" = "Acerca de";
 
@@ -83,11 +86,14 @@
    Title: No filters applied */
 "All Notes" = "Todas las notas";
 
+/* Delete account confirmation instructions */
+"An email has been sent to %@ Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation" = "Se ha enviado un correo electrónico a %@ Comprueba tu bandeja de entrada y sigue las instrucciones para confirmar la eliminación de la cuenta.\n\nTu cuenta no se eliminará hasta que recibamos tu confirmación.";
+
+/* Deletion error message */
+"An error occured. Please, try again. If the problem continues, contact us at support@simplenote.com for help." = "Se ha producido un error. Inténtalo de nuevo. Si el problema persiste, ponte en contacto con nosotros a través de support@simplenote.com y te ayudaremos.";
+
 /* Sign in error message */
 "An error was encountered while signing in." = "No se ha podido iniciar sesión.";
-
-/* Engine URL Message */
-"AppEngine Endpoints" = "Variables de AppEngine";
 
 /* No comment provided by engineer. */
 "Appearance" = "Apariencia";
@@ -104,14 +110,14 @@
 /* User Authenticated */
 "Authenticated" = "Autenticado";
 
-/* Engine URL Message */
-"Authentication Endpoints" = "Variables de autenticación";
-
 /* The Simplenote blog */
 "Blog" = "Blog";
 
 /* Terms of Service Legend *PREFIX*: printed in dark color */
 "By creating an account you agree to our" = "Al crear una cuenta, aceptas nuestros";
+
+/* Delete account confirmation alert message */
+"By deleting your account, all notes created with this account will be permanently deleted. This action is not reversible" = "Si eliminas tu cuenta, se eliminarán de forma permanente todas las notas que hayas creado con ella. Esta acción es irreversible.";
 
 /* Cancel Action
    Cancel action button
@@ -136,6 +142,9 @@
 
 /* Number of characters in the note */
 "Characters" = "Caracteres";
+
+/* Title for delete account succes alert */
+"Check Your Email" = "Comprueba tu correo electrónico";
 
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "Elige un código de acceso de 4 dígitos";
@@ -226,6 +235,10 @@
 /* PinLock screen \"delete\" button */
 "Delete" = "Eliminar";
 
+/* Delete account title and action
+   Display Delete Account Alert */
+"Delete Account" = "Eliminar cuenta";
+
 /* Delete a note from trash */
 "Delete Note" = "Eliminar nota";
 
@@ -293,7 +306,8 @@
 /* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "Ingrese su contraseña";
 
-/* Error Title */
+/* Deletion Error Title
+   Error Title */
 "Error" = "Error";
 
 /* Get Help Description Label */
@@ -453,6 +467,9 @@
 /* Instant passcode lock timeout */
 "Off" = "Apagado";
 
+/* Confirm alert message */
+"Ok" = "Aceptar";
+
 /* No comment provided by engineer. */
 "On" = "Encendido";
 
@@ -549,6 +566,9 @@
 
 /* Rename a tag */
 "Rename" = "Renombrar";
+
+/* Title for account deletion confirm button */
+"Request Account Deletion" = "Solicitud de eliminación de cuenta";
 
 /* Resend email button -> Verify your email screen */
 "Resend Email" = "Volver a enviar correo electrónico";
@@ -670,6 +690,9 @@
 
 /* Error when address is in use */
 "The email you've entered is already associated with a Simplenote account." = "El correo electrónico que has introducido ya está asociado a una cuenta de Simplenote.";
+
+/* Error when the network is inaccessible */
+"The network could not be reached." = "No se ha podido acceder a la red.";
 
 /* Onboarding Header Text */
 "The simplest way to keep notes." = "La forma más sencilla de guardar notas.";
@@ -800,9 +823,6 @@
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "etiqueta:";
-
-/* Warning Title */
-"⚠️ Important" = "⚠️ Importante";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞 Depuración activada 🐞";

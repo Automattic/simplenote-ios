@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-06-29 11:32:19+0000 */
+/* Translation-Revision-Date: 2021-08-19 20:49:46+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: zh_TW */
@@ -60,6 +60,9 @@
 /* 5 minutes passcode lock timeout */
 "5 Minutes" = "5 分鐘";
 
+/* Network connection issue notificaiton */
+"A network connection is required. Please, check your connection and try again." = "需要網路連線。 請檢查你的連線並再試一次。";
+
 /* Display app about screen */
 "About" = "關於";
 
@@ -83,11 +86,14 @@
    Title: No filters applied */
 "All Notes" = "所有筆記";
 
+/* Delete account confirmation instructions */
+"An email has been sent to %@ Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation" = "電子郵件已傳送至 %@。請檢查你的收件匣，並按照說明確認刪除帳號。\n\n在收到你的確認之前，我們不會刪除你的帳號";
+
+/* Deletion error message */
+"An error occured. Please, try again. If the problem continues, contact us at support@simplenote.com for help." = "發生錯誤。 請再試一次。 如果問題持續發生，請聯絡我們尋求協助：support@simplenote.com。";
+
 /* Sign in error message */
 "An error was encountered while signing in." = "登入時發生錯誤。";
-
-/* Engine URL Message */
-"AppEngine Endpoints" = "AppEngine 端點";
 
 /* No comment provided by engineer. */
 "Appearance" = "外觀";
@@ -104,14 +110,14 @@
 /* User Authenticated */
 "Authenticated" = "已驗證";
 
-/* Engine URL Message */
-"Authentication Endpoints" = "驗證端點";
-
 /* The Simplenote blog */
 "Blog" = "網誌";
 
 /* Terms of Service Legend *PREFIX*: printed in dark color */
 "By creating an account you agree to our" = "建立帳號即表示你同意我們的";
+
+/* Delete account confirmation alert message */
+"By deleting your account, all notes created with this account will be permanently deleted. This action is not reversible" = "若刪除帳號，此帳號建立的所有備註都會永久刪除。 此動作無法復原";
 
 /* Cancel Action
    Cancel action button
@@ -136,6 +142,9 @@
 
 /* Number of characters in the note */
 "Characters" = "字元";
+
+/* Title for delete account succes alert */
+"Check Your Email" = "請檢查電子郵件";
 
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "選擇 4 位數的密碼";
@@ -226,6 +235,10 @@
 /* PinLock screen \"delete\" button */
 "Delete" = "刪除";
 
+/* Delete account title and action
+   Display Delete Account Alert */
+"Delete Account" = "刪除帳號";
+
 /* Delete a note from trash */
 "Delete Note" = "刪除筆記";
 
@@ -293,7 +306,8 @@
 /* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "輸入你的密碼";
 
-/* Error Title */
+/* Deletion Error Title
+   Error Title */
 "Error" = "錯誤";
 
 /* Get Help Description Label */
@@ -453,6 +467,9 @@
 /* Instant passcode lock timeout */
 "Off" = "關閉";
 
+/* Confirm alert message */
+"Ok" = "確定";
+
 /* No comment provided by engineer. */
 "On" = "開啟";
 
@@ -549,6 +566,9 @@
 
 /* Rename a tag */
 "Rename" = "重新命名";
+
+/* Title for account deletion confirm button */
+"Request Account Deletion" = "要求刪除帳號";
 
 /* Resend email button -> Verify your email screen */
 "Resend Email" = "重新傳送電子郵件";
@@ -670,6 +690,9 @@
 
 /* Error when address is in use */
 "The email you've entered is already associated with a Simplenote account." = "你輸入的電子郵件地址已與 Simplenote 帳號建立關聯。";
+
+/* Error when the network is inaccessible */
+"The network could not be reached." = "無法連上網路。";
 
 /* Onboarding Header Text */
 "The simplest way to keep notes." = "輕鬆作筆記的最佳方式。";
@@ -800,9 +823,6 @@
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "標籤：";
-
-/* Warning Title */
-"⚠️ Important" = "⚠️ 重要";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞偵錯模式已啟用🐞";

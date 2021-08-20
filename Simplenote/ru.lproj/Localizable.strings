@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-06-29 11:32:19+0000 */
+/* Translation-Revision-Date: 2021-08-19 20:49:08+0000 */
 /* Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ru */
@@ -60,6 +60,9 @@
 /* 5 minutes passcode lock timeout */
 "5 Minutes" = "5 минут";
 
+/* Network connection issue notificaiton */
+"A network connection is required. Please, check your connection and try again." = "Требуется подключение к сети. Проверьте подключение и повторите попытку.";
+
 /* Display app about screen */
 "About" = "О нас";
 
@@ -83,11 +86,14 @@
    Title: No filters applied */
 "All Notes" = "Все заметки";
 
+/* Delete account confirmation instructions */
+"An email has been sent to %@ Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation" = "Мы выслали письмо на адрес %@. Проверьте почту и следуйте инструкциям, чтобы подтвердить удаление учётной записи.\n\nВаша учётная запись будет удалена только после получения вашего подтверждения";
+
+/* Deletion error message */
+"An error occured. Please, try again. If the problem continues, contact us at support@simplenote.com for help." = "Произошла ошибка. Повторите попытку. Если это не поможет решить проблему, свяжитесь с нами по адресу support@simplenote.com.";
+
 /* Sign in error message */
 "An error was encountered while signing in." = "Во время входа произошла ошибка.";
-
-/* Engine URL Message */
-"AppEngine Endpoints" = "Конечные точки AppEngine";
 
 /* No comment provided by engineer. */
 "Appearance" = "Внешний вид";
@@ -104,14 +110,14 @@
 /* User Authenticated */
 "Authenticated" = "Прошедший проверку";
 
-/* Engine URL Message */
-"Authentication Endpoints" = "Конечные точки аутентификации";
-
 /* The Simplenote blog */
 "Blog" = "Блог";
 
 /* Terms of Service Legend *PREFIX*: printed in dark color */
 "By creating an account you agree to our" = "Создавая учетную запись, вы принимаете наши";
+
+/* Delete account confirmation alert message */
+"By deleting your account, all notes created with this account will be permanently deleted. This action is not reversible" = "При удалении учётной записи все созданные в ней заметки будут безвозвратно удалены. Это действие нельзя отменить";
 
 /* Cancel Action
    Cancel action button
@@ -136,6 +142,9 @@
 
 /* Number of characters in the note */
 "Characters" = "Символы";
+
+/* Title for delete account succes alert */
+"Check Your Email" = "Проверьте почту";
 
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "Введите 4-значный пароль";
@@ -226,6 +235,10 @@
 /* PinLock screen \"delete\" button */
 "Delete" = "Удалить";
 
+/* Delete account title and action
+   Display Delete Account Alert */
+"Delete Account" = "Удалить учётную запись";
+
 /* Delete a note from trash */
 "Delete Note" = "Удалить заметку";
 
@@ -293,7 +306,8 @@
 /* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "Введите ваш пароль";
 
-/* Error Title */
+/* Deletion Error Title
+   Error Title */
 "Error" = "Ошибка";
 
 /* Get Help Description Label */
@@ -453,6 +467,9 @@
 /* Instant passcode lock timeout */
 "Off" = "Выключить";
 
+/* Confirm alert message */
+"Ok" = "OK";
+
 /* No comment provided by engineer. */
 "On" = "Включить";
 
@@ -549,6 +566,9 @@
 
 /* Rename a tag */
 "Rename" = "Переименовать";
+
+/* Title for account deletion confirm button */
+"Request Account Deletion" = "Запрос удаления учётной записи";
 
 /* Resend email button -> Verify your email screen */
 "Resend Email" = "Отправить ещё раз";
@@ -670,6 +690,9 @@
 
 /* Error when address is in use */
 "The email you've entered is already associated with a Simplenote account." = "Указанный адрес эл. почты уже связан с учетной записью Simplenote.";
+
+/* Error when the network is inaccessible */
+"The network could not be reached." = "Сеть недоступна.";
 
 /* Onboarding Header Text */
 "The simplest way to keep notes." = "Простой способ хранить заметки.";
@@ -800,9 +823,6 @@
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "метка:";
-
-/* Warning Title */
-"⚠️ Important" = "⚠️ Важно";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞 Отладка включена 🐞";
