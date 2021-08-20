@@ -1,1 +1,2 @@
-- Bazı hata düzeltmeleri
+-   Uygulamada hesap silme özelliği eklendi #1354
+

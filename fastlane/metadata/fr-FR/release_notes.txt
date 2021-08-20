@@ -1,1 +1,2 @@
-- Quelques résolutions de bugs
+-   Ajout de la suppression de compte dans l’application #1354
+

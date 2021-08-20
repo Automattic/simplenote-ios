@@ -1,1 +1,2 @@
-- Se han corregido algunos errores
+-   Se ha añadido la función de eliminar la cuenta en la aplicación n.º 1354
+

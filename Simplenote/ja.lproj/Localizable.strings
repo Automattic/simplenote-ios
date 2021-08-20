@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-06-29 11:32:19+0000 */
+/* Translation-Revision-Date: 2021-08-19 20:50:20+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ja_JP */
@@ -60,6 +60,9 @@
 /* 5 minutes passcode lock timeout */
 "5 Minutes" = "5分";
 
+/* Network connection issue notificaiton */
+"A network connection is required. Please, check your connection and try again." = "ネットワーク接続が必要です。 接続を確認して、もう一度お試しください。";
+
 /* Display app about screen */
 "About" = "このサイトについて";
 
@@ -83,11 +86,14 @@
    Title: No filters applied */
 "All Notes" = "すべてのノート";
 
+/* Delete account confirmation instructions */
+"An email has been sent to %@ Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation" = "%@ にメールが送信されました。受信トレイを確認し、手順に従ってアカウントの削除を確定してください。\n\n当社がお客様から確認を得るまでアカウントは削除されません。";
+
+/* Deletion error message */
+"An error occured. Please, try again. If the problem continues, contact us at support@simplenote.com for help." = "エラーが発生しました。 もう一度お試しください。 問題が解決しない場合は、support@simplenote.com までお問い合わせください。";
+
 /* Sign in error message */
 "An error was encountered while signing in." = "ログイン時にエラーが発生しました。";
-
-/* Engine URL Message */
-"AppEngine Endpoints" = "AppEngine エンドポイント";
 
 /* No comment provided by engineer. */
 "Appearance" = "外観";
@@ -104,14 +110,14 @@
 /* User Authenticated */
 "Authenticated" = "認証済み";
 
-/* Engine URL Message */
-"Authentication Endpoints" = "認証エンドポイント";
-
 /* The Simplenote blog */
 "Blog" = "ブログ";
 
 /* Terms of Service Legend *PREFIX*: printed in dark color */
 "By creating an account you agree to our" = "アカウントを作成すると次に合意したものとみなされます";
+
+/* Delete account confirmation alert message */
+"By deleting your account, all notes created with this account will be permanently deleted. This action is not reversible" = "アカウントを削除すると、このアカウントで作成したすべてのメモが完全に削除されます。 この操作を元に戻すことはできません";
 
 /* Cancel Action
    Cancel action button
@@ -136,6 +142,9 @@
 
 /* Number of characters in the note */
 "Characters" = "文字";
+
+/* Title for delete account succes alert */
+"Check Your Email" = "メールを確認";
 
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "4桁のパスコードを選択してください";
@@ -226,6 +235,10 @@
 /* PinLock screen \"delete\" button */
 "Delete" = "削除";
 
+/* Delete account title and action
+   Display Delete Account Alert */
+"Delete Account" = "アカウントを削除";
+
 /* Delete a note from trash */
 "Delete Note" = "メモを削除";
 
@@ -293,7 +306,8 @@
 /* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "パスコードを入力してください";
 
-/* Error Title */
+/* Deletion Error Title
+   Error Title */
 "Error" = "エラー";
 
 /* Get Help Description Label */
@@ -453,6 +467,9 @@
 /* Instant passcode lock timeout */
 "Off" = "オフ";
 
+/* Confirm alert message */
+"Ok" = "OK";
+
 /* No comment provided by engineer. */
 "On" = "オン";
 
@@ -549,6 +566,9 @@
 
 /* Rename a tag */
 "Rename" = "タイトル変更";
+
+/* Title for account deletion confirm button */
+"Request Account Deletion" = "アカウントの削除をリクエスト";
 
 /* Resend email button -> Verify your email screen */
 "Resend Email" = "メールの再送";
@@ -670,6 +690,9 @@
 
 /* Error when address is in use */
 "The email you've entered is already associated with a Simplenote account." = "このメールアドレスは、すでに他の Simplenote アカウントで使用されています。";
+
+/* Error when the network is inaccessible */
+"The network could not be reached." = "ネットワークにアクセスできません。";
 
 /* Onboarding Header Text */
 "The simplest way to keep notes." = "最も手軽にメモを残せる方法です。";
@@ -800,9 +823,6 @@
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "タグ :";
-
-/* Warning Title */
-"⚠️ Important" = "⚠️ 重要";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞 デバッグ有効 🐞";

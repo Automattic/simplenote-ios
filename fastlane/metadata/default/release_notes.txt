@@ -1,1 +1,2 @@
-- Some bug fixes
+-   Added In app account deletion #1354
+

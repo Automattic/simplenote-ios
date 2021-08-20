@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-06-29 11:32:19+0000 */
+/* Translation-Revision-Date: 2021-08-19 20:48:53+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ko_KR */
@@ -60,6 +60,9 @@
 /* 5 minutes passcode lock timeout */
 "5 Minutes" = "5분";
 
+/* Network connection issue notificaiton */
+"A network connection is required. Please, check your connection and try again." = "네트워크 연결은 필수입니다. 연결을 확인하고 다시 시도하세요.";
+
 /* Display app about screen */
 "About" = "정보";
 
@@ -83,11 +86,14 @@
    Title: No filters applied */
 "All Notes" = "모든 메모";
 
+/* Delete account confirmation instructions */
+"An email has been sent to %@ Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation" = "이메일을 %@(으)로 보냈으니 받은 편지함을 확인하고 지침에 따라 계정 삭제를 확인하세요.\n\n시스템에 확인이 수신될 때까지 계정이 삭제되지 않음";
+
+/* Deletion error message */
+"An error occured. Please, try again. If the problem continues, contact us at support@simplenote.com for help." = "오류가 발생했습니다. 다시 시도하세요. 문제가 계속 발생하면 support@simplenote.com에서 도움말을 문의하세요.";
+
 /* Sign in error message */
 "An error was encountered while signing in." = "로그인하는 중에 오류가 발생했습니다.";
-
-/* Engine URL Message */
-"AppEngine Endpoints" = "AppEngine 엔드포인트";
 
 /* No comment provided by engineer. */
 "Appearance" = "모양";
@@ -104,14 +110,14 @@
 /* User Authenticated */
 "Authenticated" = "인증됨";
 
-/* Engine URL Message */
-"Authentication Endpoints" = "인증 엔드포인트";
-
 /* The Simplenote blog */
 "Blog" = "블로그";
 
 /* Terms of Service Legend *PREFIX*: printed in dark color */
 "By creating an account you agree to our" = "계정을 만들면 다음에 동의하는 것입니다.";
+
+/* Delete account confirmation alert message */
+"By deleting your account, all notes created with this account will be permanently deleted. This action is not reversible" = "계정을 삭제하면 이 계정을 통해 생성된 모든 메모가 영구적으로 삭제됩니다. 이 작업은 되돌릴 수 없음";
 
 /* Cancel Action
    Cancel action button
@@ -136,6 +142,9 @@
 
 /* Number of characters in the note */
 "Characters" = "문자";
+
+/* Title for delete account succes alert */
+"Check Your Email" = "이메일 확인";
 
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "네 자리 패스코드 선택";
@@ -226,6 +235,10 @@
 /* PinLock screen \"delete\" button */
 "Delete" = "삭제";
 
+/* Delete account title and action
+   Display Delete Account Alert */
+"Delete Account" = "계정 삭제";
+
 /* Delete a note from trash */
 "Delete Note" = "메모 삭제";
 
@@ -293,7 +306,8 @@
 /* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "패스코드 입력";
 
-/* Error Title */
+/* Deletion Error Title
+   Error Title */
 "Error" = "오류";
 
 /* Get Help Description Label */
@@ -453,6 +467,9 @@
 /* Instant passcode lock timeout */
 "Off" = "끔";
 
+/* Confirm alert message */
+"Ok" = "확인";
+
 /* No comment provided by engineer. */
 "On" = "켬";
 
@@ -549,6 +566,9 @@
 
 /* Rename a tag */
 "Rename" = "이름 변경";
+
+/* Title for account deletion confirm button */
+"Request Account Deletion" = "계정 삭제 요청";
 
 /* Resend email button -> Verify your email screen */
 "Resend Email" = "이메일 다시 보내기";
@@ -670,6 +690,9 @@
 
 /* Error when address is in use */
 "The email you've entered is already associated with a Simplenote account." = "입력한 이메일이 이미 Simplenote 계정과 연결되어 있습니다.";
+
+/* Error when the network is inaccessible */
+"The network could not be reached." = "네트워크에 연결할 수 없습니다.";
 
 /* Onboarding Header Text */
 "The simplest way to keep notes." = "메모를 보관하는 가장 간단한 방법입니다.";
@@ -800,9 +823,6 @@
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "태그:";
-
-/* Warning Title */
-"⚠️ Important" = "⚠️ 중요";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞 디버그 활성화 🐞";

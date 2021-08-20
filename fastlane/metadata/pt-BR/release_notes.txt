@@ -1,1 +1,2 @@
-- Algumas correções de bug
+-   Exclusão de conta no aplicativo adicionada #1354
+

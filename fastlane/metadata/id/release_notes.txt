@@ -1,1 +1,2 @@
-- Beberapa perbaikan bug
+-   Penambahan penghapusan akun di dalam Aplikasi #1354
+

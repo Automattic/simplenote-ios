@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-06-29 11:32:20+0000 */
+/* Translation-Revision-Date: 2021-08-19 20:53:19+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: he_IL */
@@ -60,6 +60,9 @@
 /* 5 minutes passcode lock timeout */
 "5 Minutes" = "חמש דקות";
 
+/* Network connection issue notificaiton */
+"A network connection is required. Please, check your connection and try again." = "נדרש חיבור פעיל לרשת. יש לבדוק את החיבור ולנסות שוב.";
+
 /* Display app about screen */
 "About" = "אודות";
 
@@ -83,11 +86,14 @@
    Title: No filters applied */
 "All Notes" = "כל הפתקים";
 
+/* Delete account confirmation instructions */
+"An email has been sent to %@ Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation" = "הודעת אימייל נשלחה לכתובת %@. יש לבדוק את תיבת הדואר הנכנס ולפעול לפי ההוראות לאישור המחיקה של החשבון.\n\nהחשבון שלך לא יימחק עד שנקבל את אישורך";
+
+/* Deletion error message */
+"An error occured. Please, try again. If the problem continues, contact us at support@simplenote.com for help." = "אירעה שגיאה. יש לנסות שוב. אם הבעיה ממשיכה, ניתן ליצור איתנו קשר לעזרה בכתובת support@simplenote.com.";
+
 /* Sign in error message */
 "An error was encountered while signing in." = "נתקלנו בשגיאה בתהליך ההתחברות.";
-
-/* Engine URL Message */
-"AppEngine Endpoints" = "נקודות קצה של AppEngine";
 
 /* No comment provided by engineer. */
 "Appearance" = "מראה";
@@ -104,14 +110,14 @@
 /* User Authenticated */
 "Authenticated" = "האימות בוצע";
 
-/* Engine URL Message */
-"Authentication Endpoints" = "נקודות קצה לאימות";
-
 /* The Simplenote blog */
 "Blog" = "בלוג";
 
 /* Terms of Service Legend *PREFIX*: printed in dark color */
 "By creating an account you agree to our" = "יצירת חשבון מהווה את הסכמתך אל";
+
+/* Delete account confirmation alert message */
+"By deleting your account, all notes created with this account will be permanently deleted. This action is not reversible" = "על ידי מחיקת החשבון שלך, כל הפתקים שנוצרו באמצעות החשבון הזה יימחקו לצמיתות. לא ניתן לבטל את הפעולה הזאת";
 
 /* Cancel Action
    Cancel action button
@@ -136,6 +142,9 @@
 
 /* Number of characters in the note */
 "Characters" = "תווים";
+
+/* Title for delete account succes alert */
+"Check Your Email" = "יש לבדוק את תיבת האימייל";
 
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "לבחור קוד סיסמה בן 4 ספרות";
@@ -226,6 +235,10 @@
 /* PinLock screen \"delete\" button */
 "Delete" = "מחיקה";
 
+/* Delete account title and action
+   Display Delete Account Alert */
+"Delete Account" = "למחוק חשבון";
+
 /* Delete a note from trash */
 "Delete Note" = "למחוק את הפתק";
 
@@ -293,7 +306,8 @@
 /* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "הזנת קוד סיסמה";
 
-/* Error Title */
+/* Deletion Error Title
+   Error Title */
 "Error" = "שגיאה";
 
 /* Get Help Description Label */
@@ -453,6 +467,9 @@
 /* Instant passcode lock timeout */
 "Off" = "כבוי";
 
+/* Confirm alert message */
+"Ok" = "OK";
+
 /* No comment provided by engineer. */
 "On" = "מופעל";
 
@@ -549,6 +566,9 @@
 
 /* Rename a tag */
 "Rename" = "שינוי שם";
+
+/* Title for account deletion confirm button */
+"Request Account Deletion" = "לבקש מחיקת חשבון";
 
 /* Resend email button -> Verify your email screen */
 "Resend Email" = "לשלוח אימייל מחדש";
@@ -670,6 +690,9 @@
 
 /* Error when address is in use */
 "The email you've entered is already associated with a Simplenote account." = "כתובת האימייל שהזנת כבר משויכת לחשבון Simplenote.";
+
+/* Error when the network is inaccessible */
+"The network could not be reached." = "לא ניתן היה להגיע לרשת.";
 
 /* Onboarding Header Text */
 "The simplest way to keep notes." = "הדרך הפשוטה ביותר לרשום פתקים.";
@@ -800,9 +823,6 @@
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "תגית:";
-
-/* Warning Title */
-"⚠️ Important" = "⚠️ חשוב";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞האפשרות לאיתור באגים מופעלת 🐞";

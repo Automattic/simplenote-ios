@@ -1,1 +1,2 @@
-- Correzioni di alcuni bug
+-   Aggiunta eliminazione account in-app #1354
+
