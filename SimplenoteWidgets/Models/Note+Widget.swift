@@ -33,22 +33,15 @@ extension Note {
 
 extension Note {
     private var lines: [String]? {
-        guard let content = content else {
-            return nil
-        }
-
-        return content.components(separatedBy: .newlines)
-    }
-
-    private var firstLine: String {
-        guard let lines = lines else {
-            return Constants.defaultTitle
-        }
-        return lines.first ?? String()
+        content?.components(separatedBy: .newlines)
     }
 
     var title: String {
-        return firstLine.count > .zero ? firstLine : Constants.defaultTitle
+        guard let firstLine = lines?.first,
+              firstLine.count > 0 else {
+            return Constants.defaultTitle
+        }
+        return firstLine
     }
 
     var body: String {
@@ -61,10 +54,7 @@ extension Note {
     }
 
     var limitedTitle: String {
-        guard firstLine.count > .zero else {
-            return Constants.defaultTitle
-        }
-        return String(firstLine.prefix(50))
+        String(title.prefix(50))
     }
 
     var url: URL {
