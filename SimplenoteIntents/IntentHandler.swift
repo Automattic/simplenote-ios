@@ -3,12 +3,10 @@ import CoreData
 
 class IntentHandler: INExtension {
     let coreDataManager: CoreDataManager
-    let dataController: WidgetDataController
 
     override init() {
         do {
             self.coreDataManager = try CoreDataManager(StorageSettings().sharedStorageURL, for: .intents)
-            self.dataController = try WidgetDataController(coreDataManager: coreDataManager)
         } catch {
             fatalError()
         }
@@ -17,18 +15,24 @@ class IntentHandler: INExtension {
 
 
     override func handler(for intent: INIntent) -> Any {
+        NSLog("failed to return handler")
         return self
     }
 }
 
 extension IntentHandler: NoteWidgetIntentHandling {
     func provideNoteOptionsCollection(for intent: NoteWidgetIntent, with completion: @escaping (INObjectCollection<WidgetNote>?, Error?) -> Void) {
-
+        NSLog("attempting to provied note options collection")
+        guard let dataController = try? WidgetDataController(coreDataManager: coreDataManager) else {
+            completion(nil, WidgetError.appConfigurationError)
+            return
+        }
         // Fetch notes
         var notes: [Note] = []
         do {
             notes = try dataController.notes()
         } catch {
+            NSLog("Could not supply notes: %@", error.localizedDescription)
             completion(nil, error)
             return
         }
@@ -47,6 +51,10 @@ extension IntentHandler: NoteWidgetIntentHandling {
     }
 
     func defaultNote(for intent: NoteWidgetIntent) -> WidgetNote? {
+        guard let dataController = try? WidgetDataController(coreDataManager: coreDataManager) else {
+            return nil
+        }
+
         guard let note = try? dataController.firstNote() else {
             return nil
         }
