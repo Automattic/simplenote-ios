@@ -29,22 +29,13 @@ private struct Sizes {
     static let overallPadding = CGFloat(20)
 }
 
-
 struct NoteWidgetView_Previews: PreviewProvider {
     static var previews: some View {
 
         Group {
-            NoteWidgetView(entry: NoteWidgetEntry(
-                            date: Date(),
-                            title: DemoContent.singleNoteTitle,
-                            content: DemoContent.singleNoteContent,
-                            url: DemoContent.demoURL))
+            NoteWidgetView(entry: NoteWidgetEntry.placeholder)
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
-            NoteWidgetView(entry: NoteWidgetEntry(
-                            date: Date(),
-                            title: DemoContent.singleNoteTitle,
-                            content: DemoContent.singleNoteContent,
-                            url: DemoContent.demoURL))
+            NoteWidgetView(entry: NoteWidgetEntry.placeholder)
                 .previewContext(WidgetPreviewContext(family: .systemMedium)).colorScheme(.dark)
         }
     }

@@ -13,7 +13,7 @@ class WidgetDataController {
     private lazy var notesController = ResultsController<Note>(
         viewContext: coreDataManager.managedObjectContext,
         matching: predicateForNotes(),
-        sortedBy: [NSSortDescriptor.descriptorForNotes(sortMode: noteSortMode)]
+        sortedBy: [NSSortDescriptor.descriptorForNotes(sortMode: WidgetDefaults.shared.sortMode)]
     )
 
     /// Tags Controller
@@ -26,35 +26,20 @@ class WidgetDataController {
     /// Initialization
     ///
     init(coreDataManager: CoreDataManager, isPreview: Bool = false) throws {
-        guard !isPreview else {
-            self.coreDataManager = coreDataManager
-            return
-        }
-
-        guard let isLoggedIn = UserDefaults(suiteName: SimplenoteConstants.sharedGroupDomain)?.bool(forKey: .accountIsLoggedIn),
-              isLoggedIn else {
-            throw StorageError.appConfigurationError
+        if !isPreview {
+            guard WidgetDefaults.shared.loggedIn else {
+                throw WidgetError.appConfigurationError
+            }
         }
 
         self.coreDataManager = coreDataManager
-    }
-
-    /// Sort mode for widgets.  Fetched from main apps sort setting
-    ///
-    private var noteSortMode: SortMode {
-        guard let defaults = UserDefaults(suiteName: SimplenoteConstants.sharedGroupDomain) else {
-            return SortMode.alphabeticallyAscending
-        }
-
-        return SortMode(rawValue: defaults.integer(forKey: .listSortMode))
-            ?? SortMode.alphabeticallyAscending
     }
 
     private func performFetch() throws {
         do {
             try notesController.performFetch()
         } catch {
-            throw StorageError.fetchError
+            throw WidgetError.fetchError
         }
     }
     // MARK: - Notes

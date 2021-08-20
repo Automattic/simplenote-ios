@@ -30,6 +30,8 @@ class SimplenoteConstants: NSObject {
     ///
     static let simplenotePublishedBaseURL = "http://simp.ly/publish/"
 
+    /// Simplenote: Domain for shared group directory
+    ///
     static let sharedGroupDomain = "group.\(Bundle.main.rootBundleIdentifier ?? "com.codality.NotationalFlow")"
 
     /// AppEngine: Base URL

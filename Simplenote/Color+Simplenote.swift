@@ -4,7 +4,6 @@ import SwiftUI
 extension Color {
     /// Convenience initializers to get and use Simplenote color studio colors
     ///
-
     init(studioColor: ColorStudio, alpha: CGFloat = UIKitConstants.alpha1_0) {
         self.init(UIColor(studioColor: studioColor, alpha: alpha))
     }

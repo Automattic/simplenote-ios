@@ -19,21 +19,14 @@ struct WidgetController {
 
                 return false
             }) {
-                NSLog("Reloading all widgets")
                 WidgetCenter.shared.reloadAllTimelines()
             }
         }
     }
 
-    static func syncWidgetDefaults(isLoggedIn loggedIn: Bool) {
-        guard let widgetDefaults = UserDefaults(suiteName: SimplenoteConstants.sharedGroupDomain) else {
-            return
-        }
-
-        // Set listsortmode default
-        widgetDefaults.set(UserDefaults.standard.integer(forKey: .listSortMode), forKey: .listSortMode)
-
-        // User is logged in
-        widgetDefaults.set(loggedIn, forKey: .accountIsLoggedIn)
+    static func syncWidgetDefaults(authenticated: Bool) {
+        let widgetDefaults = WidgetDefaults.shared
+        widgetDefaults.sortMode = Options.shared.listSortMode
+        widgetDefaults.loggedIn = authenticated
     }
 }
