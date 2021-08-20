@@ -45,8 +45,7 @@ struct NoteWidgetProvider: IntentTimelineProvider {
     }
 
     func getSnapshot(for configuration: NoteWidgetIntent, in context: Context, completion: @escaping (NoteWidgetEntry) -> Void) {
-        guard let dataController = buildWidgetDataController(),
-              let note = try? dataController.firstNote() else {
+        guard let note = try? widgetDataController()?.firstNote() else {
             completion(NoteWidgetEntry.placeholder)
             return
         }
@@ -58,32 +57,25 @@ struct NoteWidgetProvider: IntentTimelineProvider {
         // Confirm valid configuration
         guard let widgetNote = configuration.note,
               let simperiumKey = widgetNote.identifier,
-              let dataController = buildWidgetDataController() else {
-            NSLog("Couldn't find configuration or identifier")
+              let note = widgetDataController()?.note(forSimperiumKey: simperiumKey) else {
             return
         }
 
-        NSLog("in GetTimeline, widgetNote key: %@", simperiumKey)
-        // Fetch note
-        guard let note = dataController.note(forSimperiumKey: simperiumKey) else {
-            return
-        }
-
-        NSLog("Was able to get note with key")
         // Prepare timeline entry for every hour for the next 6 hours
         // Create a new set of entries at the end of the 6 entries
-        var entries: [NoteWidgetEntry] = []
-        for int in Constants.entryRange {
-            if let date = Date().increased(byHours: int) {
-                entries.append(NoteWidgetEntry(date: date, note: note))
+        let entries: [NoteWidgetEntry] = Constants.entryRange.compactMap({ (index)  in
+            guard let date = Date().increased(byHours: index) else {
+                return nil
             }
-        }
+            return NoteWidgetEntry(date: date, note: note)
+        })
+
         let timeline = Timeline(entries: entries, policy: .atEnd)
 
         completion(timeline)
     }
 
-    private func buildWidgetDataController() -> WidgetDataController? {
+    private func widgetDataController() -> WidgetDataController? {
         let isPreview = ProcessInfo.processInfo.environment[Constants.environmentXcodePreviewsKey] != Constants.isPreviews
         return try? WidgetDataController(coreDataManager: coreDataManager, isPreview: isPreview)
     }
