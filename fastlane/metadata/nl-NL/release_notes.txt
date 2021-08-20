@@ -1,1 +1,2 @@
-- Enkele bugs verholpen
+-   Accountverwijdering in de app toegevoegd #1354
+

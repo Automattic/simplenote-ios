@@ -1,1 +1,2 @@
-- Ein paar Fehlerkorrekturen
+-   In-App-Kontolöschung hinzugefügt #1354
+
