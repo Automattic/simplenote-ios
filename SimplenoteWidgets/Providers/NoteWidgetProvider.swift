@@ -31,13 +31,10 @@ struct NoteWidgetProvider: IntentTimelineProvider {
     typealias Entry = NoteWidgetEntry
 
     let coreDataManager: CoreDataManager!
-    let dataController: WidgetDataController!
 
     init() {
         do {
             self.coreDataManager = try CoreDataManager(StorageSettings().sharedStorageURL, for: .widgets)
-            let isPreview = ProcessInfo.processInfo.environment[Constants.environmentXcodePreviewsKey] != Constants.isPreviews
-            self.dataController = try WidgetDataController(coreDataManager: coreDataManager, isPreview: isPreview)
         } catch {
             fatalError("Couldn't setup dataController")
         }
@@ -48,7 +45,7 @@ struct NoteWidgetProvider: IntentTimelineProvider {
     }
 
     func getSnapshot(for configuration: NoteWidgetIntent, in context: Context, completion: @escaping (NoteWidgetEntry) -> Void) {
-        guard let dataController = dataController,
+        guard let dataController = buildWidgetDataController(),
               let note = try? dataController.firstNote() else {
             completion(NoteWidgetEntry.placeholder)
             return
@@ -61,16 +58,18 @@ struct NoteWidgetProvider: IntentTimelineProvider {
         // Confirm valid configuration
         guard let widgetNote = configuration.note,
               let simperiumKey = widgetNote.identifier,
-              let dataController = dataController else {
+              let dataController = buildWidgetDataController() else {
             NSLog("Couldn't find configuration or identifier")
             return
         }
 
+        NSLog("in GetTimeline, widgetNote key: %@", simperiumKey)
         // Fetch note
         guard let note = dataController.note(forSimperiumKey: simperiumKey) else {
             return
         }
 
+        NSLog("Was able to get note with key")
         // Prepare timeline entry for every hour for the next 6 hours
         // Create a new set of entries at the end of the 6 entries
         var entries: [NoteWidgetEntry] = []
@@ -82,6 +81,11 @@ struct NoteWidgetProvider: IntentTimelineProvider {
         let timeline = Timeline(entries: entries, policy: .atEnd)
 
         completion(timeline)
+    }
+
+    private func buildWidgetDataController() -> WidgetDataController? {
+        let isPreview = ProcessInfo.processInfo.environment[Constants.environmentXcodePreviewsKey] != Constants.isPreviews
+        return try? WidgetDataController(coreDataManager: coreDataManager, isPreview: isPreview)
     }
 }
 
