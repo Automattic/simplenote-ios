@@ -20,14 +20,11 @@ struct ListWidgetProvider: IntentTimelineProvider {
     typealias Entry = ListWidgetEntry
 
     let coreDataManager: CoreDataManager!
-    let dataController: WidgetDataController!
 
     init() {
         NSLog("Created a provider")
         do {
             self.coreDataManager = try CoreDataManager(StorageSettings().sharedStorageURL, for: .widgets)
-            let isPreview = ProcessInfo.processInfo.environment[WidgetConstants.environmentXcodePreviewsKey] != WidgetConstants.isPreviews
-            self.dataController = try WidgetDataController(coreDataManager: coreDataManager, isPreview: isPreview)
         } catch {
             fatalError("Couldn't setup dataController")
         }
@@ -39,12 +36,7 @@ struct ListWidgetProvider: IntentTimelineProvider {
     }
 
     func getSnapshot(for configuration: ListWidgetIntent, in context: Context, completion: @escaping (ListWidgetEntry) -> Void) {
-        guard let dataController = dataController else {
-            completion(ListWidgetEntry.placeholder)
-            return
-        }
-
-        guard let allNotes = try? dataController.notes() else {
+        guard let allNotes = try? widgetDataController()?.notes() else {
             completion(ListWidgetEntry.placeholder)
             return
         }
@@ -59,16 +51,7 @@ struct ListWidgetProvider: IntentTimelineProvider {
     func getTimeline(for configuration: ListWidgetIntent, in context: Context, completion: @escaping (Timeline<ListWidgetEntry>) -> Void) {
         // Confirm valid configuration
         guard let tag = configuration.tag?.identifier,
-              let dataController = dataController else {
-            NSLog("Couldn't find configuration or identifier")
-            return
-        }
-        // Fetch note
-        var notes: [Note]
-        do {
-            notes = try dataController.notes(withFilter: TagsFilter(from: tag), limit: 8)
-        } catch {
-            NSLog("Couldn't fetch notes from core data")
+              let notes = try? widgetDataController()?.notes(withFilter: TagsFilter(from: tag), limit: 8) else {
             return
         }
 
@@ -78,14 +61,25 @@ struct ListWidgetProvider: IntentTimelineProvider {
 
         // Prepare timeline entry for every hour for the next 6 hours
         // Create a new set of entries at the end of the 6 entries
-        var entries: [ListWidgetEntry] = []
-        for int in 0..<6 {
-            if let date = Date().increased(byHours: int) {
-                entries.append(ListWidgetEntry(date: date, tag: tag, noteProxys: proxies))
+        let entries: [ListWidgetEntry] = Constants.entryRange.compactMap { (index) in
+            guard let date = Date().increased(byHours: index) else {
+                return nil
             }
+            return ListWidgetEntry(date: date, tag: tag, noteProxys: proxies)
         }
-        let timeline = Timeline(entries: entries, policy: .atEnd)
 
-        completion(timeline)
+        completion(Timeline(entries: entries, policy: .atEnd)
+)
+    }
+
+    private func widgetDataController() -> WidgetDataController? {
+        let isPreview = ProcessInfo.processInfo.environment[Constants.environmentXcodePreviewsKey] != Constants.isPreviews
+        return try? WidgetDataController(coreDataManager: coreDataManager, isPreview: isPreview)
+    }
+
+    private struct Constants {
+        static let environmentXcodePreviewsKey = "XCODE_RUNNING_FOR_PREVIEWS"
+        static let isPreviews = "1"
+        static let entryRange = 0..<6
     }
 }

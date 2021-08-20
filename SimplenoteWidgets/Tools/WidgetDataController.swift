@@ -94,7 +94,7 @@ class WidgetDataController {
         do {
             try tagsController.performFetch()
         } catch {
-            throw StorageError.fetchError
+            throw WidgetError.fetchError
         }
 
         return tagsController.fetchedObjects

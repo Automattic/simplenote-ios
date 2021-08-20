@@ -23,20 +23,10 @@ class IntentHandler: INExtension {
 extension IntentHandler: NoteWidgetIntentHandling {
     func provideNoteOptionsCollection(for intent: NoteWidgetIntent, with completion: @escaping (INObjectCollection<WidgetNote>?, Error?) -> Void) {
         NSLog("attempting to provied note options collection")
-        guard let dataController = try? WidgetDataController(coreDataManager: coreDataManager) else {
+        guard let notes = try? WidgetDataController(coreDataManager: coreDataManager).notes() else {
             completion(nil, WidgetError.appConfigurationError)
             return
         }
-        // Fetch notes
-        var notes: [Note] = []
-        do {
-            notes = try dataController.notes()
-        } catch {
-            NSLog("Could not supply notes: %@", error.localizedDescription)
-            completion(nil, error)
-            return
-        }
-
 
         // Return collection to intents
         let collection = widgetNoteInObjectCollection(from: notes)
@@ -64,13 +54,9 @@ extension IntentHandler: NoteWidgetIntentHandling {
 
 extension IntentHandler: ListWidgetIntentHandling {
     func provideTagOptionsCollection(for intent: ListWidgetIntent, with completion: @escaping (INObjectCollection<WidgetTag>?, Error?) -> Void) {
-
-        // Fetch Tags
-        var tags: [Tag] = []
-        do {
-            try tags = dataController.tags()
-        } catch {
-            completion(nil, error)
+        guard let tags = try? WidgetDataController(coreDataManager: coreDataManager).tags() else {
+            completion(nil, WidgetError.appConfigurationError)
+            return
         }
 
         // Return collection to intents
