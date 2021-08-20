@@ -63,7 +63,7 @@ struct NoteWidgetProvider: IntentTimelineProvider {
 
         // Prepare timeline entry for every hour for the next 6 hours
         // Create a new set of entries at the end of the 6 entries
-        let entries: [NoteWidgetEntry] = Constants.entryRange.compactMap({ (index)  in
+        let entries: [NoteWidgetEntry] = WidgetConstants.rangeForSixEntries.compactMap({ (index)  in
             guard let date = Date().increased(byHours: index) else {
                 return nil
             }
@@ -76,13 +76,7 @@ struct NoteWidgetProvider: IntentTimelineProvider {
     }
 
     private func widgetDataController() -> WidgetDataController? {
-        let isPreview = ProcessInfo.processInfo.environment[Constants.environmentXcodePreviewsKey] != Constants.isPreviews
+        let isPreview = ProcessInfo.processInfo.environment[WidgetConstants.environmentXcodePreviewsKey] != WidgetConstants.isPreviews
         return try? WidgetDataController(coreDataManager: coreDataManager, isPreview: isPreview)
     }
-}
-
-private struct Constants {
-    static let environmentXcodePreviewsKey = "XCODE_RUNNING_FOR_PREVIEWS"
-    static let isPreviews = "1"
-    static let entryRange = 0..<6
 }
