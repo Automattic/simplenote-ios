@@ -77,7 +77,7 @@ struct NoteWidgetProvider: IntentTimelineProvider {
 
     private func widgetDataController() -> WidgetDataController? {
         let isPreview = ProcessInfo.processInfo.environment[Constants.environmentXcodePreviewsKey] != Constants.isPreviews
-        return try? WidgetDataController(coreDataManager: coreDataManager, isPreview: isPreview)
+        return try? WidgetDataController(context: coreDataManager.managedObjectContext, isPreview: isPreview)
     }
 }
 

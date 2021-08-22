@@ -21,7 +21,7 @@ class IntentHandler: INExtension {
 
 extension IntentHandler: NoteWidgetIntentHandling {
     func provideNoteOptionsCollection(for intent: NoteWidgetIntent, with completion: @escaping (INObjectCollection<WidgetNote>?, Error?) -> Void) {
-        guard let dataController = try? WidgetDataController(coreDataManager: coreDataManager) else {
+        guard let dataController = try? WidgetDataController(context: coreDataManager.managedObjectContext) else {
             completion(nil, WidgetError.appConfigurationError)
             return
         }
@@ -49,7 +49,7 @@ extension IntentHandler: NoteWidgetIntentHandling {
     }
 
     func defaultNote(for intent: NoteWidgetIntent) -> WidgetNote? {
-        guard let dataController = try? WidgetDataController(coreDataManager: coreDataManager) else {
+        guard let dataController = try? WidgetDataController(context: coreDataManager.managedObjectContext) else {
             return nil
         }
 

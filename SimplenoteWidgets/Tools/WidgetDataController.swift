@@ -1,31 +1,32 @@
 import Foundation
 import SimplenoteFoundation
 import SimplenoteSearch
+import CoreData
 
 class WidgetDataController {
 
     /// Data Controller
     ///
-    let coreDataManager: CoreDataManager
+    let managedObjectContext: NSManagedObjectContext
 
     /// Notes Controller
     ///
     private lazy var notesController = ResultsController<Note>(
-        viewContext: coreDataManager.managedObjectContext,
+        viewContext: managedObjectContext,
         matching: predicateForNotes(),
         sortedBy: [NSSortDescriptor.descriptorForNotes(sortMode: WidgetDefaults.shared.sortMode)]
     )
 
     /// Initialization
     ///
-    init(coreDataManager: CoreDataManager, isPreview: Bool = false) throws {
+    init(context: NSManagedObjectContext, isPreview: Bool = false) throws {
         if !isPreview {
             guard WidgetDefaults.shared.loggedIn else {
                 throw WidgetError.appConfigurationError
             }
         }
 
-        self.coreDataManager = coreDataManager
+        self.managedObjectContext = context
     }
 
     private func performFetch() throws {
