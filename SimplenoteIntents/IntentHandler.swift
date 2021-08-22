@@ -15,14 +15,12 @@ class IntentHandler: INExtension {
 
 
     override func handler(for intent: INIntent) -> Any {
-        NSLog("failed to return handler")
         return self
     }
 }
 
 extension IntentHandler: NoteWidgetIntentHandling {
     func provideNoteOptionsCollection(for intent: NoteWidgetIntent, with completion: @escaping (INObjectCollection<WidgetNote>?, Error?) -> Void) {
-        NSLog("attempting to provied note options collection")
         guard let dataController = try? WidgetDataController(coreDataManager: coreDataManager) else {
             completion(nil, WidgetError.appConfigurationError)
             return
