@@ -36,7 +36,7 @@ struct ListWidgetProvider: IntentTimelineProvider {
     }
 
     func getSnapshot(for configuration: ListWidgetIntent, in context: Context, completion: @escaping (ListWidgetEntry) -> Void) {
-        guard let allNotes = try? widgetDataController()?.notes() else {
+        guard let allNotes = widgetDataController()?.notes() else {
             completion(ListWidgetEntry.placeholder)
             return
         }
@@ -51,7 +51,7 @@ struct ListWidgetProvider: IntentTimelineProvider {
     func getTimeline(for configuration: ListWidgetIntent, in context: Context, completion: @escaping (Timeline<ListWidgetEntry>) -> Void) {
         // Confirm valid configuration
         guard let tag = configuration.tag?.identifier,
-              let notes = try? widgetDataController()?.notes(withFilter: TagsFilter(from: tag), limit: Constants.noteFetchLimit) else {
+              let notes = widgetDataController()?.notes(filteredBy: TagsFilter(from: tag), limit: Constants.noteFetchLimit) else {
             return
         }
 
@@ -74,7 +74,7 @@ struct ListWidgetProvider: IntentTimelineProvider {
 
     private func widgetDataController() -> WidgetDataController? {
         let isPreview = ProcessInfo.processInfo.environment[WidgetConstants.environmentXcodePreviewsKey] != WidgetConstants.isPreviews
-        return try? WidgetDataController(coreDataManager: coreDataManager, isPreview: isPreview)
+        return try? WidgetDataController(context: coreDataManager.managedObjectContext, isPreview: isPreview)
     }
 }
 

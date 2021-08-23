@@ -26,8 +26,8 @@ class WidgetDataController {
     /// Fetch notes with given tag and limit
     /// If no tag is specified, will fetch notes that are not deleted. If there is no limit specified it will fetch all of the notes
     ///
-    func notes(withTag tag: String? = nil, limit: Int = .zero) -> [Note]? {
-        let request: NSFetchRequest<Note> = fetchRequest(withTag: tag, limit: limit)
+    func notes(filteredBy filter: TagsFilter = .allNotes, limit: Int = .zero) -> [Note]? {
+        let request: NSFetchRequest<Note> = fetchRequest(filteredBy: filter, limit: limit)
         return performFetch(from: request)
     }
 
@@ -50,7 +50,7 @@ class WidgetDataController {
     }
 
     func firstNote() -> Note? {
-        let fetched = notes(withTag: nil, limit: 1)
+        let fetched = notes(limit: 1)
         return fetched?.first
     }
 
@@ -69,25 +69,26 @@ class WidgetDataController {
         return NSSortDescriptor.descriptorForNotes(sortMode: WidgetDefaults.shared.sortMode)
     }
 
-    private func fetchRequest<T: NSManagedObject>(withTag tag: String? = nil, limit: Int = .zero) -> NSFetchRequest<T> {
+    private func fetchRequest<T: NSManagedObject>(filteredBy filter: TagsFilter = .allNotes, limit: Int = .zero) -> NSFetchRequest<T> {
         let fetchRequest = NSFetchRequest<T>(entityName: T.entityName)
         fetchRequest.fetchLimit = limit
         fetchRequest.sortDescriptors = [sortDescriptorForNotes()]
-        fetchRequest.predicate = predicateForNotes(withTag: tag)
+        fetchRequest.predicate = predicateForNotes(filteredBy: filter)
+
+        return fetchRequest
+    }
+
+    private func tagsFetchRequest() -> NSFetchRequest<Tag> {
+        let fetchRequest = NSFetchRequest<Tag>(entityName: Tag.entityName)
+        fetchRequest.sortDescriptors = [NSSortDescriptor.descriptorForTags()]
 
         return fetchRequest
     }
 
     // MARK: - Tags
 
-    func tags() throws -> [Tag] {
-        do {
-            try tagsController.performFetch()
-        } catch {
-            throw WidgetError.fetchError
-        }
-
-        return tagsController.fetchedObjects
+    func tags() -> [Tag]? {
+        performFetch(from: tagsFetchRequest())
     }
 }
 
