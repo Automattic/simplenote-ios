@@ -25,18 +25,12 @@ extension IntentHandler: NoteWidgetIntentHandling {
             completion(nil, WidgetError.appConfigurationError)
             return
         }
-        // Fetch notes
-        var notes: [Note] = []
-        do {
-            notes = try dataController.notes()
-        } catch {
-            NSLog("Could not supply notes: %@", error.localizedDescription)
-            completion(nil, error)
+
+        guard let notes = dataController.notes() else {
+            completion(nil, WidgetError.fetchError)
             return
         }
 
-
-        // Return collection to intents
         let collection = widgetNoteInObjectCollection(from: notes)
         completion(collection, nil)
     }
@@ -49,13 +43,11 @@ extension IntentHandler: NoteWidgetIntentHandling {
     }
 
     func defaultNote(for intent: NoteWidgetIntent) -> WidgetNote? {
-        guard let dataController = try? WidgetDataController(context: coreDataManager.managedObjectContext) else {
+        guard let dataController = try? WidgetDataController(context: coreDataManager.managedObjectContext),
+              let note = dataController.firstNote() else {
             return nil
         }
 
-        guard let note = try? dataController.firstNote() else {
-            return nil
-        }
         return WidgetNote(identifier: note.simperiumKey, display: note.limitedTitle)
     }
 }
