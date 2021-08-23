@@ -458,6 +458,7 @@
 		BA9B59022685549F00DAD1ED /* StorageSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B59012685549F00DAD1ED /* StorageSettings.swift */; };
 		BAA4856925D5E40900F3BDB9 /* SearchQuery+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */; };
 		BAA63C3325EEDA83001589D7 /* NoteLinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA63C3225EEDA83001589D7 /* NoteLinkTests.swift */; };
+		BAA723E226D4530A00C051B4 /* Color+Widgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA723E126D4530A00C051B4 /* Color+Widgets.swift */; };
 		BAB017722609456D007A9CC3 /* PublishController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB017712609456D007A9CC3 /* PublishController.swift */; };
 		BAB01792260AAE93007A9CC3 /* NoticeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB01791260AAE93007A9CC3 /* NoticeFactory.swift */; };
 		BAB0179B260AD591007A9CC3 /* PublishControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB0179A260AD591007A9CC3 /* PublishControllerTests.swift */; };
@@ -1073,6 +1074,7 @@
 		BA9B59012685549F00DAD1ED /* StorageSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageSettings.swift; sourceTree = "<group>"; };
 		BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchQuery+Simplenote.swift"; sourceTree = "<group>"; };
 		BAA63C3225EEDA83001589D7 /* NoteLinkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteLinkTests.swift; sourceTree = "<group>"; };
+		BAA723E126D4530A00C051B4 /* Color+Widgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Widgets.swift"; sourceTree = "<group>"; };
 		BAB017712609456D007A9CC3 /* PublishController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishController.swift; sourceTree = "<group>"; };
 		BAB01791260AAE93007A9CC3 /* NoticeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeFactory.swift; sourceTree = "<group>"; };
 		BAB0179A260AD591007A9CC3 /* PublishControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishControllerTests.swift; sourceTree = "<group>"; };
@@ -2161,6 +2163,7 @@
 			children = (
 				BA75D87D26C0843600883FFA /* Text+Simplenote.swift */,
 				BA75D8AD26C0862E00883FFA /* View+Simplenote.swift */,
+				BAA723E126D4530A00C051B4 /* Color+Widgets.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -3486,6 +3489,7 @@
 				BAFA93F3265DE4A40009DCFB /* NewNoteWidget.swift in Sources */,
 				BABFFF2326CF9094003A4C25 /* WidgetDefaults.swift in Sources */,
 				BA122DBD265EF412003D3BC5 /* UIColor+Studio.swift in Sources */,
+				BAA723E226D4530A00C051B4 /* Color+Widgets.swift in Sources */,
 				BA88765126B79324001C9C9E /* DemoContent.swift in Sources */,
 				BA122DBE265EF421003D3BC5 /* UIKitConstants.swift in Sources */,
 				BAF8D5BB26AE254000CA9383 /* Simplenote.xcdatamodeld in Sources */,

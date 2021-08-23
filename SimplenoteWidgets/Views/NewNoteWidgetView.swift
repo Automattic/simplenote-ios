@@ -21,7 +21,7 @@ struct NewNoteWidgetView: View {
             }
             .padding(Constants.overallPadding)
         }
-        .background(Color(studioColor: .spBlue50))
+        .background(Color.newNoteBackgroundColor)
         .widgetURL(URL(string: SimplenoteConstants.simplenoteScheme + "://" + Constants.newNoteHost))
     }
 }

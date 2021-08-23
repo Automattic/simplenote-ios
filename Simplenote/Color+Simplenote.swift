@@ -13,4 +13,8 @@ extension Color {
         let alpha = colorScheme == .dark ? darkAlpha : lightAlpha
         self.init(UIColor(studioColor: color, alpha: alpha))
     }
+
+    init(light: ColorStudio, lightAlpha: CGFloat = UIKitConstants.alpha1_0, dark: ColorStudio, darkAlpha: CGFloat = UIKitConstants.alpha1_0) {
+        self.init(UIColor(lightColor: light, darkColor: dark, lightColorAlpha: lightAlpha, darkColorAlpha: darkAlpha))
+    }
 }

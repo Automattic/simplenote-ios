@@ -12,9 +12,9 @@ struct NoteWidgetView: View {
                 VStack(alignment: .leading) {
                     Text(entry.title)
                         .widgetHeader(widgetFamily,
-                                      color: Color(for: colorScheme, light: .gray100, dark: .white))
+                                      color: .bodyTextColor)
                     Text(entry.content)
-                        .subheadline(color: Color(for: colorScheme, light: .gray100, dark: .white))
+                        .subheadline(color: .bodyTextColor)
                 }
                 .filling()
                 .padding([.leading, .trailing, .top], Sizes.overallPadding)
