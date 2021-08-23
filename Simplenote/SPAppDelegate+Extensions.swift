@@ -287,7 +287,7 @@ extension SPAppDelegate: SimperiumDelegate {
         if #available(iOS 14.0, *) {
             syncWidgetDefaults()
         }
-        
+
         setupVerificationController()
     }
 

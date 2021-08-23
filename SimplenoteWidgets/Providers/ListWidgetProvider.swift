@@ -51,7 +51,7 @@ struct ListWidgetProvider: IntentTimelineProvider {
     func getTimeline(for configuration: ListWidgetIntent, in context: Context, completion: @escaping (Timeline<ListWidgetEntry>) -> Void) {
         // Confirm valid configuration
         guard let tag = configuration.tag?.identifier,
-              let notes = try? widgetDataController()?.notes(withFilter: TagsFilter(from: tag), limit: 8) else {
+              let notes = try? widgetDataController()?.notes(withFilter: TagsFilter(from: tag), limit: Constants.noteFetchLimit) else {
             return
         }
 
@@ -76,4 +76,8 @@ struct ListWidgetProvider: IntentTimelineProvider {
         let isPreview = ProcessInfo.processInfo.environment[WidgetConstants.environmentXcodePreviewsKey] != WidgetConstants.isPreviews
         return try? WidgetDataController(coreDataManager: coreDataManager, isPreview: isPreview)
     }
+}
+
+private struct Constants {
+    static let noteFetchLimit = 8
 }
