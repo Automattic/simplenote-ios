@@ -11,16 +11,16 @@ struct NoteWidgetView: View {
                 VStack(alignment: .leading) {
                     Text(entry.title)
                         .widgetHeader(widgetFamily,
-                                      color: Color(UIColor.simplenoteTextColor))
+                                      color: .bodyTextColor)
                     Text(entry.content)
-                        .subheadline(color: Color(UIColor.simplenoteTextColor))
+                        .subheadline(color: .bodyTextColor)
                 }
                 .filling()
                 .padding([.leading, .trailing, .top], Sizes.overallPadding)
                 .ignoresSafeArea()
                 .widgetURL(entry.url)
             }
-            .background(Color(UIColor.simplenoteWidgetBackgroundColor))
+            .background(Color.widgetBackgroundColor)
         }
     }
 }

@@ -12,13 +12,13 @@ struct ListWidgetHeaderView: View {
             Link(destination: URL.internalUrl(for: tag)) {
                 Text(displayName(for: tag))
                     .font(.headline)
-                    .foregroundColor(Color(UIColor.simplenoteTextColor))
+                    .foregroundColor(.bodyTextColor)
                 Spacer()
             }
             Link(destination: URL.newNoteURL(withTag: tag)) {
                 NewNoteImage(size: Constants.side,
-                             foregroundColor: Color(UIColor.simplenoteTintColor),
-                             backgroundColor: Color(UIColor.simplenoteWidgetBackgroundColor))
+                             foregroundColor: .widgetTintColor,
+                             backgroundColor: .widgetBackgroundColor)
             }
         }
         .padding(.zero)

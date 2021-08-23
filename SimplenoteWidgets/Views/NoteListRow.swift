@@ -12,6 +12,7 @@ struct NoteListRow: View {
             .font(.subheadline)
             .lineLimit(1)
             .frame(width: width, height: height, alignment: .leading)
+            .foregroundColor(.bodyTextColor)
         Divider()
             .opacity(lastRow ? Double.zero : Constants.fullOpacity)
     }

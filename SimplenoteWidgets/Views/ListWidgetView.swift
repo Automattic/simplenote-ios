@@ -24,7 +24,7 @@ struct ListWidgetView: View {
                 }
             }
             .filling()
-            .background(Color(UIColor.simplenoteWidgetBackgroundColor))
+            .background(Color.widgetBackgroundColor)
         }
     }
 

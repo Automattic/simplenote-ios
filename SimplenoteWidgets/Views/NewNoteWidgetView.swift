@@ -9,7 +9,7 @@ struct NewNoteWidgetView: View {
                 HStack {
                     NewNoteImage(size: Constants.side,
                                  foregroundColor: .white,
-                                 backgroundColor: Color(studioColor: .spBlue50))
+                                 backgroundColor: .widgetBlueBackgroundColor)
                     Spacer()
                 }
                 Spacer()
@@ -19,7 +19,7 @@ struct NewNoteWidgetView: View {
             }
             .padding(Constants.overallPadding)
         }
-        .background(Color(studioColor: .spBlue50))
+        .background(Color.widgetBlueBackgroundColor)
         .widgetURL(URL.newNoteURL())
     }
 }

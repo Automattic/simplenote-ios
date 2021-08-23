@@ -14,7 +14,7 @@ struct NewNoteImage: View {
                 .foregroundColor(foregroundColor)
                 .frame(side: size)
         }
-        .background(Color(UIColor(backgroundColor)))
+        .background(backgroundColor)
     }
 }
 
