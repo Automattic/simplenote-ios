@@ -8,19 +8,18 @@ struct NoteListTable: View {
     var body: some View {
         let width = geometry.size.width - Constants.sidePadding
         let height = (geometry.size.height - Constants.headerSize) / CGFloat(numberOfRows)
-        let entryCount = entry.noteProxys.count
+        let proxies = entry.noteProxys
 
-        ForEach(.zero ..< entryCount) { index in
-            let proxy = entry.noteProxys[index]
-            Link(destination: proxy.url) {
-                NoteListRow(noteTitle: proxy.title, width: width, height: height)
-            }
-        }
+        ForEach(.zero ..< numberOfRows) { index in
+            let isLastRow = index == (numberOfRows - 1)
 
-        if entryCount < numberOfRows {
-            let remainder = numberOfRows - entryCount
-            ForEach(.zero ..< remainder) { index in
-                NoteListRow(noteTitle: "", width: width, height: height)
+            if proxies.indices.contains(index) {
+                let proxy = proxies[index]
+                Link(destination: proxy.url) {
+                    NoteListRow(noteTitle: proxy.title, width: width, height: height, lastRow: isLastRow)
+                }
+            } else {
+                NoteListRow(noteTitle: "", width: width, height: height, lastRow: isLastRow)
             }
         }
     }
