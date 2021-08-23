@@ -69,7 +69,7 @@ extension IntentHandler: ListWidgetIntentHandling {
     }
 
     private func tagNoteInObjectCollection(from tags: [Tag]) -> INObjectCollection<WidgetTag> {
-        let allNotesWidgetTag: [WidgetTag] = [WidgetTag(identifier: WidgetConstants.allNotesIdentifier, display: Constants.allNotesDisplay)]
+        let allNotesWidgetTag: [WidgetTag] = [WidgetTag(identifier: SimplenoteConstants.allNotesTagIdentifier, display: Constants.allNotesDisplay)]
         let fetchedWidgetTags = tags.map({ tag in
             WidgetTag(identifier: tag.name ?? Constants.unnamedTag, display: tag.name ?? Constants.unnamedTag)
         })
@@ -77,7 +77,7 @@ extension IntentHandler: ListWidgetIntentHandling {
     }
 
     func defaultTag(for intent: ListWidgetIntent) -> WidgetTag? {
-        WidgetTag(identifier: WidgetConstants.allNotesIdentifier, display: Constants.allNotesDisplay)
+        WidgetTag(identifier: SimplenoteConstants.allNotesTagIdentifier, display: Constants.allNotesDisplay)
     }
 }
 

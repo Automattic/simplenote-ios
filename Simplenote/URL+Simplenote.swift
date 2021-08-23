@@ -13,9 +13,9 @@ extension URL {
     }
 
     static func newNoteURL(withTag tag: String? = nil) -> URL {
-        var newNoteURLString = SimplenoteConstants.simplenoteScheme + "://new"
+        var newNoteURLString = SimplenoteConstants.simplenoteScheme + "://" + Constants.newNotePath
 
-        if let tag = tag {
+        if let tag = tag, tag != SimplenoteConstants.allNotesTagIdentifier {
             newNoteURLString += tagQuery(for: tag)
         }
 
@@ -25,4 +25,5 @@ extension URL {
 
 private struct Constants {
     static let tagQueryBase = "?tag="
+    static let newNotePath = "new"
 }

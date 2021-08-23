@@ -45,7 +45,7 @@ struct ListWidgetProvider: IntentTimelineProvider {
             ListWidgetNoteProxy(title: note.title, url: note.url)
         }
 
-        completion(ListWidgetEntry(date: Date(), tag: WidgetConstants.allNotesIdentifier, noteProxys: proxies))
+        completion(ListWidgetEntry(date: Date(), tag: SimplenoteConstants.allNotesTagIdentifier, noteProxys: proxies))
     }
 
     func getTimeline(for configuration: ListWidgetIntent, in context: Context, completion: @escaping (Timeline<ListWidgetEntry>) -> Void) {
