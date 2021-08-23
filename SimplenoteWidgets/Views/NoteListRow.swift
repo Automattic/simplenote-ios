@@ -13,8 +13,12 @@ struct NoteListRow: View {
             .lineLimit(1)
             .frame(width: width, height: height, alignment: .leading)
         Divider()
-            .opacity(lastRow ? 0.0 : 1.0)
+            .opacity(lastRow ? Double.zero : Constants.fullOpacity)
     }
+}
+
+private struct Constants {
+    static let fullOpacity = 1.0
 }
 
 struct NoteListRow_Previews: PreviewProvider {
@@ -23,3 +27,4 @@ struct NoteListRow_Previews: PreviewProvider {
             .previewContext(WidgetPreviewContext(family: .systemLarge))
     }
 }
+
