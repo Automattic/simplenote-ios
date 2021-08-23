@@ -21,24 +21,14 @@ class WidgetDataController {
         self.managedObjectContext = context
     }
 
-    // MARK: Public Methods
+    // MARK: - Notes
 
     /// Fetch notes with given tag and limit
     /// If no tag is specified, will fetch notes that are not deleted. If there is no limit specified it will fetch all of the notes
     ///
     func notes(filteredBy filter: TagsFilter = .allNotes, limit: Int = .zero) -> [Note]? {
-        let request: NSFetchRequest<Note> = fetchRequest(filteredBy: filter, limit: limit)
+        let request: NSFetchRequest<Note> = fetchRequestForNotes(filteredBy: filter, limit: limit)
         return performFetch(from: request)
-    }
-
-    func performFetch<T: NSManagedObject>(from request: NSFetchRequest<T>) -> [T]? {
-        do {
-            let objects = try managedObjectContext.fetch(request)
-            return objects
-        } catch {
-            NSLog("Couldn't fetch objects: %@", error.localizedDescription)
-            return nil
-        }
     }
 
     /// Returns note given a simperium key
@@ -69,8 +59,8 @@ class WidgetDataController {
         return NSSortDescriptor.descriptorForNotes(sortMode: WidgetDefaults.shared.sortMode)
     }
 
-    private func fetchRequest<T: NSManagedObject>(filteredBy filter: TagsFilter = .allNotes, limit: Int = .zero) -> NSFetchRequest<T> {
-        let fetchRequest = NSFetchRequest<T>(entityName: T.entityName)
+    private func fetchRequestForNotes(filteredBy filter: TagsFilter = .allNotes, limit: Int = .zero) -> NSFetchRequest<Note> {
+        let fetchRequest = NSFetchRequest<Note>(entityName: Note.entityName)
         fetchRequest.fetchLimit = limit
         fetchRequest.sortDescriptors = [sortDescriptorForNotes()]
         fetchRequest.predicate = predicateForNotes(filteredBy: filter)
@@ -78,17 +68,29 @@ class WidgetDataController {
         return fetchRequest
     }
 
-    private func tagsFetchRequest() -> NSFetchRequest<Tag> {
+    // MARK: - Tags
+
+    func tags() -> [Tag]? {
+        performFetch(from: fetchRequestForTags())
+    }
+
+    private func fetchRequestForTags() -> NSFetchRequest<Tag> {
         let fetchRequest = NSFetchRequest<Tag>(entityName: Tag.entityName)
         fetchRequest.sortDescriptors = [NSSortDescriptor.descriptorForTags()]
 
         return fetchRequest
     }
 
-    // MARK: - Tags
+    // MARK: Fetching
 
-    func tags() -> [Tag]? {
-        performFetch(from: tagsFetchRequest())
+    private func performFetch<T: NSManagedObject>(from request: NSFetchRequest<T>) -> [T]? {
+        do {
+            let objects = try managedObjectContext.fetch(request)
+            return objects
+        } catch {
+            NSLog("Couldn't fetch objects: %@", error.localizedDescription)
+            return nil
+        }
     }
 }
 
