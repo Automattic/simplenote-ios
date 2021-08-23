@@ -21,24 +21,14 @@ class WidgetDataController {
         self.managedObjectContext = context
     }
 
-    // MARK: Public Methods
+    // MARK: - Notes
 
     /// Fetch notes with given tag and limit
     /// If no tag is specified, will fetch notes that are not deleted. If there is no limit specified it will fetch all of the notes
     ///
-    func notes(withTag tag: String? = nil, limit: Int = .zero) -> [Note]? {
-        let request: NSFetchRequest<Note> = fetchRequest(withTag: tag, limit: limit)
+    func notes(filteredBy filter: TagsFilter = .allNotes, limit: Int = .zero) -> [Note]? {
+        let request: NSFetchRequest<Note> = fetchRequestForNotes(filteredBy: filter, limit: limit)
         return performFetch(from: request)
-    }
-
-    func performFetch<T: NSManagedObject>(from request: NSFetchRequest<T>) -> [T]? {
-        do {
-            let objects = try managedObjectContext.fetch(request)
-            return objects
-        } catch {
-            NSLog("Couldn't fetch objects: %@", error.localizedDescription)
-            return nil
-        }
     }
 
     /// Returns note given a simperium key
@@ -50,29 +40,65 @@ class WidgetDataController {
     }
 
     func firstNote() -> Note? {
-        let fetched = notes(withTag: nil, limit: 1)
+        let fetched = notes(limit: 1)
         return fetched?.first
     }
 
     /// Creates a predicate for notes given a tag name.  If not specified the predicate is for all notes that are not deleted
     ///
-    private func predicateForNotes(withTag tag: String? = nil) -> NSPredicate {
-        guard let tag = tag else {
+    private func predicateForNotes(filteredBy tagFilter: TagsFilter = .allNotes) -> NSPredicate {
+        switch tagFilter {
+        case .allNotes:
             return NSPredicate.predicateForNotes(deleted: false)
+        case .tag(let tag):
+            return NSPredicate.predicateForNotes(tag: tag)
         }
-        return NSPredicate.predicateForNotes(tag: tag)
     }
 
     private func sortDescriptorForNotes() -> NSSortDescriptor {
         return NSSortDescriptor.descriptorForNotes(sortMode: WidgetDefaults.shared.sortMode)
     }
 
-    private func fetchRequest<T: NSManagedObject>(withTag tag: String? = nil, limit: Int = .zero) -> NSFetchRequest<T> {
-        let fetchRequest = NSFetchRequest<T>(entityName: T.entityName)
+    private func fetchRequestForNotes(filteredBy filter: TagsFilter = .allNotes, limit: Int = .zero) -> NSFetchRequest<Note> {
+        let fetchRequest = NSFetchRequest<Note>(entityName: Note.entityName)
         fetchRequest.fetchLimit = limit
         fetchRequest.sortDescriptors = [sortDescriptorForNotes()]
-        fetchRequest.predicate = predicateForNotes(withTag: tag)
+        fetchRequest.predicate = predicateForNotes(filteredBy: filter)
 
         return fetchRequest
     }
+
+    // MARK: Fetching
+
+    private func performFetch<T: NSManagedObject>(from request: NSFetchRequest<T>) -> [T]? {
+        do {
+            let objects = try managedObjectContext.fetch(request)
+            return objects
+        } catch {
+            NSLog("Couldn't fetch objects: %@", error.localizedDescription)
+            return nil
+        }
+    }
+}
+
+enum TagsFilter {
+    case allNotes
+    case tag(String)
+}
+
+extension TagsFilter {
+    init(from tag: String) {
+        switch tag {
+        case Constants.allNotesIdentifier:
+            self = .allNotes
+        default:
+            self = .tag(tag)
+        }
+    }
+}
+
+
+private struct Constants {
+    #warning("TODO: remove file constant when list widget merged in")
+    static let allNotesIdentifier = "All-Notes"
 }
