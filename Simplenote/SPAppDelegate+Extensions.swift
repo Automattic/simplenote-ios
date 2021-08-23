@@ -115,17 +115,18 @@ extension SPAppDelegate {
             return false
         }
 
-        let request = NSFetchRequest<Tag>()
-        request.entity = Tag.entity()
-        request.predicate = NSPredicate(format: "name = %@", tag)
-        let tagExists = (try? coreDataManager.managedObjectContext.count(for: request) > 0) ?? false
-
-        selectedTag = tagExists ? tag : nil
+        selectedTag = tagExists(tag) ? tag : nil
 
         navigationController.presentedViewController?.dismiss(animated: true, completion: nil)
         navigationController.popToRootViewController(animated: true)
 
         return true
+    }
+
+    private func tagExists(_ tag: String) -> Bool {
+        let request = NSFetchRequest<Tag>(entityName: Tag.entityName)
+        request.predicate = NSPredicate(format: "\(\Tag.name) = %@", tag)
+        return (try? coreDataManager.managedObjectContext.count(for: request) > .zero) ?? false
     }
 
     /// Opens search
