@@ -67,7 +67,7 @@ extension IntentHandler: ListWidgetIntentHandling {
     private func tagNoteInObjectCollection(from tags: [Tag]) -> INObjectCollection<WidgetTag> {
         let allNotesWidgetTag: [WidgetTag] = [WidgetTag(identifier: WidgetConstants.allNotesIdentifier, display: Constants.allNotesDisplay)]
         let fetchedWidgetTags = tags.map({ tag in
-            WidgetTag(identifier: tag.name ?? "Unamed Tag", display: tag.name ?? "Unamed Tag")
+            WidgetTag(identifier: tag.name ?? Constants.unnamedTag, display: tag.name ?? Constants.unnamedTag)
         })
         return INObjectCollection(items: allNotesWidgetTag + fetchedWidgetTags)
     }
@@ -78,5 +78,6 @@ extension IntentHandler: ListWidgetIntentHandling {
 }
 
 private struct Constants {
-    static let allNotesDisplay = "All Notes"
+    static let allNotesDisplay = NSLocalizedString("All Notes", comment: "Display title for All Notes")
+    static let unnamedTag = NSLocalizedString("Unnamed Tag", comment: "Default title for an unnamed tag")
 }
