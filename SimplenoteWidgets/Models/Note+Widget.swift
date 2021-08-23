@@ -54,7 +54,7 @@ extension Note {
     }
 
     var limitedTitle: String {
-        String(title.prefix(50))
+        String(title.prefix(Constants.previewCharacterLength))
     }
 
     var url: URL {
@@ -67,4 +67,6 @@ extension Note {
 
 private struct Constants {
     static let defaultTitle = NSLocalizedString("Untitled Note", comment: "Default title for notes")
+    static let linkUrlBase = SimplenoteConstants.simplenoteScheme + "://" + SimplenoteConstants.simplenoteInterlinkHost + "/"
+    static let previewCharacterLength = 50
 }

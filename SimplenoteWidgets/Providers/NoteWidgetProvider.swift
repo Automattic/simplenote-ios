@@ -45,7 +45,7 @@ struct NoteWidgetProvider: IntentTimelineProvider {
     }
 
     func getSnapshot(for configuration: NoteWidgetIntent, in context: Context, completion: @escaping (NoteWidgetEntry) -> Void) {
-        guard let note = try? widgetDataController()?.firstNote() else {
+        guard let note = widgetDataController()?.firstNote() else {
             completion(NoteWidgetEntry.placeholder)
             return
         }

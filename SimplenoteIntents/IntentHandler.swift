@@ -15,20 +15,22 @@ class IntentHandler: INExtension {
 
 
     override func handler(for intent: INIntent) -> Any {
-        NSLog("failed to return handler")
         return self
     }
 }
 
 extension IntentHandler: NoteWidgetIntentHandling {
     func provideNoteOptionsCollection(for intent: NoteWidgetIntent, with completion: @escaping (INObjectCollection<WidgetNote>?, Error?) -> Void) {
-        NSLog("attempting to provied note options collection")
-        guard let notes = try? WidgetDataController(coreDataManager: coreDataManager).notes() else {
+        guard let dataController = try? WidgetDataController(context: coreDataManager.managedObjectContext) else {
             completion(nil, WidgetError.appConfigurationError)
             return
         }
 
-        // Return collection to intents
+        guard let notes = dataController.notes() else {
+            completion(nil, WidgetError.fetchError)
+            return
+        }
+
         let collection = widgetNoteInObjectCollection(from: notes)
         completion(collection, nil)
     }
@@ -41,13 +43,11 @@ extension IntentHandler: NoteWidgetIntentHandling {
     }
 
     func defaultNote(for intent: NoteWidgetIntent) -> WidgetNote? {
-        guard let dataController = try? WidgetDataController(coreDataManager: coreDataManager) else {
+        guard let dataController = try? WidgetDataController(context: coreDataManager.managedObjectContext),
+              let note = dataController.firstNote() else {
             return nil
         }
 
-        guard let note = try? dataController.firstNote() else {
-            return nil
-        }
         return WidgetNote(identifier: note.simperiumKey, display: note.limitedTitle)
     }
 }
