@@ -1,3 +1,22 @@
+GIT
+  remote: git@github.com:wordpress-mobile/release-toolkit
+  revision: c5708ba7f4c81042ac1ed2c178b1dd37d2d8d197
+  branch: fix-msgid-newline
+  specs:
+    fastlane-plugin-wpmreleasetoolkit (1.4.0)
+      activesupport (~> 5)
+      bigdecimal (~> 1.4)
+      chroma (= 0.2.0)
+      diffy (~> 3.3)
+      git (~> 1.3)
+      jsonlint (~> 0.3)
+      nokogiri (~> 1.11)
+      octokit (~> 4.18)
+      parallel (~> 1.14)
+      progress_bar (~> 1.3)
+      rake (>= 12.3, < 14.0)
+      rake-compiler (~> 1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -90,7 +109,7 @@ GEM
     ethon (0.12.0)
       ffi (>= 1.3.0)
     excon (0.82.0)
-    faraday (1.5.1)
+    faraday (1.7.0)
       faraday-em_http (~> 1.0)
       faraday-em_synchrony (~> 1.0)
       faraday-excon (~> 1.1)
@@ -98,6 +117,7 @@ GEM
       faraday-net_http (~> 1.0)
       faraday-net_http_persistent (~> 1.1)
       faraday-patron (~> 1.0)
+      faraday-rack (~> 1.0)
       multipart-post (>= 1.2, < 3)
       ruby2_keywords (>= 0.0.4)
     faraday-cookie_jar (0.0.7)
@@ -110,6 +130,7 @@ GEM
     faraday-net_http (1.0.1)
     faraday-net_http_persistent (1.2.0)
     faraday-patron (1.0.0)
+    faraday-rack (1.0.0)
     faraday_middleware (1.0.0)
       faraday (~> 1.0)
     fastimage (2.2.4)
@@ -153,19 +174,6 @@ GEM
       xcpretty-travis-formatter (>= 0.0.3)
     fastlane-plugin-appcenter (1.11.1)
     fastlane-plugin-sentry (1.6.0)
-    fastlane-plugin-wpmreleasetoolkit (1.4.0)
-      activesupport (~> 5)
-      bigdecimal (~> 1.4)
-      chroma (= 0.2.0)
-      diffy (~> 3.3)
-      git (~> 1.3)
-      jsonlint (~> 0.3)
-      nokogiri (~> 1.11)
-      octokit (~> 4.18)
-      parallel (~> 1.14)
-      progress_bar (~> 1.3)
-      rake (~> 12.3)
-      rake-compiler (~> 1.0)
     ffi (1.13.1)
     fourflusher (2.3.1)
     fuzzy_match (2.0.4)
@@ -235,15 +243,15 @@ GEM
     nap (1.1.0)
     naturally (2.2.1)
     netrc (0.11.0)
-    nokogiri (1.12.2)
+    nokogiri (1.12.3)
       mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
-    nokogiri (1.12.2-x86_64-darwin)
+    nokogiri (1.12.3-x86_64-darwin)
       racc (~> 1.4)
     octokit (4.21.0)
       faraday (>= 0.9)
       sawyer (~> 0.8.0, >= 0.5.3)
-    oj (3.13.0)
+    oj (3.13.2)
     optimist (3.0.1)
     options (2.3.2)
     os (1.1.1)
@@ -254,7 +262,7 @@ GEM
       options (~> 2.3.0)
     public_suffix (4.0.6)
     racc (1.5.2)
-    rake (12.3.3)
+    rake (13.0.6)
     rake-compiler (1.1.1)
       rake
     rchardet (1.8.0)
@@ -267,7 +275,7 @@ GEM
     rmagick (3.2.0)
     rouge (2.0.7)
     ruby-macho (1.4.0)
-    ruby2_keywords (0.0.4)
+    ruby2_keywords (0.0.5)
     rubyzip (2.3.0)
     sawyer (0.8.2)
       addressable (>= 2.3.5)
@@ -323,10 +331,10 @@ DEPENDENCIES
   fastlane (~> 2)
   fastlane-plugin-appcenter (~> 1.11)
   fastlane-plugin-sentry (~> 1.6)
-  fastlane-plugin-wpmreleasetoolkit (~> 1.4)
+  fastlane-plugin-wpmreleasetoolkit!
   octokit (~> 4.0)
   rmagick (~> 3.2.0)
   xcpretty-travis-formatter
 
 BUNDLED WITH
-   2.2.16
+   2.2.25
