@@ -1,3 +1,7 @@
+4.44
+-----
+
+
 4.43
 -----
 -   Fixed a bug where non http/https urls crashed when opened from markdown #1397

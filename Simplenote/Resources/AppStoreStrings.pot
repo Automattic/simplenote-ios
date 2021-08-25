@@ -66,9 +66,10 @@ msgctxt "app_store_keywords"
 msgid "notes,text,planner,journal,diary,sync,to-do,cloud,notebook,simple,notepad,tag,todo,writing,memo"
 msgstr ""
 
-msgctxt "v4.42-whats-new"
+msgctxt "v4.43-whats-new"
 msgid ""
-"-   Added In app account deletion #1354\n"
-"\n"
+"-   Fixed a bug where non http/https urls crashed when opened from markdown\n"
+"-   Account Deletion Support\n"
+"-   Tags are now removed from deleted Notes\n"
 msgstr ""
 

@@ -1,2 +1,3 @@
--   Added In app account deletion #1354
-
+-   Fixed a bug where non http/https urls crashed when opened from markdown
+-   Account Deletion Support
+-   Tags are now removed from deleted Notes
