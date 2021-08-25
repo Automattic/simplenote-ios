@@ -2,7 +2,7 @@ Note: (A) means Automated Test. If automated UI tests were executed for the app,
 
 ## Manual Testing
 
-### Setup 
+### Preparation 
 
 - [ ] Sign up using mixed-capitalization in the email address. Use this account to run all tests below.
 
