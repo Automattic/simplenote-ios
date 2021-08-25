@@ -10,7 +10,7 @@ struct NoteListRow: View {
     var body: some View {
         Text(noteTitle)
             .font(.subheadline)
-            .lineLimit(1)
+            .lineLimit(Constants.lineLimit)
             .frame(width: width, height: height, alignment: .leading)
             .foregroundColor(.bodyTextColor)
         Divider()
@@ -20,6 +20,7 @@ struct NoteListRow: View {
 
 private struct Constants {
     static let fullOpacity = 1.0
+    static let lineLimit = 1
 }
 
 struct NoteListRow_Previews: PreviewProvider {

@@ -7,7 +7,7 @@ struct NoteListTable: View {
 
     var body: some View {
         let width = geometry.size.width - Constants.sidePadding
-        let height = (geometry.size.height - Constants.headerSize) / CGFloat(numberOfRows)
+        let height = round((geometry.size.height - Constants.headerSize) / CGFloat(numberOfRows))
         let proxies = entry.noteProxys
 
         ForEach(.zero ..< numberOfRows) { index in

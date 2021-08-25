@@ -20,11 +20,12 @@ struct NewNoteImage: View {
 
 struct NewNoteButton_Previews: PreviewProvider {
     static var previews: some View {
-        NewNoteImage(size: 48, foregroundColor: .white, backgroundColor: .blue)
+        NewNoteImage(size: Constants.size, foregroundColor: .white, backgroundColor: .blue)
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }
 
 private struct Constants {
+    static let size = CGFloat(48)
     static let newNoteImage = "icon_new_note"
 }
