@@ -107,4 +107,51 @@ extension TagsFilter {
         }
         self = .tag(tag)
     }
+
+    private func sortDescriptorForNotes() -> NSSortDescriptor {
+        return NSSortDescriptor.descriptorForNotes(sortMode: WidgetDefaults.shared.sortMode)
+    }
+
+    private func fetchRequestForNotes(filteredBy filter: TagsFilter = .allNotes, limit: Int = .zero) -> NSFetchRequest<Note> {
+        let fetchRequest = NSFetchRequest<Note>(entityName: Note.entityName)
+        fetchRequest.fetchLimit = limit
+        fetchRequest.sortDescriptors = [sortDescriptorForNotes()]
+        fetchRequest.predicate = predicateForNotes(filteredBy: filter)
+
+        return fetchRequest
+    }
+
+    // MARK: Fetching
+
+    private func performFetch<T: NSManagedObject>(from request: NSFetchRequest<T>) -> [T]? {
+        do {
+            let objects = try managedObjectContext.fetch(request)
+            return objects
+        } catch {
+            NSLog("Couldn't fetch objects: %@", error.localizedDescription)
+            return nil
+        }
+    }
+}
+
+enum TagsFilter {
+    case allNotes
+    case tag(String)
+}
+
+extension TagsFilter {
+    init(from tag: String) {
+        switch tag {
+        case Constants.allNotesIdentifier:
+            self = .allNotes
+        default:
+            self = .tag(tag)
+        }
+    }
+}
+
+
+private struct Constants {
+    #warning("TODO: remove file constant when list widget merged in")
+    static let allNotesIdentifier = "All-Notes"
 }

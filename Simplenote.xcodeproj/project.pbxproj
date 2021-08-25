@@ -3540,6 +3540,7 @@
 				BAFA93F3265DE4A40009DCFB /* NewNoteWidget.swift in Sources */,
 				BABFFF2326CF9094003A4C25 /* WidgetDefaults.swift in Sources */,
 				BA122DBD265EF412003D3BC5 /* UIColor+Studio.swift in Sources */,
+				BAA723E226D4530A00C051B4 /* Color+Widgets.swift in Sources */,
 				BA88765126B79324001C9C9E /* DemoContent.swift in Sources */,
 				BA122DBE265EF421003D3BC5 /* UIKitConstants.swift in Sources */,
 				BAF8D5BB26AE254000CA9383 /* Simplenote.xcdatamodeld in Sources */,

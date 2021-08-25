@@ -1,11 +1,13 @@
 import WidgetKit
 
 struct NoteWidgetEntry: TimelineEntry {
-    static let placeholder = NoteWidgetEntry(date: Date(),
-                                             title: DemoContent.singleNoteTitle,
-                                             content: DemoContent.singleNoteContent,
-                                             url: DemoContent.demoURL)
+    let date: Date
+    let title: String
+    let content: String
+    let url: URL
+}
 
+extension NoteWidgetEntry {
     init(date: Date, note: Note) {
         self.init(date: date,
                   title: note.title,
@@ -13,17 +15,10 @@ struct NoteWidgetEntry: TimelineEntry {
                   url: note.url)
     }
 
-    init(date: Date, title: String, content: String, url: URL) {
-        self.date = date
-        self.title = title
-        self.content = content
-        self.url = url
-    }
-
-    let date: Date
-    let title: String
-    let content: String
-    let url: URL
+    static let placeholder = NoteWidgetEntry(date: Date(),
+                                             title: DemoContent.singleNoteTitle,
+                                             content: DemoContent.singleNoteContent,
+                                             url: DemoContent.demoURL)
 }
 
 struct NoteWidgetProvider: IntentTimelineProvider {
