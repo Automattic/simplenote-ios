@@ -15,7 +15,7 @@ msgstr ""
 
 #. translators: App name to be displayed in the Apple App Store. Limit to 30 characters including spaces and commas!
 msgctxt "app_store_title"
-msgid ""
+msgid "Simplenote – Notes and Todos"
 msgstr ""
 
 #. translators: Subtitle to be displayed below the application name in the Apple App Store. Limit to 30 characters including spaces and commas!
