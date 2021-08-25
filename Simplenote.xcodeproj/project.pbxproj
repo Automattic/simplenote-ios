@@ -411,6 +411,7 @@
 		BA0890A526BB9B680035CA48 /* NoteListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0890A426BB9B680035CA48 /* NoteListRow.swift */; };
 		BA0890A726BB9BE20035CA48 /* ListWidgetHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0890A626BB9BE20035CA48 /* ListWidgetHeaderView.swift */; };
 		BA0890A926BB9BF80035CA48 /* NewNoteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0890A826BB9BF80035CA48 /* NewNoteButton.swift */; };
+		BA0ED16E26D708AC002533B6 /* Color+Widgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0ED16D26D708AC002533B6 /* Color+Widgets.swift */; };
 		BA122DBA265EF402003D3BC5 /* SimplenoteConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5095DC824632E3300812711 /* SimplenoteConstants.swift */; };
 		BA122DBB265EF40E003D3BC5 /* UIColor+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575736B232D454300443C2E /* UIColor+Helpers.swift */; };
 		BA122DBC265EF410003D3BC5 /* ColorStudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E4082A235DDFC800D4E1DF /* ColorStudio.swift */; };
@@ -472,7 +473,6 @@
 		BA9B59022685549F00DAD1ED /* StorageSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B59012685549F00DAD1ED /* StorageSettings.swift */; };
 		BAA4856925D5E40900F3BDB9 /* SearchQuery+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */; };
 		BAA63C3325EEDA83001589D7 /* NoteLinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA63C3225EEDA83001589D7 /* NoteLinkTests.swift */; };
-		BAA7245C26D46B2E00C051B4 /* Color+Widgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA7245B26D46B2E00C051B4 /* Color+Widgets.swift */; };
 		BAADC8A426C634DB004CAAA9 /* WidgetConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAADC8A326C634DB004CAAA9 /* WidgetConstants.swift */; };
 		BAADC8A526C634DB004CAAA9 /* WidgetConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAADC8A326C634DB004CAAA9 /* WidgetConstants.swift */; };
 		BAB017722609456D007A9CC3 /* PublishController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB017712609456D007A9CC3 /* PublishController.swift */; };
@@ -1064,6 +1064,7 @@
 		BA0890A426BB9B680035CA48 /* NoteListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListRow.swift; sourceTree = "<group>"; };
 		BA0890A626BB9BE20035CA48 /* ListWidgetHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWidgetHeaderView.swift; sourceTree = "<group>"; };
 		BA0890A826BB9BF80035CA48 /* NewNoteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNoteButton.swift; sourceTree = "<group>"; };
+		BA0ED16D26D708AC002533B6 /* Color+Widgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Widgets.swift"; sourceTree = "<group>"; };
 		BA122DC5265EF90C003D3BC5 /* NewNoteWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNoteWidgetView.swift; sourceTree = "<group>"; };
 		BA122DC9265F2E2D003D3BC5 /* UIColorSimplenoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorSimplenoteTests.swift; sourceTree = "<group>"; };
 		BA12B06C26B0D0150026F31D /* SPManagedObject+Widget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SPManagedObject+Widget.swift"; sourceTree = "<group>"; };
@@ -1102,7 +1103,6 @@
 		BA9B59012685549F00DAD1ED /* StorageSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageSettings.swift; sourceTree = "<group>"; };
 		BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchQuery+Simplenote.swift"; sourceTree = "<group>"; };
 		BAA63C3225EEDA83001589D7 /* NoteLinkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteLinkTests.swift; sourceTree = "<group>"; };
-		BAA7245B26D46B2E00C051B4 /* Color+Widgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Widgets.swift"; sourceTree = "<group>"; };
 		BAADC8A326C634DB004CAAA9 /* WidgetConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetConstants.swift; sourceTree = "<group>"; };
 		BAB017712609456D007A9CC3 /* PublishController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishController.swift; sourceTree = "<group>"; };
 		BAB01791260AAE93007A9CC3 /* NoticeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeFactory.swift; sourceTree = "<group>"; };
@@ -2201,9 +2201,9 @@
 			children = (
 				BA75D87D26C0843600883FFA /* Text+Simplenote.swift */,
 				BA75D8AD26C0862E00883FFA /* View+Simplenote.swift */,
-				BAA7245B26D46B2E00C051B4 /* Color+Widgets.swift */,
 				BA3CE86126D5DF3800EFF9EB /* WidgetTag+Helpers.swift */,
 				BAB7B29B26D6F433005DF3D8 /* ProcessInfo+Simplenote.swift */,
+				BA0ED16D26D708AC002533B6 /* Color+Widgets.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -3537,10 +3537,10 @@
 				BA86625326B3B14800466746 /* SortMode.swift in Sources */,
 				BAF8D50A26AE172600CA9383 /* StorageSettings.swift in Sources */,
 				BA3CE86226D5DF3800EFF9EB /* WidgetTag+Helpers.swift in Sources */,
+				BA0ED16E26D708AC002533B6 /* Color+Widgets.swift in Sources */,
 				BAFA93F3265DE4A40009DCFB /* NewNoteWidget.swift in Sources */,
 				BABFFF2326CF9094003A4C25 /* WidgetDefaults.swift in Sources */,
 				BA122DBD265EF412003D3BC5 /* UIColor+Studio.swift in Sources */,
-				BAA723E226D4530A00C051B4 /* Color+Widgets.swift in Sources */,
 				BA88765126B79324001C9C9E /* DemoContent.swift in Sources */,
 				BA122DBE265EF421003D3BC5 /* UIKitConstants.swift in Sources */,
 				BAF8D5BB26AE254000CA9383 /* Simplenote.xcdatamodeld in Sources */,
@@ -3571,7 +3571,6 @@
 				BA32A91A26B746A300727247 /* WidgetError.swift in Sources */,
 				BA86621826B3A73D00466746 /* UserDefaults+Simplenote.swift in Sources */,
 				BAF8D44B26AE10FC00CA9383 /* Tag+Widget.swift in Sources */,
-				BAA7245C26D46B2E00C051B4 /* Color+Widgets.swift in Sources */,
 				BA7071E526BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition in Sources */,
 				BAFDBBD926B88BD200119615 /* Date+Simplenote.swift in Sources */,
 				BA02A59226C0AE92005FF36E /* NoteListTable.swift in Sources */,
