@@ -12,7 +12,7 @@ struct ListWidgetView: View {
             ZStack {
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: .zero) {
-                        ListWidgetHeaderView(tag: entry.tag)
+                        ListWidgetHeaderView(tag: entry.widgetTag)
                             .padding(.trailing, Constants.sidePadding)
                             .padding([.bottom, .top], Constants.topAndBottomPadding)
                         NoteListTable(entry: entry,
@@ -49,9 +49,9 @@ struct ListWidgetView_Previews: PreviewProvider {
     static var previews: some View {
 
         Group {
-            ListWidgetView(entry: ListWidgetEntry(date: Date(), tag: DemoContent.listTag, noteProxys: DemoContent.listProxies))
+            ListWidgetView(entry: ListWidgetEntry(date: Date(), widgetTag: WidgetTag.allNotes, noteProxys: DemoContent.listProxies))
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
-            ListWidgetView(entry: ListWidgetEntry(date: Date(), tag: DemoContent.listTag, noteProxys: DemoContent.listProxies))
+            ListWidgetView(entry: ListWidgetEntry(date: Date(), widgetTag: WidgetTag.allNotes, noteProxys: DemoContent.listProxies))
                 .previewContext(WidgetPreviewContext(family: .systemLarge))
                 .colorScheme(.dark)
         }

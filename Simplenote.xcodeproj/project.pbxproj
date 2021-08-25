@@ -429,6 +429,8 @@
 		BA32A91926B746A200727247 /* WidgetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32A90E26B7469F00727247 /* WidgetError.swift */; };
 		BA32A91A26B746A300727247 /* WidgetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32A90E26B7469F00727247 /* WidgetError.swift */; };
 		BA3856CD2681715700F388CC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3856CC2681715700F388CC /* CoreDataManager.swift */; };
+		BA3CE86226D5DF3800EFF9EB /* WidgetTag+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3CE86126D5DF3800EFF9EB /* WidgetTag+Helpers.swift */; };
+		BA3CE8D926D5E21C00EFF9EB /* WidgetTag+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3CE86126D5DF3800EFF9EB /* WidgetTag+Helpers.swift */; };
 		BA3FB8CF25FEA0C500EA9A1B /* NoticeControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3FB8CE25FEA0C500EA9A1B /* NoticeControllerTests.swift */; };
 		BA4499AA25ED8821000C563E /* NoticeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA4499A925ED8821000C563E /* NoticeView.xib */; };
 		BA4499B325ED8AB0000C563E /* NoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4499B225ED8AB0000C563E /* NoticeView.swift */; };
@@ -1067,6 +1069,7 @@
 		BA2D82C5261522F100A1695B /* PublishNoticePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishNoticePresenter.swift; sourceTree = "<group>"; };
 		BA32A90E26B7469F00727247 /* WidgetError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetError.swift; sourceTree = "<group>"; };
 		BA3856CC2681715700F388CC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		BA3CE86126D5DF3800EFF9EB /* WidgetTag+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WidgetTag+Helpers.swift"; sourceTree = "<group>"; };
 		BA3FB8CE25FEA0C500EA9A1B /* NoticeControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeControllerTests.swift; sourceTree = "<group>"; };
 		BA4499A925ED8821000C563E /* NoticeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoticeView.xib; sourceTree = "<group>"; };
 		BA4499B225ED8AB0000C563E /* NoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeView.swift; sourceTree = "<group>"; };
@@ -2196,6 +2199,7 @@
 				BA75D87D26C0843600883FFA /* Text+Simplenote.swift */,
 				BA75D8AD26C0862E00883FFA /* View+Simplenote.swift */,
 				BAA7245B26D46B2E00C051B4 /* Color+Widgets.swift */,
+				BA3CE86126D5DF3800EFF9EB /* WidgetTag+Helpers.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -3509,6 +3513,7 @@
 				BAB6C04526BA4A04007495C4 /* String+Simplenote.swift in Sources */,
 				BA32A91926B746A200727247 /* WidgetError.swift in Sources */,
 				BAFDBBDA26B88BD200119615 /* Date+Simplenote.swift in Sources */,
+				BA3CE8D926D5E21C00EFF9EB /* WidgetTag+Helpers.swift in Sources */,
 				BA86627226B3B1B700466746 /* NSSortDescriptor+Simplenote.swift in Sources */,
 				BAADC8A526C634DB004CAAA9 /* WidgetConstants.swift in Sources */,
 				BAF8D45526AE10FC00CA9383 /* Tag+Widget.swift in Sources */,
@@ -3526,6 +3531,7 @@
 				BA608EF526BB6E0200A9D94E /* ListWidget.swift in Sources */,
 				BA86625326B3B14800466746 /* SortMode.swift in Sources */,
 				BAF8D50A26AE172600CA9383 /* StorageSettings.swift in Sources */,
+				BA3CE86226D5DF3800EFF9EB /* WidgetTag+Helpers.swift in Sources */,
 				BAFA93F3265DE4A40009DCFB /* NewNoteWidget.swift in Sources */,
 				BABFFF2326CF9094003A4C25 /* WidgetDefaults.swift in Sources */,
 				BA122DBD265EF412003D3BC5 /* UIColor+Studio.swift in Sources */,

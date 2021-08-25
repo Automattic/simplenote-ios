@@ -1,8 +1,11 @@
 import Foundation
 
 extension URL {
-    static func internalUrl(for tag: String) -> URL {
-        URL(string: SimplenoteConstants.simplenoteScheme +
+    static func internalUrl(forTag tag: String?) -> URL {
+        guard let tag = tag else {
+            return URL(string: SimplenoteConstants.simplenoteScheme + "://" + SimplenoteConstants.simplenoteInternalTagHost + Constants.tagQueryBase)!
+        }
+        return URL(string: SimplenoteConstants.simplenoteScheme +
                 "://" +
                 SimplenoteConstants.simplenoteInternalTagHost +
                 tagQuery(for: tag))!
@@ -15,7 +18,7 @@ extension URL {
     static func newNoteURL(withTag tag: String? = nil) -> URL {
         var newNoteURLString = SimplenoteConstants.simplenoteScheme + "://" + Constants.newNotePath
 
-        if let tag = tag, tag != SimplenoteConstants.allNotesTagIdentifier {
+        if let tag = tag {
             newNoteURLString += tagQuery(for: tag)
         }
 

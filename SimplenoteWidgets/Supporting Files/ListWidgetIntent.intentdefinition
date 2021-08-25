@@ -3,7 +3,53 @@
 <plist version="1.0">
 <dict>
 	<key>INEnums</key>
-	<array/>
+	<array>
+		<dict>
+			<key>INEnumClassName</key>
+			<string>ListFilterKind</string>
+			<key>INEnumDisplayName</key>
+			<string>Kind</string>
+			<key>INEnumDisplayNameID</key>
+			<string>6qmDqt</string>
+			<key>INEnumGeneratesHeader</key>
+			<true/>
+			<key>INEnumName</key>
+			<string>Kind</string>
+			<key>INEnumType</key>
+			<string>Regular</string>
+			<key>INEnumValues</key>
+			<array>
+				<dict>
+					<key>INEnumValueDisplayName</key>
+					<string>unknown</string>
+					<key>INEnumValueDisplayNameID</key>
+					<string>EOY5hC</string>
+					<key>INEnumValueName</key>
+					<string>unknown</string>
+				</dict>
+				<dict>
+					<key>INEnumValueDisplayName</key>
+					<string>all notes</string>
+					<key>INEnumValueDisplayNameID</key>
+					<string>6xaM6C</string>
+					<key>INEnumValueIndex</key>
+					<integer>1</integer>
+					<key>INEnumValueName</key>
+					<string>allNotes</string>
+				</dict>
+				<dict>
+					<key>INEnumValueDisplayName</key>
+					<string>tag</string>
+					<key>INEnumValueDisplayNameID</key>
+					<string>pC7r6l</string>
+					<key>INEnumValueIndex</key>
+					<integer>2</integer>
+					<key>INEnumValueName</key>
+					<string>tag</string>
+				</dict>
+			</array>
+		</dict>
+	</array>
 	<key>INIntentDefinitionModelVersion</key>
 	<string>1.2</string>
 	<key>INIntentDefinitionNamespace</key>
@@ -113,7 +159,7 @@
 			<key>INTypeDisplayNameID</key>
 			<string>kCKtbp</string>
 			<key>INTypeLastPropertyTag</key>
-			<integer>99</integer>
+			<integer>103</integer>
 			<key>INTypeName</key>
 			<string>Tag</string>
 			<key>INTypeProperties</key>
@@ -147,12 +193,16 @@
 					<true/>
 					<key>INTypePropertyDisplayPriority</key>
 					<integer>3</integer>
+					<key>INTypePropertyEnumType</key>
+					<string>Kind</string>
+					<key>INTypePropertyEnumTypeNamespace</key>
+					<string>33lhc7</string>
 					<key>INTypePropertyName</key>
 					<string>pronunciationHint</string>
 					<key>INTypePropertyTag</key>
-					<integer>3</integer>
+					<integer>102</integer>
 					<key>INTypePropertyType</key>
-					<string>String</string>
+					<string>Integer</string>
 				</dict>
 				<dict>
 					<key>INTypePropertyDefault</key>
@@ -167,6 +217,24 @@
 					<integer>4</integer>
 					<key>INTypePropertyType</key>
 					<string>SpeakableString</string>
+				</dict>
+				<dict>
+					<key>INTypePropertyDisplayName</key>
+					<string>Kind</string>
+					<key>INTypePropertyDisplayNameID</key>
+					<string>381XVz</string>
+					<key>INTypePropertyDisplayPriority</key>
+					<integer>5</integer>
+					<key>INTypePropertyEnumType</key>
+					<string>Kind</string>
+					<key>INTypePropertyEnumTypeNamespace</key>
+					<string>33lhc7</string>
+					<key>INTypePropertyName</key>
+					<string>kind</string>
+					<key>INTypePropertyTag</key>
+					<integer>103</integer>
+					<key>INTypePropertyType</key>
+					<string>Integer</string>
 				</dict>
 			</array>
 		</dict>

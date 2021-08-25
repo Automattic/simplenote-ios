@@ -100,12 +100,11 @@ enum TagsFilter {
 }
 
 extension TagsFilter {
-    init(from tag: String) {
-        switch tag {
-        case SimplenoteConstants.allNotesTagIdentifier:
+    init(from tag: String?) {
+        guard let tag = tag else {
             self = .allNotes
-        default:
-            self = .tag(tag)
+            return
         }
+        self = .tag(tag)
     }
 }

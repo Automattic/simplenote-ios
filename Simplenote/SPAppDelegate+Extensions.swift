@@ -111,11 +111,15 @@ extension SPAppDelegate {
     ///
     @objc
     func handleOpenTagList(url: NSURL) -> Bool {
-        guard let tag = url.internalTagKey else {
+        guard url.isInternalTagURL else {
             return false
         }
 
-        selectedTag = tagExists(tag) ? tag : nil
+        if let tag = url.internalTagKey {
+            selectedTag = tagExists(tag) ? tag : nil
+        } else {
+            selectedTag = nil
+        }
 
         navigationController.presentedViewController?.dismiss(animated: true, completion: nil)
         navigationController.popToRootViewController(animated: true)
@@ -125,7 +129,7 @@ extension SPAppDelegate {
 
     private func tagExists(_ tag: String) -> Bool {
         let request = NSFetchRequest<Tag>(entityName: Tag.entityName)
-        request.predicate = NSPredicate(format: "\(\Tag.name) = %@", tag)
+        request.predicate = NSPredicate(format: "name = %@", tag)
         return (try? coreDataManager.managedObjectContext.count(for: request) > .zero) ?? false
     }
 
