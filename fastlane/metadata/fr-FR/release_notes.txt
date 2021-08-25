@@ -1,2 +1,0 @@
--   Ajout de la suppression de compte dans l’application #1354
-
