@@ -45,7 +45,7 @@ struct NoteWidgetProvider: IntentTimelineProvider {
     }
 
     func getSnapshot(for configuration: NoteWidgetIntent, in context: Context, completion: @escaping (NoteWidgetEntry) -> Void) {
-        guard let note = widgetDataController()?.firstNote() else {
+        guard let note = widgetResultsController()?.firstNote() else {
             completion(NoteWidgetEntry.placeholder)
             return
         }
@@ -57,7 +57,7 @@ struct NoteWidgetProvider: IntentTimelineProvider {
         // Confirm valid configuration
         guard let widgetNote = configuration.note,
               let simperiumKey = widgetNote.identifier,
-              let note = widgetDataController()?.note(forSimperiumKey: simperiumKey) else {
+              let note = widgetResultsController()?.note(forSimperiumKey: simperiumKey) else {
             return
         }
 
@@ -75,8 +75,7 @@ struct NoteWidgetProvider: IntentTimelineProvider {
         completion(timeline)
     }
 
-    private func widgetDataController() -> WidgetDataController? {
-        let isPreview = ProcessInfo.processInfo.environment[WidgetConstants.environmentXcodePreviewsKey] != WidgetConstants.isPreviews
-        return try? WidgetDataController(context: coreDataManager.managedObjectContext, isPreview: isPreview)
+    private func widgetResultsController() -> WidgetResultsController? {
+        return try? WidgetResultsController(context: coreDataManager.managedObjectContext, isPreview: ProcessInfo.processInfo.environmentIsPreview)
     }
 }

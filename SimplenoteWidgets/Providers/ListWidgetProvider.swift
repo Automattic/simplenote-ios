@@ -22,7 +22,6 @@ struct ListWidgetProvider: IntentTimelineProvider {
     let coreDataManager: CoreDataManager!
 
     init() {
-        NSLog("Created a provider")
         do {
             self.coreDataManager = try CoreDataManager(StorageSettings().sharedStorageURL, for: .widgets)
         } catch {
@@ -36,7 +35,7 @@ struct ListWidgetProvider: IntentTimelineProvider {
     }
 
     func getSnapshot(for configuration: ListWidgetIntent, in context: Context, completion: @escaping (ListWidgetEntry) -> Void) {
-        guard let allNotes = widgetDataController()?.notes() else {
+        guard let allNotes = widgetResultsController()?.notes() else {
             completion(ListWidgetEntry.placeholder)
             return
         }
@@ -51,7 +50,7 @@ struct ListWidgetProvider: IntentTimelineProvider {
     func getTimeline(for configuration: ListWidgetIntent, in context: Context, completion: @escaping (Timeline<ListWidgetEntry>) -> Void) {
         // Confirm valid configuration
         guard let widgetTag = configuration.tag,
-              let notes = widgetDataController()?.notes(filteredBy: TagsFilter(from: widgetTag.identifier), limit: Constants.noteFetchLimit) else {
+              let notes = widgetResultsController()?.notes(filteredBy: TagsFilter(from: widgetTag.identifier), limit: Constants.noteFetchLimit) else {
             return
         }
 
@@ -72,9 +71,9 @@ struct ListWidgetProvider: IntentTimelineProvider {
 )
     }
 
-    private func widgetDataController() -> WidgetDataController? {
-        let isPreview = ProcessInfo.processInfo.environment[WidgetConstants.environmentXcodePreviewsKey] != WidgetConstants.isPreviews
-        return try? WidgetDataController(context: coreDataManager.managedObjectContext, isPreview: isPreview)
+    private func widgetResultsController() -> WidgetResultsController? {
+        return try? WidgetResultsController(context: coreDataManager.managedObjectContext,
+                                            isPreview: ProcessInfo.processInfo.environmentIsPreview)
     }
 }
 
