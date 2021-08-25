@@ -23,7 +23,7 @@ Note: (A) means Automated Test. If automated UI tests were executed for the app,
 - [ ] Preview mode disappears/reappears when receiving remote changes to markdown setting.
 - [ ] Note pinning syncs immediately to/from other device.
 - [ ] Note pinning works regardless if done from list view or note info.
-- [ ] Viewing history on one device leaves note unchanged on other device.
+- [ ] Viewing history on one device leaves note unchanged on the other device.
 - [ ] Restoring history immediately syncs note to/from other device.
 - [ ] After disabling network connectivity and making changes, selecting Log Out triggers an `Unsynced Notes Detected` alert.
 - [ ] After going back online, changes sync.
@@ -38,8 +38,8 @@ Note: (A) means Automated Test. If automated UI tests were executed for the app,
 - [ ] Can change analytics sharing setting.
 - [ ] Changing `Sort Order` immediately updates and reflects in note list.
 - [ ] Changing `Tag Sorting` immediately updates and reflects in tag list.
-- [ ] For each sort type the pinned notes appear first in the note list.
-- [ ] Changing `Theme` immediately updates app for desired color scheme.
+- [ ] For each sort type, the pinned notes appear first in the note list.
+- [ ] Changing `Theme` immediately updates app for desired colour scheme.
 - [ ] After setting a passcode, passcode (or Touch/Face ID if also enabled) is required to resume the app.
 - [ ] Can turn passcode lock off with correct 4-digit passcode (also disables Touch/Face ID).
 
@@ -57,8 +57,8 @@ Note: (A) means Automated Test. If automated UI tests were executed for the app,
 
 #### Note list
 
-- [ ] Possible to `Select All` notes and trash tem all at once. (A)
-- [ ] After note is trashed from note list, it can be restored by tapping `Undo` link in the snackbar. (A)
+- [ ] Possible to `Select All` notes and trash them all at once. (A)
+- [ ] After a note is trashed from note list, it can be restored by tapping `Undo` link in the snackbar. (A)
 - [ ] Internal link can be copied from note context menu and pasted into a different note. (A)
  
 #### Note editor
@@ -70,10 +70,10 @@ Note: (A) means Automated Test. If automated UI tests were executed for the app,
 - [ ] Typing `- [x]` creates a checked checklist item. (A)
 - [ ] Typing `- [ ]` created an unchecked checklist item. (A)
 - [ ] Typing `-`, `+`, or `*` creates a list. (A)
-- [ ] All list bullet types render to markdown lists. (A)
+- [ ] All list bullet types render to Markdown lists. (A)
 - [ ] Added URL is linkified. (A)
-- [ ] Regular tap on link in preview opens the link in new window. (A)
-- [ ] Long-tapping on link in edtor opens the link in new window. (A)
+- [ ] Regular tap on link in preview opens the link in a new window. (A)
+- [ ] Long-tapping on a link in editor opens the link in a new window. (A)
 
 #### Tags & search
 
@@ -91,7 +91,7 @@ Note: (A) means Automated Test. If automated UI tests were executed for the app,
 
 - [ ] Can view trashed notes by selecting `Trash`. (A)
 - [ ] Can delete note forever from trash screen. (A)
-- [ ] Trash can be emptied (A)
+- [ ] Trash can be emptied. (A)
 - [ ] Can restore note from trash screen. (A)
 - [ ] Can trash note. (A)
 
