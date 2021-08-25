@@ -2,11 +2,15 @@
 
 import Foundation
 
+let glotPressTitleKey = "app_store_title"
 let glotPressSubtitleKey = "app_store_subtitle"
 let glotPressWhatsNewKey = "v4.43-whats-new"
 let glotPressDescriptionKey = "app_store_desc"
 let glotPressKeywordsKey = "app_store_keywords"
-let baseFolder = "./metadata"
+
+let scriptURL = URL(fileURLWithPath: CommandLine.arguments[0], relativeTo: URL(fileURLWithPath: FileManager.default.currentDirectoryPath))
+let fastlaneDir = scriptURL.deletingLastPathComponent()
+let baseFolder = fastlaneDir.appendingPathComponent("metadata").path
 
 // iTunes Connect language code: GlotPress code
 let languages = [
@@ -58,6 +62,7 @@ func downloadTranslation(languageCode: String, folderName: String) {
                 return
         }
 
+        var title: String?
         var subtitle: String?
         var whatsNew: String?
         var keywords: String?
@@ -65,7 +70,7 @@ func downloadTranslation(languageCode: String, folderName: String) {
 
         jsonDict.forEach({ (key: String, value: Any) in
 
-            guard let index = key.index(of: Character(UnicodeScalar(0004))) else {
+            guard let index = key.firstIndex(of: Character(UnicodeScalar(0004))) else {
             	return
             }
 
@@ -82,6 +87,8 @@ func downloadTranslation(languageCode: String, folderName: String) {
             let translation = languageCode == "en-us" ? originalLanguage : firstValue
             
             switch keyFirstPart {
+            case glotPressTitleKey:
+                title = translation
             case glotPressSubtitleKey:
                 subtitle = translation
             case glotPressKeywordsKey:
@@ -101,7 +108,8 @@ func downloadTranslation(languageCode: String, folderName: String) {
         try? fileManager.createDirectory(atPath: languageFolder, withIntermediateDirectories: true, attributes: nil)
 
         do {
-            try subtitle?.write(toFile: "\(languageFolder)/promotional_text.txt", atomically: true, encoding: .utf8)
+            try title?.write(toFile: "\(languageFolder)/name.txt", atomically: true, encoding: .utf8)
+            try subtitle?.write(toFile: "\(languageFolder)/subtitle.txt", atomically: true, encoding: .utf8)
             try whatsNew?.write(toFile: "\(languageFolder)/release_notes.txt", atomically: true, encoding: .utf8)
             try keywords?.write(toFile: "\(languageFolder)/keywords.txt", atomically: true, encoding: .utf8)
             try storeDescription?.write(toFile: "\(languageFolder)/description.txt", atomically: true, encoding: .utf8)

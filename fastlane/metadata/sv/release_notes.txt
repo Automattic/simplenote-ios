@@ -1,2 +1,0 @@
--   Kontoborttagning i appen har lagts till #1354
-
