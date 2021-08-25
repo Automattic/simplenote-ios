@@ -116,7 +116,7 @@ extension SPAppDelegate {
         }
 
         if let tag = url.internalTagKey {
-            selectedTag = tagExists(tag) ? tag : nil
+            selectedTag = SPObjectManager.shared().tagExists(tag) ? tag : nil
         } else {
             selectedTag = nil
         }
@@ -125,12 +125,6 @@ extension SPAppDelegate {
         navigationController.popToRootViewController(animated: true)
 
         return true
-    }
-
-    private func tagExists(_ tag: String) -> Bool {
-        let request = NSFetchRequest<Tag>(entityName: Tag.entityName)
-        request.predicate = NSPredicate(format: "name = %@", tag)
-        return (try? coreDataManager.managedObjectContext.count(for: request) > .zero) ?? false
     }
 
     /// Opens search
