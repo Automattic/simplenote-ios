@@ -44,6 +44,7 @@ extension NSURL {
             return nil
         }
 
-        return query?.replacingOccurrences(of: "tag=", with: "")
+        let queryString = query?.replacingOccurrences(of: "/", with: "")
+        return queryString?.replacingOccurrences(of: "tag=", with: "")
     }
 }
