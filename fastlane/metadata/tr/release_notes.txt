@@ -1,2 +1,0 @@
--   Uygulamada hesap silme özelliği eklendi #1354
-

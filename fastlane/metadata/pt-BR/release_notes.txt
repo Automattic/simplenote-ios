@@ -1,2 +1,0 @@
--   Exclusão de conta no aplicativo adicionada #1354
-
