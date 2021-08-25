@@ -59,14 +59,13 @@ extension Note {
 
     var url: URL {
         guard let simperiumKey = simperiumKey else {
-            return URL(string: SimplenoteConstants.simplenoteScheme + "://")!
+            return URL(string: .simplenotePath())!
         }
-        return URL(string: WidgetConstants.interlinkURLBase + simperiumKey)!
+        return URL(string: .simplenotePath(withHost: SimplenoteConstants.simplenoteInterlinkHost) + simperiumKey)!
     }
 }
 
 private struct Constants {
     static let defaultTitle = NSLocalizedString("Untitled Note", comment: "Default title for notes")
-    static let linkUrlBase = SimplenoteConstants.simplenoteScheme + "://" + SimplenoteConstants.simplenoteInterlinkHost + "/"
     static let previewCharacterLength = 50
 }
