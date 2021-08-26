@@ -25,11 +25,13 @@ struct NoteWidgetProvider: IntentTimelineProvider {
     typealias Intent = NoteWidgetIntent
     typealias Entry = NoteWidgetEntry
 
-    let coreDataManager: CoreDataManager!
+    let coreDataManager: CoreDataManager
+    let widgetResultsController: WidgetResultsController
 
     init() {
         do {
             self.coreDataManager = try CoreDataManager(StorageSettings().sharedStorageURL, for: .widgets)
+            self.widgetResultsController = WidgetResultsController(context: coreDataManager.managedObjectContext, isPreview: ProcessInfo.processInfo.environmentIsPreview)
         } catch {
             fatalError("Couldn't setup dataController")
         }
@@ -40,7 +42,8 @@ struct NoteWidgetProvider: IntentTimelineProvider {
     }
 
     func getSnapshot(for configuration: NoteWidgetIntent, in context: Context, completion: @escaping (NoteWidgetEntry) -> Void) {
-        guard let note = widgetResultsController()?.firstNote() else {
+        guard WidgetDefaults.shared.loggedIn,
+            let note = widgetResultsController.firstNote() else {
             completion(NoteWidgetEntry.placeholder)
             return
         }
@@ -50,9 +53,10 @@ struct NoteWidgetProvider: IntentTimelineProvider {
 
     func getTimeline(for configuration: NoteWidgetIntent, in context: Context, completion: @escaping (Timeline<NoteWidgetEntry>) -> Void) {
         // Confirm valid configuration
-        guard let widgetNote = configuration.note,
+        guard WidgetDefaults.shared.loggedIn,
+              let widgetNote = configuration.note,
               let simperiumKey = widgetNote.identifier,
-              let note = widgetResultsController()?.note(forSimperiumKey: simperiumKey) else {
+              let note = widgetResultsController.note(forSimperiumKey: simperiumKey) else {
             return
         }
 
@@ -70,7 +74,7 @@ struct NoteWidgetProvider: IntentTimelineProvider {
         completion(timeline)
     }
 
-    private func widgetResultsController() -> WidgetResultsController? {
-        return try? WidgetResultsController(context: coreDataManager.managedObjectContext, isPreview: ProcessInfo.processInfo.environmentIsPreview)
+    private func buildWidgetResultsController() -> WidgetResultsController {
+        return WidgetResultsController(context: coreDataManager.managedObjectContext, isPreview: ProcessInfo.processInfo.environmentIsPreview)
     }
 }

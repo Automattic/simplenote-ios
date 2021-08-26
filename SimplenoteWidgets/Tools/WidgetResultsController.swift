@@ -11,13 +11,7 @@ class WidgetResultsController {
 
     /// Initialization
     ///
-    init(context: NSManagedObjectContext, isPreview: Bool = false) throws {
-        if !isPreview {
-            guard WidgetDefaults.shared.loggedIn else {
-                throw WidgetError.appConfigurationError
-            }
-        }
-
+    init(context: NSManagedObjectContext, isPreview: Bool = false) {
         self.managedObjectContext = context
     }
 

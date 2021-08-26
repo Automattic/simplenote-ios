@@ -19,11 +19,14 @@ struct ListWidgetProvider: IntentTimelineProvider {
     typealias Intent = ListWidgetIntent
     typealias Entry = ListWidgetEntry
 
-    let coreDataManager: CoreDataManager!
+    let coreDataManager: CoreDataManager
+    let widgetResultsController: WidgetResultsController
 
     init() {
         do {
             self.coreDataManager = try CoreDataManager(StorageSettings().sharedStorageURL, for: .widgets)
+            self.widgetResultsController = WidgetResultsController(context: coreDataManager.managedObjectContext,
+                                                                   isPreview: ProcessInfo.processInfo.environmentIsPreview)
         } catch {
             fatalError("Couldn't setup dataController")
         }
@@ -35,7 +38,8 @@ struct ListWidgetProvider: IntentTimelineProvider {
     }
 
     func getSnapshot(for configuration: ListWidgetIntent, in context: Context, completion: @escaping (ListWidgetEntry) -> Void) {
-        guard let allNotes = widgetResultsController()?.notes() else {
+        guard WidgetDefaults.shared.loggedIn,
+              let allNotes = widgetResultsController.notes() else {
             completion(ListWidgetEntry.placeholder)
             return
         }
@@ -49,8 +53,9 @@ struct ListWidgetProvider: IntentTimelineProvider {
 
     func getTimeline(for configuration: ListWidgetIntent, in context: Context, completion: @escaping (Timeline<ListWidgetEntry>) -> Void) {
         // Confirm valid configuration
-        guard let widgetTag = configuration.tag,
-              let notes = widgetResultsController()?.notes(filteredBy: TagsFilter(from: widgetTag.identifier), limit: Constants.noteFetchLimit) else {
+        guard WidgetDefaults.shared.loggedIn,
+              let widgetTag = configuration.tag,
+              let notes = widgetResultsController.notes(filteredBy: TagsFilter(from: widgetTag.identifier), limit: Constants.noteFetchLimit) else {
             return
         }
 
@@ -69,11 +74,6 @@ struct ListWidgetProvider: IntentTimelineProvider {
 
         completion(Timeline(entries: entries, policy: .atEnd)
 )
-    }
-
-    private func widgetResultsController() -> WidgetResultsController? {
-        return try? WidgetResultsController(context: coreDataManager.managedObjectContext,
-                                            isPreview: ProcessInfo.processInfo.environmentIsPreview)
     }
 }
 
