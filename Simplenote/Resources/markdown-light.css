@@ -1,0 +1,37 @@
+
+html {
+    background: #FFFFFF;
+    color: #111111;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #84878a;
+}
+
+.note-detail-markdown a {
+    color: #3361cc;
+}
+
+.note-detail-markdown hr {
+    color: #4895d9;
+}
+
+.note-detail-markdown code {
+    color: #899199;
+}
+
+.note-detail-markdown pre {
+    background: #f6f7f8;
+}
+
+.note-detail-markdown pre code {
+    color: #616870;
+}
+
+.note-detail-markdown table tr:nth-child(2n) {
+    background-color: #f6f7f8;
+}
+
+.note-detail-markdown table th, .note-detail-markdown table td {
+    border-color: #c0c4c8;
+}

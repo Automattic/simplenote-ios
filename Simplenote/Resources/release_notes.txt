@@ -1,2 +1,3 @@
--   Some bug fixes #1345, #1347, #1348
-
+-   Fixed a bug where non http/https urls crashed when opened from markdown
+-   Account Deletion Support
+-   Tags are now removed from deleted Notes

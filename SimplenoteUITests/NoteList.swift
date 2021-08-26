@@ -129,6 +129,46 @@ class NoteList {
         guard searchCancelButton.exists else { return }
         searchCancelButton.tap()
     }
+
+    class func longPressNote(title: String) {
+        app.tables.cells[title].press(forDuration: 3)
+    }
+
+    class func selectNoteFromContextMenu() {
+        let selectButton = app.buttons[UID.Button.select]
+        guard selectButton.exists else { return }
+        selectButton.tap()
+    }
+
+    class func deleteNoteFromContextMenu() {
+        let deleteNoteButton = app.buttons[UID.Button.deleteNote]
+        guard deleteNoteButton.exists else { return }
+        deleteNoteButton.tap()
+    }
+
+    class func copyInternalLinkFromContextMenu() {
+        let copyInternalLinkButton = app.buttons[UID.Button.copyInternalLink]
+        guard copyInternalLinkButton.exists else { return }
+        copyInternalLinkButton.tap()
+    }
+
+    class func selectAll() {
+        let selectAllButton = app.buttons[UID.Button.selectAll]
+        guard selectAllButton.exists else { return }
+        selectAllButton.tap()
+    }
+
+    class func tapTrashNotesButton() {
+        let trashNotesButton = app.buttons[UID.Button.trashNotes]
+        guard trashNotesButton.exists else { return }
+        trashNotesButton.tap()
+    }
+
+    class func tapUndoOnSnackbar() {
+        let undoButton = app.buttons[UID.Button.undoTrashButton]
+        guard undoButton.exists else { return }
+        undoButton.tap()
+    }
 }
 
 class NoteListAssert {
@@ -273,5 +313,9 @@ class NoteListAssert {
 
         print(">>> Actual search string is '\(actualSearchString)'")
         XCTAssertEqual(actualSearchString, searchString)
+    }
+
+    class func deselectAllButtonDisplayed() {
+        XCTAssertTrue(app.buttons[UID.Button.deselectAll].waitForExistence(timeout: maxLoadTimeout))
     }
 }

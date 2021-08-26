@@ -34,13 +34,6 @@ extension SPAppDelegate {
         let authenticator = simperium.authenticator
 
         authenticator.providerString = "simplenote.com"
-
-        guard BuildConfiguration.current == .internal else {
-            return
-        }
-
-        authenticator.authURL = SPCredentials.experimentalAuthURL
-        authenticator.customHTTPHeaders = ["Host": SPCredentials.experimentalAuthHost]
     }
 }
 
@@ -85,6 +78,11 @@ extension SPAppDelegate {
         publishController.onUpdate = { (note) in
             PublishNoticePresenter.presentNotice(for: note)
         }
+    }
+
+    @objc
+    func configureAccountDeletionController() {
+        accountDeletionController = AccountDeletionController()
     }
 }
 
@@ -280,6 +278,17 @@ extension SPAppDelegate: SimperiumDelegate {
 
     public func simperium(_ simperium: Simperium, didFailWithError error: Error) {
         SPTracker.refreshMetadataForAnonymousUser()
+
+        guard let simperiumError = SPSimperiumErrors(rawValue: (error as NSError).code) else {
+            return
+        }
+
+        switch simperiumError {
+        case .invalidToken:
+            logOutIfAccountDeletionRequested()
+        default:
+            break
+        }
     }
 }
 
@@ -403,6 +412,29 @@ extension SPAppDelegate {
             note.deleted ? nil : note.simperiumKey
         }
         EditorFactory.shared.scrollPositionCache.cleanup(keeping: allIdentifiers)
+    }
+}
+
+// MARK: - Account Deletion
+//
+extension SPAppDelegate {
+    @objc
+    func authenticateSimperiumIfAccountDeletionRequested() {
+        guard let deletionController = accountDeletionController,
+              deletionController.hasValidDeletionRequest else {
+            return
+        }
+
+        simperium.authenticateIfNecessary()
+    }
+
+    @objc
+    func logOutIfAccountDeletionRequested() {
+        guard accountDeletionController?.hasValidDeletionRequest == true else {
+            return
+        }
+
+        logoutAndReset(self)
     }
 }
 

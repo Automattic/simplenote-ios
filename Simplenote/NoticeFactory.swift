@@ -32,6 +32,10 @@ struct NoticeFactory {
         let action = NoticeAction(title: Messages.copyLink, handler: onCopy)
         return Notice(message: Messages.published, action: action)
     }
+
+    static func networkError() -> Notice {
+        Notice(message: Messages.networkIssue, action: nil)
+    }
 }
 
 extension NoticeFactory {
@@ -44,6 +48,7 @@ extension NoticeFactory {
         static let trashed = NSLocalizedString("Note Trashed", comment: "Note trashed notification")
         static let unpublished = NSLocalizedString("Unpublish successful", comment: "Notice of publishing unsuccessful")
         static let published = NSLocalizedString("Publish Successful", comment: "Notice up succesful publishing")
+        static let networkIssue = NSLocalizedString("A network connection is required. Please, check your connection and try again.", comment: "Network connection issue notificaiton")
 
         static let noteTrashed = NSLocalizedString("%i Note Trashed", comment: "Note trashed notification")
         static let notesTrashed = NSLocalizedString("%i Notes Trashed", comment: "Notes trashed notification")

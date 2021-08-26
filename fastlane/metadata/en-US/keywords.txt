@@ -1,1 +1,1 @@
-simplenote,note,taking,taker,notes,sync,share,simple,markdown,tag,to-do,list,lock,cloud,writing
+notes,text,planner,journal,diary,sync,to-do,cloud,notebook,simple,notepad,tag,todo,writing,memo

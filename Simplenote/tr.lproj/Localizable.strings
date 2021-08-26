@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-06-29 11:32:19+0000 */
+/* Translation-Revision-Date: 2021-08-19 20:51:47+0000 */
 /* Plural-Forms: nplurals=2; plural=(n > 1); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: tr */
@@ -60,6 +60,9 @@
 /* 5 minutes passcode lock timeout */
 "5 Minutes" = "5 Dakika";
 
+/* Network connection issue notificaiton */
+"A network connection is required. Please, check your connection and try again." = "Bir ağ bağlantısı gereklidir. Lütfen bağlantınızı kontrol edip tekrar deneyin.";
+
 /* Display app about screen */
 "About" = "Hakkında";
 
@@ -83,11 +86,14 @@
    Title: No filters applied */
 "All Notes" = "Tüm Notlar";
 
+/* Delete account confirmation instructions */
+"An email has been sent to %@ Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation" = "%@ adresine bir e-posta gönderildi Gelen kutunuzu kontrol edin ve hesap silme işlemini onaylamak için talimatları izleyin.\n\nOnayınız alınana kadar hesabınız silinmeyecek.";
+
+/* Deletion error message */
+"An error occured. Please, try again. If the problem continues, contact us at support@simplenote.com for help." = "Bir hata oluştu. Lütfen tekrar deneyin. Sorun devam ederse yardım için support@simplenote.com adresinden bize ulaşın.";
+
 /* Sign in error message */
 "An error was encountered while signing in." = "Oturum açılırken bir hata oluştu.";
-
-/* Engine URL Message */
-"AppEngine Endpoints" = "AppEngine Uç Noktaları";
 
 /* No comment provided by engineer. */
 "Appearance" = "Görünüm";
@@ -104,14 +110,14 @@
 /* User Authenticated */
 "Authenticated" = "Kimliği Doğrulandı";
 
-/* Engine URL Message */
-"Authentication Endpoints" = "Kimlik Doğrulama Uç Noktaları";
-
 /* The Simplenote blog */
 "Blog" = "Blog";
 
 /* Terms of Service Legend *PREFIX*: printed in dark color */
 "By creating an account you agree to our" = "Hesap oluşturarak şunları kabul etmiş olursunuz:";
+
+/* Delete account confirmation alert message */
+"By deleting your account, all notes created with this account will be permanently deleted. This action is not reversible" = "Hesabınızı sildiğinizde bu hesapla oluşturulan tüm notlar kalıcı olarak silinecektir. Bu eylem geri alınamaz.";
 
 /* Cancel Action
    Cancel action button
@@ -136,6 +142,9 @@
 
 /* Number of characters in the note */
 "Characters" = "Karakter";
+
+/* Title for delete account succes alert */
+"Check Your Email" = "E-postanızı kontrol edin";
 
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "4 basamaklı bir parola seçin";
@@ -226,6 +235,10 @@
 /* PinLock screen \"delete\" button */
 "Delete" = "Sil";
 
+/* Delete account title and action
+   Display Delete Account Alert */
+"Delete Account" = "Hesabı Sil";
+
 /* Delete a note from trash */
 "Delete Note" = "Not Sil";
 
@@ -293,7 +306,8 @@
 /* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "Parolanızı girin";
 
-/* Error Title */
+/* Deletion Error Title
+   Error Title */
 "Error" = "Hata";
 
 /* Get Help Description Label */
@@ -453,6 +467,9 @@
 /* Instant passcode lock timeout */
 "Off" = "Kapalı";
 
+/* Confirm alert message */
+"Ok" = "Tamam";
+
 /* No comment provided by engineer. */
 "On" = "Açık";
 
@@ -549,6 +566,9 @@
 
 /* Rename a tag */
 "Rename" = "Yeniden Adlandır";
+
+/* Title for account deletion confirm button */
+"Request Account Deletion" = "Hesap Silme İsteği";
 
 /* Resend email button -> Verify your email screen */
 "Resend Email" = "E-postayı yeniden gönder";
@@ -670,6 +690,9 @@
 
 /* Error when address is in use */
 "The email you've entered is already associated with a Simplenote account." = "Girdiğiniz e-posta adresi zaten bir Simplenote hesabıyla ilişkilendirilmiş.";
+
+/* Error when the network is inaccessible */
+"The network could not be reached." = "Ağa ulaşılamadı.";
 
 /* Onboarding Header Text */
 "The simplest way to keep notes." = "Not tutmanın en basit yolu.";
@@ -800,9 +823,6 @@
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "etiket:";
-
-/* Warning Title */
-"⚠️ Important" = "⚠️ Önemli";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞 Hata Ayıklama Etkinleştirildi 🐞";

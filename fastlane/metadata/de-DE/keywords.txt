@@ -1,1 +1,1 @@
-Simplenote,Notiz,erstellen,Ersteller,Notizen,synchronisieren,teilen,einfach,Markdown,Schlagwort
+Notizen,Text,Planer,Tagebuch,synchronisieren,To-do,Cloud,Notizbuch,einfach,Notepad,Schlagwort,Todo

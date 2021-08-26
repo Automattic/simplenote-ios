@@ -1,106 +1,10 @@
-@charset "UTF-8";
-* , body {
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    background: transparent;
-}
-
-img {
-    border: 0;
-}
-
-* :focus {
-    outline: none;
-}
-
 html {
-    margin: 0;
-    padding: 0;
     background: 1f2123;
     color: #DDDDDD;
-    text-rendering: optimizeLegibility;
-}
-
-::-webkit-scrollbar {
-    width: 6px;
-}
-
-::-webkit-scrollbar-track {
-    background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-    border-radius: 6px;
     background: #84878a;
-}
-
-/* Same styles as app.simplenote.com/publish */
-.note-detail-markdown {
-    user-select: auto;
-    font-family: 'Noto Serif', serif;
-    font-size: 18px;
-    line-height: 1.7;
-    word-wrap: break-word;
-    padding: 20px 20px 20px 24px;
-}
-
-.note-detail-markdown h1, .note-detail-markdown h2, .note-detail-markdown h3,
-.note-detail-markdown h4, .note-detail-markdown h5, .note-detail-markdown h6,
-.note-detail-markdown #title {
-    line-height: 1.15;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-    margin: 1.7em 0 1em 0;
-}
-
-.note-detail-markdown h1, .note-detail-markdown #title {
-    font-size: 2em;
-}
-
-.note-detail-markdown h1:first-of-type, .note-detail-markdown #title:first-of-type {
-    margin-top: 0;
-}
-
-.note-detail-markdown h2 {
-    font-size: 1.8em;
-}
-
-.note-detail-markdown h3 {
-    font-size: 1.4em;
-}
-
-.note-detail-markdown h4 {
-    font-size: 1.2em;
-}
-
-.note-detail-markdown h5, .note-detail-markdown h6 {
-    font-size: 1em;
-    text-transform: uppercase;
-}
-
-.note-detail-markdown #title {
-    margin-bottom: 0.5em;
-    font-weight: bold;
-}
-
-.note-detail-markdown p, .note-detail-markdown ul, .note-detail-markdown ol,
-.note-detail-markdown blockquote, .note-detail-markdown pre, .note-detail-markdown table,
-.note-detail-markdown code, .note-detail-markdown img {
-    margin-bottom: 1.7em;
-    box-sizing: border-box;
-}
-
-.note-detail-markdown ul, .note-detail-markdown ol {
-    margin-left: 2em;
-}
-
-.note-detail-markdown img {
-    display: block;
-    margin: 0 auto;
-    max-width: 100%;
-    height: auto;
 }
 
 .note-detail-markdown a {
@@ -108,28 +12,7 @@ html {
 }
 
 .note-detail-markdown hr {
-    border: 0;
-    margin: 3.4em 0;
     color: #4895d9;
-    height: 1em;
-}
-
-.note-detail-markdown hr:before {
-    content: '...';
-    display: block;
-    width: 100%;
-    letter-spacing: 2em;
-    text-indent: 2em;
-    z-index: 1;
-    line-height: .5;
-    text-align: center;
-}
-
-.note-detail-markdown blockquote {
-    font-style: italic;
-    border-left: 4px solid currentColor;
-    margin-left: 0;
-    padding-left: 1.7em;
 }
 
 .note-detail-markdown code {
@@ -137,26 +20,11 @@ html {
 }
 
 .note-detail-markdown pre {
-    padding: 1em;
-    border-radius: 3px;
     background: #f6f7f8;
 }
 
 .note-detail-markdown pre code {
-    font-size: 85%;
     color: #616870;
-    background: transparent;
-    width: 100%;
-    overflow-x: auto;
-    display: block;
-    margin-bottom: 0;
-}
-
-.note-detail-markdown table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    display: block;
-    width: 100%;
 }
 
 .note-detail-markdown table tr:nth-child(2n) {
@@ -164,39 +32,5 @@ html {
 }
 
 .note-detail-markdown table th, .note-detail-markdown table td {
-    border: 1px solid #575e65;
-    padding: 6px 13px;
-}
-
-.note-detail-markdown table th {
-    font-weight: 600;
-}
-
-.note-detail-markdown input {
-    pointer-events: none;
-}
-
-.note-detail-markdown .task-list {
-    list-style-type: none;
-    margin-left: 0;
-}
-
-.note-detail-markdown .task-list li input {
-    margin-right: 6px;
-}
-
-@media only screen and (max-width: 480px) {
-    .note-detail-markdown {
-        font-size: 16px;
-    }
-    
-    .note-detail-markdown h1, .note-detail-markdown h2, .note-detail-markdown h3,
-    .note-detail-markdown h4, .note-detail-markdown h5, .note-detail-markdown h6,
-    .note-detail-markdown #title {
-        margin: 1.19em 0 0.7em 0;
-    }
-    
-    .note-detail-markdown #title {
-        margin-bottom: 0;
-    }
+    border-color: #575e65;
 }
