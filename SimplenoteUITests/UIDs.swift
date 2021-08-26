@@ -38,7 +38,7 @@ enum UID {
         static let trashNote = "Move to Trash"
         static let restoreNote = "Restore Note"
         static let deleteNote = "Delete Note"
-      
+
         // "Empty Trash" button label is generated
         // differently by Xcode 12.4 and 12.5 (runs iOS 14.5+)
         static private(set) var trashEmptyTrash: String = {
@@ -53,6 +53,13 @@ enum UID {
         static let cancel = "Cancel"
         static let dismissKeyboard = "Dismiss keyboard"
         static let deleteTagConfirmation = "Delete Tag"
+        static let select = "Select"
+        static let selectAll = "Select All"
+        static let deselectAll = "Deselect All"
+        static let trashNotes = "Trash Notes"
+        static let crossIcon = "icon cross"
+        static let undoTrashButton = "Undo"
+        static let copyInternalLink = "Copy Internal Link"
     }
 
     enum Text {
@@ -72,6 +79,10 @@ enum UID {
     enum SearchField {
         static let search = "Search notes or tags"
     }
+
+    enum ContextMenuItem {
+        static let paste = "Paste"
+    }
 }
 
 enum Text {
@@ -79,6 +90,7 @@ enum Text {
     static let appTagline = "The simplest way to keep notes."
     static let alertHeadingSorry = "Sorry!"
     static let alertContentLoginFailed = "Could not login with the provided email address and password."
+    static let alertReviewAccount = "Review Your Account"
     static let loginEmailInvalid = "Your email address is not valid"
     static let loginPasswordShort = "Password must contain at least 4 characters"
 }

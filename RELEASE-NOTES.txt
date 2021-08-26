@@ -1,6 +1,23 @@
-4.41
+4.44
 -----
 
+
+4.43
+-----
+-   Fixed a bug where non http/https urls crashed when opened from markdown #1397
+-   Account Deletion Support #1395
+-   Tags are now removed from deleted Notes #1391
+-   [Internal] added login alert for compromised password #1394
+-   [Internal] added error response case on login for unverified emails #1398
+
+4.42
+-----
+-   Added In app account deletion #1354
+
+4.41
+-----
+-   Some bug fixes #1359
+-   [Internal] Migrated core data database to secure shared directory #1349
 
 4.40
 -----

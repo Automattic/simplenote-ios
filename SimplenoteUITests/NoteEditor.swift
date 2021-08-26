@@ -34,6 +34,16 @@ class NoteEditor {
             noteContentTextView.clearText()
             noteContentTextView.paste(text: enteredValue)
 
+            // Once the text is pasted, there might be an info bubble shown at the note top,
+            // saying "Simplenote pasted from Simplenote-UITestsRunner". Since it covers all
+            // NavBar buttons, we have to wait for it to disappear:
+            let isHittablePredicate = NSPredicate { _, _ in
+                app.buttons[UID.Button.dismissKeyboard].isHittable == true
+            }
+
+            let expectation = XCTNSPredicateExpectation(predicate: isHittablePredicate, object: .none)
+            XCTWaiter().wait(for: [expectation], timeout: averageLoadTimeout)
+
             // Swipe up fast to show tags input, which disappears if pasted text is large
             // enough to push tags input off screen
             noteContentTextView.swipeUp(velocity: .fast)
@@ -42,11 +52,30 @@ class NoteEditor {
         }
     }
 
+    class func enterTitle(enteredValue: String) {
+        let noteContentTextView = app.textViews.element
+
+        noteContentTextView.clearAndEnterText(text: enteredValue + "\n")
+    }
+
+    class func pasteNoteContent() {
+        app.press(forDuration: 1.2)
+        app.menuItems[UID.ContextMenuItem.paste].tap()
+    }
+
     class func getEditorText() -> String {
         return app.textViews.element.value as! String
     }
 
     class func setFocus() {
+        // Waiting for the TextView to become hittable before using it
+        let isHittablePredicate = NSPredicate { _, _ in
+            app.textViews.firstMatch.isHittable == true
+        }
+
+        let expectation = XCTNSPredicateExpectation(predicate: isHittablePredicate, object: .none)
+        XCTWaiter().wait(for: [expectation], timeout: averageLoadTimeout)
+
         app.textViews.firstMatch.tap()
     }
 

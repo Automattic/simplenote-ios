@@ -1,1 +1,0 @@
-- Moved edit mode into a long press action and removed the new note bar

@@ -127,6 +127,7 @@
     [self setupCrashLogging];
     [self configureVersionsController];
     [self configurePublishController];
+    [self configureAccountDeletionController];
     [self setupDefaultWindow];
     [self configureStateRestoration];
     
@@ -188,6 +189,7 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     [self dismissPasscodeLockIfPossible];
+    [self authenticateSimperiumIfAccountDeletionRequested];
 }
 
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler
@@ -287,13 +289,14 @@
 - (void)logoutAndReset:(id)sender
 {
     self.bSigningUserOut = YES;
+
+    [self dismissAllModalsAnimated:YES completion:nil];
     self.signOutActivityIndicator = [SPModalActivityIndicator show];
     
-    // Remove WordPress token
+    // Reset State
     [SPKeychain deletePasswordForService:kSimplenoteWPServiceName account:self.simperium.user.email];
-
-    // Remove Siri Shortcuts
     [[ShortcutsHandler shared] unregisterSimplenoteActivities];
+    [self.accountDeletionController clearRequestToken];
 
     // Actual Simperium Logout
     double delayInSeconds = 0.75;
@@ -316,13 +319,11 @@
 			
 			// hide sidebar of notelist
             [self.sidebarViewController hideSidebarWithAnimation:NO];
-			
-			[self dismissAllModalsAnimated:YES completion:^{
-				
-                [self.simperium authenticateIfNecessary];
-                self.bSigningUserOut = NO;
-			}];
-		}];
+            [self.signOutActivityIndicator dismiss:YES completion:nil];
+
+            [self.simperium authenticateIfNecessary];
+            self.bSigningUserOut = NO;
+        }];
     });
 }
 

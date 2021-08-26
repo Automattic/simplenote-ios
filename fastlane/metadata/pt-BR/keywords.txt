@@ -1,1 +1,1 @@
-simplenote,anotação,fazer,escrever,anotações,sincronizar,compartilhar,simple,markdown,tag,tarefas
+anotações,mensagem,organizador,agenda,diário,sincronização,tarefas,nuvem,caderno,bloco de notas

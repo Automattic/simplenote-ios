@@ -16,6 +16,12 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         let _ = attemptLogOut()
         EmailLogin.open()
         EmailLogin.logIn()
+
+        // Extra check for certain emails
+        if testDataEmail.contains("trial") {
+            dismissVerifyEmailIfNeeded()
+        }
+
         NoteList.waitForLoad()
     }
 
@@ -263,6 +269,7 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         trackStep()
         NoteList.addNoteTap()
         NoteEditorAssert.editorShown()
+        NoteEditor.markdownEnable()
 
         trackStep()
         NoteEditor.clearAndEnterText(enteredValue: noteTitle + noteContent)
@@ -276,10 +283,71 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         NoteEditorAssert.textViewWithExactLabelsShownOnce(labels: ["* Asterisk1", "* Asterisk2", "* Asterisk3"])
 
         trackStep()
-        NoteEditor.markdownEnable()
         NoteEditor.swipeToPreview()
         PreviewAssert.staticTextWithExactValuesShownOnce(values: ["• Minus1", "• Minus2", "• Minus3"])
         PreviewAssert.staticTextWithExactValuesShownOnce(values: ["• Plus1", "• Plus2", "• Plus3"])
         PreviewAssert.staticTextWithExactValuesShownOnce(values: ["• Asterisk1", "• Asterisk2", "• Asterisk3"])
+    }
+
+    func testSelectAllAndTrashNotes() throws {
+        trackTest()
+        let noteTitle = "Note Title"
+
+        trackStep()
+        populateNoteList(title: noteTitle, numberToCreate: 2)
+        NoteList.longPressNote(title: noteTitle + "-1")
+        NoteList.selectNoteFromContextMenu()
+        NoteList.selectAll()
+        NoteListAssert.deselectAllButtonDisplayed()
+
+        trackStep()
+        NoteList.tapTrashNotesButton()
+        NoteListAssert.notesNumber(expectedNotesNumber: 0)
+
+        trackStep()
+        Trash.open()
+        TrashAssert.notesNumber(expectedNotesNumber: 2)
+        TrashAssert.noteExists(noteName: noteTitle + "-1")
+        TrashAssert.noteExists(noteName: noteTitle + "-2")
+    }
+
+    func testUndoTrashFromSnackbar() throws {
+        trackTest()
+        let noteName = "Note Title"
+
+        trackStep()
+        NoteList.createNoteAndLeaveEditor(noteName: noteName)
+        NoteList.longPressNote(title: noteName)
+        NoteList.deleteNoteFromContextMenu()
+        NoteListAssert.notesNumber(expectedNotesNumber: 0)
+
+        trackStep()
+        NoteList.tapUndoOnSnackbar()
+        NoteListAssert.notesNumber(expectedNotesNumber: 1)
+        NoteListAssert.noteExists(noteName: noteName)
+    }
+
+    func testCopyAndPasteInternalLink() throws {
+        trackTest()
+        let originalNoteTitle = "Original Note Title"
+        let referringNoteTitle = "Referring Note Title"
+        let referringNoteData = NoteData(
+                name: referringNoteTitle,
+                content: "[\(originalNoteTitle)](simplenote://note/"
+            )
+
+        trackStep()
+        NoteList.createNoteAndLeaveEditor(noteName: originalNoteTitle)
+        NoteList.longPressNote(title: originalNoteTitle)
+        NoteList.copyInternalLinkFromContextMenu()
+        NoteListAssert.notesNumber(expectedNotesNumber: 1)
+
+        trackStep()
+        NoteList.addNoteTap()
+        NoteEditor.enterTitle(enteredValue: referringNoteTitle)
+        NoteEditor.pasteNoteContent()
+        NoteEditor.leaveEditor()
+        NoteListAssert.notesNumber(expectedNotesNumber: 2)
+        NoteListAssert.contentIsShown(for: referringNoteData)
     }
 }

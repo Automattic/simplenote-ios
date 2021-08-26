@@ -35,6 +35,10 @@ class SPCredentials: NSObject {
     static let simperiumPreferencesObjectKey = "not-required"
     static let simperiumSettingsObjectKey = "not-required"
 
+    /// Simperium: Endpoints
+    ///
+    static let defaultEngineURL = "https://app.simplenote.com"
+
     /// Simplenote's Send Feedback
     ///
     static let simplenoteFeedbackURL = URL(string: "https://not.required")!

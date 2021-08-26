@@ -112,20 +112,23 @@ end
 
     files = {
       whats_new: File.join(prj_folder,  "/Simplenote/Resources/release_notes.txt"),
+      app_store_title: File.join(source_metadata_folder, "name.txt"),
       app_store_subtitle: File.join(source_metadata_folder, "subtitle.txt"),
       app_store_desc: File.join(source_metadata_folder, "description.txt"),
       app_store_keywords: File.join(source_metadata_folder, "keywords.txt")
     }
 
-    ios_update_metadata_source(po_file_path: prj_folder + "/Simplenote/Resources/AppStoreStrings.pot",
+    ios_update_metadata_source(
+      po_file_path: prj_folder + "/Simplenote/Resources/AppStoreStrings.pot",
       source_files: files,
-      release_version: options[:version])
+      release_version: options[:version]
+    )
   end
 
   # This lane lacks documentation because it ought to be part of the localized
   # metadata download script instead!
   desc "Updates the files with the localized keywords values for App Store Connect to match the 100 characters requirement"
-  lane :sanitize_appstore_keywords do | options |
+  lane :sanitize_appstore_keywords do
     Dir["./metadata/**"].each do |locale_dir|
       keywords_path = File.join(locale_dir, 'keywords.txt')
 
@@ -176,6 +179,7 @@ end
   lane :new_beta_release do | options |
     ios_betabuild_prechecks(options)
     ios_update_metadata(options)
+    sanitize_appstore_keywords()
     ios_lint_localizations(input_dir: 'Simplenote', allow_retry: true)
     ios_bump_version_beta()
     ios_tag_build()
@@ -184,7 +188,7 @@ end
   #####################################################################################
   # new_hotfix_release
   # -----------------------------------------------------------------------------------
-  # This lane updates the release branch for a new hotix release.
+  # This lane creates the release branch for a new hotfix release.
   # -----------------------------------------------------------------------------------
   # Usage:
   # bundle exec fastlane new_hotfix_release [skip_confirm:<skip confirm>] [version:<version>]
@@ -193,7 +197,7 @@ end
   # bundle exec fastlane new_hotfix_release version:10.6.1
   # bundle exec fastlane new_hotfix_release skip_confirm:true version:10.6.1
   #####################################################################################
-  desc "Creates a new hotfix branch from the given tag"
+  desc 'Creates a new hotfix branch for the given version:x.y.z. The branch will be cut from the tag x.y of the previous release'
   lane :new_hotfix_release do | options |
     prev_ver = ios_hotfix_prechecks(options)
     ios_bump_version_hotfix(previous_version: prev_ver, version: options[:version])
@@ -210,10 +214,10 @@ end
   # Example:
   # bundle exec fastlane finalize_hotfix_release skip_confirm:true
   #####################################################################################
-  desc "Creates a new hotfix branch from the given tag"
-  lane :finalize_hotfix_release do | options |
+  desc 'Performs the final checks and triggers a release build for the hotfix in the current branch'
+  lane :finalize_hotfix_release do |options|
     ios_finalize_prechecks(options)
-    version = ios_get_app_version()
+    version = ios_get_app_version
     trigger_release_build(branch_to_build: "release/#{version}")
   end
 
@@ -231,25 +235,27 @@ end
   # bundle exec fastlane finalize_release skip_confirm:true
   #####################################################################################
   desc 'Trigger the final release build on CI'
-  lane :finalize_release do | options |
+  lane :finalize_release do |options|
+    UI.user_error!('To finalize a hotfix, please use the finalize_hotfix_release lane instead') if ios_current_branch_is_hotfix
+
     ios_finalize_prechecks(options)
-    unless ios_current_branch_is_hotfix
-      UI.message('Checking app strings translation status...')
-      check_translation_progress(
-        glotpress_url: 'https://translate.wordpress.com/projects/simplenote/ios/',
-        abort_on_violations: false
-      )
+    
+    UI.message('Checking app strings translation status...')
+    check_translation_progress(
+      glotpress_url: 'https://translate.wordpress.com/projects/simplenote/ios/',
+      abort_on_violations: false
+    )
 
-      UI.message("Checking release notes strings translation status...")
-      check_translation_progress(
-        glotpress_url: 'https://translate.wordpress.com/projects/simplenote/ios/release-notes/',
-        abort_on_violations: false
-      )
+    UI.message("Checking release notes strings translation status...")
+    check_translation_progress(
+      glotpress_url: 'https://translate.wordpress.com/projects/simplenote/ios/release-notes/',
+      abort_on_violations: false
+    )
 
-      ios_update_metadata(options)
-      ios_lint_localizations(input_dir: 'Simplenote', allow_retry: true)
-      ios_bump_version_beta() unless ios_current_branch_is_hotfix
-    end
+    ios_update_metadata(options)
+    sanitize_appstore_keywords()
+    ios_lint_localizations(input_dir: 'Simplenote', allow_retry: true)
+    ios_bump_version_beta()
 
     # Wrap up
     version = ios_get_app_version()

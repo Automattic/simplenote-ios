@@ -1,1 +1,1 @@
-simplenote,catatan,menulis,pencatat,sinkron,bagikan,simpel,markdown,tag,daftar tugas,kunci,cloud
+catatan,teks,perencana,jurnal,diari,sinkronisasi,daftar tugas,cloud,notebook,simpel,notepad,tag

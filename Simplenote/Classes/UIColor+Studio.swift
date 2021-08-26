@@ -315,6 +315,11 @@ extension UIColor {
     }
 
     @objc
+    static var simplenoteRedButtonColor: UIColor {
+        UIColor(lightColor: .red50, darkColor: .red30)
+    }
+
+    @objc
     static var simplenoteInteractiveTextColor: UIColor {
         UIColor(lightColor: .spBlue50, darkColor: .spBlue30)
     }
