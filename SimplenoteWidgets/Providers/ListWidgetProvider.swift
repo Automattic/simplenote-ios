@@ -25,8 +25,7 @@ struct ListWidgetProvider: IntentTimelineProvider {
     init() {
         do {
             self.coreDataManager = try CoreDataManager(StorageSettings().sharedStorageURL, for: .widgets)
-            self.widgetResultsController = WidgetResultsController(context: coreDataManager.managedObjectContext,
-                                                                   isPreview: ProcessInfo.processInfo.environmentIsPreview)
+            self.widgetResultsController = WidgetResultsController(context: coreDataManager.managedObjectContext)
         } catch {
             fatalError("Couldn't setup dataController")
         }

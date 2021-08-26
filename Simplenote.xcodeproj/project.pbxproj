@@ -501,8 +501,6 @@
 		BAB6C04426BA49F3007495C4 /* ContentSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64DE6E8255D1C9F001D0526 /* ContentSlice.swift */; };
 		BAB6C04526BA4A04007495C4 /* String+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5476BC023D8E5D0000E7723 /* String+Simplenote.swift */; };
 		BAB6C04726BA4CAF007495C4 /* WidgetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6C04626BA4CAF007495C4 /* WidgetController.swift */; };
-		BAB7B29C26D6F433005DF3D8 /* ProcessInfo+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB7B29B26D6F433005DF3D8 /* ProcessInfo+Simplenote.swift */; };
-		BAB7B29D26D6F433005DF3D8 /* ProcessInfo+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB7B29B26D6F433005DF3D8 /* ProcessInfo+Simplenote.swift */; };
 		BABFFF2226CF9094003A4C25 /* WidgetDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABFFF2126CF9094003A4C25 /* WidgetDefaults.swift */; };
 		BABFFF2326CF9094003A4C25 /* WidgetDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABFFF2126CF9094003A4C25 /* WidgetDefaults.swift */; };
 		BABFFF2426CF9094003A4C25 /* WidgetDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABFFF2126CF9094003A4C25 /* WidgetDefaults.swift */; };
@@ -1132,7 +1130,6 @@
 		BAB5769226703F0E00B0C56F /* NoteWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteWidgetProvider.swift; sourceTree = "<group>"; };
 		BAB576BD2670512C00B0C56F /* NoteWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteWidget.swift; sourceTree = "<group>"; };
 		BAB6C04626BA4CAF007495C4 /* WidgetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetController.swift; sourceTree = "<group>"; };
-		BAB7B29B26D6F433005DF3D8 /* ProcessInfo+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProcessInfo+Simplenote.swift"; sourceTree = "<group>"; };
 		BABFFF2126CF9094003A4C25 /* WidgetDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDefaults.swift; sourceTree = "<group>"; };
 		BAE08625261282D1009D40CD /* Note+Publish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+Publish.swift"; sourceTree = "<group>"; };
 		BAF8D42226AE10F100CA9383 /* Tag+Widget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tag+Widget.swift"; sourceTree = "<group>"; };
@@ -2228,7 +2225,6 @@
 				BA75D87D26C0843600883FFA /* Text+Simplenote.swift */,
 				BA75D8AD26C0862E00883FFA /* View+Simplenote.swift */,
 				BA3CE86126D5DF3800EFF9EB /* WidgetTag+Helpers.swift */,
-				BAB7B29B26D6F433005DF3D8 /* ProcessInfo+Simplenote.swift */,
 				BA0ED16D26D708AC002533B6 /* Color+Widgets.swift */,
 			);
 			path = Extensions;
@@ -3538,7 +3534,6 @@
 				BAF8D50026AE171400CA9383 /* CoreDataManager.swift in Sources */,
 				BAF8D51426AE172600CA9383 /* StorageSettings.swift in Sources */,
 				BA86616326B35CF000466746 /* BuildConfiguration.swift in Sources */,
-				BAB7B29D26D6F433005DF3D8 /* ProcessInfo+Simplenote.swift in Sources */,
 				BAB5762726703C8200B0C56F /* IntentHandler.swift in Sources */,
 				BA86625D26B3B14900466746 /* SortMode.swift in Sources */,
 				BA12B07026B0D0150026F31D /* SPManagedObject+Widget.swift in Sources */,
@@ -3616,7 +3611,6 @@
 				BAB576A826703F4500B0C56F /* NoteWidgetProvider.swift in Sources */,
 				BAF8D4F626AE171400CA9383 /* CoreDataManager.swift in Sources */,
 				BAB5764626703D0000B0C56F /* IntentHandler.swift in Sources */,
-				BAB7B29C26D6F433005DF3D8 /* ProcessInfo+Simplenote.swift in Sources */,
 				BAB576C92670514500B0C56F /* NoteWidget.swift in Sources */,
 				BA122DC7265EF92D003D3BC5 /* NewNoteWidgetView.swift in Sources */,
 			);
