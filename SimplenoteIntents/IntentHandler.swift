@@ -72,10 +72,10 @@ extension IntentHandler: ListWidgetIntentHandling {
     }
 
     private func tagNoteInObjectCollection(from tags: [Tag]) -> INObjectCollection<WidgetTag> {
-        var items = [WidgetTag.allNotes]
+        var items = [WidgetTag(kind: .allNotes)]
 
         tags.forEach { tag in
-            let tag = WidgetTag(name: tag.name, kind: .tag)
+            let tag = WidgetTag(kind: .tag, name: tag.name)
             tag.kind = .tag
             items.append(tag)
         }
@@ -84,6 +84,6 @@ extension IntentHandler: ListWidgetIntentHandling {
     }
 
     func defaultTag(for intent: ListWidgetIntent) -> WidgetTag? {
-        WidgetTag.allNotes
+        WidgetTag(kind: .allNotes)
     }
 }

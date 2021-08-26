@@ -1,30 +1,33 @@
 import Foundation
 
-extension WidgetTag {
-    convenience init(identifier: String?, display: String, kind: ListFilterKind) {
-        self.init(identifier: identifier, display: display)
-        self.kind = kind
-    }
-
-    convenience init(name: String? = nil, kind: ListFilterKind) {
-        switch kind {
-        case .allNotes, .unknown:
-            self.init(identifier: nil, display: Constants.allNotesDisplay, kind: .allNotes)
+extension ListFilterKind {
+    var description: String {
+        switch self {
         case .tag:
-            self.init(identifier: name, display: name ?? Constants.unnamedTag, kind: .tag)
+            return NSLocalizedString("Tag", comment: "Display title for a User Tag")
+        default:
+            return NSLocalizedString("All Notes", comment: "Display title for All Notes")
         }
     }
+}
 
-    static var allNotes: WidgetTag {
-        WidgetTag.init(kind: .allNotes)
+extension WidgetTag {
+    convenience init(kind: ListFilterKind, name: String? = nil) {
+        switch kind {
+        case .tag:
+            self.init(identifier: name, display: name ?? Constants.unnamedTag)
+        default:
+            self.init(identifier: nil, display: kind.description)
+        }
+        self.kind = kind
     }
 
     var tagDescription: String {
         switch kind {
-        case .allNotes, .unknown:
-            return Constants.allNotesDisplay
         case .tag:
             return displayString
+        default:
+            return kind.description
         }
     }
 }

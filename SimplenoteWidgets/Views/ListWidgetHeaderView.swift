@@ -31,7 +31,7 @@ private func displayName(for tag: String) -> String {
 
 struct NotePreviewHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        ListWidgetHeaderView(tag: WidgetTag.allNotes)
+        ListWidgetHeaderView(tag: WidgetTag(kind: .allNotes))
             .previewContext(WidgetPreviewContext(family: .systemMedium))
     }
 }
