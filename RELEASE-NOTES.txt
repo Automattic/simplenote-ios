@@ -1,6 +1,6 @@
 4.44
 -----
-
+-   Added home screen widgets #1416
 
 4.43
 -----
