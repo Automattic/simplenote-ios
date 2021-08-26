@@ -353,7 +353,6 @@
 		B5AD0357251446B900255D5C /* UIBarButtonItem+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AD0356251446B900255D5C /* UIBarButtonItem+Appearance.swift */; };
 		B5AD7AB11D1C82D3009725FB /* NSURLSessionConfiguration+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AD7AB01D1C82D3009725FB /* NSURLSessionConfiguration+Extensions.swift */; };
 		B5AEC38423FAC5D600D24221 /* DateFormatter+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AEC38323FAC5D600D24221 /* DateFormatter+Simplenote.swift */; };
-		B5B06F3C1C31E119006F4495 /* SimplenoteShare-AppStore.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = B5B06F3B1C31E119006F4495 /* SimplenoteShare-AppStore.entitlements */; };
 		B5B0DE24239AFD1D00F1009D /* SPFeedbackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B0DE23239AFD1D00F1009D /* SPFeedbackManager.swift */; };
 		B5B9AB4522EE8AF0001CB0AD /* UIImageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B9AB4422EE8AF0001CB0AD /* UIImageName.swift */; };
 		B5B9AB4722EE9CC2001CB0AD /* UIImageSimplenoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B9AB4622EE9CC2001CB0AD /* UIImageSimplenoteTests.swift */; };
@@ -2860,7 +2859,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				74388F4A22CFFB8B001C5EC0 /* ShareViewController.xib in Resources */,
-				B5B06F3C1C31E119006F4495 /* SimplenoteShare-AppStore.entitlements in Resources */,
 				B5EB1EFF1C205A800080A1B3 /* Icons.xcassets in Resources */,
 				B5EB1EF21C204EBD0080A1B3 /* MainInterface.storyboard in Resources */,
 			);
