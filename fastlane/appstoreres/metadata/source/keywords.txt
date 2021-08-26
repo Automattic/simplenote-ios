@@ -1,1 +1,1 @@
-notes,text,planner,journal,diary,sync,to-do,cloud,notebook,simple,notepad,tag,todo,writing,memo
+notes,note,markdown,journal,sync,to-do,list,cloud,notebook,simple,notepad,tag,todo,writing,memo
