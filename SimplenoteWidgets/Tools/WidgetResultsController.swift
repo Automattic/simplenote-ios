@@ -11,7 +11,7 @@ class WidgetResultsController {
 
     /// Initialization
     ///
-    init(context: NSManagedObjectContext, isPreview: Bool = false) {
+    init(context: NSManagedObjectContext) {
         self.managedObjectContext = context
     }
 
