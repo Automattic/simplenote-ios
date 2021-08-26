@@ -2,8 +2,8 @@ import WidgetKit
 
 struct ListWidgetEntry: TimelineEntry {
     static let placeholder = ListWidgetEntry(date: Date(),
-                                    widgetTag: WidgetTag(name: DemoContent.listTag, kind: .tag),
-                                    noteProxys: DemoContent.listProxies)
+                                             widgetTag: WidgetTag(kind: .tag, name: DemoContent.listTag),
+                                             noteProxys: DemoContent.listProxies)
 
     let date: Date
     let widgetTag: WidgetTag
@@ -47,7 +47,7 @@ struct ListWidgetProvider: IntentTimelineProvider {
             ListWidgetNoteProxy(title: note.title, url: note.url)
         }
 
-        completion(ListWidgetEntry(date: Date(), widgetTag: WidgetTag.allNotes, noteProxys: proxies))
+        completion(ListWidgetEntry(date: Date(), widgetTag: WidgetTag(kind: .allNotes), noteProxys: proxies))
     }
 
     func getTimeline(for configuration: ListWidgetIntent, in context: Context, completion: @escaping (Timeline<ListWidgetEntry>) -> Void) {
