@@ -182,13 +182,12 @@ extension String {
 // MARK: Simplenote URL Path
 extension String {
     static func simplenotePath(withHost host: String? = nil) -> String {
-        var path = SimplenoteConstants.simplenoteScheme + "://"
+        let base = SimplenoteConstants.simplenoteScheme + "://"
 
-        if let host = host {
-            path.append(host)
-            path.append("/")
+        guard let host = host else {
+            return base
         }
 
-        return path
+        return base + host + "/"
     }
 }
