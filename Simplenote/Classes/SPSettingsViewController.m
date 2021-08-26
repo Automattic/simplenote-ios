@@ -37,10 +37,11 @@ typedef NS_ENUM(NSInteger, SPOptionsViewSections) {
     SPOptionsViewSectionsAppearance     = 2,
     SPOptionsViewSectionsSecurity       = 3,
     SPOptionsViewSectionsAccount        = 4,
-    SPOptionsViewSectionsAbout          = 5,
-    SPOptionsViewSectionsHelp           = 6,
-    SPOptionsViewSectionsDebug          = 7,
-    SPOptionsViewSectionsCount          = 8
+    SPOptionsViewSectionsDelete         = 5,
+    SPOptionsViewSectionsAbout          = 6,
+    SPOptionsViewSectionsHelp           = 7,
+    SPOptionsViewSectionsDebug          = 8,
+    SPOptionsViewSectionsCount          = 9,
 };
 
 typedef NS_ENUM(NSInteger, SPOptionsAccountRow) {
@@ -71,6 +72,11 @@ typedef NS_ENUM(NSInteger, SPOptionsSecurityRow) {
     SPOptionsSecurityRowRowBiometry     = 1,
     SPOptionsSecurityRowTimeout         = 2,
     SPOptionsSecurityRowRowCount        = 3
+};
+
+typedef NS_ENUM(NSInteger, SPOptionsDeleteRow) {
+    SPOptionsDeleteRowTitle              = 0,
+    SPOptionsDeleteRowCount              = 1
 };
 
 typedef NS_ENUM(NSInteger, SPOptionsAboutRow) {
@@ -214,6 +220,10 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
             
         case SPOptionsViewSectionsAccount: {
             return SPOptionsAccountRowCount;
+        }
+
+        case SPOptionsViewSectionsDelete: {
+            return SPOptionsDeleteRowCount;
         }
             
         case SPOptionsViewSectionsAbout: {
@@ -409,6 +419,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                 }
                 case SPOptionsAccountRowLogout: {
                     cell.textLabel.text = NSLocalizedString(@"Log Out", @"Log out of the active account in the app");
+                    cell.textLabel.textColor = [UIColor simplenoteTintColor];
                     break;
                 }
                 default:
@@ -417,15 +428,26 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
             
             break;
 
-        } case SPOptionsViewSectionsAbout: {
+        } case SPOptionsViewSectionsDelete: {
             
+            switch (indexPath.row) {
+                case SPOptionsDeleteRowTitle: {
+                    cell.textLabel.text = NSLocalizedString(@"Delete Account", @"Display Delete Account Alert");
+                    cell.textLabel.textColor = [UIColor simplenoteRedButtonColor];
+                    break;
+                }
+            }
+            
+            break;
+        } case SPOptionsViewSectionsAbout: {
+
             switch (indexPath.row) {
                 case SPOptionsAboutRowTitle: {
                     cell.textLabel.text = NSLocalizedString(@"About", @"Display app about screen");
                     break;
                 }
             }
-            
+
             break;
         } case SPOptionsViewSectionsHelp: {
             
@@ -531,6 +553,15 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                     break;
             }
             
+            break;
+        } case SPOptionsViewSectionsDelete: {
+            switch (indexPath.row) {
+                case SPOptionsDeleteRowTitle: {
+                    [self deleteAccountWasPressed];
+                    break;
+                }
+            }
+
             break;
         } case SPOptionsViewSectionsAbout: {
             switch (indexPath.row) {

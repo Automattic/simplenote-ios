@@ -54,7 +54,6 @@
 		37FD30491FC4CFA2008D0B78 /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FD30471FC4CFA2008D0B78 /* KeychainPasswordItem.swift */; };
 		3F1BB4A0242DB81E006D1A04 /* ScreenshotsCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1BB49F242DB81E006D1A04 /* ScreenshotsCredentials.swift */; };
 		3F1BB4A3242DC162006D1A04 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1BB4A2242DC162006D1A04 /* SnapshotHelper.swift */; };
-		3F5EDD0C2435A3AE00959576 /* XCTest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5EDD0B2435A3AE00959576 /* XCTest+Extensions.swift */; };
 		3F762E8F2677F19C0088CD45 /* XCUITestHelpers in Frameworks */ = {isa = PBXBuildFile; productRef = 3F762E8E2677F19C0088CD45 /* XCUITestHelpers */; };
 		3F762E912677F1AA0088CD45 /* XCUITestHelpers in Frameworks */ = {isa = PBXBuildFile; productRef = 3F762E902677F1AA0088CD45 /* XCUITestHelpers */; };
 		3FA17B5626240FF000C11C46 /* NoteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA17B5526240FF000C11C46 /* NoteData.swift */; };
@@ -168,7 +167,7 @@
 		A6C2721825AF0C1E00593731 /* TagListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C2721725AF0C1E00593731 /* TagListViewCell.swift */; };
 		A6C3D8B7256687970042F584 /* SPObjectManager+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C3D8B6256687970042F584 /* SPObjectManager+Simplenote.swift */; };
 		A6C7648025E9131C00A39067 /* SignupRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C7647F25E9131C00A39067 /* SignupRemote.swift */; };
-		A6CC0B0725B8287F00F12A85 /* AccountVerificationRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CC0B0625B8287F00F12A85 /* AccountVerificationRemote.swift */; };
+		A6CC0B0725B8287F00F12A85 /* AccountRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CC0B0625B8287F00F12A85 /* AccountRemote.swift */; };
 		A6CC0B1025B83FE400F12A85 /* AccountVerificationControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CC0B0F25B83FE400F12A85 /* AccountVerificationControllerTests.swift */; };
 		A6CC0B1F25B840A400F12A85 /* MockAccountVerificationRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CC0B1E25B840A400F12A85 /* MockAccountVerificationRemote.swift */; };
 		A6CC0B2D25B84FF200F12A85 /* AccountVerificationRemoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CC0B2C25B84FF200F12A85 /* AccountVerificationRemoteTests.swift */; };
@@ -416,6 +415,8 @@
 		BA122DCA265F2E2D003D3BC5 /* UIColorSimplenoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA122DC9265F2E2D003D3BC5 /* UIColorSimplenoteTests.swift */; };
 		BA12B06F26B0D0150026F31D /* SPManagedObject+Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA12B06C26B0D0150026F31D /* SPManagedObject+Widget.swift */; };
 		BA12B07026B0D0150026F31D /* SPManagedObject+Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA12B06C26B0D0150026F31D /* SPManagedObject+Widget.swift */; };
+		BA0F5E0426B62A8B0098C605 /* RemoteError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0F5E0326B62A8B0098C605 /* RemoteError.swift */; };
+		BA113E4D269E860500F3E3B4 /* markdown-light.css in Resources */ = {isa = PBXBuildFile; fileRef = BA113E4C269E860500F3E3B4 /* markdown-light.css */; };
 		BA18532826488DBC00D9A347 /* SignupRemoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA18532726488DBC00D9A347 /* SignupRemoteTests.swift */; };
 		BA2D82C6261522F100A1695B /* PublishNoticePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2D82C5261522F100A1695B /* PublishNoticePresenter.swift */; };
 		BA32A90F26B7469F00727247 /* WidgetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32A90E26B7469F00727247 /* WidgetError.swift */; };
@@ -431,6 +432,8 @@
 		BA55124E2600210B00D8F882 /* TimerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA55124D2600210B00D8F882 /* TimerFactory.swift */; };
 		BA55B05A25F067DF0042582B /* NoticePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA55B05925F067DF0042582B /* NoticePresenter.swift */; };
 		BA55B06325F068650042582B /* NoticeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA55B06225F068650042582B /* NoticeController.swift */; };
+		BA5768E3269A803F008B510E /* Remote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5768E2269A803F008B510E /* Remote.swift */; };
+		BA5768EC269BE4D0008B510E /* AccountDeletionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5768EB269BE4D0008B510E /* AccountDeletionController.swift */; };
 		BA5C1C0725BF9D6C006E3820 /* SPDragBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5C1C0625BF9D6C006E3820 /* SPDragBar.swift */; };
 		BA5E5B7D264A148C00D0EE19 /* URLRequest+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5E5B7C264A148C00D0EE19 /* URLRequest+Simplenote.swift */; };
 		BA75D8A326C084E900883FFA /* Text+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA75D87D26C0843600883FFA /* Text+Simplenote.swift */; };
@@ -454,9 +457,11 @@
 		BA8662C026B3B63B00466746 /* SimplenoteSearch in Frameworks */ = {isa = PBXBuildFile; productRef = BA8662BF26B3B63B00466746 /* SimplenoteSearch */; };
 		BA8662C226B3B63F00466746 /* SimplenoteSearch in Frameworks */ = {isa = PBXBuildFile; productRef = BA8662C126B3B63F00466746 /* SimplenoteSearch */; };
 		BA88765126B79324001C9C9E /* DemoContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA88765026B79324001C9C9E /* DemoContent.swift */; };
+		BA9B19F926A8EF3200692366 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B19F826A8EF3200692366 /* SpinnerViewController.swift */; };
 		BA8FC2A5267AC7470082962E /* SharedStorageMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8FC2A4267AC7470082962E /* SharedStorageMigrator.swift */; };
 		BA9B59022685549F00DAD1ED /* StorageSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B59012685549F00DAD1ED /* StorageSettings.swift */; };
 		BAA4856925D5E40900F3BDB9 /* SearchQuery+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */; };
+		BAA59E79269F9FE30068BD3D /* Date+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA59E78269F9FE30068BD3D /* Date+Simplenote.swift */; };
 		BAA63C3325EEDA83001589D7 /* NoteLinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA63C3225EEDA83001589D7 /* NoteLinkTests.swift */; };
 		BAA723E226D4530A00C051B4 /* Color+Widgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA723E126D4530A00C051B4 /* Color+Widgets.swift */; };
 		BAB017722609456D007A9CC3 /* PublishController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB017712609456D007A9CC3 /* PublishController.swift */; };
@@ -482,6 +487,7 @@
 		BABFFF2226CF9094003A4C25 /* WidgetDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABFFF2126CF9094003A4C25 /* WidgetDefaults.swift */; };
 		BABFFF2326CF9094003A4C25 /* WidgetDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABFFF2126CF9094003A4C25 /* WidgetDefaults.swift */; };
 		BABFFF2426CF9094003A4C25 /* WidgetDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABFFF2126CF9094003A4C25 /* WidgetDefaults.swift */; };
+		BAB32C63269E4190005C72B2 /* RemoteResult+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB32C62269E4190005C72B2 /* RemoteResult+TestHelpers.swift */; };
 		BAE08626261282D1009D40CD /* Note+Publish.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE08625261282D1009D40CD /* Note+Publish.swift */; };
 		BAF8D44B26AE10FC00CA9383 /* Tag+Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42226AE10F100CA9383 /* Tag+Widget.swift */; };
 		BAF8D44C26AE10FC00CA9383 /* Note+Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42326AE10F100CA9383 /* Note+Widget.swift */; };
@@ -677,7 +683,6 @@
 		3F1BB49F242DB81E006D1A04 /* ScreenshotsCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenshotsCredentials.swift; sourceTree = "<group>"; };
 		3F1BB4A2242DC162006D1A04 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		3F3CA94826255FA800F6316F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		3F5EDD0B2435A3AE00959576 /* XCTest+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTest+Extensions.swift"; sourceTree = "<group>"; };
 		3F6CECDC2FEA90B9E5C920F5 /* Pods-SimplenoteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplenoteTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests.release.xcconfig"; sourceTree = "<group>"; };
 		3FA17B5526240FF000C11C46 /* NoteData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteData.swift; sourceTree = "<group>"; };
 		3FA60139242C5AAD0068FC52 /* SimplenoteScreenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimplenoteScreenshots.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -781,7 +786,7 @@
 		A6C2721725AF0C1E00593731 /* TagListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagListViewCell.swift; sourceTree = "<group>"; };
 		A6C3D8B6256687970042F584 /* SPObjectManager+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "SPObjectManager+Simplenote.swift"; path = "Classes/SPObjectManager+Simplenote.swift"; sourceTree = "<group>"; };
 		A6C7647F25E9131C00A39067 /* SignupRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignupRemote.swift; path = Classes/SignupRemote.swift; sourceTree = "<group>"; };
-		A6CC0B0625B8287F00F12A85 /* AccountVerificationRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVerificationRemote.swift; sourceTree = "<group>"; };
+		A6CC0B0625B8287F00F12A85 /* AccountRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRemote.swift; sourceTree = "<group>"; };
 		A6CC0B0F25B83FE400F12A85 /* AccountVerificationControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVerificationControllerTests.swift; sourceTree = "<group>"; };
 		A6CC0B1E25B840A400F12A85 /* MockAccountVerificationRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAccountVerificationRemote.swift; sourceTree = "<group>"; };
 		A6CC0B2C25B84FF200F12A85 /* AccountVerificationRemoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVerificationRemoteTests.swift; sourceTree = "<group>"; };
@@ -968,7 +973,6 @@
 		B594E61321508247001577EE /* Preferences.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Preferences.m; sourceTree = "<group>"; };
 		B594E61421508247001577EE /* Preferences.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Preferences.h; sourceTree = "<group>"; };
 		B59560DF251A46D500A06788 /* KeychainManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainManager.swift; path = Classes/KeychainManager.swift; sourceTree = "<group>"; };
-		B59C676C2660252000E6DD9B /* Simplenote.internal.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Simplenote.internal.xcconfig; sourceTree = "<group>"; };
 		B59FFB42231851C700567627 /* UIGestureRecognizer+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIGestureRecognizer+Simplenote.swift"; path = "Classes/UIGestureRecognizer+Simplenote.swift"; sourceTree = "<group>"; };
 		B5A6846C23CE84D400398BBC /* NotesListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotesListController.swift; path = Classes/NotesListController.swift; sourceTree = "<group>"; };
 		B5AB169722FA124F00B4EBA5 /* SPSheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPSheetController.swift; path = Classes/SPSheetController.swift; sourceTree = "<group>"; };
@@ -1044,6 +1048,8 @@
 		BA122DC5265EF90C003D3BC5 /* NewNoteWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNoteWidgetView.swift; sourceTree = "<group>"; };
 		BA122DC9265F2E2D003D3BC5 /* UIColorSimplenoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorSimplenoteTests.swift; sourceTree = "<group>"; };
 		BA12B06C26B0D0150026F31D /* SPManagedObject+Widget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SPManagedObject+Widget.swift"; sourceTree = "<group>"; };
+		BA0F5E0326B62A8B0098C605 /* RemoteError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteError.swift; sourceTree = "<group>"; };
+		BA113E4C269E860500F3E3B4 /* markdown-light.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "markdown-light.css"; sourceTree = "<group>"; };
 		BA18532726488DBC00D9A347 /* SignupRemoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupRemoteTests.swift; sourceTree = "<group>"; };
 		BA2D82C5261522F100A1695B /* PublishNoticePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishNoticePresenter.swift; sourceTree = "<group>"; };
 		BA32A90E26B7469F00727247 /* WidgetError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetError.swift; sourceTree = "<group>"; };
@@ -1057,6 +1063,8 @@
 		BA55124D2600210B00D8F882 /* TimerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFactory.swift; sourceTree = "<group>"; };
 		BA55B05925F067DF0042582B /* NoticePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticePresenter.swift; sourceTree = "<group>"; };
 		BA55B06225F068650042582B /* NoticeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeController.swift; sourceTree = "<group>"; };
+		BA5768E2269A803F008B510E /* Remote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Remote.swift; sourceTree = "<group>"; };
+		BA5768EB269BE4D0008B510E /* AccountDeletionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDeletionController.swift; sourceTree = "<group>"; };
 		BA5C1C0625BF9D6C006E3820 /* SPDragBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPDragBar.swift; sourceTree = "<group>"; };
 		BA5E5B7C264A148C00D0EE19 /* URLRequest+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Simplenote.swift"; sourceTree = "<group>"; };
 		BA75D87D26C0843600883FFA /* Text+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Simplenote.swift"; sourceTree = "<group>"; };
@@ -1070,9 +1078,11 @@
 		BA8661D826B3A0B000466746 /* SimplenoteIntentsDistribution Internal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SimplenoteIntentsDistribution Internal.entitlements"; sourceTree = "<group>"; };
 		BA86622226B3AE4A00466746 /* WidgetDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDataController.swift; sourceTree = "<group>"; };
 		BA88765026B79324001C9C9E /* DemoContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoContent.swift; sourceTree = "<group>"; };
+		BA9B19F826A8EF3200692366 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 		BA8FC2A4267AC7470082962E /* SharedStorageMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStorageMigrator.swift; sourceTree = "<group>"; };
 		BA9B59012685549F00DAD1ED /* StorageSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageSettings.swift; sourceTree = "<group>"; };
 		BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchQuery+Simplenote.swift"; sourceTree = "<group>"; };
+		BAA59E78269F9FE30068BD3D /* Date+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Simplenote.swift"; sourceTree = "<group>"; };
 		BAA63C3225EEDA83001589D7 /* NoteLinkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteLinkTests.swift; sourceTree = "<group>"; };
 		BAA723E126D4530A00C051B4 /* Color+Widgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Widgets.swift"; sourceTree = "<group>"; };
 		BAB017712609456D007A9CC3 /* PublishController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishController.swift; sourceTree = "<group>"; };
@@ -1090,6 +1100,7 @@
 		BAB576BD2670512C00B0C56F /* NoteWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteWidget.swift; sourceTree = "<group>"; };
 		BAB6C04626BA4CAF007495C4 /* WidgetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetController.swift; sourceTree = "<group>"; };
 		BABFFF2126CF9094003A4C25 /* WidgetDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDefaults.swift; sourceTree = "<group>"; };
+		BAB32C62269E4190005C72B2 /* RemoteResult+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RemoteResult+TestHelpers.swift"; sourceTree = "<group>"; };
 		BAE08625261282D1009D40CD /* Note+Publish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+Publish.swift"; sourceTree = "<group>"; };
 		BAF8D42226AE10F100CA9383 /* Tag+Widget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tag+Widget.swift"; sourceTree = "<group>"; };
 		BAF8D42326AE10F100CA9383 /* Note+Widget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Note+Widget.swift"; sourceTree = "<group>"; };
@@ -1288,6 +1299,7 @@
 				17BC3D461BC46BA800535DF3 /* markdown-dark.css */,
 				BA83478225F59F8B0059B797 /* markdown-default-contrast.css */,
 				BA83478B25F59FE90059B797 /* markdown-dark-contrast.css */,
+				BA113E4C269E860500F3E3B4 /* markdown-light.css */,
 			);
 			name = CSS;
 			sourceTree = "<group>";
@@ -1335,7 +1347,6 @@
 				3FA6013D242C5AAE0068FC52 /* Info.plist */,
 				3FA6013B242C5AAE0068FC52 /* SimplenoteScreenshots.swift */,
 				3F1BB4A2242DC162006D1A04 /* SnapshotHelper.swift */,
-				3F5EDD0B2435A3AE00959576 /* XCTest+Extensions.swift */,
 			);
 			path = SimplenoteScreenshots;
 			sourceTree = "<group>";
@@ -1438,7 +1449,6 @@
 				8C573B0D22CD1AD6005BC6F5 /* Version.Public.xcconfig */,
 				8C573B0A22CD1A61005BC6F5 /* Simplenote.debug.xcconfig */,
 				8C573B0B22CD1A6F005BC6F5 /* Simplenote.release.xcconfig */,
-				B59C676C2660252000E6DD9B /* Simplenote.internal.xcconfig */,
 			);
 			path = config;
 			sourceTree = "<group>";
@@ -1470,6 +1480,7 @@
 		A690032F253D85C40087D0D2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				BA5768EB269BE4D0008B510E /* AccountDeletionController.swift */,
 				A6900345253D87060087D0D2 /* VersionsController.swift */,
 				BAB017712609456D007A9CC3 /* PublishController.swift */,
 				BA2D82C5261522F100A1695B /* PublishNoticePresenter.swift */,
@@ -1494,7 +1505,6 @@
 				A6A648A225AC3AC00074A094 /* AccountVerificationViewController.swift */,
 				A6A648A325AC3AC00074A094 /* AccountVerificationViewController.xib */,
 				A6A648BA25AC85D40074A094 /* AccountVerificationController.swift */,
-				A6CC0B0625B8287F00F12A85 /* AccountVerificationRemote.swift */,
 			);
 			path = Verification;
 			sourceTree = "<group>";
@@ -1845,6 +1855,7 @@
 				BA5E5B7C264A148C00D0EE19 /* URLRequest+Simplenote.swift */,
 				BAFDBBD726B88BD200119615 /* Date+Simplenote.swift */,
 				BAB27BD526BA425C00AE4ACC /* Color+Simplenote.swift */,
+				BAA59E78269F9FE30068BD3D /* Date+Simplenote.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1860,7 +1871,6 @@
 				B56A695E22F9D53300B90398 /* SPAuthViewController.xib */,
 				B5AB169722FA124F00B4EBA5 /* SPSheetController.swift */,
 				B5AB169922FA128000B4EBA5 /* SPSheetController.xib */,
-				A6C7647F25E9131C00A39067 /* SignupRemote.swift */,
 				A6CDD9C725F0163D00E0BC4D /* MagicLinkAuthenticator.swift */,
 				A628BEB425ECD97900121B64 /* SignupVerificationViewController.swift */,
 				A628BEB525ECD97900121B64 /* SignupVerificationViewController.xib */,
@@ -1961,6 +1971,7 @@
 				B52F35D222F356F500724793 /* UserDefaults+Tests.swift */,
 				A6E6CEC825A6053A005A92DB /* MockApplication.swift */,
 				BAB017AA260ADDEB007A9CC3 /* MockTimerFactory.swift */,
+				BAB32C62269E4190005C72B2 /* RemoteResult+TestHelpers.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -1989,6 +2000,7 @@
 		B5BE053E1AB751FD002417BF /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				BA57692A269D2103008B510E /* Remotes */,
 				B51F6DCF2460C3D80074DDD9 /* Onboarding */,
 				B5CBEF3F22D3AD92009DBE67 /* MigrationsHandler.swift */,
 				B5D3FCCF201F96AC00A813B7 /* StatusChecker.h */,
@@ -2235,6 +2247,17 @@
 				BAF8D48126AE125B00CA9383 /* Simplenote-Widgets-Bridging-Header.h */,
 			);
 			path = SimplenoteWidgets;
+			sourceTree = "<group>";
+		};
+		BA57692A269D2103008B510E /* Remotes */ = {
+			isa = PBXGroup;
+			children = (
+				A6C7647F25E9131C00A39067 /* SignupRemote.swift */,
+				A6CC0B0625B8287F00F12A85 /* AccountRemote.swift */,
+				BA5768E2269A803F008B510E /* Remote.swift */,
+				BA0F5E0326B62A8B0098C605 /* RemoteError.swift */,
+			);
+			name = Remotes;
 			sourceTree = "<group>";
 		};
 		D864B15525CAE25000F9B73E /* SimplenoteUITests */ = {
@@ -2486,6 +2509,7 @@
 				A6F489C725DA5B21005FBD1A /* PopoverPresenter.swift */,
 				BA55B05925F067DF0042582B /* NoticePresenter.swift */,
 				BA55B06225F068650042582B /* NoticeController.swift */,
+				BA9B19F826A8EF3200692366 /* SpinnerViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -2835,6 +2859,7 @@
 				A61471A925D6BC700065D849 /* NoteEditorTagSuggestionsViewController.xib in Resources */,
 				A69F861D25408085005140F2 /* NoteInformationViewController.xib in Resources */,
 				BA4499AA25ED8821000C563E /* NoticeView.xib in Resources */,
+				BA113E4D269E860500F3E3B4 /* markdown-light.css in Resources */,
 				B513F2B62319A8F40021CFA4 /* SPNoteTableViewCell.xib in Resources */,
 				B5078A001C1F5595009F097A /* markdown-dark.css in Resources */,
 				B502311325129525002C3CDA /* SPDiagnosticsViewController.xib in Resources */,
@@ -3073,7 +3098,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F5EDD0C2435A3AE00959576 /* XCTest+Extensions.swift in Sources */,
 				3F1BB4A0242DB81E006D1A04 /* ScreenshotsCredentials.swift in Sources */,
 				3FA6013C242C5AAE0068FC52 /* SimplenoteScreenshots.swift in Sources */,
 				3F1BB4A3242DC162006D1A04 /* SnapshotHelper.swift in Sources */,
@@ -3144,6 +3168,7 @@
 				B5BE054E1AB75902002417BF /* NSProcessInfo+Util.m in Sources */,
 				BA4C6CFC264C744300B723A7 /* SeparatorsView.swift in Sources */,
 				375D24B821E01131007AB25A /* hash.c in Sources */,
+				BA5768EC269BE4D0008B510E /* AccountDeletionController.swift in Sources */,
 				A6D5AE6525483F8A00326C76 /* NSTextStorage+Simplenote.swift in Sources */,
 				A61471A825D6BC700065D849 /* NoteEditorTagSuggestionsViewController.swift in Sources */,
 				A6E02758256E52F3002054DF /* PinLockController.swift in Sources */,
@@ -3211,6 +3236,7 @@
 				B5757368232BED0700443C2E /* UIBezierPath+Simplenote.swift in Sources */,
 				B5476BB723D89AF7000E7723 /* SPSectionHeaderView.swift in Sources */,
 				B5377349252E2A4200BC78C5 /* Value1TableViewCell.swift in Sources */,
+				BA0F5E0426B62A8B0098C605 /* RemoteError.swift in Sources */,
 				B53C5A5A230330CD00DA2143 /* SPNoteListViewController+Extensions.swift in Sources */,
 				A6C0DFB525C1581D00B9BE39 /* UIScrollView+Simplenote.swift in Sources */,
 				375D24B621E01131007AB25A /* html_blocks.c in Sources */,
@@ -3255,6 +3281,7 @@
 				BAA4856925D5E40900F3BDB9 /* SearchQuery+Simplenote.swift in Sources */,
 				B56B357F1AC3565600B9F365 /* UITextView+Simplenote.m in Sources */,
 				B5C9F71E193E75FE00FD2491 /* SPDebugViewController.m in Sources */,
+				BAA59E79269F9FE30068BD3D /* Date+Simplenote.swift in Sources */,
 				B5A6166F2150855300CBE47B /* Preferences.m in Sources */,
 				46A3C98E17DFA81A002865AE /* SPObjectManager.m in Sources */,
 				B5DF734F22A599D100602CE7 /* SPNotifications.m in Sources */,
@@ -3321,6 +3348,7 @@
 				B5AB169C22FB2DF300B4EBA5 /* UIKitConstants.swift in Sources */,
 				B56A695922F9CD1500B90398 /* SPOnboardingViewController.swift in Sources */,
 				BA55B06325F068650042582B /* NoticeController.swift in Sources */,
+				BA9B19F926A8EF3200692366 /* SpinnerViewController.swift in Sources */,
 				46A3C9A317DFA81A002865AE /* SPTagEntryField.m in Sources */,
 				A6E1E7A224BDE456008A44BC /* SPCardPresentationAnimator.swift in Sources */,
 				A6C0589B24AD5205006BC572 /* SPNoteHistoryController.swift in Sources */,
@@ -3351,7 +3379,7 @@
 				A6BF0E352567B29B008DE8E0 /* RoundedCrossButton.swift in Sources */,
 				375D24B121E01131007AB25A /* html5_blocks.c in Sources */,
 				B504D4DE23D2014200AEED27 /* IndexPath+Simplenote.swift in Sources */,
-				A6CC0B0725B8287F00F12A85 /* AccountVerificationRemote.swift in Sources */,
+				A6CC0B0725B8287F00F12A85 /* AccountRemote.swift in Sources */,
 				A61471B925D70C190065D849 /* PopoverViewController.swift in Sources */,
 				B536988D25646C9400817E30 /* CGRect+Simplenote.swift in Sources */,
 				B5E96B611BDE5ACA00D707F5 /* SPMarkdownParser.m in Sources */,
@@ -3361,6 +3389,7 @@
 				B52EF9FE24F69E4E0029DCCE /* UIMenuController+Simplenote.swift in Sources */,
 				46A3C9AF17DFA81A002865AE /* NSString+Condensing.m in Sources */,
 				A6F487AF25A79D550050CFA8 /* BiometricAuthentication.swift in Sources */,
+				BA5768E3269A803F008B510E /* Remote.swift in Sources */,
 				A6F4881325A884CE0050CFA8 /* UITextInput+Simplenote.swift in Sources */,
 				B50F47A41D1D78EA00822748 /* SPRatingsHelper.m in Sources */,
 				371A8630213DF00E002E9120 /* SPPinLockManager.swift in Sources */,
@@ -3397,6 +3426,7 @@
 				A6E6CEC925A6053A005A92DB /* MockApplication.swift in Sources */,
 				BA18532826488DBC00D9A347 /* SignupRemoteTests.swift in Sources */,
 				BA3FB8CF25FEA0C500EA9A1B /* NoticeControllerTests.swift in Sources */,
+				BAB32C63269E4190005C72B2 /* RemoteResult+TestHelpers.swift in Sources */,
 				A645FA70254C5E69008A1519 /* NoteContentHelperTests.swift in Sources */,
 				BAB0179B260AD591007A9CC3 /* PublishControllerTests.swift in Sources */,
 				A6E6CE6425A5AAA8005A92DB /* PinLockControllerConfiguration+Tests.swift in Sources */,
@@ -4251,7 +4281,7 @@
 		};
 		B50789FA1C1F4F63009F097A /* Distribution Internal */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B59C676C2660252000E6DD9B /* Simplenote.internal.xcconfig */;
+			baseConfigurationReference = 8C573B0B22CD1A6F005BC6F5 /* Simplenote.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ALWAYS_SEARCH_USER_PATHS = NO;

@@ -130,8 +130,13 @@
         return;
     }
 
-    SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:targetURL];
-    [self presentViewController:sfvc animated:YES completion:nil];
+
+    if ([WKWebView handlesURLScheme:targetURL.scheme]) {
+        SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:targetURL];
+        [self presentViewController:sfvc animated:YES completion:nil];
+    } else {
+        [UIApplication.sharedApplication openURL:targetURL options:@{} completionHandler:nil];
+    }
 
     decisionHandler(WKNavigationActionPolicyCancel);
 }

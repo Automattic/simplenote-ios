@@ -1,1 +1,0 @@
-- Düzenleme modu uzun basma işlemine taşınmış ve yeni not çubuğu kaldırılmıştır

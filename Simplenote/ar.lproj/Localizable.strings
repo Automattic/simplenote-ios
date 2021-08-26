@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-06-29 11:32:20+0000 */
+/* Translation-Revision-Date: 2021-08-19 20:51:17+0000 */
 /* Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ar */
@@ -60,6 +60,9 @@
 /* 5 minutes passcode lock timeout */
 "5 Minutes" = "5 دقائق";
 
+/* Network connection issue notificaiton */
+"A network connection is required. Please, check your connection and try again." = "يلزم اتصال بالإنترنت. يرجى التحقّق من اتصالك والمحاولة لاحقًا.";
+
 /* Display app about screen */
 "About" = "نبذة عن";
 
@@ -83,11 +86,14 @@
    Title: No filters applied */
 "All Notes" = "كل الملاحظات";
 
+/* Delete account confirmation instructions */
+"An email has been sent to %@ Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation" = "تم إرسال بريد إلكتروني إلى %@، راجع علبة الوارد لديك واتبع الإرشادات لتأكيد حذف الحساب.\n\nلن يتم حذف حسابك حتى نتلقى تأكيدك";
+
+/* Deletion error message */
+"An error occured. Please, try again. If the problem continues, contact us at support@simplenote.com for help." = "حدث خطأ. يُرجى المحاولة مرة أخرى. إذا استمرت المشكلة، فاتصل بنا على support@simplenote.com للحصول على المساعدة.";
+
 /* Sign in error message */
 "An error was encountered while signing in." = "تمت مصادفة خطأ أثناء تسجيل الدخول.";
-
-/* Engine URL Message */
-"AppEngine Endpoints" = "نقاط النهاية الخاصة بـ AppEngine";
 
 /* No comment provided by engineer. */
 "Appearance" = "المظهر";
@@ -104,14 +110,14 @@
 /* User Authenticated */
 "Authenticated" = "مصادَق عليه";
 
-/* Engine URL Message */
-"Authentication Endpoints" = "نقاط النهاية الخاصة بالمصادقة";
-
 /* The Simplenote blog */
 "Blog" = "المدونة";
 
 /* Terms of Service Legend *PREFIX*: printed in dark color */
 "By creating an account you agree to our" = "بموجب إنشائك لحساب فأنت توافق على";
+
+/* Delete account confirmation alert message */
+"By deleting your account, all notes created with this account will be permanently deleted. This action is not reversible" = "عن طريق حذف حسابك، سيتم حذف جميع الملحوظات التي تم إنشاؤها باستخدام هذا الحساب بشكل نهائي. لا يمكن التراجع عن هذا الإجراء";
 
 /* Cancel Action
    Cancel action button
@@ -136,6 +142,9 @@
 
 /* Number of characters in the note */
 "Characters" = "أحرف";
+
+/* Title for delete account succes alert */
+"Check Your Email" = "التحقُّق من بريدك الإلكتروني";
 
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "اختيار رمز مرور مكوَّن من 4 أرقام";
@@ -226,6 +235,10 @@
 /* PinLock screen \"delete\" button */
 "Delete" = "حذف";
 
+/* Delete account title and action
+   Display Delete Account Alert */
+"Delete Account" = "حذف حساب";
+
 /* Delete a note from trash */
 "Delete Note" = "حذف ملحوظة";
 
@@ -293,7 +306,8 @@
 /* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "إدخال رمز المرور الخاص بك";
 
-/* Error Title */
+/* Deletion Error Title
+   Error Title */
 "Error" = "خطأ";
 
 /* Get Help Description Label */
@@ -453,6 +467,9 @@
 /* Instant passcode lock timeout */
 "Off" = "إيقاف تشغيل";
 
+/* Confirm alert message */
+"Ok" = "موافق";
+
 /* No comment provided by engineer. */
 "On" = "تشغيل";
 
@@ -549,6 +566,9 @@
 
 /* Rename a tag */
 "Rename" = "إعادة التسمية";
+
+/* Title for account deletion confirm button */
+"Request Account Deletion" = "طلب حذف الحساب";
 
 /* Resend email button -> Verify your email screen */
 "Resend Email" = "إعادة إرسال البريد الإلكتروني";
@@ -670,6 +690,9 @@
 
 /* Error when address is in use */
 "The email you've entered is already associated with a Simplenote account." = "البريد الإلكتروني الذي أدخلته مرتبط بالفعل بحساب Simplenote.";
+
+/* Error when the network is inaccessible */
+"The network could not be reached." = "يتعذر الوصول إلى الشبكة.";
 
 /* Onboarding Header Text */
 "The simplest way to keep notes." = "الطريقة الأسهل للاحتفاظ بالملحوظات.";
@@ -800,9 +823,6 @@
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "وسم:";
-
-/* Warning Title */
-"⚠️ Important" = "⚠️ مهم";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞 تم تمكين تصحيح الأخطاء 🐞";

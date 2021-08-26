@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-06-29 11:32:19+0000 */
+/* Translation-Revision-Date: 2021-08-19 20:51:08+0000 */
 /* Plural-Forms: nplurals=2; plural=(n > 1); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: pt_BR */
@@ -16,10 +16,10 @@
 "%i Failed Passcode Attempts" = "%i tentativas de senha com falha";
 
 /* Note trashed notification */
-"%i Note Trashed" = "%i nota excluída";
+"%i Note Trashed" = "%i anotação enviada para a lixeira";
 
 /* Notes trashed notification */
-"%i Notes Trashed" = "%i notas excluídas";
+"%i Notes Trashed" = "%i anotações enviadas para a lixeira";
 
 /* Count of interlink references to a note */
 "%i Reference" = "%i Referência";
@@ -28,7 +28,7 @@
 "%i References" = "%i Referências";
 
 /* Count of currently selected notes */
-"%i Selected" = "%i selecionadas";
+"%i Selected" = "%i selecionada(s)";
 
 /* Password Requirement: Length */
 "- Minimum of 8 characters" = "- Mínimo de oito caracteres";
@@ -60,6 +60,9 @@
 /* 5 minutes passcode lock timeout */
 "5 Minutes" = "5 minutos";
 
+/* Network connection issue notificaiton */
+"A network connection is required. Please, check your connection and try again." = "É necessária uma conexão de rede. Verifique sua conexão e tente novamente.";
+
 /* Display app about screen */
 "About" = "Sobre";
 
@@ -83,11 +86,14 @@
    Title: No filters applied */
 "All Notes" = "Todas as anotações";
 
+/* Delete account confirmation instructions */
+"An email has been sent to %@ Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation" = "Um e-mail foi enviado para %@. Verifique sua caixa de entrada e siga as instruções para confirmar a exclusão da conta.\n\nSua conta não será excluída até recebermos sua confirmação.";
+
+/* Deletion error message */
+"An error occured. Please, try again. If the problem continues, contact us at support@simplenote.com for help." = "Ocorreu um erro. Tente novamente. Se o problema continuar, entre em contato pelo e-mail support@simplenote.com para obter ajuda.";
+
 /* Sign in error message */
 "An error was encountered while signing in." = "Foi encontrado um erro ao fazer login.";
-
-/* Engine URL Message */
-"AppEngine Endpoints" = "AppEngine Endpoints";
 
 /* No comment provided by engineer. */
 "Appearance" = "Aparência";
@@ -104,14 +110,14 @@
 /* User Authenticated */
 "Authenticated" = "Autenticado";
 
-/* Engine URL Message */
-"Authentication Endpoints" = "Endpoints de autenticação";
-
 /* The Simplenote blog */
 "Blog" = "Blog";
 
 /* Terms of Service Legend *PREFIX*: printed in dark color */
 "By creating an account you agree to our" = "Ao criar uma conta, você concorda com os";
+
+/* Delete account confirmation alert message */
+"By deleting your account, all notes created with this account will be permanently deleted. This action is not reversible" = "Ao excluir sua conta, todas as anotações criadas nela serão excluídas permanentemente. Essa ação não é reversível";
 
 /* Cancel Action
    Cancel action button
@@ -136,6 +142,9 @@
 
 /* Number of characters in the note */
 "Characters" = "Caracteres";
+
+/* Title for delete account succes alert */
+"Check Your Email" = "Verifique seu e-mail";
 
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "Escolha uma senha de quatro dígitos";
@@ -190,16 +199,16 @@
 "Couldn't Sign In" = "Não foi possível entrar";
 
 /* Siri Suggestion to create a New Note */
-"Create a New Note" = "Criar uma nova nota";
+"Create a New Note" = "Criar uma nova anotação";
 
 /* No comment provided by engineer. */
 "Create a new note" = "Criar uma nova anotação";
 
 /* Tappable message shown when no notes match a search string. Parameter: %@ - search term */
-"Create a new note titled “%@”" = "Criar uma nova nota com o título “%@”";
+"Create a new note titled “%@”" = "Criar uma nova anotação com o título “%@”";
 
 /* Message shown in note list when no notes are in the current view */
-"Create your first note" = "Crie sua primeira nota";
+"Create your first note" = "Crie sua primeira anotação";
 
 /* Note Creation Date */
 "Created" = "Criação";
@@ -226,6 +235,10 @@
 /* PinLock screen \"delete\" button */
 "Delete" = "Excluir";
 
+/* Delete account title and action
+   Display Delete Account Alert */
+"Delete Account" = "Excluir conta";
+
 /* Delete a note from trash */
 "Delete Note" = "Excluir anotação";
 
@@ -236,7 +249,7 @@
 "Delete Tag" = "Excluir tag";
 
 /* Deselect all Button Label */
-"Deselect All" = "Desselecionar todas";
+"Deselect All" = "Desmarcar todas";
 
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "Diagnóstico";
@@ -293,7 +306,8 @@
 /* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "Insira sua senha";
 
-/* Error Title */
+/* Deletion Error Title
+   Error Title */
 "Error" = "Erro";
 
 /* Get Help Description Label */
@@ -399,7 +413,7 @@
 "Modified: Oldest" = "Modificado: mais antiga";
 
 /* Accessibility hint for trash selected notes button */
-"Move selected notes to trash" = "Mover as notas selecionadas para a lixeira";
+"Move selected notes to trash" = "Mova as anotações selecionadas para a lixeira";
 
 /* Delete Action
    Deletes a note */
@@ -413,7 +427,7 @@
 
 /* Home screen quick action: New Note
    Keyboard shortcut: New Note */
-"New Note" = "Nova nota";
+"New Note" = "Nova anotação";
 
 /* Label to create a new note */
 "New note" = "Nova anotação";
@@ -431,13 +445,13 @@
 "No Results" = "Nenhum resultado";
 
 /* Message shown in note list when no notes are tagged with the provided tag. Parameter: %@ - tag */
-"No notes tagged “%@”" = "Nenhuma nota com a tag “%@”";
+"No notes tagged “%@”" = "Nenhuma anotação com a tag “%@”";
 
 /* Rating view - liked or disliked - no thanks button */
 "No thanks" = "Não, obrigado!";
 
 /* Message shown in note list when no notes are untagged */
-"No untagged notes" = "Nenhuma nota sem tags";
+"No untagged notes" = "Nenhuma anotação sem tag";
 
 /* Note trashed notification */
 "Note Trashed" = "Anotação enviada para a lixeira";
@@ -452,6 +466,9 @@
 
 /* Instant passcode lock timeout */
 "Off" = "Desativado";
+
+/* Confirm alert message */
+"Ok" = "Ok";
 
 /* No comment provided by engineer. */
 "On" = "Ativado";
@@ -549,6 +566,9 @@
 
 /* Rename a tag */
 "Rename" = "Renomear";
+
+/* Title for account deletion confirm button */
+"Request Account Deletion" = "Solicitar exclusão de conta";
 
 /* Resend email button -> Verify your email screen */
 "Resend Email" = "Reenviar e-mail";
@@ -654,13 +674,13 @@
 "Status Code" = "Código do status";
 
 /* Theme: Matches iOS Settings */
-"System Default" = "Sistema padrão";
+"System Default" = "Padrão do sistema ";
 
 /* Tags List Header */
 "Tags" = "Tags";
 
 /* Accessibility hint for the select/deselect all button */
-"Tap button to select or deselect all notes" = "Toque no botão para selecionar ou desselecionar todas as notas";
+"Tap button to select or deselect all notes" = "Toque no botão para selecionar ou desmarcar todas as notas";
 
 /* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
 "Terms and Conditions" = "Termos e condições";
@@ -670,6 +690,9 @@
 
 /* Error when address is in use */
 "The email you've entered is already associated with a Simplenote account." = "O e-mail informado já está associado a uma conta do Simplenote.";
+
+/* Error when the network is inaccessible */
+"The network could not be reached." = "Não foi possível acessar a rede.";
 
 /* Onboarding Header Text */
 "The simplest way to keep notes." = "A melhor forma de manter notas.";
@@ -699,7 +722,7 @@
 "Touch ID" = "Identificação por toque";
 
 /* Move selected notes to trash */
-"Trash Notes" = "Excluir notas";
+"Trash Notes" = "Excluir anotações";
 
 /* Title: Trash Tag is selected
    Trash filter button */
@@ -800,9 +823,6 @@
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "tag:";
-
-/* Warning Title */
-"⚠️ Important" = "⚠️ Importante";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞 Depuração ativada 🐞";

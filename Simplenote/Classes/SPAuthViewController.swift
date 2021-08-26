@@ -412,6 +412,10 @@ private extension SPAuthViewController {
         switch error {
         case .signupUserAlreadyExists:
             presentUserAlreadyExistsError(error: error)
+        case .compromisedPassword:
+            presentPasswordCompromisedError(error: error)
+        case .unverifiedEmail:
+            presentUserUnverifiedError(error: error, email: email)
         case .unknown(let statusCode, let response, let error) where debugEnabled:
             let details = NSAttributedString.stringFromNetworkError(statusCode: statusCode, response: response, error: error)
             presentDebugDetails(details: details)
@@ -425,6 +429,41 @@ private extension SPAuthViewController {
         alertController.addCancelActionWithTitle(AuthenticationStrings.cancelActionText)
         alertController.addDefaultActionWithTitle(AuthenticationStrings.loginActionText) { _ in
             self.attemptLoginWithCurrentCredentials()
+        }
+
+        present(alertController, animated: true, completion: nil)
+    }
+
+    func presentPasswordCompromisedError(error: SPAuthError) {
+        let alertController = UIAlertController(title: error.title, message: error.message, preferredStyle: .alert)
+        alertController.addDefaultActionWithTitle(AuthenticationStrings.compromisedAlertReset) { _ in
+            self.presentPasswordReset()
+        }
+        alertController.addCancelActionWithTitle(AuthenticationStrings.compromisedAlertCancel)
+
+        present(alertController, animated: true, completion: nil)
+    }
+
+    func presentUserUnverifiedError(error: SPAuthError, email: String) {
+        let alertController = UIAlertController(title: error.title, message: error.message, preferredStyle: .alert)
+        alertController.addCancelActionWithTitle(AuthenticationStrings.unverifiedCancelText)
+        alertController.addDefaultActionWithTitle(AuthenticationStrings.unverifiedActionText) { [weak self] _ in
+            let spinnerVC = SpinnerViewController()
+            self?.present(spinnerVC, animated: false, completion: nil)
+
+            AccountRemote().verify(email: email) { result in
+                spinnerVC.dismiss(animated: false, completion: nil)
+                var alert: UIAlertController
+                switch result {
+                case .success:
+                    alert = UIAlertController.dismissableAlert(title: AuthenticationStrings.verificationSentTitle,
+                                                               message: String(format: AuthenticationStrings.verificationSentTemplate, email))
+                case .failure:
+                    alert = UIAlertController.dismissableAlert(title: AuthenticationStrings.unverifiedErrorTitle,
+                                                               message: AuthenticationStrings.unverifiedErrorMessage)
+                }
+                self?.present(alert, animated: true, completion: nil)
+            }
         }
 
         present(alertController, animated: true, completion: nil)
@@ -615,27 +654,27 @@ extension AuthenticationMode {
     /// Login Operation Mode: Contains all of the strings + delegate wirings, so that the AuthUI handles authentication scenarios.
     ///
     static var login: AuthenticationMode {
-        return .init(title:                         AuthenticationStrings.loginTitle,
-                     validationStyle:               .legacy,
-                     primaryActionSelector:         #selector(SPAuthViewController.performLogIn),
-                     primaryActionText:             AuthenticationStrings.loginPrimaryAction,
-                     secondaryActionSelector:       #selector(SPAuthViewController.presentPasswordReset),
-                     secondaryActionText:           AuthenticationStrings.loginSecondaryAction,
+        return .init(title: AuthenticationStrings.loginTitle,
+                     validationStyle: .legacy,
+                     primaryActionSelector: #selector(SPAuthViewController.performLogIn),
+                     primaryActionText: AuthenticationStrings.loginPrimaryAction,
+                     secondaryActionSelector: #selector(SPAuthViewController.presentPasswordReset),
+                     secondaryActionText: AuthenticationStrings.loginSecondaryAction,
                      secondaryActionAttributedText: nil,
-                     isPasswordHidden:              false)
+                     isPasswordHidden: false)
     }
 
     /// Signup Operation Mode: Contains all of the strings + delegate wirings, so that the AuthUI handles user account creation scenarios.
     ///
     static var signup: AuthenticationMode {
-        return .init(title:                         AuthenticationStrings.signupTitle,
-                     validationStyle:               .strong,
-                     primaryActionSelector:         #selector(SPAuthViewController.performSignUp),
-                     primaryActionText:             AuthenticationStrings.signupPrimaryAction,
-                     secondaryActionSelector:       #selector(SPAuthViewController.presentTermsOfService),
-                     secondaryActionText:           nil,
+        return .init(title: AuthenticationStrings.signupTitle,
+                     validationStyle: .strong,
+                     primaryActionSelector: #selector(SPAuthViewController.performSignUp),
+                     primaryActionText: AuthenticationStrings.signupPrimaryAction,
+                     secondaryActionSelector: #selector(SPAuthViewController.presentTermsOfService),
+                     secondaryActionText: nil,
                      secondaryActionAttributedText: AuthenticationStrings.signupSecondaryAttributedAction,
-                     isPasswordHidden:              true)
+                     isPasswordHidden: true)
     }
 }
 
@@ -655,6 +694,14 @@ private enum AuthenticationStrings {
     static let acceptActionText             = NSLocalizedString("Accept", comment: "Accept Action")
     static let cancelActionText             = NSLocalizedString("Cancel", comment: "Cancel Action")
     static let loginActionText              = NSLocalizedString("Log In", comment: "Log In Action")
+    static let compromisedAlertCancel       = NSLocalizedString("Not Yet", comment: "Cancel action for password alert")
+    static let compromisedAlertReset        = NSLocalizedString("Change Password", comment: "Change password action")
+    static let unverifiedCancelText         = NSLocalizedString("Ok", comment: "Email unverified alert dismiss")
+    static let unverifiedActionText         = NSLocalizedString("Resend Verification Email", comment: "Send email verificaiton action")
+    static let unverifiedErrorTitle         = NSLocalizedString("Request Error", comment: "Request error alert title")
+    static let unverifiedErrorMessage       = NSLocalizedString("There was an preparing your verification email, please try again later", comment: "Request error alert message")
+    static let verificationSentTitle        = NSLocalizedString("Check your Email", comment: "Vefification sent alert title")
+    static let verificationSentTemplate     = NSLocalizedString("We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions.", comment: "Confirmation that an email has been sent")
 }
 
 
