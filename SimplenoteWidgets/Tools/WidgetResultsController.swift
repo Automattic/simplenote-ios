@@ -3,7 +3,7 @@ import SimplenoteFoundation
 import SimplenoteSearch
 import CoreData
 
-class WidgetDataController {
+class WidgetResultsController {
 
     /// Data Controller
     ///
@@ -11,13 +11,7 @@ class WidgetDataController {
 
     /// Initialization
     ///
-    init(context: NSManagedObjectContext, isPreview: Bool = false) throws {
-        if !isPreview {
-            guard WidgetDefaults.shared.loggedIn else {
-                throw WidgetError.appConfigurationError
-            }
-        }
-
+    init(context: NSManagedObjectContext, isPreview: Bool = false) {
         self.managedObjectContext = context
     }
 
@@ -68,6 +62,19 @@ class WidgetDataController {
         return fetchRequest
     }
 
+    // MARK: - Tags
+
+    func tags() -> [Tag]? {
+        performFetch(from: fetchRequestForTags())
+    }
+
+    private func fetchRequestForTags() -> NSFetchRequest<Tag> {
+        let fetchRequest = NSFetchRequest<Tag>(entityName: Tag.entityName)
+        fetchRequest.sortDescriptors = [NSSortDescriptor.descriptorForTags()]
+
+        return fetchRequest
+    }
+
     // MARK: Fetching
 
     private func performFetch<T: NSManagedObject>(from request: NSFetchRequest<T>) -> [T]? {
@@ -87,18 +94,11 @@ enum TagsFilter {
 }
 
 extension TagsFilter {
-    init(from tag: String) {
-        switch tag {
-        case Constants.allNotesIdentifier:
+    init(from tag: String?) {
+        guard let tag = tag else {
             self = .allNotes
-        default:
-            self = .tag(tag)
+            return
         }
+        self = .tag(tag)
     }
-}
-
-
-private struct Constants {
-    #warning("TODO: remove file constant when list widget merged in")
-    static let allNotesIdentifier = "All-Notes"
 }

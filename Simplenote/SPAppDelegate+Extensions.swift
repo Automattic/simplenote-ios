@@ -105,6 +105,26 @@ extension SPAppDelegate {
         return true
     }
 
+    /// Opens the Note list displaying a tag associated with a given URL instance, when possible
+    ///
+    @objc
+    func handleOpenTagList(url: NSURL) -> Bool {
+        guard url.isInternalTagURL else {
+            return false
+        }
+
+        if let tag = url.internalTagKey {
+            selectedTag = SPObjectManager.shared().tagExists(tag) ? tag : nil
+        } else {
+            selectedTag = nil
+        }
+
+        navigationController.presentedViewController?.dismiss(animated: true, completion: nil)
+        navigationController.popToRootViewController(animated: true)
+
+        return true
+    }
+
     /// Opens search
     ///
     func presentSearch(animated: Bool = false) {
@@ -264,7 +284,7 @@ extension SPAppDelegate: SimperiumDelegate {
         if #available(iOS 14.0, *) {
             syncWidgetDefaults()
         }
-        
+
         setupVerificationController()
     }
 

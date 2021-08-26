@@ -417,4 +417,8 @@ extension UIColor {
     static var simplenoteTagPillTextColor: UIColor {
         return UIColor(lightColor: .gray100, darkColor: .white)
     }
+
+    static var simplenoteWidgetBackgroundColor: UIColor {
+        return UIColor(lightColor: .white, darkColor: .darkGray1)
+    }
 }

@@ -30,6 +30,7 @@
 			<array/>
 			<key>IntentsSupported</key>
 			<array>
+				<string>ListWidgetIntent</string>
 				<string>NoteWidgetIntent</string>
 			</array>
 		</dict>

@@ -3,10 +3,12 @@ import CoreData
 
 class IntentHandler: INExtension {
     let coreDataManager: CoreDataManager
+    let widgetResultsController: WidgetResultsController
 
     override init() {
         do {
             self.coreDataManager = try CoreDataManager(StorageSettings().sharedStorageURL, for: .intents)
+            self.widgetResultsController = WidgetResultsController(context: coreDataManager.managedObjectContext)
         } catch {
             fatalError()
         }
@@ -21,12 +23,12 @@ class IntentHandler: INExtension {
 
 extension IntentHandler: NoteWidgetIntentHandling {
     func provideNoteOptionsCollection(for intent: NoteWidgetIntent, with completion: @escaping (INObjectCollection<WidgetNote>?, Error?) -> Void) {
-        guard let dataController = try? WidgetDataController(context: coreDataManager.managedObjectContext) else {
+        guard WidgetDefaults.shared.loggedIn else {
             completion(nil, WidgetError.appConfigurationError)
             return
         }
 
-        guard let notes = dataController.notes() else {
+        guard let notes = widgetResultsController.notes() else {
             completion(nil, WidgetError.fetchError)
             return
         }
@@ -43,11 +45,45 @@ extension IntentHandler: NoteWidgetIntentHandling {
     }
 
     func defaultNote(for intent: NoteWidgetIntent) -> WidgetNote? {
-        guard let dataController = try? WidgetDataController(context: coreDataManager.managedObjectContext),
-              let note = dataController.firstNote() else {
+        guard WidgetDefaults.shared.loggedIn,
+              let note = widgetResultsController.firstNote() else {
             return nil
         }
 
         return WidgetNote(identifier: note.simperiumKey, display: note.limitedTitle)
+    }
+}
+
+extension IntentHandler: ListWidgetIntentHandling {
+    func provideTagOptionsCollection(for intent: ListWidgetIntent, with completion: @escaping (INObjectCollection<WidgetTag>?, Error?) -> Void) {
+        guard WidgetDefaults.shared.loggedIn else {
+            completion(nil, WidgetError.appConfigurationError)
+            return
+        }
+
+        guard let tags = widgetResultsController.tags() else {
+            completion(nil, WidgetError.fetchError)
+            return
+        }
+
+        // Return collection to intents
+        let collection = tagNoteInObjectCollection(from: tags)
+        completion(collection, nil)
+    }
+
+    private func tagNoteInObjectCollection(from tags: [Tag]) -> INObjectCollection<WidgetTag> {
+        var items = [WidgetTag.allNotes]
+
+        tags.forEach { tag in
+            let tag = WidgetTag(name: tag.name, kind: .tag)
+            tag.kind = .tag
+            items.append(tag)
+        }
+
+        return INObjectCollection(items: items)
+    }
+
+    func defaultTag(for intent: ListWidgetIntent) -> WidgetTag? {
+        WidgetTag.allNotes
     }
 }

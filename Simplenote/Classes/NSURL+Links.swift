@@ -28,4 +28,23 @@ extension NSURL {
 
         return path?.replacingOccurrences(of: "/", with: "")
     }
+
+    /// Indicates if the receiver is a reference to a tag
+    ///
+    @objc
+    var isInternalTagURL: Bool {
+        isSimplenoteURL && host?.lowercased() == SimplenoteConstants.simplenoteInternalTagHost
+    }
+
+    /// Extracts the tag,  whenever the receiver is an internal tag url
+    ///
+    @objc
+    var internalTagKey: String? {
+        guard isInternalTagURL else {
+            return nil
+        }
+
+        let queryString = query?.replacingOccurrences(of: "/", with: "")
+        return queryString?.replacingOccurrences(of: "tag=", with: "")
+    }
 }

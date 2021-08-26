@@ -18,6 +18,14 @@ class SimplenoteConstants: NSObject {
     ///
     static let simplenoteInterlinkHost = "note"
 
+    /// Simplenote: Tag list Host
+    ///
+    static let simplenoteInternalTagHost = "list"
+
+    /// Simplenote: Identifier for all notes list
+    ///
+    static let allNotesTagIdentifier = "All-Notes"
+
     /// Simplenote: Interlink Maximum Title Length
     ///
     static let simplenoteInterlinkMaxTitleLength = 150

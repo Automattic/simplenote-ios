@@ -4,7 +4,6 @@ import WidgetKit
 struct NoteWidgetView: View {
     var entry: NoteWidgetEntry
     @Environment(\.widgetFamily) var widgetFamily
-    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         GeometryReader { geometry in
@@ -21,7 +20,7 @@ struct NoteWidgetView: View {
                 .ignoresSafeArea()
                 .widgetURL(entry.url)
             }
-            .background(Color(for: colorScheme, light: .white, dark: .darkGray1))
+            .background(Color.widgetBackgroundColor)
         }
     }
 }

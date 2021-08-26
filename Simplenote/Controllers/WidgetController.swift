@@ -8,8 +8,15 @@ struct WidgetController {
                 return
             }
 
-            if widgets.contains(where: { widget in
-                widget.configuration as? NoteWidgetIntent != nil
+            if widgets.contains(where: { (widget) -> Bool in
+                switch widget.configuration {
+                case is NoteWidgetIntent:
+                    return true
+                case is ListWidgetIntent:
+                    return true
+                default:
+                    return false
+                }
             }) {
                 WidgetCenter.shared.reloadAllTimelines()
             }

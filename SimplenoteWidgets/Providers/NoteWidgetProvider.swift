@@ -25,11 +25,13 @@ struct NoteWidgetProvider: IntentTimelineProvider {
     typealias Intent = NoteWidgetIntent
     typealias Entry = NoteWidgetEntry
 
-    let coreDataManager: CoreDataManager!
+    let coreDataManager: CoreDataManager
+    let widgetResultsController: WidgetResultsController
 
     init() {
         do {
             self.coreDataManager = try CoreDataManager(StorageSettings().sharedStorageURL, for: .widgets)
+            self.widgetResultsController = WidgetResultsController(context: coreDataManager.managedObjectContext, isPreview: ProcessInfo.processInfo.environmentIsPreview)
         } catch {
             fatalError("Couldn't setup dataController")
         }
@@ -40,7 +42,8 @@ struct NoteWidgetProvider: IntentTimelineProvider {
     }
 
     func getSnapshot(for configuration: NoteWidgetIntent, in context: Context, completion: @escaping (NoteWidgetEntry) -> Void) {
-        guard let note = widgetDataController()?.firstNote() else {
+        guard WidgetDefaults.shared.loggedIn,
+            let note = widgetResultsController.firstNote() else {
             completion(NoteWidgetEntry.placeholder)
             return
         }
@@ -50,15 +53,16 @@ struct NoteWidgetProvider: IntentTimelineProvider {
 
     func getTimeline(for configuration: NoteWidgetIntent, in context: Context, completion: @escaping (Timeline<NoteWidgetEntry>) -> Void) {
         // Confirm valid configuration
-        guard let widgetNote = configuration.note,
+        guard WidgetDefaults.shared.loggedIn,
+              let widgetNote = configuration.note,
               let simperiumKey = widgetNote.identifier,
-              let note = widgetDataController()?.note(forSimperiumKey: simperiumKey) else {
+              let note = widgetResultsController.note(forSimperiumKey: simperiumKey) else {
             return
         }
 
         // Prepare timeline entry for every hour for the next 6 hours
         // Create a new set of entries at the end of the 6 entries
-        let entries: [NoteWidgetEntry] = Constants.entryRange.compactMap({ (index)  in
+        let entries: [NoteWidgetEntry] = WidgetConstants.rangeForSixEntries.compactMap({ (index)  in
             guard let date = Date().increased(byHours: index) else {
                 return nil
             }
@@ -70,14 +74,7 @@ struct NoteWidgetProvider: IntentTimelineProvider {
         completion(timeline)
     }
 
-    private func widgetDataController() -> WidgetDataController? {
-        let isPreview = ProcessInfo.processInfo.environment[Constants.environmentXcodePreviewsKey] != Constants.isPreviews
-        return try? WidgetDataController(context: coreDataManager.managedObjectContext, isPreview: isPreview)
+    private func buildWidgetResultsController() -> WidgetResultsController {
+        return WidgetResultsController(context: coreDataManager.managedObjectContext, isPreview: ProcessInfo.processInfo.environmentIsPreview)
     }
-}
-
-private struct Constants {
-    static let environmentXcodePreviewsKey = "XCODE_RUNNING_FOR_PREVIEWS"
-    static let isPreviews = "1"
-    static let entryRange = 0..<6
 }
