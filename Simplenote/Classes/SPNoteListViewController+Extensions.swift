@@ -850,6 +850,7 @@ private extension SPNoteListViewController {
             self?.tableView.scrollToNearestSelectedRow(at: .none, animated: false)
             self?.refreshListViewTitle()
             self?.refreshTrashButton()
+            self?.refreshSelectAllLabels()
         }
         if isSearchActive {
             select.attributes = .disabled
