@@ -40,11 +40,12 @@ extension NSURL {
     ///
     @objc
     var internalTagKey: String? {
-        guard isInternalTagURL else {
+        guard isInternalTagURL,
+              let components = URLComponents(url: self as URL, resolvingAgainstBaseURL: false),
+              let queryValue = components.queryItems?[0].value else {
             return nil
         }
 
-        let queryString = query?.replacingOccurrences(of: "/", with: "")
-        return queryString?.replacingOccurrences(of: "tag=", with: "")
+        return queryValue.replacingOccurrences(of: "/", with: "")
     }
 }
