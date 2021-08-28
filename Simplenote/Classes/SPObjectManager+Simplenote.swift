@@ -60,9 +60,9 @@ extension SPObjectManager {
             if item.name == "content" {
                 newNote.content = item.value
             } else if item.name == "tag" {
-                if let tags = item.value?.components(separatedBy: " ") {
+                if let tags = item.value?.components(separatedBy: .whitespacesAndNewlines) {
                     for tag in tags {
-                        if tag.count == 0 {
+                        if tag.isEmpty {
                             continue
                         }
                         newNote.addTag(tag)
