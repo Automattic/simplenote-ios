@@ -1,6 +1,8 @@
 import XCTest
 
 class SimplenoteUISmokeTestsHistory: XCTestCase {
+    let notePrefix = "HistoryTest"
+
     override class func setUp() {
         app.launch()
         getToAllNotes()
@@ -23,8 +25,7 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
 
     func testHistoryCanBeDismissed() throws {
         trackTest()
-        let timestamp = NSDate().timeIntervalSince1970.description
-        let noteText = "HistoryTest " + timestamp.suffix(6)
+        let noteText = notePrefix + getRandonId()
 
         trackStep()
         NoteList.addNoteTap()
@@ -45,8 +46,7 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
 
     func testRestoreNoteButtonIsDisabledByDefault() throws {
         trackTest()
-        let timestamp = NSDate().timeIntervalSince1970.description
-        let noteText = "HistoryTest " + timestamp.suffix(6)
+        let noteText = notePrefix + getRandonId()
 
         trackStep()
         NoteList.addNoteTap()
@@ -68,16 +68,15 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
 
     func testRestoreButtonIsEnabledWhenAPreviousVersionIsSelected() throws {
         trackTest()
-        let timestamp = NSDate().timeIntervalSince1970.description
-        let noteText = "HistoryTest " + timestamp.suffix(6)
-        let editedNoteText = noteText + "\nLine 1"
+        let initialNoteText = notePrefix + getRandonId()
+        let editedNoteText = notePrefix + getRandonId()
 
         trackStep()
         NoteList.addNoteTap()
         NoteEditorAssert.editorShown()
 
         trackStep()
-        NoteEditor.clearAndEnterText(enteredValue: noteText)
+        NoteEditor.clearAndEnterText(enteredValue: initialNoteText)
         NoteEditor.waitBeforeEditingText(delayInSeconds: 3, newText: editedNoteText)
 
         trackStep()
@@ -91,15 +90,13 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
         trackStep()
         History.close()
         NoteEditor.leaveEditor()
-        NoteList.trashNote(noteName: noteText)
+        NoteList.trashNote(noteName: editedNoteText)
     }
 
     func testCanRestorePreviousVersion() throws {
         trackTest()
-        let timestamp = NSDate().timeIntervalSince1970.description
-        let initialNoteText = "HistoryTest " + timestamp.suffix(6)
-        let secondTimestamp = NSDate().timeIntervalSince1970.description
-        let editedNoteText = "HistoryTest " + secondTimestamp.suffix(6)
+        let initialNoteText = notePrefix + getRandonId()
+        let editedNoteText = notePrefix + getRandonId()
 
         trackStep()
         NoteList.addNoteTap()
@@ -127,10 +124,8 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
 
     func testRestoredVersionIsAddedOnTopOfTheOtherChanges() throws {
         trackTest()
-        let timestamp = NSDate().timeIntervalSince1970.description
-        let initialNoteText = "HistoryTest " + timestamp.suffix(6)
-        let secondTimestamp = NSDate().timeIntervalSince1970.description
-        let editedNoteText = "HistoryTest " + secondTimestamp.suffix(6)
+        let initialNoteText = notePrefix + getRandonId()
+        let editedNoteText = notePrefix + getRandonId()
 
         trackStep()
         NoteList.addNoteTap()
@@ -169,10 +164,8 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
 
     func testPreviousNoteIsNotRestoredWhenTheHistoryPanelIsDismissed() throws {
         trackTest()
-        let timestamp = NSDate().timeIntervalSince1970.description
-        let initialNoteText = "HistoryTest " + timestamp.suffix(6)
-        let secondTimestamp = NSDate().timeIntervalSince1970.description
-        let editedNoteText = "HistoryTest " + secondTimestamp.suffix(6)
+        let initialNoteText = notePrefix + getRandonId()
+        let editedNoteText = notePrefix + getRandonId()
 
         trackStep()
         NoteList.addNoteTap()
@@ -199,10 +192,8 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
 
     func testHistoryIsKeptAfterRecoveringNoteFromTrash() throws {
         trackTest()
-        let timestamp = NSDate().timeIntervalSince1970.description
-        let initialNoteText = "HistoryTest " + timestamp.suffix(6)
-        let secondTimestamp = NSDate().timeIntervalSince1970.description
-        let editedNoteText = "HistoryTest " + secondTimestamp.suffix(6)
+        let initialNoteText = notePrefix + getRandonId()
+        let editedNoteText = notePrefix + getRandonId()
 
         trackStep()
         NoteList.addNoteTap()

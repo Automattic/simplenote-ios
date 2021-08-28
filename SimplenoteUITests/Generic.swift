@@ -63,6 +63,11 @@ func populateNoteList(title: String, numberToCreate: Int) {
     }
 }
 
+func getRandonId() -> String.SubSequence {
+    let id = NSDate().timeIntervalSince1970.description.suffix(6)
+    return id
+}
+
 class Table {
 
     class func getAllCells() -> XCUIElementQuery {
