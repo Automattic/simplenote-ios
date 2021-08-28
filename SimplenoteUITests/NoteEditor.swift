@@ -58,10 +58,10 @@ class NoteEditor {
         noteContentTextView.clearAndEnterText(text: enteredValue + "\n")
     }
 
-    class func waitBeforeEditingText(delayInSeconds: TimeInterval, newText: String) {
+    class func waitBeforeEditingText(delayInSeconds: UInt32, newText: String) {
         let noteContentTextView = app.textViews.element
 
-        Thread.sleep(forTimeInterval: delayInSeconds)
+        sleep(delayInSeconds)
 
         noteContentTextView.clearAndEnterText(text: newText)
     }

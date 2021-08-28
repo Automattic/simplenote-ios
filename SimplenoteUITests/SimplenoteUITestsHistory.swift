@@ -78,7 +78,7 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
 
         trackStep()
         NoteEditor.clearAndEnterText(enteredValue: noteText)
-        NoteEditor.waitBeforeEditingText(delayInSeconds: 3.0, newText: editedNoteText)
+        NoteEditor.waitBeforeEditingText(delayInSeconds: 3, newText: editedNoteText)
 
         trackStep()
         NoteEditor.openHistory()
@@ -107,7 +107,7 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
 
         trackStep()
         NoteEditor.clearAndEnterText(enteredValue: initialNoteText)
-        NoteEditor.waitBeforeEditingText(delayInSeconds: 3.0, newText: editedNoteText)
+        NoteEditor.waitBeforeEditingText(delayInSeconds: 3, newText: editedNoteText)
 
 
         trackStep()
@@ -138,7 +138,7 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
 
         trackStep()
         NoteEditor.clearAndEnterText(enteredValue: initialNoteText)
-        NoteEditor.waitBeforeEditingText(delayInSeconds: 3.0, newText: editedNoteText)
+        NoteEditor.waitBeforeEditingText(delayInSeconds: 3, newText: editedNoteText)
 
         trackStep()
         NoteEditor.openHistory()
@@ -180,7 +180,7 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
 
         trackStep()
         NoteEditor.clearAndEnterText(enteredValue: initialNoteText)
-        NoteEditor.waitBeforeEditingText(delayInSeconds: 3.0, newText: editedNoteText)
+        NoteEditor.waitBeforeEditingText(delayInSeconds: 3, newText: editedNoteText)
 
 
         trackStep()
@@ -210,7 +210,7 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
 
         trackStep()
         NoteEditor.clearAndEnterText(enteredValue: initialNoteText)
-        NoteEditor.waitBeforeEditingText(delayInSeconds: 3.0, newText: editedNoteText)
+        NoteEditor.waitBeforeEditingText(delayInSeconds: 3, newText: editedNoteText)
 
         trackStep()
         getToAllNotes()
