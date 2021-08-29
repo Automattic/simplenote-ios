@@ -109,11 +109,18 @@ extension SPAppDelegate {
     ///
     @objc
     func handleOpenTagList(url: NSURL) -> Bool {
-        guard let tag = url.internalTagKey else {
+        guard url.isInternalTagURL else {
             return false
         }
 
-        selectedTag = SPObjectManager.shared().tagExists(tag) ? tag : nil
+        if let tag = url.internalTagKey {
+            switch tag {
+            case String():
+                selectedTag = nil
+            default:
+                if SPObjectManager.shared().tagExists(tag) { selectedTag = tag }
+            }
+        }
 
         navigationController.presentedViewController?.dismiss(animated: true, completion: nil)
         navigationController.popToRootViewController(animated: true)

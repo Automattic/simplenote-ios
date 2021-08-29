@@ -43,7 +43,7 @@ extension NSURL {
         guard isInternalTagURL,
               let components = URLComponents(url: self as URL, resolvingAgainstBaseURL: false),
               let queryValue = components.queryItems?[0].value else {
-            return nil
+            return String()
         }
 
         return queryValue.replacingOccurrences(of: "/", with: "")
