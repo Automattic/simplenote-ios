@@ -449,6 +449,8 @@
 		BA608EF526BB6E0200A9D94E /* ListWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA608EF426BB6E0200A9D94E /* ListWidget.swift */; };
 		BA608EF726BB6E7400A9D94E /* ListWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA608EF626BB6E7400A9D94E /* ListWidgetProvider.swift */; };
 		BA608EF926BB6F4C00A9D94E /* ListWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA608EF826BB6F4C00A9D94E /* ListWidgetView.swift */; };
+		BA6DA19126DB5F1B000464C8 /* URLComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6DA19026DB5F1B000464C8 /* URLComponents.swift */; };
+		BA6DA19226DB5F1B000464C8 /* URLComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6DA19026DB5F1B000464C8 /* URLComponents.swift */; };
 		BA7071E526BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BA7071E426BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition */; };
 		BA7071E626BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BA7071E426BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition */; };
 		BA75D8A326C084E900883FFA /* Text+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA75D87D26C0843600883FFA /* Text+Simplenote.swift */; };
@@ -1099,6 +1101,7 @@
 		BA608EF426BB6E0200A9D94E /* ListWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWidget.swift; sourceTree = "<group>"; };
 		BA608EF626BB6E7400A9D94E /* ListWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWidgetProvider.swift; sourceTree = "<group>"; };
 		BA608EF826BB6F4C00A9D94E /* ListWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWidgetView.swift; sourceTree = "<group>"; };
+		BA6DA19026DB5F1B000464C8 /* URLComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLComponents.swift; sourceTree = "<group>"; };
 		BA7071E426BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = ListWidgetIntent.intentdefinition; sourceTree = "<group>"; };
 		BA75D87D26C0843600883FFA /* Text+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Simplenote.swift"; sourceTree = "<group>"; };
 		BA75D8AD26C0862E00883FFA /* View+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Simplenote.swift"; sourceTree = "<group>"; };
@@ -1892,6 +1895,7 @@
 				BAB27BD526BA425C00AE4ACC /* Color+Simplenote.swift */,
 				BAA59E78269F9FE30068BD3D /* Date+Simplenote.swift */,
 				BAF4A96E26DB085D00C51C1D /* NSURLComponents+Simplenote.swift */,
+				BA6DA19026DB5F1B000464C8 /* URLComponents.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -3293,6 +3297,7 @@
 				375D24B621E01131007AB25A /* html_blocks.c in Sources */,
 				46A3C98217DFA81A002865AE /* NSString+Attributed.m in Sources */,
 				375D24BA21E01131007AB25A /* document.c in Sources */,
+				BA6DA19126DB5F1B000464C8 /* URLComponents.swift in Sources */,
 				46A3C98317DFA81A002865AE /* main.m in Sources */,
 				B58C9F5723F2FCEC008C3480 /* SPPlaceholderView.swift in Sources */,
 				BAB6C04726BA4CAF007495C4 /* WidgetController.swift in Sources */,
@@ -3613,6 +3618,7 @@
 				BA7071E526BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition in Sources */,
 				BAFDBBD926B88BD200119615 /* Date+Simplenote.swift in Sources */,
 				BA02A59226C0AE92005FF36E /* NoteListTable.swift in Sources */,
+				BA6DA19226DB5F1B000464C8 /* URLComponents.swift in Sources */,
 				BAFA93F2265DE4A10009DCFB /* SimplenoteWidgets.swift in Sources */,
 				BAF8D53226AE175B00CA9383 /* Bundle+Simplenote.swift in Sources */,
 				BA122DC2265EF4E5003D3BC5 /* SPUserInterface.swift in Sources */,

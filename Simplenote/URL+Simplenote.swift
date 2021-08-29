@@ -33,15 +33,3 @@ private struct Constants {
     static let tagQueryBase = "tag="
     static let newNotePath = "new"
 }
-
-extension URLComponents {
-    static func simplenoteURLComponents(with host: String? = nil) -> URLComponents? {
-        var components = URLComponents(string: .simplenotePath())
-
-        if let host = host {
-            components?.host = host
-        }
-
-        return components
-    }
-}
