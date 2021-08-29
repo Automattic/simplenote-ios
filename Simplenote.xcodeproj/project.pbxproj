@@ -506,10 +506,12 @@
 		BABFFF2426CF9094003A4C25 /* WidgetDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABFFF2126CF9094003A4C25 /* WidgetDefaults.swift */; };
 		BAE08626261282D1009D40CD /* Note+Publish.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE08625261282D1009D40CD /* Note+Publish.swift */; };
 		BAF4A96F26DB085D00C51C1D /* NSURLComponents+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF4A96E26DB085D00C51C1D /* NSURLComponents+Simplenote.swift */; };
+		BAF4A97926DB10BD00C51C1D /* NoteContentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64DE6F0255D1CD9001D0526 /* NoteContentHelper.swift */; };
+		BAF4A9AA26DB138600C51C1D /* NoteContentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64DE6F0255D1CD9001D0526 /* NoteContentHelper.swift */; };
+		BAF4A9BD26DB13B400C51C1D /* Note+Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42326AE10F100CA9383 /* Note+Widget.swift */; };
 		BAF8D44B26AE10FC00CA9383 /* Tag+Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42226AE10F100CA9383 /* Tag+Widget.swift */; };
 		BAF8D44C26AE10FC00CA9383 /* Note+Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42326AE10F100CA9383 /* Note+Widget.swift */; };
 		BAF8D45526AE10FC00CA9383 /* Tag+Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42226AE10F100CA9383 /* Tag+Widget.swift */; };
-		BAF8D45626AE10FC00CA9383 /* Note+Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42326AE10F100CA9383 /* Note+Widget.swift */; };
 		BAF8D46426AE118800CA9383 /* SPCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E196BA230F522D00F5658A /* SPCredentials.swift */; };
 		BAF8D46E26AE118800CA9383 /* SPCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E196BA230F522D00F5658A /* SPCredentials.swift */; };
 		BAF8D4F626AE171400CA9383 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3856CC2681715700F388CC /* CoreDataManager.swift */; };
@@ -3541,17 +3543,18 @@
 				BAB5762726703C8200B0C56F /* IntentHandler.swift in Sources */,
 				BA86625D26B3B14900466746 /* SortMode.swift in Sources */,
 				BA12B07026B0D0150026F31D /* SPManagedObject+Widget.swift in Sources */,
+				BAF4A9AA26DB138600C51C1D /* NoteContentHelper.swift in Sources */,
 				BA7071E626BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition in Sources */,
 				BA86622426B3AE4A00466746 /* WidgetResultsController.swift in Sources */,
 				BABFFF2426CF9094003A4C25 /* WidgetDefaults.swift in Sources */,
 				BAF8D46E26AE118800CA9383 /* SPCredentials.swift in Sources */,
-				BAF8D45626AE10FC00CA9383 /* Note+Widget.swift in Sources */,
 				BAF8D5C526AE254100CA9383 /* Simplenote.xcdatamodeld in Sources */,
 				BAB6C04426BA49F3007495C4 /* ContentSlice.swift in Sources */,
 				BA86624926B3B05100466746 /* SimplenoteConstants.swift in Sources */,
 				BAB5765C26703D0600B0C56F /* NoteWidgetIntent.intentdefinition in Sources */,
 				BAB6C04526BA4A04007495C4 /* String+Simplenote.swift in Sources */,
 				BA32A91926B746A200727247 /* WidgetError.swift in Sources */,
+				BAF4A9BD26DB13B400C51C1D /* Note+Widget.swift in Sources */,
 				BAFDBBDA26B88BD200119615 /* Date+Simplenote.swift in Sources */,
 				BA3CE8D926D5E21C00EFF9EB /* WidgetTag+Helpers.swift in Sources */,
 				BA86627226B3B1B700466746 /* NSSortDescriptor+Simplenote.swift in Sources */,
@@ -3592,6 +3595,7 @@
 				BA122DBA265EF402003D3BC5 /* SimplenoteConstants.swift in Sources */,
 				BAF8D51E26AE173D00CA9383 /* FileManager+Simplenote.swift in Sources */,
 				BA86615926B35CEF00466746 /* BuildConfiguration.swift in Sources */,
+				BAF4A97926DB10BD00C51C1D /* NoteContentHelper.swift in Sources */,
 				BA122DBC265EF410003D3BC5 /* ColorStudio.swift in Sources */,
 				BA608EF926BB6F4C00A9D94E /* ListWidgetView.swift in Sources */,
 				BA86626726B3B1B600466746 /* NSSortDescriptor+Simplenote.swift in Sources */,

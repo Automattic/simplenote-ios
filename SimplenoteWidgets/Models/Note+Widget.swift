@@ -32,29 +32,35 @@ extension Note {
 }
 
 extension Note {
-    private var lines: [String]? {
-        content?.components(separatedBy: .newlines)
+    var title: String {
+        let (titleRange, _) = NoteContentHelper.structure(of: content)
+        return title(with: titleRange)
     }
 
-    var title: String {
-        guard let firstLine = lines?.first,
-              firstLine.count > 0 else {
+    private func title(with range: Range<String.Index>?) -> String {
+        guard let range = range, let content = content else {
             return Constants.defaultTitle
         }
-        return firstLine
+
+        let result = String(content[range])
+        return result.droppingPrefix(Constants.titleMarkdownPrefix)
     }
 
     var body: String {
-        guard var lines = lines else {
+        let (_, bodyRange) = NoteContentHelper.structure(of: content)
+        return body(with: bodyRange)
+    }
+
+    private func body(with range: Range<String.Index>?) -> String {
+        guard let range = range, let content = content else {
             // Note. Swift UI Text will crash if given String() so need to use this version of an empty string
             return ""
         }
-        lines.removeFirst()
-        return lines.joined(separator: .newline)
-    }
 
-    var limitedTitle: String {
-        String(title.prefix(Constants.previewCharacterLength))
+        let upperBound = content.index(range.lowerBound, offsetBy: Constants.bodyPreviewCap, limitedBy: range.upperBound) ?? range.upperBound
+        let cappedRange = range.lowerBound..<upperBound
+
+        return String(content[cappedRange]).replacingNewlinesWithSpaces()
     }
 
     var url: URL {
@@ -68,4 +74,6 @@ extension Note {
 private struct Constants {
     static let defaultTitle = NSLocalizedString("New Note...", comment: "Default title for notes")
     static let previewCharacterLength = 50
+    static let titleMarkdownPrefix = "# "
+    static let bodyPreviewCap = 500
 }

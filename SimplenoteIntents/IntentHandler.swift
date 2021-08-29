@@ -39,7 +39,7 @@ extension IntentHandler: NoteWidgetIntentHandling {
 
     private func widgetNoteInObjectCollection(from notes: [Note]) -> INObjectCollection<WidgetNote> {
         let widgetNotes = notes.map({ note in
-            WidgetNote(identifier: note.simperiumKey, display: note.limitedTitle)
+            WidgetNote(identifier: note.simperiumKey, display: note.title)
         })
         return INObjectCollection(items: widgetNotes)
     }
@@ -50,7 +50,7 @@ extension IntentHandler: NoteWidgetIntentHandling {
             return nil
         }
 
-        return WidgetNote(identifier: note.simperiumKey, display: note.limitedTitle)
+        return WidgetNote(identifier: note.simperiumKey, display: note.title)
     }
 }
 

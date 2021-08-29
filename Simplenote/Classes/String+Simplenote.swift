@@ -191,3 +191,14 @@ extension String {
         return base + host + "/"
     }
 }
+
+// MARK: Replacing newlines with spaces
+extension String {
+    func replacingNewlinesWithSpaces() -> String {
+        if self.count == .zero {
+            return self
+        }
+        let components = self.components(separatedBy: .newlines)
+        return components.joined(separator: " ")
+    }
+}
