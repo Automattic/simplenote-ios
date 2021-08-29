@@ -21,6 +21,7 @@ struct NoteWidgetView: View {
                 .widgetURL(entry.url)
             }
             .background(Color.widgetBackgroundColor)
+            .redacted(reason: [entry.loggedIn ? [] : .placeholder])
         }
     }
 }
@@ -33,9 +34,9 @@ struct NoteWidgetView_Previews: PreviewProvider {
     static var previews: some View {
 
         Group {
-            NoteWidgetView(entry: NoteWidgetEntry.placeholder)
+            NoteWidgetView(entry: NoteWidgetEntry.placeholder())
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
-            NoteWidgetView(entry: NoteWidgetEntry.placeholder)
+            NoteWidgetView(entry: NoteWidgetEntry.placeholder())
                 .previewContext(WidgetPreviewContext(family: .systemMedium)).colorScheme(.dark)
         }
     }

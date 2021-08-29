@@ -5,6 +5,7 @@ struct NoteWidgetEntry: TimelineEntry {
     let title: String
     let content: String
     let url: URL
+    let loggedIn: Bool
 }
 
 extension NoteWidgetEntry {
@@ -12,13 +13,18 @@ extension NoteWidgetEntry {
         self.init(date: date,
                   title: note.title,
                   content: note.body,
-                  url: note.url)
+                  url: note.url,
+                  loggedIn: WidgetDefaults.shared.loggedIn)
     }
 
-    static let placeholder = NoteWidgetEntry(date: Date(),
-                                             title: DemoContent.singleNoteTitle,
-                                             content: DemoContent.singleNoteContent,
-                                             url: DemoContent.demoURL)
+    static func placeholder(loggedIn: Bool = true) -> NoteWidgetEntry {
+        return NoteWidgetEntry(date: Date(),
+                               title: DemoContent.singleNoteTitle,
+                               content: DemoContent.singleNoteContent,
+                               url: DemoContent.demoURL,
+                               loggedIn: loggedIn)
+    }
+
 }
 
 struct NoteWidgetProvider: IntentTimelineProvider {
@@ -38,13 +44,13 @@ struct NoteWidgetProvider: IntentTimelineProvider {
     }
 
     func placeholder(in context: Context) -> NoteWidgetEntry {
-        return NoteWidgetEntry.placeholder
+        return NoteWidgetEntry.placeholder(loggedIn: WidgetDefaults.shared.loggedIn)
     }
 
     func getSnapshot(for configuration: NoteWidgetIntent, in context: Context, completion: @escaping (NoteWidgetEntry) -> Void) {
         guard WidgetDefaults.shared.loggedIn,
             let note = widgetResultsController.firstNote() else {
-            completion(NoteWidgetEntry.placeholder)
+            completion(placeholder(in: context))
             return
         }
 
@@ -57,6 +63,7 @@ struct NoteWidgetProvider: IntentTimelineProvider {
               let widgetNote = configuration.note,
               let simperiumKey = widgetNote.identifier,
               let note = widgetResultsController.note(forSimperiumKey: simperiumKey) else {
+            completion(Timeline(entries: [placeholder(in: context)], policy: .never))
             return
         }
 

@@ -25,6 +25,7 @@ struct ListWidgetView: View {
             }
             .filling()
             .background(Color.widgetBackgroundColor)
+            .redacted(reason: entry.loggedIn ? [] : .placeholder)
         }
     }
 
@@ -49,9 +50,9 @@ struct ListWidgetView_Previews: PreviewProvider {
     static var previews: some View {
 
         Group {
-            ListWidgetView(entry: ListWidgetEntry(date: Date(), widgetTag: WidgetTag(kind: .allNotes), noteProxys: DemoContent.listProxies))
+            ListWidgetView(entry: ListWidgetEntry.placeholder())
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
-            ListWidgetView(entry: ListWidgetEntry(date: Date(), widgetTag: WidgetTag(kind: .allNotes), noteProxys: DemoContent.listProxies))
+            ListWidgetView(entry: ListWidgetEntry.placeholder())
                 .previewContext(WidgetPreviewContext(family: .systemLarge))
                 .colorScheme(.dark)
         }

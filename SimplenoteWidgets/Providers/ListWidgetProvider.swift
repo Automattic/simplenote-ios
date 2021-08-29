@@ -1,13 +1,27 @@
 import WidgetKit
 
 struct ListWidgetEntry: TimelineEntry {
-    static let placeholder = ListWidgetEntry(date: Date(),
-                                             widgetTag: WidgetTag(kind: .tag, name: DemoContent.listTag),
-                                             noteProxys: DemoContent.listProxies)
-
     let date: Date
     let widgetTag: WidgetTag
-    let noteProxys: [ListWidgetNoteProxy]
+    let noteProxies: [ListWidgetNoteProxy]
+    let loggedIn: Bool
+}
+
+extension ListWidgetEntry {
+    init(widgetTag: WidgetTag, noteProxies: [ListWidgetNoteProxy]) {
+        self.date = Date()
+        self.widgetTag = widgetTag
+        self.noteProxies = noteProxies
+        self.loggedIn = WidgetDefaults.shared.loggedIn
+    }
+
+    static func placeholder(loggedIn: Bool = true) -> ListWidgetEntry {
+        return ListWidgetEntry(date: Date(),
+                               widgetTag: WidgetTag(kind: .tag, name: DemoContent.listTag),
+                               noteProxies: DemoContent.listProxies,
+                               loggedIn: loggedIn)
+
+    }
 }
 
 struct ListWidgetNoteProxy {
@@ -33,13 +47,13 @@ struct ListWidgetProvider: IntentTimelineProvider {
 
 
     func placeholder(in context: Context) -> ListWidgetEntry {
-        return ListWidgetEntry.placeholder
+        return ListWidgetEntry.placeholder(loggedIn: WidgetDefaults.shared.loggedIn)
     }
 
     func getSnapshot(for configuration: ListWidgetIntent, in context: Context, completion: @escaping (ListWidgetEntry) -> Void) {
         guard WidgetDefaults.shared.loggedIn,
               let allNotes = widgetResultsController.notes() else {
-            completion(ListWidgetEntry.placeholder)
+            completion(placeholder(in: context))
             return
         }
 
@@ -47,7 +61,7 @@ struct ListWidgetProvider: IntentTimelineProvider {
             ListWidgetNoteProxy(title: note.title, url: note.url)
         }
 
-        completion(ListWidgetEntry(date: Date(), widgetTag: WidgetTag(kind: .allNotes), noteProxys: proxies))
+        completion(ListWidgetEntry(widgetTag: WidgetTag(kind: .allNotes), noteProxies: proxies))
     }
 
     func getTimeline(for configuration: ListWidgetIntent, in context: Context, completion: @escaping (Timeline<ListWidgetEntry>) -> Void) {
@@ -55,6 +69,7 @@ struct ListWidgetProvider: IntentTimelineProvider {
         guard WidgetDefaults.shared.loggedIn,
               let widgetTag = configuration.tag,
               let notes = widgetResultsController.notes(filteredBy: TagsFilter(from: widgetTag.identifier), limit: Constants.noteFetchLimit) else {
+            completion(Timeline(entries: [placeholder(in: context)], policy: .never))
             return
         }
 
@@ -68,7 +83,7 @@ struct ListWidgetProvider: IntentTimelineProvider {
             guard let date = Date().increased(byHours: index) else {
                 return nil
             }
-            return ListWidgetEntry(date: date, widgetTag: widgetTag, noteProxys: proxies)
+            return ListWidgetEntry(date: date, widgetTag: widgetTag, noteProxies: proxies, loggedIn: WidgetDefaults.shared.loggedIn)
         }
 
         completion(Timeline(entries: entries, policy: .atEnd)
