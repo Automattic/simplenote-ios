@@ -509,8 +509,8 @@
     NSURLComponents *components = [NSURLComponents componentsWithURL:url resolvingAgainstBaseURL:NO];
 
     if ([[components host] isEqualToString:@"new"]) {
-        
-        Note *newNote = [[SPObjectManager sharedManager] newNoteFrom:components];
+
+        Note *newNote = [[SPObjectManager sharedManager] newNoteWithContent:[components contentFromQuery] tags:[components tagsFromQuery]];
 
         [self presentNote:newNote animated:NO];
     }

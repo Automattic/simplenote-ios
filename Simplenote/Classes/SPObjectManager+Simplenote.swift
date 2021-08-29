@@ -49,26 +49,20 @@ extension SPObjectManager {
     }
 
     @objc
-    func newNote(from urlComponents: URLComponents) -> Note {
-        guard let queryItems = urlComponents.queryItems else {
-            return newDefaultNote()
-        }
-
+    func newNote(withContent content: String?, tags: [String]?) -> Note {
         let newNote = newDefaultNote()
 
-        for item in queryItems {
-            if item.name == "content" {
-                newNote.content = item.value
-            } else if item.name == "tag" {
-                if let tags = item.value?.components(separatedBy: .whitespacesAndNewlines) {
-                    for tag in tags {
-                        if tag.isEmpty {
-                            continue
-                        }
-                        newNote.addTag(tag)
-                        SPObjectManager.shared().createTag(from: tag)
-                    }
+        if let content = content {
+            newNote.content = content
+        }
+
+        if let tags = tags {
+            for tag in tags {
+                if tag.isEmpty {
+                    continue
                 }
+                newNote.addTag(tag)
+                SPObjectManager.shared().createTag(from: tag)
             }
         }
 
