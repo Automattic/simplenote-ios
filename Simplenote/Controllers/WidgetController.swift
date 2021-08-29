@@ -23,9 +23,9 @@ struct WidgetController {
         }
     }
 
-    static func syncWidgetDefaults(authenticated: Bool) {
+    static func syncWidgetDefaults(authenticated: Bool, sortMode: SortMode) {
         let widgetDefaults = WidgetDefaults.shared
-        widgetDefaults.sortMode = Options.shared.listSortMode
+        widgetDefaults.sortMode = sortMode
         widgetDefaults.loggedIn = authenticated
     }
 }

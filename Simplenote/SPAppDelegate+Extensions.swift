@@ -506,6 +506,7 @@ extension SPAppDelegate {
     @objc
     func syncWidgetDefaults() {
         let authenticated = simperium.user?.authenticated() ?? false
-        WidgetController.syncWidgetDefaults(authenticated: authenticated)
+        let sortMode = Options.shared.listSortMode
+        WidgetController.syncWidgetDefaults(authenticated: authenticated, sortMode: sortMode)
     }
 }
