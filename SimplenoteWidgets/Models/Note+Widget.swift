@@ -66,6 +66,6 @@ extension Note {
 }
 
 private struct Constants {
-    static let defaultTitle = NSLocalizedString("Untitled Note", comment: "Default title for notes")
+    static let defaultTitle = NSLocalizedString("New Note...", comment: "Default title for notes")
     static let previewCharacterLength = 50
 }
