@@ -118,7 +118,7 @@ extension SPAppDelegate {
             case String():
                 selectedTag = nil
             default:
-                if SPObjectManager.shared().tagExists(tag) { selectedTag = tag }
+                selectedTag = SPObjectManager.shared().tagExists(tag) ? tag : selectedTag
             }
         }
 
