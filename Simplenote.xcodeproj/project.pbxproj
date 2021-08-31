@@ -54,6 +54,8 @@
 		37FD30491FC4CFA2008D0B78 /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FD30471FC4CFA2008D0B78 /* KeychainPasswordItem.swift */; };
 		3F1BB4A0242DB81E006D1A04 /* ScreenshotsCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1BB49F242DB81E006D1A04 /* ScreenshotsCredentials.swift */; };
 		3F1BB4A3242DC162006D1A04 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1BB4A2242DC162006D1A04 /* SnapshotHelper.swift */; };
+		3F4BA07E26CDF295000619B1 /* ScreenObject in Frameworks */ = {isa = PBXBuildFile; productRef = 3F4BA07D26CDF295000619B1 /* ScreenObject */; };
+		3F4BA08026CE00A2000619B1 /* PasscodeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4BA07F26CE00A2000619B1 /* PasscodeScreen.swift */; };
 		3F762E8F2677F19C0088CD45 /* XCUITestHelpers in Frameworks */ = {isa = PBXBuildFile; productRef = 3F762E8E2677F19C0088CD45 /* XCUITestHelpers */; };
 		3F762E912677F1AA0088CD45 /* XCUITestHelpers in Frameworks */ = {isa = PBXBuildFile; productRef = 3F762E902677F1AA0088CD45 /* XCUITestHelpers */; };
 		3FA17B5626240FF000C11C46 /* NoteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA17B5526240FF000C11C46 /* NoteData.swift */; };
@@ -424,8 +426,8 @@
 		BA5E5B7D264A148C00D0EE19 /* URLRequest+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5E5B7C264A148C00D0EE19 /* URLRequest+Simplenote.swift */; };
 		BA83478325F59F8B0059B797 /* markdown-default-contrast.css in Resources */ = {isa = PBXBuildFile; fileRef = BA83478225F59F8B0059B797 /* markdown-default-contrast.css */; };
 		BA83478C25F59FE90059B797 /* markdown-dark-contrast.css in Resources */ = {isa = PBXBuildFile; fileRef = BA83478B25F59FE90059B797 /* markdown-dark-contrast.css */; };
-		BA9B19F926A8EF3200692366 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B19F826A8EF3200692366 /* SpinnerViewController.swift */; };
 		BA8FC2A5267AC7470082962E /* SharedStorageMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8FC2A4267AC7470082962E /* SharedStorageMigrator.swift */; };
+		BA9B19F926A8EF3200692366 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B19F826A8EF3200692366 /* SpinnerViewController.swift */; };
 		BA9B59022685549F00DAD1ED /* StorageSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B59012685549F00DAD1ED /* StorageSettings.swift */; };
 		BAA4856925D5E40900F3BDB9 /* SearchQuery+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */; };
 		BAA59E79269F9FE30068BD3D /* Date+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA59E78269F9FE30068BD3D /* Date+Simplenote.swift */; };
@@ -582,6 +584,7 @@
 		3F1BB49F242DB81E006D1A04 /* ScreenshotsCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenshotsCredentials.swift; sourceTree = "<group>"; };
 		3F1BB4A2242DC162006D1A04 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		3F3CA94826255FA800F6316F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		3F4BA07F26CE00A2000619B1 /* PasscodeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeScreen.swift; sourceTree = "<group>"; };
 		3F6CECDC2FEA90B9E5C920F5 /* Pods-SimplenoteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplenoteTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests.release.xcconfig"; sourceTree = "<group>"; };
 		3FA17B5526240FF000C11C46 /* NoteData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteData.swift; sourceTree = "<group>"; };
 		3FA60139242C5AAD0068FC52 /* SimplenoteScreenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimplenoteScreenshots.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -964,8 +967,8 @@
 		BA5E5B7C264A148C00D0EE19 /* URLRequest+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Simplenote.swift"; sourceTree = "<group>"; };
 		BA83478225F59F8B0059B797 /* markdown-default-contrast.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "markdown-default-contrast.css"; sourceTree = "<group>"; };
 		BA83478B25F59FE90059B797 /* markdown-dark-contrast.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "markdown-dark-contrast.css"; sourceTree = "<group>"; };
-		BA9B19F826A8EF3200692366 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 		BA8FC2A4267AC7470082962E /* SharedStorageMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStorageMigrator.swift; sourceTree = "<group>"; };
+		BA9B19F826A8EF3200692366 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 		BA9B59012685549F00DAD1ED /* StorageSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageSettings.swift; sourceTree = "<group>"; };
 		BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchQuery+Simplenote.swift"; sourceTree = "<group>"; };
 		BAA59E78269F9FE30068BD3D /* Date+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Simplenote.swift"; sourceTree = "<group>"; };
@@ -1075,6 +1078,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F762E912677F1AA0088CD45 /* XCUITestHelpers in Frameworks */,
+				3F4BA07E26CDF295000619B1 /* ScreenObject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1187,6 +1191,7 @@
 				3FA6013D242C5AAE0068FC52 /* Info.plist */,
 				3FA6013B242C5AAE0068FC52 /* SimplenoteScreenshots.swift */,
 				3F1BB4A2242DC162006D1A04 /* SnapshotHelper.swift */,
+				3F4BA07F26CE00A2000619B1 /* PasscodeScreen.swift */,
 			);
 			path = SimplenoteScreenshots;
 			sourceTree = "<group>";
@@ -2281,6 +2286,7 @@
 			name = SimplenoteScreenshots;
 			packageProductDependencies = (
 				3F762E902677F1AA0088CD45 /* XCUITestHelpers */,
+				3F4BA07D26CDF295000619B1 /* ScreenObject */,
 			);
 			productName = SimplenoteScreenshots;
 			productReference = 3FA60139242C5AAD0068FC52 /* SimplenoteScreenshots.xctest */;
@@ -2474,6 +2480,7 @@
 				B50D2FB424E6DFAC00163FC3 /* XCRemoteSwiftPackageReference "SimplenoteSearch-Swift" */,
 				B59CACFA2541E05400958330 /* XCRemoteSwiftPackageReference "SimplenoteInterlinks-Swift" */,
 				3F762E8D2677F19C0088CD45 /* XCRemoteSwiftPackageReference "XCUITestHelpers" */,
+				3F4BA07C26CDF295000619B1 /* XCRemoteSwiftPackageReference "ScreenObject" */,
 			);
 			productRefGroup = E29ADD3917848E8500E55842 /* Products */;
 			projectDirPath = "";
@@ -2749,6 +2756,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F1BB4A0242DB81E006D1A04 /* ScreenshotsCredentials.swift in Sources */,
+				3F4BA08026CE00A2000619B1 /* PasscodeScreen.swift in Sources */,
 				3FA6013C242C5AAE0068FC52 /* SimplenoteScreenshots.swift in Sources */,
 				3F1BB4A3242DC162006D1A04 /* SnapshotHelper.swift in Sources */,
 			);
@@ -4652,6 +4660,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3F4BA07C26CDF295000619B1 /* XCRemoteSwiftPackageReference "ScreenObject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Automattic/ScreenObject";
+			requirement = {
+				branch = "always-compute-at-runtime";
+				kind = branch;
+			};
+		};
 		3F762E8D2677F19C0088CD45 /* XCRemoteSwiftPackageReference "XCUITestHelpers" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Automattic/XCUITestHelpers";
@@ -4687,6 +4703,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3F4BA07D26CDF295000619B1 /* ScreenObject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F4BA07C26CDF295000619B1 /* XCRemoteSwiftPackageReference "ScreenObject" */;
+			productName = ScreenObject;
+		};
 		3F762E8E2677F19C0088CD45 /* XCUITestHelpers */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3F762E8D2677F19C0088CD45 /* XCRemoteSwiftPackageReference "XCUITestHelpers" */;
