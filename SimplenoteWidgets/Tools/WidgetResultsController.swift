@@ -45,7 +45,10 @@ class WidgetResultsController {
         case .allNotes:
             return NSPredicate.predicateForNotes(deleted: false)
         case .tag(let tag):
-            return NSPredicate.predicateForNotes(tag: tag)
+            return NSCompoundPredicate(type: .and, subpredicates: [
+                NSPredicate.predicateForNotes(deleted: false),
+                NSPredicate.predicateForNotes(tag: tag)
+            ])
         }
     }
 
