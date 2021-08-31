@@ -56,15 +56,13 @@ extension SPObjectManager {
             newNote.content = content
         }
 
-        if let tags = tags {
-            for tag in tags {
-                if tag.isEmpty {
-                    continue
-                }
+        let validator = TagTextFieldInputValidator()
+        tags?
+            .compactMap({ validator.preprocessForPasting(tag: $0) })
+            .forEach { tag in
                 newNote.addTag(tag)
                 SPObjectManager.shared().createTag(from: tag)
             }
-        }
 
         return newNote
     }
