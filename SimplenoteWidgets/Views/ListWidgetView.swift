@@ -6,8 +6,6 @@ struct ListWidgetView: View {
     @Environment(\.widgetFamily) var widgetFamily
 
     var body: some View {
-        let numberOfRows = rows(for: widgetFamily)
-
         GeometryReader { geometry in
             ZStack {
                 HStack(alignment: .top) {
@@ -15,8 +13,7 @@ struct ListWidgetView: View {
                         ListWidgetHeaderView(tag: entry.widgetTag)
                             .padding(.trailing, Constants.sidePadding)
                             .padding([.bottom, .top], Constants.topAndBottomPadding)
-                        NoteListTable(entry: entry,
-                                      numberOfRows: numberOfRows,
+                        NoteListTable(rows: rows,
                                       geometry: geometry)
                             .multilineTextAlignment(.leading)
                     }
@@ -29,7 +26,7 @@ struct ListWidgetView: View {
         }
     }
 
-    func rows(for widgetFamily: WidgetFamily) -> Int {
+    func numberOfRows(for widgetFamily: WidgetFamily) -> Int {
         switch widgetFamily {
         case .systemLarge:
             return Constants.largeRows
@@ -37,7 +34,22 @@ struct ListWidgetView: View {
             return Constants.mediumRows
         }
     }
+
+    var rows: [Row] {
+        let data = entry.noteProxies.map({ Row.note($0) })
+        var rows: [Row] = []
+        for index in .zero..<numberOfRows(for: widgetFamily) {
+            rows.append((data.indices.contains(index)) ? data[index] : .empty)
+        }
+        return rows
+    }
 }
+
+enum Row {
+    case note(ListWidgetNoteProxy)
+    case empty
+}
+
 
 private struct Constants {
     static let mediumRows = 3

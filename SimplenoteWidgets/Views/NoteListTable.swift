@@ -1,24 +1,23 @@
 import SwiftUI
 
 struct NoteListTable: View {
-    let entry: ListWidgetEntry
-    let numberOfRows: Int
+    let rows: [Row]
     let geometry: GeometryProxy
 
     var body: some View {
         let width = geometry.size.width - Constants.sidePadding
-        let height = round((geometry.size.height - Constants.headerSize) / CGFloat(numberOfRows))
-        let proxies = entry.noteProxies
+        let height = round((geometry.size.height - Constants.headerSize) / CGFloat(rows.count))
 
-        ForEach(.zero ..< numberOfRows) { index in
-            let isLastRow = index == (numberOfRows - 1)
+        ForEach(.zero ..< (rows.count)) { index in
+            let isLastRow = index == (rows.count - 1)
+            let row = rows[index]
 
-            if proxies.indices.contains(index) {
-                let proxy = proxies[index]
+            switch row {
+            case .note(let proxy):
                 Link(destination: proxy.url) {
                     NoteListRow(noteTitle: proxy.title, width: width, height: height, lastRow: isLastRow)
                 }
-            } else {
+            case .empty:
                 NoteListRow(noteTitle: "", width: width, height: height, lastRow: isLastRow)
             }
         }
