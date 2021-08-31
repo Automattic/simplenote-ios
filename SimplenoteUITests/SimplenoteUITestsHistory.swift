@@ -18,9 +18,8 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
         NoteList.openAllNotes()
     }
 
-    override class func tearDown() {
-        NoteList.trashAllNotes()
-        Trash.empty()
+    override func tearDownWithError() throws {
+        History.close()
     }
 
     func testHistoryCanBeDismissed() throws {
@@ -29,9 +28,6 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
 
         trackStep()
         NoteList.addNoteTap()
-        NoteEditorAssert.editorShown()
-
-        trackStep()
         NoteEditor.clearAndEnterText(enteredValue: noteText)
         NoteEditor.openHistory()
         HistoryAssert.historyShown()
@@ -39,9 +35,6 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
         trackStep()
         History.close()
         HistoryAssert.historyDismissed()
-
-        NoteEditor.leaveEditor()
-        NoteList.trashNote(noteName: noteText)
     }
 
     func testRestoreNoteButtonIsDisabledByDefault() throws {
@@ -50,20 +43,11 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
 
         trackStep()
         NoteList.addNoteTap()
-        NoteEditorAssert.editorShown()
-
-        trackStep()
         NoteEditor.clearAndEnterText(enteredValue: noteText)
+        NoteEditorAssert.textViewWithExactValueShownOnce(value: noteText)
         NoteEditor.openHistory()
         HistoryAssert.historyShown()
-
-        trackStep()
         HistoryAssert.restoreButtonIsDisabled()
-
-        trackStep()
-        History.close()
-        NoteEditor.leaveEditor()
-        NoteList.trashNote(noteName: noteText)
     }
 
     func testRestoreButtonIsEnabledWhenAPreviousVersionIsSelected() throws {
@@ -73,24 +57,14 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
 
         trackStep()
         NoteList.addNoteTap()
-        NoteEditorAssert.editorShown()
-
-        trackStep()
         NoteEditor.clearAndEnterText(enteredValue: initialNoteText)
         NoteEditor.waitBeforeEditingText(delayInSeconds: 3, newText: editedNoteText)
-
-        trackStep()
         NoteEditor.openHistory()
         HistoryAssert.historyShown()
 
         trackStep()
         History.setSliderPosition(position: 0.0)
         HistoryAssert.restoreButtonIsEnabled()
-
-        trackStep()
-        History.close()
-        NoteEditor.leaveEditor()
-        NoteList.trashNote(noteName: editedNoteText)
     }
 
     func testCanRestorePreviousVersion() throws {
@@ -100,13 +74,8 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
 
         trackStep()
         NoteList.addNoteTap()
-        NoteEditorAssert.editorShown()
-
-        trackStep()
         NoteEditor.clearAndEnterText(enteredValue: initialNoteText)
         NoteEditor.waitBeforeEditingText(delayInSeconds: 3, newText: editedNoteText)
-
-        trackStep()
         NoteEditor.openHistory()
         HistoryAssert.historyShown()
 
@@ -114,11 +83,6 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
         History.setSliderPosition(position: 0.0)
         History.restoreNote()
         NoteEditorAssert.textViewWithExactValueShownOnce(value: initialNoteText)
-
-        trackStep()
-        History.close()
-        NoteEditor.leaveEditor()
-        NoteList.trashNote(noteName: initialNoteText)
     }
 
     func testRestoredVersionIsAddedOnTopOfTheOtherChanges() throws {
@@ -128,15 +92,12 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
 
         trackStep()
         NoteList.addNoteTap()
-        NoteEditorAssert.editorShown()
-
-        trackStep()
         NoteEditor.clearAndEnterText(enteredValue: initialNoteText)
         NoteEditor.waitBeforeEditingText(delayInSeconds: 3, newText: editedNoteText)
-
-        trackStep()
         NoteEditor.openHistory()
         HistoryAssert.historyShown()
+
+        trackStep()
         History.setSliderPosition(position: 0.0)
         History.restoreNote()
         NoteEditorAssert.textViewWithExactValueShownOnce(value: initialNoteText)
@@ -144,6 +105,8 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
         trackStep()
         NoteEditor.openHistory()
         HistoryAssert.historyShown()
+
+        trackStep()
         History.setSliderPosition(position: 1.0)
         NoteEditorAssert.textViewWithExactValueShownOnce(value: initialNoteText)
 
@@ -154,11 +117,6 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
         trackStep()
         History.setSliderPosition(position: 0.0)
         NoteEditorAssert.textViewWithExactValueShownOnce(value: initialNoteText)
-
-        trackStep()
-        History.close()
-        NoteEditor.leaveEditor()
-        NoteList.trashNote(noteName: initialNoteText)
     }
 
     func testPreviousNoteIsNotRestoredWhenTheHistoryPanelIsDismissed() throws {
@@ -168,13 +126,8 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
 
         trackStep()
         NoteList.addNoteTap()
-        NoteEditorAssert.editorShown()
-
-        trackStep()
         NoteEditor.clearAndEnterText(enteredValue: initialNoteText)
         NoteEditor.waitBeforeEditingText(delayInSeconds: 3, newText: editedNoteText)
-
-        trackStep()
         NoteEditor.openHistory()
         HistoryAssert.historyShown()
 
@@ -182,10 +135,6 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
         History.setSliderPosition(position: 0.0)
         History.close()
         NoteEditorAssert.textViewWithExactValueShownOnce(value: editedNoteText)
-
-        trackStep()
-        NoteEditor.leaveEditor()
-        NoteList.trashNote(noteName: editedNoteText)
     }
 
     func testHistoryIsKeptAfterRecoveringNoteFromTrash() throws {
@@ -195,23 +144,26 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
 
         trackStep()
         NoteList.addNoteTap()
-        NoteEditorAssert.editorShown()
-
-        trackStep()
         NoteEditor.clearAndEnterText(enteredValue: initialNoteText)
         NoteEditor.waitBeforeEditingText(delayInSeconds: 3, newText: editedNoteText)
-
-        trackStep()
         NoteEditor.leaveEditor()
-        NoteList.trashNote(noteName: editedNoteText)
+        NoteListAssert.noteExists(noteName: editedNoteText)
 
         trackStep()
+        NoteList.trashNote(noteName: editedNoteText)
         Trash.open()
+        TrashAssert.noteExists(noteName: editedNoteText)
+
+        trackStep()
         Trash.restoreNote(noteName: editedNoteText)
+        TrashAssert.noteAbsent(noteName: editedNoteText)
 
         trackStep()
         NoteList.openAllNotes()
         NoteList.openNote(noteName: editedNoteText)
+        NoteEditorAssert.textViewWithExactValueShownOnce(value: editedNoteText)
+
+        trackStep()
         NoteEditor.openHistory()
         HistoryAssert.historyShown()
 
@@ -219,11 +171,6 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
         History.setSliderPosition(position: 0.0)
         History.restoreNote()
         NoteEditorAssert.textViewWithExactValueShownOnce(value: initialNoteText)
-
-        trackStep()
-        History.close()
-        NoteEditor.leaveEditor()
-        NoteList.trashNote(noteName: initialNoteText)
     }
 
 }
