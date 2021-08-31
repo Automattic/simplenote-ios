@@ -114,12 +114,9 @@ extension SPAppDelegate {
         }
 
         if let tag = url.internalTagKey {
-            switch tag {
-            case String():
-                selectedTag = nil
-            default:
-                selectedTag = SPObjectManager.shared().tagExists(tag) ? tag : selectedTag
-            }
+            selectedTag = SPObjectManager.shared().tagExists(tag) ? tag : selectedTag
+        } else {
+            selectedTag = nil
         }
 
         navigationController.presentedViewController?.dismiss(animated: true, completion: nil)
