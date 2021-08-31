@@ -25,7 +25,7 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
 
     func testHistoryCanBeDismissed() throws {
         trackTest()
-        let noteText = notePrefix + getRandonId()
+        let noteText = notePrefix + getRandomId()
 
         trackStep()
         NoteList.addNoteTap()
@@ -46,7 +46,7 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
 
     func testRestoreNoteButtonIsDisabledByDefault() throws {
         trackTest()
-        let noteText = notePrefix + getRandonId()
+        let noteText = notePrefix + getRandomId()
 
         trackStep()
         NoteList.addNoteTap()
@@ -68,8 +68,8 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
 
     func testRestoreButtonIsEnabledWhenAPreviousVersionIsSelected() throws {
         trackTest()
-        let initialNoteText = notePrefix + getRandonId()
-        let editedNoteText = notePrefix + getRandonId()
+        let initialNoteText = notePrefix + getRandomId()
+        let editedNoteText = notePrefix + getRandomId()
 
         trackStep()
         NoteList.addNoteTap()
@@ -95,8 +95,8 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
 
     func testCanRestorePreviousVersion() throws {
         trackTest()
-        let initialNoteText = notePrefix + getRandonId()
-        let editedNoteText = notePrefix + getRandonId()
+        let initialNoteText = notePrefix + getRandomId()
+        let editedNoteText = notePrefix + getRandomId()
 
         trackStep()
         NoteList.addNoteTap()
@@ -123,8 +123,8 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
 
     func testRestoredVersionIsAddedOnTopOfTheOtherChanges() throws {
         trackTest()
-        let initialNoteText = notePrefix + getRandonId()
-        let editedNoteText = notePrefix + getRandonId()
+        let initialNoteText = notePrefix + getRandomId()
+        let editedNoteText = notePrefix + getRandomId()
 
         trackStep()
         NoteList.addNoteTap()
@@ -163,8 +163,8 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
 
     func testPreviousNoteIsNotRestoredWhenTheHistoryPanelIsDismissed() throws {
         trackTest()
-        let initialNoteText = notePrefix + getRandonId()
-        let editedNoteText = notePrefix + getRandonId()
+        let initialNoteText = notePrefix + getRandomId()
+        let editedNoteText = notePrefix + getRandomId()
 
         trackStep()
         NoteList.addNoteTap()
@@ -190,8 +190,8 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
 
     func testHistoryIsKeptAfterRecoveringNoteFromTrash() throws {
         trackTest()
-        let initialNoteText = notePrefix + getRandonId()
-        let editedNoteText = notePrefix + getRandonId()
+        let initialNoteText = notePrefix + getRandomId()
+        let editedNoteText = notePrefix + getRandomId()
 
         trackStep()
         NoteList.addNoteTap()

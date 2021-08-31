@@ -63,9 +63,9 @@ func populateNoteList(title: String, numberToCreate: Int) {
     }
 }
 
-func getRandonId() -> String.SubSequence {
+func getRandomId() -> String {
     let id = NSDate().timeIntervalSince1970.description.suffix(6)
-    return id
+    return String(id)
 }
 
 class Table {
