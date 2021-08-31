@@ -7,7 +7,9 @@ extension URL {
             return URL(string: .simplenotePath(withHost: SimplenoteConstants.simplenoteInternalTagHost))!
         }
 
-        components.query = tagQuery(for: tag)
+        components.queryItems = [
+            URLQueryItem(name: Constants.tagQueryBase, value: tag)
+        ]
 
         return components.url!
     }
@@ -18,18 +20,16 @@ extension URL {
         }
 
         if let tag = tag {
-            components.query = tagQuery(for: tag)
+            components.queryItems = [
+                URLQueryItem(name: Constants.tagQueryBase, value: tag)
+            ]
         }
 
         return components.url!
     }
-
-    static private func tagQuery(for tag: String) -> String {
-        Constants.tagQueryBase + tag
-    }
 }
 
 private struct Constants {
-    static let tagQueryBase = "tag="
+    static let tagQueryBase = "tag"
     static let newNotePath = "new"
 }
