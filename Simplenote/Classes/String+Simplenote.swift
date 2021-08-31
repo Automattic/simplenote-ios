@@ -195,7 +195,7 @@ extension String {
 // MARK: Replacing newlines with spaces
 extension String {
     func replacingNewlinesWithSpaces() -> String {
-        if self.count == .zero {
+        if isEmpty {
             return self
         }
         let components = self.components(separatedBy: .newlines)

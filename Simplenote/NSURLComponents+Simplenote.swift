@@ -10,10 +10,10 @@ extension NSURLComponents {
 
     @objc
     func tagsFromQuery() -> [String]? {
-        let tags = queryItems?.first(where: { query in
-            query.name == "tag"
-        })
-
-        return tags?.value?.components(separatedBy: .whitespacesAndNewlines)
+        queryItems?
+            .filter({ $0.name == "tag" })
+            .compactMap({ $0.value })
+            .flatMap({ $0.components(separatedBy: .whitespacesAndNewlines) })
+            .filter({ !$0.isEmpty })
     }
 }
