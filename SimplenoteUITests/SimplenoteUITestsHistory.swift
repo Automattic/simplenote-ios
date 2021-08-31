@@ -202,7 +202,7 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
         NoteEditor.waitBeforeEditingText(delayInSeconds: 3, newText: editedNoteText)
 
         trackStep()
-        getToAllNotes()
+        NoteEditor.leaveEditor()
         NoteList.trashNote(noteName: editedNoteText)
 
         trackStep()
