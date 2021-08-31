@@ -31,17 +31,7 @@ struct NoteWidgetProvider: IntentTimelineProvider {
     typealias Intent = NoteWidgetIntent
     typealias Entry = NoteWidgetEntry
 
-    let coreDataManager: CoreDataManager
-    let widgetResultsController: WidgetResultsController
-
-    init() {
-        do {
-            self.coreDataManager = try CoreDataManager(StorageSettings().sharedStorageURL, for: .widgets)
-            self.widgetResultsController = WidgetResultsController(context: coreDataManager.managedObjectContext)
-        } catch {
-            fatalError("Couldn't setup dataController")
-        }
-    }
+    let coreDataWrapper = WidgetCoreDataWrapper()
 
     func placeholder(in context: Context) -> NoteWidgetEntry {
         return NoteWidgetEntry.placeholder(loggedIn: WidgetDefaults.shared.loggedIn)
@@ -49,7 +39,7 @@ struct NoteWidgetProvider: IntentTimelineProvider {
 
     func getSnapshot(for configuration: NoteWidgetIntent, in context: Context, completion: @escaping (NoteWidgetEntry) -> Void) {
         guard WidgetDefaults.shared.loggedIn,
-            let note = widgetResultsController.firstNote() else {
+              let note = coreDataWrapper.resultsController()?.firstNote() else {
             completion(placeholder(in: context))
             return
         }
@@ -62,7 +52,7 @@ struct NoteWidgetProvider: IntentTimelineProvider {
         guard WidgetDefaults.shared.loggedIn,
               let widgetNote = configuration.note,
               let simperiumKey = widgetNote.identifier,
-              let note = widgetResultsController.note(forSimperiumKey: simperiumKey) else {
+              let note = coreDataWrapper.resultsController()?.note(forSimperiumKey: simperiumKey) else {
             completion(Timeline(entries: [placeholder(in: context)], policy: .never))
             return
         }

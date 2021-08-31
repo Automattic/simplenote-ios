@@ -1,6 +1,6 @@
 import Foundation
 
-class CoreDataWidgetWrapper {
+class WidgetCoreDataWrapper {
     private lazy var coreDataManager: CoreDataManager = {
         do {
             return try CoreDataManager(StorageSettings().sharedStorageURL, for: .widgets)

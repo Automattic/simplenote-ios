@@ -2,19 +2,7 @@ import Intents
 import CoreData
 
 class IntentHandler: INExtension {
-    let coreDataManager: CoreDataManager
-    let widgetResultsController: WidgetResultsController
-
-    override init() {
-        do {
-            self.coreDataManager = try CoreDataManager(StorageSettings().sharedStorageURL, for: .intents)
-            self.widgetResultsController = WidgetResultsController(context: coreDataManager.managedObjectContext)
-        } catch {
-            fatalError()
-        }
-        super.init()
-    }
-
+    let coreDataWrapper = WidgetCoreDataWrapper()
 
     override func handler(for intent: INIntent) -> Any {
         return self
@@ -28,7 +16,7 @@ extension IntentHandler: NoteWidgetIntentHandling {
             return
         }
 
-        guard let notes = widgetResultsController.notes() else {
+        guard let notes = coreDataWrapper.resultsController()?.notes() else {
             completion(nil, WidgetError.fetchError)
             return
         }
@@ -46,7 +34,7 @@ extension IntentHandler: NoteWidgetIntentHandling {
 
     func defaultNote(for intent: NoteWidgetIntent) -> WidgetNote? {
         guard WidgetDefaults.shared.loggedIn,
-              let note = widgetResultsController.firstNote() else {
+              let note = coreDataWrapper.resultsController()?.firstNote() else {
             return nil
         }
 
@@ -61,7 +49,7 @@ extension IntentHandler: ListWidgetIntentHandling {
             return
         }
 
-        guard let tags = widgetResultsController.tags() else {
+        guard let tags = coreDataWrapper.resultsController()?.tags() else {
             completion(nil, WidgetError.fetchError)
             return
         }

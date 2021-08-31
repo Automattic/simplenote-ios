@@ -33,18 +33,7 @@ struct ListWidgetProvider: IntentTimelineProvider {
     typealias Intent = ListWidgetIntent
     typealias Entry = ListWidgetEntry
 
-    let coreDataManager: CoreDataManager
-    let widgetResultsController: WidgetResultsController
-
-    init() {
-        do {
-            self.coreDataManager = try CoreDataManager(StorageSettings().sharedStorageURL, for: .widgets)
-            self.widgetResultsController = WidgetResultsController(context: coreDataManager.managedObjectContext)
-        } catch {
-            fatalError("Couldn't setup dataController")
-        }
-    }
-
+    let coreDataWrapper = WidgetCoreDataWrapper()
 
     func placeholder(in context: Context) -> ListWidgetEntry {
         return ListWidgetEntry.placeholder(loggedIn: WidgetDefaults.shared.loggedIn)
@@ -52,7 +41,7 @@ struct ListWidgetProvider: IntentTimelineProvider {
 
     func getSnapshot(for configuration: ListWidgetIntent, in context: Context, completion: @escaping (ListWidgetEntry) -> Void) {
         guard WidgetDefaults.shared.loggedIn,
-              let allNotes = widgetResultsController.notes() else {
+              let allNotes = coreDataWrapper.resultsController()?.notes() else {
             completion(placeholder(in: context))
             return
         }
@@ -68,7 +57,7 @@ struct ListWidgetProvider: IntentTimelineProvider {
         // Confirm valid configuration
         guard WidgetDefaults.shared.loggedIn,
               let widgetTag = configuration.tag,
-              let notes = widgetResultsController.notes(filteredBy: TagsFilter(from: widgetTag.identifier), limit: Constants.noteFetchLimit) else {
+              let notes = coreDataWrapper.resultsController()?.notes(filteredBy: TagsFilter(from: widgetTag.identifier), limit: Constants.noteFetchLimit) else {
             completion(Timeline(entries: [placeholder(in: context)], policy: .never))
             return
         }
