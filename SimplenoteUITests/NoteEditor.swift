@@ -187,8 +187,8 @@ class NoteEditor {
 
     class func openHistory() {
         app.navigationBars[UID.NavBar.allNotes].buttons[UID.Button.noteEditorMenu].tap()
-        guard app.tables.staticTexts[UID.Text.nodeEditorOptionsHistory].exists else {return}
-        app.tables.staticTexts[UID.Text.nodeEditorOptionsHistory ].tap()
+        guard app.tables.staticTexts[UID.Text.noteEditorOptionsHistory].exists else {return}
+        app.tables.staticTexts[UID.Text.noteEditorOptionsHistory ].tap()
     }
 
 }

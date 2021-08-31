@@ -106,7 +106,6 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
         NoteEditor.clearAndEnterText(enteredValue: initialNoteText)
         NoteEditor.waitBeforeEditingText(delayInSeconds: 3, newText: editedNoteText)
 
-
         trackStep()
         NoteEditor.openHistory()
         HistoryAssert.historyShown()
@@ -174,7 +173,6 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
         trackStep()
         NoteEditor.clearAndEnterText(enteredValue: initialNoteText)
         NoteEditor.waitBeforeEditingText(delayInSeconds: 3, newText: editedNoteText)
-
 
         trackStep()
         NoteEditor.openHistory()

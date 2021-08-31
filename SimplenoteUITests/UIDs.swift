@@ -66,7 +66,7 @@ enum UID {
     enum Text {
         static let noteEditorPreview = "Preview"
         static let noteEditorOptionsMarkdown = "Markdown"
-        static let nodeEditorOptionsHistory = "History"
+        static let noteEditorOptionsHistory = "History"
         static let allNotesInProgress = "In progress"
         static let searchByTag = "Search by Tag"
         static let notes = "Notes"
