@@ -1,1 +1,1 @@
-simplenote,not,tutma,tutucu,notlar,eşitleme,paylaşma,basit,markdown,etiket,yapılacaklar,liste,kilit
+notlar,metin,planlayıcı,günlük,eşitleme,yapılacaklar,bulut,defter,basit,not defteri,etiket

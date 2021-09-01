@@ -102,10 +102,11 @@ private extension AccountVerificationViewController {
         button?.inProgress = true
         updateButtons(isEnabled: false)
 
-        controller.verify { [weak self] (success) in
-            if success {
+        controller.verify { [weak self] (result) in
+            switch result {
+            case .success:
                 onSuccess?()
-            } else {
+            case .failure:
                 self?.showErrorMessage()
             }
 

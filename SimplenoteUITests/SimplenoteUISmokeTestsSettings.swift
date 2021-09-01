@@ -54,6 +54,4 @@ class SimplenoteUISmokeTestsSettings: XCTestCase {
         NoteListAssert.contentIsShown(for: note)
         NoteListAssert.note(note, hasHeight: cellHeightUsual)
     }
-
-
 }

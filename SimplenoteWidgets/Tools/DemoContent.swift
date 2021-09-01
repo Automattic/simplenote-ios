@@ -1,9 +1,25 @@
 import Foundation
 
 struct DemoContent {
-    static let singleNoteTitle = "Twelve Tone Serialism"
-    static let singleNoteContent = "The twelve-tone technique is often closely related with the compositional style, serialism. Fundamentally, twelve-tone serialism is a compositional technique where all 12 notes of the chromatic scale are played with equal frequency throughout the piece without any emphasis on any one note. For this reason, twelve-tone serialism avoids being in any key. Arnold Schoenberg was arguably the most influential composers who embraced the twelve-tone technique. Schoenberg described the system as a “Method of composing with twelve tones which are related only with one another.”"
+    static let singleNoteTitle = "Lorem ipsum dolor sit amet"
+    static let singleNoteContent = ", consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nulla facilisi nullam vehicula ipsum a arcu cursus. Cursus risus at ultrices mi tempus imperdiet nulla malesuada. Vitae aliquet nec ullamcorper sit amet risus nullam eget felis. Ultrices sagittis orci a scelerisque. Et ligula ullamcorper malesuada proin libero nunc. Ut diam quam nulla porttitor massa. Quam nulla porttitor massa id neque aliquam. Urna cursus eget nunc scelerisque viverra mauris in aliquam. Turpis nunc eget lorem dolor. Ac turpis egestas maecenas pharetra convallis posuere. Gravida in fermentum et sollicitudin ac. Tempor orci eu lobortis elementum nibh tellus molestie. Nec tincidunt praesent semper feugiat nibh sed pulvinar proin. Interdum velit laoreet id donec ultrices tincidunt. Aliquam vestibulum morbi blandit cursus risus at ultrices mi. Aliquet lectus proin nibh nisl condimentum id venenatis. Consequat ac felis donec et odio pellentesque. Lobortis elementum nibh tellus molestie. Sed velit dignissim sodales ut eu sem integer vitae justo.”"
     static let singleNoteContentAlt = "- [] Check item one \n- [] check item two\n- [] check item three"
+    static let singleNoteURL = URL(string: .simplenotePath())!
 
-    static let demoURL = URL(string: SimplenoteConstants.simplenoteScheme + "://")!
+    static let demoURL = URL(string: .simplenotePath())!
+
+    static let listTag = "Cursus"
+    static let listTitles = [
+        "Urna cursus eget nunc scelerisque",
+        "Lorem Ipsum",
+        "Interdum velit laoreet id donec ultrices",
+        "Nec tincidunt praesent semper",
+        "porttitor massa id neque aliquam",
+        "Gravida in fermentum et sollicitudin ac",
+        "Lobortis elementum nibh tellus molestie.",
+        "Lorem Ipsum"
+    ]
+    static let listProxies: [ListWidgetNoteProxy] = listTitles.map { (title) in
+        ListWidgetNoteProxy(title: title, url: demoURL)
+    }
 }

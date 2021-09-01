@@ -35,13 +35,6 @@ extension SPAppDelegate {
         let authenticator = simperium.authenticator
 
         authenticator.providerString = "simplenote.com"
-
-        guard BuildConfiguration.current == .internal else {
-            return
-        }
-
-        authenticator.authURL = SPCredentials.experimentalAuthURL
-        authenticator.customHTTPHeaders = ["Host": SPCredentials.experimentalAuthHost]
     }
 }
 
@@ -87,6 +80,11 @@ extension SPAppDelegate {
             PublishNoticePresenter.presentNotice(for: note)
         }
     }
+
+    @objc
+    func configureAccountDeletionController() {
+        accountDeletionController = AccountDeletionController()
+    }
 }
 
 // MARK: - URL Handlers and Deep Linking
@@ -103,6 +101,26 @@ extension SPAppDelegate {
 
         navigationController.presentedViewController?.dismiss(animated: true, completion: nil)
         noteListViewController.open(note, ignoringSearchQuery: true, animated: true)
+
+        return true
+    }
+
+    /// Opens the Note list displaying a tag associated with a given URL instance, when possible
+    ///
+    @objc
+    func handleOpenTagList(url: NSURL) -> Bool {
+        guard url.isInternalTagURL else {
+            return false
+        }
+
+        if let tag = url.internalTagKey {
+            selectedTag = SPObjectManager.shared().tagExists(tag) ? tag : selectedTag
+        } else {
+            selectedTag = nil
+        }
+
+        navigationController.presentedViewController?.dismiss(animated: true, completion: nil)
+        navigationController.popToRootViewController(animated: true)
 
         return true
     }
@@ -266,7 +284,7 @@ extension SPAppDelegate: SimperiumDelegate {
         if #available(iOS 14.0, *) {
             syncWidgetDefaults()
         }
-        
+
         setupVerificationController()
     }
 
@@ -289,6 +307,17 @@ extension SPAppDelegate: SimperiumDelegate {
 
     public func simperium(_ simperium: Simperium, didFailWithError error: Error) {
         SPTracker.refreshMetadataForAnonymousUser()
+
+        guard let simperiumError = SPSimperiumErrors(rawValue: (error as NSError).code) else {
+            return
+        }
+
+        switch simperiumError {
+        case .invalidToken:
+            logOutIfAccountDeletionRequested()
+        default:
+            break
+        }
     }
 }
 
@@ -415,6 +444,29 @@ extension SPAppDelegate {
     }
 }
 
+// MARK: - Account Deletion
+//
+extension SPAppDelegate {
+    @objc
+    func authenticateSimperiumIfAccountDeletionRequested() {
+        guard let deletionController = accountDeletionController,
+              deletionController.hasValidDeletionRequest else {
+            return
+        }
+
+        simperium.authenticateIfNecessary()
+    }
+
+    @objc
+    func logOutIfAccountDeletionRequested() {
+        guard accountDeletionController?.hasValidDeletionRequest == true else {
+            return
+        }
+
+        logoutAndReset(self)
+    }
+}
+
 // MARK: - Core Data
 //
 extension SPAppDelegate {
@@ -458,6 +510,7 @@ extension SPAppDelegate {
     @objc
     func syncWidgetDefaults() {
         let authenticated = simperium.user?.authenticated() ?? false
-        WidgetController.syncWidgetDefaults(authenticated: authenticated)
+        let sortMode = Options.shared.listSortMode
+        WidgetController.syncWidgetDefaults(authenticated: authenticated, sortMode: sortMode)
     }
 }

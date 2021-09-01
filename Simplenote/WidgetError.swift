@@ -24,7 +24,7 @@ extension WidgetError {
         case .appConfigurationError:
             return NSLocalizedString("Simplenote must be configured and logged in to setup widgets", comment: "Message displayed when app is not configured")
         case .fetchError:
-            return NSLocalizedString("Attempt to fetch entities from core data failed", comment: "Data Fetch error message")
+            return NSLocalizedString("Attempt to fetch entities failed.  Please try again later.", comment: "Data Fetch error message")
         }
     }
 }

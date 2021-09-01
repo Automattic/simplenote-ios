@@ -31,10 +31,14 @@ extension SPObjectManager {
         }
 
         let request = NSFetchRequest<Note>(entityName: Note.entityName)
-        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
-            .predicateForNotes(tag: tagName),
-            .predicateForNotes(deleted: includeDeleted)
-        ])
+
+        var predicates: [NSPredicate] = []
+        predicates.append(.predicateForNotes(tag: tagName))
+        if includeDeleted == false {
+            predicates.append(.predicateForNotes(deleted: includeDeleted))
+        }
+
+        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
 
         return (try? managedObjectContext.fetch(request)) ?? []
     }
@@ -45,28 +49,20 @@ extension SPObjectManager {
     }
 
     @objc
-    func newNote(from urlComponents: URLComponents) -> Note {
-        guard let queryItems = urlComponents.queryItems else {
-            return newDefaultNote()
-        }
-
+    func newNote(withContent content: String?, tags: [String]?) -> Note {
         let newNote = newDefaultNote()
 
-        for item in queryItems {
-            if item.name == "content" {
-                newNote.content = item.value
-            } else if item.name == "tag" {
-                if let tags = item.value?.components(separatedBy: " ") {
-                    for tag in tags {
-                        if tag.count == 0 {
-                            continue
-                        }
-                        newNote.addTag(tag)
-                        SPObjectManager.shared().createTag(from: tag)
-                    }
-                }
-            }
+        if let content = content {
+            newNote.content = content
         }
+
+        let validator = TagTextFieldInputValidator()
+        tags?
+            .compactMap({ validator.preprocessForPasting(tag: $0) })
+            .forEach { tag in
+                newNote.addTag(tag)
+                SPObjectManager.shared().createTag(from: tag)
+            }
 
         return newNote
     }

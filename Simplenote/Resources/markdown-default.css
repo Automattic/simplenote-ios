@@ -19,8 +19,6 @@ img {
 html {
     margin: 0;
     padding: 0;
-    background: #FFFFFF;
-    color: #111111;
     text-rendering: optimizeLegibility;
 }
 
@@ -34,7 +32,6 @@ html {
 
 ::-webkit-scrollbar-thumb {
     border-radius: 6px;
-    background: #84878a;
 }
 
 /* Same styles as app.simplenote.com/publish */
@@ -77,7 +74,6 @@ html {
 
 .note-detail-markdown h5, .note-detail-markdown h6 {
     font-size: 1em;
-    text-transform: uppercase;
 }
 
 .note-detail-markdown #title {
@@ -103,14 +99,9 @@ html {
     height: auto;
 }
 
-.note-detail-markdown a {
-    color: #3361cc;
-}
-
 .note-detail-markdown hr {
     border: 0;
     margin: 3.4em 0;
-    color: #4895d9;
     height: 1em;
 }
 
@@ -132,19 +123,13 @@ html {
     padding-left: 1.7em;
 }
 
-.note-detail-markdown code {
-    color: #899199;
-}
-
 .note-detail-markdown pre {
     padding: 1em;
     border-radius: 3px;
-    background: #f6f7f8;
 }
 
 .note-detail-markdown pre code {
     font-size: 85%;
-    color: #616870;
     background: transparent;
     width: 100%;
     overflow-x: auto;
@@ -159,12 +144,8 @@ html {
     width: 100%;
 }
 
-.note-detail-markdown table tr:nth-child(2n) {
-    background-color: #f6f7f8;
-}
-
 .note-detail-markdown table th, .note-detail-markdown table td {
-    border: 1px solid #c0c4c8;
+    border: 1px solid;
     padding: 6px 13px;
 }
 

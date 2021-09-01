@@ -17,7 +17,7 @@ class WidgetDefaults {
 
     var sortMode: SortMode {
         get {
-            SortMode(rawValue: defaults?.integer(forKey: .listSortMode) ?? 0) ?? .alphabeticallyAscending
+            SortMode(rawValue: defaults?.integer(forKey: .listSortMode) ?? .zero) ?? .alphabeticallyAscending
         }
         set {
             let payload = newValue.rawValue

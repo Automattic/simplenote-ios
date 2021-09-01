@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-06-29 11:32:19+0000 */
+/* Translation-Revision-Date: 2021-08-19 20:50:28+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: sv_SE */
@@ -60,6 +60,9 @@
 /* 5 minutes passcode lock timeout */
 "5 Minutes" = "5 minuter";
 
+/* Network connection issue notificaiton */
+"A network connection is required. Please, check your connection and try again." = "En nätverksanslutning krävs. Kontrollera din anslutning och försök igen.";
+
 /* Display app about screen */
 "About" = "Om";
 
@@ -83,11 +86,14 @@
    Title: No filters applied */
 "All Notes" = "Alla anteckningar";
 
+/* Delete account confirmation instructions */
+"An email has been sent to %@ Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation" = "Ett e-postmeddelande har skickats till %@. Kolla din inkorg och följ instruktionerna för att bekräfta kontoborttagningen.\n\nDitt konto kommer inte att tas bort förrän vi har mottagit din bekräftelse";
+
+/* Deletion error message */
+"An error occured. Please, try again. If the problem continues, contact us at support@simplenote.com for help." = "Ett fel uppstod. Försök igen. Om problemet fortsätter, kontakta oss på support@simplenote.com för hjälp.";
+
 /* Sign in error message */
 "An error was encountered while signing in." = "Ett fel uppstod vid inloggningen.";
-
-/* Engine URL Message */
-"AppEngine Endpoints" = "AppEngine-slutpunkter";
 
 /* No comment provided by engineer. */
 "Appearance" = "Utseende";
@@ -104,14 +110,14 @@
 /* User Authenticated */
 "Authenticated" = "Autentiserad";
 
-/* Engine URL Message */
-"Authentication Endpoints" = "Autentiseringsslutpunkter";
-
 /* The Simplenote blog */
 "Blog" = "Blogg";
 
 /* Terms of Service Legend *PREFIX*: printed in dark color */
 "By creating an account you agree to our" = "Genom att skapa ett konto godkänner du våra";
+
+/* Delete account confirmation alert message */
+"By deleting your account, all notes created with this account will be permanently deleted. This action is not reversible" = "Om du tar bort ditt konto kommer alla anteckningar som har skapats med kontot att tas bort permanent. Det går inte att ångra den här åtgärden.";
 
 /* Cancel Action
    Cancel action button
@@ -136,6 +142,9 @@
 
 /* Number of characters in the note */
 "Characters" = "Tecken";
+
+/* Title for delete account succes alert */
+"Check Your Email" = "Kontrollera din e-post";
 
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "Välj en fyrsiffrig låskod";
@@ -226,6 +235,10 @@
 /* PinLock screen \"delete\" button */
 "Delete" = "Ta bort";
 
+/* Delete account title and action
+   Display Delete Account Alert */
+"Delete Account" = "Ta bort konto";
+
 /* Delete a note from trash */
 "Delete Note" = "Ta bort anteckning";
 
@@ -293,7 +306,8 @@
 /* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "Ange lösenkod";
 
-/* Error Title */
+/* Deletion Error Title
+   Error Title */
 "Error" = "Fel";
 
 /* Get Help Description Label */
@@ -453,6 +467,9 @@
 /* Instant passcode lock timeout */
 "Off" = "Av";
 
+/* Confirm alert message */
+"Ok" = "Okej";
+
 /* No comment provided by engineer. */
 "On" = "På";
 
@@ -549,6 +566,9 @@
 
 /* Rename a tag */
 "Rename" = "Ändra namn";
+
+/* Title for account deletion confirm button */
+"Request Account Deletion" = "Begär borttagning av konto";
 
 /* Resend email button -> Verify your email screen */
 "Resend Email" = "Skicka e-post igen";
@@ -670,6 +690,9 @@
 
 /* Error when address is in use */
 "The email you've entered is already associated with a Simplenote account." = "Den angivna e-postadressen är redan associerad med ett Simplenote-konto.";
+
+/* Error when the network is inaccessible */
+"The network could not be reached." = "Nätverket kunde inte nås.";
 
 /* Onboarding Header Text */
 "The simplest way to keep notes." = "Det enklaste sättet att anteckna på.";
@@ -800,9 +823,6 @@
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "etikett:";
-
-/* Warning Title */
-"⚠️ Important" = " Viktigt";
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞 Felsökning aktiverad 🐞";

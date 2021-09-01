@@ -32,41 +32,45 @@ extension Note {
 }
 
 extension Note {
-    private var lines: [String]? {
-        content?.components(separatedBy: .newlines)
+    var title: String {
+        let (titleRange, _) = NoteContentHelper.structure(of: content)
+        return title(with: titleRange)
     }
 
-    var title: String {
-        guard let firstLine = lines?.first,
-              firstLine.count > 0 else {
+    private func title(with range: Range<String.Index>?) -> String {
+        guard let range = range, let content = content else {
             return Constants.defaultTitle
         }
-        return firstLine
+
+        let result = String(content[range])
+        return result.droppingPrefix(Constants.titleMarkdownPrefix)
     }
 
     var body: String {
-        guard var lines = lines else {
+        let (titleRange, _) = NoteContentHelper.structure(of: content)
+        return content(removing: titleRange)
+    }
+
+    private func content(removing range: Range<String.Index>?) -> String {
+        guard let range = range, var content = content else {
             // Note. Swift UI Text will crash if given String() so need to use this version of an empty string
             return ""
         }
-        lines.removeFirst()
-        return lines.joined(separator: .newline)
-    }
-
-    var limitedTitle: String {
-        String(title.prefix(Constants.previewCharacterLength))
+        content.removeSubrange(range)
+        return content
     }
 
     var url: URL {
         guard let simperiumKey = simperiumKey else {
-            return URL(string: SimplenoteConstants.simplenoteScheme + "://")!
+            return URL(string: .simplenotePath())!
         }
-        return URL(string: Constants.linkUrlBase + simperiumKey)!
+        return URL(string: .simplenotePath(withHost: SimplenoteConstants.simplenoteInterlinkHost) + simperiumKey)!
     }
 }
 
 private struct Constants {
-    static let defaultTitle = NSLocalizedString("Untitled Note", comment: "Default title for notes")
-    static let linkUrlBase = SimplenoteConstants.simplenoteScheme + "://" + SimplenoteConstants.simplenoteInterlinkHost + "/"
+    static let defaultTitle = NSLocalizedString("New Note...", comment: "Default title for notes")
     static let previewCharacterLength = 50
+    static let titleMarkdownPrefix = "# "
+    static let bodyPreviewCap = 500
 }

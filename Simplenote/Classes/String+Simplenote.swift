@@ -178,3 +178,37 @@ extension String {
         return components(separatedBy: string).count - 1
     }
 }
+
+// MARK: Simplenote URL Path
+extension String {
+    static func simplenotePath(withHost host: String? = nil) -> String {
+        let base = SimplenoteConstants.simplenoteScheme + "://"
+
+        guard let host = host else {
+            return base
+        }
+
+        return base + host + "/"
+    }
+}
+
+// MARK: Replacing newlines with spaces
+extension String {
+    func replacingNewlinesWithSpaces() -> String {
+        if isEmpty {
+            return self
+        }
+        var components = self.components(separatedBy: .newlines)
+        components.removeAll { $0.isEmpty }
+        return components.joined(separator: " ")
+    }
+}
+
+// MARK: Tag hash encoding
+extension String {
+    var byEncodingAsTagHash: String {
+        precomposedStringWithCanonicalMapping
+            .lowercased()
+            .addingPercentEncoding(withAllowedCharacters: .alphanumerics) ?? self as String
+    }
+}

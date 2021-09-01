@@ -2,59 +2,15 @@ import Foundation
 
 // MARK: - SignupRemote
 //
-class SignupRemote {
-    enum Result: Equatable {
-        static func == (lhs: SignupRemote.Result, rhs: SignupRemote.Result) -> Bool {
-            switch (lhs, rhs) {
-            case (.success, .success):
-                return true
-            case (.failure(let code1, _), .failure(let code2, _)):
-                return code1 == code2
-            default:
-                return false
-            }
+class SignupRemote: Remote {
+    func signup(with email: String, completion: @escaping (_ result: Result<Data?, RemoteError>) -> Void) {
+        let urlRequest = request(with: email)
 
-        }
-
-        case success
-        case failure(_ statusCode: Int, _ error: Error?)
+        performDataTask(with: urlRequest, completion: completion)
     }
 
-    private let urlSession: URLSession
-
-    init(urlSession: URLSession = URLSession.shared) {
-        self.urlSession = urlSession
-    }
-
-    /// Send signup request for specified email address
-    ///
-    func signup(with email: String, completion: @escaping (_ result: Result) -> Void) {
-        guard let request = request(with: email) else {
-            completion(.failure(0, nil))
-            return
-        }
-
-        let dataTask = urlSession.dataTask(with: request) { (data, response, error) in
-            DispatchQueue.main.async {
-                let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
-
-                // Check for 2xx status code
-                guard statusCode / 100 == 2 else {
-                    completion(.failure(statusCode, error))
-                    return
-                }
-
-                completion(.success)
-            }
-        }
-
-        dataTask.resume()
-    }
-
-    private func request(with email: String) -> URLRequest? {
-        guard let url = URL(string: SimplenoteConstants.signupURL) else {
-            return nil
-        }
+    private func request(with email: String) -> URLRequest {
+        let url = URL(string: SimplenoteConstants.signupURL)!
 
         var request = URLRequest(url: url,
                                  cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,

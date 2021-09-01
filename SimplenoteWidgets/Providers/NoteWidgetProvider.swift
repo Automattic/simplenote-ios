@@ -5,43 +5,51 @@ struct NoteWidgetEntry: TimelineEntry {
     let title: String
     let content: String
     let url: URL
+    let loggedIn: Bool
+    let state: State
+
+    enum State {
+        case standard
+        case noteMissing
+        case loggedOut
+    }
 }
 
 extension NoteWidgetEntry {
-    init(date: Date, note: Note) {
+    init(date: Date, note: Note, loggedIn: Bool = WidgetDefaults.shared.loggedIn, state: State = .standard) {
         self.init(date: date,
                   title: note.title,
                   content: note.body,
-                  url: note.url)
+                  url: note.url,
+                  loggedIn: loggedIn,
+                  state: state)
     }
 
-    static let placeholder = NoteWidgetEntry(date: Date(),
-                                             title: DemoContent.singleNoteTitle,
-                                             content: DemoContent.singleNoteContent,
-                                             url: DemoContent.demoURL)
+    static func placeholder(loggedIn: Bool = false, state: State = .standard) -> NoteWidgetEntry {
+        return NoteWidgetEntry(date: Date(),
+                               title: DemoContent.singleNoteTitle,
+                               content: DemoContent.singleNoteContent,
+                               url: DemoContent.demoURL,
+                               loggedIn: loggedIn,
+                               state: state)
+    }
+
 }
 
 struct NoteWidgetProvider: IntentTimelineProvider {
     typealias Intent = NoteWidgetIntent
     typealias Entry = NoteWidgetEntry
 
-    let coreDataManager: CoreDataManager!
-
-    init() {
-        do {
-            self.coreDataManager = try CoreDataManager(StorageSettings().sharedStorageURL, for: .widgets)
-        } catch {
-            fatalError("Couldn't setup dataController")
-        }
-    }
+    let coreDataWrapper = WidgetCoreDataWrapper()
 
     func placeholder(in context: Context) -> NoteWidgetEntry {
-        return NoteWidgetEntry.placeholder
+        return NoteWidgetEntry.placeholder()
     }
 
     func getSnapshot(for configuration: NoteWidgetIntent, in context: Context, completion: @escaping (NoteWidgetEntry) -> Void) {
-        guard let note = widgetDataController()?.firstNote() else {
-            completion(NoteWidgetEntry.placeholder)
+        guard WidgetDefaults.shared.loggedIn,
+              let note = coreDataWrapper.resultsController()?.firstNote() else {
+            completion(placeholder(in: context))
             return
         }
 
@@ -50,15 +58,21 @@ struct NoteWidgetProvider: IntentTimelineProvider {
 
     func getTimeline(for configuration: NoteWidgetIntent, in context: Context, completion: @escaping (Timeline<NoteWidgetEntry>) -> Void) {
         // Confirm valid configuration
+        guard WidgetDefaults.shared.loggedIn else {
+            completion(errorTimeline(withState: .loggedOut))
+            return
+        }
+
         guard let widgetNote = configuration.note,
               let simperiumKey = widgetNote.identifier,
-              let note = widgetDataController()?.note(forSimperiumKey: simperiumKey) else {
+              let note = coreDataWrapper.resultsController()?.note(forSimperiumKey: simperiumKey) else {
+            completion(errorTimeline(withState: .noteMissing))
             return
         }
 
         // Prepare timeline entry for every hour for the next 6 hours
         // Create a new set of entries at the end of the 6 entries
-        let entries: [NoteWidgetEntry] = Constants.entryRange.compactMap({ (index)  in
+        let entries: [NoteWidgetEntry] = WidgetConstants.rangeForSixEntries.compactMap({ (index)  in
             guard let date = Date().increased(byHours: index) else {
                 return nil
             }
@@ -70,14 +84,7 @@ struct NoteWidgetProvider: IntentTimelineProvider {
         completion(timeline)
     }
 
-    private func widgetDataController() -> WidgetDataController? {
-        let isPreview = ProcessInfo.processInfo.environment[Constants.environmentXcodePreviewsKey] != Constants.isPreviews
-        return try? WidgetDataController(context: coreDataManager.managedObjectContext, isPreview: isPreview)
+    private func errorTimeline(withState state: NoteWidgetEntry.State) -> Timeline<NoteWidgetEntry> {
+        Timeline(entries: [NoteWidgetEntry.placeholder(state: state)], policy: .never)
     }
-}
-
-private struct Constants {
-    static let environmentXcodePreviewsKey = "XCODE_RUNNING_FOR_PREVIEWS"
-    static let isPreviews = "1"
-    static let entryRange = 0..<6
 }

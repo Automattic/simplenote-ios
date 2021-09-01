@@ -8,17 +8,24 @@ struct WidgetController {
                 return
             }
 
-            if widgets.contains(where: { widget in
-                widget.configuration as? NoteWidgetIntent != nil
+            if widgets.contains(where: { (widget) -> Bool in
+                switch widget.configuration {
+                case is NoteWidgetIntent:
+                    return true
+                case is ListWidgetIntent:
+                    return true
+                default:
+                    return false
+                }
             }) {
                 WidgetCenter.shared.reloadAllTimelines()
             }
         }
     }
 
-    static func syncWidgetDefaults(authenticated: Bool) {
+    static func syncWidgetDefaults(authenticated: Bool, sortMode: SortMode) {
         let widgetDefaults = WidgetDefaults.shared
-        widgetDefaults.sortMode = Options.shared.listSortMode
+        widgetDefaults.sortMode = sortMode
         widgetDefaults.loggedIn = authenticated
     }
 }

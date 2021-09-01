@@ -8,5 +8,6 @@ struct SimplenoteWidgets: WidgetBundle {
     var body: some Widget {
         NewNoteWidget()
         NoteWidget()
+        ListWidget()
     }
 }

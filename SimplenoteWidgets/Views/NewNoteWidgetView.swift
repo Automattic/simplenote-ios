@@ -7,11 +7,9 @@ struct NewNoteWidgetView: View {
         ZStack {
             VStack(alignment: .leading) {
                 HStack {
-                    Image(Constants.newNoteImage)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .foregroundColor(.white)
-                        .frame(width: Constants.side, height: Constants.side, alignment: .center)
+                    NewNoteImage(size: Constants.side,
+                                 foregroundColor: .white,
+                                 backgroundColor: .widgetBlueBackgroundColor)
                     Spacer()
                 }
                 Spacer()
@@ -21,8 +19,8 @@ struct NewNoteWidgetView: View {
             }
             .padding(Constants.overallPadding)
         }
-        .background(Color.newNoteBackgroundColor)
-        .widgetURL(URL(string: SimplenoteConstants.simplenoteScheme + "://" + Constants.newNoteHost))
+        .background(Color.widgetBlueBackgroundColor)
+        .widgetURL(URL.newNoteURL())
     }
 }
 
@@ -37,7 +35,5 @@ struct NewNoteView_Previews: PreviewProvider {
 private struct Constants {
     static let side = CGFloat(48)
     static let overallPadding = CGFloat(16)
-    static let newNoteImage = "icon_new_note"
-    static let newNoteText = "New Note..."
-    static let newNoteHost = "new"
+    static let newNoteText = NSLocalizedString("New Note...", comment: "Text for new note button")
 }

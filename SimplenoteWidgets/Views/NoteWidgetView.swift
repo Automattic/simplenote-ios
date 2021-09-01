@@ -4,7 +4,6 @@ import WidgetKit
 struct NoteWidgetView: View {
     var entry: NoteWidgetEntry
     @Environment(\.widgetFamily) var widgetFamily
-    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         GeometryReader { geometry in
@@ -21,7 +20,8 @@ struct NoteWidgetView: View {
                 .ignoresSafeArea()
                 .widgetURL(entry.url)
             }
-            .background(Color(for: colorScheme, light: .white, dark: .darkGray1))
+            .background(Color.widgetBackgroundColor)
+            .redacted(reason: [entry.loggedIn ? [] : .placeholder])
         }
     }
 }
@@ -34,9 +34,9 @@ struct NoteWidgetView_Previews: PreviewProvider {
     static var previews: some View {
 
         Group {
-            NoteWidgetView(entry: NoteWidgetEntry.placeholder)
+            NoteWidgetView(entry: NoteWidgetEntry.placeholder())
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
-            NoteWidgetView(entry: NoteWidgetEntry.placeholder)
+            NoteWidgetView(entry: NoteWidgetEntry.placeholder())
                 .previewContext(WidgetPreviewContext(family: .systemMedium)).colorScheme(.dark)
         }
     }
