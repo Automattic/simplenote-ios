@@ -72,6 +72,12 @@ extension String {
     func locationOfFirstCharacter(from searchSet: CharacterSet,
                                   startingFrom startLocation: String.Index,
                                   backwards: Bool = false) -> String.Index? {
+        rangeOfFirstCharacter(from: searchSet, startingFrom: startLocation, backwards: backwards)?.lowerBound
+    }
+
+    func rangeOfFirstCharacter(from searchSet: CharacterSet,
+                               startingFrom startLocation: String.Index,
+                               backwards: Bool = false) -> Range<String.Index>? {
 
         guard startLocation <= endIndex else {
             return nil
@@ -83,7 +89,7 @@ extension String {
                                               options: backwards ? .backwards : [],
                                               range: range)
 
-        return characterRange?.lowerBound
+        return characterRange
     }
 }
 

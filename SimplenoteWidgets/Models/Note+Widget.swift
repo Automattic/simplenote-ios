@@ -33,8 +33,8 @@ extension Note {
 
 extension Note {
     var title: String {
-        let (titleRange, _) = NoteContentHelper.structure(of: content)
-        return title(with: titleRange)
+        let noteStructure = NoteContentHelper.structure(of: content)
+        return title(with: noteStructure.title)
     }
 
     private func title(with range: Range<String.Index>?) -> String {
@@ -47,17 +47,16 @@ extension Note {
     }
 
     var body: String {
-        let (titleRange, _) = NoteContentHelper.structure(of: content)
-        return content(removing: titleRange)
+        let noteStructure = NoteContentHelper.structure(of: content)
+        return content(with: noteStructure.body)
     }
 
-    private func content(removing range: Range<String.Index>?) -> String {
-        guard let range = range, var content = content else {
+    private func content(with range: Range<String.Index>?) -> String {
+        guard let range = range, let content = content else {
             // Note. Swift UI Text will crash if given String() so need to use this version of an empty string
             return ""
         }
-        content.removeSubrange(range)
-        return content
+        return String(content[range])
     }
 
     var url: URL {

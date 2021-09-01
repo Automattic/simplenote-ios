@@ -9,18 +9,23 @@ enum NoteContentHelper {
     /// - Parameters:
     ///     - content: note content
     ///
-    static func structure(of content: String?) -> (title: Range<String.Index>?, body: Range<String.Index>?) {
+    static func structure(of content: String?) -> (title: Range<String.Index>?, body: Range<String.Index>?, trimmedBody: Range<String.Index>?) {
         guard let content = content, !content.isEmpty else {
-            return (title: nil, body: nil)
+            return (title: nil, body: nil, trimmedBody: nil)
         }
 
         guard let titleRange = trimmedTextRange(in: content, startingFrom: content.startIndex, endAtNewline: true) else {
-            return (title: nil, body: nil)
+            return (title: nil, body: nil, trimmedBody: nil)
         }
 
-        let bodyRange = trimmedTextRange(in: content, startingFrom: titleRange.upperBound, endAtNewline: false)
+        guard let bodyStartLocation = content.rangeOfFirstCharacter(from: .newlines, startingFrom: titleRange.upperBound)?.upperBound else {
+            return (title: titleRange, body: nil, trimmedBody: nil)
+        }
 
-        return (title: titleRange, body: bodyRange)
+        let bodyRange = bodyStartLocation..<content.endIndex
+        let trimmedBodyRange = trimmedTextRange(in: content, startingFrom: bodyStartLocation, endAtNewline: false)
+
+        return (title: titleRange, body: bodyRange, trimmedBody: trimmedBodyRange)
     }
 
     private static func trimmedTextRange(in content: String, startingFrom startLocation: String.Index, endAtNewline: Bool) -> Range<String.Index>? {
