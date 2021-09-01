@@ -37,6 +37,7 @@ enum UID {
         static let itemTrash = "icon trash"
         static let trashNote = "Move to Trash"
         static let restoreNote = "Restore Note"
+        static let dismissHistory = "Dismiss History"
         static let deleteNote = "Delete Note"
 
         // "Empty Trash" button label is generated
@@ -65,6 +66,7 @@ enum UID {
     enum Text {
         static let noteEditorPreview = "Preview"
         static let noteEditorOptionsMarkdown = "Markdown"
+        static let noteEditorOptionsHistory = "History"
         static let allNotesInProgress = "In progress"
         static let searchByTag = "Search by Tag"
         static let notes = "Notes"

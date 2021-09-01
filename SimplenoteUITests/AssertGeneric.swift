@@ -15,6 +15,7 @@ let checkboxNotFound = " checkbox" + notFoundEnding,
     checkboxNotAbsent = " checkbox" + notAbsentEnding,
     textViewNotFound = " TextView" + notFoundEnding,
     buttonNotFound = " button" + notFoundEnding,
+    buttonNotAbsent = " button" + notAbsentEnding,
     labelNotFound = " label" + notFoundEnding,
     labelNotAbsent = " label" + notAbsentEnding
 
