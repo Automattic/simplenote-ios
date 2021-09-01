@@ -18,19 +18,23 @@ class History {
 
 class HistoryAssert {
     class func historyShown() {
-        let dismissHistoryButton = app.buttons[UID.Button.dismissHistory]
-        let restoreNoteButton = app.buttons[UID.Button.restoreNote]
-
-        XCTAssertTrue(dismissHistoryButton.waitForExistence(timeout: minLoadTimeout), UID.Button.dismissHistory + buttonNotFound)
-        XCTAssertTrue(restoreNoteButton.waitForExistence(timeout: minLoadTimeout), UID.Button.restoreNote + buttonNotFound)
+        HistoryAssert.historyExistence(shouldExist: true, errorMessage: buttonNotFound)
     }
 
     class func historyDismissed() {
+        HistoryAssert.historyExistence(shouldExist: false, errorMessage: buttonNotAbsent)
+    }
+
+    class func historyExistence(shouldExist: Bool, errorMessage: String) {
         let dismissHistoryButton = app.buttons[UID.Button.dismissHistory]
         let restoreNoteButton = app.buttons[UID.Button.restoreNote]
 
-        XCTAssertFalse(dismissHistoryButton.exists, UID.Button.dismissHistory + buttonNotAbsent)
-        XCTAssertFalse(restoreNoteButton.exists, UID.Button.restoreNote + buttonNotAbsent)
+        XCTAssertEqual(dismissHistoryButton.waitForExistence(timeout: minLoadTimeout),
+                       shouldExist,
+                       UID.Button.dismissHistory + errorMessage)
+        XCTAssertEqual(restoreNoteButton.waitForExistence(timeout: minLoadTimeout),
+                       shouldExist,
+                       UID.Button.restoreNote + errorMessage)
     }
 
     class func restoreButtonIsDisabled() {
