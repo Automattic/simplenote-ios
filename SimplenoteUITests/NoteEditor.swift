@@ -188,7 +188,7 @@ class NoteEditor {
     class func openHistory() {
         app.buttons[UID.Button.noteEditorMenu].tap()
         let historyButton = app.tables.staticTexts[UID.Text.noteEditorOptionsHistory]
-        guard historyButton.waitForExistence(timeout: minLoadTimeout) else {return}
+        guard historyButton.waitForExistence(timeout: minLoadTimeout) else { return }
         historyButton.tap()
     }
 

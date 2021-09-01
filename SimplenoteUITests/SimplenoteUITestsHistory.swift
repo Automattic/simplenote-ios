@@ -172,5 +172,4 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
         History.restoreNote()
         NoteEditorAssert.textViewWithExactValueShownOnce(value: initialNoteText)
     }
-
 }
