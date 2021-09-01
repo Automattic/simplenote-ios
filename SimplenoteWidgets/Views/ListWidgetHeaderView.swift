@@ -10,7 +10,7 @@ struct ListWidgetHeaderView: View {
     var body: some View {
         HStack(alignment: .center) {
             Link(destination: URL.internalUrl(forTag: tag.identifier)) {
-                Text(displayName(for: tag.tagDescription))
+                Text(tag.tagDescription)
                     .font(.headline)
                     .foregroundColor(.bodyTextColor)
                 Spacer()
@@ -23,10 +23,6 @@ struct ListWidgetHeaderView: View {
         }
         .padding(.zero)
     }
-}
-
-private func displayName(for tag: String) -> String {
-    tag.replacingOccurrences(of: "-", with: " ")
 }
 
 struct NotePreviewHeaderView_Previews: PreviewProvider {
