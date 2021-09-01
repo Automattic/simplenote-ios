@@ -47,20 +47,17 @@ extension Note {
     }
 
     var body: String {
-        let (_, bodyRange) = NoteContentHelper.structure(of: content)
-        return body(with: bodyRange)
+        let (titleRange, _) = NoteContentHelper.structure(of: content)
+        return content(removing: titleRange)
     }
 
-    private func body(with range: Range<String.Index>?) -> String {
-        guard let range = range, let content = content else {
+    private func content(removing range: Range<String.Index>?) -> String {
+        guard let range = range, var content = content else {
             // Note. Swift UI Text will crash if given String() so need to use this version of an empty string
             return ""
         }
-
-        let upperBound = content.index(range.lowerBound, offsetBy: Constants.bodyPreviewCap, limitedBy: range.upperBound) ?? range.upperBound
-        let cappedRange = range.lowerBound..<upperBound
-
-        return String(content[cappedRange])
+        content.removeSubrange(range)
+        return content
     }
 
     var url: URL {
