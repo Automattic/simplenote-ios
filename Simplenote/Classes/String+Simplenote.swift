@@ -198,7 +198,8 @@ extension String {
         if isEmpty {
             return self
         }
-        let components = self.components(separatedBy: .newlines)
+        var components = self.components(separatedBy: .newlines)
+        components.removeAll { $0.isEmpty }
         return components.joined(separator: " ")
     }
 }
