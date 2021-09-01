@@ -5,11 +5,22 @@ import WidgetKit
 struct ListWidget: Widget {
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: Constants.configurationKind, intent: ListWidgetIntent.self, provider: ListWidgetProvider()) { (entry) in
-            ListWidgetProcessorView(entry: entry)
+            prepareWidgetView(fromEntry: entry)
         }
         .configurationDisplayName(Constants.displayName)
         .description(Constants.description)
         .supportedFamilies([.systemMedium, .systemLarge])
+    }
+
+    private func prepareWidgetView(fromEntry entry: ListWidgetEntry) -> some View {
+        switch entry.state {
+        case .standard:
+            return AnyView(ListWidgetView(entry: entry))
+        case .loggedOut:
+            return AnyView(WidgetWarningView(warning: .loggedOut))
+        case .tagDeleted:
+            return AnyView(WidgetWarningView(warning: .tagDeleted))
+        }
     }
 }
 

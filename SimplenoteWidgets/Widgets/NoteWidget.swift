@@ -5,11 +5,22 @@ import WidgetKit
 struct NoteWidget: Widget {
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: Constants.configurationKind, intent: NoteWidgetIntent.self, provider: NoteWidgetProvider()) { (entry) in
-            NoteWidgetProcessorView(entry: entry)
+            prepareWidgetView(fromEntry: entry)
         }
         .configurationDisplayName(Constants.displayName)
         .description(Constants.description)
         .supportedFamilies([.systemSmall, .systemMedium])
+    }
+
+    private func prepareWidgetView(fromEntry entry: NoteWidgetEntry) -> some View {
+        switch entry.state {
+        case .standard:
+            return AnyView(NoteWidgetView(entry: entry))
+        case .loggedOut:
+            return AnyView(WidgetWarningView(warning: .loggedOut))
+        case .noteMissing:
+            return AnyView(WidgetWarningView(warning: .noteMissing))
+        }
     }
 }
 
