@@ -82,7 +82,7 @@ extension SPAuthError {
         case .compromisedPassword:
             return NSLocalizedString("This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately.", comment: "error for compromised password")
         case .unverifiedEmail:
-            return NSLocalizedString("You must verify your email before being able to login.", comment: "Erro for un verified email")
+            return NSLocalizedString("You must verify your email before being able to login.", comment: "Error for un verified email")
         case .unknown:
             return NSLocalizedString("We're having problems. Please try again soon.", comment: "Generic error")
         }
@@ -91,5 +91,5 @@ extension SPAuthError {
 
 private struct Constants {
     static let compromisedPassword = "compromised password"
-    static let requiresVerification = "requires verification"
+    static let requiresVerification = "verification required"
 }
