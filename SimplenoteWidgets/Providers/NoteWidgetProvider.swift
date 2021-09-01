@@ -6,23 +6,32 @@ struct NoteWidgetEntry: TimelineEntry {
     let content: String
     let url: URL
     let loggedIn: Bool
+    let state: State
+
+    enum State {
+        case standard
+        case noteMissing
+        case loggedOut
+    }
 }
 
 extension NoteWidgetEntry {
-    init(date: Date, note: Note) {
+    init(date: Date, note: Note, loggedIn: Bool = WidgetDefaults.shared.loggedIn, state: State = .standard) {
         self.init(date: date,
                   title: note.title,
                   content: note.body,
                   url: note.url,
-                  loggedIn: WidgetDefaults.shared.loggedIn)
+                  loggedIn: loggedIn,
+                  state: state)
     }
 
-    static func placeholder(loggedIn: Bool = true) -> NoteWidgetEntry {
+    static func placeholder(loggedIn: Bool = false, state: State = .standard) -> NoteWidgetEntry {
         return NoteWidgetEntry(date: Date(),
                                title: DemoContent.singleNoteTitle,
                                content: DemoContent.singleNoteContent,
                                url: DemoContent.demoURL,
-                               loggedIn: loggedIn)
+                               loggedIn: loggedIn,
+                               state: state)
     }
 
 }
@@ -34,7 +43,7 @@ struct NoteWidgetProvider: IntentTimelineProvider {
     let coreDataWrapper = WidgetCoreDataWrapper()
 
     func placeholder(in context: Context) -> NoteWidgetEntry {
-        return NoteWidgetEntry.placeholder(loggedIn: WidgetDefaults.shared.loggedIn)
+        return NoteWidgetEntry.placeholder()
     }
 
     func getSnapshot(for configuration: NoteWidgetIntent, in context: Context, completion: @escaping (NoteWidgetEntry) -> Void) {
@@ -49,11 +58,15 @@ struct NoteWidgetProvider: IntentTimelineProvider {
 
     func getTimeline(for configuration: NoteWidgetIntent, in context: Context, completion: @escaping (Timeline<NoteWidgetEntry>) -> Void) {
         // Confirm valid configuration
-        guard WidgetDefaults.shared.loggedIn,
-              let widgetNote = configuration.note,
+        guard WidgetDefaults.shared.loggedIn else {
+            completion(errorTimeline(withState: .loggedOut))
+            return
+        }
+
+        guard let widgetNote = configuration.note,
               let simperiumKey = widgetNote.identifier,
               let note = coreDataWrapper.resultsController()?.note(forSimperiumKey: simperiumKey) else {
-            completion(Timeline(entries: [placeholder(in: context)], policy: .never))
+            completion(errorTimeline(withState: .noteMissing))
             return
         }
 
@@ -69,5 +82,9 @@ struct NoteWidgetProvider: IntentTimelineProvider {
         let timeline = Timeline(entries: entries, policy: .atEnd)
 
         completion(timeline)
+    }
+
+    private func errorTimeline(withState state: NoteWidgetEntry.State) -> Timeline<NoteWidgetEntry> {
+        Timeline(entries: [NoteWidgetEntry.placeholder(state: state)], policy: .never)
     }
 }

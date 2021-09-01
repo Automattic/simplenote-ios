@@ -5,7 +5,7 @@ import WidgetKit
 struct NoteWidget: Widget {
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: Constants.configurationKind, intent: NoteWidgetIntent.self, provider: NoteWidgetProvider()) { (entry) in
-            NoteWidgetView(entry: entry)
+            NoteWidgetProcessorView(entry: entry)
         }
         .configurationDisplayName(Constants.displayName)
         .description(Constants.description)
