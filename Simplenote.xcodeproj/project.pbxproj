@@ -442,6 +442,7 @@
 		BA5249FD26DF0BC600DAC945 /* WidgetWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5249FC26DF0BC600DAC945 /* WidgetWarningView.swift */; };
 		BA524A0026DF107700DAC945 /* NoteWidgetProcessorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5249FF26DF107700DAC945 /* NoteWidgetProcessorView.swift */; };
 		BA524A0226DF1AE800DAC945 /* WidgetsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA524A0126DF1AE800DAC945 /* WidgetsState.swift */; };
+		BA524A0426DF1CE800DAC945 /* ListWidgetProcessorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA524A0326DF1CE800DAC945 /* ListWidgetProcessorView.swift */; };
 		BA55124E2600210B00D8F882 /* TimerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA55124D2600210B00D8F882 /* TimerFactory.swift */; };
 		BA55B05A25F067DF0042582B /* NoticePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA55B05925F067DF0042582B /* NoticePresenter.swift */; };
 		BA55B06325F068650042582B /* NoticeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA55B06225F068650042582B /* NoticeController.swift */; };
@@ -1099,6 +1100,7 @@
 		BA5249FC26DF0BC600DAC945 /* WidgetWarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetWarningView.swift; sourceTree = "<group>"; };
 		BA5249FF26DF107700DAC945 /* NoteWidgetProcessorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteWidgetProcessorView.swift; sourceTree = "<group>"; };
 		BA524A0126DF1AE800DAC945 /* WidgetsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetsState.swift; sourceTree = "<group>"; };
+		BA524A0326DF1CE800DAC945 /* ListWidgetProcessorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWidgetProcessorView.swift; sourceTree = "<group>"; };
 		BA55124D2600210B00D8F882 /* TimerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerFactory.swift; sourceTree = "<group>"; };
 		BA55B05925F067DF0042582B /* NoticePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticePresenter.swift; sourceTree = "<group>"; };
 		BA55B06225F068650042582B /* NoticeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeController.swift; sourceTree = "<group>"; };
@@ -2197,6 +2199,7 @@
 				BA02A59126C0AE92005FF36E /* NoteListTable.swift */,
 				BA5249FC26DF0BC600DAC945 /* WidgetWarningView.swift */,
 				BA5249FF26DF107700DAC945 /* NoteWidgetProcessorView.swift */,
+				BA524A0326DF1CE800DAC945 /* ListWidgetProcessorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -3600,6 +3603,7 @@
 				BA122DBD265EF412003D3BC5 /* UIColor+Studio.swift in Sources */,
 				BA88765126B79324001C9C9E /* DemoContent.swift in Sources */,
 				BA122DBE265EF421003D3BC5 /* UIKitConstants.swift in Sources */,
+				BA524A0426DF1CE800DAC945 /* ListWidgetProcessorView.swift in Sources */,
 				BAF8D5BB26AE254000CA9383 /* Simplenote.xcdatamodeld in Sources */,
 				BA608EF726BB6E7400A9D94E /* ListWidgetProvider.swift in Sources */,
 				BA0890A726BB9BE20035CA48 /* ListWidgetHeaderView.swift in Sources */,

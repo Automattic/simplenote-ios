@@ -12,14 +12,15 @@ struct WidgetWarningView: View {
                     .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
             }
             .filling()
-            .background(Color.widgetBackgroundColor)
         }
+        .padding()
+        .background(Color.widgetBackgroundColor)
     }
 }
 
 struct WidgetWarningView_Previews: PreviewProvider {
     static var previews: some View {
-        WidgetWarningView(warning: .noteMissing)
+        WidgetWarningView(warning: .tagDeleted)
             .previewContext(WidgetPreviewContext(family: .systemSmall))
         WidgetWarningView(warning: .noteMissing)
             .previewContext(WidgetPreviewContext(family: .systemMedium)).colorScheme(.dark)

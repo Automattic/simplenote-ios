@@ -21,6 +21,12 @@ class WidgetResultsController {
     /// If no tag is specified, will fetch notes that are not deleted. If there is no limit specified it will fetch all of the notes
     ///
     func notes(filteredBy filter: TagsFilter = .allNotes, limit: Int = .zero) -> [Note]? {
+        if case let .tag(tag) = filter {
+            if !tagExists(tagName: tag) {
+                return nil
+            }
+        }
+
         let request: NSFetchRequest<Note> = fetchRequestForNotes(filteredBy: filter, limit: limit)
         return performFetch(from: request)
     }
@@ -76,6 +82,25 @@ class WidgetResultsController {
         fetchRequest.sortDescriptors = [NSSortDescriptor.descriptorForTags()]
 
         return fetchRequest
+    }
+
+    private func tagExists(tagName: String) -> Bool {
+        return tagForName(tagName: tagName) != nil
+    }
+
+    private func tagForName(tagName: String) -> Tag? {
+        guard let tags = tags() else {
+            return nil
+        }
+
+        let targetTagHash = tagName.byEncodingAsTagHash
+        for tag in tags {
+            if tag.name?.byEncodingAsTagHash == targetTagHash {
+                return tag
+            }
+        }
+
+        return nil
     }
 
     // MARK: Fetching

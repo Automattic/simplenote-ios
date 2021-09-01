@@ -5,7 +5,7 @@ import WidgetKit
 struct ListWidget: Widget {
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: Constants.configurationKind, intent: ListWidgetIntent.self, provider: ListWidgetProvider()) { (entry) in
-            ListWidgetView(entry: entry)
+            ListWidgetProcessorView(entry: entry)
         }
         .configurationDisplayName(Constants.displayName)
         .description(Constants.description)
