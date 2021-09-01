@@ -60,7 +60,7 @@ extension Note {
         let upperBound = content.index(range.lowerBound, offsetBy: Constants.bodyPreviewCap, limitedBy: range.upperBound) ?? range.upperBound
         let cappedRange = range.lowerBound..<upperBound
 
-        return String(content[cappedRange]).replacingNewlinesWithSpaces()
+        return String(content[cappedRange])
     }
 
     var url: URL {
