@@ -5,6 +5,10 @@ extension Color {
         Color(light: .gray100, dark: .white)
     }
 
+    static var secondaryTextColor: Color {
+        Color(light: .gray50, dark: .gray30)
+    }
+
     static var widgetBackgroundColor: Color {
         Color(light: .white, dark: .darkGray1)
     }

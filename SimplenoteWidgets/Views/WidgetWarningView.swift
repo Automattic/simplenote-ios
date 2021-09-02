@@ -7,7 +7,7 @@ struct WidgetWarningView: View {
         GeometryReader { geometry in
             ZStack(alignment: .center) {
                 Text(warning.message)
-                    .subheadline(color: .bodyTextColor)
+                    .subheadline(color: .secondaryTextColor)
                     .multilineTextAlignment(.center)
                     .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
             }
