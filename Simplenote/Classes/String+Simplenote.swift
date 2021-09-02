@@ -209,12 +209,3 @@ extension String {
         return components.joined(separator: " ")
     }
 }
-
-// MARK: Tag hash encoding
-extension String {
-    var byEncodingAsTagHash: String {
-        precomposedStringWithCanonicalMapping
-            .lowercased()
-            .addingPercentEncoding(withAllowedCharacters: .alphanumerics) ?? self as String
-    }
-}

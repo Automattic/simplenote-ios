@@ -509,6 +509,10 @@
 		BABFFF2326CF9094003A4C25 /* WidgetDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABFFF2126CF9094003A4C25 /* WidgetDefaults.swift */; };
 		BABFFF2426CF9094003A4C25 /* WidgetDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABFFF2126CF9094003A4C25 /* WidgetDefaults.swift */; };
 		BAE08626261282D1009D40CD /* Note+Publish.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE08625261282D1009D40CD /* Note+Publish.swift */; };
+		BAE63CAF26E05312002BF81A /* NSString+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59188C124005B8A0069EF96 /* NSString+Simplenote.swift */; };
+		BAE63CB026E05313002BF81A /* NSString+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59188C124005B8A0069EF96 /* NSString+Simplenote.swift */; };
+		BAE63CB126E05325002BF81A /* NSPredicate+Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51F6DD42460D7540074DDD9 /* NSPredicate+Email.swift */; };
+		BAE63CB226E05325002BF81A /* NSPredicate+Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51F6DD42460D7540074DDD9 /* NSPredicate+Email.swift */; };
 		BAF4A96F26DB085D00C51C1D /* NSURLComponents+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF4A96E26DB085D00C51C1D /* NSURLComponents+Simplenote.swift */; };
 		BAF4A97926DB10BD00C51C1D /* NoteContentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64DE6F0255D1CD9001D0526 /* NoteContentHelper.swift */; };
 		BAF4A9AA26DB138600C51C1D /* NoteContentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64DE6F0255D1CD9001D0526 /* NoteContentHelper.swift */; };
@@ -3553,6 +3557,8 @@
 				BA86620E26B3A73D00466746 /* UserDefaults+Simplenote.swift in Sources */,
 				BAF8D52826AE173D00CA9383 /* FileManager+Simplenote.swift in Sources */,
 				BAF8D50026AE171400CA9383 /* CoreDataManager.swift in Sources */,
+				BAE63CB026E05313002BF81A /* NSString+Simplenote.swift in Sources */,
+				BAE63CB226E05325002BF81A /* NSPredicate+Email.swift in Sources */,
 				BAF8D51426AE172600CA9383 /* StorageSettings.swift in Sources */,
 				BA86616326B35CF000466746 /* BuildConfiguration.swift in Sources */,
 				BAB5762726703C8200B0C56F /* IntentHandler.swift in Sources */,
@@ -3612,9 +3618,11 @@
 				BAF8D51E26AE173D00CA9383 /* FileManager+Simplenote.swift in Sources */,
 				BA86615926B35CEF00466746 /* BuildConfiguration.swift in Sources */,
 				BAF4A97926DB10BD00C51C1D /* NoteContentHelper.swift in Sources */,
+				BAE63CB126E05325002BF81A /* NSPredicate+Email.swift in Sources */,
 				BAFFCEA626DDA9F6007F5EE3 /* WidgetCoreDataWrapper.swift in Sources */,
 				BA122DBC265EF410003D3BC5 /* ColorStudio.swift in Sources */,
 				BA608EF926BB6F4C00A9D94E /* ListWidgetView.swift in Sources */,
+				BAE63CAF26E05312002BF81A /* NSString+Simplenote.swift in Sources */,
 				BA86626726B3B1B600466746 /* NSSortDescriptor+Simplenote.swift in Sources */,
 				BAF8D46426AE118800CA9383 /* SPCredentials.swift in Sources */,
 				BA122DC1265EF4C5003D3BC5 /* UITraitCollection+Simplenote.swift in Sources */,
