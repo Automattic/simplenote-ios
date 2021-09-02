@@ -1,6 +1,7 @@
 4.44
 -----
 -   Added home screen widgets #1416
+-   Fixed an issue with the select all button when only one note is in the list #1417
 
 4.43
 -----

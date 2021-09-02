@@ -58,6 +58,14 @@ class NoteEditor {
         noteContentTextView.clearAndEnterText(text: enteredValue + "\n")
     }
 
+    class func waitBeforeEditingText(delayInSeconds: UInt32, newText: String) {
+        let noteContentTextView = app.textViews.element
+
+        sleep(delayInSeconds)
+
+        noteContentTextView.clearAndEnterText(text: newText)
+    }
+
     class func pasteNoteContent() {
         app.press(forDuration: 1.2)
         app.menuItems[UID.ContextMenuItem.paste].tap()
@@ -175,6 +183,13 @@ class NoteEditor {
         let matches = matchingTextViews.count
         print(">>> Found \(matches) TextView(s) with '\(label)' label")
         return matches
+    }
+
+    class func openHistory() {
+        app.buttons[UID.Button.noteEditorMenu].tap()
+        let historyButton = app.tables.staticTexts[UID.Text.noteEditorOptionsHistory]
+        guard historyButton.waitForExistence(timeout: minLoadTimeout) else { return }
+        historyButton.tap()
     }
 
 }
