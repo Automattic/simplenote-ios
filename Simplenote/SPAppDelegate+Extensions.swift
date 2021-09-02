@@ -98,9 +98,7 @@ extension SPAppDelegate {
         guard let simperiumKey = url.interlinkSimperiumKey, let note = simperium.loadNote(simperiumKey: simperiumKey) else {
             return false
         }
-
-        navigationController.presentedViewController?.dismiss(animated: true, completion: nil)
-        noteListViewController.open(note, ignoringSearchQuery: true, animated: true)
+        presentNote(note)
 
         return true
     }
@@ -119,8 +117,7 @@ extension SPAppDelegate {
             selectedTag = nil
         }
 
-        navigationController.presentedViewController?.dismiss(animated: true, completion: nil)
-        navigationController.popToRootViewController(animated: true)
+        popToNoteList()
 
         return true
     }

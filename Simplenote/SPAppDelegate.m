@@ -496,6 +496,11 @@
         return YES;
     }
 
+    // Dismiss sidebar if visible
+    if (self.sidebarViewController.isSidebarVisible) {
+        [self.sidebarViewController hideSidebarWithAnimation:NO];
+    }
+
     // URL: Open a Note!
     if ([self handleOpenNoteWithUrl:url]) {
         return YES;
