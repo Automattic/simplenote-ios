@@ -23,6 +23,24 @@
             </BuildableReference>
             <SkippedTests>
                <Test
+                  Identifier = "SimplenoteUISmokeTestsHistory/testCanRestorePreviousVersion()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsHistory/testHistoryCanBeDismissed()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsHistory/testHistoryIsKeptAfterRecoveringNoteFromTrash()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsHistory/testPreviousNoteIsNotRestoredWhenTheHistoryPanelIsDismissed()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsHistory/testRestoreButtonIsEnabledWhenAPreviousVersionIsSelected()">
+               </Test>
+               <Test
+                  Identifier = "SimplenoteUISmokeTestsHistory/testRestoreNoteButtonIsDisabledByDefault()">
+               </Test>
+               <Test
                   Identifier = "SimplenoteUISmokeTestsLogin/testLogInWithCorrectCredentials()">
                </Test>
                <Test
