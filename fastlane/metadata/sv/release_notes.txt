@@ -1,0 +1,3 @@
+-   Ett fel som gjorde att URL:er utan http/https inte gick att öppna från markdown
+-   Kontoborttagningssupport
+-   Etiketter tas nu bort från borttagna anteckningar

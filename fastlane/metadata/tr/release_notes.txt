@@ -1,0 +1,3 @@
+-   http/https olmayan url'lerin markdown'dan açıldığında çökmesine neden olan hata düzeltildi
+-   Hesap Silme Desteği
+-   Silinen Notlardan etiketler çıkarıldı

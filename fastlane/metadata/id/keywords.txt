@@ -1,1 +1,1 @@
-catatan,teks,perencana,jurnal,diari,sinkronisasi,daftar tugas,cloud,notebook,simpel,notepad,tag
+catatan,teks,markdown,jurnal,sinkronisasi,daftar,tugas,cloud,notebook,simpel,notepad,tag,tugas

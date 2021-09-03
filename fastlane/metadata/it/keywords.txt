@@ -1,1 +1,1 @@
-note,testo,agenda,diario,sincronizzazione,da-fare,cloud,blocco-note,semplice,bloc-notes,tag
+appunti,appunto,markdown,diario,sincronizzazione,checklist,cloud,blocco,semplice,notepad,tag
