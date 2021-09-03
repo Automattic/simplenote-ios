@@ -98,7 +98,8 @@ extension SPAppDelegate {
         guard let simperiumKey = url.interlinkSimperiumKey, let note = simperium.loadNote(simperiumKey: simperiumKey) else {
             return false
         }
-        presentNote(note)
+        popToNoteList()
+        noteListViewController.open(note, ignoringSearchQuery: true, animated: true)
 
         return true
     }
