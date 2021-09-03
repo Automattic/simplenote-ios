@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-08-19 20:48:53+0000 */
+/* Translation-Revision-Date: 2021-09-01 09:54:03+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ko_KR */
@@ -73,6 +73,9 @@
 /* No comment provided by engineer. */
 "Account" = "계정";
 
+/* Email verification required alert title */
+"Account Verification Required" = "계정 인증 필요";
+
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Add a new collaborator..." = "새 공동 작업자 추가...";
 
@@ -87,7 +90,7 @@
 "All Notes" = "모든 메모";
 
 /* Delete account confirmation instructions */
-"An email has been sent to %@ Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation" = "이메일을 %@(으)로 보냈으니 받은 편지함을 확인하고 지침에 따라 계정 삭제를 확인하세요.\n\n시스템에 확인이 수신될 때까지 계정이 삭제되지 않음";
+"An email has been sent to %@. Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation." = "이메일을 %@(으)로 보냈으니 받은 편지함을 확인하고 지침에 따라 계정 삭제를 확인하세요.\n\n시스템에 확인이 수신될 때까지 계정이 삭제되지 않음";
 
 /* Deletion error message */
 "An error occured. Please, try again. If the problem continues, contact us at support@simplenote.com for help." = "오류가 발생했습니다. 다시 시도하세요. 문제가 계속 발생하면 support@simplenote.com에서 도움말을 문의하세요.";
@@ -140,11 +143,17 @@
 /* Change email button -> Review you account screen */
 "Change Email" = "이메일 변경";
 
+/* Change password action */
+"Change Password" = "비밀번호 변경";
+
 /* Number of characters in the note */
 "Characters" = "문자";
 
 /* Title for delete account succes alert */
 "Check Your Email" = "이메일 확인";
+
+/* Vefification sent alert title */
+"Check your Email" = "이메일 점검";
 
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "네 자리 패스코드 선택";
@@ -157,6 +166,9 @@
 
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Collaborators" = "공동 작업자";
+
+/* Compromised password alert title */
+"Compromised Password" = "손상된 비밀번호";
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "메모 요약 목록";
@@ -453,6 +465,9 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "태그 없는 메모 없음";
 
+/* Cancel action for password alert */
+"Not Yet" = "아직 아님";
+
 /* Note trashed notification */
 "Note Trashed" = "메모 삭제됨";
 
@@ -467,7 +482,9 @@
 /* Instant passcode lock timeout */
 "Off" = "끔";
 
-/* Confirm alert message */
+/* Alert dismiss action
+   Confirm alert message
+   Email unverified alert dismiss */
 "Ok" = "확인";
 
 /* No comment provided by engineer. */
@@ -570,8 +587,14 @@
 /* Title for account deletion confirm button */
 "Request Account Deletion" = "계정 삭제 요청";
 
+/* Request error alert title */
+"Request Error" = "요청 오류";
+
 /* Resend email button -> Verify your email screen */
 "Resend Email" = "이메일 다시 보내기";
+
+/* Send email verificaiton action */
+"Resend Verification Email" = "인증 이메일 다시 보내기";
 
 /* Reset Action */
 "Reset" = "재설정";
@@ -703,6 +726,12 @@
 /* Simplenote Themes */
 "Themes" = "테마";
 
+/* Request error alert message */
+"There was an preparing your verification email, please try again later" = "준비 중인 인증 이메일이 있었습니다. 나중에 다시 시도해 주세요.";
+
+/* error for compromised password */
+"This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately." = "계정 손상 위험이 큰 데이터 위반이 이 비밀번호에서 나타났습니다. 즉시 비밀번호를 변경하는 것이 좋습니다.";
+
 /* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
 "To enable %1$@, you must have a passcode setup first." = "%1$@을(를) 활성화하려면 먼저 패스코드를 설정해야 합니다.";
 
@@ -779,7 +808,8 @@
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
 
-/* Message -> Verify your email screen. Parameter: %1$@ - email address */
+/* Confirmation that an email has been sent
+   Message -> Verify your email screen. Parameter: %1$@ - email address */
 "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "%1$@(으)로 인증 이메일을 보내드렸습니다. 받은 편지함을 확인하고 지침에 따라 주세요.";
 
 /* Message -> Sign up verification screen. Parameter: %1$@ - email address */
@@ -799,6 +829,9 @@
 
 /* Message -> Review you account screen. Parameter: %1$@ - email address */
 "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "이메일 %1$@을(를) 사용하여 Simplenote에 등록하셨습니다.\n\n더는 이 이메일 주소에 액세스하는 권한이 없는 경우 계정 보안 향상으로 인해 계정을 상실하실 수 있습니다.";
+
+/* Erro for un verified email */
+"You must verify your email before being able to login." = "먼저 이메일을 확인해야 로그인할 수 있습니다.";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "이메일 주소가 올바르지 않습니다.";
