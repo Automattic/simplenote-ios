@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-08-19 20:51:47+0000 */
+/* Translation-Revision-Date: 2021-09-01 11:54:05+0000 */
 /* Plural-Forms: nplurals=2; plural=(n > 1); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: tr */
@@ -73,6 +73,9 @@
 /* No comment provided by engineer. */
 "Account" = "Hesap";
 
+/* Email verification required alert title */
+"Account Verification Required" = "Hesap Doğrulaması Gerekli";
+
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Add a new collaborator..." = "Yeni çalışma arkadaşı ekle...";
 
@@ -87,7 +90,7 @@
 "All Notes" = "Tüm Notlar";
 
 /* Delete account confirmation instructions */
-"An email has been sent to %@ Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation" = "%@ adresine bir e-posta gönderildi Gelen kutunuzu kontrol edin ve hesap silme işlemini onaylamak için talimatları izleyin.\n\nOnayınız alınana kadar hesabınız silinmeyecek.";
+"An email has been sent to %@. Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation." = "%@ adresine bir e-posta gönderildi Gelen kutunuzu kontrol edin ve hesap silme işlemini onaylamak için talimatları izleyin.\n\nOnayınız alınana kadar hesabınız silinmeyecek.";
 
 /* Deletion error message */
 "An error occured. Please, try again. If the problem continues, contact us at support@simplenote.com for help." = "Bir hata oluştu. Lütfen tekrar deneyin. Sorun devam ederse yardım için support@simplenote.com adresinden bize ulaşın.";
@@ -140,11 +143,17 @@
 /* Change email button -> Review you account screen */
 "Change Email" = "E-posta Değiştir";
 
+/* Change password action */
+"Change Password" = "Parola değiştir";
+
 /* Number of characters in the note */
 "Characters" = "Karakter";
 
 /* Title for delete account succes alert */
 "Check Your Email" = "E-postanızı kontrol edin";
+
+/* Vefification sent alert title */
+"Check your Email" = "E-postanızı kontrol edin";
 
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "4 basamaklı bir parola seçin";
@@ -157,6 +166,9 @@
 
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Collaborators" = "Çalışma Arkadaşları";
+
+/* Compromised password alert title */
+"Compromised Password" = "Güvenliği İhlal Edilmiş Şifre";
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "Sıkıştırılmış Not Listesi";
@@ -453,6 +465,9 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "Etiketsiz not yok";
 
+/* Cancel action for password alert */
+"Not Yet" = "Henüz Değil";
+
 /* Note trashed notification */
 "Note Trashed" = "Not Çöp Kutusuna Gönderildi";
 
@@ -467,7 +482,9 @@
 /* Instant passcode lock timeout */
 "Off" = "Kapalı";
 
-/* Confirm alert message */
+/* Alert dismiss action
+   Confirm alert message
+   Email unverified alert dismiss */
 "Ok" = "Tamam";
 
 /* No comment provided by engineer. */
@@ -570,8 +587,14 @@
 /* Title for account deletion confirm button */
 "Request Account Deletion" = "Hesap Silme İsteği";
 
+/* Request error alert title */
+"Request Error" = "İstek Hatası";
+
 /* Resend email button -> Verify your email screen */
 "Resend Email" = "E-postayı yeniden gönder";
+
+/* Send email verificaiton action */
+"Resend Verification Email" = "Doğrulama E-postasını Yeniden Gönder";
 
 /* Reset Action */
 "Reset" = "Sıfırla";
@@ -703,6 +726,12 @@
 /* Simplenote Themes */
 "Themes" = "Temalar";
 
+/* Request error alert message */
+"There was an preparing your verification email, please try again later" = "Doğrulama e-postanız hazırlanırken bir hata oluştu, lütfen daha sonra tekrar deneyin";
+
+/* error for compromised password */
+"This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately." = "Bu şifre, hesabınızı ileri düzeyde tehlikeye atma riskine sokan bir veri ihlalinde ortaya çıktı. Şifrenizi hemen değiştirmeniz önerilir.";
+
 /* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
 "To enable %1$@, you must have a passcode setup first." = "%1$@ özelliğini etkinleştirmek için önce bir parola ayarlamalısınız.";
 
@@ -779,7 +808,8 @@
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
 
-/* Message -> Verify your email screen. Parameter: %1$@ - email address */
+/* Confirmation that an email has been sent
+   Message -> Verify your email screen. Parameter: %1$@ - email address */
 "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "%1$@ adresine bir doğrulama e-postası gönderdik. Lütfen gelen kutunuzu kontrol edin ve talimatları izleyin.";
 
 /* Message -> Sign up verification screen. Parameter: %1$@ - email address */
@@ -799,6 +829,9 @@
 
 /* Message -> Review you account screen. Parameter: %1$@ - email address */
 "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "%1$@ e-postasını kullanarak Simplenote'a kaydoldunuz.\n\nBu e-posta adresine artık erişiminiz yoksa, hesap güvenliğindeki iyileştirmeler hesap kaybına neden olabilir.";
+
+/* Erro for un verified email */
+"You must verify your email before being able to login." = "Oturum açmak için önce e-postanızı doğrulamanız gerekir.";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "E-posta adresiniz geçerli değil.";

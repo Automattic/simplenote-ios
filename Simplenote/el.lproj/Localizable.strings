@@ -73,6 +73,9 @@
 /* No comment provided by engineer. */
 "Account" = "Λογαριασμός";
 
+/* Email verification required alert title */
+"Account Verification Required" = "Account Verification Required";
+
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Add a new collaborator..." = "Προσθήκη συνεργάτη...";
 
@@ -87,7 +90,7 @@
 "All Notes" = "All Notes";
 
 /* Delete account confirmation instructions */
-"An email has been sent to %@ Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation" = "An email has been sent to %@ Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation";
+"An email has been sent to %@. Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation." = "An email has been sent to %@. Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation.";
 
 /* Deletion error message */
 "An error occured. Please, try again. If the problem continues, contact us at support@simplenote.com for help." = "An error occured. Please, try again. If the problem continues, contact us at support@simplenote.com for help.";
@@ -140,11 +143,17 @@
 /* Change email button -> Review you account screen */
 "Change Email" = "Change Email";
 
+/* Change password action */
+"Change Password" = "Change Password";
+
 /* Number of characters in the note */
 "Characters" = "Characters";
 
 /* Title for delete account succes alert */
 "Check Your Email" = "Check Your Email";
+
+/* Vefification sent alert title */
+"Check your Email" = "Check your Email";
 
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "Choose a 4 digit passcode";
@@ -157,6 +166,9 @@
 
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Collaborators" = "Συνεργάτες";
+
+/* Compromised password alert title */
+"Compromised Password" = "Compromised Password";
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "Condensed Note List";
@@ -453,6 +465,9 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "No untagged notes";
 
+/* Cancel action for password alert */
+"Not Yet" = "Not Yet";
+
 /* Note trashed notification */
 "Note Trashed" = "Note Trashed";
 
@@ -467,7 +482,9 @@
 /* Instant passcode lock timeout */
 "Off" = "Απενεργοποίηση";
 
-/* Confirm alert message */
+/* Alert dismiss action
+   Confirm alert message
+   Email unverified alert dismiss */
 "Ok" = "Ok";
 
 /* No comment provided by engineer. */
@@ -570,8 +587,14 @@
 /* Title for account deletion confirm button */
 "Request Account Deletion" = "Request Account Deletion";
 
+/* Request error alert title */
+"Request Error" = "Request Error";
+
 /* Resend email button -> Verify your email screen */
 "Resend Email" = "Resend Email";
+
+/* Send email verificaiton action */
+"Resend Verification Email" = "Resend Verification Email";
 
 /* Reset Action */
 "Reset" = "Reset";
@@ -703,6 +726,12 @@
 /* Simplenote Themes */
 "Themes" = "Themes";
 
+/* Request error alert message */
+"There was an preparing your verification email, please try again later" = "There was an preparing your verification email, please try again later";
+
+/* error for compromised password */
+"This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately." = "This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately.";
+
 /* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
 "To enable %1$@, you must have a passcode setup first." = "To enable %1$@, you must have a passcode setup first.";
 
@@ -779,7 +808,8 @@
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
 
-/* Message -> Verify your email screen. Parameter: %1$@ - email address */
+/* Confirmation that an email has been sent
+   Message -> Verify your email screen. Parameter: %1$@ - email address */
 "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions.";
 
 /* Message -> Sign up verification screen. Parameter: %1$@ - email address */
@@ -799,6 +829,9 @@
 
 /* Message -> Review you account screen. Parameter: %1$@ - email address */
 "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address.";
+
+/* Erro for un verified email */
+"You must verify your email before being able to login." = "You must verify your email before being able to login.";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "Μη έγκυρη διεύθυνση email.";

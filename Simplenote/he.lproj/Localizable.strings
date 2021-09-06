@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-08-19 20:53:19+0000 */
+/* Translation-Revision-Date: 2021-08-31 13:54:45+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: he_IL */
@@ -73,6 +73,9 @@
 /* No comment provided by engineer. */
 "Account" = "חשבון";
 
+/* Email verification required alert title */
+"Account Verification Required" = "נדרש אימות לחשבון";
+
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Add a new collaborator..." = "הוספת שותף עריכה חדש...";
 
@@ -87,7 +90,7 @@
 "All Notes" = "כל הפתקים";
 
 /* Delete account confirmation instructions */
-"An email has been sent to %@ Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation" = "הודעת אימייל נשלחה לכתובת %@. יש לבדוק את תיבת הדואר הנכנס ולפעול לפי ההוראות לאישור המחיקה של החשבון.\n\nהחשבון שלך לא יימחק עד שנקבל את אישורך";
+"An email has been sent to %@. Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation." = "הודעת אימייל נשלחה לכתובת %@. יש לבדוק את תיבת הדואר הנכנס ולפעול לפי ההוראות לאישור המחיקה של החשבון.\n\nהחשבון שלך לא יימחק עד שנקבל את אישורך";
 
 /* Deletion error message */
 "An error occured. Please, try again. If the problem continues, contact us at support@simplenote.com for help." = "אירעה שגיאה. יש לנסות שוב. אם הבעיה ממשיכה, ניתן ליצור איתנו קשר לעזרה בכתובת support@simplenote.com.";
@@ -140,11 +143,17 @@
 /* Change email button -> Review you account screen */
 "Change Email" = "לשנות כתובת אימייל";
 
+/* Change password action */
+"Change Password" = "שינוי סיסמה";
+
 /* Number of characters in the note */
 "Characters" = "תווים";
 
 /* Title for delete account succes alert */
 "Check Your Email" = "יש לבדוק את תיבת האימייל";
+
+/* Vefification sent alert title */
+"Check your Email" = "יש לבדוק את תיבת האימייל";
 
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "לבחור קוד סיסמה בן 4 ספרות";
@@ -157,6 +166,9 @@
 
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Collaborators" = "שותפי עריכה";
+
+/* Compromised password alert title */
+"Compromised Password" = "סיסמה בסכנה";
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "רשימת פתקים מכווצת";
@@ -453,6 +465,9 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "אין פתקים ללא תגיות";
 
+/* Cancel action for password alert */
+"Not Yet" = "עדיין לא";
+
 /* Note trashed notification */
 "Note Trashed" = "הפתק הועבר לפח";
 
@@ -467,7 +482,9 @@
 /* Instant passcode lock timeout */
 "Off" = "כבוי";
 
-/* Confirm alert message */
+/* Alert dismiss action
+   Confirm alert message
+   Email unverified alert dismiss */
 "Ok" = "OK";
 
 /* No comment provided by engineer. */
@@ -570,8 +587,14 @@
 /* Title for account deletion confirm button */
 "Request Account Deletion" = "לבקש מחיקת חשבון";
 
+/* Request error alert title */
+"Request Error" = "שגיאה בבקשה";
+
 /* Resend email button -> Verify your email screen */
 "Resend Email" = "לשלוח אימייל מחדש";
+
+/* Send email verificaiton action */
+"Resend Verification Email" = "שלח מחדש דוא\"ל לאימות";
 
 /* Reset Action */
 "Reset" = "איפוס";
@@ -703,6 +726,12 @@
 /* Simplenote Themes */
 "Themes" = "ערכות עיצוב";
 
+/* Request error alert message */
+"There was an preparing your verification email, please try again later" = "אירעה שגיאה בהכנת האימייל לאימות, יש לנסות שוב מאוחר יותר";
+
+/* error for compromised password */
+"This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately." = "הסיסמה הזאת מופיעה ברשימה של הפרת נתונים ולכן החשבון שלך נמצא בסיכון גבוה לפגיעה. מומלץ לשנות את הסיסמה שלך באופן מיידי.";
+
 /* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
 "To enable %1$@, you must have a passcode setup first." = "כדי להפעיל את %1$@, עליך ראשית להגדיר קוד סיסמה.";
 
@@ -779,7 +808,8 @@
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
 
-/* Message -> Verify your email screen. Parameter: %1$@ - email address */
+/* Confirmation that an email has been sent
+   Message -> Verify your email screen. Parameter: %1$@ - email address */
 "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "שלחנו את האימות לכתובת האימייל %1$@. יש לבדוק את תיבת הדואר הנכנס ולפעול לפי ההוראות.";
 
 /* Message -> Sign up verification screen. Parameter: %1$@ - email address */
@@ -799,6 +829,9 @@
 
 /* Message -> Review you account screen. Parameter: %1$@ - email address */
 "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "החשבון שלך רשום עם Simplenote באמצעות האימייל %1$@.\n\nשיפורים באבטחת החשבון עלולים לגרום לאבדן החשבון אם אין לך עוד גישה לכתובת האימייל הזאת.";
+
+/* Erro for un verified email */
+"You must verify your email before being able to login." = "עליך לאמת את כתובת האימייל שלך לפני ההתחברות.";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "כתובת האימייל שלך אינה חוקית.";

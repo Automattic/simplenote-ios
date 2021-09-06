@@ -1,0 +1,3 @@
+- Corrigido um bug em que urls não http / https travavam ao serem abertas na marcação
+- Suporte para exclusão de conta
+- As tags agora são removidas das anotações excluídas

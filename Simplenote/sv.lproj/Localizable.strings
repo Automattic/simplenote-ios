@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-08-19 20:50:28+0000 */
+/* Translation-Revision-Date: 2021-09-01 09:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: sv_SE */
@@ -73,6 +73,9 @@
 /* No comment provided by engineer. */
 "Account" = "Konto";
 
+/* Email verification required alert title */
+"Account Verification Required" = "Verifiering av konto krävs";
+
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Add a new collaborator..." = "Lägg till ny redigerare...";
 
@@ -87,7 +90,7 @@
 "All Notes" = "Alla anteckningar";
 
 /* Delete account confirmation instructions */
-"An email has been sent to %@ Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation" = "Ett e-postmeddelande har skickats till %@. Kolla din inkorg och följ instruktionerna för att bekräfta kontoborttagningen.\n\nDitt konto kommer inte att tas bort förrän vi har mottagit din bekräftelse";
+"An email has been sent to %@. Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation." = "Ett e-postmeddelande har skickats till %@. Kolla din inkorg och följ instruktionerna för att bekräfta kontoborttagningen.\n\nDitt konto kommer inte att tas bort förrän vi har mottagit din bekräftelse";
 
 /* Deletion error message */
 "An error occured. Please, try again. If the problem continues, contact us at support@simplenote.com for help." = "Ett fel uppstod. Försök igen. Om problemet fortsätter, kontakta oss på support@simplenote.com för hjälp.";
@@ -140,11 +143,17 @@
 /* Change email button -> Review you account screen */
 "Change Email" = "Ändra e-post";
 
+/* Change password action */
+"Change Password" = "Ändra lösenord";
+
 /* Number of characters in the note */
 "Characters" = "Tecken";
 
 /* Title for delete account succes alert */
 "Check Your Email" = "Kontrollera din e-post";
+
+/* Vefification sent alert title */
+"Check your Email" = "Kolla din e-post!";
 
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "Välj en fyrsiffrig låskod";
@@ -157,6 +166,9 @@
 
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Collaborators" = "Redigerare";
+
+/* Compromised password alert title */
+"Compromised Password" = "Komprometterat lösenord";
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "Komprimerad anteckningslista";
@@ -453,6 +465,9 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "Inga omärkta anteckningar";
 
+/* Cancel action for password alert */
+"Not Yet" = "Inte än";
+
 /* Note trashed notification */
 "Note Trashed" = "Anteckning borttagen";
 
@@ -467,7 +482,9 @@
 /* Instant passcode lock timeout */
 "Off" = "Av";
 
-/* Confirm alert message */
+/* Alert dismiss action
+   Confirm alert message
+   Email unverified alert dismiss */
 "Ok" = "Okej";
 
 /* No comment provided by engineer. */
@@ -570,8 +587,14 @@
 /* Title for account deletion confirm button */
 "Request Account Deletion" = "Begär borttagning av konto";
 
+/* Request error alert title */
+"Request Error" = "Begäran misslyckades";
+
 /* Resend email button -> Verify your email screen */
 "Resend Email" = "Skicka e-post igen";
+
+/* Send email verificaiton action */
+"Resend Verification Email" = "Skicka verifieringsmeddelande igen";
 
 /* Reset Action */
 "Reset" = "Återställ";
@@ -703,6 +726,12 @@
 /* Simplenote Themes */
 "Themes" = "Teman";
 
+/* Request error alert message */
+"There was an preparing your verification email, please try again later" = "Det gick inte att förbereda ditt verifieringsmeddelande. Försök igen senare.";
+
+/* error for compromised password */
+"This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately." = "Det här lösenordet har dykt upp i ett dataintrång, vilket innebär att ditt konto löper hög risk att komprometteras. Vi rekommenderar att du ändrar ditt lösenord omedelbart.";
+
 /* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
 "To enable %1$@, you must have a passcode setup first." = "För att aktivera %1$@ måste du först konfigurera en lösenkod.";
 
@@ -779,7 +808,8 @@
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
 
-/* Message -> Verify your email screen. Parameter: %1$@ - email address */
+/* Confirmation that an email has been sent
+   Message -> Verify your email screen. Parameter: %1$@ - email address */
 "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "Vi har skickat en e-postverifiering till %1$@. Kontrollera din inkorg och följ instruktionerna.";
 
 /* Message -> Sign up verification screen. Parameter: %1$@ - email address */
@@ -799,6 +829,9 @@
 
 /* Message -> Review you account screen. Parameter: %1$@ - email address */
 "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "Du är registrerad hos Simplenote med e-postadressen %1$@.\n\nFörbättringar av kontosäkerhet kan leda till kontoförlust om du inte längre har tillgång till den här e-postadressen.";
+
+/* Erro for un verified email */
+"You must verify your email before being able to login." = "Du måste verifiera din e-postadress för att du ska kunna logga in.";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "Din e-postadress är inte giltig";

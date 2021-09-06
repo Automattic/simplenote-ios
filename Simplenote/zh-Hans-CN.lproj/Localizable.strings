@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-08-19 20:52:57+0000 */
+/* Translation-Revision-Date: 2021-08-31 13:54:44+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: zh_CN */
@@ -73,6 +73,9 @@
 /* No comment provided by engineer. */
 "Account" = "帐户";
 
+/* Email verification required alert title */
+"Account Verification Required" = "需要验证账户";
+
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Add a new collaborator..." = "添加新协作者...";
 
@@ -87,7 +90,7 @@
 "All Notes" = "全部笔记";
 
 /* Delete account confirmation instructions */
-"An email has been sent to %@ Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation" = "我们已向 %@ 发送一封电子邮件。请检查您的收件箱，按照电子邮件中的说明来确认账户删除。\n\n在收到您的确认之前，我们不会删除您的账户。";
+"An email has been sent to %@. Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation." = "我们已向 %@ 发送一封电子邮件。请检查您的收件箱，按照电子邮件中的说明来确认账户删除。\n\n在收到您的确认之前，我们不会删除您的账户。";
 
 /* Deletion error message */
 "An error occured. Please, try again. If the problem continues, contact us at support@simplenote.com for help." = "发生错误。 请重试。 如果问题仍然存在，请通过 support@simplenote.com 联系我们，我们会竭诚相助。";
@@ -140,11 +143,17 @@
 /* Change email button -> Review you account screen */
 "Change Email" = "更改电子邮件地址";
 
+/* Change password action */
+"Change Password" = "修改密码";
+
 /* Number of characters in the note */
 "Characters" = "字符";
 
 /* Title for delete account succes alert */
 "Check Your Email" = "检查您的电子邮件";
+
+/* Vefification sent alert title */
+"Check your Email" = "检查您的电子邮件";
 
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "选择一个 4 位数密码";
@@ -157,6 +166,9 @@
 
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Collaborators" = "协作者";
+
+/* Compromised password alert title */
+"Compromised Password" = "遭盗密码";
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "压缩的笔记列表";
@@ -453,6 +465,9 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "没有未标记的笔记";
 
+/* Cancel action for password alert */
+"Not Yet" = "尚无";
+
 /* Note trashed notification */
 "Note Trashed" = "已将笔记放入回收站";
 
@@ -467,7 +482,9 @@
 /* Instant passcode lock timeout */
 "Off" = "关闭";
 
-/* Confirm alert message */
+/* Alert dismiss action
+   Confirm alert message
+   Email unverified alert dismiss */
 "Ok" = "确定";
 
 /* No comment provided by engineer. */
@@ -570,8 +587,14 @@
 /* Title for account deletion confirm button */
 "Request Account Deletion" = "请求账户删除";
 
+/* Request error alert title */
+"Request Error" = "请求错误";
+
 /* Resend email button -> Verify your email screen */
 "Resend Email" = "重发电子邮件";
+
+/* Send email verificaiton action */
+"Resend Verification Email" = "重新发送验证电子邮件";
 
 /* Reset Action */
 "Reset" = "重置";
@@ -703,6 +726,12 @@
 /* Simplenote Themes */
 "Themes" = "主题";
 
+/* Request error alert message */
+"There was an preparing your verification email, please try again later" = "正在准备您的验证电子邮件地址，请稍后重试";
+
+/* error for compromised password */
+"This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately." = "此密码似乎存在数据泄露，使您的账户存在高盗用风险。 建议您立即更改密码。";
+
 /* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
 "To enable %1$@, you must have a passcode setup first." = "要启用 %1$@，必须先设置密码。";
 
@@ -779,7 +808,8 @@
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
 
-/* Message -> Verify your email screen. Parameter: %1$@ - email address */
+/* Confirmation that an email has been sent
+   Message -> Verify your email screen. Parameter: %1$@ - email address */
 "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "我们已向 %1$@ 发送了一封验证电子邮件。 请检查您的收件箱并按照说明执行操作。";
 
 /* Message -> Sign up verification screen. Parameter: %1$@ - email address */
@@ -799,6 +829,9 @@
 
 /* Message -> Review you account screen. Parameter: %1$@ - email address */
 "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "您已使用电子邮件 %1$@ 注册 Simplenote。\n\n如果您无法再访问此电子邮件地址，那么帐户安全性的改进可能会导致您无法找回帐户。";
+
+/* Erro for un verified email */
+"You must verify your email before being able to login." = "您必须先验证电子邮件地址，才能登录。";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "您输入的电子邮件地址无效。";

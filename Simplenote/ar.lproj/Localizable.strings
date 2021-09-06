@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-08-19 20:51:17+0000 */
+/* Translation-Revision-Date: 2021-09-01 11:54:05+0000 */
 /* Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ar */
@@ -73,6 +73,9 @@
 /* No comment provided by engineer. */
 "Account" = "الحساب";
 
+/* Email verification required alert title */
+"Account Verification Required" = "يلزم التحقُّق من الحساب";
+
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Add a new collaborator..." = "إضافة مشارك جديد...";
 
@@ -87,7 +90,7 @@
 "All Notes" = "كل الملاحظات";
 
 /* Delete account confirmation instructions */
-"An email has been sent to %@ Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation" = "تم إرسال بريد إلكتروني إلى %@، راجع علبة الوارد لديك واتبع الإرشادات لتأكيد حذف الحساب.\n\nلن يتم حذف حسابك حتى نتلقى تأكيدك";
+"An email has been sent to %@. Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation." = "تم إرسال بريد إلكتروني إلى %@، راجع علبة الوارد لديك واتبع الإرشادات لتأكيد حذف الحساب.\n\nلن يتم حذف حسابك حتى نتلقى تأكيدك";
 
 /* Deletion error message */
 "An error occured. Please, try again. If the problem continues, contact us at support@simplenote.com for help." = "حدث خطأ. يُرجى المحاولة مرة أخرى. إذا استمرت المشكلة، فاتصل بنا على support@simplenote.com للحصول على المساعدة.";
@@ -140,11 +143,17 @@
 /* Change email button -> Review you account screen */
 "Change Email" = "تغيير البريد الإلكتروني";
 
+/* Change password action */
+"Change Password" = "تغيير كلمة المرور";
+
 /* Number of characters in the note */
 "Characters" = "أحرف";
 
 /* Title for delete account succes alert */
 "Check Your Email" = "التحقُّق من بريدك الإلكتروني";
+
+/* Vefification sent alert title */
+"Check your Email" = "التحقُّق من بريدك الإلكتروني";
 
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "اختيار رمز مرور مكوَّن من 4 أرقام";
@@ -157,6 +166,9 @@
 
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Collaborators" = "المشاركون";
+
+/* Compromised password alert title */
+"Compromised Password" = "كلمة مرور مخترقة";
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "قائمة الملاحظات الموجزة";
@@ -453,6 +465,9 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "لا توجد أي ملاحظات غير موسومة";
 
+/* Cancel action for password alert */
+"Not Yet" = "ليس بعد";
+
 /* Note trashed notification */
 "Note Trashed" = "لم يتم النقل إلى سلة المهملات";
 
@@ -467,7 +482,9 @@
 /* Instant passcode lock timeout */
 "Off" = "إيقاف تشغيل";
 
-/* Confirm alert message */
+/* Alert dismiss action
+   Confirm alert message
+   Email unverified alert dismiss */
 "Ok" = "موافق";
 
 /* No comment provided by engineer. */
@@ -570,8 +587,14 @@
 /* Title for account deletion confirm button */
 "Request Account Deletion" = "طلب حذف الحساب";
 
+/* Request error alert title */
+"Request Error" = "خطأ في الطلب";
+
 /* Resend email button -> Verify your email screen */
 "Resend Email" = "إعادة إرسال البريد الإلكتروني";
+
+/* Send email verificaiton action */
+"Resend Verification Email" = "أعد إرسال رسالة التحقق";
 
 /* Reset Action */
 "Reset" = "إعادة تعيين";
@@ -703,6 +726,12 @@
 /* Simplenote Themes */
 "Themes" = "القوالب";
 
+/* Request error alert message */
+"There was an preparing your verification email, please try again later" = "كان يتم إعداد البريد الإلكتروني للتحقُّق من الصحة الخاص بك، يرجى المحاولة  مرة أخرى لاحقًا";
+
+/* error for compromised password */
+"This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately." = "لقد ظهرت كلمة المرور هذه في عملية اختراق بيانات، ما يضع حسابك في خطر كبير لاختراقه. يوصى بتغيير كلمة مرورك على الفور.";
+
 /* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
 "To enable %1$@, you must have a passcode setup first." = "لتمكين %1$@، يجب أن يكون لديك رمز مرور تم إعداده أولاً.";
 
@@ -779,7 +808,8 @@
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
 
-/* Message -> Verify your email screen. Parameter: %1$@ - email address */
+/* Confirmation that an email has been sent
+   Message -> Verify your email screen. Parameter: %1$@ - email address */
 "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "لقد أرسلنا بريدًا إلكترونيًا للتحقق إلى %1$@. يرجى التحقُّق من علبة الوارد لديك واتباع الإرشادات.";
 
 /* Message -> Sign up verification screen. Parameter: %1$@ - email address */
@@ -799,6 +829,9 @@
 
 /* Message -> Review you account screen. Parameter: %1$@ - email address */
 "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "لقد قمت بالتسجيل في Simplenote باستخدام البريد الإلكتروني %1$@.\n\nقد تؤدي التحسينات التي يتم إجراؤها على أمان الحساب إلى فقدان الحساب إذا لم يعد لديك حق الوصول إلى عنوان البريد الإلكتروني هذا.";
+
+/* Erro for un verified email */
+"You must verify your email before being able to login." = "يجب أن تتحقَّق من بريدك الإلكتروني قبل أن تتمكن من تسجيل الدخول.";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "عنوان البريد الإلكتروني الخاص بك غير صالح.";

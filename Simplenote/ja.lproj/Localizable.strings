@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-08-19 20:50:20+0000 */
+/* Translation-Revision-Date: 2021-09-01 09:54:03+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ja_JP */
@@ -73,6 +73,9 @@
 /* No comment provided by engineer. */
 "Account" = "アカウント";
 
+/* Email verification required alert title */
+"Account Verification Required" = "アカウント認証が必要";
+
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Add a new collaborator..." = "共同編集者を追加";
 
@@ -87,7 +90,7 @@
 "All Notes" = "すべてのノート";
 
 /* Delete account confirmation instructions */
-"An email has been sent to %@ Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation" = "%@ にメールが送信されました。受信トレイを確認し、手順に従ってアカウントの削除を確定してください。\n\n当社がお客様から確認を得るまでアカウントは削除されません。";
+"An email has been sent to %@. Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation." = "%@ にメールが送信されました。受信トレイを確認し、手順に従ってアカウントの削除を確定してください。\n\n当社がお客様から確認を得るまでアカウントは削除されません。";
 
 /* Deletion error message */
 "An error occured. Please, try again. If the problem continues, contact us at support@simplenote.com for help." = "エラーが発生しました。 もう一度お試しください。 問題が解決しない場合は、support@simplenote.com までお問い合わせください。";
@@ -140,11 +143,17 @@
 /* Change email button -> Review you account screen */
 "Change Email" = "メールアドレスを変更";
 
+/* Change password action */
+"Change Password" = "パスワードの変更";
+
 /* Number of characters in the note */
 "Characters" = "文字";
 
 /* Title for delete account succes alert */
 "Check Your Email" = "メールを確認";
+
+/* Vefification sent alert title */
+"Check your Email" = "メールを確認";
 
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "4桁のパスコードを選択してください";
@@ -157,6 +166,9 @@
 
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Collaborators" = "共同編集者";
+
+/* Compromised password alert title */
+"Compromised Password" = "侵害されたパスワード";
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "要約ノート一覧";
@@ -453,6 +465,9 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "タグが付けられていないメモはありません";
 
+/* Cancel action for password alert */
+"Not Yet" = "未処理";
+
 /* Note trashed notification */
 "Note Trashed" = "ノートをゴミ箱に入れました";
 
@@ -467,7 +482,9 @@
 /* Instant passcode lock timeout */
 "Off" = "オフ";
 
-/* Confirm alert message */
+/* Alert dismiss action
+   Confirm alert message
+   Email unverified alert dismiss */
 "Ok" = "OK";
 
 /* No comment provided by engineer. */
@@ -570,8 +587,14 @@
 /* Title for account deletion confirm button */
 "Request Account Deletion" = "アカウントの削除をリクエスト";
 
+/* Request error alert title */
+"Request Error" = "リクエストエラー";
+
 /* Resend email button -> Verify your email screen */
 "Resend Email" = "メールの再送";
+
+/* Send email verificaiton action */
+"Resend Verification Email" = "確認メールを再送";
 
 /* Reset Action */
 "Reset" = "リセット";
@@ -703,6 +726,12 @@
 /* Simplenote Themes */
 "Themes" = "テーマ";
 
+/* Request error alert message */
+"There was an preparing your verification email, please try again later" = "準備中の確認メールがありました。後ほど、もう一度お試しください";
+
+/* error for compromised password */
+"This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately." = "このパスワードはデータ侵害に含まれており、アカウントが不正アクセスの危険にさらされています。 すぐにパスワードを変更することをお勧めします。";
+
 /* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
 "To enable %1$@, you must have a passcode setup first." = "%1$@ を有効にするには、まずパスコードを設定する必要があります。";
 
@@ -779,7 +808,8 @@
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
 
-/* Message -> Verify your email screen. Parameter: %1$@ - email address */
+/* Confirmation that an email has been sent
+   Message -> Verify your email screen. Parameter: %1$@ - email address */
 "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "%1$@ に確認メールを送信しました。 受信箱を確認して手順に従ってください。";
 
 /* Message -> Sign up verification screen. Parameter: %1$@ - email address */
@@ -799,6 +829,9 @@
 
 /* Message -> Review you account screen. Parameter: %1$@ - email address */
 "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "メールアドレス %1$@ で、Simplenote に登録されました。\n\nアカウントのセキュリティ強化により、このメールアドレスにアクセスできなくなった場合にはアカウントを喪失する可能性があります。";
+
+/* Erro for un verified email */
+"You must verify your email before being able to login." = "ログインする前にメールを確認する必要があります。";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "無効なメールアドレスです。";

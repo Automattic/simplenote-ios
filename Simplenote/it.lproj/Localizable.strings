@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-08-19 20:48:06+0000 */
+/* Translation-Revision-Date: 2021-08-31 09:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: it */
@@ -73,6 +73,9 @@
 /* No comment provided by engineer. */
 "Account" = "Account";
 
+/* Email verification required alert title */
+"Account Verification Required" = "Verifica dell'account richiesta";
+
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Add a new collaborator..." = "Aggiungi un nuovo collaboratore...";
 
@@ -87,7 +90,7 @@
 "All Notes" = "Tutte le note";
 
 /* Delete account confirmation instructions */
-"An email has been sent to %@ Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation" = "È stata inviata un'e-mail a %@ Controlla la posta in arrivo e segui le istruzioni per confermare l'eliminazione dell'account.\n\nIl tuo account non verrà eliminato fino alla ricezione della conferma";
+"An email has been sent to %@. Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation." = "È stata inviata un'e-mail a %@ Controlla la posta in arrivo e segui le istruzioni per confermare l'eliminazione dell'account.\n\nIl tuo account non verrà eliminato fino alla ricezione della conferma";
 
 /* Deletion error message */
 "An error occured. Please, try again. If the problem continues, contact us at support@simplenote.com for help." = "Si è verificato un errore. Riprova. Se il problema persiste, contattaci all'indirizzo support@simplenote.com per ricevere supporto.";
@@ -140,11 +143,17 @@
 /* Change email button -> Review you account screen */
 "Change Email" = "Cambia e-mail";
 
+/* Change password action */
+"Change Password" = "Cambia la password";
+
 /* Number of characters in the note */
 "Characters" = "Caratteri";
 
 /* Title for delete account succes alert */
 "Check Your Email" = "Controlla l'e-mail";
+
+/* Vefification sent alert title */
+"Check your Email" = "Verifica l'e-mail";
 
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "Scegli un PIN di 4 cifre";
@@ -157,6 +166,9 @@
 
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Collaborators" = "Collaboratori";
+
+/* Compromised password alert title */
+"Compromised Password" = "Password compromessa";
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "Elenco note ristretto";
@@ -453,6 +465,9 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "Nessuna nota senza tag";
 
+/* Cancel action for password alert */
+"Not Yet" = "Non ancora";
+
 /* Note trashed notification */
 "Note Trashed" = "Nota spostata nel cestino";
 
@@ -467,7 +482,9 @@
 /* Instant passcode lock timeout */
 "Off" = "Off";
 
-/* Confirm alert message */
+/* Alert dismiss action
+   Confirm alert message
+   Email unverified alert dismiss */
 "Ok" = "OK";
 
 /* No comment provided by engineer. */
@@ -570,8 +587,14 @@
 /* Title for account deletion confirm button */
 "Request Account Deletion" = "Richiedi eliminazione account";
 
+/* Request error alert title */
+"Request Error" = "Errore richiesta";
+
 /* Resend email button -> Verify your email screen */
 "Resend Email" = "Invia di nuovo l'e-mail";
+
+/* Send email verificaiton action */
+"Resend Verification Email" = "Rinvia e-mail di verifica";
 
 /* Reset Action */
 "Reset" = "Ripristina";
@@ -703,6 +726,12 @@
 /* Simplenote Themes */
 "Themes" = "Temi";
 
+/* Request error alert message */
+"There was an preparing your verification email, please try again later" = "È stata preparata la tua e-mail di verifica, prova di nuovo più tardi";
+
+/* error for compromised password */
+"This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately." = "Questa password è apparsa in una violazione dei dati, che mette il tuo account ad alto rischio di compromissione. Si consiglia di modificare subito la tua password.";
+
 /* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
 "To enable %1$@, you must have a passcode setup first." = "Per abilitare %1$@, devi avere una prima configurazione del PIN.";
 
@@ -779,7 +808,8 @@
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
 
-/* Message -> Verify your email screen. Parameter: %1$@ - email address */
+/* Confirmation that an email has been sent
+   Message -> Verify your email screen. Parameter: %1$@ - email address */
 "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "Abbiamo inviato un'e-mail di verifica a %1$@. Controlla la tua casella di posta in arrivo e segui le istruzioni.";
 
 /* Message -> Sign up verification screen. Parameter: %1$@ - email address */
@@ -799,6 +829,9 @@
 
 /* Message -> Review you account screen. Parameter: %1$@ - email address */
 "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "Sei registrato su Simplenote con l'e-mail %1$@.\n\nI miglioramenti alla sicurezza dell'account possono comportare la perdita dell'account se non hai più accesso a questo indirizzo e-mail.";
+
+/* Erro for un verified email */
+"You must verify your email before being able to login." = "Devi verificare la tua e-mail prima di poter accedere.";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "Il tuo indirizzo email non è valido.";

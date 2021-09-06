@@ -101,7 +101,7 @@ extension SPSettingsViewController {
         SPTracker.trackDeleteAccountButttonTapped()
         let spinnerViewController = SpinnerViewController()
 
-        presentAccountDeletionConfirmation { (_) in
+        presentAccountDeletionConfirmation(forEmail: user.email) { (_) in
             self.present(spinnerViewController, animated: false, completion: nil)
             deletionController.requestAccountDeletion(user) { [weak self] (result) in
                 spinnerViewController.dismiss(animated: false, completion: nil)
@@ -119,9 +119,9 @@ extension SPSettingsViewController {
         }
     }
 
-    private func presentAccountDeletionConfirmation(onConfirm: @escaping ((UIAlertAction) -> Void)) {
+    private func presentAccountDeletionConfirmation(forEmail email: String, onConfirm: @escaping ((UIAlertAction) -> Void)) {
         let alert = UIAlertController(title: AccountDeletion.deleteAccount,
-                                      message: AccountDeletion.confirmAlertMessage,
+                                      message: AccountDeletion.confirmAlertMessage(with: email),
                                       preferredStyle: .alert)
         let deleteAccountButton = UIAlertAction(title: AccountDeletion.deleteAccountButton, style: .destructive, handler: onConfirm)
 
@@ -154,8 +154,11 @@ extension SPSettingsViewController {
 }
 
 private struct AccountDeletion {
+    static func confirmAlertMessage(with email: String) -> String {
+        String(format: confirmAlertTemplate, email)
+    }
     static let deleteAccount = NSLocalizedString("Delete Account", comment: "Delete account title and action")
-    static let confirmAlertMessage = NSLocalizedString("By deleting your account, all notes created with this account will be permanently deleted. This action is not reversible", comment: "Delete account confirmation alert message")
+    static let confirmAlertTemplate = NSLocalizedString("By deleting the account for %@, all notes created with this account will be permanently deleted. This action is not reversible", comment: "Delete account confirmation alert message")
     static let deleteAccountButton = NSLocalizedString("Request Account Deletion", comment: "Title for account deletion confirm button")
     static let cancel = NSLocalizedString("Cancel", comment: "Cancel button title")
 

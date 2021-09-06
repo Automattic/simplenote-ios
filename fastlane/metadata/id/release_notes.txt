@@ -1,0 +1,3 @@
+- Perbaikan bug saat url non http/https berhenti ketika dibuka dari markdown↵
+- Bantuan Penghapusan Akun↵
+- Tag dihilangkan dari Catatan yang dihapus↵
