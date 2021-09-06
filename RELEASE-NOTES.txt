@@ -1,3 +1,7 @@
+4.45
+-----
+
+
 4.44
 -----
 -   Fixed an issue with the select all button when only one note is in the list #1417
