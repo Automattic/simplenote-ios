@@ -71,10 +71,8 @@ msgctxt "app_store_keywords"
 msgid "notes,note,markdown,journal,sync,to-do,list,cloud,notebook,simple,notepad,tag,todo,writing,memo"
 msgstr ""
 
-msgctxt "v4.43-whats-new"
+msgctxt "v4.44-whats-new"
 msgid ""
-"-   Fixed a bug where non http/https urls crashed when opened from markdown\n"
-"-   Account Deletion Support\n"
-"-   Tags are now removed from deleted Notes\n"
+"- Fixed an issue with the select all button when only one note is in the list\n"
 msgstr ""
 

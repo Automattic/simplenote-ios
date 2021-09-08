@@ -1,3 +1,1 @@
--   Fixed a bug where non http/https urls crashed when opened from markdown
--   Account Deletion Support
--   Tags are now removed from deleted Notes
+- Fixed an issue with the select all button when only one note is in the list
