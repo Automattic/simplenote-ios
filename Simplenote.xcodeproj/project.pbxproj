@@ -1332,11 +1332,11 @@
 		092FD78026D7BB72006BE8E2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				BA8661D826B3A0B000466746 /* SimplenoteIntents-Distribution Internal.entitlements */,
-				BA8661D726B3A0A000466746 /* SimplenoteIntents-Release.entitlements */,
-				BA8661D626B3A08700466746 /* SimplenoteIntents-Debug.entitlements */,
-				BA8661D526B3A00B00466746 /* SimplenoteIntents-DistributionAlpha.entitlements */,
 				BAB5762826703C8200B0C56F /* Info.plist */,
+				BA8661D626B3A08700466746 /* SimplenoteIntents-Debug.entitlements */,
+				BA8661D826B3A0B000466746 /* SimplenoteIntents-Distribution Internal.entitlements */,
+				BA8661D526B3A00B00466746 /* SimplenoteIntents-DistributionAlpha.entitlements */,
+				BA8661D726B3A0A000466746 /* SimplenoteIntents-Release.entitlements */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -1671,11 +1671,11 @@
 		B512AF8F1C209DE800FE76D8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				8C3FEBF423EAE0F000EE55E6 /* SimplenoteShare-Distribution Alpha.entitlements */,
+				B5EB1EF31C204EBD0080A1B3 /* Info.plist */,
 				B5B06F3B1C31E119006F4495 /* SimplenoteShare-AppStore.entitlements */,
 				B5D3ADAF1FC8C0A200F84B31 /* SimplenoteShare-Development.entitlements */,
+				8C3FEBF423EAE0F000EE55E6 /* SimplenoteShare-Distribution Alpha.entitlements */,
 				B5D3ADB01FC8C0A300F84B31 /* SimplenoteShare-Internal.entitlements */,
-				B5EB1EF31C204EBD0080A1B3 /* Info.plist */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -2263,12 +2263,12 @@
 		BAB5760926703BE100B0C56F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				241709BB266827A800F6E2B1 /* SimplenoteWidgetsExtension-Release.entitlements */,
-				241709BC266827BA00F6E2B1 /* SimplenoteWidgetsExtension-Debug.entitlements */,
-				241709D126682AED00F6E2B1 /* SimplenoteWidgetsExtension-DistributionInternal.entitlements */,
-				241709C7266829CD00F6E2B1 /* SimplenoteWidgetsExtension-DistributionAlpha.entitlements */,
-				BAB5760A26703C0C00B0C56F /* NoteWidgetIntent.intentdefinition */,
 				BA7071E426BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition */,
+				BAB5760A26703C0C00B0C56F /* NoteWidgetIntent.intentdefinition */,
+				241709BC266827BA00F6E2B1 /* SimplenoteWidgetsExtension-Debug.entitlements */,
+				241709C7266829CD00F6E2B1 /* SimplenoteWidgetsExtension-DistributionAlpha.entitlements */,
+				241709D126682AED00F6E2B1 /* SimplenoteWidgetsExtension-DistributionInternal.entitlements */,
+				241709BB266827A800F6E2B1 /* SimplenoteWidgetsExtension-Release.entitlements */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
