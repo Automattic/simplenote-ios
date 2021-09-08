@@ -3,11 +3,14 @@ import XCTest
 
 class PasscodeScreen: ScreenObject {
 
-    // TODO: Add more digits verifications once `ScreenObject` support initializing with more than
-    // one expected element. The digits we had originally were 1, 4, 7, 0 (one per pad row).
     init(app: XCUIApplication = XCUIApplication()) throws {
         try super.init(
-            expectedElementGetter: { $0.staticTexts["1"].firstMatch },
+            expectedElementGetters: [
+                { $0.staticTexts["1"].firstMatch },
+                { $0.staticTexts["4"].firstMatch },
+                { $0.staticTexts["7"].firstMatch },
+                { $0.staticTexts["0"].firstMatch }
+            ],
             app: app
         )
     }
