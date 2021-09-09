@@ -5,9 +5,9 @@
         "package": "ScreenObject",
         "repositoryURL": "https://github.com/Automattic/ScreenObject",
         "state": {
-          "branch": "always-compute-at-runtime",
-          "revision": "d76744458980e38e25ac52f3445e45460003c3fb",
-          "version": null
+          "branch": null,
+          "revision": "df8ee4983e674b583b546bb0640ec83428be2465",
+          "version": "0.1.0"
         }
       },
       {

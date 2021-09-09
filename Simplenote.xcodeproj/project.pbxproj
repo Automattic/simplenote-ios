@@ -4672,8 +4672,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Automattic/ScreenObject";
 			requirement = {
-				branch = "always-compute-at-runtime";
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.0;
 			};
 		};
 		3F762E8D2677F19C0088CD45 /* XCRemoteSwiftPackageReference "XCUITestHelpers" */ = {
