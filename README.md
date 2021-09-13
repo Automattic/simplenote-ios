@@ -48,24 +48,33 @@ This will ensure any dependencies are ready before launching Xcode.
 
 You can also open the project by double clicking on Simplenote.xcworkspace file, or launching Xcode and choose `File` > `Open` and browse to `Simplenote.xcworkspace`.
 
+Once you have opened Simpleonte iOS in Xcode, depending on your setup, you may need to make a few changes before you can build the app.  In Xcode hit `Command + B` and see if you get any errors.  
+
+If you see (go do the setup again and get the error) before you can build Simplenote you will need to mark the app as trusted.  To do this, tap on the warning and hit Trust
+
+If the build fails with an "Account Creation Failed" error and Xcode asks for your GitHub credentials most likely you need to update the Swift Packages before being able to build the app. We use Swift Package Manager for some internal dependencies which can be found on Github.  To fetch these packages, connect Xcode to Github by going to Xcode > Preferences > Accounts, then enter your Github account details.  To be able to fetch these dependencies Xcode will need to be connected to a Github account via [SSH](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+
+Once you have trusted the app and the SPM packages are downloaded you should be able to build the app.  Try `Command + B` again and make sure that it builds correctly.
 
 ## Setup Credentials
 
-Simplenote is powered by the [Simperium Sync'ing protocol](https://www.simperium.com). We distribute **testing credentials** that help us authenticate your application, and verify that the API calls being made are valid. Once the Simperium account is created, you can register an app and access the APP ID and necessary API keys.
+Simplenote is powered by the [Simperium Sync'ing protocol](https://www.simperium.com). To be able to connect a development build of Simplenote iOS to the Simperium syncing service you will first need to setup app credentials.
+We distribute **testing credentials** that help us authenticate your application, and verify that the API calls being made are valid. 
 
 **⚠️ Please note → We're not accepting any new Simperium accounts at this time.**
+First you will need to setup an account with [Simperium.com](https://www.simperium.com) 
 
-After you've created your own Simperium application, run the following command in the terminal in order to copy the sample config:
+After creating your account, login and click on `Add an App`, give the app a name, and you will be taken to your test apps details page.  From there you need to copy the `App ID` and the `Default API Key`
+
+Once you have the `App ID` and the `API Key` for your Simperium application, run the following command in the terminal in order to copy the sample config:
 
 ```
 mkdir -p ~/.configure/simplenote-ios/secrets && cp Simplenote/SPCredentials-demo.swift ~/.configure/simplenote-ios/secrets/SPCredentials.swift
 ```
 
-This will copy the demo SPCredentials file into the correct directory with the basic details for an OSS contributor. Then edit the new `Simplenote/Credentials/SPCredentials.swift` file and change the `simperiumAppID` and `simperiumApiKey` fields to the correct values that appear in your Simperium app. 
+This will copy the demo SPCredentials file into the correct directory with the basic details for an OSS contributor. Then edit the new `Simplenote/Credentials/SPCredentials.swift` file and change the `simperiumAppID` and `simperiumApiKey` fields to the correct values that appear in your Simperium app. If you don't see the file there, try doing a build by pressing `Command + B` and then restarting Xcode.  You should see it then.
 
-If the build fails with an "Account Creation Failed" error and Xcode asks for your GitHub credentials most likely you need to update the Swift Packages before being able to build the app. Package issues need to be resolved before you can build the app, so the credentials file is put in place. For this you can setup GitHub under Xcode > Preferences > Accounts, then enter your account and [access token](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token). If you have 2FA on your GitHub account you won't be able to connect to without the [SSH key.](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
-
-This will allow you to compile and run the app on a device or a simulator. Please note that this will only work the Simperium account credentials, no other Simplenote account will work.
+This will allow you to compile and run the app on a device or a simulator. With the app running in the simulator you can connect to Simplenote.  Note that for testing builds you can only connect to Simplenote account using the email address and password of your account on`Simperium.com`.  You can not connect to regular Simplenote accounts in development builds.
 
 _Note: Simplenote API features such as sharing and publishing will not work with development builds._
 
