@@ -1,0 +1,3 @@
+- Een bug opgelost waarbij niet-http/https-urls crashten bij het openen vanuit markdown 
+- Ondersteuning voor het verwijderen van accounts 
+- Tags worden nu verwijderd uit verwijderde notities

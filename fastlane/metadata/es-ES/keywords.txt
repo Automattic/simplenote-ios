@@ -1,1 +1,1 @@
-notas,texto,planificador,diario,agenda,sincronizar,tarea,nube,cuaderno,simple,bloc de notas,etiqueta
+notas,nota,markdown,diario,sincronizar,lista,nube,simple,bloc,etiqueta,tarea,escribir,recordatorio

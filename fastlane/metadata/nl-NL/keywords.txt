@@ -1,1 +1,1 @@
-Notities,tekst,agenda,dagboek,synchroniseren,to-do,cloud,notitieboekje,eenvoudig,blocnote,tag
+notities,tekst,markdown,dagboek,synchroniseren,to-do,cloud,eenvoudig,tag,schrijven,memo

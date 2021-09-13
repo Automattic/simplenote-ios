@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-08-19 20:52:12+0000 */
+/* Translation-Revision-Date: 2021-09-01 15:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n > 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: id */
@@ -73,6 +73,9 @@
 /* No comment provided by engineer. */
 "Account" = "Account";
 
+/* Email verification required alert title */
+"Account Verification Required" = "Dibutuhkan Verifikasi Akun";
+
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Add a new collaborator..." = "Tambahkan kolaborator baru...";
 
@@ -87,7 +90,7 @@
 "All Notes" = "Semua Catatan";
 
 /* Delete account confirmation instructions */
-"An email has been sent to %@ Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation" = "Email sudah dikirimkan ke %@ Periksa kotak masuk Anda dan ikuti petunjuk untuk mengonfirmasi penghapusan akun.\n\nAkun tidak akan dihapus hingga kami menerima konfirmasi Anda.";
+"An email has been sent to %@. Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation." = "Email sudah dikirimkan ke %@ Periksa kotak masuk Anda dan ikuti petunjuk untuk mengonfirmasi penghapusan akun.\n\nAkun tidak akan dihapus hingga kami menerima konfirmasi Anda.";
 
 /* Deletion error message */
 "An error occured. Please, try again. If the problem continues, contact us at support@simplenote.com for help." = "Terjadi kesalahan. Harap coba lagi. Jika masalah berlanjut, hubungi kami di support@simplenote.com untuk mendapatkan bantuan.";
@@ -140,11 +143,17 @@
 /* Change email button -> Review you account screen */
 "Change Email" = "Ubah Email";
 
+/* Change password action */
+"Change Password" = "Ganti Kata Sandi";
+
 /* Number of characters in the note */
 "Characters" = "Karakter";
 
 /* Title for delete account succes alert */
 "Check Your Email" = "Periksa Email Anda";
+
+/* Vefification sent alert title */
+"Check your Email" = "Periksa Email Anda";
 
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "Pilih kode sandi 4 digit";
@@ -157,6 +166,9 @@
 
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Collaborators" = "Kolaborator";
+
+/* Compromised password alert title */
+"Compromised Password" = "Kata Sandi yang Disusupi";
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "Daftar Catatan Ringkas";
@@ -453,6 +465,9 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "Tidak ada catatan tanpa tag";
 
+/* Cancel action for password alert */
+"Not Yet" = "Belum";
+
 /* Note trashed notification */
 "Note Trashed" = "Catatan Dibuang";
 
@@ -467,7 +482,9 @@
 /* Instant passcode lock timeout */
 "Off" = "Matikan";
 
-/* Confirm alert message */
+/* Alert dismiss action
+   Confirm alert message
+   Email unverified alert dismiss */
 "Ok" = "OK";
 
 /* No comment provided by engineer. */
@@ -570,8 +587,14 @@
 /* Title for account deletion confirm button */
 "Request Account Deletion" = "Lakukan Permintaan Penghapusan Akun";
 
+/* Request error alert title */
+"Request Error" = "Permintaan Error";
+
 /* Resend email button -> Verify your email screen */
 "Resend Email" = "Kirim Ulang Email";
+
+/* Send email verificaiton action */
+"Resend Verification Email" = "Kirim ulang Email Verifikasi";
 
 /* Reset Action */
 "Reset" = "Atur Ulang";
@@ -703,6 +726,12 @@
 /* Simplenote Themes */
 "Themes" = "Tema";
 
+/* Request error alert message */
+"There was an preparing your verification email, please try again later" = "Ada email persiapan verifikasi, silakan coba lagi nanti";
+
+/* error for compromised password */
+"This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately." = "Kata sandi ini muncul dalam kasus pelanggaran data, yang membuat akun Anda berisiko tinggi disusupi. Kami sarankan agar Anda segera mengubah kata sandi.";
+
 /* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
 "To enable %1$@, you must have a passcode setup first." = "Untuk mengaktifkan %1$@, Anda harus menyiapkan kode sandi terlebih dahulu.";
 
@@ -779,7 +808,8 @@
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
 
-/* Message -> Verify your email screen. Parameter: %1$@ - email address */
+/* Confirmation that an email has been sent
+   Message -> Verify your email screen. Parameter: %1$@ - email address */
 "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "Kami telah mengirimkan email verifikasi ke %1$@. Harap periksa kotak masuk Anda dan ikuti instruksi berikut.";
 
 /* Message -> Sign up verification screen. Parameter: %1$@ - email address */
@@ -799,6 +829,9 @@
 
 /* Message -> Review you account screen. Parameter: %1$@ - email address */
 "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "Anda terdaftar pada SImplenote menggunakan email %1$@.\n\nPeningkatan keamanan akun dapat menyebabkan akun hilang jika Anda tidak lagi memiliki akses ke alamat email ini.";
+
+/* Erro for un verified email */
+"You must verify your email before being able to login." = "Anda harus memverifikasi email agar bisa login.";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "Alamat email Anda tidak valid.";

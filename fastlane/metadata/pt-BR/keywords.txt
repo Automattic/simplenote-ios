@@ -1,1 +1,1 @@
-anotações,mensagem,organizador,agenda,diário,sincronização,tarefas,nuvem,caderno,bloco de notas
+anotações,anotaçãp,markdown,diário,sincronização,tarefas,lista,nuvem,bloco de notas,simples,tag

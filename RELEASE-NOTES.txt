@@ -1,3 +1,7 @@
+4.45
+-----
+
+
 4.44
 -----
 -   Added home screen widgets #1416
@@ -10,6 +14,7 @@
 -   Tags are now removed from deleted Notes #1391
 -   [Internal] added login alert for compromised password #1394
 -   [Internal] added error response case on login for unverified emails #1398
+-   Updated the account deletion flow for clarity #1423
 
 4.42
 -----
