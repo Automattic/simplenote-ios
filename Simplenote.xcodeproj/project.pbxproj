@@ -97,7 +97,6 @@
 		46A3C9BD17DFA81A002865AE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E29ADD3D17848E8500E55842 /* CoreGraphics.framework */; };
 		46A3C9BE17DFA81A002865AE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E29ADD3F17848E8500E55842 /* UIKit.framework */; };
 		46A3C9BF17DFA81A002865AE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E29ADD3B17848E8500E55842 /* Foundation.framework */; };
-		46A3C9C217DFA81A002865AE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E29ADD4417848E8500E55842 /* InfoPlist.strings */; };
 		46A3C9C317DFA81A002865AE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E29ADD4D17848E8500E55842 /* Images.xcassets */; };
 		74388F4422CFFA30001C5EC0 /* UIViewController+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74388F4322CFFA30001C5EC0 /* UIViewController+Helpers.swift */; };
 		74388F4622CFFA8B001C5EC0 /* NSObject+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74388F4522CFFA8B001C5EC0 /* NSObject+Helpers.swift */; };
@@ -354,7 +353,6 @@
 		B5AD0357251446B900255D5C /* UIBarButtonItem+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AD0356251446B900255D5C /* UIBarButtonItem+Appearance.swift */; };
 		B5AD7AB11D1C82D3009725FB /* NSURLSessionConfiguration+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AD7AB01D1C82D3009725FB /* NSURLSessionConfiguration+Extensions.swift */; };
 		B5AEC38423FAC5D600D24221 /* DateFormatter+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AEC38323FAC5D600D24221 /* DateFormatter+Simplenote.swift */; };
-		B5B06F3C1C31E119006F4495 /* SimplenoteShare-AppStore.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = B5B06F3B1C31E119006F4495 /* SimplenoteShare-AppStore.entitlements */; };
 		B5B0DE24239AFD1D00F1009D /* SPFeedbackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B0DE23239AFD1D00F1009D /* SPFeedbackManager.swift */; };
 		B5B9AB4522EE8AF0001CB0AD /* UIImageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B9AB4422EE8AF0001CB0AD /* UIImageName.swift */; };
 		B5B9AB4722EE9CC2001CB0AD /* UIImageSimplenoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B9AB4622EE9CC2001CB0AD /* UIImageSimplenoteTests.swift */; };
@@ -671,10 +669,10 @@
 		17C421D01BE0BABE00752B56 /* SPMarkdownPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPMarkdownPreviewViewController.h; path = Classes/SPMarkdownPreviewViewController.h; sourceTree = "<group>"; };
 		17C421D11BE0BABE00752B56 /* SPMarkdownPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPMarkdownPreviewViewController.m; path = Classes/SPMarkdownPreviewViewController.m; sourceTree = "<group>"; };
 		183BAB896957F07FDCAB6DF5 /* Pods_Automattic_SimplenoteShare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Automattic_SimplenoteShare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		241709BB266827A800F6E2B1 /* SimplenoteWidgetsExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SimplenoteWidgetsExtension.entitlements; sourceTree = "<group>"; };
-		241709BC266827BA00F6E2B1 /* SimplenoteWidgetsExtensionDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SimplenoteWidgetsExtensionDebug.entitlements; sourceTree = "<group>"; };
-		241709C7266829CD00F6E2B1 /* SimplenoteWidgetsExtensionDistributionAlpha.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SimplenoteWidgetsExtensionDistributionAlpha.entitlements; sourceTree = "<group>"; };
-		241709D126682AED00F6E2B1 /* SimplenoteWidgetsExtensionDistributionInternal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SimplenoteWidgetsExtensionDistributionInternal.entitlements; sourceTree = "<group>"; };
+		241709BB266827A800F6E2B1 /* SimplenoteWidgetsExtension-Release.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SimplenoteWidgetsExtension-Release.entitlements"; sourceTree = "<group>"; };
+		241709BC266827BA00F6E2B1 /* SimplenoteWidgetsExtension-Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SimplenoteWidgetsExtension-Debug.entitlements"; sourceTree = "<group>"; };
+		241709C7266829CD00F6E2B1 /* SimplenoteWidgetsExtension-DistributionAlpha.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SimplenoteWidgetsExtension-DistributionAlpha.entitlements"; sourceTree = "<group>"; };
+		241709D126682AED00F6E2B1 /* SimplenoteWidgetsExtension-DistributionInternal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SimplenoteWidgetsExtension-DistributionInternal.entitlements"; sourceTree = "<group>"; };
 		30BBEDD4EB11FC7D576AE690 /* Pods-SimplenoteTests.distribution internal.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimplenoteTests.distribution internal.xcconfig"; path = "Pods/Target Support Files/Pods-SimplenoteTests/Pods-SimplenoteTests.distribution internal.xcconfig"; sourceTree = "<group>"; };
 		3318C36BBA08D53624E27EFC /* Pods_Automattic_Simplenote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Automattic_Simplenote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		371A862F213DF00E002E9120 /* SPPinLockManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPPinLockManager.swift; sourceTree = "<group>"; };
@@ -713,10 +711,6 @@
 		37E55A6621BF2B1800F14241 /* SPTextAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPTextAttachment.swift; sourceTree = "<group>"; };
 		37FD30471FC4CFA2008D0B78 /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
 		3D0CDFF82DFBC35A68B2C1C7 /* Pods-Automattic-SimplenoteShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-SimplenoteShare.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-SimplenoteShare/Pods-Automattic-SimplenoteShare.release.xcconfig"; sourceTree = "<group>"; };
-		3F0D6C3A26BA6B1600FF5BB1 /* SimplenoteIntents.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = SimplenoteIntents.entitlements; sourceTree = "<group>"; };
-		3F0D6C3B26BA6B1600FF5BB1 /* SimplenoteIntentsDistributionInternal.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = SimplenoteIntentsDistributionInternal.entitlements; sourceTree = "<group>"; };
-		3F0D6C3C26BA6B1600FF5BB1 /* SimplenoteIntentsDistributionAlpha.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = SimplenoteIntentsDistributionAlpha.entitlements; sourceTree = "<group>"; };
-		3F0D6C3D26BA6B1600FF5BB1 /* SimplenoteIntentsDebug.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = SimplenoteIntentsDebug.entitlements; sourceTree = "<group>"; };
 		3F1BB49F242DB81E006D1A04 /* ScreenshotsCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenshotsCredentials.swift; sourceTree = "<group>"; };
 		3F1BB4A2242DC162006D1A04 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		3F3CA94826255FA800F6316F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -758,7 +752,7 @@
 		74F6638022BADBD200FA147E /* ExtensionPresentationAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionPresentationAnimator.swift; sourceTree = "<group>"; };
 		74F6638222BADD0300FA147E /* SharePresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePresentationController.swift; sourceTree = "<group>"; };
 		7B29128DBC9F14CBA5F4683F /* Pods-Automattic-SimplenoteShare.distribution appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-SimplenoteShare.distribution appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-SimplenoteShare/Pods-Automattic-SimplenoteShare.distribution appstore.xcconfig"; sourceTree = "<group>"; };
-		8C3FEBF423EAE0F000EE55E6 /* SimplenoteShareDistribution Alpha.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SimplenoteShareDistribution Alpha.entitlements"; sourceTree = "<group>"; };
+		8C3FEBF423EAE0F000EE55E6 /* SimplenoteShare-DistributionAlpha.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SimplenoteShare-DistributionAlpha.entitlements"; sourceTree = "<group>"; };
 		8C573B0A22CD1A61005BC6F5 /* Simplenote.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Simplenote.debug.xcconfig; sourceTree = "<group>"; };
 		8C573B0B22CD1A6F005BC6F5 /* Simplenote.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Simplenote.release.xcconfig; sourceTree = "<group>"; };
 		8C573B0D22CD1AD6005BC6F5 /* Version.Public.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Version.Public.xcconfig; sourceTree = "<group>"; };
@@ -1124,10 +1118,10 @@
 		BA75D8B926C0865C00883FFA /* Filling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filling.swift; sourceTree = "<group>"; };
 		BA83478225F59F8B0059B797 /* markdown-default-contrast.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "markdown-default-contrast.css"; sourceTree = "<group>"; };
 		BA83478B25F59FE90059B797 /* markdown-dark-contrast.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "markdown-dark-contrast.css"; sourceTree = "<group>"; };
-		BA8661D526B3A00B00466746 /* SimplenoteIntents.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SimplenoteIntents.entitlements; sourceTree = "<group>"; };
-		BA8661D626B3A08700466746 /* SimplenoteIntentsDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SimplenoteIntentsDebug.entitlements; sourceTree = "<group>"; };
-		BA8661D726B3A0A000466746 /* SimplenoteIntentsRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SimplenoteIntentsRelease.entitlements; sourceTree = "<group>"; };
-		BA8661D826B3A0B000466746 /* SimplenoteIntentsDistribution Internal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SimplenoteIntentsDistribution Internal.entitlements"; sourceTree = "<group>"; };
+		BA8661D526B3A00B00466746 /* SimplenoteIntents-DistributionAlpha.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SimplenoteIntents-DistributionAlpha.entitlements"; sourceTree = "<group>"; };
+		BA8661D626B3A08700466746 /* SimplenoteIntents-Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SimplenoteIntents-Debug.entitlements"; sourceTree = "<group>"; };
+		BA8661D726B3A0A000466746 /* SimplenoteIntents-Release.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SimplenoteIntents-Release.entitlements"; sourceTree = "<group>"; };
+		BA8661D826B3A0B000466746 /* SimplenoteIntents-DistributionInternal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SimplenoteIntents-DistributionInternal.entitlements"; sourceTree = "<group>"; };
 		BA86622226B3AE4A00466746 /* WidgetResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetResultsController.swift; sourceTree = "<group>"; };
 		BA88765026B79324001C9C9E /* DemoContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoContent.swift; sourceTree = "<group>"; };
 		BA8FC2A4267AC7470082962E /* SharedStorageMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStorageMigrator.swift; sourceTree = "<group>"; };
@@ -1237,7 +1231,6 @@
 		E29ADD3B17848E8500E55842 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E29ADD3D17848E8500E55842 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		E29ADD3F17848E8500E55842 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		E29ADD4517848E8500E55842 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E29ADD4717848E8500E55842 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E29ADD4917848E8500E55842 /* Simplenote-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Simplenote-Prefix.pch"; sourceTree = "<group>"; };
 		E29ADD4A17848E8500E55842 /* SPAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SPAppDelegate.h; sourceTree = "<group>"; };
@@ -1350,6 +1343,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		092FD78026D7BB72006BE8E2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BAB5762826703C8200B0C56F /* Info.plist */,
+				BA8661D626B3A08700466746 /* SimplenoteIntents-Debug.entitlements */,
+				BA8661D526B3A00B00466746 /* SimplenoteIntents-DistributionAlpha.entitlements */,
+				BA8661D826B3A0B000466746 /* SimplenoteIntents-DistributionInternal.entitlements */,
+				BA8661D726B3A0A000466746 /* SimplenoteIntents-Release.entitlements */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		1748382D1BC1CAAB00E834AF /* CSS */ = {
 			isa = PBXGroup;
 			children = (
@@ -1681,12 +1686,13 @@
 		B512AF8F1C209DE800FE76D8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B5EB1EF31C204EBD0080A1B3 /* Info.plist */,
 				B5B06F3B1C31E119006F4495 /* SimplenoteShare-AppStore.entitlements */,
 				B5D3ADAF1FC8C0A200F84B31 /* SimplenoteShare-Development.entitlements */,
+				8C3FEBF423EAE0F000EE55E6 /* SimplenoteShare-DistributionAlpha.entitlements */,
 				B5D3ADB01FC8C0A300F84B31 /* SimplenoteShare-Internal.entitlements */,
-				B5EB1EF31C204EBD0080A1B3 /* Info.plist */,
 			);
-			name = "Supporting Files";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		B512AF981C20B1A200FE76D8 /* Settings */ = {
@@ -2164,7 +2170,6 @@
 		B5EB1EED1C204EBD0080A1B3 /* SimplenoteShare */ = {
 			isa = PBXGroup;
 			children = (
-				8C3FEBF423EAE0F000EE55E6 /* SimplenoteShareDistribution Alpha.entitlements */,
 				B56A9FF722AEBF33003F85CB /* Extensions */,
 				B56A9FFA22AECBF2003F85CB /* Extractors */,
 				B5CFFFE522AA9DA200B968CD /* Simperium */,
@@ -2273,8 +2278,12 @@
 		BAB5760926703BE100B0C56F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				BAB5760A26703C0C00B0C56F /* NoteWidgetIntent.intentdefinition */,
 				BA7071E426BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition */,
+				BAB5760A26703C0C00B0C56F /* NoteWidgetIntent.intentdefinition */,
+				241709BC266827BA00F6E2B1 /* SimplenoteWidgetsExtension-Debug.entitlements */,
+				241709C7266829CD00F6E2B1 /* SimplenoteWidgetsExtension-DistributionAlpha.entitlements */,
+				241709D126682AED00F6E2B1 /* SimplenoteWidgetsExtension-DistributionInternal.entitlements */,
+				241709BB266827A800F6E2B1 /* SimplenoteWidgetsExtension-Release.entitlements */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -2282,17 +2291,9 @@
 		BAB5762526703C8200B0C56F /* SimplenoteIntents */ = {
 			isa = PBXGroup;
 			children = (
-				BA8661D826B3A0B000466746 /* SimplenoteIntentsDistribution Internal.entitlements */,
-				BA8661D726B3A0A000466746 /* SimplenoteIntentsRelease.entitlements */,
-				BA8661D626B3A08700466746 /* SimplenoteIntentsDebug.entitlements */,
-				BA8661D526B3A00B00466746 /* SimplenoteIntents.entitlements */,
+				092FD78026D7BB72006BE8E2 /* Supporting Files */,
 				BAB5762626703C8200B0C56F /* IntentHandler.swift */,
-				BAB5762826703C8200B0C56F /* Info.plist */,
 				BAF8D4AD26AE136D00CA9383 /* Simplenote-Intents-Bridging-Header.h */,
-				3F0D6C3A26BA6B1600FF5BB1 /* SimplenoteIntents.entitlements */,
-				3F0D6C3D26BA6B1600FF5BB1 /* SimplenoteIntentsDebug.entitlements */,
-				3F0D6C3C26BA6B1600FF5BB1 /* SimplenoteIntentsDistributionAlpha.entitlements */,
-				3F0D6C3B26BA6B1600FF5BB1 /* SimplenoteIntentsDistributionInternal.entitlements */,
 			);
 			path = SimplenoteIntents;
 			sourceTree = "<group>";
@@ -2528,15 +2529,10 @@
 				46A3C9DC17DFA866002865AE /* Simplenote-Info.plist */,
 				B5D3ADB21FC8C11A00F84B31 /* Simplenote.entitlements */,
 				B5250A6B22B922F900AE7797 /* Simplenote-Internal.entitlements */,
-				241709BB266827A800F6E2B1 /* SimplenoteWidgetsExtension.entitlements */,
-				241709BC266827BA00F6E2B1 /* SimplenoteWidgetsExtensionDebug.entitlements */,
-				241709D126682AED00F6E2B1 /* SimplenoteWidgetsExtensionDistributionInternal.entitlements */,
-				241709C7266829CD00F6E2B1 /* SimplenoteWidgetsExtensionDistributionAlpha.entitlements */,
-				E29ADD4417848E8500E55842 /* InfoPlist.strings */,
 				E29ADD4717848E8500E55842 /* main.m */,
 				E29ADD4917848E8500E55842 /* Simplenote-Prefix.pch */,
 			);
-			name = "Supporting Files";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		E29ADD7117848F9700E55842 /* Transitions */ = {
@@ -2919,7 +2915,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46A3C9C217DFA81A002865AE /* InfoPlist.strings in Resources */,
 				A66E41D1256D08E6000C6FCB /* PinLockViewController.xib in Resources */,
 				46A3C9C317DFA81A002865AE /* Images.xcassets in Resources */,
 				B5476BBB23D89B66000E7723 /* SPSectionHeaderView.xib in Resources */,
@@ -2968,7 +2963,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				74388F4A22CFFB8B001C5EC0 /* ShareViewController.xib in Resources */,
-				B5B06F3C1C31E119006F4495 /* SimplenoteShare-AppStore.entitlements in Resources */,
 				B5EB1EFF1C205A800080A1B3 /* Icons.xcassets in Resources */,
 				B5EB1EF21C204EBD0080A1B3 /* MainInterface.storyboard in Resources */,
 			);
@@ -3781,14 +3775,6 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
-		E29ADD4417848E8500E55842 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E29ADD4517848E8500E55842 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -4001,7 +3987,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
-				CODE_SIGN_ENTITLEMENTS = Simplenote/Simplenote.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "Simplenote/Supporting Files/Simplenote.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -4014,12 +4000,12 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Simplenote/Simplenote-Prefix.pch";
+				GCC_PREFIX_HEADER = "Simplenote/Supporting Files/Simplenote-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"COCOAPODS=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "Simplenote/Simplenote-Info.plist";
+				INFOPLIST_FILE = "Simplenote/Supporting Files/Simplenote-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4052,7 +4038,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
-				CODE_SIGN_ENTITLEMENTS = Simplenote/Simplenote.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "Simplenote/Supporting Files/Simplenote.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -4066,12 +4052,12 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Simplenote/Simplenote-Prefix.pch";
+				GCC_PREFIX_HEADER = "Simplenote/Supporting Files/Simplenote-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"RELEASE=1",
 				);
-				INFOPLIST_FILE = "Simplenote/Simplenote-Info.plist";
+				INFOPLIST_FILE = "Simplenote/Supporting Files/Simplenote-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4161,7 +4147,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
-				CODE_SIGN_ENTITLEMENTS = "Simplenote/Simplenote-Internal.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Simplenote/Supporting Files/Simplenote-Internal.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Automattic, Inc.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Automattic, Inc.";
 				CODE_SIGN_STYLE = Manual;
@@ -4174,13 +4160,13 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Simplenote/Simplenote-Prefix.pch";
+				GCC_PREFIX_HEADER = "Simplenote/Supporting Files/Simplenote-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"INTERNAL_DISTRIBUTION=1",
 					"USE_APPCENTER=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "Simplenote/Simplenote-Info.plist";
+				INFOPLIST_FILE = "Simplenote/Supporting Files/Simplenote-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4210,7 +4196,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Beta";
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_ENTITLEMENTS = "SimplenoteShare/SimplenoteShareDistribution Alpha.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "SimplenoteShare/Supporting Files/SimplenoteShare-DistributionAlpha.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Automattic, Inc.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Automattic, Inc.";
 				COPY_PHASE_STRIP = NO;
@@ -4225,7 +4211,7 @@
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = SimplenoteShare/Info.plist;
+				INFOPLIST_FILE = "SimplenoteShare/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4352,7 +4338,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
-				CODE_SIGN_ENTITLEMENTS = Simplenote/Simplenote.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "Simplenote/Supporting Files/Simplenote.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Distribution: Automattic, Inc. (PZYM8XX95Q)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Automattic, Inc. (PZYM8XX95Q)";
 				CODE_SIGN_STYLE = Manual;
@@ -4365,12 +4351,12 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Simplenote/Simplenote-Prefix.pch";
+				GCC_PREFIX_HEADER = "Simplenote/Supporting Files/Simplenote-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"APPSTORE_DISTRIBUTION=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "Simplenote/Simplenote-Info.plist";
+				INFOPLIST_FILE = "Simplenote/Supporting Files/Simplenote-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4459,7 +4445,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
-				CODE_SIGN_ENTITLEMENTS = "Simplenote/Simplenote-Internal.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Simplenote/Supporting Files/Simplenote-Internal.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Automattic, Inc.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Automattic, Inc.";
 				CODE_SIGN_STYLE = Manual;
@@ -4472,13 +4458,13 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Simplenote/Simplenote-Prefix.pch";
+				GCC_PREFIX_HEADER = "Simplenote/Supporting Files/Simplenote-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"INTERNAL_DISTRIBUTION=1",
 					"USE_APPCENTER=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "Simplenote/Simplenote-Info.plist";
+				INFOPLIST_FILE = "Simplenote/Supporting Files/Simplenote-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4677,7 +4663,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Beta";
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_ENTITLEMENTS = "SimplenoteShare/SimplenoteShare-Development.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "SimplenoteShare/Supporting Files/SimplenoteShare-Development.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -4686,7 +4672,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = SimplenoteShare/Info.plist;
+				INFOPLIST_FILE = "SimplenoteShare/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4713,7 +4699,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Beta";
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_ENTITLEMENTS = "SimplenoteShare/SimplenoteShare-AppStore.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "SimplenoteShare/Supporting Files/SimplenoteShare-AppStore.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -4727,7 +4713,7 @@
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = SimplenoteShare/Info.plist;
+				INFOPLIST_FILE = "SimplenoteShare/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4753,7 +4739,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Beta";
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_ENTITLEMENTS = "SimplenoteShare/SimplenoteShare-Internal.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "SimplenoteShare/Supporting Files/SimplenoteShare-Internal.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Automattic, Inc.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Automattic, Inc.";
 				COPY_PHASE_STRIP = NO;
@@ -4768,7 +4754,7 @@
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = SimplenoteShare/Info.plist;
+				INFOPLIST_FILE = "SimplenoteShare/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4794,7 +4780,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_ENTITLEMENTS = "SimplenoteShare/SimplenoteShare-AppStore.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "SimplenoteShare/Supporting Files/SimplenoteShare-AppStore.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Distribution: Automattic, Inc. (PZYM8XX95Q)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Automattic, Inc. (PZYM8XX95Q)";
 				COPY_PHASE_STRIP = NO;
@@ -4809,7 +4795,7 @@
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = SimplenoteShare/Info.plist;
+				INFOPLIST_FILE = "SimplenoteShare/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4837,7 +4823,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = SimplenoteIntents/SimplenoteIntentsDebug.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "SimplenoteIntents/Supporting Files/SimplenoteIntents-Debug.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -4849,7 +4835,7 @@
 					"$(inherited)",
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = SimplenoteIntents/Info.plist;
+				INFOPLIST_FILE = "SimplenoteIntents/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4879,7 +4865,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = SimplenoteIntents/SimplenoteIntents.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "SimplenoteIntents/Supporting Files/SimplenoteIntents-Release.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -4888,7 +4874,7 @@
 				DEVELOPMENT_TEAM = PZYM8XX95Q;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = SimplenoteIntents/Info.plist;
+				INFOPLIST_FILE = "SimplenoteIntents/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4917,7 +4903,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = SimplenoteIntents/SimplenoteIntentsDistributionInternal.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "SimplenoteIntents/Supporting Files/SimplenoteIntents-DistributionInternal.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Automattic, Inc.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Automattic, Inc.";
 				CODE_SIGN_STYLE = Manual;
@@ -4926,7 +4912,7 @@
 				DEVELOPMENT_TEAM = 99KV9Z6BKV;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = SimplenoteIntents/Info.plist;
+				INFOPLIST_FILE = "SimplenoteIntents/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4955,7 +4941,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = SimplenoteIntents/SimplenoteIntentsDistributionAlpha.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "SimplenoteIntents/Supporting Files/SimplenoteIntents-DistributionAlpha.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Automattic, Inc.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Automattic, Inc.";
 				CODE_SIGN_STYLE = Manual;
@@ -4964,7 +4950,7 @@
 				DEVELOPMENT_TEAM = 99KV9Z6BKV;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = SimplenoteIntents/Info.plist;
+				INFOPLIST_FILE = "SimplenoteIntents/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4993,7 +4979,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = SimplenoteIntents/SimplenoteIntents.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "SimplenoteIntents/Supporting Files/SimplenoteIntents-Release.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Distribution: Automattic, Inc. (PZYM8XX95Q)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Automattic, Inc. (PZYM8XX95Q)";
 				CODE_SIGN_STYLE = Manual;
@@ -5002,7 +4988,7 @@
 				DEVELOPMENT_TEAM = PZYM8XX95Q;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = SimplenoteIntents/Info.plist;
+				INFOPLIST_FILE = "SimplenoteIntents/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5033,7 +5019,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = Simplenote/SimplenoteWidgetsExtensionDebug.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "SimplenoteWidgets/Supporting Files/SimplenoteWidgetsExtension-Debug.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -5079,7 +5065,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = Simplenote/SimplenoteWidgetsExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "SimplenoteWidgets/Supporting Files/SimplenoteWidgetsExtension-Release.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Distribution: Automattic, Inc. (PZYM8XX95Q)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Automattic, Inc. (PZYM8XX95Q)";
 				CODE_SIGN_STYLE = Manual;
@@ -5121,7 +5107,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = Simplenote/SimplenoteWidgetsExtensionDistributionInternal.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "SimplenoteWidgets/Supporting Files/SimplenoteWidgetsExtension-DistributionInternal.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Automattic, Inc.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Automattic, Inc.";
 				CODE_SIGN_STYLE = Manual;
@@ -5163,7 +5149,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = Simplenote/SimplenoteWidgetsExtensionDistributionAlpha.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "SimplenoteWidgets/Supporting Files/SimplenoteWidgetsExtension-DistributionAlpha.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Automattic, Inc.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Automattic, Inc.";
 				CODE_SIGN_STYLE = Manual;
@@ -5205,7 +5191,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = Simplenote/SimplenoteWidgetsExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "SimplenoteWidgets/Supporting Files/SimplenoteWidgetsExtension-Release.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Distribution: Automattic, Inc. (PZYM8XX95Q)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Automattic, Inc. (PZYM8XX95Q)";
 				CODE_SIGN_STYLE = Manual;
