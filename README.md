@@ -50,9 +50,9 @@ You can also open the project by double clicking on Simplenote.xcworkspace file,
 
 Once you have opened Simpleonte iOS in Xcode, depending on your setup, you may need to make a few changes before you can build the app.  In Xcode hit `Command + B` and see if you get any errors.  
 
-If you see (go do the setup again and get the error) before you can build Simplenote you will need to mark the app as trusted.  To do this, tap on the warning and hit Trust
+If you see `The server SSH fingerprint failed to verify` before you can build Simplenote you will need to mark the app as trusted.  To do this, tap on the warning and hit Trust
 
-If the build fails with an "Account Creation Failed" error and Xcode asks for your GitHub credentials most likely you need to update the Swift Packages before being able to build the app. We use Swift Package Manager for some internal dependencies which can be found on Github.  To fetch these packages, connect Xcode to Github by going to Xcode > Preferences > Accounts, then enter your Github account details.  To be able to fetch these dependencies Xcode will need to be connected to a Github account via [SSH](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+If the build fails with an `Authentication failed because the credentials were missing` error most likely you need to update the Swift Packages before being able to build the app. We use Swift Package Manager for some internal dependencies which can be found on Github.  To fetch these packages, connect Xcode to Github by going to Xcode > Preferences > Accounts, then enter your Github account details.  To be able to fetch these dependencies Xcode will need to be connected to a Github account via [SSH](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 
 Once you have trusted the app and the SPM packages are downloaded you should be able to build the app.  Try `Command + B` again and make sure that it builds correctly.
 
