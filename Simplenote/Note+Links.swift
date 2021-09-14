@@ -12,7 +12,7 @@ extension Note {
             return nil
         }
 
-        return SimplenoteConstants.simplenoteScheme + "://" + SimplenoteConstants.simplenoteInterlinkHost + "/" + key
+        return .simplenotePath(withHost: SimplenoteConstants.simplenoteInterlinkHost) + key
     }
 
     /// Returns the receiver's Markdown Internal Reference, when possible

@@ -74,6 +74,8 @@
 	<string>This app does not require Photo Library access.</string>
 	<key>NSUserActivityTypes</key>
 	<array>
+		<string>ListWidgetIntent</string>
+		<string>SPNoteWidgetIntent</string>
 		<string>com.codality.NotationalFlow.launch</string>
 		<string>com.codality.NotationalFlow.newNote</string>
 		<string>com.codality.NotationalFlow.openNote</string>

@@ -18,6 +18,10 @@ class SimplenoteConstants: NSObject {
     ///
     static let simplenoteInterlinkHost = "note"
 
+    /// Simplenote: Tag list Host
+    ///
+    static let simplenoteInternalTagHost = "list"
+
     /// Simplenote: Interlink Maximum Title Length
     ///
     static let simplenoteInterlinkMaxTitleLength = 150
@@ -25,6 +29,10 @@ class SimplenoteConstants: NSObject {
     /// Simplenote: Published Notes base URL
     ///
     static let simplenotePublishedBaseURL = "http://simp.ly/publish/"
+
+    /// Simplenote: Domain for shared group directory
+    ///
+    static let sharedGroupDomain = "group.\(Bundle.main.rootBundleIdentifier ?? "com.codality.NotationalFlow")"
 
     /// AppEngine: Base URL
     ///

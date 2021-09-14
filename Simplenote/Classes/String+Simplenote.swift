@@ -72,6 +72,12 @@ extension String {
     func locationOfFirstCharacter(from searchSet: CharacterSet,
                                   startingFrom startLocation: String.Index,
                                   backwards: Bool = false) -> String.Index? {
+        rangeOfFirstCharacter(from: searchSet, startingFrom: startLocation, backwards: backwards)?.lowerBound
+    }
+
+    func rangeOfFirstCharacter(from searchSet: CharacterSet,
+                               startingFrom startLocation: String.Index,
+                               backwards: Bool = false) -> Range<String.Index>? {
 
         guard startLocation <= endIndex else {
             return nil
@@ -83,7 +89,7 @@ extension String {
                                               options: backwards ? .backwards : [],
                                               range: range)
 
-        return characterRange?.lowerBound
+        return characterRange
     }
 }
 
@@ -176,5 +182,30 @@ extension String {
 extension String {
     func occurrences(of string: String) -> Int {
         return components(separatedBy: string).count - 1
+    }
+}
+
+// MARK: Simplenote URL Path
+extension String {
+    static func simplenotePath(withHost host: String? = nil) -> String {
+        let base = SimplenoteConstants.simplenoteScheme + "://"
+
+        guard let host = host else {
+            return base
+        }
+
+        return base + host + "/"
+    }
+}
+
+// MARK: Replacing newlines with spaces
+extension String {
+    func replacingNewlinesWithSpaces() -> String {
+        if isEmpty {
+            return self
+        }
+        var components = self.components(separatedBy: .newlines)
+        components.removeAll { $0.isEmpty }
+        return components.joined(separator: " ")
     }
 }

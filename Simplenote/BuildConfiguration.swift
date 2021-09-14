@@ -1,5 +1,4 @@
 import Foundation
-import AutomatticTracks
 
 enum BuildConfiguration: String {
     case debug

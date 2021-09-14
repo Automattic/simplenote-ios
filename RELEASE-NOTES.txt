@@ -1,6 +1,6 @@
 4.45
 -----
-
+-   Added home screen widgets #1416
 
 4.44
 -----
@@ -30,6 +30,7 @@
 
 4.39
 -----
+-   Adds a home screen widget to start a new note with a single tap #1293
 -   Moved edit mode into a long press action and removed the new note bar #1328
 
 4.38

@@ -47,4 +47,23 @@ extension SPObjectManager {
     func notesWithTag(_ tag: Tag?) -> [Note] {
         return notesWithTag(tag, includeDeleted: false)
     }
+
+    @objc
+    func newNote(withContent content: String?, tags: [String]?) -> Note {
+        let newNote = newDefaultNote()
+
+        if let content = content {
+            newNote.content = content
+        }
+
+        let validator = TagTextFieldInputValidator()
+        tags?
+            .compactMap({ validator.preprocessForPasting(tag: $0) })
+            .forEach { tag in
+                newNote.addTag(tag)
+                SPObjectManager.shared().createTag(from: tag)
+            }
+
+        return newNote
+    }
 }

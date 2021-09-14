@@ -168,6 +168,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     [SPTracker trackApplicationOpened];
+    [self syncWidgetDefaults];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -181,6 +182,8 @@
 
     [self showPasscodeLockIfNecessary];
     [self cleanupScrollPositionCache];
+    [self syncWidgetDefaults];
+    [self resetWidgetTimelines];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -498,35 +501,17 @@
         return YES;
     }
 
+    if ([self handleOpenTagListWithUrl:url]) {
+        return YES;
+    }
+
     // Support opening Simplenote and optionally creating a new note
-    if ([[url host] isEqualToString:@"new"]) {
-        
-        Note *newNote = [[SPObjectManager sharedManager] newDefaultNote];
-        
-        NSArray *params = [[url query] componentsSeparatedByString:@"&"];
-        for (NSString *param in params) {
-            NSArray *paramArray = [param componentsSeparatedByString:@"="];
-            if ([paramArray count] < 2) {
-                continue;
-            }
-            
-            NSString *key = [paramArray objectAtIndex:0];
-            NSString *value = [[paramArray objectAtIndex:1] stringByRemovingPercentEncoding];
-            
-            if ([key isEqualToString:@"content"]) {
-                newNote.content = value;
-            } else if ([key isEqualToString:@"tag"]) {
-                NSArray *tags = [value componentsSeparatedByString:@" "];
-                for (NSString *tag in tags) {
-                    if (tag.length == 0)
-                        continue;
-                    [newNote addTag:tag];
-                    [[SPObjectManager sharedManager] createTagFromString:tag];
-                }
-            }
-        }
-        [_simperium save];
-        
+    NSURLComponents *components = [NSURLComponents componentsWithURL:url resolvingAgainstBaseURL:NO];
+
+    if ([[components host] isEqualToString:@"new"]) {
+
+        Note *newNote = [[SPObjectManager sharedManager] newNoteWithContent:[components contentFromQuery] tags:[components tagsFromQuery]];
+
         [self presentNote:newNote animated:NO];
     }
     

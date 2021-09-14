@@ -47,10 +47,10 @@ extension Note {
     /// Create title and body previews from content
     @objc
     func createPreview() {
-        let (titleRange, bodyRange) = NoteContentHelper.structure(of: content)
+        let noteStructure = NoteContentHelper.structure(of: content)
 
-        titlePreview = titlePreview(with: titleRange)
-        bodyPreview = bodyPreview(with: bodyRange)
+        titlePreview = titlePreview(with: noteStructure.title)
+        bodyPreview = bodyPreview(with: noteStructure.trimmedBody)
 
         updateTagsArray()
     }
@@ -87,7 +87,7 @@ extension Note {
             return bodyPreview
         }
 
-        guard let bodyRange = NoteContentHelper.structure(of: content).body else {
+        guard let bodyRange = NoteContentHelper.structure(of: content).trimmedBody else {
             return nil
         }
 

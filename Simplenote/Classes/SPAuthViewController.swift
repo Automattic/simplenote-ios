@@ -377,7 +377,6 @@ private extension SPAuthViewController {
             } else {
                 SPTracker.trackUserSignedIn()
             }
-
             self.unlockInterface()
         }
     }
