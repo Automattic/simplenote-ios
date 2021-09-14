@@ -30,7 +30,7 @@ This is the recommended way to include SwiftLint in your workflow, as it catches
 
 Alternately, a SwiftLint scheme is exposed within the project; Xcode will show a warning if you don't have SwiftLint installed.
 
-SwiftLint is connected to Simplenote iOS, so lint errors will appear as warnings in Xcode after you build the project.
+SwiftLint is integrated directly into the Xcode project, so lint errors appear as warnings after you build the project
 
 If your code has any style violations, you can try to automatically correct them by running:
 
