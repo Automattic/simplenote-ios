@@ -1,3 +1,1 @@
-- Perbaikan bug saat url non http/https berhenti ketika dibuka dari markdown↵
-- Bantuan Penghapusan Akun↵
-- Tag dihilangkan dari Catatan yang dihapus↵
+- Masalah terkait tombol pilih semua jika hanya ada satu catatan dalam daftar teratasi

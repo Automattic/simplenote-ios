@@ -1,4 +1,1 @@
--   Se ha arreglado un fallo que causaba un error al abrir URLs no http/https desde Markdown
--   Soporte para eliminación de cuentas 
--   Ahora se borrarán las etiquetas de las notas eliminadas
-
+- Se ha corregido un problema con el botón "Seleccionar todo" cuando solo hay una nota en la lista.
