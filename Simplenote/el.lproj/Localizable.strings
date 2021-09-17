@@ -120,7 +120,7 @@
 "By creating an account you agree to our" = "By creating an account you agree to our";
 
 /* Delete account confirmation alert message */
-"By deleting your account, all notes created with this account will be permanently deleted. This action is not reversible" = "By deleting your account, all notes created with this account will be permanently deleted. This action is not reversible";
+"By deleting the account for %@, all notes created with this account will be permanently deleted. This action is not reversible" = "By deleting the account for %@, all notes created with this account will be permanently deleted. This action is not reversible";
 
 /* Cancel Action
    Cancel action button
@@ -830,7 +830,7 @@
 /* Message -> Review you account screen. Parameter: %1$@ - email address */
 "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address.";
 
-/* Erro for un verified email */
+/* Error for un verified email */
 "You must verify your email before being able to login." = "You must verify your email before being able to login.";
 
 /* Message displayed when email address is invalid */

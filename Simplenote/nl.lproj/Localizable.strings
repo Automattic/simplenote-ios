@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-08-31 15:54:04+0000 */
+/* Translation-Revision-Date: 2021-09-14 11:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: nl */
@@ -120,7 +120,7 @@
 "By creating an account you agree to our" = "Door een account aan te maken, ga je akkoord met onze";
 
 /* Delete account confirmation alert message */
-"By deleting your account, all notes created with this account will be permanently deleted. This action is not reversible" = "Door je account te verwijderen zullen alle notities die gemaakt zijn met dit account permanent worden verwijderd. Dit kan niet worden teruggedraaid";
+"By deleting the account for %@, all notes created with this account will be permanently deleted. This action is not reversible" = "Door het account voor %@ te verwijderen zullen alle opmerkingen die gemaakt zijn met dit account permanent worden verwijderd. Dit kan niet worden teruggedraaid";
 
 /* Cancel Action
    Cancel action button
@@ -830,7 +830,7 @@
 /* Message -> Review you account screen. Parameter: %1$@ - email address */
 "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "Je staat geregistreerd bij Simplenote met het e-mailadres %1$@.\n\nVerbeteringen aan accountbeveiliging kunnen leiden tot accountverlies als je geen toegang meer hebt tot dit e-mailadres.";
 
-/* Erro for un verified email */
+/* Error for un verified email */
 "You must verify your email before being able to login." = "Je moet je e-mailadres verifiëren voordat je kunt inloggen.";
 
 /* Message displayed when email address is invalid */
