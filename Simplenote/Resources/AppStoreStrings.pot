@@ -15,12 +15,14 @@ msgstr ""
 
 #. translators: App name to be displayed in the Apple App Store. Limit to 30 characters including spaces and commas!
 msgctxt "app_store_title"
-msgid "Simplenote – Notes and Todos"
+msgid "Simplenote – Notes and Todos
+"
 msgstr ""
 
 #. translators: Subtitle to be displayed below the application name in the Apple App Store. Limit to 30 characters including spaces and commas!
 msgctxt "app_store_subtitle"
-msgid "Simple notes, todos and memos"
+msgid "Simple notes, todos and memos
+"
 msgstr ""
 
 #. translators: Multi-paragraph text used to display in the Apple App Store.
@@ -71,8 +73,8 @@ msgctxt "app_store_keywords"
 msgid "notes,note,markdown,journal,sync,to-do,list,cloud,notebook,simple,notepad,tag,todo,writing,memo"
 msgstr ""
 
-msgctxt "v4.44-whats-new"
+msgctxt "v4.45-whats-new"
 msgid ""
-"- Fixed an issue with the select all button when only one note is in the list\n"
+"- Added home screen widgets\n"
 msgstr ""
 
