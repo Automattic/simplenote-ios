@@ -1,1 +1,1 @@
-note,markdown,journal,synchronisation,àfaire,liste,cloud,notebook,tâches,notepad,étiquette,écrire
+notes,note,markdown,journal,synchronisation,todo,liste,cloud,notebook,simple,notepad,écrire

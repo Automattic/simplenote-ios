@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-09-01 09:54:03+0000 */
+/* Translation-Revision-Date: 2021-09-15 09:54:57+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ja_JP */
@@ -120,7 +120,7 @@
 "By creating an account you agree to our" = "アカウントを作成すると次に合意したものとみなされます";
 
 /* Delete account confirmation alert message */
-"By deleting your account, all notes created with this account will be permanently deleted. This action is not reversible" = "アカウントを削除すると、このアカウントで作成したすべてのメモが完全に削除されます。 この操作を元に戻すことはできません";
+"By deleting the account for %@, all notes created with this account will be permanently deleted. This action is not reversible" = "%@ のアカウントを削除すると、このアカウントで作成したすべてのメモが完全に削除されます。 この操作を元に戻すことはできません";
 
 /* Cancel Action
    Cancel action button
@@ -830,7 +830,7 @@
 /* Message -> Review you account screen. Parameter: %1$@ - email address */
 "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "メールアドレス %1$@ で、Simplenote に登録されました。\n\nアカウントのセキュリティ強化により、このメールアドレスにアクセスできなくなった場合にはアカウントを喪失する可能性があります。";
 
-/* Erro for un verified email */
+/* Error for un verified email */
 "You must verify your email before being able to login." = "ログインする前にメールを確認する必要があります。";
 
 /* Message displayed when email address is invalid */

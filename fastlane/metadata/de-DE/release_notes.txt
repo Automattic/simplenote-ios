@@ -1,3 +1,1 @@
-- Fehler behoben, bei dem über Markdown geöffnete URLs ohne http/https abgestürzt sind
-- Support beim Löschen eines Kontos
-- Schlagwörter werden jetzt aus gelöschten Notizen entfernt
+- Ein Problem mit dem Button „Alle auswählen“, wenn die Liste nur eine Notiz enthält, wurde behoben

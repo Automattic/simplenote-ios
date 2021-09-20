@@ -1,3 +1,1 @@
--   Résolution d’un bogue où les URL non-http/https se bloquaient après leur ouverture à partir de Markdown
--   Assistance lors de la suppression de compte
--   Les étiquettes sont désormais retirées des notes supprimées
+- Résolution d’un problème lié au bouton Tout sélectionner lorsqu’il n’y a qu’une seule note dans la liste

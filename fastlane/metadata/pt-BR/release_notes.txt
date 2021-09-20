@@ -1,3 +1,1 @@
-- Corrigido um bug em que urls não http / https travavam ao serem abertas na marcação
-- Suporte para exclusão de conta
-- As tags agora são removidas das anotações excluídas
+- Correção de um erro no botão de selecionar tudo que ocorria quando só havia uma anotação na lista
