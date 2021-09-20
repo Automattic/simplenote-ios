@@ -1,2 +1,1 @@
--   Added home screen widgets #1416
-
+- Added home screen widgets
