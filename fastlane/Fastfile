@@ -93,6 +93,10 @@ end
     trigger_beta_build(branch_to_build: "release/#{new_version}")
   end
 
+  lane :t do
+    ios_localize_project
+  end
+
   #####################################################################################
   # update_appstore_strings
   # -----------------------------------------------------------------------------------
@@ -239,7 +243,7 @@ end
     UI.user_error!('To finalize a hotfix, please use the finalize_hotfix_release lane instead') if ios_current_branch_is_hotfix
 
     ios_finalize_prechecks(options)
-    
+
     UI.message('Checking app strings translation status...')
     check_translation_progress(
       glotpress_url: 'https://translate.wordpress.com/projects/simplenote/ios/',
