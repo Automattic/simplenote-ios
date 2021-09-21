@@ -98,4 +98,4 @@ enum Text {
 }
 
 let testDataEmail = "simplenoteuitest@mailinator.com"
-let testDataPassword = "qazxswedc"
+let testDataPassword = "yang8EEF3pall"
