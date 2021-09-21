@@ -1,4 +1,5 @@
 # Simplenote for iOS
+
 A Simplenote client for iOS. Learn more about Simplenote at [Simplenote.com](https://simplenote.com).
 
 ## Build Instructions
@@ -63,7 +64,7 @@ After you've created your own Simperium application, run the following command i
 mkdir -p ~/.configure/simplenote-ios/secrets && cp Simplenote/SPCredentials-demo.swift ~/.configure/simplenote-ios/secrets/SPCredentials.swift
 ```
 
-This will copy the demo SPCredentials file into the correct directory with the basic details for an OSS contributor. Then edit the new `Simplenote/Credentials/SPCredentials.swift` file and change the `simperiumAppID` and `simperiumApiKey` fields to the correct values that appear in your Simperium app. 
+This will copy the demo SPCredentials file into the correct directory with the basic details for an OSS contributor. Then edit the new `Simplenote/Credentials/SPCredentials.swift` file and change the `simperiumAppID` and `simperiumApiKey` fields to the correct values that appear in your Simperium app.
 
 If the build fails with an "Account Creation Failed" error and Xcode asks for your GitHub credentials most likely you need to update the Swift Packages before being able to build the app. Package issues need to be resolved before you can build the app, so the credentials file is put in place. For this you can setup GitHub under Xcode > Preferences > Accounts, then enter your account and [access token](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token). If you have 2FA on your GitHub account you won't be able to connect to without the [SSH key.](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 
