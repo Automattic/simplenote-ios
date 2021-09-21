@@ -1,3 +1,9 @@
+/* Number of found search results */
+"%d Result" = "%d Result";
+
+/* Number of found search results */
+"%d Results" = "%d Results";
+
 /* Number of failed entries entering in passcode */
 "%i Failed Passcode Attempt" = "%i Failed Passcode Attempt";
 
@@ -28,14 +34,51 @@
 /* Password Requirement: Email Match */
 "- Password cannot match email" = "- Password cannot match email";
 
+/* 1 minute passcode lock timeout */
+"1 Minute" = "1 Minute";
+
+/* 15 seconds passcode lock timeout */
+"15 Seconds" = "15 Seconds";
+
+/* 2 minutes passcode lock timeout */
+"2 Minutes" = "2 Minutes";
+
+/* 3 minutes passcode lock timeout */
+"3 Minutes" = "3 Minutes";
+
+/* 30 seconds passcode lock timeout */
+"30 Seconds" = "30 Seconds";
+
+/* 4 minutes passcode lock timeout */
+"4 Minutes" = "4 Minutes";
+
+/* 5 minutes passcode lock timeout */
+"5 Minutes" = "5 Minutes";
+
 /* Network connection issue notificaiton */
 "A network connection is required. Please, check your connection and try again." = "A network connection is required. Please, check your connection and try again.";
 
-/* Accept Action */
+/* Display app about screen */
+"About" = "About";
+
+/* Accept Action
+   Label of accept button on alert dialog */
 "Accept" = "Accept";
+
+/* No comment provided by engineer. */
+"Account" = "Account";
 
 /* Email verification required alert title */
 "Account Verification Required" = "Account Verification Required";
+
+/* Noun - collaborators are other Simplenote users who you chose to share a note with */
+"Add a new collaborator..." = "Add a new collaborator...";
+
+/* Placeholder test in textfield when adding a new tag to a note */
+"Add a tag..." = "Add a tag...";
+
+/* Label on button to add a new tag to a note */
+"Add tag" = "Add tag";
 
 /* All Notes filter button
    Display title for All Notes
@@ -51,14 +94,23 @@
 /* Sign in error message */
 "An error was encountered while signing in." = "An error was encountered while signing in.";
 
+/* No comment provided by engineer. */
+"Appearance" = "Appearance";
+
 /* Automattic hiring description */
 "Are you a developer? We’re hiring." = "Are you a developer? We’re hiring.";
 
 /* Title of deletion confirmation message for a tag. Parameters: %1$@ - tag name */
 "Are you sure you want to delete \"%1$@\"?" = "Are you sure you want to delete \"%1$@\"?";
 
+/* Empty Trash Warning */
+"Are you sure you want to empty the trash? This cannot be undone." = "Are you sure you want to empty the trash? This cannot be undone.";
+
 /* Data Fetch error message */
 "Attempt to fetch entities failed.  Please try again later." = "Attempt to fetch entities failed.  Please try again later.";
+
+/* User Authenticated */
+"Authenticated" = "Authenticated";
 
 /* The Simplenote blog */
 "Blog" = "Blog";
@@ -70,11 +122,13 @@
 "By deleting the account for %@, all notes created with this account will be permanently deleted. This action is not reversible" = "By deleting the account for %@, all notes created with this account will be permanently deleted. This action is not reversible";
 
 /* Cancel Action
+   Cancel action button
    Cancel action on share extension.
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
-   PinLock screen \"cancel\" button */
+   PinLock screen \"cancel\" button
+   Verb, cancel an alert dialog */
 "Cancel" = "Cancel";
 
 /* Name of button to cancel iOS share extension in missing token alert  */
@@ -113,8 +167,17 @@
 /* Alert title that collaboration has moved */
 "Collaboration has moved" = "Collaboration has moved";
 
+/* Noun - collaborators are other Simplenote users who you chose to share a note with */
+"Collaborators" = "Collaborators";
+
+/* No comment provided by engineer. */
+"collaborators-description" = "collaborators-description";
+
 /* Compromised password alert title */
 "Compromised Password" = "Compromised Password";
+
+/* Option to make the note list show only 1 line of text. The default is 3. */
+"Condensed Note List" = "Condensed Note List";
 
 /* Confirm button -> Review you account screen */
 "Confirm" = "Confirm";
@@ -159,6 +222,9 @@
 /* Siri Suggestion to create a New Note */
 "Create a New Note" = "Create a New Note";
 
+/* No comment provided by engineer. */
+"Create a new note" = "Create a new note";
+
 /* New Note Widget Description */
 "Create a new note instantly with one tap." = "Create a new note instantly with one tap.";
 
@@ -177,8 +243,15 @@
 /* Sort Mode: Creation Date, ascending */
 "Created: Oldest" = "Created: Oldest";
 
+/* No comment provided by engineer. */
+"Current Collaborators" = "Current Collaborators";
+
 /* Theme: Dark */
 "Dark" = "Dark";
+
+/* Debug Screen Title
+   Display internal debug status */
+"Debug" = "Debug";
 
 /* Indicates that Extended Debugging has been disabled */
 "Debug Disabled" = "Debug Disabled";
@@ -186,14 +259,21 @@
 /* PinLock screen \"delete\" button */
 "Delete" = "Delete";
 
-/* Delete account title and action */
+/* Delete account title and action
+   Display Delete Account Alert */
 "Delete Account" = "Delete Account";
 
 /* Delete a note from trash */
 "Delete Note" = "Delete Note";
 
+/* Verb: Delete notes and log out of the app */
+"Delete Notes" = "Delete Notes";
+
 /* Confirmation button of deletion confirmation message for a tag. */
 "Delete Tag" = "Delete Tag";
+
+/* Warning message shown when current note is deleted on another device */
+"deleted-note-warning" = "deleted-note-warning";
 
 /* Deselect all Button Label */
 "Deselect All" = "Deselect All";
@@ -221,7 +301,8 @@
 
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
-   Done editing tags */
+   Done editing tags
+   Done toolbar button */
 "Done" = "Done";
 
 /* Edit button title
@@ -234,11 +315,20 @@
 /* Email Taken Alert Title */
 "Email in use" = "Email in use";
 
+/* Verb - empty causes all notes to be removed permenently from the trash */
+"Empty" = "Empty";
+
+/* Remove all notes from the trash */
+"Empty trash" = "Empty trash";
+
 /* Markdown Accessibility Hint */
 "Enable Markdown formatting" = "Enable Markdown formatting";
 
 /* Keyboard shortcut: End Editing */
 "End Editing" = "End Editing";
+
+/* Number of objects enqueued for processing */
+"Enqueued" = "Enqueued";
 
 /* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "Enter your passcode";
@@ -271,6 +361,9 @@
 /* Rating view liked title */
 "Great! Mind leaving a review to tell us what you like?" = "Great! Mind leaving a review to tell us what you like?";
 
+/* Display help web page */
+"Help" = "Help";
+
 /* Privacy Details */
 "Help us improve Simplenote by sharing usage data with our analytics tool." = "Help us improve Simplenote by sharing usage data with our analytics tool.";
 
@@ -292,6 +385,9 @@
 /* Date of note last modified. Parameter: %1$@ - formatted date */
 "Last Modified %1$@" = "Last Modified %1$@";
 
+/* Last Message timestamp */
+"LastSeen" = "LastSeen";
+
 /* Learn More Action */
 "Learn more" = "Learn more";
 
@@ -303,6 +399,9 @@
 
 /* Link Copied alert */
 "Link copied" = "Link copied";
+
+/* Setting for when the passcode lock should enable */
+"Lock Timeout" = "Lock Timeout";
 
 /* Log In Action
    Login Action
@@ -319,6 +418,9 @@
 /* Allows the user to SignIn using their WPCOM Account */
 "Log in with WordPress.com" = "Log in with WordPress.com";
 
+/* Log out of the active account in the app */
+"Log Out" = "Log Out";
+
 /* App configuration error title */
 "Main App is not configured" = "Main App is not configured";
 
@@ -328,6 +430,18 @@
 /* Note Options Button */
 "Menu" = "Menu";
 
+/* Month and day date formatter */
+"MMM d" = "MMM d";
+
+/* Month, day, and time date formatter */
+"MMM d, h:mm a" = "MMM d, h:mm a";
+
+/* Month, day, and year date formatter */
+"MMM d, yyyy" = "MMM d, yyyy";
+
+/* Month and year date formatter */
+"MMM yyyy" = "MMM yyyy";
+
 /* Note Modification Date */
 "Modified" = "Modified";
 
@@ -336,6 +450,9 @@
 
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "Modified: Oldest";
+
+/* Accessibility hint for trash selected notes button */
+"Move selected notes to trash" = "Move selected notes to trash";
 
 /* Delete Action
    Deletes a note */
@@ -364,6 +481,9 @@
 
 /* Keyboard shortcut: Note search, Next Match */
 "Next Match" = "Next Match";
+
+/* Cancels Empty Trash Action */
+"No" = "No";
 
 /* Message shown in note list when no notes are tagged with the provided tag. Parameter: %@ - tag */
 "No notes tagged “%@”" = "No notes tagged “%@”";
@@ -398,6 +518,9 @@
 /* Notes Header (Search Mode) */
 "Notes" = "Notes";
 
+/* Instant passcode lock timeout */
+"Off" = "Off";
+
 /* Alert confirmation button title
    Closes alert controller for spinner on About view
    Dismisses an AlertController */
@@ -407,6 +530,9 @@
    Confirm alert message
    Email unverified alert dismiss */
 "Ok" = "Ok";
+
+/* No comment provided by engineer. */
+"On" = "On";
 
 /* Siri Suggestion to open a specific Note */
 "Open \"\(preview)\"" = "Open \"\(preview)\"";
@@ -419,6 +545,9 @@
 
 /* Note Options Title */
 "Options" = "Options";
+
+/* A 4-digit code to lock the app when it is closed */
+"Passcode" = "Passcode";
 
 /* Pin Lock */
 "Passcodes did not match. Try again." = "Passcodes did not match. Try again.";
@@ -435,6 +564,9 @@
 /* Message displayed when a password contains a disallowed character */
 "Password must not contain tabs nor newlines" = "Password must not contain tabs nor newlines";
 
+/* Number of changes pending to be sent */
+"Pendings" = "Pendings";
+
 /* Pin State Accessibility Hint */
 "Pin note" = "Pin note";
 
@@ -442,11 +574,17 @@
    Toggles the Pinned State */
 "Pin to Top" = "Pin to Top";
 
+/* Error message displayed when user has not verified their WordPress.com account */
+"Please activate your WordPress.com account via email and try again." = "Please activate your WordPress.com account via email and try again.";
+
 /* Error message. Account verification */
 "Please check your network settings and try again." = "Please check your network settings and try again.";
 
 /* Extension Missing Token Alert Title */
 "Please log into your Simplenote account first by using the Simplenote app." = "Please log into your Simplenote account first by using the Simplenote app.";
+
+/* Title of Markdown preview screen */
+"Preview" = "Preview";
 
 /* Keyboard shortcut: Note search, Previous Match */
 "Previous Match" = "Previous Match";
@@ -478,11 +616,17 @@
 /* Rate on the App Store */
 "Rate Us" = "Rate Us";
 
+/* Reachs Internet */
+"Reachability" = "Reachability";
+
 /* Home screen quick action: Recent Note */
 "Recent" = "Recent";
 
 /* References section header on Info Card */
 "Referenced In" = "Referenced In";
+
+/* No comment provided by engineer. */
+"Remove all notes from trash" = "Remove all notes from trash";
 
 /* Rename a tag */
 "Rename" = "Rename";
@@ -527,13 +671,20 @@
 /* Tags Header (Search Mode) */
 "Search by Tag" = "Search by Tag";
 
+/* SearchBar's Placeholder Text */
+"Search notes or tags" = "Search notes or tags";
+
+/* No comment provided by engineer. */
+"Security" = "Security";
+
 /* Select multiple notes at once */
 "Select" = "Select";
 
 /* Accessibility label describing a slider used to reset the current note to a previous version */
 "Select a Version" = "Select a Version";
 
-/* Select all Button Label */
+/* Select all Button Label
+   Select all button title */
 "Select All" = "Select All";
 
 /* For debugging use */
@@ -542,7 +693,11 @@
 /* Rating view - disliked - send feedback button */
 "Send feedback" = "Send feedback";
 
-/* Settings button */
+/* Setup a passcode action button */
+"Set up Passcode" = "Set up Passcode";
+
+/* Settings button
+   Title of options screen */
 "Settings" = "Settings";
 
 /* Opens the Share Sheet
@@ -558,10 +713,16 @@
 /* Alert message that collaboration has moved */
 "Sharing notes is now accessed through the action menu from the toolbar." = "Sharing notes is now accessed through the action menu from the toolbar.";
 
+/* UI region to the left of the note list which shows all of a users tags */
+"Sidebar" = "Sidebar";
+
 /* Signup Action
    SignUp Action
    SignUp Interface Title */
 "Sign Up" = "Sign Up";
+
+/* Alert message displayed when an account has unsynced notes */
+"Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App.";
 
 /* Our mighty brand!
    Title of main share extension view */
@@ -576,10 +737,14 @@
 /* Authentication Error Alert Title */
 "Sorry!" = "Sorry!";
 
+/* Option to sort tags alphabetically. The default is by manual ordering. */
+"Sort Alphabetically" = "Sort Alphabetically";
+
 /* Sort By Title */
 "Sort by:" = "Sort by:";
 
-/* Sort Order for the Notes List */
+/* Option to sort notes in the note list alphabetically. The default is by modification date
+   Sort Order for the Notes List */
 "Sort Order" = "Sort Order";
 
 /* Title for the response's Status Code */
@@ -593,6 +758,9 @@
 
 /* Widget warning if tag is deleted */
 "Tag no longer available" = "Tag no longer available";
+
+/* Accessibility hint for adding a tag to a note */
+"tag-add-accessibility-hint" = "tag-add-accessibility-hint";
 
 /* Remove a tag from the current note */
 "tag-delete-accessibility-hint" = "tag-delete-accessibility-hint";
@@ -621,6 +789,9 @@
 /* Onboarding Header Text */
 "The simplest way to keep notes." = "The simplest way to keep notes.";
 
+/* Option to enable the dark app theme. */
+"Theme" = "Theme";
+
 /* Simplenote Themes */
 "Themes" = "Themes";
 
@@ -630,14 +801,26 @@
 /* error for compromised password */
 "This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately." = "This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately.";
 
+/* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
+"To enable %1$@, you must have a passcode setup first." = "To enable %1$@, you must have a passcode setup first.";
+
 /* Touch ID reason/explanation */
 "To unlock the application" = "To unlock the application";
+
+/* Displayed as a date in the case where a note was modified today, for example */
+"Today" = "Today";
 
 /* Keyboard shortcut: Toggle Markdown */
 "Toggle Markdown" = "Toggle Markdown";
 
+/* Accessibility hint used to show or hide the sidebar */
+"Toggle tag sidebar" = "Toggle tag sidebar";
+
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Touch ID";
+
+/* Move selected notes to trash */
+"Trash Notes" = "Trash Notes";
 
 /* Title: Trash Tag is selected
    Trash filter button */
@@ -670,11 +853,17 @@
 /* Indicates the Note is being unpublished */
 "Unpublishing..." = "Unpublishing...";
 
+/* Alert title displayed in settings when an account has unsynced notes */
+"Unsynced Notes Detected" = "Unsynced Notes Detected";
+
 /* Title: Untagged Notes are onscreen */
 "Untagged" = "Untagged";
 
 /* Allows selecting notes with no tags */
 "Untagged Notes" = "Untagged Notes";
+
+/* A user's Simplenote account */
+"Username" = "Username";
 
 /* Title -> Verify your email screen */
 "Verify Your Email" = "Verify Your Email";
@@ -682,8 +871,14 @@
 /* App version number */
 "Version %@" = "Version %@";
 
+/* Visit app.simplenote.com in the browser */
+"Visit Web App" = "Visit Web App";
+
 /* Generic error */
 "We're having problems. Please try again soon." = "We're having problems. Please try again soon.";
+
+/* WebSocket Status */
+"WebSocket" = "WebSocket";
 
 /* Confirmation that an email has been sent
    Message -> Verify your email screen. Parameter: %1$@ - email address */
@@ -697,6 +892,12 @@
 
 /* Number of words in the note */
 "Words" = "Words";
+
+/* Proceeds with the Empty Trash OP */
+"Yes" = "Yes";
+
+/* Displayed as a date in the case where a note was modified yesterday, for example */
+"Yesterday" = "Yesterday";
 
 /* Message -> Review you account screen. Parameter: %1$@ - email address */
 "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address.";
