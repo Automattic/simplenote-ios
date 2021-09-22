@@ -71,7 +71,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     if (self) {
         _note = note;
     }
-    
+
     return self;
 }
 
@@ -100,7 +100,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     [self configureLayout];
     [self configureTagListViewController];
     [self configureInterlinksProcessor];
-    
+
     [self configureTextViewKeyboard];
 
     [self startListeningToNotifications];
@@ -171,9 +171,9 @@ CGFloat const SPSelectedAreaPadding = 20;
     if (!self.searching || !self.searchQuery || self.searchQuery.isEmpty || self.searchResultRanges) {
         return;
     }
-    
+
     NSString *searchText = _noteEditorTextView.text;
-    
+
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
 
         self.searchResultRanges = [self searchResultRangesIn:(searchText ?: @"")
@@ -185,16 +185,16 @@ CGFloat const SPSelectedAreaPadding = 20;
 
             UIColor *tintColor = [UIColor simplenoteEditorSearchHighlightColor];
             [self.noteEditorTextView.textStorage applyBackgroundColor:tintColor toRanges:self.searchResultRanges];
-            
+
             NSInteger count = self.searchResultRanges.count;
-            
+
             NSString *searchDetailFormat = count == 1 ? NSLocalizedString(@"%d Result", @"Number of found search results") : NSLocalizedString(@"%d Results", @"Number of found search results");
             self.searchDetailLabel.text = [NSString stringWithFormat:searchDetailFormat, count];
             self.searchDetailLabel.alpha = UIKitConstants.alpha0_0;
 
             [UIView animateWithDuration:0.3
                              animations:^{
-                                 
+
                                  self.searchDetailLabel.alpha = UIKitConstants.alpha1_0;
                              }];
 
@@ -298,8 +298,8 @@ CGFloat const SPSelectedAreaPadding = 20;
                                                             target:self
                                                             action:@selector(highlightPrevSearchResult)];
     self.prevSearchButton.width = 34.0;
-    
-    
+
+
     self.searchDetailLabel = [[UILabel alloc] init];
     self.searchDetailLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     self.searchDetailLabel.frame = CGRectMake(0, 0, 180, self.searchDetailLabel.font.lineHeight);
@@ -307,7 +307,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     self.searchDetailLabel.textAlignment = NSTextAlignmentCenter;
     self.searchDetailLabel.alpha = 0.0;
     UIBarButtonItem *detailButton = [[UIBarButtonItem alloc] initWithCustomView:self.searchDetailLabel];
-    
+
     [self setToolbarItems:@[self.doneSearchButton, flexibleSpace, detailButton, flexibleSpaceTwo, self.prevSearchButton, self.nextSearchButton] animated:NO];
 }
 
@@ -342,7 +342,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     [self endEditing];
     [self ensureEmptyNoteIsDeleted];
     [self ensureNoteIsVisibleInList];
-    
+
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
@@ -441,7 +441,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     if ([UIDevice isPad]) {
         return YES;
     }
-    
+
     return !self.isKeyboardVisible;
 }
 
@@ -483,7 +483,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 {
     SPMarkdownPreviewViewController *previewViewController = [SPMarkdownPreviewViewController new];
     previewViewController.markdownText = [self.noteEditorTextView plainText];
-    
+
     return previewViewController;
 }
 
@@ -577,15 +577,15 @@ CGFloat const SPSelectedAreaPadding = 20;
 
     if ([sender isEqual:self.doneSearchButton])
         [[SPAppDelegate sharedDelegate].noteListViewController endSearching];
-    
+
     _noteEditorTextView.text = [_noteEditorTextView plainText];
     [_noteEditorTextView processChecklists];
-    
+
     _searchQuery = nil;
     self.searchResultRanges = nil;
-    
+
     [_noteEditorTextView clearHighlights:(sender ? YES : NO)];
-    
+
     self.searching = NO;
 
     [self configureNavigationController];
@@ -631,14 +631,14 @@ CGFloat const SPSelectedAreaPadding = 20;
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-        
+
     BOOL appliedAutoBullets = [textView applyAutoBulletsWithReplacementText:text replacementRange:range];
-    
+
     return !appliedAutoBullets;
 }
 
 - (BOOL)textView:(UITextView *)textView shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction {
-    
+
     // Don't allow "3d press" on our checkbox images
     return NO;
 }
@@ -646,7 +646,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 - (void)textViewDidChange:(UITextView *)textView
 {
     self.modified = YES;
-    
+
     [self.saveTimer invalidate];
     self.saveTimer = [NSTimer scheduledTimerWithTimeInterval:2.0
                                                       target:self
@@ -654,7 +654,7 @@ CGFloat const SPSelectedAreaPadding = 20;
                                                     userInfo:nil
                                                      repeats:NO];
     self.saveTimer.tolerance = 0.1;
-    
+
     if (!self.guarenteedSaveTimer) {
         self.guarenteedSaveTimer = [NSTimer scheduledTimerWithTimeInterval:21.0
                                                                     target:self
@@ -663,7 +663,7 @@ CGFloat const SPSelectedAreaPadding = 20;
                                                                    repeats:NO];
         self.guarenteedSaveTimer.tolerance = 1.0;
     }
-    
+
     if([textView.text hasSuffix:@"\n"] && _noteEditorTextView.selectedRange.location == _noteEditorTextView.text.length) {
         double delayInSeconds = 0.1;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
@@ -673,10 +673,10 @@ CGFloat const SPSelectedAreaPadding = 20;
                 [self.noteEditorTextView setContentOffset:bottomOffset animated:YES];
         });
     }
-    
+
     [_noteEditorTextView processChecklists];
     [self.interlinkProcessor processInterlinkLookup];
-    
+
     // Ensure we get back to capitalizing sentences instead of Words after autobulleting.
     // See UITextView+Simplenote
     if (_noteEditorTextView.autocapitalizationType != UITextAutocapitalizationTypeSentences) {
@@ -752,10 +752,10 @@ CGFloat const SPSelectedAreaPadding = 20;
 #pragma mark Simperium
 
 - (void)cancelSaveTimers {
-    
+
     [self.saveTimer invalidate];
     self.saveTimer = nil;
-    
+
     [self.guarenteedSaveTimer invalidate];
     self.guarenteedSaveTimer = nil;
 }
@@ -789,13 +789,13 @@ CGFloat const SPSelectedAreaPadding = 20;
 
         // Force an update of the note's content preview in case only tags changed
         [self.note createPreview];
-        
-        
+
+
         // Simperum: save
         [[SPAppDelegate sharedDelegate] save];
         [SPTracker trackEditorNoteEdited];
         [[CSSearchableIndex defaultSearchableIndex] indexSearchableNote:self.note];
-        
+
         self.modified = NO;
 
         [self updateHomeScreenQuickActions];
@@ -803,10 +803,10 @@ CGFloat const SPSelectedAreaPadding = 20;
 }
 
 - (void)willReceiveNewContent {
-    
+
     self.cursorLocationBeforeRemoteUpdate = [_noteEditorTextView selectedRange].location;
     self.noteContentBeforeRemoteUpdate = [_noteEditorTextView plainText];
-	
+
     if (![_noteEditorTextView.text isEqualToString:@""]) {
         self.note.content = [_noteEditorTextView plainText];
         [[SPAppDelegate sharedDelegate].simperium saveWithoutSyncing];
@@ -814,14 +814,14 @@ CGFloat const SPSelectedAreaPadding = 20;
 }
 
 - (void)didReceiveNewContent {
-    
+
     NSUInteger newLocation = [self newCursorLocation:self.note.content
                                              oldText:self.noteContentBeforeRemoteUpdate
                                      currentLocation:self.cursorLocationBeforeRemoteUpdate];
-	
+
 	_noteEditorTextView.attributedText = [self.note.content attributedString];
     [_noteEditorTextView processChecklists];
-	
+
 	NSRange newRange = NSMakeRange(newLocation, 0);
 	[_noteEditorTextView setSelectedRange:newRange];
 
@@ -830,7 +830,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 - (void)didDeleteCurrentNote {
 
-    NSString *title = NSLocalizedString(@"deleted-note-warning", @"Warning message shown when current note is deleted on another device");
+    NSString *title = NSLocalizedString(@"Deleted note warning", @"Warning message shown when current note is deleted on another device");
     NSString *cancelTitle = NSLocalizedString(@"Accept", @"Label of accept button on alert dialog");
 
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
@@ -845,21 +845,21 @@ CGFloat const SPSelectedAreaPadding = 20;
 #pragma mark barButton action methods
 
 - (void)keyboardButtonAction:(id)sender {
-    
+
     [self endEditing];
     [self.tagListViewController.view endEditing:YES];
 }
 
 - (void)insertChecklistAction:(id)sender {
     [_noteEditorTextView insertOrRemoveChecklist];
-    
+
     [SPTracker trackEditorChecklistInserted];
 }
 
 - (NSUInteger)newCursorLocation:(NSString *)newText oldText:(NSString *)oldText currentLocation:(NSUInteger)location
 {
 	NSUInteger newCursorLocation = location;
-    
+
     // Cases:
     // 0. All text after cursor (and possibly more) was removed ==> put cursor at end
     // 1. Text was added after the cursor ==> no change
@@ -867,27 +867,27 @@ CGFloat const SPSelectedAreaPadding = 20;
     // 3. Text was removed after the cursor ==> no change
     // 4. Text was removed before the cursor ==> location retreats
     // 5. Text was added/removed on both sides of the cursor ==> not handled
-    
+
     NSInteger deltaLength = newText.length - oldText.length;
-    
+
     // Case 0
     if (newText.length < location)
         return newText.length;
-    
+
     BOOL beforeCursorMatches = NO;
     BOOL afterCursorMatches = NO;
     @try {
         beforeCursorMatches = [[oldText substringToIndex:location] compare:[newText substringToIndex:location]] == NSOrderedSame;
         afterCursorMatches = [[oldText substringFromIndex:location] compare:[newText substringFromIndex:location+deltaLength]] == NSOrderedSame;
     } @catch (NSException *e) {
-        
+
     }
-    
+
     // Cases 2 and 4
     if (!beforeCursorMatches && afterCursorMatches) {
         newCursorLocation += deltaLength;
     }
-    
+
     // Cases 1, 3 and 5 have no change
     return newCursorLocation;
 }
