@@ -121,7 +121,8 @@ def localize(path):
     old = original + '.old'
     new = original + '.new'
 
-    genstrings_cmd = 'genstrings -q -o "%s" `find ./Simplenote ./SimplenoteShare ./SimplenoteWidgets -name "*.m" -o -name "*.swift"`'
+    # Using with `-print0` and `xargs -0` to account for spaces in the paths `find` might return
+    genstrings_cmd = 'find ./Simplenote ./SimplenoteShare ./SimplenoteWidgets \( -name "*.m" -o -name "*.swift" \) -print0 | xargs -0 genstrings -q -o "%s"'
 
     if os.path.isfile(original):
         os.rename(original, old)
