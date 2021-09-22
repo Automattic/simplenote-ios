@@ -71,8 +71,8 @@ msgctxt "app_store_keywords"
 msgid "notes,note,markdown,journal,sync,to-do,list,cloud,notebook,simple,notepad,tag,todo,writing,memo"
 msgstr ""
 
-msgctxt "v4.44-whats-new"
+msgctxt "v4.45-whats-new"
 msgid ""
-"- Fixed an issue with the select all button when only one note is in the list\n"
+"- Added home screen widgets\n"
 msgstr ""
 

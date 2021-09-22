@@ -145,7 +145,11 @@
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
     if ([tableView isEqual:primaryTableView]) {
-        return self.dataSource.count > 0 ? nil : NSLocalizedString(@"collaborators-description", nil);
+        if (self.dataSource.count > 0) {
+            return nil;
+        } else {
+            return NSLocalizedString(@"Add an email address to share this note with someone. Then you can both make changes to it.", @"Description text for the screen that allows users to share notes with other users");
+        }
     }
 
     return [super tableView:tableView titleForFooterInSection:section];
