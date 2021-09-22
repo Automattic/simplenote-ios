@@ -29,7 +29,7 @@ CGFloat const TagEntryFieldPadding = 40;
 
 
         self.accessibilityLabel = NSLocalizedString(@"Add tag", @"Label on button to add a new tag to a note");
-        self.accessibilityHint = NSLocalizedString(@"tag-add-accessibility-hint", @"Accessibility hint for adding a tag to a note");
+        self.accessibilityHint = NSLocalizedString(@"Add a tag to the current note", @"Accessibility hint for adding a tag to a note");
 
         [self sizeField];
 
