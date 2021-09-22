@@ -830,7 +830,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 - (void)didDeleteCurrentNote {
 
-    NSString *title = NSLocalizedString(@"deleted-note-warning", @"Warning message shown when current note is deleted on another device");
+    NSString *title = NSLocalizedString(@"This note was deleted on another device", @"Warning message shown when current note is deleted on another device");
     NSString *cancelTitle = NSLocalizedString(@"Accept", @"Label of accept button on alert dialog");
 
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];

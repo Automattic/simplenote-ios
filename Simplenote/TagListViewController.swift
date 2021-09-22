@@ -860,7 +860,7 @@ private struct Localization {
     static let done = NSLocalizedString("Done", comment: "Done editing tags")
 
     static let allNotes = NSLocalizedString("All Notes", comment: "All Notes filter button")
-    static let trash = NSLocalizedString("Trash-noun", comment: "Trash filter button")
+    static let trash = NSLocalizedString("Trash", comment: "Trash filter button")
     static let settings = NSLocalizedString("Settings", comment: "Settings button")
 
     static let tags = NSLocalizedString("Tags", comment: "Tags List Header")

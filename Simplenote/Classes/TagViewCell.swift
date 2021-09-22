@@ -176,5 +176,5 @@ private struct Constants {
 // MARK: - Localization
 //
 private struct Localization {
-    static let removeTagHint = NSLocalizedString("tag-delete-accessibility-hint", comment: "Remove a tag from the current note")
+    static let removeTagHint = NSLocalizedString("Remove tag from the current note", comment: "Accessibility hint for removing a tag from the current note")
 }

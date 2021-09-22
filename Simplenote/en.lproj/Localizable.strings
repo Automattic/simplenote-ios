@@ -74,8 +74,11 @@
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Add a new collaborator..." = "Add a new collaborator...";
 
-/* Placeholder test in textfield when adding a new tag to a note */
-"Add a tag..." = "Add a tag...";
+/* Accessibility hint for adding a tag to a note */
+"Add a tag to the current note" = "Add a tag to the current note";
+
+/* Description text for the screen that allows users to share notes with other users */
+"Add an email address to share this note with someone. Then you can both make changes to it." = "Add an email address to share this note with someone. Then you can both make changes to it.";
 
 /* Label on button to add a new tag to a note */
 "Add tag" = "Add tag";
@@ -169,9 +172,6 @@
 
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Collaborators" = "Collaborators";
-
-/* No comment provided by engineer. */
-"collaborators-description" = "collaborators-description";
 
 /* Compromised password alert title */
 "Compromised Password" = "Compromised Password";
@@ -271,9 +271,6 @@
 
 /* Confirmation button of deletion confirmation message for a tag. */
 "Delete Tag" = "Delete Tag";
-
-/* Warning message shown when current note is deleted on another device */
-"deleted-note-warning" = "deleted-note-warning";
 
 /* Deselect all Button Label */
 "Deselect All" = "Deselect All";
@@ -628,6 +625,9 @@
 /* No comment provided by engineer. */
 "Remove all notes from trash" = "Remove all notes from trash";
 
+/* Accessibility hint for removing a tag from the current note */
+"Remove tag from the current note" = "Remove tag from the current note";
+
 /* Rename a tag */
 "Rename" = "Rename";
 
@@ -759,11 +759,8 @@
 /* Widget warning if tag is deleted */
 "Tag no longer available" = "Tag no longer available";
 
-/* Accessibility hint for adding a tag to a note */
-"tag-add-accessibility-hint" = "tag-add-accessibility-hint";
-
-/* Remove a tag from the current note */
-"tag-delete-accessibility-hint" = "tag-delete-accessibility-hint";
+/* Placeholder text in textfield when adding a new tag to a note */
+"Tag..." = "Tag...";
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "tag:";
@@ -798,6 +795,9 @@
 /* Request error alert message */
 "There was an preparing your verification email, please try again later" = "There was an preparing your verification email, please try again later";
 
+/* Warning message shown when current note is deleted on another device */
+"This note was deleted on another device" = "This note was deleted on another device";
+
 /* error for compromised password */
 "This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately." = "This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately.";
 
@@ -819,12 +819,12 @@
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Touch ID";
 
-/* Move selected notes to trash */
-"Trash Notes" = "Trash Notes";
-
 /* Title: Trash Tag is selected
    Trash filter button */
-"Trash-noun" = "Trash-noun";
+"Trash" = "Trash";
+
+/* Move selected notes to trash */
+"Trash Notes" = "Trash Notes";
 
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "Turn off Passcode";

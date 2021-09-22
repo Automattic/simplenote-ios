@@ -44,7 +44,7 @@ extension NotesListFilter {
         case .everything:
             return NSLocalizedString("All Notes", comment: "Title: No filters applied")
         case .deleted:
-            return NSLocalizedString("Trash-noun", comment: "Title: Trash Tag is selected")
+            return NSLocalizedString("Trash", comment: "Title: Trash Tag is selected")
         case .untagged:
             return NSLocalizedString("Untagged", comment: "Title: Untagged Notes are onscreen")
         case .tag(let name):
