@@ -273,7 +273,7 @@
 "Delete Tag" = "Delete Tag";
 
 /* Warning message shown when current note is deleted on another device */
-"deleted-note-warning" = "deleted-note-warning";
+"Deleted note warning" = "Deleted note warning";
 
 /* Deselect all Button Label */
 "Deselect All" = "Deselect All";
