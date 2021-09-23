@@ -602,6 +602,13 @@
 			remoteGlobalIDString = 3FFBDBEA26FBF132008AD052;
 			remoteInfo = UITestsFoundation;
 		};
+		3FF314D426FC47ED0012E68E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E29ADD3017848E8500E55842 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3FFBDBEA26FBF132008AD052;
+			remoteInfo = UITestsFoundation;
+		};
 		B582189C1FCC45170094ECA1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E29ADD3017848E8500E55842 /* Project object */;
@@ -2838,6 +2845,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				3FF314D526FC47ED0012E68E /* PBXTargetDependency */,
 				D864B15A25CAE25000F9B73E /* PBXTargetDependency */,
 			);
 			name = SimplenoteUITests;
@@ -3792,6 +3800,11 @@
 			isa = PBXTargetDependency;
 			target = 3FFBDBEA26FBF132008AD052 /* UITestsFoundation */;
 			targetProxy = 3FF314D026FC220B0012E68E /* PBXContainerItemProxy */;
+		};
+		3FF314D526FC47ED0012E68E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3FFBDBEA26FBF132008AD052 /* UITestsFoundation */;
+			targetProxy = 3FF314D426FC47ED0012E68E /* PBXContainerItemProxy */;
 		};
 		B582189D1FCC45170094ECA1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

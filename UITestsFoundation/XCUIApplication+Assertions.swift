@@ -10,7 +10,7 @@ extension XCUIApplication {
     ) {
         XCTAssertTrue(
             staticTexts[text].waitForExistence(timeout: timetout),
-            "\(text) label NOT found",
+            #"Label with text "\#(text)" NOT found"#,
             file: file,
             line: line
         )

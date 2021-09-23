@@ -1,3 +1,4 @@
+import UITestsFoundation
 import XCTest
 
 class SimplenoteUISmokeTestsLogin: XCTestCase {
@@ -22,8 +23,8 @@ class SimplenoteUISmokeTestsLogin: XCTestCase {
         trackStep()
         EmailLogin.open()
         EmailLogin.logIn(email: "", password: "")
-        Assert.labelExists(labelText: Text.loginEmailInvalid)
-        Assert.labelExists(labelText: Text.loginPasswordShort)
+        app.assertLabelExists(withText: Text.loginEmailInvalid)
+        app.assertLabelExists(withText: Text.loginPasswordShort)
     }
 
     func testLogInWithNoEmail() throws {
