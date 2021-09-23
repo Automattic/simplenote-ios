@@ -60,6 +60,7 @@
 		3FA17B5626240FF000C11C46 /* NoteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA17B5526240FF000C11C46 /* NoteData.swift */; };
 		3FA6013C242C5AAE0068FC52 /* SimplenoteScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6013B242C5AAE0068FC52 /* SimplenoteScreenshots.swift */; };
 		3FF314CE26FC20FD0012E68E /* PasscodeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4BA07F26CE00A2000619B1 /* PasscodeScreen.swift */; };
+		3FF314D326FC47720012E68E /* XCUIApplication+Assertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF314D226FC47720012E68E /* XCUIApplication+Assertions.swift */; };
 		3FFBDBEE26FBF132008AD052 /* UITestsFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FFBDBED26FBF132008AD052 /* UITestsFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3FFBDBF626FBF143008AD052 /* XCUITestHelpers in Frameworks */ = {isa = PBXBuildFile; productRef = 3FFBDBF526FBF143008AD052 /* XCUITestHelpers */; };
 		3FFBDBF826FBF148008AD052 /* ScreenObject in Frameworks */ = {isa = PBXBuildFile; productRef = 3FFBDBF726FBF148008AD052 /* ScreenObject */; };
@@ -730,6 +731,7 @@
 		3FA60139242C5AAD0068FC52 /* SimplenoteScreenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimplenoteScreenshots.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FA6013B242C5AAE0068FC52 /* SimplenoteScreenshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplenoteScreenshots.swift; sourceTree = "<group>"; };
 		3FA6013D242C5AAE0068FC52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3FF314D226FC47720012E68E /* XCUIApplication+Assertions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+Assertions.swift"; sourceTree = "<group>"; };
 		3FFBDBEB26FBF132008AD052 /* UITestsFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UITestsFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FFBDBED26FBF132008AD052 /* UITestsFoundation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UITestsFoundation.h; sourceTree = "<group>"; };
 		467D9C5D1788A4FB00785EF3 /* Simplenote 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Simplenote 2.xcdatamodel"; sourceTree = "<group>"; };
@@ -1440,6 +1442,7 @@
 			children = (
 				3F4BA07F26CE00A2000619B1 /* PasscodeScreen.swift */,
 				3FFBDBED26FBF132008AD052 /* UITestsFoundation.h */,
+				3FF314D226FC47720012E68E /* XCUIApplication+Assertions.swift */,
 			);
 			path = UITestsFoundation;
 			sourceTree = "<group>";
@@ -3261,6 +3264,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FF314D326FC47720012E68E /* XCUIApplication+Assertions.swift in Sources */,
 				3FF314CE26FC20FD0012E68E /* PasscodeScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
