@@ -80,7 +80,7 @@ extension SPAuthError {
         case .network:
             return NSLocalizedString("The network could not be reached.", comment: "Error when the network is inaccessible")
         case .compromisedPassword:
-            return NSLocalizedString("This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately.", comment: "error for compromised password")
+            return NSLocalizedString("This password has appeared in a data breach, which puts your account at high risk of compromise. To protect your data, you'll need to update your password before being able to log in again.", comment: "error for compromised password")
         case .unverifiedEmail:
             return NSLocalizedString("You must verify your email before being able to login.", comment: "Error for un verified email")
         case .unknown:

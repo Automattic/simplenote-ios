@@ -694,7 +694,7 @@ private enum AuthenticationStrings {
     static let acceptActionText             = NSLocalizedString("Accept", comment: "Accept Action")
     static let cancelActionText             = NSLocalizedString("Cancel", comment: "Cancel Action")
     static let loginActionText              = NSLocalizedString("Log In", comment: "Log In Action")
-    static let compromisedAlertCancel       = NSLocalizedString("Not Yet", comment: "Cancel action for password alert")
+    static let compromisedAlertCancel       = NSLocalizedString("Cancel", comment: "Cancel action for password alert")
     static let compromisedAlertReset        = NSLocalizedString("Change Password", comment: "Change password action")
     static let unverifiedCancelText         = NSLocalizedString("Ok", comment: "Email unverified alert dismiss")
     static let unverifiedActionText         = NSLocalizedString("Resend Verification Email", comment: "Send email verificaiton action")
