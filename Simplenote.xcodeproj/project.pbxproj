@@ -55,11 +55,11 @@
 		3F1BB4A0242DB81E006D1A04 /* ScreenshotsCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1BB49F242DB81E006D1A04 /* ScreenshotsCredentials.swift */; };
 		3F1BB4A3242DC162006D1A04 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1BB4A2242DC162006D1A04 /* SnapshotHelper.swift */; };
 		3F4BA07E26CDF295000619B1 /* ScreenObject in Frameworks */ = {isa = PBXBuildFile; productRef = 3F4BA07D26CDF295000619B1 /* ScreenObject */; };
-		3F4BA08026CE00A2000619B1 /* PasscodeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4BA07F26CE00A2000619B1 /* PasscodeScreen.swift */; };
 		3F762E8F2677F19C0088CD45 /* XCUITestHelpers in Frameworks */ = {isa = PBXBuildFile; productRef = 3F762E8E2677F19C0088CD45 /* XCUITestHelpers */; };
 		3F762E912677F1AA0088CD45 /* XCUITestHelpers in Frameworks */ = {isa = PBXBuildFile; productRef = 3F762E902677F1AA0088CD45 /* XCUITestHelpers */; };
 		3FA17B5626240FF000C11C46 /* NoteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA17B5526240FF000C11C46 /* NoteData.swift */; };
 		3FA6013C242C5AAE0068FC52 /* SimplenoteScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6013B242C5AAE0068FC52 /* SimplenoteScreenshots.swift */; };
+		3FF314CE26FC20FD0012E68E /* PasscodeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4BA07F26CE00A2000619B1 /* PasscodeScreen.swift */; };
 		3FFBDBEE26FBF132008AD052 /* UITestsFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FFBDBED26FBF132008AD052 /* UITestsFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3FFBDBF626FBF143008AD052 /* XCUITestHelpers in Frameworks */ = {isa = PBXBuildFile; productRef = 3FFBDBF526FBF143008AD052 /* XCUITestHelpers */; };
 		3FFBDBF826FBF148008AD052 /* ScreenObject in Frameworks */ = {isa = PBXBuildFile; productRef = 3FFBDBF726FBF148008AD052 /* ScreenObject */; };
@@ -593,6 +593,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 46A3C96017DFA81A002865AE;
 			remoteInfo = Simplenote;
+		};
+		3FF314D026FC220B0012E68E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E29ADD3017848E8500E55842 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3FFBDBEA26FBF132008AD052;
+			remoteInfo = UITestsFoundation;
 		};
 		B582189C1FCC45170094ECA1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1424,7 +1431,6 @@
 				3FA6013D242C5AAE0068FC52 /* Info.plist */,
 				3FA6013B242C5AAE0068FC52 /* SimplenoteScreenshots.swift */,
 				3F1BB4A2242DC162006D1A04 /* SnapshotHelper.swift */,
-				3F4BA07F26CE00A2000619B1 /* PasscodeScreen.swift */,
 			);
 			path = SimplenoteScreenshots;
 			sourceTree = "<group>";
@@ -1432,6 +1438,7 @@
 		3FFBDBEC26FBF132008AD052 /* UITestsFoundation */ = {
 			isa = PBXGroup;
 			children = (
+				3F4BA07F26CE00A2000619B1 /* PasscodeScreen.swift */,
 				3FFBDBED26FBF132008AD052 /* UITestsFoundation.h */,
 			);
 			path = UITestsFoundation;
@@ -2669,6 +2676,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				3FF314D126FC220B0012E68E /* PBXTargetDependency */,
 				3F1BB4B724319A5B006D1A04 /* PBXTargetDependency */,
 				3FA6013F242C5AAE0068FC52 /* PBXTargetDependency */,
 			);
@@ -3244,7 +3252,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F1BB4A0242DB81E006D1A04 /* ScreenshotsCredentials.swift in Sources */,
-				3F4BA08026CE00A2000619B1 /* PasscodeScreen.swift in Sources */,
 				3FA6013C242C5AAE0068FC52 /* SimplenoteScreenshots.swift in Sources */,
 				3F1BB4A3242DC162006D1A04 /* SnapshotHelper.swift in Sources */,
 			);
@@ -3254,6 +3261,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FF314CE26FC20FD0012E68E /* PasscodeScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3775,6 +3783,11 @@
 			isa = PBXTargetDependency;
 			target = 46A3C96017DFA81A002865AE /* Simplenote */;
 			targetProxy = 3FA6013E242C5AAE0068FC52 /* PBXContainerItemProxy */;
+		};
+		3FF314D126FC220B0012E68E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3FFBDBEA26FBF132008AD052 /* UITestsFoundation */;
+			targetProxy = 3FF314D026FC220B0012E68E /* PBXContainerItemProxy */;
 		};
 		B582189D1FCC45170094ECA1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

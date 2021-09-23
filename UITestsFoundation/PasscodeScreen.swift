@@ -1,9 +1,9 @@
 import ScreenObject
 import XCTest
 
-class PasscodeScreen: ScreenObject {
+public class PasscodeScreen: ScreenObject {
 
-    init(app: XCUIApplication = XCUIApplication()) throws {
+    public init(app: XCUIApplication = XCUIApplication()) throws {
         try super.init(
             expectedElementGetters: [
                 { $0.staticTexts["1"].firstMatch },
@@ -15,7 +15,7 @@ class PasscodeScreen: ScreenObject {
         )
     }
 
-    func type(passcode: Int) {
+    public func type(passcode: Int) {
         // This converts an Int into an [Int] of its digits
         let digits = "\(passcode.magnitude)".compactMap(\.wholeNumberValue)
 
@@ -28,7 +28,7 @@ class PasscodeScreen: ScreenObject {
         }
     }
 
-    static func isLoaded(in app: XCUIApplication = XCUIApplication()) -> Bool {
+    public static func isLoaded(in app: XCUIApplication = XCUIApplication()) -> Bool {
         do {
             let screen = try PasscodeScreen(app: app)
             return screen.isLoaded
