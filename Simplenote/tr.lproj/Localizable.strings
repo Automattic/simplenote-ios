@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-09-15 17:54:04+0000 */
+/* Translation-Revision-Date: 2021-09-23 11:32:13+0000 */
 /* Plural-Forms: nplurals=2; plural=(n > 1); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: tr */
@@ -79,13 +79,17 @@
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Add a new collaborator..." = "Yeni çalışma arkadaşı ekle...";
 
-/* Placeholder test in textfield when adding a new tag to a note */
-"Add a tag..." = "Etiketle…";
+/* Accessibility hint for adding a tag to a note */
+"Add a tag to the current note" = "Add a tag to the current note";
+
+/* Description text for the screen that allows users to share notes with other users */
+"Add an email address to share this note with someone. Then you can both make changes to it." = "Add an email address to share this note with someone. Then you can both make changes to it.";
 
 /* Label on button to add a new tag to a note */
 "Add tag" = "Etiket ekle";
 
 /* All Notes filter button
+   Display title for All Notes
    Title: No filters applied */
 "All Notes" = "Tüm Notlar";
 
@@ -110,6 +114,9 @@
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "Çöp kutusunu boşaltmak istediğinizden emin misiniz? Bu işlem geri alınamaz.";
 
+/* Data Fetch error message */
+"Attempt to fetch entities failed.  Please try again later." = "Attempt to fetch entities failed.  Please try again later.";
+
 /* User Authenticated */
 "Authenticated" = "Kimliği Doğrulandı";
 
@@ -124,12 +131,16 @@
 
 /* Cancel Action
    Cancel action button
+   Cancel action on share extension.
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
    PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
 "Cancel" = "İptal";
+
+/* Name of button to cancel iOS share extension in missing token alert */
+"Cancel Share" = "Cancel Share";
 
 /* Error message title. Review you account screen */
 "Cannot Confirm Account" = "Hesap Onaylanamıyor";
@@ -198,6 +209,9 @@
 /* Error for bad email or password */
 "Could not create an account with the provided email address and password." = "Verilen e-posta adresi ve parolayla hesap oluşturulamadı.";
 
+/* Fetch error title */
+"Could not fetch entities" = "Could not fetch entities";
+
 /* Message displayed when login fails */
 "Could not login with the provided email address and password." = "Verilen e-posta adresi ve parolayla oturum açılamadı.";
 
@@ -215,6 +229,9 @@
 
 /* No comment provided by engineer. */
 "Create a new note" = "Yeni not oluştur";
+
+/* New Note Widget Description */
+"Create a new note instantly with one tap." = "Create a new note instantly with one tap.";
 
 /* Tappable message shown when no notes match a search string. Parameter: %@ - search term */
 "Create a new note titled “%@”" = "“%@” başlıklı yeni bir not oluştur";
@@ -337,6 +354,12 @@
 /* FAQ or contact us */
 "Get Help" = "Yardım Alın";
 
+/* Note List Widget Description */
+"Get quick access to a list of all notes or based on the selected tag." = "Get quick access to a list of all notes or based on the selected tag.";
+
+/* Note Widget Description */
+"Get quick access to one of your notes." = "Get quick access to one of your notes.";
+
 /* Rating view liked title */
 "Great! Mind leaving a review to tell us what you like?" = "Harika! Neleri beğendiğiniz hakkında değerlendirme yapmaya ne dersiniz?";
 
@@ -391,6 +414,9 @@
 /* Log out of the active account in the app */
 "Log Out" = "Çıkış yap";
 
+/* Widget warning if user is logged out */
+"Log in to see your notes" = "Log in to see your notes";
+
 /* Allows the user to SignIn using their WPCOM Account */
 "Log in with WordPress.com" = "WordPress.com ile oturum aç";
 
@@ -408,6 +434,9 @@
 
 /* Month and year date formatter */
 "MMM yyyy" = "AAA yyyy";
+
+/* App configuration error title */
+"Main App is not configured" = "Main App is not configured";
 
 /* Toggles the Markdown State */
 "Markdown" = "Markdown";
@@ -438,8 +467,13 @@
 "Name: Z-A" = "Ad: Z-A";
 
 /* Home screen quick action: New Note
-   Keyboard shortcut: New Note */
+   Keyboard shortcut: New Note
+   New Note Widget Title */
 "New Note" = "Yeni Not";
+
+/* Default title for notes
+   Text for new note button */
+"New Note..." = "New Note...";
 
 /* Label to create a new note */
 "New note" = "Yeni not";
@@ -456,6 +490,9 @@
 /* Message shown when no notes match a search string */
 "No Results" = "Sonuç Yok";
 
+/* Extension Missing Token Alert Title */
+"No Simplenote Account" = "No Simplenote Account";
+
 /* Message shown in note list when no notes are tagged with the provided tag. Parameter: %@ - tag */
 "No notes tagged “%@”" = "“%@” etiketli not yok";
 
@@ -468,8 +505,17 @@
 /* Cancel action for password alert */
 "Not Yet" = "Henüz Değil";
 
+/* Note Widget Title */
+"Note" = "Note";
+
+/* Note List Widget Title */
+"Note List" = "Note List";
+
 /* Note trashed notification */
 "Note Trashed" = "Not Çöp Kutusuna Gönderildi";
+
+/* Widget warning if note is deleted */
+"Note no longer available" = "Note no longer available";
 
 /* Notes Header (Search Mode) */
 "Notes" = "Notlar";
@@ -536,6 +582,9 @@
 /* Error message. Account verification */
 "Please check your network settings and try again." = "Lütfen ağ ayarlarınızı kontrol edip tekrar deneyin.";
 
+/* Extension Missing Token Alert Title */
+"Please log into your Simplenote account first by using the Simplenote app." = "Please log into your Simplenote account first by using the Simplenote app.";
+
 /* Title of Markdown preview screen */
 "Preview" = "Önizleme";
 
@@ -581,6 +630,9 @@
 /* No comment provided by engineer. */
 "Remove all notes from trash" = "Çöp kutusundaki tüm notları kaldır";
 
+/* Accessibility hint for removing a tag from the current note */
+"Remove tag from the current note" = "Remove tag from the current note";
+
 /* Rename a tag */
 "Rename" = "Yeniden Adlandır";
 
@@ -611,6 +663,9 @@
 
 /* Title -> Review you account screen */
 "Review Your Account" = "Hesabınızı İnceleyin";
+
+/* Save action on share extension. */
+"Save" = "Kaydet";
 
 /* Home screen quick action: Search
    Keyboard shortcut: Search
@@ -674,11 +729,15 @@
 /* Alert message displayed when an account has unsynced notes */
 "Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "Oturumu kapattığınızda, senkronize edilmemiş tüm notlar silinir. Senkronize edilmiş notlarınızı Web Uygulamasında oturum açarak doğrulayabilirsiniz.";
 
-/* Our mighty brand! */
+/* Our mighty brand!
+   Title of main share extension view */
 "Simplenote" = "Simplenote";
 
 /* Simplenote's Feedback Email Title */
 "Simplenote iOS Feedback" = "Simplenote iOS Geri Bildirimi";
+
+/* Message displayed when app is not configured */
+"Simplenote must be configured and logged in to setup widgets" = "Simplenote must be configured and logged in to setup widgets";
 
 /* Authentication Error Alert Title */
 "Sorry!" = "Üzgünüz!";
@@ -698,6 +757,15 @@
 
 /* Theme: Matches iOS Settings */
 "System Default" = "Sistem Varsayılanı";
+
+/* Display title for a User Tag */
+"Tag" = "Etiket";
+
+/* Widget warning if tag is deleted */
+"Tag no longer available" = "Tag no longer available";
+
+/* Placeholder text in textfield when adding a new tag to a note */
+"Tag..." = "Etiket…";
 
 /* Tags List Header */
 "Tags" = "Etiketler";
@@ -729,6 +797,9 @@
 /* Request error alert message */
 "There was an preparing your verification email, please try again later" = "Doğrulama e-postanız hazırlanırken bir hata oluştu, lütfen daha sonra tekrar deneyin";
 
+/* Warning message shown when current note is deleted on another device */
+"This note was deleted on another device" = "This note was deleted on another device";
+
 /* error for compromised password */
 "This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately." = "Bu şifre, hesabınızı ileri düzeyde tehlikeye atma riskine sokan bir veri ihlalinde ortaya çıktı. Şifrenizi hemen değiştirmeniz önerilir.";
 
@@ -750,18 +821,21 @@
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Touch ID";
 
-/* Move selected notes to trash */
-"Trash Notes" = "Notları Çöp Kutusuna Gönder";
-
 /* Title: Trash Tag is selected
    Trash filter button */
-"Trash-noun" = "Çöpe At";
+"Trash" = "Çöp Kutusu";
+
+/* Move selected notes to trash */
+"Trash Notes" = "Notları Çöp Kutusuna Gönder";
 
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "Parolayı Kapat";
 
 /* Undo action */
 "Undo" = "Geri al";
+
+/* Default title for an unnamed tag */
+"Unnamed Tag" = "Adsız Etiket";
 
 /* Unpins a note */
 "Unpin" = "Sabitlemeyi kaldır";
@@ -841,18 +915,6 @@
 
 /* Message shown in note list when no notes are in the trash */
 "Your trash is empty" = "Çöp kutusu boş";
-
-/* No comment provided by engineer. */
-"collaborators-description" = "Bu notu bir başka kişinin görebilmesi için o kişinin e-posta adresini ekleyin. Bunun ardından her ikiniz de not üzerinde değişiklik yapabilirsiniz.";
-
-/* Warning message shown when current note is deleted on another device */
-"deleted-note-warning" = "Bu not bir başka aygıtta silindi.";
-
-/* Accessibility hint for adding a tag to a note */
-"tag-add-accessibility-hint" = "Geçerli nota etiket ekle";
-
-/* Remove a tag from the current note */
-"tag-delete-accessibility-hint" = "Geçerli nottan etiket kaldır";
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "etiket:";
