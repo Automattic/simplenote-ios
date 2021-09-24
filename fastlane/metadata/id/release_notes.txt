@@ -1,1 +1,0 @@
-- Masalah terkait tombol pilih semua jika hanya ada satu catatan dalam daftar teratasi

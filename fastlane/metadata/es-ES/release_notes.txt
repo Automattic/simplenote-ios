@@ -1,1 +1,0 @@
-- Se ha corregido un problema con el botón "Seleccionar todo" cuando solo hay una nota en la lista.

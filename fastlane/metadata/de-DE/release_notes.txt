@@ -1,1 +1,0 @@
-- Ein Problem mit dem Button „Alle auswählen“, wenn die Liste nur eine Notiz enthält, wurde behoben
