@@ -159,7 +159,7 @@ extension SPNoteListViewController {
     @objc
     func refreshTableViewTopInsets() {
         tableView.contentInset.top = searchBarStackView.frame.height
-        tableView.scrollIndicatorInsets.top = searchBarStackView.frame.height
+        tableView.verticalScrollIndicatorInsets.top = searchBarStackView.frame.height
     }
 
     /// Scrolls to the First Row whenever the flag `mustScrollToFirstRow` was set to true
@@ -945,7 +945,7 @@ extension SPNoteListViewController {
 
         let updates = {
             self.tableView.contentInset.bottom = bottomInsets
-            self.tableView.scrollIndicatorInsets.bottom = bottomInsets
+            self.tableView.verticalScrollIndicatorInsets.bottom = bottomInsets
             self.view.layoutIfNeeded()
         }
 

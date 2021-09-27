@@ -303,7 +303,7 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
     }
 
     UIEdgeInsets contentInsets = sideTableView.contentInset;
-    UIEdgeInsets scrollIndicatorInsets = sideTableView.scrollIndicatorInsets;
+    UIEdgeInsets scrollIndicatorInsets = sideTableView.verticalScrollIndicatorInsets;
 
     contentInsets.top = mainSafeInsets.top;
     contentInsets.bottom = mainSafeInsets.bottom;
