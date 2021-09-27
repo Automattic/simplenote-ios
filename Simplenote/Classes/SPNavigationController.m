@@ -93,7 +93,7 @@ static const NSInteger SPNavigationBarBackgroundPositionZ = -1000;
 
 - (void)attachNavigationBarBackground:(UIVisualEffectView *)barBackground toNavigationBar:(UINavigationBar *)navigationBar
 {
-    CGSize statusBarSize = UIApplication.sharedApplication.statusBarFrame.size;
+    CGSize statusBarSize = [[UIApplication sharedApplication] keyWindowStatusBarHeight];
     CGRect bounds = navigationBar.bounds;
     bounds.origin.y -= statusBarSize.height;
     bounds.size.height += statusBarSize.height;
