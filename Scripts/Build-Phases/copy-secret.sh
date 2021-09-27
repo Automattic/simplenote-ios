@@ -25,10 +25,14 @@ set -e
 if [ ! -f ${SOURCE_PATH} ]; then
     echo "error: Unable to copy credentials. Could not find ${SOURCE_PATH}."
     exit 1
-else
-    echo "Copying credentials..."
-    mkdir -p $(dirname $TARGET_PATH)
-    cp ${SOURCE_PATH} ${TARGET_PATH}
 fi
 
+
+if cmp --silent -- ${SOURCE_PATH} ${TARGET_PATH}; then
+    echo "☑️ Credentials were not modified. Skipping..."
+    exit 0
+fi
+
+mkdir -p $(dirname $TARGET_PATH)
+cp ${SOURCE_PATH} ${TARGET_PATH}
 echo "✅ Copied secret at ${SOURCE_PATH} to ${TARGET_PATH}"
