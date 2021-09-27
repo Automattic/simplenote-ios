@@ -260,7 +260,6 @@
 		B52BB74E22CFD1660042C162 /* SimplenoteActivityItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BB74D22CFD1660042C162 /* SimplenoteActivityItemSource.swift */; };
 		B52BB75022CFD18F0042C162 /* UIActivity+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BB74F22CFD18F0042C162 /* UIActivity+Simplenote.swift */; };
 		B52E2B152537480A0074509A /* SPEditorTapRecognizerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52E2B142537480A0074509A /* SPEditorTapRecognizerDelegate.swift */; };
-		B52EF9FE24F69E4E0029DCCE /* UIMenuController+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52EF9FD24F69E4E0029DCCE /* UIMenuController+Simplenote.swift */; };
 		B52F35CF22F3243900724793 /* SPThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F35CE22F3243900724793 /* SPThemeViewController.swift */; };
 		B52F35D122F3254800724793 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F35D022F3254800724793 /* Theme.swift */; };
 		B52F35D322F356F500724793 /* UserDefaults+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F35D222F356F500724793 /* UserDefaults+Tests.swift */; };
@@ -921,7 +920,6 @@
 		B52BB74D22CFD1660042C162 /* SimplenoteActivityItemSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SimplenoteActivityItemSource.swift; path = Classes/SimplenoteActivityItemSource.swift; sourceTree = "<group>"; };
 		B52BB74F22CFD18F0042C162 /* UIActivity+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIActivity+Simplenote.swift"; path = "Classes/UIActivity+Simplenote.swift"; sourceTree = "<group>"; };
 		B52E2B142537480A0074509A /* SPEditorTapRecognizerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPEditorTapRecognizerDelegate.swift; path = Classes/SPEditorTapRecognizerDelegate.swift; sourceTree = "<group>"; };
-		B52EF9FD24F69E4E0029DCCE /* UIMenuController+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIMenuController+Simplenote.swift"; path = "Classes/UIMenuController+Simplenote.swift"; sourceTree = "<group>"; };
 		B52F35CE22F3243900724793 /* SPThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPThemeViewController.swift; path = Classes/SPThemeViewController.swift; sourceTree = "<group>"; };
 		B52F35D022F3254800724793 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Theme.swift; path = Classes/Theme.swift; sourceTree = "<group>"; };
 		B52F35D222F356F500724793 /* UserDefaults+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Tests.swift"; sourceTree = "<group>"; };
@@ -1946,7 +1944,6 @@
 				B52AC185233587F8007B2E75 /* UITraitCollection+Simplenote.swift */,
 				B58039852322D4F90083C916 /* UIView+ImageRepresentation.swift */,
 				B50E99F3234242130092F274 /* UISearchBar+Simplenote.swift */,
-				B52EF9FD24F69E4E0029DCCE /* UIMenuController+Simplenote.swift */,
 				A69F851C253EC877005140F2 /* UISlider+Simplenote.swift */,
 				B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */,
 				A6F487A625A79D350050CFA8 /* UIApplication+Simplenote.swift */,
@@ -3562,7 +3559,6 @@
 				B5BA5B082551FB3C002AAD43 /* UIDevice+Simplenote.swift in Sources */,
 				A681C7342541772D00F369C2 /* NumberFormatter+Simplenote.swift in Sources */,
 				B59560E0251A46D500A06788 /* KeychainManager.swift in Sources */,
-				B52EF9FE24F69E4E0029DCCE /* UIMenuController+Simplenote.swift in Sources */,
 				46A3C9AF17DFA81A002865AE /* NSString+Condensing.m in Sources */,
 				A6F487AF25A79D550050CFA8 /* BiometricAuthentication.swift in Sources */,
 				BA5768E3269A803F008B510E /* Remote.swift in Sources */,
