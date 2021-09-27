@@ -142,9 +142,10 @@ extension UIView {
         let originalTransform = transform
 
         transform = leftTranslation
-        UIView.animate(withDuration: 0.07, delay: 0.0, options: [.autoreverse, .repeat]) {
-            UIView.setAnimationRepeatCount(5)
-            self.transform = rightTranslation
+        UIView.animate(withDuration: 0.07, delay: 0.0, options: []) {
+            UIView.modifyAnimations(withRepeatCount: 5, autoreverses: true, animations: {
+                self.transform = rightTranslation
+            })
         } completion: { (completed) in
             self.transform = originalTransform
             onCompletion?(completed)
