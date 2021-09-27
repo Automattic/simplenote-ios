@@ -75,7 +75,7 @@ enum UID {
     enum TextField {
         static let email = "Email"
         static let password = "Password"
-        static let tag = "Tag..."
+        static let tag = "Tag…"
     }
 
     enum SearchField {
