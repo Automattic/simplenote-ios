@@ -1,1 +1,0 @@
-- Correção de um erro no botão de selecionar tudo que ocorria quando só havia uma anotação na lista

@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-09-14 09:54:04+0000 */
+/* Translation-Revision-Date: 2021-09-23 11:32:13+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ko_KR */
@@ -79,13 +79,17 @@
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Add a new collaborator..." = "새 공동 작업자 추가...";
 
-/* Placeholder test in textfield when adding a new tag to a note */
-"Add a tag..." = "태그...";
+/* Accessibility hint for adding a tag to a note */
+"Add a tag to the current note" = "Add a tag to the current note";
+
+/* Description text for the screen that allows users to share notes with other users */
+"Add an email address to share this note with someone. Then you can both make changes to it." = "Add an email address to share this note with someone. Then you can both make changes to it.";
 
 /* Label on button to add a new tag to a note */
 "Add tag" = "태그 추가";
 
 /* All Notes filter button
+   Display title for All Notes
    Title: No filters applied */
 "All Notes" = "모든 메모";
 
@@ -110,6 +114,9 @@
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "휴지통을 비우시겠습니까? 이 작업은 되돌릴 수 없습니다.";
 
+/* Data Fetch error message */
+"Attempt to fetch entities failed.  Please try again later." = "Attempt to fetch entities failed.  Please try again later.";
+
 /* User Authenticated */
 "Authenticated" = "인증됨";
 
@@ -124,12 +131,16 @@
 
 /* Cancel Action
    Cancel action button
+   Cancel action on share extension.
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
    PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
 "Cancel" = "취소";
+
+/* Name of button to cancel iOS share extension in missing token alert */
+"Cancel Share" = "Cancel Share";
 
 /* Error message title. Review you account screen */
 "Cannot Confirm Account" = "계정을 확인할 수 없음";
@@ -198,6 +209,9 @@
 /* Error for bad email or password */
 "Could not create an account with the provided email address and password." = "입력하신 이메일 주소와 비밀번호로 계정을 만들지 못했습니다.";
 
+/* Fetch error title */
+"Could not fetch entities" = "Could not fetch entities";
+
 /* Message displayed when login fails */
 "Could not login with the provided email address and password." = "입력하신 이메일 주소와 비밀번호로 로그인하지 못했습니다.";
 
@@ -215,6 +229,9 @@
 
 /* No comment provided by engineer. */
 "Create a new note" = "새 메모 만들기";
+
+/* New Note Widget Description */
+"Create a new note instantly with one tap." = "Create a new note instantly with one tap.";
 
 /* Tappable message shown when no notes match a search string. Parameter: %@ - search term */
 "Create a new note titled “%@”" = "제목이 “%@”인 새 메모 만들기";
@@ -337,6 +354,12 @@
 /* FAQ or contact us */
 "Get Help" = "도움말";
 
+/* Note List Widget Description */
+"Get quick access to a list of all notes or based on the selected tag." = "Get quick access to a list of all notes or based on the selected tag.";
+
+/* Note Widget Description */
+"Get quick access to one of your notes." = "Get quick access to one of your notes.";
+
 /* Rating view liked title */
 "Great! Mind leaving a review to tell us what you like?" = "좋습니다! 마음에 드는 리뷰를 남겨주시겠습니까?";
 
@@ -391,6 +414,9 @@
 /* Log out of the active account in the app */
 "Log Out" = "로그아웃";
 
+/* Widget warning if user is logged out */
+"Log in to see your notes" = "Log in to see your notes";
+
 /* Allows the user to SignIn using their WPCOM Account */
 "Log in with WordPress.com" = "워드프레스닷컴으로 로그인";
 
@@ -408,6 +434,9 @@
 
 /* Month and year date formatter */
 "MMM yyyy" = "yyyy MMM";
+
+/* App configuration error title */
+"Main App is not configured" = "Main App is not configured";
 
 /* Toggles the Markdown State */
 "Markdown" = "마크다운";
@@ -438,8 +467,13 @@
 "Name: Z-A" = "이름: 내림차순";
 
 /* Home screen quick action: New Note
-   Keyboard shortcut: New Note */
+   Keyboard shortcut: New Note
+   New Note Widget Title */
 "New Note" = "새 메모";
+
+/* Default title for notes
+   Text for new note button */
+"New Note..." = "New Note...";
 
 /* Label to create a new note */
 "New note" = "새 메모";
@@ -456,6 +490,9 @@
 /* Message shown when no notes match a search string */
 "No Results" = "결과 없음";
 
+/* Extension Missing Token Alert Title */
+"No Simplenote Account" = "No Simplenote Account";
+
 /* Message shown in note list when no notes are tagged with the provided tag. Parameter: %@ - tag */
 "No notes tagged “%@”" = "태그가 “%@”인 메모 없음";
 
@@ -468,8 +505,17 @@
 /* Cancel action for password alert */
 "Not Yet" = "아직 아님";
 
+/* Note Widget Title */
+"Note" = "Note";
+
+/* Note List Widget Title */
+"Note List" = "Note List";
+
 /* Note trashed notification */
 "Note Trashed" = "메모 삭제됨";
+
+/* Widget warning if note is deleted */
+"Note no longer available" = "Note no longer available";
 
 /* Notes Header (Search Mode) */
 "Notes" = "메모";
@@ -536,6 +582,9 @@
 /* Error message. Account verification */
 "Please check your network settings and try again." = "네트워크 설정을 확인하고 다시 시도해 주세요.";
 
+/* Extension Missing Token Alert Title */
+"Please log into your Simplenote account first by using the Simplenote app." = "Please log into your Simplenote account first by using the Simplenote app.";
+
 /* Title of Markdown preview screen */
 "Preview" = "미리보기";
 
@@ -581,6 +630,9 @@
 /* No comment provided by engineer. */
 "Remove all notes from trash" = "휴지통 비우기";
 
+/* Accessibility hint for removing a tag from the current note */
+"Remove tag from the current note" = "Remove tag from the current note";
+
 /* Rename a tag */
 "Rename" = "이름 변경";
 
@@ -611,6 +663,9 @@
 
 /* Title -> Review you account screen */
 "Review Your Account" = "계정 검토";
+
+/* Save action on share extension. */
+"Save" = "저장";
 
 /* Home screen quick action: Search
    Keyboard shortcut: Search
@@ -674,11 +729,15 @@
 /* Alert message displayed when an account has unsynced notes */
 "Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "로그아웃하면 동기화되지 않은 모든 메모가 삭제됩니다. 웹 앱에 로그인하여 동기화된 메모를 확인할 수 있습니다.";
 
-/* Our mighty brand! */
+/* Our mighty brand!
+   Title of main share extension view */
 "Simplenote" = "Simplenote";
 
 /* Simplenote's Feedback Email Title */
 "Simplenote iOS Feedback" = "Simplenote iOS 피드백";
+
+/* Message displayed when app is not configured */
+"Simplenote must be configured and logged in to setup widgets" = "Simplenote must be configured and logged in to setup widgets";
 
 /* Authentication Error Alert Title */
 "Sorry!" = "죄송합니다!";
@@ -698,6 +757,15 @@
 
 /* Theme: Matches iOS Settings */
 "System Default" = "시스템 기본값";
+
+/* Display title for a User Tag */
+"Tag" = "태그";
+
+/* Widget warning if tag is deleted */
+"Tag no longer available" = "Tag no longer available";
+
+/* Placeholder text in textfield when adding a new tag to a note */
+"Tag..." = "태그...";
 
 /* Tags List Header */
 "Tags" = "태그";
@@ -729,6 +797,9 @@
 /* Request error alert message */
 "There was an preparing your verification email, please try again later" = "준비 중인 인증 이메일이 있었습니다. 나중에 다시 시도해 주세요.";
 
+/* Warning message shown when current note is deleted on another device */
+"This note was deleted on another device" = "This note was deleted on another device";
+
 /* error for compromised password */
 "This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately." = "계정 손상 위험이 큰 데이터 위반이 이 비밀번호에서 나타났습니다. 즉시 비밀번호를 변경하는 것이 좋습니다.";
 
@@ -750,18 +821,21 @@
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Touch ID";
 
-/* Move selected notes to trash */
-"Trash Notes" = "메모 삭제";
-
 /* Title: Trash Tag is selected
    Trash filter button */
-"Trash-noun" = "휴지통";
+"Trash" = "휴지통";
+
+/* Move selected notes to trash */
+"Trash Notes" = "메모 삭제";
 
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "패스코드 사용 끄기";
 
 /* Undo action */
 "Undo" = "실행 취소";
+
+/* Default title for an unnamed tag */
+"Unnamed Tag" = "이름 없는 태그";
 
 /* Unpins a note */
 "Unpin" = "고정 해제";
@@ -841,18 +915,6 @@
 
 /* Message shown in note list when no notes are in the trash */
 "Your trash is empty" = "휴지통이 비어 있습니다.";
-
-/* No comment provided by engineer. */
-"collaborators-description" = "이 메모를 다른 사람과 공유하려면 이메일 주소를 추가하세요. 그러면 두 사람 모두 메모를 수정할 수 있습니다.";
-
-/* Warning message shown when current note is deleted on another device */
-"deleted-note-warning" = "이 메모는 다른 장치에서 삭제됐습니다.";
-
-/* Accessibility hint for adding a tag to a note */
-"tag-add-accessibility-hint" = "현재 메모에 태그 추가";
-
-/* Remove a tag from the current note */
-"tag-delete-accessibility-hint" = "현재 메모에서 태그 제거";
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "태그:";

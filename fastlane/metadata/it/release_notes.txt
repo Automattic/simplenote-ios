@@ -1,1 +1,0 @@
-- Risolto un problema con il pulsante Seleziona tutto quando nell'elenco è presente solo una nota

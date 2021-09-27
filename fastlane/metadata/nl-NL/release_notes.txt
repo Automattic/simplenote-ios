@@ -1,1 +1,0 @@
-- Een probleem verholpen met de knop 'Alles selecteren' wanneer er slechts één opmerking in de lijst staat

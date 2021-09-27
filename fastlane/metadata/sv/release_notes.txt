@@ -1,1 +1,0 @@
-- Ett problem med knappen Välj alla när listan endast innehåller en anteckning har åtgärdats
