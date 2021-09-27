@@ -188,13 +188,6 @@ extension SPNoteListViewController {
         tableView.contentOffset.y = tableView.adjustedContentInset.top * -1
     }
 
-    /// Registers the ListViewController for Peek and Pop events.
-    ///
-    @objc
-    func registerForPeekAndPop() {
-        registerForPreviewing(with: self, sourceView: tableView)
-    }
-
     /// Refreshes the Notes ListController Filters + Sorting: We'll also update the UI (TableView + Title) to match the new parameters.
     ///
     @objc
@@ -407,40 +400,6 @@ extension SPNoteListViewController {
             return
         }
         trashButton.isEnabled = selectedRows.count > 0
-    }
-}
-
-
-// MARK: - UIViewControllerPreviewingDelegate Conformance
-//
-extension SPNoteListViewController: UIViewControllerPreviewingDelegate {
-
-    public func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-        guard tableView.isUserInteractionEnabled,
-            isDeletedFilterActive == false,
-            let indexPath = tableView.indexPathForRow(at: location),
-            let note = notesListController.object(at: indexPath) as? Note
-            else {
-                return nil
-        }
-
-        /// Prevent any Pan gesture from passing thru
-        SPAppDelegate.shared().sidebarViewController.requirePanningToFail()
-
-        /// Mark the source of the interaction
-        previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
-
-        /// Setup the Editor
-        return previewingViewController(for: note)
-    }
-
-    public func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-        guard let editorViewController = viewControllerToCommit as? SPNoteEditorViewController else {
-            return
-        }
-
-        editorViewController.isPreviewing = false
-        navigationController?.pushViewController(editorViewController, animated: true)
     }
 }
 

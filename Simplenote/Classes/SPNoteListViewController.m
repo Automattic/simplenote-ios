@@ -60,7 +60,6 @@
         [self startListeningToNotifications];
         [self startDisplayingEntities];
 
-        [self registerForPeekAndPop];
         [self refreshStyle];
         [self update];
         self.mustScrollToFirstRow = YES;
