@@ -8,7 +8,7 @@
     
     SPModalActivityIndicator *alertView = [[SPModalActivityIndicator alloc] initWithFrame:CGRectZero];
 
-    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleMedium];
     [activityIndicator startAnimating];
     
     [alertView showWithContentView:activityIndicator];

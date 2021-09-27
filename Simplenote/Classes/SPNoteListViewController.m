@@ -171,8 +171,7 @@
 
 - (UIActivityIndicatorView *)activityIndicator {
     if (_activityIndicator == nil) {
-        UIActivityIndicatorViewStyle style = SPUserInterface.isDark ? UIActivityIndicatorViewStyleWhite : UIActivityIndicatorViewStyleGray;
-        _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:style];
+        _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleMedium];
     }
 
     return _activityIndicator;
