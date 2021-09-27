@@ -291,7 +291,7 @@
     self.bSigningUserOut = YES;
 
     [self dismissAllModalsAnimated:YES completion:nil];
-    self.signOutActivityIndicator = [SPModalActivityIndicator show];
+    self.signOutActivityIndicator = [SPModalActivityIndicator showInWindow:self.window];
     
     // Reset State
     [SPKeychain deletePasswordForService:kSimplenoteWPServiceName account:self.simperium.user.email];

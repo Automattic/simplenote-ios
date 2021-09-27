@@ -3,14 +3,12 @@
 @interface SPModalActivityIndicator : UIView {
     
     CGRect boxFrame;
-
-    UIView *parentView;
     UIView *topView;
 }
 
 @property (nonatomic, retain) UIView *contentView;
 
-+ (SPModalActivityIndicator *)show;
++ (SPModalActivityIndicator *)showInWindow:(UIWindow *)window;
 - (void)dismiss:(BOOL)animated completion:(void (^)())completion;
 
 @end

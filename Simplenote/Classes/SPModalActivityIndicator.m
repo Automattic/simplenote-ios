@@ -4,24 +4,23 @@
 
 @implementation SPModalActivityIndicator
 
-+ (SPModalActivityIndicator *)show {
++ (SPModalActivityIndicator *)showInWindow:(UIWindow *)window {
     
     SPModalActivityIndicator *alertView = [[SPModalActivityIndicator alloc] initWithFrame:CGRectZero];
 
     UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleMedium];
     [activityIndicator startAnimating];
     
-    [alertView showWithContentView:activityIndicator];
+    [alertView showWithContentView:activityIndicator window:window];
     
     return alertView;
 }
 
-- (void)showWithContentView:(UIView *)cView {
+- (void)showWithContentView:(UIView *)cView window:(UIWindow *)window {
     
     self.contentView = cView;
-    topView = [[[[UIApplication sharedApplication] keyWindow] subviews] lastObject];
-    parentView = topView;
-    
+    topView = window;
+
     self.contentView.clipsToBounds = YES;
     
     [self applyStyling];
