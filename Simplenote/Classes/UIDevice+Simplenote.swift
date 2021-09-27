@@ -7,6 +7,6 @@ extension UIDevice {
 
     @objc
     static var isPad: Bool {
-        UI_USER_INTERFACE_IDIOM() == .pad
+        UIDevice.current.userInterfaceIdiom == .pad
     }
 }
