@@ -268,13 +268,11 @@ private extension SPAuthViewController {
         view.endEditing(true)
         view.isUserInteractionEnabled = false
         primaryActionSpinner.startAnimating()
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
     }
 
     private func unlockInterface() {
         view.isUserInteractionEnabled = true
         primaryActionSpinner.stopAnimating()
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
 }
 
