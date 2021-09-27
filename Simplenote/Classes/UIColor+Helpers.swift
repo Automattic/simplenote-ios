@@ -9,10 +9,6 @@ extension UIColor {
     /// Returns an UIImage representation of the receiver, with the specified size, and Dark Mode support.
     ///
     func dynamicImageRepresentation(size: CGSize = CGSize(width: 1, height: 1)) -> UIImage {
-        guard #available(iOS 13.0, *) else {
-            return imageRepresentation(size: size)
-        }
-
         let darkImage = resolvedColor(with: .purelyDarkTraits).imageRepresentation(size: size)
         let lightImage = resolvedColor(with: .purelyLightTraits).imageRepresentation(size: size)
 

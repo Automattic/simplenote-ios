@@ -137,11 +137,7 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
-    if (@available(iOS 13.0, *)) {
-        return UIStatusBarStyleDefault;
-    }
-
-    return SPUserInterface.isDark ? UIStatusBarStyleLightContent : UIStatusBarStyleDefault;
+    return UIStatusBarStyleDefault;
 }
 
 - (BOOL)shouldAutorotate

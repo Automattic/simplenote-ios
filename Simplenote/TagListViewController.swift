@@ -72,10 +72,7 @@ private extension TagListViewController {
         tableView.register(Value1TableViewCell.self, forCellReuseIdentifier: Value1TableViewCell.reuseIdentifier)
 
         tableView.separatorInsetReference = .fromAutomaticInsets
-
-        if #available(iOS 13.0, *) {
-            tableView.automaticallyAdjustsScrollIndicatorInsets = false
-        }
+        tableView.automaticallyAdjustsScrollIndicatorInsets = false
     }
 
     func configureTableHeaderView() {

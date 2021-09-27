@@ -545,7 +545,6 @@ extension SPNoteListViewController: UITableViewDelegate {
         }
     }
 
-    @available(iOS 13.0, *)
     public func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         guard isDeletedFilterActive == false, isEditing == false, let note = notesListController.object(at: indexPath) as? Note else {
             return nil
@@ -559,7 +558,6 @@ extension SPNoteListViewController: UITableViewDelegate {
         })
     }
 
-    @available(iOS 13.0, *)
     public func tableView(_ tableView: UITableView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
         guard let editorViewController = animator.previewViewController as? SPNoteEditorViewController else {
             return
@@ -782,7 +780,6 @@ private extension SPNoteListViewController {
 
 // MARK: - UIMenu
 //
-@available(iOS 13.0, *)
 private extension SPNoteListViewController {
 
     /// Invoked by the Long Press UITableView Mechanism (ex 3d Touch)
