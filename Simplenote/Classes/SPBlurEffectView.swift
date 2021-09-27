@@ -27,10 +27,6 @@ class SPBlurEffectView: UIVisualEffectView {
 
     // MARK: - Initializers
 
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-
     convenience init() {
         self.init(effect: .simplenoteBlurEffect)
     }
@@ -42,7 +38,6 @@ class SPBlurEffectView: UIVisualEffectView {
     init(effect: UIBlurEffect) {
         super.init(effect: effect)
         setupTintView()
-        startListeningToNotifications()
     }
 }
 
@@ -50,15 +45,6 @@ class SPBlurEffectView: UIVisualEffectView {
 // MARK: - Private Methods
 //
 private extension SPBlurEffectView {
-
-    func startListeningToNotifications() {
-        // No need to do this in iOS +13
-        if #available(iOS 13, *) {
-            return
-        }
-
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshStyle), name: .SPSimplenoteThemeChanged, object: nil)
-    }
 
     func setupTintView() {
         contentView.addSubview(tintView)

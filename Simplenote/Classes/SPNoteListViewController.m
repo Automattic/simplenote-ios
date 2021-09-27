@@ -155,8 +155,6 @@
 #pragma mark - Overridden Properties
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
-    // In iOS <13, whenever the navigationBar is hidden, the system will query the top VC for its preferred bar style.
-    // Nuke this the second iOS 13 is the deployment target, which will probably be around 2021?
     return self.navigationController.preferredStatusBarStyle;
 }
 
