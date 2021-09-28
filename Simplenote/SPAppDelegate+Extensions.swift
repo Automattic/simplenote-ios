@@ -497,7 +497,6 @@ extension SPAppDelegate {
 }
 
 // MARK: - Widgets
-
 @available(iOS 14.0, *)
 extension SPAppDelegate {
     @objc

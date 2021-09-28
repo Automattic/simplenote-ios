@@ -168,7 +168,9 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     [SPTracker trackApplicationOpened];
-    [self syncWidgetDefaults];
+    if (@available(iOS 14.0, *)) {
+        [self syncWidgetDefaults];
+    }
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -182,8 +184,11 @@
 
     [self showPasscodeLockIfNecessary];
     [self cleanupScrollPositionCache];
-    [self syncWidgetDefaults];
-    [self resetWidgetTimelines];
+
+    if (@available(iOS 14.0, *)) {
+        [self syncWidgetDefaults];
+        [self resetWidgetTimelines];
+    } 
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
