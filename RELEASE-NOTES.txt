@@ -1,6 +1,6 @@
 4.46
 -----
-
+-   Fixed an issue where a note could be edited after being trashed #1451
 
 4.45
 -----
