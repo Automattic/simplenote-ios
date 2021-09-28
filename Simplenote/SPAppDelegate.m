@@ -355,6 +355,10 @@
             {
                 if ([key isEqualToString:self.noteEditorViewController.note.simperiumKey]) {
                     [self.noteEditorViewController didReceiveNewContent];
+
+                    if ([memberNames.firstObject isEqual:@"deleted"]) {
+                        [self dismissTrashedNote];
+                    }
                 }
 
                 [self.publishController didReceiveUpdateNotificationForKey:key withMemberNames:memberNames];
