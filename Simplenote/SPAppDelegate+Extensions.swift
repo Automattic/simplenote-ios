@@ -279,9 +279,7 @@ extension SPAppDelegate: SimperiumDelegate {
         CrashLoggingShim.cacheUser(user)
         CrashLoggingShim.cacheOptOutSetting(!analyticsEnabled)
 
-        if #available(iOS 14.0, *) {
-            syncWidgetDefaults()
-        }
+        syncWidgetDefaults()
 
         setupVerificationController()
     }
@@ -296,9 +294,7 @@ extension SPAppDelegate: SimperiumDelegate {
         // Shortcuts!
         ShortcutsHandler.shared.clearHomeScreenQuickActions()
 
-        if #available(iOS 14.0, *) {
-            syncWidgetDefaults()
-        }
+        syncWidgetDefaults()
 
         destroyVerificationController()
     }
@@ -497,11 +493,12 @@ extension SPAppDelegate {
 }
 
 // MARK: - Widgets
-
-@available(iOS 14.0, *)
 extension SPAppDelegate {
     @objc
     func resetWidgetTimelines() {
+        guard #available(iOS 14.0, *) else {
+            return
+        }
         WidgetController.resetWidgetTimelines()
     }
 
