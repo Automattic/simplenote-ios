@@ -260,7 +260,6 @@
 		B52BB74E22CFD1660042C162 /* SimplenoteActivityItemSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BB74D22CFD1660042C162 /* SimplenoteActivityItemSource.swift */; };
 		B52BB75022CFD18F0042C162 /* UIActivity+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BB74F22CFD18F0042C162 /* UIActivity+Simplenote.swift */; };
 		B52E2B152537480A0074509A /* SPEditorTapRecognizerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52E2B142537480A0074509A /* SPEditorTapRecognizerDelegate.swift */; };
-		B52EF9FE24F69E4E0029DCCE /* UIMenuController+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52EF9FD24F69E4E0029DCCE /* UIMenuController+Simplenote.swift */; };
 		B52F35CF22F3243900724793 /* SPThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F35CE22F3243900724793 /* SPThemeViewController.swift */; };
 		B52F35D122F3254800724793 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F35D022F3254800724793 /* Theme.swift */; };
 		B52F35D322F356F500724793 /* UserDefaults+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F35D222F356F500724793 /* UserDefaults+Tests.swift */; };
@@ -431,7 +430,7 @@
 		BA12B07026B0D0150026F31D /* SPManagedObject+Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA12B06C26B0D0150026F31D /* SPManagedObject+Widget.swift */; };
 		BA18532826488DBC00D9A347 /* SignupRemoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA18532726488DBC00D9A347 /* SignupRemoteTests.swift */; };
 		BA2D82C6261522F100A1695B /* PublishNoticePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2D82C5261522F100A1695B /* PublishNoticePresenter.swift */; };
-		BA3101A926C8C76A00C95F93 /* ListWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BA7071E426BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition */; };
+		BA3101A926C8C76A00C95F93 /* ListWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BA7071E426BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition */; settings = {ATTRIBUTES = (no_codegen, ); }; };
 		BA32A90F26B7469F00727247 /* WidgetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32A90E26B7469F00727247 /* WidgetError.swift */; };
 		BA32A91926B746A200727247 /* WidgetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32A90E26B7469F00727247 /* WidgetError.swift */; };
 		BA32A91A26B746A300727247 /* WidgetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32A90E26B7469F00727247 /* WidgetError.swift */; };
@@ -547,7 +546,7 @@
 		BAFA93FA265DE8920009DCFB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E29ADD4D17848E8500E55842 /* Images.xcassets */; };
 		BAFDBBD926B88BD200119615 /* Date+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFDBBD726B88BD200119615 /* Date+Simplenote.swift */; };
 		BAFDBBDA26B88BD200119615 /* Date+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFDBBD726B88BD200119615 /* Date+Simplenote.swift */; };
-		BAFDBBE426B88F1300119615 /* NoteWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BAB5760A26703C0C00B0C56F /* NoteWidgetIntent.intentdefinition */; };
+		BAFDBBE426B88F1300119615 /* NoteWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BAB5760A26703C0C00B0C56F /* NoteWidgetIntent.intentdefinition */; settings = {ATTRIBUTES = (no_codegen, ); }; };
 		BAFFCEA626DDA9F6007F5EE3 /* WidgetCoreDataWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFFCEA526DDA9F6007F5EE3 /* WidgetCoreDataWrapper.swift */; };
 		BAFFCEA726DDA9F6007F5EE3 /* WidgetCoreDataWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFFCEA526DDA9F6007F5EE3 /* WidgetCoreDataWrapper.swift */; };
 		D435D38FCA5863E8447D5C2C /* Pods_Automattic_SimplenoteShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183BAB896957F07FDCAB6DF5 /* Pods_Automattic_SimplenoteShare.framework */; };
@@ -921,7 +920,6 @@
 		B52BB74D22CFD1660042C162 /* SimplenoteActivityItemSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SimplenoteActivityItemSource.swift; path = Classes/SimplenoteActivityItemSource.swift; sourceTree = "<group>"; };
 		B52BB74F22CFD18F0042C162 /* UIActivity+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIActivity+Simplenote.swift"; path = "Classes/UIActivity+Simplenote.swift"; sourceTree = "<group>"; };
 		B52E2B142537480A0074509A /* SPEditorTapRecognizerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPEditorTapRecognizerDelegate.swift; path = Classes/SPEditorTapRecognizerDelegate.swift; sourceTree = "<group>"; };
-		B52EF9FD24F69E4E0029DCCE /* UIMenuController+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIMenuController+Simplenote.swift"; path = "Classes/UIMenuController+Simplenote.swift"; sourceTree = "<group>"; };
 		B52F35CE22F3243900724793 /* SPThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPThemeViewController.swift; path = Classes/SPThemeViewController.swift; sourceTree = "<group>"; };
 		B52F35D022F3254800724793 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Theme.swift; path = Classes/Theme.swift; sourceTree = "<group>"; };
 		B52F35D222F356F500724793 /* UserDefaults+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Tests.swift"; sourceTree = "<group>"; };
@@ -1946,7 +1944,6 @@
 				B52AC185233587F8007B2E75 /* UITraitCollection+Simplenote.swift */,
 				B58039852322D4F90083C916 /* UIView+ImageRepresentation.swift */,
 				B50E99F3234242130092F274 /* UISearchBar+Simplenote.swift */,
-				B52EF9FD24F69E4E0029DCCE /* UIMenuController+Simplenote.swift */,
 				A69F851C253EC877005140F2 /* UISlider+Simplenote.swift */,
 				B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */,
 				A6F487A625A79D350050CFA8 /* UIApplication+Simplenote.swift */,
@@ -3562,7 +3559,6 @@
 				B5BA5B082551FB3C002AAD43 /* UIDevice+Simplenote.swift in Sources */,
 				A681C7342541772D00F369C2 /* NumberFormatter+Simplenote.swift in Sources */,
 				B59560E0251A46D500A06788 /* KeychainManager.swift in Sources */,
-				B52EF9FE24F69E4E0029DCCE /* UIMenuController+Simplenote.swift in Sources */,
 				46A3C9AF17DFA81A002865AE /* NSString+Condensing.m in Sources */,
 				A6F487AF25A79D550050CFA8 /* BiometricAuthentication.swift in Sources */,
 				BA5768E3269A803F008B510E /* Remote.swift in Sources */,
@@ -3887,6 +3883,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -3895,6 +3892,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -3903,6 +3901,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = "Distribution Internal";
@@ -3911,6 +3910,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = "Distribution Alpha";
@@ -3919,6 +3919,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = "Distribution AppStore";
@@ -4321,7 +4322,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Simplenote/Supporting Files/Simplenote-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4373,7 +4374,7 @@
 					"RELEASE=1",
 				);
 				INFOPLIST_FILE = "Simplenote/Supporting Files/Simplenote-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4444,7 +4445,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
@@ -4482,7 +4483,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Simplenote/Supporting Files/Simplenote-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4527,7 +4528,7 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "SimplenoteShare/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4563,7 +4564,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = SimplenoteTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4583,6 +4584,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = "Distribution Alpha";
@@ -4635,7 +4637,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
@@ -4672,7 +4674,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Simplenote/Supporting Files/Simplenote-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4742,7 +4744,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
@@ -4780,7 +4782,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Simplenote/Supporting Files/Simplenote-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4819,7 +4821,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = SimplenoteTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4855,7 +4857,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = SimplenoteTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4889,7 +4891,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = SimplenoteTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4923,7 +4925,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = SimplenoteTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4943,6 +4945,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -4951,6 +4954,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -4959,6 +4963,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = "Distribution Internal";
@@ -4967,6 +4972,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = "Distribution AppStore";
@@ -4988,7 +4994,7 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "SimplenoteShare/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5029,7 +5035,7 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "SimplenoteShare/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5070,7 +5076,7 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "SimplenoteShare/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5111,7 +5117,7 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "SimplenoteShare/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5151,7 +5157,7 @@
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "SimplenoteIntents/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5190,7 +5196,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "SimplenoteIntents/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5228,7 +5234,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "SimplenoteIntents/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5266,7 +5272,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "SimplenoteIntents/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5304,7 +5310,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "SimplenoteIntents/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5348,7 +5354,7 @@
 				);
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = SimplenoteWidgets/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5391,7 +5397,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = SimplenoteWidgets/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5433,7 +5439,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = SimplenoteWidgets/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5475,7 +5481,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = SimplenoteWidgets/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5517,7 +5523,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = SimplenoteWidgets/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5754,7 +5760,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -5811,7 +5817,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;

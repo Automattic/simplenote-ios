@@ -159,7 +159,7 @@ extension SPNoteListViewController {
     @objc
     func refreshTableViewTopInsets() {
         tableView.contentInset.top = searchBarStackView.frame.height
-        tableView.scrollIndicatorInsets.top = searchBarStackView.frame.height
+        tableView.verticalScrollIndicatorInsets.top = searchBarStackView.frame.height
     }
 
     /// Scrolls to the First Row whenever the flag `mustScrollToFirstRow` was set to true
@@ -186,13 +186,6 @@ extension SPNoteListViewController {
         }
 
         tableView.contentOffset.y = tableView.adjustedContentInset.top * -1
-    }
-
-    /// Registers the ListViewController for Peek and Pop events.
-    ///
-    @objc
-    func registerForPeekAndPop() {
-        registerForPreviewing(with: self, sourceView: tableView)
     }
 
     /// Refreshes the Notes ListController Filters + Sorting: We'll also update the UI (TableView + Title) to match the new parameters.
@@ -411,40 +404,6 @@ extension SPNoteListViewController {
 }
 
 
-// MARK: - UIViewControllerPreviewingDelegate Conformance
-//
-extension SPNoteListViewController: UIViewControllerPreviewingDelegate {
-
-    public func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-        guard tableView.isUserInteractionEnabled,
-            isDeletedFilterActive == false,
-            let indexPath = tableView.indexPathForRow(at: location),
-            let note = notesListController.object(at: indexPath) as? Note
-            else {
-                return nil
-        }
-
-        /// Prevent any Pan gesture from passing thru
-        SPAppDelegate.shared().sidebarViewController.requirePanningToFail()
-
-        /// Mark the source of the interaction
-        previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
-
-        /// Setup the Editor
-        return previewingViewController(for: note)
-    }
-
-    public func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-        guard let editorViewController = viewControllerToCommit as? SPNoteEditorViewController else {
-            return
-        }
-
-        editorViewController.isPreviewing = false
-        navigationController?.pushViewController(editorViewController, animated: true)
-    }
-}
-
-
 // MARK: - UIScrollViewDelegate
 //
 extension SPNoteListViewController: UIScrollViewDelegate {
@@ -586,7 +545,6 @@ extension SPNoteListViewController: UITableViewDelegate {
         }
     }
 
-    @available(iOS 13.0, *)
     public func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         guard isDeletedFilterActive == false, isEditing == false, let note = notesListController.object(at: indexPath) as? Note else {
             return nil
@@ -600,7 +558,6 @@ extension SPNoteListViewController: UITableViewDelegate {
         })
     }
 
-    @available(iOS 13.0, *)
     public func tableView(_ tableView: UITableView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
         guard let editorViewController = animator.previewViewController as? SPNoteEditorViewController else {
             return
@@ -823,7 +780,6 @@ private extension SPNoteListViewController {
 
 // MARK: - UIMenu
 //
-@available(iOS 13.0, *)
 private extension SPNoteListViewController {
 
     /// Invoked by the Long Press UITableView Mechanism (ex 3d Touch)
@@ -989,7 +945,7 @@ extension SPNoteListViewController {
 
         let updates = {
             self.tableView.contentInset.bottom = bottomInsets
-            self.tableView.scrollIndicatorInsets.bottom = bottomInsets
+            self.tableView.verticalScrollIndicatorInsets.bottom = bottomInsets
             self.view.layoutIfNeeded()
         }
 

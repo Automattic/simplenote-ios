@@ -17,10 +17,6 @@ extension UIBlurEffect {
     ///
     @objc
     static var simplenoteBlurStyle: UIBlurEffect.Style {
-        guard #available(iOS 13.0, *) else {
-            return SPUserInterface.isDark ? .dark : .light
-        }
-
-        return .regular
+        .regular
     }
 }

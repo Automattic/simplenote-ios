@@ -16,11 +16,7 @@ class SPUserInterface: NSObject {
     ///
     @objc
     static var isDark: Bool {
-        if #available(iOS 13.0, *) {
-            return UITraitCollection.current.userInterfaceStyle == .dark
-        }
-
-        return Options.shared.theme == .dark
+        return UITraitCollection.current.userInterfaceStyle == .dark
     }
 
     /// Deinitializer
@@ -41,10 +37,7 @@ class SPUserInterface: NSObject {
     @objc
     func refreshUserInterfaceStyle() {
         refreshUIKitAppearance()
-
-        if #available(iOS 13.0, *) {
-            refreshUserInterfaceStyleIOS13()
-        }
+        refreshOverrideInterfaceStyle()
     }
 }
 
@@ -67,8 +60,7 @@ private extension SPUserInterface {
         UINavigationBar.refreshAppearance()
     }
 
-    @available (iOS 13, *)
-    func refreshUserInterfaceStyleIOS13() {
+    func refreshOverrideInterfaceStyle() {
         let window = SPAppDelegate.shared().window
         window.overrideUserInterfaceStyle = Options.shared.theme.userInterfaceStyle
     }
@@ -79,7 +71,6 @@ private extension SPUserInterface {
 //
 private extension Theme {
 
-    @available (iOS 13, *)
     var userInterfaceStyle: UIUserInterfaceStyle {
         switch self {
         case .light:

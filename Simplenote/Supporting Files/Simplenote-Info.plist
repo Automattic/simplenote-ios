@@ -75,7 +75,7 @@
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>ListWidgetIntent</string>
-		<string>SPNoteWidgetIntent</string>
+		<string>NoteWidgetIntent</string>
 		<string>com.codality.NotationalFlow.launch</string>
 		<string>com.codality.NotationalFlow.newNote</string>
 		<string>com.codality.NotationalFlow.openNote</string>
