@@ -512,17 +512,3 @@ extension SPAppDelegate {
         WidgetController.syncWidgetDefaults(authenticated: authenticated, sortMode: sortMode)
     }
 }
-
-// MARK: - Note Change Handling
-
-extension SPAppDelegate {
-    @objc
-    func dismissTrashedNote() {
-        guard let editorViewController = noteEditorViewController else {
-            return
-        }
-        editorViewController.dismiss(animated: true) {
-            editorViewController.didDeleteCurrentNote()
-        }
-    }
-}
