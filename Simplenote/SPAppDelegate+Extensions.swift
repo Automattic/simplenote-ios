@@ -99,7 +99,7 @@ extension SPAppDelegate {
             return false
         }
         popToNoteList()
-        presentNote(note)
+        noteListViewController.open(note, ignoringSearchQuery: true, animated: false)
 
         return true
     }
