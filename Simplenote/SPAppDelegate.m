@@ -356,8 +356,9 @@
                 if ([key isEqualToString:self.noteEditorViewController.note.simperiumKey]) {
                     [self.noteEditorViewController didReceiveNewContent];
 
-                    if ([memberNames.firstObject isEqual:@"deleted"]) {
-                        [self dismissTrashedNote];
+                    NSString *deletedKey = NSStringFromSelector(@selector(deleted));
+                    if (([memberNames.firstObject isEqualToString:deletedKey])) {
+                        [self.noteEditorViewController didDeleteCurrentNote];
                     }
                 }
 

@@ -342,6 +342,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     [self endEditing];
     [self ensureEmptyNoteIsDeleted];
     [self ensureNoteIsVisibleInList];
+    [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
     
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
