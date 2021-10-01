@@ -10,6 +10,7 @@ enum SPAuthError: Error {
     case network
     case compromisedPassword
     case unverifiedEmail
+    case tooManyAttempts
     case unknown(statusCode: Int, response: String?, error: Error?)
 }
 
@@ -28,6 +29,8 @@ extension SPAuthError {
             self = .loginBadCredentials
         case 403 where response == Constants.requiresVerification:
             self = .unverifiedEmail
+        case 429:
+            self = .tooManyAttempts
         default:
             self = .unknown(statusCode: loginErrorCode, response: response, error: error)
         }
@@ -41,6 +44,8 @@ extension SPAuthError {
             self = .signupBadCredentials
         case 409:
             self = .signupUserAlreadyExists
+        case 429:
+            self = .tooManyAttempts
         default:
             self = .unknown(statusCode: signupErrorCode, response: response, error: error)
         }
@@ -62,6 +67,8 @@ extension SPAuthError {
             return NSLocalizedString("Compromised Password", comment: "Compromised password alert title")
         case .unverifiedEmail:
             return NSLocalizedString("Account Verification Required", comment: "Email verification required alert title")
+        case .tooManyAttempts:
+            return NSLocalizedString("Too Login Attempts", comment: "Title for too many login attempts error")
         default:
             return NSLocalizedString("Sorry!", comment: "Authentication Error Alert Title")
         }
@@ -83,6 +90,8 @@ extension SPAuthError {
             return NSLocalizedString("This password has appeared in a data breach, which puts your account at high risk of compromise. To protect your data, you'll need to update your password before being able to log in again.", comment: "error for compromised password")
         case .unverifiedEmail:
             return NSLocalizedString("You must verify your email before being able to login.", comment: "Error for un verified email")
+        case .tooManyAttempts:
+            return NSLocalizedString("Too many log in attempts. Try again later.", comment: "Error message for too many login attempts")
         case .unknown:
             return NSLocalizedString("We're having problems. Please try again soon.", comment: "Generic error")
         }
