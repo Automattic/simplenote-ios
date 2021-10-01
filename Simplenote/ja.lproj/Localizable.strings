@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-09-23 11:32:13+0000 */
+/* Translation-Revision-Date: 2021-09-29 09:54:04+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ja_JP */
@@ -80,10 +80,10 @@
 "Add a new collaborator..." = "共同編集者を追加";
 
 /* Accessibility hint for adding a tag to a note */
-"Add a tag to the current note" = "Add a tag to the current note";
+"Add a tag to the current note" = "現在のノートにタグを追加";
 
 /* Description text for the screen that allows users to share notes with other users */
-"Add an email address to share this note with someone. Then you can both make changes to it." = "Add an email address to share this note with someone. Then you can both make changes to it.";
+"Add an email address to share this note with someone. Then you can both make changes to it." = "このノートを他の人と共有するにはメールアドレスを追加してください。 共有すると、お互いにノートを変更できるようになります。";
 
 /* Label on button to add a new tag to a note */
 "Add tag" = "タグを追加";
@@ -115,7 +115,7 @@
 "Are you sure you want to empty the trash? This cannot be undone." = "ゴミ箱を空にしてもよいですか ?この操作は元に戻すことができません。";
 
 /* Data Fetch error message */
-"Attempt to fetch entities failed.  Please try again later." = "Attempt to fetch entities failed.  Please try again later.";
+"Attempt to fetch entities failed.  Please try again later." = "エンティティの取得の試みに失敗しました。  後ほど、もう一度お試しください。";
 
 /* User Authenticated */
 "Authenticated" = "認証済み";
@@ -140,7 +140,7 @@
 "Cancel" = "キャンセル";
 
 /* Name of button to cancel iOS share extension in missing token alert */
-"Cancel Share" = "Cancel Share";
+"Cancel Share" = "共有をキャンセル";
 
 /* Error message title. Review you account screen */
 "Cannot Confirm Account" = "アカウントを確認できません";
@@ -210,7 +210,7 @@
 "Could not create an account with the provided email address and password." = "入力されたメールアドレスとパスワードではアカウントを作成できませんでした。";
 
 /* Fetch error title */
-"Could not fetch entities" = "Could not fetch entities";
+"Could not fetch entities" = "エンティティを取得できませんでした";
 
 /* Message displayed when login fails */
 "Could not login with the provided email address and password." = "入力されたメールアドレスとパスワードではログインできませんでした。";
@@ -231,7 +231,7 @@
 "Create a new note" = "新規ノートを作成";
 
 /* New Note Widget Description */
-"Create a new note instantly with one tap." = "Create a new note instantly with one tap.";
+"Create a new note instantly with one tap." = "1 回のタップですぐに新しいノートを作成できます。";
 
 /* Tappable message shown when no notes match a search string. Parameter: %@ - search term */
 "Create a new note titled “%@”" = "「%@」の件名で新規メモを作成";
@@ -355,10 +355,10 @@
 "Get Help" = "ヘルプ";
 
 /* Note List Widget Description */
-"Get quick access to a list of all notes or based on the selected tag." = "Get quick access to a list of all notes or based on the selected tag.";
+"Get quick access to a list of all notes or based on the selected tag." = "すべてのノートのリストに素早くアクセスしたり、選択したタグに基づいてアクセスしたりできます。";
 
 /* Note Widget Description */
-"Get quick access to one of your notes." = "Get quick access to one of your notes.";
+"Get quick access to one of your notes." = "ノートの1つに素早くアクセスできます。";
 
 /* Rating view liked title */
 "Great! Mind leaving a review to tell us what you like?" = "ありがとうございます。レビューの投稿にご協力ください。";
@@ -415,7 +415,7 @@
 "Log Out" = "ログアウト";
 
 /* Widget warning if user is logged out */
-"Log in to see your notes" = "Log in to see your notes";
+"Log in to see your notes" = "ノートを見るにはログインしてください";
 
 /* Allows the user to SignIn using their WPCOM Account */
 "Log in with WordPress.com" = "WordPress.com アカウントでログイン";
@@ -436,7 +436,7 @@
 "MMM yyyy" = "yyyy年M月";
 
 /* App configuration error title */
-"Main App is not configured" = "Main App is not configured";
+"Main App is not configured" = "メインアプリが構成されていません";
 
 /* Toggles the Markdown State */
 "Markdown" = "Markdown";
@@ -473,7 +473,7 @@
 
 /* Default title for notes
    Text for new note button */
-"New Note..." = "New Note...";
+"New Note..." = "新しいノート…";
 
 /* Label to create a new note */
 "New note" = "新規ノート";
@@ -491,7 +491,7 @@
 "No Results" = "一致する結果がありません";
 
 /* Extension Missing Token Alert Title */
-"No Simplenote Account" = "No Simplenote Account";
+"No Simplenote Account" = "Simplenote アカウントがありません";
 
 /* Message shown in note list when no notes are tagged with the provided tag. Parameter: %@ - tag */
 "No notes tagged “%@”" = "「%@」のタグが付いたメモはありません";
@@ -506,16 +506,16 @@
 "Not Yet" = "未処理";
 
 /* Note Widget Title */
-"Note" = "Note";
+"Note" = "ノート";
 
 /* Note List Widget Title */
-"Note List" = "Note List";
+"Note List" = "ノートリスト";
 
 /* Note trashed notification */
 "Note Trashed" = "ノートをゴミ箱に入れました";
 
 /* Widget warning if note is deleted */
-"Note no longer available" = "Note no longer available";
+"Note no longer available" = "ノートは現在ご利用いただけません";
 
 /* Notes Header (Search Mode) */
 "Notes" = "メモ";
@@ -583,7 +583,7 @@
 "Please check your network settings and try again." = "ネットワーク設定をご確認のうえもう一度お試しください。";
 
 /* Extension Missing Token Alert Title */
-"Please log into your Simplenote account first by using the Simplenote app." = "Please log into your Simplenote account first by using the Simplenote app.";
+"Please log into your Simplenote account first by using the Simplenote app." = "まず、Simplenote アプリを使用して Simplenote アカウントにログインしてください。";
 
 /* Title of Markdown preview screen */
 "Preview" = "プレビュー";
@@ -631,7 +631,7 @@
 "Remove all notes from trash" = "ゴミ箱からノートを完全消去";
 
 /* Accessibility hint for removing a tag from the current note */
-"Remove tag from the current note" = "Remove tag from the current note";
+"Remove tag from the current note" = "現在のノートからタグを削除";
 
 /* Rename a tag */
 "Rename" = "タイトル変更";
@@ -737,7 +737,7 @@
 "Simplenote iOS Feedback" = "Simplenote iOS フィードバック";
 
 /* Message displayed when app is not configured */
-"Simplenote must be configured and logged in to setup widgets" = "Simplenote must be configured and logged in to setup widgets";
+"Simplenote must be configured and logged in to setup widgets" = "ウィジェットを設定するには Simplenote を構成してログインする必要があります";
 
 /* Authentication Error Alert Title */
 "Sorry!" = "申し訳ございません。";
@@ -762,7 +762,7 @@
 "Tag" = "タグ";
 
 /* Widget warning if tag is deleted */
-"Tag no longer available" = "Tag no longer available";
+"Tag no longer available" = "タグは現在ご利用いただけません";
 
 /* Placeholder text in textfield when adding a new tag to a note */
 "Tag..." = "タグ…";
@@ -798,7 +798,7 @@
 "There was an preparing your verification email, please try again later" = "準備中の確認メールがありました。後ほど、もう一度お試しください";
 
 /* Warning message shown when current note is deleted on another device */
-"This note was deleted on another device" = "This note was deleted on another device";
+"This note was deleted on another device" = "このノートは別のデバイスから削除されました";
 
 /* error for compromised password */
 "This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately." = "このパスワードはデータ侵害に含まれており、アカウントが不正アクセスの危険にさらされています。 すぐにパスワードを変更することをお勧めします。";

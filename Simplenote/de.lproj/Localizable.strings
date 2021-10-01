@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-09-23 11:32:13+0000 */
+/* Translation-Revision-Date: 2021-09-29 13:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: de */
@@ -80,10 +80,10 @@
 "Add a new collaborator..." = "Neuen Mitarbeiter hinzufügen…";
 
 /* Accessibility hint for adding a tag to a note */
-"Add a tag to the current note" = "Add a tag to the current note";
+"Add a tag to the current note" = "Schlagwort zur aktuellen Notiz hinzufügen";
 
 /* Description text for the screen that allows users to share notes with other users */
-"Add an email address to share this note with someone. Then you can both make changes to it." = "Add an email address to share this note with someone. Then you can both make changes to it.";
+"Add an email address to share this note with someone. Then you can both make changes to it." = "Füge eine E-Mail-Adresse hinzu, um diese Notiz mit jemandem zu teilen. Dann könnt ihr beide Änderungen daran vornehmen.";
 
 /* Label on button to add a new tag to a note */
 "Add tag" = "Schlagwort hinzufügen";
@@ -115,7 +115,7 @@
 "Are you sure you want to empty the trash? This cannot be undone." = "Soll der Papierkorb wirklich geleert werden? Dies kann nicht rückgängig gemacht werden.";
 
 /* Data Fetch error message */
-"Attempt to fetch entities failed.  Please try again later." = "Attempt to fetch entities failed.  Please try again later.";
+"Attempt to fetch entities failed.  Please try again later." = "Abrufen von Einheiten fehlgeschlagen.  Bitte versuche es später erneut.";
 
 /* User Authenticated */
 "Authenticated" = "Authentifiziert";
@@ -140,7 +140,7 @@
 "Cancel" = "Abbrechen";
 
 /* Name of button to cancel iOS share extension in missing token alert */
-"Cancel Share" = "Cancel Share";
+"Cancel Share" = "Teilen abbrechen";
 
 /* Error message title. Review you account screen */
 "Cannot Confirm Account" = "Konto kann nicht bestätigt werden";
@@ -210,7 +210,7 @@
 "Could not create an account with the provided email address and password." = "Mit der angegebenen E-Mail-Adresse und dem Passwort konnte kein Konto erstellt werden.";
 
 /* Fetch error title */
-"Could not fetch entities" = "Could not fetch entities";
+"Could not fetch entities" = "Einheiten konnten nicht abgerufen werden";
 
 /* Message displayed when login fails */
 "Could not login with the provided email address and password." = "Mit der angegebenen E-Mail-Adresse und dem Passwort war keine Anmeldung möglich.";
@@ -231,7 +231,7 @@
 "Create a new note" = "Neue Notiz erstellen";
 
 /* New Note Widget Description */
-"Create a new note instantly with one tap." = "Create a new note instantly with one tap.";
+"Create a new note instantly with one tap." = "Erstelle mit nur einmal Tippen sofort eine neue Notiz.";
 
 /* Tappable message shown when no notes match a search string. Parameter: %@ - search term */
 "Create a new note titled “%@”" = "Neue Notiz mit dem Titel „%@“ erstellen";
@@ -355,10 +355,10 @@
 "Get Help" = "Hilfe bekommen";
 
 /* Note List Widget Description */
-"Get quick access to a list of all notes or based on the selected tag." = "Get quick access to a list of all notes or based on the selected tag.";
+"Get quick access to a list of all notes or based on the selected tag." = "Greife schnell auf eine Liste aller Notizen zu, die dem ausgewählten Schlagwort entspricht.";
 
 /* Note Widget Description */
-"Get quick access to one of your notes." = "Get quick access to one of your notes.";
+"Get quick access to one of your notes." = "Greife schnell auf eine deiner Notizen zu.";
 
 /* Rating view liked title */
 "Great! Mind leaving a review to tell us what you like?" = "Großartig! Kannst du eine Rezension hinterlassen und uns mitteilen, was dir besonders gut gefällt?";
@@ -415,7 +415,7 @@
 "Log Out" = "Abmelden";
 
 /* Widget warning if user is logged out */
-"Log in to see your notes" = "Log in to see your notes";
+"Log in to see your notes" = "Melde dich an, um deine Notizen zu sehen";
 
 /* Allows the user to SignIn using their WPCOM Account */
 "Log in with WordPress.com" = "Mit WordPress.com anmelden";
@@ -436,7 +436,7 @@
 "MMM yyyy" = "MMM yyyy";
 
 /* App configuration error title */
-"Main App is not configured" = "Main App is not configured";
+"Main App is not configured" = "Haupt-App ist nicht konfiguriert";
 
 /* Toggles the Markdown State */
 "Markdown" = "Markdown";
@@ -473,7 +473,7 @@
 
 /* Default title for notes
    Text for new note button */
-"New Note..." = "New Note...";
+"New Note..." = "Neue Notiz …";
 
 /* Label to create a new note */
 "New note" = "Neue Notiz";
@@ -491,7 +491,7 @@
 "No Results" = "Keine Ergebnisse";
 
 /* Extension Missing Token Alert Title */
-"No Simplenote Account" = "No Simplenote Account";
+"No Simplenote Account" = "Kein Simplenote-Konto";
 
 /* Message shown in note list when no notes are tagged with the provided tag. Parameter: %@ - tag */
 "No notes tagged “%@”" = "Keine Notizen mit „%@“ markiert";
@@ -506,16 +506,16 @@
 "Not Yet" = "Noch nicht";
 
 /* Note Widget Title */
-"Note" = "Note";
+"Note" = "Notiz";
 
 /* Note List Widget Title */
-"Note List" = "Note List";
+"Note List" = "Notizenliste";
 
 /* Note trashed notification */
 "Note Trashed" = "Notiz in den Papierkorb verschoben";
 
 /* Widget warning if note is deleted */
-"Note no longer available" = "Note no longer available";
+"Note no longer available" = "Notiz nicht mehr verfügbar";
 
 /* Notes Header (Search Mode) */
 "Notes" = "Notizen";
@@ -583,7 +583,7 @@
 "Please check your network settings and try again." = "Prüfe bitte deine Netzwerkeinstellungen und versuche es noch einmal.";
 
 /* Extension Missing Token Alert Title */
-"Please log into your Simplenote account first by using the Simplenote app." = "Please log into your Simplenote account first by using the Simplenote app.";
+"Please log into your Simplenote account first by using the Simplenote app." = "Bitte melde dich zuerst über die Simplenote-App bei deinem Simplenote-Konto an.";
 
 /* Title of Markdown preview screen */
 "Preview" = "Vorschau";
@@ -631,7 +631,7 @@
 "Remove all notes from trash" = "Alle Notizen aus Papierkorb entfernen";
 
 /* Accessibility hint for removing a tag from the current note */
-"Remove tag from the current note" = "Remove tag from the current note";
+"Remove tag from the current note" = "Schlagwort aus aktueller Notiz entfernen";
 
 /* Rename a tag */
 "Rename" = "Umbenennen";
@@ -737,7 +737,7 @@
 "Simplenote iOS Feedback" = "Feedback zu Simplenote iOS";
 
 /* Message displayed when app is not configured */
-"Simplenote must be configured and logged in to setup widgets" = "Simplenote must be configured and logged in to setup widgets";
+"Simplenote must be configured and logged in to setup widgets" = "Um Widgets einzurichten, musst du Simplenote konfigurieren und dich dort anmelden";
 
 /* Authentication Error Alert Title */
 "Sorry!" = "Entschuldigung!";
@@ -762,7 +762,7 @@
 "Tag" = "Schlagwort";
 
 /* Widget warning if tag is deleted */
-"Tag no longer available" = "Tag no longer available";
+"Tag no longer available" = "Schlagwort nicht mehr verfügbar";
 
 /* Placeholder text in textfield when adding a new tag to a note */
 "Tag..." = "Schlagwort…";
@@ -798,7 +798,7 @@
 "There was an preparing your verification email, please try again later" = "Beim Erstellen deiner Verifizierungs-E-Mail ist ein Fehler aufgetreten. Versuche es später bitte erneut.";
 
 /* Warning message shown when current note is deleted on another device */
-"This note was deleted on another device" = "This note was deleted on another device";
+"This note was deleted on another device" = "Diese Notiz wurde auf einem anderen Gerät gelöscht";
 
 /* error for compromised password */
 "This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately." = "Dieses Passwort ist in einer Datenschutzverletzung aufgetaucht, sodass das Risiko einer Sicherheitsverletzung bei deinem Konto hoch ist. Du solltest dein Passwort sofort ändern.";
