@@ -27,9 +27,8 @@ class PinLockViewController: UIViewController {
     init(controller: PinLockController) {
         self.controller = controller
         super.init(nibName: nil, bundle: nil)
-        if #available(iOS 13.0, *) {
-            isModalInPresentation = true
-        }
+
+        isModalInPresentation = true
         modalPresentationStyle = .fullScreen
     }
 

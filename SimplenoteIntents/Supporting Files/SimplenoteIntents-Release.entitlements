@@ -6,5 +6,9 @@
 	<array>
 		<string>group.com.codality.NotationalFlow</string>
 	</array>
+	<key>previous-application-identifiers</key>
+	<array>
+		<string>4ESDVWK654.com.codality.NotationalFlow</string>
+	</array>
 </dict>
 </plist>

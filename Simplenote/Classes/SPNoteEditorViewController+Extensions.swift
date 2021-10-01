@@ -232,7 +232,7 @@ extension SPNoteEditorViewController: KeyboardObservable {
 
         UIViewPropertyAnimator.runningPropertyAnimator(withDuration: duration, delay: .zero, options: animationOptions, animations: {
             self.noteEditorTextView.contentInset.bottom = adjustedBottomInsets
-            self.noteEditorTextView.scrollIndicatorInsets.bottom = adjustedBottomInsets
+            self.noteEditorTextView.verticalScrollIndicatorInsets.bottom = adjustedBottomInsets
             self.tagListBottomConstraint.constant = -editorBottomInsets
             self.view.layoutIfNeeded()
         }, completion: { _ in

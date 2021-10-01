@@ -44,5 +44,5 @@ class SimplenoteConstants: NSObject {
     static let settingsURL          = currentEngineBaseURL.appendingPathComponent("/settings")
     static let signupURL            = currentEngineBaseURL.appendingPathComponent("/account/request-signup")
     static let verificationURL      = currentEngineBaseURL.appendingPathComponent("/account/verify-email/")
-    static let accountDeletionURL      = currentEngineBaseURL.appendingPathComponent("/account/request-delete/")
+    static let accountDeletionURL   = currentEngineBaseURL.appendingPathComponent("/account/request-delete/")
 }

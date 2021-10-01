@@ -45,10 +45,6 @@ extension Theme {
     }
 
     static var defaultThemeForCurrentOS: Theme {
-        guard #available(iOS 13, *) else {
-            return .light
-        }
-
         return .system
     }
 }

@@ -1,5 +1,6 @@
 4.46
 -----
+-   Drops iOS 12 support #1450
 -   Fixed an issue where a note could be edited after being trashed #1451
 
 4.45

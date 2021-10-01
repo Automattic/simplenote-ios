@@ -72,10 +72,7 @@ private extension TagListViewController {
         tableView.register(Value1TableViewCell.self, forCellReuseIdentifier: Value1TableViewCell.reuseIdentifier)
 
         tableView.separatorInsetReference = .fromAutomaticInsets
-
-        if #available(iOS 13.0, *) {
-            tableView.automaticallyAdjustsScrollIndicatorInsets = false
-        }
+        tableView.automaticallyAdjustsScrollIndicatorInsets = false
     }
 
     func configureTableHeaderView() {
@@ -735,7 +732,7 @@ private extension TagListViewController {
         let duration = (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
 
         var contentInsets = tableView.contentInset
-        var scrollInsets = tableView.scrollIndicatorInsets
+        var scrollInsets = tableView.verticalScrollIndicatorInsets
         let keyboardHeight = min(keyboardFrame.size.height, keyboardFrame.size.width)
 
         contentInsets.bottom = keyboardHeight
@@ -743,7 +740,7 @@ private extension TagListViewController {
 
         UIView.animate(withDuration: TimeInterval(duration), animations: {
             self.tableView.contentInset = contentInsets
-            self.tableView.scrollIndicatorInsets = scrollInsets
+            self.tableView.verticalScrollIndicatorInsets = scrollInsets
         })
     }
 
