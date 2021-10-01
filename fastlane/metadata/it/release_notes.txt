@@ -1,0 +1,1 @@
+- Aggiunti widget alla schermata iniziale
