@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-09-23 11:32:13+0000 */
+/* Translation-Revision-Date: 2021-09-29 09:54:04+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: zh_CN */
@@ -80,10 +80,10 @@
 "Add a new collaborator..." = "添加新协作者...";
 
 /* Accessibility hint for adding a tag to a note */
-"Add a tag to the current note" = "Add a tag to the current note";
+"Add a tag to the current note" = "向当前笔记中添加标签";
 
 /* Description text for the screen that allows users to share notes with other users */
-"Add an email address to share this note with someone. Then you can both make changes to it." = "Add an email address to share this note with someone. Then you can both make changes to it.";
+"Add an email address to share this note with someone. Then you can both make changes to it." = "添加电子邮件地址即可与他人分享此笔记。 而且，您与协作者均可对笔记作出更改。";
 
 /* Label on button to add a new tag to a note */
 "Add tag" = "添加标签";
@@ -115,7 +115,7 @@
 "Are you sure you want to empty the trash? This cannot be undone." = "是否确定要清空回收站？此操作无法撤消。";
 
 /* Data Fetch error message */
-"Attempt to fetch entities failed.  Please try again later." = "Attempt to fetch entities failed.  Please try again later.";
+"Attempt to fetch entities failed.  Please try again later." = "尝试获取实体失败。  请稍后重试。";
 
 /* User Authenticated */
 "Authenticated" = "已验证";
@@ -140,7 +140,7 @@
 "Cancel" = "取消";
 
 /* Name of button to cancel iOS share extension in missing token alert */
-"Cancel Share" = "Cancel Share";
+"Cancel Share" = "取消共享";
 
 /* Error message title. Review you account screen */
 "Cannot Confirm Account" = "无法确认帐户";
@@ -210,7 +210,7 @@
 "Could not create an account with the provided email address and password." = "无法使用所提供的电子邮件地址和密码创建帐户。";
 
 /* Fetch error title */
-"Could not fetch entities" = "Could not fetch entities";
+"Could not fetch entities" = "无法获取实体";
 
 /* Message displayed when login fails */
 "Could not login with the provided email address and password." = "无法使用所提供的电子邮件地址和密码登录。";
@@ -231,7 +231,7 @@
 "Create a new note" = "创建新笔记";
 
 /* New Note Widget Description */
-"Create a new note instantly with one tap." = "Create a new note instantly with one tap.";
+"Create a new note instantly with one tap." = "点击一下即可立即创建新笔记。";
 
 /* Tappable message shown when no notes match a search string. Parameter: %@ - search term */
 "Create a new note titled “%@”" = "创建标题为“%@”的新笔记";
@@ -355,10 +355,10 @@
 "Get Help" = "获取帮助";
 
 /* Note List Widget Description */
-"Get quick access to a list of all notes or based on the selected tag." = "Get quick access to a list of all notes or based on the selected tag.";
+"Get quick access to a list of all notes or based on the selected tag." = "快速访问所有笔记列表或基于所选标签的笔记。";
 
 /* Note Widget Description */
-"Get quick access to one of your notes." = "Get quick access to one of your notes.";
+"Get quick access to one of your notes." = "快速访问您的某一条笔记。";
 
 /* Rating view liked title */
 "Great! Mind leaving a review to tell us what you like?" = "太棒了！能否写下评论，告知我们您具体喜欢哪些方面？";
@@ -415,7 +415,7 @@
 "Log Out" = "注销";
 
 /* Widget warning if user is logged out */
-"Log in to see your notes" = "Log in to see your notes";
+"Log in to see your notes" = "登录以查看您的笔记";
 
 /* Allows the user to SignIn using their WPCOM Account */
 "Log in with WordPress.com" = "使用 WordPress.com 帐户登录";
@@ -436,7 +436,7 @@
 "MMM yyyy" = "yyyy MMM";
 
 /* App configuration error title */
-"Main App is not configured" = "Main App is not configured";
+"Main App is not configured" = "未配置主应用程序";
 
 /* Toggles the Markdown State */
 "Markdown" = "Markdown";
@@ -473,7 +473,7 @@
 
 /* Default title for notes
    Text for new note button */
-"New Note..." = "New Note...";
+"New Note..." = "新建笔记...";
 
 /* Label to create a new note */
 "New note" = "新建笔记";
@@ -491,7 +491,7 @@
 "No Results" = "无结果";
 
 /* Extension Missing Token Alert Title */
-"No Simplenote Account" = "No Simplenote Account";
+"No Simplenote Account" = "无 Simplenote 账户";
 
 /* Message shown in note list when no notes are tagged with the provided tag. Parameter: %@ - tag */
 "No notes tagged “%@”" = "没有标记为“%@”的笔记";
@@ -506,16 +506,16 @@
 "Not Yet" = "尚无";
 
 /* Note Widget Title */
-"Note" = "Note";
+"Note" = "注意";
 
 /* Note List Widget Title */
-"Note List" = "Note List";
+"Note List" = "笔记列表";
 
 /* Note trashed notification */
 "Note Trashed" = "已将笔记放入回收站";
 
 /* Widget warning if note is deleted */
-"Note no longer available" = "Note no longer available";
+"Note no longer available" = "笔记不再可用";
 
 /* Notes Header (Search Mode) */
 "Notes" = "笔记";
@@ -583,7 +583,7 @@
 "Please check your network settings and try again." = "请检查您的网络设置，然后重试。";
 
 /* Extension Missing Token Alert Title */
-"Please log into your Simplenote account first by using the Simplenote app." = "Please log into your Simplenote account first by using the Simplenote app.";
+"Please log into your Simplenote account first by using the Simplenote app." = "请先使用 Simplenote 应用程序登录您的 Simplenote 账户。";
 
 /* Title of Markdown preview screen */
 "Preview" = "预览";
@@ -631,7 +631,7 @@
 "Remove all notes from trash" = "从回收站中移除所有笔记";
 
 /* Accessibility hint for removing a tag from the current note */
-"Remove tag from the current note" = "Remove tag from the current note";
+"Remove tag from the current note" = "将标签从当前笔记中删除";
 
 /* Rename a tag */
 "Rename" = "重命名";
@@ -737,7 +737,7 @@
 "Simplenote iOS Feedback" = "Simplenote iOS 反馈";
 
 /* Message displayed when app is not configured */
-"Simplenote must be configured and logged in to setup widgets" = "Simplenote must be configured and logged in to setup widgets";
+"Simplenote must be configured and logged in to setup widgets" = "必须配置 Simplenote 并登录以设置小组件";
 
 /* Authentication Error Alert Title */
 "Sorry!" = "抱歉！";
@@ -762,7 +762,7 @@
 "Tag" = "标签";
 
 /* Widget warning if tag is deleted */
-"Tag no longer available" = "Tag no longer available";
+"Tag no longer available" = "标签不再可用";
 
 /* Placeholder text in textfield when adding a new tag to a note */
 "Tag..." = "标签...";
@@ -798,7 +798,7 @@
 "There was an preparing your verification email, please try again later" = "正在准备您的验证电子邮件地址，请稍后重试";
 
 /* Warning message shown when current note is deleted on another device */
-"This note was deleted on another device" = "This note was deleted on another device";
+"This note was deleted on another device" = "此笔记已从其他设备上删除";
 
 /* error for compromised password */
 "This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately." = "此密码似乎存在数据泄露，使您的账户存在高盗用风险。 建议您立即更改密码。";

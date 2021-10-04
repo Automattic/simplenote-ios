@@ -1,0 +1,1 @@
+- Se han añadido widgets para la pantalla de inicio
