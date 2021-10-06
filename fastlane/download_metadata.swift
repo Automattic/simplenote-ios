@@ -108,7 +108,8 @@ func downloadTranslation(languageCode: String, folderName: String) {
         try? fileManager.createDirectory(atPath: languageFolder, withIntermediateDirectories: true, attributes: nil)
 
         do {
-            try title?.write(toFile: "\(languageFolder)/name.txt", atomically: true, encoding: .utf8)
+            // Disable downloading title from GlotPress since we don't want it to be translated anymore
+            // try title?.write(toFile: "\(languageFolder)/name.txt", atomically: true, encoding: .utf8)
             try subtitle?.write(toFile: "\(languageFolder)/subtitle.txt", atomically: true, encoding: .utf8)
             try whatsNew?.write(toFile: "\(languageFolder)/release_notes.txt", atomically: true, encoding: .utf8)
             try keywords?.write(toFile: "\(languageFolder)/keywords.txt", atomically: true, encoding: .utf8)
