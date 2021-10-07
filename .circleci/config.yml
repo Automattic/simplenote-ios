@@ -35,6 +35,17 @@ commands:
               echo "Manually added `/usr/local/bin` to the $PATH:"
               echo $PATH
             fi
+  fix-ssl:
+    steps:
+      - run:
+          name: Fix OpenSSL
+          command: |
+            brew install openssl@3
+            echo -e "\n"  >> ~/.bash_profile
+            echo 'export PATH="/usr/local/opt/openssl@3/bin:$PATH"' >> ~/.bash_profile
+            source ~/.bash_profile
+            openssl version
+
 
 jobs:
   Test:
@@ -44,6 +55,7 @@ jobs:
     steps:
       - git/shallow-checkout
       - fix-path
+      - fix-ssl
       - ios/install-dependencies:
           bundle-install: true
           pod-install: true
@@ -155,6 +167,7 @@ jobs:
       FL_OUTPUT_DIR: output
     steps:
       - git/shallow-checkout
+      - fix-ssl
       - ios/install-dependencies:
             bundle-install: true
             pod-install: true
@@ -164,6 +177,7 @@ jobs:
       - run: rm ~/.ssh/id_rsa
       - run: for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts || true
       # END: Swift Package Manager Workaround
+      - run: openssl version && ruby --version
       - run:
           name: Fastlane
           command: bundle exec fastlane pick_test_account_and_run_ui_tests scheme:'<< parameters.scheme >>' device:'<< parameters.device >>'
