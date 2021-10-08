@@ -762,10 +762,10 @@ end
   desc "Occupy a free test account and run UI tests with it"
   lane :pick_test_account_and_run_ui_tests do | options |
     if is_ci
-      sanitize_test_accounts
-      find_free_test_account
-      run_ui_tests(options.merge({ test_account: get_required_env("UI_TESTS_ACCOUNT_EMAIL").sub("X", $used_test_account_index.to_s)}))
-      deoccupy_test_account
+      #sanitize_test_accounts
+      #find_free_test_account
+      run_ui_tests(options.merge({ test_account: get_required_env("UI_TESTS_ACCOUNT_EMAIL").sub("X", "1")}))
+      #deoccupy_test_account
     else
       UI.user_error!("This lane should be run only from CI")
     end
