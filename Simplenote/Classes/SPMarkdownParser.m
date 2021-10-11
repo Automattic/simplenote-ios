@@ -66,11 +66,9 @@
 
     // Check if increase contrast is enabled.  If enabled amend CSS to include high contrast colors
     //
-    if (@available(iOS 13.0, *)) {
-        if ([[UITraitCollection currentTraitCollection] accessibilityContrast] == UIAccessibilityContrastHigh) {
-            NSString *contrast = [self loadCSSAtPath:self.contrastCssPath];
-            css = [css stringByAppendingString:contrast];
-        }
+    if ([[UITraitCollection currentTraitCollection] accessibilityContrast] == UIAccessibilityContrastHigh) {
+        NSString *contrast = [self loadCSSAtPath:self.contrastCssPath];
+        css = [css stringByAppendingString:contrast];
     }
 
     return css;

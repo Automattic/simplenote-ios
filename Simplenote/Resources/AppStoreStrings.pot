@@ -13,11 +13,6 @@ msgstr ""
 "Last-Translator: \n"
 "Language-Team: \n"
 
-#. translators: App name to be displayed in the Apple App Store. Limit to 30 characters including spaces and commas!
-msgctxt "app_store_title"
-msgid "Simplenote – Notes and Todos"
-msgstr ""
-
 #. translators: Subtitle to be displayed below the application name in the Apple App Store. Limit to 30 characters including spaces and commas!
 msgctxt "app_store_subtitle"
 msgid "Simple notes, todos and memos"
@@ -71,8 +66,10 @@ msgctxt "app_store_keywords"
 msgid "notes,note,markdown,journal,sync,to-do,list,cloud,notebook,simple,notepad,tag,todo,writing,memo"
 msgstr ""
 
-msgctxt "v4.45-whats-new"
+msgctxt "v4.46-whats-new"
 msgid ""
-"- Added home screen widgets\n"
+"- Drops iOS 12 support\n"
+"- Fixed an issue where a note could be edited after being trashed\n"
+"\n"
 msgstr ""
 

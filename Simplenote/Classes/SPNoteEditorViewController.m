@@ -232,21 +232,19 @@ CGFloat const SPSelectedAreaPadding = 20;
         [self updateInformationControllerPresentation];
     }
 
-    if (@available(iOS 13.0, *)) {
-        if (self.traitCollection.userInterfaceStyle == previousTraitCollection.userInterfaceStyle) {
-            return;
-        }
-
-        // Okay. Let's talk.
-        // Whenever `applyStyle` gets called whenever this VC is not really onScreen, it might have issues with SPUserInteface.isDark
-        // (since the active traits might not really match the UIWindow's traits).
-        //
-        // For the above reason, we _must_ listen to Trait Change events, and refresh the style appropriately.
-        //
-        // Ref. https://github.com/Automattic/simplenote-ios/issues/599
-        //
-        [self refreshStyle];
+    if (self.traitCollection.userInterfaceStyle == previousTraitCollection.userInterfaceStyle) {
+        return;
     }
+
+    // Okay. Let's talk.
+    // Whenever `applyStyle` gets called whenever this VC is not really onScreen, it might have issues with SPUserInteface.isDark
+    // (since the active traits might not really match the UIWindow's traits).
+    //
+    // For the above reason, we _must_ listen to Trait Change events, and refresh the style appropriately.
+    //
+    // Ref. https://github.com/Automattic/simplenote-ios/issues/599
+    //
+    [self refreshStyle];
 }
 
 - (void)refreshTagEditorOffsetWithCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
@@ -342,6 +340,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     [self endEditing];
     [self ensureEmptyNoteIsDeleted];
     [self ensureNoteIsVisibleInList];
+    [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
     
     [self.navigationController popToRootViewControllerAnimated:YES];
 }

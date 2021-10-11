@@ -16,11 +16,6 @@ class SPUserInterface: NSObject {
     ///
     @objc
     static var isDark: Bool {
-        // Note: In the Share Extension we'll always respect the system's theme. iOS <13 will always get light mode.
-        guard #available(iOS 13.0, *) else {
-            return false
-        }
-
-        return UITraitCollection.current.userInterfaceStyle == .dark
+        UITraitCollection.current.userInterfaceStyle == .dark
     }
 }

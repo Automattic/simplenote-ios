@@ -93,7 +93,7 @@ static const NSInteger SPNavigationBarBackgroundPositionZ = -1000;
 
 - (void)attachNavigationBarBackground:(UIVisualEffectView *)barBackground toNavigationBar:(UINavigationBar *)navigationBar
 {
-    CGSize statusBarSize = UIApplication.sharedApplication.statusBarFrame.size;
+    CGSize statusBarSize = [[UIApplication sharedApplication] keyWindowStatusBarHeight];
     CGRect bounds = navigationBar.bounds;
     bounds.origin.y -= statusBarSize.height;
     bounds.size.height += statusBarSize.height;
@@ -108,12 +108,7 @@ static const NSInteger SPNavigationBarBackgroundPositionZ = -1000;
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
-    if (@available(iOS 13.0, *)) {
-        // In iOS 13 we'll just... let the OS decide
-        return UIStatusBarStyleDefault;
-    }
-
-    return SPUserInterface.isDark ? UIStatusBarStyleLightContent : UIStatusBarStyleDefault;
+    return UIStatusBarStyleDefault;
 }
 
 - (BOOL)shouldAutorotate

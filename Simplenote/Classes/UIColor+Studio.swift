@@ -26,12 +26,6 @@ extension UIColor {
             return (lightColor, lightColorAlpha)
         }
 
-        guard #available(iOS 13.0, *) else {
-            let targetColor = colorProvider(SPUserInterface.isDark)
-            self.init(studioColor: targetColor.value, alpha: targetColor.alpha)
-            return
-        }
-
         self.init(dynamicProvider: { traits in
             let targetColor = colorProvider(traits.userInterfaceStyle == .dark)
             return UIColor(studioColor: targetColor.value, alpha: targetColor.alpha)

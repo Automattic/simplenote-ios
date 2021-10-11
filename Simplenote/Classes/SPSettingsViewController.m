@@ -725,7 +725,6 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 - (void)themeDidChange
 {
     [self refreshThemeStyles];
-    [self reloadAppearance];
     [self.tableView reloadData];
 }
 
@@ -748,20 +747,6 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     
     // Refresh the Table
     [self.tableView applySimplenoteGroupedStyle];
-}
-
-- (void)reloadAppearance
-{
-    // HACK:
-    // Yes, another one. Reference: http://stackoverflow.com/questions/17070582/using-uiappearance-and-switching-themes
-    // This is required, so UINavigationBar picks up the new style
-    // The linked solution loops through all app windows, but we need
-    // to only update views in the keyWindow. See #269.
-    UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
-    for (UIView *view in keyWindow.subviews) {
-        [view removeFromSuperview];
-        [keyWindow addSubview:view];
-    }
 }
 
 

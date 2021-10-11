@@ -7,7 +7,7 @@ end
 inhibit_all_warnings!
 use_frameworks!
 
-platform :ios, '12.0'
+platform :ios, '13.0'
 workspace 'Simplenote.xcworkspace'
 
 plugin 'cocoapods-repo-update'

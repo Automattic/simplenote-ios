@@ -137,11 +137,7 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
-    if (@available(iOS 13.0, *)) {
-        return UIStatusBarStyleDefault;
-    }
-
-    return SPUserInterface.isDark ? UIStatusBarStyleLightContent : UIStatusBarStyleDefault;
+    return UIStatusBarStyleDefault;
 }
 
 - (BOOL)shouldAutorotate
@@ -307,7 +303,7 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
     }
 
     UIEdgeInsets contentInsets = sideTableView.contentInset;
-    UIEdgeInsets scrollIndicatorInsets = sideTableView.scrollIndicatorInsets;
+    UIEdgeInsets scrollIndicatorInsets = sideTableView.verticalScrollIndicatorInsets;
 
     contentInsets.top = mainSafeInsets.top;
     contentInsets.bottom = mainSafeInsets.bottom;

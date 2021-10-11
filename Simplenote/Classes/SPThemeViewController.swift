@@ -7,11 +7,7 @@ import UIKit
 class SPThemeViewController: UITableViewController {
 
     private var themes: [Theme] {
-        if #available(iOS 13.0, *) {
-            return Theme.allThemes
-        }
-
-        return Theme.legacyThemes
+        return Theme.allThemes
     }
 
     /// Selected SortMode

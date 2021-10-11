@@ -55,17 +55,10 @@ class SpinnerViewController: UIViewController {
 
     private func setupViewAppearance() {
         modalPresentationStyle = .overFullScreen
-
-        if #available(iOS 13.0, *) {
-            activityIndicator.style = .large
-        } else {
-            activityIndicator.style = .gray
-        }
-
-
         view.backgroundColor = UIColor(lightColor: .black, darkColor: .black, lightColorAlpha: 0.2, darkColorAlpha: 0.43)
         alertView.backgroundColor = UIColor(lightColor: .spGray2, darkColor: .darkGray2)
         activityIndicator.color = UIColor(lightColor: .black, darkColor: .spGray1)
+        activityIndicator.style = .large
     }
 }
 

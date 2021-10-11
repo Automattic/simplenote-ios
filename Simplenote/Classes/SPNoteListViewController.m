@@ -60,7 +60,6 @@
         [self startListeningToNotifications];
         [self startDisplayingEntities];
 
-        [self registerForPeekAndPop];
         [self refreshStyle];
         [self update];
         self.mustScrollToFirstRow = YES;
@@ -115,13 +114,11 @@
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
     [super traitCollectionDidChange:previousTraitCollection];
 
-    if (@available(iOS 13.0, *)) {
-        if ([previousTraitCollection hasDifferentColorAppearanceComparedToTraitCollection:self.traitCollection] == false) {
-            return;
-        }
-
-        [self themeDidChange];
+    if ([previousTraitCollection hasDifferentColorAppearanceComparedToTraitCollection:self.traitCollection] == false) {
+        return;
     }
+
+    [self themeDidChange];
 }
 
 
@@ -158,8 +155,6 @@
 #pragma mark - Overridden Properties
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
-    // In iOS <13, whenever the navigationBar is hidden, the system will query the top VC for its preferred bar style.
-    // Nuke this the second iOS 13 is the deployment target, which will probably be around 2021?
     return self.navigationController.preferredStatusBarStyle;
 }
 
@@ -172,8 +167,7 @@
 
 - (UIActivityIndicatorView *)activityIndicator {
     if (_activityIndicator == nil) {
-        UIActivityIndicatorViewStyle style = SPUserInterface.isDark ? UIActivityIndicatorViewStyleWhite : UIActivityIndicatorViewStyleGray;
-        _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:style];
+        _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleMedium];
     }
 
     return _activityIndicator;

@@ -56,10 +56,6 @@ private extension ActivityIndicatorButton {
     }
 
     func styleActivityIndicator() {
-        if #available(iOS 13.0, *) {
-            activityIndicator.style = .medium
-        } else {
-            activityIndicator.style = SPUserInterface.isDark ? .white : .gray
-        }
+        activityIndicator.style = .medium
     }
 }

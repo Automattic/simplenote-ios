@@ -112,7 +112,6 @@ end
 
     files = {
       whats_new: File.join(prj_folder,  "/Simplenote/Resources/release_notes.txt"),
-      app_store_title: File.join(source_metadata_folder, "name.txt"),
       app_store_subtitle: File.join(source_metadata_folder, "subtitle.txt"),
       app_store_desc: File.join(source_metadata_folder, "description.txt"),
       app_store_keywords: File.join(source_metadata_folder, "keywords.txt")
