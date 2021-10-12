@@ -3424,7 +3424,6 @@
 				B56A696322F9D53400B90398 /* SPAuthViewController.swift in Sources */,
 				B50789FE1C1F5517009F097A /* SPInteractivePushPopAnimationController.m in Sources */,
 				B5D3FCD0201F96AC00A813B7 /* StatusChecker.m in Sources */,
-				BAB27BD626BA425C00AE4ACC /* Color+Simplenote.swift in Sources */,
 				B57DE27825013C6600B4D435 /* Simperium+Simplenote.swift in Sources */,
 				A6E4875025BEEC9F00D0CE3B /* SPSidebarViewController+Extensions.swift in Sources */,
 				A6F4881B25A8881B0050CFA8 /* TagListTextField.swift in Sources */,
