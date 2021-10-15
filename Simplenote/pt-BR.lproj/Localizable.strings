@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-09-27 15:54:05+0000 */
+/* Translation-Revision-Date: 2021-10-11 17:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=(n > 1); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: pt_BR */
@@ -131,6 +131,7 @@
 
 /* Cancel Action
    Cancel action button
+   Cancel action for password alert
    Cancel action on share extension.
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
@@ -502,9 +503,6 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "Nenhuma anotação sem tag";
 
-/* Cancel action for password alert */
-"Not Yet" = "Ainda não";
-
 /* Note Widget Title */
 "Note" = "Anotação";
 
@@ -764,11 +762,11 @@
 /* Widget warning if tag is deleted */
 "Tag no longer available" = "A tag não está mais disponível";
 
-/* Placeholder text in textfield when adding a new tag to a note */
-"Tag..." = "Tag...";
-
 /* Tags List Header */
 "Tags" = "Tags";
+
+/* Placeholder text in textfield when adding a new tag to a note */
+"Tag…" = "Tag...";
 
 /* Accessibility hint for the select/deselect all button */
 "Tap button to select or deselect all notes" = "Toque no botão para selecionar ou desmarcar todas as notas";
@@ -801,7 +799,7 @@
 "This note was deleted on another device" = "Esta anotação foi excluída em outro dispositivo";
 
 /* error for compromised password */
-"This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately." = "Esta senha apareceu em um vazamento de dados, o que significa que sua conta pode estar em risco. Recomendamos trocar sua senha imediatamente.";
+"This password has appeared in a data breach, which puts your account at high risk of compromise. To protect your data, you'll need to update your password before being able to log in again." = "Esta senha apareceu em um vazamento de dados, o que coloca sua conta em alto risco de ser comprometida. Para proteger seus dados, você terá que atualizar sua senha antes de poder fazer login novamente.";
 
 /* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
 "To enable %1$@, you must have a passcode setup first." = "Para ativar %1$@, primeiro é preciso definir uma senha.";
@@ -817,6 +815,12 @@
 
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "Exibir a barra lateral de tags";
+
+/* Title for too many login attempts error */
+"Too Login Attempts" = "Muitas tentativas de login";
+
+/* Error message for too many login attempts */
+"Too many log in attempts. Try again later." = "Muitas tentativas de login. Tente novamente mais tarde.";
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Identificação por toque";

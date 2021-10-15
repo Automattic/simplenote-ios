@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-09-30 09:54:04+0000 */
+/* Translation-Revision-Date: 2021-10-11 19:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n > 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: id */
@@ -131,6 +131,7 @@
 
 /* Cancel Action
    Cancel action button
+   Cancel action for password alert
    Cancel action on share extension.
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
@@ -502,9 +503,6 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "Tidak ada catatan tanpa tag";
 
-/* Cancel action for password alert */
-"Not Yet" = "Belum";
-
 /* Note Widget Title */
 "Note" = "Catatan";
 
@@ -764,11 +762,11 @@
 /* Widget warning if tag is deleted */
 "Tag no longer available" = "Tag tidak lagi tersedia";
 
-/* Placeholder text in textfield when adding a new tag to a note */
-"Tag..." = "Label...";
-
 /* Tags List Header */
 "Tags" = "Tag";
+
+/* Placeholder text in textfield when adding a new tag to a note */
+"Tag…" = "Tag...";
 
 /* Accessibility hint for the select/deselect all button */
 "Tap button to select or deselect all notes" = "Ketuk tombol untuk memilih atau membatalkan pilihan semua catatan";
@@ -801,7 +799,7 @@
 "This note was deleted on another device" = "Catatan ini dihapus pada perangkat lain";
 
 /* error for compromised password */
-"This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately." = "Kata sandi ini muncul dalam kasus pelanggaran data, yang membuat akun Anda berisiko tinggi disusupi. Kami sarankan agar Anda segera mengubah kata sandi.";
+"This password has appeared in a data breach, which puts your account at high risk of compromise. To protect your data, you'll need to update your password before being able to log in again." = "Kata sandi ini muncul dalam kasus pelanggaran data, yang membuat akun Anda berisiko tinggi untuk disusupi. Untuk melindungi data, Anda perlu memperbarui kata sandi sebelum dapat login kembali.";
 
 /* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
 "To enable %1$@, you must have a passcode setup first." = "Untuk mengaktifkan %1$@, Anda harus menyiapkan kode sandi terlebih dahulu.";
@@ -817,6 +815,12 @@
 
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "Panel sisi label pilihan";
+
+/* Title for too many login attempts error */
+"Too Login Attempts" = "Terlalu Banyak Upaya Login";
+
+/* Error message for too many login attempts */
+"Too many log in attempts. Try again later." = "Terlalu banyak upaya login. Coba lagi nanti.";
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "ID Sentuhan";

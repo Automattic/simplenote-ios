@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-09-29 11:54:50+0000 */
+/* Translation-Revision-Date: 2021-10-12 15:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: sv_SE */
@@ -131,6 +131,7 @@
 
 /* Cancel Action
    Cancel action button
+   Cancel action for password alert
    Cancel action on share extension.
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
@@ -502,9 +503,6 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "Inga omärkta anteckningar";
 
-/* Cancel action for password alert */
-"Not Yet" = "Inte än";
-
 /* Note Widget Title */
 "Note" = "Notis";
 
@@ -764,11 +762,11 @@
 /* Widget warning if tag is deleted */
 "Tag no longer available" = "Etiketten är inte längre tillgänglig";
 
-/* Placeholder text in textfield when adding a new tag to a note */
-"Tag..." = "Ny etikett...";
-
 /* Tags List Header */
 "Tags" = "Etiketter";
+
+/* Placeholder text in textfield when adding a new tag to a note */
+"Tag…" = "Etikett …";
 
 /* Accessibility hint for the select/deselect all button */
 "Tap button to select or deselect all notes" = "Tryck på knappen för att markera eller avmarkera alla anteckningar";
@@ -801,7 +799,7 @@
 "This note was deleted on another device" = "Denna anteckning har blivit borttagen på en annan enhet";
 
 /* error for compromised password */
-"This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately." = "Det här lösenordet har dykt upp i ett dataintrång, vilket innebär att ditt konto löper hög risk att komprometteras. Vi rekommenderar att du ändrar ditt lösenord omedelbart.";
+"This password has appeared in a data breach, which puts your account at high risk of compromise. To protect your data, you'll need to update your password before being able to log in again." = "Det här lösenordet har dykt upp i ett dataintrång, vilket innebär att ditt konto löper hög risk att komprometteras. För att skydda dina data behöver du uppdatera ditt lösenord innan du kan logga in igen.";
 
 /* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
 "To enable %1$@, you must have a passcode setup first." = "För att aktivera %1$@ måste du först konfigurera en lösenkod.";
@@ -817,6 +815,12 @@
 
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "Slå på\/av etiketter i sidopanelen";
+
+/* Title for too many login attempts error */
+"Too Login Attempts" = "För många inloggningsförsök";
+
+/* Error message for too many login attempts */
+"Too many log in attempts. Try again later." = "För många inloggningsförsök. Försök igen senare.";
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Touch ID";

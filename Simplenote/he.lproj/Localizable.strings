@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-09-29 11:54:49+0000 */
+/* Translation-Revision-Date: 2021-10-12 13:54:04+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: he_IL */
@@ -131,6 +131,7 @@
 
 /* Cancel Action
    Cancel action button
+   Cancel action for password alert
    Cancel action on share extension.
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
@@ -502,9 +503,6 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "אין פתקים ללא תגיות";
 
-/* Cancel action for password alert */
-"Not Yet" = "עדיין לא";
-
 /* Note Widget Title */
 "Note" = "פתק";
 
@@ -764,11 +762,11 @@
 /* Widget warning if tag is deleted */
 "Tag no longer available" = "התגית לא זמינה עוד";
 
-/* Placeholder text in textfield when adding a new tag to a note */
-"Tag..." = "תגית...";
-
 /* Tags List Header */
 "Tags" = "תגיות";
+
+/* Placeholder text in textfield when adding a new tag to a note */
+"Tag…" = "לתייג...";
 
 /* Accessibility hint for the select/deselect all button */
 "Tap button to select or deselect all notes" = "יש להקיש על הכפתור כדי לבחור את כל הכפתורים או לבטל את הבחירה בהם";
@@ -801,7 +799,7 @@
 "This note was deleted on another device" = "הפתק נמחק במכשיר אחר";
 
 /* error for compromised password */
-"This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately." = "הסיסמה הזאת מופיעה ברשימה של הפרת נתונים ולכן החשבון שלך נמצא בסיכון גבוה לפגיעה. מומלץ לשנות את הסיסמה שלך באופן מיידי.";
+"This password has appeared in a data breach, which puts your account at high risk of compromise. To protect your data, you'll need to update your password before being able to log in again." = "הסיסמה הזאת מופיעה ברשימה של הפרת נתונים ולכן החשבון שלך נמצא בסיכון גבוה לפגיעה. כדי להגן על הנתונים שלך, עליך לעדכן את הסיסמה שלך לפני ההתחברות מחדש.";
 
 /* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
 "To enable %1$@, you must have a passcode setup first." = "כדי להפעיל את %1$@, עליך ראשית להגדיר קוד סיסמה.";
@@ -817,6 +815,12 @@
 
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "החלפת מצב סרגל צדדי";
+
+/* Title for too many login attempts error */
+"Too Login Attempts" = "יותר מדי ניסיונות התחברות";
+
+/* Error message for too many login attempts */
+"Too many log in attempts. Try again later." = "מספר ניסיונות התחברות גבוה מדי. יש לנסות שוב מאוחר יותר.";
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "מזהה מגע";

@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-09-29 21:54:04+0000 */
+/* Translation-Revision-Date: 2021-10-12 15:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=(n > 1); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: tr */
@@ -131,6 +131,7 @@
 
 /* Cancel Action
    Cancel action button
+   Cancel action for password alert
    Cancel action on share extension.
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
@@ -502,9 +503,6 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "Etiketsiz not yok";
 
-/* Cancel action for password alert */
-"Not Yet" = "Henüz Değil";
-
 /* Note Widget Title */
 "Note" = "Not";
 
@@ -764,11 +762,11 @@
 /* Widget warning if tag is deleted */
 "Tag no longer available" = "Etiket artık mevcut değil ";
 
-/* Placeholder text in textfield when adding a new tag to a note */
-"Tag..." = "Etiket…";
-
 /* Tags List Header */
 "Tags" = "Etiketler";
+
+/* Placeholder text in textfield when adding a new tag to a note */
+"Tag…" = "Etiket...";
 
 /* Accessibility hint for the select/deselect all button */
 "Tap button to select or deselect all notes" = "Tüm notları seçmek veya seçimlerini kaldırmak için düğmeye dokunun";
@@ -801,7 +799,7 @@
 "This note was deleted on another device" = "Bu not bir başka cihazda silindi";
 
 /* error for compromised password */
-"This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately." = "Bu şifre, hesabınızı ileri düzeyde tehlikeye atma riskine sokan bir veri ihlalinde ortaya çıktı. Şifrenizi hemen değiştirmeniz önerilir.";
+"This password has appeared in a data breach, which puts your account at high risk of compromise. To protect your data, you'll need to update your password before being able to log in again." = "Bu şifre, hesabınızı ileri düzeyde tehlikeye atma riskine sokan bir veri ihlalinde ortaya çıktı. Verilerinizi korumak için tekrar oturum açmadan önce şifrenizi güncellemeniz gerekir.";
 
 /* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
 "To enable %1$@, you must have a passcode setup first." = "%1$@ özelliğini etkinleştirmek için önce bir parola ayarlamalısınız.";
@@ -817,6 +815,12 @@
 
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "Etiket kenar çubuğunu aç\/kapat";
+
+/* Title for too many login attempts error */
+"Too Login Attempts" = "Çok Fazla Oturum Açma Denemesi";
+
+/* Error message for too many login attempts */
+"Too many log in attempts. Try again later." = "Çok fazla oturum açma denemesi. Daha sonra yeniden deneyin.";
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Touch ID";

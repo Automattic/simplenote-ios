@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-09-29 15:54:03+0000 */
+/* Translation-Revision-Date: 2021-10-13 13:54:04+0000 */
 /* Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ru */
@@ -131,6 +131,7 @@
 
 /* Cancel Action
    Cancel action button
+   Cancel action for password alert
    Cancel action on share extension.
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
@@ -502,9 +503,6 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "Нет заметок без тегов";
 
-/* Cancel action for password alert */
-"Not Yet" = "Ещё не выполнено";
-
 /* Note Widget Title */
 "Note" = "Заметка";
 
@@ -764,11 +762,11 @@
 /* Widget warning if tag is deleted */
 "Tag no longer available" = "Тег больше не доступен";
 
-/* Placeholder text in textfield when adding a new tag to a note */
-"Tag..." = "Тег…";
-
 /* Tags List Header */
 "Tags" = "Метки";
+
+/* Placeholder text in textfield when adding a new tag to a note */
+"Tag…" = "Тег";
 
 /* Accessibility hint for the select/deselect all button */
 "Tap button to select or deselect all notes" = "Нажмите кнопку, чтобы выбрать все заметки или снять выделение";
@@ -801,7 +799,7 @@
 "This note was deleted on another device" = "Эта заметка была удалена на другом устройстве";
 
 /* error for compromised password */
-"This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately." = "Этот пароль появлялся в списке украденных данных, что ставит вашу учётную запись под угрозу взлома. Рекомендуется немедленно изменить пароль.";
+"This password has appeared in a data breach, which puts your account at high risk of compromise. To protect your data, you'll need to update your password before being able to log in again." = "Этот пароль есть в списках украденных, поэтому взломать вашу учётную запись очень легко. Чтобы защитить ваши данные, этот пароль больше не принимается. Придумайте другой, иначе вы не сможете войти.";
 
 /* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
 "To enable %1$@, you must have a passcode setup first." = "Чтобы включить %1$@, сначала установите код доступа.";
@@ -817,6 +815,12 @@
 
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "Боковая панель переключения меток";
+
+/* Title for too many login attempts error */
+"Too Login Attempts" = "Слишком много попыток входа";
+
+/* Error message for too many login attempts */
+"Too many log in attempts. Try again later." = "Вы пробовали войти слишком много раз. Повторите попытку позже.";
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Идентификатор прикосновения";
