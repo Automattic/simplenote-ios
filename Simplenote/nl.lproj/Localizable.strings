@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-10-12 15:54:03+0000 */
+/* Translation-Revision-Date: 2021-10-15 18:53:19+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: nl */
@@ -766,7 +766,7 @@
 "Tags" = "Tags";
 
 /* Placeholder text in textfield when adding a new tag to a note */
-"Tag…" = "%@ tag";
+"Tag…" = "Tag…";
 
 /* Accessibility hint for the select/deselect all button */
 "Tap button to select or deselect all notes" = "Tik op de knop om alle notities te selecteren of deselecteren";
