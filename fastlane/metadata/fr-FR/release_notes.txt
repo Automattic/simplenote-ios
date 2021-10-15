@@ -1,1 +1,3 @@
-- Ajout de widgets d’écran d’accueil
+- Arrêt de la prise en charge d’iOS 12
+- Résolution du problème qui permettait de modifier une note après son déplacement vers la corbeille
+

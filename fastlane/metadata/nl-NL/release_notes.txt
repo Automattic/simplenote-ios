@@ -1,1 +1,3 @@
-- Widgets toegevoegd voor op het startscherm
+- Geen ondersteuning voor iOS 12 meer
+- Een probleem verholpen waarbij een notitie niet kon worden bewerkt nadat deze naar de prullenbak is verplaatst
+

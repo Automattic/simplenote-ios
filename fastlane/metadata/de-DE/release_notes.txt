@@ -1,1 +1,3 @@
-- Startbildschirm-Widgets hinzugefügt
+- Kein Support für iOS 12
+- Problem behoben, bei dem eine Notiz bearbeitet werden konnte, nachdem sie in den Papierkorb verschoben wurde
+
