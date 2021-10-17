@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-09-29 15:54:04+0000 */
+/* Translation-Revision-Date: 2021-10-12 15:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n > 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: fr */
@@ -131,6 +131,7 @@
 
 /* Cancel Action
    Cancel action button
+   Cancel action for password alert
    Cancel action on share extension.
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
@@ -502,9 +503,6 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "Aucune note sans étiquette";
 
-/* Cancel action for password alert */
-"Not Yet" = "Pas encore";
-
 /* Note Widget Title */
 "Note" = "Remarque&nbsp;:";
 
@@ -764,11 +762,11 @@
 /* Widget warning if tag is deleted */
 "Tag no longer available" = "Le tag n’est plus disponible";
 
-/* Placeholder text in textfield when adding a new tag to a note */
-"Tag..." = "Tag...";
-
 /* Tags List Header */
 "Tags" = "Étiquettes";
+
+/* Placeholder text in textfield when adding a new tag to a note */
+"Tag…" = "Étiquette...";
 
 /* Accessibility hint for the select/deselect all button */
 "Tap button to select or deselect all notes" = "Appuyer sur le bouton pour sélectionner ou désélectionner toutes les notes";
@@ -801,7 +799,7 @@
 "This note was deleted on another device" = "Cette note à été supprimée sur un autre appareil.";
 
 /* error for compromised password */
-"This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately." = "Ce mot de passe est apparu dans une fuite de données, ce qui augmente les risques que votre compte soit compromis. Il vous est recommandé de modifier votre mot de passe immédiatement.";
+"This password has appeared in a data breach, which puts your account at high risk of compromise. To protect your data, you'll need to update your password before being able to log in again." = "Ce mot de passe est apparu dans une fuite de données, ce qui augmente les risques que votre compte soit compromis. Afin de protéger vos données, vous devrez mettre à jour votre mot de passe avant de pouvoir vous reconnecter.";
 
 /* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
 "To enable %1$@, you must have a passcode setup first." = "Pour activer %1$@, vous devez d’abord avoir configuré un code d’accès.";
@@ -817,6 +815,12 @@
 
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "Activer\/désactiver la barre de tag";
+
+/* Title for too many login attempts error */
+"Too Login Attempts" = "Nombre excessif de tentatives de connexion";
+
+/* Error message for too many login attempts */
+"Too many log in attempts. Try again later." = "Nombre excessif de tentatives de connexion. Réessayez plus tard.";
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Touch ID";

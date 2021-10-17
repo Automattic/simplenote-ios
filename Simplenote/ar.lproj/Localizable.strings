@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-09-28 11:54:04+0000 */
+/* Translation-Revision-Date: 2021-10-12 20:54:06+0000 */
 /* Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ar */
@@ -131,6 +131,7 @@
 
 /* Cancel Action
    Cancel action button
+   Cancel action for password alert
    Cancel action on share extension.
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
@@ -502,9 +503,6 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "لا توجد أي ملاحظات غير موسومة";
 
-/* Cancel action for password alert */
-"Not Yet" = "ليس بعد";
-
 /* Note Widget Title */
 "Note" = "ملاحظة";
 
@@ -764,11 +762,11 @@
 /* Widget warning if tag is deleted */
 "Tag no longer available" = "لم يُعد الوسم متاحًا";
 
-/* Placeholder text in textfield when adding a new tag to a note */
-"Tag..." = "العلامة...";
-
 /* Tags List Header */
 "Tags" = "الوسوم";
+
+/* Placeholder text in textfield when adding a new tag to a note */
+"Tag…" = "العلامة...";
 
 /* Accessibility hint for the select/deselect all button */
 "Tap button to select or deselect all notes" = "الضغط على الزر لتحديد جميع الملحوظات أو إلغاء تحديدها";
@@ -801,7 +799,7 @@
 "This note was deleted on another device" = "تم حذف هذه الملحوظة على جهاز آخر";
 
 /* error for compromised password */
-"This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately." = "لقد ظهرت كلمة المرور هذه في عملية اختراق بيانات، ما يضع حسابك في خطر كبير لاختراقه. يوصى بتغيير كلمة مرورك على الفور.";
+"This password has appeared in a data breach, which puts your account at high risk of compromise. To protect your data, you'll need to update your password before being able to log in again." = "لقد ظهرت كلمة المرور هذه في عملية اختراق بيانات، ما يضع حسابك في خطر كبير لاختراقه. لحماية بياناتك، سيتعين عليك تحديث كلمة مرورك قبل التمكن من تسجيل الدخول مجددًا.";
 
 /* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
 "To enable %1$@, you must have a passcode setup first." = "لتمكين %1$@، يجب أن يكون لديك رمز مرور تم إعداده أولاً.";
@@ -817,6 +815,12 @@
 
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "تبديل الشريط الجانبي للوسوم";
+
+/* Title for too many login attempts error */
+"Too Login Attempts" = "محاولات تسجيل الدخول كثيرة";
+
+/* Error message for too many login attempts */
+"Too many log in attempts. Try again later." = "محاولات تسجيل دخول كثيرة للغاية. حاول مرة أخرى لاحقًا.";
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "معرف اللمس";

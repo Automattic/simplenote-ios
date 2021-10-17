@@ -1,1 +1,3 @@
-- Startskärmswidgetar har lagts till
+- Släpper iOS 12-stöd
+- Ett fel som gjorde att en anteckning kunde redigeras efter borttagning har åtgärdats
+

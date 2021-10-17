@@ -131,6 +131,7 @@
 
 /* Cancel Action
    Cancel action button
+   Cancel action for password alert
    Cancel action on share extension.
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
@@ -502,9 +503,6 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "No untagged notes";
 
-/* Cancel action for password alert */
-"Not Yet" = "Not Yet";
-
 /* Note Widget Title */
 "Note" = "Note";
 
@@ -764,11 +762,11 @@
 /* Widget warning if tag is deleted */
 "Tag no longer available" = "Tag no longer available";
 
-/* Placeholder text in textfield when adding a new tag to a note */
-"Tag..." = "Tag...";
-
 /* Tags List Header */
 "Tags" = "Tags";
+
+/* Placeholder text in textfield when adding a new tag to a note */
+"Tag…" = "Tag…";
 
 /* Accessibility hint for the select/deselect all button */
 "Tap button to select or deselect all notes" = "Tap button to select or deselect all notes";
@@ -801,7 +799,7 @@
 "This note was deleted on another device" = "This note was deleted on another device";
 
 /* error for compromised password */
-"This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately." = "This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately.";
+"This password has appeared in a data breach, which puts your account at high risk of compromise. To protect your data, you'll need to update your password before being able to log in again." = "This password has appeared in a data breach, which puts your account at high risk of compromise. To protect your data, you'll need to update your password before being able to log in again.";
 
 /* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
 "To enable %1$@, you must have a passcode setup first." = "To enable %1$@, you must have a passcode setup first.";
@@ -817,6 +815,12 @@
 
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "Bar ochr toglo tagiau";
+
+/* Title for too many login attempts error */
+"Too Login Attempts" = "Too Login Attempts";
+
+/* Error message for too many login attempts */
+"Too many log in attempts. Try again later." = "Too many log in attempts. Try again later.";
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Enw Cyffwrdd";

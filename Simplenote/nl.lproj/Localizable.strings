@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-09-29 15:54:03+0000 */
+/* Translation-Revision-Date: 2021-10-15 18:53:19+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: nl */
@@ -131,6 +131,7 @@
 
 /* Cancel Action
    Cancel action button
+   Cancel action for password alert
    Cancel action on share extension.
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
@@ -502,9 +503,6 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "Geen niet-getagde opmerkingen";
 
-/* Cancel action for password alert */
-"Not Yet" = "Nog niet";
-
 /* Note Widget Title */
 "Note" = "Notitie";
 
@@ -764,11 +762,11 @@
 /* Widget warning if tag is deleted */
 "Tag no longer available" = "Tag is niet meer beschikbaar";
 
-/* Placeholder text in textfield when adding a new tag to a note */
-"Tag..." = "Tag...";
-
 /* Tags List Header */
 "Tags" = "Tags";
+
+/* Placeholder text in textfield when adding a new tag to a note */
+"Tag…" = "Tag…";
 
 /* Accessibility hint for the select/deselect all button */
 "Tap button to select or deselect all notes" = "Tik op de knop om alle notities te selecteren of deselecteren";
@@ -801,7 +799,7 @@
 "This note was deleted on another device" = "Deze notitie is verwijderd op een ander apparaat";
 
 /* error for compromised password */
-"This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately." = "Dit wachtwoord is gelekt tijdens een datalek, waardoor je account gevaar loopt. Het wordt aanbevolen je wachtwoord meteen te wijzigen.";
+"This password has appeared in a data breach, which puts your account at high risk of compromise. To protect your data, you'll need to update your password before being able to log in again." = "Dit wachtwoord is gelekt tijdens een datalek, waardoor je account gevaar loopt. Om je data te beschermen moet je je wachtwoord bijwerken voordat je je weer mag aanmelden.";
 
 /* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
 "To enable %1$@, you must have a passcode setup first." = "Om %1$@ in te schakelen, moet je eerst een pincode instellen.";
@@ -817,6 +815,12 @@
 
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "Tag-sidebar tonen\/verbergen";
+
+/* Title for too many login attempts error */
+"Too Login Attempts" = "Te veel aanmeldpogingen";
+
+/* Error message for too many login attempts */
+"Too many log in attempts. Try again later." = "Te veel aanmeldpogingen. Probeer het later nog eens.";
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Touch ID";

@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2021-09-29 09:54:04+0000 */
+/* Translation-Revision-Date: 2021-10-12 11:54:03+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: zh_CN */
@@ -131,6 +131,7 @@
 
 /* Cancel Action
    Cancel action button
+   Cancel action for password alert
    Cancel action on share extension.
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
@@ -502,9 +503,6 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "没有未标记的笔记";
 
-/* Cancel action for password alert */
-"Not Yet" = "尚无";
-
 /* Note Widget Title */
 "Note" = "注意";
 
@@ -764,11 +762,11 @@
 /* Widget warning if tag is deleted */
 "Tag no longer available" = "标签不再可用";
 
-/* Placeholder text in textfield when adding a new tag to a note */
-"Tag..." = "标签...";
-
 /* Tags List Header */
 "Tags" = "标签";
+
+/* Placeholder text in textfield when adding a new tag to a note */
+"Tag…" = "标记…";
 
 /* Accessibility hint for the select/deselect all button */
 "Tap button to select or deselect all notes" = "轻点按钮，选择或取消选择所有笔记";
@@ -801,7 +799,7 @@
 "This note was deleted on another device" = "此笔记已从其他设备上删除";
 
 /* error for compromised password */
-"This password has appeared in a data breach, which puts your account at high risk of compromise. It is recommended that you change your password immediately." = "此密码似乎存在数据泄露，使您的账户存在高盗用风险。 建议您立即更改密码。";
+"This password has appeared in a data breach, which puts your account at high risk of compromise. To protect your data, you'll need to update your password before being able to log in again." = "此密码似乎存在数据泄露，使您的账户存在高盗用风险。 为了保护您的数据，您需要先更新密码，然后才能再次进行登录。";
 
 /* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
 "To enable %1$@, you must have a passcode setup first." = "要启用 %1$@，必须先设置密码。";
@@ -817,6 +815,12 @@
 
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "切换标签侧边栏";
+
+/* Title for too many login attempts error */
+"Too Login Attempts" = "尝试登录次数过多";
+
+/* Error message for too many login attempts */
+"Too many log in attempts. Try again later." = "尝试登录次数过多。 请稍后重试。";
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "触摸 ID";

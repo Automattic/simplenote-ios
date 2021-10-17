@@ -1,1 +1,3 @@
-- Se han añadido widgets para la pantalla de inicio
+- Deja de ser compatible con iOS 12
+- Se ha corregido un problema por el que se podía editar una nota después de haberla borrado
+

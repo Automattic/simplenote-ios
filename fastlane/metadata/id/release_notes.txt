@@ -1,1 +1,3 @@
-- Penambahan widget layar beranda
+- Penghentian dukungan untuk iOS 12
+- Perbaikan masalah terkait catatan masih bisa disunting setelah dibuang
+

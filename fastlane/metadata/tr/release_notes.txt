@@ -1,1 +1,3 @@
-- Eklenen ana ekran bileşenleri
+- iOS 12 desteği kalktı
+- Bir notu çöpe attıtkan sonra düzenleme ile ilgili sorun düzeltildi
+
