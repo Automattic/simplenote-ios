@@ -1,3 +1,2 @@
-- Drops iOS 12 support
-- Fixed an issue where a note could be edited after being trashed
+
 
