@@ -85,7 +85,6 @@ end
       release_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'RELEASE-NOTES.txt'),
       extracted_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt'))
     ios_update_release_notes(new_version: new_version)
-    get_prs_list(repository:GHHELPER_REPO, milestone: new_version, report_path:"#{File.expand_path('~')}/simplenoteios_prs_list_#{old_version}_#{new_version}.txt")
     setbranchprotection(repository:GHHELPER_REPO, branch: "release/#{new_version}")
     setfrozentag(repository:GHHELPER_REPO, milestone: new_version)
 
@@ -885,15 +884,6 @@ end
 ########################################################################
 # Helper Lanes
 ########################################################################
-desc "Get a list of pull request from `milestone` to the current state"
-lane :get_pullrequests_list do | options |
-  get_prs_list(
-    repository:GHHELPER_REPO,
-    milestone: options[:milestone],
-    report_path: File.join(Dir.home, 'simplenoteios_prs_list.txt')
-  )
-end
-
 def fastlane_directory()
   File.expand_path File.dirname(__FILE__)
 end
