@@ -66,10 +66,9 @@ msgctxt "app_store_keywords"
 msgid "notes,note,markdown,journal,sync,to-do,list,cloud,notebook,simple,notepad,tag,todo,writing,memo"
 msgstr ""
 
-msgctxt "v4.46-whats-new"
+msgctxt "v4.47-whats-new"
 msgid ""
-"- Drops iOS 12 support\n"
-"- Fixed an issue where a note could be edited after being trashed\n"
+"- Some bug fixes\n"
 "\n"
 msgstr ""
 

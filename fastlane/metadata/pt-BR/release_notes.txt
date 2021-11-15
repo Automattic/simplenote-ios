@@ -1,3 +1,0 @@
-- Remoção da compatibilidade com iOS 12
-- Correção de um erro que permitia a edição de uma anotação após ela ser enviada para a lixeira
-
