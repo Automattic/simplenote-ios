@@ -1,3 +1,0 @@
-- Rilascia il supporto per iOS 12
-- Risolto un problema a causa del quale una nota poteva essere modificata dopo essere stata spostata nel cestino
-
