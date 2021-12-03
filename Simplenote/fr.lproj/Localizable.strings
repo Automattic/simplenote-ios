@@ -817,10 +817,10 @@
 "Toggle tag sidebar" = "Activer\/désactiver la barre de tag";
 
 /* Title for too many login attempts error */
-"Too Login Attempts" = "Nombre excessif de tentatives de connexion";
+"Too Many Login Attempts" = "Nombre excessif de tentatives de connexion";
 
 /* Error message for too many login attempts */
-"Too many log in attempts. Try again later." = "Nombre excessif de tentatives de connexion. Réessayez plus tard.";
+"Too many login attempts. Try again later." = "Nombre excessif de tentatives de connexion. Réessayez plus tard.";
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Touch ID";

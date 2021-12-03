@@ -817,10 +817,10 @@
 "Toggle tag sidebar" = "태그 사이드바 토글";
 
 /* Title for too many login attempts error */
-"Too Login Attempts" = "지나친 로그인 시도";
+"Too Many Login Attempts" = "지나친 로그인 시도";
 
 /* Error message for too many login attempts */
-"Too many log in attempts. Try again later." = "로그인을 너무 많이 시도했습니다. 나중에 다시 시도하세요.";
+"Too many login attempts. Try again later." = "로그인을 너무 많이 시도했습니다. 나중에 다시 시도하세요.";
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Touch ID";
