@@ -817,10 +817,10 @@
 "Toggle tag sidebar" = "Etiket kenar çubuğunu aç\/kapat";
 
 /* Title for too many login attempts error */
-"Too Login Attempts" = "Çok Fazla Oturum Açma Denemesi";
+"Too Many Login Attempts" = "Çok Fazla Oturum Açma Denemesi";
 
 /* Error message for too many login attempts */
-"Too many log in attempts. Try again later." = "Çok fazla oturum açma denemesi. Daha sonra yeniden deneyin.";
+"Too many login attempts. Try again later." = "Çok fazla oturum açma denemesi. Daha sonra yeniden deneyin.";
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Touch ID";

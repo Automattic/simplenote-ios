@@ -817,10 +817,10 @@
 "Toggle tag sidebar" = "Боковая панель переключения меток";
 
 /* Title for too many login attempts error */
-"Too Login Attempts" = "Слишком много попыток входа";
+"Too Many Login Attempts" = "Слишком много попыток входа";
 
 /* Error message for too many login attempts */
-"Too many log in attempts. Try again later." = "Вы пробовали войти слишком много раз. Повторите попытку позже.";
+"Too many login attempts. Try again later." = "Вы пробовали войти слишком много раз. Повторите попытку позже.";
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Идентификатор прикосновения";

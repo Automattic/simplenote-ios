@@ -817,10 +817,10 @@
 "Toggle tag sidebar" = "切换标签侧边栏";
 
 /* Title for too many login attempts error */
-"Too Login Attempts" = "尝试登录次数过多";
+"Too Many Login Attempts" = "尝试登录次数过多";
 
 /* Error message for too many login attempts */
-"Too many log in attempts. Try again later." = "尝试登录次数过多。 请稍后重试。";
+"Too many login attempts. Try again later." = "尝试登录次数过多。 请稍后重试。";
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "触摸 ID";

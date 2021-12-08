@@ -68,7 +68,7 @@ extension SPAuthError {
         case .unverifiedEmail:
             return NSLocalizedString("Account Verification Required", comment: "Email verification required alert title")
         case .tooManyAttempts:
-            return NSLocalizedString("Too Login Attempts", comment: "Title for too many login attempts error")
+            return NSLocalizedString("Too Many Login Attempts", comment: "Title for too many login attempts error")
         default:
             return NSLocalizedString("Sorry!", comment: "Authentication Error Alert Title")
         }
@@ -91,7 +91,7 @@ extension SPAuthError {
         case .unverifiedEmail:
             return NSLocalizedString("You must verify your email before being able to login.", comment: "Error for un verified email")
         case .tooManyAttempts:
-            return NSLocalizedString("Too many log in attempts. Try again later.", comment: "Error message for too many login attempts")
+            return NSLocalizedString("Too many login attempts. Try again later.", comment: "Error message for too many login attempts")
         case .unknown:
             return NSLocalizedString("We're having problems. Please try again soon.", comment: "Generic error")
         }

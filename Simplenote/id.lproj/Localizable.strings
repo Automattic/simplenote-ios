@@ -817,10 +817,10 @@
 "Toggle tag sidebar" = "Panel sisi label pilihan";
 
 /* Title for too many login attempts error */
-"Too Login Attempts" = "Terlalu Banyak Upaya Login";
+"Too Many Login Attempts" = "Terlalu Banyak Upaya Login";
 
 /* Error message for too many login attempts */
-"Too many log in attempts. Try again later." = "Terlalu banyak upaya login. Coba lagi nanti.";
+"Too many login attempts. Try again later." = "Terlalu banyak upaya login. Coba lagi nanti.";
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "ID Sentuhan";

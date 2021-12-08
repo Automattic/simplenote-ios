@@ -817,10 +817,10 @@
 "Toggle tag sidebar" = "Εμφάνιση στήλης";
 
 /* Title for too many login attempts error */
-"Too Login Attempts" = "Too Login Attempts";
+"Too Many Login Attempts" = "Too Many Login Attempts";
 
 /* Error message for too many login attempts */
-"Too many log in attempts. Try again later." = "Too many log in attempts. Try again later.";
+"Too many login attempts. Try again later." = "Too many login attempts. Try again later.";
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Touch ID";
