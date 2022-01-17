@@ -48,6 +48,7 @@ ENV["PROJECT_ROOT_FOLDER"]="./"
 ENV['APP_STORE_STRINGS_FILE_NAME']='AppStoreStrings.pot'
 ENV["PUBLIC_CONFIG_FILE"]="./config/Version.Public.xcconfig"
 ENV["DOWNLOAD_METADATA"]="./fastlane/download_metadata.swift"
+ENV['FL_RELEASE_TOOLKIT_DEFAULT_BRANCH'] = 'trunk'
 REPOSITORY_NAME="simplenote-ios"
 APP_STORE_BUNDLE_IDENTIFIER = 'com.codality.NotationalFlow'.freeze
 
@@ -75,7 +76,7 @@ end
   # bundle exec fastlane code_freeze
   # bundle exec fastlane code_freeze skip_confirm:true
   #####################################################################################
-  desc "Creates a new release branch from the current develop"
+  desc "Creates a new release branch from the current trunk"
   lane :code_freeze do | options |
     old_version = ios_codefreeze_prechecks(options)
 
@@ -237,7 +238,7 @@ end
     UI.user_error!('To finalize a hotfix, please use the finalize_hotfix_release lane instead') if ios_current_branch_is_hotfix
 
     ios_finalize_prechecks(options)
-    
+
     UI.message('Checking app strings translation status...')
     check_translation_progress(
       glotpress_url: 'https://translate.wordpress.com/projects/simplenote/ios/',
@@ -719,7 +720,7 @@ end
   #####################################################################################
 
   # Props to work done by others in this file and in
-  # https://github.com/wordpress-mobile/WordPress-iOS/blob/develop/fastlane/Fastfile
+  # https://github.com/wordpress-mobile/WordPress-iOS/blob/trunk/fastlane/Fastfile
   # this is a combined rip-off from both
 
   #####################################################################################
