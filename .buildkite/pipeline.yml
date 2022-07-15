@@ -21,3 +21,7 @@ steps:
     artifact_paths:
       - "fastlane/test_output/*"
 
+  - label: "🛠 Installable Build"
+    command: ".buildkite/commands/build-prototype.sh"
+    env: *common_env
+    plugins: *common_plugins
