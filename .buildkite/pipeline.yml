@@ -1,0 +1,23 @@
+# Nodes with values to reuse in the pipeline.
+common_params:
+  # Common plugin settings to use with the `plugins` key.
+  - &common_plugins
+    - automattic/bash-cache#2.6.0
+  # Common environment values to use with the `env` key.
+  - &common_env
+    # Remember to address all "FIXIT-13.1" comments when we'll update to new image.
+    #
+    # `xcode-13.4.1` note: The issue "FIXIT-13.1" addresses is still there in this image.
+    # See: https://buildkite.com/automattic/wordpress-ios/builds/8187#01813c28-1c1d-4a25-95c0-0fdd6f2af399
+    IMAGE_ID: xcode-13.4.1
+
+# This is the default pipeline – it will build and test the app
+steps:
+
+  - label: "🔬 Build and Test"
+    command: ".buildkite/commands/build-and-test.sh"
+    env: *common_env
+    plugins: *common_plugins
+    artifact_paths:
+      - "fastlane/test_output/*"
+

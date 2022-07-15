@@ -716,12 +716,34 @@ end
   end
 
   #####################################################################################
-  # UI tests lanes
+  # Test lanes
   #####################################################################################
 
   # Props to work done by others in this file and in
   # https://github.com/wordpress-mobile/WordPress-iOS/blob/trunk/fastlane/Fastfile
   # this is a combined rip-off from both
+
+  #####################################################################################
+  # test
+  # -----------------------------------------------------------------------------------
+  # Run unit tests
+  # -----------------------------------------------------------------------------------
+  # Usage:
+  # bundle exec fastlane test [device:<Name of the iOS Simulator>]
+  #
+  # Example:
+  # bundle exec fastlane test device:"iPhone 12"
+  #####################################################################################
+  desc "Run Unit Tests"
+  lane :test do | options |
+    scan(
+      workspace: workspace_name,
+      scheme: 'Simplenote',
+      device: options[:device] || "iPhone 12",
+      prelaunch_simulator: true,
+      reset_simulator: true,
+    )
+  end
 
   #####################################################################################
   # run_ui_tests
