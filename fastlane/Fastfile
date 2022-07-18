@@ -505,11 +505,10 @@ end
   # This lane builds the app and upload it for adhoc testing
   # -----------------------------------------------------------------------------------
   # Usage:
-  # bundle exec fastlane build_and_upload_installable_build [version_long:<version_long>]
+  # bundle exec fastlane build_and_upload_installable_build
   #
   # Example:
   # bundle exec fastlane build_and_upload_installable_build
-  # bundle exec fastlane build_and_upload_installable_build build_number:123
   #####################################################################################
   desc "Builds and uploads an installable build"
   lane :build_and_upload_installable_build do | options |
@@ -547,9 +546,6 @@ end
       destinations: "All-Users-of-Simplenote-Installable-Builds",
       notify_testers: false
     )
-
-    # Install SentryCLI prior to trying to upload dSYMs
-    sh("curl -sL https://sentry.io/get-cli/ | bash")
 
     sentry_upload_dsym(
       auth_token: get_required_env("SENTRY_AUTH_TOKEN"),
@@ -1073,7 +1069,7 @@ def generate_installable_build_number
     commit = ENV.fetch('BUILDKITE_COMMIT', nil)[0, 7]
     branch = ENV.fetch('BUILDKITE_BRANCH', nil)
     pr_num = ENV.fetch('BUILDKITE_PULL_REQUEST', nil)
-    build  = ENV.fetch('BUILDKITE_BUILD_NUMBER', nil)
+    build  = ENV.fetch('BUILDKITE_BUILD_ID', nil)
 
     pr_num == 'false' ? "#{branch}-#{commit}-#{build}" : "pr#{pr_num}-#{commit}-#{build}"
   else
