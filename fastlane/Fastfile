@@ -2,6 +2,7 @@ default_platform(:ios)
 fastlane_require 'xcodeproj'
 fastlane_require 'dotenv'
 fastlane_require 'open-uri'
+fastlane_require 'buildkit'
 
 unless FastlaneCore::Helper.bundler?
   UI.user_error!('Please run fastlane via `bundle exec`')
@@ -26,10 +27,7 @@ before_all do
     UI.user_error!("project.env not found: Make sure your configuration is up to date with `rake dependencies`")
   end
 
-  # This allows code signing to work on CircleCI
-  # It is skipped if this isn't running on CI
-  # See https://circleci.com/docs/2.0/ios-codesigning/
-  setup_circle_ci
+  setup_ci
 end
 
 error do |lane, exception, options|
@@ -978,7 +976,7 @@ def deoccupy_test_account
 end
 
 # Test accounts info is stored in JSON-formatted string, where keys represent
-# the account index, and values are either "free" or CIRCLE_BUILD_NUM, in case if account
+# the account index, and values are either "free" or BUILDKITE_BUILD_NUMBER, in case if account
 # was occupied by a build. Returns the hash.
 # Example:
 #   get_test_accounts_hash
@@ -1001,7 +999,7 @@ def find_free_test_account
 
   UI.user_error!("Could not find free UI Test account. Quitting.") if $used_test_account_index.nil?
   UI.message("Free account index: #{$used_test_account_index}")
-  change_test_account_availability("#{get_required_env("CIRCLE_BUILD_NUM")}")
+  change_test_account_availability("#{get_required_env("BUILDKITE_BUILD_NUMBER")}")
 end
 
 # Replace a value in a key which is equal to $used_test_account_index global variable
@@ -1030,13 +1028,18 @@ def sanitize_test_accounts
 end
 
 def is_job_running(job_number)
-  uri = URI.parse("https://circleci.com/api/v2/project/gh/Automattic/simplenote-ios/job/#{job_number}")
-  response = Net::HTTP.get_response(uri)
-  return if response.code != "200"
+  begin
+    client = Buildkit.new(token: get_required_env('BUILDKITE_TOKEN'))
+    build = client.build('automattic', 'simplenote-ios', job_number)
 
-  response_hash = JSON.parse(response.body)
-  UI.message("Status of CircleCI Job Number #{job_number} is #{response_hash['status']}")
-  response_hash["status"] == "running"
+    state = build['state']
+
+    UI.message("Status of Job Number #{job_number} is #{state}")
+
+    build['state'] == 'running'
+  rescue
+    false
+  end
 end
 
 def submit_accounts_hash(accounts_hash)
