@@ -16,4 +16,4 @@ echo "--- Installing Secrets"
 bundle exec fastlane run configure_apply
 
 echo "--- :hammer_and_wrench: Build and Test"
-bundle exec fastlane build_and_upload_installable_build
+bundle exec fastlane pick_test_account_and_run_ui_tests scheme:"$1" device:"$2"
