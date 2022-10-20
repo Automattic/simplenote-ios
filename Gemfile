@@ -8,3 +8,6 @@ gem 'fastlane-plugin-appcenter', '~> 1.11'
 group :screenshots, optional: true do
   gem 'rmagick', '~> 3.2.0'
 end
+
+plugins_path = File.join(File.dirname(__FILE__), 'fastlane', 'Pluginfile')
+eval_gemfile(plugins_path) if File.exist?(plugins_path)

@@ -2,7 +2,7 @@
 common_params:
   # Common plugin settings to use with the `plugins` key.
   - &common_plugins
-    - automattic/bash-cache#2.6.0
+    - automattic/bash-cache#2.9.0
   # Common environment values to use with the `env` key.
   - &common_env
     # Remember to address all "FIXIT-13.1" comments when we'll update to new image.
