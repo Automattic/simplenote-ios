@@ -51,7 +51,8 @@ class SharedStorageMigrator: NSObject {
             return .success
         } catch {
             NSLog("Could not migrate database to app group " + error.localizedDescription)
-            CrashLogging.logError(error)
+
+            CrashLoggingShim.shared.logError(error)
 
             removeFailedMigrationFilesIfNeeded()
             return .failed

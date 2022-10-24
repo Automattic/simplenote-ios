@@ -1,5 +1,6 @@
 #import "SPAutomatticTracker.h"
 #import "TracksService.h"
+#import "TracksContextManager.h"
 
 
 static NSString *const TracksUserDefaultsAnonymousUserIDKey = @"TracksUserDefaultsAnonymousUserIDKey";
