@@ -1,19 +1,39 @@
 import Foundation
 import AutomatticTracks
 
+
 /// This exists to bridge CrashLogging with Objective-C. Once the App Delegate is moved over to Swift,
 /// this shim can be removed, and the cache methods moved to a `CrashLogging` extension. At that time,
 /// you, future developer, can just set up the Crash Logging system in the App Delegate using `SNCrashLoggingDataProvider`.
 @objc(CrashLogging)
 class CrashLoggingShim: NSObject {
-    @objc static func start(withSimperium simperium: Simperium) {
-        let dataProvider = SNCrashLoggingDataProvider(withSimperium: simperium)
-        CrashLogging.start(withDataProvider: dataProvider)
+
+    @objc
+    static let shared = CrashLoggingShim()
+
+    private var crashLogging: CrashLogging?
+
+    @objc
+    func start(withSimperium simperium: Simperium) {
+        crashLogging = {
+            let dataProvider = SNCrashLoggingDataProvider(withSimperium: simperium)
+            let logger = CrashLogging(dataProvider: dataProvider)
+            return try? logger.start()
+        }()
     }
 
-    @objc static func cacheUser(_ user: SPUser) {
+    @objc
+    func cacheUser(_ user: SPUser) {
         CrashLoggingCache.emailAddress = user.email
-        CrashLogging.setNeedsDataRefresh()
+        crashLogging?.setNeedsDataRefresh()
+    }
+
+    func crash() {
+        crashLogging?.crash()
+    }
+
+    func logError(_ error: Error) {
+        crashLogging?.logError(error)
     }
 
     @objc static func cacheOptOutSetting(_ didOptOut: Bool) {

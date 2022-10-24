@@ -75,7 +75,7 @@ class SPPrivacyViewController: SPTableViewController {
         case .learn:
             displayPrivacyLink()
         case .crash:
-            CrashLogging.crash()
+            CrashLoggingShim.shared.crash()
         default:
             break
         }

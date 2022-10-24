@@ -127,7 +127,7 @@ extension TagListViewCell {
     }
 
     @objc
-    private func rename(_ sender: Any?) {
+    override func rename(_ sender: Any?) {
         delegate?.tagListViewCellShouldRenameTag(self)
     }
 

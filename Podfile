@@ -22,12 +22,12 @@ abstract_target 'Automattic' do
 		# Third Party
 		#
 		pod 'Gridicons', '~> 0.18'
-		pod 'AppCenter', '~> 2.5.1'
-		pod 'AppCenter/Distribute', '~> 2.5.1'
+		pod 'AppCenter', '~> 4.4.3'
+		pod 'AppCenter/Distribute', '~> 4.4.3'
 
 		# Automattic
 		#
-		pod 'Automattic-Tracks-iOS', '~> 0.6'
+		pod 'Automattic-Tracks-iOS', '~> 0.13'
 #		pod 'Automattic-Tracks-iOS', :git => 'https://github.com/Automattic/Automattic-Tracks-iOS.git', :branch => 'add/support-for-tracking-crashes'
 		pod 'Simperium', '1.9.0'
 		pod 'WordPress-Ratings-iOS', '0.0.2'
