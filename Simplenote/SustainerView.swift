@@ -16,9 +16,19 @@ class SustainerView: UIView {
     private var detailsLabel: UILabel!
 
     @IBOutlet
+    private var topConstraint: NSLayoutConstraint!
+
+    @IBOutlet
     private var widthConstraint: NSLayoutConstraint!
 
-    public var preferredWidth: CGFloat? {
+    @objc
+    public var appliesTopInset: Bool = false {
+        didSet {
+            topConstraint.constant = appliesTopInset ? Metrics.defaultTopInset : .zero
+        }
+    }
+
+    var preferredWidth: CGFloat? {
         didSet {
             guard let preferredWidth else {
                 return
@@ -28,7 +38,8 @@ class SustainerView: UIView {
         }
     }
 
-
+    // MARK: - Overridden Methods
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         backgroundView.layer.cornerRadius = 8
@@ -40,4 +51,11 @@ class SustainerView: UIView {
         titleLabel.textColor = .white
         detailsLabel.textColor = .white
     }
+}
+
+
+// MARK: - Metrics
+//
+private enum Metrics {
+    static let defaultTopInset: CGFloat = 19
 }

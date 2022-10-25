@@ -82,6 +82,7 @@
                 <outlet property="backgroundView" destination="sc5-2f-Alr" id="hfq-9u-tWz"/>
                 <outlet property="detailsLabel" destination="c5O-bV-2OC" id="Yzb-l5-bwj"/>
                 <outlet property="titleLabel" destination="xLW-HX-XmH" id="G19-ww-50A"/>
+                <outlet property="topConstraint" destination="SUn-BD-pzh" id="e9F-8I-nc7"/>
                 <outlet property="widthConstraint" destination="kYU-Lx-Xbh" id="yEN-6g-UV9"/>
             </connections>
             <point key="canvasLocation" x="87.692307692307693" y="-258.05687203791467"/>
