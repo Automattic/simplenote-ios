@@ -44,6 +44,7 @@ final class TagListViewController: UIViewController {
         super.viewWillAppear(animated)
         startListeningToKeyboardNotifications()
 
+        refreshTableHeaderSize()
         reloadTableView()
         startListeningForChanges()
         becomeFirstResponder()
@@ -59,14 +60,12 @@ final class TagListViewController: UIViewController {
         resignFirstResponder()
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        refreshTableHeaderSize()
-    }
-
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        refreshTableHeaderSize()
+
+        coordinator.animate { _ in
+            self.refreshTableHeaderSize()
+        }
     }
 }
 
