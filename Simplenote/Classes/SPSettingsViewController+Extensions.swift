@@ -14,7 +14,6 @@ extension SPSettingsViewController {
         headerView.preferredWidth = tableView.frame.width
         headerView.adjustSizeForCompressedLayout()
 
-        NSLog("# RESET")
         tableView.tableHeaderView = headerView
     }
 }
