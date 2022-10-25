@@ -58,7 +58,18 @@ final class TagListViewController: UIViewController {
 
         resignFirstResponder()
     }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        refreshTableHeaderSize()
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        refreshTableHeaderSize()
+    }
 }
+
 
 // MARK: - Configuration
 //
@@ -68,6 +79,9 @@ private extension TagListViewController {
     }
 
     func configureTableView() {
+        let sustainerView: SustainerView = SustainerView.instantiateFromNib()
+
+        tableView.tableHeaderView = sustainerView
         tableView.register(TagListViewCell.loadNib(), forCellReuseIdentifier: TagListViewCell.reuseIdentifier)
         tableView.register(Value1TableViewCell.self, forCellReuseIdentifier: Value1TableViewCell.reuseIdentifier)
 
@@ -533,6 +547,17 @@ private extension TagListViewController {
     func refreshEditTagsButton(isEditing: Bool) {
         let title = isEditing ? Localization.done : Localization.edit
         tagsHeaderView.actionButton.setTitle(title, for: .normal)
+    }
+
+    func refreshTableHeaderSize() {
+        guard let headerView = tableView.tableHeaderView as? SustainerView else {
+            return
+        }
+
+        headerView.preferredWidth = tableView.frame.width - view.safeAreaInsets.left
+        headerView.adjustSizeForCompressedLayout()
+
+        tableView.tableHeaderView = headerView
     }
 
     func openNoteListForTagName(_ tagName: String?, isTraversing: Bool) {

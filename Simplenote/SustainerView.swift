@@ -15,6 +15,19 @@ class SustainerView: UIView {
     @IBOutlet
     private var detailsLabel: UILabel!
 
+    @IBOutlet
+    private var widthConstraint: NSLayoutConstraint!
+
+    public var preferredWidth: CGFloat? {
+        didSet {
+            guard let preferredWidth else {
+                return
+            }
+
+            widthConstraint.constant = preferredWidth
+        }
+    }
+
 
     override func awakeFromNib() {
         super.awakeFromNib()
