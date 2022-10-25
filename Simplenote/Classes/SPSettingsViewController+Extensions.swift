@@ -1,5 +1,25 @@
 import UIKit
 
+
+// MARK: - Interface Helpers
+//
+extension SPSettingsViewController {
+
+    @objc
+    func refreshTableHeaderSize() {
+        guard let headerView = tableView.tableHeaderView as? SustainerView else {
+            return
+        }
+
+        headerView.preferredWidth = tableView.frame.width
+        headerView.adjustSizeForCompressedLayout()
+
+        NSLog("# RESET")
+        tableView.tableHeaderView = headerView
+    }
+}
+
+
 // MARK: - Pin
 //
 extension SPSettingsViewController {

@@ -127,6 +127,11 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                                                                                            target:self
                                                                                            action:@selector(doneAction:)];
     
+    // Header View
+    SustainerView *sustainerView = [SustainerView loadFromNib];
+    sustainerView.appliesTopInset = YES;
+    self.tableView.tableHeaderView = sustainerView;
+    
     // Setup the Switches
     self.alphabeticalTagSortSwitch = [UISwitch new];
     [self.alphabeticalTagSortSwitch addTarget:self
@@ -177,7 +182,17 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self refreshTableHeaderSize];
     [self.tableView reloadData];
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        [self refreshTableHeaderSize];
+    } completion:nil];
 }
 
 - (void)doneAction:(id)sender
