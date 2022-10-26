@@ -122,6 +122,9 @@ private extension StoreManager {
         do {
             let storeProducts = try await Product.products(for: StoreProduct.allIdentifiers)
             subscriptions = filter(products: storeProducts, ofType: .autoRenewable)
+
+            NSLog("[StoreKit] Retrieved \(subscriptions.count) Subscription Products")
+
         } catch {
             NSLog("[StoreKit] Failed product request from the App Store server: \(error)")
         }

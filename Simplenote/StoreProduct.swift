@@ -16,10 +16,10 @@ enum StoreProduct: String, CaseIterable {
 
     var identifier: String {
         guard let prefix = Bundle.main.rootBundleIdentifier else {
-            return "com.codality.NotationalFlow.sustainer"
+            return "com.codality.NotationalFlow.sustainer200"
         }
 
-        return prefix + ".sustainer"
+        return prefix + ".sustainer200"
     }
 
     static var allIdentifiers: [String] {

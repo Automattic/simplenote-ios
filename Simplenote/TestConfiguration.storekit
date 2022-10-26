@@ -1,0 +1,52 @@
+{
+  "identifier" : "A7468C4F",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+
+  ],
+  "settings" : {
+
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "6ED580C5",
+      "localizations" : [
+
+      ],
+      "name" : "sustainer",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "200",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "6BF391A1",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "",
+              "displayName" : "",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "com.codality.NotationalFlow.Development.sustainer200",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Simplenote Sustainer",
+          "subscriptionGroupID" : "6ED580C5",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 2,
+    "minor" : 0
+  }
+}

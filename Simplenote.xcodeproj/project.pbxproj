@@ -1047,6 +1047,7 @@
 		B5BA5B072551FB3C002AAD43 /* UIDevice+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIDevice+Simplenote.swift"; path = "Classes/UIDevice+Simplenote.swift"; sourceTree = "<group>"; };
 		B5BA5B1B25520ECF002AAD43 /* UIKeyboardAppearance+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIKeyboardAppearance+Simplenote.swift"; path = "Classes/UIKeyboardAppearance+Simplenote.swift"; sourceTree = "<group>"; };
 		B5BA5B2925520F79002AAD43 /* NSMutableParagraphStyle+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSMutableParagraphStyle+Simplenote.swift"; path = "Classes/NSMutableParagraphStyle+Simplenote.swift"; sourceTree = "<group>"; };
+		B5BADB7C2909D78B00275B29 /* TestConfiguration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestConfiguration.storekit; sourceTree = "<group>"; };
 		B5BDD8721BEA6B01006EB940 /* Simplenote-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Simplenote-Bridging-Header.h"; sourceTree = "<group>"; };
 		B5BE05431AB7522F002417BF /* JSONKit+Simplenote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "JSONKit+Simplenote.h"; path = "Classes/JSONKit+Simplenote.h"; sourceTree = "<group>"; };
 		B5BE05441AB7522F002417BF /* JSONKit+Simplenote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "JSONKit+Simplenote.m"; path = "Classes/JSONKit+Simplenote.m"; sourceTree = "<group>"; };
@@ -1872,6 +1873,7 @@
 			children = (
 				B54D9C562909BA2600D0E0EC /* StoreManager.swift */,
 				B54D9C582909CC4400D0E0EC /* StoreProduct.swift */,
+				B5BADB7C2909D78B00275B29 /* TestConfiguration.storekit */,
 			);
 			name = Store;
 			sourceTree = "<group>";
