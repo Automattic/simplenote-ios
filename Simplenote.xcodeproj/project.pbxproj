@@ -294,6 +294,8 @@
 		B5476BBF23D8B686000E7723 /* NotesListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5476BBE23D8B686000E7723 /* NotesListSection.swift */; };
 		B5476BC123D8E5D0000E7723 /* String+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5476BC023D8E5D0000E7723 /* String+Simplenote.swift */; };
 		B54B04D82407169500401FBB /* SPAppDelegate+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54B04D72407169500401FBB /* SPAppDelegate+Extensions.swift */; };
+		B54D9C572909BA2600D0E0EC /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D9C562909BA2600D0E0EC /* StoreManager.swift */; };
+		B54D9C592909CC4400D0E0EC /* StoreProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D9C582909CC4400D0E0EC /* StoreProduct.swift */; };
 		B55051821A4328B9002A1093 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B55051811A4328B9002A1093 /* LocalAuthentication.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B550F93122BA65CD00091939 /* ActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550F93022BA65CD00091939 /* ActivityType.swift */; };
 		B550F93322BA6A3300091939 /* ShortcutsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550F93222BA6A3300091939 /* ShortcutsHandler.swift */; };
@@ -957,6 +959,8 @@
 		B5476BC023D8E5D0000E7723 /* String+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "String+Simplenote.swift"; path = "Classes/String+Simplenote.swift"; sourceTree = "<group>"; };
 		B54B04D72407169500401FBB /* SPAppDelegate+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SPAppDelegate+Extensions.swift"; sourceTree = "<group>"; };
 		B54D9C542909B21700D0E0EC /* Simplenote 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Simplenote 6.xcdatamodel"; sourceTree = "<group>"; };
+		B54D9C562909BA2600D0E0EC /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
+		B54D9C582909CC4400D0E0EC /* StoreProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreProduct.swift; sourceTree = "<group>"; };
 		B55051811A4328B9002A1093 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		B550F93022BA65CD00091939 /* ActivityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ActivityType.swift; path = Classes/ActivityType.swift; sourceTree = "<group>"; };
 		B550F93222BA6A3300091939 /* ShortcutsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShortcutsHandler.swift; path = Classes/ShortcutsHandler.swift; sourceTree = "<group>"; };
@@ -1863,6 +1867,15 @@
 			name = Headers;
 			sourceTree = "<group>";
 		};
+		B54D9C552909BA0A00D0E0EC /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				B54D9C562909BA2600D0E0EC /* StoreManager.swift */,
+				B54D9C582909CC4400D0E0EC /* StoreProduct.swift */,
+			);
+			name = Store;
+			sourceTree = "<group>";
+		};
 		B550F92F22BA643800091939 /* Siri */ = {
 			isa = PBXGroup;
 			children = (
@@ -2559,6 +2572,7 @@
 				B5B8AE7B1AB9ECF80082775D /* Ratings */,
 				B512AF981C20B1A200FE76D8 /* Settings */,
 				B550F92F22BA643800091939 /* Siri */,
+				B54D9C552909BA0A00D0E0EC /* Store */,
 				B5C57A3F22E78EDF009166EA /* Themes */,
 				B5BE053E1AB751FD002417BF /* Tools */,
 				B521A19B1BC8452800E1CF2A /* Trackers */,
@@ -3374,6 +3388,7 @@
 				B5DF734222A565DA00602CE7 /* Options.swift in Sources */,
 				B5BA5B2A25520F79002AAD43 /* NSMutableParagraphStyle+Simplenote.swift in Sources */,
 				A6FDF75825435CA500415C87 /* SubtitleTableViewCell.swift in Sources */,
+				B54D9C592909CC4400D0E0EC /* StoreProduct.swift in Sources */,
 				A6C0589924AD47CB006BC572 /* SPSnappingSlider.swift in Sources */,
 				B550F93122BA65CD00091939 /* ActivityType.swift in Sources */,
 				BA3101A926C8C76A00C95F93 /* ListWidgetIntent.intentdefinition in Sources */,
@@ -3505,6 +3520,7 @@
 				B58BF1FB23D78ADF00515B50 /* UIContextualAction+Simplenote.swift in Sources */,
 				BA02A5DC26C0B4B1005FF36E /* URL+Simplenote.swift in Sources */,
 				BABFFF2226CF9094003A4C25 /* WidgetDefaults.swift in Sources */,
+				B54D9C572909BA2600D0E0EC /* StoreManager.swift in Sources */,
 				E215C79A180B130B00AD36B5 /* SPTableViewController.m in Sources */,
 				BA4499BC25ED95D0000C563E /* Notice.swift in Sources */,
 				BA5C1C0725BF9D6C006E3820 /* SPDragBar.swift in Sources */,
