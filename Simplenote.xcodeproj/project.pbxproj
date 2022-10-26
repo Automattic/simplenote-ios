@@ -956,6 +956,7 @@
 		B5476BBE23D8B686000E7723 /* NotesListSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotesListSection.swift; path = Classes/NotesListSection.swift; sourceTree = "<group>"; };
 		B5476BC023D8E5D0000E7723 /* String+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "String+Simplenote.swift"; path = "Classes/String+Simplenote.swift"; sourceTree = "<group>"; };
 		B54B04D72407169500401FBB /* SPAppDelegate+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SPAppDelegate+Extensions.swift"; sourceTree = "<group>"; };
+		B54D9C542909B21700D0E0EC /* Simplenote 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Simplenote 6.xcdatamodel"; sourceTree = "<group>"; };
 		B55051811A4328B9002A1093 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		B550F93022BA65CD00091939 /* ActivityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ActivityType.swift; path = Classes/ActivityType.swift; sourceTree = "<group>"; };
 		B550F93222BA6A3300091939 /* ShortcutsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShortcutsHandler.swift; path = Classes/ShortcutsHandler.swift; sourceTree = "<group>"; };
@@ -6089,13 +6090,14 @@
 		467D9C5C1788A4FB00785EF3 /* Simplenote.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				B54D9C542909B21700D0E0EC /* Simplenote 6.xcdatamodel */,
 				B5526335238881EE009AB3B2 /* Simplenote 5.xcdatamodel */,
 				B594E60C21508170001577EE /* Simplenote 4.xcdatamodel */,
 				B5BE05501AB75BE2002417BF /* Simplenote 3.xcdatamodel */,
 				467D9C5D1788A4FB00785EF3 /* Simplenote 2.xcdatamodel */,
 				467D9C5E1788A4FB00785EF3 /* Simplenote.xcdatamodel */,
 			);
-			currentVersion = B5526335238881EE009AB3B2 /* Simplenote 5.xcdatamodel */;
+			currentVersion = B54D9C542909B21700D0E0EC /* Simplenote 6.xcdatamodel */;
 			name = Simplenote.xcdatamodeld;
 			path = ../Simplenote.xcdatamodeld;
 			sourceTree = "<group>";
