@@ -44,17 +44,30 @@ class StoreManager {
     private var updateListenerTask: Task<Void, Error>?
 
 
+    deinit {
+        updateListenerTask?.cancel()
+    }
+
+
     // MARK: - Public API(s)
 
-    /// Initialization:
-    /// - Starts listening for Pending Transactions
-    /// - Requests the Available Products
+    /// Initialization involves three major steps:
+    ///
+    ///     1.  Listen for Pending Transactions
+    ///     2.  Request the Known Subscription Products
+    ///     3.  Refresh the Subscription Status (and update Core Data)
+    ///
+    /// This API should be invoked shortly after the Launch Sequence is complete.
     ///
     func initialize() {
         NSLog("[StoreManager] Initializing...")
 
         updateListenerTask = listenForTransactions()
-        refreshSubscriptionProducts()
+
+        Task {
+            await refreshSubscriptionProducts()
+            await refreshSubscriptionStatus()
+        }
     }
 
 
@@ -104,14 +117,13 @@ private extension StoreManager {
         }
     }
 
-    func refreshSubscriptionProducts() {
-        Task { @MainActor in
-            do {
-                let storeProducts = try await Product.products(for: StoreProduct.allIdentifiers)
-                subscriptions = filter(products: storeProducts, ofType: .autoRenewable)
-            } catch {
-                NSLog("Failed product request from the App Store server: \(error)")
-            }
+    @MainActor
+    func refreshSubscriptionProducts() async {
+        do {
+            let storeProducts = try await Product.products(for: StoreProduct.allIdentifiers)
+            subscriptions = filter(products: storeProducts, ofType: .autoRenewable)
+        } catch {
+            NSLog("[StoreKit] Failed product request from the App Store server: \(error)")
         }
     }
 
@@ -132,7 +144,7 @@ private extension StoreManager {
                     break
                 }
             } catch {
-                print()
+                NSLog("[StoreKit] Failed to refresh Current Entitlements: \(error)")
             }
         }
 
