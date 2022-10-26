@@ -34,7 +34,7 @@ class StoreManager {
 
     // MARK: - Private Properties
 
-    private(set) var subscriptions: [Product] = []
+    private(set) var subscriptions: [StoreProduct: Product] = [:]
     private(set) var purchasedSubscriptions: [Product] = []
     private(set) var subscriptionGroupStatus: RenewalState?
 
@@ -73,7 +73,25 @@ class StoreManager {
 
     ///
     ///
-    func purchase(_ product: Product) async throws -> Transaction? {
+    func purchase(product: StoreProduct) {
+        guard let subcription = subscriptions[product] else {
+            return
+        }
+
+        Task {
+            do {
+                try await purchase(product: subcription)
+            } catch {
+                NSLog("[StoreManager] Purchase Failed \(error)")
+            }
+        }
+    }
+
+
+    ///
+    ///
+    @discardableResult
+    private func purchase(product: Product) async throws -> Transaction? {
         let result = try await product.purchase()
 
         switch result {
@@ -120,8 +138,10 @@ private extension StoreManager {
     @MainActor
     func refreshSubscriptionProducts() async {
         do {
-            let storeProducts = try await Product.products(for: StoreProduct.allIdentifiers)
-            subscriptions = filter(products: storeProducts, ofType: .autoRenewable)
+            let allProducts = try await Product.products(for: StoreProduct.allIdentifiers)
+            let subscriptionProducts = filter(products: allProducts, ofType: .autoRenewable)
+
+            subscriptions = self.buildSubscriptionsMap(products: subscriptionProducts)
 
             NSLog("[StoreKit] Retrieved \(subscriptions.count) Subscription Products")
 
@@ -140,7 +160,7 @@ private extension StoreManager {
 
                 switch transaction.productType {
                 case .autoRenewable:
-                    if let subscription = subscriptions.first(where: { $0.id == transaction.productID }) {
+                    if let subscription = subscriptions.values.first(where: { $0.id == transaction.productID }) {
                         newPurchasedSubscriptions.append(subscription)
                     }
                 default:
@@ -157,7 +177,7 @@ private extension StoreManager {
         // is new (never subscribed), active, or inactive (expired subscription). This app has only one subscription
         // group, so products in the subscriptions array all belong to the same group. The statuses that
         // `product.subscription.status` returns apply to the entire subscription group.
-        subscriptionGroupStatus = try? await subscriptions.first?.subscription?.status.first?.state
+        subscriptionGroupStatus = try? await subscriptions.values.first?.subscription?.status.first?.state
     }
 }
 
@@ -182,6 +202,24 @@ private extension StoreManager {
 
         return newSubscriptions
     }
+
+    func buildSubscriptionsMap(products: [Product]) -> [StoreProduct: Product] {
+        return products.reduce([StoreProduct: Product]()) { partialResult, product in
+            var updated = partialResult
+            if let storeProduct = self.findStoreProduct(for: product) {
+                updated[storeProduct] = product
+            }
+
+            return updated
+        }
+    }
+
+    func findStoreProduct(for product: Product) -> StoreProduct? {
+        StoreProduct.allCases.first { storeProduct in
+            product.id == storeProduct.identifier
+        }
+    }
+
 
     func isPurchased(_ product: Product) async throws -> Bool {
         switch product.type {
