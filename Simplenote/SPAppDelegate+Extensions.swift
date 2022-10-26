@@ -36,6 +36,16 @@ extension SPAppDelegate {
 
         authenticator.providerString = "simplenote.com"
     }
+
+    @objc
+    func setupStoreManager() {
+        guard #available(iOS 15, *) else {
+            NSLog("[StoreManager] Unavailable")
+            return
+        }
+
+        StoreManager.shared.initialize()
+    }
 }
 
 // MARK: - Internal Methods
