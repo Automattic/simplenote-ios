@@ -263,8 +263,14 @@ private extension StoreManager {
 
     func refreshSimperiumPreferences(status: SubscriptionStatus?) {
         let simperium = SPAppDelegate.shared().simperium
-        let preferences = simperium.preferencesObject()
 
+        simperium.managedObjectContext().perform {
+            self.refreshSimperiumPreferences(simperium: simperium, status: status)
+        }
+    }
+
+    func refreshSimperiumPreferences(simperium: Simperium, status: SubscriptionStatus?) {
+        let preferences = simperium.preferencesObject()
         guard mustUpdatePreferences(preferences: preferences) else {
             return
         }
