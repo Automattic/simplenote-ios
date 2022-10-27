@@ -145,10 +145,13 @@ private extension StoreManager {
             }
         }
 
+        /// This structure helps us determine if a given `Product` instance has been purchased, or not
+        ///
+        purchasedSubscriptions = newPurchasedSubscriptions
+
         /// - Important!
         ///     Simplenote has a single Subscription Group. `product.subscription.status` represents the entire subscription group status
         subscriptionGroupStatus = try? await subscriptions.values.first?.subscription?.status.first?.state
-        purchasedSubscriptions = newPurchasedSubscriptions
     }
 
     @discardableResult
