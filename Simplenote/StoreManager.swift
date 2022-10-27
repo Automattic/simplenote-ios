@@ -29,14 +29,21 @@ class StoreManager {
 
     // MARK: - Aliases
     //
-    typealias RenewalState = Product.SubscriptionInfo.RenewalState
+    typealias SubscriptionStatus = Product.SubscriptionInfo.Status
 
 
     // MARK: - Private Properties
 
     private(set) var subscriptions: [StoreProduct: Product] = [:]
     private(set) var purchasedSubscriptions: [Product] = []
-    private(set) var subscriptionGroupStatus: RenewalState?
+    private(set) var subscriptionGroupStatus: SubscriptionStatus?
+
+
+    // MARK: - Calculated Properties
+
+    private var subscriptionProducts: [Product] {
+        Array(subscriptions.values)
+    }
 
 
     // MARK: - Public Properties
@@ -56,6 +63,7 @@ class StoreManager {
     ///     1.  Listen for Pending Transactions
     ///     2.  Request the Known Products
     ///     3.  Refresh the Purchased Products (and update Core Data)
+    ///     4.  Refresh the SubscriptionGroup Status
     ///
     /// This API should be invoked shortly after the Launch Sequence is complete.
     ///
@@ -67,6 +75,7 @@ class StoreManager {
         Task {
             await refreshKnownProducts()
             await refreshPurchasedProducts()
+            await refreshSubscriptionGroupStatus()
         }
     }
 
@@ -100,6 +109,7 @@ private extension StoreManager {
                 do {
                     let transaction = try self.checkVerified(result)
                     await self.refreshPurchasedProducts()
+                    await self.refreshSubscriptionGroupStatus()
                     await transaction.finish()
 
                 } catch {
@@ -124,6 +134,9 @@ private extension StoreManager {
         }
     }
 
+    /// - Note:
+    ///     The `purchasedSubscriptions` collection us determine if a given `Product` instance has been purchased, or not
+    ///
     @MainActor
     func refreshPurchasedProducts() async {
         var newPurchasedSubscriptions: [Product] = []
@@ -134,7 +147,7 @@ private extension StoreManager {
 
                 switch transaction.productType {
                 case .autoRenewable:
-                    if let subscription = subscriptions.values.first(where: { $0.id == transaction.productID }) {
+                    if let subscription = subscriptionProducts.first(where: { $0.id == transaction.productID }) {
                         newPurchasedSubscriptions.append(subscription)
                     }
                 default:
@@ -145,14 +158,15 @@ private extension StoreManager {
             }
         }
 
-        /// This structure helps us determine if a given `Product` instance has been purchased, or not
-        ///
         purchasedSubscriptions = newPurchasedSubscriptions
+    }
 
-        /// - Important!
-        ///     Simplenote has a single Subscription Group. `product.subscription.status` represents the entire subscription group status
+    /// - Important!
+    ///     Simplenote has a single Subscription Group. `product.subscription.status` represents the entire subscription group status
+    @MainActor
+    func refreshSubscriptionGroupStatus() async {
         do {
-            subscriptionGroupStatus = try await subscriptions.values.first?.subscription?.status.first?.state
+            subscriptionGroupStatus = try await subscriptionProducts.first?.subscription?.status.first
         } catch {
             NSLog("[StoreKit] Failed to refresh the Subscription Group Status: \(error)")
         }
@@ -167,6 +181,7 @@ private extension StoreManager {
             let transaction = try checkVerified(verification)
 
             await refreshPurchasedProducts()
+            await refreshSubscriptionGroupStatus()
             await transaction.finish()
 
             return transaction
