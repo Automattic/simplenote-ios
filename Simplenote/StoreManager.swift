@@ -34,6 +34,7 @@ class StoreManager {
 
     // MARK: - Private Properties
 
+    private var updateListenerTask: Task<Void, Error>?
     private(set) var storeProductMap: [StoreProduct: Product] = [:]
     private(set) var purchasedProducts: [Product] = []
     private(set) var subscriptionGroupStatus: SubscriptionStatus? {
@@ -43,17 +44,7 @@ class StoreManager {
     }
 
 
-    // MARK: - Calculated Properties
-
-    private var allProducts: [Product] {
-        Array(storeProductMap.values)
-    }
-
-
-    // MARK: - Public Properties
-
-    private var updateListenerTask: Task<Void, Error>?
-
+    // MARK: - Deinit
 
     deinit {
         updateListenerTask?.cancel()
@@ -145,7 +136,7 @@ private extension StoreManager {
         for await result in Transaction.currentEntitlements {
             do {
                 let transaction = try checkVerified(result)
-                if let subscription = allProducts.first(where: { $0.id == transaction.productID }) {
+                if let subscription = storeProductMap.values.first(where: { $0.id == transaction.productID }) {
                     newPurchasedProducts.append(subscription)
                 }
 
@@ -162,7 +153,7 @@ private extension StoreManager {
     @MainActor
     func refreshSubscriptionGroupStatus() async {
         do {
-            subscriptionGroupStatus = try await allProducts.first?.subscription?.status.first
+            subscriptionGroupStatus = try await storeProductMap.values.first?.subscription?.status.first
         } catch {
             NSLog("[StoreKit] Failed to refresh the Subscription Group Status: \(error)")
         }
