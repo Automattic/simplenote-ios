@@ -22,11 +22,13 @@ class SustainerView: UIView {
     private var widthConstraint: NSLayoutConstraint!
 
     @objc
-    public var appliesTopInset: Bool = false {
+    var appliesTopInset: Bool = false {
         didSet {
             topConstraint.constant = appliesTopInset ? Metrics.defaultTopInset : .zero
         }
     }
+
+    var onPress: (() -> Void)?
 
     var preferredWidth: CGFloat? {
         didSet {
@@ -39,7 +41,7 @@ class SustainerView: UIView {
     }
 
     // MARK: - Overridden Methods
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         backgroundView.layer.cornerRadius = 8
@@ -50,6 +52,14 @@ class SustainerView: UIView {
 
         titleLabel.textColor = .white
         detailsLabel.textColor = .white
+    }
+
+
+    // MARK: - Tap Events
+
+    @IBAction
+    func sustainerWasPresssed() {
+        onPress?()
     }
 }
 

@@ -68,6 +68,7 @@
             </subviews>
             <viewLayoutGuide key="safeArea" id="FBi-kX-fTh"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <gestureRecognizers/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="RSL-o1-Qz1" secondAttribute="trailing" id="5A2-TL-w9u"/>
                 <constraint firstItem="sc5-2f-Alr" firstAttribute="leading" secondItem="FBi-kX-fTh" secondAttribute="leading" constant="12" id="CJ4-gH-CaM"/>
@@ -84,9 +85,15 @@
                 <outlet property="titleLabel" destination="xLW-HX-XmH" id="G19-ww-50A"/>
                 <outlet property="topConstraint" destination="SUn-BD-pzh" id="e9F-8I-nc7"/>
                 <outlet property="widthConstraint" destination="kYU-Lx-Xbh" id="yEN-6g-UV9"/>
+                <outletCollection property="gestureRecognizers" destination="4op-51-Dvd" appends="YES" id="gpV-aI-zul"/>
             </connections>
             <point key="canvasLocation" x="87.692307692307693" y="-258.05687203791467"/>
         </view>
+        <tapGestureRecognizer id="4op-51-Dvd">
+            <connections>
+                <action selector="sustainerWasPresssed" destination="H3q-Rz-XVn" id="usw-j5-ej9"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="simplenote-logo" width="64" height="64"/>
