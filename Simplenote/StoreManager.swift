@@ -151,7 +151,11 @@ private extension StoreManager {
 
         /// - Important!
         ///     Simplenote has a single Subscription Group. `product.subscription.status` represents the entire subscription group status
-        subscriptionGroupStatus = try? await subscriptions.values.first?.subscription?.status.first?.state
+        do {
+            subscriptionGroupStatus = try await subscriptions.values.first?.subscription?.status.first?.state
+        } catch {
+            NSLog("[StoreKit] Failed to refresh the Subscription Group Status: \(error)")
+        }
     }
 
     @discardableResult
