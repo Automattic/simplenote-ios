@@ -6,6 +6,21 @@ import UIKit
 extension SPSettingsViewController {
 
     @objc
+    func setupTableHeaderView() {
+        guard #available(iOS 15.0, *) else {
+            return
+        }
+
+        let sustainerView: SustainerView = SustainerView.instantiateFromNib()
+        sustainerView.appliesTopInset = true
+        sustainerView.onPress = {
+            StoreManager.shared.purchase(storeProduct: .sustainer)
+        }
+
+        tableView.tableHeaderView = sustainerView
+    }
+
+    @objc
     func refreshTableHeaderSize() {
         guard let headerView = tableView.tableHeaderView as? SustainerView else {
             return
