@@ -15,6 +15,6 @@ extension Preferences {
 
     @objc
     var isActiveSubscriber: Bool {
-        subscription_level == StoreSettings.activeSubscriptionLevel
+        subscription_level == StoreConstants.activeSubscriptionLevel
     }
 }

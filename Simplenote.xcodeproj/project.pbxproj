@@ -294,6 +294,7 @@
 		B5476BBF23D8B686000E7723 /* NotesListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5476BBE23D8B686000E7723 /* NotesListSection.swift */; };
 		B5476BC123D8E5D0000E7723 /* String+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5476BC023D8E5D0000E7723 /* String+Simplenote.swift */; };
 		B549E249290B3BDB0072C3E8 /* Preferences+IAP.swift in Sources */ = {isa = PBXBuildFile; fileRef = B549E248290B3BDB0072C3E8 /* Preferences+IAP.swift */; };
+		B549E24B290B3DD70072C3E8 /* StoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B549E24A290B3DD70072C3E8 /* StoreConstants.swift */; };
 		B54B04D82407169500401FBB /* SPAppDelegate+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54B04D72407169500401FBB /* SPAppDelegate+Extensions.swift */; };
 		B54D9C572909BA2600D0E0EC /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D9C562909BA2600D0E0EC /* StoreManager.swift */; };
 		B54D9C592909CC4400D0E0EC /* StoreProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D9C582909CC4400D0E0EC /* StoreProduct.swift */; };
@@ -959,6 +960,7 @@
 		B5476BBE23D8B686000E7723 /* NotesListSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotesListSection.swift; path = Classes/NotesListSection.swift; sourceTree = "<group>"; };
 		B5476BC023D8E5D0000E7723 /* String+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "String+Simplenote.swift"; path = "Classes/String+Simplenote.swift"; sourceTree = "<group>"; };
 		B549E248290B3BDB0072C3E8 /* Preferences+IAP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Preferences+IAP.swift"; sourceTree = "<group>"; };
+		B549E24A290B3DD70072C3E8 /* StoreConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreConstants.swift; sourceTree = "<group>"; };
 		B54B04D72407169500401FBB /* SPAppDelegate+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SPAppDelegate+Extensions.swift"; sourceTree = "<group>"; };
 		B54D9C542909B21700D0E0EC /* Simplenote 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Simplenote 6.xcdatamodel"; sourceTree = "<group>"; };
 		B54D9C562909BA2600D0E0EC /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
@@ -1875,6 +1877,7 @@
 			isa = PBXGroup;
 			children = (
 				B54D9C562909BA2600D0E0EC /* StoreManager.swift */,
+				B549E24A290B3DD70072C3E8 /* StoreConstants.swift */,
 				B54D9C582909CC4400D0E0EC /* StoreProduct.swift */,
 				B5BADB7C2909D78B00275B29 /* TestConfiguration.storekit */,
 			);
@@ -3551,6 +3554,7 @@
 				B550F93322BA6A3300091939 /* ShortcutsHandler.swift in Sources */,
 				A6C0589424AD2B8F006BC572 /* SPNoteHistoryViewController.swift in Sources */,
 				F52A2FD11DE8B1FB002DEB0E /* CSSearchable+Helpers.swift in Sources */,
+				B549E24B290B3DD70072C3E8 /* StoreConstants.swift in Sources */,
 				37FD30491FC4CFA2008D0B78 /* KeychainPasswordItem.swift in Sources */,
 				A664845325B6C31900BFEF27 /* SPTracker+Extensions.swift in Sources */,
 				B52F35D122F3254800724793 /* Theme.swift in Sources */,

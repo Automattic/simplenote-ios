@@ -278,7 +278,7 @@ private extension StoreManager {
         if let status {
             preferences.subscription_date = subscriptionDate(from: status)
             preferences.subscription_level = subscriptionLevel(from: status)
-            preferences.subscription_platform = StoreSettings.platform
+            preferences.subscription_platform = StoreConstants.platform
         } else {
             preferences.subscription_date = nil
             preferences.subscription_level = nil
@@ -294,7 +294,7 @@ private extension StoreManager {
             return true
         }
 
-        return platform.isEmpty || platform == StoreSettings.platform
+        return platform.isEmpty || platform == StoreConstants.platform
     }
 
     func subscriptionDate(from status: SubscriptionStatus) -> Date? {
@@ -311,14 +311,6 @@ private extension StoreManager {
             return nil
         }
 
-        return StoreSettings.activeSubscriptionLevel
+        return StoreConstants.activeSubscriptionLevel
     }
-}
-
-
-// MARK: - Settings
-//
-enum StoreSettings {
-    static let platform = "iOS"
-    static let activeSubscriptionLevel = "sustainer"
 }
