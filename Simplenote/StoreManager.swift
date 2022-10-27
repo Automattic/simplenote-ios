@@ -84,16 +84,16 @@ class StoreManager {
     }
 
 
-    /// Purchases the specified Product
+    /// Purchases the specified Product (as long as we don't own it already?)
     ///
-    func purchase(product: StoreProduct) {
-        guard let subcription = subscriptions[product] else {
+    func purchase(storeProduct: StoreProduct) {
+        guard let product = subscriptions[storeProduct], isPurchased(product) == false else {
             return
         }
 
         Task {
             do {
-                try await purchase(product: subcription)
+                try await purchase(product: product)
             } catch {
                 NSLog("[StoreManager] Purchase Failed \(error)")
             }
@@ -199,7 +199,6 @@ private extension StoreManager {
 }
 
 
-
 // MARK: - Private Helpers
 //
 @available(iOS 15, *)
@@ -237,7 +236,7 @@ private extension StoreManager {
         }
     }
 
-    func isPurchased(_ product: Product) async throws -> Bool {
+    func isPurchased(_ product: Product) -> Bool {
         switch product.type {
         case .autoRenewable:
             return purchasedSubscriptions.contains(product)

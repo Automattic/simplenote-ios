@@ -95,7 +95,7 @@ private extension TagListViewController {
 
         let sustainerView: SustainerView = SustainerView.instantiateFromNib()
         sustainerView.onPress = {
-            StoreManager.shared.purchase(product: .sustainer)
+            StoreManager.shared.purchase(storeProduct: .sustainer)
         }
 
         tableView.tableHeaderView = sustainerView
