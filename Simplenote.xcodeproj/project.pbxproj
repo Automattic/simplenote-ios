@@ -293,6 +293,7 @@
 		B5476BBD23D8A71D000E7723 /* UIFont+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5476BBC23D8A71D000E7723 /* UIFont+Simplenote.swift */; };
 		B5476BBF23D8B686000E7723 /* NotesListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5476BBE23D8B686000E7723 /* NotesListSection.swift */; };
 		B5476BC123D8E5D0000E7723 /* String+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5476BC023D8E5D0000E7723 /* String+Simplenote.swift */; };
+		B549E249290B3BDB0072C3E8 /* Preferences+IAP.swift in Sources */ = {isa = PBXBuildFile; fileRef = B549E248290B3BDB0072C3E8 /* Preferences+IAP.swift */; };
 		B54B04D82407169500401FBB /* SPAppDelegate+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54B04D72407169500401FBB /* SPAppDelegate+Extensions.swift */; };
 		B54D9C572909BA2600D0E0EC /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D9C562909BA2600D0E0EC /* StoreManager.swift */; };
 		B54D9C592909CC4400D0E0EC /* StoreProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D9C582909CC4400D0E0EC /* StoreProduct.swift */; };
@@ -957,6 +958,7 @@
 		B5476BBC23D8A71D000E7723 /* UIFont+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIFont+Simplenote.swift"; path = "Classes/UIFont+Simplenote.swift"; sourceTree = "<group>"; };
 		B5476BBE23D8B686000E7723 /* NotesListSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotesListSection.swift; path = Classes/NotesListSection.swift; sourceTree = "<group>"; };
 		B5476BC023D8E5D0000E7723 /* String+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "String+Simplenote.swift"; path = "Classes/String+Simplenote.swift"; sourceTree = "<group>"; };
+		B549E248290B3BDB0072C3E8 /* Preferences+IAP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Preferences+IAP.swift"; sourceTree = "<group>"; };
 		B54B04D72407169500401FBB /* SPAppDelegate+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SPAppDelegate+Extensions.swift"; sourceTree = "<group>"; };
 		B54D9C542909B21700D0E0EC /* Simplenote 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Simplenote 6.xcdatamodel"; sourceTree = "<group>"; };
 		B54D9C562909BA2600D0E0EC /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
@@ -1483,6 +1485,7 @@
 				A64DE6E8255D1C9F001D0526 /* ContentSlice.swift */,
 				BA4499BB25ED95D0000C563E /* Notice.swift */,
 				BA4499C425ED95E5000C563E /* NoticeAction.swift */,
+				B549E248290B3BDB0072C3E8 /* Preferences+IAP.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -3520,6 +3523,7 @@
 				A6E4875825BEF3C700D0CE3B /* UIResponder+Simplenote.swift in Sources */,
 				46A3C99C17DFA81A002865AE /* NSString+Bullets.m in Sources */,
 				B58BF1FB23D78ADF00515B50 /* UIContextualAction+Simplenote.swift in Sources */,
+				B549E249290B3BDB0072C3E8 /* Preferences+IAP.swift in Sources */,
 				BA02A5DC26C0B4B1005FF36E /* URL+Simplenote.swift in Sources */,
 				BABFFF2226CF9094003A4C25 /* WidgetDefaults.swift in Sources */,
 				B54D9C572909BA2600D0E0EC /* StoreManager.swift in Sources */,

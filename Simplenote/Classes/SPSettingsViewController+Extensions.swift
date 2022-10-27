@@ -1,9 +1,13 @@
 import UIKit
 
 
-// MARK: - Interface Helpers
+// MARK: - Subscriber UI
 //
 extension SPSettingsViewController {
+
+    private var isActiveSustainer: Bool {
+        SPAppDelegate.shared().simperium.preferencesObject().isActiveSubscriber
+    }
 
     @objc
     func setupTableHeaderView() {
@@ -21,11 +25,12 @@ extension SPSettingsViewController {
     }
 
     @objc
-    func refreshTableHeaderSize() {
+    func refreshTableHeaderView() {
         guard let headerView = tableView.tableHeaderView as? SustainerView else {
             return
         }
 
+        headerView.isActiveSustainer = isActiveSustainer
         headerView.preferredWidth = tableView.frame.width
         headerView.adjustSizeForCompressedLayout()
 

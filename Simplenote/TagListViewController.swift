@@ -18,6 +18,10 @@ final class TagListViewController: UIViewController {
 
     private var renameTag: Tag?
 
+    private var isActiveSustainer: Bool {
+        SPAppDelegate.shared().simperium.preferencesObject().isActiveSubscriber
+    }
+
     override var shouldAutorotate: Bool {
         return false
     }
@@ -44,7 +48,7 @@ final class TagListViewController: UIViewController {
         super.viewWillAppear(animated)
         startListeningToKeyboardNotifications()
 
-        refreshTableHeaderSize()
+        refreshTableHeaderView()
         reloadTableView()
         startListeningForChanges()
         becomeFirstResponder()
@@ -62,14 +66,14 @@ final class TagListViewController: UIViewController {
 
     override func viewSafeAreaInsetsDidChange() {
         super.viewSafeAreaInsetsDidChange()
-        refreshTableHeaderSize()
+        refreshTableHeaderView()
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
 
         coordinator.animate { _ in
-            self.refreshTableHeaderSize()
+            self.refreshTableHeaderView()
         }
     }
 }
@@ -133,6 +137,7 @@ private extension TagListViewController {
         nc.addObserver(self, selector: #selector(menuDidChangeVisibility), name: UIMenuController.didHideMenuNotification, object: nil)
         nc.addObserver(self, selector: #selector(tagsSortOrderWasUpdated), name: NSNotification.Name.SPAlphabeticalTagSortPreferenceChanged, object: nil)
         nc.addObserver(self, selector: #selector(themeDidChange), name: NSNotification.Name.SPSimplenoteThemeChanged, object: nil)
+        nc.addObserver(self, selector: #selector(subscriptionStatusDidChange), name: .SPSubscriptionStatusDidChange, object: nil)
     }
 
     func startListeningToKeyboardNotifications() {
@@ -164,6 +169,11 @@ private extension TagListViewController {
     @objc
     func tagsSortOrderWasUpdated() {
         refreshSortDescriptorsAndPerformFetch()
+    }
+
+    @objc
+    func subscriptionStatusDidChange() {
+        refreshTableHeaderView()
     }
 }
 
@@ -545,6 +555,7 @@ extension TagListViewController: TagListViewCellDelegate {
 // MARK: - Helper Methods
 //
 private extension TagListViewController {
+
     func setEditing(_ editing: Bool) {
         // Note: Neither super.setEditing nor tableView.setEditing will resign the first responder.
         if !editing {
@@ -562,11 +573,12 @@ private extension TagListViewController {
         tagsHeaderView.actionButton.setTitle(title, for: .normal)
     }
 
-    func refreshTableHeaderSize() {
+    func refreshTableHeaderView() {
         guard let headerView = tableView.tableHeaderView as? SustainerView else {
             return
         }
 
+        headerView.isActiveSustainer = isActiveSustainer
         headerView.preferredWidth = tableView.frame.width - view.safeAreaInsets.left
         headerView.adjustSizeForCompressedLayout()
 

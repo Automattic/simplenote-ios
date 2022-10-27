@@ -168,10 +168,15 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     self.pinTimeoutTextField.inputAccessoryView = self.doneToolbar;
     [self.view addSubview:self.pinTimeoutTextField];
     
-    // Listen to Theme Notifications
+    // Listen to Notifications
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(themeDidChange)
                                                  name:SPSimplenoteThemeChangedNotification
+                                               object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refreshTableHeaderView)
+                                                 name:SPSubscriptionStatusDidChangeNotification
                                                object:nil];
 
     [self refreshThemeStyles];
@@ -180,7 +185,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self refreshTableHeaderSize];
+    [self refreshTableHeaderView];
     [self.tableView reloadData];
 }
 
@@ -189,7 +194,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        [self refreshTableHeaderSize];
+        [self refreshTableHeaderView];
     } completion:nil];
 }
 
