@@ -16,3 +16,5 @@ extern NSString *const SPAlphabeticalTagSortPreferenceChangedNotification;
 extern NSString *const SPCondensedNoteListPreferenceChangedNotification;
 extern NSString *const SPNotesListSortModeChangedNotification;
 extern NSString *const SPSimplenoteThemeChangedNotification;
+extern NSString *const SPSubscriptionStatusDidChangeNotification;
+

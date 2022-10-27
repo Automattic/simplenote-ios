@@ -78,6 +78,7 @@ final class TagListViewController: UIViewController {
 // MARK: - Configuration
 //
 private extension TagListViewController {
+
     func configureView() {
         view.backgroundColor = .simplenoteBackgroundColor
     }
