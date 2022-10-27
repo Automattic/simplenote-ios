@@ -54,8 +54,8 @@ class StoreManager {
     /// Initialization involves three major steps:
     ///
     ///     1.  Listen for Pending Transactions
-    ///     2.  Request the Known Subscription Products
-    ///     3.  Refresh the Subscription Status (and update Core Data)
+    ///     2.  Request the Known Products
+    ///     3.  Refresh the Purchased Products (and update Core Data)
     ///
     /// This API should be invoked shortly after the Launch Sequence is complete.
     ///
@@ -65,13 +65,13 @@ class StoreManager {
         updateListenerTask = listenForTransactions()
 
         Task {
-            await refreshSubscriptionProducts()
-            await refreshSubscriptionStatus()
+            await refreshKnownProducts()
+            await refreshPurchasedProducts()
         }
     }
 
 
-    ///
+    /// Purchases the specified Product
     ///
     func purchase(product: StoreProduct) {
         guard let subcription = subscriptions[product] else {
@@ -84,31 +84,6 @@ class StoreManager {
             } catch {
                 NSLog("[StoreManager] Purchase Failed \(error)")
             }
-        }
-    }
-
-
-    ///
-    ///
-    @discardableResult
-    private func purchase(product: Product) async throws -> Transaction? {
-        let result = try await product.purchase()
-
-        switch result {
-        case .success(let verification):
-            //Check whether the transaction is verified. If it isn't,
-            //this function rethrows the verification error.
-            let transaction = try checkVerified(verification)
-
-            await refreshSubscriptionStatus()
-
-            await transaction.finish()
-
-            return transaction
-        case .userCancelled, .pending:
-            return nil
-        default:
-            return nil
         }
     }
 }
@@ -124,10 +99,9 @@ private extension StoreManager {
             for await result in Transaction.updates {
                 do {
                     let transaction = try self.checkVerified(result)
-
-                    await self.refreshSubscriptionStatus()
-
+                    await self.refreshPurchasedProducts()
                     await transaction.finish()
+
                 } catch {
                     NSLog("[StoreKit] Transaction failed verification. Error \(error)")
                 }
@@ -136,7 +110,7 @@ private extension StoreManager {
     }
 
     @MainActor
-    func refreshSubscriptionProducts() async {
+    func refreshKnownProducts() async {
         do {
             let allProducts = try await Product.products(for: StoreProduct.allIdentifiers)
             let subscriptionProducts = filter(products: allProducts, ofType: .autoRenewable)
@@ -151,7 +125,7 @@ private extension StoreManager {
     }
 
     @MainActor
-    func refreshSubscriptionStatus() async {
+    func refreshPurchasedProducts() async {
         var newPurchasedSubscriptions: [Product] = []
 
         for await result in Transaction.currentEntitlements {
@@ -178,6 +152,26 @@ private extension StoreManager {
         // group, so products in the subscriptions array all belong to the same group. The statuses that
         // `product.subscription.status` returns apply to the entire subscription group.
         subscriptionGroupStatus = try? await subscriptions.values.first?.subscription?.status.first?.state
+    }
+
+    @discardableResult
+    func purchase(product: Product) async throws -> Transaction? {
+        let result = try await product.purchase()
+
+        switch result {
+        case .success(let verification):
+            let transaction = try checkVerified(verification)
+
+            await refreshPurchasedProducts()
+            await transaction.finish()
+
+            return transaction
+
+        case .userCancelled, .pending:
+            return nil
+        default:
+            return nil
+        }
     }
 }
 
@@ -219,7 +213,6 @@ private extension StoreManager {
             product.id == storeProduct.identifier
         }
     }
-
 
     func isPurchased(_ product: Product) async throws -> Bool {
         switch product.type {
