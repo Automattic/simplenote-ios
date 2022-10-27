@@ -5,6 +5,6 @@
 
 @interface Simperium (Simplenote)
 
-- (Preferences *)preferencesObject;
+- (nonnull Preferences *)preferencesObject;
 
 @end

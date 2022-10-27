@@ -285,7 +285,7 @@ extension SPAppDelegate: SimperiumDelegate {
         ShortcutsHandler.shared.updateHomeScreenQuickActionsIfNeeded()
 
         // Now that the user info is present, cache it for use by the crash logging system.
-        let analyticsEnabled = simperium.preferencesObject()?.analytics_enabled?.boolValue ?? true
+        let analyticsEnabled = simperium.preferencesObject().analytics_enabled?.boolValue ?? true
         CrashLoggingShim.shared.cacheUser(user)
         CrashLoggingShim.cacheOptOutSetting(!analyticsEnabled)
 
