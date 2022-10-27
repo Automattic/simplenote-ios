@@ -30,13 +30,17 @@ class StoreManager {
     // MARK: - Aliases
     //
     typealias SubscriptionStatus = Product.SubscriptionInfo.Status
-
+    typealias RenewalInfo = Product.SubscriptionInfo.RenewalInfo
 
     // MARK: - Private Properties
 
     private(set) var subscriptions: [StoreProduct: Product] = [:]
     private(set) var purchasedSubscriptions: [Product] = []
-    private(set) var subscriptionGroupStatus: SubscriptionStatus?
+    private(set) var subscriptionGroupStatus: SubscriptionStatus? {
+        didSet {
+            refreshSimperiumPreferences(status: subscriptionGroupStatus)
+        }
+    }
 
 
     // MARK: - Calculated Properties
@@ -250,4 +254,65 @@ private extension StoreManager {
             return safe
         }
     }
+}
+
+
+// MARK: - Simperium Kung Fu
+//
+@available(iOS 15, *)
+private extension StoreManager {
+
+    func refreshSimperiumPreferences(status: SubscriptionStatus?) {
+        let simperium = SPAppDelegate.shared().simperium
+        let preferences = simperium.preferencesObject()
+
+        guard mustUpdatePreferences(preferences: preferences) else {
+            return
+        }
+
+        if let status {
+            preferences.subscription_date = subscriptionDate(from: status)
+            preferences.subscription_level = subscriptionLevel(from: status)
+            preferences.subscription_platform = Settings.platform
+        } else {
+            preferences.subscription_date = nil
+            preferences.subscription_level = nil
+            preferences.subscription_platform = nil
+        }
+
+        simperium.save()
+    }
+
+    func mustUpdatePreferences(preferences: Preferences) -> Bool {
+        guard let platform = preferences.subscription_platform else {
+            return true
+        }
+
+        return platform.isEmpty || platform == Settings.platform
+    }
+
+    func subscriptionDate(from status: SubscriptionStatus) -> Date? {
+        do {
+            return try checkVerified(status.transaction).purchaseDate
+        } catch {
+            NSLog("[StoreManager] Error Verifying Transaction")
+            return nil
+        }
+    }
+
+    func subscriptionLevel(from status: SubscriptionStatus) -> String? {
+        guard status.state == .subscribed || status.state == .inGracePeriod else {
+            return nil
+        }
+
+        return Settings.activeSubscriptionLevel
+    }
+}
+
+
+// MARK: - Settings
+//
+private enum Settings {
+    static let platform = "iOS"
+    static let activeSubscriptionLevel = "sustainer"
 }
