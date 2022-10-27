@@ -21,10 +21,18 @@ enum StoreProduct: String, CaseIterable {
 
         return prefix + ".sustainer200"
     }
+}
 
+extension StoreProduct {
     static var allIdentifiers: [String] {
         StoreProduct.allCases.map { product in
             product.identifier
+        }
+    }
+
+    static func findStoreProduct(identifier: String) -> StoreProduct? {
+        StoreProduct.allCases.first { storeProduct in
+            storeProduct.identifier == identifier
         }
     }
 }

@@ -34,8 +34,8 @@ class StoreManager {
 
     // MARK: - Private Properties
 
-    private(set) var subscriptions: [StoreProduct: Product] = [:]
-    private(set) var purchasedSubscriptions: [Product] = []
+    private(set) var storeProductMap: [StoreProduct: Product] = [:]
+    private(set) var purchasedProducts: [Product] = []
     private(set) var subscriptionGroupStatus: SubscriptionStatus? {
         didSet {
             refreshSimperiumPreferences(status: subscriptionGroupStatus)
@@ -45,8 +45,8 @@ class StoreManager {
 
     // MARK: - Calculated Properties
 
-    private var subscriptionProducts: [Product] {
-        Array(subscriptions.values)
+    private var allProducts: [Product] {
+        Array(storeProductMap.values)
     }
 
 
@@ -87,7 +87,7 @@ class StoreManager {
     /// Purchases the specified Product (as long as we don't own it already?)
     ///
     func purchase(storeProduct: StoreProduct) {
-        guard let product = subscriptions[storeProduct], isPurchased(product) == false else {
+        guard let product = storeProductMap[storeProduct], isPurchased(product) == false else {
             return
         }
 
@@ -127,50 +127,42 @@ private extension StoreManager {
     func refreshKnownProducts() async {
         do {
             let allProducts = try await Product.products(for: StoreProduct.allIdentifiers)
-            let subscriptionProducts = filter(products: allProducts, ofType: .autoRenewable)
+            storeProductMap = self.buildStoreProductMap(products: allProducts)
 
-            subscriptions = self.buildSubscriptionsMap(products: subscriptionProducts)
-
-            NSLog("[StoreKit] Retrieved \(subscriptions.count) Subscription Products")
+            NSLog("[StoreKit] Retrieved \(storeProductMap.count) Subscription Products")
 
         } catch {
             NSLog("[StoreKit] Failed product request from the App Store server: \(error)")
         }
     }
 
-    /// - Note:
-    ///     The `purchasedSubscriptions` collection us determine if a given `Product` instance has been purchased, or not
+    /// The `purchasedProducts` collection us determine if a given `Product` instance has been purchased, or not.
     ///
     @MainActor
     func refreshPurchasedProducts() async {
-        var newPurchasedSubscriptions: [Product] = []
+        var newPurchasedProducts: [Product] = []
 
         for await result in Transaction.currentEntitlements {
             do {
                 let transaction = try checkVerified(result)
-
-                switch transaction.productType {
-                case .autoRenewable:
-                    if let subscription = subscriptionProducts.first(where: { $0.id == transaction.productID }) {
-                        newPurchasedSubscriptions.append(subscription)
-                    }
-                default:
-                    break
+                if let subscription = allProducts.first(where: { $0.id == transaction.productID }) {
+                    newPurchasedProducts.append(subscription)
                 }
+
             } catch {
                 NSLog("[StoreKit] Failed to refresh Current Entitlements: \(error)")
             }
         }
 
-        purchasedSubscriptions = newPurchasedSubscriptions
+        purchasedProducts = newPurchasedProducts
     }
 
-    /// - Important!
-    ///     Simplenote has a single Subscription Group. `product.subscription.status` represents the entire subscription group status
+    /// - Important: Simplenote has a single Subscription Group. `product.subscription.status` represents the entire subscription group status
+    ///
     @MainActor
     func refreshSubscriptionGroupStatus() async {
         do {
-            subscriptionGroupStatus = try await subscriptionProducts.first?.subscription?.status.first
+            subscriptionGroupStatus = try await allProducts.first?.subscription?.status.first
         } catch {
             NSLog("[StoreKit] Failed to refresh the Subscription Group Status: \(error)")
         }
@@ -204,45 +196,20 @@ private extension StoreManager {
 @available(iOS 15, *)
 private extension StoreManager {
 
-    func filter(products: [Product], ofType type: Product.ProductType) -> [Product] {
-        var newSubscriptions: [Product] = []
-
-        for product in products {
-            switch product.type {
-            case .autoRenewable:
-                newSubscriptions.append(product)
-            default:
-                NSLog("[StoreManager] Unknown product: \(product)")
-            }
-        }
-
-        return newSubscriptions
-    }
-
-    func buildSubscriptionsMap(products: [Product]) -> [StoreProduct: Product] {
+    func buildStoreProductMap(products: [Product]) -> [StoreProduct: Product] {
         return products.reduce([StoreProduct: Product]()) { partialResult, product in
-            var updated = partialResult
-            if let storeProduct = self.findStoreProduct(for: product) {
-                updated[storeProduct] = product
+            guard let storeProduct = StoreProduct.findStoreProduct(identifier: product.id) else {
+                return partialResult
             }
 
+            var updated = partialResult
+            updated[storeProduct] = product
             return updated
         }
     }
 
-    func findStoreProduct(for product: Product) -> StoreProduct? {
-        StoreProduct.allCases.first { storeProduct in
-            product.id == storeProduct.identifier
-        }
-    }
-
     func isPurchased(_ product: Product) -> Bool {
-        switch product.type {
-        case .autoRenewable:
-            return purchasedSubscriptions.contains(product)
-        default:
-            return false
-        }
+        purchasedProducts.contains(product)
     }
 
     func checkVerified<T>(_ result: VerificationResult<T>) throws -> T {
