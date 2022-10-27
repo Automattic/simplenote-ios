@@ -128,11 +128,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                                                                                            action:@selector(doneAction:)];
     
     // Header View
-    if (@available(iOS 15.0, *)) {
-        SustainerView *sustainerView = [SustainerView loadFromNib];
-        sustainerView.appliesTopInset = YES;
-        self.tableView.tableHeaderView = sustainerView;
-    }
+    [self setupTableHeaderView];
 
     // Setup the Switches
     self.alphabeticalTagSortSwitch = [UISwitch new];
