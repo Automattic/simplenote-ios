@@ -145,13 +145,10 @@ private extension StoreManager {
             }
         }
 
-        purchasedSubscriptions = newPurchasedSubscriptions
-
-        // Check the `subscriptionGroupStatus` to learn the auto-renewable subscription state to determine whether the customer
-        // is new (never subscribed), active, or inactive (expired subscription). This app has only one subscription
-        // group, so products in the subscriptions array all belong to the same group. The statuses that
-        // `product.subscription.status` returns apply to the entire subscription group.
+        /// - Important!
+        ///     Simplenote has a single Subscription Group. `product.subscription.status` represents the entire subscription group status
         subscriptionGroupStatus = try? await subscriptions.values.first?.subscription?.status.first?.state
+        purchasedSubscriptions = newPurchasedSubscriptions
     }
 
     @discardableResult

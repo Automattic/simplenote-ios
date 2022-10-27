@@ -94,10 +94,8 @@ private extension TagListViewController {
         }
 
         let sustainerView: SustainerView = SustainerView.instantiateFromNib()
-        sustainerView.onPress = { [weak sustainerView, weak self] in
-            // TODO: Remove. For demo purposes only.
-            sustainerView?.isActiveSustainer.toggle()
-            self?.refreshTableHeaderSize()
+        sustainerView.onPress = {
+            StoreManager.shared.purchase(product: .sustainer)
         }
 
         tableView.tableHeaderView = sustainerView
