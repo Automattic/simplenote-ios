@@ -83,14 +83,24 @@ private extension TagListViewController {
     }
 
     func configureTableView() {
-        let sustainerView: SustainerView = SustainerView.instantiateFromNib()
-
-        tableView.tableHeaderView = sustainerView
         tableView.register(TagListViewCell.loadNib(), forCellReuseIdentifier: TagListViewCell.reuseIdentifier)
         tableView.register(Value1TableViewCell.self, forCellReuseIdentifier: Value1TableViewCell.reuseIdentifier)
 
         tableView.separatorInsetReference = .fromAutomaticInsets
         tableView.automaticallyAdjustsScrollIndicatorInsets = false
+
+        guard #available(iOS 15.0, *) else {
+            return
+        }
+
+        let sustainerView: SustainerView = SustainerView.instantiateFromNib()
+        sustainerView.onPress = { [weak sustainerView, weak self] in
+            // TODO: Remove. For demo purposes only.
+            sustainerView?.isActiveSustainer.toggle()
+            self?.refreshTableHeaderSize()
+        }
+
+        tableView.tableHeaderView = sustainerView
     }
 
     func configureTableHeaderView() {
