@@ -153,7 +153,8 @@ private extension StoreManager {
     @MainActor
     func refreshSubscriptionGroupStatus() async {
         do {
-            subscriptionGroupStatus = try await storeProductMap.values.first?.subscription?.status.first
+            let newStatus = try await storeProductMap.values.first?.subscription?.status.first
+            subscriptionGroupStatus = newStatus
         } catch {
             NSLog("[StoreKit] Failed to refresh the Subscription Group Status: \(error)")
         }

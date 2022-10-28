@@ -12,14 +12,16 @@ import Foundation
 // MARK: - StoreProduct
 //
 enum StoreProduct: String, CaseIterable {
-    case sustainer
+    case sustainerMonthly
+    case sustainerYearly
 
     var identifier: String {
-        guard let prefix = Bundle.main.rootBundleIdentifier else {
+        switch self {
+        case .sustainerYearly:
             return "com.codality.NotationalFlow.sustainer200"
+        case .sustainerMonthly:
+            return "com.codality.NotationalFlow.sustainer20"
         }
-
-        return prefix + ".sustainer200"
     }
 }
 
