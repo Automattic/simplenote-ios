@@ -43,6 +43,12 @@ class StoreManager {
         }
     }
 
+    // MARK: - Public Properties
+
+    var isActiveSubscriber: Bool {
+        subscriptionGroupStatus != nil
+    }
+
 
     // MARK: - Deinit
 
@@ -78,7 +84,7 @@ class StoreManager {
     /// Purchases the specified Product (as long as we don't own it already?)
     ///
     func purchase(storeProduct: StoreProduct) {
-        guard let product = storeProductMap[storeProduct], isPurchased(product) == false else {
+        guard let product = storeProductMap[storeProduct], isActiveSubscriber == false else {
             return
         }
 
