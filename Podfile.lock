@@ -1,28 +1,22 @@
 PODS:
-  - AppCenter (2.5.3):
-    - AppCenter/Analytics (= 2.5.3)
-    - AppCenter/Crashes (= 2.5.3)
-  - AppCenter/Analytics (2.5.3):
+  - AppCenter (4.4.3):
+    - AppCenter/Analytics (= 4.4.3)
+    - AppCenter/Crashes (= 4.4.3)
+  - AppCenter/Analytics (4.4.3):
     - AppCenter/Core
-  - AppCenter/Core (2.5.3)
-  - AppCenter/Crashes (2.5.3):
+  - AppCenter/Core (4.4.3)
+  - AppCenter/Crashes (4.4.3):
     - AppCenter/Core
-  - AppCenter/Distribute (2.5.3):
+  - AppCenter/Distribute (4.4.3):
     - AppCenter/Core
-  - Automattic-Tracks-iOS (0.7.0):
-    - CocoaLumberjack (~> 3)
-    - Reachability (~> 3)
-    - Sentry (~> 4)
-    - Sodium-Fork (= 0.8.2)
-    - UIDeviceIdentifier (~> 1)
-  - CocoaLumberjack (3.7.0):
-    - CocoaLumberjack/Core (= 3.7.0)
-  - CocoaLumberjack/Core (3.7.0)
+  - Automattic-Tracks-iOS (0.13.0):
+    - Sentry (~> 7.25)
+    - Sodium (>= 0.9.1)
+    - UIDeviceIdentifier (~> 2.0)
   - Gridicons (0.19)
-  - Reachability (3.2)
-  - Sentry (4.5.0):
-    - Sentry/Core (= 4.5.0)
-  - Sentry/Core (4.5.0)
+  - Sentry (7.29.0):
+    - Sentry/Core (= 7.29.0)
+  - Sentry/Core (7.29.0)
   - Simperium (1.9.0):
     - Simperium/DiffMatchPach (= 1.9.0)
     - Simperium/JRSwizzle (= 1.9.0)
@@ -34,15 +28,15 @@ PODS:
   - Simperium/SocketTrust (1.9.0)
   - Simperium/SPReachability (1.9.0)
   - Simperium/SSKeychain (1.9.0)
-  - Sodium-Fork (0.8.2)
-  - UIDeviceIdentifier (1.6.0)
+  - Sodium (0.9.1)
+  - UIDeviceIdentifier (2.1.0)
   - WordPress-Ratings-iOS (0.0.2)
   - ZIPFoundation (0.9.11)
 
 DEPENDENCIES:
-  - AppCenter (~> 2.5.1)
-  - AppCenter/Distribute (~> 2.5.1)
-  - Automattic-Tracks-iOS (~> 0.6)
+  - AppCenter (~> 4.4.3)
+  - AppCenter/Distribute (~> 4.4.3)
+  - Automattic-Tracks-iOS (~> 0.13)
   - Gridicons (~> 0.18)
   - Simperium (= 1.9.0)
   - WordPress-Ratings-iOS (= 0.0.2)
@@ -52,29 +46,25 @@ SPEC REPOS:
   trunk:
     - AppCenter
     - Automattic-Tracks-iOS
-    - CocoaLumberjack
     - Gridicons
-    - Reachability
     - Sentry
     - Simperium
-    - Sodium-Fork
+    - Sodium
     - UIDeviceIdentifier
     - WordPress-Ratings-iOS
     - ZIPFoundation
 
 SPEC CHECKSUMS:
-  AppCenter: 765ff38c4d360fc5ec61b61a8be24d74cd6d4d83
-  Automattic-Tracks-iOS: 208742591b1cd9abbc8914b37d6ebdb569f22e78
-  CocoaLumberjack: e8955b9d337ac307103b0a34fd141c32f27e53c5
+  AppCenter: 3fd04aa1b166e16fdb03ec81dabe488aece83fbd
+  Automattic-Tracks-iOS: 63e55654f500b3e8fb35087e64575e00d12eb2f5
   Gridicons: dc92efbe5fd60111d2e8ea051d84a60cca552abc
-  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  Sentry: ab6c209f23700d1460691dbc90e19ed0a05d496b
+  Sentry: 4272663eb0eda312024d795ca3f5a562a8ce5e18
   Simperium: 45d828d68aad71f3449371346f270013943eff78
-  Sodium-Fork: 45fe3a7c675898ca0635af4eadcb34985477e868
-  UIDeviceIdentifier: f4bf3b343581a1beacdbf5fb1a8825bd5f05a4a4
+  Sodium: 23d11554ecd556196d313cf6130d406dfe7ac6da
+  UIDeviceIdentifier: e6a801d25f4f178de5bdf475ffe29050d0148176
   WordPress-Ratings-iOS: 9f83dbba6e728c5121b1fd21b5683cf2fd120646
   ZIPFoundation: b1f0de4eed33e74a676f76e12559ab6b75990197
 
-PODFILE CHECKSUM: 4671d263d1055fc5b4d6c40c0838a4ffaf373d42
+PODFILE CHECKSUM: 3f45f47d6daf796253a730461f3f3dc6d222bd35
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.11.3

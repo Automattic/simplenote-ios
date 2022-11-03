@@ -103,7 +103,7 @@
 
 - (void)setupCrashLogging
 {
-    [CrashLogging startWithSimperium: self.simperium];
+    [[CrashLogging shared] startWithSimperium: self.simperium];
 }
 
 - (void)setupThemeNotifications
