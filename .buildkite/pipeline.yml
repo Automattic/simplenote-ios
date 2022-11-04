@@ -14,14 +14,14 @@ common_params:
 steps:
 
   - label: "🔬 Build and Test"
-    command: .buildkite/commands/build-and-test.sh
+    command: ".buildkite/commands/build-and-test.sh"
     env: *common_env
     plugins: *common_plugins
     artifact_paths:
       - "fastlane/test_output/*"
 
   - label: "🛠 Installable Build"
-    command: .buildkite/commands/build-prototype.sh
+    command: ".buildkite/commands/build-prototype.sh"
     env: *common_env
     plugins: *common_plugins
     if: "build.pull_request.id != null || build.pull_request.draft"
