@@ -12,7 +12,6 @@ USER_ENV_FILE_PATH = File.join(Dir.home, '.simplenoteios-env.default')
 PROJECT_ENV_FILE_PATH = File.join(
   Dir.home, '.configure', 'simplenote-ios', 'secrets', 'project.env'
 )
-PROJECT_ROOT_FOLDER = File.dirname(File.expand_path(__dir__))
 $used_test_account_index = nil
 
 before_all do
@@ -775,14 +774,14 @@ end
   # bundle exec fastlane run_ui_tests [scheme:<Xcode scheme with UI tests>] [device:<Name of the iOS Simulator>] [test_account:<Test account email>]
   #
   # Example:
-  # bundle exec fastlane run_ui_tests scheme:"SimplenoteUITests_Subset" device:"iPhone 12" test_account:"test.account@test.com"
+  # bundle exec fastlane run_ui_tests scheme:"SimplenoteUITests_Subset" device:"iPhone 14" test_account:"test.account@test.com"
   #####################################################################################
   desc "Run UI tests"
   lane :run_ui_tests do | options |
     scan(
       workspace: workspace_name,
       scheme: options[:scheme] || "SimplenoteUITests_Subset",
-      device: options[:device] || "iPhone 12",
+      device: options[:device] || "iPhone 14",
       prelaunch_simulator: true,
       reset_simulator: true,
       xcargs: { UI_TEST_ACCOUNT: options[:test_account] || '' }
@@ -799,7 +798,7 @@ end
   # bundle exec fastlane pick_test_account_and_run_ui_tests [device:<Name of the iOS Simulator>]
   #
   # Example:
-  # bundle exec fastlane pick_test_account_and_run_ui_tests device:"iPhone 12"
+  # bundle exec fastlane pick_test_account_and_run_ui_tests device:"iPhone 14"
   #####################################################################################
   desc "Occupy a free test account and run UI tests with it"
   lane :pick_test_account_and_run_ui_tests do | options |
