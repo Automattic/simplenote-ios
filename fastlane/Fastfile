@@ -752,14 +752,14 @@ end
   # bundle exec fastlane test [device:<Name of the iOS Simulator>]
   #
   # Example:
-  # bundle exec fastlane test device:"iPhone 12"
+  # bundle exec fastlane test device:"iPhone 14"
   #####################################################################################
   desc "Run Unit Tests"
   lane :test do | options |
     scan(
       workspace: workspace_name,
       scheme: 'Simplenote',
-      device: options[:device] || "iPhone 12",
+      device: options[:device] || "iPhone 14",
       prelaunch_simulator: true,
       reset_simulator: true,
     )

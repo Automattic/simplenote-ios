@@ -27,14 +27,14 @@ steps:
     if: "build.pull_request.id != null || build.pull_request.draft"
 
   - label: "🔬 UI Test (Subset)"
-    command: ".buildkite/commands/build-and-ui-test.sh SimplenoteUITests_Subset 'iPhone 12'"
+    command: ".buildkite/commands/build-and-ui-test.sh SimplenoteUITests_Subset 'iPhone 14'"
     env: *common_env
     plugins: *common_plugins
     artifact_paths:
       - "output/scan/*"
 
   - label: "🔬 UI Test (Full)"
-    command: ".buildkite/commands/build-and-ui-test.sh SimplenoteUITests 'iPhone 12'"
+    command: ".buildkite/commands/build-and-ui-test.sh SimplenoteUITests 'iPhone 14'"
     env: *common_env
     plugins: *common_plugins
     artifact_paths:
