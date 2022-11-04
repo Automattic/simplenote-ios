@@ -4,8 +4,8 @@ common_params:
   - &common_plugins
     - automattic/bash-cache#2.9.0
     - automattic/git-s3-cache#v1.1.3:
-      bucket: "a8c-repo-mirrors"
-      repo: "automattic/simplenote-ios/"
+        bucket: "a8c-repo-mirrors"
+        repo: "automattic/simplenote-ios/"
   # Common environment values to use with the `env` key.
   - &common_env
     IMAGE_ID: xcode-14.0.1
