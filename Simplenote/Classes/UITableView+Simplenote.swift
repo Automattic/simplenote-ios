@@ -135,7 +135,7 @@ extension UITableView {
         }
     }
 
-    open func selectAllRows(inSection section: Int, animated: Bool) {
+    func selectAllRows(inSection section: Int, animated: Bool) {
         forEachIndexPath(in: section) { indexPath in
             selectRow(at: indexPath, animated: animated, scrollPosition: .none)
         }

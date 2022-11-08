@@ -36,6 +36,16 @@ extension SPAppDelegate {
 
         authenticator.providerString = "simplenote.com"
     }
+
+    @objc
+    func setupStoreManager() {
+        guard #available(iOS 15, *) else {
+            NSLog("[StoreManager] Unavailable")
+            return
+        }
+
+        StoreManager.shared.initialize()
+    }
 }
 
 // MARK: - Internal Methods
@@ -275,7 +285,7 @@ extension SPAppDelegate: SimperiumDelegate {
         ShortcutsHandler.shared.updateHomeScreenQuickActionsIfNeeded()
 
         // Now that the user info is present, cache it for use by the crash logging system.
-        let analyticsEnabled = simperium.preferencesObject()?.analytics_enabled?.boolValue ?? true
+        let analyticsEnabled = simperium.preferencesObject().analytics_enabled?.boolValue ?? true
         CrashLoggingShim.shared.cacheUser(user)
         CrashLoggingShim.cacheOptOutSetting(!analyticsEnabled)
 

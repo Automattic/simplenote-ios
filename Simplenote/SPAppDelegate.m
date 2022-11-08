@@ -130,14 +130,17 @@
     [self configureAccountDeletionController];
     [self setupDefaultWindow];
     [self configureStateRestoration];
-    
+
     return YES;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-	// Once the UI is wired, Auth Simperium
-	[self authenticateSimperium];
+    // Once the UI is wired, Auth Simperium
+    [self authenticateSimperium];
+
+    // Start the StoreKit Manager
+    [self setupStoreManager];
 
     // Handle Simplenote Migrations: We *need* to initialize the Ratings framework after this step, for reasons be.
     [[MigrationsHandler new] ensureUpdateIsHandled];
@@ -147,7 +150,7 @@
 
     // Initialize UI
     [self loadSelectedTheme];
-    
+
     // Check to see if first time user
     if ([self isFirstLaunch]) {
         _noteListViewController.firstLaunch = YES;

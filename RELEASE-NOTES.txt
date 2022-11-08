@@ -1,6 +1,6 @@
 4.48
 -----
-
+-   Simplenote Users now have the ability to become sustainers #1493
 
 4.47
 -----

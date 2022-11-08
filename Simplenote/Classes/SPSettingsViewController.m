@@ -128,11 +128,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                                                                                            action:@selector(doneAction:)];
     
     // Header View
-    if (@available(iOS 15.0, *)) {
-        SustainerView *sustainerView = [SustainerView loadFromNib];
-        sustainerView.appliesTopInset = YES;
-        self.tableView.tableHeaderView = sustainerView;
-    }
+    [self setupTableHeaderView];
 
     // Setup the Switches
     self.alphabeticalTagSortSwitch = [UISwitch new];
@@ -172,10 +168,15 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     self.pinTimeoutTextField.inputAccessoryView = self.doneToolbar;
     [self.view addSubview:self.pinTimeoutTextField];
     
-    // Listen to Theme Notifications
+    // Listen to Notifications
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(themeDidChange)
                                                  name:SPSimplenoteThemeChangedNotification
+                                               object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(subscriptionStatusDidChange)
+                                                 name:SPSubscriptionStatusDidChangeNotification
                                                object:nil];
 
     [self refreshThemeStyles];
@@ -184,7 +185,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self refreshTableHeaderSize];
+    [self refreshTableHeaderView];
     [self.tableView reloadData];
 }
 
@@ -193,13 +194,23 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        [self refreshTableHeaderSize];
+        [self refreshTableHeaderView];
     } completion:nil];
 }
 
 - (void)doneAction:(id)sender
 {
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+#pragma mark - Notifications
+
+- (void)subscriptionStatusDidChange
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self refreshTableHeaderView];
+    });
 }
 
 

@@ -1,0 +1,77 @@
+{
+  "identifier" : "A7468C4F",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+
+  ],
+  "settings" : {
+
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "6ED580C5",
+      "localizations" : [
+
+      ],
+      "name" : "sustainer",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "199.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "6BF391A1",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "",
+              "displayName" : "",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "com.codality.NotationalFlow.sustainer200",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Sustainer Yearly",
+          "subscriptionGroupID" : "6ED580C5",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "19.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "51054854",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "",
+              "displayName" : "",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "com.codality.NotationalFlow.sustainer20",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Sustainer Monthly",
+          "subscriptionGroupID" : "6ED580C5",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 2,
+    "minor" : 0
+  }
+}
