@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21279" systemVersion="22A380" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="Note" representedClassName="Note" parentEntity="SPManagedObject" syncable="YES">
+        <attribute name="content" attributeType="String" syncable="YES"/>
+        <attribute name="creationDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="deleted" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="lastPosition" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES">
+            <userInfo>
+                <entry key="spDisableSync" value="value"/>
+            </userInfo>
+        </attribute>
+        <attribute name="modificationDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="noteSynced" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES">
+            <userInfo>
+                <entry key="spDisableSync" value="value"/>
+            </userInfo>
+        </attribute>
+        <attribute name="owner" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pinned" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES">
+            <userInfo>
+                <entry key="spDisableSync" value="value"/>
+            </userInfo>
+        </attribute>
+        <attribute name="publishURL" attributeType="String" syncable="YES"/>
+        <attribute name="remoteId" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="spDisableSync" value="value"/>
+            </userInfo>
+        </attribute>
+        <attribute name="shareURL" attributeType="String" syncable="YES"/>
+        <attribute name="systemTags" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="spOverride" value="jsonlist"/>
+            </userInfo>
+        </attribute>
+        <attribute name="tags" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="spOverride" value="jsonlist"/>
+            </userInfo>
+        </attribute>
+    </entity>
+    <entity name="Preferences" representedClassName="Preferences" syncable="YES">
+        <attribute name="analytics_enabled" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="ghostData" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="recent_searches" optional="YES" attributeType="Transformable" valueTransformerName="" syncable="YES"/>
+        <attribute name="simperiumKey" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="subscription_date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="subscription_level" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="subscription_platform" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Settings" representedClassName="Settings" syncable="YES">
+        <attribute name="decline_skip_versions" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="dislike_skip_versions" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="ghostData" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="like_skip_versions" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="minimum_events" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="minimum_interval_days" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="ratings_disabled" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="simperiumKey" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="SPManagedObject" representedClassName="SPManagedObject" isAbstract="YES" syncable="YES">
+        <attribute name="ghostData" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="simperiumKey" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Tag" representedClassName="Tag" parentEntity="SPManagedObject" syncable="YES">
+        <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="share" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="spOverride" value="jsonlist"/>
+            </userInfo>
+        </attribute>
+    </entity>
+</model>
