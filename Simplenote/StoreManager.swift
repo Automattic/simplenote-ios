@@ -95,11 +95,7 @@ class StoreManager {
         Task {
             do {
                 try await purchase(product: product)
-
-                Task { @MainActor in
-                    /// Note: This must be invoked in the main thread, otherwise, warnings get triggered!
-                    SPTracker.trackSustainerPurchaseCompleted(storeProduct: storeProduct)
-                }
+                await SPTracker.trackSustainerPurchaseCompleted(storeProduct: storeProduct)
             } catch {
                 NSLog("[StoreManager] Purchase Failed \(error)")
             }

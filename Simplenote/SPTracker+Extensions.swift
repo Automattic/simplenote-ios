@@ -116,6 +116,7 @@ extension SPTracker {
         trackAutomatticEvent(withName: "iap_dismiss_button_tapped", properties: nil)
     }
 
+    @MainActor
     static func trackSustainerPurchaseCompleted(storeProduct: StoreProduct) {
         trackAutomatticEvent(withName: "iap_purchase_completed", properties: [
             "product": storeProduct.identifier
