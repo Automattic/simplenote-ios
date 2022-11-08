@@ -820,7 +820,10 @@ end
   lane :register_new_device do |options|
     device_name = UI.input('Device Name: ') if options[:device_name].nil?
     device_id = UI.input('Device ID: ') if options[:device_id].nil?
-    all_bundle_ids = simplenote_app_identifiers
+    # Currently, Simplenote has an odd setup with a dedicated app id for development builds
+    all_bundle_ids =
+      simplenote_app_identifiers +
+      simplenote_app_identifiers(root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Development")
 
     UI.message "Registering #{device_name} with ID #{device_id} and registering it with any provisioning profiles associated with these bundle identifiers:"
     all_bundle_ids.each do |identifier|
