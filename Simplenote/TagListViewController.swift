@@ -173,7 +173,9 @@ private extension TagListViewController {
 
     @objc
     func subscriptionStatusDidChange() {
-        refreshTableHeaderView()
+        DispatchQueue.main.async {
+            self.refreshTableHeaderView()
+        }
     }
 }
 

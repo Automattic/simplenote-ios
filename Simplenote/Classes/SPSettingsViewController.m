@@ -175,7 +175,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                                                object:nil];
 
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(refreshTableHeaderView)
+                                             selector:@selector(subscriptionStatusDidChange)
                                                  name:SPSubscriptionStatusDidChangeNotification
                                                object:nil];
 
@@ -201,6 +201,16 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 - (void)doneAction:(id)sender
 {
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+#pragma mark - Notifications
+
+- (void)subscriptionStatusDidChange
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self refreshTableHeaderView];
+    });
 }
 
 

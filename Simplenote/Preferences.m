@@ -19,8 +19,14 @@
 
 - (void) didChangeValueForKey:(NSString *)key
 {
-    if ([key isEqualToString:@"analytics_enabled"]) {
+    NSString *analyticsKey = NSStringFromSelector(@selector((analytics_enabled)));
+    if ([key isEqualToString:analyticsKey]) {
         [CrashLogging cacheOptOutSetting: !self.analytics_enabled.boolValue];
+    }
+
+    NSString *subscriptionKey = NSStringFromSelector(@selector((subscription_level)));
+    if ([key isEqualToString:subscriptionKey]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:SPSubscriptionStatusDidChangeNotification object:nil];
     }
 
     [super didChangeValueForKey:key];

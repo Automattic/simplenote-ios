@@ -251,7 +251,6 @@ private extension StoreManager {
         }
 
         simperium.save()
-        NotificationCenter.default.post(name: .SPSubscriptionStatusDidChange, object: nil)
     }
 
     func mustUpdatePreferences(preferences: Preferences) -> Bool {
