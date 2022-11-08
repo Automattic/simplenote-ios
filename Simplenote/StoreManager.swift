@@ -96,6 +96,16 @@ class StoreManager {
             }
         }
     }
+
+    /// Returns the Display Price for a given Product
+    ///
+    func displayPrice(for storeProduct: StoreProduct) -> String? {
+        guard let product = storeProductMap[storeProduct] else {
+            return nil
+        }
+
+        return product.displayPrice
+    }
 }
 
 

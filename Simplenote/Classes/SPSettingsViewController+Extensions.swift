@@ -17,8 +17,13 @@ extension SPSettingsViewController {
 
         let sustainerView: SustainerView = SustainerView.instantiateFromNib()
         sustainerView.appliesTopInset = true
-        sustainerView.onPress = {
-            StoreManager.shared.purchase(storeProduct: .sustainerYearly)
+        sustainerView.onPress = { [weak self] in
+            guard let self else {
+                return
+            }
+
+            let sustainerAlertController = UIAlertController.buildSustainerAlert()
+            self.present(sustainerAlertController, animated: true)
         }
 
         tableView.tableHeaderView = sustainerView
