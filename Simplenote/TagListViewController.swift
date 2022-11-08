@@ -44,6 +44,7 @@ final class TagListViewController: UIViewController {
         super.viewWillAppear(animated)
         startListeningToKeyboardNotifications()
 
+        refreshTableHeaderSize()
         reloadTableView()
         startListeningForChanges()
         becomeFirstResponder()
@@ -58,7 +59,21 @@ final class TagListViewController: UIViewController {
 
         resignFirstResponder()
     }
+
+    override func viewSafeAreaInsetsDidChange() {
+        super.viewSafeAreaInsetsDidChange()
+        refreshTableHeaderSize()
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+
+        coordinator.animate { _ in
+            self.refreshTableHeaderSize()
+        }
+    }
 }
+
 
 // MARK: - Configuration
 //
@@ -73,6 +88,19 @@ private extension TagListViewController {
 
         tableView.separatorInsetReference = .fromAutomaticInsets
         tableView.automaticallyAdjustsScrollIndicatorInsets = false
+
+        guard #available(iOS 15.0, *) else {
+            return
+        }
+
+        let sustainerView: SustainerView = SustainerView.instantiateFromNib()
+        sustainerView.onPress = { [weak sustainerView, weak self] in
+            // TODO: Remove. For demo purposes only.
+            sustainerView?.isActiveSustainer.toggle()
+            self?.refreshTableHeaderSize()
+        }
+
+        tableView.tableHeaderView = sustainerView
     }
 
     func configureTableHeaderView() {
@@ -533,6 +561,17 @@ private extension TagListViewController {
     func refreshEditTagsButton(isEditing: Bool) {
         let title = isEditing ? Localization.done : Localization.edit
         tagsHeaderView.actionButton.setTitle(title, for: .normal)
+    }
+
+    func refreshTableHeaderSize() {
+        guard let headerView = tableView.tableHeaderView as? SustainerView else {
+            return
+        }
+
+        headerView.preferredWidth = tableView.frame.width - view.safeAreaInsets.left
+        headerView.adjustSizeForCompressedLayout()
+
+        tableView.tableHeaderView = headerView
     }
 
     func openNoteListForTagName(_ tagName: String?, isTraversing: Bool) {
