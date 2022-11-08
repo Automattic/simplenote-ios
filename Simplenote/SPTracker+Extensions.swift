@@ -91,9 +91,35 @@ extension SPTracker {
     }
 }
 
+
 // MARK: Account Deletion
+//
 extension SPTracker {
     static func trackDeleteAccountButttonTapped() {
         trackAutomatticEvent(withName: "spios_delete_account_button_clicked", properties: nil)
+    }
+}
+
+// MARK: - IAP
+//
+extension SPTracker {
+
+    static func trackSustainerMonthlyButtonTapped() {
+        trackAutomatticEvent(withName: "iap_monthly_button_tapped", properties: nil)
+    }
+
+    static func trackSustainerYearlyButtonTapped() {
+        trackAutomatticEvent(withName: "iap_yearly_button_tapped", properties: nil)
+    }
+
+    static func trackSustainerDismissButtonTapped() {
+        trackAutomatticEvent(withName: "iap_dismiss_button_tapped", properties: nil)
+    }
+
+    @MainActor
+    static func trackSustainerPurchaseCompleted(storeProduct: StoreProduct) {
+        trackAutomatticEvent(withName: "iap_purchase_completed", properties: [
+            "product": storeProduct.identifier
+        ])
     }
 }

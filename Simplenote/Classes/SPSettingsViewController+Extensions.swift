@@ -17,8 +17,8 @@ extension SPSettingsViewController {
 
         let sustainerView: SustainerView = SustainerView.instantiateFromNib()
         sustainerView.appliesTopInset = true
-        sustainerView.onPress = {
-            StoreManager.shared.purchase(storeProduct: .sustainerYearly)
+        sustainerView.onPress = { [weak self] in
+            self?.presentSubscriptionAlertIfNeeded()
         }
 
         tableView.tableHeaderView = sustainerView
@@ -35,6 +35,16 @@ extension SPSettingsViewController {
         headerView.adjustSizeForCompressedLayout()
 
         tableView.tableHeaderView = headerView
+    }
+
+    @available(iOS 15.0, *)
+    func presentSubscriptionAlertIfNeeded() {
+        if isActiveSustainer {
+            return
+        }
+
+        let sustainerAlertController = UIAlertController.buildSustainerAlert()
+        present(sustainerAlertController, animated: true)
     }
 }
 
