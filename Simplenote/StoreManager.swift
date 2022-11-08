@@ -46,7 +46,11 @@ class StoreManager {
     // MARK: - Public Properties
 
     var isActiveSubscriber: Bool {
-        subscriptionGroupStatus != nil
+        guard let subscriptionGroupStatus else {
+            return false
+        }
+
+        return subscriptionGroupStatus.isActive
     }
 
 
@@ -255,9 +259,9 @@ private extension StoreManager {
             return
         }
 
-        if let status {
-            preferences.subscription_date = subscriptionDate(from: status)
+        if let status, status.isActive {
             preferences.subscription_level = subscriptionLevel(from: status)
+            preferences.subscription_date = subscriptionDate(from: status)
             preferences.subscription_platform = StoreConstants.platform
         } else {
             preferences.subscription_date = nil
@@ -286,10 +290,21 @@ private extension StoreManager {
     }
 
     func subscriptionLevel(from status: SubscriptionStatus) -> String? {
-        guard status.state == .subscribed || status.state == .inGracePeriod else {
+        guard status.isActive else {
             return nil
         }
 
         return StoreConstants.activeSubscriptionLevel
+    }
+}
+
+
+// MARK: - SubscriptionStatus Helpers
+//
+@available(iOS 15, *)
+private extension Product.SubscriptionInfo.Status {
+
+    var isActive: Bool {
+        state == .subscribed || state == .inGracePeriod
     }
 }
