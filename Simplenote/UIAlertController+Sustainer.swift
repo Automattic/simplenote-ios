@@ -21,14 +21,19 @@ extension UIAlertController {
 
         let alert = UIAlertController(title: Localization.title, message: Localization.message, preferredStyle: .actionSheet)
         alert.addActionWithTitle(monthlyActionTitle, style: .default) { _ in
+            SPTracker.trackSustainerMonthlyButtonTapped()
             manager.purchase(storeProduct: .sustainerMonthly)
         }
 
         alert.addActionWithTitle(yearlyActionTitle, style: .default) { _ in
+            SPTracker.trackSustainerYearlyButtonTapped()
             manager.purchase(storeProduct: .sustainerYearly)
         }
 
-        alert.addCancelActionWithTitle(Localization.dismissActionTitle)
+        alert.addCancelActionWithTitle(Localization.dismissActionTitle) { _ in
+            SPTracker.trackSustainerDismissButtonTapped()
+        }
+
         return alert
     }
 }

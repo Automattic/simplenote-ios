@@ -91,6 +91,7 @@ class StoreManager {
         Task {
             do {
                 try await purchase(product: product)
+                SPTracker.trackSustainerPurchaseCompleted(product: storeProduct)
             } catch {
                 NSLog("[StoreManager] Purchase Failed \(error)")
             }
