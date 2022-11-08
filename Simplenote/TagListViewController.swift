@@ -18,6 +18,7 @@ final class TagListViewController: UIViewController {
 
     private var renameTag: Tag?
 
+    private var sustainerHeaderView: SustainerView?
     private var isActiveSustainer: Bool {
         SPAppDelegate.shared().simperium.preferencesObject().isActiveSubscriber
     }
@@ -98,17 +99,14 @@ private extension TagListViewController {
             return
         }
 
-        let sustainerView: SustainerView = SustainerView.instantiateFromNib()
-        sustainerView.onPress = { [weak self] in
-            guard let self else {
-                return
+        sustainerHeaderView = {
+            let sustainerView: SustainerView = SustainerView.instantiateFromNib()
+            sustainerView.onPress = { [weak self] in
+                self?.presentSubscriptionAlertIfNeeded()
             }
 
-            let sustainerAlertController = UIAlertController.buildSustainerAlert()
-            self.present(sustainerAlertController, animated: true)
-        }
-
-        tableView.tableHeaderView = sustainerView
+            return sustainerView
+        }()
     }
 
     func configureTableHeaderView() {
@@ -132,6 +130,23 @@ private extension TagListViewController {
         UIMenuController.shared.update()
     }
 }
+
+
+// MARK: - Action Handlers
+//
+private extension TagListViewController {
+
+    @available(iOS 15.0, *)
+    func presentSubscriptionAlertIfNeeded() {
+        if isActiveSustainer {
+            return
+        }
+
+        let sustainerAlertController = UIAlertController.buildSustainerAlert()
+        present(sustainerAlertController, animated: true)
+    }
+}
+
 
 // MARK: - Notifications
 //
@@ -581,15 +596,19 @@ private extension TagListViewController {
     }
 
     func refreshTableHeaderView() {
-        guard let headerView = tableView.tableHeaderView as? SustainerView else {
+        guard let sustainerHeaderView else {
             return
         }
 
-        headerView.isActiveSustainer = isActiveSustainer
-        headerView.preferredWidth = tableView.frame.width - view.safeAreaInsets.left
-        headerView.adjustSizeForCompressedLayout()
+        if isActiveSustainer {
+            tableView.tableHeaderView = nil
+            return
+        }
 
-        tableView.tableHeaderView = headerView
+        sustainerHeaderView.preferredWidth = tableView.frame.width - view.safeAreaInsets.left
+        sustainerHeaderView.adjustSizeForCompressedLayout()
+
+        tableView.tableHeaderView = sustainerHeaderView
     }
 
     func openNoteListForTagName(_ tagName: String?, isTraversing: Bool) {
