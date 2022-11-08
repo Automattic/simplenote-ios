@@ -63,8 +63,8 @@ class StoreManager {
     ///
     ///     1.  Listen for Pending Transactions
     ///     2.  Request the Known Products
-    ///     3.  Refresh the Purchased Products (and update Core Data)
-    ///     4.  Refresh the SubscriptionGroup Status
+    ///     3.  Refresh the Purchased Products
+    ///     4.  Refresh the SubscriptionGroup Status (and update Core Data / refresh UI all over!)
     ///
     /// This API should be invoked shortly after the Launch Sequence is complete.
     ///
