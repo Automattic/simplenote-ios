@@ -96,8 +96,8 @@
     NSLog(@"Initializing AppCenter...");
     
     NSString *identifier = [SPCredentials appCenterIdentifier];
-    [MSAppCenter start:identifier withServices:@[[MSDistribute class]]];
-    [MSDistribute setEnabled:true];
+    [MSACAppCenter start:identifier withServices:@[[MSACDistribute class]]];
+    [MSACDistribute setEnabled:true];
 #endif
 }
 
