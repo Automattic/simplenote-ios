@@ -39,6 +39,7 @@ platform :ios do
 ########################################################################
 PROJECT_ROOT_FOLDER = File.dirname(File.expand_path(__dir__))
 VERSION_FILE_PATH = File.join(PROJECT_ROOT_FOLDER, 'config', 'Version.Public.xcconfig')
+OUTPUT_DIRECTORY_PATH = File.join(PROJECT_ROOT_FOLDER, 'build', 'results')
 
 Dotenv.load(USER_ENV_FILE_PATH)
 Dotenv.load(PROJECT_ENV_FILE_PATH)
@@ -365,7 +366,7 @@ end
       workspace: "Simplenote.xcworkspace",
       export_method: "enterprise",
       clean: true,
-      output_directory: "./build/",
+      output_directory: OUTPUT_DIRECTORY_PATH
       export_team_id: ENV["INT_EXPORT_TEAM_ID"],
       export_options: {
         method: "enterprise",
@@ -376,14 +377,14 @@ end
       }
     )
 
-    sh("mv ../build/Simplenote.ipa \"../build/Simplenote Internal.ipa\"")
+    File.rename(File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote.ipa'), File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote Internal.ipa'))
 
     appcenter_upload(
       api_token: ENV["APPCENTER_API_TOKEN"],
       owner_name: "automattic",
       owner_type: "organization",
       app_name: "Simplenote",
-      file: "./build/Simplenote Internal.ipa",
+      file: File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote Internal.ipa'),
       notify_testers: false
     )
 
@@ -391,7 +392,7 @@ end
       auth_token: ENV["SENTRY_AUTH_TOKEN"],
       org_slug: 'a8c',
       project_slug: 'simplenote-ios',
-      dsym_path: "./build/Simplenote.app.dSYM.zip"
+      dsym_path: File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote.app.dSYM.zip')
     )
   end
 
@@ -521,7 +522,7 @@ end
       workspace: "Simplenote.xcworkspace",
       export_method: "enterprise",
       clean: true,
-      output_directory: "./build/",
+      output_directory: OUTPUT_DIRECTORY_PATH
       export_team_id: ENV["INT_EXPORT_TEAM_ID"],
       export_options: {
         method: "enterprise",
@@ -532,14 +533,14 @@ end
       }
     )
 
-    sh("mv ../build/Simplenote.ipa \"../build/Simplenote Alpha.ipa\"")
+    File.rename(File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote.ipa'), File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote Alpha.ipa'))
 
     appcenter_upload(
       api_token: get_required_env("APPCENTER_API_TOKEN"),
       owner_name: "automattic",
       owner_type: "organization",
       app_name: "Simplenote-Installable-Builds",
-      file: "./build/Simplenote Alpha.ipa",
+      file: File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote Alpha.ipa'),
       destinations: "All-Users-of-Simplenote-Installable-Builds",
       notify_testers: false
     )
@@ -548,7 +549,7 @@ end
       auth_token: get_required_env("SENTRY_AUTH_TOKEN"),
       org_slug: 'a8c',
       project_slug: 'simplenote-ios',
-      dsym_path: "./build/Simplenote.app.dSYM.zip",
+      dsym_path: File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote.app.dSYM.zip'),
     )
 
     return if ENV['BUILDKITE_PULL_REQUEST'].nil?
@@ -759,6 +760,7 @@ end
       workspace: workspace_name,
       scheme: 'Simplenote',
       device: options[:device] || "iPhone 14",
+      output_directory: OUTPUT_DIRECTORY_PATH,
       prelaunch_simulator: true,
       reset_simulator: true,
     )
@@ -782,6 +784,7 @@ end
       workspace: workspace_name,
       scheme: options[:scheme] || "SimplenoteUITests_Subset",
       device: options[:device] || "iPhone 14",
+      output_directory: OUTPUT_DIRECTORY_PATH,
       prelaunch_simulator: true,
       reset_simulator: true,
       xcargs: { UI_TEST_ACCOUNT: options[:test_account] || '' }

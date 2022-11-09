@@ -21,7 +21,7 @@ steps:
     env: *common_env
     plugins: *common_plugins
     artifact_paths:
-         - "build/results/*"
+      - "build/results/*"
 
   #################
   # Create Installable Build
@@ -31,6 +31,8 @@ steps:
     env: *common_env
     plugins: *common_plugins
     if: "build.pull_request.id != null || build.pull_request.draft"
+    artifact_paths:
+      - "build/results/*"
 
   #################
   # UI Tests
