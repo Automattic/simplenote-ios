@@ -523,6 +523,7 @@ end
       export_method: "enterprise",
       clean: true,
       output_directory: OUTPUT_DIRECTORY_PATH,
+      result_bundle: true,
       export_team_id: ENV["INT_EXPORT_TEAM_ID"],
       export_options: {
         method: "enterprise",
@@ -761,6 +762,7 @@ end
       scheme: 'Simplenote',
       device: options[:device] || "iPhone 14",
       output_directory: OUTPUT_DIRECTORY_PATH,
+      result_bundle: true,
       prelaunch_simulator: true,
       reset_simulator: true,
     )
@@ -785,6 +787,7 @@ end
       scheme: options[:scheme] || "SimplenoteUITests_Subset",
       device: options[:device] || "iPhone 14",
       output_directory: OUTPUT_DIRECTORY_PATH,
+      result_bundle: true,
       prelaunch_simulator: true,
       reset_simulator: true,
       xcargs: { UI_TEST_ACCOUNT: options[:test_account] || '' }
