@@ -374,7 +374,8 @@ end
           root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Internal",
           match_type: 'InHouse'
         )
-      }
+      },
+      result_bundle: true
     )
 
     File.rename(File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote.ipa'), File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote Internal.ipa'))
@@ -392,7 +393,7 @@ end
       auth_token: ENV["SENTRY_AUTH_TOKEN"],
       org_slug: 'a8c',
       project_slug: 'simplenote-ios',
-      dsym_path: File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote.app.dSYM.zip')
+      dsym_path: lane_context[SharedValues::DSYM_OUTPUT_PATH]
     )
   end
 
@@ -415,7 +416,8 @@ end
 
     appstore_code_signing
 
-    gym(scheme: "Simplenote",
+    gym(
+      scheme: "Simplenote",
       workspace: "Simplenote.xcworkspace",
       configuration: "Distribution AppStore",
       clean: true,
@@ -423,7 +425,8 @@ end
         method: "app-store",
         export_team_id: ENV["EXT_EXPORT_TEAM_ID"],
         provisioningProfiles: simplenote_provisioning_profiles
-      }
+      },
+      result_bundle: true
     )
 
     testflight(
@@ -523,7 +526,6 @@ end
       export_method: "enterprise",
       clean: true,
       output_directory: OUTPUT_DIRECTORY_PATH,
-      result_bundle: true,
       export_team_id: ENV["INT_EXPORT_TEAM_ID"],
       export_options: {
         method: "enterprise",
@@ -531,7 +533,8 @@ end
           root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Alpha",
           match_type: 'InHouse'
         )
-      }
+      },
+      result_bundle: true
     )
 
     File.rename(File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote.ipa'), File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote Alpha.ipa'))
@@ -550,7 +553,7 @@ end
       auth_token: get_required_env("SENTRY_AUTH_TOKEN"),
       org_slug: 'a8c',
       project_slug: 'simplenote-ios',
-      dsym_path: File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote.app.dSYM.zip'),
+      dsym_path: lane_context[SharedValues::DSYM_OUTPUT_PATH]
     )
 
     return if ENV['BUILDKITE_PULL_REQUEST'].nil?
@@ -762,9 +765,8 @@ end
       scheme: 'Simplenote',
       device: options[:device] || "iPhone 14",
       output_directory: OUTPUT_DIRECTORY_PATH,
-      result_bundle: true,
-      prelaunch_simulator: true,
       reset_simulator: true,
+      result_bundle: true
     )
   end
 
@@ -787,10 +789,9 @@ end
       scheme: options[:scheme] || "SimplenoteUITests_Subset",
       device: options[:device] || "iPhone 14",
       output_directory: OUTPUT_DIRECTORY_PATH,
-      result_bundle: true,
-      prelaunch_simulator: true,
       reset_simulator: true,
-      xcargs: { UI_TEST_ACCOUNT: options[:test_account] || '' }
+      xcargs: { UI_TEST_ACCOUNT: options[:test_account] || '' },
+      result_bundle: true
     )
   end
 
