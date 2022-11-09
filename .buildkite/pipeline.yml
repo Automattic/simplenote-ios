@@ -13,29 +13,38 @@ common_params:
 # This is the default pipeline – it will build and test the app
 steps:
 
+  #################
+  # Run Unit Tests
+  #################
   - label: "🔬 Build and Test"
     command: ".buildkite/commands/build-and-test.sh"
     env: *common_env
     plugins: *common_plugins
     artifact_paths:
-      - "fastlane/test_output/*"
+         - "build/results/*"
 
+  #################
+  # Create Installable Build
+  #################
   - label: "🛠 Installable Build"
     command: ".buildkite/commands/build-prototype.sh"
     env: *common_env
     plugins: *common_plugins
     if: "build.pull_request.id != null || build.pull_request.draft"
 
+  #################
+  # UI Tests
+  #################
   - label: "🔬 UI Test (Subset)"
     command: ".buildkite/commands/build-and-ui-test.sh SimplenoteUITests_Subset 'iPhone 14'"
     env: *common_env
     plugins: *common_plugins
     artifact_paths:
-      - "output/scan/*"
+      - "build/results/*"
 
   - label: "🔬 UI Test (Full)"
     command: ".buildkite/commands/build-and-ui-test.sh SimplenoteUITests 'iPhone 14'"
     env: *common_env
     plugins: *common_plugins
     artifact_paths:
-      - "output/scan/*"
+      - "build/results/*"
