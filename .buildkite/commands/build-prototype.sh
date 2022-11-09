@@ -6,6 +6,9 @@ install_gems
 echo "--- :cocoapods: Setting up Pods"
 install_cocoapods
 
+echo "--- 📥 Installing xcbeautify"
+brew install xcbeautify
+
 echo "--- Installing Secrets"
 bundle exec fastlane run configure_apply
 
