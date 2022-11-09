@@ -42,7 +42,7 @@ abstract_target 'Automattic' do
 	target 'SimplenoteShare' do
 		# Third Party
 		#
-	    pod 'ZIPFoundation', '~> 0.9.9'
+		pod 'ZIPFoundation', '~> 0.9.9'
 	end
 end
 
@@ -50,14 +50,14 @@ end
 # Post Install
 #
 post_install do |installer|
-  installer.pods_project.targets.each do |target|
-    target.build_configurations.each do |config|
-    	# Remove min deploy target to clean up build warnings.
-  		# See: https://stackoverflow.com/a/64048124
-      config.build_settings.delete 'IPHONEOS_DEPLOYMENT_TARGET'
-      # Fix a code signing issue in Xcode 14 beta.
-  		# This solution is suggested here: https://github.com/CocoaPods/CocoaPods/issues/11402#issuecomment-1189861270
-      config.build_settings['CODE_SIGN_IDENTITY'] = ''
-    end
-  end
+	installer.pods_project.targets.each do |target|
+		target.build_configurations.each do |config|
+			# Remove min deploy target to clean up build warnings.
+			# See: https://stackoverflow.com/a/64048124
+			config.build_settings.delete 'IPHONEOS_DEPLOYMENT_TARGET'
+			# Fix a code signing issue in Xcode 14 beta.
+			# This solution is suggested here: https://github.com/CocoaPods/CocoaPods/issues/11402#issuecomment-1189861270
+			config.build_settings['CODE_SIGN_IDENTITY'] = ''
+		end
+	end
 end
