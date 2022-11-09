@@ -366,7 +366,7 @@ end
       workspace: "Simplenote.xcworkspace",
       export_method: "enterprise",
       clean: true,
-      output_directory: OUTPUT_DIRECTORY_PATH
+      output_directory: OUTPUT_DIRECTORY_PATH,
       export_team_id: ENV["INT_EXPORT_TEAM_ID"],
       export_options: {
         method: "enterprise",
@@ -522,7 +522,7 @@ end
       workspace: "Simplenote.xcworkspace",
       export_method: "enterprise",
       clean: true,
-      output_directory: OUTPUT_DIRECTORY_PATH
+      output_directory: OUTPUT_DIRECTORY_PATH,
       export_team_id: ENV["INT_EXPORT_TEAM_ID"],
       export_options: {
         method: "enterprise",
