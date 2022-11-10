@@ -748,7 +748,7 @@ end
   # bundle exec fastlane test device:"iPhone 14"
   #####################################################################################
   desc "Run Unit Tests"
-  lane :test do | options |
+  lane :run_unit_tests do | options |
     scan(
       workspace: workspace_name,
       scheme: 'Simplenote',

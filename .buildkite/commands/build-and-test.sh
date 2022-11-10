@@ -11,7 +11,7 @@ bundle exec fastlane run configure_apply
 
 echo "--- :hammer_and_wrench: Build and Test"
 set +e
-bundle exec fastlane test
+bundle exec fastlane run_unit_tests
 TESTS_EXIT_STATUS=$?
 set -e
 
