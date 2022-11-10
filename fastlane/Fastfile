@@ -533,7 +533,8 @@ end
           root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Alpha",
           match_type: 'InHouse'
         )
-      }
+      },
+      result_bundle: true
     )
 
     File.rename(File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote.ipa'), File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote Alpha.ipa'))
@@ -767,10 +768,6 @@ end
       reset_simulator: true,
       result_bundle: true
     )
-    trainer(
-      path: OUTPUT_DIRECTORY_PATH,
-      output_directory: OUTPUT_DIRECTORY_PATH
-    )
   end
 
   #####################################################################################
@@ -795,10 +792,6 @@ end
       reset_simulator: true,
       xcargs: { UI_TEST_ACCOUNT: options[:test_account] || '' },
       result_bundle: true
-    )
-    trainer(
-      path: OUTPUT_DIRECTORY_PATH,
-      output_directory: OUTPUT_DIRECTORY_PATH
     )
   end
 
