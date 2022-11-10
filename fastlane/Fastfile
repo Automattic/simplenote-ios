@@ -374,8 +374,7 @@ end
           root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Internal",
           match_type: 'InHouse'
         )
-      },
-      result_bundle: true
+      }
     )
 
     File.rename(File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote.ipa'), File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote Internal.ipa'))
@@ -425,8 +424,7 @@ end
         method: "app-store",
         export_team_id: ENV["EXT_EXPORT_TEAM_ID"],
         provisioningProfiles: simplenote_provisioning_profiles
-      },
-      result_bundle: true
+      }
     )
 
     testflight(
@@ -533,8 +531,7 @@ end
           root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Alpha",
           match_type: 'InHouse'
         )
-      },
-      result_bundle: true
+      }
     )
 
     File.rename(File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote.ipa'), File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote Alpha.ipa'))
