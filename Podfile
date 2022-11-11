@@ -1,7 +1,7 @@
 source 'https://cdn.cocoapods.org/'
 
 unless ['BUNDLE_BIN_PATH', 'BUNDLE_GEMFILE'].any? { |k| ENV.key?(k) }
-	raise 'Please run CocoaPods via `bundle exec`'
+  raise 'Please run CocoaPods via `bundle exec`'
 end
 
 inhibit_all_warnings!
@@ -14,36 +14,36 @@ workspace 'Simplenote.xcworkspace'
 #
 abstract_target 'Automattic' do
 
-	# Main Target
-	#
-	target 'Simplenote' do
-		# Third Party
-		#
-		pod 'Gridicons', '~> 0.18'
-		pod 'AppCenter', '~> 4.4.3'
-		pod 'AppCenter/Distribute', '~> 4.4.3'
+  # Main Target
+  #
+  target 'Simplenote' do
+    # Third Party
+    #
+    pod 'Gridicons', '~> 0.18'
+    pod 'AppCenter', '~> 4.4.3'
+    pod 'AppCenter/Distribute', '~> 4.4.3'
 
-		# Automattic
-		#
-		pod 'Automattic-Tracks-iOS', '~> 0.13'
-#		pod 'Automattic-Tracks-iOS', :git => 'https://github.com/Automattic/Automattic-Tracks-iOS.git', :branch => 'add/support-for-tracking-crashes'
-		pod 'Simperium', '1.9.0'
-		pod 'WordPress-Ratings-iOS', '0.0.2'
+    # Automattic
+    #
+    pod 'Automattic-Tracks-iOS', '~> 0.13'
+    #		pod 'Automattic-Tracks-iOS', :git => 'https://github.com/Automattic/Automattic-Tracks-iOS.git', :branch => 'add/support-for-tracking-crashes'
+    pod 'Simperium', '1.9.0'
+    pod 'WordPress-Ratings-iOS', '0.0.2'
 
-		# Testing Target
-		#
-		target 'SimplenoteTests' do
-			inherit! :search_paths
-		end
-	end
+    # Testing Target
+    #
+    target 'SimplenoteTests' do
+      inherit! :search_paths
+    end
+  end
 
-	# Extension Target
-	#
-	target 'SimplenoteShare' do
-		# Third Party
-		#
-		pod 'ZIPFoundation', '~> 0.9.9'
-	end
+  # Extension Target
+  #
+  target 'SimplenoteShare' do
+    # Third Party
+    #
+    pod 'ZIPFoundation', '~> 0.9.9'
+  end
 end
 
 
