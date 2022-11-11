@@ -2,6 +2,7 @@ default_platform(:ios)
 fastlane_require 'xcodeproj'
 fastlane_require 'dotenv'
 fastlane_require 'open-uri'
+fastlane_require 'buildkit'
 
 unless FastlaneCore::Helper.bundler?
   UI.user_error!('Please run fastlane via `bundle exec`')
@@ -11,7 +12,6 @@ USER_ENV_FILE_PATH = File.join(Dir.home, '.simplenoteios-env.default')
 PROJECT_ENV_FILE_PATH = File.join(
   Dir.home, '.configure', 'simplenote-ios', 'secrets', 'project.env'
 )
-PROJECT_ROOT_FOLDER = File.dirname(File.expand_path(__dir__))
 $used_test_account_index = nil
 
 before_all do
@@ -26,10 +26,7 @@ before_all do
     UI.user_error!("project.env not found: Make sure your configuration is up to date with `rake dependencies`")
   end
 
-  # This allows code signing to work on CircleCI
-  # It is skipped if this isn't running on CI
-  # See https://circleci.com/docs/2.0/ios-codesigning/
-  setup_circle_ci
+  setup_ci
 end
 
 error do |lane, exception, options|
@@ -40,13 +37,17 @@ platform :ios do
 ########################################################################
 # Environment
 ########################################################################
+PROJECT_ROOT_FOLDER = File.dirname(File.expand_path(__dir__))
+VERSION_FILE_PATH = File.join(PROJECT_ROOT_FOLDER, 'config', 'Version.Public.xcconfig')
+OUTPUT_DIRECTORY_PATH = File.join(PROJECT_ROOT_FOLDER, 'build', 'results')
+
 Dotenv.load(USER_ENV_FILE_PATH)
 Dotenv.load(PROJECT_ENV_FILE_PATH)
 ENV[GHHELPER_REPO="Automattic/simplenote-ios"]
 ENV["PROJECT_NAME"]="Simplenote"
-ENV["PROJECT_ROOT_FOLDER"]="./"
+ENV["PROJECT_ROOT_FOLDER"]=PROJECT_ROOT_FOLDER
 ENV['APP_STORE_STRINGS_FILE_NAME']='AppStoreStrings.pot'
-ENV["PUBLIC_CONFIG_FILE"]="./config/Version.Public.xcconfig"
+ENV["PUBLIC_CONFIG_FILE"]=VERSION_FILE_PATH
 ENV["DOWNLOAD_METADATA"]="./fastlane/download_metadata.swift"
 ENV['FL_RELEASE_TOOLKIT_DEFAULT_BRANCH'] = 'trunk'
 REPOSITORY_NAME="simplenote-ios"
@@ -336,7 +337,7 @@ end
 
     ios_build_preflight()
     build_and_upload_internal(skip_prechecks: true, skip_confirm: options[:skip_confirm]) if options[:beta_release]
-    build_and_upload_itc(skip_prechecks: true, skip_confirm: options[:skip_confirm],
+    build_and_upload_to_app_store_connect(skip_prechecks: true, skip_confirm: options[:skip_confirm],
                          beta_release: options[:beta_release], create_release: options[:create_gh_release])
   end
 
@@ -365,7 +366,7 @@ end
       workspace: "Simplenote.xcworkspace",
       export_method: "enterprise",
       clean: true,
-      output_directory: "./build/",
+      output_directory: OUTPUT_DIRECTORY_PATH,
       export_team_id: ENV["INT_EXPORT_TEAM_ID"],
       export_options: {
         method: "enterprise",
@@ -376,14 +377,14 @@ end
       }
     )
 
-    sh("mv ../build/Simplenote.ipa \"../build/Simplenote Internal.ipa\"")
+    File.rename(File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote.ipa'), File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote Internal.ipa'))
 
     appcenter_upload(
       api_token: ENV["APPCENTER_API_TOKEN"],
       owner_name: "automattic",
       owner_type: "organization",
       app_name: "Simplenote",
-      file: "./build/Simplenote Internal.ipa",
+      file: File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote Internal.ipa'),
       notify_testers: false
     )
 
@@ -391,30 +392,31 @@ end
       auth_token: ENV["SENTRY_AUTH_TOKEN"],
       org_slug: 'a8c',
       project_slug: 'simplenote-ios',
-      dsym_path: "./build/Simplenote.app.dSYM.zip"
+      dsym_path: lane_context[SharedValues::DSYM_OUTPUT_PATH]
     )
   end
 
   #####################################################################################
-  # build_and_upload_itc
+  # build_and_upload_to_app_store_connect
   # -----------------------------------------------------------------------------------
   # This lane builds the app and upload it for external distribution
   # -----------------------------------------------------------------------------------
   # Usage:
-  # bundle exec fastlane build_and_upload_itc [skip_confirm:<skip confirm>] [create_release:<Create release on GH>] [beta_release:<intermediate beta?>]
+  # bundle exec fastlane build_and_upload_to_app_store_connect [skip_confirm:<skip confirm>] [create_release:<Create release on GH>] [beta_release:<intermediate beta?>]
   #
   # Example:
-  # bundle exec fastlane build_and_upload_itc
-  # bundle exec fastlane build_and_upload_itc skip_confirm:true
+  # bundle exec fastlane build_and_upload_to_app_store_connect
+  # bundle exec fastlane build_and_upload_to_app_store_connect skip_confirm:true
   #####################################################################################
   desc "Builds and uploads for distribution"
-  lane :build_and_upload_itc do | options |
+  lane :build_and_upload_to_app_store_connect do | options |
     ios_build_prechecks(skip_confirm: options[:skip_confirm], external: true) unless (options[:skip_prechecks])
     ios_build_preflight() unless (options[:skip_prechecks])
 
     appstore_code_signing
 
-    gym(scheme: "Simplenote",
+    gym(
+      scheme: "Simplenote",
       workspace: "Simplenote.xcworkspace",
       configuration: "Distribution AppStore",
       clean: true,
@@ -463,18 +465,14 @@ end
   # -----------------------------------------------------------------------------------
   # This lane triggers a beta build on CI
   # -----------------------------------------------------------------------------------
+  # @option [String] branch_to_build The name of the branch we want the CI to build, e.g. `release/19.3`
+  #
   # Usage:
   # bundle exec fastlane trigger_beta_build [branch_to_build:<branch_name>]
   #
   #####################################################################################
-  lane :trigger_beta_build do | options |
-    circleci_trigger_job(
-      circle_ci_token: ENV["CIRCLE_CI_AUTH_TOKEN"],
-      repository: REPOSITORY_NAME,
-      organization: "Automattic",
-      branch: options[:branch_to_build],
-      job_params: {"beta_build" => true}
-    )
+  lane :trigger_beta_build do |options|
+    trigger_buildkite_release_build(branch: options[:branch_to_build], beta: true)
   end
 
   #####################################################################################
@@ -482,18 +480,14 @@ end
   # -----------------------------------------------------------------------------------
   # This lane triggers a stable release build on CI
   # -----------------------------------------------------------------------------------
+  # @option [String] branch_to_build The name of the branch we want the CI to build, e.g. `release/19.3`
+  #
   # Usage:
   # bundle exec fastlane trigger_release_build [branch_to_build:<branch_name>]
   #
   #####################################################################################
-  lane :trigger_release_build do | options |
-    circleci_trigger_job(
-      circle_ci_token: ENV["CIRCLE_CI_AUTH_TOKEN"],
-      repository: REPOSITORY_NAME,
-      organization: "Automattic",
-      branch: options[:branch_to_build],
-      job_params: {"release_build" => true}
-    )
+  lane :trigger_release_build do |options|
+    trigger_buildkite_release_build(branch: options[:branch_to_build], beta: false)
   end
 
   #####################################################################################
@@ -502,30 +496,18 @@ end
   # This lane builds the app and upload it for adhoc testing
   # -----------------------------------------------------------------------------------
   # Usage:
-  # bundle exec fastlane build_and_upload_installable_build [version_long:<version_long>]
+  # bundle exec fastlane build_and_upload_installable_build
   #
   # Example:
   # bundle exec fastlane build_and_upload_installable_build
-  # bundle exec fastlane build_and_upload_installable_build build_number:123
   #####################################################################################
   desc "Builds and uploads an installable build"
   lane :build_and_upload_installable_build do | options |
     alpha_code_signing
 
     # Get the current build version, and update it if needed
-    version_config_path = "../config/Version.Public.xcconfig"
-    versions = Xcodeproj::Config.new(File.new(version_config_path)).to_hash
-    build_number = versions["VERSION_LONG"]
-
-    if options.key?(:build_number)
-      build_number = options[:build_number]
-
-      UI.message("Updating build version to #{build_number}")
-
-      versions["VERSION_LONG"] = build_number
-      new_config = Xcodeproj::Config.new(versions)
-      new_config.save_as(Pathname.new(version_config_path))
-    end
+    build_number = generate_installable_build_number
+    apply_build_number(build_number)
 
     gym(
       scheme: "Simplenote",
@@ -533,7 +515,7 @@ end
       workspace: "Simplenote.xcworkspace",
       export_method: "enterprise",
       clean: true,
-      output_directory: "./build/",
+      output_directory: OUTPUT_DIRECTORY_PATH,
       export_team_id: ENV["INT_EXPORT_TEAM_ID"],
       export_options: {
         method: "enterprise",
@@ -544,35 +526,66 @@ end
       }
     )
 
-    sh("mv ../build/Simplenote.ipa \"../build/Simplenote Alpha.ipa\"")
+    File.rename(File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote.ipa'), File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote Alpha.ipa'))
 
     appcenter_upload(
       api_token: get_required_env("APPCENTER_API_TOKEN"),
       owner_name: "automattic",
       owner_type: "organization",
       app_name: "Simplenote-Installable-Builds",
-      file: "./build/Simplenote Alpha.ipa",
+      file: File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote Alpha.ipa'),
       destinations: "All-Users-of-Simplenote-Installable-Builds",
       notify_testers: false
     )
-
-    # Install SentryCLI prior to trying to upload dSYMs
-    sh("curl -sL https://sentry.io/get-cli/ | bash")
 
     sentry_upload_dsym(
       auth_token: get_required_env("SENTRY_AUTH_TOKEN"),
       org_slug: 'a8c',
       project_slug: 'simplenote-ios',
-      dsym_path: "./build/Simplenote.app.dSYM.zip",
+      dsym_path: lane_context[SharedValues::DSYM_OUTPUT_PATH]
     )
 
-    download_url = Actions.lane_context[SharedValues::APPCENTER_DOWNLOAD_LINK]
-    UI.message("Successfully built and uploaded installable build here: #{download_url}")
-    install_url = "https://install.appcenter.ms/orgs/automattic/apps/Simplenote-Installable-Builds/"
+    return if ENV['BUILDKITE_PULL_REQUEST'].nil?
 
-    # Create a comment.json file so that Peril to comment with the build details, if this is running on CI
-    comment_body = "You can test the changes on this Pull Request by downloading it from AppCenter [here](#{install_url}) with build number: #{build_number}. IPA is available [here](#{download_url}). If you need access to this, you can ask a maintainer to add you."
-    File.write("comment.json", { body: comment_body }.to_json)
+    post_installable_build_pr_comment(
+      app_name: 'simplenote-ios',
+      build_number: build_number,
+      url_slug: 'Simplenote-Installable-Builds'
+    )
+  end
+
+  # Posts a comment on the current PR to inform where to download a given Installable Build that was just published to App Center.
+  #
+  # Use this only after `upload_to_app_center` as been called, as it announces how said App Center build can be installed.
+  #
+  # @param [String] app_name The display name to use in the comment text to identify which app this Installable Build is about
+  # @param [String] build_number The App Center's build number for this build
+  # @param [String] url_slug The last component of the `install.appcenter.ms` URL used to install the app. Typically a sluggified version of the app name in App Center (e.g. `WPiOS-One-Offs`)
+  #
+  # @called_by CI — especially, relies on `BUILDKITE_PULL_REQUEST` being defined
+  #
+  def post_installable_build_pr_comment(app_name:, build_number:, url_slug:)
+    UI.message("Successfully built and uploaded installable build `#{build_number}` to App Center.")
+
+    return if ENV['BUILDKITE_PULL_REQUEST'].nil?
+
+    install_url = "https://install.appcenter.ms/orgs/automattic/apps/#{url_slug}/"
+    qr_code_url = "https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=#{CGI.escape(install_url)}&choe=UTF-8"
+    comment_body = <<~COMMENT_BODY
+      You can test the changes in <strong>#{app_name}</strong> from this Pull Request by:<ul>
+        <li><a href='#{install_url}'>Clicking here</a> or scanning the QR code below to access App Center</li>
+        <li>Then installing the build number <code>#{build_number}</code> on your iPhone</li>
+      </ul>
+      <img src='#{qr_code_url}' width='150' height='150' />
+      If you need access to App Center, please ask a maintainer to add you.
+    COMMENT_BODY
+
+    comment_on_pr(
+      project: 'automattic/simplenote-ios',
+      pr_number: Integer(ENV.fetch('BUILDKITE_PULL_REQUEST', nil)),
+      reuse_identifier: "installable-build-link--#{url_slug}",
+      body: comment_body
+    )
   end
 
   #####################################################################################
@@ -716,12 +729,35 @@ end
   end
 
   #####################################################################################
-  # UI tests lanes
+  # Test lanes
   #####################################################################################
 
   # Props to work done by others in this file and in
   # https://github.com/wordpress-mobile/WordPress-iOS/blob/trunk/fastlane/Fastfile
   # this is a combined rip-off from both
+
+  #####################################################################################
+  # test
+  # -----------------------------------------------------------------------------------
+  # Run unit tests
+  # -----------------------------------------------------------------------------------
+  # Usage:
+  # bundle exec fastlane test [device:<Name of the iOS Simulator>]
+  #
+  # Example:
+  # bundle exec fastlane test device:"iPhone 14"
+  #####################################################################################
+  desc "Run Unit Tests"
+  lane :run_unit_tests do | options |
+    scan(
+      workspace: workspace_name,
+      scheme: 'Simplenote',
+      device: options[:device] || "iPhone 14",
+      output_directory: OUTPUT_DIRECTORY_PATH,
+      reset_simulator: true,
+      result_bundle: true
+    )
+  end
 
   #####################################################################################
   # run_ui_tests
@@ -733,17 +769,18 @@ end
   # bundle exec fastlane run_ui_tests [scheme:<Xcode scheme with UI tests>] [device:<Name of the iOS Simulator>] [test_account:<Test account email>]
   #
   # Example:
-  # bundle exec fastlane run_ui_tests scheme:"SimplenoteUITests_Subset" device:"iPhone 12" test_account:"test.account@test.com"
+  # bundle exec fastlane run_ui_tests scheme:"SimplenoteUITests_Subset" device:"iPhone 14" test_account:"test.account@test.com"
   #####################################################################################
   desc "Run UI tests"
   lane :run_ui_tests do | options |
     scan(
       workspace: workspace_name,
       scheme: options[:scheme] || "SimplenoteUITests_Subset",
-      device: options[:device] || "iPhone 12",
-      prelaunch_simulator: true,
+      device: options[:device] || "iPhone 14",
+      output_directory: OUTPUT_DIRECTORY_PATH,
       reset_simulator: true,
-      xcargs: { UI_TEST_ACCOUNT: options[:test_account] || '' }
+      xcargs: { UI_TEST_ACCOUNT: options[:test_account] || '' },
+      result_bundle: true
     )
   end
 
@@ -757,7 +794,7 @@ end
   # bundle exec fastlane pick_test_account_and_run_ui_tests [device:<Name of the iOS Simulator>]
   #
   # Example:
-  # bundle exec fastlane pick_test_account_and_run_ui_tests device:"iPhone 12"
+  # bundle exec fastlane pick_test_account_and_run_ui_tests device:"iPhone 14"
   #####################################################################################
   desc "Occupy a free test account and run UI tests with it"
   lane :pick_test_account_and_run_ui_tests do | options |
@@ -885,6 +922,22 @@ end
 ########################################################################
 # Helper Lanes
 ########################################################################
+
+# Triggers a Release Build on Buildkite
+#
+# @param [String] branch The branch to build
+# @param [Boolean] beta Indicate if we should build a beta or regular release
+#
+def trigger_buildkite_release_build(branch:, beta:)
+  buildkite_trigger_build(
+    buildkite_organization: 'automattic',
+    buildkite_pipeline: 'simplenote-ios',
+    branch: branch,
+    environment: { BETA_RELEASE: beta },
+    pipeline_file: 'release-builds.yml'
+  )
+end
+
 def fastlane_directory()
   File.expand_path File.dirname(__FILE__)
 end
@@ -934,7 +987,7 @@ def deoccupy_test_account
 end
 
 # Test accounts info is stored in JSON-formatted string, where keys represent
-# the account index, and values are either "free" or CIRCLE_BUILD_NUM, in case if account
+# the account index, and values are either "free" or BUILDKITE_BUILD_NUMBER, in case if account
 # was occupied by a build. Returns the hash.
 # Example:
 #   get_test_accounts_hash
@@ -957,7 +1010,7 @@ def find_free_test_account
 
   UI.user_error!("Could not find free UI Test account. Quitting.") if $used_test_account_index.nil?
   UI.message("Free account index: #{$used_test_account_index}")
-  change_test_account_availability("#{get_required_env("CIRCLE_BUILD_NUM")}")
+  change_test_account_availability("#{get_required_env("BUILDKITE_BUILD_NUMBER")}")
 end
 
 # Replace a value in a key which is equal to $used_test_account_index global variable
@@ -986,13 +1039,18 @@ def sanitize_test_accounts
 end
 
 def is_job_running(job_number)
-  uri = URI.parse("https://circleci.com/api/v2/project/gh/Automattic/simplenote-ios/job/#{job_number}")
-  response = Net::HTTP.get_response(uri)
-  return if response.code != "200"
+  begin
+    client = Buildkit.new(token: get_required_env('BUILDKITE_TOKEN'))
+    build = client.build('automattic', 'simplenote-ios', job_number)
 
-  response_hash = JSON.parse(response.body)
-  UI.message("Status of CircleCI Job Number #{job_number} is #{response_hash['status']}")
-  response_hash["status"] == "running"
+    state = build['state']
+
+    UI.message("Status of Job Number #{job_number} is #{state}")
+
+    build['state'] == 'running'
+  rescue
+    false
+  end
 end
 
 def submit_accounts_hash(accounts_hash)
@@ -1011,3 +1069,29 @@ def submit_accounts_hash(accounts_hash)
 
   UI.message("Accounts state after write: #{get_test_accounts_hash}")
 end
+
+def apply_build_number(build_number)
+  versions = Xcodeproj::Config.new(File.new(VERSION_FILE_PATH)).to_hash
+  UI.message("Updating build version to #{build_number}")
+  versions['VERSION_LONG'] = build_number
+  new_config = Xcodeproj::Config.new(versions)
+  new_config.save_as(Pathname.new(VERSION_FILE_PATH))
+end
+
+def generate_installable_build_number
+  if ENV['BUILDKITE']
+    commit = ENV.fetch('BUILDKITE_COMMIT', nil)[0, 7]
+    branch = ENV.fetch('BUILDKITE_BRANCH', nil)
+    pr_num = ENV.fetch('BUILDKITE_PULL_REQUEST', nil)
+    build  = ENV.fetch('BUILDKITE_BUILD_ID', nil)
+
+    pr_num == 'false' ? "#{branch}-#{commit}-#{build}" : "pr#{pr_num}-#{commit}-#{build}"
+  else
+    repo = Git.open(PROJECT_ROOT_FOLDER)
+    commit = repo.current_branch
+    branch = repo.revparse('HEAD')[0, 7]
+
+    "#{branch}-#{commit}"
+  end
+end
+
