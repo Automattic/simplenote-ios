@@ -1,2 +1,2 @@
-- Some bug fixes
+-   Simplenote Users now have the ability to become sustainers #1493
 
