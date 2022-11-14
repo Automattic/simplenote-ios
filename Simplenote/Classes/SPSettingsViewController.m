@@ -36,12 +36,18 @@ typedef NS_ENUM(NSInteger, SPOptionsViewSections) {
     SPOptionsViewSectionsTags           = 1,
     SPOptionsViewSectionsAppearance     = 2,
     SPOptionsViewSectionsSecurity       = 3,
-    SPOptionsViewSectionsAccount        = 4,
-    SPOptionsViewSectionsDelete         = 5,
-    SPOptionsViewSectionsAbout          = 6,
-    SPOptionsViewSectionsHelp           = 7,
-    SPOptionsViewSectionsDebug          = 8,
-    SPOptionsViewSectionsCount          = 9,
+    SPOptionsViewSectionsSustainer      = 4,
+    SPOptionsViewSectionsAccount        = 5,
+    SPOptionsViewSectionsDelete         = 6,
+    SPOptionsViewSectionsAbout          = 7,
+    SPOptionsViewSectionsHelp           = 8,
+    SPOptionsViewSectionsDebug          = 9,
+    SPOptionsViewSectionsCount          = 10,
+};
+
+typedef NS_ENUM(NSInteger, SPOptionsSustainerRow) {
+    SPOptionsSustainerRowRestore        = 0,
+    SPOptionsSustainerRowCount          = 1
 };
 
 typedef NS_ENUM(NSInteger, SPOptionsAccountRow) {
@@ -245,7 +251,11 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
             int disabledPinLockRows = [self isBiometryAvailable] ? 2 : 1;
             return [self isPinLockEnabled] ? SPOptionsSecurityRowRowCount - rowsToRemove : disabledPinLockRows;
         }
-            
+
+        case SPOptionsViewSectionsSustainer: {
+            return SPOptionsSustainerRowCount;
+        }
+
         case SPOptionsViewSectionsAccount: {
             return SPOptionsAccountRowCount;
         }
@@ -284,9 +294,12 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
             
         case SPOptionsViewSectionsAppearance:
             return NSLocalizedString(@"Appearance", nil);
-            
+
         case SPOptionsViewSectionsSecurity:
             return NSLocalizedString(@"Security", nil);
+
+        case SPOptionsViewSectionsSustainer:
+            return NSLocalizedString(@"Sustainer", nil);
 
         case SPOptionsViewSectionsAccount:
             return NSLocalizedString(@"Account", nil);
@@ -431,6 +444,21 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
             }
             
             break;
+
+        } case SPOptionsViewSectionsSustainer: {
+
+            switch (indexPath.row) {
+                case SPOptionsSustainerRowRestore: {
+                    cell.textLabel.text = NSLocalizedString(@"Restore Purchases", @"Manually Restores IAP Purchases");
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    break;
+                }
+                default:
+                    break;
+            }
+
+            break;
+
         } case SPOptionsViewSectionsAccount:{
             
             switch (indexPath.row) {
@@ -564,6 +592,12 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
             }
             
             break;
+
+        } case SPOptionsViewSectionsSustainer: {
+
+            [self restorePurchases];
+            break;
+
         } case SPOptionsViewSectionsAccount: {
             
             switch (indexPath.row) {
@@ -582,6 +616,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
             }
             
             break;
+
         } case SPOptionsViewSectionsDelete: {
             switch (indexPath.row) {
                 case SPOptionsDeleteRowTitle: {
