@@ -54,8 +54,13 @@ extension SPSettingsViewController {
             return
         }
 
+        if StoreManager.shared.isActiveSubscriber {
+            presentPurchasesRestored(alert: .alreadySustainer)
+            return
+        }
+
         StoreManager.shared.restorePurchases { isActiveSubscriber in
-            self.presentPurchasesRestored(alert: isActiveSubscriber ? .sustainer : .notFound)
+            self.presentPurchasesRestored(alert: isActiveSubscriber ? .becameSustainer : .notFound)
         }
     }
 
@@ -260,9 +265,17 @@ extension RestorationAlert {
         return RestorationAlert(title: title, message: message, action: action)
     }
 
-    static var sustainer: RestorationAlert {
+    static var becameSustainer: RestorationAlert {
         let title = NSLocalizedString("Thank You!", comment: "Restoration Successful Title")
         let message = NSLocalizedString("Sustainer subscription restored. Thank you for supporting Simplenote!", comment: "Restoration Successful Message")
+        let action = NSLocalizedString("Dismiss", comment: "Dismiss Alert")
+
+        return RestorationAlert(title: title, message: message, action: action)
+    }
+
+    static var alreadySustainer: RestorationAlert {
+        let title = NSLocalizedString("Simplenote Sustainer", comment: "Restoration Successful Title")
+        let message = NSLocalizedString("You're already a Sustainer. Thank you for supporting Simplenote!", comment: "Restoration Successful Message")
         let action = NSLocalizedString("Dismiss", comment: "Dismiss Alert")
 
         return RestorationAlert(title: title, message: message, action: action)
