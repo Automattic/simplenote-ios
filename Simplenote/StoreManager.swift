@@ -111,6 +111,19 @@ class StoreManager {
 
         return product.displayPrice
     }
+
+    /// Restores Purchases. Shouldn't be required, but review guideliens dictate we provide an explicit action!
+    ///
+    func restorePurchases(completion: @escaping (Bool) -> Void) {
+        Task {
+            await refreshPurchasedProducts()
+            await refreshSubscriptionGroupStatus()
+
+            Task { @MainActor in
+                completion(isActiveSubscriber)
+            }
+        }
+    }
 }
 
 
