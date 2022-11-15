@@ -19,7 +19,7 @@ extension UIAlertController {
         let monthlyActionTitle = Localization.monthlyActionTitle(price: manager.displayPrice(for: .sustainerMonthly))
         let yearlyActionTitle = Localization.yearlyActionTitle(price: manager.displayPrice(for: .sustainerYearly))
 
-        let alert = UIAlertController(title: Localization.title, message: Localization.message, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: Localization.title, message: Localization.message, preferredStyle: .alert)
         alert.addActionWithTitle(monthlyActionTitle, style: .default) { _ in
             SPTracker.trackSustainerMonthlyButtonTapped()
             manager.purchase(storeProduct: .sustainerMonthly)
