@@ -132,9 +132,19 @@ class NoteEditor {
         toggleMarkdownState()
     }
 
-    class func pressLink(containerText: String, linkifiedText: String) {
+
+    class func getLink(byText linkText: String) -> XCUIElement {
+        // As of iOS 16.0, a link in Note Editor is presented by two elements:
+        // First is of `link` type and has zero dimensions, the other is its child
+        // and has proper dimensions. Only the latter is usable for interactions:
+        return app.links.matching(identifier: linkText).allElementsBoundByIndex.last!
+    }
+
+    class func pressLink(linkText: String) {
+        let link = getLink(byText: linkText)
+        guard link.exists else { return }
         // Should be replaced with proper way to determine if page is loaded
-        app.textViews[containerText].links[linkifiedText].press(forDuration: 1.3)
+        link.press(forDuration: 1.3)
         sleep(5)
     }
 
@@ -196,10 +206,9 @@ class NoteEditor {
 
 class NoteEditorAssert {
 
-    class func linkifiedURL(containerText: String, linkifiedText: String) {
-        let linkContainer = app.textViews[containerText]
-        XCTAssertTrue(linkContainer.exists, "\"" + containerText + linkContainerNotFoundInEditor)
-        XCTAssertTrue(linkContainer.links[linkifiedText].exists, "\"" + linkifiedText + linkNotFoundInEditor)
+    class func linkifiedURL(linkText: String) {
+        let linkElement = NoteEditor.getLink(byText: linkText)
+        XCTAssertTrue(linkElement.exists, "\"" + linkText + linkNotFoundInEditor)
     }
 
     class func editorShown() {

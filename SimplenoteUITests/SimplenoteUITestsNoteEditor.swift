@@ -154,7 +154,7 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
 
         trackStep()
         NoteList.openNote(noteName: usualLinkText)
-        NoteEditorAssert.linkifiedURL(containerText: usualLinkText, linkifiedText: usualLinkText)
+        NoteEditorAssert.linkifiedURL(linkText: usualLinkText)
     }
 
     func testLongTappingOnLinkOpensLinkInNewWindow() throws {
@@ -175,10 +175,10 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
 
         trackStep()
         NoteList.openNote(noteName: usualLinkText)
-        NoteEditorAssert.linkifiedURL(containerText: usualLinkText, linkifiedText: usualLinkText)
+        NoteEditorAssert.linkifiedURL(linkText: usualLinkText)
 
         trackStep()
-        NoteEditor.pressLink(containerText: usualLinkText, linkifiedText: usualLinkText)
+        NoteEditor.pressLink(linkText: usualLinkText)
         WebViewAssert.textsShownOnScreen(texts: webViewTexts)
     }
 
