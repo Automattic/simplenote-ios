@@ -46,6 +46,29 @@ extension SPSettingsViewController {
         let sustainerAlertController = UIAlertController.buildSustainerAlert()
         present(sustainerAlertController, animated: true)
     }
+
+    @objc
+    func restorePurchases() {
+        guard #available(iOS 15.0, *) else {
+            presentPurchasesRestored(alert: .unsupported)
+            return
+        }
+
+        if StoreManager.shared.isActiveSubscriber {
+            presentPurchasesRestored(alert: .alreadySustainer)
+            return
+        }
+
+        StoreManager.shared.restorePurchases { isActiveSubscriber in
+            self.presentPurchasesRestored(alert: isActiveSubscriber ? .becameSustainer : .notFound)
+        }
+    }
+
+    private func presentPurchasesRestored(alert: RestorationAlert) {
+        let alertController = UIAlertController(title: alert.title, message: alert.message, preferredStyle: .alert)
+        alertController.addDefaultActionWithTitle(alert.action)
+        present(alertController, animated: true)
+    }
 }
 
 
@@ -220,5 +243,49 @@ private struct AccountDeletion {
 
     static func successMessage(email: String) -> String {
         String(format: successAlertMessage, email)
+    }
+}
+
+
+// MARK: - RestorationAlert
+//
+struct RestorationAlert {
+    let title: String
+    let message: String
+    let action: String
+}
+
+extension RestorationAlert {
+
+    static var notFound: RestorationAlert {
+        let title = NSLocalizedString("No purchases found", comment: "No purchases Found Title")
+        let message = NSLocalizedString("No previous valid purchases found, for the current period", comment: "No purchases Found Message")
+        let action = NSLocalizedString("Dismiss", comment: "Dismiss Alert")
+
+        return RestorationAlert(title: title, message: message, action: action)
+    }
+
+    static var becameSustainer: RestorationAlert {
+        let title = NSLocalizedString("Thank You!", comment: "Restoration Successful Title")
+        let message = NSLocalizedString("Sustainer subscription restored. Thank you for supporting Simplenote!", comment: "Restoration Successful Message")
+        let action = NSLocalizedString("Dismiss", comment: "Dismiss Alert")
+
+        return RestorationAlert(title: title, message: message, action: action)
+    }
+
+    static var alreadySustainer: RestorationAlert {
+        let title = NSLocalizedString("Simplenote Sustainer", comment: "Restoration Successful Title")
+        let message = NSLocalizedString("You're already a Sustainer. Thank you for supporting Simplenote!", comment: "Restoration Successful Message")
+        let action = NSLocalizedString("Dismiss", comment: "Dismiss Alert")
+
+        return RestorationAlert(title: title, message: message, action: action)
+    }
+
+    static var unsupported: RestorationAlert {
+        let title = NSLocalizedString("Unsupported", comment: "Upgrade Alert Title")
+        let message = NSLocalizedString("Please upgrade to the latest iOS release to restore purchases", comment: "Upgrade Alert Message")
+        let action = NSLocalizedString("Dismiss", comment: "Dismiss Alert")
+
+        return RestorationAlert(title: title, message: message, action: action)
     }
 }

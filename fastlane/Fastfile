@@ -178,11 +178,11 @@ end
   desc "Updates a release branch for a new beta release"
   lane :new_beta_release do | options |
     ios_betabuild_prechecks(options)
-    ios_update_metadata(options)
-    sanitize_appstore_keywords()
+    download_localized_strings_and_metadata_from_glotpress
     ios_lint_localizations(input_dir: 'Simplenote', allow_retry: true)
-    ios_bump_version_beta()
-    ios_tag_build()
+    ios_bump_version_beta
+    version = ios_get_app_version
+    trigger_beta_build(branch_to_build: "release/#{version}")
   end
 
   #####################################################################################
@@ -934,7 +934,7 @@ def trigger_buildkite_release_build(branch:, beta:)
     buildkite_pipeline: 'simplenote-ios',
     branch: branch,
     environment: { BETA_RELEASE: beta },
-    pipeline_file: 'release-builds.yml'
+    pipeline_file: 'release-build.yml'
   )
 end
 
