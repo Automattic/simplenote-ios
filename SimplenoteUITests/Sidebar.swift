@@ -59,7 +59,7 @@ class Sidebar {
         while app.tables.buttons[UID.Button.itemTrash].firstMatch.isHittable {
             app.tables.buttons[UID.Button.itemTrash].firstMatch.tap()
             sleep(1)
-            app.sheets.buttons[UID.Button.deleteTagConfirmation].tap()
+            app.buttons[UID.Button.deleteTagConfirmation].tap()
             sleep(1)
         }
 
