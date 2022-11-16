@@ -89,7 +89,6 @@ class NoteEditor {
 
     class func undo() {
         app.textViews.element.tap(withNumberOfTaps: 2, numberOfTouches: 3)
-        app.otherElements["UIUndoInteractiveHUD"].children(matching: .other).element(boundBy: 1).children(matching: .other).element(boundBy: 1).tap()
     }
 
     class func swipeToPreview() {
