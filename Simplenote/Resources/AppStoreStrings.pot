@@ -68,7 +68,7 @@ msgstr ""
 
 msgctxt "v4.48-whats-new"
 msgid ""
-"- You can now start a Simplenote Sustainer subscription to help support the ongoing development of Simplenote\n"
+"New: Simplenote Sustainer. Help support the ongoing development of Simplenote with an annual subscription.\n"
 "\n"
 msgstr ""
 
