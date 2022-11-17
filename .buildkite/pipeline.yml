@@ -38,14 +38,14 @@ steps:
   # UI Tests
   #################
   - label: "🔬 UI Test (Subset)"
-    command: ".buildkite/commands/build-and-ui-test.sh SimplenoteUITests_Subset 'iPhone 14'"
+    command: ".buildkite/commands/build-and-ui-test.sh SimplenoteUITests_Subset 'iPhone SE (3rd generation)'"
     env: *common_env
     plugins: *common_plugins
     artifact_paths:
       - "build/results/*"
 
   - label: "🔬 UI Test (Full)"
-    command: ".buildkite/commands/build-and-ui-test.sh SimplenoteUITests 'iPhone 14'"
+    command: ".buildkite/commands/build-and-ui-test.sh SimplenoteUITests 'iPhone SE (3rd generation)'"
     env: *common_env
     plugins: *common_plugins
     artifact_paths:
