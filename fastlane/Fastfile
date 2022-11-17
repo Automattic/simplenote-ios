@@ -90,7 +90,7 @@ end
     setbranchprotection(repository:GHHELPER_REPO, branch: "release/#{new_version}")
     setfrozentag(repository:GHHELPER_REPO, milestone: new_version)
 
-    ios_localize_project()
+    generate_strings_file_for_glotpress
     trigger_beta_build(branch_to_build: "release/#{new_version}")
   end
 
@@ -918,6 +918,26 @@ end
       .map { |key| [key, "match #{match_type} #{key}"] }
       .to_h
   end
+
+########################################################################
+# Localization Lanes
+########################################################################
+
+desc 'Updates the main `Localizable.strings` file — that will be imported by GlotPress'
+lane :generate_strings_file_for_glotpress do
+  en_lproj_path = File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'en.lproj')
+  ios_generate_strings_file_from_code(
+    paths: ['Simplenote/', 'SimplenoteIntents/', 'SimplenoteShare/',
+            'SimplenoteWidgets/', 'Pods/Simperium/Simperium/',
+            'Pods/Simperium/Simperium-iOS'],
+    output_dir: en_lproj_path)
+
+  git_commit(
+    path: en_lproj_path,
+    message: 'Freeze strings for localization',
+    allow_nothing_to_commit: true
+  )
+end
 
 ########################################################################
 # Helper Lanes
