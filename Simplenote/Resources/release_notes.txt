@@ -1,2 +1,2 @@
--   Simplenote Users now have the ability to become sustainers #1493
+- You can now become a Simplenote Sustainer subscriber to help support the ongoing development of Simplenote
 
