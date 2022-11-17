@@ -106,18 +106,6 @@
 /* Sign in error message */
 "An error was encountered while signing in." = "An error was encountered while signing in.";
 
-/* validation: TracksEvent, pattern eventName error */
-"An event name contain alpha characters and underscores only." = "An event name contain alpha characters and underscores only.";
-
-/* validation: TracksEvent, too short eventName error */
-"An event name must be at least one character." = "An event name must be at least one character.";
-
-/* validation: TracksEvent, contains dashes eventName error */
-"An event name must not contain dashes." = "An event name must not contain dashes.";
-
-/* validation: TracksEvent, whitespace eventName error */
-"An event name must not contain whitespace." = "An event name must not contain whitespace.";
-
 /* No comment provided by engineer. */
 "Appearance" = "Appearance";
 
@@ -280,12 +268,6 @@
 /* No comment provided by engineer. */
 "Current Collaborators" = "Current Collaborators";
 
-/* validation: TracksEvent, key type customProperties error */
-"Custom properties dictionary keys must be NSString instances." = "Custom properties dictionary keys must be NSString instances.";
-
-/* validation: TracksEvent, key format customProperties error */
-"Custom properties dictionary keys must contain alpha characters and underscores only." = "Custom properties dictionary keys must contain alpha characters and underscores only.";
-
 /* Theme: Dark */
 "Dark" = "Dark";
 
@@ -312,20 +294,8 @@
 /* Confirmation button of deletion confirmation message for a tag. */
 "Delete Tag" = "Delete Tag";
 
-/* Error */
-"Delta length (%lu) larger than source text length (%lu)." = "Delta length (%1$lu) larger than source text length (%2$lu).";
-
-/* Error */
-"Delta length (%lu) smaller than source text length (%lu)." = "Delta length (%1$lu) smaller than source text length (%2$lu).";
-
 /* Deselect all Button Label */
 "Deselect All" = "Deselect All";
-
-/* validation: TracksEvent, key type deviceProperties error */
-"Device properties dictionary keys must be NSString instances." = "Device properties dictionary keys must be NSString instances.";
-
-/* validation: TracksEvent, key format deviceProperties error */
-"Device properties dictionary keys must contain alpha characters and underscores only." = "Device properties dictionary keys must contain alpha characters and underscores only.";
 
 /* Title displayed in the extended diagnostics UI */
 "Diagnostics" = "Diagnostics";
@@ -407,9 +377,6 @@
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "Fetching Version";
 
-/* A message indicating that a file queued for upload could not be found */
-"File not found" = "File not found";
-
 /* Forgot password Button Text */
 "Forgot password? »" = "Forgot password? »";
 
@@ -448,21 +415,6 @@
 
 /* Insert Checklist Button */
 "Inserts a new Checklist Item" = "Inserts a new Checklist Item";
-
-/* Error */
-"Invalid character in diff_fromDelta: %@" = "Invalid character in diff_fromDelta: %@";
-
-/* Error */
-"Invalid diff operation in diff_fromDelta: %C" = "Invalid diff operation in diff_fromDelta: %C";
-
-/* Error */
-"Invalid number in diff_fromDelta: %@" = "Invalid number in diff_fromDelta: %@";
-
-/* Error */
-"Invalid patch mode '%C' in: %@" = "Invalid patch mode '%1$C' in: %2$@";
-
-/* Error */
-"Invalid patch string: %@" = "Invalid patch string: %@";
 
 /* Date of note last modified. Parameter: %1$@ - formatted date */
 "Last Modified %1$@" = "Last Modified %1$@";
@@ -548,9 +500,6 @@
 
 /* Sort Mode: Alphabetically, descending */
 "Name: Z-A" = "Name: Z-A";
-
-/* Error */
-"Negative number in diff_fromDelta: %@" = "Negative number in diff_fromDelta: %@";
 
 /* Home screen quick action: New Note
    Keyboard shortcut: New Note
@@ -830,8 +779,8 @@
 /* A short link to access the account login screen */
 "Sign in" = "Sign in";
 
-/* Signup Action
-   SignUp Action
+/* SignUp Action
+   Signup Action
    SignUp Interface Title
    Title of button to create a new account (must be short) */
 "Sign Up" = "Sign Up";
@@ -880,9 +829,6 @@
 
 /* Restoration Successful Message */
 "Sustainer subscription restored. Thank you for supporting Simplenote!" = "Sustainer subscription restored. Thank you for supporting Simplenote!";
-
-/* A message indicating that a file queued for upload was cancelled by the system */
-"System Cancelled Upload" = "System Cancelled Upload";
 
 /* Theme: Matches iOS Settings */
 "System Default" = "System Default";
@@ -1016,12 +962,6 @@
 
 /* Allows selecting notes with no tags */
 "Untagged Notes" = "Untagged Notes";
-
-/* validation: TracksEvent, key type userProperties error */
-"User properties dictionary keys must be NSString instances." = "User properties dictionary keys must be NSString instances.";
-
-/* validation: TracksEvent, key format userProperties error */
-"User properties dictionary keys must contain alpha characters and underscores only." = "User properties dictionary keys must contain alpha characters and underscores only.";
 
 /* A user's Simplenote account */
 "Username" = "Username";
