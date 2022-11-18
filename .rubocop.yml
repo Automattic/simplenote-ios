@@ -1,0 +1,25 @@
+AllCops:
+  Exclude:
+    - DerivedData/**/*
+    - Pods/**/*
+    - vendor/**/*
+  NewCops: enable
+  SuggestExtensions:
+    rubocop-rake: false
+
+Layout/LineLength:
+  Exclude:
+    - fastlane/Fastfile
+
+Metrics/BlockLength:
+  Exclude:
+    - fastlane/*file
+
+Metrics/BlockNesting:
+  Exclude:
+    - fastlane/*file
+
+Naming/FileName:
+  Exclude:
+    - fastlane/*file
+    - '**/*.podspec'
