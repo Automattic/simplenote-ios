@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # The Deliverfile allows you to store various App Store Connect metadata
 # For more information, check out the docs
 # https://docs.fastlane.tools/actions/deliver/
@@ -7,15 +9,15 @@
 ########################################
 
 # This folder has to include one folder for each language
-screenshots_path "./screenshots/"
-app_identifier "com.codality.NotationalFlow"
+screenshots_path './screenshots/'
+app_identifier 'com.codality.NotationalFlow'
 
 # Make sure to update these keys for a new version
-app_version "4.48"
+app_version '4.48'
 
 privacy_url({
-  'default' => 'https://simplenote.com/privacy/',
-})
+              'default' => 'https://simplenote.com/privacy/'
+            })
 
 copyright('2021 Automattic')
 

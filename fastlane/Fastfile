@@ -1,12 +1,12 @@
+# frozen_string_literal: true
+
 default_platform(:ios)
 fastlane_require 'xcodeproj'
 fastlane_require 'dotenv'
 fastlane_require 'open-uri'
 fastlane_require 'buildkit'
 
-unless FastlaneCore::Helper.bundler?
-  UI.user_error!('Please run fastlane via `bundle exec`')
-end
+UI.user_error!('Please run fastlane via `bundle exec`') unless FastlaneCore::Helper.bundler?
 
 USER_ENV_FILE_PATH = File.join(Dir.home, '.simplenoteios-env.default')
 PROJECT_ENV_FILE_PATH = File.join(
@@ -23,48 +23,48 @@ before_all do
     UI.user_error!("~/.simplenoteios-env.default not found: Please copy env/user.env-example to #{USER_ENV_FILE_PATH} and fill in the values")
   end
   unless File.file?(PROJECT_ENV_FILE_PATH)
-    UI.user_error!("project.env not found: Make sure your configuration is up to date with `rake dependencies`")
+    UI.user_error!('project.env not found: Make sure your configuration is up to date with `rake dependencies`')
   end
 
   setup_ci
 end
 
-error do |lane, exception, options|
+error do |lane, _exception, _options|
   deoccupy_test_account if lane == :run_ui_tests
 end
 
 platform :ios do
-########################################################################
-# Environment
-########################################################################
-PROJECT_ROOT_FOLDER = File.dirname(File.expand_path(__dir__))
-VERSION_FILE_PATH = File.join(PROJECT_ROOT_FOLDER, 'config', 'Version.Public.xcconfig')
-OUTPUT_DIRECTORY_PATH = File.join(PROJECT_ROOT_FOLDER, 'build', 'results')
+  ########################################################################
+  # Environment
+  ########################################################################
+  PROJECT_ROOT_FOLDER = File.dirname(File.expand_path(__dir__))
+  VERSION_FILE_PATH = File.join(PROJECT_ROOT_FOLDER, 'config', 'Version.Public.xcconfig')
+  OUTPUT_DIRECTORY_PATH = File.join(PROJECT_ROOT_FOLDER, 'build', 'results')
 
-Dotenv.load(USER_ENV_FILE_PATH)
-Dotenv.load(PROJECT_ENV_FILE_PATH)
-ENV[GHHELPER_REPO="Automattic/simplenote-ios"]
-ENV["PROJECT_NAME"]="Simplenote"
-ENV["PROJECT_ROOT_FOLDER"]=PROJECT_ROOT_FOLDER
-ENV['APP_STORE_STRINGS_FILE_NAME']='AppStoreStrings.pot'
-ENV["PUBLIC_CONFIG_FILE"]=VERSION_FILE_PATH
-ENV["DOWNLOAD_METADATA"]="./fastlane/download_metadata.swift"
-ENV['FL_RELEASE_TOOLKIT_DEFAULT_BRANCH'] = 'trunk'
-REPOSITORY_NAME="simplenote-ios"
-APP_STORE_BUNDLE_IDENTIFIER = 'com.codality.NotationalFlow'.freeze
+  Dotenv.load(USER_ENV_FILE_PATH)
+  Dotenv.load(PROJECT_ENV_FILE_PATH)
+  ENV.fetch(GHHELPER_REPO = 'Automattic/simplenote-ios', nil)
+  ENV['PROJECT_NAME'] = 'Simplenote'
+  ENV['PROJECT_ROOT_FOLDER'] = PROJECT_ROOT_FOLDER
+  ENV['APP_STORE_STRINGS_FILE_NAME'] = 'AppStoreStrings.pot'
+  ENV['PUBLIC_CONFIG_FILE'] = VERSION_FILE_PATH
+  ENV['DOWNLOAD_METADATA'] = './fastlane/download_metadata.swift'
+  ENV['FL_RELEASE_TOOLKIT_DEFAULT_BRANCH'] = 'trunk'
+  REPOSITORY_NAME = 'simplenote-ios'
+  APP_STORE_BUNDLE_IDENTIFIER = 'com.codality.NotationalFlow'
 
-# Use this instead of getting values from ENV directly
-# It will throw an error if the requested value is missing
-def get_required_env(key)
-  unless ENV.key?(key)
-    UI.user_error!("Environment variable '#{key}' is not set. Have you setup #{USER_ENV_FILE_PATH} correctly?")
+  # Use this instead of getting values from ENV directly
+  # It will throw an error if the requested value is missing
+  def get_required_env(key)
+    unless ENV.key?(key)
+      UI.user_error!("Environment variable '#{key}' is not set. Have you setup #{USER_ENV_FILE_PATH} correctly?")
+    end
+    ENV.fetch(key, nil)
   end
-  ENV[key]
-end
 
-########################################################################
-# Release Lanes
-########################################################################
+  ########################################################################
+  # Release Lanes
+  ########################################################################
   #####################################################################################
   # code_freeze
   # -----------------------------------------------------------------------------------
@@ -77,18 +77,18 @@ end
   # bundle exec fastlane code_freeze
   # bundle exec fastlane code_freeze skip_confirm:true
   #####################################################################################
-  desc "Creates a new release branch from the current trunk"
-  lane :code_freeze do | options |
+  desc 'Creates a new release branch from the current trunk'
+  lane :code_freeze do |options|
     old_version = ios_codefreeze_prechecks(options)
 
-    ios_bump_version_release()
-    new_version = ios_get_app_version()
+    ios_bump_version_release
+    new_version = ios_get_app_version
     extract_release_notes_for_version(version: new_version,
-      release_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'RELEASE-NOTES.txt'),
-      extracted_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt'))
+                                      release_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'RELEASE-NOTES.txt'),
+                                      extracted_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt'))
     ios_update_release_notes(new_version: new_version)
-    setbranchprotection(repository:GHHELPER_REPO, branch: "release/#{new_version}")
-    setfrozentag(repository:GHHELPER_REPO, milestone: new_version)
+    setbranchprotection(repository: GHHELPER_REPO, branch: "release/#{new_version}")
+    setfrozentag(repository: GHHELPER_REPO, milestone: new_version)
 
     generate_strings_file_for_glotpress
     trigger_beta_build(branch_to_build: "release/#{new_version}")
@@ -106,20 +106,20 @@ end
   # Example:
   # bundle exec fastlane update_appstore_strings version:1.1
   #####################################################################################
-  desc "Updates the AppStoreStrings.pot file with the latest data"
-  lane :update_appstore_strings do | options |
-    prj_folder = Pathname.new(File.join(Dir.pwd, "..")).expand_path.to_s
-    source_metadata_folder = File.join(prj_folder, "fastlane/appstoreres/metadata/source")
+  desc 'Updates the AppStoreStrings.pot file with the latest data'
+  lane :update_appstore_strings do |options|
+    prj_folder = Pathname.new(File.join(Dir.pwd, '..')).expand_path.to_s
+    source_metadata_folder = File.join(prj_folder, 'fastlane/appstoreres/metadata/source')
 
     files = {
-      whats_new: File.join(prj_folder,  "/Simplenote/Resources/release_notes.txt"),
-      app_store_subtitle: File.join(source_metadata_folder, "subtitle.txt"),
-      app_store_desc: File.join(source_metadata_folder, "description.txt"),
-      app_store_keywords: File.join(source_metadata_folder, "keywords.txt")
+      whats_new: File.join(prj_folder, '/Simplenote/Resources/release_notes.txt'),
+      app_store_subtitle: File.join(source_metadata_folder, 'subtitle.txt'),
+      app_store_desc: File.join(source_metadata_folder, 'description.txt'),
+      app_store_keywords: File.join(source_metadata_folder, 'keywords.txt')
     }
 
     ios_update_metadata_source(
-      po_file_path: prj_folder + "/Simplenote/Resources/AppStoreStrings.pot",
+      po_file_path: "#{prj_folder}/Simplenote/Resources/AppStoreStrings.pot",
       source_files: files,
       release_version: options[:version]
     )
@@ -127,12 +127,12 @@ end
 
   # This lane lacks documentation because it ought to be part of the localized
   # metadata download script instead!
-  desc "Updates the files with the localized keywords values for App Store Connect to match the 100 characters requirement"
+  desc 'Updates the files with the localized keywords values for App Store Connect to match the 100 characters requirement'
   lane :sanitize_appstore_keywords do
-    Dir["./metadata/**"].each do |locale_dir|
+    Dir['./metadata/**'].each do |locale_dir|
       keywords_path = File.join(locale_dir, 'keywords.txt')
 
-      unless File.exists?(keywords_path)
+      unless File.exist?(keywords_path)
         UI.message "Could not find keywords file in #{locale_dir}. Skipping."
         next
       end
@@ -175,8 +175,8 @@ end
   # bundle exec fastlane new_beta_release skip_confirm:true
   # bundle exec fastlane new_beta_release base_version:10.6.1
   #####################################################################################
-  desc "Updates a release branch for a new beta release"
-  lane :new_beta_release do | options |
+  desc 'Updates a release branch for a new beta release'
+  lane :new_beta_release do |options|
     ios_betabuild_prechecks(options)
     download_localized_strings_and_metadata_from_glotpress
     ios_lint_localizations(input_dir: 'Simplenote', allow_retry: true)
@@ -198,7 +198,7 @@ end
   # bundle exec fastlane new_hotfix_release skip_confirm:true version:10.6.1
   #####################################################################################
   desc 'Creates a new hotfix branch for the given version:x.y.z. The branch will be cut from the tag x.y of the previous release'
-  lane :new_hotfix_release do | options |
+  lane :new_hotfix_release do |options|
     prev_ver = ios_hotfix_prechecks(options)
     ios_bump_version_hotfix(previous_version: prev_ver, version: options[:version])
   end
@@ -236,7 +236,9 @@ end
   #####################################################################################
   desc 'Trigger the final release build on CI'
   lane :finalize_release do |options|
-    UI.user_error!('To finalize a hotfix, please use the finalize_hotfix_release lane instead') if ios_current_branch_is_hotfix
+    if ios_current_branch_is_hotfix
+      UI.user_error!('To finalize a hotfix, please use the finalize_hotfix_release lane instead')
+    end
 
     ios_finalize_prechecks(options)
 
@@ -246,23 +248,23 @@ end
       abort_on_violations: false
     )
 
-    UI.message("Checking release notes strings translation status...")
+    UI.message('Checking release notes strings translation status...')
     check_translation_progress(
       glotpress_url: 'https://translate.wordpress.com/projects/simplenote/ios/release-notes/',
       abort_on_violations: false
     )
 
     ios_update_metadata(options)
-    sanitize_appstore_keywords()
+    sanitize_appstore_keywords
     ios_lint_localizations(input_dir: 'Simplenote', allow_retry: true)
-    ios_bump_version_beta()
+    ios_bump_version_beta
 
     # Wrap up
-    version = ios_get_app_version()
-    removebranchprotection(repository:GHHELPER_REPO, branch: "release/#{version}")
-    setfrozentag(repository:GHHELPER_REPO, milestone: version, freeze: false)
-    create_new_milestone(repository:GHHELPER_REPO)
-    close_milestone(repository:GHHELPER_REPO, milestone: version)
+    version = ios_get_app_version
+    removebranchprotection(repository: GHHELPER_REPO, branch: "release/#{version}")
+    setfrozentag(repository: GHHELPER_REPO, milestone: version, freeze: false)
+    create_new_milestone(repository: GHHELPER_REPO)
+    close_milestone(repository: GHHELPER_REPO, milestone: version)
 
     # Start the build
     trigger_release_build(branch_to_build: "release/#{version}")
@@ -283,12 +285,13 @@ end
   # bundle exec fastlane build_and_upload_beta_release skip_confirm:true
   # bundle exec fastlane build_and_upload_beta_release create_gh_release:true
   #####################################################################################
-  desc "Builds and uploads a beta release for distribution"
-  lane :build_and_upload_beta_release do | options |
+  desc 'Builds and uploads a beta release for distribution'
+  lane :build_and_upload_beta_release do |options|
     build_and_upload_release(
       skip_confirm: options[:skip_confirm],
       create_gh_release: options[:create_gh_release],
-      beta_release: true)
+      beta_release: true
+    )
   end
 
   #####################################################################################
@@ -306,12 +309,13 @@ end
   # bundle exec fastlane build_and_upload_stable_release skip_confirm:true
   # bundle exec fastlane build_and_upload_stable_release create_gh_release:true
   #####################################################################################
-  desc "Builds and uploads a stable release for distribution"
-  lane :build_and_upload_stable_release do | options |
+  desc 'Builds and uploads a stable release for distribution'
+  lane :build_and_upload_stable_release do |options|
     build_and_upload_release(
       skip_confirm: options[:skip_confirm],
       create_gh_release: options[:create_gh_release],
-      beta_release: false)
+      beta_release: false
+    )
   end
 
   #####################################################################################
@@ -328,17 +332,17 @@ end
   # bundle exec fastlane build_and_upload_release skip_confirm:true
   # bundle exec fastlane build_and_upload_release beta_release:true
   #####################################################################################
-  desc "Builds and uploads for distribution"
-  lane :build_and_upload_release do | options |
+  desc 'Builds and uploads for distribution'
+  lane :build_and_upload_release do |options|
     ios_build_prechecks(skip_confirm: options[:skip_confirm],
-      internal: false,
-      internal_on_single_version: options[:beta_release],
-      external: true)
+                        internal: false,
+                        internal_on_single_version: options[:beta_release],
+                        external: true)
 
-    ios_build_preflight()
+    ios_build_preflight
     build_and_upload_internal(skip_prechecks: true, skip_confirm: options[:skip_confirm]) if options[:beta_release]
     build_and_upload_to_app_store_connect(skip_prechecks: true, skip_confirm: options[:skip_confirm],
-                         beta_release: options[:beta_release], create_release: options[:create_gh_release])
+                                          beta_release: options[:beta_release], create_release: options[:create_gh_release])
   end
 
   #####################################################################################
@@ -353,23 +357,23 @@ end
   # bundle exec fastlane build_and_upload_internal
   # bundle exec fastlane build_and_upload_internal skip_confirm:true
   #####################################################################################
-  desc "Builds and updates for distribution"
-  lane :build_and_upload_internal do | options |
-    ios_build_prechecks(skip_confirm: options[:skip_confirm], internal: false) unless (options[:skip_prechecks])
-    ios_build_preflight() unless (options[:skip_prechecks])
+  desc 'Builds and updates for distribution'
+  lane :build_and_upload_internal do |options|
+    ios_build_prechecks(skip_confirm: options[:skip_confirm], internal: false) unless options[:skip_prechecks]
+    ios_build_preflight unless options[:skip_prechecks]
 
     internal_code_signing
 
     gym(
-      scheme: "Simplenote",
-      configuration: "Distribution Internal",
-      workspace: "Simplenote.xcworkspace",
-      export_method: "enterprise",
+      scheme: 'Simplenote',
+      configuration: 'Distribution Internal',
+      workspace: 'Simplenote.xcworkspace',
+      export_method: 'enterprise',
       clean: true,
       output_directory: OUTPUT_DIRECTORY_PATH,
-      export_team_id: ENV["INT_EXPORT_TEAM_ID"],
+      export_team_id: ENV.fetch('INT_EXPORT_TEAM_ID', nil),
       export_options: {
-        method: "enterprise",
+        method: 'enterprise',
         provisioningProfiles: simplenote_provisioning_profiles(
           root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Internal",
           match_type: 'InHouse'
@@ -380,16 +384,16 @@ end
     File.rename(File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote.ipa'), File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote Internal.ipa'))
 
     appcenter_upload(
-      api_token: ENV["APPCENTER_API_TOKEN"],
-      owner_name: "automattic",
-      owner_type: "organization",
-      app_name: "Simplenote",
+      api_token: ENV.fetch('APPCENTER_API_TOKEN', nil),
+      owner_name: 'automattic',
+      owner_type: 'organization',
+      app_name: 'Simplenote',
       file: File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote Internal.ipa'),
       notify_testers: false
     )
 
     sentry_upload_dsym(
-      auth_token: ENV["SENTRY_AUTH_TOKEN"],
+      auth_token: ENV.fetch('SENTRY_AUTH_TOKEN', nil),
       org_slug: 'a8c',
       project_slug: 'simplenote-ios',
       dsym_path: lane_context[SharedValues::DSYM_OUTPUT_PATH]
@@ -408,21 +412,21 @@ end
   # bundle exec fastlane build_and_upload_to_app_store_connect
   # bundle exec fastlane build_and_upload_to_app_store_connect skip_confirm:true
   #####################################################################################
-  desc "Builds and uploads for distribution"
-  lane :build_and_upload_to_app_store_connect do | options |
-    ios_build_prechecks(skip_confirm: options[:skip_confirm], external: true) unless (options[:skip_prechecks])
-    ios_build_preflight() unless (options[:skip_prechecks])
+  desc 'Builds and uploads for distribution'
+  lane :build_and_upload_to_app_store_connect do |options|
+    ios_build_prechecks(skip_confirm: options[:skip_confirm], external: true) unless options[:skip_prechecks]
+    ios_build_preflight unless options[:skip_prechecks]
 
     appstore_code_signing
 
     gym(
-      scheme: "Simplenote",
-      workspace: "Simplenote.xcworkspace",
-      configuration: "Distribution AppStore",
+      scheme: 'Simplenote',
+      workspace: 'Simplenote.xcworkspace',
+      configuration: 'Distribution AppStore',
       clean: true,
       export_options: {
-        method: "app-store",
-        export_team_id: ENV["EXT_EXPORT_TEAM_ID"],
+        method: 'app-store',
+        export_team_id: ENV.fetch('EXT_EXPORT_TEAM_ID', nil),
         provisioningProfiles: simplenote_provisioning_profiles
       }
     )
@@ -432,29 +436,28 @@ end
       api_key_path: File.join(Dir.home, '.configure', 'simplenote-ios', 'secrets', 'app_store_connect_fastlane_api_key.json')
     )
 
-    sh("rm ../Simplenote.ipa")
-    dSYM_PATH = File.dirname(Dir.pwd) + "/Simplenote.app.dSYM.zip"
+    sh('rm ../Simplenote.ipa')
+    dSYM_PATH = "#{File.dirname(Dir.pwd)}/Simplenote.app.dSYM.zip"
 
     sentry_upload_dsym(
       dsym_path: dSYM_PATH,
-      auth_token: ENV["SENTRY_AUTH_TOKEN"],
+      auth_token: ENV.fetch('SENTRY_AUTH_TOKEN', nil),
       org_slug: 'a8c',
-      project_slug: 'simplenote-ios',
+      project_slug: 'simplenote-ios'
     )
 
     sh("rm #{dSYM_PATH}")
 
-    if (options[:create_release])
-      archive_zip_path = File.dirname(Dir.pwd) + "/Simplenote.xarchive.zip"
+    if options[:create_release]
+      archive_zip_path = "#{File.dirname(Dir.pwd)}/Simplenote.xarchive.zip"
       zip(path: lane_context[SharedValues::XCODEBUILD_ARCHIVE], output_path: archive_zip_path)
 
       version = options[:beta_release] ? ios_get_build_version : ios_get_app_version
-      create_release(repository:GHHELPER_REPO,
-        version: version,
-        release_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt'),
-        release_assets: archive_zip_path.to_s,
-        prerelease: options[:beta_release]
-      )
+      create_release(repository: GHHELPER_REPO,
+                     version: version,
+                     release_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt'),
+                     release_assets: archive_zip_path.to_s,
+                     prerelease: options[:beta_release])
 
       sh("rm #{archive_zip_path}")
     end
@@ -501,8 +504,8 @@ end
   # Example:
   # bundle exec fastlane build_and_upload_installable_build
   #####################################################################################
-  desc "Builds and uploads an installable build"
-  lane :build_and_upload_installable_build do | options |
+  desc 'Builds and uploads an installable build'
+  lane :build_and_upload_installable_build do |_options|
     alpha_code_signing
 
     # Get the current build version, and update it if needed
@@ -510,15 +513,15 @@ end
     apply_build_number(build_number)
 
     gym(
-      scheme: "Simplenote",
-      configuration: "Distribution Alpha",
-      workspace: "Simplenote.xcworkspace",
-      export_method: "enterprise",
+      scheme: 'Simplenote',
+      configuration: 'Distribution Alpha',
+      workspace: 'Simplenote.xcworkspace',
+      export_method: 'enterprise',
       clean: true,
       output_directory: OUTPUT_DIRECTORY_PATH,
-      export_team_id: ENV["INT_EXPORT_TEAM_ID"],
+      export_team_id: ENV.fetch('INT_EXPORT_TEAM_ID', nil),
       export_options: {
-        method: "enterprise",
+        method: 'enterprise',
         provisioningProfiles: simplenote_provisioning_profiles(
           root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Alpha",
           match_type: 'InHouse'
@@ -529,17 +532,17 @@ end
     File.rename(File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote.ipa'), File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote Alpha.ipa'))
 
     appcenter_upload(
-      api_token: get_required_env("APPCENTER_API_TOKEN"),
-      owner_name: "automattic",
-      owner_type: "organization",
-      app_name: "Simplenote-Installable-Builds",
+      api_token: get_required_env('APPCENTER_API_TOKEN'),
+      owner_name: 'automattic',
+      owner_type: 'organization',
+      app_name: 'Simplenote-Installable-Builds',
       file: File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote Alpha.ipa'),
-      destinations: "All-Users-of-Simplenote-Installable-Builds",
+      destinations: 'All-Users-of-Simplenote-Installable-Builds',
       notify_testers: false
     )
 
     sentry_upload_dsym(
-      auth_token: get_required_env("SENTRY_AUTH_TOKEN"),
+      auth_token: get_required_env('SENTRY_AUTH_TOKEN'),
       org_slug: 'a8c',
       project_slug: 'simplenote-ios',
       dsym_path: lane_context[SharedValues::DSYM_OUTPUT_PATH]
@@ -598,7 +601,7 @@ end
   # On the other hand, right now Simplenote only needs one locale, so we might
   # as well keep using this on CI too. We still benefit from not having to
   # rebuild the app just to take the screenshots in light vs dark mode.
-  desc "Walk through the app taking screenshots."
+  desc 'Walk through the app taking screenshots.'
   lane :take_screenshots do |options|
     build_app_for_screenshots(options)
 
@@ -612,22 +615,22 @@ end
     )
   end
 
-  desc "Build the binaries to run to take the screenshots"
+  desc 'Build the binaries to run to take the screenshots'
   lane :build_app_for_screenshots do
     scan(
       workspace: workspace_path,
       scheme: screenshots_scheme,
       build_for_testing: true,
-      derived_data_path: derived_data_directory,
+      derived_data_path: derived_data_directory
     )
   end
 
-  desc "Runs through the app taking screenshots, using a prebuilt binary"
+  desc 'Runs through the app taking screenshots, using a prebuilt binary'
   lane :take_screenshots_from_app do |options|
-    devices = (options[:devices] || screenshot_devices).split(',').flatten()
+    devices = (options[:devices] || screenshot_devices).split(',').flatten
 
     languages = [
-      "en-US"
+      'en-US'
     ]
 
     # Erase the Simulators between runs in order to get everything back to a
@@ -673,22 +676,22 @@ end
       concurrent_simulators: false,
 
       # Allow the caller to invoke dark mode
-      dark_mode: options[:mode].to_s.downcase == "dark"
+      dark_mode: options[:mode].to_s.downcase == 'dark'
     )
   end
 
   lane :create_promo_screenshots do |options|
-    unless Fastlane::Helper::GitHelper.has_git_lfs then
-      UI.user_error!("Git LFS not enabled – Unable to generate promo screenshots. Run `git lfs install && git lfs fetch && git lfs pull` to fix this.")
+    unless Fastlane::Helper::GitHelper.has_git_lfs
+      UI.user_error!('Git LFS not enabled – Unable to generate promo screenshots. Run `git lfs install && git lfs fetch && git lfs pull` to fix this.')
     end
 
     # This value is defined in style.css. It would be good if there was a way
     # to make it parametric, so that if we update the CSS we don't risk this
     # getting out of sync.
-    font_name = "SourceSansPro-Regular.ttf"
-    user_font_directory = File.join(Dir.home, "Library/Fonts")
+    font_name = 'SourceSansPro-Regular.ttf'
+    user_font_directory = File.join(Dir.home, 'Library/Fonts')
     user_font_path = File.join(user_font_directory, font_name)
-    if File.exists?(user_font_path)
+    if File.exist?(user_font_path)
       UI.success("Custom font #{font_name} already installed locally.")
     else
       UI.message("Installing #{font_name} at #{user_font_path}.")
@@ -698,13 +701,13 @@ end
 
     promo_screenshots(
       orig_folder: options[:source] || screenshots_directory,
-      metadata_folder: File.join(Dir.pwd, "metadata"),
+      metadata_folder: File.join(Dir.pwd, 'metadata'),
       output_folder: promo_screenshots_directory,
       force: options[:force] || true
     )
   end
 
-  desc "Rebuild Screenshot Devices"
+  desc 'Rebuild Screenshot Devices'
   lane :rebuild_screenshot_devices do |options|
     require 'simctl'
 
@@ -714,18 +717,19 @@ end
     device_names = (options[:devices] || screenshot_devices).split(',').flatten
     sim_version = options[:simulator_version] || simulator_version
 
-    SimCtl.list_devices.each { |device|
+    SimCtl.list_devices.each do |device|
       next unless device_names.include? device.name
+
       UI.message("Deleting #{device.name} because it already exists.")
       device.delete
-    }
+    end
 
-    device_names.each { |device|
+    device_names.each do |device|
       runtime = SimCtl.runtime(name: "iOS #{sim_version}")
       devicetype = SimCtl.devicetype(name: device)
 
       SimCtl.create_device device, devicetype, runtime
-    }
+    end
   end
 
   #####################################################################################
@@ -747,12 +751,12 @@ end
   # Example:
   # bundle exec fastlane test device:"iPhone 14"
   #####################################################################################
-  desc "Run Unit Tests"
-  lane :run_unit_tests do | options |
+  desc 'Run Unit Tests'
+  lane :run_unit_tests do |options|
     scan(
       workspace: workspace_name,
       scheme: 'Simplenote',
-      device: options[:device] || "iPhone 14",
+      device: options[:device] || 'iPhone 14',
       output_directory: OUTPUT_DIRECTORY_PATH,
       reset_simulator: true,
       result_bundle: true
@@ -771,12 +775,12 @@ end
   # Example:
   # bundle exec fastlane run_ui_tests scheme:"SimplenoteUITests_Subset" device:"iPhone 14" test_account:"test.account@test.com"
   #####################################################################################
-  desc "Run UI tests"
-  lane :run_ui_tests do | options |
+  desc 'Run UI tests'
+  lane :run_ui_tests do |options|
     scan(
       workspace: workspace_name,
-      scheme: options[:scheme] || "SimplenoteUITests_Subset",
-      device: options[:device] || "iPhone 14",
+      scheme: options[:scheme] || 'SimplenoteUITests_Subset',
+      device: options[:device] || 'iPhone 14',
       output_directory: OUTPUT_DIRECTORY_PATH,
       reset_simulator: true,
       xcargs: { UI_TEST_ACCOUNT: options[:test_account] || '' },
@@ -796,15 +800,15 @@ end
   # Example:
   # bundle exec fastlane pick_test_account_and_run_ui_tests device:"iPhone 14"
   #####################################################################################
-  desc "Occupy a free test account and run UI tests with it"
-  lane :pick_test_account_and_run_ui_tests do | options |
+  desc 'Occupy a free test account and run UI tests with it'
+  lane :pick_test_account_and_run_ui_tests do |options|
     if is_ci
       sanitize_test_accounts
       find_free_test_account
-      run_ui_tests(options.merge({ test_account: get_required_env("UI_TESTS_ACCOUNT_EMAIL").sub("X", $used_test_account_index.to_s)}))
+      run_ui_tests(options.merge({ test_account: get_required_env('UI_TESTS_ACCOUNT_EMAIL').sub('X', $used_test_account_index.to_s) }))
       deoccupy_test_account
     else
-      UI.user_error!("This lane should be run only from CI")
+      UI.user_error!('This lane should be run only from CI')
     end
   end
 end
@@ -812,112 +816,111 @@ end
 ########################################################################
 # Configure Lanes
 ########################################################################
-  #####################################################################################
-  # update_certs_and_profiles
-  # -----------------------------------------------------------------------------------
-  # This lane downloads all the required certs and profiles and,
-  # if not run on CI it creates the missing ones.
-  # -----------------------------------------------------------------------------------
-  # Usage:
-  # bundle exec fastlane update_certs_and_profiles
+#####################################################################################
+# update_certs_and_profiles
+# -----------------------------------------------------------------------------------
+# This lane downloads all the required certs and profiles and,
+# if not run on CI it creates the missing ones.
+# -----------------------------------------------------------------------------------
+# Usage:
+# bundle exec fastlane update_certs_and_profiles
+#
+# Example:
+# bundle exec fastlane update_certs_and_profiles
+#####################################################################################
+lane :update_certs_and_profiles do |_options|
+  alpha_code_signing
+  internal_code_signing
+  appstore_code_signing
+end
+
+lane :upload_screenshots do |_options|
+  # This uses the following env vars from the user env:
+  # DELIVER_USER
+  # DELIVER_APP_IDENTIFIER
+  # FASTLANE_PASSWORD
   #
-  # Example:
-  # bundle exec fastlane update_certs_and_profiles
-  #####################################################################################
-  lane :update_certs_and_profiles do | options |
-    alpha_code_signing
-    internal_code_signing
-    appstore_code_signing
-  end
+  # and from the project env:
+  # FASTLANE_ITC_TEAM_ID
+  upload_to_app_store(
+    edit_live: false,
+    use_live_version: false,
+    screenshots_path: promo_screenshots_directory,
+    skip_binary_upload: true,
+    skip_metadata: true,
+    skip_app_version_update: true,
 
-  lane :upload_screenshots do |options|
-    # This uses the following env vars from the user env:
-    # DELIVER_USER
-    # DELIVER_APP_IDENTIFIER
-    # FASTLANE_PASSWORD
-    #
-    # and from the project env:
-    # FASTLANE_ITC_TEAM_ID
-    upload_to_app_store(
-      edit_live: false,
-      use_live_version: false,
-      screenshots_path: promo_screenshots_directory,
-      skip_binary_upload: true,
-      skip_metadata: true,
-      skip_app_version_update: true,
+    # Prechecks
+    run_precheck_before_submit: false,
+    precheck_include_in_app_purchases: false,
 
-      # Prechecks
-      run_precheck_before_submit: false,
-      precheck_include_in_app_purchases: false,
-
-      # Delete all the previous screenshots on ASC
-      overwrite_screenshots: true,
-      # Set this to true to skip the interactive confirmation of the
-      # screenshots that will be uploaded. Please, though, don't do it, unless
-      # you disable the overwrite option above. If we loose the screenshot that
-      # are on ASC, we might not be able to recover them, unless we checkout
-      # whichever version made them and generate them again.
-      force: false,
-      submit_for_review: false
-    )
-  end
+    # Delete all the previous screenshots on ASC
+    overwrite_screenshots: true,
+    # Set this to true to skip the interactive confirmation of the
+    # screenshots that will be uploaded. Please, though, don't do it, unless
+    # you disable the overwrite option above. If we loose the screenshot that
+    # are on ASC, we might not be able to recover them, unless we checkout
+    # whichever version made them and generate them again.
+    force: false,
+    submit_for_review: false
+  )
+end
 
 ########################################################################
 # Fastlane match code signing
 ########################################################################
 
-  private_lane :alpha_code_signing do |options|
-    match(
-      type: "enterprise",
-      team_id: get_required_env("INT_EXPORT_TEAM_ID"),
-      readonly: options[:readonly] || is_ci,
-      app_identifier: simplenote_app_identifiers(root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Alpha")
-    )
-  end
+private_lane :alpha_code_signing do |options|
+  match(
+    type: 'enterprise',
+    team_id: get_required_env('INT_EXPORT_TEAM_ID'),
+    readonly: options[:readonly] || is_ci,
+    app_identifier: simplenote_app_identifiers(root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Alpha")
+  )
+end
 
-  private_lane :internal_code_signing do |options|
-    match(
-      type: "enterprise",
-      team_id: get_required_env("INT_EXPORT_TEAM_ID"),
-      readonly: options[:readonly] || is_ci,
-      app_identifier: simplenote_app_identifiers(root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Internal")
-    )
-  end
+private_lane :internal_code_signing do |options|
+  match(
+    type: 'enterprise',
+    team_id: get_required_env('INT_EXPORT_TEAM_ID'),
+    readonly: options[:readonly] || is_ci,
+    app_identifier: simplenote_app_identifiers(root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Internal")
+  )
+end
 
-  private_lane :appstore_code_signing do |options|
-    match(
-      type: "appstore",
-      team_id: get_required_env("EXT_EXPORT_TEAM_ID"),
-      readonly: options[:readonly] || is_ci,
-      app_identifier: simplenote_app_identifiers,
-      template_name: "NotationalFlow Keychain Access (Distribution)",
-    )
-  end
+private_lane :appstore_code_signing do |options|
+  match(
+    type: 'appstore',
+    team_id: get_required_env('EXT_EXPORT_TEAM_ID'),
+    readonly: options[:readonly] || is_ci,
+    app_identifier: simplenote_app_identifiers,
+    template_name: 'NotationalFlow Keychain Access (Distribution)'
+  )
+end
 
-  # Compiles the array of bundle identifiers for the different targets that
-  # make up the Simplenote app, to be used as the `app_identifier` parameter
-  # for the `match` action.
-  def simplenote_app_identifiers(root_bundle_id: APP_STORE_BUNDLE_IDENTIFIER)
-    extension_bundle_ids =
-      %w[Share Widgets Intents]
-      .map { |suffix| "#{root_bundle_id}.#{suffix}" }
+# Compiles the array of bundle identifiers for the different targets that
+# make up the Simplenote app, to be used as the `app_identifier` parameter
+# for the `match` action.
+def simplenote_app_identifiers(root_bundle_id: APP_STORE_BUNDLE_IDENTIFIER)
+  extension_bundle_ids =
+    %w[Share Widgets Intents]
+    .map { |suffix| "#{root_bundle_id}.#{suffix}" }
 
-    [root_bundle_id, *extension_bundle_ids]
-  end
+  [root_bundle_id, *extension_bundle_ids]
+end
 
-  # Compiles the dictionary mapping of the bundle identifiers and provisioning
-  # profiles to be used in the `export_options > provisioningProfiles`
-  # parameter for the `build_app`/`gym` action.
-  def simplenote_provisioning_profiles(root_bundle_id: APP_STORE_BUNDLE_IDENTIFIER, match_type: 'AppStore')
-    # FIXME: replace the array below with the following call once established
-    # the impact of adding the mapping for the Widgets extension, which is
-    # something we haven't had up to this point.
-    #
-    # simplenote_app_identifiers(root_bundle_id: root_bundle_id)
-    [root_bundle_id, "#{root_bundle_id}.Share", "#{root_bundle_id}.Intents"]
-      .map { |key| [key, "match #{match_type} #{key}"] }
-      .to_h
-  end
+# Compiles the dictionary mapping of the bundle identifiers and provisioning
+# profiles to be used in the `export_options > provisioningProfiles`
+# parameter for the `build_app`/`gym` action.
+def simplenote_provisioning_profiles(root_bundle_id: APP_STORE_BUNDLE_IDENTIFIER, match_type: 'AppStore')
+  # FIXME: replace the array below with the following call once established
+  # the impact of adding the mapping for the Widgets extension, which is
+  # something we haven't had up to this point.
+  #
+  # simplenote_app_identifiers(root_bundle_id: root_bundle_id)
+  [root_bundle_id, "#{root_bundle_id}.Share", "#{root_bundle_id}.Intents"]
+    .to_h { |key| [key, "match #{match_type} #{key}"] }
+end
 
 ########################################################################
 # Localization Lanes
@@ -930,7 +933,8 @@ lane :generate_strings_file_for_glotpress do
     paths: ['Simplenote/', 'SimplenoteIntents/', 'SimplenoteShare/',
             'SimplenoteWidgets/', 'Pods/Simperium/Simperium/',
             'Pods/Simperium/Simperium-iOS'],
-    output_dir: en_lproj_path)
+    output_dir: en_lproj_path
+  )
 
   git_commit(
     path: en_lproj_path,
@@ -958,40 +962,40 @@ def trigger_buildkite_release_build(branch:, beta:)
   )
 end
 
-def fastlane_directory()
-  File.expand_path File.dirname(__FILE__)
+def fastlane_directory
+  __dir__
 end
 
 def derived_data_directory
-  File.join(fastlane_directory, "DerivedData")
+  File.join(fastlane_directory, 'DerivedData')
 end
 
 def workspace_name
-  "Simplenote.xcworkspace"
+  'Simplenote.xcworkspace'
 end
 
 def screenshots_scheme
-  "SimplenoteScreenshots"
+  'SimplenoteScreenshots'
 end
 
 def workspace_path
   File.join(fastlane_directory, "../#{workspace_name}")
 end
 
-def screenshots_directory()
-  File.join(fastlane_directory, "screenshots")
+def screenshots_directory
+  File.join(fastlane_directory, 'screenshots')
 end
 
 def promo_screenshots_directory
-  File.join(fastlane_directory, "promo_screenshots")
+  File.join(fastlane_directory, 'promo_screenshots')
 end
 
-def screenshot_devices()
+def screenshot_devices
   [
-    "iPhone X",
-    "iPhone 8",
-    "iPad Pro (12.9-inch) (2nd generation)",
-    "iPad Pro (12.9-inch) (3rd generation)",
+    'iPhone X',
+    'iPhone 8',
+    'iPad Pro (12.9-inch) (2nd generation)',
+    'iPad Pro (12.9-inch) (3rd generation)'
   ]
 end
 
@@ -1000,9 +1004,10 @@ def simulator_version
 end
 
 def deoccupy_test_account
-  return if $used_test_account_index == nil
+  return if $used_test_account_index.nil?
+
   UI.message("Freeing used test account #{$used_test_account_index}")
-  change_test_account_availability("free")
+  change_test_account_availability('free')
   $used_test_account_index = nil
 end
 
@@ -1013,7 +1018,7 @@ end
 #   get_test_accounts_hash
 #     => {"0"=>"4079", "1"=>"free", "2"=>"free", "3"=>"free"}
 def get_test_accounts_hash
-  uri = URI.parse(get_required_env("UI_TESTS_ACCOUNTS_JSON_URL"))
+  uri = URI.parse(get_required_env('UI_TESTS_ACCOUNTS_JSON_URL'))
   response = Net::HTTP.get_response(uri)
   accounts_state = response.body.chomp
   JSON.parse(accounts_state)
@@ -1023,14 +1028,14 @@ end
 # Crashed fastlane if free account was not found.
 def find_free_test_account
   accounts_hash = get_test_accounts_hash
-  UI.message("Looking for a free test account...")
+  UI.message('Looking for a free test account...')
   UI.message("Accounts state: #{accounts_hash}")
 
   $used_test_account_index = accounts_hash.key('free')
 
-  UI.user_error!("Could not find free UI Test account. Quitting.") if $used_test_account_index.nil?
+  UI.user_error!('Could not find free UI Test account. Quitting.') if $used_test_account_index.nil?
   UI.message("Free account index: #{$used_test_account_index}")
-  change_test_account_availability("#{get_required_env("BUILDKITE_BUILD_NUMBER")}")
+  change_test_account_availability(get_required_env('BUILDKITE_BUILD_NUMBER').to_s)
 end
 
 # Replace a value in a key which is equal to $used_test_account_index global variable
@@ -1048,39 +1053,38 @@ end
 
 def sanitize_test_accounts
   accounts_hash = get_test_accounts_hash
-  UI.message("Sanitizing stale test accounts...")
+  UI.message('Sanitizing stale test accounts...')
   UI.message("Accounts before sanitizing: #{accounts_hash}")
 
   accounts_hash.each do |key, value|
-    next if value == "free" || is_job_running(value)
-    accounts_hash[key] = "free"
+    next if value == 'free' || is_job_running(value)
+
+    accounts_hash[key] = 'free'
     submit_accounts_hash(accounts_hash)
   end
 end
 
 def is_job_running(job_number)
-  begin
-    client = Buildkit.new(token: get_required_env('BUILDKITE_TOKEN'))
-    build = client.build('automattic', 'simplenote-ios', job_number)
+  client = Buildkit.new(token: get_required_env('BUILDKITE_TOKEN'))
+  build = client.build('automattic', 'simplenote-ios', job_number)
 
-    state = build['state']
+  state = build['state']
 
-    UI.message("Status of Job Number #{job_number} is #{state}")
+  UI.message("Status of Job Number #{job_number} is #{state}")
 
-    build['state'] == 'running'
-  rescue
-    false
-  end
+  build['state'] == 'running'
+rescue StandardError
+  false
 end
 
 def submit_accounts_hash(accounts_hash)
   UI.message("Writing new accounts state: #{accounts_hash}")
-  uri = URI.parse(get_required_env("UI_TESTS_ACCOUNTS_JSON_URL"))
+  uri = URI.parse(get_required_env('UI_TESTS_ACCOUNTS_JSON_URL'))
   request = Net::HTTP::Post.new(uri)
   request.body = accounts_hash.to_json
 
   req_options = {
-    use_ssl: uri.scheme == "https",
+    use_ssl: uri.scheme == 'https'
   }
 
   response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
@@ -1114,4 +1118,3 @@ def generate_installable_build_number
     "#{branch}-#{commit}"
   end
 end
-
