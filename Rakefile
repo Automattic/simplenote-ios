@@ -239,16 +239,6 @@ task :xcode => [:dependencies] do
   sh "open #{XCODE_WORKSPACE}"
 end
 
-def fold(label, &block)
-  puts "travis_fold:start:#{label}" if is_travis?
-  yield
-  puts "travis_fold:end:#{label}" if is_travis?
-end
-
-def is_travis?
-  return ENV["TRAVIS"] != nil
-end
-
 def pod(args)
   args = %w[bundle exec pod] + args
   sh(*args)
