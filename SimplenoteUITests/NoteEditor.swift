@@ -230,6 +230,19 @@ class NoteEditorAssert {
         XCTAssertEqual(matches, 0)
     }
 
+    class func oneOfTheStringsIsShownInTextView(strings: [String]) {
+        var matchFound = false
+
+        for string in strings {
+            if NoteEditor.getTextViewsWithExactValueCount(value: string) > 0 {
+                matchFound = true
+                break
+            }
+        }
+
+        XCTAssertTrue(matchFound)
+    }
+
     class func textViewWithExactLabelShownOnce(label: String) {
         let matches = NoteEditor.getTextViewsWithExactLabelCount(label: label)
         XCTAssertEqual(matches, 1)

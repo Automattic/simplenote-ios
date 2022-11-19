@@ -133,9 +133,10 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         trackStep()
         NoteEditor.undo()
         NoteEditorAssert.textViewWithExactValueNotShown(value: editorText)
-        // Depending on iOS version, undoing might result in last character only "removal"
-        // or the whole entered string removal. As of iOS 16.0, former is true.
-        NoteEditorAssert.textViewWithExactValueShownOnce(value: "")
+        // Depending on... somehting, undoing might result in last character only "removal"
+        // or the whole entered string removal. To decrease maintenance effort, we check
+        // for at least one of two to be present:
+        NoteEditorAssert.oneOfTheStringsIsShownInTextView(strings: ["ABC", ""])
     }
 
     func testAddedURLIsLinkified() throws {
