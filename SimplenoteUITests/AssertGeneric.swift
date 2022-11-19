@@ -35,8 +35,7 @@ let numberOfNotesInAllNotesNotExpected = "Notes Number" + inAllNotesEnding + not
     numberOfNotesInTrashNotExpected = "Notes Number" + inTrashEnding + notExpectedEnding,
     numberOfTagsSuggestionsNotExpected = "Tags search suggestions " + inNoteListEnding + notExpectedEnding
 
-let linkContainerNotFoundInEditor = "\" link container" + notFoundEnding + inEditorEnding,
-    linkNotFoundInEditor = "\" link" + notFoundEnding + inEditorEnding,
+let linkNotFoundInEditor = "\" link" + notFoundEnding + inEditorEnding,
     linkNotFoundInPreview = "\" link" + notFoundEnding + inNotePreviewEnding
 
 let textNotFoundInEditor = "\" text" + notFoundEnding + inEditorEnding,
