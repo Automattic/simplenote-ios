@@ -4,10 +4,10 @@
 /* Language: nl */
 
 /* Monthly Subscription Option. Please preserve the special marker! */
-"%@ per Month" = "Per maand";
+"%@ per Month" = "%@ Per maand";
 
 /* Yearly Subscription Option. Please preserve the special marker! */
-"%@ per Year" = "Per jaar";
+"%@ per Year" = "%@ Per jaar";
 
 /* Number of found search results */
 "%d Result" = "%d resultaat";

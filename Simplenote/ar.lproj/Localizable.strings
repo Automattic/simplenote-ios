@@ -4,7 +4,7 @@
 /* Language: ar */
 
 /* Monthly Subscription Option. Please preserve the special marker! */
-"%@ per Month" = "شهريًا";
+"%@ per Month" = "%@ شهريًا";
 
 /* Yearly Subscription Option. Please preserve the special marker! */
 "%@ per Year" = "%@ سنويًا";
