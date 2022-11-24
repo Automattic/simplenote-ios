@@ -3,6 +3,12 @@
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: el_GR */
 
+/* Monthly Subscription Option. Please preserve the special marker! */
+"%@ per Month" = "%@ per Month";
+
+/* Yearly Subscription Option. Please preserve the special marker! */
+"%@ per Year" = "%@ per Year";
+
 /* Number of found search results */
 "%d Result" = "%d αποτέλεσμα";
 
@@ -93,6 +99,9 @@
    Title: No filters applied */
 "All Notes" = "All Notes";
 
+/* A short description to access the account login screen */
+"Already have an account?" = "Έχετε ήδη λογαριασμό;";
+
 /* Delete account confirmation instructions */
 "An email has been sent to %@. Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation." = "An email has been sent to %@. Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation.";
 
@@ -120,6 +129,9 @@
 /* User Authenticated */
 "Authenticated" = "Authenticated";
 
+/* Become a Sustainer Title */
+"Become a Simplenote Sustainer" = "Become a Simplenote Sustainer";
+
 /* The Simplenote blog */
 "Blog" = "Blog";
 
@@ -129,12 +141,17 @@
 /* Delete account confirmation alert message */
 "By deleting the account for %@, all notes created with this account will be permanently deleted. This action is not reversible" = "By deleting the account for %@, all notes created with this account will be permanently deleted. This action is not reversible";
 
+/* Terms Button Text */
+"By signing up, you agree to our Terms of Service »" = "By signing up, you agree to our Terms of Service »";
+
 /* Cancel Action
    Cancel action button
    Cancel action for password alert
    Cancel action on share extension.
+   Cancel button for authentication
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
+   Dismisses the alert
    Dismissing an interface
    PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
@@ -170,6 +187,9 @@
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "Choose a 4 digit passcode";
 
+/* Sustainer Alert's Message */
+"Choose a plan and help unlock future features" = "Choose a plan and help unlock future features";
+
 /* Opens the Collaborate UI */
 "Collaborate" = "Συνεργασία";
 
@@ -185,7 +205,8 @@
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "Condensed Note List";
 
-/* Confirm button -> Review you account screen */
+/* Confirm button -> Review you account screen
+   Hint displayed in the password confirmation field */
 "Confirm" = "Επιβεβαίωση";
 
 /* Title on the PinLock screen asking to confirm a passcode */
@@ -290,6 +311,9 @@
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "Disable Markdown formatting";
 
+/* Dismiss Alert */
+"Dismiss" = "Dismiss";
+
 /* Accessibility label describing a button used to dismiss a history view of the note */
 "Dismiss History" = "Dismiss History";
 
@@ -301,6 +325,9 @@
 
 /* Card title showing information about the note (metrics, references) */
 "Document" = "Document";
+
+/* A short description to access the account creation screen */
+"Don't have an account?" = "Δεν έχετε λογαριασμό;";
 
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
@@ -340,6 +367,12 @@
    Error Title */
 "Error" = "Error";
 
+/* No comment provided by engineer. */
+"Error: NSManagedObjectContext's persistentStoreCoordinator must be nil. Simperium will handle CoreData connections for you." = "Error: NSManagedObjectContext's persistentStoreCoordinator must be nil. Simperium will handle CoreData connections for you.";
+
+/* No comment provided by engineer. */
+"Error: you must initialize your context with 'NSMainQueueConcurrencyType' concurrency type." = "Error: you must initialize your context with 'NSMainQueueConcurrencyType' concurrency type.";
+
 /* Get Help Description Label */
 "FAQ or contact us" = "FAQ or contact us";
 
@@ -348,6 +381,9 @@
 
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "Fetching Version";
+
+/* Forgot password Button Text */
+"Forgot password? »" = "Forgot password? »";
 
 /* Password Reset Action */
 "Forgotten password?" = "Forgotten password?";
@@ -454,6 +490,9 @@
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "Modified: Oldest";
 
+/* Monthly Subscription Option (Used when / if the price fails to load) */
+"Monthly" = "Monthly";
+
 /* Accessibility hint for trash selected notes button */
 "Move selected notes to trash" = "Move selected notes to trash";
 
@@ -497,11 +536,20 @@
 /* Message shown in note list when no notes are tagged with the provided tag. Parameter: %@ - tag */
 "No notes tagged “%@”" = "No notes tagged “%@”";
 
+/* No purchases Found Message */
+"No previous valid purchases found, for the current period" = "No previous valid purchases found, for the current period";
+
+/* No purchases Found Title */
+"No purchases found" = "No purchases found";
+
 /* Rating view - liked or disliked - no thanks button */
 "No thanks" = "No thanks";
 
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "No untagged notes";
+
+/* Error when you enter a bad email address */
+"Not a valid email address" = "Not a valid email address";
 
 /* Note Widget Title */
 "Note" = "Note";
@@ -552,17 +600,22 @@
 /* Pin Lock */
 "Passcodes did not match. Try again." = "Τα συνθηματικά δεν συμφωνούν. Δοκιμάστε ξανά.";
 
-/* Password TextField Placeholder */
+/* Hint displayed in the password field
+   Password TextField Placeholder */
 "Password" = "Κωδικός";
 
 /* Message displayed when password is invalid (Signup) */
 "Password cannot match email" = "Password cannot match email";
 
-/* Message displayed when password is too short. Please preserve the Percent D! */
+/* Message displayed when password is too short. Please preserve the Percent D!
+   Message displayed when password is too short. The %%d is a placeholder for a numeral. Please preserve it! */
 "Password must contain at least %d characters" = "Password must contain at least %d characters";
 
 /* Message displayed when a password contains a disallowed character */
 "Password must not contain tabs nor newlines" = "Password must not contain tabs nor newlines";
+
+/* Password Validation: Confirmation doesn't match */
+"Passwords do not match" = "Passwords do not match";
 
 /* Number of changes pending to be sent */
 "Pendings" = "Pendings";
@@ -582,6 +635,9 @@
 
 /* Extension Missing Token Alert Title */
 "Please log into your Simplenote account first by using the Simplenote app." = "Please log into your Simplenote account first by using the Simplenote app.";
+
+/* Upgrade Alert Message */
+"Please upgrade to the latest iOS release to restore purchases" = "Please upgrade to the latest iOS release to restore purchases";
 
 /* Title of Markdown preview screen */
 "Preview" = "Preview";
@@ -659,6 +715,9 @@
    Restore a note to a previous version */
 "Restore Note" = "Ανάκτηση σημείωσης";
 
+/* Manually Restores IAP Purchases */
+"Restore Purchases" = "Restore Purchases";
+
 /* Title -> Review you account screen */
 "Review Your Account" = "Review Your Account";
 
@@ -719,10 +778,20 @@
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "Στήλη";
 
-/* Signup Action
-   SignUp Action
-   SignUp Interface Title */
+/* Title of button for logging in (must be short) */
+"Sign In" = "Σύνδεση";
+
+/* SignUp Action
+   Signup Action
+   SignUp Interface Title
+   Title of button to create a new account (must be short) */
 "Sign Up" = "Εγγραφή";
+
+/* A short link to access the account login screen */
+"Sign in" = "Σύνδεση";
+
+/* A short link to access the account creation screen */
+"Sign up" = "Εγγραφή";
 
 /* Alert message displayed when an account has unsynced notes */
 "Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App.";
@@ -730,6 +799,10 @@
 /* Our mighty brand!
    Title of main share extension view */
 "Simplenote" = "Simplenote";
+
+/* Restoration Successful Title
+   Sustainer Alert's Title */
+"Simplenote Sustainer" = "Simplenote Sustainer";
 
 /* Simplenote's Feedback Email Title */
 "Simplenote iOS Feedback" = "Simplenote iOS Feedback";
@@ -752,6 +825,15 @@
 
 /* Title for the response's Status Code */
 "Status Code" = "Status Code";
+
+/* Become a Sustainer Details */
+"Support your favorite notes app to help unlock future features" = "Support your favorite notes app to help unlock future features";
+
+/* No comment provided by engineer. */
+"Sustainer" = "Sustainer";
+
+/* Restoration Successful Message */
+"Sustainer subscription restored. Thank you for supporting Simplenote!" = "Sustainer subscription restored. Thank you for supporting Simplenote!";
 
 /* Theme: Matches iOS Settings */
 "System Default" = "System Default";
@@ -776,6 +858,15 @@
 
 /* Simplenote terms of service */
 "Terms of Service" = "Terms of Service";
+
+/* Restoration Successful Title */
+"Thank You!" = "Thank You!";
+
+/* Current Sustainer Details */
+"Thank you for your continued support" = "Thank you for your continued support";
+
+/* Error when address is in use */
+"That email is already being used" = "That email is already being used";
 
 /* Error when address is in use */
 "The email you've entered is already associated with a Simplenote account." = "The email you've entered is already associated with a Simplenote account.";
@@ -838,6 +929,9 @@
 /* Undo action */
 "Undo" = "Undo";
 
+/* WebSocket not initialized */
+"Uninitialized" = "Uninitialized";
+
 /* Default title for an unnamed tag */
 "Unnamed Tag" = "Unnamed Tag";
 
@@ -858,6 +952,9 @@
 
 /* Indicates the Note is being unpublished */
 "Unpublishing..." = "Ακύρωση δημοσίευσης...";
+
+/* Upgrade Alert Title */
+"Unsupported" = "Unsupported";
 
 /* Alert title displayed in settings when an account has unsynced notes */
 "Unsynced Notes Detected" = "Unsynced Notes Detected";
@@ -899,17 +996,26 @@
 /* Number of words in the note */
 "Words" = "Words";
 
+/* Yearly Subscription Option (Used when / if the price fails to load) */
+"Yearly" = "Yearly";
+
 /* Proceeds with the Empty Trash OP */
 "Yes" = "Yes";
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "Εχθές";
 
+/* Current Sustainer Title */
+"You are a Simplenote Sustainer" = "You are a Simplenote Sustainer";
+
 /* Message -> Review you account screen. Parameter: %1$@ - email address */
 "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address.";
 
 /* Error for un verified email */
 "You must verify your email before being able to login." = "You must verify your email before being able to login.";
+
+/* Restoration Successful Message */
+"You're already a Sustainer. Thank you for supporting Simplenote!" = "You're already a Sustainer. Thank you for supporting Simplenote!";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "Μη έγκυρη διεύθυνση email.";

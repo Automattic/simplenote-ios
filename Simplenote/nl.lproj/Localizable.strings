@@ -1,7 +1,13 @@
-/* Translation-Revision-Date: 2021-10-15 18:53:19+0000 */
+/* Translation-Revision-Date: 2022-11-22 15:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: nl */
+
+/* Monthly Subscription Option. Please preserve the special marker! */
+"%@ per Month" = "Per maand";
+
+/* Yearly Subscription Option. Please preserve the special marker! */
+"%@ per Year" = "Per jaar";
 
 /* Number of found search results */
 "%d Result" = "%d resultaat";
@@ -93,6 +99,9 @@
    Title: No filters applied */
 "All Notes" = "Alle notities";
 
+/* A short description to access the account login screen */
+"Already have an account?" = "Heb je al een account?";
+
 /* Delete account confirmation instructions */
 "An email has been sent to %@. Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation." = "Er is een e-mail verzonden naar %@ Controleer je inbox en volg de instructies om het verwijderen van je account te bevestigen.\n\nJe account zal niet worden verwijderd totdat we je bevestiging hebben ontvangen";
 
@@ -120,6 +129,9 @@
 /* User Authenticated */
 "Authenticated" = "Geverifieerd";
 
+/* Become a Sustainer Title */
+"Become a Simplenote Sustainer" = "Word Simplenote Sustainer";
+
 /* The Simplenote blog */
 "Blog" = "Blog";
 
@@ -129,12 +141,17 @@
 /* Delete account confirmation alert message */
 "By deleting the account for %@, all notes created with this account will be permanently deleted. This action is not reversible" = "Door het account voor %@ te verwijderen zullen alle opmerkingen die gemaakt zijn met dit account permanent worden verwijderd. Dit kan niet worden teruggedraaid";
 
+/* Terms Button Text */
+"By signing up, you agree to our Terms of Service »" = "Als je je registreert, ga je akkoord met onze Terms of Service »";
+
 /* Cancel Action
    Cancel action button
    Cancel action for password alert
    Cancel action on share extension.
+   Cancel button for authentication
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
+   Dismisses the alert
    Dismissing an interface
    PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
@@ -170,6 +187,9 @@
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "Kies een viercijferige pincode";
 
+/* Sustainer Alert's Message */
+"Choose a plan and help unlock future features" = "Kies een abonnement en help mee toekomstige functies mogelijk te maken";
+
 /* Opens the Collaborate UI */
 "Collaborate" = "Samenwerken";
 
@@ -185,7 +205,8 @@
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "Beknopte notitielijst";
 
-/* Confirm button -> Review you account screen */
+/* Confirm button -> Review you account screen
+   Hint displayed in the password confirmation field */
 "Confirm" = "Bevestigen";
 
 /* Title on the PinLock screen asking to confirm a passcode */
@@ -290,6 +311,9 @@
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "Markdown-opmaak uitschakelen";
 
+/* Dismiss Alert */
+"Dismiss" = "Afbreken";
+
 /* Accessibility label describing a button used to dismiss a history view of the note */
 "Dismiss History" = "Geschiedenis negeren";
 
@@ -301,6 +325,9 @@
 
 /* Card title showing information about the note (metrics, references) */
 "Document" = "Document";
+
+/* A short description to access the account creation screen */
+"Don't have an account?" = "Heb je nog geen account?";
 
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
@@ -340,6 +367,12 @@
    Error Title */
 "Error" = "Fout";
 
+/* No comment provided by engineer. */
+"Error: NSManagedObjectContext's persistentStoreCoordinator must be nil. Simperium will handle CoreData connections for you." = "Fout: NSManagedObjectContext's persistentStoreCoordinator moet nul zijn. Simperium verwerkt CoreData-verbindingen voor je.";
+
+/* No comment provided by engineer. */
+"Error: you must initialize your context with 'NSMainQueueConcurrencyType' concurrency type." = "Fout: je moet je context laten beginnen met het gelijktijdigheidstype ‘NSMainQueueConcurrencyType’.";
+
 /* Get Help Description Label */
 "FAQ or contact us" = "Veelgestelde vragen of neem contact met ons op";
 
@@ -348,6 +381,9 @@
 
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "Versie ophalen";
+
+/* Forgot password Button Text */
+"Forgot password? »" = "Wachtwoord vergeten? »";
 
 /* Password Reset Action */
 "Forgotten password?" = "Wachtwoord vergeten?";
@@ -454,6 +490,9 @@
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "Aangepast op: Oudste";
 
+/* Monthly Subscription Option (Used when / if the price fails to load) */
+"Monthly" = "Maandelijks";
+
 /* Accessibility hint for trash selected notes button */
 "Move selected notes to trash" = "Verplaats de geselecteerde notities naar de prullenbak";
 
@@ -497,11 +536,20 @@
 /* Message shown in note list when no notes are tagged with the provided tag. Parameter: %@ - tag */
 "No notes tagged “%@”" = "Geen opmerkingen getagd met '%@'";
 
+/* No purchases Found Message */
+"No previous valid purchases found, for the current period" = "Geen geldige eerdere aankopen gevonden voor de huidige periode";
+
+/* No purchases Found Title */
+"No purchases found" = "Geen aankopen gevonden";
+
 /* Rating view - liked or disliked - no thanks button */
 "No thanks" = "Nee, liever niet";
 
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "Geen niet-getagde opmerkingen";
+
+/* Error when you enter a bad email address */
+"Not a valid email address" = "Geen geldig e-mailadres";
 
 /* Note Widget Title */
 "Note" = "Notitie";
@@ -552,17 +600,22 @@
 /* Pin Lock */
 "Passcodes did not match. Try again." = "Wachtwoordcodes komen niet overeen. Probeer het opnieuw.";
 
-/* Password TextField Placeholder */
+/* Hint displayed in the password field
+   Password TextField Placeholder */
 "Password" = "Wachtwoord";
 
 /* Message displayed when password is invalid (Signup) */
 "Password cannot match email" = "Wachtwoord mag niet hetzelfde zijn als e-mailadres";
 
-/* Message displayed when password is too short. Please preserve the Percent D! */
+/* Message displayed when password is too short. Please preserve the Percent D!
+   Message displayed when password is too short. The %%d is a placeholder for a numeral. Please preserve it! */
 "Password must contain at least %d characters" = "Wachtwoord moet minstens %d tekens bevatten";
 
 /* Message displayed when a password contains a disallowed character */
 "Password must not contain tabs nor newlines" = "Wachtwoord mag geen tabs of nieuwe regels bevatten";
+
+/* Password Validation: Confirmation doesn't match */
+"Passwords do not match" = "Wachtwoorden komen niet overeen";
 
 /* Number of changes pending to be sent */
 "Pendings" = "Aantal in behandeling";
@@ -582,6 +635,9 @@
 
 /* Extension Missing Token Alert Title */
 "Please log into your Simplenote account first by using the Simplenote app." = "Log eerst in bij je Simplenote-account met behulp van de Simplenote-app.";
+
+/* Upgrade Alert Message */
+"Please upgrade to the latest iOS release to restore purchases" = "Upgrade naar de nieuwste versie van iOS om aankopen te herstellen";
 
 /* Title of Markdown preview screen */
 "Preview" = "Voorbeeld bekijken";
@@ -659,6 +715,9 @@
    Restore a note to a previous version */
 "Restore Note" = "Notitie herstellen";
 
+/* Manually Restores IAP Purchases */
+"Restore Purchases" = "Herstel aankopen";
+
 /* Title -> Review you account screen */
 "Review Your Account" = "Controleer je account";
 
@@ -719,10 +778,20 @@
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "Sidebar";
 
-/* Signup Action
-   SignUp Action
-   SignUp Interface Title */
+/* Title of button for logging in (must be short) */
+"Sign In" = "Aanmelden";
+
+/* SignUp Action
+   Signup Action
+   SignUp Interface Title
+   Title of button to create a new account (must be short) */
 "Sign Up" = "Registreren";
+
+/* A short link to access the account login screen */
+"Sign in" = "Aanmelden";
+
+/* A short link to access the account creation screen */
+"Sign up" = "Registreren";
 
 /* Alert message displayed when an account has unsynced notes */
 "Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "Door je af te melden worden gesynchroniseerde notities verwijderd. Je kunt je gesynchroniseerde notities verifiëren door je aan te melden via de web-app.";
@@ -730,6 +799,10 @@
 /* Our mighty brand!
    Title of main share extension view */
 "Simplenote" = "Simplenote";
+
+/* Restoration Successful Title
+   Sustainer Alert's Title */
+"Simplenote Sustainer" = "Simplenote Sustainer";
 
 /* Simplenote's Feedback Email Title */
 "Simplenote iOS Feedback" = "Feedback over Simplenote voor iOS";
@@ -752,6 +825,15 @@
 
 /* Title for the response's Status Code */
 "Status Code" = "Statuscode";
+
+/* Become a Sustainer Details */
+"Support your favorite notes app to help unlock future features" = "Steun je favoriete notitie-app en help toekomstige functies mogelijk te maken";
+
+/* No comment provided by engineer. */
+"Sustainer" = "Sustainer";
+
+/* Restoration Successful Message */
+"Sustainer subscription restored. Thank you for supporting Simplenote!" = "Sustainer-abonnement hersteld. Bedankt voor je steun aan Simplenote!";
 
 /* Theme: Matches iOS Settings */
 "System Default" = "Systeemstandaard";
@@ -776,6 +858,15 @@
 
 /* Simplenote terms of service */
 "Terms of Service" = "Servicevoorwaarden";
+
+/* Restoration Successful Title */
+"Thank You!" = "Bedankt!";
+
+/* Current Sustainer Details */
+"Thank you for your continued support" = "Bedankt voor je voortdurende ondersteuning";
+
+/* Error when address is in use */
+"That email is already being used" = "Dit e-mailadres is al in gebruik";
 
 /* Error when address is in use */
 "The email you've entered is already associated with a Simplenote account." = "Het e-mailadres dat je hebt ingevoerd, is al gekoppeld aan een Simplenote-account.";
@@ -838,6 +929,9 @@
 /* Undo action */
 "Undo" = "Ongedaan maken";
 
+/* WebSocket not initialized */
+"Uninitialized" = "Niet gestart";
+
 /* Default title for an unnamed tag */
 "Unnamed Tag" = "Ongetitelde tag";
 
@@ -858,6 +952,9 @@
 
 /* Indicates the Note is being unpublished */
 "Unpublishing..." = "Verwijderen ...";
+
+/* Upgrade Alert Title */
+"Unsupported" = "Niet ondersteund";
 
 /* Alert title displayed in settings when an account has unsynced notes */
 "Unsynced Notes Detected" = "Ongesynchroniseerde notities gedetecteerd";
@@ -899,17 +996,26 @@
 /* Number of words in the note */
 "Words" = "Woorden";
 
+/* Yearly Subscription Option (Used when / if the price fails to load) */
+"Yearly" = "Jaarlijks";
+
 /* Proceeds with the Empty Trash OP */
 "Yes" = "Ja";
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "Gisteren";
 
+/* Current Sustainer Title */
+"You are a Simplenote Sustainer" = "Je bent een Simplenote Sustainer!";
+
 /* Message -> Review you account screen. Parameter: %1$@ - email address */
 "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "Je staat geregistreerd bij Simplenote met het e-mailadres %1$@.\n\nVerbeteringen aan accountbeveiliging kunnen leiden tot accountverlies als je geen toegang meer hebt tot dit e-mailadres.";
 
 /* Error for un verified email */
 "You must verify your email before being able to login." = "Je moet je e-mailadres verifiëren voordat je kunt inloggen.";
+
+/* Restoration Successful Message */
+"You're already a Sustainer. Thank you for supporting Simplenote!" = "Je bent al een Sustainer. Bedankt voor je steun aan Simplenote!";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "Je e-mailadres is niet geldig.";
