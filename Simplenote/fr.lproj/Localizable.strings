@@ -1,7 +1,13 @@
-/* Translation-Revision-Date: 2021-10-12 15:54:03+0000 */
+/* Translation-Revision-Date: 2022-11-22 15:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n > 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: fr */
+
+/* Monthly Subscription Option. Please preserve the special marker! */
+"%@ per Month" = "%@ par mois";
+
+/* Yearly Subscription Option. Please preserve the special marker! */
+"%@ per Year" = "%@ par an";
 
 /* Number of found search results */
 "%d Result" = "%d résultats";
@@ -93,6 +99,9 @@
    Title: No filters applied */
 "All Notes" = "Toutes les notes";
 
+/* A short description to access the account login screen */
+"Already have an account?" = "Déjà un compte ?";
+
 /* Delete account confirmation instructions */
 "An email has been sent to %@. Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation." = "Un e-mail a été envoyé à %@ Consultez votre boîte de réception et suivez les instructions pour confirmer la suppression du compte.\n\nVotre compte ne sera pas supprimé tant que nous n’aurons pas reçu votre confirmation.";
 
@@ -120,6 +129,9 @@
 /* User Authenticated */
 "Authenticated" = "Authentifié";
 
+/* Become a Sustainer Title */
+"Become a Simplenote Sustainer" = "Devenez contributeur de Simplenote";
+
 /* The Simplenote blog */
 "Blog" = "Blog";
 
@@ -129,12 +141,17 @@
 /* Delete account confirmation alert message */
 "By deleting the account for %@, all notes created with this account will be permanently deleted. This action is not reversible" = "En supprimant le compte associé à %@, toutes les notes créées avec ce compte seront définitivement supprimées. Cette action est irréversible.";
 
+/* Terms Button Text */
+"By signing up, you agree to our Terms of Service »" = "En vous inscrivant, vous acceptez les conditions d'utilisation »";
+
 /* Cancel Action
    Cancel action button
    Cancel action for password alert
    Cancel action on share extension.
+   Cancel button for authentication
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
+   Dismisses the alert
    Dismissing an interface
    PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
@@ -170,6 +187,9 @@
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "Choisir un code d’accès à 4 chiffres";
 
+/* Sustainer Alert's Message */
+"Choose a plan and help unlock future features" = "Choisissez un plan et aidez à créer de nouvelles fonctionnalités.";
+
 /* Opens the Collaborate UI */
 "Collaborate" = "Collaborer";
 
@@ -185,7 +205,8 @@
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "Liste de notes condensée";
 
-/* Confirm button -> Review you account screen */
+/* Confirm button -> Review you account screen
+   Hint displayed in the password confirmation field */
 "Confirm" = "Confirmer";
 
 /* Title on the PinLock screen asking to confirm a passcode */
@@ -290,6 +311,9 @@
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "Désactiver le formatage Markdown";
 
+/* Dismiss Alert */
+"Dismiss" = "Fermer";
+
 /* Accessibility label describing a button used to dismiss a history view of the note */
 "Dismiss History" = "Ignorer l’historique";
 
@@ -301,6 +325,9 @@
 
 /* Card title showing information about the note (metrics, references) */
 "Document" = "Document";
+
+/* A short description to access the account creation screen */
+"Don't have an account?" = "Vous n'avez pas encore de compte ?";
 
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
@@ -340,6 +367,12 @@
    Error Title */
 "Error" = "Erreur";
 
+/* No comment provided by engineer. */
+"Error: NSManagedObjectContext's persistentStoreCoordinator must be nil. Simperium will handle CoreData connections for you." = "Erreur : « NSManagedObjectContext’s persistentStoreCoordinator » doit être nul. Simperium se chargera des connexions CoreData pour vous.";
+
+/* No comment provided by engineer. */
+"Error: you must initialize your context with 'NSMainQueueConcurrencyType' concurrency type." = "Erreur : vous devez initialiser votre contexte avec le type de concurrence « NSMainQueueConcurrencyType ».";
+
 /* Get Help Description Label */
 "FAQ or contact us" = "FAQ ou nous contacter";
 
@@ -348,6 +381,9 @@
 
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "Récupération de version";
+
+/* Forgot password Button Text */
+"Forgot password? »" = "Mot de passe oublié ?";
 
 /* Password Reset Action */
 "Forgotten password?" = "Mot de passe oublié ?";
@@ -454,6 +490,9 @@
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "Modification : Plus anciennes";
 
+/* Monthly Subscription Option (Used when / if the price fails to load) */
+"Monthly" = "Mensuel";
+
 /* Accessibility hint for trash selected notes button */
 "Move selected notes to trash" = "Déplacer les notes sélectionnées vers la corbeille";
 
@@ -497,11 +536,20 @@
 /* Message shown in note list when no notes are tagged with the provided tag. Parameter: %@ - tag */
 "No notes tagged “%@”" = "Aucune note avec l’étiquette « %@ »";
 
+/* No purchases Found Message */
+"No previous valid purchases found, for the current period" = "Aucun achat antérieur valide n’a été trouvé pour la période en cours.";
+
+/* No purchases Found Title */
+"No purchases found" = "Aucun achat trouvé";
+
 /* Rating view - liked or disliked - no thanks button */
 "No thanks" = "Non merci";
 
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "Aucune note sans étiquette";
+
+/* Error when you enter a bad email address */
+"Not a valid email address" = "Adresse e-mail non valide";
 
 /* Note Widget Title */
 "Note" = "Remarque&nbsp;:";
@@ -552,17 +600,22 @@
 /* Pin Lock */
 "Passcodes did not match. Try again." = "Codes PIN différents. Essayez de nouveau.";
 
-/* Password TextField Placeholder */
+/* Hint displayed in the password field
+   Password TextField Placeholder */
 "Password" = "Mot de passe";
 
 /* Message displayed when password is invalid (Signup) */
 "Password cannot match email" = "Le mot de passe et l'adresse e-mail ne doivent pas être identiques";
 
-/* Message displayed when password is too short. Please preserve the Percent D! */
+/* Message displayed when password is too short. Please preserve the Percent D!
+   Message displayed when password is too short. The %%d is a placeholder for a numeral. Please preserve it! */
 "Password must contain at least %d characters" = "Le mot de passe doit contenir au moins %d caractères.";
 
 /* Message displayed when a password contains a disallowed character */
 "Password must not contain tabs nor newlines" = "Le mot de passe ne doit contenir ni tabulation ni retours à la ligne";
+
+/* Password Validation: Confirmation doesn't match */
+"Passwords do not match" = "Les mots de passe ne correspondent pas";
 
 /* Number of changes pending to be sent */
 "Pendings" = "En attente";
@@ -582,6 +635,9 @@
 
 /* Extension Missing Token Alert Title */
 "Please log into your Simplenote account first by using the Simplenote app." = "Commencez par vous connecter à votre compte Simplenote à l’aide de l’application Simplenote.";
+
+/* Upgrade Alert Message */
+"Please upgrade to the latest iOS release to restore purchases" = "Veuillez mettre à niveau vers la dernière version d’iOS pour rétablir les achats.";
 
 /* Title of Markdown preview screen */
 "Preview" = "Aperçu";
@@ -659,6 +715,9 @@
    Restore a note to a previous version */
 "Restore Note" = "Restaurer la note";
 
+/* Manually Restores IAP Purchases */
+"Restore Purchases" = "Rétablir les achats";
+
 /* Title -> Review you account screen */
 "Review Your Account" = "Passez en revue votre compte";
 
@@ -719,10 +778,20 @@
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "Barre latérale";
 
-/* Signup Action
-   SignUp Action
-   SignUp Interface Title */
+/* Title of button for logging in (must be short) */
+"Sign In" = "Se connecter";
+
+/* SignUp Action
+   Signup Action
+   SignUp Interface Title
+   Title of button to create a new account (must be short) */
 "Sign Up" = "S'inscrire";
+
+/* A short link to access the account login screen */
+"Sign in" = "Se connecter";
+
+/* A short link to access the account creation screen */
+"Sign up" = "S'inscrire";
 
 /* Alert message displayed when an account has unsynced notes */
 "Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "La déconnexion entraînera la suppression de l’ensemble des notes non synchronisées. Vous pouvez vérifier vos notes synchronisées en vous connectant à l’application Web. ";
@@ -730,6 +799,10 @@
 /* Our mighty brand!
    Title of main share extension view */
 "Simplenote" = "Simplenote";
+
+/* Restoration Successful Title
+   Sustainer Alert's Title */
+"Simplenote Sustainer" = "Contributeur de Simplenote";
 
 /* Simplenote's Feedback Email Title */
 "Simplenote iOS Feedback" = "Commentaire sur Simplenote pour iOS";
@@ -752,6 +825,15 @@
 
 /* Title for the response's Status Code */
 "Status Code" = "Code d’état";
+
+/* Become a Sustainer Details */
+"Support your favorite notes app to help unlock future features" = "Soutenez votre application de notes préférée pour aider à créer de nouvelles fonctionnalités.";
+
+/* No comment provided by engineer. */
+"Sustainer" = "Contributeur";
+
+/* Restoration Successful Message */
+"Sustainer subscription restored. Thank you for supporting Simplenote!" = "L’abonnement de soutien est restauré. Nous vous remercions de soutenir Simplenote !";
 
 /* Theme: Matches iOS Settings */
 "System Default" = "Paramètres par défaut du système";
@@ -776,6 +858,15 @@
 
 /* Simplenote terms of service */
 "Terms of Service" = "Conditions d’utilisation";
+
+/* Restoration Successful Title */
+"Thank You!" = "Merci !";
+
+/* Current Sustainer Details */
+"Thank you for your continued support" = "Nous vous remercions de votre soutien continu !";
+
+/* Error when address is in use */
+"That email is already being used" = "Cette adresse e-mail est déjà utilisée";
 
 /* Error when address is in use */
 "The email you've entered is already associated with a Simplenote account." = "L'adresse e-mail saisie est déjà associée à un compte Simplenote.";
@@ -838,6 +929,9 @@
 /* Undo action */
 "Undo" = "Annuler";
 
+/* WebSocket not initialized */
+"Uninitialized" = "Non initialisé";
+
 /* Default title for an unnamed tag */
 "Unnamed Tag" = "Étiquette sans nom";
 
@@ -858,6 +952,9 @@
 
 /* Indicates the Note is being unpublished */
 "Unpublishing..." = "Dépublication...";
+
+/* Upgrade Alert Title */
+"Unsupported" = "Non reconnu";
 
 /* Alert title displayed in settings when an account has unsynced notes */
 "Unsynced Notes Detected" = "Notes non-synchronisées détectées";
@@ -899,17 +996,26 @@
 /* Number of words in the note */
 "Words" = "Mots";
 
+/* Yearly Subscription Option (Used when / if the price fails to load) */
+"Yearly" = "Annuellement";
+
 /* Proceeds with the Empty Trash OP */
 "Yes" = "Oui";
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "Hier";
 
+/* Current Sustainer Title */
+"You are a Simplenote Sustainer" = "Vous êtes contributeur de Simplenote";
+
 /* Message -> Review you account screen. Parameter: %1$@ - email address */
 "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "Vous êtes enregistré sur Simplenote avec l’adresse e-mail %1$@.\n\nLes améliorations apportées à la sécurité de votre compte peuvent entraîner la perte de votre compte si vous n'avez plus accès à cette adresse e-mail.";
 
 /* Error for un verified email */
 "You must verify your email before being able to login." = "Vous devez vérifier votre adresse e-mail avant de pouvoir vous connecter.";
+
+/* Restoration Successful Message */
+"You're already a Sustainer. Thank you for supporting Simplenote!" = "Vous êtes déjà contributeur. Nous vous remercions de soutenir Simplenote !";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "Votre adresse e-mail n'est pas valide.";

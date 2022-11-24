@@ -1,7 +1,13 @@
-/* Translation-Revision-Date: 2021-10-13 11:54:04+0000 */
+/* Translation-Revision-Date: 2022-11-23 11:54:04+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ja_JP */
+
+/* Monthly Subscription Option. Please preserve the special marker! */
+"%@ per Month" = "月額 %@";
+
+/* Yearly Subscription Option. Please preserve the special marker! */
+"%@ per Year" = "年額 %@";
 
 /* Number of found search results */
 "%d Result" = "%d件の検索結果";
@@ -93,6 +99,9 @@
    Title: No filters applied */
 "All Notes" = "すべてのノート";
 
+/* A short description to access the account login screen */
+"Already have an account?" = "すでにアカウントを持ちですか ?";
+
 /* Delete account confirmation instructions */
 "An email has been sent to %@. Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation." = "%@ にメールが送信されました。受信トレイを確認し、手順に従ってアカウントの削除を確定してください。\n\n当社がお客様から確認を得るまでアカウントは削除されません。";
 
@@ -120,6 +129,9 @@
 /* User Authenticated */
 "Authenticated" = "認証済み";
 
+/* Become a Sustainer Title */
+"Become a Simplenote Sustainer" = "Simplenote Sustainer になる";
+
 /* The Simplenote blog */
 "Blog" = "ブログ";
 
@@ -129,12 +141,17 @@
 /* Delete account confirmation alert message */
 "By deleting the account for %@, all notes created with this account will be permanently deleted. This action is not reversible" = "%@ のアカウントを削除すると、このアカウントで作成したすべてのメモが完全に削除されます。 この操作を元に戻すことはできません";
 
+/* Terms Button Text */
+"By signing up, you agree to our Terms of Service »" = "登録すると、利用規約に合意したものとみなされます。»";
+
 /* Cancel Action
    Cancel action button
    Cancel action for password alert
    Cancel action on share extension.
+   Cancel button for authentication
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
+   Dismisses the alert
    Dismissing an interface
    PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
@@ -170,6 +187,9 @@
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "4桁のパスコードを選択してください";
 
+/* Sustainer Alert's Message */
+"Choose a plan and help unlock future features" = "プランを選択して将来の機能のロックを解除する";
+
 /* Opens the Collaborate UI */
 "Collaborate" = "共同編集";
 
@@ -185,7 +205,8 @@
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "要約ノート一覧";
 
-/* Confirm button -> Review you account screen */
+/* Confirm button -> Review you account screen
+   Hint displayed in the password confirmation field */
 "Confirm" = "確認";
 
 /* Title on the PinLock screen asking to confirm a passcode */
@@ -290,6 +311,9 @@
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "Markdown フォーマットを無効化";
 
+/* Dismiss Alert */
+"Dismiss" = "非表示にする";
+
 /* Accessibility label describing a button used to dismiss a history view of the note */
 "Dismiss History" = "履歴を閉じる";
 
@@ -301,6 +325,9 @@
 
 /* Card title showing information about the note (metrics, references) */
 "Document" = "文書";
+
+/* A short description to access the account creation screen */
+"Don't have an account?" = "アカウントが無い場合";
 
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
@@ -340,6 +367,12 @@
    Error Title */
 "Error" = "エラー";
 
+/* No comment provided by engineer. */
+"Error: NSManagedObjectContext's persistentStoreCoordinator must be nil. Simperium will handle CoreData connections for you." = "エラー: NSManagedObjectContext の persistentStoreCoordinator が nil です。 Simperium が CoreData の接続に対応します。";
+
+/* No comment provided by engineer. */
+"Error: you must initialize your context with 'NSMainQueueConcurrencyType' concurrency type." = "エラー: 「NSMainQueueConcurrencyType」同時実行タイプでコンテキストを初期化する必要があります。";
+
 /* Get Help Description Label */
 "FAQ or contact us" = "FAQ またはお問い合わせ";
 
@@ -348,6 +381,9 @@
 
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "バージョンを取得中";
+
+/* Forgot password Button Text */
+"Forgot password? »" = "パスワードをお忘れですか ? »";
 
 /* Password Reset Action */
 "Forgotten password?" = "パスワードを忘れましたか ?";
@@ -454,6 +490,9 @@
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "更新日 :最も古い";
 
+/* Monthly Subscription Option (Used when / if the price fails to load) */
+"Monthly" = "毎月";
+
 /* Accessibility hint for trash selected notes button */
 "Move selected notes to trash" = "選択したメモをゴミ箱に移動";
 
@@ -497,11 +536,20 @@
 /* Message shown in note list when no notes are tagged with the provided tag. Parameter: %@ - tag */
 "No notes tagged “%@”" = "「%@」のタグが付いたメモはありません";
 
+/* No purchases Found Message */
+"No previous valid purchases found, for the current period" = "現在の期間では、以前の有効な購入は見つかりませんでした";
+
+/* No purchases Found Title */
+"No purchases found" = "購入したものが見つかりませんでした";
+
 /* Rating view - liked or disliked - no thanks button */
 "No thanks" = "いいえ";
 
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "タグが付けられていないメモはありません";
+
+/* Error when you enter a bad email address */
+"Not a valid email address" = "メールアドレスが無効です";
 
 /* Note Widget Title */
 "Note" = "ノート";
@@ -552,17 +600,22 @@
 /* Pin Lock */
 "Passcodes did not match. Try again." = "パスコードが一致しませんでした。もう一度お試しください。";
 
-/* Password TextField Placeholder */
+/* Hint displayed in the password field
+   Password TextField Placeholder */
 "Password" = "パスワード";
 
 /* Message displayed when password is invalid (Signup) */
 "Password cannot match email" = "パスワードがメールと一致しません";
 
-/* Message displayed when password is too short. Please preserve the Percent D! */
+/* Message displayed when password is too short. Please preserve the Percent D!
+   Message displayed when password is too short. The %%d is a placeholder for a numeral. Please preserve it! */
 "Password must contain at least %d characters" = "パスワードは%d文字以上にしてください";
 
 /* Message displayed when a password contains a disallowed character */
 "Password must not contain tabs nor newlines" = "パスワードにタブや改行を含めることはできません";
+
+/* Password Validation: Confirmation doesn't match */
+"Passwords do not match" = "パスワードが一致しません";
 
 /* Number of changes pending to be sent */
 "Pendings" = "保留中";
@@ -582,6 +635,9 @@
 
 /* Extension Missing Token Alert Title */
 "Please log into your Simplenote account first by using the Simplenote app." = "まず、Simplenote アプリを使用して Simplenote アカウントにログインしてください。";
+
+/* Upgrade Alert Message */
+"Please upgrade to the latest iOS release to restore purchases" = "最新の iOS リリースをアップグレードして購入したものを復元してください";
 
 /* Title of Markdown preview screen */
 "Preview" = "プレビュー";
@@ -659,6 +715,9 @@
    Restore a note to a previous version */
 "Restore Note" = "ノートを復元";
 
+/* Manually Restores IAP Purchases */
+"Restore Purchases" = "購入したものを復元";
+
 /* Title -> Review you account screen */
 "Review Your Account" = "アカウントの設定を確認";
 
@@ -719,10 +778,20 @@
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "サイドバー";
 
-/* Signup Action
-   SignUp Action
-   SignUp Interface Title */
+/* Title of button for logging in (must be short) */
+"Sign In" = "ログイン";
+
+/* SignUp Action
+   Signup Action
+   SignUp Interface Title
+   Title of button to create a new account (must be short) */
 "Sign Up" = "登録";
+
+/* A short link to access the account login screen */
+"Sign in" = "ログイン";
+
+/* A short link to access the account creation screen */
+"Sign up" = "登録";
 
 /* Alert message displayed when an account has unsynced notes */
 "Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "ログアウトすると、同期されていないメモはすべて削除されます。同期したメモを確認するには、Web アプリにログインします。";
@@ -730,6 +799,10 @@
 /* Our mighty brand!
    Title of main share extension view */
 "Simplenote" = "Simplenote";
+
+/* Restoration Successful Title
+   Sustainer Alert's Title */
+"Simplenote Sustainer" = "Simplenote Sustainer";
 
 /* Simplenote's Feedback Email Title */
 "Simplenote iOS Feedback" = "Simplenote iOS フィードバック";
@@ -752,6 +825,15 @@
 
 /* Title for the response's Status Code */
 "Status Code" = "ステータスコード";
+
+/* Become a Sustainer Details */
+"Support your favorite notes app to help unlock future features" = "お気に入りのメモアプリをサポートして将来の機能のロックを解除できるようにする";
+
+/* No comment provided by engineer. */
+"Sustainer" = "Sustainer";
+
+/* Restoration Successful Message */
+"Sustainer subscription restored. Thank you for supporting Simplenote!" = "Sustainer サブスクリプションが復元されました。 Simplenote をサポートいただきありがとうございます。";
 
 /* Theme: Matches iOS Settings */
 "System Default" = "システムの初期設定";
@@ -776,6 +858,15 @@
 
 /* Simplenote terms of service */
 "Terms of Service" = "利用規約";
+
+/* Restoration Successful Title */
+"Thank You!" = "ありがとうございました。";
+
+/* Current Sustainer Details */
+"Thank you for your continued support" = "今後とも末永くご支援いただきますよう、宜しくお願い申し上げます";
+
+/* Error when address is in use */
+"That email is already being used" = "そのメールアドレスはすでに使用されています";
 
 /* Error when address is in use */
 "The email you've entered is already associated with a Simplenote account." = "このメールアドレスは、すでに他の Simplenote アカウントで使用されています。";
@@ -817,7 +908,7 @@
 "Toggle tag sidebar" = "タグサイドバーを切り替え";
 
 /* Title for too many login attempts error */
-"Too Many Login Attempts" = "ログイン試行が多すぎる";
+"Too Many Login Attempts" = "ログイン試行回数が多すぎる";
 
 /* Error message for too many login attempts */
 "Too many login attempts. Try again later." = "ログイン試行の回数が多すぎます。 後ほど、もう一度お試しください。";
@@ -837,6 +928,9 @@
 
 /* Undo action */
 "Undo" = "元に戻す";
+
+/* WebSocket not initialized */
+"Uninitialized" = "未初期化";
 
 /* Default title for an unnamed tag */
 "Unnamed Tag" = "名前のないタグ";
@@ -858,6 +952,9 @@
 
 /* Indicates the Note is being unpublished */
 "Unpublishing..." = "非公開設定中…";
+
+/* Upgrade Alert Title */
+"Unsupported" = "非サポート";
 
 /* Alert title displayed in settings when an account has unsynced notes */
 "Unsynced Notes Detected" = "同期されていないメモが検出されました";
@@ -899,17 +996,26 @@
 /* Number of words in the note */
 "Words" = "単語";
 
+/* Yearly Subscription Option (Used when / if the price fails to load) */
+"Yearly" = "毎年";
+
 /* Proceeds with the Empty Trash OP */
 "Yes" = "はい";
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "昨日";
 
+/* Current Sustainer Title */
+"You are a Simplenote Sustainer" = "Simplenote Sustainer です";
+
 /* Message -> Review you account screen. Parameter: %1$@ - email address */
 "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "メールアドレス %1$@ で、Simplenote に登録されました。\n\nアカウントのセキュリティ強化により、このメールアドレスにアクセスできなくなった場合にはアカウントを喪失する可能性があります。";
 
 /* Error for un verified email */
 "You must verify your email before being able to login." = "ログインする前にメールを確認する必要があります。";
+
+/* Restoration Successful Message */
+"You're already a Sustainer. Thank you for supporting Simplenote!" = "すでに Sustainer です。 Simplenote をサポートいただきありがとうございます。";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "無効なメールアドレスです。";

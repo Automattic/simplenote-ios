@@ -1,7 +1,13 @@
-/* Translation-Revision-Date: 2021-10-12 09:54:48+0000 */
+/* Translation-Revision-Date: 2022-11-22 09:54:03+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: zh_TW */
+
+/* Monthly Subscription Option. Please preserve the special marker! */
+"%@ per Month" = "每月 %@";
+
+/* Yearly Subscription Option. Please preserve the special marker! */
+"%@ per Year" = "每年 %@";
 
 /* Number of found search results */
 "%d Result" = "%d 個搜尋結果";
@@ -93,6 +99,9 @@
    Title: No filters applied */
 "All Notes" = "所有筆記";
 
+/* A short description to access the account login screen */
+"Already have an account?" = "已經有帳號了？";
+
 /* Delete account confirmation instructions */
 "An email has been sent to %@. Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation." = "電子郵件已傳送至 %@。請檢查你的收件匣，並按照說明確認刪除帳號。\n\n在收到你的確認之前，我們不會刪除你的帳號";
 
@@ -120,6 +129,9 @@
 /* User Authenticated */
 "Authenticated" = "已驗證";
 
+/* Become a Sustainer Title */
+"Become a Simplenote Sustainer" = "成為 Simplenote Sustainer";
+
 /* The Simplenote blog */
 "Blog" = "網誌";
 
@@ -129,12 +141,17 @@
 /* Delete account confirmation alert message */
 "By deleting the account for %@, all notes created with this account will be permanently deleted. This action is not reversible" = "若刪除 %@ 的帳號，此帳號建立的所有筆記將永久刪除。 此動作無法復原";
 
+/* Terms Button Text */
+"By signing up, you agree to our Terms of Service »" = "註冊即代表你同意我們的「服務條款」»";
+
 /* Cancel Action
    Cancel action button
    Cancel action for password alert
    Cancel action on share extension.
+   Cancel button for authentication
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
+   Dismisses the alert
    Dismissing an interface
    PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
@@ -170,6 +187,9 @@
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "選擇 4 位數的密碼";
 
+/* Sustainer Alert's Message */
+"Choose a plan and help unlock future features" = "選擇方案，協助日後解鎖更多功能";
+
 /* Opens the Collaborate UI */
 "Collaborate" = "協作";
 
@@ -185,7 +205,8 @@
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "精簡版筆記清單";
 
-/* Confirm button -> Review you account screen */
+/* Confirm button -> Review you account screen
+   Hint displayed in the password confirmation field */
 "Confirm" = "確認";
 
 /* Title on the PinLock screen asking to confirm a passcode */
@@ -290,6 +311,9 @@
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "停用 Markdown 格式";
 
+/* Dismiss Alert */
+"Dismiss" = "關閉";
+
 /* Accessibility label describing a button used to dismiss a history view of the note */
 "Dismiss History" = "關閉歷史記錄";
 
@@ -301,6 +325,9 @@
 
 /* Card title showing information about the note (metrics, references) */
 "Document" = "內容";
+
+/* A short description to access the account creation screen */
+"Don't have an account?" = "還沒有帳號？";
 
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
@@ -340,6 +367,12 @@
    Error Title */
 "Error" = "錯誤";
 
+/* No comment provided by engineer. */
+"Error: NSManagedObjectContext's persistentStoreCoordinator must be nil. Simperium will handle CoreData connections for you." = "錯誤：NSManagedObjectContext 的 persistentStoreCoordinator 必須為 nil。 Simperium 將為你處理 CoreData 連結。";
+
+/* No comment provided by engineer. */
+"Error: you must initialize your context with 'NSMainQueueConcurrencyType' concurrency type." = "錯誤：你必須使用「NSMainQueueConcurrencyType」並行類型來初始化內容。";
+
 /* Get Help Description Label */
 "FAQ or contact us" = "常見問題集或與我們聯絡";
 
@@ -348,6 +381,9 @@
 
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "正在擷取版本";
+
+/* Forgot password Button Text */
+"Forgot password? »" = "忘記密碼？»";
 
 /* Password Reset Action */
 "Forgotten password?" = "忘記密碼了嗎？";
@@ -454,6 +490,9 @@
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "修改時間：最舊";
 
+/* Monthly Subscription Option (Used when / if the price fails to load) */
+"Monthly" = "每月";
+
 /* Accessibility hint for trash selected notes button */
 "Move selected notes to trash" = "將選取的筆記移至垃圾桶";
 
@@ -497,11 +536,20 @@
 /* Message shown in note list when no notes are tagged with the provided tag. Parameter: %@ - tag */
 "No notes tagged “%@”" = "沒有標籤為「%@」的筆記";
 
+/* No purchases Found Message */
+"No previous valid purchases found, for the current period" = "針對目前的期間，找不到先前有效的購買項目";
+
+/* No purchases Found Title */
+"No purchases found" = "找不到購買項目";
+
 /* Rating view - liked or disliked - no thanks button */
 "No thanks" = "不用了，謝謝";
 
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "沒有未標籤筆記";
+
+/* Error when you enter a bad email address */
+"Not a valid email address" = "電子郵件地址格式不正確";
 
 /* Note Widget Title */
 "Note" = "備註";
@@ -552,17 +600,22 @@
 /* Pin Lock */
 "Passcodes did not match. Try again." = "密碼不相符。請再試一次。";
 
-/* Password TextField Placeholder */
+/* Hint displayed in the password field
+   Password TextField Placeholder */
 "Password" = "密碼";
 
 /* Message displayed when password is invalid (Signup) */
 "Password cannot match email" = "密碼不能和電子郵件地址相同";
 
-/* Message displayed when password is too short. Please preserve the Percent D! */
+/* Message displayed when password is too short. Please preserve the Percent D!
+   Message displayed when password is too short. The %%d is a placeholder for a numeral. Please preserve it! */
 "Password must contain at least %d characters" = "密碼必須包含至少 %d 個字元";
 
 /* Message displayed when a password contains a disallowed character */
 "Password must not contain tabs nor newlines" = "密碼不得包含定位字元或換行";
+
+/* Password Validation: Confirmation doesn't match */
+"Passwords do not match" = "密碼不符";
 
 /* Number of changes pending to be sent */
 "Pendings" = "待確認";
@@ -582,6 +635,9 @@
 
 /* Extension Missing Token Alert Title */
 "Please log into your Simplenote account first by using the Simplenote app." = "請先使用 Simplenote 應用程式登入 Simplenote 帳號。";
+
+/* Upgrade Alert Message */
+"Please upgrade to the latest iOS release to restore purchases" = "請升級至最新 iOS 版本以恢復購買";
 
 /* Title of Markdown preview screen */
 "Preview" = "預覽";
@@ -659,6 +715,9 @@
    Restore a note to a previous version */
 "Restore Note" = "還原筆記";
 
+/* Manually Restores IAP Purchases */
+"Restore Purchases" = "恢復購買";
+
 /* Title -> Review you account screen */
 "Review Your Account" = "檢閱你的帳號";
 
@@ -719,10 +778,20 @@
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "側選單";
 
-/* Signup Action
-   SignUp Action
-   SignUp Interface Title */
+/* Title of button for logging in (must be short) */
+"Sign In" = "登入";
+
+/* SignUp Action
+   Signup Action
+   SignUp Interface Title
+   Title of button to create a new account (must be short) */
 "Sign Up" = "註冊";
+
+/* A short link to access the account login screen */
+"Sign in" = "登入";
+
+/* A short link to access the account creation screen */
+"Sign up" = "註冊";
 
 /* Alert message displayed when an account has unsynced notes */
 "Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "登出將會刪除任何尚未同步的備註。登入網頁應用程式即可驗證已同步的備註。";
@@ -730,6 +799,10 @@
 /* Our mighty brand!
    Title of main share extension view */
 "Simplenote" = "Simplenote";
+
+/* Restoration Successful Title
+   Sustainer Alert's Title */
+"Simplenote Sustainer" = "Simplenote Sustainer";
 
 /* Simplenote's Feedback Email Title */
 "Simplenote iOS Feedback" = "iOS 版 Simplenote 意見回饋";
@@ -752,6 +825,15 @@
 
 /* Title for the response's Status Code */
 "Status Code" = "狀態代碼";
+
+/* Become a Sustainer Details */
+"Support your favorite notes app to help unlock future features" = "支持你最愛的筆記應用程式，協助日後解鎖更多功能";
+
+/* No comment provided by engineer. */
+"Sustainer" = "Sustainer";
+
+/* Restoration Successful Message */
+"Sustainer subscription restored. Thank you for supporting Simplenote!" = "已恢復 Sustainer 訂購。 感謝你支持 Simplenote！";
 
 /* Theme: Matches iOS Settings */
 "System Default" = "系統預設";
@@ -776,6 +858,15 @@
 
 /* Simplenote terms of service */
 "Terms of Service" = "服務條款";
+
+/* Restoration Successful Title */
+"Thank You!" = "感謝你！";
+
+/* Current Sustainer Details */
+"Thank you for your continued support" = "感謝你持續支持";
+
+/* Error when address is in use */
+"That email is already being used" = "此電子信箱已被使用";
 
 /* Error when address is in use */
 "The email you've entered is already associated with a Simplenote account." = "你輸入的電子郵件地址已與 Simplenote 帳號建立關聯。";
@@ -838,6 +929,9 @@
 /* Undo action */
 "Undo" = "復原";
 
+/* WebSocket not initialized */
+"Uninitialized" = "未初始化";
+
 /* Default title for an unnamed tag */
 "Unnamed Tag" = "未命名標籤";
 
@@ -859,6 +953,9 @@
 /* Indicates the Note is being unpublished */
 "Unpublishing..." = "正在取消發表...";
 
+/* Upgrade Alert Title */
+"Unsupported" = "不支援的使用者";
+
 /* Alert title displayed in settings when an account has unsynced notes */
 "Unsynced Notes Detected" = "偵測到尚未同步的備註";
 
@@ -866,7 +963,7 @@
 "Untagged" = "取消標籤";
 
 /* Allows selecting notes with no tags */
-"Untagged Notes" = "取消標籤備註";
+"Untagged Notes" = "未標籤筆記";
 
 /* A user's Simplenote account */
 "Username" = "使用者名稱";
@@ -899,17 +996,26 @@
 /* Number of words in the note */
 "Words" = "字";
 
+/* Yearly Subscription Option (Used when / if the price fails to load) */
+"Yearly" = "每年";
+
 /* Proceeds with the Empty Trash OP */
 "Yes" = "是";
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "昨天";
 
+/* Current Sustainer Title */
+"You are a Simplenote Sustainer" = "你是 Simplenote Sustainer";
+
 /* Message -> Review you account screen. Parameter: %1$@ - email address */
 "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "你已使用電子郵件地址  %1$@ 註冊 Simplenote。\n\n如果你不再擁有存取此電子郵件地址的權限，對帳號安全性的改善項目可能導致帳號遺失。";
 
 /* Error for un verified email */
 "You must verify your email before being able to login." = "你必須先驗證電子郵件才能登入。";
+
+/* Restoration Successful Message */
+"You're already a Sustainer. Thank you for supporting Simplenote!" = "你已經是 Sustainer。 感謝你支持 Simplenote！";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "你的電子郵件地址無效。";
