@@ -12,6 +12,8 @@ USER_ENV_FILE_PATH = File.join(Dir.home, '.simplenoteios-env.default')
 PROJECT_ENV_FILE_PATH = File.join(
   Dir.home, '.configure', 'simplenote-ios', 'secrets', 'project.env'
 )
+SECRETS_ROOT = File.join(Dir.home, '.configure', 'simplenote-ios', 'secrets')
+APP_STORE_CONNECT_KEY_PATH = File.join(SECRETS_ROOT, 'app_store_connect_fastlane_api_key.json')
 $used_test_account_index = nil
 
 before_all do
@@ -20,8 +22,14 @@ before_all do
 
   # Check that the env files exist
   unless is_ci || File.file?(USER_ENV_FILE_PATH)
-    UI.user_error!("~/.simplenoteios-env.default not found: Please copy env/user.env-example to #{USER_ENV_FILE_PATH} and fill in the values")
+    error_message = <<~ERROR
+    ~/.simplenoteios-env.default not found. Please copy env/user.env-example to #{USER_ENV_FILE_PATH} and fill in the values") using the following command:
+
+    \tcp #{PROJECT_ROOT_FOLDER}/fastlane/env/user.env-example #{USER_ENV_FILE_PATH}
+    ERROR
+    UI.user_error!(error_message)
   end
+
   unless File.file?(PROJECT_ENV_FILE_PATH)
     UI.user_error!("project.env not found: Make sure your configuration is up to date with `rake dependencies`")
   end
@@ -806,6 +814,54 @@ end
     else
       UI.user_error!("This lane should be run only from CI")
     end
+  end
+
+  desc 'Registers a Device in the developer console'
+  lane :register_new_device do |options|
+    device_name = UI.input('Device Name: ') if options[:device_name].nil?
+    device_id = UI.input('Device ID: ') if options[:device_id].nil?
+    # Currently, Simplenote has an odd setup with a dedicated app id for development builds
+    all_bundle_ids =
+      simplenote_app_identifiers +
+      simplenote_app_identifiers(root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Development")
+
+    UI.message "Registering #{device_name} with ID #{device_id} and registering it with any provisioning profiles associated with these bundle identifiers:"
+    all_bundle_ids.each do |identifier|
+      UI.message "\t#{identifier}"
+    end
+
+    team_id = get_required_env('EXT_EXPORT_TEAM_ID')
+
+    # Register the user's device
+    register_device(
+      name: device_name,
+      udid: device_id,
+      team_id: team_id,
+      api_key_path: APP_STORE_CONNECT_KEY_PATH
+    )
+
+    # We're about to use `add_development_certificates_to_provisioning_profiles` and `add_all_devices_to_provisioning_profiles`.
+    # These actions use Developer Portal APIs that don't yet support authentication via API key (-.-').
+    # Let's preemptively ask for and set the email here to avoid being asked twice for it if not set.
+
+    require 'credentials_manager'
+
+    # If Fastlane cannot instantiate a user, it will ask the caller for the email.
+    # Once we have it, we can set it as `FASTLANE_USER` in the environment (which has lifecycle limited to this call) so that the next commands will already have access to it.
+    # Note that if the user is already available to `AccountManager`, setting it in the environment is redundant, but Fastlane doesn't provide a way to check it so we have to do it anyway.
+    ENV['FASTLANE_USER'] = CredentialsManager::AccountManager.new.user
+
+    # Add all development certificates to the provisioning profiles (just in case – this is an easy step to miss)
+    add_development_certificates_to_provisioning_profiles(
+      team_id: team_id,
+      app_identifier: all_bundle_ids
+    )
+
+    # Add all devices to the provisioning profiles
+    add_all_devices_to_provisioning_profiles(
+      team_id: team_id,
+      app_identifier: all_bundle_ids
+    )
   end
 end
 
