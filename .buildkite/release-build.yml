@@ -10,12 +10,13 @@ common_params:
         repo: "automattic/simplenote-ios/"
   # Common environment values to use with the `env` key.
   - &common_env
-    IMAGE_ID: xcode-14.0.1
+    IMAGE_ID: xcode-14.2
 
 steps:
 
   - label: ":testflight: Simplenote iOS Release Build (App Store Connect)"
     command: ".buildkite/commands/release-build.sh"
+    priority: 1
     env: *common_env
     plugins: *common_plugins
     notify:
