@@ -1,6 +1,6 @@
 4.49
 -----
-
+- Adds Large NoteWidget support #1521
 
 4.48
 -----
