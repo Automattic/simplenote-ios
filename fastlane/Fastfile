@@ -906,9 +906,9 @@ end
   # bundle exec fastlane update_certs_and_profiles
   #####################################################################################
   lane :update_certs_and_profiles do | options |
-    alpha_code_signing
-    internal_code_signing
-    appstore_code_signing
+    alpha_code_signing(options)
+    internal_code_signing(options)
+    appstore_code_signing(options)
   end
 
 ########################################################################
@@ -919,7 +919,7 @@ end
     match(
       type: "enterprise",
       team_id: get_required_env("INT_EXPORT_TEAM_ID"),
-      readonly: options[:readonly] || is_ci,
+      readonly: options.fetch(:readonly, true),
       app_identifier: simplenote_app_identifiers(root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Alpha")
     )
   end
@@ -928,7 +928,7 @@ end
     match(
       type: "enterprise",
       team_id: get_required_env("INT_EXPORT_TEAM_ID"),
-      readonly: options[:readonly] || is_ci,
+      readonly: options.fetch(:readonly, true),
       app_identifier: simplenote_app_identifiers(root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Internal")
     )
   end
@@ -937,7 +937,7 @@ end
     match(
       type: "appstore",
       team_id: get_required_env("EXT_EXPORT_TEAM_ID"),
-      readonly: options[:readonly] || is_ci,
+      readonly: options.fetch(:readonly, true),
       app_identifier: simplenote_app_identifiers,
       template_name: "NotationalFlow Keychain Access (Distribution)",
     )
