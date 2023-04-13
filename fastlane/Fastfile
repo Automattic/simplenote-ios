@@ -435,37 +435,37 @@ end
       }
     )
 
-    testflight(
-      skip_waiting_for_build_processing: true,
-      api_key_path: APP_STORE_CONNECT_KEY_PATH
-    )
+    # testflight(
+    #   skip_waiting_for_build_processing: true,
+    #   api_key_path: APP_STORE_CONNECT_KEY_PATH
+    # )
 
-    sh("rm ../Simplenote.ipa")
-    dSYM_PATH = File.dirname(Dir.pwd) + "/Simplenote.app.dSYM.zip"
+    # sh("rm ../Simplenote.ipa")
+    # dSYM_PATH = File.dirname(Dir.pwd) + "/Simplenote.app.dSYM.zip"
 
-    sentry_upload_dsym(
-      dsym_path: dSYM_PATH,
-      auth_token: ENV["SENTRY_AUTH_TOKEN"],
-      org_slug: 'a8c',
-      project_slug: 'simplenote-ios',
-    )
+    # sentry_upload_dsym(
+    #   dsym_path: dSYM_PATH,
+    #   auth_token: ENV["SENTRY_AUTH_TOKEN"],
+    #   org_slug: 'a8c',
+    #   project_slug: 'simplenote-ios',
+    # )
 
-    sh("rm #{dSYM_PATH}")
+    # sh("rm #{dSYM_PATH}")
 
-    if (options[:create_release])
-      archive_zip_path = File.dirname(Dir.pwd) + "/Simplenote.xarchive.zip"
-      zip(path: lane_context[SharedValues::XCODEBUILD_ARCHIVE], output_path: archive_zip_path)
+    # if (options[:create_release])
+    #   archive_zip_path = File.dirname(Dir.pwd) + "/Simplenote.xarchive.zip"
+    #   zip(path: lane_context[SharedValues::XCODEBUILD_ARCHIVE], output_path: archive_zip_path)
 
-      version = options[:beta_release] ? ios_get_build_version : ios_get_app_version
-      create_release(repository:GHHELPER_REPO,
-        version: version,
-        release_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt'),
-        release_assets: archive_zip_path.to_s,
-        prerelease: options[:beta_release]
-      )
+    #   version = options[:beta_release] ? ios_get_build_version : ios_get_app_version
+    #   create_release(repository:GHHELPER_REPO,
+    #     version: version,
+    #     release_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt'),
+    #     release_assets: archive_zip_path.to_s,
+    #     prerelease: options[:beta_release]
+    #   )
 
-      sh("rm #{archive_zip_path}")
-    end
+    #   sh("rm #{archive_zip_path}")
+    # end
   end
 
   # Upload the localized metadata (from `fastlane/metadata/`) to App Store Connect

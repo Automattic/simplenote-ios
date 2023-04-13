@@ -10,36 +10,10 @@ common_params:
   - &common_env
     IMAGE_ID: xcode-14.2
 
-# This is the default pipeline – it will build and test the app
 steps:
 
-  #################
-  # Run Unit Tests
-  #################
-  - label: "🔬 Build and Test"
-    command: ".buildkite/commands/build-and-test.sh"
+  - label: ":testflight: Simplenote iOS Release Build (App Store Connect)"
+    command: ".buildkite/commands/release-build.sh"
+    priority: 1
     env: *common_env
     plugins: *common_plugins
-    artifact_paths:
-      - "build/results/*"
-
-  #################
-  # Create Installable Build
-  #################
-  - label: "🛠 Installable Build"
-    command: ".buildkite/commands/build-prototype.sh"
-    env: *common_env
-    plugins: *common_plugins
-    if: "build.pull_request.id != null || build.pull_request.draft"
-    artifact_paths:
-      - "build/results/*"
-
-  #################
-  # UI Tests
-  #################
-  - label: "🔬 UI Test (Full)"
-    command: ".buildkite/commands/build-and-ui-test.sh SimplenoteUITests 'iPhone SE (3rd generation)'"
-    env: *common_env
-    plugins: *common_plugins
-    artifact_paths:
-      - "build/results/*"
