@@ -4,7 +4,8 @@
 
 4.49
 -----
-
+- Add background color to code block in dark mode preview #1518
+- Add large note widget #1522
 
 4.48
 -----
