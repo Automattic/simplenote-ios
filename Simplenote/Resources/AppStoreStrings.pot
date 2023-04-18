@@ -66,9 +66,9 @@ msgctxt "app_store_keywords"
 msgid "notes,note,markdown,journal,sync,to-do,list,cloud,notebook,simple,notepad,tag,todo,writing,memo"
 msgstr ""
 
-msgctxt "v4.48-whats-new"
+msgctxt "v4.49-whats-new"
 msgid ""
-"New: Simplenote Sustainer. Help support the ongoing development of Simplenote with an annual subscription.\n"
-"\n"
+"- Add background color to code block in dark mode preview\n"
+"- Add large note widget\n"
 msgstr ""
 

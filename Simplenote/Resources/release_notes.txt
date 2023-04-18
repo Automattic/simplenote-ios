@@ -1,2 +1,2 @@
-New: Simplenote Sustainer. Help support the ongoing development of Simplenote with an annual subscription.
-
+- Add background color to code block in dark mode preview
+- Add large note widget
