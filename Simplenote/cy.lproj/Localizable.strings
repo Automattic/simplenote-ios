@@ -1,9 +1,9 @@
-/* Translation-Revision-Date: 2021-01-26 11:32:58+0000 */
+/* Translation-Revision-Date: 2023-01-03 11:55:41+0000 */
 /* Plural-Forms: nplurals=4; plural=(n==1) ? 0 : (n==2) ? 1 : (n != 8 && n != 11) ? 2 : 3; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: cy_GB */
 
-/* Monthly Subscription Option. Please preserve the special marker! */
+/* No comment provided by engineer. */
 "%@ per Month" = "%@ per Month";
 
 /* Yearly Subscription Option. Please preserve the special marker! */
@@ -383,7 +383,7 @@
 "Fetching Version" = "Fetching Version";
 
 /* Forgot password Button Text */
-"Forgot password? »" = "Forgot password? »";
+"Forgot password? »" = "Wedi anghofio eich cyfrinair? »";
 
 /* Password Reset Action */
 "Forgotten password?" = "Forgotten password?";
