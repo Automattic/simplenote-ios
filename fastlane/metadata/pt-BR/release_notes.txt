@@ -1,2 +1,2 @@
-Novo: apoiador do Simplenote. Ajude a apoiar o desenvolvimento contínuo do Simplenote com uma assinatura anual.
-
+- Adição de cor de fundo ao bloco de código na visualização do modo escuro
+- Adição do widget de anotação grande
