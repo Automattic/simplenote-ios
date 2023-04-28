@@ -262,10 +262,7 @@ end
 
     ios_update_metadata(options)
     sanitize_appstore_keywords()
-    # Disabled to get through a crash during linting.
-    # The issue is due to a bug that is fixed in later version of the tooling, but we don't have the time to update.
-    # See https://github.com/wordpress-mobile/release-toolkit/commit/80c6c91c24eab7726da92e75fbe52cfffeddba79
-    # ios_lint_localizations(input_dir: 'Simplenote', allow_retry: true)
+    ios_lint_localizations(input_dir: 'Simplenote', allow_retry: true)
     ios_bump_version_beta()
 
     # Wrap up
