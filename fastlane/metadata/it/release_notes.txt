@@ -1,2 +1,2 @@
-Novità: sostenitore Simplenote. Aiuta a sostenere lo sviluppo continuo di Simplenote con un abbonamento annuale.
-
+- Aggiungere il colore di sfondo al blocco di codice nell'anteprima in modalità scura
+- Aggiungere widget nota di grandi dimensioni

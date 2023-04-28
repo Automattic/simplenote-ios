@@ -1,2 +1,2 @@
-Novedad: Contribuidor de Simplenote Contribuye al desarrollo continuo de Simplenote con una suscripción anual.
-
+- Añadir color de fondo al bloque de código en la vista previa del modo oscuro 
+- Añadir widget grande de notas

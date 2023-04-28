@@ -1,2 +1,2 @@
-Baru: Simplenote Sustainer. Bantu dukung pengembangan Simplenote yang sedang berlangsung dengan langganan tahunan.
-
+- Menambahkan warna latar belakang ke blok kode dalam pratinjau mode gelap
+- Menambahkan widget catatan besar

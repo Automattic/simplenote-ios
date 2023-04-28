@@ -1,2 +1,2 @@
-Yeni: Simplenote Sustainer. Yıllık abonelikle Simplenote'un sürekli olarak geliştirilmesini desteklemeye yardımcı olun.
-
+- Karanlık mod önizlemesinde kod blokuna arka plan rengi ekleyin
+- Büyük not bileşeni ekleyin
