@@ -129,6 +129,7 @@
     [self configureAccountDeletionController];
     [self setupDefaultWindow];
     [self configureStateRestoration];
+    [self setupDawnSyncing];
 
     return YES;
 }

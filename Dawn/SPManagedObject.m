@@ -18,9 +18,4 @@
     return @"";
 }
 
-- (NSString *)simperiumKey
-{
-    return @"";
-}
-
 @end

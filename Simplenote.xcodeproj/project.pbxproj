@@ -266,6 +266,21 @@
 		B52F35D322F356F500724793 /* UserDefaults+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F35D222F356F500724793 /* UserDefaults+Tests.swift */; };
 		B52FD3E72A9F6B4B001037FD /* Simperium.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FD3E62A9F6B4B001037FD /* Simperium.swift */; };
 		B52FD3EA2A9F75E9001037FD /* SPManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = B52FD3E92A9F75E9001037FD /* SPManagedObject.m */; };
+		B52FD3ED2A9F8488001037FD /* Dawn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FD3EC2A9F8488001037FD /* Dawn.swift */; };
+		B52FD3EF2A9F849D001037FD /* SyncEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FD3EE2A9F849D001037FD /* SyncEngine.swift */; };
+		B52FD3F12A9F856F001037FD /* Notification+Dawn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FD3F02A9F856F001037FD /* Notification+Dawn.swift */; };
+		B52FD3F32A9F9029001037FD /* DawnRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FD3F22A9F9029001037FD /* DawnRemote.swift */; };
+		B52FD3F52A9F9289001037FD /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FD3F42A9F9289001037FD /* Network.swift */; };
+		B52FD3F72A9F939A001037FD /* URLSessionConfiguration+Dawn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FD3F62A9F939A001037FD /* URLSessionConfiguration+Dawn.swift */; };
+		B52FD3FA2A9F93CE001037FD /* DawnConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FD3F92A9F93CE001037FD /* DawnConstants.swift */; };
+		B52FD3FD2A9F94F2001037FD /* ResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FD3FC2A9F94F2001037FD /* ResponseParser.swift */; };
+		B52FD3FF2A9F953E001037FD /* SyncError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FD3FE2A9F953E001037FD /* SyncError.swift */; };
+		B52FD4012A9FA730001037FD /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FD4002A9FA730001037FD /* NetworkRequest.swift */; };
+		B52FD4032A9FA7A7001037FD /* URLComponents+Dawn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FD4022A9FA7A7001037FD /* URLComponents+Dawn.swift */; };
+		B52FD4052A9FAD83001037FD /* JSONDecoder+Dawn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FD4042A9FAD83001037FD /* JSONDecoder+Dawn.swift */; };
+		B52FD4072A9FAD96001037FD /* DateFormatter+Dawn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FD4062A9FAD96001037FD /* DateFormatter+Dawn.swift */; };
+		B52FD40A2A9FC0DA001037FD /* EntryRevision.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FD4092A9FC0DA001037FD /* EntryRevision.swift */; };
+		B52FD40C2A9FC4B0001037FD /* RevisionProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FD40B2A9FC4B0001037FD /* RevisionProcessor.swift */; };
 		B531090823D0B685002B0998 /* SPSimpleTextPrintFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B531090723D0B685002B0998 /* SPSimpleTextPrintFormatter.swift */; };
 		B5358C5A2371DFBC007604E0 /* UITextView+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5358C592371DFBC007604E0 /* UITextView+Simplenote.swift */; };
 		B535F2E72399BFB600C1DDCA /* SPRatingsPromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B535F2E62399BFB600C1DDCA /* SPRatingsPromptView.swift */; };
@@ -935,6 +950,21 @@
 		B52FD3E62A9F6B4B001037FD /* Simperium.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simperium.swift; sourceTree = "<group>"; };
 		B52FD3E82A9F75E9001037FD /* SPManagedObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SPManagedObject.h; sourceTree = "<group>"; };
 		B52FD3E92A9F75E9001037FD /* SPManagedObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SPManagedObject.m; sourceTree = "<group>"; };
+		B52FD3EC2A9F8488001037FD /* Dawn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dawn.swift; sourceTree = "<group>"; };
+		B52FD3EE2A9F849D001037FD /* SyncEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncEngine.swift; sourceTree = "<group>"; };
+		B52FD3F02A9F856F001037FD /* Notification+Dawn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Dawn.swift"; sourceTree = "<group>"; };
+		B52FD3F22A9F9029001037FD /* DawnRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DawnRemote.swift; sourceTree = "<group>"; };
+		B52FD3F42A9F9289001037FD /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		B52FD3F62A9F939A001037FD /* URLSessionConfiguration+Dawn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSessionConfiguration+Dawn.swift"; sourceTree = "<group>"; };
+		B52FD3F92A9F93CE001037FD /* DawnConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DawnConstants.swift; sourceTree = "<group>"; };
+		B52FD3FC2A9F94F2001037FD /* ResponseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseParser.swift; sourceTree = "<group>"; };
+		B52FD3FE2A9F953E001037FD /* SyncError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncError.swift; sourceTree = "<group>"; };
+		B52FD4002A9FA730001037FD /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
+		B52FD4022A9FA7A7001037FD /* URLComponents+Dawn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLComponents+Dawn.swift"; sourceTree = "<group>"; };
+		B52FD4042A9FAD83001037FD /* JSONDecoder+Dawn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+Dawn.swift"; sourceTree = "<group>"; };
+		B52FD4062A9FAD96001037FD /* DateFormatter+Dawn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Dawn.swift"; sourceTree = "<group>"; };
+		B52FD4092A9FC0DA001037FD /* EntryRevision.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryRevision.swift; sourceTree = "<group>"; };
+		B52FD40B2A9FC4B0001037FD /* RevisionProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevisionProcessor.swift; sourceTree = "<group>"; };
 		B531090723D0B685002B0998 /* SPSimpleTextPrintFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SPSimpleTextPrintFormatter.swift; path = Classes/SPSimpleTextPrintFormatter.swift; sourceTree = "<group>"; };
 		B5358C592371DFBC007604E0 /* UITextView+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UITextView+Simplenote.swift"; path = "Classes/UITextView+Simplenote.swift"; sourceTree = "<group>"; };
 		B535F2E62399BFB600C1DDCA /* SPRatingsPromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPRatingsPromptView.swift; path = Classes/SPRatingsPromptView.swift; sourceTree = "<group>"; };
@@ -1840,11 +1870,58 @@
 		B52FD3E32A9F6AE0001037FD /* Dawn */ = {
 			isa = PBXGroup;
 			children = (
+				B52FD4082A9FC0D1001037FD /* Model */,
+				B52FD3EB2A9F847C001037FD /* Stubs */,
+				B52FD3F82A9F93A1001037FD /* Extensions */,
+				B52FD3FB2A9F9481001037FD /* Remote */,
+				B52FD3EC2A9F8488001037FD /* Dawn.swift */,
+				B52FD3EE2A9F849D001037FD /* SyncEngine.swift */,
+				B52FD40B2A9FC4B0001037FD /* RevisionProcessor.swift */,
+				B52FD3F92A9F93CE001037FD /* DawnConstants.swift */,
+			);
+			path = Dawn;
+			sourceTree = "<group>";
+		};
+		B52FD3EB2A9F847C001037FD /* Stubs */ = {
+			isa = PBXGroup;
+			children = (
 				B52FD3E62A9F6B4B001037FD /* Simperium.swift */,
 				B52FD3E82A9F75E9001037FD /* SPManagedObject.h */,
 				B52FD3E92A9F75E9001037FD /* SPManagedObject.m */,
 			);
-			path = Dawn;
+			name = Stubs;
+			sourceTree = "<group>";
+		};
+		B52FD3F82A9F93A1001037FD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B52FD3F02A9F856F001037FD /* Notification+Dawn.swift */,
+				B52FD3F62A9F939A001037FD /* URLSessionConfiguration+Dawn.swift */,
+				B52FD4022A9FA7A7001037FD /* URLComponents+Dawn.swift */,
+				B52FD4042A9FAD83001037FD /* JSONDecoder+Dawn.swift */,
+				B52FD4062A9FAD96001037FD /* DateFormatter+Dawn.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		B52FD3FB2A9F9481001037FD /* Remote */ = {
+			isa = PBXGroup;
+			children = (
+				B52FD3F22A9F9029001037FD /* DawnRemote.swift */,
+				B52FD3F42A9F9289001037FD /* Network.swift */,
+				B52FD4002A9FA730001037FD /* NetworkRequest.swift */,
+				B52FD3FC2A9F94F2001037FD /* ResponseParser.swift */,
+				B52FD3FE2A9F953E001037FD /* SyncError.swift */,
+			);
+			name = Remote;
+			sourceTree = "<group>";
+		};
+		B52FD4082A9FC0D1001037FD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B52FD4092A9FC0DA001037FD /* EntryRevision.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		B537730D252E14AE00BC78C5 /* Options */ = {
@@ -3340,8 +3417,10 @@
 				E215C793180B115C00AD36B5 /* SPNavigationController.m in Sources */,
 				B5DF734422A56E2800602CE7 /* UserDefaults+Simplenote.swift in Sources */,
 				A6DB2C1525BF5D6E00437B99 /* SPMarkdownPreviewViewController+Extensions.swift in Sources */,
+				B52FD3ED2A9F8488001037FD /* Dawn.swift in Sources */,
 				B56A696022F9D53400B90398 /* SPAuthHandler.swift in Sources */,
 				A6E1E78924B5196C008A44BC /* SPNoteHistoryControllerDelegate.swift in Sources */,
+				B52FD4032A9FA7A7001037FD /* URLComponents+Dawn.swift in Sources */,
 				B5B9AB4522EE8AF0001CB0AD /* UIImageName.swift in Sources */,
 				BA2D82C6261522F100A1695B /* PublishNoticePresenter.swift in Sources */,
 				A64DE6E9255D1C9F001D0526 /* ContentSlice.swift in Sources */,
@@ -3354,6 +3433,7 @@
 				B552AB8724B8E75E00E5E115 /* SPNoteEditorViewController+Extensions.swift in Sources */,
 				A69F851D253EC877005140F2 /* UISlider+Simplenote.swift in Sources */,
 				46A3C96617DFA81A002865AE /* SPAcitivitySafari.m in Sources */,
+				B52FD3F12A9F856F001037FD /* Notification+Dawn.swift in Sources */,
 				B5E951E424FEE26E004B10B8 /* NSURL+Links.swift in Sources */,
 				B5BE05461AB7522F002417BF /* JSONKit+Simplenote.m in Sources */,
 				B5095DC924632E3300812711 /* SimplenoteConstants.swift in Sources */,
@@ -3392,6 +3472,7 @@
 				A6F487A725A79D350050CFA8 /* UIApplication+Simplenote.swift in Sources */,
 				B59FFB43231851C700567627 /* UIGestureRecognizer+Simplenote.swift in Sources */,
 				B550F93622BA7E9100091939 /* NSUserActivity+Simplenote.swift in Sources */,
+				B52FD40C2A9FC4B0001037FD /* RevisionProcessor.swift in Sources */,
 				B5BE054E1AB75902002417BF /* NSProcessInfo+Util.m in Sources */,
 				BA4C6CFC264C744300B723A7 /* SeparatorsView.swift in Sources */,
 				375D24B821E01131007AB25A /* hash.c in Sources */,
@@ -3421,14 +3502,17 @@
 				A6C0589924AD47CB006BC572 /* SPSnappingSlider.swift in Sources */,
 				B550F93122BA65CD00091939 /* ActivityType.swift in Sources */,
 				BA3101A926C8C76A00C95F93 /* ListWidgetIntent.intentdefinition in Sources */,
+				B52FD3F72A9F939A001037FD /* URLSessionConfiguration+Dawn.swift in Sources */,
 				46A3C97817DFA81A002865AE /* PersonTag.m in Sources */,
 				B5BFAEBB21519DCA00918DC8 /* SPPrivacyViewController.swift in Sources */,
+				B52FD3F52A9F9289001037FD /* Network.swift in Sources */,
 				A6C0DFE725C18E3300B9BE39 /* NoteEditorTagListViewController.swift in Sources */,
 				A6A8968E25D5779D00A7B390 /* FileManager+Simplenote.swift in Sources */,
 				375D24B921E01131007AB25A /* version.c in Sources */,
 				A6E1E7A424BDE472008A44BC /* SPCardPresentationController.swift in Sources */,
 				B50F479F1D1D77FC00822748 /* UIAlertController+Helpers.swift in Sources */,
 				37E10E7720B3368700864E43 /* WPAuthHandler.m in Sources */,
+				B52FD4052A9FAD83001037FD /* JSONDecoder+Dawn.swift in Sources */,
 				B52E2B152537480A0074509A /* SPEditorTapRecognizerDelegate.swift in Sources */,
 				A6A648A425AC3AC00074A094 /* AccountVerificationViewController.swift in Sources */,
 				BA4499B325ED8AB0000C563E /* NoticeView.swift in Sources */,
@@ -3467,6 +3551,7 @@
 				74F454ED22DD4BC0000C66DB /* KeyboardObservable.swift in Sources */,
 				B5757368232BED0700443C2E /* UIBezierPath+Simplenote.swift in Sources */,
 				B5476BB723D89AF7000E7723 /* SPSectionHeaderView.swift in Sources */,
+				B52FD3FA2A9F93CE001037FD /* DawnConstants.swift in Sources */,
 				B5377349252E2A4200BC78C5 /* Value1TableViewCell.swift in Sources */,
 				BA0F5E0426B62A8B0098C605 /* RemoteError.swift in Sources */,
 				B53C5A5A230330CD00DA2143 /* SPNoteListViewController+Extensions.swift in Sources */,
@@ -3477,12 +3562,14 @@
 				BA6DA19126DB5F1B000464C8 /* URLComponents.swift in Sources */,
 				46A3C98317DFA81A002865AE /* main.m in Sources */,
 				B58C9F5723F2FCEC008C3480 /* SPPlaceholderView.swift in Sources */,
+				B52FD4072A9FAD96001037FD /* DateFormatter+Dawn.swift in Sources */,
 				BAB6C04726BA4CAF007495C4 /* WidgetController.swift in Sources */,
 				A6E1E79E24BDE401008A44BC /* SPCardTransitioningManager.swift in Sources */,
 				74388F4622CFFA8B001C5EC0 /* NSObject+Helpers.swift in Sources */,
 				46A3C98617DFA81A002865AE /* SPEntryListViewController.m in Sources */,
 				A6ABB689256D95EB00E2A076 /* PinLockProgressView.swift in Sources */,
 				B56A696322F9D53400B90398 /* SPAuthViewController.swift in Sources */,
+				B52FD3F32A9F9029001037FD /* DawnRemote.swift in Sources */,
 				B50789FE1C1F5517009F097A /* SPInteractivePushPopAnimationController.m in Sources */,
 				B5D3FCD0201F96AC00A813B7 /* StatusChecker.m in Sources */,
 				B57DE27825013C6600B4D435 /* Simperium+Simplenote.swift in Sources */,
@@ -3490,6 +3577,7 @@
 				A6F4881B25A8881B0050CFA8 /* TagListTextField.swift in Sources */,
 				B50CA5262513EC5400A4742D /* NSAttributedString+AuthError.swift in Sources */,
 				46A3C98817DFA81A002865AE /* Simplenote.xcdatamodeld in Sources */,
+				B52FD4012A9FA730001037FD /* NetworkRequest.swift in Sources */,
 				B546BE9E234F6CB700A126DA /* SPTagHeaderView.swift in Sources */,
 				B518899E1E0D5EF800E71B83 /* SPContactsManager.swift in Sources */,
 				46A3C98917DFA81A002865AE /* SPAppDelegate.m in Sources */,
@@ -3507,10 +3595,12 @@
 				F9E197D42283D05C0092B3E1 /* CrashLogging.swift in Sources */,
 				BA9B59022685549F00DAD1ED /* StorageSettings.swift in Sources */,
 				DE7E545B214E34C8008D9928 /* NSString+Count.swift in Sources */,
+				B52FD40A2A9FC0DA001037FD /* EntryRevision.swift in Sources */,
 				A6E6CE0025A4B0A9005A92DB /* PinLockVerifyController.swift in Sources */,
 				BA55124E2600210B00D8F882 /* TimerFactory.swift in Sources */,
 				B5476BB923D89B28000E7723 /* UITableViewHeaderFooterView+Simplenote.swift in Sources */,
 				BAA4856925D5E40900F3BDB9 /* SearchQuery+Simplenote.swift in Sources */,
+				B52FD3FD2A9F94F2001037FD /* ResponseParser.swift in Sources */,
 				B56B357F1AC3565600B9F365 /* UITextView+Simplenote.m in Sources */,
 				B5C9F71E193E75FE00FD2491 /* SPDebugViewController.m in Sources */,
 				BAA59E79269F9FE30068BD3D /* Date+Simplenote.swift in Sources */,
@@ -3531,6 +3621,7 @@
 				46A3C99417DFA81A002865AE /* Note.m in Sources */,
 				B52F35CF22F3243900724793 /* SPThemeViewController.swift in Sources */,
 				46A3C99617DFA81A002865AE /* SPEntryListAutoCompleteCell.m in Sources */,
+				B52FD3EF2A9F849D001037FD /* SyncEngine.swift in Sources */,
 				74388F4422CFFA30001C5EC0 /* UIViewController+Helpers.swift in Sources */,
 				A6C3D8B7256687970042F584 /* SPObjectManager+Simplenote.swift in Sources */,
 				46A3C99817DFA81A002865AE /* SPEntryListCell.m in Sources */,
@@ -3609,6 +3700,7 @@
 				B58039862322D4F90083C916 /* UIView+ImageRepresentation.swift in Sources */,
 				B5358C5A2371DFBC007604E0 /* UITextView+Simplenote.swift in Sources */,
 				B524491225388B570063CCEE /* Note+Properties.swift in Sources */,
+				B52FD3FF2A9F953E001037FD /* SyncError.swift in Sources */,
 				B5AD0349251445CA00255D5C /* UINavigationBar+Appearance.swift in Sources */,
 				B584DA36236722D400B2844A /* SPBlurEffectView.swift in Sources */,
 				B521A1961BC8446900E1CF2A /* SPAutomatticTracker.m in Sources */,

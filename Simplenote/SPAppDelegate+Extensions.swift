@@ -31,6 +31,12 @@ extension SPAppDelegate: SPBucketDelegate {
     }
 
     @objc
+    func setupDawnSyncing() {
+        dawn = Dawn(managedObjectContext: coreDataManager.managedObjectContext)
+        dawn.startSynchronizing()
+    }
+
+    @objc
     func setupAuthenticator() {
         let authenticator = simperium.authenticator
 
