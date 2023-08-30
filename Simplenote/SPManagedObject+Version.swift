@@ -1,5 +1,5 @@
 import Foundation
-import Simperium
+
 
 // MARK: - SPManagedObject extension
 //

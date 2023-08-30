@@ -264,6 +264,8 @@
 		B52F35CF22F3243900724793 /* SPThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F35CE22F3243900724793 /* SPThemeViewController.swift */; };
 		B52F35D122F3254800724793 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F35D022F3254800724793 /* Theme.swift */; };
 		B52F35D322F356F500724793 /* UserDefaults+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F35D222F356F500724793 /* UserDefaults+Tests.swift */; };
+		B52FD3E72A9F6B4B001037FD /* Simperium.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FD3E62A9F6B4B001037FD /* Simperium.swift */; };
+		B52FD3EA2A9F75E9001037FD /* SPManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = B52FD3E92A9F75E9001037FD /* SPManagedObject.m */; };
 		B531090823D0B685002B0998 /* SPSimpleTextPrintFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B531090723D0B685002B0998 /* SPSimpleTextPrintFormatter.swift */; };
 		B5358C5A2371DFBC007604E0 /* UITextView+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5358C592371DFBC007604E0 /* UITextView+Simplenote.swift */; };
 		B535F2E72399BFB600C1DDCA /* SPRatingsPromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B535F2E62399BFB600C1DDCA /* SPRatingsPromptView.swift */; };
@@ -930,6 +932,9 @@
 		B52F35CE22F3243900724793 /* SPThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPThemeViewController.swift; path = Classes/SPThemeViewController.swift; sourceTree = "<group>"; };
 		B52F35D022F3254800724793 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Theme.swift; path = Classes/Theme.swift; sourceTree = "<group>"; };
 		B52F35D222F356F500724793 /* UserDefaults+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Tests.swift"; sourceTree = "<group>"; };
+		B52FD3E62A9F6B4B001037FD /* Simperium.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simperium.swift; sourceTree = "<group>"; };
+		B52FD3E82A9F75E9001037FD /* SPManagedObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SPManagedObject.h; sourceTree = "<group>"; };
+		B52FD3E92A9F75E9001037FD /* SPManagedObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SPManagedObject.m; sourceTree = "<group>"; };
 		B531090723D0B685002B0998 /* SPSimpleTextPrintFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SPSimpleTextPrintFormatter.swift; path = Classes/SPSimpleTextPrintFormatter.swift; sourceTree = "<group>"; };
 		B5358C592371DFBC007604E0 /* UITextView+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UITextView+Simplenote.swift"; path = "Classes/UITextView+Simplenote.swift"; sourceTree = "<group>"; };
 		B535F2E62399BFB600C1DDCA /* SPRatingsPromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPRatingsPromptView.swift; path = Classes/SPRatingsPromptView.swift; sourceTree = "<group>"; };
@@ -1832,6 +1837,16 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
+		B52FD3E32A9F6AE0001037FD /* Dawn */ = {
+			isa = PBXGroup;
+			children = (
+				B52FD3E62A9F6B4B001037FD /* Simperium.swift */,
+				B52FD3E82A9F75E9001037FD /* SPManagedObject.h */,
+				B52FD3E92A9F75E9001037FD /* SPManagedObject.m */,
+			);
+			path = Dawn;
+			sourceTree = "<group>";
+		};
 		B537730D252E14AE00BC78C5 /* Options */ = {
 			isa = PBXGroup;
 			children = (
@@ -2502,7 +2517,7 @@
 		E29ADD2F17848E8500E55842 = {
 			isa = PBXGroup;
 			children = (
-				8C573B0C22CD1A78005BC6F5 /* config */,
+				B52FD3E32A9F6AE0001037FD /* Dawn */,
 				E29ADD4117848E8500E55842 /* Simplenote */,
 				B5EB1EED1C204EBD0080A1B3 /* SimplenoteShare */,
 				B58218981FCC45170094ECA1 /* SimplenoteTests */,
@@ -2514,6 +2529,7 @@
 				3FFBDBEC26FBF132008AD052 /* UITestsFoundation */,
 				E29ADD3A17848E8500E55842 /* Frameworks */,
 				E29ADD3917848E8500E55842 /* Products */,
+				8C573B0C22CD1A78005BC6F5 /* config */,
 				564CAA42AA330D16FDBDD081 /* Pods */,
 				B5CA3E0D22B1503700AC0D47 /* RELEASE-NOTES.txt */,
 			);
@@ -3385,6 +3401,7 @@
 				A6E02758256E52F3002054DF /* PinLockController.swift in Sources */,
 				B5CBEF4022D3AD92009DBE67 /* MigrationsHandler.swift in Sources */,
 				B5476BBF23D8B686000E7723 /* NotesListSection.swift in Sources */,
+				B52FD3E72A9F6B4B001037FD /* Simperium.swift in Sources */,
 				A6E1E79824B7D7B4008A44BC /* SPHistoryVersion.swift in Sources */,
 				B531090823D0B685002B0998 /* SPSimpleTextPrintFormatter.swift in Sources */,
 				B5CDE61F2150834C00C3FED4 /* Simperium+Simplenote.m in Sources */,
@@ -3394,6 +3411,7 @@
 				A60DF31025A4524100FDADF3 /* PinLockBaseController.swift in Sources */,
 				A6F487ED25A85F970050CFA8 /* TagTextFieldInputValidator.swift in Sources */,
 				B5AB169822FA124F00B4EBA5 /* SPSheetController.swift in Sources */,
+				B52FD3EA2A9F75E9001037FD /* SPManagedObject.m in Sources */,
 				B511AEDA255A0A2A005B2159 /* InterlinkResultsController.swift in Sources */,
 				B5476BC123D8E5D0000E7723 /* String+Simplenote.swift in Sources */,
 				B5DF734222A565DA00602CE7 /* Options.swift in Sources */,

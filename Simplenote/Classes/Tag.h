@@ -6,7 +6,9 @@
 //  Copyright 2010 Simperium. All rights reserved.
 //
 
-#import <Simperium/SPManagedObject.h>
+#import <Foundation/Foundation.h>
+#import "SPManagedObject.h"
+
 
 @interface Tag : SPManagedObject {
 	NSString *name;

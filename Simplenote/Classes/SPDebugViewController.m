@@ -11,9 +11,6 @@
 #import "Note.h"
 #import "Simplenote-Swift.h"
 
-#import <Simperium/Simperium.h>
-#import <Simperium/SPBucket.h>
-
 
 static NSInteger const SPDebugSectionCount  = 1;
 
@@ -45,15 +42,15 @@ typedef NS_ENUM(NSInteger, SPDebugRow) {
     [self.tableView applySimplenoteGroupedStyle];
     self.title = NSLocalizedString(@"Debug", @"Debug Screen Title");
     
-    Simperium *simperium        = [[SPAppDelegate sharedDelegate] simperium];
-    SPBucket *bucket            = [simperium bucketForName:NSStringFromClass([Note class])];
-    [bucket statsWithCallback:^(SPBucket *bucket, NSUInteger localPendingChanges, NSUInteger localEnqueuedChanges, NSUInteger localEnqueuedDeletions) {
-        self.localPendingChanges    = localPendingChanges;
-        self.localEnqueuedChanges   = localEnqueuedChanges;
-        self.localEnqueuedDeletions = localEnqueuedDeletions;
-        
-        [self.tableView reloadData];
-    }];
+//    Simperium *simperium        = [[SPAppDelegate sharedDelegate] simperium];
+//    SPBucket *bucket            = [simperium bucketForName:NSStringFromClass([Note class])];
+//    [bucket statsWithCallback:^(SPBucket *bucket, NSUInteger localPendingChanges, NSUInteger localEnqueuedChanges, NSUInteger localEnqueuedDeletions) {
+//        self.localPendingChanges    = localPendingChanges;
+//        self.localEnqueuedChanges   = localEnqueuedChanges;
+//        self.localEnqueuedDeletions = localEnqueuedDeletions;
+//        
+//        [self.tableView reloadData];
+//    }];
 }
 
 

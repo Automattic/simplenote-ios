@@ -69,7 +69,8 @@ private class SNCrashLoggingDataProvider: CrashLoggingDataProvider {
     var currentUser: TracksUser? {
 
         /// Prefer data from the up-to-date simperium user
-        if let user = self.simperium.user, let email = user.email {
+        if let user = self.simperium.user {
+            let email = user.email
             return TracksUser(userID: email, email: email, username: email)
         }
 

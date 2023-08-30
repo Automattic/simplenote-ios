@@ -16,7 +16,6 @@
 #import "NSMutableAttributedString+Styling.h"
 
 #import <StoreKit/StoreKit.h>
-#import <Simperium/Simperium.h>
 #import "Simplenote-Swift.h"
 
 

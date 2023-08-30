@@ -3,10 +3,6 @@
 //
 
 
-#pragma mark - External
-
-#import <Simperium/Simperium.h>
-
 
 #pragma mark - Simplenote-Y
 

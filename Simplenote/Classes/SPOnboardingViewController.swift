@@ -5,7 +5,7 @@ import SafariServices
 
 // MARK: - SPOnboardingViewController
 //
-class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
+class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {    
 
     /// Message: Container View
     ///

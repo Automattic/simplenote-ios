@@ -4,7 +4,7 @@ import WidgetKit
 
 // MARK: - Initialization
 //
-extension SPAppDelegate {
+extension SPAppDelegate: SPBucketDelegate {
 
     /// Simperium Initialization
     /// - Important: Buckets that don't have a backing `SPManagedObject` will be dynamic. Invoking `bucketForName` will initialize sync'ing!

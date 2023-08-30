@@ -24,7 +24,6 @@
 #import "SPTracker.h"
 
 @import Contacts;
-@import Simperium;
 
 @class KeychainMigrator;
 

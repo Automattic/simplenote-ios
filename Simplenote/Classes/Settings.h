@@ -6,7 +6,8 @@
 //  Copyright (c) 2015 Automattic. All rights reserved.
 //
 
-#import <Simperium/SPManagedObject.h>
+#import <Foundation/Foundation.h>
+#import "SPManagedObject.h"
 
 
 @interface Settings : SPManagedObject

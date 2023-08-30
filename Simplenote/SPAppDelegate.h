@@ -1,5 +1,5 @@
 #import <UIKit/UIKit.h>
-#import <Simperium/Simperium.h>
+#import <Foundation/Foundation.h>
 
 
 @class SPSidebarContainerViewController;
@@ -14,10 +14,11 @@
 @class PublishStateObserver;
 @class AccountDeletionController;
 @class CoreDataManager;
+@class Simperium;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SPAppDelegate : UIResponder <UIApplicationDelegate, SPBucketDelegate>
+@interface SPAppDelegate : UIResponder <UIApplicationDelegate> //, SPBucketDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nullable, strong, nonatomic) UIWindow *pinLockWindow;

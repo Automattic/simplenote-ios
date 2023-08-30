@@ -1,5 +1,6 @@
 import Foundation
 
+
 // MARK: - MagicLinkAuthenticator
 //
 struct MagicLinkAuthenticator {

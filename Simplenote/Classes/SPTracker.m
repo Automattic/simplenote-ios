@@ -2,6 +2,7 @@
 #import "SPAutomatticTracker.h"
 #import "SPAppDelegate.h"
 #import "Simperium+Simplenote.h"
+#import "Simplenote-Swift.h"
 
 
 @implementation SPTracker

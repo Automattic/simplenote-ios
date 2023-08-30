@@ -12,8 +12,6 @@
 #import "Simplenote-Swift.h"
 
 
-@import Simperium;
-
 static NSString * const SPAuthSessionKey = @"SPAuthSessionKey";
 
 

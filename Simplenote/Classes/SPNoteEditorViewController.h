@@ -1,5 +1,5 @@
 #import <UIKit/UIKit.h>
-#import <Simperium/Simperium.h>
+#import <Foundation/Foundation.h>
 
 
 @class InterlinkProcessor;
@@ -13,7 +13,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SPNoteEditorViewController : UIViewController  <SPBucketDelegate>
+@interface SPNoteEditorViewController : UIViewController // <SPBucketDelegate>
 
 // Navigation Bar
 @property (nonatomic, strong, readonly) SPBlurEffectView *navigationBarBackground;

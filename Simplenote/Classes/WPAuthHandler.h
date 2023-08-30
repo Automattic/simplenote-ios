@@ -4,7 +4,9 @@
 //  Handles oauth authentication with WordPress.com
 //
 
-#import <Simperium/Simperium.h>
+#import <Foundation/Foundation.h>
+
+@class SPUser;
 
 @interface WPAuthHandler : NSObject
 + (BOOL)isWPAuthenticationUrl:(NSURL*)url;

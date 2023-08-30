@@ -41,7 +41,7 @@ class VersionsController: NSObject {
         callbackMap.setObject(wrapper, forKey: simperiumKey as NSString)
 
         let versionRange = VersionsController.range(forCurrentVersion: currentVersion)
-        bucket.requestVersions(Int32(versionRange.count), key: simperiumKey)
+        bucket.requestVersions(versionRange.count, key: simperiumKey)
 
         // We'll return the wrapper as receipt
         return wrapper

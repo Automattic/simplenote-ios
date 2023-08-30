@@ -8,7 +8,6 @@
 
 #import "SPObjectManager.h"
 #import "NSManagedObjectContext+CoreDataExtensions.h"
-#import <Simperium/Simperium.h>
 #import "SPAppDelegate.h"
 #import "Note.h"
 #import "Tag.h"
