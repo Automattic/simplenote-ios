@@ -32,7 +32,7 @@ extension SPAppDelegate: SPBucketDelegate {
 
     @objc
     func setupDawnSyncing() {
-        dawn = Dawn(managedObjectContext: coreDataManager.managedObjectContext)
+        dawn = Dawn(mainContext: simperium.managedObjectContext, writerContext: simperium.writerObjectContext)
         dawn.startSynchronizing()
     }
 

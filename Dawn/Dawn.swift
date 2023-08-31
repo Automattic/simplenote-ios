@@ -14,16 +14,23 @@ class Dawn {
     private let engine: SyncEngine
     private var timer: Timer?
 
-    init(managedObjectContext: NSManagedObjectContext, remote: DawnRemote = .init()) {
-        engine = SyncEngine(managedObjectContext: managedObjectContext, remote: remote)
+    init(mainContext: NSManagedObjectContext, writerContext: NSManagedObjectContext, remote: DawnRemote = .init()) {
+        engine = SyncEngine(mainContext: mainContext, writerContext: writerContext, remote: remote)
     }
 
     func startSynchronizing() {
-        timer?.invalidate()
+        ///
+        ///
+        engine.startListeningToChanges()
+
+        ///
+        ///
         timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
             self.syncNow()
         }
 
+        ///
+        ///
         timer?.fire()
     }
 

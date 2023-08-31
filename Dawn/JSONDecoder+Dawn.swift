@@ -9,6 +9,20 @@
 import Foundation
 
 
+extension JSONEncoder {
+    public static var mercuryRecordEncoder: JSONEncoder = {
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .custom({ (date, encoder) throws -> Void in
+            let milliseconds = date.timeIntervalSince1970 * 1000
+            let roundedMilliseconds = Int64(milliseconds)
+            var container = encoder.singleValueContainer()
+            try container.encode(roundedMilliseconds)
+        })
+        return encoder
+    }()
+}
+
+
 extension JSONDecoder {
     public static var mercuryRecordDecoder: JSONDecoder {
         let decoder = JSONDecoder()

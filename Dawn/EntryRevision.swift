@@ -9,7 +9,7 @@
 import Foundation
 
 
-struct EntryRevision {
+struct EntryRevision: Codable {
     let envelope: EntryRevisionEnvelope
     let payload: EntryRevisionPayload
 
@@ -41,11 +41,11 @@ struct EntryRevision {
         envelope.revision.purgeCompleted
     }
 
-    var lastEditingDeviceID: String {
+    var lastEditingDeviceID: String? {
         payload.lastEditingDeviceID
     }
 
-    var lastEditingDeviceName: String {
+    var lastEditingDeviceName: String? {
         payload.lastEditingDeviceName
     }
 
@@ -72,15 +72,16 @@ enum RevisionType: String, Codable {
 }
 
 
-struct EntryRevisionEnvelope: Decodable {
+struct EntryRevisionEnvelope: Codable {
     let cursor: Int
     let contentLength: Int
     let encrypted: Bool
     let revision: EntryRevisionMetadata
 }
 
-struct EntryRevisionMetadata: Decodable {
+struct EntryRevisionMetadata: Codable {
     var entryID: String
+    var journalID: String
     var type: RevisionType
     var deviceID: String?
     var userID: String? = nil
@@ -95,6 +96,7 @@ struct EntryRevisionMetadata: Decodable {
 
     enum CodingKeys: String, CodingKey {
         case entryID = "entryId"
+        case journalID = "journalId"
         case type
         case deviceID = "deviceId"
         case userID = "userId"
@@ -110,10 +112,10 @@ struct EntryRevisionMetadata: Decodable {
 }
 
 
-struct EntryRevisionPayload: Decodable {
+struct EntryRevisionPayload: Codable {
     var id: String
-    var lastEditingDeviceID: String
-    var lastEditingDeviceName: String
+    var lastEditingDeviceID: String?
+    var lastEditingDeviceName: String?
     var isPinned: Bool
     var tags: [String]
     var body: String

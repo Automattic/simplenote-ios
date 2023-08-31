@@ -13,19 +13,22 @@ import Foundation
 //
 class SyncEngine {
 
-    let managedObjectContext: NSManagedObjectContext
+    let mainContext: NSManagedObjectContext
+    let writerContext: NSManagedObjectContext
     let remote: DawnRemote
     let processor: SyncProcessor
 
-    init(managedObjectContext: NSManagedObjectContext, remote: DawnRemote) {
+    init(mainContext: NSManagedObjectContext, writerContext: NSManagedObjectContext, remote: DawnRemote) {
         self.remote = remote
-        self.managedObjectContext = managedObjectContext
-        self.processor = SyncProcessor(managedObjectContext: managedObjectContext)
+        self.mainContext = mainContext
+        self.writerContext = writerContext
+        self.processor = SyncProcessor(writerContext: writerContext)
     }
 
     func startListeningToChanges() {
         stopListeningToChanges()
-        NotificationCenter.default.addObserver(self, selector: #selector(contextDidSave(_:)), name: .NSManagedObjectContextDidSave, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(mainContextWillSave(_:)), name: .NSManagedObjectContextWillSave, object: mainContext)
+        NotificationCenter.default.addObserver(self, selector: #selector(mainContextDidSave(_:)), name: .NSManagedObjectContextDidSave, object: mainContext)
     }
 
     func stopListeningToChanges() {
@@ -49,14 +52,33 @@ extension SyncEngine {
 private extension SyncEngine {
 
     @objc
-    func contextDidSave(_ note: Notification) {
+    func mainContextWillSave(_ note: Notification) {
+        if mainContext.insertedObjects.isEmpty {
+            return
+        }
+
+        do {
+            try mainContext.obtainPermanentIDs(for: Array(mainContext.insertedObjects))
+        } catch {
+            NSLog("# Failure obtaining permanent ID(s): \(error)")
+        }
+
+        let notes = mainContext.insertedObjects.compactMap { $0 as? Note }
+        for note in notes {
+            note.ensureSimperiumKeyIsSet()
+        }
+    }
+
+    @objc
+    func mainContextDidSave(_ note: Notification) {
         let objects = note.managedObjectsOfType(SPManagedObject.self)
         if objects.isEmpty {
             return
         }
 
+        let objectIDs = objects.map { $0.objectID }
         Task {
-            await pushChanges(objects: objects)
+            await pushChanges(objectIDs: objectIDs)
         }
     }
 }
@@ -81,7 +103,14 @@ private extension SyncEngine {
             return
         }
 
+        NSLog("# Persisting cursor \(revision.cursor)")
         lastSeenCursor = String(revision.cursor)
+    }
+
+    func save() {
+        writerContext.perform {
+            try? self.writerContext.save()
+        }
     }
 }
 
@@ -91,10 +120,14 @@ private extension SyncEngine {
     func pullChanges() async {
         do {
             let revisions = try await remote.fetchLatestRevisions(cursor: lastSeenCursor)
-            NSLog("# Retrieved \(revisions.count) revisions since \(lastSeenCursor ?? "")")
+            if revisions.isEmpty {
+                return
+            }
+            NSLog("# Retrieved \(revisions.count) revisions since \(lastSeenCursor ?? "-")")
 
-            processor.process(revisions: revisions)
+            await processor.process(revisions: revisions)
             updateCursor(revisions: revisions)
+            save()
 
         } catch {
             NSLog("# Error: \(error)")
@@ -102,10 +135,28 @@ private extension SyncEngine {
     }
 
     func pushAllChanges() async {
-
+// TODO: Fetch all objects
     }
 
-    func pushChanges(objects: Set<SPManagedObject>) async {
+    func pushChanges(objectIDs: [NSManagedObjectID]) async {
+        //            let entryID = "7D330AD0F73247819F18F31B808498EF"
+        //            let journalID = DawnConstants.journalID
+        //            let editDate = Date()
+        //            let body = "YOSEMITE!"
+        //
+        //            let metadata = EntryRevisionMetadata(entryID: entryID, journalID: journalID, type: .update, editDate: editDate)
+        //            let payload = EntryRevisionPayload(id: entryID, isPinned: false, tags: [], body: body)
+
+        do {
+            let revisions = await processor.calculateNewRevisions(objectIDs: objectIDs)
+            for (metadata, payload) in revisions {
+                NSLog("# Submitting new revision!")
+                try await remote.pushEntryRevision(metadata: metadata, payload: payload)
+            }
+
+        } catch {
+            NSLog("# Error \(error)")
+        }
 
     }
 }

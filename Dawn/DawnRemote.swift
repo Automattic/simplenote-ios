@@ -66,13 +66,27 @@ extension DawnRemote {
 
 extension DawnRemote {
 
-    func fetchLatestRevisions(cursor: String? = "") async throws -> [EntryRevision] {
-        let path = "/api/v2p5/sync/entries/" + DawnConstants.journalID + "/feed"
+    func fetchLatestRevisions(cursor: String? = "", journalID: String = DawnConstants.journalID) async throws -> [EntryRevision] {
+        let path = "/api/v2p5/sync/entries/" + journalID + "/feed"
         let parameters = [
             "cursor": cursor ?? ""
         ]
 
         let request = request(method: .get, path: path, parameters: parameters)
         return try await runRequest(request, parser: EntryResponseParser())
+    }
+
+    func pushEntryRevision(metadata: EntryRevisionMetadata, payload: EntryRevisionPayload) async throws {
+        guard let encoder = EntryEncoder(metadata: metadata, payload: payload) else {
+            return
+        }
+
+        let path = "/api/v3/sync/entries/" + metadata.journalID + "/" + metadata.entryID
+        let extraHTTPHeaders = [
+            "Content-Type": "multipart/form-data; boundary=\(encoder.boundaryIdentifier)"
+        ]
+
+        let request = request(method: .put, path: path, extraHTTPHeaders: extraHTTPHeaders, explicitEncodedBody: encoder.bodyData)
+        try await runRequest(request, parser: PassthruResponseParser())
     }
 }

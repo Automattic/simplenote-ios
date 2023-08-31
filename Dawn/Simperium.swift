@@ -132,12 +132,21 @@ public class Simperium: NSObject {
 
     var requiresConnection = false
     var managedObjectContext: NSManagedObjectContext
+    var writerObjectContext: NSManagedObjectContext
 
     var networkStatus = ""
 
     init(model: NSManagedObjectModel, context: NSManagedObjectContext, coordinator: NSPersistentStoreCoordinator) {
         managedObjectContext = context
-        context.persistentStoreCoordinator = coordinator
+
+        writerObjectContext = {
+            let writerContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+            writerContext.persistentStoreCoordinator = coordinator
+            return writerContext
+        }()
+
+        managedObjectContext.parent = writerObjectContext
+        managedObjectContext.automaticallyMergesChangesFromParent = true
     }
 
     var networkLastSeenTime: Date {
@@ -157,8 +166,15 @@ public class Simperium: NSObject {
     }
 
     func save() {
+        guard #available(iOS 15.0, *) else {
+            return
+        }
+
         do {
             try managedObjectContext.save()
+            try writerObjectContext.performAndWait {
+                try writerObjectContext.save()
+            }
         } catch {
             NSLog("Save Error: \(error)")
         }
