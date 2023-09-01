@@ -1,5 +1,6 @@
 import Foundation
 import CoreSpotlight
+import SimplenoteFoundation
 
 
 // MARK: - Overridden Methods
@@ -117,6 +118,32 @@ extension SPNoteEditorViewController {
         return PopoverPresenter(containerViewController: self,
                                 viewportProvider: viewportProvider,
                                 siblingView: navigationBarBackground)
+    }
+}
+
+
+// MARK: - EntityObserver
+//
+extension SPNoteEditorViewController {
+
+    @objc
+    func startListeningToChanges() {
+        guard let context = note.managedObjectContext else {
+            return
+        }
+
+        entityObserver = {
+            let observer = EntityObserver(context: context, object: note)
+            observer.delegate = self
+            return observer
+        }()
+    }
+}
+
+
+extension SPNoteEditorViewController: EntityObserverDelegate {
+    public func entityObserver(_ observer: EntityObserver, didObserveChanges identifiers: Set<NSManagedObjectID>) {
+        didReceiveNewContent()
     }
 }
 

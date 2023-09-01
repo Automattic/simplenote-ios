@@ -12,4 +12,5 @@ import Foundation
 enum SyncError: Error {
     case undefinedSyncError
     case parsingFailure
+    case encodingFailure
 }

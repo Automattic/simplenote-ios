@@ -17,26 +17,6 @@ class DawnRemote {
 
 extension DawnRemote {
 
-    /// Runs the specified URLRequest and parses the specified Decodable Type
-    ///
-    func runRequest<T: Decodable>(_ request: URLRequest, type: T.Type, decoder: JSONDecoder = .mercuryRecordDecoder, handler: @escaping (Swift.Result<T, Error>) -> Void) {
-        let parser = CodableResponseParser(type: type, decoder: decoder)
-        runRequest(request, parser: parser, completion: handler)
-    }
-
-    /// Runs the specified URLRequest, and attempts to parse its Response with the specified DOResponseParser instance
-    ///
-    func runRequest<Parser: ResponseParser>(_ request: URLRequest, parser: Parser, completion: @escaping (Swift.Result<Parser.Output, Error>) -> Void) {
-        network.perform(request: request) { (responseData, response, responseError) in
-            do {
-                let result = try parser.parse(request: request, responseData: responseData, response: response, error: responseError)
-                completion(.success(result))
-            } catch {
-                completion(.failure(error))
-            }
-        }
-    }
-
     /// Runs the specified URLRequest, and attempts to parse its Response with the specified DOResponseParser instance
     ///
     @discardableResult
@@ -66,27 +46,27 @@ extension DawnRemote {
 
 extension DawnRemote {
 
-    func fetchLatestRevisions(cursor: String? = "", journalID: String = DawnConstants.journalID) async throws -> [EntryRevision] {
+    func downloadLatestRevisions(cursor: String? = "", journalID: String = DawnConstants.journalID) async throws -> (String, [EntryRevision]) {
         let path = "/api/v2p5/sync/entries/" + journalID + "/feed"
         let parameters = [
             "cursor": cursor ?? ""
         ]
 
         let request = request(method: .get, path: path, parameters: parameters)
-        return try await runRequest(request, parser: EntryResponseParser())
+        return try await runRequest(request, parser: EntryFeedParser())
     }
 
-    func pushEntryRevision(metadata: EntryRevisionMetadata, payload: EntryRevisionPayload) async throws {
-        guard let encoder = EntryEncoder(metadata: metadata, payload: payload) else {
-            return
+    func submitNewRevision(revision: EntryRevision) async throws -> (EntryUploadOutcome, EntryRevision) {
+        guard let encoder = EntryEncoder(revision: revision) else {
+            throw SyncError.encodingFailure
         }
 
-        let path = "/api/v3/sync/entries/" + metadata.journalID + "/" + metadata.entryID
+        let path = "/api/v3/sync/entries/" + revision.metadata.journalID + "/" + revision.metadata.entryID
         let extraHTTPHeaders = [
             "Content-Type": "multipart/form-data; boundary=\(encoder.boundaryIdentifier)"
         ]
 
         let request = request(method: .put, path: path, extraHTTPHeaders: extraHTTPHeaders, explicitEncodedBody: encoder.bodyData)
-        try await runRequest(request, parser: PassthruResponseParser())
+        return try await runRequest(request, parser: EntryUploadResponseParser())
     }
 }

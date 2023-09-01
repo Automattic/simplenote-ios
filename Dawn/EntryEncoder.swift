@@ -11,13 +11,13 @@ import Foundation
 
 class EntryEncoder: MultipartEncoder {
 
-    init?(metadata: EntryRevisionMetadata, payload: EntryRevisionPayload) {
+    init?(revision: EntryRevision) {
         super.init()
 
         do {
             let encoder  = JSONEncoder.mercuryRecordEncoder
-            let envelope = try encoder.encode(metadata)
-            let content  = try encoder.encode(payload)
+            let envelope = try encoder.encode(revision.metadata)
+            let content  = try encoder.encode(revision.payload)
 
             addDataPart(envelope, name: "envelope", mimeType: "application/json")
             addDataPart(content, name: "content", mimeType: "application/json")

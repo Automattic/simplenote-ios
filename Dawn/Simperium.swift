@@ -147,6 +147,7 @@ public class Simperium: NSObject {
 
         managedObjectContext.parent = writerObjectContext
         managedObjectContext.automaticallyMergesChangesFromParent = true
+        managedObjectContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
     }
 
     var networkLastSeenTime: Date {

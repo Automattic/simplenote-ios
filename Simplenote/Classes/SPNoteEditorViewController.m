@@ -110,6 +110,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 
     [self configureTextViewObservers];
     [self displayNote];
+    [self startListeningToChanges];
 }
 
 - (void)viewWillAppear:(BOOL)animated

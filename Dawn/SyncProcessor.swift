@@ -14,30 +14,44 @@ struct SyncProcessor {
 
     let writerContext: NSManagedObjectContext
 
-    func process(revisions: [EntryRevision]) async {
-        writerContext.perform {
-            applyInContext(revisions: revisions, context: writerContext)
+    func processNewRevisions(_ revisions: [EntryRevision]) async {
+        guard #available(iOS 15.0, *) else {
+            return
+        }
+
+        await writerContext.perform {
+            processNewRevisionsInContext(revisions: revisions, context: writerContext)
         }
     }
 
-    func calculateNewRevisions(objectIDs: [NSManagedObjectID]) async -> [(EntryRevisionMetadata, EntryRevisionPayload)] {
+    func calculateNewRevision(objectID: NSManagedObjectID) async -> EntryRevision? {
         guard #available(iOS 15.0, *) else {
-            return []
+            return nil
         }
 
         return await writerContext.perform {
-            calculateNewRevisionsInContext(objectIDs: objectIDs, context: writerContext)
+            calculateNewRevisionInContext(objectID: objectID, context: writerContext)
+        }
+    }
+
+    func rebaseLocalRevision(latest: EntryRevision) async {
+        guard #available(iOS 15.0, *) else {
+            return
+        }
+
+        await writerContext.perform {
+            rebaseLocalRevisionInContext(latest: latest, context: writerContext)
         }
     }
 }
 
 private extension SyncProcessor {
 
-    func applyInContext(revisions: [EntryRevision], context: NSManagedObjectContext) {
+    func processNewRevisionsInContext(revisions: [EntryRevision], context: NSManagedObjectContext) {
         for revision in revisions {
-            NSLog("# Processing revision of type \(revision.type.rawValue)")
+            NSLog("# Processing revision of type \(revision.metadata.type.rawValue)")
 
-            switch revision.type {
+            switch revision.metadata.type {
             case .create:
                 fallthrough
             case .update:
@@ -54,20 +68,28 @@ private extension SyncProcessor {
     }
 
     func processUpdateRevision(_ revision: EntryRevision, context: NSManagedObjectContext) {
-        let note = Note.fetchNote(in: context, key: revision.entryID) ?? Note(context: context)
-        update(note: note, using: revision)
+        let note = Note.fetchNote(in: context, key: revision.metadata.entryID) ?? Note(context: context)
+
+        guard containsLocalChanges(note: note), note.content != revision.payload?.simplenoteBody else {
+            apply(revision: revision, to: note)
+            return
+        }
+
+        /// Rebasing + Applying On Top!
+        rebaseLocalRevisionInContext(latest: revision, local: note, context: context)
     }
 
-    func update(note: Note, using revision: EntryRevision) {
-        // TODO: Why the Body has `\\` ?
-        note.simperiumKey = revision.entryID
-        note.content = revision.body.replacingOccurrences(of: "\\", with: "")
+    func apply(revision: EntryRevision, to note: Note) {
+        note.simperiumKey = revision.metadata.entryID
+        note.content = revision.payload?.simplenoteBody
+        note.modificationDate = revision.metadata.editDate
+        note.updateGhost(revision: revision)
         note.createPreview()
         note.ensureSimperiumKeyIsSet()
     }
 
     func processDeleteRevision(_ revision: EntryRevision, context: NSManagedObjectContext) {
-        guard let note = Note.fetchNote(in: context, key: revision.entryID) else {
+        guard let note = Note.fetchNote(in: context, key: revision.metadata.entryID) else {
             return
         }
 
@@ -76,35 +98,18 @@ private extension SyncProcessor {
 }
 
 
+// MARK: - Revision Calculation
+//
 private extension SyncProcessor {
 
-    func calculateNewRevisionsInContext(objectIDs: [NSManagedObjectID], context: NSManagedObjectContext) -> [(EntryRevisionMetadata, EntryRevisionPayload)] {
-        var output = [(EntryRevisionMetadata, EntryRevisionPayload)]()
-
-        for objectID in objectIDs {
-            guard let object = try? context.existingObject(with: objectID) else {
-                NSLog("# Failure calculating new revision! \(objectID)")
-                continue
-            }
-
-            guard let revision = calculateNewRevisionsInContext(object: object, context: context) else {
-                continue
-            }
-
-            output.append(revision)
-        }
-
-        return output
-    }
-
-    func calculateNewRevisionsInContext(object: NSManagedObject, context: NSManagedObjectContext) -> (EntryRevisionMetadata, EntryRevisionPayload)? {
-        // TODO: Support for multiple entity kinds
-        guard let note = object as? Note else {
-            NSLog("# Unsupported entity kind")
+    func calculateNewRevisionInContext(objectID: NSManagedObjectID, context: NSManagedObjectContext) -> EntryRevision? {
+        guard let note = try? context.existingObject(with: objectID) as? Note else {
+            // TODO: Support for multiple entity kinds
+            // TODO: Support Deletion!
             return nil
         }
 
-        guard requiresNewRevision(note: note) else {
+        guard containsLocalChanges(note: note) else {
             return nil
         }
 
@@ -116,67 +121,55 @@ private extension SyncProcessor {
         let metadata    = EntryRevisionMetadata(entryID: entryID, journalID: journalID, type: .update, editDate: editDate)
         let payload     = EntryRevisionPayload(id: entryID, isPinned: false, tags: [], body: body)
 
-        return (metadata, payload)
+        return EntryRevision(metadata: metadata, payload: payload)
     }
 
-    func requiresNewRevision(note: Note) -> Bool {
+    func containsLocalChanges(note: Note) -> Bool {
         // No Ghost == Never pushed!
         guard let revision = note.decodeGhostRevision() else {
-            return true
+            return false
         }
 
-        return revision.payload.body != note.content
+        return revision.payload?.simplenoteBody != note.content
     }
 }
 
 
 
-extension Note {
+// MARK: - Rebase Mechanism
+//
+extension SyncProcessor {
 
-    func ensureSimperiumKeyIsSet() {
-        guard simperiumKey == nil || simperiumKey.count == .zero else {
+    func rebaseLocalRevisionInContext(latest: EntryRevision, context: NSManagedObjectContext) {
+        guard let local = Note.fetchNote(in: context, key: latest.metadata.entryID) else {
+            NSLog("# FATAL: Missing Note \(latest.metadata.entryID))")
             return
         }
 
-        simperiumKey = UUID().uuidString.replacingOccurrences(of: "-", with: "").uppercased()
+        rebaseLocalRevisionInContext(latest: latest, local: local, context: context)
     }
 
-    func updateGhost(revision: EntryRevision) {
-        guard let data = try? JSONEncoder.mercuryRecordEncoder.encode(revision) else {
-            NSLog("# ERROR Updating Host!")
+    func rebaseLocalRevisionInContext(latest: EntryRevision, local: Note, context: NSManagedObjectContext) {
+        guard let lastKnownPayload = local.decodeGhostRevision()?.payload else {
+            NSLog("# FATAL: Cannot decode Ghost")
             return
         }
 
-        ghostData = String(data: data, encoding: .utf8)
-    }
-
-    func decodeGhostRevision() -> EntryRevision? {
-        guard let payload = ghostData?.data(using: .utf8) else {
-            return nil
+        guard let latestPayload = latest.payload else {
+            NSLog("# FATAL: Latest Remote contains no payload")
+            return
         }
 
-        return try? JSONDecoder.mercuryRecordDecoder.decode(EntryRevision.self, from: payload)
+        do {
+            let dmp = DiffMatchPatch()
+            let rebased = try dmp.rebase(currentValue: local.content,
+                                         otherValue: latestPayload.simplenoteBody,
+                                         oldValue: lastKnownPayload.simplenoteBody)
 
-    }
-
-    class func fetchNote(in context: NSManagedObjectContext, key: String) -> Note? {
-        let request = NSFetchRequest<Note>(entityName: "Note")
-        request.predicate = NSPredicate(format: "%K = %@", #keyPath(Note.simperiumKey), key)
-
-        return try? context.fetch(request).first
-    }
-}
-
-
-extension NSManagedObjectContext {
-
-    func saveIfPossible() {
-        perform {
-            do {
-                try self.save()
-            } catch {
-                NSLog("# FATAL: \(error)")
-            }
+            local.content = rebased.replacingOccurrences(of: "\\", with: "")
+            local.modificationDate = Date()
+        } catch {
+            NSLog("# Rebase Failure!! \(error)")
         }
     }
 }

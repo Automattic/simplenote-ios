@@ -331,7 +331,10 @@
 		B55AECC62AA22AF1007EC0E3 /* NSMutableDictionary+DMPExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B55AECC02AA22AF1007EC0E3 /* NSMutableDictionary+DMPExtensions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B55AECCB2AA22FE4007EC0E3 /* DiffMatchPatch+Simperium.m in Sources */ = {isa = PBXBuildFile; fileRef = B55AECC92AA22FE4007EC0E3 /* DiffMatchPatch+Simperium.m */; };
 		B55AECCD2AA24A24007EC0E3 /* DiffMatchPatch+Dawn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55AECCC2AA24A24007EC0E3 /* DiffMatchPatch+Dawn.swift */; };
-		B55AECCE2AA24A3A007EC0E3 /* DiffMatchPatchDawnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55AECC72AA22D5D007EC0E3 /* DiffMatchPatchDawnTests.swift */; };
+		B55AECCF2AA24EE4007EC0E3 /* DiffMatchPatchDawnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55AECC72AA22D5D007EC0E3 /* DiffMatchPatchDawnTests.swift */; };
+		B55AECD12AA28933007EC0E3 /* Note+Dawn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55AECD02AA28933007EC0E3 /* Note+Dawn.swift */; };
+		B55AECD32AA28946007EC0E3 /* NSManagedObjectContext+Dawn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55AECD22AA28946007EC0E3 /* NSManagedObjectContext+Dawn.swift */; };
+		B55AECD52AA2932D007EC0E3 /* TaskQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55AECD42AA2932D007EC0E3 /* TaskQueue.swift */; };
 		B55E428C22A1A4550018C0CE /* SPSortOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55E428B22A1A4550018C0CE /* SPSortOrderViewController.swift */; };
 		B56315BE236BD9970066C151 /* UIKitConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB169B22FB2DF300B4EBA5 /* UIKitConstants.swift */; };
 		B56A695822F9CD1500B90398 /* SPOnboardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B56A695622F9CD1500B90398 /* SPOnboardingViewController.xib */; };
@@ -1047,6 +1050,9 @@
 		B55AECC92AA22FE4007EC0E3 /* DiffMatchPatch+Simperium.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DiffMatchPatch+Simperium.m"; sourceTree = "<group>"; };
 		B55AECCA2AA22FE4007EC0E3 /* DiffMatchPatch+Simperium.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DiffMatchPatch+Simperium.h"; sourceTree = "<group>"; };
 		B55AECCC2AA24A24007EC0E3 /* DiffMatchPatch+Dawn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiffMatchPatch+Dawn.swift"; sourceTree = "<group>"; };
+		B55AECD02AA28933007EC0E3 /* Note+Dawn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+Dawn.swift"; sourceTree = "<group>"; };
+		B55AECD22AA28946007EC0E3 /* NSManagedObjectContext+Dawn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Dawn.swift"; sourceTree = "<group>"; };
+		B55AECD42AA2932D007EC0E3 /* TaskQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskQueue.swift; sourceTree = "<group>"; };
 		B55E428B22A1A4550018C0CE /* SPSortOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPSortOrderViewController.swift; path = Classes/SPSortOrderViewController.swift; sourceTree = "<group>"; };
 		B5651239243BC063001EFE77 /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B566A1DD189AA74600DC3F2D /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
@@ -1783,6 +1789,7 @@
 			children = (
 				B5070D352AA0EAF10062C43D /* MultipartEncoding.swift */,
 				B57190F02AA117B600482B52 /* EntryEncoder.swift */,
+				B55AECD42AA2932D007EC0E3 /* TaskQueue.swift */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -1939,6 +1946,7 @@
 				B52FD4062A9FAD96001037FD /* DateFormatter+Dawn.swift */,
 				B55AECCC2AA24A24007EC0E3 /* DiffMatchPatch+Dawn.swift */,
 				B55AECC72AA22D5D007EC0E3 /* DiffMatchPatchDawnTests.swift */,
+				B55AECD22AA28946007EC0E3 /* NSManagedObjectContext+Dawn.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1959,6 +1967,7 @@
 			isa = PBXGroup;
 			children = (
 				B52FD4092A9FC0DA001037FD /* EntryRevision.swift */,
+				B55AECD02AA28933007EC0E3 /* Note+Dawn.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -3379,7 +3388,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"$SRCROOT/Scripts/swiftlint.sh\"\n";
+			shellScript = "#\"$SRCROOT/Scripts/swiftlint.sh\"\n";
 		};
 		B553F5A11D10474600F7E397 /* Delete Frameworks folder (temporary fix for CocoaPods) */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3480,6 +3489,7 @@
 				A6DB2C1525BF5D6E00437B99 /* SPMarkdownPreviewViewController+Extensions.swift in Sources */,
 				B52FD3ED2A9F8488001037FD /* Dawn.swift in Sources */,
 				B56A696022F9D53400B90398 /* SPAuthHandler.swift in Sources */,
+				B55AECD32AA28946007EC0E3 /* NSManagedObjectContext+Dawn.swift in Sources */,
 				A6E1E78924B5196C008A44BC /* SPNoteHistoryControllerDelegate.swift in Sources */,
 				B52FD4032A9FA7A7001037FD /* URLComponents+Dawn.swift in Sources */,
 				B5B9AB4522EE8AF0001CB0AD /* UIImageName.swift in Sources */,
@@ -3551,6 +3561,7 @@
 				A6E1E79824B7D7B4008A44BC /* SPHistoryVersion.swift in Sources */,
 				B531090823D0B685002B0998 /* SPSimpleTextPrintFormatter.swift in Sources */,
 				B5CDE61F2150834C00C3FED4 /* Simperium+Simplenote.m in Sources */,
+				B55AECD52AA2932D007EC0E3 /* TaskQueue.swift in Sources */,
 				A60A1A1E25655D840041701E /* ApplicationShortcutItemType.swift in Sources */,
 				B51F6DD12460C3EE0074DDD9 /* AuthenticationValidator.swift in Sources */,
 				B575736A232C567000443C2E /* UIImage+Dynamic.swift in Sources */,
@@ -3717,6 +3728,7 @@
 				BA5C1C0725BF9D6C006E3820 /* SPDragBar.swift in Sources */,
 				B5070D362AA0EAF10062C43D /* MultipartEncoding.swift in Sources */,
 				B5AEC38423FAC5D600D24221 /* DateFormatter+Simplenote.swift in Sources */,
+				B55AECD12AA28933007EC0E3 /* Note+Dawn.swift in Sources */,
 				B5DF734622A5713600602CE7 /* SortMode.swift in Sources */,
 				BA55B05A25F067DF0042582B /* NoticePresenter.swift in Sources */,
 				46A3C99D17DFA81A002865AE /* SPAddCollaboratorsViewController.m in Sources */,
@@ -3745,7 +3757,6 @@
 				B5AB169C22FB2DF300B4EBA5 /* UIKitConstants.swift in Sources */,
 				B56A695922F9CD1500B90398 /* SPOnboardingViewController.swift in Sources */,
 				BA55B06325F068650042582B /* NoticeController.swift in Sources */,
-				B55AECCE2AA24A3A007EC0E3 /* DiffMatchPatchDawnTests.swift in Sources */,
 				BA9B19F926A8EF3200692366 /* SpinnerViewController.swift in Sources */,
 				46A3C9A317DFA81A002865AE /* SPTagEntryField.m in Sources */,
 				A6E1E7A224BDE456008A44BC /* SPCardPresentationAnimator.swift in Sources */,
@@ -3802,6 +3813,7 @@
 				A6CC0B1F25B840A400F12A85 /* MockAccountVerificationRemote.swift in Sources */,
 				A6CC0B1025B83FE400F12A85 /* AccountVerificationControllerTests.swift in Sources */,
 				A694ABB325D1687200CC3A2D /* NoteScrollPositionCacheTests.swift in Sources */,
+				B55AECCF2AA24EE4007EC0E3 /* DiffMatchPatchDawnTests.swift in Sources */,
 				A6E6CE7525A5B4A3005A92DB /* MockPinLockManager.swift in Sources */,
 				A6CC0B4425B8505700F12A85 /* MockURLSessionDataTask.swift in Sources */,
 				A6CC0B3625B8502800F12A85 /* MockURLSession.swift in Sources */,
@@ -4537,6 +4549,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = PZYM8XX95Q;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = PZYM8XX95Q;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4564,6 +4577,7 @@
 				PRODUCT_NAME = Simplenote;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "Simplenote Development";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Simplenote Development";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG USE_VERBOSE_LOGGING $(SP_IOS_SDK)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Simplenote/Simplenote-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";

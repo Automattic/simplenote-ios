@@ -10,6 +10,7 @@
 @class SearchMapView;
 @class NoteEditorTagListViewController;
 @class NoteScrollPositionCache;
+@class EntityObserver;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -27,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, readonly) Note *note;
 @property (nonatomic, strong) SPEditorTextView *noteEditorTextView;
+@property (nonatomic, strong) id entityObserver;
 
 @property (nonatomic, strong) NoteEditorTagListViewController *tagListViewController;
 @property (nonatomic, strong) NSLayoutConstraint *tagListBottomConstraint;

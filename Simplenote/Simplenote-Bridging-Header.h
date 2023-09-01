@@ -8,6 +8,7 @@
 
 #import "DiffMatchPatch.h"
 #import "DiffMatchPatch+Simperium.h"
+#import "SPManagedObject.h"
 
 #pragma mark - Simplenote-Y
 

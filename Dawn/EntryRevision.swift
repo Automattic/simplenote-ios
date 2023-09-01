@@ -8,75 +8,38 @@
 
 import Foundation
 
-
-struct EntryRevision: Codable {
-    let envelope: EntryRevisionEnvelope
-    let payload: EntryRevisionPayload
-
-    var entryID: String {
-        envelope.revision.entryID
-    }
-
-    var type: RevisionType {
-        envelope.revision.type
-    }
-
-    var cursor: Int {
-        envelope.cursor
-    }
-
-    var revisionID: Int? {
-        envelope.revision.revisionID
-    }
-
-    var version: String? {
-        envelope.revision.version
-    }
-
-    var deletionRequested: Date? {
-        envelope.revision.deletionRequested
-    }
-
-    var purgeCompleted: Date? {
-        envelope.revision.purgeCompleted
-    }
-
-    var lastEditingDeviceID: String? {
-        payload.lastEditingDeviceID
-    }
-
-    var lastEditingDeviceName: String? {
-        payload.lastEditingDeviceName
-    }
-
-    var isPinned: Bool {
-        payload.isPinned
-    }
-
-    var tags: [String] {
-        payload.tags
-    }
-
-    var body: String {
-        payload.body
-    }
-
-    var richTextJSON: String? {
-        payload.richTextJSON
-    }
-}
-
-
-enum RevisionType: String, Codable {
-    case create, update, merge, delete
-}
-
-
-struct EntryRevisionEnvelope: Codable {
+// MARK: - Feed
+//
+struct EntryFeedEnvelope: Codable {
     let cursor: Int
     let contentLength: Int
     let encrypted: Bool
     let revision: EntryRevisionMetadata
+}
+
+
+// MARK: - Upload
+//
+enum EntryUploadOutcome: String, Codable {
+    case clean
+    case dirty
+}
+
+struct EntryUploadResponse: Codable {
+    let outcome: EntryUploadOutcome
+    let revision: EntryRevisionMetadata
+}
+
+
+// MARK: - Revision
+//
+enum RevisionType: String, Codable {
+    case create, update, merge, delete
+}
+
+struct EntryRevision: Codable {
+    let metadata: EntryRevisionMetadata
+    let payload: EntryRevisionPayload?
 }
 
 struct EntryRevisionMetadata: Codable {
@@ -120,4 +83,9 @@ struct EntryRevisionPayload: Codable {
     var tags: [String]
     var body: String
     var richTextJSON: String?
+
+    var simplenoteBody: String {
+        // TODO: Why the Body has `\\` ?
+        body.replacingOccurrences(of: "\\", with: "")
+    }
 }

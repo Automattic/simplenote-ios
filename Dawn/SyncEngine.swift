@@ -7,82 +7,43 @@
 //
 
 import Foundation
+import CoreData
 
 
 // MARK: - SyncEngine
 //
-class SyncEngine {
+@available(iOS 15, *)
+actor SyncEngine {
 
-    let mainContext: NSManagedObjectContext
     let writerContext: NSManagedObjectContext
     let remote: DawnRemote
     let processor: SyncProcessor
 
-    init(mainContext: NSManagedObjectContext, writerContext: NSManagedObjectContext, remote: DawnRemote) {
+    init(writerContext: NSManagedObjectContext, remote: DawnRemote) {
         self.remote = remote
-        self.mainContext = mainContext
         self.writerContext = writerContext
         self.processor = SyncProcessor(writerContext: writerContext)
     }
-
-    func startListeningToChanges() {
-        stopListeningToChanges()
-        NotificationCenter.default.addObserver(self, selector: #selector(mainContextWillSave(_:)), name: .NSManagedObjectContextWillSave, object: mainContext)
-        NotificationCenter.default.addObserver(self, selector: #selector(mainContextDidSave(_:)), name: .NSManagedObjectContextDidSave, object: mainContext)
-    }
-
-    func stopListeningToChanges() {
-        NotificationCenter.default.removeObserver(self)
-    }
 }
 
+@available(iOS 15, *)
 extension SyncEngine {
 
-    func syncNow() {
-        Task {
-            await pullChanges()
-            await pushAllChanges()
-        }
+    func syncNow() async {
+        let allObjectIDs = await fetchAllNoteObjectIDs()
+        await syncNow(objectIDs: allObjectIDs)
     }
+
+    func syncNow(objectIDs: [NSManagedObjectID]) async {
+        NSLog("# SyncNow!")
+        await downloadLatestRevisions()
+        await submitNewRevisions(for: objectIDs)
+    }
+
 }
 
 
-// MARK: - Notification Handlers
-//
-private extension SyncEngine {
-
-    @objc
-    func mainContextWillSave(_ note: Notification) {
-        if mainContext.insertedObjects.isEmpty {
-            return
-        }
-
-        do {
-            try mainContext.obtainPermanentIDs(for: Array(mainContext.insertedObjects))
-        } catch {
-            NSLog("# Failure obtaining permanent ID(s): \(error)")
-        }
-
-        let notes = mainContext.insertedObjects.compactMap { $0 as? Note }
-        for note in notes {
-            note.ensureSimperiumKeyIsSet()
-        }
-    }
-
-    @objc
-    func mainContextDidSave(_ note: Notification) {
-        let objects = note.managedObjectsOfType(SPManagedObject.self)
-        if objects.isEmpty {
-            return
-        }
-
-        let objectIDs = objects.map { $0.objectID }
-        Task {
-            await pushChanges(objectIDs: objectIDs)
-        }
-    }
-}
-
+@available(iOS 15, *)
 private extension SyncEngine {
 
     var lastSeenCursor: String? {
@@ -91,72 +52,83 @@ private extension SyncEngine {
         }
         set {
             UserDefaults.standard.setValue(newValue, forKey: DawnConstants.lastSeenKey)
+            UserDefaults.standard.synchronize()
+            NSLog("# SETTING Cursor to \(newValue)")
+            // TODO: Fix spurious Cursor Reset?
         }
     }
 }
 
 
+@available(iOS 15, *)
 private extension SyncEngine {
 
-    func updateCursor(revisions: [EntryRevision]) {
-        guard let revision = revisions.last else {
-            return
+    func fetchAllNoteObjectIDs() async -> [NSManagedObjectID] {
+        await writerContext.perform {
+            Note.fetchAllObjectIDs(in: self.writerContext)
         }
-
-        NSLog("# Persisting cursor \(revision.cursor)")
-        lastSeenCursor = String(revision.cursor)
     }
 
-    func save() {
-        writerContext.perform {
+    func save() async {
+        await writerContext.perform {
             try? self.writerContext.save()
         }
     }
 }
 
 
+@available(iOS 15, *)
 private extension SyncEngine {
 
-    func pullChanges() async {
+    func downloadLatestRevisions() async {
         do {
-            let revisions = try await remote.fetchLatestRevisions(cursor: lastSeenCursor)
+            let cursor = lastSeenCursor
+            let (lastCursor, revisions) = try await remote.downloadLatestRevisions(cursor: cursor)
             if revisions.isEmpty {
                 return
             }
-            NSLog("# Retrieved \(revisions.count) revisions since \(lastSeenCursor ?? "-")")
 
-            await processor.process(revisions: revisions)
-            updateCursor(revisions: revisions)
-            save()
+            NSLog("# Retrieved \(revisions.count) revisions since \(cursor ?? "-")")
+
+            await processor.processNewRevisions(revisions)
+            await save()
+
+            lastSeenCursor = lastCursor
 
         } catch {
             NSLog("# Error: \(error)")
         }
     }
 
-    func pushAllChanges() async {
-// TODO: Fetch all objects
-    }
-
-    func pushChanges(objectIDs: [NSManagedObjectID]) async {
-        //            let entryID = "7D330AD0F73247819F18F31B808498EF"
-        //            let journalID = DawnConstants.journalID
-        //            let editDate = Date()
-        //            let body = "YOSEMITE!"
-        //
-        //            let metadata = EntryRevisionMetadata(entryID: entryID, journalID: journalID, type: .update, editDate: editDate)
-        //            let payload = EntryRevisionPayload(id: entryID, isPinned: false, tags: [], body: body)
-
+    func submitNewRevisions(for objectIDs: [NSManagedObjectID]) async {
         do {
-            let revisions = await processor.calculateNewRevisions(objectIDs: objectIDs)
-            for (metadata, payload) in revisions {
-                NSLog("# Submitting new revision!")
-                try await remote.pushEntryRevision(metadata: metadata, payload: payload)
+            for objectID in objectIDs {
+                guard let revision = await processor.calculateNewRevision(objectID: objectID) else {
+                    continue
+                }
+
+                try await submitNewRevision(revision: revision)
             }
 
         } catch {
             NSLog("# Error \(error)")
         }
+    }
 
+    func submitNewRevision(revision: EntryRevision) async throws {
+        NSLog("# Submitting new revision for [\(revision.metadata.entryID)]")
+        let (outcome, latest) = try await remote.submitNewRevision(revision: revision)
+
+        switch outcome {
+        case .clean:
+            NSLog("# New revision submitted successfully!")
+            await processor.processNewRevisions([latest])
+
+        case .dirty:
+            NSLog("# Rebasing...!")
+            await processor.rebaseLocalRevision(latest: latest)
+        }
+
+        await save()
     }
 }

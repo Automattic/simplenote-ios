@@ -47,27 +47,6 @@ struct CodableResponseParser<Output: Decodable>: ResponseParser {
 }
 
 
-// MARK: - ChocolateResponseParser
-//
-struct ChocolateResponseParser<Output: Decodable>: ResponseParser {
-
-    let type: Output.Type
-    let decoder: JSONDecoder
-
-    init(type: Output.Type, decoder: JSONDecoder = .chocolateRecordDecoder) {
-        self.type = type
-        self.decoder = decoder
-    }
-
-    func parse(request: URLRequest, responseData: Data?, response: URLResponse?, error: Error? = nil) throws -> Output {
-        if let error {
-            throw error
-        }
-
-        return try decoder.decode(type, from: responseData ?? Data())
-    }
-}
-
 
 // MARK: - PassthruResponseParser
 //
@@ -84,12 +63,12 @@ struct PassthruResponseParser: ResponseParser {
 }
 
 
-// MARK: - EntryResponseParser
+// MARK: - EntryFeedParser
 //
-struct EntryResponseParser: ResponseParser {
+struct EntryFeedParser: ResponseParser {
 
     @discardableResult
-    func parse(request: URLRequest, responseData: Data?, response: URLResponse?, error: Error?) throws -> [EntryRevision] {
+    func parse(request: URLRequest, responseData: Data?, response: URLResponse?, error: Error?) throws -> (String, [EntryRevision]) {
         if let error {
             throw error
         }
@@ -98,27 +77,69 @@ struct EntryResponseParser: ResponseParser {
             throw SyncError.parsingFailure
         }
 
-        var lastSeenEnvelope: EntryRevisionEnvelope?
+        var lastSeenEnvelope: EntryFeedEnvelope?
         var revisions = [EntryRevision]()
+        var cursor: Int = .zero
 
         for slice in data.splitByNewline() {
-
             guard let envelope = lastSeenEnvelope else {
-                lastSeenEnvelope = slice.decode(as: EntryRevisionEnvelope.self)
+                guard let envelope = slice.decode(as: EntryFeedEnvelope.self) else {
+                    continue
+                }
+
+                switch envelope.revision.type {
+                case .delete:
+                    let revision = EntryRevision(metadata: envelope.revision, payload: nil)
+                    revisions.append(revision)
+                default:
+                    lastSeenEnvelope = envelope
+                }
+
                 continue
             }
+
 
             guard let payload = slice.decode(as: EntryRevisionPayload.self) else {
                 lastSeenEnvelope = nil
                 continue
             }
 
-            let revision = EntryRevision(envelope: envelope, payload: payload)
+            let revision = EntryRevision(metadata: envelope.revision, payload: payload)
             revisions.append(revision)
+
+            cursor = envelope.cursor
             lastSeenEnvelope = nil
         }
 
-        return revisions
+        return (String(cursor), revisions)
+    }
+}
+
+
+
+// MARK: - EntryUploadResponseParser
+//
+struct EntryUploadResponseParser: ResponseParser {
+
+    @discardableResult
+    func parse(request: URLRequest, responseData: Data?, response: URLResponse?, error: Error?) throws -> (EntryUploadOutcome, EntryRevision) {
+        if let error {
+            throw error
+        }
+
+        guard let slices = responseData?.splitByNewline(), slices.count == 2 else {
+            throw SyncError.parsingFailure
+        }
+
+        guard
+            let response = slices.first?.decode(as: EntryUploadResponse.self),
+            let payload = slices.last?.decode(as: EntryRevisionPayload.self)
+        else {
+            throw SyncError.parsingFailure
+        }
+
+        let revision = EntryRevision(metadata: response.revision, payload: payload)
+        return (response.outcome, revision)
     }
 }
 
@@ -128,7 +149,7 @@ extension Data {
 
     func decode<T: Decodable>(as type: T.Type) -> T? {
         do {
-            return try JSONDecoder().decode(T.self, from: self)
+            return try JSONDecoder.mercuryRecordDecoder.decode(T.self, from: self)
         } catch {
             NSLog("# Decoding Error: \(error)")
         }
@@ -145,6 +166,11 @@ extension Data {
             output.append(slice)
 
             bufferRange = newlineRange.upperBound ..< count
+        }
+
+        if bufferRange.count > .zero {
+            let slice = subdata(in: bufferRange)
+            output.append(slice)
         }
 
         return output

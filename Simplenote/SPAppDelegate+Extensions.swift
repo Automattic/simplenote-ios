@@ -32,6 +32,10 @@ extension SPAppDelegate: SPBucketDelegate {
 
     @objc
     func setupDawnSyncing() {
+        guard #available(iOS 15, *) else {
+            return
+        }
+
         dawn = Dawn(mainContext: simperium.managedObjectContext, writerContext: simperium.writerObjectContext)
         dawn.startSynchronizing()
     }
