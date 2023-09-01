@@ -154,7 +154,16 @@ public class Simperium: NSObject {
     }
 
     func preferencesObject() -> Preferences {
-        Preferences(context: managedObjectContext)
+        let request = NSFetchRequest<Preferences>(entityName: "Preferences")
+        request.predicate = NSPredicate(format: "%K = %@", #keyPath(Note.simperiumKey), kSimperiumPreferencesObjectKey)
+
+        if let preferences = try? managedObjectContext.fetch(request).first {
+            return preferences
+        }
+
+        let preferences = Preferences(context: managedObjectContext)
+        preferences.simperiumKey = kSimperiumPreferencesObjectKey
+        return preferences
     }
 
     func bucket(forName name: String) -> SPBucket? {
