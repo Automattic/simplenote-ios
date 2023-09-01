@@ -10,38 +10,39 @@ import Foundation
 
 
 class TaskQueue {
+    private let taskQueueActor = TaskQueueActor()
 
-    private actor TaskQueueActor{
-        private var blocks : [() async -> Void] = []
-        private var currentTask : Task<Void,Never>? = nil
-        private let taskQueueActor = TaskQueueActor()
-        
-        func addBlock(block:@escaping () async -> Void){
-            blocks.append(block)
-            next()
-        }
-
-        func next() {
-            if currentTask != nil {
-                return
-            }
-
-            if blocks.isEmpty {
-                return
-            }
-
-            let block = blocks.removeFirst()
-            currentTask = Task {
-                await block()
-                currentTask = nil
-                next()
-            }
-        }
-    }
-
-    func dispatch(block:@escaping () async ->Void){
+    func dispatch(block: @escaping () async -> Void){
         Task {
             await taskQueueActor.addBlock(block: block)
+        }
+    }
+}
+
+
+private actor TaskQueueActor {
+    private var blocks: [() async -> Void] = []
+    private var currentTask: Task<Void,Never>? = nil
+
+    func addBlock(block:@escaping () async -> Void){
+        blocks.append(block)
+        next()
+    }
+
+    func next() {
+        if currentTask != nil {
+            return
+        }
+
+        if blocks.isEmpty {
+            return
+        }
+
+        let block = blocks.removeFirst()
+        currentTask = Task {
+            await block()
+            currentTask = nil
+            next()
         }
     }
 }
