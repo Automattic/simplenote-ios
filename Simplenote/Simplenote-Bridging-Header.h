@@ -4,6 +4,11 @@
 
 
 
+#pragma mark - Sync
+
+#import "DiffMatchPatch.h"
+#import "DiffMatchPatch+Simperium.h"
+
 #pragma mark - Simplenote-Y
 
 #import "Note.h"
