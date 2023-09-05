@@ -44,6 +44,9 @@ class EditorFactory: NSObject {
         if let tagName = SPAppDelegate.shared().filteredTagName {
             note.addTag(tagName)
         }
+
+        try? note.managedObjectContext?.obtainPermanentIDs(for: [note])
+
         return note
     }
 }
