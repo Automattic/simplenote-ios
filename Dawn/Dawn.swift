@@ -27,7 +27,7 @@ class Dawn {
     func startSynchronizing() {
         startListeningToChanges()
         schedulSyncTimer()
-        timer?.fire()
+        syncNow()
     }
 
     func stopSynchronizing() {
@@ -52,7 +52,7 @@ private extension Dawn {
 private extension Dawn {
 
     func schedulSyncTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { _ in
             self.syncNow()
         }
     }
@@ -81,19 +81,18 @@ private extension Dawn {
 
     @objc
     func mainContextWillSave(_ note: Notification) {
-        let notes = mainContext.insertedObjects.compactMap { $0 as? Note }
-        if notes.isEmpty {
-            return
+        let newNotes = mainContext.insertedObjects.compactMap { $0 as? Note }
+        if newNotes.count > .zero {
+            setupNewNotes(newNotes)
         }
 
-        do {
-            try mainContext.obtainPermanentIDs(for: notes)
-        } catch {
-            NSLog("# Failure obtaining permanent ID(s): \(error)")
+        let deletedNotes = mainContext.deletedObjects.compactMap { $0 as? Note }
+        let identifiers = deletedNotes.compactMap { note in
+            note.simperiumKey
         }
 
-        for note in notes {
-            note.ensureSimperiumKeyIsSet()
+        if identifiers.count > .zero {
+            schedulDeletionRevisions(identifiers: identifiers)
         }
     }
 
@@ -106,6 +105,29 @@ private extension Dawn {
 
         queue.dispatch {
             await self.engine.syncNow(objectIDs: objects.compactMap { $0.objectID })
+        }
+    }
+}
+
+
+@available(iOS 15, *)
+extension Dawn {
+
+    func setupNewNotes(_ newNotes: [Note]) {
+        do {
+            try mainContext.obtainPermanentIDs(for: newNotes)
+        } catch {
+            NSLog("# Failure obtaining permanent ID(s): \(error)")
+        }
+
+        for note in newNotes {
+            note.ensureSimperiumKeyIsSet()
+        }
+    }
+
+    func schedulDeletionRevisions(identifiers: [String]) {
+        queue.dispatch {
+            await self.engine.scheduleEntryDeletions(identifiers: identifiers)
         }
     }
 }

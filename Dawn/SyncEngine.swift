@@ -15,9 +15,10 @@ import CoreData
 @available(iOS 15, *)
 actor SyncEngine {
 
-    let writerContext: NSManagedObjectContext
-    let remote: DawnRemote
-    let processor: SyncProcessor
+    private let writerContext: NSManagedObjectContext
+    private let remote: DawnRemote
+    private let processor: SyncProcessor
+    private var pendingDeletions = Set<EntryRevision>()
 
     init(writerContext: NSManagedObjectContext, remote: DawnRemote) {
         self.remote = remote
@@ -38,8 +39,18 @@ extension SyncEngine {
         NSLog("# SyncNow!")
         await downloadLatestRevisions()
         await submitNewRevisions(for: objectIDs)
+        await submitScheduledDeletions()
     }
 
+    /// TODO: Fix architecture!
+    func scheduleEntryDeletions(identifiers: [String]) {
+        for identifier in identifiers {
+            let metadata = EntryRevisionMetadata(entryID: identifier, journalID: DawnConstants.journalID, type: .delete)
+            let revision = EntryRevision(metadata: metadata, payload: nil)
+
+            pendingDeletions.insert(revision)
+        }
+    }
 }
 
 
@@ -83,8 +94,7 @@ private extension SyncEngine {
     func downloadLatestRevisions() async {
         do {
             let cursor = lastSeenCursor
-            let (lastCursor, revisions) = try await remote.downloadLatestRevisions(cursor: cursor)
-            if revisions.isEmpty {
+            guard let (lastCursor, revisions) = try await remote.downloadLatestRevisions(cursor: cursor) else {
                 return
             }
 
@@ -130,5 +140,23 @@ private extension SyncEngine {
         }
 
         await save()
+    }
+}
+
+@available(iOS 15, *)
+private extension SyncEngine {
+
+    func submitScheduledDeletions() async {
+        let revisions = Array(pendingDeletions)
+
+        for revision in revisions {
+            do {
+                _ = try await remote.submitNewRevision(revision: revision)
+                pendingDeletions.remove(revision)
+                NSLog("# Deleted revision \(revision.metadata.entryID)")
+            } catch {
+                NSLog("# Error deleting \(revision.metadata.entryID)")
+            }
+        }
     }
 }

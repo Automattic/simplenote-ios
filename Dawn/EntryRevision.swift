@@ -37,12 +37,12 @@ enum RevisionType: String, Codable {
     case create, update, merge, delete
 }
 
-struct EntryRevision: Codable {
+struct EntryRevision: Codable, Hashable {
     let metadata: EntryRevisionMetadata
     let payload: EntryRevisionPayload?
 }
 
-struct EntryRevisionMetadata: Codable {
+struct EntryRevisionMetadata: Codable, Hashable {
     var entryID: String
     var journalID: String
     var type: RevisionType
@@ -75,7 +75,7 @@ struct EntryRevisionMetadata: Codable {
 }
 
 
-struct EntryRevisionPayload: Codable {
+struct EntryRevisionPayload: Codable, Hashable {
     var id: String
     var lastEditingDeviceID: String?
     var lastEditingDeviceName: String?
@@ -85,7 +85,7 @@ struct EntryRevisionPayload: Codable {
     var richTextJSON: String?
 
     var simplenoteBody: String {
-        // TODO: Why the Body has `\\` ?
+        // setMissingAppleMediaIdentifiers: Why the Body has `\\` ?
         body.replacingOccurrences(of: "\\", with: "")
     }
 }
