@@ -9,6 +9,10 @@
 import Foundation
 
 
+protocol DawnDelegate: NSObject {
+    func willReceiveNewContent()
+}
+
 @available(iOS 15, *)
 class Dawn {
 
@@ -17,6 +21,8 @@ class Dawn {
     private let engine: SyncEngine
     private var timer: Timer?
     private let queue = TaskQueue()
+    private var skipSave = false
+    weak var delegate: DawnDelegate?
 
     init(mainContext: NSManagedObjectContext, writerContext: NSManagedObjectContext, remote: DawnRemote = .init()) {
         self.engine = SyncEngine(writerContext: writerContext, remote: remote)
@@ -33,6 +39,27 @@ class Dawn {
     func stopSynchronizing() {
         stopListeningToChanges()
         invalidateSyncTimer()
+    }
+}
+
+@available(iOS 15, *)
+extension Dawn {
+
+    func save() {
+        do {
+            try mainContext.save()
+            skipSave = true
+            try writerContext.performAndWait {
+                try writerContext.save()
+            }
+            skipSave = false
+        } catch {
+            NSLog("Save Error: \(error)")
+        }
+    }
+
+    func saveWithoutSyncing() {
+        save()
     }
 }
 
@@ -81,6 +108,10 @@ private extension Dawn {
 
     @objc
     func mainContextWillSave(_ note: Notification) {
+        if skipSave {
+            return
+        }
+
         let newNotes = mainContext.insertedObjects.compactMap { $0 as? Note }
         if newNotes.count > .zero {
             setupNewNotes(newNotes)
@@ -98,6 +129,10 @@ private extension Dawn {
 
     @objc
     func mainContextDidSave(_ note: Notification) {
+        if skipSave {
+            return
+        }
+
         let objects = note.managedObjectsOfType(SPManagedObject.self)
         if objects.isEmpty {
             return

@@ -99,6 +99,7 @@ private extension SyncEngine {
             }
 
             NSLog("# Retrieved \(revisions.count) revisions since \(cursor ?? "-")")
+            notifyWillReceiveNewContent()
 
             await processor.processNewRevisions(revisions)
             await save()
@@ -159,4 +160,18 @@ private extension SyncEngine {
             }
         }
     }
+}
+
+
+@available(iOS 15, *)
+private extension SyncEngine {
+
+    func notifyWillReceiveNewContent() {
+        NotificationCenter.default.post(name: .dawnWillReceiveNewContent, object: nil)
+    }
+}
+
+
+extension Notification.Name {
+    static let dawnWillReceiveNewContent = NSNotification.Name(rawValue: "dawnWillReceiveNewContent")
 }

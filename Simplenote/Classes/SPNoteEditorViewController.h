@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIBarButtonItem *createNoteButton;
 @property (nonatomic, strong) UIBarButtonItem *informationButton;
 
+@property (nonatomic, strong) id listenerToken;
 @property (nonatomic, strong, readonly) Note *note;
 @property (nonatomic, strong) SPEditorTextView *noteEditorTextView;
 @property (nonatomic, strong) id entityObserver;

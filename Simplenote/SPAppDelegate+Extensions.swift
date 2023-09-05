@@ -56,6 +56,15 @@ extension SPAppDelegate: SPBucketDelegate {
 
         StoreManager.shared.initialize()
     }
+
+    @objc
+    func saveWithoutSyncing() {
+        guard #available(iOS 15, *) else {
+            return
+        }
+
+        dawn.saveWithoutSyncing()
+    }
 }
 
 // MARK: - Internal Methods

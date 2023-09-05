@@ -137,6 +137,12 @@ extension SPNoteEditorViewController {
             observer.delegate = self
             return observer
         }()
+
+        listenerToken = NotificationCenter.default.addObserver(forName: .dawnWillReceiveNewContent,
+                                                               object: nil,
+                                                               queue: .main) { [weak self] _ in
+            self?.willReceiveNewContent()
+        }
     }
 }
 

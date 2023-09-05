@@ -809,7 +809,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 	
     if (![_noteEditorTextView.text isEqualToString:@""]) {
         self.note.content = [_noteEditorTextView plainText];
-        [[SPAppDelegate sharedDelegate].simperium saveWithoutSyncing];
+        [[SPAppDelegate sharedDelegate] saveWithoutSyncing];
     }
 }
 

@@ -70,6 +70,7 @@ private extension SyncProcessor {
     func processUpdateRevision(_ revision: EntryRevision, context: NSManagedObjectContext) {
         let note = Note.fetchNote(in: context, key: revision.metadata.entryID) ?? Note(context: context)
 
+// BUG: Changed in Child1
         guard containsLocalChanges(note: note), note.content != revision.payload?.simplenoteBody else {
             apply(revision: revision, to: note)
             return
