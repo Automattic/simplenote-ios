@@ -68,7 +68,7 @@ struct PassthruResponseParser: ResponseParser {
 struct EntryFeedParser: ResponseParser {
 
     @discardableResult
-    func parse(request: URLRequest, responseData: Data?, response: URLResponse?, error: Error?) throws -> (String, [EntryRevision]) {
+    func parse(request: URLRequest, responseData: Data?, response: URLResponse?, error: Error?) throws -> (String, [EntryRevision])? {
         if let error {
             throw error
         }
@@ -91,6 +91,7 @@ struct EntryFeedParser: ResponseParser {
                 case .delete:
                     let revision = EntryRevision(metadata: envelope.revision, payload: nil)
                     revisions.append(revision)
+                    cursor = envelope.cursor
                 default:
                     lastSeenEnvelope = envelope
                 }
@@ -111,6 +112,10 @@ struct EntryFeedParser: ResponseParser {
             lastSeenEnvelope = nil
         }
 
+        if revisions.isEmpty {
+            return nil
+        }
+
         return (String(cursor), revisions)
     }
 }
@@ -127,15 +132,18 @@ struct EntryUploadResponseParser: ResponseParser {
             throw error
         }
 
-        guard let slices = responseData?.splitByNewline(), slices.count == 2 else {
+        guard let slices = responseData?.splitByNewline() else {
             throw SyncError.parsingFailure
         }
 
-        guard
-            let response = slices.first?.decode(as: EntryUploadResponse.self),
-            let payload = slices.last?.decode(as: EntryRevisionPayload.self)
-        else {
+        guard let response = slices.first?.decode(as: EntryUploadResponse.self) else {
             throw SyncError.parsingFailure
+        }
+
+        /// Deletion Revisions contain no payload
+        var payload: EntryRevisionPayload?
+        if slices.count == 2 {
+            payload = slices.last?.decode(as: EntryRevisionPayload.self)
         }
 
         let revision = EntryRevision(metadata: response.revision, payload: payload)
