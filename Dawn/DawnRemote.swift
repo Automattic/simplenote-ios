@@ -46,7 +46,7 @@ extension DawnRemote {
 
 extension DawnRemote {
 
-    func downloadLatestRevisions(cursor: String? = "", journalID: String = DawnConstants.journalID) async throws -> (String, [EntryRevision]) {
+    func downloadLatestRevisions(cursor: String? = "", journalID: String = DawnConstants.journalID) async throws -> (String, [EntryRevision])? {
         let path = "/api/v2p5/sync/entries/" + journalID + "/feed"
         let parameters = [
             "cursor": cursor ?? ""

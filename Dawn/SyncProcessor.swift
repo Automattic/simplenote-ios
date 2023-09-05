@@ -127,7 +127,8 @@ private extension SyncProcessor {
     func containsLocalChanges(note: Note) -> Bool {
         // No Ghost == Never pushed!
         guard let revision = note.decodeGhostRevision() else {
-            return false
+            let isEmpty = note.content?.isEmpty ?? false
+            return isEmpty == false
         }
 
         return revision.payload?.simplenoteBody != note.content
