@@ -64,8 +64,6 @@ private extension SyncEngine {
         set {
             UserDefaults.standard.setValue(newValue, forKey: DawnConstants.lastSeenKey)
             UserDefaults.standard.synchronize()
-            NSLog("# SETTING Cursor to \(newValue)")
-            // TODO: Fix spurious Cursor Reset?
         }
     }
 }
