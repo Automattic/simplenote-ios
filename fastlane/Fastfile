@@ -929,21 +929,21 @@ end
   private_lane :alpha_code_signing do |options|
     update_code_signing_enterprise(
       app_identifiers: simplenote_app_identifiers(root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Alpha"),
-      readonly: options[:readonly] || is_ci
+      readonly: options.fetch(:readonly, true)
     )
   end
 
   private_lane :internal_code_signing do |options|
     update_code_signing_enterprise(
       app_identifiers: simplenote_app_identifiers(root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Internal"),
-      readonly: options[:readonly] || is_ci
+      readonly: options.fetch(:readonly, true)
     )
   end
 
   private_lane :appstore_code_signing do |options|
     update_code_signing_app_store(
       app_identifiers: simplenote_app_identifiers,
-      readonly: options[:readonly] || is_ci,
+      readonly: options.fetch(:readonly, true),
       template_name: 'NotationalFlow Keychain Access (Distribution)'
     )
   end
