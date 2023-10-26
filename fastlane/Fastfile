@@ -90,7 +90,7 @@ end
     old_version = ios_codefreeze_prechecks(options)
 
     ios_bump_version_release(skip_deliver: true)
-    new_version = ios_get_app_version()
+    new_version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
     extract_release_notes_for_version(version: new_version,
       release_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'RELEASE-NOTES.txt'),
       extracted_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt'))
@@ -189,7 +189,7 @@ end
     download_localized_strings_and_metadata_from_glotpress
     ios_lint_localizations(input_dir: 'Simplenote', allow_retry: true)
     ios_bump_version_beta
-    version = ios_get_app_version
+    version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
     trigger_beta_build(branch_to_build: "release/#{version}")
   end
 
@@ -225,7 +225,7 @@ end
   desc 'Performs the final checks and triggers a release build for the hotfix in the current branch'
   lane :finalize_hotfix_release do |options|
     ios_finalize_prechecks(options)
-    version = ios_get_app_version
+    version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
     trigger_release_build(branch_to_build: "release/#{version}")
   end
 
@@ -266,7 +266,7 @@ end
     ios_bump_version_beta()
 
     # Wrap up
-    version = ios_get_app_version()
+    version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
     removebranchprotection(repository:GHHELPER_REPO, branch: "release/#{version}")
     setfrozentag(repository:GHHELPER_REPO, milestone: version, freeze: false)
     create_new_milestone(repository:GHHELPER_REPO)
@@ -456,7 +456,7 @@ end
       archive_zip_path = File.dirname(Dir.pwd) + "/Simplenote.xarchive.zip"
       zip(path: lane_context[SharedValues::XCODEBUILD_ARCHIVE], output_path: archive_zip_path)
 
-      version = options[:beta_release] ? ios_get_build_version : ios_get_app_version
+      version = options[:beta_release] ? ios_get_build_version : ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
       create_release(repository:GHHELPER_REPO,
         version: version,
         release_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt'),
@@ -482,7 +482,7 @@ end
 
     upload_to_app_store(
       app_identifier: APP_STORE_BUNDLE_IDENTIFIER,
-      app_version: ios_get_app_version,
+      app_version: ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH),
       skip_binary_upload: true,
       screenshots_path: promo_screenshots_directory,
       skip_screenshots: skip_screenshots,
@@ -1163,4 +1163,3 @@ def generate_installable_build_number
     "#{branch}-#{commit}"
   end
 end
-
