@@ -61,6 +61,32 @@ ENV['FL_RELEASE_TOOLKIT_DEFAULT_BRANCH'] = 'trunk'
 REPOSITORY_NAME="simplenote-ios"
 APP_STORE_BUNDLE_IDENTIFIER = 'com.codality.NotationalFlow'.freeze
 
+# List of locales used for the app strings (GlotPress code => `*.lproj` folder name`)
+#
+# TODO: Replace with `LocaleHelper` once provided by release toolkit (https://github.com/wordpress-mobile/release-toolkit/pull/296)
+GLOTPRESS_TO_LPROJ_APP_LOCALE_CODES = {
+  'ar' => 'ar',             # Arabic
+  'cy' => 'cy',             # Welsh
+  'de' => 'de',             # German
+  'el' => 'el',             # Greek
+  'en' => 'en',             # English
+  'es' => 'es',             # Spanish
+  'fa' => 'fa',             # Persian
+  'fr' => 'fr',             # French
+  'he' => 'he',             # Hebrew
+  'id' => 'id',             # Indonesian
+  'it' => 'it',             # Italian
+  'ja' => 'ja',             # Japanese
+  'ko' => 'ko',             # Korean
+  'nl' => 'nl',             # Dutch
+  'pt-br' => 'pt-BR',       # Portuguese (Brazil)
+  'ru' => 'ru',             # Russian
+  'sv' => 'sv',             # Swedish
+  'tr' => 'tr',             # Turkish
+  'zh-cn' => 'zh-Hans-CN',  # Chinese (China)
+  'zh-tw' => 'zh-Hant-TW'   # Chinese (Taiwan)
+}.freeze
+
 # Use this instead of getting values from ENV directly
 # It will throw an error if the requested value is missing
 def get_required_env(key)
@@ -260,7 +286,11 @@ end
       abort_on_violations: false
     )
 
-    ios_update_metadata(options)
+    ios_download_strings_files_from_glotpress(
+      project_url: 'https://translate.wordpress.com/projects/simplenote/ios/',
+      locales: GLOTPRESS_TO_LPROJ_APP_LOCALE_CODES,
+      download_dir: File.join(PROJECT_ROOT_FOLDER, 'Simplenote')
+    )
     sanitize_appstore_keywords()
     ios_lint_localizations(input_dir: 'Simplenote', allow_retry: true)
     ios_bump_version_beta()
