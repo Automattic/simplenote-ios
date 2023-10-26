@@ -1028,6 +1028,7 @@ end
 # @param [Boolean] beta Indicate if we should build a beta or regular release
 #
 def trigger_buildkite_release_build(branch:, beta:)
+  push_to_git_remote(tags: false)
   buildkite_trigger_build(
     buildkite_organization: 'automattic',
     buildkite_pipeline: 'simplenote-ios',
