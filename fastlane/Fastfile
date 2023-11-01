@@ -61,6 +61,32 @@ ENV['FL_RELEASE_TOOLKIT_DEFAULT_BRANCH'] = 'trunk'
 REPOSITORY_NAME="simplenote-ios"
 APP_STORE_BUNDLE_IDENTIFIER = 'com.codality.NotationalFlow'.freeze
 
+# List of locales used for the app strings (GlotPress code => `*.lproj` folder name`)
+#
+# TODO: Replace with `LocaleHelper` once provided by release toolkit (https://github.com/wordpress-mobile/release-toolkit/pull/296)
+GLOTPRESS_TO_LPROJ_APP_LOCALE_CODES = {
+  'ar' => 'ar',             # Arabic
+  'cy' => 'cy',             # Welsh
+  'de' => 'de',             # German
+  'el' => 'el',             # Greek
+  'en' => 'en',             # English
+  'es' => 'es',             # Spanish
+  'fa' => 'fa',             # Persian
+  'fr' => 'fr',             # French
+  'he' => 'he',             # Hebrew
+  'id' => 'id',             # Indonesian
+  'it' => 'it',             # Italian
+  'ja' => 'ja',             # Japanese
+  'ko' => 'ko',             # Korean
+  'nl' => 'nl',             # Dutch
+  'pt-br' => 'pt-BR',       # Portuguese (Brazil)
+  'ru' => 'ru',             # Russian
+  'sv' => 'sv',             # Swedish
+  'tr' => 'tr',             # Turkish
+  'zh-cn' => 'zh-Hans-CN',  # Chinese (China)
+  'zh-tw' => 'zh-Hant-TW'   # Chinese (Taiwan)
+}.freeze
+
 # Use this instead of getting values from ENV directly
 # It will throw an error if the requested value is missing
 def get_required_env(key)
@@ -89,8 +115,8 @@ end
   lane :code_freeze do | options |
     old_version = ios_codefreeze_prechecks(options)
 
-    ios_bump_version_release(skip_deliver: true)
-    new_version = ios_get_app_version()
+    ios_bump_version_release(skip_deliver: true, skip_glotpress: true)
+    new_version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
     extract_release_notes_for_version(version: new_version,
       release_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'RELEASE-NOTES.txt'),
       extracted_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt'))
@@ -189,7 +215,7 @@ end
     download_localized_strings_and_metadata_from_glotpress
     ios_lint_localizations(input_dir: 'Simplenote', allow_retry: true)
     ios_bump_version_beta
-    version = ios_get_app_version
+    version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
     trigger_beta_build(branch_to_build: "release/#{version}")
   end
 
@@ -225,7 +251,7 @@ end
   desc 'Performs the final checks and triggers a release build for the hotfix in the current branch'
   lane :finalize_hotfix_release do |options|
     ios_finalize_prechecks(options)
-    version = ios_get_app_version
+    version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
     trigger_release_build(branch_to_build: "release/#{version}")
   end
 
@@ -260,13 +286,17 @@ end
       abort_on_violations: false
     )
 
-    ios_update_metadata(options)
+    ios_download_strings_files_from_glotpress(
+      project_url: 'https://translate.wordpress.com/projects/simplenote/ios/',
+      locales: GLOTPRESS_TO_LPROJ_APP_LOCALE_CODES,
+      download_dir: File.join(PROJECT_ROOT_FOLDER, 'Simplenote')
+    )
     sanitize_appstore_keywords()
     ios_lint_localizations(input_dir: 'Simplenote', allow_retry: true)
     ios_bump_version_beta()
 
     # Wrap up
-    version = ios_get_app_version()
+    version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
     removebranchprotection(repository:GHHELPER_REPO, branch: "release/#{version}")
     setfrozentag(repository:GHHELPER_REPO, milestone: version, freeze: false)
     create_new_milestone(repository:GHHELPER_REPO)
@@ -456,7 +486,7 @@ end
       archive_zip_path = File.dirname(Dir.pwd) + "/Simplenote.xarchive.zip"
       zip(path: lane_context[SharedValues::XCODEBUILD_ARCHIVE], output_path: archive_zip_path)
 
-      version = options[:beta_release] ? ios_get_build_version : ios_get_app_version
+      version = options[:beta_release] ? ios_get_build_version : ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
       create_release(repository:GHHELPER_REPO,
         version: version,
         release_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt'),
@@ -482,7 +512,7 @@ end
 
     upload_to_app_store(
       app_identifier: APP_STORE_BUNDLE_IDENTIFIER,
-      app_version: ios_get_app_version,
+      app_version: ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH),
       skip_binary_upload: true,
       screenshots_path: promo_screenshots_directory,
       skip_screenshots: skip_screenshots,
@@ -998,6 +1028,7 @@ end
 # @param [Boolean] beta Indicate if we should build a beta or regular release
 #
 def trigger_buildkite_release_build(branch:, beta:)
+  push_to_git_remote(tags: false)
   buildkite_trigger_build(
     buildkite_organization: 'automattic',
     buildkite_pipeline: 'simplenote-ios',
@@ -1163,4 +1194,3 @@ def generate_installable_build_number
     "#{branch}-#{commit}"
   end
 end
-
