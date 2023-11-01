@@ -350,7 +350,7 @@ PLATFORMS
   arm64-darwin-22
 
 DEPENDENCIES
-  cocoapods (~> 1.10)
+  cocoapods (~> 1.14)
   fastlane (~> 2)
   fastlane-plugin-appcenter (~> 1.11)
   fastlane-plugin-sentry (~> 1.6)
