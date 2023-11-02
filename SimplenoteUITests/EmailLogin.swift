@@ -3,7 +3,10 @@ import XCTest
 class EmailLogin {
 
     class func open() {
+        app.buttons[UID.Button.logIn].waitForIsHittable()
         app.buttons[UID.Button.logIn].tap()
+        
+        app.buttons[UID.Button.logInWithEmail].waitForIsHittable()
         app.buttons[UID.Button.logInWithEmail].tap()
     }
 
