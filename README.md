@@ -1,4 +1,4 @@
-# Simplenote for iOS
+# Simplenote for iOS.
 A Simplenote client for iOS. Learn more about Simplenote at [Simplenote.com](https://simplenote.com).
 
 ## Build Instructions
