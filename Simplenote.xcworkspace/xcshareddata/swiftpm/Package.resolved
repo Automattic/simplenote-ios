@@ -41,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Automattic/XCUITestHelpers",
       "state" : {
-        "revision" : "2cf059427b0f0362ddd8c14109493141cf710cc8",
-        "version" : "0.2.0"
+        "revision" : "5179cb69d58b90761cc713bdee7740c4889d3295",
+        "version" : "0.4.0"
       }
     }
   ],
