@@ -98,7 +98,7 @@ namespace :dependencies do
           # Try first using a binary release
           zipfile = "#{tmpdir}/swiftlint-#{SWIFTLINT_VERSION}.zip"
           sh "curl --fail --location -o #{zipfile} https://github.com/realm/SwiftLint/releases/download/#{SWIFTLINT_VERSION}/portable_swiftlint.zip || true"
-          if File.exists?(zipfile)
+          if File.exist?(zipfile)
             extracted_dir = "#{tmpdir}/swiftlint-#{SWIFTLINT_VERSION}"
             sh "unzip #{zipfile} -d #{extracted_dir}"
             FileUtils.mkdir_p("#{swiftlint_path}/bin")
