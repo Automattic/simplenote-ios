@@ -19,7 +19,9 @@ struct NewNoteWidgetView: View {
             }
             .padding(Constants.overallPadding)
         }
-        .background(Color.widgetBlueBackgroundColor)
+        .widgetBackground(content: {
+            Color.widgetBlueBackgroundColor
+        })
         .widgetURL(URL.newNoteURL())
     }
 }
