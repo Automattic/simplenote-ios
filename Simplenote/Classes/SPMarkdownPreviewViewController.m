@@ -43,17 +43,15 @@
 {
     NSAssert(self.webView == nil, @"WebView was already initialized!");
 
-    WKPreferences *prefs = [WKPreferences new];
-    prefs.javaScriptEnabled = NO;
-
     WKWebViewConfiguration *config = [WKWebViewConfiguration new];
-    config.preferences = prefs;
     
     WKWebView *webView = [[WKWebView alloc] initWithFrame:self.view.frame configuration:config];
     webView.opaque = NO;
     webView.allowsLinkPreview = YES;
     webView.scrollView.delegate = self;
     webView.navigationDelegate = self;
+    webView.configuration.defaultWebpagePreferences.allowsContentJavaScript = NO;
+    
     self.webView = webView;
 }
 
