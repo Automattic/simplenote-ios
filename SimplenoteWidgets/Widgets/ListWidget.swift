@@ -10,6 +10,7 @@ struct ListWidget: Widget {
         .configurationDisplayName(Constants.displayName)
         .description(Constants.description)
         .supportedFamilies([.systemMedium, .systemLarge])
+        .contentMarginsDisabled()
     }
 
     private func prepareWidgetView(fromEntry entry: ListWidgetEntry) -> some View {

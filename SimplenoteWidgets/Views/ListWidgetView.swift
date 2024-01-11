@@ -21,7 +21,9 @@ struct ListWidgetView: View {
                 }
             }
             .filling()
-            .background(Color.widgetBackgroundColor)
+            .widgetBackground(content: {
+                Color.widgetBackgroundColor
+            })
             .redacted(reason: entry.loggedIn ? [] : .placeholder)
         }
     }
@@ -55,7 +57,7 @@ private struct Constants {
     static let mediumRows = 3
     static let largeRows = 8
     static let sidePadding = CGFloat(20)
-    static let topAndBottomPadding = CGFloat(10)
+    static let topAndBottomPadding = CGFloat(5)
 }
 
 struct ListWidgetView_Previews: PreviewProvider {
