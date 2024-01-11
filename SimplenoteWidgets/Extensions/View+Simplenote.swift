@@ -9,3 +9,15 @@ extension View {
         self.frame(width: side, height: side, alignment: alignment)
     }
 }
+
+extension View {
+    func widgetBackground(@ViewBuilder content: ()-> some View) -> some View {
+        if #available(iOSApplicationExtension 17.0, *) {
+            return containerBackground(for: .widget) {
+                content()
+            }
+        } else {
+            return background(content())
+        }
+    }
+}
