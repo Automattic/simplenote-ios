@@ -1,5 +1,6 @@
 import Foundation
 import MobileCoreServices
+import UniformTypeIdentifiers
 
 
 // MARK: - PlainTextExtractor
@@ -8,7 +9,7 @@ struct PlainTextExtractor: Extractor {
 
     /// Accepted File Extension
     ///
-    let acceptedType = kUTTypePlainText as String
+    let acceptedType = UTType.plainText.identifier
 
     /// Indicates if a given Extension Context can be handled by the Extractor
     ///
