@@ -57,5 +57,3 @@ default.profraw
 # Everything without a .enc extension is ignored
 .configure-files/*
 !.configure-files/*.enc
-
-Gemfile.lock
