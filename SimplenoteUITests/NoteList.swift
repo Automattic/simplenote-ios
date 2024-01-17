@@ -32,11 +32,11 @@ class NoteList {
     }
 
     class func getNoteCellHeight(_ noteName: String) -> CGFloat {
-        return NoteList.getNoteCell(noteName).frame.height
+        return NoteList.getNoteCell(noteName).frame.height.rounded()
     }
 
     class func openAllNotes() {
-        guard !NoteList.isAllNotesListOpen() else { return }
+        guard !isAllNotesListOpen() else { return }
         print(">>> Opening \"All Notes\"")
         Sidebar.open()
         let allNotesButton = app.tables.staticTexts[UID.Button.allNotes]
