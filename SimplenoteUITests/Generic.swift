@@ -154,8 +154,10 @@ class WebView {
 
     class func tapDone() {
         let doneButton = app.buttons[UID.Button.done]
-        guard doneButton.exists else { return }
-        doneButton.tap()
+        guard doneButton.exists else {
+            return
+        }
+        doneButton.tapCenterCoordinates(in: app)
     }
 }
 
@@ -189,5 +191,13 @@ class Alert {
         guard confirmationButton.exists else { return }
 
         confirmationButton.tap()
+    }
+}
+
+extension XCUIElement {
+    func tapCenterCoordinates(in app: XCUIApplication) {
+        let coordinates = app.coordinate(withNormalizedOffset: .zero)
+            .withOffset(CGVector(dx: frame.midX, dy: frame.midY))
+        coordinates.tap()
     }
 }
