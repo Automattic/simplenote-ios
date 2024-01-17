@@ -8,7 +8,7 @@ struct NoteListTable: View {
         let width = geometry.size.width - Constants.sidePadding
         let height = round((geometry.size.height - Constants.headerSize) / CGFloat(rows.count))
 
-        ForEach(.zero ..< (rows.count)) { index in
+        ForEach(.zero ..< rows.count, id: \.self) { index in
             let isLastRow = index == (rows.count - 1)
             let row = rows[index]
 

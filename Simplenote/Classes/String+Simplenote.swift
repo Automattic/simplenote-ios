@@ -107,8 +107,8 @@ extension String {
     ///
     func contentSlice(matching keywords: [String],
                       in range: Range<String.Index>? = nil,
-                      leadingLimit: String.IndexDistance = 0,
-                      trailingLimit: String.IndexDistance = 0) -> ContentSlice? {
+                      leadingLimit: Int = 0,
+                      trailingLimit: Int = 0) -> ContentSlice? {
 
         guard !keywords.isEmpty else {
             return nil
