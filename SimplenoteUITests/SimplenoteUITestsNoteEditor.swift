@@ -114,7 +114,7 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
 
         trackStep()
         NoteEditor.swipeToPreview()
-        PreviewAssert.staticTextWithExactValueShownOnce(value: noteNameInitial)
+        PreviewAssert.staticTextWithExactLabelShownOnce(label: noteNameInitial)
         PreviewAssert.boxesStates(expectedCheckedBoxesNumber: 0, expectedEmptyBoxesNumber: 1)
     }
 
