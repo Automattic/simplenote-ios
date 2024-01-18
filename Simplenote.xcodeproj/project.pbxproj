@@ -408,7 +408,7 @@
 		B5E96B611BDE5ACA00D707F5 /* SPMarkdownParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 174838281BBDCAA400E834AF /* SPMarkdownParser.m */; };
 		B5EB1EEF1C204EBD0080A1B3 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EB1EEE1C204EBD0080A1B3 /* ShareViewController.swift */; };
 		B5EB1EF21C204EBD0080A1B3 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5EB1EF01C204EBD0080A1B3 /* MainInterface.storyboard */; };
-		B5EB1EF61C204EBD0080A1B3 /* SimplenoteShare.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B5EB1EEC1C204EBD0080A1B3 /* SimplenoteShare.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B5EB1EF61C204EBD0080A1B3 /* SimplenoteShare.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B5EB1EEC1C204EBD0080A1B3 /* SimplenoteShare.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B5EB1EFE1C205A800080A1B3 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5EB1EFD1C205A800080A1B3 /* Icons.xcassets */; };
 		B5EB1EFF1C205A800080A1B3 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5EB1EFD1C205A800080A1B3 /* Icons.xcassets */; };
 		B5F232B629084336006D8570 /* SustainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F232B529084336006D8570 /* SustainerView.swift */; };
@@ -504,7 +504,7 @@
 		BAB32C63269E4190005C72B2 /* RemoteResult+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB32C62269E4190005C72B2 /* RemoteResult+TestHelpers.swift */; };
 		BAB5762426703C8100B0C56F /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAB5762326703C8100B0C56F /* Intents.framework */; };
 		BAB5762726703C8200B0C56F /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5762626703C8200B0C56F /* IntentHandler.swift */; };
-		BAB5762B26703C8200B0C56F /* SimplenoteIntents.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = BAB5762226703C8100B0C56F /* SimplenoteIntents.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		BAB5762B26703C8200B0C56F /* SimplenoteIntents.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BAB5762226703C8100B0C56F /* SimplenoteIntents.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		BAB5764626703D0000B0C56F /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5762626703C8200B0C56F /* IntentHandler.swift */; };
 		BAB5765B26703D0600B0C56F /* NoteWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BAB5760A26703C0C00B0C56F /* NoteWidgetIntent.intentdefinition */; };
 		BAB5765C26703D0600B0C56F /* NoteWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BAB5760A26703C0C00B0C56F /* NoteWidgetIntent.intentdefinition */; };
@@ -546,7 +546,7 @@
 		BAFA93DA265DCFCA0009DCFB /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAFA93D9265DCFCA0009DCFB /* WidgetKit.framework */; };
 		BAFA93DC265DCFCA0009DCFB /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAFA93DB265DCFCA0009DCFB /* SwiftUI.framework */; };
 		BAFA93E1265DCFCD0009DCFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAFA93E0265DCFCD0009DCFB /* Assets.xcassets */; };
-		BAFA93E5265DCFCD0009DCFB /* SimplenoteWidgetsExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = BAFA93D8265DCFCA0009DCFB /* SimplenoteWidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		BAFA93E5265DCFCD0009DCFB /* SimplenoteWidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BAFA93D8265DCFCA0009DCFB /* SimplenoteWidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		BAFA93F2265DE4A10009DCFB /* SimplenoteWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFA93EC265DE3810009DCFB /* SimplenoteWidgets.swift */; };
 		BAFA93F3265DE4A40009DCFB /* NewNoteWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFA93EE265DE3B90009DCFB /* NewNoteWidget.swift */; };
 		BAFA93F4265DE4A70009DCFB /* NewNoteWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFA93F0265DE45D0009DCFB /* NewNoteWidgetProvider.swift */; };
@@ -667,17 +667,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		B5EB1EFC1C204EBE0080A1B3 /* Embed App Extensions */ = {
+		B5EB1EFC1C204EBE0080A1B3 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				BAFA93E5265DCFCD0009DCFB /* SimplenoteWidgetsExtension.appex in Embed App Extensions */,
-				BAB5762B26703C8200B0C56F /* SimplenoteIntents.appex in Embed App Extensions */,
-				B5EB1EF61C204EBD0080A1B3 /* SimplenoteShare.appex in Embed App Extensions */,
+				BAFA93E5265DCFCD0009DCFB /* SimplenoteWidgetsExtension.appex in Embed Foundation Extensions */,
+				BAB5762B26703C8200B0C56F /* SimplenoteIntents.appex in Embed Foundation Extensions */,
+				B5EB1EF61C204EBD0080A1B3 /* SimplenoteShare.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -2768,7 +2768,7 @@
 				46A3C96117DFA81A002865AE /* Sources */,
 				46A3C9B017DFA81A002865AE /* Frameworks */,
 				46A3C9C117DFA81A002865AE /* Resources */,
-				B5EB1EFC1C204EBE0080A1B3 /* Embed App Extensions */,
+				B5EB1EFC1C204EBE0080A1B3 /* Embed Foundation Extensions */,
 				730A1CB888B6254066EA8CAA /* [CP] Embed Pods Frameworks */,
 				1FED62BA1BD3808429C8CEE9 /* [CP] Copy Pods Resources */,
 			);
@@ -2901,9 +2901,10 @@
 		E29ADD3017848E8500E55842 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				CLASSPREFIX = SP;
 				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1210;
+				LastUpgradeCheck = 1520;
 				ORGANIZATIONNAME = Automattic;
 				TargetAttributes = {
 					3F1BB4AD243199FF006D1A04 = {
@@ -4144,6 +4145,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -4151,6 +4153,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -4167,6 +4170,8 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++17";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.automattic.simplenote.UITestsFoundation;
@@ -4190,6 +4195,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
@@ -4198,6 +4204,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -4210,6 +4217,8 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++17";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.automattic.simplenote.UITestsFoundation;
@@ -4231,6 +4240,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
@@ -4239,6 +4249,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -4251,6 +4262,8 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++17";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.automattic.simplenote.UITestsFoundation;
@@ -4272,6 +4285,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
@@ -4280,6 +4294,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -4292,6 +4307,8 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++17";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.automattic.simplenote.UITestsFoundation;
@@ -4313,6 +4330,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
@@ -4321,6 +4339,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -4333,6 +4352,8 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++17";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.automattic.simplenote.UITestsFoundation;
@@ -4362,6 +4383,7 @@
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = PZYM8XX95Q;
 				ENABLE_BITCODE = NO;
+				ENABLE_MODULE_VERIFIER = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -4379,6 +4401,8 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -4413,6 +4437,7 @@
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = PZYM8XX95Q;
 				ENABLE_BITCODE = NO;
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4431,6 +4456,8 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -4483,6 +4510,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -4522,6 +4550,7 @@
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 99KV9Z6BKV;
 				ENABLE_BITCODE = NO;
+				ENABLE_MODULE_VERIFIER = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -4540,6 +4569,8 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -4675,6 +4706,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -4714,6 +4746,7 @@
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = PZYM8XX95Q;
 				ENABLE_BITCODE = NO;
+				ENABLE_MODULE_VERIFIER = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -4731,6 +4764,8 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -4782,6 +4817,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -4821,6 +4857,7 @@
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 99KV9Z6BKV;
 				ENABLE_BITCODE = NO;
+				ENABLE_MODULE_VERIFIER = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -4839,6 +4876,8 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -5794,6 +5833,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -5855,6 +5895,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
