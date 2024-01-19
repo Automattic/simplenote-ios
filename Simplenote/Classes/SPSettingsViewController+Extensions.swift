@@ -11,10 +11,6 @@ extension SPSettingsViewController {
 
     @objc
     func setupTableHeaderView() {
-        guard #available(iOS 15.0, *) else {
-            return
-        }
-
         let sustainerView: SustainerView = SustainerView.instantiateFromNib()
         sustainerView.appliesTopInset = true
         sustainerView.onPress = { [weak self] in
@@ -49,11 +45,6 @@ extension SPSettingsViewController {
 
     @objc
     func restorePurchases() {
-        guard #available(iOS 15.0, *) else {
-            presentPurchasesRestored(alert: .unsupported)
-            return
-        }
-
         if StoreManager.shared.isActiveSubscriber {
             presentPurchasesRestored(alert: .alreadySustainer)
             return

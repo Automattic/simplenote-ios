@@ -39,11 +39,6 @@ extension SPAppDelegate {
 
     @objc
     func setupStoreManager() {
-        guard #available(iOS 15, *) else {
-            NSLog("[StoreManager] Unavailable")
-            return
-        }
-
         StoreManager.shared.initialize()
     }
 }
@@ -506,9 +501,6 @@ extension SPAppDelegate {
 extension SPAppDelegate {
     @objc
     func resetWidgetTimelines() {
-        guard #available(iOS 14.0, *) else {
-            return
-        }
         WidgetController.resetWidgetTimelines()
     }
 
