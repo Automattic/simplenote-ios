@@ -5,7 +5,6 @@ class EmailLogin {
     class func open() {
         app.buttons[UID.Button.logIn].waitForIsHittable()
         app.buttons[UID.Button.logIn].tap()
-        
         app.buttons[UID.Button.logInWithEmail].waitForIsHittable()
         app.buttons[UID.Button.logInWithEmail].tap()
     }
@@ -38,6 +37,7 @@ class EmailLogin {
         enterPassword(enteredValue: password)
         app.buttons[UID.Button.logIn].tap()
         handleSavePasswordPrompt()
+        waitForSpinnerToDisappear()
     }
 
     class func enterEmail(enteredValue: String) {
@@ -59,5 +59,11 @@ class EmailLogin {
             // alert where "Save Password" is.
             app.buttons["Not Now"].tap()
         }
+    }
+
+    class func waitForSpinnerToDisappear() {
+        let predicate   = NSPredicate(format: "exists == false && isHittable == false")
+        let expectation = XCTNSPredicateExpectation(predicate: predicate, object: app.staticTexts["In progress"])
+        XCTWaiter().wait(for: [ expectation ], timeout: 10)
     }
 }

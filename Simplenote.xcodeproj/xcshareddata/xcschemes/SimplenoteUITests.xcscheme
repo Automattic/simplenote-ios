@@ -21,11 +21,6 @@
                BlueprintName = "SimplenoteUITests"
                ReferencedContainer = "container:Simplenote.xcodeproj">
             </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "SimplenoteUISmokeTestsHistory">
-               </Test>
-            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>
