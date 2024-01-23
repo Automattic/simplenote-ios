@@ -220,19 +220,7 @@
     [self.noteEditorViewController save];
 }
 
-// Deprecated in iOS 13.2. Per the docs, this method will not be called in favor of the new secure version when both are defined.
-- (BOOL)application:(UIApplication *)application shouldSaveApplicationState:(NSCoder *)coder
-{
-    return YES;
-}
-
 - (BOOL)application:(UIApplication *)application shouldSaveSecureApplicationState:(NSCoder *)coder
-{
-    return YES;
-}
-
-// Deprecated in iOS 13.2. Per the docs, this method will not be called in favor of the new secure version when both are defined.
-- (BOOL)application:(UIApplication *)application shouldRestoreApplicationState:(NSCoder *)coder
 {
     return YES;
 }

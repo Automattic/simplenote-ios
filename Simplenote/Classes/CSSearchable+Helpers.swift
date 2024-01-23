@@ -9,11 +9,12 @@
 import Foundation
 import CoreSpotlight
 import MobileCoreServices
+import UniformTypeIdentifiers
 
 extension CSSearchableItemAttributeSet {
 
     convenience init(note: Note) {
-        self.init(itemContentType: kUTTypeData as String)
+        self.init(contentType: UTType.data)
         note.ensurePreviewStringsAreAvailable()
         title = note.titlePreview
         contentDescription = note.bodyPreview

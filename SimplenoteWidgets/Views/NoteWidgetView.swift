@@ -20,7 +20,9 @@ struct NoteWidgetView: View {
                 .ignoresSafeArea()
                 .widgetURL(entry.url)
             }
-            .background(Color.widgetBackgroundColor)
+            .widgetBackground(content: {
+                Color.widgetBackgroundColor
+            })
             .redacted(reason: [entry.loggedIn ? [] : .placeholder])
         }
     }

@@ -13,7 +13,7 @@ class NoticePresenter {
     private var keyboardNotificationTokens: [Any]?
 
     private var keyWindow: UIWindow? {
-        return UIApplication.shared.windows.first(where: { $0.isKeyWindow })
+        return UIApplication.shared.foregroundSceneWindows.first(where: { $0.isKeyWindow })
     }
     private var windowFrame: CGRect {
         return keyWindow?.frame ?? .zero

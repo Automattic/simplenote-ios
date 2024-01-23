@@ -13,8 +13,8 @@ struct ListWidgetHeaderView: View {
                 Text(tag.tagDescription)
                     .font(.headline)
                     .foregroundColor(.bodyTextColor)
-                Spacer()
             }
+            Spacer()
             Link(destination: URL.newNoteURL(withTag: tag.identifier)) {
                 NewNoteImage(size: Constants.side,
                              foregroundColor: .widgetTintColor,
