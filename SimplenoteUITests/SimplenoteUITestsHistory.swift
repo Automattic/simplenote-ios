@@ -5,6 +5,7 @@ class SimplenoteUISmokeTestsHistory: XCTestCase {
 
     override class func setUp() {
         app.launch()
+        EmailLogin.handleSavePasswordPrompt()
         getToAllNotes()
         let _ = attemptLogOut()
         EmailLogin.open()
