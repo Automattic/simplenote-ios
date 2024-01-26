@@ -66,9 +66,8 @@ msgctxt "app_store_keywords"
 msgid "notes,note,markdown,journal,sync,to-do,list,cloud,notebook,simple,notepad,tag,todo,writing,memo"
 msgstr ""
 
-msgctxt "v4.49-whats-new"
+msgctxt "v4.50-whats-new"
 msgid ""
-"- Add background color to code block in dark mode preview\n"
-"- Add large note widget\n"
+"• Behind-the-scenes reliability improvements\n"
 msgstr ""
 
