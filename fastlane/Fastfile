@@ -168,7 +168,7 @@ end
     Dir["./metadata/**"].each do |locale_dir|
       keywords_path = File.join(locale_dir, 'keywords.txt')
 
-      unless File.exists?(keywords_path)
+      unless File.exist?(keywords_path)
         UI.message "Could not find keywords file in #{locale_dir}. Skipping."
         next
       end
@@ -753,7 +753,7 @@ end
     font_name = "SourceSansPro-Regular.ttf"
     user_font_directory = File.join(Dir.home, "Library/Fonts")
     user_font_path = File.join(user_font_directory, font_name)
-    if File.exists?(user_font_path)
+    if File.exist?(user_font_path)
       UI.success("Custom font #{font_name} already installed locally.")
     else
       UI.message("Installing #{font_name} at #{user_font_path}.")
