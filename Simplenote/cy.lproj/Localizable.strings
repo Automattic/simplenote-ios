@@ -3,12 +3,6 @@
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: cy_GB */
 
-/* No comment provided by engineer. */
-"%@ per Month" = "%@ per Month";
-
-/* Yearly Subscription Option. Please preserve the special marker! */
-"%@ per Year" = "%@ per Year";
-
 /* Number of found search results */
 "%d Result" = "%d Canlyniad";
 
@@ -21,57 +15,6 @@
 /* Number of failed entries entering in passcode */
 "%i Failed Passcode Attempts" = "%i Ymgais Aflwyddiannus gyda'r Cod Cyfrin";
 
-/* Note trashed notification */
-"%i Note Trashed" = "%i Note Trashed";
-
-/* Notes trashed notification */
-"%i Notes Trashed" = "%i Notes Trashed";
-
-/* Count of interlink references to a note */
-"%i Reference" = "%i Reference";
-
-/* Count of interlink references to a note */
-"%i References" = "%i References";
-
-/* Count of currently selected notes */
-"%i Selected" = "%i Selected";
-
-/* Password Requirement: Length */
-"- Minimum of 8 characters" = "- Minimum of 8 characters";
-
-/* Password Requirement: Special Characters */
-"- Neither tabs nor newlines are allowed" = "- Neither tabs nor newlines are allowed";
-
-/* Password Requirement: Email Match */
-"- Password cannot match email" = "- Password cannot match email";
-
-/* 1 minute passcode lock timeout */
-"1 Minute" = "1 Minute";
-
-/* 15 seconds passcode lock timeout */
-"15 Seconds" = "15 Seconds";
-
-/* 2 minutes passcode lock timeout */
-"2 Minutes" = "2 Minutes";
-
-/* 3 minutes passcode lock timeout */
-"3 Minutes" = "3 Minutes";
-
-/* 30 seconds passcode lock timeout */
-"30 Seconds" = "30 Seconds";
-
-/* 4 minutes passcode lock timeout */
-"4 Minutes" = "4 Minutes";
-
-/* 5 minutes passcode lock timeout */
-"5 Minutes" = "5 Minutes";
-
-/* Network connection issue notificaiton */
-"A network connection is required. Please, check your connection and try again." = "A network connection is required. Please, check your connection and try again.";
-
-/* Display app about screen */
-"About" = "About";
-
 /* Accept Action
    Label of accept button on alert dialog */
 "Accept" = "Derbyn";
@@ -79,17 +22,8 @@
 /* No comment provided by engineer. */
 "Account" = "Cyfrif";
 
-/* Email verification required alert title */
-"Account Verification Required" = "Account Verification Required";
-
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Add a new collaborator..." = "Ychwanegu cydweithredwr newydd...";
-
-/* Accessibility hint for adding a tag to a note */
-"Add a tag to the current note" = "Add a tag to the current note";
-
-/* Description text for the screen that allows users to share notes with other users */
-"Add an email address to share this note with someone. Then you can both make changes to it." = "Add an email address to share this note with someone. Then you can both make changes to it.";
 
 /* Label on button to add a new tag to a note */
 "Add tag" = "Ychwanegu tag";
@@ -102,44 +36,8 @@
 /* A short description to access the account login screen */
 "Already have an account?" = "Eisoes â chyfrif?";
 
-/* Delete account confirmation instructions */
-"An email has been sent to %@. Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation." = "An email has been sent to %@. Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation.";
-
-/* Deletion error message */
-"An error occured. Please, try again. If the problem continues, contact us at support@simplenote.com for help." = "An error occured. Please, try again. If the problem continues, contact us at support@simplenote.com for help.";
-
-/* Sign in error message */
-"An error was encountered while signing in." = "An error was encountered while signing in.";
-
-/* No comment provided by engineer. */
-"Appearance" = "Appearance";
-
-/* Automattic hiring description */
-"Are you a developer? We’re hiring." = "Are you a developer? We’re hiring.";
-
-/* Title of deletion confirmation message for a tag. Parameters: %1$@ - tag name */
-"Are you sure you want to delete \"%1$@\"?" = "Are you sure you want to delete \"%1$@\"?";
-
-/* Empty Trash Warning */
-"Are you sure you want to empty the trash? This cannot be undone." = "Are you sure you want to empty the trash? This cannot be undone.";
-
-/* Data Fetch error message */
-"Attempt to fetch entities failed.  Please try again later." = "Attempt to fetch entities failed.  Please try again later.";
-
-/* User Authenticated */
-"Authenticated" = "Authenticated";
-
-/* Become a Sustainer Title */
-"Become a Simplenote Sustainer" = "Become a Simplenote Sustainer";
-
 /* The Simplenote blog */
 "Blog" = "Blog";
-
-/* Terms of Service Legend *PREFIX*: printed in dark color */
-"By creating an account you agree to our" = "By creating an account you agree to our";
-
-/* Delete account confirmation alert message */
-"By deleting the account for %@, all notes created with this account will be permanently deleted. This action is not reversible" = "By deleting the account for %@, all notes created with this account will be permanently deleted. This action is not reversible";
 
 /* Terms Button Text */
 "By signing up, you agree to our Terms of Service »" = "Drwy ymuno, rydych yn cytuno i'n Amodau Gwasanaeth »";
@@ -157,50 +55,11 @@
    Verb, cancel an alert dialog */
 "Cancel" = "Canslo";
 
-/* Name of button to cancel iOS share extension in missing token alert */
-"Cancel Share" = "Cancel Share";
-
-/* Error message title. Review you account screen */
-"Cannot Confirm Account" = "Cannot Confirm Account";
-
-/* Error message title. Verify your email screen */
-"Cannot Send Verification Email" = "Cannot Send Verification Email";
-
-/* Work at Automattic */
-"Careers" = "Careers";
-
-/* Change email button -> Review you account screen */
-"Change Email" = "Change Email";
-
-/* Change password action */
-"Change Password" = "Change Password";
-
-/* Number of characters in the note */
-"Characters" = "Characters";
-
-/* Title for delete account succes alert */
-"Check Your Email" = "Check Your Email";
-
-/* Vefification sent alert title */
-"Check your Email" = "Check your Email";
-
-/* Title on the PinLock screen asking to create a passcode */
-"Choose a 4 digit passcode" = "Choose a 4 digit passcode";
-
-/* Sustainer Alert's Message */
-"Choose a plan and help unlock future features" = "Choose a plan and help unlock future features";
-
 /* Opens the Collaborate UI */
 "Collaborate" = "Cydweithredu";
 
-/* Alert title that collaboration has moved */
-"Collaboration has moved" = "Collaboration has moved";
-
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Collaborators" = "Cydweithredwyr";
-
-/* Compromised password alert title */
-"Compromised Password" = "Compromised Password";
 
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "Rhestr Gryno o Nodiadau";
@@ -209,30 +68,11 @@
    Hint displayed in the password confirmation field */
 "Confirm" = "Cadarnhau";
 
-/* Title on the PinLock screen asking to confirm a passcode */
-"Confirm your passcode" = "Confirm your passcode";
-
-/* Contribute to the Simplenote apps on github */
-"Contribute" = "Contribute";
-
-/* Copies Link to a Note
-   Copies the Note's Interlink */
-"Copy Internal Link" = "Copy Internal Link";
-
-/* Copies the Note's Public Link */
-"Copy Link" = "Copy Link";
-
-/* Copy link action */
-"Copy link" = "Copy link";
-
 /* Rating view - initial - could be better button */
 "Could be better" = "Gallai Fod yn Well";
 
 /* Error for bad email or password */
 "Could not create an account with the provided email address and password." = "Nid oedd modd creu cyfrif gyda'r cyfeiriad e-bost a chyfrinair a ddarparwyd.";
-
-/* Fetch error title */
-"Could not fetch entities" = "Could not fetch entities";
 
 /* Message displayed when login fails */
 "Could not login with the provided email address and password." = "Nid oedd modd mewngofnodi gyda'r cyfeiriad e-bost a chyfrinair a ddarparwyd. ";
@@ -240,91 +80,27 @@
 /* Rating view disliked title */
 "Could you tell us how we could improve?" = "Dwedwch wrthym sut y gallwn ni ei wella?";
 
-/* Error message shown when trying to view history of a note without an internet connection */
-"Couldn't Retrieve History" = "Couldn't Retrieve History";
-
-/* Alert dialog title displayed on sign in error */
-"Couldn't Sign In" = "Couldn't Sign In";
-
-/* Siri Suggestion to create a New Note */
-"Create a New Note" = "Create a New Note";
-
 /* No comment provided by engineer. */
 "Create a new note" = "Creu nodyn newydd";
 
-/* New Note Widget Description */
-"Create a new note instantly with one tap." = "Create a new note instantly with one tap.";
-
-/* Tappable message shown when no notes match a search string. Parameter: %@ - search term */
-"Create a new note titled “%@”" = "Create a new note titled “%@”";
-
-/* Message shown in note list when no notes are in the current view */
-"Create your first note" = "Create your first note";
-
-/* Note Creation Date */
-"Created" = "Created";
-
-/* Sort Mode: Creation Date, descending */
-"Created: Newest" = "Created: Newest";
-
-/* Sort Mode: Creation Date, ascending */
-"Created: Oldest" = "Created: Oldest";
-
 /* No comment provided by engineer. */
 "Current Collaborators" = "Cydweithredwyr Cyfredol";
-
-/* Theme: Dark */
-"Dark" = "Dark";
 
 /* Debug Screen Title
    Display internal debug status */
 "Debug" = "Dadfygio";
 
-/* Indicates that Extended Debugging has been disabled */
-"Debug Disabled" = "Debug Disabled";
-
 /* PinLock screen \"delete\" button */
 "Delete" = "Dileu";
-
-/* Delete account title and action
-   Display Delete Account Alert */
-"Delete Account" = "Delete Account";
-
-/* Delete a note from trash */
-"Delete Note" = "Delete Note";
-
-/* Verb: Delete notes and log out of the app */
-"Delete Notes" = "Delete Notes";
 
 /* Confirmation button of deletion confirmation message for a tag. */
 "Delete Tag" = "Dileu tag";
 
-/* Deselect all Button Label */
-"Deselect All" = "Deselect All";
-
-/* Title displayed in the extended diagnostics UI */
-"Diagnostics" = "Diagnostics";
-
-/* Footer -> Sign up verification screen. Parameter: %1$@ - support email address */
-"Didn't get an email? There may already be an account associated with this email address. Contact %1$@ for help." = "Didn't get an email? There may already be an account associated with this email address. Contact %1$@ for help.";
-
-/* Markdown Accessibility Hint */
-"Disable Markdown formatting" = "Disable Markdown formatting";
-
 /* Dismiss Alert */
 "Dismiss" = "Cau";
 
-/* Accessibility label describing a button used to dismiss a history view of the note */
-"Dismiss History" = "Dismiss History";
-
-/* Accessibility label describing a button used to dismiss an information view of the note */
-"Dismiss Information" = "Dismiss Information";
-
 /* Dismiss Keyboard Button */
 "Dismiss keyboard" = "Cau'r bysellfwrdd";
-
-/* Card title showing information about the note (metrics, references) */
-"Document" = "Document";
 
 /* A short description to access the account creation screen */
 "Don't have an account?" = "Heb greu cyfrif?";
@@ -335,30 +111,14 @@
    Done toolbar button */
 "Done" = "Gorffen";
 
-/* Edit button title
-   Edit Tags Action: Visible in the Tags List */
-"Edit" = "Edit";
-
 /* Email TextField Placeholder */
 "Email" = "E-bost";
-
-/* Email Taken Alert Title */
-"Email in use" = "Email in use";
 
 /* Verb - empty causes all notes to be removed permenently from the trash */
 "Empty" = "Gwagio";
 
 /* Remove all notes from the trash */
 "Empty trash" = "Clirio'r sbwriel";
-
-/* Markdown Accessibility Hint */
-"Enable Markdown formatting" = "Enable Markdown formatting";
-
-/* Keyboard shortcut: End Editing */
-"End Editing" = "End Editing";
-
-/* Number of objects enqueued for processing */
-"Enqueued" = "Enqueued";
 
 /* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "Rhowch eich cod cyfrin";
@@ -367,44 +127,8 @@
    Error Title */
 "Error" = "Gwall";
 
-/* No comment provided by engineer. */
-"Error: NSManagedObjectContext's persistentStoreCoordinator must be nil. Simperium will handle CoreData connections for you." = "Error: NSManagedObjectContext's persistentStoreCoordinator must be nil. Simperium will handle CoreData connections for you.";
-
-/* No comment provided by engineer. */
-"Error: you must initialize your context with 'NSMainQueueConcurrencyType' concurrency type." = "Error: you must initialize your context with 'NSMainQueueConcurrencyType' concurrency type.";
-
-/* Get Help Description Label */
-"FAQ or contact us" = "FAQ or contact us";
-
-/* Offer to enable Face ID support if available and passcode is on. */
-"Face ID" = "Face ID";
-
-/* Accessibility hint used when previous versions of a note are being fetched */
-"Fetching Version" = "Fetching Version";
-
 /* Forgot password Button Text */
 "Forgot password? »" = "Wedi anghofio eich cyfrinair? »";
-
-/* Password Reset Action */
-"Forgotten password?" = "Forgotten password?";
-
-/* FAQ or contact us */
-"Get Help" = "Get Help";
-
-/* Note List Widget Description */
-"Get quick access to a list of all notes or based on the selected tag." = "Get quick access to a list of all notes or based on the selected tag.";
-
-/* Note Widget Description */
-"Get quick access to one of your notes." = "Get quick access to one of your notes.";
-
-/* Rating view liked title */
-"Great! Mind leaving a review to tell us what you like?" = "Great! Mind leaving a review to tell us what you like?";
-
-/* Display help web page */
-"Help" = "Help";
-
-/* Privacy Details */
-"Help us improve Simplenote by sharing usage data with our analytics tool." = "Help us improve Simplenote by sharing usage data with our analytics tool.";
 
 /* Opens the Note's History */
 "History" = "Hanes";
@@ -412,53 +136,8 @@
 /* Rating view - initial - liked button */
 "I like it" = "Rydw i'n ei Hoffi";
 
-/* Note Information Button (metrics + references) */
-"Information" = "Information";
-
-/* Keyboard shortcut: Insert Checklist */
-"Insert Checklist" = "Insert Checklist";
-
-/* Insert Checklist Button */
-"Inserts a new Checklist Item" = "Inserts a new Checklist Item";
-
-/* Date of note last modified. Parameter: %1$@ - formatted date */
-"Last Modified %1$@" = "Last Modified %1$@";
-
-/* Last Message timestamp */
-"LastSeen" = "LastSeen";
-
-/* Learn More Action */
-"Learn more" = "Learn more";
-
 /* Rating view - liked - leave review button */
 "Leave a review" = "Gadael Adolygiad";
-
-/* Theme: Light */
-"Light" = "Light";
-
-/* Link Copied alert */
-"Link copied" = "Link copied";
-
-/* Setting for when the passcode lock should enable */
-"Lock Timeout" = "Lock Timeout";
-
-/* Log In Action
-   Login Action
-   LogIn Action
-   LogIn Interface Title */
-"Log In" = "Log In";
-
-/* Log out of the active account in the app */
-"Log Out" = "Log Out";
-
-/* Widget warning if user is logged out */
-"Log in to see your notes" = "Log in to see your notes";
-
-/* Allows the user to SignIn using their WPCOM Account */
-"Log in with WordPress.com" = "Log in with WordPress.com";
-
-/* Presents the regular Email signin flow */
-"Log in with email" = "Log in with email";
 
 /* Month and day date formatter */
 "MMM d" = "MMM d";
@@ -472,96 +151,17 @@
 /* Month and year date formatter */
 "MMM yyyy" = "MMM yyyy";
 
-/* App configuration error title */
-"Main App is not configured" = "Main App is not configured";
-
-/* Toggles the Markdown State */
-"Markdown" = "Markdown";
-
 /* Note Options Button */
 "Menu" = "Dewislen";
-
-/* Note Modification Date */
-"Modified" = "Modified";
-
-/* Sort Mode: Modified Date, descending */
-"Modified: Newest" = "Modified: Newest";
-
-/* Sort Mode: Modified Date, ascending */
-"Modified: Oldest" = "Modified: Oldest";
-
-/* Monthly Subscription Option (Used when / if the price fails to load) */
-"Monthly" = "Monthly";
-
-/* Accessibility hint for trash selected notes button */
-"Move selected notes to trash" = "Move selected notes to trash";
-
-/* Delete Action
-   Deletes a note */
-"Move to Trash" = "Move to Trash";
-
-/* Sort Mode: Alphabetically, ascending */
-"Name: A-Z" = "Name: A-Z";
-
-/* Sort Mode: Alphabetically, descending */
-"Name: Z-A" = "Name: Z-A";
-
-/* Home screen quick action: New Note
-   Keyboard shortcut: New Note
-   New Note Widget Title */
-"New Note" = "New Note";
-
-/* Default title for notes
-   Text for new note button */
-"New Note..." = "New Note...";
 
 /* Label to create a new note */
 "New note" = "Nodyn newydd";
 
-/* Empty Note Placeholder */
-"New note..." = "New note...";
-
-/* Keyboard shortcut: Note search, Next Match */
-"Next Match" = "Next Match";
-
-/* Cancels Empty Trash Action */
-"No" = "No";
-
 /* Message shown when no notes match a search string */
 "No Results" = "Dim Canlyniadau";
 
-/* Extension Missing Token Alert Title */
-"No Simplenote Account" = "No Simplenote Account";
-
-/* Message shown in note list when no notes are tagged with the provided tag. Parameter: %@ - tag */
-"No notes tagged “%@”" = "No notes tagged “%@”";
-
-/* No purchases Found Message */
-"No previous valid purchases found, for the current period" = "No previous valid purchases found, for the current period";
-
-/* No purchases Found Title */
-"No purchases found" = "No purchases found";
-
 /* Rating view - liked or disliked - no thanks button */
 "No thanks" = "Dim Diolch";
-
-/* Message shown in note list when no notes are untagged */
-"No untagged notes" = "No untagged notes";
-
-/* Error when you enter a bad email address */
-"Not a valid email address" = "Not a valid email address";
-
-/* Note Widget Title */
-"Note" = "Note";
-
-/* Note List Widget Title */
-"Note List" = "Note List";
-
-/* Note trashed notification */
-"Note Trashed" = "Note Trashed";
-
-/* Widget warning if note is deleted */
-"Note no longer available" = "Note no longer available";
 
 /* Notes Header (Search Mode) */
 "Notes" = "Nodiadau";
@@ -574,25 +174,11 @@
 /* Instant passcode lock timeout */
 "Off" = "I ffwrdd";
 
-/* Alert dismiss action
-   Confirm alert message
-   Email unverified alert dismiss */
-"Ok" = "Ok";
-
 /* No comment provided by engineer. */
 "On" = "Ymlaen";
 
-/* Siri Suggestion to open a specific Note */
-"Open \"(preview)\"" = "Open \"(preview)\"";
-
-/* Siri Suggestion to open our app */
-"Open Simplenote" = "Open Simplenote";
-
 /* Select a note to view in the note editor */
 "Open note" = "Agor nodyn";
-
-/* Note Options Title */
-"Options" = "Options";
 
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "Cod cyfrin";
@@ -604,21 +190,9 @@
    Password TextField Placeholder */
 "Password" = "Cyfrinair";
 
-/* Message displayed when password is invalid (Signup) */
-"Password cannot match email" = "Password cannot match email";
-
 /* Message displayed when password is too short. Please preserve the Percent D!
    Message displayed when password is too short. The %%d is a placeholder for a numeral. Please preserve it! */
 "Password must contain at least %d characters" = "Rhaid i'r cyfrinair gynnwys o leiaf %d nod.";
-
-/* Message displayed when a password contains a disallowed character */
-"Password must not contain tabs nor newlines" = "Password must not contain tabs nor newlines";
-
-/* Password Validation: Confirmation doesn't match */
-"Passwords do not match" = "Passwords do not match";
-
-/* Number of changes pending to be sent */
-"Pendings" = "Pendings";
 
 /* Pin State Accessibility Hint */
 "Pin note" = "Pinio'r nodyn";
@@ -627,44 +201,14 @@
    Toggles the Pinned State */
 "Pin to Top" = "Pinio'r i'r top";
 
-/* Error message displayed when user has not verified their WordPress.com account */
-"Please activate your WordPress.com account via email and try again." = "Please activate your WordPress.com account via email and try again.";
-
-/* Error message. Account verification */
-"Please check your network settings and try again." = "Please check your network settings and try again.";
-
-/* Extension Missing Token Alert Title */
-"Please log into your Simplenote account first by using the Simplenote app." = "Please log into your Simplenote account first by using the Simplenote app.";
-
-/* Upgrade Alert Message */
-"Please upgrade to the latest iOS release to restore purchases" = "Please upgrade to the latest iOS release to restore purchases";
-
 /* Title of Markdown preview screen */
 "Preview" = "Rhagolwg";
-
-/* Keyboard shortcut: Note search, Previous Match */
-"Previous Match" = "Previous Match";
-
-/* Simplenote terms of service */
-"Privacy Notice for California Users" = "Privacy Notice for California Users";
-
-/* Simplenote privacy policy */
-"Privacy Policy" = "Privacy Policy";
-
-/* Privacy Settings */
-"Privacy Settings" = "Privacy Settings";
 
 /* Publishes a Note to the Web */
 "Publish" = "Cyhoeddi";
 
-/* Notice up succesful publishing */
-"Publish Successful" = "Publish Successful";
-
 /* Publish Accessibility Hint */
 "Publish note" = "Cyhoeddi nodyn";
-
-/* Notice of publishing action */
-"Publishing note..." = "Publishing note...";
 
 /* Indicates the Note is being published */
 "Publishing..." = "Wrthi'n cyhoeddi...";
@@ -672,91 +216,24 @@
 /* Rate on the App Store */
 "Rate Us" = "Pa mor dda?";
 
-/* Reachs Internet */
-"Reachability" = "Reachability";
-
-/* Home screen quick action: Recent Note */
-"Recent" = "Recent";
-
-/* References section header on Info Card */
-"Referenced In" = "Referenced In";
-
 /* No comment provided by engineer. */
 "Remove all notes from trash" = "Cael gwared â'r holl nodiadau o'r sbwriel";
 
-/* Accessibility hint for removing a tag from the current note */
-"Remove tag from the current note" = "Remove tag from the current note";
-
 /* Rename a tag */
 "Rename" = "Ailenwi";
-
-/* Title for account deletion confirm button */
-"Request Account Deletion" = "Request Account Deletion";
-
-/* Request error alert title */
-"Request Error" = "Request Error";
-
-/* Resend email button -> Verify your email screen */
-"Resend Email" = "Resend Email";
-
-/* Send email verificaiton action */
-"Resend Verification Email" = "Resend Verification Email";
-
-/* Reset Action */
-"Reset" = "Reset";
-
-/* Password Reset Required Alert Title */
-"Reset Required" = "Reset Required";
-
-/* Response Title */
-"Response" = "Response";
 
 /* Restore a note from trash
    Restore a note to a previous version */
 "Restore Note" = "Adfer Nodyn";
 
-/* Manually Restores IAP Purchases */
-"Restore Purchases" = "Restore Purchases";
-
-/* Title -> Review you account screen */
-"Review Your Account" = "Review Your Account";
-
 /* Save action on share extension. */
 "Save" = "Cadw";
-
-/* Home screen quick action: Search
-   Keyboard shortcut: Search
-   Search Placeholder
-   Search Title */
-"Search" = "Search";
-
-/* Tags Header (Search Mode) */
-"Search by Tag" = "Search by Tag";
-
-/* SearchBar's Placeholder Text */
-"Search notes or tags" = "Search notes or tags";
 
 /* No comment provided by engineer. */
 "Security" = "Diogelwch";
 
-/* Select multiple notes at once */
-"Select" = "Select";
-
-/* Select all Button Label
-   Select all button title */
-"Select All" = "Select All";
-
-/* Accessibility label describing a slider used to reset the current note to a previous version */
-"Select a Version" = "Select a Version";
-
-/* For debugging use */
-"Send a Test Crash" = "Send a Test Crash";
-
 /* Rating view - disliked - send feedback button */
 "Send feedback" = "Anfon Adborth";
-
-/* Setup a passcode action button */
-"Set up Passcode" = "Set up Passcode";
 
 /* Settings button
    Title of options screen */
@@ -765,15 +242,6 @@
 /* Opens the Share Sheet
    Share Action */
 "Share" = "Rhannu";
-
-/* Option to disable Analytics. */
-"Share Analytics" = "Share Analytics";
-
-/* Shares a note */
-"Share..." = "Share...";
-
-/* Alert message that collaboration has moved */
-"Sharing notes is now accessed through the action menu from the toolbar." = "Sharing notes is now accessed through the action menu from the toolbar.";
 
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "Bar ochr";
@@ -796,122 +264,18 @@
 /* Alert message displayed when an account has unsynced notes */
 "Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "Bydd all-gofnodi'n dileu unrhyw nodau heb eu cydweddu. Gallwch ddilysu eich nodau wedi eu cydweddu drwy fewngofnodi i'r Web App.";
 
-/* Our mighty brand!
-   Title of main share extension view */
-"Simplenote" = "Simplenote";
-
-/* Restoration Successful Title
-   Sustainer Alert's Title */
-"Simplenote Sustainer" = "Simplenote Sustainer";
-
-/* Simplenote's Feedback Email Title */
-"Simplenote iOS Feedback" = "Simplenote iOS Feedback";
-
-/* Message displayed when app is not configured */
-"Simplenote must be configured and logged in to setup widgets" = "Simplenote must be configured and logged in to setup widgets";
-
-/* Authentication Error Alert Title */
-"Sorry!" = "Sorry!";
-
-/* Option to sort tags alphabetically. The default is by manual ordering. */
-"Sort Alphabetically" = "Sort Alphabetically";
-
 /* Option to sort notes in the note list alphabetically. The default is by modification date
    Sort Order for the Notes List */
 "Sort Order" = "Trefn didoli";
 
-/* Sort By Title */
-"Sort by:" = "Sort by:";
-
-/* Title for the response's Status Code */
-"Status Code" = "Status Code";
-
-/* Become a Sustainer Details */
-"Support your favorite notes app to help unlock future features" = "Support your favorite notes app to help unlock future features";
-
-/* No comment provided by engineer. */
-"Sustainer" = "Sustainer";
-
-/* Restoration Successful Message */
-"Sustainer subscription restored. Thank you for supporting Simplenote!" = "Sustainer subscription restored. Thank you for supporting Simplenote!";
-
-/* Theme: Matches iOS Settings */
-"System Default" = "System Default";
-
-/* Display title for a User Tag */
-"Tag" = "Tag";
-
-/* Widget warning if tag is deleted */
-"Tag no longer available" = "Tag no longer available";
-
-/* Tags List Header */
-"Tags" = "Tags";
-
-/* Placeholder text in textfield when adding a new tag to a note */
-"Tag…" = "Tag…";
-
-/* Accessibility hint for the select/deselect all button */
-"Tap button to select or deselect all notes" = "Tap button to select or deselect all notes";
-
-/* Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
-"Terms and Conditions" = "Terms and Conditions";
-
-/* Simplenote terms of service */
-"Terms of Service" = "Terms of Service";
-
-/* Restoration Successful Title */
-"Thank You!" = "Thank You!";
-
-/* Current Sustainer Details */
-"Thank you for your continued support" = "Thank you for your continued support";
-
-/* Error when address is in use */
-"That email is already being used" = "That email is already being used";
-
-/* Error when address is in use */
-"The email you've entered is already associated with a Simplenote account." = "The email you've entered is already associated with a Simplenote account.";
-
-/* Error when the network is inaccessible */
-"The network could not be reached." = "The network could not be reached.";
-
-/* Onboarding Header Text */
-"The simplest way to keep notes." = "The simplest way to keep notes.";
-
 /* Option to enable the dark app theme. */
 "Theme" = "Thema";
-
-/* Simplenote Themes */
-"Themes" = "Themes";
-
-/* Request error alert message */
-"There was an preparing your verification email, please try again later" = "There was an preparing your verification email, please try again later";
-
-/* Warning message shown when current note is deleted on another device */
-"This note was deleted on another device" = "This note was deleted on another device";
-
-/* error for compromised password */
-"This password has appeared in a data breach, which puts your account at high risk of compromise. To protect your data, you'll need to update your password before being able to log in again." = "This password has appeared in a data breach, which puts your account at high risk of compromise. To protect your data, you'll need to update your password before being able to log in again.";
-
-/* Prompt to setup passcode before biomtery lock. Parameters: %1$@ - biometry type (Face ID or Touch ID */
-"To enable %1$@, you must have a passcode setup first." = "To enable %1$@, you must have a passcode setup first.";
-
-/* Touch ID reason/explanation */
-"To unlock the application" = "To unlock the application";
 
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "Heddiw";
 
-/* Keyboard shortcut: Toggle Markdown */
-"Toggle Markdown" = "Toggle Markdown";
-
 /* Accessibility hint used to show or hide the sidebar */
 "Toggle tag sidebar" = "Bar ochr toglo tagiau";
-
-/* Title for too many login attempts error */
-"Too Many Login Attempts" = "Too Many Login Attempts";
-
-/* Error message for too many login attempts */
-"Too many login attempts. Try again later." = "Too many login attempts. Try again later.";
 
 /* Offer to enable Touch ID support if available and passcode is on. */
 "Touch ID" = "Enw Cyffwrdd";
@@ -920,23 +284,11 @@
    Trash filter button */
 "Trash" = "Sbwriel";
 
-/* Move selected notes to trash */
-"Trash Notes" = "Trash Notes";
-
 /* Prompt when disabling passcode */
 "Turn off Passcode" = "Diffodd y cod cyfrin";
 
 /* Undo action */
 "Undo" = "Dadwneud";
-
-/* WebSocket not initialized */
-"Uninitialized" = "Uninitialized";
-
-/* Default title for an unnamed tag */
-"Unnamed Tag" = "Unnamed Tag";
-
-/* Unpins a note */
-"Unpin" = "Unpin";
 
 /* Pin State Accessibility Hint */
 "Unpin note" = "Dadbinio'r nodyn";
@@ -944,51 +296,11 @@
 /* Publish Accessibility Hint */
 "Unpublish note" = "Dad-gyhoeddi'r nodyn";
 
-/* Notice of publishing unsuccessful */
-"Unpublish successful" = "Unpublish successful";
-
-/* Notice of unpublishing action */
-"Unpublishing note..." = "Unpublishing note...";
-
 /* Indicates the Note is being unpublished */
 "Unpublishing..." = "Wrthi'n dad-gyhoeddi...";
 
-/* Upgrade Alert Title */
-"Unsupported" = "Unsupported";
-
 /* Alert title displayed in settings when an account has unsynced notes */
 "Unsynced Notes Detected" = "Wedi Canfod Nodau Heb eu Cydweddu";
-
-/* Title: Untagged Notes are onscreen */
-"Untagged" = "Untagged";
-
-/* Allows selecting notes with no tags */
-"Untagged Notes" = "Untagged Notes";
-
-/* A user's Simplenote account */
-"Username" = "Username";
-
-/* Title -> Verify your email screen */
-"Verify Your Email" = "Verify Your Email";
-
-/* App version number */
-"Version %@" = "Version %@";
-
-/* Visit app.simplenote.com in the browser */
-"Visit Web App" = "Visit Web App";
-
-/* Generic error */
-"We're having problems. Please try again soon." = "We're having problems. Please try again soon.";
-
-/* WebSocket Status */
-"WebSocket" = "WebSocket";
-
-/* Confirmation that an email has been sent
-   Message -> Verify your email screen. Parameter: %1$@ - email address */
-"We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions." = "We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions.";
-
-/* Message -> Sign up verification screen. Parameter: %1$@ - email address */
-"We’ve sent an email to %1$@. Please check your inbox and follow the instructions." = "We’ve sent an email to %1$@. Please check your inbox and follow the instructions.";
 
 /* Rating view initial title */
 "What do you think about Simplenote?" = "Beth ydych chi'n ei feddwl Simplenote?";
@@ -996,39 +308,9 @@
 /* Number of words in the note */
 "Words" = "Gair";
 
-/* Yearly Subscription Option (Used when / if the price fails to load) */
-"Yearly" = "Yearly";
-
-/* Proceeds with the Empty Trash OP */
-"Yes" = "Yes";
-
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "Ddoe";
 
-/* Current Sustainer Title */
-"You are a Simplenote Sustainer" = "You are a Simplenote Sustainer";
-
-/* Message -> Review you account screen. Parameter: %1$@ - email address */
-"You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address.";
-
-/* Error for un verified email */
-"You must verify your email before being able to login." = "You must verify your email before being able to login.";
-
-/* Restoration Successful Message */
-"You're already a Sustainer. Thank you for supporting Simplenote!" = "You're already a Sustainer. Thank you for supporting Simplenote!";
-
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "Nid yw eich cyfeiriad e-bost yn ddilys.";
-
-/* Password Requirements: Title */
-"Your password is insecure and must be reset. The password requirements are:" = "Your password is insecure and must be reset. The password requirements are:";
-
-/* Message shown in note list when no notes are in the trash */
-"Your trash is empty" = "Your trash is empty";
-
-/* Search Operator for tags. Please preserve the semicolons when translating! */
-"tag:" = "tag:";
-
-/* Indicates that Extended Debugging has been enabled */
-"🐞 Debug Enabled 🐞" = "";
 
