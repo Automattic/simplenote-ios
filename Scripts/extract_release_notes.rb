@@ -67,7 +67,7 @@ lines[(index + 1)...].each do |line|
 end
 
 formatted_lines = release_lines
-                  .map { |l| l.gsub(/-   /, '- ') }
+                  .map { |l| l.gsub('-   ', '- ') }
 
 case mode
 when :strip_pr_links

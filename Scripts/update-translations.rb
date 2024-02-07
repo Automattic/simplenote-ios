@@ -53,7 +53,7 @@ ALL_LANGS = {
 
 def copy_header(target_file, trans_strings)
   trans_strings.each_line do |line|
-    if (!line.start_with?("/*"))
+    unless line.start_with?('/*')
       target_file.write("\n")
       return
     end
@@ -76,7 +76,7 @@ end
 langs = {}
 if ARGV.count.positive?
   ARGV.each do |key|
-    unless local = ALL_LANGS[key]
+    unless (local = ALL_LANGS[key])
       puts "Unknown language #{key}"
       exit 1
     end
