@@ -618,7 +618,7 @@ platform :ios do
   # bundle exec fastlane build_and_upload_installable_build
   #####################################################################################
   desc 'Builds and uploads an installable build'
-  lane :build_and_upload_installable_build do |_options|
+  lane :build_and_upload_installable_build do
     alpha_code_signing
 
     # Get the current build version, and update it if needed
@@ -991,7 +991,7 @@ end
 # Example:
 # bundle exec fastlane update_certs_and_profiles
 #####################################################################################
-lane :update_certs_and_profiles do |_options|
+lane :update_certs_and_profiles do
   alpha_code_signing
   internal_code_signing
   appstore_code_signing
