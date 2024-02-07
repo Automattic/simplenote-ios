@@ -49,9 +49,11 @@ platform :ios do
   VERSION_FILE_PATH = File.join(PROJECT_ROOT_FOLDER, 'config', 'Version.Public.xcconfig')
   OUTPUT_DIRECTORY_PATH = File.join(PROJECT_ROOT_FOLDER, 'build', 'results')
 
+  GITHUB_TOKEN = 'Automattic/simplenote-ios'
+
   Dotenv.load(USER_ENV_FILE_PATH)
   Dotenv.load(PROJECT_ENV_FILE_PATH)
-  ENV.fetch(GHHELPER_REPO = 'Automattic/simplenote-ios', nil)
+
   ENV['PROJECT_NAME'] = 'Simplenote'
   ENV['PROJECT_ROOT_FOLDER'] = PROJECT_ROOT_FOLDER
   ENV['APP_STORE_STRINGS_FILE_NAME'] = 'AppStoreStrings.pot'
@@ -124,11 +126,11 @@ end
     )
     ios_update_release_notes(new_version: new_version)
     setbranchprotection(
-      repository: GHHELPER_REPO,
+      repository: GITHUB_TOKEN,
       branch: "release/#{new_version}"
     )
     setfrozentag(
-      repository: GHHELPER_REPO,
+      repository: GITHUB_TOKEN,
       milestone: new_version
     )
 
@@ -317,17 +319,17 @@ end
     # Wrap up
     version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
     removebranchprotection(
-      repository: GHHELPER_REPO,
+      repository: GITHUB_TOKEN,
       branch: "release/#{version}"
     )
     setfrozentag(
-      repository: GHHELPER_REPO,
+      repository: GITHUB_TOKEN,
       milestone: version,
       freeze: false
     )
-    create_new_milestone(repository: GHHELPER_REPO)
+    create_new_milestone(repository: GITHUB_TOKEN)
     close_milestone(
-      repository: GHHELPER_REPO,
+      repository: GITHUB_TOKEN,
       milestone: version
     )
 
@@ -534,7 +536,7 @@ end
 
       version = options[:beta_release] ? ios_get_build_version : ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
       create_release(
-        repository: GHHELPER_REPO,
+        repository: GITHUB_TOKEN,
         version: version,
         release_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt'),
         release_assets: archive_zip_path.to_s,
