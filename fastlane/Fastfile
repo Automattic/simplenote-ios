@@ -93,6 +93,7 @@ def get_required_env(key)
   unless ENV.key?(key)
     UI.user_error!("Environment variable '#{key}' is not set. Have you setup #{USER_ENV_FILE_PATH} correctly?")
   end
+end
 
   ########################################################################
   # Release Lanes
@@ -116,12 +117,20 @@ def get_required_env(key)
     ios_bump_version_release
     new_version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
 
-    extract_release_notes_for_version(version: new_version,
-                                      release_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'RELEASE-NOTES.txt'),
-                                      extracted_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt'))
+    extract_release_notes_for_version(
+      version: new_version,
+      release_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'RELEASE-NOTES.txt'),
+      extracted_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt')
+    )
     ios_update_release_notes(new_version: new_version)
-    setbranchprotection(repository: GHHELPER_REPO, branch: "release/#{new_version}")
-    setfrozentag(repository: GHHELPER_REPO, milestone: new_version)
+    setbranchprotection(
+      repository: GHHELPER_REPO,
+      branch: "release/#{new_version}"
+    )
+    setfrozentag(
+      repository: GHHELPER_REPO,
+      milestone: new_version
+    )
 
     generate_strings_file_for_glotpress
     trigger_beta_build(branch_to_build: "release/#{new_version}")
@@ -212,7 +221,10 @@ def get_required_env(key)
   lane :new_beta_release do |options|
     ios_betabuild_prechecks(options)
     download_localized_strings_and_metadata_from_glotpress
-    ios_lint_localizations(input_dir: 'Simplenote', allow_retry: true)
+    ios_lint_localizations(
+      input_dir: 'Simplenote',
+      allow_retry: true
+    )
     ios_bump_version_beta
     version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
     trigger_beta_build(branch_to_build: "release/#{version}")
@@ -233,7 +245,10 @@ def get_required_env(key)
   desc 'Creates a new hotfix branch for the given version:x.y.z. The branch will be cut from the tag x.y of the previous release'
   lane :new_hotfix_release do |options|
     prev_ver = ios_hotfix_prechecks(options)
-    ios_bump_version_hotfix(previous_version: prev_ver, version: options[:version])
+    ios_bump_version_hotfix(
+      previous_version: prev_ver,
+      version: options[:version]
+    )
   end
 
   #####################################################################################
@@ -292,16 +307,29 @@ def get_required_env(key)
       locales: GLOTPRESS_TO_LPROJ_APP_LOCALE_CODES,
       download_dir: File.join(PROJECT_ROOT_FOLDER, 'Simplenote')
     )
-    sanitize_appstore_keywords()
-    ios_lint_localizations(input_dir: 'Simplenote', allow_retry: true)
+    sanitize_appstore_keywords
+    ios_lint_localizations(
+      input_dir: 'Simplenote',
+      allow_retry: true
+    )
     ios_bump_version_beta
 
     # Wrap up
     version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
-    removebranchprotection(repository:GHHELPER_REPO, branch: "release/#{version}")
-    setfrozentag(repository:GHHELPER_REPO, milestone: version, freeze: false)
-    create_new_milestone(repository:GHHELPER_REPO)
-    close_milestone(repository:GHHELPER_REPO, milestone: version)
+    removebranchprotection(
+      repository: GHHELPER_REPO,
+      branch: "release/#{version}"
+    )
+    setfrozentag(
+      repository: GHHELPER_REPO,
+      milestone: version,
+      freeze: false
+    )
+    create_new_milestone(repository: GHHELPER_REPO)
+    close_milestone(
+      repository: GHHELPER_REPO,
+      milestone: version
+    )
 
     # Start the build
     trigger_release_build(branch_to_build: "release/#{version}")
@@ -371,15 +399,24 @@ def get_required_env(key)
   #####################################################################################
   desc 'Builds and uploads for distribution'
   lane :build_and_upload_release do |options|
-    ios_build_prechecks(skip_confirm: options[:skip_confirm],
-                        internal: false,
-                        internal_on_single_version: options[:beta_release],
-                        external: true)
+    ios_build_prechecks(
+      skip_confirm: options[:skip_confirm],
+      internal: false,
+      internal_on_single_version: options[:beta_release],
+      external: true
+    )
 
     ios_build_preflight
-    build_and_upload_internal(skip_prechecks: true, skip_confirm: options[:skip_confirm]) if options[:beta_release]
-    build_and_upload_to_app_store_connect(skip_prechecks: true, skip_confirm: options[:skip_confirm],
-                                          beta_release: options[:beta_release], create_release: options[:create_gh_release])
+    build_and_upload_internal(
+      skip_prechecks: true,
+      skip_confirm: options[:skip_confirm]
+    ) if options[:beta_release]
+    build_and_upload_to_app_store_connect(
+      skip_prechecks: true,
+      skip_confirm: options[:skip_confirm],
+      beta_release: options[:beta_release],
+      create_release: options[:create_gh_release]
+    )
   end
 
   #####################################################################################
@@ -396,7 +433,10 @@ def get_required_env(key)
   #####################################################################################
   desc 'Builds and updates for distribution'
   lane :build_and_upload_internal do |options|
-    ios_build_prechecks(skip_confirm: options[:skip_confirm], internal: false) unless options[:skip_prechecks]
+    ios_build_prechecks(
+      skip_confirm: options[:skip_confirm],
+      internal: false
+    ) unless options[:skip_prechecks]
     ios_build_preflight unless options[:skip_prechecks]
 
     internal_code_signing
@@ -451,7 +491,10 @@ def get_required_env(key)
   #####################################################################################
   desc 'Builds and uploads for distribution'
   lane :build_and_upload_to_app_store_connect do |options|
-    ios_build_prechecks(skip_confirm: options[:skip_confirm], external: true) unless options[:skip_prechecks]
+    ios_build_prechecks(
+      skip_confirm: options[:skip_confirm],
+      external: true
+    ) unless options[:skip_prechecks]
     ios_build_preflight unless options[:skip_prechecks]
 
     appstore_code_signing
@@ -490,7 +533,8 @@ def get_required_env(key)
       zip(path: lane_context[SharedValues::XCODEBUILD_ARCHIVE], output_path: archive_zip_path)
 
       version = options[:beta_release] ? ios_get_build_version : ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
-      create_release(repository:GHHELPER_REPO,
+      create_release(
+        repository: GHHELPER_REPO,
         version: version,
         release_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt'),
         release_assets: archive_zip_path.to_s,
@@ -538,7 +582,10 @@ def get_required_env(key)
   #
   #####################################################################################
   lane :trigger_beta_build do |options|
-    trigger_buildkite_release_build(branch: options[:branch_to_build], beta: true)
+    trigger_buildkite_release_build(
+      branch: options[:branch_to_build],
+      beta: true
+    )
   end
 
   #####################################################################################
@@ -553,7 +600,10 @@ def get_required_env(key)
   #
   #####################################################################################
   lane :trigger_release_build do |options|
-    trigger_buildkite_release_build(branch: options[:branch_to_build], beta: false)
+    trigger_buildkite_release_build(
+      branch: options[:branch_to_build],
+      beta: false
+    )
   end
 
   #####################################################################################
