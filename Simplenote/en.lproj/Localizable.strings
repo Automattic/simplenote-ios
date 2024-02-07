@@ -1,4 +1,4 @@
-﻿/* Monthly Subscription Option. Please preserve the special marker! */
+/* Monthly Subscription Option. Please preserve the special marker! */
 "%@ per Month" = "%@ per Month";
 
 /* Yearly Subscription Option. Please preserve the special marker! */
@@ -1026,4 +1026,3 @@
 
 /* Indicates that Extended Debugging has been enabled */
 "🐞 Debug Enabled 🐞" = "🐞 Debug Enabled 🐞";
-
