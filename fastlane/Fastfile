@@ -96,7 +96,6 @@ def get_required_env(key)
 end
 
 platform :ios do
-
   ########################################################################
   # Release Lanes
   ########################################################################
@@ -519,16 +518,16 @@ platform :ios do
     )
 
     sh('rm ../Simplenote.ipa')
-    dSYM_PATH = "#{File.dirname(Dir.pwd)}/Simplenote.app.dSYM.zip"
+    dsym_path = "#{File.dirname(Dir.pwd)}/Simplenote.app.dSYM.zip"
 
     sentry_upload_dsym(
-      dsym_path: dSYM_PATH,
+      dsym_path: dsym_path,
       auth_token: ENV.fetch('SENTRY_AUTH_TOKEN', nil),
       org_slug: 'a8c',
       project_slug: 'simplenote-ios'
     )
 
-    sh("rm #{dSYM_PATH}")
+    sh("rm #{dsym_path}")
 
     if options[:create_release]
       archive_zip_path = "#{File.dirname(Dir.pwd)}/Simplenote.xarchive.zip"
@@ -678,7 +677,8 @@ platform :ios do
   #
   # @param [String] app_name The display name to use in the comment text to identify which app this Installable Build is about
   # @param [String] build_number The App Center's build number for this build
-  # @param [String] url_slug The last component of the `install.appcenter.ms` URL used to install the app. Typically a sluggified version of the app name in App Center (e.g. `WPiOS-One-Offs`)
+  # @param [String] url_slug The last component of the `install.appcenter.ms` URL used to install the app. Typically a sluggified version of the app name
+  #                          in App Center (e.g. `WPiOS-One-Offs`)
   #
   # @called_by CI — especially, relies on `BUILDKITE_PULL_REQUEST` being defined
   #
@@ -959,7 +959,8 @@ platform :ios do
 
     # If Fastlane cannot instantiate a user, it will ask the caller for the email.
     # Once we have it, we can set it as `FASTLANE_USER` in the environment (which has lifecycle limited to this call) so that the next commands will already have access to it.
-    # Note that if the user is already available to `AccountManager`, setting it in the environment is redundant, but Fastlane doesn't provide a way to check it so we have to do it anyway.
+    # Note that if the user is already available to `AccountManager`, setting it in the environment is redundant, but Fastlane
+    # doesn't provide a way to check it so we have to do it anyway.
     ENV['FASTLANE_USER'] = CredentialsManager::AccountManager.new.user
 
     # Add all development certificates to the provisioning profiles (just in case – this is an easy step to miss)
@@ -1189,14 +1190,14 @@ def sanitize_test_accounts
   UI.message("Accounts before sanitizing: #{accounts_hash}")
 
   accounts_hash.each do |key, value|
-    next if value == 'free' || is_job_running(value)
+    next if value == 'free' || job_running?(value)
 
     accounts_hash[key] = 'free'
     submit_accounts_hash(accounts_hash)
   end
 end
 
-def is_job_running(job_number)
+def job_running?(job_number)
   client = Buildkit.new(token: get_required_env('BUILDKITE_TOKEN'))
   build = client.build('automattic', 'simplenote-ios', job_number)
 
