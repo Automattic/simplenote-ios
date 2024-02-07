@@ -23,16 +23,14 @@ before_all do
   # Check that the env files exist
   unless is_ci || File.file?(USER_ENV_FILE_PATH)
     error_message = <<~ERROR
-    ~/.simplenoteios-env.default not found. Please copy env/user.env-example to #{USER_ENV_FILE_PATH} and fill in the values") using the following command:
+      ~/.simplenoteios-env.default not found. Please copy env/user.env-example to #{USER_ENV_FILE_PATH} and fill in the values") using the following command:
 
-    \tcp #{PROJECT_ROOT_FOLDER}/fastlane/env/user.env-example #{USER_ENV_FILE_PATH}
+      \tcp #{PROJECT_ROOT_FOLDER}/fastlane/env/user.env-example #{USER_ENV_FILE_PATH}
     ERROR
     UI.user_error!(error_message)
   end
 
-  unless File.file?(PROJECT_ENV_FILE_PATH)
-    UI.user_error!('project.env not found: Make sure your configuration is up to date with `rake dependencies`')
-  end
+  UI.user_error!('project.env not found: Make sure your configuration is up to date with `rake dependencies`') unless File.file?(PROJECT_ENV_FILE_PATH)
 
   setup_ci
 end
@@ -90,9 +88,8 @@ ENV['FL_RELEASE_TOOLKIT_DEFAULT_BRANCH'] = 'trunk'
 # Use this instead of getting values from ENV directly
 # It will throw an error if the requested value is missing
 def get_required_env(key)
-  unless ENV.key?(key)
-    UI.user_error!("Environment variable '#{key}' is not set. Have you setup #{USER_ENV_FILE_PATH} correctly?")
-  end
+  UI.user_error!("Environment variable '#{key}' is not set. Have you setup #{USER_ENV_FILE_PATH} correctly?") unless ENV.key?(key)
+  ENV.fetch(key)
 end
 
 platform :ios do
@@ -113,7 +110,7 @@ platform :ios do
   #####################################################################################
   desc 'Creates a new release branch from the current trunk'
   lane :code_freeze do |options|
-    old_version = ios_codefreeze_prechecks(options)
+    ios_codefreeze_prechecks(options)
 
     ios_bump_version_release
     new_version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
@@ -194,9 +191,7 @@ platform :ios do
       arabic_comma = '،'
       keywords = keywords.gsub(arabic_comma, english_comma) if File.basename(locale_dir) == 'ar-SA'
 
-      until keywords.length <= app_store_connect_keywords_length_limit
-        keywords = keywords.split(english_comma)[0...-1].join(english_comma)
-      end
+      keywords = keywords.split(english_comma)[0...-1].join(english_comma) until keywords.length <= app_store_connect_keywords_length_limit
 
       File.write(keywords_path, keywords)
     end
@@ -285,9 +280,7 @@ platform :ios do
   #####################################################################################
   desc 'Trigger the final release build on CI'
   lane :finalize_release do |options|
-    if ios_current_branch_is_hotfix
-      UI.user_error!('To finalize a hotfix, please use the finalize_hotfix_release lane instead')
-    end
+    UI.user_error!('To finalize a hotfix, please use the finalize_hotfix_release lane instead') if ios_current_branch_is_hotfix
 
     ios_finalize_prechecks(options)
 
@@ -408,10 +401,12 @@ platform :ios do
     )
 
     ios_build_preflight
-    build_and_upload_internal(
-      skip_prechecks: true,
-      skip_confirm: options[:skip_confirm]
-    ) if options[:beta_release]
+    if options[:beta_release]
+      build_and_upload_internal(
+        skip_prechecks: true,
+        skip_confirm: options[:skip_confirm]
+      )
+    end
     build_and_upload_to_app_store_connect(
       skip_prechecks: true,
       skip_confirm: options[:skip_confirm],
@@ -434,10 +429,12 @@ platform :ios do
   #####################################################################################
   desc 'Builds and updates for distribution'
   lane :build_and_upload_internal do |options|
-    ios_build_prechecks(
-      skip_confirm: options[:skip_confirm],
-      internal: false
-    ) unless options[:skip_prechecks]
+    unless options[:skip_prechecks]
+      ios_build_prechecks(
+        skip_confirm: options[:skip_confirm],
+        internal: false
+      )
+    end
     ios_build_preflight unless options[:skip_prechecks]
 
     internal_code_signing
@@ -492,10 +489,12 @@ platform :ios do
   #####################################################################################
   desc 'Builds and uploads for distribution'
   lane :build_and_upload_to_app_store_connect do |options|
-    ios_build_prechecks(
-      skip_confirm: options[:skip_confirm],
-      external: true
-    ) unless options[:skip_prechecks]
+    unless options[:skip_prechecks]
+      ios_build_prechecks(
+        skip_confirm: options[:skip_confirm],
+        external: true
+      )
+    end
     ios_build_preflight unless options[:skip_prechecks]
 
     appstore_code_signing
@@ -1220,7 +1219,7 @@ def submit_accounts_hash(accounts_hash)
     use_ssl: uri.scheme == 'https'
   }
 
-  response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+  Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
     http.request(request)
   end
 
