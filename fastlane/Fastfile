@@ -149,17 +149,17 @@ platform :ios do
   desc 'Updates the AppStoreStrings.pot file with the latest data'
   lane :update_appstore_strings do |options|
     prj_folder = Pathname.new(File.join(Dir.pwd, '..')).expand_path.to_s
-    source_metadata_folder = File.join(prj_folder, 'fastlane/appstoreres/metadata/source')
+    source_metadata_folder = File.join(prj_folder, 'fastlane', 'appstoreres', 'metadata', 'source')
 
     files = {
-      whats_new: File.join(prj_folder, '/Simplenote/Resources/release_notes.txt'),
+      whats_new: File.join(prj_folder, 'Simplenote', 'Resources', 'release_notes.txt'),
       app_store_subtitle: File.join(source_metadata_folder, 'subtitle.txt'),
       app_store_desc: File.join(source_metadata_folder, 'description.txt'),
       app_store_keywords: File.join(source_metadata_folder, 'keywords.txt')
     }
 
     ios_update_metadata_source(
-      po_file_path: "#{prj_folder}/Simplenote/Resources/AppStoreStrings.pot",
+      po_file_path: File.join(prj_folder, 'Simplenote', 'Resources', 'AppStoreStrings.pot'),
       source_files: files,
       release_version: options[:version]
     )
@@ -517,7 +517,7 @@ platform :ios do
     )
 
     sh('rm ../Simplenote.ipa')
-    dsym_path = "#{File.dirname(Dir.pwd)}/Simplenote.app.dSYM.zip"
+    dsym_path = File.join(File.dirname(Dir.pwd), 'Simplenote.app.dSYM.zip')
 
     sentry_upload_dsym(
       dsym_path: dsym_path,
@@ -529,7 +529,7 @@ platform :ios do
     sh("rm #{dsym_path}")
 
     if options[:create_release]
-      archive_zip_path = "#{File.dirname(Dir.pwd)}/Simplenote.xarchive.zip"
+      archive_zip_path = File.join(File.dirname(Dir.pwd)), 'Simplenote.xarchive.zip')
       zip(path: lane_context[SharedValues::XCODEBUILD_ARCHIVE], output_path: archive_zip_path)
 
       version = options[:beta_release] ? ios_get_build_version : ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
