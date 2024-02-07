@@ -55,19 +55,19 @@ def copy_header(target_file, trans_strings)
   trans_strings.each_line do |line|
     unless line.start_with?('/*')
       target_file.write("\n")
-      return
+      break
     end
 
     target_file.write(line)
   end
 end
 
-def copy_comment(f, trans_strings, value)
+def copy_comment(file, trans_strings, value)
   prev_line = ''
   trans_strings.each_line do |line|
     if line.include?(value)
-      f.write(prev_line)
-      return
+      file.write(prev_line)
+      break
     end
     prev_line = line
   end
