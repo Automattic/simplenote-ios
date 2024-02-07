@@ -241,6 +241,11 @@ task xcode: [:dependencies] do
   sh "open #{XCODE_WORKSPACE}"
 end
 
+def fold(label)
+  puts "--- #{label}" if ENV['BUILDKITE']
+  yield
+end
+
 def pod(args)
   args = %w[bundle exec pod] + args
   sh(*args)
