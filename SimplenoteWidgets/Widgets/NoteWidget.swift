@@ -9,7 +9,8 @@ struct NoteWidget: Widget {
         }
         .configurationDisplayName(Constants.displayName)
         .description(Constants.description)
-        .supportedFamilies([.systemSmall, .systemMedium])
+        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
+        .contentMarginsDisabled()
     }
 
     private func prepareWidgetView(fromEntry entry: NoteWidgetEntry) -> some View {

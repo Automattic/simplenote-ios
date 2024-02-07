@@ -3,7 +3,9 @@ import XCTest
 class EmailLogin {
 
     class func open() {
+        app.buttons[UID.Button.logIn].waitForIsHittable()
         app.buttons[UID.Button.logIn].tap()
+        app.buttons[UID.Button.logInWithEmail].waitForIsHittable()
         app.buttons[UID.Button.logInWithEmail].tap()
     }
 
@@ -12,6 +14,7 @@ class EmailLogin {
         guard backButton.isHittable else { return }
 
         backButton.tap()
+        handleSavePasswordPrompt()
     }
 
     class func logIn() {
@@ -33,6 +36,8 @@ class EmailLogin {
         enterEmail(enteredValue: email)
         enterPassword(enteredValue: password)
         app.buttons[UID.Button.logIn].tap()
+        handleSavePasswordPrompt()
+        waitForSpinnerToDisappear()
     }
 
     class func enterEmail(enteredValue: String) {
@@ -45,5 +50,20 @@ class EmailLogin {
         let field = app.secureTextFields[UID.TextField.password]
         field.tap()
         field.typeText(enteredValue)
+    }
+
+    class func handleSavePasswordPrompt() {
+        // As of Xcode 14.3, the Simulator might ask to save the password which, of course, we don't want to do.
+        if app.buttons["Save Password"].waitForExistence(timeout: 5) {
+            // There should be no need to wait for this button to exist since it's part of the same
+            // alert where "Save Password" is.
+            app.buttons["Not Now"].tap()
+        }
+    }
+
+    class func waitForSpinnerToDisappear() {
+        let predicate   = NSPredicate(format: "exists == false && isHittable == false")
+        let expectation = XCTNSPredicateExpectation(predicate: predicate, object: app.staticTexts["In progress"])
+        XCTWaiter().wait(for: [ expectation ], timeout: 10)
     }
 }

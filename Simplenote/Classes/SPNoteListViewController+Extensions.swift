@@ -812,16 +812,6 @@ private extension SPNoteListViewController {
             select.attributes = .disabled
         }
 
-        /// NOTE:
-        /// iOS 13 exhibits a broken animation when performing a Delete OP from a ContextMenu.
-        /// Since this appears to be fixed in iOS 14, quick workaround is: remove Delete from the Contextual Actions for iOS 13.
-        ///
-        /// Ref.: https://github.com/Automattic/simplenote-ios/pull/902/files
-        ///
-        guard #available(iOS 14.0, *) else {
-            return UIMenu(title: "", children: [select, share, copy, pin])
-        }
-
         let delete = UIAction(title: ActionTitle.delete, image: .image(name: .trash), attributes: .destructive) { [weak self] _ in
             self?.delete(note: note)
             NoticeController.shared.present(NoticeFactory.noteTrashed(onUndo: {

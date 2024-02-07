@@ -1,0 +1,2 @@
+- Aggiungere il colore di sfondo al blocco di codice nell'anteprima in modalità scura
+- Aggiungere widget nota di grandi dimensioni

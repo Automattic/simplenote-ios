@@ -43,11 +43,7 @@ enum UID {
         // "Empty Trash" button label is generated
         // differently by Xcode 12.4 and 12.5 (runs iOS 14.5+)
         static private(set) var trashEmptyTrash: String = {
-            if #available(iOS 14.5, *) {
-                return "Empty trash"
-            } else {
-                return "Empty"
-            }
+            "Empty trash"
         }()
 
         static let clearText = "Clear text"

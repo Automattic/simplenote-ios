@@ -1,7 +1,13 @@
-/* Translation-Revision-Date: 2021-10-12 13:54:04+0000 */
+/* Translation-Revision-Date: 2022-11-22 15:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: he_IL */
+
+/* No comment provided by engineer. */
+"%@ per Month" = "%@ לחודש";
+
+/* Yearly Subscription Option. Please preserve the special marker! */
+"%@ per Year" = "%@ לשנה";
 
 /* Number of found search results */
 "%d Result" = "תוצאה %d";
@@ -93,6 +99,9 @@
    Title: No filters applied */
 "All Notes" = "כל הפתקים";
 
+/* A short description to access the account login screen */
+"Already have an account?" = "יש לך כבר חשבון?";
+
 /* Delete account confirmation instructions */
 "An email has been sent to %@. Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation." = "הודעת אימייל נשלחה לכתובת %@. יש לבדוק את תיבת הדואר הנכנס ולפעול לפי ההוראות לאישור המחיקה של החשבון.\n\nהחשבון שלך לא יימחק עד שנקבל את אישורך";
 
@@ -120,6 +129,9 @@
 /* User Authenticated */
 "Authenticated" = "האימות בוצע";
 
+/* Become a Sustainer Title */
+"Become a Simplenote Sustainer" = "להצטרף בתור Simplenote Sustainer";
+
 /* The Simplenote blog */
 "Blog" = "בלוג";
 
@@ -129,12 +141,17 @@
 /* Delete account confirmation alert message */
 "By deleting the account for %@, all notes created with this account will be permanently deleted. This action is not reversible" = "על ידי מחיקת החשבון עבור %@, כל הפתקים שנוצרו באמצעות החשבון הזה יימחקו לצמיתות. לא ניתן לבטל את הפעולה הזאת";
 
+/* Terms Button Text */
+"By signing up, you agree to our Terms of Service »" = "הרשמתך מהווה הסכמה לתנאי השימוש שלנו »";
+
 /* Cancel Action
    Cancel action button
    Cancel action for password alert
    Cancel action on share extension.
+   Cancel button for authentication
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
+   Dismisses the alert
    Dismissing an interface
    PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
@@ -170,6 +187,9 @@
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "לבחור קוד סיסמה בן 4 ספרות";
 
+/* Sustainer Alert's Message */
+"Choose a plan and help unlock future features" = "יש לבחור תוכנית כדי לעזור בהפעלת אפשרויות בעתיד";
+
 /* Opens the Collaborate UI */
 "Collaborate" = "שיתוף פעולה בעריכה";
 
@@ -185,7 +205,8 @@
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "רשימת פתקים מכווצת";
 
-/* Confirm button -> Review you account screen */
+/* Confirm button -> Review you account screen
+   Hint displayed in the password confirmation field */
 "Confirm" = "פעם נוספת";
 
 /* Title on the PinLock screen asking to confirm a passcode */
@@ -290,6 +311,9 @@
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "להשבית את העיצוב של Markdown";
 
+/* Dismiss Alert */
+"Dismiss" = "סגור";
+
 /* Accessibility label describing a button used to dismiss a history view of the note */
 "Dismiss History" = "למחוק את ההיסטוריה";
 
@@ -301,6 +325,9 @@
 
 /* Card title showing information about the note (metrics, references) */
 "Document" = "מסמך";
+
+/* A short description to access the account creation screen */
+"Don't have an account?" = "אין לך חשבון עדיין?";
 
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
@@ -340,6 +367,12 @@
    Error Title */
 "Error" = "שגיאה";
 
+/* No comment provided by engineer. */
+"Error: NSManagedObjectContext's persistentStoreCoordinator must be nil. Simperium will handle CoreData connections for you." = "שגיאה: הערך 'persistentStoreCoordinator' של 'NSManagedObjectContext' חייב להיות \"nil\". השירות של Simperium יטפל בחיבורים של CoreData עבורך.";
+
+/* No comment provided by engineer. */
+"Error: you must initialize your context with 'NSMainQueueConcurrencyType' concurrency type." = "שגיאה: עליך להפעיל את ההקשר באמצעות סוג המטבע 'NSMainQueueConcurrencyType'.";
+
 /* Get Help Description Label */
 "FAQ or contact us" = "שאלות נפוצות או יצירת קשר";
 
@@ -348,6 +381,9 @@
 
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "מוריד גרסה";
+
+/* Forgot password Button Text */
+"Forgot password? »" = "שכחת את הסיסמה? »";
 
 /* Password Reset Action */
 "Forgotten password?" = "שכחת את הסיסמה?";
@@ -454,6 +490,9 @@
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "עודכן: הישן ביותר";
 
+/* Monthly Subscription Option (Used when / if the price fails to load) */
+"Monthly" = "חודשי";
+
 /* Accessibility hint for trash selected notes button */
 "Move selected notes to trash" = "להעביר את הפתקים שנבחרו לפח";
 
@@ -497,11 +536,20 @@
 /* Message shown in note list when no notes are tagged with the provided tag. Parameter: %@ - tag */
 "No notes tagged “%@”" = "אין פתקים עם התגית “%@”";
 
+/* No purchases Found Message */
+"No previous valid purchases found, for the current period" = "לא נמצאו רכישות קודמות רלוונטיות עבור התקופה הנוכחית";
+
+/* No purchases Found Title */
+"No purchases found" = "לא נמצאו רכישות";
+
 /* Rating view - liked or disliked - no thanks button */
 "No thanks" = "לא תודה";
 
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "אין פתקים ללא תגיות";
+
+/* Error when you enter a bad email address */
+"Not a valid email address" = "כתובת האימייל לא חוקית";
 
 /* Note Widget Title */
 "Note" = "פתק";
@@ -552,17 +600,22 @@
 /* Pin Lock */
 "Passcodes did not match. Try again." = "קודי הסיסמה לא התאימו. יש לנסות שוב.";
 
-/* Password TextField Placeholder */
+/* Hint displayed in the password field
+   Password TextField Placeholder */
 "Password" = "סיסמה";
 
 /* Message displayed when password is invalid (Signup) */
 "Password cannot match email" = "הסיסמה לא יכולה להיות כתובת האימייל";
 
-/* Message displayed when password is too short. Please preserve the Percent D! */
+/* Message displayed when password is too short. Please preserve the Percent D!
+   Message displayed when password is too short. The %%d is a placeholder for a numeral. Please preserve it! */
 "Password must contain at least %d characters" = "הסיסמה חייבת להכיל לפחות %d תווים";
 
 /* Message displayed when a password contains a disallowed character */
 "Password must not contain tabs nor newlines" = "הסיסמה לא יכולה להכיל סימני Tab או שורות חדשות";
+
+/* Password Validation: Confirmation doesn't match */
+"Passwords do not match" = "הסיסמאות לא תואמות";
 
 /* Number of changes pending to be sent */
 "Pendings" = "בהמתנה";
@@ -582,6 +635,9 @@
 
 /* Extension Missing Token Alert Title */
 "Please log into your Simplenote account first by using the Simplenote app." = "ראשית עליך להתחבר לחשבון שלך ב-Simplenote באמצעות האפליקציה של Simplenote.";
+
+/* Upgrade Alert Message */
+"Please upgrade to the latest iOS release to restore purchases" = "יש לשדרג לגרסה האחרונה של iOS כדי לשחזר רכישות";
 
 /* Title of Markdown preview screen */
 "Preview" = "תצוגה מקדימה";
@@ -659,6 +715,9 @@
    Restore a note to a previous version */
 "Restore Note" = "שחזור פתק";
 
+/* Manually Restores IAP Purchases */
+"Restore Purchases" = "לשחזר רכישות";
+
 /* Title -> Review you account screen */
 "Review Your Account" = "לבדוק את החשבון שלך";
 
@@ -719,10 +778,20 @@
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "סרגל צדדי";
 
-/* Signup Action
-   SignUp Action
-   SignUp Interface Title */
+/* Title of button for logging in (must be short) */
+"Sign In" = "התחברות";
+
+/* SignUp Action
+   Signup Action
+   SignUp Interface Title
+   Title of button to create a new account (must be short) */
 "Sign Up" = "הרשמה";
+
+/* A short link to access the account login screen */
+"Sign in" = "כניסה למערכת";
+
+/* A short link to access the account creation screen */
+"Sign up" = "הרשמה";
 
 /* Alert message displayed when an account has unsynced notes */
 "Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "לאחר ההתנתקות, כל הפתקים שלא סוכרנו יימחקו. אפשר לאמת אילו פתקים סונכרנו באמצעות התחברות לאפליקציית הרשת.";
@@ -730,6 +799,10 @@
 /* Our mighty brand!
    Title of main share extension view */
 "Simplenote" = "Simplenote";
+
+/* Restoration Successful Title
+   Sustainer Alert's Title */
+"Simplenote Sustainer" = "Simplenote Sustainer";
 
 /* Simplenote's Feedback Email Title */
 "Simplenote iOS Feedback" = "משוב על Simplenote iOS";
@@ -752,6 +825,15 @@
 
 /* Title for the response's Status Code */
 "Status Code" = "קוד מצב";
+
+/* Become a Sustainer Details */
+"Support your favorite notes app to help unlock future features" = "ניתן לתמוך באפליקציית הפתקים המועדפת עליך כדי לעזור בהפעלת אפשרויות בעתיד";
+
+/* No comment provided by engineer. */
+"Sustainer" = "Sustainer";
+
+/* Restoration Successful Message */
+"Sustainer subscription restored. Thank you for supporting Simplenote!" = "המינוי של Sustainer שוחזר. תודה על התמיכה ב-Simplenote!";
 
 /* Theme: Matches iOS Settings */
 "System Default" = "ברירת המחדל לפי המערכת";
@@ -776,6 +858,15 @@
 
 /* Simplenote terms of service */
 "Terms of Service" = "תנאי השירות";
+
+/* Restoration Successful Title */
+"Thank You!" = "תודה!";
+
+/* Current Sustainer Details */
+"Thank you for your continued support" = "תודה על התמיכה המתמשכת";
+
+/* Error when address is in use */
+"That email is already being used" = "כתובת האימייל הזאת כבר נמצאת בשימוש";
 
 /* Error when address is in use */
 "The email you've entered is already associated with a Simplenote account." = "כתובת האימייל שהזנת כבר משויכת לחשבון Simplenote.";
@@ -838,6 +929,9 @@
 /* Undo action */
 "Undo" = "ביטול פעולה אחרונה";
 
+/* WebSocket not initialized */
+"Uninitialized" = "לא הופעל";
+
 /* Default title for an unnamed tag */
 "Unnamed Tag" = "תגית ללא שם";
 
@@ -858,6 +952,9 @@
 
 /* Indicates the Note is being unpublished */
 "Unpublishing..." = "ביטול פרסום...";
+
+/* Upgrade Alert Title */
+"Unsupported" = "לא נתמך";
 
 /* Alert title displayed in settings when an account has unsynced notes */
 "Unsynced Notes Detected" = "אותרו הערות שלא סונכרנו";
@@ -899,17 +996,26 @@
 /* Number of words in the note */
 "Words" = "מילים";
 
+/* Yearly Subscription Option (Used when / if the price fails to load) */
+"Yearly" = "שנתי";
+
 /* Proceeds with the Empty Trash OP */
 "Yes" = "כן";
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "אתמול";
 
+/* Current Sustainer Title */
+"You are a Simplenote Sustainer" = "הצטרפת בתור Simplenote Sustainer";
+
 /* Message -> Review you account screen. Parameter: %1$@ - email address */
 "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "החשבון שלך רשום עם Simplenote באמצעות האימייל %1$@.\n\nשיפורים באבטחת החשבון עלולים לגרום לאבדן החשבון אם אין לך עוד גישה לכתובת האימייל הזאת.";
 
 /* Error for un verified email */
 "You must verify your email before being able to login." = "עליך לאמת את כתובת האימייל שלך לפני ההתחברות.";
+
+/* Restoration Successful Message */
+"You're already a Sustainer. Thank you for supporting Simplenote!" = "כבר הצטרפת בתור Sustainer. תודה על התמיכה ב-Simplenote!";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "כתובת האימייל שלך אינה חוקית.";

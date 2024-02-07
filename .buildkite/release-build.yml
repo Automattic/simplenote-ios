@@ -4,18 +4,16 @@
 common_params:
   # Common plugin settings to use with the `plugins` key.
   - &common_plugins
-    - automattic/bash-cache#2.9.0
-    - automattic/git-s3-cache#v1.1.3:
-        bucket: "a8c-repo-mirrors"
-        repo: "automattic/simplenote-ios/"
+    - automattic/a8c-ci-toolkit#3.0.1
   # Common environment values to use with the `env` key.
   - &common_env
-    IMAGE_ID: xcode-14.0.1
+    IMAGE_ID: xcode-15.1
 
 steps:
 
   - label: ":testflight: Simplenote iOS Release Build (App Store Connect)"
     command: ".buildkite/commands/release-build.sh"
+    priority: 1
     env: *common_env
     plugins: *common_plugins
     notify:

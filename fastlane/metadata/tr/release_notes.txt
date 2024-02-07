@@ -1,0 +1,2 @@
+- Karanlık mod önizlemesinde kod blokuna arka plan rengi ekleyin
+- Büyük not bileşeni ekleyin

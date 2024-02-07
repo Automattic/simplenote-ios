@@ -1,7 +1,13 @@
-/* Translation-Revision-Date: 2021-10-11 19:54:03+0000 */
+/* Translation-Revision-Date: 2022-11-21 22:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n > 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: id */
+
+/* No comment provided by engineer. */
+"%@ per Month" = "%@ per Bulan";
+
+/* Yearly Subscription Option. Please preserve the special marker! */
+"%@ per Year" = "%@ per Tahun";
 
 /* Number of found search results */
 "%d Result" = "%d Hasil";
@@ -93,6 +99,9 @@
    Title: No filters applied */
 "All Notes" = "Semua Catatan";
 
+/* A short description to access the account login screen */
+"Already have an account?" = "Sudah memiliki akun?";
+
 /* Delete account confirmation instructions */
 "An email has been sent to %@. Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation." = "Email sudah dikirimkan ke %@ Periksa kotak masuk Anda dan ikuti petunjuk untuk mengonfirmasi penghapusan akun.\n\nAkun tidak akan dihapus hingga kami menerima konfirmasi Anda.";
 
@@ -120,6 +129,9 @@
 /* User Authenticated */
 "Authenticated" = "Diautentikasi";
 
+/* Become a Sustainer Title */
+"Become a Simplenote Sustainer" = "Jadilah Simplenote Sustainer";
+
 /* The Simplenote blog */
 "Blog" = "Blog";
 
@@ -129,12 +141,17 @@
 /* Delete account confirmation alert message */
 "By deleting the account for %@, all notes created with this account will be permanently deleted. This action is not reversible" = "Dengan menghapus akun untuk  %@, semua catatan yang dibuat dengan akun ini akan dihapus secara permanen. Tindakan ini tidak dapat dibatalkan";
 
+/* Terms Button Text */
+"By signing up, you agree to our Terms of Service »" = "Dengan mendaftar, berarti Anda menyetujui Ketentuan Layanan »";
+
 /* Cancel Action
    Cancel action button
    Cancel action for password alert
    Cancel action on share extension.
+   Cancel button for authentication
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
+   Dismisses the alert
    Dismissing an interface
    PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
@@ -170,6 +187,9 @@
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "Pilih kode sandi 4 digit";
 
+/* Sustainer Alert's Message */
+"Choose a plan and help unlock future features" = "Pilih paket untuk membantu pengembangan fitur masa depan";
+
 /* Opens the Collaborate UI */
 "Collaborate" = "Kolaborasi";
 
@@ -185,7 +205,8 @@
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "Daftar Catatan Ringkas";
 
-/* Confirm button -> Review you account screen */
+/* Confirm button -> Review you account screen
+   Hint displayed in the password confirmation field */
 "Confirm" = "Konfirmasi";
 
 /* Title on the PinLock screen asking to confirm a passcode */
@@ -290,6 +311,9 @@
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "Nonaktifkan pemformatan Markdown";
 
+/* Dismiss Alert */
+"Dismiss" = "Selesai";
+
 /* Accessibility label describing a button used to dismiss a history view of the note */
 "Dismiss History" = "Tutup Riwayat";
 
@@ -301,6 +325,9 @@
 
 /* Card title showing information about the note (metrics, references) */
 "Document" = "Dokumen";
+
+/* A short description to access the account creation screen */
+"Don't have an account?" = "Belum memiliki akun?";
 
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
@@ -340,6 +367,12 @@
    Error Title */
 "Error" = "Kesalahan";
 
+/* No comment provided by engineer. */
+"Error: NSManagedObjectContext's persistentStoreCoordinator must be nil. Simperium will handle CoreData connections for you." = "Error: persistentStoreCoordinator NSManagedObjectContext harus nol. Simperium akan menangani penyambungan CoreData untuk Anda.";
+
+/* No comment provided by engineer. */
+"Error: you must initialize your context with 'NSMainQueueConcurrencyType' concurrency type." = "Error: Anda harus memulai konteks dengan tipe konkurensi 'NSMainQueueConcurrencyType'.";
+
 /* Get Help Description Label */
 "FAQ or contact us" = "FAQ atau hubungi kami";
 
@@ -348,6 +381,9 @@
 
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "Mengambil Versi";
+
+/* Forgot password Button Text */
+"Forgot password? »" = "Lupa kata sandi? »";
 
 /* Password Reset Action */
 "Forgotten password?" = "Lupa kata sandi?";
@@ -454,6 +490,9 @@
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "Diubah: Paling lama";
 
+/* Monthly Subscription Option (Used when / if the price fails to load) */
+"Monthly" = "Bulanan";
+
 /* Accessibility hint for trash selected notes button */
 "Move selected notes to trash" = "Pindahkan catatan yang dipilih ke tong sampah";
 
@@ -497,11 +536,20 @@
 /* Message shown in note list when no notes are tagged with the provided tag. Parameter: %@ - tag */
 "No notes tagged “%@”" = "Tidak ada catatan yang diberi tag “%@”";
 
+/* No purchases Found Message */
+"No previous valid purchases found, for the current period" = "Untuk periode saat ini, tidak ada pembelian valid sebelumnya yang ditemukan";
+
+/* No purchases Found Title */
+"No purchases found" = "Tidak ada pembelian yang ditemukan";
+
 /* Rating view - liked or disliked - no thanks button */
 "No thanks" = "Tidak, Terima Kasih";
 
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "Tidak ada catatan tanpa tag";
+
+/* Error when you enter a bad email address */
+"Not a valid email address" = "Bukan alamat email yang valid";
 
 /* Note Widget Title */
 "Note" = "Catatan";
@@ -552,17 +600,22 @@
 /* Pin Lock */
 "Passcodes did not match. Try again." = "Kode sandi tidak cocok. Coba lagi.";
 
-/* Password TextField Placeholder */
+/* Hint displayed in the password field
+   Password TextField Placeholder */
 "Password" = "Kata sandi";
 
 /* Message displayed when password is invalid (Signup) */
 "Password cannot match email" = "Kata sandi tidak boleh sama dengan email";
 
-/* Message displayed when password is too short. Please preserve the Percent D! */
+/* Message displayed when password is too short. Please preserve the Percent D!
+   Message displayed when password is too short. The %%d is a placeholder for a numeral. Please preserve it! */
 "Password must contain at least %d characters" = "Kata sandi harus berisi setidaknya %d karakter";
 
 /* Message displayed when a password contains a disallowed character */
 "Password must not contain tabs nor newlines" = "Kata sandi tidak boleh berisi tab atau baris baru";
+
+/* Password Validation: Confirmation doesn't match */
+"Passwords do not match" = "Kata sandi tidak cocok";
 
 /* Number of changes pending to be sent */
 "Pendings" = "Tertunda";
@@ -582,6 +635,9 @@
 
 /* Extension Missing Token Alert Title */
 "Please log into your Simplenote account first by using the Simplenote app." = "Silakan masuk ke akun Simplenote Anda terlebih dahulu menggunakan aplikasi Simplenote.";
+
+/* Upgrade Alert Message */
+"Please upgrade to the latest iOS release to restore purchases" = "Upgrade ke rilis iOS terbaru untuk memulihkan pembelian";
 
 /* Title of Markdown preview screen */
 "Preview" = "Pratinjau";
@@ -659,6 +715,9 @@
    Restore a note to a previous version */
 "Restore Note" = "Pulihkan Catatan";
 
+/* Manually Restores IAP Purchases */
+"Restore Purchases" = "Pulihkan Pembelian";
+
 /* Title -> Review you account screen */
 "Review Your Account" = "Tinjau Akun Anda";
 
@@ -719,10 +778,20 @@
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "Panel Sisi";
 
-/* Signup Action
-   SignUp Action
-   SignUp Interface Title */
+/* Title of button for logging in (must be short) */
+"Sign In" = "Masuk";
+
+/* SignUp Action
+   Signup Action
+   SignUp Interface Title
+   Title of button to create a new account (must be short) */
 "Sign Up" = "Mendaftar";
+
+/* A short link to access the account login screen */
+"Sign in" = "Masuk";
+
+/* A short link to access the account creation screen */
+"Sign up" = "Mendaftar";
 
 /* Alert message displayed when an account has unsynced notes */
 "Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "Catatan yang tidak disinkronkan akan dihapus saat Anda keluar. Anda dapat memverifikasi catatan Anda yang disinkronkan dengan masuk ke Aplikasi Web.";
@@ -730,6 +799,10 @@
 /* Our mighty brand!
    Title of main share extension view */
 "Simplenote" = "Simplenote";
+
+/* Restoration Successful Title
+   Sustainer Alert's Title */
+"Simplenote Sustainer" = "Simplenote Sustainer";
 
 /* Simplenote's Feedback Email Title */
 "Simplenote iOS Feedback" = "Umpan Balik Simplenote iOS";
@@ -752,6 +825,15 @@
 
 /* Title for the response's Status Code */
 "Status Code" = "Kode Status";
+
+/* Become a Sustainer Details */
+"Support your favorite notes app to help unlock future features" = "Dukung aplikasi pencatatan favorit Anda untuk membantu pengembangan fitur masa depan";
+
+/* No comment provided by engineer. */
+"Sustainer" = "Sustainer";
+
+/* Restoration Successful Message */
+"Sustainer subscription restored. Thank you for supporting Simplenote!" = "Langganan Sustainer dipulihkan. Terima kasih telah mendukung Simplenote!";
 
 /* Theme: Matches iOS Settings */
 "System Default" = "Pengaturan Asal Sistem";
@@ -776,6 +858,15 @@
 
 /* Simplenote terms of service */
 "Terms of Service" = "Ketentuan Layanan";
+
+/* Restoration Successful Title */
+"Thank You!" = "Terima Kasih!";
+
+/* Current Sustainer Details */
+"Thank you for your continued support" = "Terima kasih atas dukungan Anda yang berkelanjutan";
+
+/* Error when address is in use */
+"That email is already being used" = "Email sudah digunakan";
 
 /* Error when address is in use */
 "The email you've entered is already associated with a Simplenote account." = "Email yang Anda masukkan telah digunakan oleh akun Simplenote lain.";
@@ -838,6 +929,9 @@
 /* Undo action */
 "Undo" = "Urungkan";
 
+/* WebSocket not initialized */
+"Uninitialized" = "Belum Dimulai";
+
 /* Default title for an unnamed tag */
 "Unnamed Tag" = "Tag Tanpa Nama";
 
@@ -858,6 +952,9 @@
 
 /* Indicates the Note is being unpublished */
 "Unpublishing..." = "Batal menerbitkan...";
+
+/* Upgrade Alert Title */
+"Unsupported" = "Tidak didukung";
 
 /* Alert title displayed in settings when an account has unsynced notes */
 "Unsynced Notes Detected" = "Catatan yang Tidak Disinkronkan Terdeteksi";
@@ -899,17 +996,26 @@
 /* Number of words in the note */
 "Words" = "Kata";
 
+/* Yearly Subscription Option (Used when / if the price fails to load) */
+"Yearly" = "Tahunan";
+
 /* Proceeds with the Empty Trash OP */
 "Yes" = "Ya";
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "Kemarin";
 
+/* Current Sustainer Title */
+"You are a Simplenote Sustainer" = "Anda adalah seorang Simplenote Sustainer.";
+
 /* Message -> Review you account screen. Parameter: %1$@ - email address */
 "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "Anda terdaftar pada SImplenote menggunakan email %1$@.\n\nPeningkatan keamanan akun dapat menyebabkan akun hilang jika Anda tidak lagi memiliki akses ke alamat email ini.";
 
 /* Error for un verified email */
 "You must verify your email before being able to login." = "Anda harus memverifikasi email agar bisa login.";
+
+/* Restoration Successful Message */
+"You're already a Sustainer. Thank you for supporting Simplenote!" = "Anda sudah menjadi Sustainer. Terima kasih telah mendukung Simplenote!";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "Alamat email Anda tidak valid.";

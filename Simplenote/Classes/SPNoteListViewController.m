@@ -688,7 +688,7 @@
 
 - (void)displayReviewUI
 {
-    [SKStoreReviewController requestReview];
+    [SKStoreReviewController requestReviewInScene:UIApplication.sharedApplication.foregroundWindowScene];
 
     [SPTracker trackRatingsAppRated];
     [[SPRatingsHelper sharedInstance] ratedCurrentVersion];

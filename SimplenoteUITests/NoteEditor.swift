@@ -89,7 +89,6 @@ class NoteEditor {
 
     class func undo() {
         app.textViews.element.tap(withNumberOfTaps: 2, numberOfTouches: 3)
-        app.otherElements["UIUndoInteractiveHUD"].children(matching: .other).element(boundBy: 1).children(matching: .other).element(boundBy: 1).tap()
     }
 
     class func swipeToPreview() {
@@ -132,9 +131,19 @@ class NoteEditor {
         toggleMarkdownState()
     }
 
-    class func pressLink(containerText: String, linkifiedText: String) {
+
+    class func getLink(byText linkText: String) -> XCUIElement {
+        // As of iOS 16.0, a link in Note Editor is presented by two elements:
+        // First is of `link` type and has zero dimensions, the other is its child
+        // and has proper dimensions. Only the latter is usable for interactions:
+        return app.links.matching(identifier: linkText).allElementsBoundByIndex.last!
+    }
+
+    class func pressLink(linkText: String) {
+        let link = getLink(byText: linkText)
+        guard link.exists else { return }
         // Should be replaced with proper way to determine if page is loaded
-        app.textViews[containerText].links[linkifiedText].press(forDuration: 1.3)
+        link.press(forDuration: 1.3)
         sleep(5)
     }
 
@@ -196,10 +205,9 @@ class NoteEditor {
 
 class NoteEditorAssert {
 
-    class func linkifiedURL(containerText: String, linkifiedText: String) {
-        let linkContainer = app.textViews[containerText]
-        XCTAssertTrue(linkContainer.exists, "\"" + containerText + linkContainerNotFoundInEditor)
-        XCTAssertTrue(linkContainer.links[linkifiedText].exists, "\"" + linkifiedText + linkNotFoundInEditor)
+    class func linkifiedURL(linkText: String) {
+        let linkElement = NoteEditor.getLink(byText: linkText)
+        XCTAssertTrue(linkElement.exists, "\"" + linkText + linkNotFoundInEditor)
     }
 
     class func editorShown() {
@@ -220,6 +228,19 @@ class NoteEditorAssert {
     class func textViewWithExactValueNotShown(value: String) {
         let matches = NoteEditor.getTextViewsWithExactValueCount(value: value)
         XCTAssertEqual(matches, 0)
+    }
+
+    class func oneOfTheStringsIsShownInTextView(strings: [String]) {
+        var matchFound = false
+
+        for string in strings {
+            if NoteEditor.getTextViewsWithExactValueCount(value: string) > 0 {
+                matchFound = true
+                break
+            }
+        }
+
+        XCTAssertTrue(matchFound)
     }
 
     class func textViewWithExactLabelShownOnce(label: String) {

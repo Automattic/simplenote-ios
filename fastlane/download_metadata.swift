@@ -4,7 +4,7 @@ import Foundation
 
 let glotPressTitleKey = "app_store_title"
 let glotPressSubtitleKey = "app_store_subtitle"
-let glotPressWhatsNewKey = "v4.48-whats-new"
+let glotPressWhatsNewKey = "v4.49-whats-new"
 let glotPressDescriptionKey = "app_store_desc"
 let glotPressKeywordsKey = "app_store_keywords"
 

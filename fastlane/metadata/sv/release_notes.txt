@@ -1,0 +1,2 @@
+- Lägg till bakgrundsfärg till kodblocket vid förhandsgranskning i mörkt läge
+- Lägg till widget för stora anteckningar

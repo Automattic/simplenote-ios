@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>previous-application-identifiers</key>
-	<array>
-		<string>4ESDVWK654.com.codality.NotationalFlow</string>
-	</array>
 	<key>com.apple.security.application-groups</key>
 	<array>
 		<string>group.com.codality.NotationalFlow.Development</string>
@@ -13,7 +9,6 @@
 	<key>keychain-access-groups</key>
 	<array>
 		<string>$(AppIdentifierPrefix)com.codality.NotationalFlow.Development</string>
-		<string>4ESDVWK654.com.codality.NotationalFlow</string>
 	</array>
 </dict>
 </plist>

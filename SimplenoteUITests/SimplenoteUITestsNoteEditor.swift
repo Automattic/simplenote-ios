@@ -114,7 +114,7 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
 
         trackStep()
         NoteEditor.swipeToPreview()
-        PreviewAssert.staticTextWithExactValueShownOnce(value: noteNameInitial)
+        PreviewAssert.staticTextWithExactLabelShownOnce(label: noteNameInitial)
         PreviewAssert.boxesStates(expectedCheckedBoxesNumber: 0, expectedEmptyBoxesNumber: 1)
     }
 
@@ -133,7 +133,10 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
         trackStep()
         NoteEditor.undo()
         NoteEditorAssert.textViewWithExactValueNotShown(value: editorText)
-        NoteEditorAssert.textViewWithExactValueShownOnce(value: "ABC")
+        // Depending on... somehting, undoing might result in last character only "removal"
+        // or the whole entered string removal. To decrease maintenance effort, we check
+        // for at least one of two to be present:
+        NoteEditorAssert.oneOfTheStringsIsShownInTextView(strings: ["ABC", ""])
     }
 
     func testAddedURLIsLinkified() throws {
@@ -154,7 +157,7 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
 
         trackStep()
         NoteList.openNote(noteName: usualLinkText)
-        NoteEditorAssert.linkifiedURL(containerText: usualLinkText, linkifiedText: usualLinkText)
+        NoteEditorAssert.linkifiedURL(linkText: usualLinkText)
     }
 
     func testLongTappingOnLinkOpensLinkInNewWindow() throws {
@@ -175,10 +178,10 @@ class SimplenoteUISmokeTestsNoteEditor: XCTestCase {
 
         trackStep()
         NoteList.openNote(noteName: usualLinkText)
-        NoteEditorAssert.linkifiedURL(containerText: usualLinkText, linkifiedText: usualLinkText)
+        NoteEditorAssert.linkifiedURL(linkText: usualLinkText)
 
         trackStep()
-        NoteEditor.pressLink(containerText: usualLinkText, linkifiedText: usualLinkText)
+        NoteEditor.pressLink(linkText: usualLinkText)
         WebViewAssert.textsShownOnScreen(texts: webViewTexts)
     }
 

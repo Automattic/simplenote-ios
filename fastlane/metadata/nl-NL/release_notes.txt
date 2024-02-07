@@ -1,0 +1,2 @@
+- Een achtergrondkleur toegevoegd aan het codeblok in de voorbeeldweergave van de donkere modus
+- Een grote notitie-widget toegevoegd

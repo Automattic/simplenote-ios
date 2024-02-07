@@ -1,6 +1,7 @@
 import Foundation
 import MobileCoreServices
 import ZIPFoundation
+import UniformTypeIdentifiers
 
 
 // MARK: - URLExtractor
@@ -9,7 +10,7 @@ struct URLExtractor: Extractor {
 
     /// Accepted File Extension
     ///
-    let acceptedType = kUTTypeURL as String
+    let acceptedType = UTType.url.identifier
 
     /// Indicates if a given Extension Context can be handled by the Extractor
     ///

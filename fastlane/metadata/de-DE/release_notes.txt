@@ -1,0 +1,2 @@
+- Hintergrundfarbe zum Codeblock in der Vorschau im dunklen Modus hinzugefügt
+- Widget für große Notizen hinzugefügt

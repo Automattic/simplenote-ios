@@ -14,7 +14,9 @@ struct WidgetWarningView: View {
             .filling()
         }
         .padding()
-        .background(Color.widgetBackgroundColor)
+        .widgetBackground(content: {
+            Color.widgetBackgroundColor
+        })
         .widgetURL(URL(string: .simplenotePath()))
     }
 }

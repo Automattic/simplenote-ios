@@ -27,7 +27,7 @@ class BiometricAuthentication {
             return .touchID
         case .faceID:
             return .faceID
-        @unknown default:
+        default:
             return nil
         }
     }

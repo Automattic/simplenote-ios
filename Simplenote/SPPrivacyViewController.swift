@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 import Gridicons
-import AutomatticTracks
+//import AutomatticTracks
 
 /// Privacy: Lets our users Opt Out from any (and all) trackers.
 ///

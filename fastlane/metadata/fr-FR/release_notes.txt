@@ -1,0 +1,2 @@
+- Ajouter une couleur d’arrière-plan au bloc de code dans l’aperçu en mode sombre
+- Ajouter un grand widget de remarque

@@ -12,6 +12,8 @@ USER_ENV_FILE_PATH = File.join(Dir.home, '.simplenoteios-env.default')
 PROJECT_ENV_FILE_PATH = File.join(
   Dir.home, '.configure', 'simplenote-ios', 'secrets', 'project.env'
 )
+SECRETS_ROOT = File.join(Dir.home, '.configure', 'simplenote-ios', 'secrets')
+APP_STORE_CONNECT_KEY_PATH = File.join(SECRETS_ROOT, 'app_store_connect_fastlane_api_key.json')
 $used_test_account_index = nil
 
 before_all do
@@ -20,8 +22,14 @@ before_all do
 
   # Check that the env files exist
   unless is_ci || File.file?(USER_ENV_FILE_PATH)
-    UI.user_error!("~/.simplenoteios-env.default not found: Please copy env/user.env-example to #{USER_ENV_FILE_PATH} and fill in the values")
+    error_message = <<~ERROR
+    ~/.simplenoteios-env.default not found. Please copy env/user.env-example to #{USER_ENV_FILE_PATH} and fill in the values") using the following command:
+
+    \tcp #{PROJECT_ROOT_FOLDER}/fastlane/env/user.env-example #{USER_ENV_FILE_PATH}
+    ERROR
+    UI.user_error!(error_message)
   end
+
   unless File.file?(PROJECT_ENV_FILE_PATH)
     UI.user_error!('project.env not found: Make sure your configuration is up to date with `rake dependencies`')
   end
@@ -53,13 +61,37 @@ platform :ios do
   REPOSITORY_NAME = 'simplenote-ios'
   APP_STORE_BUNDLE_IDENTIFIER = 'com.codality.NotationalFlow'
 
-  # Use this instead of getting values from ENV directly
-  # It will throw an error if the requested value is missing
-  def get_required_env(key)
-    unless ENV.key?(key)
-      UI.user_error!("Environment variable '#{key}' is not set. Have you setup #{USER_ENV_FILE_PATH} correctly?")
-    end
-    ENV.fetch(key, nil)
+# List of locales used for the app strings (GlotPress code => `*.lproj` folder name`)
+#
+# TODO: Replace with `LocaleHelper` once provided by release toolkit (https://github.com/wordpress-mobile/release-toolkit/pull/296)
+GLOTPRESS_TO_LPROJ_APP_LOCALE_CODES = {
+  'ar' => 'ar',             # Arabic
+  'cy' => 'cy',             # Welsh
+  'de' => 'de',             # German
+  'el' => 'el',             # Greek
+  'en' => 'en',             # English
+  'es' => 'es',             # Spanish
+  'fa' => 'fa',             # Persian
+  'fr' => 'fr',             # French
+  'he' => 'he',             # Hebrew
+  'id' => 'id',             # Indonesian
+  'it' => 'it',             # Italian
+  'ja' => 'ja',             # Japanese
+  'ko' => 'ko',             # Korean
+  'nl' => 'nl',             # Dutch
+  'pt-br' => 'pt-BR',       # Portuguese (Brazil)
+  'ru' => 'ru',             # Russian
+  'sv' => 'sv',             # Swedish
+  'tr' => 'tr',             # Turkish
+  'zh-cn' => 'zh-Hans-CN',  # Chinese (China)
+  'zh-tw' => 'zh-Hant-TW'   # Chinese (Taiwan)
+}.freeze
+
+# Use this instead of getting values from ENV directly
+# It will throw an error if the requested value is missing
+def get_required_env(key)
+  unless ENV.key?(key)
+    UI.user_error!("Environment variable '#{key}' is not set. Have you setup #{USER_ENV_FILE_PATH} correctly?")
   end
 
   ########################################################################
@@ -82,7 +114,8 @@ platform :ios do
     old_version = ios_codefreeze_prechecks(options)
 
     ios_bump_version_release
-    new_version = ios_get_app_version
+    new_version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
+
     extract_release_notes_for_version(version: new_version,
                                       release_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'RELEASE-NOTES.txt'),
                                       extracted_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt'))
@@ -181,7 +214,7 @@ platform :ios do
     download_localized_strings_and_metadata_from_glotpress
     ios_lint_localizations(input_dir: 'Simplenote', allow_retry: true)
     ios_bump_version_beta
-    version = ios_get_app_version
+    version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
     trigger_beta_build(branch_to_build: "release/#{version}")
   end
 
@@ -217,7 +250,7 @@ platform :ios do
   desc 'Performs the final checks and triggers a release build for the hotfix in the current branch'
   lane :finalize_hotfix_release do |options|
     ios_finalize_prechecks(options)
-    version = ios_get_app_version
+    version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
     trigger_release_build(branch_to_build: "release/#{version}")
   end
 
@@ -254,17 +287,21 @@ platform :ios do
       abort_on_violations: false
     )
 
-    ios_update_metadata(options)
-    sanitize_appstore_keywords
+    ios_download_strings_files_from_glotpress(
+      project_url: 'https://translate.wordpress.com/projects/simplenote/ios/',
+      locales: GLOTPRESS_TO_LPROJ_APP_LOCALE_CODES,
+      download_dir: File.join(PROJECT_ROOT_FOLDER, 'Simplenote')
+    )
+    sanitize_appstore_keywords()
     ios_lint_localizations(input_dir: 'Simplenote', allow_retry: true)
     ios_bump_version_beta
 
     # Wrap up
-    version = ios_get_app_version
-    removebranchprotection(repository: GHHELPER_REPO, branch: "release/#{version}")
-    setfrozentag(repository: GHHELPER_REPO, milestone: version, freeze: false)
-    create_new_milestone(repository: GHHELPER_REPO)
-    close_milestone(repository: GHHELPER_REPO, milestone: version)
+    version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
+    removebranchprotection(repository:GHHELPER_REPO, branch: "release/#{version}")
+    setfrozentag(repository:GHHELPER_REPO, milestone: version, freeze: false)
+    create_new_milestone(repository:GHHELPER_REPO)
+    close_milestone(repository:GHHELPER_REPO, milestone: version)
 
     # Start the build
     trigger_release_build(branch_to_build: "release/#{version}")
@@ -433,7 +470,7 @@ platform :ios do
 
     testflight(
       skip_waiting_for_build_processing: true,
-      api_key_path: File.join(Dir.home, '.configure', 'simplenote-ios', 'secrets', 'app_store_connect_fastlane_api_key.json')
+      api_key_path: APP_STORE_CONNECT_KEY_PATH
     )
 
     sh('rm ../Simplenote.ipa')
@@ -452,15 +489,41 @@ platform :ios do
       archive_zip_path = "#{File.dirname(Dir.pwd)}/Simplenote.xarchive.zip"
       zip(path: lane_context[SharedValues::XCODEBUILD_ARCHIVE], output_path: archive_zip_path)
 
-      version = options[:beta_release] ? ios_get_build_version : ios_get_app_version
-      create_release(repository: GHHELPER_REPO,
-                     version: version,
-                     release_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt'),
-                     release_assets: archive_zip_path.to_s,
-                     prerelease: options[:beta_release])
+      version = options[:beta_release] ? ios_get_build_version : ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
+      create_release(repository:GHHELPER_REPO,
+        version: version,
+        release_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt'),
+        release_assets: archive_zip_path.to_s,
+        prerelease: options[:beta_release]
+      )
 
       sh("rm #{archive_zip_path}")
     end
+  end
+
+  # Upload the localized metadata (from `fastlane/metadata/`) to App Store Connect
+  #
+  # @option [Boolean] with_screenshots (default: false) If true, will also upload the latest screenshot files to ASC
+  #
+  desc 'Upload the localized metadata to App Store Connect, optionally including screenshots.'
+  lane :update_metadata_on_app_store_connect do |options|
+    # Skip screenshots by default. The naming is "with" to make it clear that
+    # callers need to opt-in to adding screenshots. The naming of the deliver
+    # (upload_to_app_store) parameter, on the other hand, uses the skip verb.
+    with_screenshots = options.fetch(:with_screenshots, false)
+    skip_screenshots = !with_screenshots
+
+    upload_to_app_store(
+      app_identifier: APP_STORE_BUNDLE_IDENTIFIER,
+      app_version: ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH),
+      skip_binary_upload: true,
+      screenshots_path: promo_screenshots_directory,
+      skip_screenshots: skip_screenshots,
+      overwrite_screenshots: true, # won't have effect if `skip_screenshots` is true
+      phased_release: true,
+      precheck_include_in_app_purchases: false,
+      api_key_path: APP_STORE_CONNECT_KEY_PATH
+    )
   end
 
   #####################################################################################
@@ -811,6 +874,54 @@ platform :ios do
       UI.user_error!('This lane should be run only from CI')
     end
   end
+
+  desc 'Registers a Device in the developer console'
+  lane :register_new_device do |options|
+    device_name = UI.input('Device Name: ') if options[:device_name].nil?
+    device_id = UI.input('Device ID: ') if options[:device_id].nil?
+    # Currently, Simplenote has an odd setup with a dedicated app id for development builds
+    all_bundle_ids =
+      simplenote_app_identifiers +
+      simplenote_app_identifiers(root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Development")
+
+    UI.message "Registering #{device_name} with ID #{device_id} and registering it with any provisioning profiles associated with these bundle identifiers:"
+    all_bundle_ids.each do |identifier|
+      UI.message "\t#{identifier}"
+    end
+
+    team_id = get_required_env('EXT_EXPORT_TEAM_ID')
+
+    # Register the user's device
+    register_device(
+      name: device_name,
+      udid: device_id,
+      team_id: team_id,
+      api_key_path: APP_STORE_CONNECT_KEY_PATH
+    )
+
+    # We're about to use `add_development_certificates_to_provisioning_profiles` and `add_all_devices_to_provisioning_profiles`.
+    # These actions use Developer Portal APIs that don't yet support authentication via API key (-.-').
+    # Let's preemptively ask for and set the email here to avoid being asked twice for it if not set.
+
+    require 'credentials_manager'
+
+    # If Fastlane cannot instantiate a user, it will ask the caller for the email.
+    # Once we have it, we can set it as `FASTLANE_USER` in the environment (which has lifecycle limited to this call) so that the next commands will already have access to it.
+    # Note that if the user is already available to `AccountManager`, setting it in the environment is redundant, but Fastlane doesn't provide a way to check it so we have to do it anyway.
+    ENV['FASTLANE_USER'] = CredentialsManager::AccountManager.new.user
+
+    # Add all development certificates to the provisioning profiles (just in case – this is an easy step to miss)
+    add_development_certificates_to_provisioning_profiles(
+      team_id: team_id,
+      app_identifier: all_bundle_ids
+    )
+
+    # Add all devices to the provisioning profiles
+    add_all_devices_to_provisioning_profiles(
+      team_id: team_id,
+      app_identifier: all_bundle_ids
+    )
+  end
 end
 
 ########################################################################
@@ -832,38 +943,6 @@ lane :update_certs_and_profiles do |_options|
   alpha_code_signing
   internal_code_signing
   appstore_code_signing
-end
-
-lane :upload_screenshots do |_options|
-  # This uses the following env vars from the user env:
-  # DELIVER_USER
-  # DELIVER_APP_IDENTIFIER
-  # FASTLANE_PASSWORD
-  #
-  # and from the project env:
-  # FASTLANE_ITC_TEAM_ID
-  upload_to_app_store(
-    edit_live: false,
-    use_live_version: false,
-    screenshots_path: promo_screenshots_directory,
-    skip_binary_upload: true,
-    skip_metadata: true,
-    skip_app_version_update: true,
-
-    # Prechecks
-    run_precheck_before_submit: false,
-    precheck_include_in_app_purchases: false,
-
-    # Delete all the previous screenshots on ASC
-    overwrite_screenshots: true,
-    # Set this to true to skip the interactive confirmation of the
-    # screenshots that will be uploaded. Please, though, don't do it, unless
-    # you disable the overwrite option above. If we loose the screenshot that
-    # are on ASC, we might not be able to recover them, unless we checkout
-    # whichever version made them and generate them again.
-    force: false,
-    submit_for_review: false
-  )
 end
 
 ########################################################################
@@ -953,6 +1032,7 @@ end
 # @param [Boolean] beta Indicate if we should build a beta or regular release
 #
 def trigger_buildkite_release_build(branch:, beta:)
+  push_to_git_remote(tags: false)
   buildkite_trigger_build(
     buildkite_organization: 'automattic',
     buildkite_pipeline: 'simplenote-ios',

@@ -1,7 +1,13 @@
-/* Translation-Revision-Date: 2021-10-12 15:54:03+0000 */
+/* Translation-Revision-Date: 2022-11-22 13:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: sv_SE */
+
+/* No comment provided by engineer. */
+"%@ per Month" = "%@ per månad";
+
+/* Yearly Subscription Option. Please preserve the special marker! */
+"%@ per Year" = "%@ per år";
 
 /* Number of found search results */
 "%d Result" = "%d resultat";
@@ -93,6 +99,9 @@
    Title: No filters applied */
 "All Notes" = "Alla anteckningar";
 
+/* A short description to access the account login screen */
+"Already have an account?" = "Har du redan ett konto?";
+
 /* Delete account confirmation instructions */
 "An email has been sent to %@. Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation." = "Ett e-postmeddelande har skickats till %@. Kolla din inkorg och följ instruktionerna för att bekräfta kontoborttagningen.\n\nDitt konto kommer inte att tas bort förrän vi har mottagit din bekräftelse";
 
@@ -120,6 +129,9 @@
 /* User Authenticated */
 "Authenticated" = "Autentiserad";
 
+/* Become a Sustainer Title */
+"Become a Simplenote Sustainer" = "Bli en Simplenote Sustainer";
+
 /* The Simplenote blog */
 "Blog" = "Blogg";
 
@@ -129,12 +141,17 @@
 /* Delete account confirmation alert message */
 "By deleting the account for %@, all notes created with this account will be permanently deleted. This action is not reversible" = "Om du tar bort kontot för %@ kommer alla anteckningar som har skapats med kontot också att tas bort permanent. Det går inte att ångra den här åtgärden.";
 
+/* Terms Button Text */
+"By signing up, you agree to our Terms of Service »" = "Genom att skapa ett konto godkänner du användaravtalet »";
+
 /* Cancel Action
    Cancel action button
    Cancel action for password alert
    Cancel action on share extension.
+   Cancel button for authentication
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
+   Dismisses the alert
    Dismissing an interface
    PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
@@ -170,6 +187,9 @@
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "Välj en fyrsiffrig låskod";
 
+/* Sustainer Alert's Message */
+"Choose a plan and help unlock future features" = "Välj ett paket och hjälp till att låsa upp framtida funktioner";
+
 /* Opens the Collaborate UI */
 "Collaborate" = "Samarbeta";
 
@@ -185,7 +205,8 @@
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "Komprimerad anteckningslista";
 
-/* Confirm button -> Review you account screen */
+/* Confirm button -> Review you account screen
+   Hint displayed in the password confirmation field */
 "Confirm" = "Bekräfta";
 
 /* Title on the PinLock screen asking to confirm a passcode */
@@ -290,6 +311,9 @@
 /* Markdown Accessibility Hint */
 "Disable Markdown formatting" = "Inaktivera Markdown-formatering";
 
+/* Dismiss Alert */
+"Dismiss" = "Avfärda";
+
 /* Accessibility label describing a button used to dismiss a history view of the note */
 "Dismiss History" = "Avfärda historik";
 
@@ -301,6 +325,9 @@
 
 /* Card title showing information about the note (metrics, references) */
 "Document" = "Dokument";
+
+/* A short description to access the account creation screen */
+"Don't have an account?" = "Har du inget konto?";
 
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
@@ -340,6 +367,12 @@
    Error Title */
 "Error" = "Fel";
 
+/* No comment provided by engineer. */
+"Error: NSManagedObjectContext's persistentStoreCoordinator must be nil. Simperium will handle CoreData connections for you." = "Fel: persistentStoreCoordinator för NSManagedObjectContext måste vara noll. Simperium kommer att hantera CoreData-anslutningar åt dig.";
+
+/* No comment provided by engineer. */
+"Error: you must initialize your context with 'NSMainQueueConcurrencyType' concurrency type." = "Fel: Du måste initiera ditt sammanhang med samtidighetstypen \"NSMainQueueConcurrencyType\".";
+
 /* Get Help Description Label */
 "FAQ or contact us" = "Vanliga frågor eller kontakta oss";
 
@@ -348,6 +381,9 @@
 
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "Hämtar version";
+
+/* Forgot password Button Text */
+"Forgot password? »" = "Glömt lösenord? »";
 
 /* Password Reset Action */
 "Forgotten password?" = "Glömt lösenordet?";
@@ -454,6 +490,9 @@
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "Modifierad: Äldsta";
 
+/* Monthly Subscription Option (Used when / if the price fails to load) */
+"Monthly" = "Månadsvis";
+
 /* Accessibility hint for trash selected notes button */
 "Move selected notes to trash" = "Flytta markerade anteckningar till papperskorgen";
 
@@ -497,11 +536,20 @@
 /* Message shown in note list when no notes are tagged with the provided tag. Parameter: %@ - tag */
 "No notes tagged “%@”" = "Inga anteckningar märkta \"%@\"";
 
+/* No purchases Found Message */
+"No previous valid purchases found, for the current period" = "Inga giltiga tidigare köp hittades för den aktuella perioden";
+
+/* No purchases Found Title */
+"No purchases found" = "Inga köp hittades";
+
 /* Rating view - liked or disliked - no thanks button */
 "No thanks" = "Nej, tack";
 
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "Inga omärkta anteckningar";
+
+/* Error when you enter a bad email address */
+"Not a valid email address" = "Inte en giltig e-postadress";
 
 /* Note Widget Title */
 "Note" = "Notis";
@@ -552,17 +600,22 @@
 /* Pin Lock */
 "Passcodes did not match. Try again." = "Lösenkoderna matchar inte varandra. Försök igen.";
 
-/* Password TextField Placeholder */
+/* Hint displayed in the password field
+   Password TextField Placeholder */
 "Password" = "Lösenord";
 
 /* Message displayed when password is invalid (Signup) */
 "Password cannot match email" = "Lösenord kan inte matcha e-post";
 
-/* Message displayed when password is too short. Please preserve the Percent D! */
+/* Message displayed when password is too short. Please preserve the Percent D!
+   Message displayed when password is too short. The %%d is a placeholder for a numeral. Please preserve it! */
 "Password must contain at least %d characters" = "Lösenord måste innehålla minst %d tecken";
 
 /* Message displayed when a password contains a disallowed character */
 "Password must not contain tabs nor newlines" = "Lösenordet får inte innehålla tabbstopp eller nya rader";
+
+/* Password Validation: Confirmation doesn't match */
+"Passwords do not match" = "Lösenorden matchar inte";
 
 /* Number of changes pending to be sent */
 "Pendings" = "Väntande";
@@ -582,6 +635,9 @@
 
 /* Extension Missing Token Alert Title */
 "Please log into your Simplenote account first by using the Simplenote app." = "Logga in på ditt Simplenote-konto först genom att använda Simplenote-appen.";
+
+/* Upgrade Alert Message */
+"Please upgrade to the latest iOS release to restore purchases" = "Uppgradera till den senaste iOS-versionen för att återställa köp";
 
 /* Title of Markdown preview screen */
 "Preview" = "Förhandsgranska";
@@ -659,6 +715,9 @@
    Restore a note to a previous version */
 "Restore Note" = "Återställ anteckning";
 
+/* Manually Restores IAP Purchases */
+"Restore Purchases" = "Återställ köp";
+
 /* Title -> Review you account screen */
 "Review Your Account" = "Granska ditt konto";
 
@@ -719,10 +778,20 @@
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "Sidopanel";
 
-/* Signup Action
-   SignUp Action
-   SignUp Interface Title */
+/* Title of button for logging in (must be short) */
+"Sign In" = "Logga in";
+
+/* SignUp Action
+   Signup Action
+   SignUp Interface Title
+   Title of button to create a new account (must be short) */
 "Sign Up" = "Registrera";
+
+/* A short link to access the account login screen */
+"Sign in" = "Logga in";
+
+/* A short link to access the account creation screen */
+"Sign up" = "Skapa konto";
 
 /* Alert message displayed when an account has unsynced notes */
 "Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "Utloggning kommer att radera alla osynkroniserade anteckningar. Du kan verifiera dina synkroniserade anteckningar genom att logga in på webbappen.";
@@ -730,6 +799,10 @@
 /* Our mighty brand!
    Title of main share extension view */
 "Simplenote" = "Simplenote";
+
+/* Restoration Successful Title
+   Sustainer Alert's Title */
+"Simplenote Sustainer" = "Simplenote Sustainer";
 
 /* Simplenote's Feedback Email Title */
 "Simplenote iOS Feedback" = "Feedback rörande Simplenote iOS";
@@ -752,6 +825,15 @@
 
 /* Title for the response's Status Code */
 "Status Code" = "Statuskod";
+
+/* Become a Sustainer Details */
+"Support your favorite notes app to help unlock future features" = "Stöd din favoritanteckningsapp och hjälp till att låsa upp framtida funktioner";
+
+/* No comment provided by engineer. */
+"Sustainer" = "Sustainer";
+
+/* Restoration Successful Message */
+"Sustainer subscription restored. Thank you for supporting Simplenote!" = "Sustainer-prenumeration återställd. Tack för att du stödjer Simplenote.";
 
 /* Theme: Matches iOS Settings */
 "System Default" = "Systemstandard";
@@ -776,6 +858,15 @@
 
 /* Simplenote terms of service */
 "Terms of Service" = "Användarvillkor";
+
+/* Restoration Successful Title */
+"Thank You!" = "Tack.";
+
+/* Current Sustainer Details */
+"Thank you for your continued support" = "Tack för ditt fortsatta stöd";
+
+/* Error when address is in use */
+"That email is already being used" = "Den e-posten används redan";
 
 /* Error when address is in use */
 "The email you've entered is already associated with a Simplenote account." = "Den angivna e-postadressen är redan associerad med ett Simplenote-konto.";
@@ -838,6 +929,9 @@
 /* Undo action */
 "Undo" = "Ångra";
 
+/* WebSocket not initialized */
+"Uninitialized" = "Oinitierad";
+
 /* Default title for an unnamed tag */
 "Unnamed Tag" = "Etikett utan namn";
 
@@ -858,6 +952,9 @@
 
 /* Indicates the Note is being unpublished */
 "Unpublishing..." = "Slutar publicera...";
+
+/* Upgrade Alert Title */
+"Unsupported" = "Stöds ej";
 
 /* Alert title displayed in settings when an account has unsynced notes */
 "Unsynced Notes Detected" = "Osynkroniserade anteckningar upptäckta";
@@ -899,17 +996,26 @@
 /* Number of words in the note */
 "Words" = "ord";
 
+/* Yearly Subscription Option (Used when / if the price fails to load) */
+"Yearly" = "Årligen";
+
 /* Proceeds with the Empty Trash OP */
 "Yes" = "Ja";
 
 /* Displayed as a date in the case where a note was modified yesterday, for example */
 "Yesterday" = "Igår";
 
+/* Current Sustainer Title */
+"You are a Simplenote Sustainer" = "Du är en Simplenote Sustainer";
+
 /* Message -> Review you account screen. Parameter: %1$@ - email address */
 "You are registered with Simplenote using the email %1$@.\n\nImprovements to account security may result in account loss if you no longer have access to this email address." = "Du är registrerad hos Simplenote med e-postadressen %1$@.\n\nFörbättringar av kontosäkerhet kan leda till kontoförlust om du inte längre har tillgång till den här e-postadressen.";
 
 /* Error for un verified email */
 "You must verify your email before being able to login." = "Du måste verifiera din e-postadress för att du ska kunna logga in.";
+
+/* Restoration Successful Message */
+"You're already a Sustainer. Thank you for supporting Simplenote!" = "Du är redan en Sustainer. Tack för att du stödjer Simplenote.";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "Din e-postadress är inte giltig";

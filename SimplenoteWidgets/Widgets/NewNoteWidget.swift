@@ -10,6 +10,7 @@ struct NewNoteWidget: Widget {
         .configurationDisplayName(Constants.displayName)
         .description(Constants.description)
         .supportedFamilies([.systemSmall])
+        .contentMarginsDisabled()
 
     }
 }

@@ -20,11 +20,11 @@ html {
 }
 
 .note-detail-markdown pre {
-    background: #f6f7f8;
+    background: #002b36;
 }
 
 .note-detail-markdown pre code {
-    color: #616870;
+    color: #84878a;
 }
 
 .note-detail-markdown table tr:nth-child(2n) {
