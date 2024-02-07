@@ -7,19 +7,17 @@ AllCops:
   SuggestExtensions:
     rubocop-rake: false
 
+Metrics/MethodLength:
+  Max: 30
+
 Layout/LineLength:
-  Exclude:
-    - fastlane/Fastfile
+  Max: 180
 
 Metrics/BlockLength:
   Exclude:
     - fastlane/*file
+    - Podfile
+    - Rakefile
 
-Metrics/BlockNesting:
-  Exclude:
-    - fastlane/*file
-
-Naming/FileName:
-  Exclude:
-    - fastlane/*file
-    - '**/*.podspec'
+Style/HashSyntax:
+  EnforcedShorthandSyntax: never
