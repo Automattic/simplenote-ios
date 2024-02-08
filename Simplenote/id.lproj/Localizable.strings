@@ -117,9 +117,6 @@
 /* Automattic hiring description */
 "Are you a developer? We’re hiring." = "Apakah Anda pengembang? Kami membuka lowongan.";
 
-/* Title of deletion confirmation message for a tag. Parameters: %1$@ - tag name */
-"Are you sure you want to delete \"%1$@\"?" = "Are you sure you want to delete \"%1$@\"?";
-
 /* Empty Trash Warning */
 "Are you sure you want to empty the trash? This cannot be undone." = "Anda yakin ingin mengosongkan tempat sampah? Ini tidak dapat dibatalkan.";
 
