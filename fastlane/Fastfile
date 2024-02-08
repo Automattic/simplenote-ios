@@ -133,9 +133,9 @@ platform :ios do
     )
 
     generate_strings_file_for_glotpress
-    
+
     push_to_git_remote(tags: false)
-    
+
     trigger_beta_build(branch_to_build: "release/#{new_version}")
   end
 
@@ -534,7 +534,7 @@ platform :ios do
     sh("rm #{dsym_path}")
 
     if options[:create_release]
-      archive_zip_path = File.join(File.dirname(Dir.pwd)), 'Simplenote.xarchive.zip')
+      archive_zip_path = File.join(File.dirname(Dir.pwd), 'Simplenote.xarchive.zip')
       zip(path: lane_context[SharedValues::XCODEBUILD_ARCHIVE], output_path: archive_zip_path)
 
       version = options[:beta_release] ? ios_get_build_version : ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
