@@ -448,7 +448,7 @@ platform :ios do
       export_method: 'enterprise',
       clean: true,
       output_directory: OUTPUT_DIRECTORY_PATH,
-      export_team_id: ENV.fetch('INT_EXPORT_TEAM_ID', nil),
+      export_team_id: get_required_env('INT_EXPORT_TEAM_ID'),
       export_options: {
         method: 'enterprise',
         provisioningProfiles: simplenote_provisioning_profiles(
@@ -508,7 +508,7 @@ platform :ios do
       clean: true,
       export_options: {
         method: 'app-store',
-        export_team_id: ENV.fetch('EXT_EXPORT_TEAM_ID', nil),
+        export_team_id: get_required_env('EXT_EXPORT_TEAM_ID'),
         provisioningProfiles: simplenote_provisioning_profiles
       }
     )
@@ -634,7 +634,7 @@ platform :ios do
       export_method: 'enterprise',
       clean: true,
       output_directory: OUTPUT_DIRECTORY_PATH,
-      export_team_id: ENV.fetch('INT_EXPORT_TEAM_ID', nil),
+      export_team_id: get_required_env('INT_EXPORT_TEAM_ID'),
       export_options: {
         method: 'enterprise',
         provisioningProfiles: simplenote_provisioning_profiles(
