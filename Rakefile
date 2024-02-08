@@ -1,16 +1,17 @@
 # frozen_string_literal: true
 
 require 'English'
-SWIFTLINT_VERSION = '0.41.0'
-XCODE_WORKSPACE = 'Simplenote.xcworkspace'
-XCODE_SCHEME = 'Simplenote'
-XCODE_CONFIGURATION = 'Debug'
-
 require 'fileutils'
 require 'tmpdir'
 require 'rake/clean'
 require 'yaml'
 require 'digest'
+
+# Constants
+SWIFTLINT_VERSION = '0.41.0'
+XCODE_WORKSPACE = 'Simplenote.xcworkspace'
+XCODE_SCHEME = 'Simplenote'
+XCODE_CONFIGURATION = 'Debug'
 PROJECT_DIR = __dir__
 
 task default: %w[test]
