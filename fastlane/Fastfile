@@ -310,7 +310,7 @@ platform :ios do
 
     # Wrap up
     version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
-    removebranchprotection(
+    remove_branch_protection(
       repository: GITHUB_REPO,
       branch: "release/#{version}"
     )
