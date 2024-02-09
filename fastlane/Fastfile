@@ -122,6 +122,14 @@ platform :ios do
       extracted_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt')
     )
     ios_update_release_notes(new_version: new_version)
+
+    generate_strings_file_for_glotpress
+
+    UI.important('Pushing changes to remote and configuring the release on GitHub')
+    UI.user_error!("Terminating as requested. Don't forget to run the remainder of this automation manually.") unless options[:skip_confirm] || UI.confirm('Do you want to continue?')
+
+    push_to_git_remote(tags: false)
+
     copy_branch_protection(
       repository: GITHUB_REPO,
       from_branch: DEFAULT_BRANCH,
@@ -131,10 +139,6 @@ platform :ios do
       repository: GITHUB_REPO,
       milestone: new_version
     )
-
-    generate_strings_file_for_glotpress
-
-    push_to_git_remote(tags: false)
 
     trigger_beta_build(branch_to_build: "release/#{new_version}")
   end
