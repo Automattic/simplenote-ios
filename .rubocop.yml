@@ -1,0 +1,28 @@
+AllCops:
+  Exclude:
+    - DerivedData/**/*
+    - Pods/**/*
+    - vendor/**/*
+  NewCops: enable
+  SuggestExtensions:
+    rubocop-rake: false
+
+Metrics/MethodLength:
+  Max: 30
+
+Layout/LineLength:
+  Max: 180
+
+Metrics/BlockLength:
+  Exclude:
+    - fastlane/*file
+    - Podfile
+    - Rakefile
+
+Style/HashSyntax:
+  EnforcedShorthandSyntax: never
+
+# Used by UI test account methods. See https://github.com/Automattic/simplenote-ios/pull/1275 for more details.
+Style/GlobalVars:
+  AllowedVariables:
+    - $used_test_account_index
