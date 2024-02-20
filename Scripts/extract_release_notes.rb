@@ -56,31 +56,30 @@ release_lines = []
 # sequence. This accounts for the edge case in which more new lines make it
 # into the release notes file than expected.
 index = 0
-until lines[index].start_with? '-----'
-  index += 1
-end
+index += 1 until lines[index].start_with? '-----'
 
-lines[(index+1)...].each do |line|
+lines[(index + 1)...].each do |line|
   break if line.strip == ''
+
   release_lines.push line
 end
 
-formatted_lines = release_lines.
-    map { |l| l.gsub(/-   /, '- ') }
+formatted_lines = release_lines
+                  .map { |l| l.gsub('-   ', '- ') }
 
 case mode
 when :strip_pr_links
-  formatted_lines = formatted_lines.
-    map { |l| l.gsub(/ \#\d*$/, '') }
+  formatted_lines = formatted_lines
+                    .map { |l| l.gsub(/ \#\d*$/, '') }
 when :keep_pr_links
   formatted_lines = formatted_lines.
-    # The PR "links" are not actually links, but PR "ids". On GitHub, they'll
-    # be automatically parsed into links to the corresponding PR, but outside
-    # GitHub, such as in our internal posts or on App Center, they won't.
-    #
-    # It's probably best to update the convention in writing the release notes
-    # but in the meantime let's compensate with more automation.
-    map { |l| replace_pr_number_with_markdown_link(l) }
+                    # The PR "links" are not actually links, but PR "ids". On GitHub, they'll
+                    # be automatically parsed into links to the corresponding PR, but outside
+                    # GitHub, such as in our internal posts or on App Center, they won't.
+                    #
+                    # It's probably best to update the convention in writing the release notes
+                    # but in the meantime let's compensate with more automation.
+                    map { |l| replace_pr_number_with_markdown_link(l) }
 end
 
 # It would be good to either add overriding of the file where the parsed

@@ -1,8 +1,6 @@
 source 'https://cdn.cocoapods.org/'
 
-unless ['BUNDLE_BIN_PATH', 'BUNDLE_GEMFILE'].any? { |k| ENV.key?(k) }
-  raise 'Please run CocoaPods via `bundle exec`'
-end
+raise 'Please run CocoaPods via `bundle exec`' unless %w[BUNDLE_BIN_PATH BUNDLE_GEMFILE].any? { |k| ENV.key?(k) }
 
 inhibit_all_warnings!
 use_frameworks!
@@ -13,7 +11,6 @@ workspace 'Simplenote.xcworkspace'
 # Main
 #
 abstract_target 'Automattic' do
-
   # Main Target
   #
   target 'Simplenote' do
@@ -43,7 +40,6 @@ abstract_target 'Automattic' do
     pod 'ZIPFoundation', '~> 0.9.9'
   end
 end
-
 
 # Post Install
 #

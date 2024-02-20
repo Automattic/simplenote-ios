@@ -1,8 +1,6 @@
 #!/usr/bin/env ruby
-# encoding: utf-8
-
 # Supported languages:
-# ar,cy,zh-Hans,zh-Hant,nl,fa,fr,de,el,he,id,ko,pt,ru,es,sv,tr,ja,it 
+# ar,cy,zh-Hans,zh-Hant,nl,fa,fr,de,el,he,id,ko,pt,ru,es,sv,tr,ja,it
 # * Arabic
 # * Welsh
 # * Chinese (China) [zh-Hans]
@@ -25,11 +23,11 @@
 require 'json'
 
 if Dir.pwd =~ /Scripts/
-  puts "Must run script from root folder"
+  puts 'Must run script from root folder'
   exit
 end
 
-ALL_LANGS={
+ALL_LANGS = {
   'ar' => 'ar',         # Arabic
   'cy' => 'cy',         # Welsh
   'de' => 'de',         # German
@@ -48,28 +46,28 @@ ALL_LANGS={
   'sv' => 'sv',         # Swedish
   'tr' => 'tr',         # Turkish
   'zh-cn' => 'zh-Hans-CN', # Chinese (China)
-  'zh-tw' => 'zh-Hant-TW', # Chinese (Taiwan)
+  'zh-tw' => 'zh-Hant-TW' # Chinese (Taiwan)
 }
 
 def copy_header(target_file, trans_strings)
   trans_strings.each_line do |line|
-    if (!line.start_with?("/*"))
+    unless line.start_with?('/*')
       target_file.write("\n")
       return
-    end 
+    end
 
     target_file.write(line)
   end
 end
 
 def copy_comment(f, trans_strings, value)
-  prev_line=""
+  prev_line = ''
   trans_strings.each_line do |line|
     if line.include?(value)
       f.write(prev_line)
-      return 
+      return
     end
-    prev_line=line
+    prev_line = line
   end
 end
 
@@ -86,11 +84,11 @@ else
   langs = ALL_LANGS
 end
 
-langs.each do |code,local|
+langs.each do |code, local|
   lang_dir = File.join('Simplenote', "#{local}.lproj")
   puts "Updating #{code}"
   system "mkdir -p #{lang_dir}"
-  
+
   # Backup the current file
   system "if [ -e #{lang_dir}/Localizable.strings ]; then cp #{lang_dir}/Localizable.strings #{lang_dir}/Localizable.strings.bak; fi"
 
