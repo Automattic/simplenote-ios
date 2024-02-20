@@ -469,16 +469,16 @@ platform :ios do
     )
 
     sh('rm ../Simplenote.ipa')
-    dSYM_PATH = "#{File.dirname(Dir.pwd)}/Simplenote.app.dSYM.zip"
+    dsym_path = "#{File.dirname(Dir.pwd)}/Simplenote.app.dSYM.zip"
 
     sentry_upload_dsym(
-      dsym_path: dSYM_PATH,
+      dsym_path: dsym_path,
       auth_token: ENV.fetch('SENTRY_AUTH_TOKEN', nil),
       org_slug: 'a8c',
       project_slug: 'simplenote-ios'
     )
 
-    sh("rm #{dSYM_PATH}")
+    sh("rm #{dsym_path}")
 
     if options[:create_release]
       archive_zip_path = "#{File.dirname(Dir.pwd)}/Simplenote.xarchive.zip"
@@ -1089,9 +1089,9 @@ end
 # the account index, and values are either "free" or BUILDKITE_BUILD_NUMBER, in case if account
 # was occupied by a build. Returns the hash.
 # Example:
-#   get_test_accounts_hash
+#   fetch_test_accounts_hash
 #     => {"0"=>"4079", "1"=>"free", "2"=>"free", "3"=>"free"}
-def get_test_accounts_hash
+def fetch_test_accounts_hash
   uri = URI.parse(get_required_env('UI_TESTS_ACCOUNTS_JSON_URL'))
   response = Net::HTTP.get_response(uri)
   accounts_state = response.body.chomp
@@ -1101,7 +1101,7 @@ end
 # Finds the index of first free account in accounts hash, and marks it as accupied by current build.
 # Crashed fastlane if free account was not found.
 def find_free_test_account
-  accounts_hash = get_test_accounts_hash
+  accounts_hash = fetch_test_accounts_hash
   UI.message('Looking for a free test account...')
   UI.message("Accounts state: #{accounts_hash}")
 
@@ -1120,25 +1120,25 @@ end
 #   change_test_account_availability("4820")
 #     => {"0"=>"4820", "1"=>"free", "2"=>"free", "3"=>"free"}
 def change_test_account_availability(availability)
-  accounts_hash = get_test_accounts_hash
+  accounts_hash = fetch_test_accounts_hash
   accounts_hash[$used_test_account_index.to_s] = availability
   submit_accounts_hash(accounts_hash)
 end
 
 def sanitize_test_accounts
-  accounts_hash = get_test_accounts_hash
+  accounts_hash = fetch_test_accounts_hash
   UI.message('Sanitizing stale test accounts...')
   UI.message("Accounts before sanitizing: #{accounts_hash}")
 
   accounts_hash.each do |key, value|
-    next if value == 'free' || is_job_running(value)
+    next if value == 'free' || job_running?(value)
 
     accounts_hash[key] = 'free'
     submit_accounts_hash(accounts_hash)
   end
 end
 
-def is_job_running(job_number)
+def job_running?(job_number)
   client = Buildkit.new(token: get_required_env('BUILDKITE_TOKEN'))
   build = client.build('automattic', 'simplenote-ios', job_number)
 
@@ -1165,7 +1165,7 @@ def submit_accounts_hash(accounts_hash)
     http.request(request)
   end
 
-  UI.message("Accounts state after write: #{get_test_accounts_hash}")
+  UI.message("Accounts state after write: #{fetch_test_accounts_hash}")
 end
 
 def apply_build_number(build_number)

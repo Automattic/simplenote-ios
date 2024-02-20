@@ -241,12 +241,12 @@ task xcode: [:dependencies] do
 end
 
 def fold(label)
-  puts "travis_fold:start:#{label}" if is_travis?
+  puts "travis_fold:start:#{label}" if travis?
   yield
-  puts "travis_fold:end:#{label}" if is_travis?
+  puts "travis_fold:end:#{label}" if travis?
 end
 
-def is_travis?
+def travis?
   !ENV['TRAVIS'].nil?
 end
 
@@ -322,7 +322,7 @@ def check_dependencies_hook
   ENV['DRY_RUN'] = '1'
   begin
     Rake::Task['dependencies'].invoke
-  rescue Exception => e
+  rescue StandardError => e
     puts e.message
     exit 1
   end
