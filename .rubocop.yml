@@ -1,0 +1,18 @@
+AllCops:
+  NewCops: enable
+  SuggestExtensions:
+    rubocop-rake: false
+
+Metrics/MethodLength:
+  Max: 30
+
+Layout/LineLength:
+  Max: 180
+
+Metrics/BlockLength:
+  Exclude:
+    - fastlane/Fastfile
+    - Rakefile
+
+Style/HashSyntax:
+  EnforcedShorthandSyntax: never
