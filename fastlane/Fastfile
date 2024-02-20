@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 default_platform(:ios)
 fastlane_require 'xcodeproj'
 fastlane_require 'dotenv'
@@ -55,7 +57,7 @@ platform :ios do
   ENV['DOWNLOAD_METADATA'] = './fastlane/download_metadata.swift'
   ENV['FL_RELEASE_TOOLKIT_DEFAULT_BRANCH'] = 'trunk'
   REPOSITORY_NAME = 'simplenote-ios'
-  APP_STORE_BUNDLE_IDENTIFIER = 'com.codality.NotationalFlow'.freeze
+  APP_STORE_BUNDLE_IDENTIFIER = 'com.codality.NotationalFlow'
 
   # List of locales used for the app strings (GlotPress code => `*.lproj` folder name`)
   #
@@ -107,7 +109,7 @@ platform :ios do
   #####################################################################################
   desc 'Creates a new release branch from the current trunk'
   lane :code_freeze do |options|
-    old_version = ios_codefreeze_prechecks(options)
+    ios_codefreeze_prechecks(options)
 
     ios_bump_version_release
     new_version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
@@ -149,7 +151,7 @@ platform :ios do
     }
 
     ios_update_metadata_source(
-      po_file_path: prj_folder + '/Simplenote/Resources/AppStoreStrings.pot',
+      po_file_path: "#{prj_folder}/Simplenote/Resources/AppStoreStrings.pot",
       source_files: files,
       release_version: options[:version]
     )
@@ -467,7 +469,7 @@ platform :ios do
     )
 
     sh('rm ../Simplenote.ipa')
-    dSYM_PATH = File.dirname(Dir.pwd) + '/Simplenote.app.dSYM.zip'
+    dSYM_PATH = "#{File.dirname(Dir.pwd)}/Simplenote.app.dSYM.zip"
 
     sentry_upload_dsym(
       dsym_path: dSYM_PATH,
@@ -479,7 +481,7 @@ platform :ios do
     sh("rm #{dSYM_PATH}")
 
     if options[:create_release]
-      archive_zip_path = File.dirname(Dir.pwd) + '/Simplenote.xarchive.zip'
+      archive_zip_path = "#{File.dirname(Dir.pwd)}/Simplenote.xarchive.zip"
       zip(path: lane_context[SharedValues::XCODEBUILD_ARCHIVE], output_path: archive_zip_path)
 
       version = options[:beta_release] ? ios_get_build_version : ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
@@ -990,8 +992,7 @@ def simplenote_provisioning_profiles(root_bundle_id: APP_STORE_BUNDLE_IDENTIFIER
   #
   # simplenote_app_identifiers(root_bundle_id: root_bundle_id)
   [root_bundle_id, "#{root_bundle_id}.Share", "#{root_bundle_id}.Intents"]
-    .map { |key| [key, "match #{match_type} #{key}"] }
-    .to_h
+    .to_h { |key| [key, "match #{match_type} #{key}"] }
 end
 
 ########################################################################
@@ -1108,7 +1109,7 @@ def find_free_test_account
 
   UI.user_error!('Could not find free UI Test account. Quitting.') if $used_test_account_index.nil?
   UI.message("Free account index: #{$used_test_account_index}")
-  change_test_account_availability("#{get_required_env('BUILDKITE_BUILD_NUMBER')}")
+  change_test_account_availability(get_required_env('BUILDKITE_BUILD_NUMBER').to_s)
 end
 
 # Replace a value in a key which is equal to $used_test_account_index global variable
@@ -1160,7 +1161,7 @@ def submit_accounts_hash(accounts_hash)
     use_ssl: uri.scheme == 'https'
   }
 
-  response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+  Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
     http.request(request)
   end
 

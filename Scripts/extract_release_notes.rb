@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Parses the release notes file to extract the current version information and
 # puts it to STDOUT.
 #

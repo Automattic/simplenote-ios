@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://cdn.cocoapods.org/'
 
 raise 'Please run CocoaPods via `bundle exec`' unless %w[BUNDLE_BIN_PATH BUNDLE_GEMFILE].any? { |k| ENV.key?(k) }

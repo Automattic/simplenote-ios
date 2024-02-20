@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
+
 # Supported languages:
 # ar,cy,zh-Hans,zh-Hant,nl,fa,fr,de,el,he,id,ko,pt,ru,es,sv,tr,ja,it
 # * Arabic
@@ -47,7 +49,7 @@ ALL_LANGS = {
   'tr' => 'tr',         # Turkish
   'zh-cn' => 'zh-Hans-CN', # Chinese (China)
   'zh-tw' => 'zh-Hant-TW' # Chinese (Taiwan)
-}
+}.freeze
 
 def copy_header(target_file, trans_strings)
   trans_strings.each_line do |line|
@@ -72,9 +74,9 @@ def copy_comment(f, trans_strings, value)
 end
 
 langs = {}
-if ARGV.count > 0
-  for key in ARGV
-    unless local = ALL_LANGS[key]
+if ARGV.count.positive?
+  ARGV.each do |key|
+    unless (local = ALL_LANGS[key])
       puts "Unknown language #{key}"
       exit 1
     end

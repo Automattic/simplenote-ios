@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+require 'English'
 SWIFTLINT_VERSION = '0.41.0'
 XCODE_WORKSPACE = 'Simplenote.xcworkspace'
 XCODE_SCHEME = 'Simplenote'
@@ -107,7 +110,7 @@ namespace :dependencies do
             Dir.chdir(tmpdir) do
               sh "git checkout --quiet #{SWIFTLINT_VERSION}"
               sh 'git submodule --quiet update --init --recursive'
-              FileUtils.remove_entry_secure(swiftlint_path) if Dir.exist?(swiftlint_path)
+              FileUtils.rm_rf(swiftlint_path)
               FileUtils.mkdir_p(swiftlint_path)
               sh "make prefix_install PREFIX='#{swiftlint_path}'"
             end
@@ -173,8 +176,8 @@ namespace :git do
       source = hook_source(hook)
       backup = hook_backup(hook)
 
-      next if File.symlink?(target) and File.readlink(target) == source
-      next if File.file?(target) and File.identical?(target, source)
+      next if File.symlink?(target) && (File.readlink(target) == source)
+      next if File.file?(target) && File.identical?(target, source)
 
       if File.exist?(target)
         puts "Existing hook for #{hook}. Creating backup at #{target} -> #{backup}"
@@ -192,7 +195,7 @@ namespace :git do
       source = hook_source(hook)
       backup = hook_backup(hook)
 
-      next unless File.symlink?(target) and File.readlink(target) == source
+      next unless File.symlink?(target) && (File.readlink(target) == source)
 
       puts "Removing hook for #{hook}"
       File.unlink(target)
@@ -220,7 +223,7 @@ namespace :git do
   task pre_commit: %(dependencies:lint:check) do
     swiftlint %w[lint --quiet --strict]
   rescue StandardError
-    exit $?.exitstatus
+    exit $CHILD_STATUS.exitstatus
   end
 
   task :post_merge do
