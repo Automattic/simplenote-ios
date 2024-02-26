@@ -3230,7 +3230,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"$SRCROOT/Scripts/swiftlint.sh\"\n";
+			shellScript = "[ $CI ] && exit 0\n./Pods/SwiftLint/swiftlint\n";
 		};
 		B553F5A11D10474600F7E397 /* Delete Frameworks folder (temporary fix for CocoaPods) */ = {
 			isa = PBXShellScriptBuildPhase;
