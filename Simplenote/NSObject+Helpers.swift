@@ -1,6 +1,5 @@
 import Foundation
 
-
 /// NSObject: Helper Methods
 ///
 extension NSObject {

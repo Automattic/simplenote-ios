@@ -1,6 +1,5 @@
 import UIKit
 
-
 // MARK: - TagViewDelegate
 //
 protocol TagViewDelegate: AnyObject {
@@ -10,7 +9,6 @@ protocol TagViewDelegate: AnyObject {
     func tagViewDidBeginEditing(_ tagView: TagView)
     func tagViewDidChange(_ tagView: TagView)
 }
-
 
 // MARK: - TagView
 //
@@ -136,7 +134,6 @@ class TagView: UIView {
     }
 }
 
-
 // MARK: - Private
 //
 private extension TagView {
@@ -185,7 +182,6 @@ private extension TagView {
     }
 }
 
-
 // MARK: - Cells
 //
 private extension TagView {
@@ -221,7 +217,6 @@ private extension TagView {
     }
 }
 
-
 // MARK: - Editing
 //
 private extension TagView {
@@ -251,7 +246,6 @@ private extension TagView {
         }
     }
 }
-
 
 // MARK: - Tag processing
 //
@@ -313,7 +307,6 @@ extension TagView: UITextFieldDelegate {
     }
 }
 
-
 // MARK: - SPTagEntryFieldDelegate
 //
 extension TagView: SPTagEntryFieldDelegate {
@@ -327,7 +320,6 @@ extension TagView: SPTagEntryFieldDelegate {
         delegate?.tagViewDidChange(self)
     }
 }
-
 
 // MARK: - Constants
 //

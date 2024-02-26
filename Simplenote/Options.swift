@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - Wraps access to all of the UserDefault Values
 //
 class Options: NSObject {
@@ -14,8 +13,6 @@ class Options: NSObject {
     ///
     private let defaults: UserDefaults
 
-
-
     /// Designated Initializer
     ///
     /// - Note: Should be *private*, but for unit testing purposes, we're opening this up.
@@ -27,7 +24,6 @@ class Options: NSObject {
         migrateLegacyTheme()
     }
 }
-
 
 // MARK: - Actual Options!
 //
@@ -115,7 +111,6 @@ extension Options {
     }
 }
 
-
 // MARK: - ObjC Convenience Methods
 //
 extension Options {
@@ -152,7 +147,6 @@ extension Options {
     }
 }
 
-
 // MARK: - Private
 //
 private extension Options {
@@ -178,7 +172,6 @@ private extension Options {
         defaults.set(newTheme.rawValue, forKey: .theme)
     }
 }
-
 
 // MARK: - Constants!
 //

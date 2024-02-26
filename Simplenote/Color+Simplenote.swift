@@ -1,6 +1,5 @@
 import SwiftUI
 
-
 extension Color {
     /// Convenience initializers to get and use Simplenote color studio colors
     ///

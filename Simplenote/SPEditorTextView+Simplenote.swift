@@ -31,7 +31,6 @@ extension SPEditorTextView {
     }
 }
 
-
 // MARK: - Observer content position
 //
 extension SPEditorTextView {

@@ -1,7 +1,6 @@
 import SwiftUI
 import WidgetKit
 
-
 @available(iOS 14.0, *)
 @main
 struct SimplenoteWidgets: WidgetBundle {

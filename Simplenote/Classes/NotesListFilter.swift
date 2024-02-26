@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - NotesListFilter
 //
 enum NotesListFilter: Equatable {
@@ -9,7 +8,6 @@ enum NotesListFilter: Equatable {
     case untagged
     case tag(name: String)
 }
-
 
 // MARK: - NotesListFilter: Public API
 //
@@ -35,7 +33,6 @@ extension NotesListFilter {
             self = .tag(name: tag)
         }
     }
-
 
     /// Filter's visible Title
     ///

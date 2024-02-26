@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 // MARK: - UIView's Simplenote Methods
 //
 extension UIView {
@@ -61,7 +60,6 @@ extension UIView {
         UIView.userInterfaceLayoutDirection(for: semanticContentAttribute)
     }
 }
-
 
 // MARK: - UIView Class Methods
 //

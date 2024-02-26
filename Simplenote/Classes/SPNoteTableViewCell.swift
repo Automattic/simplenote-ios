@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 // MARK: - SPNoteTableViewCell
 //
 @objcMembers
@@ -137,8 +136,6 @@ class SPNoteTableViewCell: UITableViewCell {
         .zero
     }
 
-
-
     /// Deinitializer
     ///
     deinit {
@@ -151,7 +148,6 @@ class SPNoteTableViewCell: UITableViewCell {
         super.init(coder: aDecoder)
         startListeningToNotifications()
     }
-
 
     // MARK: - Overridden Methods
 
@@ -222,7 +218,6 @@ class SPNoteTableViewCell: UITableViewCell {
     }
 }
 
-
 // MARK: - Private Methods: Initialization
 //
 private extension SPNoteTableViewCell {
@@ -262,7 +257,6 @@ private extension SPNoteTableViewCell {
     }
 }
 
-
 // MARK: - Notifications
 //
 private extension SPNoteTableViewCell {
@@ -283,7 +277,6 @@ private extension SPNoteTableViewCell {
         refreshConstraints()
     }
 }
-
 
 // MARK: - Private Methods: Skinning
 //
@@ -316,7 +309,6 @@ private extension SPNoteTableViewCell {
         accessoryRightImageView.isHidden = isRightImageEmpty
     }
 }
-
 
 // MARK: - SPNoteTableViewCell
 //
@@ -354,7 +346,6 @@ extension SPNoteTableViewCell {
         return max(result.rounded(.up), Constants.minCellHeight)
     }
 }
-
 
 // MARK: - Cell Styles
 //
@@ -444,8 +435,6 @@ private enum Style {
         .simplenoteLightBlueColor
     }
 }
-
-
 
 // MARK: - NSAttributedString Private Methods
 //

@@ -1,7 +1,6 @@
 import WidgetKit
 import Intents
 
-
 struct WidgetController {
     @available(iOS 14.0, *)
     static func resetWidgetTimelines() {

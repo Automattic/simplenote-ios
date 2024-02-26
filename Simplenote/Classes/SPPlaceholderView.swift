@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 // MARK: - SPPlaceholderView
 //
 @objc
@@ -22,7 +21,6 @@ class SPPlaceholderView: UIView {
             displayModeWasChanged()
         }
     }
-
 
     /// Placeholder Image
     ///
@@ -61,7 +59,6 @@ class SPPlaceholderView: UIView {
         return stackView
     }()
 
-
     // MARK: - Initializers
 
     init() {
@@ -82,7 +79,6 @@ class SPPlaceholderView: UIView {
         stopListeningToNotifications()
     }
 }
-
 
 // MARK: - Private Methods
 //

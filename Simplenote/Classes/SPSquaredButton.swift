@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - SPSquaredButton: Simple convenience UIButton subclass, with a default corner radius
 //
 @IBDesignable
@@ -33,7 +32,6 @@ class SPSquaredButton: UIButton {
         setupStyle()
     }
 }
-
 
 // MARK: - Private Methods
 //

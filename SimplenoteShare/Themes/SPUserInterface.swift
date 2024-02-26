@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 // MARK: - Simplenote's Theme
 //
 @objc

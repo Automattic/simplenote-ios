@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - UserDefaults Extension Methods
 //
 extension UserDefaults {

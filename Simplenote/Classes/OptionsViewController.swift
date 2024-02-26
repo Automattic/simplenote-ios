@@ -2,7 +2,6 @@ import Foundation
 import UIKit
 import SimplenoteFoundation
 
-
 // MARK: - OptionsControllerDelegate
 //
 protocol OptionsControllerDelegate: AnyObject {
@@ -10,7 +9,6 @@ protocol OptionsControllerDelegate: AnyObject {
     func optionsControllerDidPressShare(_ sender: OptionsViewController)
     func optionsControllerDidPressTrash(_ sender: OptionsViewController)
 }
-
 
 // MARK: - OptionsViewController
 //
@@ -77,7 +75,6 @@ class OptionsViewController: UIViewController {
     }
 }
 
-
 // MARK: - Initialization
 //
 private extension OptionsViewController {
@@ -113,7 +110,6 @@ private extension OptionsViewController {
     }
 }
 
-
 // MARK: - EntityObserverDelegate
 //
 extension OptionsViewController: EntityObserverDelegate {
@@ -127,7 +123,6 @@ extension OptionsViewController: EntityObserverDelegate {
         refreshInterface()
     }
 }
-
 
 // MARK: - UITableViewDelegate
 //
@@ -143,7 +138,6 @@ extension OptionsViewController: UITableViewDelegate {
     }
 }
 
-
 // MARK: - UITableViewDataSource
 //
 extension OptionsViewController: UITableViewDataSource {
@@ -158,7 +152,6 @@ extension OptionsViewController: UITableViewDataSource {
     }
 }
 
-
 // MARK: - Helper API(s)
 //
 private extension OptionsViewController {
@@ -171,7 +164,6 @@ private extension OptionsViewController {
         sections[indexPath.section].rows[indexPath.row]
     }
 }
-
 
 // MARK: - Building Cells
 //
@@ -288,7 +280,6 @@ private extension OptionsViewController {
     }
 }
 
-
 // MARK: - Publishing
 //
 extension OptionsViewController {
@@ -310,7 +301,6 @@ extension OptionsViewController {
     }
 
 }
-
 
 // MARK: - Action Handlers
 //
@@ -412,7 +402,6 @@ private extension OptionsViewController {
     }
 }
 
-
 // MARK: - SPCollaboratorDelegate
 //
 extension OptionsViewController: SPCollaboratorDelegate {
@@ -431,13 +420,11 @@ extension OptionsViewController: SPCollaboratorDelegate {
     }
 }
 
-
 // MARK: - Section: Defines a TableView Section
 //
 private struct Section {
     let rows: [Row]
 }
-
 
 // MARK: - TableView Rows
 //

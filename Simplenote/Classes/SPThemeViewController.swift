@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 // MARK: - Settings: Theme
 //
 class SPThemeViewController: UITableViewController {
@@ -32,7 +31,6 @@ class SPThemeViewController: UITableViewController {
     ///
     var displaysDismissButton = false
 
-
     /// Designated Initializer
     ///
     init() {
@@ -49,7 +47,6 @@ class SPThemeViewController: UITableViewController {
         refreshInterfaceStyle()
     }
 }
-
 
 // MARK: - UITableViewDelegate Conformance
 //
@@ -78,7 +75,6 @@ extension SPThemeViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
-
 
 // MARK: - Private
 //
@@ -127,7 +123,6 @@ private extension SPThemeViewController {
         return IndexPath(row: selectedIndex, section: Constants.firstSectionIndex)
     }
 }
-
 
 extension SPThemeViewController {
 

@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - UIPasteboard + Interlink
 //
 extension UIPasteboard {

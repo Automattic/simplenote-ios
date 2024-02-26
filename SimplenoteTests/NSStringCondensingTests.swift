@@ -2,7 +2,6 @@ import Foundation
 import XCTest
 @testable import Simplenote
 
-
 // MARK: - NSString+Condensing Unit Tests
 //
 class NSStringCondensingTests: XCTestCase {

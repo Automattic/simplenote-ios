@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 // MARK: - UIBezierPath Methods
 //
 extension UIBezierPath {

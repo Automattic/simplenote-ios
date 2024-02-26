@@ -2,7 +2,6 @@ import Foundation
 import UIKit
 import SafariServices
 
-
 // MARK: - SPOnboardingViewController
 //
 class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
@@ -43,7 +42,6 @@ class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
     ///
     var authenticator: SPAuthenticator?
 
-
     // MARK: - Overriden Properties
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -53,7 +51,6 @@ class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
     override var shouldAutorotate: Bool {
         return false
     }
-
 
     // MARK: - Overridden Methods
 
@@ -73,7 +70,6 @@ class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
         ensureNavigationBarIsHidden()
     }
 }
-
 
 // MARK: - Private
 //
@@ -141,7 +137,6 @@ private extension SPOnboardingViewController {
     }
 }
 
-
 // MARK: - Actions
 //
 private extension SPOnboardingViewController {
@@ -195,7 +190,6 @@ private extension SPOnboardingViewController {
     }
 }
 
-
 // MARK: - Actions
 //
 private extension SPOnboardingViewController {
@@ -219,7 +213,6 @@ private extension SPOnboardingViewController {
 
 }
 
-
 // MARK: - Private Types
 //
 private struct OnboardingStrings {
@@ -232,7 +225,6 @@ private struct OnboardingStrings {
     static let loginWithEmailText = NSLocalizedString("Log in with email", comment: "Presents the regular Email signin flow")
     static let loginWithWpcomText = NSLocalizedString("Log in with WordPress.com", comment: "Allows the user to SignIn using their WPCOM Account")
 }
-
 
 private struct SignInError {
     static let title = NSLocalizedString("Couldn't Sign In", comment: "Alert dialog title displayed on sign in error")

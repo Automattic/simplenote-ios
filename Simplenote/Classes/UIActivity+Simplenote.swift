@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - UIActivity <> WordPress iOS!
 //
 extension UIActivity.ActivityType {

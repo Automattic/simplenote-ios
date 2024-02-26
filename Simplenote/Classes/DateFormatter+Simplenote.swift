@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - Simplenote Extension
 //
 extension DateFormatter {

@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 // MARK: - UITraitCollection Simplenote Methods
 //
 extension UITraitCollection {

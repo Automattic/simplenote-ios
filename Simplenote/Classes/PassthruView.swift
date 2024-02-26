@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - PassthruView: Doesn't capture tap events performed over itself!
 //
 class PassthruView: UIView {

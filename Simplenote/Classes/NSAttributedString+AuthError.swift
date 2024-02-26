@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - NSAttributedString + AuthError Helpers
 //
 extension NSAttributedString {
@@ -49,7 +48,6 @@ extension NSAttributedString {
     }
 }
 
-
 // MARK: - Diagnostic Title(s)
 //
 private enum Title {
@@ -57,7 +55,6 @@ private enum Title {
     static let error        = NSLocalizedString("Error", comment: "Error Title")
     static let response     = NSLocalizedString("Response", comment: "Response Title")
 }
-
 
 // MARK: - Text Styles
 //

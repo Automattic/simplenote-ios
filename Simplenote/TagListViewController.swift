@@ -79,7 +79,6 @@ final class TagListViewController: UIViewController {
     }
 }
 
-
 // MARK: - Configuration
 //
 private extension TagListViewController {
@@ -127,7 +126,6 @@ private extension TagListViewController {
     }
 }
 
-
 // MARK: - Action Handlers
 //
 private extension TagListViewController {
@@ -142,7 +140,6 @@ private extension TagListViewController {
         present(sustainerAlertController, animated: true)
     }
 }
-
 
 // MARK: - Notifications
 //

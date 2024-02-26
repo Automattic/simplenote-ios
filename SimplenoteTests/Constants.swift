@@ -1,6 +1,5 @@
 import Foundation
 
-
 /// Unit Tests Constants
 ///
 struct Constants {

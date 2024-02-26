@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - UITableView Simplenote Methods
 //
 extension UITableView {

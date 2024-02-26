@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - UINavigationController Simplenote API
 //
 extension UINavigationController {

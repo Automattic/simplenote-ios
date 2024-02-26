@@ -73,7 +73,6 @@ class TagViewCell: RoundedView {
     }
 }
 
-
 // MARK: - Private
 //
 private extension TagViewCell {
@@ -138,7 +137,6 @@ private extension TagViewCell {
     }
 }
 
-
 // MARK: - Accessibility
 //
 extension TagViewCell {
@@ -157,7 +155,6 @@ extension TagViewCell {
     }
 }
 
-
 // MARK: - Constants
 //
 private struct Constants {
@@ -171,7 +168,6 @@ private struct Constants {
     static let deleteButtonSideSize: CGFloat = 20
     static let deleteButtonHitAreaInset: CGFloat = -10
 }
-
 
 // MARK: - Localization
 //

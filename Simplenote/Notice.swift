@@ -1,7 +1,7 @@
 import Foundation
 
 struct Notice {
-    
+
     let message: String
     let action: NoticeAction?
 

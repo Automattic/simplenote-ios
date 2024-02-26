@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 // MARK: - Preferences Extensions
 //
 extension Preferences {

@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - Editor Factory (!)
 //
 @objcMembers
@@ -47,7 +46,6 @@ class EditorFactory: NSObject {
         return note
     }
 }
-
 
 // MARK: - Constants
 //

@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - NSPredicate Validation Methods
 //
 extension NSPredicate {

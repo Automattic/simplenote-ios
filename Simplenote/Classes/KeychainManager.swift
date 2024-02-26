@@ -1,7 +1,5 @@
 import Foundation
 
-
-
 // MARK: - KeychainManager
 //
 enum KeychainManager {
@@ -21,8 +19,6 @@ enum KeychainManager {
     @KeychainItemWrapper(service: SimplenoteKeychain.timestampService, account: SimplenoteKeychain.timestampAccount)
     static var timestamp: String?
 }
-
-
 
 // MARK: - KeychainItemWrapper
 //
@@ -63,7 +59,6 @@ struct KeychainItemWrapper {
         }
     }
 }
-
 
 // MARK: - Keychain Constants
 //

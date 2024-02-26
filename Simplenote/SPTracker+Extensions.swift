@@ -58,7 +58,6 @@ extension SPTracker {
     }
 }
 
-
 // MARK: - Shortcuts
 //
 extension SPTracker {
@@ -90,7 +89,6 @@ extension SPTracker {
         trackShortcut("toggle_checklist")
     }
 }
-
 
 // MARK: Account Deletion
 //

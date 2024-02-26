@@ -34,7 +34,6 @@ class SPPrivacyViewController: SPTableViewController {
         return isAnalyticsEnabled.boolValue
     }
 
-
     // MARK: - Overridden Methods
 
     override func viewDidLoad() {
@@ -88,7 +87,6 @@ class SPPrivacyViewController: SPTableViewController {
     }
 }
 
-
 // MARK: - Event Handlers
 //
 extension SPPrivacyViewController {
@@ -113,7 +111,6 @@ extension SPPrivacyViewController {
         UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
     }
 }
-
 
 // MARK: - Initialization Methods
 //
@@ -180,7 +177,6 @@ private extension SPPrivacyViewController {
         cell.selectionStyle = .none
     }
 }
-
 
 // MARK: - Private Types
 //

@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 // MARK: - SPSortBar
 //
 class SPSortBar: UIView {
@@ -45,7 +44,6 @@ class SPSortBar: UIView {
     ///
     var onSortModePress: (() -> Void)?
 
-
     // MARK: - Lifecycle
 
     deinit {
@@ -66,7 +64,6 @@ class SPSortBar: UIView {
         refreshStyle()
     }
 }
-
 
 // MARK: - Private Methods
 //
@@ -111,7 +108,6 @@ private extension SPSortBar {
     }
 }
 
-
 // MARK: - Notifications
 //
 private extension SPSortBar {
@@ -129,7 +125,6 @@ private extension SPSortBar {
         refreshStyle()
     }
 }
-
 
 // MARK: - Action Handlers
 //

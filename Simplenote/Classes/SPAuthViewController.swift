@@ -2,7 +2,6 @@ import Foundation
 import UIKit
 import SafariServices
 
-
 // MARK: - SPAuthViewController
 //
 class SPAuthViewController: UIViewController {
@@ -166,14 +165,11 @@ class SPAuthViewController: UIViewController {
     ///
     var debugEnabled = false
 
-
-
     /// NSCodable Required Initializer
     ///
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
 
     /// Designated Initializer
     ///
@@ -182,7 +178,6 @@ class SPAuthViewController: UIViewController {
         self.mode = mode
         super.init(nibName: nil, bundle: nil)
     }
-
 
     // MARK: - Overridden Methods
 
@@ -213,7 +208,6 @@ class SPAuthViewController: UIViewController {
     }
 }
 
-
 // MARK: - Actions
 //
 extension SPAuthViewController {
@@ -224,7 +218,6 @@ extension SPAuthViewController {
         passwordInputView.isSecureTextEntry = !isPasswordVisible
     }
 }
-
 
 // MARK: - Interface
 //
@@ -275,7 +268,6 @@ private extension SPAuthViewController {
         primaryActionSpinner.stopAnimating()
     }
 }
-
 
 // MARK: - Actions
 //
@@ -347,7 +339,6 @@ private extension SPAuthViewController {
     }
 }
 
-
 // MARK: - Simperium Services
 //
 private extension SPAuthViewController {
@@ -380,7 +371,6 @@ private extension SPAuthViewController {
     }
 }
 
-
 // MARK: - Password Reset Flow
 //
 private extension SPAuthViewController {
@@ -400,7 +390,6 @@ private extension SPAuthViewController {
         present(alertController, animated: true, completion: nil)
     }
 }
-
 
 // MARK: - Error Handling
 //
@@ -502,7 +491,6 @@ private extension SPAuthViewController {
     }
 }
 
-
 // MARK: - Warning Labels
 //
 private extension SPAuthViewController {
@@ -535,7 +523,6 @@ private extension SPAuthViewController {
         passwordInputView.inErrorState = inErrorState
     }
 }
-
 
 // MARK: - Validation
 //
@@ -588,7 +575,6 @@ private extension SPAuthViewController {
     }
 }
 
-
 // MARK: - UITextFieldDelegate Conformance
 //
 extension SPAuthViewController: SPTextInputViewDelegate {
@@ -630,7 +616,6 @@ extension SPAuthViewController: SPTextInputViewDelegate {
     }
 }
 
-
 // MARK: - AuthenticationMode: Signup / Login
 //
 struct AuthenticationMode {
@@ -643,7 +628,6 @@ struct AuthenticationMode {
     let secondaryActionAttributedText: NSAttributedString?
     let isPasswordHidden: Bool
 }
-
 
 // MARK: - Default Operation Modes
 //
@@ -676,7 +660,6 @@ extension AuthenticationMode {
     }
 }
 
-
 // MARK: - Authentication Strings
 //
 private enum AuthenticationStrings {
@@ -702,7 +685,6 @@ private enum AuthenticationStrings {
     static let verificationSentTemplate     = NSLocalizedString("We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions.", comment: "Confirmation that an email has been sent")
 }
 
-
 // MARK: - PasswordInsecure Alert Strings
 //
 private enum PasswordInsecureString {
@@ -717,7 +699,6 @@ private enum PasswordInsecureString {
         NSLocalizedString("- Neither tabs nor newlines are allowed", comment: "Password Requirement: Special Characters")
     ].joined(separator: .newline)
 }
-
 
 // MARK: - Strings >> Authenticated Strings Convenience Properties
 //
@@ -737,7 +718,6 @@ private extension AuthenticationStrings {
         return output
     }
 }
-
 
 // MARK: - Authentication Constants
 //

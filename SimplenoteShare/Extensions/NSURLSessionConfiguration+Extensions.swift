@@ -1,6 +1,5 @@
 import Foundation
 
-
 /// Encapsulates NSURLSessionConfiguration Helpers
 ///
 extension URLSessionConfiguration {

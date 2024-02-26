@@ -3,8 +3,6 @@ import CoreSpotlight
 import Intents
 import MobileCoreServices
 
-
-
 // MARK: - NSUserActivity Convenience Methods
 //
 extension NSUserActivity {

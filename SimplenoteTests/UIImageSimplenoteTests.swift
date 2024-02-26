@@ -1,7 +1,6 @@
 import XCTest
 @testable import Simplenote
 
-
 // MARK: - UIImage+Simplenote Unit Tests
 //
 class UIImageSimplenoteTests: XCTestCase {

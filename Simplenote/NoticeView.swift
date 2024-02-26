@@ -36,7 +36,6 @@ class NoticeView: UIView {
 
     weak var delegate: NoticeInteractionDelegate?
 
-
     // MARK: Initialization
     //
     override func awakeFromNib() {

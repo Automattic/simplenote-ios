@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 // MARK: - Simplenote Named Images
 //
 @objc
@@ -57,7 +56,6 @@ enum UIImageName: Int, CaseIterable {
     case visibilityOff
     case warning
 }
-
 
 // MARK: - Public Methods
 //

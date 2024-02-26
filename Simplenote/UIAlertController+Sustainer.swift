@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 // MARK: - UIAlertController+Sustainer
 //
 @available(iOS 15, *)
@@ -38,7 +37,6 @@ extension UIAlertController {
         return alert
     }
 }
-
 
 // MARK: - Localization
 //

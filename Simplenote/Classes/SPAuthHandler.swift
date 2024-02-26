@@ -1,7 +1,6 @@
 import Foundation
 import SafariServices
 
-
 // MARK: - SPAuthHandler
 //
 class SPAuthHandler {
@@ -10,7 +9,6 @@ class SPAuthHandler {
     ///
     private let simperiumService: SPAuthenticator
 
-
     /// Designated Initializer.
     ///
     /// - Parameter simperiumService: Reference to a valid SPAuthenticator instance.
@@ -18,8 +16,6 @@ class SPAuthHandler {
     init(simperiumService: SPAuthenticator) {
         self.simperiumService = simperiumService
     }
-
-
 
     /// Authenticates against the Simperium Backend.
     ///
@@ -39,7 +35,6 @@ class SPAuthHandler {
         })
     }
 
-
     /// Validates a set of credentials against the Simperium Backend.
     ///
     /// - Note: This API is meant to be used to verify an unsecured set of credentials, before presenting the Reset Password UI.
@@ -57,7 +52,6 @@ class SPAuthHandler {
             onCompletion(error)
         })
     }
-
 
     /// Registers a new user in the Simperium Backend.
     ///

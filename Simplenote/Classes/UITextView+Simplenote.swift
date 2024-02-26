@@ -2,7 +2,6 @@ import Foundation
 import UIKit
 import SimplenoteInterlinks
 
-
 // MARK: - UITextView State
 //
 extension UITextView {
@@ -21,7 +20,6 @@ extension UITextView {
     }
 }
 
-
 // MARK: - Updating!
 //
 extension UITextView {
@@ -39,7 +37,6 @@ extension UITextView {
         }
     }
 }
-
 
 // MARK: - Undo Stack
 //
@@ -93,7 +90,6 @@ private extension UITextView {
     }
 }
 
-
 // MARK: - Interlinks
 //
 extension UITextView {
@@ -109,7 +105,6 @@ extension UITextView {
     }
 }
 
-
 // MARK: - Attachments
 //
 extension UITextView {
@@ -124,7 +119,6 @@ extension UITextView {
         return attributedText.attribute(.attachment, at: index, effectiveRange: nil) as? T
     }
 }
-
 
 // MARK: - Geometry
 //

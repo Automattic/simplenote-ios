@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 // MARK: - Renders a customized Action Sheet
 //
 class SPSheetController: UIViewController {
@@ -42,8 +41,6 @@ class SPSheetController: UIViewController {
     ///
     var onClickButton1: (() -> Void)?
 
-
-
     /// Designated Initializer
     ///
     init() {
@@ -57,7 +54,6 @@ class SPSheetController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-
     // MARK: - Required Methods
 
     override func viewWillAppear(_ animated: Bool) {
@@ -69,7 +65,6 @@ class SPSheetController: UIViewController {
         super.viewDidAppear(animated)
         performSlideUpAnimation()
     }
-
 
     // MARK: - Public Methods
 
@@ -92,7 +87,6 @@ class SPSheetController: UIViewController {
         button1.setTitle(title, for: .normal)
     }
 }
-
 
 // MARK: - Private Methods
 //
@@ -117,7 +111,6 @@ private extension SPSheetController {
     }
 }
 
-
 // MARK: - Actions
 //
 private extension SPSheetController {
@@ -136,7 +129,6 @@ private extension SPSheetController {
         dismissWithAnimation()
     }
 }
-
 
 // MARK: - Animations
 //

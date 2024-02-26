@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - UIActivityItem With Special Treatment for WordPress iOS
 //
 class SimplenoteActivityItemSource: NSObject, UIActivityItemSource {

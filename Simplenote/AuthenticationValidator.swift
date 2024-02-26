@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - AuthenticationValidator
 //
 struct AuthenticationValidator {
@@ -12,7 +11,6 @@ struct AuthenticationValidator {
     /// Minimum Password Length: SignUp
     ///
     private let strongPasswordLength = UInt(8)
-
 
     /// Returns the Validation Result for a given Username
     ///
@@ -52,7 +50,6 @@ struct AuthenticationValidator {
     }
 }
 
-
 // MARK: - Nested Types
 //
 extension AuthenticationValidator {
@@ -70,7 +67,6 @@ extension AuthenticationValidator {
         case passwordContainsInvalidCharacter
     }
 }
-
 
 // MARK: - Validation Results: String Conversion
 //

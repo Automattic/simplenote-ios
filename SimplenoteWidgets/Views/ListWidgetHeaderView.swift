@@ -1,7 +1,6 @@
 import SwiftUI
 import WidgetKit
 
-
 struct ListWidgetHeaderView: View {
     let tag: WidgetTag
 

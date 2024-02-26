@@ -20,7 +20,6 @@ struct NoteMetrics {
     ///
     let modifiedDate: Date
 
-
     /// Designed Initializer
     /// - Parameter note: Note from which we should extract metrics
     ///

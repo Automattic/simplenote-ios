@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 // MARK: - Settings
 //
 enum StoreConstants {

@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 // MARK: - InterlinkViewController
 //
 class InterlinkViewController: UIViewController {
@@ -25,7 +24,7 @@ class InterlinkViewController: UIViewController {
     var desiredHeight: CGFloat {
         return Metrics.maximumTableHeight
     }
-    
+
     // MARK: - Overridden API(s)
 
     override func viewDidLoad() {
@@ -34,7 +33,6 @@ class InterlinkViewController: UIViewController {
         setupTableView()
     }
 }
-
 
 // MARK: - Initialization
 //
@@ -55,7 +53,6 @@ private extension InterlinkViewController {
         tableView.maxHeightConstraint.constant = Metrics.maximumTableHeight
     }
 }
-
 
 // MARK: - UITableViewDataSource
 //
@@ -83,7 +80,6 @@ extension InterlinkViewController: UITableViewDataSource {
     }
 }
 
-
 // MARK: - UITableViewDelegate
 //
 extension InterlinkViewController: UITableViewDelegate {
@@ -93,7 +89,6 @@ extension InterlinkViewController: UITableViewDelegate {
         performInterlinkInsert(for: note)
     }
 }
-
 
 // MARK: - Private API(s)
 //
@@ -107,7 +102,6 @@ private extension InterlinkViewController {
         onInsertInterlink?(markdownInterlink)
     }
 }
-
 
 // MARK: - Metrics
 //
