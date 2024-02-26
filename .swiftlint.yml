@@ -1,3 +1,5 @@
+swiftlint_version: 0.54.0
+
 # Project configuration
 excluded:
   - Pods
@@ -14,6 +16,10 @@ only_rules:
 
   # if,for,while,do statements shouldn't wrap their conditionals in parentheses.
   - control_statement
+
+  - discarded_notification_center_observer
+
+  - duplicate_imports
 
   # Arguments can be omitted when matching enums with associated types if they
   # are not used.
@@ -37,6 +43,8 @@ only_rules:
 
   # Lines should not have trailing whitespace.
   - trailing_whitespace
+
+  - vertical_whitespace
 
   - custom_rules
 
