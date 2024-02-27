@@ -2,7 +2,6 @@ import XCTest
 import SimplenoteFoundation
 @testable import Simplenote
 
-
 // MARK: - NotesListControllerTests
 //
 class NotesListControllerTests: XCTestCase {
@@ -14,7 +13,6 @@ class NotesListControllerTests: XCTestCase {
     /// List Controller
     ///
     private var noteListController: NotesListController!
-
 
     // MARK: - Overridden Methods
 
@@ -28,7 +26,6 @@ class NotesListControllerTests: XCTestCase {
         super.tearDown()
         storage.reset()
     }
-
 
     // MARK: - Tests: Filters
 
@@ -51,7 +48,6 @@ class NotesListControllerTests: XCTestCase {
         XCTAssertEqual(noteListController.numberOfObjects, 1)
     }
 
-
     // MARK: - Tests: Sorting
 
     /// Verifies that the SortMode property properly applies the specified order mode to the retrieved entities
@@ -73,7 +69,6 @@ class NotesListControllerTests: XCTestCase {
         }
     }
 
-
     // MARK: - Tests: Sections
 
     /// Verifies that the Tag Entities aren't fetched when in Results Mode
@@ -91,7 +86,6 @@ class NotesListControllerTests: XCTestCase {
         XCTAssertEqual(noteListController.sections.count, 1)
         XCTAssertEqual(noteListController.sections[0].numberOfObjects, notes.count)
     }
-
 
     // MARK: - Tests: Search
 
@@ -121,7 +115,6 @@ class NotesListControllerTests: XCTestCase {
         XCTAssertEqual(noteListController.numberOfObjects, 0)
         XCTAssertEqual(noteListController.sections.count, 2)
     }
-
 
     /// Verifies that the `endSearch` switches the NotesList back to a single section
     ///
@@ -168,7 +161,6 @@ class NotesListControllerTests: XCTestCase {
 
         XCTAssert(noteListController.sections[0].numberOfObjects <= noteListController.limitForTagResults)
     }
-
 
     // MARK: - Tests: `object(at:)`
 
@@ -224,7 +216,6 @@ class NotesListControllerTests: XCTestCase {
         XCTAssertEqual(tag.name, "055")
         XCTAssertEqual(note.content, "055")
     }
-
 
     // MARK: - Tests: `indexPath(forObject:)`
 
@@ -476,7 +467,6 @@ class NotesListControllerTests: XCTestCase {
         waitForExpectations(timeout: Constants.expectationTimeout, handler: nil)
     }
 
-
     /// Verifies that `onBatchChanges` does not relay duplicated Changesets
     ///
     func testOnBatchChangesDoesNotRelayDuplicatedEvents() {
@@ -492,7 +482,6 @@ class NotesListControllerTests: XCTestCase {
 
         waitForExpectations(timeout: Constants.expectationTimeout, handler: nil)
     }
-
 
     /// Verifies that `onBatchChanges` relays move events
     ///
@@ -513,7 +502,6 @@ class NotesListControllerTests: XCTestCase {
         waitForExpectations(timeout: Constants.expectationTimeout, handler: nil)
     }
 }
-
 
 // MARK: - Private APIs
 //

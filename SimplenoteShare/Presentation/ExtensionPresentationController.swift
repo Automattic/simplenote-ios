@@ -1,13 +1,11 @@
 import UIKit
 
-
 /// Allows certain presented view controllers to request themselves to be
 /// presented at full size instead of inset within the container.
 ///
 protocol ExtensionPresentationTarget {
     var shouldFillContentContainer: Bool { get }
 }
-
 
 final class ExtensionPresentationController: UIPresentationController {
 
@@ -45,7 +43,6 @@ final class ExtensionPresentationController: UIPresentationController {
 
         removeKeyboardObservers(with: tokens)
     }
-
 
     // MARK: Presentation Controller Overrides
 
@@ -103,7 +100,6 @@ final class ExtensionPresentationController: UIPresentationController {
     }
 }
 
-
 // MARK: - KeyboardObservable Conformance
 //
 extension ExtensionPresentationController: KeyboardObservable {
@@ -147,7 +143,6 @@ extension ExtensionPresentationController: KeyboardObservable {
         return frame
     }
 }
-
 
 // MARK: - Constants
 //

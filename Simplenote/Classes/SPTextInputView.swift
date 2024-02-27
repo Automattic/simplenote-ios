@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - SPTextInputViewDelegate
 //
 @objc
@@ -21,7 +20,6 @@ protocol SPTextInputViewDelegate: NSObjectProtocol {
     @objc optional
     func textInput(_ textInput: SPTextInputView, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
 }
-
 
 // MARK: - SPTextInputView:
 //         Renders a custom UITextView with bezel. When becomes the first responder, the border color will be refreshed.
@@ -239,7 +237,6 @@ class SPTextInputView: UIView {
     ///
     weak var delegate: SPTextInputViewDelegate?
 
-
     // MARK: - Initializers
 
     override init(frame: CGRect) {
@@ -258,7 +255,6 @@ class SPTextInputView: UIView {
         refreshBorderStyle()
     }
 
-
     // MARK: - Public Methods
 
     @discardableResult
@@ -266,7 +262,6 @@ class SPTextInputView: UIView {
         return textField.becomeFirstResponder()
     }
 }
-
 
 // MARK: - Private
 //
@@ -310,7 +305,6 @@ private extension SPTextInputView {
     }
 }
 
-
 // MARK: - Relaying editingChanged Events
 //
 extension SPTextInputView {
@@ -319,7 +313,6 @@ extension SPTextInputView {
         delegate?.textInputDidChange?(self)
     }
 }
-
 
 // MARK: - UITextFieldDelegate
 //
@@ -343,7 +336,6 @@ extension SPTextInputView: UITextFieldDelegate {
         return delegate?.textInput?(self, shouldChangeCharactersIn: range, replacementString: string) ?? true
     }
 }
-
 
 // MARK: - Default Settings
 //

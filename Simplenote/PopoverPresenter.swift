@@ -1,6 +1,5 @@
 import UIKit
 
-
 // MARK: - PopoverPresenter
 //
 final class PopoverPresenter {
@@ -23,11 +22,9 @@ final class PopoverPresenter {
     ///
     var dismissOnInteractionWithPassthruView: Bool = false
 
-
     /// Dismiss on container frame change
     ///
     var dismissOnContainerFrameChange: Bool = false
-
 
     /// Center content relative to anchor
     ///
@@ -115,7 +112,6 @@ final class PopoverPresenter {
     }
 }
 
-
 // MARK: - Geometry
 //
 private extension PopoverPresenter {
@@ -177,14 +173,12 @@ private extension PopoverPresenter {
     }
 }
 
-
 // MARK: - Defines the vertical orientation in which we'll display Popover
 //
 private enum Orientation {
     case above
     case below
 }
-
 
 // MARK: - Metrics
 //

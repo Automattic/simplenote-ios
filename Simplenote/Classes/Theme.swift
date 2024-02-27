@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - Represents all of the available Themes
 //
 @objc
@@ -18,7 +17,6 @@ enum Theme: Int, CaseIterable {
     ///
     case system
 
-
     /// Returns a localized Description, matching the current rawValue
     ///
     var description: String {
@@ -32,7 +30,6 @@ enum Theme: Int, CaseIterable {
         }
     }
 }
-
 
 extension Theme {
 

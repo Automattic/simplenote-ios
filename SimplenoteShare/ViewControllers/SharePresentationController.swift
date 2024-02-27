@@ -1,6 +1,5 @@
 import UIKit
 
-
 class SharePresentationController: UIViewController {
 
     private let extensionTransitioningManager: ExtensionTransitioningManager = {
@@ -25,7 +24,6 @@ class SharePresentationController: UIViewController {
     }
 }
 
-
 // MARK: - Private Helpers
 //
 private extension SharePresentationController {
@@ -43,7 +41,6 @@ private extension SharePresentationController {
         present(shareNavController, animated: true)
     }
 }
-
 
 // MARK: - Appearance Helpers
 //

@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - Simplenote UserDefaults Keys
 //
 extension UserDefaults {
@@ -18,7 +17,6 @@ extension UserDefaults {
         case accountIsLoggedIn
     }
 }
-
 
 // MARK: - Convenience Methods
 //

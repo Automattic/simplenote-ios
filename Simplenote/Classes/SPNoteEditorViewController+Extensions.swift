@@ -1,7 +1,6 @@
 import Foundation
 import CoreSpotlight
 
-
 // MARK: - Overridden Methods
 //
 extension SPNoteEditorViewController {
@@ -25,7 +24,6 @@ extension SPNoteEditorViewController {
         interlinkProcessor.dismissInterlinkLookup()
     }
 }
-
 
 // MARK: - Interface Initialization
 //
@@ -119,7 +117,6 @@ extension SPNoteEditorViewController {
                                 siblingView: navigationBarBackground)
     }
 }
-
 
 // MARK: - Layout
 //
@@ -241,7 +238,6 @@ extension SPNoteEditorViewController: KeyboardObservable {
     }
 }
 
-
 // MARK: - Voiceover Support
 //
 extension SPNoteEditorViewController {
@@ -277,7 +273,6 @@ extension SPNoteEditorViewController {
     }
 }
 
-
 // MARK: - State Restoration
 //
 extension SPNoteEditorViewController {
@@ -303,7 +298,6 @@ extension SPNoteEditorViewController {
         coder.encode(note.simperiumKey, forKey: CodingKeys.currentNoteKey.rawValue)
     }
 }
-
 
 // MARK: - History
 //
@@ -354,7 +348,6 @@ extension SPNoteEditorViewController {
     }
 }
 
-
 // MARK: - History Delegate
 //
 extension SPNoteEditorViewController: SPNoteHistoryControllerDelegate {
@@ -374,7 +367,6 @@ extension SPNoteEditorViewController: SPNoteHistoryControllerDelegate {
         updateEditor(with: content)
     }
 }
-
 
 // MARK: - SPCardPresentationControllerDelegate
 //
@@ -500,8 +492,6 @@ private extension SPNoteEditorViewController {
     }
 }
 
-
-
 // MARK: - Services
 //
 extension SPNoteEditorViewController {
@@ -581,7 +571,6 @@ extension SPNoteEditorViewController {
     }
 }
 
-
 // MARK: - Editor
 //
 private extension SPNoteEditorViewController {
@@ -629,7 +618,6 @@ private extension SPNoteEditorViewController {
     }
 }
 
-
 // MARK: - OptionsControllerDelegate
 //
 extension SPNoteEditorViewController: OptionsControllerDelegate {
@@ -663,7 +651,6 @@ extension SPNoteEditorViewController: OptionsControllerDelegate {
     }
 }
 
-
 // MARK: - Accessibility
 //
 private extension SPNoteEditorViewController {
@@ -672,7 +659,6 @@ private extension SPNoteEditorViewController {
         UIAccessibility.post(notification: .layoutChanged, argument: nil)
     }
 }
-
 
 // MARK: - Actions
 //
@@ -717,7 +703,6 @@ extension SPNoteEditorViewController {
     }
 }
 
-
 // MARK: - InterlinkProcessorDelegate
 //
 extension SPNoteEditorViewController: InterlinkProcessorDelegate {
@@ -726,7 +711,6 @@ extension SPNoteEditorViewController: InterlinkProcessorDelegate {
         processor.dismissInterlinkLookup()
     }
 }
-
 
 // MARK: - Tags
 //
@@ -777,7 +761,6 @@ extension SPNoteEditorViewController {
     }
 }
 
-
 // MARK: - NoteEditorTagListViewControllerDelegate
 //
 extension SPNoteEditorViewController: NoteEditorTagListViewControllerDelegate {
@@ -798,7 +781,6 @@ extension SPNoteEditorViewController: NoteEditorTagListViewControllerDelegate {
         }
     }
 }
-
 
 // MARK: - Style
 //
@@ -961,8 +943,6 @@ extension SPNoteEditorViewController {
                                          title: Localization.Shortcuts.toggleMarkdown))
         }
 
-
-
         if searching {
             commands.append(contentsOf: [
                 UIKeyCommand(input: "g",
@@ -1038,7 +1018,6 @@ extension SPNoteEditorViewController {
     }
 }
 
-
 // MARK: - Scroll position
 //
 extension SPNoteEditorViewController {
@@ -1066,7 +1045,6 @@ extension SPNoteEditorViewController {
     }
 }
 
-
 // MARK: - Metrics
 //
 private enum Metrics {
@@ -1080,7 +1058,6 @@ private enum Metrics {
     static let searchMapWidth: CGFloat = 15.0
     static let additionalTagViewAndEditorCollisionDistance: CGFloat = 16.0
 }
-
 
 // MARK: - Localization
 //

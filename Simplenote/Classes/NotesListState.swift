@@ -8,7 +8,6 @@ enum NotesListState: Equatable {
     case searching(query: SearchQuery)
 }
 
-
 // MARK: - NotesListState: Public API
 //
 extension NotesListState {

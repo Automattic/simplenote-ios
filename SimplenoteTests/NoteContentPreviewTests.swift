@@ -1,7 +1,6 @@
 import XCTest
 @testable import Simplenote
 
-
 // MARK: - NoteContentPreviewTests Tests
 //
 class NoteContentPreviewTests: XCTestCase {

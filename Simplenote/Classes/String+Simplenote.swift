@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - String
 //
 extension String {
@@ -17,7 +16,6 @@ extension String {
     ///
     static let tab = "\t"
 }
-
 
 // MARK: - Helper API(s)
 //

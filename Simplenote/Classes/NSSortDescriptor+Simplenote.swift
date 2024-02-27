@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - SortMode List Methods
 //
 extension NSSortDescriptor {

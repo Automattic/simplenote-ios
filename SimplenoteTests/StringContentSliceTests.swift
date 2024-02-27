@@ -1,7 +1,6 @@
 import XCTest
 @testable import Simplenote
 
-
 // MARK: - String Content Slice Tests
 //
 class StringContentSliceTests: XCTestCase {

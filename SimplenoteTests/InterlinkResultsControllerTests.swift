@@ -1,7 +1,6 @@
 import XCTest
 @testable import Simplenote
 
-
 // MARK: - InterlinkResultsController Tests
 //
 class InterlinkResultsControllerTests: XCTestCase {
@@ -14,7 +13,6 @@ class InterlinkResultsControllerTests: XCTestCase {
     ///
     private var resultsController: InterlinkResultsController!
 
-
     // MARK: - Overridden Methods
 
     override func setUp() {
@@ -26,7 +24,6 @@ class InterlinkResultsControllerTests: XCTestCase {
         super.tearDown()
         storage.reset()
     }
-
 
     // MARK: - Tests: Filtering
 
@@ -107,7 +104,6 @@ class InterlinkResultsControllerTests: XCTestCase {
     }
 }
 
-
 // MARK: - Private
 //
 private extension InterlinkResultsControllerTests {
@@ -131,7 +127,6 @@ private extension InterlinkResultsControllerTests {
         return (notesWithKeyword, notesWithoutKeyword)
     }
 }
-
 
 // MARK: - Constants
 //

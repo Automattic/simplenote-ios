@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 // MARK: - SPSectionHeaderView
 //
 @objcMembers
@@ -29,7 +28,6 @@ class SPSectionHeaderView: UITableViewHeaderFooterView {
     ///
     private lazy var nib = UINib(nibName: type(of: self).classNameWithoutNamespaces, bundle: nil)
 
-
     // MARK: - Overridden Methods
 
     override init(reuseIdentifier: String?) {
@@ -49,7 +47,6 @@ class SPSectionHeaderView: UITableViewHeaderFooterView {
         refreshStyle()
     }
 }
-
 
 // MARK: - Private Methods
 //

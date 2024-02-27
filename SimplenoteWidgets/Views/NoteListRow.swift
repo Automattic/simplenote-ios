@@ -29,4 +29,3 @@ struct NoteListRow_Previews: PreviewProvider {
             .previewContext(WidgetPreviewContext(family: .systemLarge))
     }
 }
-

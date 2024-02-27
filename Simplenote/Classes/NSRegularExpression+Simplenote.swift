@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - NSRegularExpression (Checklists)
 //
 extension NSRegularExpression {
@@ -18,7 +17,6 @@ extension NSRegularExpression {
     static let regexForChecklistsEmbeddedAnywhere: NSRegularExpression = {
         try! NSRegularExpression(pattern: "\\s*(-[ \t]+\\[[xX\\s]?\\])", options: .anchorsMatchLines)
     }()
-
 
     /// Both our Checklist regexes look like this: `"^\\s*(EXPRESSION)"`
     /// This will produce two resulting NSRange(s): a top level one, including the full match, and a "capture group"

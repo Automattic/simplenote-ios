@@ -1,7 +1,6 @@
 import XCTest
 @testable import Simplenote
 
-
 // MARK: - Note+Extension Tests
 //
 class NoteLinkTests: XCTestCase {

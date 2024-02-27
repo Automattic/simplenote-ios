@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 // MARK: - SearchDisplayController Delegate Methods
 //
 @objc
@@ -12,14 +11,12 @@ protocol SearchDisplayControllerDelegate: NSObjectProtocol {
     func searchDisplayControllerDidEndSearch(_ controller: SearchDisplayController)
 }
 
-
 // MARK: - SearchControllerPresentationContextProvider Methods
 //
 @objc
 protocol SearchControllerPresentationContextProvider: NSObjectProtocol {
     func navigationControllerForSearchDisplayController(_ controller: SearchDisplayController) -> UINavigationController
 }
-
 
 // MARK: - Simplenote's Search Controller: Because UIKit's Search Controller is simply unusable
 //
@@ -41,7 +38,6 @@ class SearchDisplayController: NSObject {
     /// SearchController's Presentation Context Provider
     ///
     weak var presenter: SearchControllerPresentationContextProvider?
-
 
     /// Designated Initializer
     ///
@@ -85,7 +81,6 @@ class SearchDisplayController: NSObject {
         searchBar.refreshPlaceholderStyle(searchEnabled: enabled)
     }
 }
-
 
 // MARK: - Private Methods
 //
@@ -141,7 +136,6 @@ private extension SearchDisplayController {
     }
 }
 
-
 // MARK: - UISearchBar Delegate Methods
 //
 extension SearchDisplayController: UISearchBarDelegate {
@@ -168,7 +162,6 @@ extension SearchDisplayController: UISearchBarDelegate {
         dismiss()
     }
 }
-
 
 // MARK: - SPSearchBar
 //

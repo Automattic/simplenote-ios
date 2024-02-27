@@ -1,7 +1,6 @@
 import XCTest
 @testable import Simplenote
 
-
 // MARK: - CGRect Tests
 //
 class CGRectSimplenoteTests: XCTestCase {

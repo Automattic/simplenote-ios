@@ -17,7 +17,6 @@ class SPDiagnosticsViewController: UIViewController {
     ///
     var attributedText: NSAttributedString?
 
-
     // MARK: - Overridden Methods
 
     override func viewDidLoad() {
@@ -27,7 +26,6 @@ class SPDiagnosticsViewController: UIViewController {
         setupNavigationItem()
     }
 }
-
 
 // MARK: - Interface
 //
@@ -54,7 +52,6 @@ private extension SPDiagnosticsViewController {
                                                             action: #selector(dismissWasPressed))
     }
 }
-
 
 // MARK: - Actions
 //

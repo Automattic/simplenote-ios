@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - NSExtensionContext's Simplenote Methods
 //
 extension NSExtensionContext {

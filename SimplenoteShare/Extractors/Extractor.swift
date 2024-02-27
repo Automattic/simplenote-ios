@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - Extractor
 //
 protocol Extractor {

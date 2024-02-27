@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - UIScreen Simplenote Methods
 //
 extension UIScreen {

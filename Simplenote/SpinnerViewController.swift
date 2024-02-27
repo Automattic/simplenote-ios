@@ -35,7 +35,6 @@ class SpinnerViewController: UIViewController {
         ])
         alertView.layer.cornerRadius = Constants.cornerRadius
 
-
         alertView.addSubview(activityIndicator)
         alertView.sizeToFit()
         NSLayoutConstraint.activate([
@@ -51,7 +50,6 @@ class SpinnerViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         activityIndicator.stopAnimating()
     }
-
 
     private func setupViewAppearance() {
         modalPresentationStyle = .overFullScreen

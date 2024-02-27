@@ -1,7 +1,6 @@
 import XCTest
 @testable import Simplenote
 
-
 // MARK: - String Truncation Tests
 //
 class NoteBodyExcerptTests: XCTestCase {

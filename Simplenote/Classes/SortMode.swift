@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - Represents all of the possible Sort Modes
 //
 @objc

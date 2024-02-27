@@ -1,7 +1,5 @@
 import XCTest
-import XCTest
 @testable import Simplenote
-
 
 // MARK: - AuthenticationValidator Tests
 //
@@ -10,7 +8,6 @@ class AuthenticationValidatorTests: XCTestCase {
     /// Testing Validator
     ///
     let validator = AuthenticationValidator()
-
 
     /// Verifies that `performUsernameValidation` returns `true` when the input string is valid
     ///

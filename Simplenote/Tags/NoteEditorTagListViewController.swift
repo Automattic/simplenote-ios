@@ -83,7 +83,6 @@ class NoteEditorTagListViewController: UIViewController {
     }
 }
 
-
 // MARK: - First Responder
 //
 extension NoteEditorTagListViewController {
@@ -99,7 +98,6 @@ extension NoteEditorTagListViewController {
         tagView.resignFirstResponder()
     }
 }
-
 
 // MARK: - Object Manager
 //
@@ -129,7 +127,6 @@ private extension NoteEditorTagListViewController {
         objectManager.removeTagName(recentlyCreatedTag)
     }
 }
-
 
 // MARK: - SPTagViewDelegate
 //
@@ -199,13 +196,11 @@ extension NoteEditorTagListViewController: TagViewDelegate {
     }
 }
 
-
 // MARK: - Constants
 //
 private struct Constants {
     static let clearRecentlyCreatedTagTimeout: TimeInterval = 3.5
 }
-
 
 // MARK: - Localization
 //

@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 // MARK: - Simplenote's Theme
 //
 @objc
@@ -41,7 +40,6 @@ class SPUserInterface: NSObject {
     }
 }
 
-
 // MARK: - Private Methods
 //
 private extension SPUserInterface {
@@ -65,7 +63,6 @@ private extension SPUserInterface {
         window.overrideUserInterfaceStyle = Options.shared.theme.userInterfaceStyle
     }
 }
-
 
 // MARK: - Private Theme Methods
 //

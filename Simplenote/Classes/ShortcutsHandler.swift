@@ -1,7 +1,6 @@
 import Foundation
 import CoreSpotlight
 
-
 // MARK: - AppDelegate Shortcuts Methods
 //
 class ShortcutsHandler: NSObject {

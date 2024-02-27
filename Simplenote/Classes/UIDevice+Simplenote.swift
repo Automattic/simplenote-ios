@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - Simplenote Methods
 //
 extension UIDevice {

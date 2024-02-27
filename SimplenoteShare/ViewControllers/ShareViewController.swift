@@ -1,7 +1,6 @@
 import UIKit
 import Social
 
-
 typealias CompletionBlock = () -> Void
 
 /// Main VC for Simplenote's Share Extension
@@ -11,7 +10,6 @@ class ShareViewController: UIViewController {
     /// This completion handler closure is executed when this VC is dismissed.
     ///
     @objc var dismissalCompletionBlock: CompletionBlock?
-
 
     // MARK: Private Properties
 
@@ -68,7 +66,6 @@ class ShareViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-
     // MARK: UIViewController Lifecycle
 
     override func viewDidLoad() {
@@ -88,7 +85,6 @@ class ShareViewController: UIViewController {
         ensureSimperiumTokenIsValid()
     }
 }
-
 
 // MARK: - Actions
 //
@@ -134,7 +130,6 @@ private extension ShareViewController {
     }
 }
 
-
 // MARK: - Token Validation
 //
 private extension ShareViewController {
@@ -166,7 +161,6 @@ private extension ShareViewController {
     }
 }
 
-
 // MARK: - Configuration
 //
 private extension ShareViewController {
@@ -193,7 +187,6 @@ private extension ShareViewController {
         }
     }
 }
-
 
 // MARK: - Constants
 //

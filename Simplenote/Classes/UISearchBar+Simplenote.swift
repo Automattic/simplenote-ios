@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 // MARK: - UISearchBar Simplenote Methods
 //
 extension UISearchBar {

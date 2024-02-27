@@ -9,13 +9,11 @@
 import Foundation
 import StoreKit
 
-
 // MARK: - StoreError
 //
 enum StoreError: Error {
     case failedVerification
 }
-
 
 // MARK: - StoreManager
 //
@@ -25,7 +23,6 @@ class StoreManager {
     // MARK: - Static
     //
     static let shared = StoreManager()
-
 
     // MARK: - Aliases
     //
@@ -53,13 +50,11 @@ class StoreManager {
         return subscriptionGroupStatus.isActive
     }
 
-
     // MARK: - Deinit
 
     deinit {
         updateListenerTask?.cancel()
     }
-
 
     // MARK: - Public API(s)
 
@@ -83,7 +78,6 @@ class StoreManager {
             await refreshSubscriptionGroupStatus()
         }
     }
-
 
     /// Purchases the specified Product (as long as we don't own it already?)
     ///
@@ -125,7 +119,6 @@ class StoreManager {
         }
     }
 }
-
 
 // MARK: - Private API(s)
 //
@@ -216,7 +209,6 @@ private extension StoreManager {
     }
 }
 
-
 // MARK: - Private Helpers
 //
 @available(iOS 15, *)
@@ -247,7 +239,6 @@ private extension StoreManager {
         }
     }
 }
-
 
 // MARK: - Simperium Kung Fu
 //
@@ -306,7 +297,6 @@ private extension StoreManager {
         return StoreConstants.activeSubscriptionLevel
     }
 }
-
 
 // MARK: - SubscriptionStatus Helpers
 //

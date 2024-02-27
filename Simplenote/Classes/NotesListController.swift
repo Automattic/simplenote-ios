@@ -2,7 +2,6 @@ import Foundation
 import SimplenoteFoundation
 import SimplenoteSearch
 
-
 // MARK: - NotesListController
 //
 class NotesListController: NSObject {
@@ -72,7 +71,6 @@ class NotesListController: NSObject {
     ///
     var onBatchChanges: ((_ sectionsChangeset: ResultsSectionsChangeset, _ rowsChangeset: ResultsObjectsChangeset) -> Void)?
 
-
     /// Designated Initializer
     ///
     init(viewContext: NSManagedObjectContext) {
@@ -82,7 +80,6 @@ class NotesListController: NSObject {
         startListeningToTagEvents()
     }
 }
-
 
 // MARK: - Public API
 //
@@ -168,7 +165,6 @@ extension NotesListController {
     }
 }
 
-
 // MARK: - Search API
 //
 extension NotesListController {
@@ -202,7 +198,6 @@ extension NotesListController {
     }
 }
 
-
 // MARK: - Convenience APIs
 //
 extension NotesListController {
@@ -216,7 +211,6 @@ extension NotesListController {
         }
     }
 }
-
 
 // MARK: - Private API: ResultsController Refreshing
 //
@@ -238,7 +232,6 @@ private extension NotesListController {
         performFetch()
     }
 }
-
 
 // MARK: - Private API: Realtime Refreshing
 //

@@ -2,7 +2,6 @@ import Foundation
 import MessageUI
 import SafariServices
 
-
 // MARK: - SPFeedbackManager
 //
 @objcMembers
@@ -35,7 +34,6 @@ class SPFeedbackManager: NSObject {
         return mailViewController
     }
 }
-
 
 // MARK: - MFMailComposeViewControllerDelegate
 //

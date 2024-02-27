@@ -7,7 +7,6 @@ enum WidgetsState {
     case loggedOut
 }
 
-
 extension WidgetsState {
     var message: String {
         switch self {

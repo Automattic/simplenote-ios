@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 // MARK: - Bundle: Simplenote Methods
 //
 extension Bundle {
@@ -32,7 +31,6 @@ extension Bundle {
         return rootIdentifier as? String
     }
 }
-
 
 // MARK: - Private Helpers
 //

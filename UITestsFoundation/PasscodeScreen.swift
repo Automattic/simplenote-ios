@@ -5,11 +5,7 @@ public class PasscodeScreen: ScreenObject {
 
     public init(app: XCUIApplication = XCUIApplication()) throws {
         try super.init(
-            expectedElementGetters: [
-                { $0.staticTexts["1"].firstMatch },
-                { $0.staticTexts["4"].firstMatch },
-                { $0.staticTexts["7"].firstMatch },
-                { $0.staticTexts["0"].firstMatch }
+            expectedElementGetters: [ { $0.staticTexts["1"].firstMatch }, { $0.staticTexts["4"].firstMatch }, { $0.staticTexts["7"].firstMatch }, { $0.staticTexts["0"].firstMatch }
             ],
             app: app
         )

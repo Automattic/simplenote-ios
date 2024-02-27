@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - Simperium + Buckets
 //
 extension Simperium {
@@ -46,7 +45,6 @@ extension Simperium {
     }
 }
 
-
 // MARK: - Public API(s)
 //
 extension Simperium {
@@ -58,7 +56,6 @@ extension Simperium {
         return notesBucket.object(forKey: simperiumKey) as? Note
     }
 }
-
 
 // MARK: - Constants
 //

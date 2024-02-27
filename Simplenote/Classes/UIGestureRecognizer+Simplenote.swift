@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 // MARK: - UIGestureRecognizer Simplenote Methods
 //
 extension UIGestureRecognizer {

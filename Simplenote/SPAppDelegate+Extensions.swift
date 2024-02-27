@@ -1,7 +1,6 @@
 import Foundation
 import WidgetKit
 
-
 // MARK: - Initialization
 //
 extension SPAppDelegate {
@@ -196,7 +195,6 @@ extension SPAppDelegate {
     }
 }
 
-
 // MARK: - UIViewControllerRestoration
 //
 @objc
@@ -259,7 +257,6 @@ extension SPAppDelegate: UIViewControllerRestoration {
     }
 }
 
-
 // MARK: - SimperiumDelegate
 //
 extension SPAppDelegate: SimperiumDelegate {
@@ -320,7 +317,6 @@ extension SPAppDelegate: SimperiumDelegate {
     }
 }
 
-
 // MARK: - Passcode
 //
 extension SPAppDelegate {
@@ -362,7 +358,6 @@ extension SPAppDelegate {
         return pinLockWindow?.isKeyWindow == true
     }
 }
-
 
 // MARK: - PinLockVerifyControllerDelegate
 //
@@ -419,7 +414,6 @@ private extension SPAppDelegate {
     }
 }
 
-
 // MARK: - Magic Link authentication
 //
 extension SPAppDelegate {
@@ -428,7 +422,6 @@ extension SPAppDelegate {
         MagicLinkAuthenticator(authenticator: simperium.authenticator).handle(url: url)
     }
 }
-
 
 // MARK: - Scroll position cache
 //

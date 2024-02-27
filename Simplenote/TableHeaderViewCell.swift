@@ -1,6 +1,5 @@
 import UIKit
 
-
 // MARK: - TableHeaderViewCell
 //
 final class TableHeaderViewCell: UITableViewCell {
@@ -28,7 +27,6 @@ final class TableHeaderViewCell: UITableViewCell {
         fatalError("Unsupported Initializer")
     }
 }
-
 
 // MARK: - Private API(s)
 //

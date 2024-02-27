@@ -2,7 +2,6 @@ import Foundation
 import MobileCoreServices
 import UniformTypeIdentifiers
 
-
 // MARK: - PlainTextExtractor
 //
 struct PlainTextExtractor: Extractor {

@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 // MARK: - SustainerView
 //
 class SustainerView: UIView {
@@ -53,7 +52,6 @@ class SustainerView: UIView {
         refreshInterface()
     }
 
-
     // MARK: - Actions
 
     @IBAction
@@ -61,7 +59,6 @@ class SustainerView: UIView {
         onPress?()
     }
 }
-
 
 // MARK: - Private API(s)
 //
@@ -79,7 +76,6 @@ private extension SustainerView {
     }
 }
 
-
 // MARK: - Style
 //
 private struct Style {
@@ -88,7 +84,6 @@ private struct Style {
     let textColor: UIColor
     let backgroundColor: UIColor
 }
-
 
 private extension Style {
     static var sustainer: Style {
@@ -105,7 +100,6 @@ private extension Style {
               backgroundColor: .simplenoteBlue50Color)
     }
 }
-
 
 // MARK: - Metrics
 //

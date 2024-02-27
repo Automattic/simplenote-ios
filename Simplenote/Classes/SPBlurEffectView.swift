@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 // MARK: - SPBlurEffectView: Reacts automatically to UserInterfaceStyle Changes
 //
 @objc
@@ -24,7 +23,6 @@ class SPBlurEffectView: UIVisualEffectView {
         }
     }
 
-
     // MARK: - Initializers
 
     convenience init() {
@@ -40,7 +38,6 @@ class SPBlurEffectView: UIVisualEffectView {
         setupTintView()
     }
 }
-
 
 // MARK: - Private Methods
 //
@@ -64,7 +61,6 @@ private extension SPBlurEffectView {
         tintView.backgroundColor = tintColorClosure?()
     }
 }
-
 
 // MARK: - Static Methods
 //

@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 /// UITableViewCell Helpers
 ///
 extension UITableViewCell {

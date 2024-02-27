@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 enum KeychainError: Error {
     case noPassword
     case unexpectedPasswordData

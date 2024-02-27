@@ -43,7 +43,6 @@ class SortModePickerViewController: UIViewController {
     }
 }
 
-
 // MARK: - UITableViewDelegate
 //
 extension SortModePickerViewController: UITableViewDelegate {
@@ -52,7 +51,6 @@ extension SortModePickerViewController: UITableViewDelegate {
         onSelectionCallback?(data[indexPath.row])
     }
 }
-
 
 // MARK: - UITableViewDataSource
 //

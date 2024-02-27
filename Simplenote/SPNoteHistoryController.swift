@@ -44,7 +44,6 @@ final class SPNoteHistoryController {
     ///
     weak var delegate: SPNoteHistoryControllerDelegate?
 
-
     private let note: Note
     private let versionsController: VersionsController
     private var versionsToken: Any?

@@ -1,6 +1,5 @@
 import UIKit
 
-
 // MARK: - Subscriber UI
 //
 extension SPSettingsViewController {
@@ -61,7 +60,6 @@ extension SPSettingsViewController {
         present(alertController, animated: true)
     }
 }
-
 
 // MARK: - Pin
 //
@@ -236,7 +234,6 @@ private struct AccountDeletion {
         String(format: successAlertMessage, email)
     }
 }
-
 
 // MARK: - RestorationAlert
 //

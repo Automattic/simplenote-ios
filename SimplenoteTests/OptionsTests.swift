@@ -2,7 +2,6 @@ import Foundation
 import XCTest
 @testable import Simplenote
 
-
 // MARK: - Options Unit Tests
 //
 class OptionsTests: XCTestCase {

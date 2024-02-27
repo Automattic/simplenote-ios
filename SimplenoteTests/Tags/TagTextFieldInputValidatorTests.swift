@@ -43,7 +43,7 @@ class TagTextFieldInputValidatorTests: XCTestCase {
             XCTAssertEqual(validator.validateInput(originalText: text, range: range, replacement: replacement), expectedResult)
         }
     }
-    
+
     func testValidationFailsWhenReplacementHasComma() {
         let text = "tag"
         let range = text.endIndex..<text.endIndex
@@ -99,14 +99,14 @@ class TagTextFieldInputValidatorTests: XCTestCase {
             XCTAssertEqual(validator.validateInput(originalText: text, range: range, replacement: replacement), expectedResult)
         }
     }
-    
+
     func testReplacingTextWithCommaAtTheEnd() {
         let text = "tag"
         let range = text.endIndex..<text.endIndex
-        
+
         let expectedResult = TagTextFieldInputValidator.Result.endingWithDisallowedCharacter("tagtag")
         let replacement = "tag,"
-        
+
         XCTAssertEqual(validator.validateInput(originalText: text, range: range, replacement: replacement), expectedResult)
     }
 
@@ -118,7 +118,6 @@ class TagTextFieldInputValidatorTests: XCTestCase {
 
         XCTAssertEqual(validator.validateInput(originalText: text, range: range, replacement: replacement), expectedResult)
     }
-
 
     func testPreprocessingForPastingTrimsWhitespacesAndNewlinesAndReturnsFirstPart() {
         let cases = [

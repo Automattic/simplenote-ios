@@ -1,11 +1,9 @@
 import UIKit
 
-
 final class ExtensionTransitioningManager: NSObject {
     var presentDirection = Direction.bottom
     var dismissDirection = Direction.bottom
 }
-
 
 // MARK: - UIViewControllerTransitioningDelegate Conformance
 //

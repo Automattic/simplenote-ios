@@ -1,6 +1,5 @@
 import UIKit
 
-
 // MARK: - SubtitleTableViewCell
 //
 final class SubtitleTableViewCell: UITableViewCell {
@@ -27,7 +26,6 @@ final class SubtitleTableViewCell: UITableViewCell {
         }
     }
 
-
     // MARK: - Initializers
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -47,7 +45,6 @@ final class SubtitleTableViewCell: UITableViewCell {
         accessoryType = .none
     }
 }
-
 
 // MARK: - Private API(s)
 //

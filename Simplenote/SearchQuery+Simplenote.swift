@@ -13,4 +13,3 @@ extension SearchQuerySettings {
         return SearchQuerySettings(tagsKeyword: "tag:", localizedTagKeyword: localizedKeyword)
     }
 }
-

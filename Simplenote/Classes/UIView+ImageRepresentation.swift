@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 // MARK: - UIView: Image Representation Helpers
 //
 extension UIView {
