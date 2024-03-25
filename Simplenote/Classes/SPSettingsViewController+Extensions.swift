@@ -17,7 +17,6 @@ fileprivate extension SPSettingsViewController {
             return
         }
 
-        headerView.isActiveSustainer = isActiveSustainer
         headerView.preferredWidth = tableView.frame.width
         headerView.adjustSizeForCompressedLayout()
 

@@ -13,7 +13,7 @@
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tapGestureRecognizer id="4op-51-Dvd">
             <connections>
-                <action selector="sustainerWasPresssed" destination="H3q-Rz-XVn" id="usw-j5-ej9"/>
+                <action selector="bannerWasPresssed" destination="H3q-Rz-XVn" id="Nhw-t0-Xiw"/>
             </connections>
         </tapGestureRecognizer>
         <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" id="H3q-Rz-XVn" userLabel="BannerView" customClass="BannerView" customModule="Simplenote" customModuleProvider="target">
