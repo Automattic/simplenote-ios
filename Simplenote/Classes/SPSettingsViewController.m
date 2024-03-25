@@ -132,10 +132,6 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                            target:self
                                                                                            action:@selector(doneAction:)];
-    
-    // Header View
-    [self setupTableHeaderView];
-
     // Setup the Switches
     self.alphabeticalTagSortSwitch = [UISwitch new];
     [self.alphabeticalTagSortSwitch addTarget:self
@@ -180,28 +176,13 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                                                  name:SPSimplenoteThemeChangedNotification
                                                object:nil];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(subscriptionStatusDidChange)
-                                                 name:SPSubscriptionStatusDidChangeNotification
-                                               object:nil];
-
     [self refreshThemeStyles];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self refreshTableHeaderView];
     [self.tableView reloadData];
-}
-
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
-{
-    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
-
-    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        [self refreshTableHeaderView];
-    } completion:nil];
 }
 
 - (void)doneAction:(id)sender
@@ -209,16 +190,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
-
 #pragma mark - Notifications
-
-- (void)subscriptionStatusDidChange
-{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self refreshTableHeaderView];
-    });
-}
-
 
 #pragma mark - Table view data source
 
@@ -594,8 +566,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
             break;
 
         } case SPOptionsViewSectionsSustainer: {
-
-            [self restorePurchases];
+            //TODO: Remove the sustainer case?
             break;
 
         } case SPOptionsViewSectionsAccount: {
