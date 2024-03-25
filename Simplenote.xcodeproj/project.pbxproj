@@ -237,7 +237,6 @@
 		B513F2B62319A8F40021CFA4 /* SPNoteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B513F2B52319A8F40021CFA4 /* SPNoteTableViewCell.xib */; };
 		B513F2B82319A9A40021CFA4 /* UITableViewCell+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B513F2B72319A9A40021CFA4 /* UITableViewCell+Simplenote.swift */; };
 		B513FB2422EF6A4B00B178AC /* SPUserInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = B513FB2322EF6A4B00B178AC /* SPUserInterface.swift */; };
-		B514678D291AC7790062736E /* UIAlertController+Sustainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B514678C291AC7790062736E /* UIAlertController+Sustainer.swift */; };
 		B5185CFB23427F2F0060145A /* SearchDisplayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5185CFA23427F2F0060145A /* SearchDisplayController.swift */; };
 		B518899E1E0D5EF800E71B83 /* SPContactsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B518899D1E0D5EF800E71B83 /* SPContactsManager.swift */; };
 		B51889A01E0D5F2200E71B83 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B518899F1E0D5F2200E71B83 /* Contacts.framework */; };
@@ -907,7 +906,6 @@
 		B513F2B52319A8F40021CFA4 /* SPNoteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPNoteTableViewCell.xib; path = Classes/SPNoteTableViewCell.xib; sourceTree = "<group>"; };
 		B513F2B72319A9A40021CFA4 /* UITableViewCell+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UITableViewCell+Simplenote.swift"; path = "Classes/UITableViewCell+Simplenote.swift"; sourceTree = "<group>"; };
 		B513FB2322EF6A4B00B178AC /* SPUserInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPUserInterface.swift; path = Classes/SPUserInterface.swift; sourceTree = "<group>"; };
-		B514678C291AC7790062736E /* UIAlertController+Sustainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Sustainer.swift"; sourceTree = "<group>"; };
 		B5185CFA23427F2F0060145A /* SearchDisplayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchDisplayController.swift; path = Classes/SearchDisplayController.swift; sourceTree = "<group>"; };
 		B518899D1E0D5EF800E71B83 /* SPContactsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SPContactsManager.swift; path = Classes/SPContactsManager.swift; sourceTree = "<group>"; };
 		B518899F1E0D5F2200E71B83 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
@@ -1883,7 +1881,6 @@
 				B54D9C562909BA2600D0E0EC /* StoreManager.swift */,
 				B549E24A290B3DD70072C3E8 /* StoreConstants.swift */,
 				B54D9C582909CC4400D0E0EC /* StoreProduct.swift */,
-				B514678C291AC7790062736E /* UIAlertController+Sustainer.swift */,
 				B5BADB7C2909D78B00275B29 /* TestConfiguration.storekit */,
 			);
 			name = Store;
@@ -3429,7 +3426,6 @@
 				A66E41E1256D0F44000C6FCB /* RoundedButton.swift in Sources */,
 				F920265B2294661C0061B1DE /* BuildConfiguration.swift in Sources */,
 				B59188C0240059950069EF96 /* NSRegularExpression+Simplenote.swift in Sources */,
-				B514678D291AC7790062736E /* UIAlertController+Sustainer.swift in Sources */,
 				A68ABCA824ABFB5300715EBD /* SPShadowView.swift in Sources */,
 				B56E763622BD565700C5AA47 /* UIView+Simplenote.swift in Sources */,
 				B5E4082D235DE41A00D4E1DF /* UIColor+Studio.swift in Sources */,
@@ -4382,6 +4378,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = PZYM8XX95Q;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = PZYM8XX95Q;
 				ENABLE_BITCODE = NO;
 				ENABLE_MODULE_VERIFIER = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4412,6 +4409,7 @@
 				PRODUCT_NAME = Simplenote;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "Simplenote Development";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Simplenote Development";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG USE_VERBOSE_LOGGING $(SP_IOS_SDK)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Simplenote/Simplenote-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
