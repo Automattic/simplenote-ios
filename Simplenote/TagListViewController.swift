@@ -18,7 +18,7 @@ final class TagListViewController: UIViewController {
 
     private var renameTag: Tag?
 
-    private var sustainerHeaderView: SustainerView?
+    private var bannerView: BannerView?
     private var isActiveSustainer: Bool {
         SPAppDelegate.shared().simperium.preferencesObject().isActiveSubscriber
     }
@@ -545,7 +545,7 @@ private extension TagListViewController {
     // This method is for refreshing the size of the sustainer view.  We are retiring sustainer so this is no longer needed
     // but we may want to use the banner again in the future, so leaving this here in case.  Method is not being called anywhere
     func refreshTableHeaderView() {
-        guard let sustainerHeaderView else {
+        guard let bannerView else {
             return
         }
 
@@ -554,10 +554,10 @@ private extension TagListViewController {
             return
         }
 
-        sustainerHeaderView.preferredWidth = tableView.frame.width - view.safeAreaInsets.left
-        sustainerHeaderView.adjustSizeForCompressedLayout()
+        bannerView.preferredWidth = tableView.frame.width - view.safeAreaInsets.left
+        bannerView.adjustSizeForCompressedLayout()
 
-        tableView.tableHeaderView = sustainerHeaderView
+        tableView.tableHeaderView = bannerView
     }
 
     func openNoteListForTagName(_ tagName: String?, isTraversing: Bool) {

@@ -1,9 +1,9 @@
 import Foundation
 import UIKit
 
-// MARK: - SustainerView
+// MARK: - BannerView
 //
-class SustainerView: UIView {
+class BannerView: UIView {
 
     @IBOutlet
     private var backgroundView: UIView!
@@ -62,7 +62,7 @@ class SustainerView: UIView {
 
 // MARK: - Private API(s)
 //
-private extension SustainerView {
+private extension BannerView {
 
     func refreshInterface() {
         let style = isActiveSustainer ? Style.sustainer : Style.notSubscriber

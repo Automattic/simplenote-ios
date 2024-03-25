@@ -13,7 +13,7 @@ fileprivate extension SPSettingsViewController {
 
     @objc
     func refreshTableHeaderView() {
-        guard let headerView = tableView.tableHeaderView as? SustainerView else {
+        guard let headerView = tableView.tableHeaderView as? BannerView else {
             return
         }
 
