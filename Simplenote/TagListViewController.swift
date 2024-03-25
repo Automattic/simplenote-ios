@@ -49,7 +49,6 @@ final class TagListViewController: UIViewController {
         super.viewWillAppear(animated)
         startListeningToKeyboardNotifications()
 
-        refreshTableHeaderView()
         reloadTableView()
         startListeningForChanges()
         becomeFirstResponder()
@@ -63,19 +62,6 @@ final class TagListViewController: UIViewController {
         stopListeningForChanges()
 
         resignFirstResponder()
-    }
-
-    override func viewSafeAreaInsetsDidChange() {
-        super.viewSafeAreaInsetsDidChange()
-        refreshTableHeaderView()
-    }
-
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-
-        coordinator.animate { _ in
-            self.refreshTableHeaderView()
-        }
     }
 }
 
@@ -93,15 +79,6 @@ private extension TagListViewController {
 
         tableView.separatorInsetReference = .fromAutomaticInsets
         tableView.automaticallyAdjustsScrollIndicatorInsets = false
-
-        sustainerHeaderView = {
-            let sustainerView: SustainerView = SustainerView.instantiateFromNib()
-            sustainerView.onPress = { [weak self] in
-                self?.presentSubscriptionAlertIfNeeded()
-            }
-
-            return sustainerView
-        }()
     }
 
     func configureTableHeaderView() {
@@ -126,21 +103,6 @@ private extension TagListViewController {
     }
 }
 
-// MARK: - Action Handlers
-//
-private extension TagListViewController {
-
-    @available(iOS 15.0, *)
-    func presentSubscriptionAlertIfNeeded() {
-        if isActiveSustainer {
-            return
-        }
-
-        let sustainerAlertController = UIAlertController.buildSustainerAlert()
-        present(sustainerAlertController, animated: true)
-    }
-}
-
 // MARK: - Notifications
 //
 private extension TagListViewController {
@@ -150,7 +112,6 @@ private extension TagListViewController {
         nc.addObserver(self, selector: #selector(menuDidChangeVisibility), name: UIMenuController.didHideMenuNotification, object: nil)
         nc.addObserver(self, selector: #selector(tagsSortOrderWasUpdated), name: NSNotification.Name.SPAlphabeticalTagSortPreferenceChanged, object: nil)
         nc.addObserver(self, selector: #selector(themeDidChange), name: NSNotification.Name.SPSimplenoteThemeChanged, object: nil)
-        nc.addObserver(self, selector: #selector(subscriptionStatusDidChange), name: .SPSubscriptionStatusDidChange, object: nil)
     }
 
     func startListeningToKeyboardNotifications() {
@@ -182,13 +143,6 @@ private extension TagListViewController {
     @objc
     func tagsSortOrderWasUpdated() {
         refreshSortDescriptorsAndPerformFetch()
-    }
-
-    @objc
-    func subscriptionStatusDidChange() {
-        DispatchQueue.main.async {
-            self.refreshTableHeaderView()
-        }
     }
 }
 
@@ -588,6 +542,8 @@ private extension TagListViewController {
         tagsHeaderView.actionButton.setTitle(title, for: .normal)
     }
 
+    // This method is for refreshing the size of the sustainer view.  We are retiring sustainer so this is no longer needed
+    // but we may want to use the banner again in the future, so leaving this here in case.  Method is not being called anywhere
     func refreshTableHeaderView() {
         guard let sustainerHeaderView else {
             return
