@@ -7,10 +7,6 @@ import UIKit
 // but we may still want to use the banner in the future, so marking these methods fileprivate and have removed their callers
 fileprivate extension SPSettingsViewController {
 
-    private var isActiveSustainer: Bool {
-        SPAppDelegate.shared().simperium.preferencesObject().isActiveSubscriber
-    }
-
     @objc
     func refreshTableHeaderView() {
         guard let headerView = tableView.tableHeaderView as? BannerView else {
@@ -39,6 +35,13 @@ fileprivate extension SPSettingsViewController {
         let alertController = UIAlertController(title: alert.title, message: alert.message, preferredStyle: .alert)
         alertController.addDefaultActionWithTitle(alert.action)
         present(alertController, animated: true)
+    }
+}
+
+extension SPSettingsViewController {
+    @objc
+    var isActiveSustainer: Bool {
+        SPAppDelegate.shared().simperium.preferencesObject().isActiveSubscriber
     }
 }
 

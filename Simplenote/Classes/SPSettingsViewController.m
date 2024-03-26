@@ -228,7 +228,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
         }
 
         case SPOptionsViewSectionsSustainer: {
-            return SPOptionsAccountSustainerCount;
+            return [self isActiveSustainer] ? SPOptionsAccountSustainerCount : 0;
         }
 
         case SPOptionsViewSectionsSecurity: {
@@ -277,7 +277,10 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
             return NSLocalizedString(@"Appearance", nil);
 
         case SPOptionsViewSectionsSustainer:
-            return NSLocalizedString(@"Sustainer Thank You", nil);
+            if ([self isActiveSustainer]) {
+                return NSLocalizedString(@"Sustainer Thank You", nil);
+            }
+            break;
 
         case SPOptionsViewSectionsSecurity:
             return NSLocalizedString(@"Security", nil);
@@ -303,6 +306,25 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     return nil;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    switch(section) {
+        case SPOptionsViewSectionsSustainer:
+            return CGFLOAT_MIN;
+        default:
+            return UITableViewAutomaticDimension;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    switch(section) {
+        case SPOptionsViewSectionsSustainer:
+            return CGFLOAT_MIN;
+        default:
+            return UITableViewAutomaticDimension;
+    }
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
