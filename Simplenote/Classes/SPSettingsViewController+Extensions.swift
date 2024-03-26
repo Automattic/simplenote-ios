@@ -43,6 +43,15 @@ extension SPSettingsViewController {
     var isActiveSustainer: Bool {
         SPAppDelegate.shared().simperium.preferencesObject().isActiveSubscriber
     }
+
+    @objc
+    func sustainerSwitchDidChangeValue(sender: UISwitch) {
+        let isOn = sender.isOn
+
+        let iconName = isOn ? SPSustainerAppIconName : nil
+        UserDefaults.standard.set(isOn, forKey: .useSustainerIcon)
+        UIApplication.shared.setAlternateIconName(iconName)
+    }
 }
 
 // MARK: - Pin

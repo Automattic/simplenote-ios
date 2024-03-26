@@ -155,8 +155,9 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 
     self.sustainerIconSwitch = [UISwitch new];
     [self.sustainerIconSwitch addTarget:self
-                                 action:@selector(sustainerSwitchDidChangeValue:)
+                                 action:@selector(sustainerSwitchDidChangeValueWithSender:)
                        forControlEvents:UIControlEventValueChanged];
+    [self.sustainerIconSwitch setOn: [NSUserDefaults.standardUserDefaults boolForKey:@"useSustainerIcon"]];
 
     self.pinTimeoutPickerView = [UIPickerView new];
     self.pinTimeoutPickerView.delegate = self;
@@ -775,14 +776,6 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
         UIAlertController* alert = [self pinLockRequiredAlert];
         [self presentViewController:alert animated:YES completion:nil];
     }
-}
-
-- (void)sustainerSwitchDidChangeValue:(UISwitch *)sender
-{
-    BOOL isOn = [(UISwitch *)sender isOn];
-
-    NSString *iconName = isOn ? SPSustainerAppIconName : nil;
-    [UIApplication.sharedApplication setAlternateIconName:iconName completionHandler:nil];
 }
 
 - (UIAlertController*)pinLockRequiredAlert
