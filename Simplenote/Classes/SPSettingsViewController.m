@@ -233,7 +233,11 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
         case SPOptionsViewSectionsDebug: {
             return SPOptionsDebugRowCount;
         }
-            
+
+        case SPOptionsViewSectionsAccount: {
+            return SPOptionsAccountRowCount;
+        }
+
         default:
             break;
     }
