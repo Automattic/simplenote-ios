@@ -9,11 +9,13 @@
 
 NSString *const SPAlphabeticalTagSortPref                           = @"SPAlphabeticalTagSortPref";
 NSString *const SPThemePref                                         = @"SPThemePref";
+NSString *const SPSustainerAppIconName                              = @"AppIcon-Sustainer";
 
 @interface SPSettingsViewController ()
 @property (nonatomic, strong) UISwitch      *condensedNoteListSwitch;
 @property (nonatomic, strong) UISwitch      *alphabeticalTagSortSwitch;
 @property (nonatomic, strong) UISwitch      *biometrySwitch;
+@property (nonatomic, strong) UISwitch      *sustainerIconSwitch;
 @property (nonatomic, strong) UITextField   *pinTimeoutTextField;
 @property (nonatomic, strong) UIPickerView  *pinTimeoutPickerView;
 @property (nonatomic, strong) UIToolbar     *doneToolbar;
@@ -30,18 +32,20 @@ NSString *const SPThemePref                                         = @"SPThemeP
 #define kTagPasscode            5
 #define kTagTimeout             6
 #define kTagTouchID             7
+#define kTagSustainerIcon       8
 
 typedef NS_ENUM(NSInteger, SPOptionsViewSections) {
     SPOptionsViewSectionsNotes          = 0,
     SPOptionsViewSectionsTags           = 1,
     SPOptionsViewSectionsAppearance     = 2,
-    SPOptionsViewSectionsSecurity       = 3,
-    SPOptionsViewSectionsAccount        = 4,
-    SPOptionsViewSectionsDelete         = 5,
-    SPOptionsViewSectionsAbout          = 6,
-    SPOptionsViewSectionsHelp           = 7,
-    SPOptionsViewSectionsDebug          = 8,
-    SPOptionsViewSectionsCount          = 9,
+    SPOptionsViewSectionsSustainer      = 3,
+    SPOptionsViewSectionsSecurity       = 4,
+    SPOptionsViewSectionsAccount        = 5,
+    SPOptionsViewSectionsDelete         = 6,
+    SPOptionsViewSectionsAbout          = 7,
+    SPOptionsViewSectionsHelp           = 8,
+    SPOptionsViewSectionsDebug          = 9,
+    SPOptionsViewSectionsCount          = 10,
 };
 
 typedef NS_ENUM(NSInteger, SPOptionsAccountRow) {
@@ -66,6 +70,12 @@ typedef NS_ENUM(NSInteger, SPOptionsAppearanceRow) {
     SPOptionsPreferencesRowTheme        = 0,
     SPOptionsAppearanceRowCount         = 1
 };
+
+typedef NS_ENUM(NSInteger, SPOptionsSustainerRow) {
+    SPOptionsAccountSustainerIcon       = 0,
+    SPOptionsAccountSustainerCount      = 1
+};
+
 
 typedef NS_ENUM(NSInteger, SPOptionsSecurityRow) {
     SPOptionsSecurityRowRowPasscode     = 0,
@@ -142,6 +152,11 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                            action:@selector(touchIdSwitchDidChangeValue:)
                  forControlEvents:UIControlEventValueChanged];
 
+    self.sustainerIconSwitch = [UISwitch new];
+    [self.sustainerIconSwitch addTarget:self
+                                 action:@selector(sustainerSwitchDidChangeValue:)
+                       forControlEvents:UIControlEventValueChanged];
+
     self.pinTimeoutPickerView = [UIPickerView new];
     self.pinTimeoutPickerView.delegate = self;
     self.pinTimeoutPickerView.dataSource = self;
@@ -211,7 +226,11 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
         case SPOptionsViewSectionsAppearance: {
             return SPOptionsAppearanceRowCount;
         }
-            
+
+        case SPOptionsViewSectionsSustainer: {
+            return SPOptionsAccountSustainerCount;
+        }
+
         case SPOptionsViewSectionsSecurity: {
             int rowsToRemove = [self isBiometryAvailable] ? 0 : 1;
             int disabledPinLockRows = [self isBiometryAvailable] ? 2 : 1;
@@ -256,6 +275,9 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
             
         case SPOptionsViewSectionsAppearance:
             return NSLocalizedString(@"Appearance", nil);
+
+        case SPOptionsViewSectionsSustainer:
+            return NSLocalizedString(@"Sustainer Thank You", nil);
 
         case SPOptionsViewSectionsSecurity:
             return NSLocalizedString(@"Security", nil);
@@ -354,7 +376,26 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
             
             break;
         }
-        
+
+        case SPOptionsViewSectionsSustainer: {
+            switch (indexPath.row) {
+                case SPOptionsAccountSustainerIcon: {
+                    cell.textLabel.text = NSLocalizedString(@"Sustainer App Icon", @"Switch app icon");
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
+                    cell.accessoryView = self.sustainerIconSwitch;
+                    cell.tag = kTagSustainerIcon;
+                    break;
+
+                }
+
+                default:
+                    break;
+            }
+
+            break;
+        }
+
         case SPOptionsViewSectionsSecurity: {
             switch (indexPath.row) {
                 case SPOptionsSecurityRowRowPasscode: {
@@ -698,6 +739,14 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
         UIAlertController* alert = [self pinLockRequiredAlert];
         [self presentViewController:alert animated:YES completion:nil];
     }
+}
+
+- (void)sustainerSwitchDidChangeValue:(UISwitch *)sender
+{
+    BOOL isOn = [(UISwitch *)sender isOn];
+
+    NSString *iconName = isOn ? SPSustainerAppIconName : nil;
+    [UIApplication.sharedApplication setAlternateIconName:iconName completionHandler:nil];
 }
 
 - (UIAlertController*)pinLockRequiredAlert
