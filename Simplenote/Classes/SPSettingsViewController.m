@@ -10,6 +10,7 @@
 NSString *const SPAlphabeticalTagSortPref                           = @"SPAlphabeticalTagSortPref";
 NSString *const SPThemePref                                         = @"SPThemePref";
 NSString *const SPSustainerAppIconName                              = @"AppIcon-Sustainer";
+CGFloat  const SPSettingsTableViewSpacing                           = 25.0;
 
 @interface SPSettingsViewController ()
 @property (nonatomic, strong) UISwitch      *condensedNoteListSwitch;
@@ -186,6 +187,9 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                                                object:nil];
 
     [self refreshThemeStyles];
+
+    self.tableView.sectionHeaderHeight = CGFLOAT_MIN;
+    self.tableView.sectionFooterHeight = CGFLOAT_MIN;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -310,9 +314,9 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 {
     switch(section) {
         case SPOptionsViewSectionsSustainer:
-            return CGFLOAT_MIN;
+            return [self isActiveSustainer] ? SPSettingsTableViewSpacing : CGFLOAT_MIN;
         default:
-            return UITableViewAutomaticDimension;
+            return SPSettingsTableViewSpacing;
     }
 }
 
@@ -320,9 +324,9 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 {
     switch(section) {
         case SPOptionsViewSectionsSustainer:
-            return CGFLOAT_MIN;
+            return [self isActiveSustainer] ? SPSettingsTableViewSpacing : CGFLOAT_MIN;
         default:
-            return UITableViewAutomaticDimension;
+            return SPSettingsTableViewSpacing;
     }
 }
 
