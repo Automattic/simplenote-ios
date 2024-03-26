@@ -188,8 +188,8 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 
     [self refreshThemeStyles];
 
-    self.tableView.sectionHeaderHeight = CGFLOAT_MIN;
-    self.tableView.sectionFooterHeight = CGFLOAT_MIN;
+//    self.tableView.sectionHeaderHeight = CGFLOAT_MIN;
+//    self.tableView.sectionFooterHeight = CGFLOAT_MIN;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -314,9 +314,9 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 {
     switch(section) {
         case SPOptionsViewSectionsSustainer:
-            return [self isActiveSustainer] ? SPSettingsTableViewSpacing : CGFLOAT_MIN;
+            return [self isActiveSustainer] ? UITableViewAutomaticDimension : CGFLOAT_MIN;
         default:
-            return SPSettingsTableViewSpacing;
+            return UITableViewAutomaticDimension;
     }
 }
 
@@ -324,10 +324,20 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 {
     switch(section) {
         case SPOptionsViewSectionsSustainer:
-            return [self isActiveSustainer] ? SPSettingsTableViewSpacing : CGFLOAT_MIN;
+            return [self isActiveSustainer] ? UITableViewAutomaticDimension : CGFLOAT_MIN;
         default:
-            return SPSettingsTableViewSpacing;
+            return UITableViewAutomaticDimension;
     }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return nil;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    return nil;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
