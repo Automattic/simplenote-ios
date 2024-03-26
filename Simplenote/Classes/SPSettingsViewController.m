@@ -36,18 +36,12 @@ typedef NS_ENUM(NSInteger, SPOptionsViewSections) {
     SPOptionsViewSectionsTags           = 1,
     SPOptionsViewSectionsAppearance     = 2,
     SPOptionsViewSectionsSecurity       = 3,
-    SPOptionsViewSectionsSustainer      = 4,
-    SPOptionsViewSectionsAccount        = 5,
-    SPOptionsViewSectionsDelete         = 6,
-    SPOptionsViewSectionsAbout          = 7,
-    SPOptionsViewSectionsHelp           = 8,
-    SPOptionsViewSectionsDebug          = 9,
-    SPOptionsViewSectionsCount          = 10,
-};
-
-typedef NS_ENUM(NSInteger, SPOptionsSustainerRow) {
-    SPOptionsSustainerRowRestore        = 0,
-    SPOptionsSustainerRowCount          = 1
+    SPOptionsViewSectionsAccount        = 4,
+    SPOptionsViewSectionsDelete         = 5,
+    SPOptionsViewSectionsAbout          = 6,
+    SPOptionsViewSectionsHelp           = 7,
+    SPOptionsViewSectionsDebug          = 8,
+    SPOptionsViewSectionsCount          = 9,
 };
 
 typedef NS_ENUM(NSInteger, SPOptionsAccountRow) {
@@ -132,10 +126,6 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                            target:self
                                                                                            action:@selector(doneAction:)];
-    
-    // Header View
-    [self setupTableHeaderView];
-
     // Setup the Switches
     self.alphabeticalTagSortSwitch = [UISwitch new];
     [self.alphabeticalTagSortSwitch addTarget:self
@@ -180,28 +170,13 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                                                  name:SPSimplenoteThemeChangedNotification
                                                object:nil];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(subscriptionStatusDidChange)
-                                                 name:SPSubscriptionStatusDidChangeNotification
-                                               object:nil];
-
     [self refreshThemeStyles];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self refreshTableHeaderView];
     [self.tableView reloadData];
-}
-
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
-{
-    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
-
-    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        [self refreshTableHeaderView];
-    } completion:nil];
 }
 
 - (void)doneAction:(id)sender
@@ -209,16 +184,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
-
 #pragma mark - Notifications
-
-- (void)subscriptionStatusDidChange
-{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self refreshTableHeaderView];
-    });
-}
-
 
 #pragma mark - Table view data source
 
@@ -252,14 +218,6 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
             return [self isPinLockEnabled] ? SPOptionsSecurityRowRowCount - rowsToRemove : disabledPinLockRows;
         }
 
-        case SPOptionsViewSectionsSustainer: {
-            return SPOptionsSustainerRowCount;
-        }
-
-        case SPOptionsViewSectionsAccount: {
-            return SPOptionsAccountRowCount;
-        }
-
         case SPOptionsViewSectionsDelete: {
             return SPOptionsDeleteRowCount;
         }
@@ -275,7 +233,11 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
         case SPOptionsViewSectionsDebug: {
             return SPOptionsDebugRowCount;
         }
-            
+
+        case SPOptionsViewSectionsAccount: {
+            return SPOptionsAccountRowCount;
+        }
+
         default:
             break;
     }
@@ -297,9 +259,6 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 
         case SPOptionsViewSectionsSecurity:
             return NSLocalizedString(@"Security", nil);
-
-        case SPOptionsViewSectionsSustainer:
-            return NSLocalizedString(@"Sustainer", nil);
 
         case SPOptionsViewSectionsAccount:
             return NSLocalizedString(@"Account", nil);
@@ -445,22 +404,8 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
             
             break;
 
-        } case SPOptionsViewSectionsSustainer: {
+        } case SPOptionsViewSectionsAccount: {
 
-            switch (indexPath.row) {
-                case SPOptionsSustainerRowRestore: {
-                    cell.textLabel.text = NSLocalizedString(@"Restore Purchases", @"Manually Restores IAP Purchases");
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    break;
-                }
-                default:
-                    break;
-            }
-
-            break;
-
-        } case SPOptionsViewSectionsAccount:{
-            
             switch (indexPath.row) {
                 case SPOptionsAccountRowDescription: {
                     cell.textLabel.text = NSLocalizedString(@"Username", @"A user's Simplenote account");
@@ -591,11 +536,6 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                 }
             }
             
-            break;
-
-        } case SPOptionsViewSectionsSustainer: {
-
-            [self restorePurchases];
             break;
 
         } case SPOptionsViewSectionsAccount: {

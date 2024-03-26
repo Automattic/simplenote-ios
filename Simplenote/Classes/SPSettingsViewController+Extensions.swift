@@ -2,44 +2,25 @@ import UIKit
 
 // MARK: - Subscriber UI
 //
-extension SPSettingsViewController {
+
+// The methods in this extension are for showing and displaying the Sustainer banner in settings.  We are discontinuing Sustainer,
+// but we may still want to use the banner in the future, so marking these methods fileprivate and have removed their callers
+fileprivate extension SPSettingsViewController {
 
     private var isActiveSustainer: Bool {
         SPAppDelegate.shared().simperium.preferencesObject().isActiveSubscriber
     }
 
     @objc
-    func setupTableHeaderView() {
-        let sustainerView: SustainerView = SustainerView.instantiateFromNib()
-        sustainerView.appliesTopInset = true
-        sustainerView.onPress = { [weak self] in
-            self?.presentSubscriptionAlertIfNeeded()
-        }
-
-        tableView.tableHeaderView = sustainerView
-    }
-
-    @objc
     func refreshTableHeaderView() {
-        guard let headerView = tableView.tableHeaderView as? SustainerView else {
+        guard let headerView = tableView.tableHeaderView as? BannerView else {
             return
         }
 
-        headerView.isActiveSustainer = isActiveSustainer
         headerView.preferredWidth = tableView.frame.width
         headerView.adjustSizeForCompressedLayout()
 
         tableView.tableHeaderView = headerView
-    }
-
-    @available(iOS 15.0, *)
-    func presentSubscriptionAlertIfNeeded() {
-        if isActiveSustainer {
-            return
-        }
-
-        let sustainerAlertController = UIAlertController.buildSustainerAlert()
-        present(sustainerAlertController, animated: true)
     }
 
     @objc
