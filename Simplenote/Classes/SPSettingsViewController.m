@@ -182,9 +182,6 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                                                object:nil];
 
     [self refreshThemeStyles];
-
-//    self.tableView.sectionHeaderHeight = CGFLOAT_MIN;
-//    self.tableView.sectionFooterHeight = CGFLOAT_MIN;
 }
 
 - (void)viewWillAppear:(BOOL)animated
