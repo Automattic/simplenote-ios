@@ -39,14 +39,13 @@ typedef NS_ENUM(NSInteger, SPOptionsViewSections) {
     SPOptionsViewSectionsNotes          = 0,
     SPOptionsViewSectionsTags           = 1,
     SPOptionsViewSectionsAppearance     = 2,
-    SPOptionsViewSectionsSustainer      = 3,
-    SPOptionsViewSectionsSecurity       = 4,
-    SPOptionsViewSectionsAccount        = 5,
-    SPOptionsViewSectionsDelete         = 6,
-    SPOptionsViewSectionsAbout          = 7,
-    SPOptionsViewSectionsHelp           = 8,
-    SPOptionsViewSectionsDebug          = 9,
-    SPOptionsViewSectionsCount          = 10,
+    SPOptionsViewSectionsSecurity       = 3,
+    SPOptionsViewSectionsAccount        = 4,
+    SPOptionsViewSectionsDelete         = 5,
+    SPOptionsViewSectionsAbout          = 6,
+    SPOptionsViewSectionsHelp           = 7,
+    SPOptionsViewSectionsDebug          = 8,
+    SPOptionsViewSectionsCount          = 9,
 };
 
 typedef NS_ENUM(NSInteger, SPOptionsAccountRow) {
@@ -69,14 +68,9 @@ typedef NS_ENUM(NSInteger, SPOptionsTagsRow) {
 
 typedef NS_ENUM(NSInteger, SPOptionsAppearanceRow) {
     SPOptionsPreferencesRowTheme        = 0,
-    SPOptionsAppearanceRowCount         = 1
+    SPOptionsAccountSustainerIcon       = 1,
+    SPOptionsAppearanceRowCount         = 2
 };
-
-typedef NS_ENUM(NSInteger, SPOptionsSustainerRow) {
-    SPOptionsAccountSustainerIcon       = 0,
-    SPOptionsAccountSustainerCount      = 1
-};
-
 
 typedef NS_ENUM(NSInteger, SPOptionsSecurityRow) {
     SPOptionsSecurityRowRowPasscode     = 0,
@@ -229,11 +223,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
         }
             
         case SPOptionsViewSectionsAppearance: {
-            return SPOptionsAppearanceRowCount;
-        }
-
-        case SPOptionsViewSectionsSustainer: {
-            return [self isActiveSustainer] ? SPOptionsAccountSustainerCount : 0;
+            return [self isActiveSustainer] ? SPOptionsAppearanceRowCount : SPOptionsAppearanceRowCount - 1;
         }
 
         case SPOptionsViewSectionsSecurity: {
@@ -281,12 +271,6 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
         case SPOptionsViewSectionsAppearance:
             return NSLocalizedString(@"Appearance", nil);
 
-        case SPOptionsViewSectionsSustainer:
-            if ([self isActiveSustainer]) {
-                return NSLocalizedString(@"Sustainer Thank You", nil);
-            }
-            break;
-
         case SPOptionsViewSectionsSecurity:
             return NSLocalizedString(@"Security", nil);
 
@@ -308,36 +292,6 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     }
 #endif
 
-    return nil;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    switch(section) {
-        case SPOptionsViewSectionsSustainer:
-            return [self isActiveSustainer] ? UITableViewAutomaticDimension : CGFLOAT_MIN;
-        default:
-            return UITableViewAutomaticDimension;
-    }
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    switch(section) {
-        case SPOptionsViewSectionsSustainer:
-            return [self isActiveSustainer] ? UITableViewAutomaticDimension : CGFLOAT_MIN;
-        default:
-            return UITableViewAutomaticDimension;
-    }
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    return nil;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-{
     return nil;
 }
 
@@ -406,16 +360,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                     cell.tag = kTagTheme;
                     break;
                 }
-                    
-                default:
-                    break;
-            }
-            
-            break;
-        }
 
-        case SPOptionsViewSectionsSustainer: {
-            switch (indexPath.row) {
                 case SPOptionsAccountSustainerIcon: {
                     cell.textLabel.text = NSLocalizedString(@"Sustainer App Icon", @"Switch app icon");
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -423,13 +368,12 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                     cell.accessoryView = self.sustainerIconSwitch;
                     cell.tag = kTagSustainerIcon;
                     break;
-
                 }
 
                 default:
                     break;
             }
-
+            
             break;
         }
 
