@@ -17,7 +17,6 @@ enum StoreError: Error {
 
 // MARK: - StoreManager
 //
-@available(iOS 15, *)
 class StoreManager {
 
     // MARK: - Static
@@ -122,7 +121,6 @@ class StoreManager {
 
 // MARK: - Private API(s)
 //
-@available(iOS 15, *)
 private extension StoreManager {
 
     func listenForTransactions() -> Task<Void, Error> {
@@ -211,7 +209,6 @@ private extension StoreManager {
 
 // MARK: - Private Helpers
 //
-@available(iOS 15, *)
 private extension StoreManager {
 
     func buildStoreProductMap(products: [Product]) -> [StoreProduct: Product] {
@@ -242,7 +239,6 @@ private extension StoreManager {
 
 // MARK: - Simperium Kung Fu
 //
-@available(iOS 15, *)
 private extension StoreManager {
 
     func refreshSimperiumPreferences(status: SubscriptionStatus?) {
@@ -263,10 +259,6 @@ private extension StoreManager {
             preferences.subscription_level = subscriptionLevel(from: status)
             preferences.subscription_date = subscriptionDate(from: status)
             preferences.subscription_platform = StoreConstants.platform
-        } else {
-            preferences.subscription_date = nil
-            preferences.subscription_level = nil
-            preferences.subscription_platform = nil
         }
 
         simperium.save()
@@ -300,7 +292,6 @@ private extension StoreManager {
 
 // MARK: - SubscriptionStatus Helpers
 //
-@available(iOS 15, *)
 private extension Product.SubscriptionInfo.Status {
 
     var isActive: Bool {
