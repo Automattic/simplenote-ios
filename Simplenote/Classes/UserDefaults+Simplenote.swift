@@ -15,6 +15,7 @@ extension UserDefaults {
         case wordPressSessionKey = "SPAuthSessionKey"
         case useBiometryInsteadOfPin = "SimplenoteUseTouchID"
         case accountIsLoggedIn
+        case useSustainerIcon
     }
 }
 

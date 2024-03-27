@@ -11,3 +11,4 @@
 @end
 
 extern NSString *const SPAlphabeticalTagSortPref;
+extern NSString *const SPSustainerAppIconName;
