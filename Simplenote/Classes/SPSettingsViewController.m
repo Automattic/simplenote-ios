@@ -10,7 +10,6 @@
 NSString *const SPAlphabeticalTagSortPref                           = @"SPAlphabeticalTagSortPref";
 NSString *const SPThemePref                                         = @"SPThemePref";
 NSString *const SPSustainerAppIconName                              = @"AppIcon-Sustainer";
-CGFloat  const SPSettingsTableViewSpacing                           = 25.0;
 
 @interface SPSettingsViewController ()
 @property (nonatomic, strong) UISwitch      *condensedNoteListSwitch;
