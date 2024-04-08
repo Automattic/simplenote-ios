@@ -504,3 +504,21 @@ extension SPAppDelegate {
         WidgetController.syncWidgetDefaults(authenticated: authenticated, sortMode: sortMode)
     }
 }
+
+// MARK: - Sustainer migration
+extension SPAppDelegate {
+    @objc 
+    func migrateSimperiumPreferencesIfNeeded() {
+        guard UserDefaults.standard.bool(forKey: .firstLaunch) == false,
+              UserDefaults.standard.bool(forKey: .hasMigratedSustainerPreferences) == false else {
+            return
+        }
+
+        UserDefaults.standard.removeObject(forKey: Simperium.preferencesLastChangedSignatureKey)
+        let prefs = simperium.preferencesObject()
+        prefs.ghostData = ""
+        simperium.saveWithoutSyncing()
+
+        UserDefaults.standard.set(true, forKey: .hasMigratedSustainerPreferences)
+    }
+}
