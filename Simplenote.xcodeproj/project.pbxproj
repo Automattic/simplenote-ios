@@ -6192,7 +6192,7 @@
 				467D9C5D1788A4FB00785EF3 /* Simplenote 2.xcdatamodel */,
 				467D9C5E1788A4FB00785EF3 /* Simplenote.xcdatamodel */,
 			);
-			currentVersion = B54D9C542909B21700D0E0EC /* Simplenote 6.xcdatamodel */;
+			currentVersion = BA16C6A82BC4968400C9079F /* Simplenote 7.xcdatamodel */;
 			name = Simplenote.xcdatamodeld;
 			path = ../Simplenote.xcdatamodeld;
 			sourceTree = "<group>";
