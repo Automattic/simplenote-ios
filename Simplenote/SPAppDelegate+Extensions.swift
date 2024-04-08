@@ -509,8 +509,12 @@ extension SPAppDelegate {
 extension SPAppDelegate {
     @objc 
     func migrateSimperiumPreferencesIfNeeded() {
-        guard UserDefaults.standard.bool(forKey: .firstLaunch) == false,
-              UserDefaults.standard.bool(forKey: .hasMigratedSustainerPreferences) == false else {
+        guard UserDefaults.standard.bool(forKey: .hasMigratedSustainerPreferences) == false else {
+            return
+        }
+
+        guard UserDefaults.standard.bool(forKey: .firstLaunch) == false else {
+            UserDefaults.standard.set(true, forKey: .hasMigratedSustainerPreferences)
             return
         }
 
