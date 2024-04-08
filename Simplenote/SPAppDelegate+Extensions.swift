@@ -513,7 +513,7 @@ extension SPAppDelegate {
             return
         }
 
-        guard UserDefaults.standard.bool(forKey: .firstLaunch) == false else {
+        guard Options.shared.firstLaunch == false else {
             UserDefaults.standard.set(true, forKey: .hasMigratedSustainerPreferences)
             return
         }
