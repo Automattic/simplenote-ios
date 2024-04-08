@@ -10,4 +10,6 @@
 @property (nullable, nonatomic,   copy) NSString            *subscription_level;
 @property (nullable, nonatomic,   copy) NSString            *subscription_platform;
 
+@property (nullable, nonatomic,   copy) NSNumber            *was_sustainer;
+
 @end

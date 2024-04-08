@@ -16,6 +16,8 @@
 @dynamic subscription_level;
 @dynamic subscription_platform;
 
+@dynamic was_sustainer;
+
 
 - (void) didChangeValueForKey:(NSString *)key
 {
