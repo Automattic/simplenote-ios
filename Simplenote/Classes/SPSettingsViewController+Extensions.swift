@@ -45,6 +45,11 @@ extension SPSettingsViewController {
     }
 
     @objc
+    var wasSustainer: Bool {
+        SPAppDelegate.shared().simperium.preferencesObject().was_sustainer == true
+    }
+
+    @objc
     func sustainerSwitchDidChangeValue(sender: UISwitch) {
         let isOn = sender.isOn
 
