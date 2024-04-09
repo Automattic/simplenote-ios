@@ -518,6 +518,7 @@ extension SPAppDelegate {
             return
         }
 
+        NSLog("Migrating Simperium Preferences object to include was_sustainer value")
         UserDefaults.standard.removeObject(forKey: Simperium.preferencesLastChangedSignatureKey)
         let prefs = simperium.preferencesObject()
         prefs.ghostData = ""
