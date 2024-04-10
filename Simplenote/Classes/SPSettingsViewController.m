@@ -219,8 +219,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
         }
             
         case SPOptionsViewSectionsAppearance: {
-            BOOL showSustainerSwitch = self.isActiveSustainer || self.wasSustainer;
-            return showSustainerSwitch ? SPOptionsAppearanceRowCount : SPOptionsAppearanceRowCount - 1;
+            return self.showSustainerSwitch ? SPOptionsAppearanceRowCount : SPOptionsAppearanceRowCount - 1;
         }
 
         case SPOptionsViewSectionsSecurity: {
