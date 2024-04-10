@@ -16,4 +16,9 @@ extension Preferences {
     var isActiveSubscriber: Bool {
         subscription_level == StoreConstants.activeSubscriptionLevel
     }
+
+    @objc
+    var wasSustainer: Bool {
+        was_sustainer == true
+    }
 }

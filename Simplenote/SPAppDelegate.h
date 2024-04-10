@@ -45,6 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)save;
 - (void)logoutAndReset:(id)sender;
+- (BOOL)isFirstLaunch;
 
 + (SPAppDelegate *)sharedDelegate;
 
