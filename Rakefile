@@ -4,7 +4,7 @@ require 'English'
 XCODE_WORKSPACE = 'Simplenote.xcworkspace'
 XCODE_SCHEME = 'Simplenote'
 XCODE_CONFIGURATION = 'Debug'
-LOCAL_PATH = "vendor/bundle"
+LOCAL_PATH = 'vendor/bundle'
 
 require 'fileutils'
 require 'tmpdir'
