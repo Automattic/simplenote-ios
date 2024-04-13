@@ -1032,6 +1032,17 @@ def simplenote_provisioning_profiles(root_bundle_id: APP_STORE_BUNDLE_IDENTIFIER
     .to_h { |key| [key, "match #{match_type} #{key}"] }
 end
 
+def prompt_user_for_app_store_connect_credentials
+  require 'credentials_manager'
+
+  # If Fastlane cannot instantiate a user, it will ask the caller for the email.
+  # Once we have it, we can set it as `FASTLANE_USER` in the environment (which has lifecycle limited to this call) so that the next commands will
+  # already have access to it.
+  # Note that if the user is already available to `AccountManager`, setting it in the environment is redundant, but Fastlane doesn't provide a way
+  # to check it so we have to do it anyway.
+  ENV['FASTLANE_USER'] = CredentialsManager::AccountManager.new.user
+end
+
 ########################################################################
 # Localization Lanes
 ########################################################################
@@ -1228,15 +1239,4 @@ def generate_installable_build_number
 
     "#{branch}-#{commit}"
   end
-end
-
-def prompt_user_for_app_store_connect_credentials
-  require 'credentials_manager'
-
-  # If Fastlane cannot instantiate a user, it will ask the caller for the email.
-  # Once we have it, we can set it as `FASTLANE_USER` in the environment (which has lifecycle limited to this call) so that the next commands will
-  # already have access to it.
-  # Note that if the user is already available to `AccountManager`, setting it in the environment is redundant, but Fastlane doesn't provide a way
-  # to check it so we have to do it anyway.
-  ENV['FASTLANE_USER'] = CredentialsManager::AccountManager.new.user
 end
