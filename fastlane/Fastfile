@@ -919,53 +919,84 @@ platform :ios do
 end
 
 ########################################################################
-# Configure Lanes
+# Fastlane Match Code Signing Lanes
 ########################################################################
-#####################################################################################
-# update_certs_and_profiles
-# -----------------------------------------------------------------------------------
-# This lane downloads all the required certs and profiles and,
-# if not run on CI it creates the missing ones.
-# -----------------------------------------------------------------------------------
-# Usage:
-# bundle exec fastlane update_certs_and_profiles
+
+# Downloads all the required certificates and profiles for both production and internal distribution builds.
+# Optionally, it can create any new necessary certificates or profiles.
 #
-# Example:
-# bundle exec fastlane update_certs_and_profiles
-#####################################################################################
-lane :update_certs_and_profiles do |_options|
-  alpha_code_signing
-  internal_code_signing
-  appstore_code_signing
+# @option [Boolean] readonly (default: true) Whether to only fetch existing certificates and profiles, without generating new ones.
+lane :update_certs_and_profiles do |options|
+  alpha_code_signing(options)
+  internal_code_signing(options)
+  appstore_code_signing(options)
 end
 
-########################################################################
-# Fastlane match code signing
-########################################################################
-
+# Downloads all the required certificates and profiles of the alpha enterprise build.
+# Optionally, it can create any new necessary certificates or profiles.
+#
+# @option [Boolean] readonly (default: true) Whether to only fetch existing certificates and profiles, without generating new ones.
 private_lane :alpha_code_signing do |options|
+  readonly = options.fetch(:readonly, true)
+
+  if readonly
+    # In readonly mode, we can use the API key
+    api_key_path = APP_STORE_CONNECT_KEY_PATH
+  else
+    # The Enterprise account APIs do not support authentication via API key.
+    # If we want to modify data (readonly = false) we need to authenticate manually.
+    prompt_user_for_app_store_connect_credentials
+    # We also need to pass no API key path, otherwise Fastlane will give
+    # precedence to that authentication mode.
+    api_key_path = nil
+  end
+
   match(
     type: 'enterprise',
     team_id: get_required_env('INT_EXPORT_TEAM_ID'),
-    readonly: options[:readonly] || is_ci,
-    app_identifier: simplenote_app_identifiers(root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Alpha")
+    app_identifier: simplenote_app_identifiers(root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Alpha"),
+    readonly: readonly,
+    api_key_path: api_key_path
   )
 end
 
+# Downloads all the required certificates and profiles the internal enterprise build.
+# Optionally, it can create any new necessary certificates or profiles.
+#
+# @option [Boolean] readonly (default: true) Whether to only fetch existing certificates and profiles, without generating new ones.
 private_lane :internal_code_signing do |options|
+  readonly = options.fetch(:readonly, true)
+
+  if readonly
+    # In readonly mode, we can use the API key
+    api_key_path = APP_STORE_CONNECT_KEY_PATH
+  else
+    # The Enterprise account APIs do not support authentication via API key.
+    # If we want to modify data (readonly = false) we need to authenticate manually.
+    prompt_user_for_app_store_connect_credentials
+    # We also need to pass no API key path, otherwise Fastlane will give
+    # precedence to that authentication mode.
+    api_key_path = nil
+  end
+
   match(
     type: 'enterprise',
     team_id: get_required_env('INT_EXPORT_TEAM_ID'),
-    readonly: options[:readonly] || is_ci,
-    app_identifier: simplenote_app_identifiers(root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Internal")
+    app_identifier: simplenote_app_identifiers(root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Internal"),
+    readonly: readonly,
+    api_key_path: api_key_path
   )
 end
 
+# Downloads all the required certificates and profiles for the production build.
+# Optionally, it can create any new necessary certificates or profiles.
+#
+# @option [Boolean] readonly (default: true) Whether to only fetch existing certificates and profiles, without generating new ones.
 private_lane :appstore_code_signing do |options|
   match(
     type: 'appstore',
     team_id: get_required_env('EXT_EXPORT_TEAM_ID'),
-    readonly: options[:readonly] || is_ci,
+    readonly: options.fetch(:readonly, true),
     app_identifier: simplenote_app_identifiers,
     template_name: 'NotationalFlow Keychain Access (Distribution)'
   )
@@ -1191,4 +1222,15 @@ def generate_installable_build_number
 
     "#{branch}-#{commit}"
   end
+end
+
+def prompt_user_for_app_store_connect_credentials
+  require 'credentials_manager'
+
+  # If Fastlane cannot instantiate a user, it will ask the caller for the email.
+  # Once we have it, we can set it as `FASTLANE_USER` in the environment (which has lifecycle limited to this call) so that the next commands will
+  # already have access to it.
+  # Note that if the user is already available to `AccountManager`, setting it in the environment is redundant, but Fastlane doesn't provide a way
+  # to check it so we have to do it anyway.
+  ENV['FASTLANE_USER'] = CredentialsManager::AccountManager.new.user
 end
