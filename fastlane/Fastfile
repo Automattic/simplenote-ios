@@ -988,7 +988,7 @@ private_lane :appstore_code_signing do |options|
     type: 'appstore',
     team_id: get_required_env('EXT_EXPORT_TEAM_ID'),
     readonly: options.fetch(:readonly, true),
-    app_identifier: simplenote_app_identifiers,
+    app_identifiers: simplenote_app_identifiers,
     api_key_path: APP_STORE_CONNECT_KEY_PATH
   )
 end
