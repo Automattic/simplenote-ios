@@ -932,13 +932,7 @@ lane :update_certs_and_profiles do |options|
   appstore_code_signing(options)
 end
 
-# Downloads all the required certificates and profiles of the alpha enterprise build.
-# Optionally, it can create any new necessary certificates or profiles.
-#
-# @option [Boolean] readonly (default: true) Whether to only fetch existing certificates and profiles, without generating new ones.
-private_lane :alpha_code_signing do |options|
-  readonly = options.fetch(:readonly, true)
-
+def update_code_signing_enterprise(readonly:, app_identifiers:)
   if readonly
     # In readonly mode, we can use the API key
     api_key_path = APP_STORE_CONNECT_KEY_PATH
@@ -951,40 +945,37 @@ private_lane :alpha_code_signing do |options|
     api_key_path = nil
   end
 
-  match(
+  update_code_signing(
     type: 'enterprise',
+    # Enterprise builds belong to the "internal" team
     team_id: get_required_env('INT_EXPORT_TEAM_ID'),
-    app_identifier: simplenote_app_identifiers(root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Alpha"),
     readonly: readonly,
+    app_identifiers: app_identifiers,
     api_key_path: api_key_path
   )
 end
 
-# Downloads all the required certificates and profiles the internal enterprise build.
+# Downloads all the required certificates and profiles (using `match`) for the alpha builds in the enterprise account.
 # Optionally, it can create any new necessary certificates or profiles.
 #
 # @option [Boolean] readonly (default: true) Whether to only fetch existing certificates and profiles, without generating new ones.
+#
+private_lane :alpha_code_signing do |options|
+  update_code_signing_enterprise(
+    app_identifiers: simplenote_app_identifiers(root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Alpha"),
+    readonly: options.fetch(:readonly, true)
+  )
+end
+
+# Downloads all the required certificates and profiles (using `match`) for the internal builds in the enterprise account.
+# Optionally, it can create any new necessary certificates or profiles.
+#
+# @option [Boolean] readonly (default: true) Whether to only fetch existing certificates and profiles, without generating new ones.
+#
 private_lane :internal_code_signing do |options|
-  readonly = options.fetch(:readonly, true)
-
-  if readonly
-    # In readonly mode, we can use the API key
-    api_key_path = APP_STORE_CONNECT_KEY_PATH
-  else
-    # The Enterprise account APIs do not support authentication via API key.
-    # If we want to modify data (readonly = false) we need to authenticate manually.
-    prompt_user_for_app_store_connect_credentials
-    # We also need to pass no API key path, otherwise Fastlane will give
-    # precedence to that authentication mode.
-    api_key_path = nil
-  end
-
-  match(
-    type: 'enterprise',
-    team_id: get_required_env('INT_EXPORT_TEAM_ID'),
-    app_identifier: simplenote_app_identifiers(root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Internal"),
-    readonly: readonly,
-    api_key_path: api_key_path
+  update_code_signing_enterprise(
+    app_identifiers: simplenote_app_identifiers(root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Internal"),
+    readonly: options.fetch(:readonly, true)
   )
 end
 
@@ -993,12 +984,27 @@ end
 #
 # @option [Boolean] readonly (default: true) Whether to only fetch existing certificates and profiles, without generating new ones.
 private_lane :appstore_code_signing do |options|
-  match(
+  update_code_signing(
     type: 'appstore',
     team_id: get_required_env('EXT_EXPORT_TEAM_ID'),
     readonly: options.fetch(:readonly, true),
     app_identifier: simplenote_app_identifiers,
-    template_name: 'NotationalFlow Keychain Access (Distribution)'
+    api_key_path: APP_STORE_CONNECT_KEY_PATH
+  )
+end
+
+def update_code_signing(type:, team_id:, readonly:, app_identifiers:, api_key_path:)
+  # NOTE: It might be neccessary to add `force: true` alongside `readonly: true` in order to regenerate some provisioning profiles.
+  # If this turns out to be a hard requirement, we should consider updating the method with logic to toggle the two setting based on whether we're fetching or renewing.
+  match(
+    storage_mode: 'google_cloud',
+    google_cloud_bucket_name: 'a8c-fastlane-match',
+    google_cloud_keys_file: File.join(SECRETS_ROOT, 'google_cloud_keys.json'),
+    type: type,
+    team_id: team_id,
+    readonly: readonly,
+    app_identifier: app_identifiers,
+    api_key_path: api_key_path
   )
 end
 
