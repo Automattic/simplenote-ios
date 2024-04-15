@@ -720,6 +720,15 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     BOOL isOn = [(UISwitch *)sender isOn];
 
     [[Options shared] setIndexNotesInSpotlight:isOn];
+
+    NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    [context setParentContext:SPAppDelegate.sharedDelegate.simperium.managedObjectContext];
+
+    if (isOn) {
+        [[CSSearchableIndex defaultSearchableIndex] indexSpotlightItemsIn:context];
+    } else {
+        [[CSSearchableIndex defaultSearchableIndex] deleteSearchableNotesIn:context];
+    }
 }
 
 - (void)tagSortSwitchDidChangeValue:(UISwitch *)sender

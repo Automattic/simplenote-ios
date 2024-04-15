@@ -32,6 +32,7 @@
 #import "SPTracker.h"
 #import "SPTagEntryField.h"
 #import "WPAuthHandler.h"
+#import "NSManagedObjectContext+CoreDataExtensions.h"
 
 
 #pragma mark - Extensions

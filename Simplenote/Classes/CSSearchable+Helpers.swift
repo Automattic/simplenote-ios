@@ -32,8 +32,29 @@ extension CSSearchableItem {
 }
 
 extension CSSearchableIndex {
+    // MARK: - Index Notes
+    @objc
+    func indexSpotlightItems(in context: NSManagedObjectContext) {
+        guard Options.shared.indexNotesInSpotlight else {
+            return
+        }
+
+        context.perform {
+            if let deleted = context.fetchObjects(forEntityName: "Note", with: NSPredicate(format: "deleted == YES")) as? [Note] {
+                CSSearchableIndex.default().deleteSearchableNotes(deleted)
+            }
+
+            if let notes = context.fetchObjects(forEntityName: "Note", with: NSPredicate(format: "deleted == NO")) as? [Note] {
+                CSSearchableIndex.default().indexSearchableNotes(notes)
+            }
+        }
+    }
 
     @objc func indexSearchableNote(_ note: Note) {
+        guard Options.shared.indexNotesInSpotlight else {
+            return
+        }
+
         let item = CSSearchableItem(note: note)
         indexSearchableItems([item]) { error in
             if let error = error {
@@ -43,6 +64,10 @@ extension CSSearchableIndex {
     }
 
     @objc func indexSearchableNotes(_ notes: [Note]) {
+        guard Options.shared.indexNotesInSpotlight else {
+            return
+        }
+
         let items = notes.map {
             return CSSearchableItem(note: $0)
         }
@@ -70,4 +95,11 @@ extension CSSearchableIndex {
         }
     }
 
+    @objc
+    func deleteSearchableNotes(in context: NSManagedObjectContext) {
+        if let notes = context.fetchAllObjects(forEntityName: "Note") as? [Note] {
+
+            deleteSearchableNotes(notes)
+        }
+    }
 }
