@@ -94,12 +94,4 @@ extension CSSearchableIndex {
             }
         }
     }
-
-    @objc
-    func deleteSearchableNotes(in context: NSManagedObjectContext) {
-        if let notes = context.fetchAllObjects(forEntityName: "Note") as? [Note] {
-
-            deleteSearchableNotes(notes)
-        }
-    }
 }

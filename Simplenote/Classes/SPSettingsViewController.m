@@ -727,7 +727,10 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     if (isOn) {
         [[CSSearchableIndex defaultSearchableIndex] indexSpotlightItemsIn:context];
     } else {
-        [[CSSearchableIndex defaultSearchableIndex] deleteSearchableNotesIn:context];
+        [[CSSearchableIndex defaultSearchableIndex] deleteAllSearchableItemsWithCompletionHandler:^(NSError * _Nullable error) {
+
+            [self presentIndexRemovalAlert];
+        }];
     }
 }
 
