@@ -19,6 +19,7 @@ NSString *const SPSustainerAppIconName                              = @"AppIcon-
 @property (nonatomic, strong) UITextField   *pinTimeoutTextField;
 @property (nonatomic, strong) UIPickerView  *pinTimeoutPickerView;
 @property (nonatomic, strong) UIToolbar     *doneToolbar;
+@property (nonatomic, strong) UISwitch      *indexNotesSwitch;
 @end
 
 @implementation SPSettingsViewController {
@@ -33,6 +34,7 @@ NSString *const SPSustainerAppIconName                              = @"AppIcon-
 #define kTagTimeout             6
 #define kTagTouchID             7
 #define kTagSustainerIcon       8
+#define kTagIndexNotes          9
 
 typedef NS_ENUM(NSInteger, SPOptionsViewSections) {
     SPOptionsViewSectionsNotes          = 0,
@@ -57,7 +59,8 @@ typedef NS_ENUM(NSInteger, SPOptionsAccountRow) {
 typedef NS_ENUM(NSInteger, SPOptionsNotesRow) {
     SPOptionsPreferencesRowSort         = 0,
     SPOptionsPreferencesRowCondensed    = 1,
-    SPOptionsNotesRowCount              = 2
+    SPOptionsPreferencesRowIndexNotes   = 2,
+    SPOptionsNotesRowCount              = 3
 };
 
 typedef NS_ENUM(NSInteger, SPOptionsTagsRow) {
@@ -140,6 +143,11 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     [self.condensedNoteListSwitch addTarget:self
                                      action:@selector(condensedSwitchDidChangeValue:)
                            forControlEvents:UIControlEventValueChanged];
+
+    self.indexNotesSwitch = [UISwitch new];
+    [self.indexNotesSwitch addTarget:self
+                              action:@selector(indexNotesSwitchDidChangeValue:)
+                    forControlEvents:UIControlEventValueChanged];
 
     self.biometrySwitch = [UISwitch new];
     [self.biometrySwitch addTarget:self
@@ -319,7 +327,17 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                     cell.tag = kTagCondensedNoteList;
                     break;
                 }
-                    
+                case SPOptionsPreferencesRowIndexNotes: {
+                    cell.textLabel.text = NSLocalizedString(@"Index Notes in Spotlight", @"Option to add notes to spotlight search");
+
+                    self.indexNotesSwitch.on = [[Options shared] indexNotesInSpotlight];
+
+                    cell.accessoryView = self.indexNotesSwitch;
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    cell.tag = kTagIndexNotes;
+                    break;
+                }
+
                 default:
                     break;
             }
@@ -695,6 +713,13 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 
     [[Options shared] setCondensedNotesList:isOn];
     [SPTracker trackSettingsListCondensedEnabled:isOn];
+}
+
+- (void)indexNotesSwitchDidChangeValue:(UISwitch *)sender
+{
+    BOOL isOn = [(UISwitch *)sender isOn];
+
+    [[Options shared] setIndexNotesInSpotlight:isOn];
 }
 
 - (void)tagSortSwitchDidChangeValue:(UISwitch *)sender

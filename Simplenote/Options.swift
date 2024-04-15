@@ -145,6 +145,19 @@ extension Options {
     var numberOfPreviewLines: Int {
         return condensedNotesList ? Settings.numberOfPreviewLinesCondensed : Settings.numberOfPreviewLinesRegular
     }
+
+    /// Index notes in spotlight
+    ///
+    @objc
+    var indexNotesInSpotlight: Bool {
+        get {
+            defaults.bool(forKey: .indexNotesInSpotlight)
+        }
+
+        set {
+            defaults.set(newValue, forKey: .indexNotesInSpotlight)
+        }
+    }
 }
 
 // MARK: - Private
