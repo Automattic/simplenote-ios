@@ -1,6 +1,7 @@
 4.51
 -----
 - Fixed issue where note cell appearance changes on press down instead of when the cell is selected
+- Added ability to enable and disable indexing notes in Spotlight
 
 4.50
 -----
