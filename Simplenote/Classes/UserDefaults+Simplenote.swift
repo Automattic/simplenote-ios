@@ -16,6 +16,7 @@ extension UserDefaults {
         case useBiometryInsteadOfPin = "SimplenoteUseTouchID"
         case accountIsLoggedIn
         case useSustainerIcon
+        case hasMigratedSustainerPreferences
     }
 }
 

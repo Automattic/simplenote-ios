@@ -131,6 +131,8 @@
     [self setupDefaultWindow];
     [self configureStateRestoration];
 
+    [self migrateSimperiumPreferencesIfNeeded];
+    
     return YES;
 }
 

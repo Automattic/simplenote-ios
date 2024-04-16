@@ -1,16 +1,19 @@
 # frozen_string_literal: true
 
 require 'English'
-XCODE_WORKSPACE = 'Simplenote.xcworkspace'
-XCODE_SCHEME = 'Simplenote'
-XCODE_CONFIGURATION = 'Debug'
-
 require 'fileutils'
 require 'tmpdir'
 require 'rake/clean'
 require 'yaml'
 require 'digest'
+
+# Constants
+SWIFTLINT_VERSION = '0.41.0'
 PROJECT_DIR = __dir__
+XCODE_WORKSPACE = 'Simplenote.xcworkspace'
+XCODE_SCHEME = 'Simplenote'
+XCODE_CONFIGURATION = 'Debug'
+LOCAL_PATH = 'vendor/bundle'
 
 task default: %w[test]
 
@@ -36,7 +39,8 @@ namespace :dependencies do
 
   namespace :bundle do
     task :check do
-      sh 'bundle check --path=${BUNDLE_PATH:-vendor/bundle} > /dev/null', verbose: false do |ok, _res|
+      sh "bundle config set --local path #{LOCAL_PATH} > /dev/null", verbose: false
+      sh 'bundle check > /dev/null', verbose: false do |ok, _res|
         next if ok
 
         # bundle check exits with a non zero code if install is needed
@@ -47,7 +51,7 @@ namespace :dependencies do
 
     task :install do
       fold('install.bundler') do
-        sh 'bundle install --jobs=3 --retry=3 --path=${BUNDLE_PATH:-vendor/bundle}'
+        sh 'bundle install --jobs=3 --retry=3'
       end
     end
     CLOBBER << 'vendor/bundle'
@@ -186,13 +190,8 @@ task xcode: [:dependencies] do
 end
 
 def fold(label)
-  puts "travis_fold:start:#{label}" if travis?
+  puts "--- #{label}" if ENV['BUILDKITE']
   yield
-  puts "travis_fold:end:#{label}" if travis?
-end
-
-def travis?
-  !ENV['TRAVIS'].nil?
 end
 
 def pod(args)

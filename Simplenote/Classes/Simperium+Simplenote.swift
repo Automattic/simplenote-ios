@@ -61,4 +61,5 @@ extension Simperium {
 //
 extension Simperium {
     static let accountBucketName = "Account"
+    static let preferencesLastChangedSignatureKey = "lastChangeSignature-Preferences"
 }

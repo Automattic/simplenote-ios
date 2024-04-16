@@ -40,8 +40,9 @@ fileprivate extension SPSettingsViewController {
 
 extension SPSettingsViewController {
     @objc
-    var isActiveSustainer: Bool {
-        SPAppDelegate.shared().simperium.preferencesObject().isActiveSubscriber
+    var showSustainerSwitch: Bool {
+        let preferences = SPAppDelegate.shared().simperium.preferencesObject()
+        return preferences.isActiveSubscriber || preferences.wasSustainer
     }
 
     @objc

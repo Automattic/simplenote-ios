@@ -1,6 +1,10 @@
 inherit_from: .rubocop_todo.yml
 
 AllCops:
+  Exclude:
+    - DerivedData/**/*
+    - Pods/**/*
+    - vendor/**/*
   NewCops: enable
   SuggestExtensions:
     rubocop-rake: false
@@ -18,3 +22,7 @@ Metrics/BlockLength:
 
 Style/HashSyntax:
   EnforcedShorthandSyntax: never
+# Used by UI test account methods. See https://github.com/Automattic/simplenote-ios/pull/1275 for more details.
+Style/GlobalVars:
+  AllowedVariables:
+    - $used_test_account_index
