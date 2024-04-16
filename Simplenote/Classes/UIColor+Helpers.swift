@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 // MARK: - UIColor Simplenote's Helpers
 //
 extension UIColor {
@@ -28,7 +27,6 @@ extension UIColor {
         }
     }
 }
-
 
 // MARK: - HTML Colors
 //

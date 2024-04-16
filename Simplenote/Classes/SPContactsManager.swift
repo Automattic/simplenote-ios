@@ -9,7 +9,6 @@
 import Foundation
 import Contacts
 
-
 /// Contacts Helper
 ///
 class SPContactsManager: NSObject {
@@ -33,7 +32,6 @@ class SPContactsManager: NSObject {
     fileprivate var status: CNAuthorizationStatus {
         return CNContactStore.authorizationStatus(for: .contacts)
     }
-
 
     /// Deinitializer
     ///
@@ -74,8 +72,6 @@ class SPContactsManager: NSObject {
         }
     }
 }
-
-
 
 /// Contacts Helper
 ///

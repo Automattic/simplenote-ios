@@ -1156,9 +1156,9 @@ end
 # the account index, and values are either "free" or BUILDKITE_BUILD_NUMBER, in case if account
 # was occupied by a build. Returns the hash.
 # Example:
-#   test_accounts_hash
+#   fetch_test_accounts_hash
 #     => {"0"=>"4079", "1"=>"free", "2"=>"free", "3"=>"free"}
-def test_accounts_hash
+def fetch_test_accounts_hash
   uri = URI.parse(get_required_env('UI_TESTS_ACCOUNTS_JSON_URL'))
   response = Net::HTTP.get_response(uri)
   accounts_state = response.body.chomp
@@ -1168,7 +1168,7 @@ end
 # Finds the index of first free account in accounts hash, and marks it as accupied by current build.
 # Crashed fastlane if free account was not found.
 def find_free_test_account
-  accounts_hash = test_accounts_hash
+  accounts_hash = fetch_test_accounts_hash
   UI.message('Looking for a free test account...')
   UI.message("Accounts state: #{accounts_hash}")
 
@@ -1187,13 +1187,13 @@ end
 #   change_test_account_availability("4820")
 #     => {"0"=>"4820", "1"=>"free", "2"=>"free", "3"=>"free"}
 def change_test_account_availability(availability)
-  accounts_hash = test_accounts_hash
+  accounts_hash = fetch_test_accounts_hash
   accounts_hash[$used_test_account_index.to_s] = availability
   submit_accounts_hash(accounts_hash)
 end
 
 def sanitize_test_accounts
-  accounts_hash = test_accounts_hash
+  accounts_hash = fetch_test_accounts_hash
   UI.message('Sanitizing stale test accounts...')
   UI.message("Accounts before sanitizing: #{accounts_hash}")
 
@@ -1232,7 +1232,7 @@ def submit_accounts_hash(accounts_hash)
     http.request(request)
   end
 
-  UI.message("Accounts state after write: #{test_accounts_hash}")
+  UI.message("Accounts state after write: #{fetch_test_accounts_hash}")
 end
 
 def apply_build_number(build_number)

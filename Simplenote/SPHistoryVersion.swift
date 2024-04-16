@@ -15,7 +15,6 @@ struct SPHistoryVersion {
     ///
     let modificationDate: Date
 
-
     /// Designated Initializer
     ///
     init?(version: Int, payload: [AnyHashable: Any]) {

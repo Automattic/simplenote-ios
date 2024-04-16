@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 // MARK: - SPEditorTapRecognizerDelegate
 //  Since the dawn of time, UITextView itself was set as (our own) TapGestureRecognizer delegate.
 //  As per iOS 14, the new (superclass) implementation is not allowing our Tap recognizer to work simultaneously with its (internal)
@@ -20,7 +19,6 @@ class SPEditorTapRecognizerDelegate: NSObject, UIGestureRecognizerDelegate {
     ///
     @objc
     weak var excludedView: UIView?
-
 
     /// TextView only performs linkification when the `editable` flag is disabled.
     /// We're allowing Edition by means of a TapGestureRecognizer, which also allows us to deal with Tap events performed over TextAttachments

@@ -1,6 +1,5 @@
 import Foundation
 
-
 /// This extension contains several helper-additions to Cocoa NSURL class.
 ///
 extension NSURL {

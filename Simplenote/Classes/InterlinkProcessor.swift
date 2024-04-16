@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - InterlinkProcessorDelegate
 //
 protocol InterlinkProcessorDelegate: NSObjectProtocol {
@@ -9,7 +8,6 @@ protocol InterlinkProcessorDelegate: NSObjectProtocol {
     ///
     func interlinkProcessor(_ processor: InterlinkProcessor, insert text: String, in range: Range<String.Index>)
 }
-
 
 // MARK: - InterlinkProcessor
 //
@@ -77,7 +75,6 @@ class InterlinkProcessor: NSObject {
     }
 }
 
-
 // MARK: - Presenting
 //
 private extension InterlinkProcessor {
@@ -117,7 +114,6 @@ private extension InterlinkProcessor {
     }
 }
 
-
 // MARK: - Scrolling
 //
 extension InterlinkProcessor {
@@ -152,7 +148,6 @@ extension InterlinkProcessor {
     }
 }
 
-
 // MARK: - State
 //
 private extension InterlinkProcessor {
@@ -161,7 +156,6 @@ private extension InterlinkProcessor {
         return editor.isFirstResponder && !editor.isTextSelected && !editor.isUndoingEditOP
     }
 }
-
 
 // MARK: - Settings
 //

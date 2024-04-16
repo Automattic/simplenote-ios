@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 // MARK: - UIFont Simplenote Helpers
 //
 extension UIFont {
@@ -50,7 +49,6 @@ extension UIFont {
     }
 }
 
-
 // MARK: - FontCache: Performance Helper!
 //
 private class FontCache {
@@ -62,7 +60,6 @@ private class FontCache {
     /// Yes. Another Singleton!
     ///
     static let shared = FontCache()
-
 
     /// (Private) Initializer
     ///
@@ -90,7 +87,6 @@ private class FontCache {
         cache[style] = updatedStyleMap
     }
 }
-
 
 // MARK: - Private Methods
 //

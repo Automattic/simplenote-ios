@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 // MARK: - SPTagTableViewCell
 //
 @objcMembers
@@ -56,7 +55,6 @@ class SPTagTableViewCell: UITableViewCell {
         }
     }
 
-
     /// Deinitializer
     ///
     deinit {
@@ -69,7 +67,6 @@ class SPTagTableViewCell: UITableViewCell {
         super.init(coder: aDecoder)
         startListeningToNotifications()
     }
-
 
     // MARK: - Overridden Methods
 
@@ -86,7 +83,6 @@ class SPTagTableViewCell: UITableViewCell {
         refreshConstraints()
     }
 }
-
 
 // MARK: - Private Methods
 //
@@ -124,7 +120,6 @@ private extension SPTagTableViewCell {
     }
 }
 
-
 // MARK: - Notifications
 //
 private extension SPTagTableViewCell {
@@ -146,7 +141,6 @@ private extension SPTagTableViewCell {
     }
 }
 
-
 // MARK: - Static!
 //
 extension SPTagTableViewCell {
@@ -163,7 +157,6 @@ extension SPTagTableViewCell {
         return result.rounded(.up)
     }
 }
-
 
 // MARK: - Cell Styles
 //

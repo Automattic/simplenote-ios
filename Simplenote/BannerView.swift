@@ -1,10 +1,9 @@
 import Foundation
 import UIKit
 
-
-// MARK: - SustainerView
+// MARK: - BannerView
 //
-class SustainerView: UIView {
+class BannerView: UIView {
 
     @IBOutlet
     private var backgroundView: UIView!
@@ -30,12 +29,6 @@ class SustainerView: UIView {
 
     var onPress: (() -> Void)?
 
-    var isActiveSustainer = false {
-        didSet {
-            refreshInterface()
-        }
-    }
-
     var preferredWidth: CGFloat? {
         didSet {
             guard let preferredWidth else {
@@ -53,22 +46,22 @@ class SustainerView: UIView {
         refreshInterface()
     }
 
-
     // MARK: - Actions
 
     @IBAction
-    func sustainerWasPresssed() {
+    func bannerWasPresssed() {
         onPress?()
     }
 }
 
-
 // MARK: - Private API(s)
 //
-private extension SustainerView {
+private extension BannerView {
 
-    func refreshInterface() {
-        let style = isActiveSustainer ? Style.sustainer : Style.notSubscriber
+    func refreshInterface(with style: Style? = nil) {
+        guard let style else {
+            return
+        }
 
         titleLabel.text = style.title
         detailsLabel.text = style.details
@@ -79,7 +72,6 @@ private extension SustainerView {
     }
 }
 
-
 // MARK: - Style
 //
 private struct Style {
@@ -89,8 +81,8 @@ private struct Style {
     let backgroundColor: UIColor
 }
 
-
 private extension Style {
+    // Leaving these styles in cause we may want them back someday
     static var sustainer: Style {
         Style(title: NSLocalizedString("You are a Simplenote Sustainer", comment: "Current Sustainer Title"),
               details: NSLocalizedString("Thank you for your continued support", comment: "Current Sustainer Details"),
@@ -105,7 +97,6 @@ private extension Style {
               backgroundColor: .simplenoteBlue50Color)
     }
 }
-
 
 // MARK: - Metrics
 //

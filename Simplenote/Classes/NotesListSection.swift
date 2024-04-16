@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - NotesListSection
 //
 struct NotesListSection {

@@ -1,6 +1,5 @@
 import UIKit
 
-
 class SPAboutViewController: UIViewController {
 
     private let tableView = HuggableTableView(frame: .zero, style: .grouped)
@@ -30,7 +29,6 @@ class SPAboutViewController: UIViewController {
         viewSpinner?.stop()
     }
 }
-
 
 // MARK: - Configuration
 //
@@ -212,7 +210,6 @@ private extension SPAboutViewController {
     }
 }
 
-
 // MARK: - UITableViewDataSource Conformance
 //
 extension SPAboutViewController: UITableViewDataSource {
@@ -248,7 +245,6 @@ extension SPAboutViewController: UITableViewDataSource {
         return cell
     }
 }
-
 
 // MARK: - UITableViewDelegate Conformance
 //
@@ -314,7 +310,6 @@ private extension SPAboutViewController {
         }
     }
 }
-
 
 // MARK: - Constants
 //

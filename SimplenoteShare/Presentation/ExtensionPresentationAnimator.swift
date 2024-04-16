@@ -1,6 +1,5 @@
 import UIKit
 
-
 /// Direction to transition from/to.
 ///
 /// - left: Enter/leave screen via the left edge.
@@ -15,7 +14,6 @@ enum Direction {
     case bottom
 }
 
-
 /// Animator that animates the presented View Controller from/to a specific `Direction`.
 ///
 final class ExtensionPresentationAnimator: NSObject {
@@ -28,7 +26,6 @@ final class ExtensionPresentationAnimator: NSObject {
         super.init()
     }
 }
-
 
 // MARK: - UIViewControllerAnimatedTransitioning Conformance
 //
@@ -71,7 +68,6 @@ extension ExtensionPresentationAnimator: UIViewControllerAnimatedTransitioning {
         }
     }
 }
-
 
 // MARK: - Constants
 //

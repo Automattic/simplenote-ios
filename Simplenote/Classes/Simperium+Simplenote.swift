@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - Simperium + Buckets
 //
 extension Simperium {
@@ -46,7 +45,6 @@ extension Simperium {
     }
 }
 
-
 // MARK: - Public API(s)
 //
 extension Simperium {
@@ -59,9 +57,9 @@ extension Simperium {
     }
 }
 
-
 // MARK: - Constants
 //
 extension Simperium {
     static let accountBucketName = "Account"
+    static let preferencesLastChangedSignatureKey = "lastChangeSignature-Preferences"
 }

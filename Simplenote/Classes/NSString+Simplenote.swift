@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - NSString Simplenote Helpers
 //
 extension NSString {

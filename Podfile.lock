@@ -21,6 +21,7 @@ PODS:
   - Simperium/SocketTrust (1.9.0)
   - Simperium/SPReachability (1.9.0)
   - Simperium/SSKeychain (1.9.0)
+  - SwiftLint (0.54.0)
   - WordPress-Ratings-iOS (0.0.2)
   - ZIPFoundation (0.9.15)
 
@@ -29,6 +30,7 @@ DEPENDENCIES:
   - AppCenter/Distribute (~> 4.4.3)
   - Gridicons (~> 0.18)
   - Simperium (= 1.9.0)
+  - SwiftLint (= 0.54.0)
   - WordPress-Ratings-iOS (= 0.0.2)
   - ZIPFoundation (~> 0.9.9)
 
@@ -37,6 +39,7 @@ SPEC REPOS:
     - AppCenter
     - Gridicons
     - Simperium
+    - SwiftLint
     - WordPress-Ratings-iOS
     - ZIPFoundation
 
@@ -44,9 +47,10 @@ SPEC CHECKSUMS:
   AppCenter: 3fd04aa1b166e16fdb03ec81dabe488aece83fbd
   Gridicons: dc92efbe5fd60111d2e8ea051d84a60cca552abc
   Simperium: 45d828d68aad71f3449371346f270013943eff78
+  SwiftLint: c1de071d9d08c8aba837545f6254315bc900e211
   WordPress-Ratings-iOS: 9f83dbba6e728c5121b1fd21b5683cf2fd120646
   ZIPFoundation: 063163dc828bf699c5be160eb4f58f676322d94f
 
-PODFILE CHECKSUM: 0310d57af0efbf50954ff46d578bc70b455981c4
+PODFILE CHECKSUM: 6fc187e283b4fb7f9f4a0ef73a27632724c90845
 
 COCOAPODS: 1.14.1

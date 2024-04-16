@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 // MARK: - StoreProduct
 //
 enum StoreProduct: String, CaseIterable {

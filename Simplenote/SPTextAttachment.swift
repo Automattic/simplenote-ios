@@ -1,6 +1,5 @@
 import UIKit
 
-
 // MARK: - SPTextAttachment
 //
 @objcMembers
@@ -30,7 +29,6 @@ class SPTextAttachment: NSTextAttachment {
     ///
     var sizingFont: UIFont = .preferredFont(forTextStyle: .headline)
 
-
     // MARK: - Overridden Methods
 
     override func attachmentBounds(for textContainer: NSTextContainer?, proposedLineFragment lineFrag: CGRect, glyphPosition position: CGPoint, characterIndex charIndex: Int) -> CGRect {
@@ -40,7 +38,6 @@ class SPTextAttachment: NSTextAttachment {
         return CGRect(x: 0, y: offsetY, width: dimension, height: dimension)
     }
 }
-
 
 // MARK: - Private
 //

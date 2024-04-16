@@ -173,7 +173,6 @@ extension NoteInformationViewController: UITableViewDelegate {
     }
 }
 
-
 // MARK: - UITableViewDataSource
 //
 extension NoteInformationViewController: UITableViewDataSource {

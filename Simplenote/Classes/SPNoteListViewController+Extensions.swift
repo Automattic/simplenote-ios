@@ -149,7 +149,6 @@ extension SPNoteListViewController {
     }
 }
 
-
 // MARK: - Internal Methods
 //
 extension SPNoteListViewController {
@@ -403,7 +402,6 @@ extension SPNoteListViewController {
     }
 }
 
-
 // MARK: - UIScrollViewDelegate
 //
 extension SPNoteListViewController: UIScrollViewDelegate {
@@ -416,7 +414,6 @@ extension SPNoteListViewController: UIScrollViewDelegate {
         searchBar.resignFirstResponder()
     }
 }
-
 
 // MARK: - UITableViewDataSource
 //
@@ -466,7 +463,6 @@ extension SPNoteListViewController: UITableViewDataSource {
         return false
     }
 }
-
 
 // MARK: - UITableViewDelegate
 //
@@ -583,7 +579,6 @@ extension SPNoteListViewController: UITableViewDelegate {
     }
 }
 
-
 // MARK: - TableViewCell(s) Initialization
 //
 private extension SPNoteListViewController {
@@ -640,7 +635,6 @@ private extension SPNoteListViewController {
         return DateFormatter.listDateFormatter.string(from: date)
     }
 }
-
 
 // MARK: - Table
 //
@@ -772,11 +766,9 @@ private extension SPNoteListViewController {
             }
         shareAction.accessibilityLabel = ActionTitle.share
 
-
         return [trashAction, pinAction, copyAction, shareAction]
     }
 }
-
 
 // MARK: - UIMenu
 //
@@ -825,7 +817,6 @@ private extension SPNoteListViewController {
         return UIMenu(title: "", children: [select, share, copy, pin, delete])
     }
 }
-
 
 // MARK: - Services
 //
@@ -893,7 +884,6 @@ private extension SPNoteListViewController {
     }
 }
 
-
 // MARK: - Services (Internal)
 //
 extension SPNoteListViewController {
@@ -907,7 +897,6 @@ extension SPNoteListViewController {
         open(nil, animated: true)
     }
 }
-
 
 // MARK: - Keyboard Handling
 //
@@ -957,7 +946,6 @@ extension SPNoteListViewController {
     }
 }
 
-
 // MARK: - Search Action Handlers
 //
 extension SPNoteListViewController {
@@ -980,7 +968,6 @@ extension SPNoteListViewController {
         return presenter
     }
 }
-
 
 // MARK: - Keyboard
 //
@@ -1047,7 +1034,6 @@ private extension SPNoteListViewController {
     }
 }
 
-
 // MARK: - Private Types
 //
 private enum ActionTitle {
@@ -1091,7 +1077,6 @@ private enum Localization {
         static let trash = NSLocalizedString("Your trash is empty", comment: "Message shown in note list when no notes are in the trash")
 
         static let untagged = NSLocalizedString("No untagged notes", comment: "Message shown in note list when no notes are untagged")
-
 
         static func tagged(with tag: String) -> String {
             return String(format: NSLocalizedString("No notes tagged “%@”", comment: "Message shown in note list when no notes are tagged with the provided tag. Parameter: %@ - tag"), tag)

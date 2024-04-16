@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - NSMutableAttributedString Simplenote Methods
 //
 extension NSAttributedString {

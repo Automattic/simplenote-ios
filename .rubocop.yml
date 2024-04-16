@@ -1,3 +1,5 @@
+inherit_from: .rubocop_todo.yml
+
 AllCops:
   Exclude:
     - DerivedData/**/*
@@ -15,13 +17,11 @@ Layout/LineLength:
 
 Metrics/BlockLength:
   Exclude:
-    - fastlane/*file
-    - Podfile
+    - fastlane/Fastfile
     - Rakefile
 
 Style/HashSyntax:
   EnforcedShorthandSyntax: never
-
 # Used by UI test account methods. See https://github.com/Automattic/simplenote-ios/pull/1275 for more details.
 Style/GlobalVars:
   AllowedVariables:

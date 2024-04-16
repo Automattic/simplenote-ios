@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - UINavigationBar + Appearance
 //
 extension UINavigationBar {

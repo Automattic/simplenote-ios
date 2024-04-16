@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - Simplenote UserDefaults Keys
 //
 extension UserDefaults {
@@ -16,9 +15,10 @@ extension UserDefaults {
         case wordPressSessionKey = "SPAuthSessionKey"
         case useBiometryInsteadOfPin = "SimplenoteUseTouchID"
         case accountIsLoggedIn
+        case useSustainerIcon
+        case hasMigratedSustainerPreferences
     }
 }
-
 
 // MARK: - Convenience Methods
 //

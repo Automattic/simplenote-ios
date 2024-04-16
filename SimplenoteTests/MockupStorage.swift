@@ -2,7 +2,6 @@ import Foundation
 import CoreData
 @testable import Simplenote
 
-
 /// MockupStorageManager: InMemory CoreData Stack.
 ///
 class MockupStorageManager {
@@ -73,7 +72,6 @@ class MockupStorageManager {
     }
 }
 
-
 // MARK: - Descriptors
 //
 extension MockupStorageManager {
@@ -96,7 +94,6 @@ extension MockupStorageManager {
         return description
     }
 }
-
 
 // MARK: - Stack URL's
 //

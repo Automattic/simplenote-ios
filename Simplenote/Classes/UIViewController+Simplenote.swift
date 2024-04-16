@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 // MARK: - UIAlertController's Simplenote Methods
 //
 extension UIViewController {
@@ -32,7 +31,6 @@ extension UIViewController {
 
         leafViewController.present(self, animated: true, completion: nil)
     }
-
 
     /// Attaches a children ViewController (if needed) below the specified sibling view
     ///

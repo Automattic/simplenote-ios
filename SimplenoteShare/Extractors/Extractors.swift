@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - Extractors: Convenience Struct that manages access to all of the known Extractors.
 //
 struct Extractors {

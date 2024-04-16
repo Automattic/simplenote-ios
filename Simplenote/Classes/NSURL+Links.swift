@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - NSURL + Interlink
 //
 extension NSURL {

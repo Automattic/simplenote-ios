@@ -8,7 +8,6 @@ class UIColorSimplenoteTests: XCTestCase {
         //gray5 in RGB is r: 220 g: 220 b: 222
         let gray5 = UIColor(hexString: "dcdcde")
 
-
         let spBlue20RGB = UIColor(red: rgbPercent(132), green: rgbPercent(164), blue: rgbPercent(240), alpha: 1)
         let gray5RGB = UIColor(red: rgbPercent(220), green: rgbPercent(220), blue: rgbPercent(222), alpha: 1)
 
@@ -25,7 +24,6 @@ class UIColorSimplenoteTests: XCTestCase {
         let spBlue20 = UIColor(hexString: "#84a4f0")
         //gray5 in RGB is r: 220 g: 220 b: 222
         let gray5 = UIColor(hexString: "#dcdcde")
-
 
         let spBlue20RGB = UIColor(red: rgbPercent(132), green: rgbPercent(164), blue: rgbPercent(240), alpha: 1)
         let gray5RGB = UIColor(red: rgbPercent(220), green: rgbPercent(220), blue: rgbPercent(222), alpha: 1)

@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - UINavigationBar Simplenote Methods
 //
 extension UINavigationBar {

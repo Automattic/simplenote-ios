@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 // MARK: - SPRatingsPromptDelegate
 //
 @objc
@@ -12,7 +11,6 @@ protocol SPRatingsPromptDelegate: AnyObject {
     func displayFeedbackUI()
     func dismissRatingsUI()
 }
-
 
 // MARK: - SPRatingsPromptView
 //
@@ -55,7 +53,6 @@ class SPRatingsPromptView: UIView {
     @objc
     weak var delegate: SPRatingsPromptDelegate?
 
-
     // MARK: - Lifecycle
 
     deinit {
@@ -73,7 +70,6 @@ class SPRatingsPromptView: UIView {
         refreshButtonsStackViewAxis()
     }
 }
-
 
 // MARK: - Private Methods
 //
@@ -126,7 +122,6 @@ private extension SPRatingsPromptView {
     }
 }
 
-
 // MARK: - Notifications
 //
 private extension SPRatingsPromptView {
@@ -175,14 +170,12 @@ private extension SPRatingsPromptView {
     }
 }
 
-
 // MARK: - Constants
 //
 private struct Settings {
     static let buttonBorderWidth = CGFloat(1)
     static let buttonCornerRAdius = CGFloat(4)
 }
-
 
 // MARK: - Ratings State
 //
@@ -191,7 +184,6 @@ private enum State {
     case liked
     case disliked
 }
-
 
 private extension State {
 

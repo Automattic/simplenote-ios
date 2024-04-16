@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - Note
 //
 extension Note {

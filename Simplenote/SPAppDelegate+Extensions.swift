@@ -1,7 +1,6 @@
 import Foundation
 import WidgetKit
 
-
 // MARK: - Initialization
 //
 extension SPAppDelegate {
@@ -196,7 +195,6 @@ extension SPAppDelegate {
     }
 }
 
-
 // MARK: - UIViewControllerRestoration
 //
 @objc
@@ -259,7 +257,6 @@ extension SPAppDelegate: UIViewControllerRestoration {
     }
 }
 
-
 // MARK: - SimperiumDelegate
 //
 extension SPAppDelegate: SimperiumDelegate {
@@ -320,7 +317,6 @@ extension SPAppDelegate: SimperiumDelegate {
     }
 }
 
-
 // MARK: - Passcode
 //
 extension SPAppDelegate {
@@ -362,7 +358,6 @@ extension SPAppDelegate {
         return pinLockWindow?.isKeyWindow == true
     }
 }
-
 
 // MARK: - PinLockVerifyControllerDelegate
 //
@@ -419,7 +414,6 @@ private extension SPAppDelegate {
     }
 }
 
-
 // MARK: - Magic Link authentication
 //
 extension SPAppDelegate {
@@ -428,7 +422,6 @@ extension SPAppDelegate {
         MagicLinkAuthenticator(authenticator: simperium.authenticator).handle(url: url)
     }
 }
-
 
 // MARK: - Scroll position cache
 //
@@ -509,5 +502,28 @@ extension SPAppDelegate {
         let authenticated = simperium.user?.authenticated() ?? false
         let sortMode = Options.shared.listSortMode
         WidgetController.syncWidgetDefaults(authenticated: authenticated, sortMode: sortMode)
+    }
+}
+
+// MARK: - Sustainer migration
+extension SPAppDelegate {
+    @objc
+    func migrateSimperiumPreferencesIfNeeded() {
+        guard UserDefaults.standard.bool(forKey: .hasMigratedSustainerPreferences) == false else {
+            return
+        }
+
+        guard isFirstLaunch() == false else {
+            UserDefaults.standard.set(true, forKey: .hasMigratedSustainerPreferences)
+            return
+        }
+
+        NSLog("Migrating Simperium Preferences object to include was_sustainer value")
+        UserDefaults.standard.removeObject(forKey: Simperium.preferencesLastChangedSignatureKey)
+        let prefs = simperium.preferencesObject()
+        prefs.ghostData = ""
+        simperium.saveWithoutSyncing()
+
+        UserDefaults.standard.set(true, forKey: .hasMigratedSustainerPreferences)
     }
 }

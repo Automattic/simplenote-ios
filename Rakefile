@@ -1,4 +1,11 @@
-# frozen_string_literal: true
+require 'English'
+# Constants
+SWIFTLINT_VERSION = '0.41.0'
+PROJECT_DIR = __dir__
+XCODE_WORKSPACE = 'Simplenote.xcworkspace'
+XCODE_SCHEME = 'Simplenote'
+XCODE_CONFIGURATION = 'Debug'
+LOCAL_PATH = 'vendor/bundle'
 
 require 'English'
 require 'fileutils'
@@ -7,12 +14,7 @@ require 'rake/clean'
 require 'yaml'
 require 'digest'
 
-# Constants
-SWIFTLINT_VERSION = '0.41.0'
-XCODE_WORKSPACE = 'Simplenote.xcworkspace'
-XCODE_SCHEME = 'Simplenote'
-XCODE_CONFIGURATION = 'Debug'
-PROJECT_DIR = __dir__
+
 
 task default: %w[test]
 
@@ -20,7 +22,7 @@ desc 'Install required dependencies'
 task dependencies: %w[dependencies:check]
 
 namespace :dependencies do
-  task check: %w[bundler:check bundle:check credentials:apply pod:check lint:check]
+  task check: %w[bundler:check bundle:check credentials:apply pod:check]
 
   namespace :bundler do
     task :check do
@@ -38,7 +40,8 @@ namespace :dependencies do
 
   namespace :bundle do
     task :check do
-      sh 'bundle check --path=${BUNDLE_PATH:-vendor/bundle} > /dev/null', verbose: false do |ok, _res|
+      sh "bundle config set --local path #{LOCAL_PATH} > /dev/null", verbose: false
+      sh 'bundle check > /dev/null', verbose: false do |ok, _res|
         next if ok
 
         # bundle check exits with a non zero code if install is needed
@@ -49,7 +52,7 @@ namespace :dependencies do
 
     task :install do
       fold('install.bundler') do
-        sh 'bundle install --jobs=3 --retry=3 --path=${BUNDLE_PATH:-vendor/bundle}'
+        sh 'bundle install --jobs=3 --retry=3'
       end
     end
     CLOBBER << 'vendor/bundle'
@@ -85,42 +88,6 @@ namespace :dependencies do
     end
     CLOBBER << 'Pods'
   end
-
-  namespace :lint do
-    task :check do
-      if swiftlint_needs_install
-        dependency_failed('SwiftLint')
-        Rake::Task['dependencies:lint:install'].invoke
-      end
-    end
-
-    task :install do
-      fold('install.swiftlint') do
-        puts "Installing SwiftLint #{SWIFTLINT_VERSION} into #{swiftlint_path}"
-        Dir.mktmpdir do |tmpdir|
-          # Try first using a binary release
-          zipfile = "#{tmpdir}/swiftlint-#{SWIFTLINT_VERSION}.zip"
-          sh "curl --fail --location -o #{zipfile} https://github.com/realm/SwiftLint/releases/download/#{SWIFTLINT_VERSION}/portable_swiftlint.zip || true"
-          if File.exist?(zipfile)
-            extracted_dir = "#{tmpdir}/swiftlint-#{SWIFTLINT_VERSION}"
-            sh "unzip #{zipfile} -d #{extracted_dir}"
-            FileUtils.mkdir_p("#{swiftlint_path}/bin")
-            FileUtils.cp("#{extracted_dir}/swiftlint", "#{swiftlint_path}/bin/swiftlint")
-          else
-            sh "git clone --quiet https://github.com/realm/SwiftLint.git #{tmpdir}"
-            Dir.chdir(tmpdir) do
-              sh "git checkout --quiet #{SWIFTLINT_VERSION}"
-              sh 'git submodule --quiet update --init --recursive'
-              FileUtils.rm_f(swiftlint_path)
-              FileUtils.mkdir_p(swiftlint_path)
-              sh "make prefix_install PREFIX='#{swiftlint_path}'"
-            end
-          end
-        end
-      end
-    end
-    CLOBBER << 'vendor/swiftlint'
-  end
 end
 
 CLOBBER << 'vendor'
@@ -133,8 +100,7 @@ end
 desc "Profile build #{XCODE_SCHEME}"
 task buildprofile: [:dependencies] do
   ENV['verbose'] = '1'
-  xcodebuild(:build,
-             "OTHER_SWIFT_FLAGS='-Xfrontend -debug-time-compilation -Xfrontend -debug-time-expression-type-checking'")
+  xcodebuild(:build, "OTHER_SWIFT_FLAGS='-Xfrontend -debug-time-compilation -Xfrontend -debug-time-expression-type-checking'")
 end
 
 task timed_build: [:clean] do
@@ -156,20 +122,8 @@ task :clean do
   xcodebuild(:clean)
 end
 
-desc 'Checks the source for style errors'
-task lint: %w[dependencies:lint:check] do
-  swiftlint %w[lint --quiet]
-end
-
-namespace :lint do
-  desc 'Automatically corrects style errors where possible'
-  task autocorrect: %w[dependencies:lint:check] do
-    swiftlint %w[autocorrect]
-  end
-end
-
 namespace :git do
-  hooks = %w[pre-commit post-checkout post-merge]
+  hooks = %w[post-checkout post-merge]
 
   desc 'Install git hooks'
   task :install_hooks do
@@ -222,12 +176,6 @@ namespace :git do
 end
 
 namespace :git do
-  task pre_commit: %(dependencies:lint:check) do
-    swiftlint %w[lint --quiet --strict]
-  rescue StandardError
-    exit $CHILD_STATUS.exitstatus
-  end
-
   task :post_merge do
     check_dependencies_hook
   end
@@ -258,29 +206,9 @@ end
 
 def podfile_locked?
   podfile_checksum = Digest::SHA1.file('Podfile')
-  lockfile_checksum = YAML.safe_load_file('Podfile.lock')['PODFILE CHECKSUM']
+  lockfile_checksum = YAML.load_file('Podfile.lock')['PODFILE CHECKSUM']
 
   podfile_checksum == lockfile_checksum
-end
-
-def swiftlint_path
-  "#{PROJECT_DIR}/vendor/swiftlint"
-end
-
-def swiftlint(args)
-  args = [swiftlint_bin] + args
-  sh(*args)
-end
-
-def swiftlint_bin
-  "#{swiftlint_path}/bin/swiftlint"
-end
-
-def swiftlint_needs_install
-  return true unless File.exist?(swiftlint_bin)
-
-  installed_version = `"#{swiftlint_bin}" version`.chomp
-  (installed_version != SWIFTLINT_VERSION)
 end
 
 def xcodebuild(*build_cmds)

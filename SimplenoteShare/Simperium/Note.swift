@@ -1,6 +1,5 @@
 import Foundation
 
-
 /// This class encapsulates the Note entity. It's the main project (non core data) counterpart.
 ///
 class Note {
@@ -26,7 +25,6 @@ class Note {
     /// Last Modification Date: Now, by default!
     ///
     let modificationDate = Date()
-
 
     /// Designated Initializer
     ///

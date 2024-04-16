@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 // MARK: - UITableViewCell with the `.default` Style
 //
 class SPDefaultTableViewCell: UITableViewCell {
@@ -30,7 +29,6 @@ class SPDefaultTableViewCell: UITableViewCell {
         applySimplenoteStyle()
     }
 }
-
 
 // MARK: - Private
 //

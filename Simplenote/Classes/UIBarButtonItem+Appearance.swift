@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - UIBarButtonItem + Appearance
 //
 extension UIBarButtonItem {

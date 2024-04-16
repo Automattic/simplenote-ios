@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 // MARK: - SwitchTableViewCell
 //
 class SwitchTableViewCell: UITableViewCell {
@@ -45,7 +44,6 @@ class SwitchTableViewCell: UITableViewCell {
     ///
     var onChange: ((Bool) -> Void)?
 
-
     // MARK: - Initializers
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -60,7 +58,6 @@ class SwitchTableViewCell: UITableViewCell {
         super.init(coder: coder)
     }
 }
-
 
 // MARK: - Private API(s)
 //
@@ -89,7 +86,6 @@ private extension SwitchTableViewCell {
         imageView?.tintColor = .simplenoteTextColor
     }
 }
-
 
 // MARK: - Action Handlers
 //

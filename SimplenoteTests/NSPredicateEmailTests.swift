@@ -2,7 +2,6 @@ import Foundation
 import XCTest
 @testable import Simplenote
 
-
 // MARK: - NSPredicate+Email Unit Tests
 //
 class NSPredicateEmailTests: XCTestCase {

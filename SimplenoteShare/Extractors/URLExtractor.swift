@@ -3,7 +3,6 @@ import MobileCoreServices
 import ZIPFoundation
 import UniformTypeIdentifiers
 
-
 // MARK: - URLExtractor
 //
 struct URLExtractor: Extractor {
@@ -37,7 +36,6 @@ struct URLExtractor: Extractor {
         }
     }
 }
-
 
 // MARK: - Loading Notes from a file!
 //
@@ -109,7 +107,6 @@ private extension URLExtractor {
     }
 }
 
-
 // MARK: - Fallback: Handling external URL(s)
 //
 private extension URLExtractor {
@@ -130,7 +127,6 @@ private extension URLExtractor {
         return Note(content: content)
     }
 }
-
 
 // MARK: - Path Extensions
 //

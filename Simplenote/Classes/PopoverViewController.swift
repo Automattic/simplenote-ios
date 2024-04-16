@@ -1,6 +1,5 @@
 import UIKit
 
-
 // MARK: - PopoverViewController
 //
 class PopoverViewController: UIViewController {
@@ -43,7 +42,6 @@ class PopoverViewController: UIViewController {
     ///
     var onViewSizeChange: (() -> Void)?
 
-
     init(viewController: UIViewController) {
         self.viewController = viewController
         super.init(nibName: nil, bundle: nil)
@@ -71,7 +69,6 @@ class PopoverViewController: UIViewController {
         onViewSizeChange?()
     }
 }
-
 
 // MARK: - Initialization
 //
@@ -107,7 +104,6 @@ private extension PopoverViewController {
         viewController.attach(to: self, attachmentView: .into(containerView))
     }
 }
-
 
 // MARK: - Metrics
 //

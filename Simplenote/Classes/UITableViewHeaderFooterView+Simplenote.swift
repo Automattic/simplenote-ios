@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 /// UITableViewHeaderFooterView Helpers
 ///
 extension UITableViewHeaderFooterView {

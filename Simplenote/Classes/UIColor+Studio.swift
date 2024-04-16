@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 // MARK: - UIColor + Studio API(s)
 //
 extension UIColor {
@@ -32,7 +31,6 @@ extension UIColor {
         })
     }
 }
-
 
 // MARK: - Simplenote colors!
 //

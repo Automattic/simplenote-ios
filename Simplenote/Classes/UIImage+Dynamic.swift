@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 // MARK: - Dynamic Images
 //
 extension UIImage {
@@ -14,7 +13,6 @@ extension UIImage {
         return path.imageRepresentation(color: tintColor)
     }
 }
-
 
 // MARK: - Constants
 //

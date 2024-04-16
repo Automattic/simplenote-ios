@@ -1,7 +1,6 @@
 import XCTest
 @testable import Simplenote
 
-
 // MARK: - NSString Simplenote Tests
 //
 class NSStringSimplenoteTests: XCTestCase {

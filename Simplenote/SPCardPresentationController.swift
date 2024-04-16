@@ -12,13 +12,11 @@ enum SPCardDismissalReason {
     case outsideTap
 }
 
-
 // MARK: - SPCardPresentationControllerDelegate
 //
 protocol SPCardPresentationControllerDelegate: AnyObject {
     func cardDidDismiss(_ viewController: UIViewController, reason: SPCardDismissalReason)
 }
-
 
 // MARK: - SPCardPresentationController: Manages presentation and swipe to dismiss
 //

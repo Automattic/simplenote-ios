@@ -63,8 +63,6 @@ open class SeparatorsView: UIView {
         }
     }
 
-
-
     // MARK: - UIView methods
     convenience init() {
         self.init(frame: CGRect.zero)

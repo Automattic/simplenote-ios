@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 // MARK: - NSMutableAttributedString Methods
 //
 extension NSMutableAttributedString {

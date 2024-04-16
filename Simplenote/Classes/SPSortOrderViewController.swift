@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-
 // MARK: - Settings: Sort Order
 //
 class SPSortOrderViewController: UITableViewController {
@@ -49,7 +48,6 @@ class SPSortOrderViewController: UITableViewController {
     }
 }
 
-
 // MARK: - UITableViewDelegate Conformance
 //
 extension SPSortOrderViewController {
@@ -77,7 +75,6 @@ extension SPSortOrderViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
-
 
 // MARK: - Private
 //
@@ -123,7 +120,6 @@ private extension SPSortOrderViewController {
         return IndexPath(row: selectedIndex, section: Constants.firstSectionIndex)
     }
 }
-
 
 extension SPSortOrderViewController {
 

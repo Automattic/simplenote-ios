@@ -131,7 +131,6 @@ class NoteEditor {
         toggleMarkdownState()
     }
 
-
     class func getLink(byText linkText: String) -> XCUIElement {
         // As of iOS 16.0, a link in Note Editor is presented by two elements:
         // First is of `link` type and has zero dimensions, the other is its child

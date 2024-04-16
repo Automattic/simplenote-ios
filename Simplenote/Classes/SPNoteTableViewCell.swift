@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 // MARK: - SPNoteTableViewCell
 //
 @objcMembers
@@ -137,8 +136,6 @@ class SPNoteTableViewCell: UITableViewCell {
         .zero
     }
 
-
-
     /// Deinitializer
     ///
     deinit {
@@ -151,7 +148,6 @@ class SPNoteTableViewCell: UITableViewCell {
         super.init(coder: aDecoder)
         startListeningToNotifications()
     }
-
 
     // MARK: - Overridden Methods
 
@@ -222,7 +218,6 @@ class SPNoteTableViewCell: UITableViewCell {
     }
 }
 
-
 // MARK: - Private Methods: Initialization
 //
 private extension SPNoteTableViewCell {
@@ -262,7 +257,6 @@ private extension SPNoteTableViewCell {
     }
 }
 
-
 // MARK: - Notifications
 //
 private extension SPNoteTableViewCell {
@@ -283,7 +277,6 @@ private extension SPNoteTableViewCell {
         refreshConstraints()
     }
 }
-
 
 // MARK: - Private Methods: Skinning
 //
@@ -316,7 +309,6 @@ private extension SPNoteTableViewCell {
         accessoryRightImageView.isHidden = isRightImageEmpty
     }
 }
-
 
 // MARK: - SPNoteTableViewCell
 //
@@ -353,8 +345,16 @@ extension SPNoteTableViewCell {
 
         return max(result.rounded(.up), Constants.minCellHeight)
     }
-}
 
+    // Ref: https://github.com/Automattic/simplenote-ios/issues/1307
+    // setHighlighted gets called on press down and on setSelected.  This causes the highlighting to change on press down but selection is on press up
+    // By only updating the highlighting if the cell is the cell is selected fixes this issue
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        if isSelected {
+            super.setHighlighted(highlighted, animated: animated)
+        }
+    }
+}
 
 // MARK: - Cell Styles
 //
@@ -444,8 +444,6 @@ private enum Style {
         .simplenoteLightBlueColor
     }
 }
-
-
 
 // MARK: - NSAttributedString Private Methods
 //

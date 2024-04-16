@@ -1,6 +1,5 @@
 import Foundation
 
-
 /// The purpose of this class is to encapsulate NSURLSession's interaction code, required to upload
 /// a note to Simperium's REST endpoint.
 ///
@@ -15,7 +14,6 @@ class Uploader: NSObject {
     init(simperiumToken: String) {
         token = simperiumToken
     }
-
 
     // MARK: - Public Methods
     func send(_ note: Note) {
@@ -38,7 +36,6 @@ class Uploader: NSObject {
     }
 }
 
-
 // MARK: - URLSessionDelegate
 //
 extension Uploader: URLSessionDelegate {
@@ -54,7 +51,6 @@ extension Uploader: URLSessionDelegate {
     }
 }
 
-
 // MARK: - URLSessionTaskDelegate
 //
 extension Uploader: URLSessionTaskDelegate {
@@ -64,7 +60,6 @@ extension Uploader: URLSessionTaskDelegate {
         print("<> Uploader.didCompleteWithError: \(String(describing: error))")
     }
 }
-
 
 // MARK: - Settings
 //

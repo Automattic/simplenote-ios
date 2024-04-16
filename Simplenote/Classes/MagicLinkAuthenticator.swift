@@ -24,7 +24,6 @@ struct MagicLinkAuthenticator {
     }
 }
 
-
 // MARK: - [URLQueryItem] Helper
 //
 private extension Array where Element == URLQueryItem {
@@ -41,7 +40,6 @@ private extension Array where Element == URLQueryItem {
         return String(data: data, encoding: .utf8)
     }
 }
-
 
 // MARK: - Constants
 //

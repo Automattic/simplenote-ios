@@ -52,7 +52,6 @@ enum Row {
     case empty
 }
 
-
 private struct Constants {
     static let mediumRows = 3
     static let largeRows = 8

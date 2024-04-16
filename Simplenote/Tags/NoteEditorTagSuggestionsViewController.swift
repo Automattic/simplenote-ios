@@ -1,6 +1,5 @@
 import UIKit
 
-
 // MARK: - NoteEditorTagSuggestionsViewController
 //
 class NoteEditorTagSuggestionsViewController: UIViewController {
@@ -74,7 +73,6 @@ class NoteEditorTagSuggestionsViewController: UIViewController {
     }
 }
 
-
 // MARK: - UITableViewDelegate
 //
 extension NoteEditorTagSuggestionsViewController: UITableViewDelegate {
@@ -83,7 +81,6 @@ extension NoteEditorTagSuggestionsViewController: UITableViewDelegate {
         onSelectionCallback?(data[indexPath.row])
     }
 }
-
 
 // MARK: - UITableViewDataSource
 //
@@ -105,7 +102,6 @@ extension NoteEditorTagSuggestionsViewController: UITableViewDataSource {
         .leastNonzeroMagnitude
     }
 }
-
 
 // MARK: - Metrics
 //

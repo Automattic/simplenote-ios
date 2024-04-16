@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - CGRect Methods
 //
 extension CGRect {

@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - Simplenote Constants!
 //
 @objcMembers

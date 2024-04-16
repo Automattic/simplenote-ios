@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 // MARK: - Value1TableViewCell
 //
 class Value1TableViewCell: UITableViewCell {
@@ -56,7 +55,6 @@ class Value1TableViewCell: UITableViewCell {
         }
     }
 
-
     // MARK: - Initializers
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -77,7 +75,6 @@ class Value1TableViewCell: UITableViewCell {
         accessoryType = .none
     }
 }
-
 
 // MARK: - Private API(s)
 //

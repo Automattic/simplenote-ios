@@ -9,23 +9,19 @@
 import Foundation
 import StoreKit
 
-
 // MARK: - StoreError
 //
 enum StoreError: Error {
     case failedVerification
 }
 
-
 // MARK: - StoreManager
 //
-@available(iOS 15, *)
 class StoreManager {
 
     // MARK: - Static
     //
     static let shared = StoreManager()
-
 
     // MARK: - Aliases
     //
@@ -53,13 +49,11 @@ class StoreManager {
         return subscriptionGroupStatus.isActive
     }
 
-
     // MARK: - Deinit
 
     deinit {
         updateListenerTask?.cancel()
     }
-
 
     // MARK: - Public API(s)
 
@@ -83,7 +77,6 @@ class StoreManager {
             await refreshSubscriptionGroupStatus()
         }
     }
-
 
     /// Purchases the specified Product (as long as we don't own it already?)
     ///
@@ -126,10 +119,8 @@ class StoreManager {
     }
 }
 
-
 // MARK: - Private API(s)
 //
-@available(iOS 15, *)
 private extension StoreManager {
 
     func listenForTransactions() -> Task<Void, Error> {
@@ -216,10 +207,8 @@ private extension StoreManager {
     }
 }
 
-
 // MARK: - Private Helpers
 //
-@available(iOS 15, *)
 private extension StoreManager {
 
     func buildStoreProductMap(products: [Product]) -> [StoreProduct: Product] {
@@ -248,10 +237,8 @@ private extension StoreManager {
     }
 }
 
-
 // MARK: - Simperium Kung Fu
 //
-@available(iOS 15, *)
 private extension StoreManager {
 
     func refreshSimperiumPreferences(status: SubscriptionStatus?) {
@@ -272,10 +259,6 @@ private extension StoreManager {
             preferences.subscription_level = subscriptionLevel(from: status)
             preferences.subscription_date = subscriptionDate(from: status)
             preferences.subscription_platform = StoreConstants.platform
-        } else {
-            preferences.subscription_date = nil
-            preferences.subscription_level = nil
-            preferences.subscription_platform = nil
         }
 
         simperium.save()
@@ -307,10 +290,8 @@ private extension StoreManager {
     }
 }
 
-
 // MARK: - SubscriptionStatus Helpers
 //
-@available(iOS 15, *)
 private extension Product.SubscriptionInfo.Status {
 
     var isActive: Bool {

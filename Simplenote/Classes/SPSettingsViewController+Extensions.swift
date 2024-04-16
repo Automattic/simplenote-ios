@@ -1,46 +1,22 @@
 import UIKit
 
-
 // MARK: - Subscriber UI
 //
-extension SPSettingsViewController {
 
-    private var isActiveSustainer: Bool {
-        SPAppDelegate.shared().simperium.preferencesObject().isActiveSubscriber
-    }
-
-    @objc
-    func setupTableHeaderView() {
-        let sustainerView: SustainerView = SustainerView.instantiateFromNib()
-        sustainerView.appliesTopInset = true
-        sustainerView.onPress = { [weak self] in
-            self?.presentSubscriptionAlertIfNeeded()
-        }
-
-        tableView.tableHeaderView = sustainerView
-    }
+// The methods in this extension are for showing and displaying the Sustainer banner in settings.  We are discontinuing Sustainer,
+// but we may still want to use the banner in the future, so marking these methods fileprivate and have removed their callers
+fileprivate extension SPSettingsViewController {
 
     @objc
     func refreshTableHeaderView() {
-        guard let headerView = tableView.tableHeaderView as? SustainerView else {
+        guard let headerView = tableView.tableHeaderView as? BannerView else {
             return
         }
 
-        headerView.isActiveSustainer = isActiveSustainer
         headerView.preferredWidth = tableView.frame.width
         headerView.adjustSizeForCompressedLayout()
 
         tableView.tableHeaderView = headerView
-    }
-
-    @available(iOS 15.0, *)
-    func presentSubscriptionAlertIfNeeded() {
-        if isActiveSustainer {
-            return
-        }
-
-        let sustainerAlertController = UIAlertController.buildSustainerAlert()
-        present(sustainerAlertController, animated: true)
     }
 
     @objc
@@ -62,6 +38,22 @@ extension SPSettingsViewController {
     }
 }
 
+extension SPSettingsViewController {
+    @objc
+    var showSustainerSwitch: Bool {
+        let preferences = SPAppDelegate.shared().simperium.preferencesObject()
+        return preferences.isActiveSubscriber || preferences.wasSustainer
+    }
+
+    @objc
+    func sustainerSwitchDidChangeValue(sender: UISwitch) {
+        let isOn = sender.isOn
+
+        let iconName = isOn ? SPSustainerAppIconName : nil
+        UserDefaults.standard.set(isOn, forKey: .useSustainerIcon)
+        UIApplication.shared.setAlternateIconName(iconName)
+    }
+}
 
 // MARK: - Pin
 //
@@ -236,7 +228,6 @@ private struct AccountDeletion {
         String(format: successAlertMessage, email)
     }
 }
-
 
 // MARK: - RestorationAlert
 //

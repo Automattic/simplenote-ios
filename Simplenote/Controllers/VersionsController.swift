@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - VersionsController
 //
 class VersionsController: NSObject {
@@ -9,7 +8,6 @@ class VersionsController: NSObject {
     /// Map of event listeners.
     ///
     private let callbackMap = NSMapTable<NSString, ListenerWrapper>(keyOptions: .copyIn, valueOptions: .weakMemory)
-
 
     /// Designated Initializer
     ///
@@ -20,7 +18,6 @@ class VersionsController: NSObject {
         self.bucket = bucket
         super.init()
     }
-
 
     /// Requests the specified number of versions of Notes for a given SimperiumKey.
     ///
@@ -47,7 +44,6 @@ class VersionsController: NSObject {
         return wrapper
     }
 }
-
 
 // MARK: - Simperium
 //

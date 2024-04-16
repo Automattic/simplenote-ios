@@ -66,7 +66,6 @@ class SignupVerificationViewController: UIViewController {
     }
 }
 
-
 // MARK: - Localization
 //
 private struct Localization {

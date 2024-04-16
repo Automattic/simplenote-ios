@@ -1,7 +1,6 @@
 import Foundation
 import SimplenoteFoundation
 
-
 // MARK: - InterlinkResultsController
 //
 class InterlinkResultsController {
@@ -13,7 +12,6 @@ class InterlinkResultsController {
     /// Limits the maximum number of results to fetch
     ///
     var maximumNumberOfResults = Settings.defaultMaximumResults
-
 
     /// Designated Initializer
     ///
@@ -33,7 +31,6 @@ class InterlinkResultsController {
         filter(notes: resultsController.fetchedObjects, byTitleKeyword: keyword, excluding: excludedID)
     }
 }
-
 
 // MARK: - Private
 //
@@ -70,7 +67,6 @@ private extension InterlinkResultsController {
         return output.isEmpty ? nil : output
     }
 }
-
 
 // MARK: - Settings!
 //

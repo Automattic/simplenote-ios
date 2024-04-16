@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - SPAuthError
 //
 enum SPAuthError: Error {
@@ -13,7 +12,6 @@ enum SPAuthError: Error {
     case tooManyAttempts
     case unknown(statusCode: Int, response: String?, error: Error?)
 }
-
 
 // MARK: - SPAuthError Convenience Initializers
 //
@@ -51,7 +49,6 @@ extension SPAuthError {
         }
     }
 }
-
 
 // MARK: - SPAuthError Public Methods
 //

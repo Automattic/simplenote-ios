@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - NSAttributedString to Markdown Converter
 //
 struct NSAttributedStringToMarkdownConverter {
@@ -12,7 +11,6 @@ struct NSAttributedStringToMarkdownConverter {
     /// Markdown replacement for "Checked Checklist"
     ///
     private static let checked = "- [x]"
-
 
     /// Returns the NSString representation of a given NSAttributedString.
     ///

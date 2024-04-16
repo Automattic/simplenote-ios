@@ -1,7 +1,6 @@
 import Foundation
 import CoreSpotlight
 
-
 // MARK: - Simplenote's NSUserActivities
 //
 extension NSUserActivity {

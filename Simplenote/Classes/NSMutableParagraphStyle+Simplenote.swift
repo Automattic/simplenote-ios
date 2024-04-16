@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - NSMutableParagraphStyle
 //
 extension NSMutableParagraphStyle {

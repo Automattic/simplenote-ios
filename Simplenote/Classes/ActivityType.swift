@@ -1,6 +1,5 @@
 import Foundation
 
-
 // MARK: - Simplenote's User Activities
 //
 enum ActivityType: String {

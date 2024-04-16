@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 /// Adopters of this protocol will recieve interactive keyboard-based notifications
 /// by implmenting the provided functions within.
 ///
@@ -68,7 +67,6 @@ extension KeyboardObservable {
         }
     }
 }
-
 
 // MARK: - Notification + UIKeyboardInfo
 //
