@@ -1066,13 +1066,10 @@ def update_code_signing(type:, team_id:, readonly:, app_identifiers:, api_key_pa
   # NOTE: It might be neccessary to add `force: true` alongside `readonly: true` in order to regenerate some provisioning profiles.
   # If this turns out to be a hard requirement, we should consider updating the method with logic to toggle the two setting based on whether we're fetching or renewing.
 
-  # Fail early if secrets not available (via ENV.fetch with not default).
+  # Fail early if secrets not available via `get_required_env`.
   # Otherwise, Fastlane will prompt to type them.
-  access_key = ENV.fetch('MATCH_S3_ACCESS_KEY')
-  secret_access_key = ENV.fetch('MATCH_S3_SECRET_ACCESS_KEY')
-  # This ENV var is required but match has no input parameter for it, likely for security
-  password_key = 'MATCH_PASSWORD'
-  raise "Missing #{password_key} in the environment" unless ENV.key?(password_key)
+  access_key = get_required_env('MATCH_S3_ACCESS_KEY')
+  secret_access_key = get_required_env('MATCH_S3_SECRET_ACCESS_KEY')
 
   match(
     storage_mode: 's3',
