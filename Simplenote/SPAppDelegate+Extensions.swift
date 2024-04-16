@@ -150,8 +150,19 @@ extension SPAppDelegate {
 
     /// Opens editor with a new note
     ///
+    @objc
     func presentNewNoteEditor(animated: Bool = false) {
-        presentNote(nil, animated: animated)
+        if isPresentingPasscodeLock && SPPinLockManager.shared.isEnabled {
+            verifyController?.addOnSuccesBlock {
+                self.presentNote(nil, animated: animated)
+            }
+        } else {
+            presentNote(nil, animated: animated)
+        }
+    }
+
+    var verifyController: PinLockVerifyController? {
+        (pinLockWindow?.rootViewController as? PinLockViewController)?.controller as? PinLockVerifyController
     }
 
     /// Opens a note with specified simperium key
@@ -325,6 +336,7 @@ extension SPAppDelegate {
     @objc
     func showPasscodeLockIfNecessary() {
         guard SPPinLockManager.shared.isEnabled, !isPresentingPasscodeLock else {
+            verifyController?.removeSuccesBlocks()
             return
         }
 
