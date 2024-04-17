@@ -17,6 +17,7 @@ extension UserDefaults {
         case accountIsLoggedIn
         case useSustainerIcon
         case hasMigratedSustainerPreferences
+        case indexNotesInSpotlight
     }
 }
 

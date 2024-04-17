@@ -206,6 +206,21 @@ extension SPSettingsViewController {
         alert.addDefaultActionWithTitle(AccountDeletion.ok)
         self.present(alert, animated: true, completion: nil)
     }
+
+    @objc
+    func presentIndexRemovalAlert() {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: IndexAlert.title, message: IndexAlert.message, preferredStyle: .alert)
+            alert.addDefaultActionWithTitle(IndexAlert.okay)
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+}
+
+private struct IndexAlert {
+    static let title = NSLocalizedString("Index Removed", comment: "Alert title letting user know their search index has been removed")
+    static let message = NSLocalizedString("Spotlight history may still appear in search results, but notes have be unindexed", comment: "Details that some results may still appear in searches on device")
+    static let okay = NSLocalizedString("Okay", comment: "confirm button title")
 }
 
 private struct AccountDeletion {

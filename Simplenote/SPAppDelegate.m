@@ -468,14 +468,8 @@
 {
     NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     [context setParentContext:self.simperium.managedObjectContext];
-    
-    [context performBlock:^{
-        NSArray *deleted = [context fetchObjectsForEntityName:@"Note" withPredicate:[NSPredicate predicateWithFormat:@"deleted == YES"]];
-        [[CSSearchableIndex defaultSearchableIndex] deleteSearchableNotes:deleted];
-        
-        NSArray *notes = [context fetchObjectsForEntityName:@"Note" withPredicate:[NSPredicate predicateWithFormat:@"deleted == NO"]];
-        [[CSSearchableIndex defaultSearchableIndex] indexSearchableNotes:notes];
-    }];
+
+    [[CSSearchableIndex defaultSearchableIndex] indexSpotlightItemsIn:context];
 }
 
 
