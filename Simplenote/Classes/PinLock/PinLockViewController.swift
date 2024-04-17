@@ -14,7 +14,7 @@ class PinLockViewController: UIViewController {
     @IBOutlet private weak var headerStackView: UIStackView!
     @IBOutlet private var keypadButtons: [UIButton] = []
 
-    private let controller: PinLockController
+    let controller: PinLockController
     private var inputValues: [Int] = [] {
         didSet {
             progressView.progress = inputValues.count

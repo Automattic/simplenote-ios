@@ -15,7 +15,7 @@ extension URL {
     }
 
     static func newNoteURL(withTag tag: String? = nil) -> URL {
-        guard var components = URLComponents.simplenoteURLComponents(with: Constants.newNotePath) else {
+        guard var components = URLComponents.simplenoteURLComponents(with: Constants.widgetNewNotePath) else {
             return URL(string: .simplenotePath())!
         }
 
@@ -27,9 +27,18 @@ extension URL {
 
         return components.url!
     }
+
+    static func newNoteWidgetURL() -> URL {
+        guard var components = URLComponents.simplenoteURLComponents(with: Constants.newNotePath) else {
+            return URL(string: .simplenotePath())!
+        }
+
+        return components.url!
+    }
 }
 
 private struct Constants {
     static let tagQueryBase = "tag"
     static let newNotePath = "new"
+    static let widgetNewNotePath = "widgetNew"
 }

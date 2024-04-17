@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SPAppDelegate : UIResponder <UIApplicationDelegate, SPBucketDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (nullable, strong, nonatomic) UIWindow *pinLockWindow;
+@property (nullable, strong, nonatomic) UIWindow                        *pinLockWindow;
 
 @property (strong, nonatomic) Simperium						            *simperium;
 @property (strong, nonatomic) CoreDataManager                           *coreDataManager;

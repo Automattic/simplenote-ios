@@ -18,6 +18,8 @@ final class PinLockVerifyController: PinLockBaseController, PinLockController {
     private let application: ApplicationStateProvider
     private weak var delegate: PinLockVerifyControllerDelegate?
 
+    private var onSuccesBlocks = [(() -> Void)]()
+
     init(pinLockManager: SPPinLockManager = .shared,
          application: ApplicationStateProvider = UIApplication.shared,
          delegate: PinLockVerifyControllerDelegate) {
@@ -37,6 +39,7 @@ final class PinLockVerifyController: PinLockBaseController, PinLockController {
         }
 
         delegate?.pinLockVerifyControllerDidComplete(self)
+        runOnSuccessBlocks()
     }
 
     func handleCancellation() {
@@ -49,6 +52,21 @@ final class PinLockVerifyController: PinLockBaseController, PinLockController {
 
     func applicationDidBecomeActive() {
         verifyBiometry()
+    }
+
+    private func runOnSuccessBlocks() {
+        onSuccesBlocks.forEach({
+            $0()
+        })
+        removeSuccesBlocks()
+    }
+
+    func addOnSuccesBlock(block: @escaping () -> Void) {
+        onSuccesBlocks.append(block)
+    }
+
+    func removeSuccesBlocks() {
+        onSuccesBlocks.removeAll()
     }
 }
 
@@ -71,6 +89,7 @@ private extension PinLockVerifyController {
 
             if success {
                 self.delegate?.pinLockVerifyControllerDidComplete(self)
+                self.runOnSuccessBlocks()
             }
         }
     }

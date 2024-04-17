@@ -39,59 +39,61 @@ error do |lane, _exception, _options|
   deoccupy_test_account if lane == :run_ui_tests
 end
 
+# Constants
+PROJECT_ROOT_FOLDER = File.dirname(File.expand_path(__dir__))
+VERSION_FILE_PATH = File.join(PROJECT_ROOT_FOLDER, 'config', 'Version.Public.xcconfig')
+OUTPUT_DIRECTORY_PATH = File.join(PROJECT_ROOT_FOLDER, 'build', 'results')
+GITHUB_REPO = 'Automattic/simplenote-ios'
+APP_STORE_BUNDLE_IDENTIFIER = 'com.codality.NotationalFlow'
+DEFAULT_BRANCH = 'trunk'
+
+# List of locales used for the app strings (GlotPress code => `*.lproj` folder name`)
+#
+# TODO: Replace with `LocaleHelper` once provided by release toolkit (https://github.com/wordpress-mobile/release-toolkit/pull/296)
+GLOTPRESS_TO_LPROJ_APP_LOCALE_CODES = {
+  'ar' => 'ar',             # Arabic
+  'cy' => 'cy',             # Welsh
+  'de' => 'de',             # German
+  'el' => 'el',             # Greek
+  'en' => 'en',             # English
+  'es' => 'es',             # Spanish
+  'fa' => 'fa',             # Persian
+  'fr' => 'fr',             # French
+  'he' => 'he',             # Hebrew
+  'id' => 'id',             # Indonesian
+  'it' => 'it',             # Italian
+  'ja' => 'ja',             # Japanese
+  'ko' => 'ko',             # Korean
+  'nl' => 'nl',             # Dutch
+  'pt-br' => 'pt-BR',       # Portuguese (Brazil)
+  'ru' => 'ru',             # Russian
+  'sv' => 'sv',             # Swedish
+  'tr' => 'tr',             # Turkish
+  'zh-cn' => 'zh-Hans-CN',  # Chinese (China)
+  'zh-tw' => 'zh-Hant-TW'   # Chinese (Taiwan)
+}.freeze
+
+########################################################################
+# Environment
+########################################################################
+Dotenv.load(USER_ENV_FILE_PATH)
+Dotenv.load(PROJECT_ENV_FILE_PATH)
+
+ENV['PROJECT_NAME'] = 'Simplenote'
+ENV['PROJECT_ROOT_FOLDER'] = PROJECT_ROOT_FOLDER
+ENV['APP_STORE_STRINGS_FILE_NAME'] = 'AppStoreStrings.pot'
+ENV['PUBLIC_CONFIG_FILE'] = VERSION_FILE_PATH
+ENV['DOWNLOAD_METADATA'] = './fastlane/download_metadata.swift'
+ENV['FL_RELEASE_TOOLKIT_DEFAULT_BRANCH'] = 'trunk'
+
+# Use this instead of getting values from ENV directly
+# It will throw an error if the requested value is missing
+def get_required_env(key)
+  UI.user_error!("Environment variable '#{key}' is not set. Have you setup #{USER_ENV_FILE_PATH} correctly?") unless ENV.key?(key)
+  ENV.fetch(key)
+end
+
 platform :ios do
-  ########################################################################
-  # Environment
-  ########################################################################
-  PROJECT_ROOT_FOLDER = File.dirname(File.expand_path(__dir__))
-  VERSION_FILE_PATH = File.join(PROJECT_ROOT_FOLDER, 'config', 'Version.Public.xcconfig')
-  OUTPUT_DIRECTORY_PATH = File.join(PROJECT_ROOT_FOLDER, 'build', 'results')
-
-  Dotenv.load(USER_ENV_FILE_PATH)
-  Dotenv.load(PROJECT_ENV_FILE_PATH)
-  ENV.fetch(GHHELPER_REPO = 'Automattic/simplenote-ios', nil)
-  ENV['PROJECT_NAME'] = 'Simplenote'
-  ENV['PROJECT_ROOT_FOLDER'] = PROJECT_ROOT_FOLDER
-  ENV['APP_STORE_STRINGS_FILE_NAME'] = 'AppStoreStrings.pot'
-  ENV['PUBLIC_CONFIG_FILE'] = VERSION_FILE_PATH
-  ENV['DOWNLOAD_METADATA'] = './fastlane/download_metadata.swift'
-  ENV['FL_RELEASE_TOOLKIT_DEFAULT_BRANCH'] = 'trunk'
-  REPOSITORY_NAME = 'simplenote-ios'
-  APP_STORE_BUNDLE_IDENTIFIER = 'com.codality.NotationalFlow'
-
-  # List of locales used for the app strings (GlotPress code => `*.lproj` folder name`)
-  #
-  # TODO: Replace with `LocaleHelper` once provided by release toolkit (https://github.com/wordpress-mobile/release-toolkit/pull/296)
-  GLOTPRESS_TO_LPROJ_APP_LOCALE_CODES = {
-    'ar' => 'ar',             # Arabic
-    'cy' => 'cy',             # Welsh
-    'de' => 'de',             # German
-    'el' => 'el',             # Greek
-    'en' => 'en',             # English
-    'es' => 'es',             # Spanish
-    'fa' => 'fa',             # Persian
-    'fr' => 'fr',             # French
-    'he' => 'he',             # Hebrew
-    'id' => 'id',             # Indonesian
-    'it' => 'it',             # Italian
-    'ja' => 'ja',             # Japanese
-    'ko' => 'ko',             # Korean
-    'nl' => 'nl',             # Dutch
-    'pt-br' => 'pt-BR',       # Portuguese (Brazil)
-    'ru' => 'ru',             # Russian
-    'sv' => 'sv',             # Swedish
-    'tr' => 'tr',             # Turkish
-    'zh-cn' => 'zh-Hans-CN',  # Chinese (China)
-    'zh-tw' => 'zh-Hant-TW'   # Chinese (Taiwan)
-  }.freeze
-
-  # Use this instead of getting values from ENV directly
-  # It will throw an error if the requested value is missing
-  def get_required_env(key)
-    UI.user_error!("Environment variable '#{key}' is not set. Have you setup #{USER_ENV_FILE_PATH} correctly?") unless ENV.key?(key)
-    ENV.fetch(key, nil)
-  end
-
   ########################################################################
   # Release Lanes
   ########################################################################
@@ -113,16 +115,33 @@ platform :ios do
 
     ios_bump_version_release
     new_version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
-    extract_release_notes_for_version(version: new_version,
-                                      release_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'RELEASE-NOTES.txt'),
-                                      extracted_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt'))
+
+    extract_release_notes_for_version(
+      version: new_version,
+      release_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'RELEASE-NOTES.txt'),
+      extracted_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt')
+    )
     ios_update_release_notes(new_version: new_version)
 
-    push_to_git_remote(tags: false)
-    setbranchprotection(repository: GHHELPER_REPO, branch: "release/#{new_version}")
-    setfrozentag(repository: GHHELPER_REPO, milestone: new_version)
-
     generate_strings_file_for_glotpress
+
+    UI.important('Pushing changes to remote, configuring the release on GitHub, and triggering the beta build')
+    unless options[:skip_confirm] || UI.confirm('Do you want to continue?')
+      UI.user_error!("Terminating as requested. Don't forget to run the remainder of this automation manually.")
+    end
+
+    push_to_git_remote(tags: false)
+
+    copy_branch_protection(
+      repository: GITHUB_REPO,
+      from_branch: DEFAULT_BRANCH,
+      to_branch: "release/#{new_version}"
+    )
+    setfrozentag(
+      repository: GITHUB_REPO,
+      milestone: new_version
+    )
+
     trigger_beta_build(branch_to_build: "release/#{new_version}")
   end
 
@@ -141,17 +160,17 @@ platform :ios do
   desc 'Updates the AppStoreStrings.pot file with the latest data'
   lane :update_appstore_strings do |options|
     prj_folder = Pathname.new(File.join(Dir.pwd, '..')).expand_path.to_s
-    source_metadata_folder = File.join(prj_folder, 'fastlane/appstoreres/metadata/source')
+    source_metadata_folder = File.join(prj_folder, 'fastlane', 'appstoreres', 'metadata', 'source')
 
     files = {
-      whats_new: File.join(prj_folder, '/Simplenote/Resources/release_notes.txt'),
+      whats_new: File.join(prj_folder, 'Simplenote', 'Resources', 'release_notes.txt'),
       app_store_subtitle: File.join(source_metadata_folder, 'subtitle.txt'),
       app_store_desc: File.join(source_metadata_folder, 'description.txt'),
       app_store_keywords: File.join(source_metadata_folder, 'keywords.txt')
     }
 
     ios_update_metadata_source(
-      po_file_path: "#{prj_folder}/Simplenote/Resources/AppStoreStrings.pot",
+      po_file_path: File.join(prj_folder, 'Simplenote', 'Resources', 'AppStoreStrings.pot'),
       source_files: files,
       release_version: options[:version]
     )
@@ -209,7 +228,10 @@ platform :ios do
   lane :new_beta_release do |options|
     ios_betabuild_prechecks(options)
     download_localized_strings_and_metadata_from_glotpress
-    ios_lint_localizations(input_dir: 'Simplenote', allow_retry: true)
+    ios_lint_localizations(
+      input_dir: 'Simplenote',
+      allow_retry: true
+    )
     ios_bump_version_beta
     version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
     trigger_beta_build(branch_to_build: "release/#{version}")
@@ -230,7 +252,10 @@ platform :ios do
   desc 'Creates a new hotfix branch for the given version:x.y.z. The branch will be cut from the tag x.y of the previous release'
   lane :new_hotfix_release do |options|
     prev_ver = ios_hotfix_prechecks(options)
-    ios_bump_version_hotfix(previous_version: prev_ver, version: options[:version])
+    ios_bump_version_hotfix(
+      previous_version: prev_ver,
+      version: options[:version]
+    )
   end
 
   #####################################################################################
@@ -288,15 +313,28 @@ platform :ios do
       download_dir: File.join(PROJECT_ROOT_FOLDER, 'Simplenote')
     )
     sanitize_appstore_keywords
-    ios_lint_localizations(input_dir: 'Simplenote', allow_retry: true)
+    ios_lint_localizations(
+      input_dir: 'Simplenote',
+      allow_retry: true
+    )
     ios_bump_version_beta
 
     # Wrap up
     version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
-    removebranchprotection(repository: GHHELPER_REPO, branch: "release/#{version}")
-    setfrozentag(repository: GHHELPER_REPO, milestone: version, freeze: false)
-    create_new_milestone(repository: GHHELPER_REPO)
-    close_milestone(repository: GHHELPER_REPO, milestone: version)
+    remove_branch_protection(
+      repository: GITHUB_REPO,
+      branch: "release/#{version}"
+    )
+    setfrozentag(
+      repository: GITHUB_REPO,
+      milestone: version,
+      freeze: false
+    )
+    create_new_milestone(repository: GITHUB_REPO)
+    close_milestone(
+      repository: GITHUB_REPO,
+      milestone: version
+    )
 
     # Start the build
     trigger_release_build(branch_to_build: "release/#{version}")
@@ -366,15 +404,26 @@ platform :ios do
   #####################################################################################
   desc 'Builds and uploads for distribution'
   lane :build_and_upload_release do |options|
-    ios_build_prechecks(skip_confirm: options[:skip_confirm],
-                        internal: false,
-                        internal_on_single_version: options[:beta_release],
-                        external: true)
+    ios_build_prechecks(
+      skip_confirm: options[:skip_confirm],
+      internal: false,
+      internal_on_single_version: options[:beta_release],
+      external: true
+    )
 
     ios_build_preflight
-    build_and_upload_internal(skip_prechecks: true, skip_confirm: options[:skip_confirm]) if options[:beta_release]
-    build_and_upload_to_app_store_connect(skip_prechecks: true, skip_confirm: options[:skip_confirm],
-                                          beta_release: options[:beta_release], create_release: options[:create_gh_release])
+    if options[:beta_release]
+      build_and_upload_internal(
+        skip_prechecks: true,
+        skip_confirm: options[:skip_confirm]
+      )
+    end
+    build_and_upload_to_app_store_connect(
+      skip_prechecks: true,
+      skip_confirm: options[:skip_confirm],
+      beta_release: options[:beta_release],
+      create_release: options[:create_gh_release]
+    )
   end
 
   #####################################################################################
@@ -391,7 +440,12 @@ platform :ios do
   #####################################################################################
   desc 'Builds and updates for distribution'
   lane :build_and_upload_internal do |options|
-    ios_build_prechecks(skip_confirm: options[:skip_confirm], internal: false) unless options[:skip_prechecks]
+    unless options[:skip_prechecks]
+      ios_build_prechecks(
+        skip_confirm: options[:skip_confirm],
+        internal: false
+      )
+    end
     ios_build_preflight unless options[:skip_prechecks]
 
     internal_code_signing
@@ -403,7 +457,7 @@ platform :ios do
       export_method: 'enterprise',
       clean: true,
       output_directory: OUTPUT_DIRECTORY_PATH,
-      export_team_id: ENV.fetch('INT_EXPORT_TEAM_ID', nil),
+      export_team_id: get_required_env('INT_EXPORT_TEAM_ID'),
       export_options: {
         method: 'enterprise',
         provisioningProfiles: simplenote_provisioning_profiles(
@@ -416,7 +470,7 @@ platform :ios do
     File.rename(File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote.ipa'), File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote Internal.ipa'))
 
     appcenter_upload(
-      api_token: ENV.fetch('APPCENTER_API_TOKEN', nil),
+      api_token: get_required_env('APPCENTER_API_TOKEN'),
       owner_name: 'automattic',
       owner_type: 'organization',
       app_name: 'Simplenote',
@@ -425,7 +479,7 @@ platform :ios do
     )
 
     sentry_upload_dsym(
-      auth_token: ENV.fetch('SENTRY_AUTH_TOKEN', nil),
+      auth_token: get_required_env('SENTRY_API_TOKEN'),
       org_slug: 'a8c',
       project_slug: 'simplenote-ios',
       dsym_path: lane_context[SharedValues::DSYM_OUTPUT_PATH]
@@ -446,8 +500,13 @@ platform :ios do
   #####################################################################################
   desc 'Builds and uploads for distribution'
   lane :build_and_upload_to_app_store_connect do |options|
-    ios_build_prechecks(skip_confirm: options[:skip_confirm], external: true) unless options[:skip_prechecks]
-    ios_build_preflight unless options[:skip_prechecks]
+    unless options[:skip_prechecks]
+      ios_build_prechecks(
+        skip_confirm: options[:skip_confirm],
+        external: true
+      )
+      ios_build_preflight
+    end
 
     appstore_code_signing
 
@@ -458,7 +517,7 @@ platform :ios do
       clean: true,
       export_options: {
         method: 'app-store',
-        export_team_id: ENV.fetch('EXT_EXPORT_TEAM_ID', nil),
+        export_team_id: get_required_env('EXT_EXPORT_TEAM_ID'),
         provisioningProfiles: simplenote_provisioning_profiles
       }
     )
@@ -469,11 +528,11 @@ platform :ios do
     )
 
     sh('rm ../Simplenote.ipa')
-    dsym_path = "#{File.dirname(Dir.pwd)}/Simplenote.app.dSYM.zip"
+    dsym_path = File.join(File.dirname(Dir.pwd), 'Simplenote.app.dSYM.zip')
 
     sentry_upload_dsym(
       dsym_path: dsym_path,
-      auth_token: ENV.fetch('SENTRY_AUTH_TOKEN', nil),
+      auth_token: get_required_env('SENTRY_AUTH_TOKEN'),
       org_slug: 'a8c',
       project_slug: 'simplenote-ios'
     )
@@ -481,15 +540,17 @@ platform :ios do
     sh("rm #{dsym_path}")
 
     if options[:create_release]
-      archive_zip_path = "#{File.dirname(Dir.pwd)}/Simplenote.xarchive.zip"
+      archive_zip_path = File.join(File.dirname(Dir.pwd), 'Simplenote.xarchive.zip')
       zip(path: lane_context[SharedValues::XCODEBUILD_ARCHIVE], output_path: archive_zip_path)
 
       version = options[:beta_release] ? ios_get_build_version : ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
-      create_release(repository: GHHELPER_REPO,
-                     version: version,
-                     release_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt'),
-                     release_assets: archive_zip_path.to_s,
-                     prerelease: options[:beta_release])
+      create_release(
+        repository: GITHUB_REPO,
+        version: version,
+        release_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt'),
+        release_assets: archive_zip_path.to_s,
+        prerelease: options[:beta_release]
+      )
 
       sh("rm #{archive_zip_path}")
     end
@@ -532,7 +593,10 @@ platform :ios do
   #
   #####################################################################################
   lane :trigger_beta_build do |options|
-    trigger_buildkite_release_build(branch: options[:branch_to_build], beta: true)
+    trigger_buildkite_release_build(
+      branch: options[:branch_to_build],
+      beta: true
+    )
   end
 
   #####################################################################################
@@ -547,7 +611,10 @@ platform :ios do
   #
   #####################################################################################
   lane :trigger_release_build do |options|
-    trigger_buildkite_release_build(branch: options[:branch_to_build], beta: false)
+    trigger_buildkite_release_build(
+      branch: options[:branch_to_build],
+      beta: false
+    )
   end
 
   #####################################################################################
@@ -562,7 +629,7 @@ platform :ios do
   # bundle exec fastlane build_and_upload_installable_build
   #####################################################################################
   desc 'Builds and uploads an installable build'
-  lane :build_and_upload_installable_build do |_options|
+  lane :build_and_upload_installable_build do
     alpha_code_signing
 
     # Get the current build version, and update it if needed
@@ -576,7 +643,7 @@ platform :ios do
       export_method: 'enterprise',
       clean: true,
       output_directory: OUTPUT_DIRECTORY_PATH,
-      export_team_id: ENV.fetch('INT_EXPORT_TEAM_ID', nil),
+      export_team_id: get_required_env('INT_EXPORT_TEAM_ID'),
       export_options: {
         method: 'enterprise',
         provisioningProfiles: simplenote_provisioning_profiles(
@@ -620,7 +687,8 @@ platform :ios do
   #
   # @param [String] app_name The display name to use in the comment text to identify which app this Installable Build is about
   # @param [String] build_number The App Center's build number for this build
-  # @param [String] url_slug The last component of the `install.appcenter.ms` URL used to install the app. Typically a sluggified version of the app name in App Center (e.g. `WPiOS-One-Offs`)
+  # @param [String] url_slug The last component of the `install.appcenter.ms` URL used to install the app. Typically a sluggified version of the app name
+  #                          in App Center (e.g. `WPiOS-One-Offs`)
   #
   # @called_by CI — especially, relies on `BUILDKITE_PULL_REQUEST` being defined
   #
@@ -901,7 +969,8 @@ platform :ios do
 
     # If Fastlane cannot instantiate a user, it will ask the caller for the email.
     # Once we have it, we can set it as `FASTLANE_USER` in the environment (which has lifecycle limited to this call) so that the next commands will already have access to it.
-    # Note that if the user is already available to `AccountManager`, setting it in the environment is redundant, but Fastlane doesn't provide a way to check it so we have to do it anyway.
+    # Note that if the user is already available to `AccountManager`, setting it in the environment is redundant, but Fastlane
+    # doesn't provide a way to check it so we have to do it anyway.
     ENV['FASTLANE_USER'] = CredentialsManager::AccountManager.new.user
 
     # Add all development certificates to the provisioning profiles (just in case – this is an easy step to miss)
@@ -933,7 +1002,7 @@ end
 # Example:
 # bundle exec fastlane update_certs_and_profiles
 #####################################################################################
-lane :update_certs_and_profiles do |_options|
+lane :update_certs_and_profiles do
   alpha_code_signing
   internal_code_signing
   appstore_code_signing

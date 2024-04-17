@@ -1,17 +1,19 @@
 # frozen_string_literal: true
 
 require 'English'
-XCODE_WORKSPACE = 'Simplenote.xcworkspace'
-XCODE_SCHEME = 'Simplenote'
-XCODE_CONFIGURATION = 'Debug'
-LOCAL_PATH = 'vendor/bundle'
-
 require 'fileutils'
 require 'tmpdir'
 require 'rake/clean'
 require 'yaml'
 require 'digest'
+
+# Constants
+SWIFTLINT_VERSION = '0.41.0'
 PROJECT_DIR = __dir__
+XCODE_WORKSPACE = 'Simplenote.xcworkspace'
+XCODE_SCHEME = 'Simplenote'
+XCODE_CONFIGURATION = 'Debug'
+LOCAL_PATH = 'vendor/bundle'
 
 task default: %w[test]
 
@@ -188,13 +190,8 @@ task xcode: [:dependencies] do
 end
 
 def fold(label)
-  puts "travis_fold:start:#{label}" if travis?
+  puts "--- #{label}" if ENV['BUILDKITE']
   yield
-  puts "travis_fold:end:#{label}" if travis?
-end
-
-def travis?
-  !ENV['TRAVIS'].nil?
 end
 
 def pod(args)
