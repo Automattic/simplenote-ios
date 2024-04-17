@@ -1,3 +1,7 @@
+4.52
+-----
+
+
 4.51
 -----
 - Fixed issue where note cell appearance changes on press down instead of when the cell is selected
