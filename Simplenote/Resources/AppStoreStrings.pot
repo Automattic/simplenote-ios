@@ -66,8 +66,10 @@ msgctxt "app_store_keywords"
 msgid "notes,note,markdown,journal,sync,to-do,list,cloud,notebook,simple,notepad,tag,todo,writing,memo"
 msgstr ""
 
-msgctxt "v4.50-whats-new"
+msgctxt "v4.51-whats-new"
 msgid ""
-"• Behind-the-scenes reliability improvements\n"
+"• Fixed issue where note cell appearance changes on press down instead of when the cell is selected\n"
+"• Fixed an issue where using the new note widget with the lock screen could create empty notes while the app was locked\n"
+"• Removed Sustainer plan information and upgrade UI\n"
 msgstr ""
 
