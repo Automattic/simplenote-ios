@@ -512,7 +512,11 @@
 
         [self presentNote:newNote animated:NO];
     }
-    
+
+    if ([[components host] isEqualToString:@"widgetNew"]) {
+        [self presentNewNoteEditorWithAnimated: NO];
+    }
+
     return YES;
 }
 
