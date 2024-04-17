@@ -1,1 +1,2 @@
-• Behind-the-scenes reliability improvements
+- Fixed issue where note cell appearance changes on press down instead of when the cell is selected
+
