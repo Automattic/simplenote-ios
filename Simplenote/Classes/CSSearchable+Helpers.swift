@@ -41,11 +41,11 @@ extension CSSearchableIndex {
 
         context.perform {
             if let deleted = context.fetchObjects(forEntityName: "Note", with: NSPredicate(format: "deleted == YES")) as? [Note] {
-                CSSearchableIndex.default().deleteSearchableNotes(deleted)
+                self.deleteSearchableNotes(deleted)
             }
 
             if let notes = context.fetchObjects(forEntityName: "Note", with: NSPredicate(format: "deleted == NO")) as? [Note] {
-                CSSearchableIndex.default().indexSearchableNotes(notes)
+                self.indexSearchableNotes(notes)
             }
         }
     }
