@@ -1,1 +1,3 @@
-• Behind-the-scenes reliability improvements
+• Fixed issue where note cell appearance changes on press down instead of when the cell is selected
+• Fixed an issue where using the new note widget with the lock screen could create empty notes while the app was locked
+• Removed Sustainer plan information and upgrade UI
