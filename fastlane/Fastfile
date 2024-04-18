@@ -1035,7 +1035,8 @@ private_lane :appstore_code_signing do |options|
     team_id: get_required_env('EXT_EXPORT_TEAM_ID'),
     readonly: options.fetch(:readonly, true),
     app_identifiers: simplenote_app_identifiers,
-    api_key_path: APP_STORE_CONNECT_KEY_PATH
+    api_key_path: APP_STORE_CONNECT_KEY_PATH,
+    template_name: 'NotationalFlow Keychain Access (Distribution)'
   )
 end
 
@@ -1062,7 +1063,8 @@ def update_code_signing_enterprise(readonly:, app_identifiers:)
   )
 end
 
-def update_code_signing(type:, team_id:, readonly:, app_identifiers:, api_key_path:)
+# rubocop:disable Metrics/ParameterLists
+def update_code_signing(type:, team_id:, readonly:, app_identifiers:, api_key_path:, template_name: nil)
   # NOTE: It might be neccessary to add `force: true` alongside `readonly: true` in order to regenerate some provisioning profiles.
   # If this turns out to be a hard requirement, we should consider updating the method with logic to toggle the two setting based on whether we're fetching or renewing.
 
@@ -1081,9 +1083,11 @@ def update_code_signing(type:, team_id:, readonly:, app_identifiers:, api_key_pa
     team_id: team_id,
     readonly: readonly,
     app_identifier: app_identifiers,
-    api_key_path: api_key_path
+    api_key_path: api_key_path,
+    template_name: template_name
   )
 end
+# rubocop:enable Metrics/ParameterLists
 
 # Compiles the array of bundle identifiers for the different targets that
 # make up the Simplenote app, to be used as the `app_identifier` parameter
