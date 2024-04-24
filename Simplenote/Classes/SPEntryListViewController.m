@@ -32,7 +32,7 @@ static CGFloat const EntryListCellHeight = 44;
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
-    [primaryTableView reloadData];
+    [self.primaryTableView reloadData];
 }
 
 - (void)setupViews {
@@ -40,25 +40,25 @@ static CGFloat const EntryListCellHeight = 44;
     // setup views
     CGFloat yOrigin = self.view.safeAreaInsets.top;
     
-    entryFieldBackground = [[UIView alloc] initWithFrame:CGRectMake(0,
+    self.entryFieldBackground = [[UIView alloc] initWithFrame:CGRectMake(0,
                                                                     yOrigin,
                                                                     self.view.frame.size.width,
                                                                     EntryListCellHeight)];
-    entryFieldBackground.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
-    [self.view addSubview:entryFieldBackground];
-    
+    self.entryFieldBackground.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
+    [self.view addSubview:self.entryFieldBackground];
+
     entryTextField = [[SPTextField alloc] initWithFrame:CGRectMake(EntryListTextFieldSidePadding,
                                                                    0,
-                                                                   entryFieldBackground.frame.size.width - 2 * EntryListTextFieldSidePadding,
-                                                                   entryFieldBackground.frame.size.height)];
+                                                                   self.entryFieldBackground.frame.size.width - 2 * EntryListTextFieldSidePadding,
+                                                                   self.entryFieldBackground.frame.size.height)];
     entryTextField.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
     entryTextField.keyboardType = UIKeyboardTypeEmailAddress;
 
     entryTextField.keyboardAppearance = SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault;
     entryTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     entryTextField.delegate = self;
-    [entryFieldBackground addSubview:entryTextField];
-    
+    [self.entryFieldBackground addSubview:entryTextField];
+
     entryFieldPlusButton = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *pickerImage = [UIImage imageWithName:UIImageNameAdd];
     [entryFieldPlusButton setImage:pickerImage forState:UIControlStateNormal];
@@ -70,17 +70,17 @@ static CGFloat const EntryListCellHeight = 44;
     entryTextField.rightViewMode = UITextFieldViewModeAlways;
     
     
-    primaryTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, yOrigin + entryTextField.frame.size.height,
+    self.primaryTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, yOrigin + entryTextField.frame.size.height,
                                                                      self.view.frame.size.width, self.view.frame.size.height - (yOrigin + entryTextField.frame.size.height))
                                                     style:UITableViewStyleGrouped];
-    primaryTableView.rowHeight = EntryListCellHeight;
-    primaryTableView.delegate = self;
-    primaryTableView.dataSource = self;
-    primaryTableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    [self.view addSubview:primaryTableView];
+    self.primaryTableView.rowHeight = EntryListCellHeight;
+    self.primaryTableView.delegate = self;
+    self.primaryTableView.dataSource = self;
+    self.primaryTableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    [self.view addSubview:self.primaryTableView];
+
     
-    
-    [primaryTableView registerClass:[SPEntryListCell class]
+    [self.primaryTableView registerClass:[SPEntryListCell class]
              forCellReuseIdentifier:cellIdentifier];
     
     [autoCompleteTableView registerClass:[SPEntryListAutoCompleteCell class]
@@ -124,7 +124,7 @@ static CGFloat const EntryListCellHeight = 44;
     self.view.backgroundColor = tableBackgroundColor;
     
     // entry field
-    entryFieldBackground.backgroundColor = tableBackgroundColor;
+    self.entryFieldBackground.backgroundColor = tableBackgroundColor;
     entryTextField.backgroundColor = [UIColor clearColor];
     entryTextField.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     entryTextField.textColor = [UIColor simplenoteTextColor];
@@ -132,15 +132,15 @@ static CGFloat const EntryListCellHeight = 44;
     
     CALayer *entryFieldBorder = [[CALayer alloc] init];
     entryFieldBorder.frame = CGRectMake(0,
-                                        entryFieldBackground.bounds.size.height - 1.0 / [[UIScreen mainScreen] scale],
+                                        self.entryFieldBackground.bounds.size.height - 1.0 / [[UIScreen mainScreen] scale],
                                         MAX(self.view.frame.size.width, self.view.frame.size.height),
                                         1.0 / [[UIScreen mainScreen] scale]);
     entryFieldBorder.backgroundColor = tableSeparatorColor.CGColor;
-    [entryFieldBackground.layer addSublayer:entryFieldBorder];
-    
+    [self.entryFieldBackground.layer addSublayer:entryFieldBorder];
+
     // tableview
-    primaryTableView.backgroundColor = [UIColor clearColor];
-    primaryTableView.separatorColor = tableSeparatorColor;
+    self.primaryTableView.backgroundColor = [UIColor clearColor];
+    self.primaryTableView.separatorColor = tableSeparatorColor;
     autoCompleteTableView.backgroundColor = backgroundColor;
     autoCompleteTableView.separatorColor = tableSeparatorColor;
 }
@@ -169,7 +169,7 @@ static CGFloat const EntryListCellHeight = 44;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if ([tableView isEqual:primaryTableView])
+    if ([tableView isEqual:self.primaryTableView])
         return 0; // this is implemented by subclassing
     else if ([tableView isEqual:autoCompleteTableView])
         return _autoCompleteDataSource.count;
@@ -192,8 +192,8 @@ static CGFloat const EntryListCellHeight = 44;
     
     UITableViewCell *finalCell;
     
-    if ([tableView isEqual:primaryTableView]) {
-        
+    if ([tableView isEqual:self.primaryTableView]) {
+
         
         SPEntryListCell *cell = (SPEntryListCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (!cell) {
@@ -220,7 +220,7 @@ static CGFloat const EntryListCellHeight = 44;
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return [tableView isEqual:primaryTableView] ? YES : NO;
+    return [tableView isEqual:self.primaryTableView] ? YES : NO;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -238,10 +238,10 @@ static CGFloat const EntryListCellHeight = 44;
     if (editingStyle == UITableViewCellEditingStyleDelete) {
 
         [self removeItemFromDataSourceAtIndexPath:indexPath];
-        [primaryTableView beginUpdates];
-        [primaryTableView deleteRowsAtIndexPaths:@[indexPath]
+        [self.primaryTableView beginUpdates];
+        [self.primaryTableView deleteRowsAtIndexPaths:@[indexPath]
                                 withRowAnimation:UITableViewRowAnimationLeft];
-        [primaryTableView endUpdates];
+        [self.primaryTableView endUpdates];
     }
 }
 - (void)removeItemFromDataSourceAtIndexPath:(NSIndexPath *)indexPath {
@@ -295,7 +295,7 @@ static CGFloat const EntryListCellHeight = 44;
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     
-    if ([scrollView isEqual:primaryTableView])
+    if ([scrollView isEqual:self.primaryTableView])
         [entryTextField resignFirstResponder];    
 }
 

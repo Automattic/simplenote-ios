@@ -47,7 +47,7 @@
 {
     [super viewWillAppear:animated];
 
-    [primaryTableView reloadData];
+    [self.primaryTableView reloadData];
     [self.contactsManager requestAuthorizationIfNeededWithCompletion:nil];
     [self setupBannerView];
 }
@@ -114,7 +114,7 @@
 
     self.dataSource = [[[merged allObjects] sortedArrayUsingSelector:@selector(compareName:)] mutableCopy];
 
-    [primaryTableView reloadData];
+    [self.primaryTableView reloadData];
 }
 
 
@@ -127,7 +127,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if ([tableView isEqual:primaryTableView]) {
+    if ([tableView isEqual:self.primaryTableView]) {
         return self.dataSource.count;
     }
 
@@ -136,7 +136,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if ([tableView isEqual:primaryTableView]) {
+    if ([tableView isEqual:self.primaryTableView]) {
         return self.dataSource.count > 0 ? NSLocalizedString(@"Current Collaborators", nil) : nil;
     }
 
@@ -145,7 +145,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-    if ([tableView isEqual:primaryTableView]) {
+    if ([tableView isEqual:self.primaryTableView]) {
         if (self.dataSource.count > 0) {
             return nil;
         } else {
@@ -161,7 +161,7 @@
     SPEntryListCell *cell = (SPEntryListCell *)[super tableView:tableView cellForRowAtIndexPath:indexPath];
     PersonTag *personTag;
 
-    if ([tableView isEqual:primaryTableView]) {
+    if ([tableView isEqual:self.primaryTableView]) {
         personTag = self.dataSource[indexPath.row];
     } else {
         personTag = self.autoCompleteDataSource[indexPath.row];
@@ -192,7 +192,7 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.selected = NO;
     
-    if ([tableView isEqual:primaryTableView]) {
+    if ([tableView isEqual:self.primaryTableView]) {
 
         PersonTag *person = self.dataSource[indexPath.row];
         person.active = !person.active;
@@ -228,7 +228,7 @@
         [self.dataSource addObject:person];
         
         entryTextField.text = @"";
-        [primaryTableView reloadSections:[NSIndexSet indexSetWithIndex:0]
+        [self.primaryTableView reloadSections:[NSIndexSet indexSetWithIndex:0]
                       withRowAnimation:UITableViewRowAnimationAutomatic];
         
         [self updateAutoCompleteMatchesForString:nil];

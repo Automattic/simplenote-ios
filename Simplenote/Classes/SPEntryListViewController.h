@@ -11,14 +11,14 @@
 
 @interface SPEntryListViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate> {
     
-    UITableView *primaryTableView;
-    UIView *entryFieldBackground;
     SPTextField *entryTextField;
     UIButton *entryFieldPlusButton;
     UITableView *autoCompleteTableView;
 
 }
 
+@property (nonatomic, strong) UITableView *primaryTableView;
+@property (nonatomic, strong) UIView *entryFieldBackground;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) NSArray *autoCompleteDataSource;
 @property (nonatomic) BOOL showEntryFieldPlusButton;
