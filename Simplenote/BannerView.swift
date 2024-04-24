@@ -59,7 +59,7 @@ class BannerView: UIView {
         backgroundView.addGestureRecognizer(tapRecognizer)
     }
 
-    func refreshInterface(with style: BannerStyle? = nil) {
+    func refreshInterface(with style: BannerView.Style? = nil) {
         guard let style else {
             return
         }
@@ -71,36 +71,35 @@ class BannerView: UIView {
         backgroundView.backgroundColor = style.backgroundColor
         backgroundView.layer.cornerRadius = Metrics.defaultCornerRadius
     }
-}
 
-// MARK: - Style
-//
-struct BannerStyle {
-    let title: String
-    let details: String
-    let textColor: UIColor
-    let backgroundColor: UIColor
-}
+    // MARK: - Style
+    //
+    struct Style {
+        let title: String
+        let details: String
+        let textColor: UIColor
+        let backgroundColor: UIColor
 
-extension BannerStyle {
-    // Leaving these styles in cause we may want them back someday
-    static var sustainer: BannerStyle {
-        BannerStyle(title: NSLocalizedString("You are a Simplenote Sustainer", comment: "Current Sustainer Title"),
-              details: NSLocalizedString("Thank you for your continued support", comment: "Current Sustainer Details"),
-              textColor: .white,
-              backgroundColor: .simplenoteSustainerViewBackgroundColor)
+        // Leaving these styles in cause we may want them back someday
+        static var sustainer: Style {
+            Style(title: NSLocalizedString("You are a Simplenote Sustainer", comment: "Current Sustainer Title"),
+                  details: NSLocalizedString("Thank you for your continued support", comment: "Current Sustainer Details"),
+                  textColor: .white,
+                  backgroundColor: .simplenoteSustainerViewBackgroundColor)
+        }
+
+        static var notSubscriber: Style {
+            Style(title: NSLocalizedString("Become a Simplenote Sustainer", comment: "Become a Sustainer Title"),
+                  details: NSLocalizedString("Support your favorite notes app to help unlock future features", comment: "Become a Sustainer Details"),
+                  textColor: .white,
+                  backgroundColor: .simplenoteBlue50Color)
+        }
+
+        static var collaborationRetirement: Style {
+            Style(title: NSLocalizedString("Collaboration Retirement", comment: "Title annoucning collaboration retirement"), details: NSLocalizedString("Collaboration is being retired and will be disabled for all users July 1st.  For more details tap here", comment: "Description for retiring collaboration feature"), textColor: .white, backgroundColor: .simplenoteBlue50Color)
+        }
     }
 
-    static var notSubscriber: BannerStyle {
-        BannerStyle(title: NSLocalizedString("Become a Simplenote Sustainer", comment: "Become a Sustainer Title"),
-              details: NSLocalizedString("Support your favorite notes app to help unlock future features", comment: "Become a Sustainer Details"),
-              textColor: .white,
-              backgroundColor: .simplenoteBlue50Color)
-    }
-
-    static var collaborationRetirement: BannerStyle {
-        BannerStyle(title: NSLocalizedString("Collaboration Retirement", comment: "Title annoucning collaboration retirement"), details: NSLocalizedString("Collaboration is being retired and will be disabled for all users July 1st.  For more details tap here", comment: "Description for retiring collaboration feature"), textColor: .white, backgroundColor: .simplenoteBlue50Color)
-    }
 }
 
 // MARK: - Metrics
