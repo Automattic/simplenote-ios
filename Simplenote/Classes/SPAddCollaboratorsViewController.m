@@ -49,6 +49,7 @@
 
     [primaryTableView reloadData];
     [self.contactsManager requestAuthorizationIfNeededWithCompletion:nil];
+    [self setupBannerView];
 }
 
 - (void)viewDidAppear:(BOOL)animated
