@@ -15,7 +15,7 @@ extension SPAddCollaboratorsViewController {
         bannerView = BannerView.instantiateFromNib()
         bannerView.refreshInterface(with: .collaborationRetirement)
         bannerView.onPress = {
-            print("# Click me")
+            //TODO: load blog post for collaborator retirement details
         }
 
         view.addSubview(bannerView)
