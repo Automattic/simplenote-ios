@@ -50,6 +50,7 @@
     [self.primaryTableView reloadData];
     [self.contactsManager requestAuthorizationIfNeededWithCompletion:nil];
     [self setupBannerView];
+    [self setupViewContraints];
 }
 
 - (void)viewDidAppear:(BOOL)animated

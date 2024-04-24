@@ -14,7 +14,6 @@
 static NSString *cellIdentifier = @"primaryCell";
 static NSString *autoCompleteCellIdentifier = @"autoCompleteCell";
 static CGFloat const EntryListTextFieldSidePadding = 15;
-static CGFloat const EntryListCellHeight = 44;
 
 @implementation SPEntryListViewController
 

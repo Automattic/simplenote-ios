@@ -12,14 +12,17 @@ import UIKit
 extension SPAddCollaboratorsViewController {
     @objc
     func setupBannerView() {
-        let bannerView: BannerView = BannerView.instantiateFromNib()
-
+        bannerView = BannerView.instantiateFromNib()
+        bannerView.refreshInterface(with: .collaborationRetirement)
         bannerView.onPress = {
             print("# Click me")
         }
 
         view.addSubview(bannerView)
+    }
 
+    @objc
+    func setupViewContraints() {
         bannerView.translatesAutoresizingMaskIntoConstraints = false
         primaryTableView.translatesAutoresizingMaskIntoConstraints = false
         entryFieldBackground.translatesAutoresizingMaskIntoConstraints = false
@@ -34,7 +37,7 @@ extension SPAddCollaboratorsViewController {
         NSLayoutConstraint.activate([
             entryFieldBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             entryFieldBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            entryFieldBackground.heightAnchor.constraint(equalToConstant: 44)
+            entryFieldBackground.heightAnchor.constraint(equalToConstant: EntryListCellHeight)
         ])
 
         NSLayoutConstraint.activate([
@@ -43,8 +46,5 @@ extension SPAddCollaboratorsViewController {
             primaryTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             primaryTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-
-        bannerView.refreshInterface(with: .collaborationRetirement)
-
     }
 }

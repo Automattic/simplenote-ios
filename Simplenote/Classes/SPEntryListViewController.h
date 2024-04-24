@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "SPTextField.h"
 
+static CGFloat const EntryListCellHeight = 44;
+
 @interface SPEntryListViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate> {
     
     SPTextField *entryTextField;
