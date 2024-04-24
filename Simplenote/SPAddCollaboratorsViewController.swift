@@ -15,7 +15,11 @@ extension SPAddCollaboratorsViewController {
         bannerView = BannerView.instantiateFromNib()
         bannerView.refreshInterface(with: .collaborationRetirement)
         bannerView.onPress = {
-            //TODO: load blog post for collaborator retirement details
+            guard let url = URL(string: "https://simplenote.com/2024/05/01/collaboration-feature-retirement") else {
+                return
+            }
+
+            UIApplication.shared.open(url)
         }
 
         view.addSubview(bannerView)
