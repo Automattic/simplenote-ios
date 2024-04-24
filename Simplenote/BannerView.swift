@@ -27,11 +27,7 @@ class BannerView: UIView {
         }
     }
 
-    var onPress: (() -> Void)? {
-        didSet {
-            setupTapRecognizer()
-        }
-    }
+    var onPress: (() -> Void)?
 
     var preferredWidth: CGFloat? {
         didSet {
@@ -48,6 +44,7 @@ class BannerView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         refreshInterface()
+        setupTapRecognizer()
     }
 
     // MARK: - Actions
