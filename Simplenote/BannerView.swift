@@ -96,7 +96,7 @@ class BannerView: UIView {
         }
 
         static var collaborationRetirement: Style {
-            Style(title: NSLocalizedString("Collaboration Retirement", comment: "Title annoucning collaboration retirement"), details: NSLocalizedString("Collaboration is being retired and will be disabled for all users July 1st.  For more details tap here", comment: "Description for retiring collaboration feature"), textColor: .white, backgroundColor: .simplenoteBlue50Color)
+            Style(title: NSLocalizedString("Collaboration Retirement", comment: "Title annoucning collaboration retirement"), details: NSLocalizedString("Collaboration is retiring on July 1st.  For more details tap here.", comment: "Description for retiring collaboration feature"), textColor: .white, backgroundColor: .simplenoteBlue50Color)
         }
     }
 
