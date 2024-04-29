@@ -462,6 +462,9 @@
 		BA608EF526BB6E0200A9D94E /* ListWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA608EF426BB6E0200A9D94E /* ListWidget.swift */; };
 		BA608EF726BB6E7400A9D94E /* ListWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA608EF626BB6E7400A9D94E /* ListWidgetProvider.swift */; };
 		BA608EF926BB6F4C00A9D94E /* ListWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA608EF826BB6F4C00A9D94E /* ListWidgetView.swift */; };
+		BA69A5192BE0127C0096E50F /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = BA69A5182BE0127C0096E50F /* PrivacyInfo.xcprivacy */; };
+		BA69A51B2BE015640096E50F /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = BA69A51A2BE015640096E50F /* PrivacyInfo.xcprivacy */; };
+		BA69A51D2BE015BF0096E50F /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = BA69A51C2BE015BF0096E50F /* PrivacyInfo.xcprivacy */; };
 		BA6DA19126DB5F1B000464C8 /* URLComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6DA19026DB5F1B000464C8 /* URLComponents.swift */; };
 		BA6DA19226DB5F1B000464C8 /* URLComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6DA19026DB5F1B000464C8 /* URLComponents.swift */; };
 		BA7071E526BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BA7071E426BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition */; };
@@ -1145,6 +1148,9 @@
 		BA608EF426BB6E0200A9D94E /* ListWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWidget.swift; sourceTree = "<group>"; };
 		BA608EF626BB6E7400A9D94E /* ListWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWidgetProvider.swift; sourceTree = "<group>"; };
 		BA608EF826BB6F4C00A9D94E /* ListWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWidgetView.swift; sourceTree = "<group>"; };
+		BA69A5182BE0127C0096E50F /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		BA69A51A2BE015640096E50F /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		BA69A51C2BE015BF0096E50F /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		BA6DA19026DB5F1B000464C8 /* URLComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLComponents.swift; sourceTree = "<group>"; };
 		BA7071E426BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = ListWidgetIntent.intentdefinition; sourceTree = "<group>"; };
 		BA75D87D26C0843600883FFA /* Text+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Simplenote.swift"; sourceTree = "<group>"; };
@@ -1395,6 +1401,7 @@
 				BA8661D526B3A00B00466746 /* SimplenoteIntents-DistributionAlpha.entitlements */,
 				BA8661D826B3A0B000466746 /* SimplenoteIntents-DistributionInternal.entitlements */,
 				BA8661D726B3A0A000466746 /* SimplenoteIntents-Release.entitlements */,
+				BA69A51C2BE015BF0096E50F /* PrivacyInfo.xcprivacy */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -2357,6 +2364,7 @@
 				241709C7266829CD00F6E2B1 /* SimplenoteWidgetsExtension-DistributionAlpha.entitlements */,
 				241709D126682AED00F6E2B1 /* SimplenoteWidgetsExtension-DistributionInternal.entitlements */,
 				241709BB266827A800F6E2B1 /* SimplenoteWidgetsExtension-Release.entitlements */,
+				BA69A51A2BE015640096E50F /* PrivacyInfo.xcprivacy */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -2693,6 +2701,7 @@
 				B5767F9022FDF2B900052D81 /* LaunchScreen.storyboard */,
 				E280453E180DAE0200670073 /* Localizable.strings */,
 				467D9C5C1788A4FB00785EF3 /* Simplenote.xcdatamodeld */,
+				BA69A5182BE0127C0096E50F /* PrivacyInfo.xcprivacy */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -3049,6 +3058,7 @@
 				A6C0DFE825C18E3300B9BE39 /* NoteEditorTagListViewController.xib in Resources */,
 				A628BEB725ECD97900121B64 /* SignupVerificationViewController.xib in Resources */,
 				B56A695822F9CD1500B90398 /* SPOnboardingViewController.xib in Resources */,
+				BA69A5192BE0127C0096E50F /* PrivacyInfo.xcprivacy in Resources */,
 				A61471B825D70C190065D849 /* PopoverViewController.xib in Resources */,
 				A6C0589524AD2B8F006BC572 /* SPNoteHistoryViewController.xib in Resources */,
 				A6A648A525AC3AC00074A094 /* AccountVerificationViewController.xib in Resources */,
@@ -3099,6 +3109,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA69A51D2BE015BF0096E50F /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3106,6 +3117,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA69A51B2BE015640096E50F /* PrivacyInfo.xcprivacy in Resources */,
 				BAFA93E1265DCFCD0009DCFB /* Assets.xcassets in Resources */,
 				BAFA93FA265DE8920009DCFB /* Images.xcassets in Resources */,
 			);
