@@ -5,6 +5,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class SPAddCollaboratorsViewController;
+@class BannerView;
 @protocol SPCollaboratorDelegate <NSObject>
 
 @required
@@ -20,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SPAddCollaboratorsViewController : SPEntryListViewController
 
+@property (nonatomic, strong) BannerView *bannerView;
 @property (nonatomic, nullable, weak) id<SPCollaboratorDelegate> collaboratorDelegate;
 
 - (void)setupWithCollaborators:(NSArray<NSString *> *)collaborators;

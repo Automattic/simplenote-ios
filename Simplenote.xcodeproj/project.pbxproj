@@ -518,6 +518,7 @@
 		BABFFF2226CF9094003A4C25 /* WidgetDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABFFF2126CF9094003A4C25 /* WidgetDefaults.swift */; };
 		BABFFF2326CF9094003A4C25 /* WidgetDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABFFF2126CF9094003A4C25 /* WidgetDefaults.swift */; };
 		BABFFF2426CF9094003A4C25 /* WidgetDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABFFF2126CF9094003A4C25 /* WidgetDefaults.swift */; };
+		BAC7264E2BD96E7C0002FA68 /* SPAddCollaboratorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC7264D2BD96E7C0002FA68 /* SPAddCollaboratorsViewController.swift */; };
 		BAE08626261282D1009D40CD /* Note+Publish.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE08625261282D1009D40CD /* Note+Publish.swift */; };
 		BAE63CAF26E05312002BF81A /* NSString+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59188C124005B8A0069EF96 /* NSString+Simplenote.swift */; };
 		BAE63CB026E05313002BF81A /* NSString+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59188C124005B8A0069EF96 /* NSString+Simplenote.swift */; };
@@ -1181,6 +1182,7 @@
 		BAB576BD2670512C00B0C56F /* NoteWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteWidget.swift; sourceTree = "<group>"; };
 		BAB6C04626BA4CAF007495C4 /* WidgetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetController.swift; sourceTree = "<group>"; };
 		BABFFF2126CF9094003A4C25 /* WidgetDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDefaults.swift; sourceTree = "<group>"; };
+		BAC7264D2BD96E7C0002FA68 /* SPAddCollaboratorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPAddCollaboratorsViewController.swift; sourceTree = "<group>"; };
 		BAE08625261282D1009D40CD /* Note+Publish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+Publish.swift"; sourceTree = "<group>"; };
 		BAF4A96E26DB085D00C51C1D /* NSURLComponents+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSURLComponents+Simplenote.swift"; sourceTree = "<group>"; };
 		BAF8D42226AE10F100CA9383 /* Tag+Widget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tag+Widget.swift"; sourceTree = "<group>"; };
@@ -2640,6 +2642,7 @@
 				E2F1497F179D8E1A00DC9690 /* Settings */,
 				E25C39CE17A41F3400B2591A /* SPAddCollaboratorsViewController.h */,
 				E25C39CF17A41F3400B2591A /* SPAddCollaboratorsViewController.m */,
+				BAC7264D2BD96E7C0002FA68 /* SPAddCollaboratorsViewController.swift */,
 				E2EAE38117C2C2D400268682 /* SPEntryListViewController.h */,
 				E2EAE38217C2C2D400268682 /* SPEntryListViewController.m */,
 				E215C790180B115C00AD36B5 /* SPNavigationController.h */,
@@ -3394,6 +3397,7 @@
 				B531090823D0B685002B0998 /* SPSimpleTextPrintFormatter.swift in Sources */,
 				B5CDE61F2150834C00C3FED4 /* Simperium+Simplenote.m in Sources */,
 				A60A1A1E25655D840041701E /* ApplicationShortcutItemType.swift in Sources */,
+				BAC7264E2BD96E7C0002FA68 /* SPAddCollaboratorsViewController.swift in Sources */,
 				B51F6DD12460C3EE0074DDD9 /* AuthenticationValidator.swift in Sources */,
 				B575736A232C567000443C2E /* UIImage+Dynamic.swift in Sources */,
 				A60DF31025A4524100FDADF3 /* PinLockBaseController.swift in Sources */,
