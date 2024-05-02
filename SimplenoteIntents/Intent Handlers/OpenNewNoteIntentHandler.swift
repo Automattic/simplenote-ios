@@ -8,41 +8,41 @@
 
 import Intents
 
-class OpenNewNoteIntentHandler: NSObject, SPOpenNewNoteIntentHandling {
-    func handle(intent: SPOpenNewNoteIntent) async -> SPOpenNewNoteIntentResponse {
-        SPOpenNewNoteIntentResponse(code: .continueInApp, userActivity: nil)
+class OpenNewNoteIntentHandler: NSObject, OpenNewNoteIntentHandling {
+    func handle(intent: OpenNewNoteIntent) async -> OpenNewNoteIntentResponse {
+        OpenNewNoteIntentResponse(code: .continueInApp, userActivity: nil)
     }
 }
 
-class OpenNoteIntentHandler: NSObject, SPOpenNoteIntentHandling {
+class OpenNoteIntentHandler: NSObject, OpenNoteIntentHandling {
     let coreDataWrapper = WidgetCoreDataWrapper()
 
-    func resolveNote(for intent: SPOpenNoteIntent) async -> SPIntentNoteResolutionResult {
+    func resolveNote(for intent: OpenNoteIntent) async -> IntentNoteResolutionResult {
         guard let identifier = intent.note?.identifier,
               let note = coreDataWrapper.resultsController()?.note(forSimperiumKey: identifier) else {
-            return SPIntentNoteResolutionResult.confirmationRequired(with: nil)
+            return IntentNoteResolutionResult.confirmationRequired(with: nil)
         }
 
-        return SPIntentNoteResolutionResult.success(with: SPIntentNote(identifier: note.simperiumKey, display: note.title))
+        return IntentNoteResolutionResult.success(with: IntentNote(identifier: note.simperiumKey, display: note.title))
     }
 
-    func provideNoteOptionsCollection(for intent: SPOpenNoteIntent) async throws -> INObjectCollection<SPIntentNote> {
+    func provideNoteOptionsCollection(for intent: OpenNoteIntent) async throws -> INObjectCollection<IntentNote> {
         guard let notes = coreDataWrapper.resultsController()?.notes() else {
             throw NSError(domain: "intents", code: 404)
         }
 
         let intentNotes = notes.map({
-            SPIntentNote(identifier: $0.simperiumKey, display: $0.title)
+            IntentNote(identifier: $0.simperiumKey, display: $0.title)
         })
         return INObjectCollection(items: intentNotes)
     }
 
-    func handle(intent: SPOpenNoteIntent) async -> SPOpenNoteIntentResponse {
+    func handle(intent: OpenNoteIntent) async -> OpenNoteIntentResponse {
         guard let identifier = intent.note?.identifier else {
-            return SPOpenNoteIntentResponse(code: .failure, userActivity: nil)
+            return OpenNoteIntentResponse(code: .failure, userActivity: nil)
         }
         let activity = NSUserActivity(activityType: "SPOpenNoteIntent")
         activity.userInfo = [IntentsConstants.noteIdentifierKey: identifier]
-        return SPOpenNoteIntentResponse(code: .continueInApp, userActivity: activity)
+        return OpenNoteIntentResponse(code: .continueInApp, userActivity: activity)
     }
 }
