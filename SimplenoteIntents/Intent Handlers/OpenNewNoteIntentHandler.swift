@@ -42,9 +42,7 @@ class OpenNoteIntentHandler: NSObject, SPOpenNoteIntentHandling {
             return SPOpenNoteIntentResponse(code: .failure, userActivity: nil)
         }
         let activity = NSUserActivity(activityType: "SPOpenNoteIntent")
-        activity.userInfo = [Self.noteIdentifierKey: identifier]
+        activity.userInfo = [IntentsConstants.noteIdentifierKey: identifier]
         return SPOpenNoteIntentResponse(code: .continueInApp, userActivity: activity)
     }
-
-    static let noteIdentifierKey = "OpenNoteIntentHandlerIdentifierKey"
 }

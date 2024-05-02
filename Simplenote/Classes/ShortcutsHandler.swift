@@ -162,7 +162,7 @@ private extension ShortcutsHandler {
     func presentNote(for interaction: INInteraction?) {
         guard let interaction,
               let activity = interaction.intentResponse?.userActivity,
-              let uniqueIdentifier = activity.userInfo?["OpenNoteIntentHandlerIdentifierKey"] as? String else {
+              let uniqueIdentifier = activity.userInfo?[IntentsConstants.noteIdentifierKey] as? String else {
             return
         }
 
