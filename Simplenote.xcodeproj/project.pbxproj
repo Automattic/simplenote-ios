@@ -445,6 +445,8 @@
 		BA289B652BE43963000E6794 /* OpenNewNoteIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA289B632BE43963000E6794 /* OpenNewNoteIntentHandler.swift */; };
 		BA289B722BE45A39000E6794 /* IntentsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA289B702BE45A39000E6794 /* IntentsConstants.swift */; };
 		BA289B732BE45A3C000E6794 /* IntentsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA289B702BE45A39000E6794 /* IntentsConstants.swift */; };
+		BA289B762BE45BBB000E6794 /* OpenNoteIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA289B742BE45BBB000E6794 /* OpenNoteIntentHandler.swift */; };
+		BA289B782BE45BFB000E6794 /* ActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550F93022BA65CD00091939 /* ActivityType.swift */; };
 		BA2D82C6261522F100A1695B /* PublishNoticePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2D82C5261522F100A1695B /* PublishNoticePresenter.swift */; };
 		BA32A90F26B7469F00727247 /* WidgetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32A90E26B7469F00727247 /* WidgetError.swift */; };
 		BA32A91926B746A200727247 /* WidgetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32A90E26B7469F00727247 /* WidgetError.swift */; };
@@ -1138,6 +1140,7 @@
 		BA289B5D2BE43728000E6794 /* NoteWidgetIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteWidgetIntentHandler.swift; sourceTree = "<group>"; };
 		BA289B632BE43963000E6794 /* OpenNewNoteIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenNewNoteIntentHandler.swift; sourceTree = "<group>"; };
 		BA289B702BE45A39000E6794 /* IntentsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentsConstants.swift; sourceTree = "<group>"; };
+		BA289B742BE45BBB000E6794 /* OpenNoteIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenNoteIntentHandler.swift; sourceTree = "<group>"; };
 		BA2D82C5261522F100A1695B /* PublishNoticePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishNoticePresenter.swift; sourceTree = "<group>"; };
 		BA32A90E26B7469F00727247 /* WidgetError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetError.swift; sourceTree = "<group>"; };
 		BA3856CC2681715700F388CC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -2327,6 +2330,7 @@
 				BA289B5D2BE43728000E6794 /* NoteWidgetIntentHandler.swift */,
 				BA289B5A2BE4371A000E6794 /* ListWidgetIntentHandler.swift */,
 				BA289B632BE43963000E6794 /* OpenNewNoteIntentHandler.swift */,
+				BA289B742BE45BBB000E6794 /* OpenNoteIntentHandler.swift */,
 			);
 			path = "Intent Handlers";
 			sourceTree = "<group>";
@@ -3760,9 +3764,11 @@
 				BA86625D26B3B14900466746 /* SortMode.swift in Sources */,
 				BA12B07026B0D0150026F31D /* SPManagedObject+Widget.swift in Sources */,
 				BAF4A9AA26DB138600C51C1D /* NoteContentHelper.swift in Sources */,
+				BA289B782BE45BFB000E6794 /* ActivityType.swift in Sources */,
 				BA7071E626BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition in Sources */,
 				BA86622426B3AE4A00466746 /* WidgetResultsController.swift in Sources */,
 				BABFFF2426CF9094003A4C25 /* WidgetDefaults.swift in Sources */,
+				BA289B762BE45BBB000E6794 /* OpenNoteIntentHandler.swift in Sources */,
 				BAF8D46E26AE118800CA9383 /* SPCredentials.swift in Sources */,
 				BAF8D5C526AE254100CA9383 /* Simplenote.xcdatamodeld in Sources */,
 				BAB6C04426BA49F3007495C4 /* ContentSlice.swift in Sources */,
