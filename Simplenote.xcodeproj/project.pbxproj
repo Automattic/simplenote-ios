@@ -436,6 +436,8 @@
 		BA12B07026B0D0150026F31D /* SPManagedObject+Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA12B06C26B0D0150026F31D /* SPManagedObject+Widget.swift */; };
 		BA18532826488DBC00D9A347 /* SignupRemoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA18532726488DBC00D9A347 /* SignupRemoteTests.swift */; };
 		BA2015BB2B57384F005E59AA /* AutomatticTracks in Frameworks */ = {isa = PBXBuildFile; productRef = BA2015BA2B57384F005E59AA /* AutomatticTracks */; };
+		BA289B582BE436EB000E6794 /* ShortcutIntents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BA289B572BE436EB000E6794 /* ShortcutIntents.intentdefinition */; };
+		BA289B592BE436EB000E6794 /* ShortcutIntents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BA289B572BE436EB000E6794 /* ShortcutIntents.intentdefinition */; };
 		BA2D82C6261522F100A1695B /* PublishNoticePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2D82C5261522F100A1695B /* PublishNoticePresenter.swift */; };
 		BA3101A926C8C76A00C95F93 /* ListWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BA7071E426BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition */; settings = {ATTRIBUTES = (no_codegen, ); }; };
 		BA32A90F26B7469F00727247 /* WidgetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32A90E26B7469F00727247 /* WidgetError.swift */; };
@@ -1127,6 +1129,7 @@
 		BA12B06C26B0D0150026F31D /* SPManagedObject+Widget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SPManagedObject+Widget.swift"; sourceTree = "<group>"; };
 		BA16C6A82BC4968400C9079F /* Simplenote 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Simplenote 7.xcdatamodel"; sourceTree = "<group>"; };
 		BA18532726488DBC00D9A347 /* SignupRemoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupRemoteTests.swift; sourceTree = "<group>"; };
+		BA289B572BE436EB000E6794 /* ShortcutIntents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = ShortcutIntents.intentdefinition; sourceTree = "<group>"; };
 		BA2D82C5261522F100A1695B /* PublishNoticePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishNoticePresenter.swift; sourceTree = "<group>"; };
 		BA32A90E26B7469F00727247 /* WidgetError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetError.swift; sourceTree = "<group>"; };
 		BA3856CC2681715700F388CC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -2618,6 +2621,7 @@
 				B5250A6B22B922F900AE7797 /* Simplenote-Internal.entitlements */,
 				E29ADD4717848E8500E55842 /* main.m */,
 				E29ADD4917848E8500E55842 /* Simplenote-Prefix.pch */,
+				BA289B572BE436EB000E6794 /* ShortcutIntents.intentdefinition */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -3372,6 +3376,7 @@
 				B52BB74E22CFD1660042C162 /* SimplenoteActivityItemSource.swift in Sources */,
 				B537730F252E14C600BC78C5 /* OptionsViewController.swift in Sources */,
 				B56A696722F9D55F00B90398 /* UIView+Animations.swift in Sources */,
+				BA289B582BE436EB000E6794 /* ShortcutIntents.intentdefinition in Sources */,
 				BA3856CD2681715700F388CC /* CoreDataManager.swift in Sources */,
 				A60DF30825A44F0F00FDADF3 /* PinLockRemoveController.swift in Sources */,
 				A694ABAB25D1549D00CC3A2D /* FileStorage.swift in Sources */,
@@ -3728,6 +3733,7 @@
 				BAF8D51426AE172600CA9383 /* StorageSettings.swift in Sources */,
 				BA86616326B35CF000466746 /* BuildConfiguration.swift in Sources */,
 				BAB5762726703C8200B0C56F /* IntentHandler.swift in Sources */,
+				BA289B592BE436EB000E6794 /* ShortcutIntents.intentdefinition in Sources */,
 				BA86625D26B3B14900466746 /* SortMode.swift in Sources */,
 				BA12B07026B0D0150026F31D /* SPManagedObject+Widget.swift in Sources */,
 				BAF4A9AA26DB138600C51C1D /* NoteContentHelper.swift in Sources */,
