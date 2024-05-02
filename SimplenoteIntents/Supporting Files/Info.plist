@@ -32,6 +32,7 @@
 			<array>
 				<string>ListWidgetIntent</string>
 				<string>NoteWidgetIntent</string>
+				<string>SPOpenNewNoteIntent</string>
 			</array>
 		</dict>
 		<key>NSExtensionPointIdentifier</key>

@@ -11,6 +11,7 @@ enum ActivityType: String {
     /// New Note Activity
     ///
     case newNote = "com.codality.NotationalFlow.newNote"
+    case newNoteShortcut = "SPOpenNewNoteIntent"
 
     /// Open a Note!
     ///
