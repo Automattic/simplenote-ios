@@ -19,6 +19,8 @@
 		<dict>
 			<key>INIntentCategory</key>
 			<string>generic</string>
+			<key>INIntentClassName</key>
+			<string>OpenNewNoteIntent</string>
 			<key>INIntentClassPrefix</key>
 			<string>SP</string>
 			<key>INIntentConfigurable</key>
@@ -71,6 +73,8 @@
 		<dict>
 			<key>INIntentCategory</key>
 			<string>information</string>
+			<key>INIntentClassName</key>
+			<string>OpenNoteIntent</string>
 			<key>INIntentClassPrefix</key>
 			<string>SP</string>
 			<key>INIntentConfigurable</key>
@@ -192,6 +196,8 @@
 	<key>INTypes</key>
 	<array>
 		<dict>
+			<key>INTypeClassName</key>
+			<string>IntentNote</string>
 			<key>INTypeClassPrefix</key>
 			<string>SP</string>
 			<key>INTypeDisplayName</key>
