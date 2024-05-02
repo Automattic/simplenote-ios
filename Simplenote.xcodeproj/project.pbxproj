@@ -438,6 +438,10 @@
 		BA2015BB2B57384F005E59AA /* AutomatticTracks in Frameworks */ = {isa = PBXBuildFile; productRef = BA2015BA2B57384F005E59AA /* AutomatticTracks */; };
 		BA289B582BE436EB000E6794 /* ShortcutIntents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BA289B572BE436EB000E6794 /* ShortcutIntents.intentdefinition */; };
 		BA289B592BE436EB000E6794 /* ShortcutIntents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BA289B572BE436EB000E6794 /* ShortcutIntents.intentdefinition */; };
+		BA289B5C2BE4371A000E6794 /* ListWidgetIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA289B5A2BE4371A000E6794 /* ListWidgetIntentHandler.swift */; };
+		BA289B5F2BE43728000E6794 /* NoteWidgetIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA289B5D2BE43728000E6794 /* NoteWidgetIntentHandler.swift */; };
+		BA289B602BE43816000E6794 /* NoteWidgetIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA289B5D2BE43728000E6794 /* NoteWidgetIntentHandler.swift */; };
+		BA289B612BE43825000E6794 /* ListWidgetIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA289B5A2BE4371A000E6794 /* ListWidgetIntentHandler.swift */; };
 		BA2D82C6261522F100A1695B /* PublishNoticePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2D82C5261522F100A1695B /* PublishNoticePresenter.swift */; };
 		BA3101A926C8C76A00C95F93 /* ListWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BA7071E426BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition */; settings = {ATTRIBUTES = (no_codegen, ); }; };
 		BA32A90F26B7469F00727247 /* WidgetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32A90E26B7469F00727247 /* WidgetError.swift */; };
@@ -1130,6 +1134,8 @@
 		BA16C6A82BC4968400C9079F /* Simplenote 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Simplenote 7.xcdatamodel"; sourceTree = "<group>"; };
 		BA18532726488DBC00D9A347 /* SignupRemoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupRemoteTests.swift; sourceTree = "<group>"; };
 		BA289B572BE436EB000E6794 /* ShortcutIntents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = ShortcutIntents.intentdefinition; sourceTree = "<group>"; };
+		BA289B5A2BE4371A000E6794 /* ListWidgetIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWidgetIntentHandler.swift; sourceTree = "<group>"; };
+		BA289B5D2BE43728000E6794 /* NoteWidgetIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteWidgetIntentHandler.swift; sourceTree = "<group>"; };
 		BA2D82C5261522F100A1695B /* PublishNoticePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishNoticePresenter.swift; sourceTree = "<group>"; };
 		BA32A90E26B7469F00727247 /* WidgetError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetError.swift; sourceTree = "<group>"; };
 		BA3856CC2681715700F388CC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -2379,6 +2385,8 @@
 			children = (
 				092FD78026D7BB72006BE8E2 /* Supporting Files */,
 				BAB5762626703C8200B0C56F /* IntentHandler.swift */,
+				BA289B5D2BE43728000E6794 /* NoteWidgetIntentHandler.swift */,
+				BA289B5A2BE4371A000E6794 /* ListWidgetIntentHandler.swift */,
 				BAF8D4AD26AE136D00CA9383 /* Simplenote-Intents-Bridging-Header.h */,
 			);
 			path = SimplenoteIntents;
@@ -3727,10 +3735,12 @@
 			files = (
 				BA86620E26B3A73D00466746 /* UserDefaults+Simplenote.swift in Sources */,
 				BAF8D52826AE173D00CA9383 /* FileManager+Simplenote.swift in Sources */,
+				BA289B5F2BE43728000E6794 /* NoteWidgetIntentHandler.swift in Sources */,
 				BAF8D50026AE171400CA9383 /* CoreDataManager.swift in Sources */,
 				BAE63CB026E05313002BF81A /* NSString+Simplenote.swift in Sources */,
 				BAE63CB226E05325002BF81A /* NSPredicate+Email.swift in Sources */,
 				BAF8D51426AE172600CA9383 /* StorageSettings.swift in Sources */,
+				BA289B5C2BE4371A000E6794 /* ListWidgetIntentHandler.swift in Sources */,
 				BA86616326B35CF000466746 /* BuildConfiguration.swift in Sources */,
 				BAB5762726703C8200B0C56F /* IntentHandler.swift in Sources */,
 				BA289B592BE436EB000E6794 /* ShortcutIntents.intentdefinition in Sources */,
@@ -3796,10 +3806,12 @@
 				BA608EF926BB6F4C00A9D94E /* ListWidgetView.swift in Sources */,
 				BAE63CAF26E05312002BF81A /* NSString+Simplenote.swift in Sources */,
 				BA86626726B3B1B600466746 /* NSSortDescriptor+Simplenote.swift in Sources */,
+				BA289B612BE43825000E6794 /* ListWidgetIntentHandler.swift in Sources */,
 				BAF8D46426AE118800CA9383 /* SPCredentials.swift in Sources */,
 				BA122DC1265EF4C5003D3BC5 /* UITraitCollection+Simplenote.swift in Sources */,
 				BA12B06F26B0D0150026F31D /* SPManagedObject+Widget.swift in Sources */,
 				BAFA93F4265DE4A70009DCFB /* NewNoteWidgetProvider.swift in Sources */,
+				BA289B602BE43816000E6794 /* NoteWidgetIntentHandler.swift in Sources */,
 				BAB27BD726BA425C00AE4ACC /* Color+Simplenote.swift in Sources */,
 				BAB5768726703EA000B0C56F /* NoteWidgetView.swift in Sources */,
 				BAF8D44C26AE10FC00CA9383 /* Note+Widget.swift in Sources */,
