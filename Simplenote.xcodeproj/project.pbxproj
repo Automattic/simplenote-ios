@@ -442,7 +442,6 @@
 		BA289B5F2BE43728000E6794 /* NoteWidgetIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA289B5D2BE43728000E6794 /* NoteWidgetIntentHandler.swift */; };
 		BA289B602BE43816000E6794 /* NoteWidgetIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA289B5D2BE43728000E6794 /* NoteWidgetIntentHandler.swift */; };
 		BA289B612BE43825000E6794 /* ListWidgetIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA289B5A2BE4371A000E6794 /* ListWidgetIntentHandler.swift */; };
-		BA289B642BE43963000E6794 /* OpenNewNoteIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA289B632BE43963000E6794 /* OpenNewNoteIntentHandler.swift */; };
 		BA289B652BE43963000E6794 /* OpenNewNoteIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA289B632BE43963000E6794 /* OpenNewNoteIntentHandler.swift */; };
 		BA2D82C6261522F100A1695B /* PublishNoticePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2D82C5261522F100A1695B /* PublishNoticePresenter.swift */; };
 		BA32A90F26B7469F00727247 /* WidgetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32A90E26B7469F00727247 /* WidgetError.swift */; };
@@ -3580,7 +3579,6 @@
 				B5AEC38423FAC5D600D24221 /* DateFormatter+Simplenote.swift in Sources */,
 				B5DF734622A5713600602CE7 /* SortMode.swift in Sources */,
 				BA55B05A25F067DF0042582B /* NoticePresenter.swift in Sources */,
-				BA289B642BE43963000E6794 /* OpenNewNoteIntentHandler.swift in Sources */,
 				46A3C99D17DFA81A002865AE /* SPAddCollaboratorsViewController.m in Sources */,
 				B52646AA22D3E04C00EBF299 /* UIViewController+Simplenote.swift in Sources */,
 				B55E428C22A1A4550018C0CE /* SPSortOrderViewController.swift in Sources */,
