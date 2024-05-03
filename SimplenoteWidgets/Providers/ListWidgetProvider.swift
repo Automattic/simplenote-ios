@@ -42,7 +42,7 @@ struct ListWidgetProvider: IntentTimelineProvider {
     typealias Intent = ListWidgetIntent
     typealias Entry = ListWidgetEntry
 
-    let coreDataWrapper = WidgetCoreDataWrapper()
+    let coreDataWrapper = ExtensionCoreDataWrapper()
 
     func placeholder(in context: Context) -> ListWidgetEntry {
         return ListWidgetEntry.placeholder()

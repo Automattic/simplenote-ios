@@ -9,7 +9,7 @@
 import Intents
 
 class NoteWidgetIntentHandler: NSObject, NoteWidgetIntentHandling {
-    let coreDataWrapper = WidgetCoreDataWrapper()
+    let coreDataWrapper = ExtensionCoreDataWrapper()
 
     func provideNoteOptionsCollection(for intent: NoteWidgetIntent, with completion: @escaping (INObjectCollection<WidgetNote>?, Error?) -> Void) {
         guard WidgetDefaults.shared.loggedIn else {

@@ -9,7 +9,7 @@
 import Intents
 
 class OpenNoteIntentHandler: NSObject, OpenNoteIntentHandling {
-    let coreDataWrapper = WidgetCoreDataWrapper()
+    let coreDataWrapper = ExtensionCoreDataWrapper()
 
     func resolveNote(for intent: OpenNoteIntent) async -> IntentNoteResolutionResult {
         guard let identifier = intent.note?.identifier,
