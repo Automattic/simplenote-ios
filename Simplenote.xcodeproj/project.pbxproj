@@ -565,8 +565,8 @@
 		BAFA93FA265DE8920009DCFB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E29ADD4D17848E8500E55842 /* Images.xcassets */; };
 		BAFDBBD926B88BD200119615 /* Date+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFDBBD726B88BD200119615 /* Date+Simplenote.swift */; };
 		BAFDBBDA26B88BD200119615 /* Date+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFDBBD726B88BD200119615 /* Date+Simplenote.swift */; };
-		BAFFCEA626DDA9F6007F5EE3 /* WidgetCoreDataWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFFCEA526DDA9F6007F5EE3 /* WidgetCoreDataWrapper.swift */; };
-		BAFFCEA726DDA9F6007F5EE3 /* WidgetCoreDataWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFFCEA526DDA9F6007F5EE3 /* WidgetCoreDataWrapper.swift */; };
+		BAFFCEA626DDA9F6007F5EE3 /* ExtensionCoreDataWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFFCEA526DDA9F6007F5EE3 /* ExtensionCoreDataWrapper.swift */; };
+		BAFFCEA726DDA9F6007F5EE3 /* ExtensionCoreDataWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFFCEA526DDA9F6007F5EE3 /* ExtensionCoreDataWrapper.swift */; };
 		D435D38FCA5863E8447D5C2C /* Pods_Automattic_SimplenoteShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183BAB896957F07FDCAB6DF5 /* Pods_Automattic_SimplenoteShare.framework */; };
 		D82BFE4B2624A8AB003DFA32 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82BFE4A2624A8AB003DFA32 /* Settings.swift */; };
 		D82BFE542624A8C5003DFA32 /* SimplenoteUISmokeTestsSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82BFE532624A8C5003DFA32 /* SimplenoteUISmokeTestsSettings.swift */; };
@@ -1218,7 +1218,7 @@
 		BAFA93EE265DE3B90009DCFB /* NewNoteWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNoteWidget.swift; sourceTree = "<group>"; };
 		BAFA93F0265DE45D0009DCFB /* NewNoteWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNoteWidgetProvider.swift; sourceTree = "<group>"; };
 		BAFDBBD726B88BD200119615 /* Date+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Simplenote.swift"; sourceTree = "<group>"; };
-		BAFFCEA526DDA9F6007F5EE3 /* WidgetCoreDataWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetCoreDataWrapper.swift; sourceTree = "<group>"; };
+		BAFFCEA526DDA9F6007F5EE3 /* ExtensionCoreDataWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionCoreDataWrapper.swift; sourceTree = "<group>"; };
 		C07B32800E3C783BDF105B3A /* Pods-Automattic-SimplenoteShare.distribution alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-SimplenoteShare.distribution alpha.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-SimplenoteShare/Pods-Automattic-SimplenoteShare.distribution alpha.xcconfig"; sourceTree = "<group>"; };
 		D82BFE4A2624A8AB003DFA32 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		D82BFE532624A8C5003DFA32 /* SimplenoteUISmokeTestsSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplenoteUISmokeTestsSettings.swift; sourceTree = "<group>"; };
@@ -2425,7 +2425,7 @@
 				BA88765026B79324001C9C9E /* DemoContent.swift */,
 				BAADC8A326C634DB004CAAA9 /* WidgetConstants.swift */,
 				BABFFF2126CF9094003A4C25 /* WidgetDefaults.swift */,
-				BAFFCEA526DDA9F6007F5EE3 /* WidgetCoreDataWrapper.swift */,
+				BAFFCEA526DDA9F6007F5EE3 /* ExtensionCoreDataWrapper.swift */,
 				BA524A0126DF1AE800DAC945 /* WidgetsState.swift */,
 			);
 			path = Tools;
@@ -3782,7 +3782,7 @@
 				BA86627226B3B1B700466746 /* NSSortDescriptor+Simplenote.swift in Sources */,
 				BAADC8A526C634DB004CAAA9 /* WidgetConstants.swift in Sources */,
 				BAF8D45526AE10FC00CA9383 /* Tag+Widget.swift in Sources */,
-				BAFFCEA726DDA9F6007F5EE3 /* WidgetCoreDataWrapper.swift in Sources */,
+				BAFFCEA726DDA9F6007F5EE3 /* ExtensionCoreDataWrapper.swift in Sources */,
 				BAF8D53C26AE175C00CA9383 /* Bundle+Simplenote.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3820,7 +3820,7 @@
 				BA86615926B35CEF00466746 /* BuildConfiguration.swift in Sources */,
 				BAF4A97926DB10BD00C51C1D /* NoteContentHelper.swift in Sources */,
 				BAE63CB126E05325002BF81A /* NSPredicate+Email.swift in Sources */,
-				BAFFCEA626DDA9F6007F5EE3 /* WidgetCoreDataWrapper.swift in Sources */,
+				BAFFCEA626DDA9F6007F5EE3 /* ExtensionCoreDataWrapper.swift in Sources */,
 				BA122DBC265EF410003D3BC5 /* ColorStudio.swift in Sources */,
 				BA608EF926BB6F4C00A9D94E /* ListWidgetView.swift in Sources */,
 				BAE63CAF26E05312002BF81A /* NSString+Simplenote.swift in Sources */,
