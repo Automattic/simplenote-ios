@@ -22,7 +22,7 @@ class OpenNoteIntentHandler: NSObject, OpenNoteIntentHandling {
 
     func provideNoteOptionsCollection(for intent: OpenNoteIntent) async throws -> INObjectCollection<IntentNote> {
         guard let notes = coreDataWrapper.resultsController()?.notes() else {
-            throw fatalError("Could not fetch notes")
+            throw IntentsError.couldNotFetchNotes
         }
 
         let intentNotes = notes.map({

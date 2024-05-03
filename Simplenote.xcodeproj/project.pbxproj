@@ -475,6 +475,7 @@
 		BA69A5192BE0127C0096E50F /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = BA69A5182BE0127C0096E50F /* PrivacyInfo.xcprivacy */; };
 		BA69A51B2BE015640096E50F /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = BA69A51A2BE015640096E50F /* PrivacyInfo.xcprivacy */; };
 		BA69A51D2BE015BF0096E50F /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = BA69A51C2BE015BF0096E50F /* PrivacyInfo.xcprivacy */; };
+		BA6D7B8B2BE588F0006AE368 /* IntentsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6D7B8A2BE588F0006AE368 /* IntentsError.swift */; };
 		BA6DA19126DB5F1B000464C8 /* URLComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6DA19026DB5F1B000464C8 /* URLComponents.swift */; };
 		BA6DA19226DB5F1B000464C8 /* URLComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6DA19026DB5F1B000464C8 /* URLComponents.swift */; };
 		BA7071E526BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BA7071E426BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition */; };
@@ -1166,6 +1167,7 @@
 		BA69A5182BE0127C0096E50F /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		BA69A51A2BE015640096E50F /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		BA69A51C2BE015BF0096E50F /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		BA6D7B8A2BE588F0006AE368 /* IntentsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentsError.swift; sourceTree = "<group>"; };
 		BA6DA19026DB5F1B000464C8 /* URLComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLComponents.swift; sourceTree = "<group>"; };
 		BA7071E426BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = ListWidgetIntent.intentdefinition; sourceTree = "<group>"; };
 		BA75D87D26C0843600883FFA /* Text+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Simplenote.swift"; sourceTree = "<group>"; };
@@ -2401,6 +2403,7 @@
 			children = (
 				092FD78026D7BB72006BE8E2 /* Supporting Files */,
 				BAB5762626703C8200B0C56F /* IntentHandler.swift */,
+				BA6D7B8A2BE588F0006AE368 /* IntentsError.swift */,
 				BA289B702BE45A39000E6794 /* IntentsConstants.swift */,
 				BA289B622BE43949000E6794 /* Intent Handlers */,
 				BAF8D4AD26AE136D00CA9383 /* Simplenote-Intents-Bridging-Header.h */,
@@ -3764,6 +3767,7 @@
 				BA86625D26B3B14900466746 /* SortMode.swift in Sources */,
 				BA12B07026B0D0150026F31D /* SPManagedObject+Widget.swift in Sources */,
 				BAF4A9AA26DB138600C51C1D /* NoteContentHelper.swift in Sources */,
+				BA6D7B8B2BE588F0006AE368 /* IntentsError.swift in Sources */,
 				BA289B782BE45BFB000E6794 /* ActivityType.swift in Sources */,
 				BA7071E626BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition in Sources */,
 				BA86622426B3AE4A00466746 /* WidgetResultsController.swift in Sources */,
