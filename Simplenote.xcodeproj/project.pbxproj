@@ -451,6 +451,7 @@
 		BA32A90F26B7469F00727247 /* WidgetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32A90E26B7469F00727247 /* WidgetError.swift */; };
 		BA32A91926B746A200727247 /* WidgetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32A90E26B7469F00727247 /* WidgetError.swift */; };
 		BA32A91A26B746A300727247 /* WidgetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32A90E26B7469F00727247 /* WidgetError.swift */; };
+		BA3580902BE95BE100CE1590 /* AppendNoteIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA35808F2BE95BE100CE1590 /* AppendNoteIntentHandler.swift */; };
 		BA3856CD2681715700F388CC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3856CC2681715700F388CC /* CoreDataManager.swift */; };
 		BA3CE86226D5DF3800EFF9EB /* WidgetTag+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3CE86126D5DF3800EFF9EB /* WidgetTag+Helpers.swift */; };
 		BA3CE8D926D5E21C00EFF9EB /* WidgetTag+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3CE86126D5DF3800EFF9EB /* WidgetTag+Helpers.swift */; };
@@ -1144,6 +1145,7 @@
 		BA289B742BE45BBB000E6794 /* OpenNoteIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenNoteIntentHandler.swift; sourceTree = "<group>"; };
 		BA2D82C5261522F100A1695B /* PublishNoticePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishNoticePresenter.swift; sourceTree = "<group>"; };
 		BA32A90E26B7469F00727247 /* WidgetError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetError.swift; sourceTree = "<group>"; };
+		BA35808F2BE95BE100CE1590 /* AppendNoteIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppendNoteIntentHandler.swift; sourceTree = "<group>"; };
 		BA3856CC2681715700F388CC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		BA3CE86126D5DF3800EFF9EB /* WidgetTag+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WidgetTag+Helpers.swift"; sourceTree = "<group>"; };
 		BA3FB8CE25FEA0C500EA9A1B /* NoticeControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeControllerTests.swift; sourceTree = "<group>"; };
@@ -2333,6 +2335,7 @@
 				BA289B5A2BE4371A000E6794 /* ListWidgetIntentHandler.swift */,
 				BA289B632BE43963000E6794 /* OpenNewNoteIntentHandler.swift */,
 				BA289B742BE45BBB000E6794 /* OpenNoteIntentHandler.swift */,
+				BA35808F2BE95BE100CE1590 /* AppendNoteIntentHandler.swift */,
 			);
 			path = "Intent Handlers";
 			sourceTree = "<group>";
@@ -3769,6 +3772,7 @@
 				BAF4A9AA26DB138600C51C1D /* NoteContentHelper.swift in Sources */,
 				BA6D7B8B2BE588F0006AE368 /* IntentsError.swift in Sources */,
 				BA289B782BE45BFB000E6794 /* ActivityType.swift in Sources */,
+				BA3580902BE95BE100CE1590 /* AppendNoteIntentHandler.swift in Sources */,
 				BA7071E626BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition in Sources */,
 				BA86622426B3AE4A00466746 /* WidgetResultsController.swift in Sources */,
 				BABFFF2426CF9094003A4C25 /* WidgetDefaults.swift in Sources */,

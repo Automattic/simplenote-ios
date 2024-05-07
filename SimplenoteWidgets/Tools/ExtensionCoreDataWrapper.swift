@@ -1,4 +1,5 @@
 import Foundation
+import CoreData
 
 class ExtensionCoreDataWrapper {
     private lazy var coreDataManager: CoreDataManager = {
@@ -18,5 +19,9 @@ class ExtensionCoreDataWrapper {
             return nil
         }
         return extensionResultsController
+    }
+
+    func context() -> NSManagedObjectContext {
+        coreDataManager.managedObjectContext
     }
 }
