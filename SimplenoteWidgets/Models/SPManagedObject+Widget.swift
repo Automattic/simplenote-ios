@@ -17,5 +17,5 @@ extension SPManagedObject {
     }
 
     @NSManaged public var ghostData: String?
-    @NSManaged public var simperiumKey: String?
+    @NSManaged public var simperiumKey: String
 }

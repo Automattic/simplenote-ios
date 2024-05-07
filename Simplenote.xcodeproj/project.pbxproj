@@ -420,6 +420,8 @@
 		BA0890A526BB9B680035CA48 /* NoteListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0890A426BB9B680035CA48 /* NoteListRow.swift */; };
 		BA0890A726BB9BE20035CA48 /* ListWidgetHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0890A626BB9BE20035CA48 /* ListWidgetHeaderView.swift */; };
 		BA0890A926BB9BF80035CA48 /* NewNoteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0890A826BB9BF80035CA48 /* NewNoteButton.swift */; };
+		BA0AF10D2BE996600050EEBD /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59560DF251A46D500A06788 /* KeychainManager.swift */; };
+		BA0AF10E2BE996630050EEBD /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FD30471FC4CFA2008D0B78 /* KeychainPasswordItem.swift */; };
 		BA0ED16E26D708AC002533B6 /* Color+Widgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0ED16D26D708AC002533B6 /* Color+Widgets.swift */; };
 		BA0F5E0426B62A8B0098C605 /* RemoteError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0F5E0326B62A8B0098C605 /* RemoteError.swift */; };
 		BA113E4D269E860500F3E3B4 /* markdown-light.css in Resources */ = {isa = PBXBuildFile; fileRef = BA113E4C269E860500F3E3B4 /* markdown-light.css */; };
@@ -451,6 +453,9 @@
 		BA32A90F26B7469F00727247 /* WidgetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32A90E26B7469F00727247 /* WidgetError.swift */; };
 		BA32A91926B746A200727247 /* WidgetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32A90E26B7469F00727247 /* WidgetError.swift */; };
 		BA32A91A26B746A300727247 /* WidgetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32A90E26B7469F00727247 /* WidgetError.swift */; };
+		BA34B04C2BEAE9E800580E15 /* Uploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CFFFE622AA9DB100B968CD /* Uploader.swift */; };
+		BA34B04D2BEAE9FE00580E15 /* SPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B59314D61A486B3800B651ED /* SPConstants.m */; };
+		BA34B04E2BEAEB4100580E15 /* NSURLSessionConfiguration+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AD7AB01D1C82D3009725FB /* NSURLSessionConfiguration+Extensions.swift */; };
 		BA3580902BE95BE100CE1590 /* AppendNoteIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA35808F2BE95BE100CE1590 /* AppendNoteIntentHandler.swift */; };
 		BA3856CD2681715700F388CC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3856CC2681715700F388CC /* CoreDataManager.swift */; };
 		BA3CE86226D5DF3800EFF9EB /* WidgetTag+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3CE86126D5DF3800EFF9EB /* WidgetTag+Helpers.swift */; };
@@ -3756,6 +3761,7 @@
 			files = (
 				BA86620E26B3A73D00466746 /* UserDefaults+Simplenote.swift in Sources */,
 				BAF8D52826AE173D00CA9383 /* FileManager+Simplenote.swift in Sources */,
+				BA34B04D2BEAE9FE00580E15 /* SPConstants.m in Sources */,
 				BA289B5F2BE43728000E6794 /* NoteWidgetIntentHandler.swift in Sources */,
 				BAF8D50026AE171400CA9383 /* CoreDataManager.swift in Sources */,
 				BAE63CB026E05313002BF81A /* NSString+Simplenote.swift in Sources */,
@@ -3763,10 +3769,12 @@
 				BAF8D51426AE172600CA9383 /* StorageSettings.swift in Sources */,
 				BA289B5C2BE4371A000E6794 /* ListWidgetIntentHandler.swift in Sources */,
 				BA86616326B35CF000466746 /* BuildConfiguration.swift in Sources */,
+				BA34B04C2BEAE9E800580E15 /* Uploader.swift in Sources */,
 				BA289B722BE45A39000E6794 /* IntentsConstants.swift in Sources */,
 				BAB5762726703C8200B0C56F /* IntentHandler.swift in Sources */,
 				BA289B652BE43963000E6794 /* OpenNewNoteIntentHandler.swift in Sources */,
 				BA289B592BE436EB000E6794 /* ShortcutIntents.intentdefinition in Sources */,
+				BA0AF10D2BE996600050EEBD /* KeychainManager.swift in Sources */,
 				BA86625D26B3B14900466746 /* SortMode.swift in Sources */,
 				BA12B07026B0D0150026F31D /* SPManagedObject+Widget.swift in Sources */,
 				BAF4A9AA26DB138600C51C1D /* NoteContentHelper.swift in Sources */,
@@ -3788,7 +3796,9 @@
 				BAFDBBDA26B88BD200119615 /* Date+Simplenote.swift in Sources */,
 				BA3CE8D926D5E21C00EFF9EB /* WidgetTag+Helpers.swift in Sources */,
 				BA86627226B3B1B700466746 /* NSSortDescriptor+Simplenote.swift in Sources */,
+				BA0AF10E2BE996630050EEBD /* KeychainPasswordItem.swift in Sources */,
 				BAADC8A526C634DB004CAAA9 /* WidgetConstants.swift in Sources */,
+				BA34B04E2BEAEB4100580E15 /* NSURLSessionConfiguration+Extensions.swift in Sources */,
 				BAF8D45526AE10FC00CA9383 /* Tag+Widget.swift in Sources */,
 				BAFFCEA726DDA9F6007F5EE3 /* ExtensionCoreDataWrapper.swift in Sources */,
 				BAF8D53C26AE175C00CA9383 /* Bundle+Simplenote.swift in Sources */,

@@ -60,10 +60,31 @@ extension Note {
     }
 
     var url: URL {
-        guard let simperiumKey = simperiumKey else {
-            return URL(string: .simplenotePath())!
-        }
         return URL(string: .simplenotePath(withHost: SimplenoteConstants.simplenoteInterlinkHost) + simperiumKey)!
+    }
+
+    func toDictionary() -> [String: Any] {
+        var systemTags = [String]()
+
+        return [
+            "tags": [],
+            "deleted": 0,
+            "shareURL": String(),
+            "publishURL": String(),
+            "content": content ?? "",
+            "systemTags": systemTags,
+            "creationDate": (creationDate ?? .now).timeIntervalSince1970,
+            "modificationDate": (modificationDate ?? .now).timeIntervalSince1970
+        ]
+    }
+
+    func toJsonData() -> Data? {
+        do {
+            return try JSONSerialization.data(withJSONObject: toDictionary(), options: .prettyPrinted)
+        } catch {
+            print("Error converting Note to JSON: \(error)")
+            return nil
+        }
     }
 }
 

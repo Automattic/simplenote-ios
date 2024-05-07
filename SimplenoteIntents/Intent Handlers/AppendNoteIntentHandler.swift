@@ -40,20 +40,15 @@ class AppendNoteIntentHandler: NSObject, AppendNoteIntentHandling {
 
     func handle(intent: AppendNoteIntent) async -> AppendNoteIntentResponse {
         guard let identifier = intent.note?.identifier,
-              let content = intent.content else {
+              let content = intent.content,
+              let note = coreDataWrapper.resultsController()?.note(forSimperiumKey: identifier),
+              let token = KeychainManager.extensionToken else {
             return AppendNoteIntentResponse(code: .failure, userActivity: nil)
         }
 
-        guard let note = coreDataWrapper.resultsController()?.note(forSimperiumKey: identifier) else {
-            return AppendNoteIntentResponse(code: .failure, userActivity: nil)
-        }
-
-        do {
-            note.content? += " \n\n\(content)"
-            try coreDataWrapper.context().save()
-        } catch {
-            return AppendNoteIntentResponse(code: .failure, userActivity: nil)
-        }
+        note.content? += "\n\n\(content)"
+        let uploader = Uploader(simperiumToken: token)
+        uploader.send(note)
 
         return AppendNoteIntentResponse(code: .success, userActivity: nil)
     }
