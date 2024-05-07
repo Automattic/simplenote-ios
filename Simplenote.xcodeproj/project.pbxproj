@@ -442,8 +442,9 @@
 		BA289B5F2BE43728000E6794 /* NoteWidgetIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA289B5D2BE43728000E6794 /* NoteWidgetIntentHandler.swift */; };
 		BA289B602BE43816000E6794 /* NoteWidgetIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA289B5D2BE43728000E6794 /* NoteWidgetIntentHandler.swift */; };
 		BA289B612BE43825000E6794 /* ListWidgetIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA289B5A2BE4371A000E6794 /* ListWidgetIntentHandler.swift */; };
+		BA289B642BE43963000E6794 /* OpenNewNoteIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA289B632BE43963000E6794 /* OpenNewNoteIntentHandler.swift */; };
+		BA289B652BE43963000E6794 /* OpenNewNoteIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA289B632BE43963000E6794 /* OpenNewNoteIntentHandler.swift */; };
 		BA2D82C6261522F100A1695B /* PublishNoticePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2D82C5261522F100A1695B /* PublishNoticePresenter.swift */; };
-		BA3101A926C8C76A00C95F93 /* ListWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BA7071E426BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition */; settings = {ATTRIBUTES = (no_codegen, ); }; };
 		BA32A90F26B7469F00727247 /* WidgetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32A90E26B7469F00727247 /* WidgetError.swift */; };
 		BA32A91926B746A200727247 /* WidgetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32A90E26B7469F00727247 /* WidgetError.swift */; };
 		BA32A91A26B746A300727247 /* WidgetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32A90E26B7469F00727247 /* WidgetError.swift */; };
@@ -513,7 +514,6 @@
 		BAB5762426703C8100B0C56F /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAB5762326703C8100B0C56F /* Intents.framework */; };
 		BAB5762726703C8200B0C56F /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5762626703C8200B0C56F /* IntentHandler.swift */; };
 		BAB5762B26703C8200B0C56F /* SimplenoteIntents.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BAB5762226703C8100B0C56F /* SimplenoteIntents.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		BAB5764626703D0000B0C56F /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5762626703C8200B0C56F /* IntentHandler.swift */; };
 		BAB5765B26703D0600B0C56F /* NoteWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BAB5760A26703C0C00B0C56F /* NoteWidgetIntent.intentdefinition */; };
 		BAB5765C26703D0600B0C56F /* NoteWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BAB5760A26703C0C00B0C56F /* NoteWidgetIntent.intentdefinition */; };
 		BAB5768726703EA000B0C56F /* NoteWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB5767B26703E8100B0C56F /* NoteWidgetView.swift */; };
@@ -562,7 +562,6 @@
 		BAFA93FA265DE8920009DCFB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E29ADD4D17848E8500E55842 /* Images.xcassets */; };
 		BAFDBBD926B88BD200119615 /* Date+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFDBBD726B88BD200119615 /* Date+Simplenote.swift */; };
 		BAFDBBDA26B88BD200119615 /* Date+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFDBBD726B88BD200119615 /* Date+Simplenote.swift */; };
-		BAFDBBE426B88F1300119615 /* NoteWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BAB5760A26703C0C00B0C56F /* NoteWidgetIntent.intentdefinition */; settings = {ATTRIBUTES = (no_codegen, ); }; };
 		BAFFCEA626DDA9F6007F5EE3 /* WidgetCoreDataWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFFCEA526DDA9F6007F5EE3 /* WidgetCoreDataWrapper.swift */; };
 		BAFFCEA726DDA9F6007F5EE3 /* WidgetCoreDataWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFFCEA526DDA9F6007F5EE3 /* WidgetCoreDataWrapper.swift */; };
 		D435D38FCA5863E8447D5C2C /* Pods_Automattic_SimplenoteShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183BAB896957F07FDCAB6DF5 /* Pods_Automattic_SimplenoteShare.framework */; };
@@ -1136,6 +1135,7 @@
 		BA289B572BE436EB000E6794 /* ShortcutIntents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = ShortcutIntents.intentdefinition; sourceTree = "<group>"; };
 		BA289B5A2BE4371A000E6794 /* ListWidgetIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWidgetIntentHandler.swift; sourceTree = "<group>"; };
 		BA289B5D2BE43728000E6794 /* NoteWidgetIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteWidgetIntentHandler.swift; sourceTree = "<group>"; };
+		BA289B632BE43963000E6794 /* OpenNewNoteIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenNewNoteIntentHandler.swift; sourceTree = "<group>"; };
 		BA2D82C5261522F100A1695B /* PublishNoticePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishNoticePresenter.swift; sourceTree = "<group>"; };
 		BA32A90E26B7469F00727247 /* WidgetError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetError.swift; sourceTree = "<group>"; };
 		BA3856CC2681715700F388CC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -2319,6 +2319,16 @@
 			path = Providers;
 			sourceTree = "<group>";
 		};
+		BA289B622BE43949000E6794 /* Intent Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				BA289B5D2BE43728000E6794 /* NoteWidgetIntentHandler.swift */,
+				BA289B5A2BE4371A000E6794 /* ListWidgetIntentHandler.swift */,
+				BA289B632BE43963000E6794 /* OpenNewNoteIntentHandler.swift */,
+			);
+			path = "Intent Handlers";
+			sourceTree = "<group>";
+		};
 		BA3FB8CD25FEA09F00EA9A1B /* Notice */ = {
 			isa = PBXGroup;
 			children = (
@@ -2385,8 +2395,7 @@
 			children = (
 				092FD78026D7BB72006BE8E2 /* Supporting Files */,
 				BAB5762626703C8200B0C56F /* IntentHandler.swift */,
-				BA289B5D2BE43728000E6794 /* NoteWidgetIntentHandler.swift */,
-				BA289B5A2BE4371A000E6794 /* ListWidgetIntentHandler.swift */,
+				BA289B622BE43949000E6794 /* Intent Handlers */,
 				BAF8D4AD26AE136D00CA9383 /* Simplenote-Intents-Bridging-Header.h */,
 			);
 			path = SimplenoteIntents;
@@ -3436,7 +3445,6 @@
 				B54D9C592909CC4400D0E0EC /* StoreProduct.swift in Sources */,
 				A6C0589924AD47CB006BC572 /* SPSnappingSlider.swift in Sources */,
 				B550F93122BA65CD00091939 /* ActivityType.swift in Sources */,
-				BA3101A926C8C76A00C95F93 /* ListWidgetIntent.intentdefinition in Sources */,
 				46A3C97817DFA81A002865AE /* PersonTag.m in Sources */,
 				B5BFAEBB21519DCA00918DC8 /* SPPrivacyViewController.swift in Sources */,
 				A6C0DFE725C18E3300B9BE39 /* NoteEditorTagListViewController.swift in Sources */,
@@ -3554,7 +3562,6 @@
 				B5E951E124FEDAD4004B10B8 /* UIPasteboard+Note.swift in Sources */,
 				A6C7648025E9131C00A39067 /* SignupRemote.swift in Sources */,
 				A681C73C2541AC8D00F369C2 /* HuggableTableView.swift in Sources */,
-				BAFDBBE426B88F1300119615 /* NoteWidgetIntent.intentdefinition in Sources */,
 				46A3C99917DFA81A002865AE /* SPTransitionController.m in Sources */,
 				B56A695B22F9CD4E00B90398 /* UINavigationBar+Simplenote.swift in Sources */,
 				46A3C99B17DFA81A002865AE /* Tag.m in Sources */,
@@ -3573,6 +3580,7 @@
 				B5AEC38423FAC5D600D24221 /* DateFormatter+Simplenote.swift in Sources */,
 				B5DF734622A5713600602CE7 /* SortMode.swift in Sources */,
 				BA55B05A25F067DF0042582B /* NoticePresenter.swift in Sources */,
+				BA289B642BE43963000E6794 /* OpenNewNoteIntentHandler.swift in Sources */,
 				46A3C99D17DFA81A002865AE /* SPAddCollaboratorsViewController.m in Sources */,
 				B52646AA22D3E04C00EBF299 /* UIViewController+Simplenote.swift in Sources */,
 				B55E428C22A1A4550018C0CE /* SPSortOrderViewController.swift in Sources */,
@@ -3743,6 +3751,7 @@
 				BA289B5C2BE4371A000E6794 /* ListWidgetIntentHandler.swift in Sources */,
 				BA86616326B35CF000466746 /* BuildConfiguration.swift in Sources */,
 				BAB5762726703C8200B0C56F /* IntentHandler.swift in Sources */,
+				BA289B652BE43963000E6794 /* OpenNewNoteIntentHandler.swift in Sources */,
 				BA289B592BE436EB000E6794 /* ShortcutIntents.intentdefinition in Sources */,
 				BA86625D26B3B14900466746 /* SortMode.swift in Sources */,
 				BA12B07026B0D0150026F31D /* SPManagedObject+Widget.swift in Sources */,
@@ -3830,7 +3839,6 @@
 				BA122DC2265EF4E5003D3BC5 /* SPUserInterface.swift in Sources */,
 				BAB576A826703F4500B0C56F /* NoteWidgetProvider.swift in Sources */,
 				BAF8D4F626AE171400CA9383 /* CoreDataManager.swift in Sources */,
-				BAB5764626703D0000B0C56F /* IntentHandler.swift in Sources */,
 				BAB576C92670514500B0C56F /* NoteWidget.swift in Sources */,
 				BA122DC7265EF92D003D3BC5 /* NewNoteWidgetView.swift in Sources */,
 			);

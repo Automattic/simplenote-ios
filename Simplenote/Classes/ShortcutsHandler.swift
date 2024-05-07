@@ -47,7 +47,7 @@ class ShortcutsHandler: NSObject {
         switch type {
         case .launch:
             break
-        case .newNote:
+        case .newNote, .newNoteShortcut:
             SPAppDelegate.shared().presentNewNoteEditor()
         case .openNote, .openSpotlightItem:
             presentNote(for: userActivity)
