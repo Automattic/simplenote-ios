@@ -40,7 +40,7 @@ struct NoteWidgetProvider: IntentTimelineProvider {
     typealias Intent = NoteWidgetIntent
     typealias Entry = NoteWidgetEntry
 
-    let coreDataWrapper = WidgetCoreDataWrapper()
+    let coreDataWrapper = ExtensionCoreDataWrapper()
 
     func placeholder(in context: Context) -> NoteWidgetEntry {
         return NoteWidgetEntry.placeholder()

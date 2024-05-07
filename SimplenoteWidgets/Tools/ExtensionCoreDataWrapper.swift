@@ -1,6 +1,6 @@
 import Foundation
 
-class WidgetCoreDataWrapper {
+class ExtensionCoreDataWrapper {
     private lazy var coreDataManager: CoreDataManager = {
         do {
             return try CoreDataManager(StorageSettings().sharedStorageURL, for: .widgets)
@@ -9,7 +9,7 @@ class WidgetCoreDataWrapper {
         }
     }()
 
-    private lazy var widgetResultsController: WidgetResultsController = {
+    private lazy var extensionResultsController: WidgetResultsController = {
         WidgetResultsController(context: coreDataManager.managedObjectContext)
     }()
 
@@ -17,6 +17,6 @@ class WidgetCoreDataWrapper {
         guard FileManager.default.fileExists(atPath: StorageSettings().sharedStorageURL.path) else {
             return nil
         }
-        return widgetResultsController
+        return extensionResultsController
     }
 }

@@ -9,8 +9,10 @@ class IntentHandler: INExtension {
             return NoteWidgetIntentHandler()
         case is ListWidgetIntent:
             return ListWidgetIntentHandler()
-        case is SPOpenNewNoteIntent:
+        case is OpenNewNoteIntent:
             return OpenNewNoteIntentHandler()
+        case is OpenNoteIntent:
+            return OpenNoteIntentHandler()
         default:
             return self
         }

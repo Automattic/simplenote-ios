@@ -8,8 +8,8 @@
 
 import Intents
 
-class OpenNewNoteIntentHandler: NSObject, SPOpenNewNoteIntentHandling {
-    func handle(intent: SPOpenNewNoteIntent) async -> SPOpenNewNoteIntentResponse {
-        SPOpenNewNoteIntentResponse(code: .continueInApp, userActivity: nil)
+class OpenNewNoteIntentHandler: NSObject, OpenNewNoteIntentHandling {
+    func handle(intent: OpenNewNoteIntent) async -> OpenNewNoteIntentResponse {
+        OpenNewNoteIntentResponse(code: .continueInApp, userActivity: nil)
     }
 }

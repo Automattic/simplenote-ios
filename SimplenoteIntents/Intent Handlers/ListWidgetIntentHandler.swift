@@ -9,7 +9,7 @@
 import Intents
 
 class ListWidgetIntentHandler: NSObject, ListWidgetIntentHandling {
-    let coreDataWrapper = WidgetCoreDataWrapper()
+    let coreDataWrapper = ExtensionCoreDataWrapper()
 
     func provideTagOptionsCollection(for intent: ListWidgetIntent, with completion: @escaping (INObjectCollection<WidgetTag>?, Error?) -> Void) {
         guard WidgetDefaults.shared.loggedIn else {

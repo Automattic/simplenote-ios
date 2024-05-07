@@ -1,5 +1,6 @@
 import Foundation
 import CoreSpotlight
+import Intents
 
 // MARK: - AppDelegate Shortcuts Methods
 //
@@ -51,6 +52,8 @@ class ShortcutsHandler: NSObject {
             SPAppDelegate.shared().presentNewNoteEditor()
         case .openNote, .openSpotlightItem:
             presentNote(for: userActivity)
+        case .openNoteShortcut:
+            presentNote(for: userActivity.interaction)
         }
 
         return true
@@ -150,6 +153,16 @@ private extension ShortcutsHandler {
     ///
     func presentNote(for userActivity: NSUserActivity) {
         guard let uniqueIdentifier = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String else {
+            return
+        }
+
+        SPAppDelegate.shared().presentNoteWithSimperiumKey(uniqueIdentifier)
+    }
+
+    func presentNote(for interaction: INInteraction?) {
+        guard let interaction,
+              let activity = interaction.intentResponse?.userActivity,
+              let uniqueIdentifier = activity.userInfo?[IntentsConstants.noteIdentifierKey] as? String else {
             return
         }
 
