@@ -284,7 +284,6 @@ extension SPAppDelegate: SimperiumDelegate {
         SPTracker.refreshMetadata(withEmail: user.email)
 
         // Shortcuts!
-        ShortcutsHandler.shared.registerSimplenoteActivities()
         ShortcutsHandler.shared.updateHomeScreenQuickActionsIfNeeded()
 
         // Now that the user info is present, cache it for use by the crash logging system.
