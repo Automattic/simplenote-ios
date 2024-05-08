@@ -63,16 +63,41 @@ extension Note {
         return URL(string: .simplenotePath(withHost: SimplenoteConstants.simplenoteInterlinkHost) + simperiumKey)!
     }
 
+    private func objectFromJSONString(_ json: String) -> Any? {
+        guard let data = json.data(using: .utf8) else {
+            return nil
+        }
+
+        return try? JSONSerialization.jsonObject(with: data)
+    }
+
+    var tagsArray: [String] {
+        guard let tagsString = tags,
+              let array = objectFromJSONString(tagsString) as? [String] else {
+            return []
+        }
+
+        return array
+    }
+
+    var systemTagsArray: [String] {
+        guard let systemTagsString = systemTags,
+              let array = objectFromJSONString(systemTagsString) as? [String] else {
+            return []
+        }
+
+        return array
+    }
+
     func toDictionary() -> [String: Any] {
-        var systemTags = [String]()
 
         return [
-            "tags": [],
+            "tags": tagsArray,
             "deleted": 0,
             "shareURL": String(),
             "publishURL": String(),
             "content": content ?? "",
-            "systemTags": systemTags,
+            "systemTags": systemTagsArray,
             "creationDate": (creationDate ?? .now).timeIntervalSince1970,
             "modificationDate": (modificationDate ?? .now).timeIntervalSince1970
         ]
