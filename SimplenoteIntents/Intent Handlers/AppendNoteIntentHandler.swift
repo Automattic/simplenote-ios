@@ -13,7 +13,7 @@ class AppendNoteIntentHandler: NSObject, AppendNoteIntentHandling {
 
     func resolveContent(for intent: AppendNoteIntent) async -> INStringResolutionResult {
         guard let content = intent.content else {
-            return INStringResolutionResult.confirmationRequired(with: nil)
+            return INStringResolutionResult.needsValue()
         }
         return INStringResolutionResult.success(with: content)
     }
