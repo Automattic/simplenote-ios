@@ -10,11 +10,11 @@ class ExtensionCoreDataWrapper {
         }
     }()
 
-    private lazy var extensionResultsController: WidgetResultsController = {
-        WidgetResultsController(context: coreDataManager.managedObjectContext)
+    private lazy var extensionResultsController: ExtensionResultsController = {
+        ExtensionResultsController(context: coreDataManager.managedObjectContext)
     }()
 
-    func resultsController() -> WidgetResultsController? {
+    func resultsController() -> ExtensionResultsController? {
         guard FileManager.default.fileExists(atPath: StorageSettings().sharedStorageURL.path) else {
             return nil
         }

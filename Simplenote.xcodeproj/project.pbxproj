@@ -496,8 +496,8 @@
 		BA86616326B35CF000466746 /* BuildConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F920265A2294661C0061B1DE /* BuildConfiguration.swift */; };
 		BA86620E26B3A73D00466746 /* UserDefaults+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */; };
 		BA86621826B3A73D00466746 /* UserDefaults+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */; };
-		BA86622326B3AE4A00466746 /* WidgetResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA86622226B3AE4A00466746 /* WidgetResultsController.swift */; };
-		BA86622426B3AE4A00466746 /* WidgetResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA86622226B3AE4A00466746 /* WidgetResultsController.swift */; };
+		BA86622326B3AE4A00466746 /* ExtensionResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA86622226B3AE4A00466746 /* ExtensionResultsController.swift */; };
+		BA86622426B3AE4A00466746 /* ExtensionResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA86622226B3AE4A00466746 /* ExtensionResultsController.swift */; };
 		BA86624926B3B05100466746 /* SimplenoteConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5095DC824632E3300812711 /* SimplenoteConstants.swift */; };
 		BA86625326B3B14800466746 /* SortMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DF734522A5713600602CE7 /* SortMode.swift */; };
 		BA86625D26B3B14900466746 /* SortMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DF734522A5713600602CE7 /* SortMode.swift */; };
@@ -1189,7 +1189,7 @@
 		BA8661D626B3A08700466746 /* SimplenoteIntents-Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SimplenoteIntents-Debug.entitlements"; sourceTree = "<group>"; };
 		BA8661D726B3A0A000466746 /* SimplenoteIntents-Release.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SimplenoteIntents-Release.entitlements"; sourceTree = "<group>"; };
 		BA8661D826B3A0B000466746 /* SimplenoteIntents-DistributionInternal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SimplenoteIntents-DistributionInternal.entitlements"; sourceTree = "<group>"; };
-		BA86622226B3AE4A00466746 /* WidgetResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetResultsController.swift; sourceTree = "<group>"; };
+		BA86622226B3AE4A00466746 /* ExtensionResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionResultsController.swift; sourceTree = "<group>"; };
 		BA88765026B79324001C9C9E /* DemoContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoContent.swift; sourceTree = "<group>"; };
 		BA8FC2A4267AC7470082962E /* SharedStorageMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStorageMigrator.swift; sourceTree = "<group>"; };
 		BA9B19F826A8EF3200692366 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
@@ -2445,7 +2445,7 @@
 		BAF8D4CB26AE142C00CA9383 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				BA86622226B3AE4A00466746 /* WidgetResultsController.swift */,
+				BA86622226B3AE4A00466746 /* ExtensionResultsController.swift */,
 				BA88765026B79324001C9C9E /* DemoContent.swift */,
 				BAADC8A326C634DB004CAAA9 /* WidgetConstants.swift */,
 				BABFFF2126CF9094003A4C25 /* WidgetDefaults.swift */,
@@ -3796,7 +3796,7 @@
 				BA289B782BE45BFB000E6794 /* ActivityType.swift in Sources */,
 				BA3580902BE95BE100CE1590 /* AppendNoteIntentHandler.swift in Sources */,
 				BA7071E626BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition in Sources */,
-				BA86622426B3AE4A00466746 /* WidgetResultsController.swift in Sources */,
+				BA86622426B3AE4A00466746 /* ExtensionResultsController.swift in Sources */,
 				BABFFF2426CF9094003A4C25 /* WidgetDefaults.swift in Sources */,
 				BA289B762BE45BBB000E6794 /* OpenNoteIntentHandler.swift in Sources */,
 				BAF8D46E26AE118800CA9383 /* SPCredentials.swift in Sources */,
@@ -3845,7 +3845,7 @@
 				BAB6C04226BA496F007495C4 /* String+Simplenote.swift in Sources */,
 				BA122DBB265EF40E003D3BC5 /* UIColor+Helpers.swift in Sources */,
 				BA75D8BA26C0865C00883FFA /* Filling.swift in Sources */,
-				BA86622326B3AE4A00466746 /* WidgetResultsController.swift in Sources */,
+				BA86622326B3AE4A00466746 /* ExtensionResultsController.swift in Sources */,
 				BA0890A926BB9BF80035CA48 /* NewNoteButton.swift in Sources */,
 				BA122DBA265EF402003D3BC5 /* SimplenoteConstants.swift in Sources */,
 				BAF8D51E26AE173D00CA9383 /* FileManager+Simplenote.swift in Sources */,

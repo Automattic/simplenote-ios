@@ -3,7 +3,7 @@ import SimplenoteFoundation
 import SimplenoteSearch
 import CoreData
 
-class WidgetResultsController {
+class ExtensionResultsController {
 
     /// Data Controller
     ///
