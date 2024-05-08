@@ -79,6 +79,7 @@
 		<string>NoteWidgetIntent</string>
 		<string>OpenNewNoteIntent</string>
 		<string>OpenNoteIntent</string>
+		<string>SPCreateNewNoteWithContentIntent</string>
 		<string>com.codality.NotationalFlow.launch</string>
 		<string>com.codality.NotationalFlow.newNote</string>
 		<string>com.codality.NotationalFlow.openNote</string>
