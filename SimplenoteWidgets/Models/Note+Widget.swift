@@ -94,8 +94,8 @@ extension Note {
         return [
             "tags": tagsArray,
             "deleted": 0,
-            "shareURL": String(),
-            "publishURL": String(),
+            "shareURL": shareURL ?? String(),
+            "publishURL": publishURL ?? String(),
             "content": content ?? "",
             "systemTags": systemTagsArray,
             "creationDate": (creationDate ?? .now).timeIntervalSince1970,
