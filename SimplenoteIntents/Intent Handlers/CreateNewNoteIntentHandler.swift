@@ -1,5 +1,5 @@
 //
-//  CreateNewNoteWithContentIntentHandler.swift
+//  CreateNewNoteIntentHandler.swift
 //  SimplenoteIntents
 //
 //  Created by Charlie Scheer on 5/8/24.
@@ -8,7 +8,7 @@
 
 import Intents
 
-class CreateNewNoteWithContentIntentHandler: NSObject, CreateNewNoteIntentHandling {
+class CreateNewNoteIntentHandler: NSObject, CreateNewNoteIntentHandling {
 
     func handle(intent: CreateNewNoteIntent) async -> CreateNewNoteIntentResponse {
         CreateNewNoteIntentResponse(code: .failure, userActivity: nil)
