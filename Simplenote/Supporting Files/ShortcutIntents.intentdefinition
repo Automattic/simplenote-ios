@@ -25,6 +25,8 @@
 			<string>SP</string>
 			<key>INIntentConfigurable</key>
 			<true/>
+			<key>INIntentDescription</key>
+			<string>Open Simplenote and create a new note</string>
 			<key>INIntentDescriptionID</key>
 			<string>fgSbr5</string>
 			<key>INIntentIneligibleForSuggestions</key>
@@ -181,6 +183,8 @@
 			<string>SP</string>
 			<key>INIntentConfigurable</key>
 			<true/>
+			<key>INIntentDescription</key>
+			<string>Append content to an existing note in Simplenote</string>
 			<key>INIntentDescriptionID</key>
 			<string>EeqvcH</string>
 			<key>INIntentIneligibleForSuggestions</key>
@@ -317,12 +321,14 @@
 		<dict>
 			<key>INIntentCategory</key>
 			<string>create</string>
+			<key>INIntentClassName</key>
+			<string>CreateNewNoteIntent</string>
 			<key>INIntentClassPrefix</key>
 			<string>SP</string>
 			<key>INIntentConfigurable</key>
 			<true/>
 			<key>INIntentDescription</key>
-			<string>Creates a note with supplied content and saves it in Simplenote</string>
+			<string>Creates a note with supplied content and save it in Simplenote</string>
 			<key>INIntentDescriptionID</key>
 			<string>sXkMgW</string>
 			<key>INIntentIneligibleForSuggestions</key>
@@ -346,7 +352,7 @@
 				</dict>
 			</dict>
 			<key>INIntentName</key>
-			<string>CreateNewNoteWithContent</string>
+			<string>CreateNewNote</string>
 			<key>INIntentParameters</key>
 			<array>
 				<dict>
