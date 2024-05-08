@@ -456,6 +456,7 @@
 		BA34B04C2BEAE9E800580E15 /* Uploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CFFFE622AA9DB100B968CD /* Uploader.swift */; };
 		BA34B04D2BEAE9FE00580E15 /* SPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B59314D61A486B3800B651ED /* SPConstants.m */; };
 		BA34B04E2BEAEB4100580E15 /* NSURLSessionConfiguration+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AD7AB01D1C82D3009725FB /* NSURLSessionConfiguration+Extensions.swift */; };
+		BA34B0572BEC216B00580E15 /* IntentNote+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA34B0562BEC216B00580E15 /* IntentNote+Helpers.swift */; };
 		BA3580902BE95BE100CE1590 /* AppendNoteIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA35808F2BE95BE100CE1590 /* AppendNoteIntentHandler.swift */; };
 		BA3856CD2681715700F388CC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3856CC2681715700F388CC /* CoreDataManager.swift */; };
 		BA3CE86226D5DF3800EFF9EB /* WidgetTag+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3CE86126D5DF3800EFF9EB /* WidgetTag+Helpers.swift */; };
@@ -1151,6 +1152,7 @@
 		BA2D82C5261522F100A1695B /* PublishNoticePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishNoticePresenter.swift; sourceTree = "<group>"; };
 		BA32A90E26B7469F00727247 /* WidgetError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetError.swift; sourceTree = "<group>"; };
 		BA34B04F2BEAEF4800580E15 /* SimplenoteIntentsRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SimplenoteIntentsRelease.entitlements; sourceTree = "<group>"; };
+		BA34B0562BEC216B00580E15 /* IntentNote+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IntentNote+Helpers.swift"; sourceTree = "<group>"; };
 		BA35808F2BE95BE100CE1590 /* AppendNoteIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppendNoteIntentHandler.swift; sourceTree = "<group>"; };
 		BA3856CC2681715700F388CC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		BA3CE86126D5DF3800EFF9EB /* WidgetTag+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WidgetTag+Helpers.swift"; sourceTree = "<group>"; };
@@ -2346,6 +2348,14 @@
 			path = "Intent Handlers";
 			sourceTree = "<group>";
 		};
+		BA34B0552BEC214800580E15 /* ResolutionResults */ = {
+			isa = PBXGroup;
+			children = (
+				BA34B0562BEC216B00580E15 /* IntentNote+Helpers.swift */,
+			);
+			path = ResolutionResults;
+			sourceTree = "<group>";
+		};
 		BA3FB8CD25FEA09F00EA9A1B /* Notice */ = {
 			isa = PBXGroup;
 			children = (
@@ -2416,6 +2426,7 @@
 				BA6D7B8A2BE588F0006AE368 /* IntentsError.swift */,
 				BA289B702BE45A39000E6794 /* IntentsConstants.swift */,
 				BA289B622BE43949000E6794 /* Intent Handlers */,
+				BA34B0552BEC214800580E15 /* ResolutionResults */,
 				BAF8D4AD26AE136D00CA9383 /* Simplenote-Intents-Bridging-Header.h */,
 			);
 			path = SimplenoteIntents;
@@ -3773,6 +3784,7 @@
 				BA86616326B35CF000466746 /* BuildConfiguration.swift in Sources */,
 				BA34B04C2BEAE9E800580E15 /* Uploader.swift in Sources */,
 				BA289B722BE45A39000E6794 /* IntentsConstants.swift in Sources */,
+				BA34B0572BEC216B00580E15 /* IntentNote+Helpers.swift in Sources */,
 				BAB5762726703C8200B0C56F /* IntentHandler.swift in Sources */,
 				BA289B652BE43963000E6794 /* OpenNewNoteIntentHandler.swift in Sources */,
 				BA289B592BE436EB000E6794 /* ShortcutIntents.intentdefinition in Sources */,

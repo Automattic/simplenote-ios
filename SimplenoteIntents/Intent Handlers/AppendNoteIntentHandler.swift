@@ -19,22 +19,11 @@ class AppendNoteIntentHandler: NSObject, AppendNoteIntentHandling {
     }
 
     func resolveNote(for intent: AppendNoteIntent) async -> IntentNoteResolutionResult {
-        guard let identifier = intent.note?.identifier,
-              let note = coreDataWrapper.resultsController()?.note(forSimperiumKey: identifier) else {
-            return IntentNoteResolutionResult.confirmationRequired(with: nil)
-        }
-
-        return IntentNoteResolutionResult.success(with: IntentNote(identifier: note.simperiumKey, display: note.title))
+        IntentNoteResolutionResult.resolve(intent.note, in: coreDataWrapper)
     }
 
     func provideNoteOptionsCollection(for intent: AppendNoteIntent) async throws -> INObjectCollection<IntentNote> {
-        guard let notes = coreDataWrapper.resultsController()?.notes() else {
-            throw IntentsError.couldNotFetchNotes
-        }
-
-        let intentNotes = notes.map({
-            IntentNote(identifier: $0.simperiumKey, display: $0.title)
-        })
+        let intentNotes = try IntentNote.allNotes(in: coreDataWrapper)
         return INObjectCollection(items: intentNotes)
     }
 
