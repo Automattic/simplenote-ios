@@ -511,6 +511,7 @@
 		BA8FC2A5267AC7470082962E /* SharedStorageMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8FC2A4267AC7470082962E /* SharedStorageMigrator.swift */; };
 		BA9B19F926A8EF3200692366 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B19F826A8EF3200692366 /* SpinnerViewController.swift */; };
 		BA9B59022685549F00DAD1ED /* StorageSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B59012685549F00DAD1ED /* StorageSettings.swift */; };
+		BA9C7EC92BED7AB1007A8460 /* CopyNoteContentIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9C7EC82BED7AB1007A8460 /* CopyNoteContentIntentHandler.swift */; };
 		BAA4856925D5E40900F3BDB9 /* SearchQuery+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */; };
 		BAA59E79269F9FE30068BD3D /* Date+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA59E78269F9FE30068BD3D /* Date+Simplenote.swift */; };
 		BAA63C3325EEDA83001589D7 /* NoteLinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA63C3225EEDA83001589D7 /* NoteLinkTests.swift */; };
@@ -1196,6 +1197,7 @@
 		BA8FC2A4267AC7470082962E /* SharedStorageMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStorageMigrator.swift; sourceTree = "<group>"; };
 		BA9B19F826A8EF3200692366 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 		BA9B59012685549F00DAD1ED /* StorageSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageSettings.swift; sourceTree = "<group>"; };
+		BA9C7EC82BED7AB1007A8460 /* CopyNoteContentIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyNoteContentIntentHandler.swift; sourceTree = "<group>"; };
 		BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchQuery+Simplenote.swift"; sourceTree = "<group>"; };
 		BAA59E78269F9FE30068BD3D /* Date+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Simplenote.swift"; sourceTree = "<group>"; };
 		BAA63C3225EEDA83001589D7 /* NoteLinkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteLinkTests.swift; sourceTree = "<group>"; };
@@ -2350,6 +2352,7 @@
 				BA35808F2BE95BE100CE1590 /* AppendNoteIntentHandler.swift */,
 				BAB898D22BEC404200E238B8 /* CreateNewNoteIntentHandler.swift */,
 				BAD0F1EC2BED49C200E73E45 /* FindNoteIntentHandler.swift */,
+				BA9C7EC82BED7AB1007A8460 /* CopyNoteContentIntentHandler.swift */,
 			);
 			path = "Intent Handlers";
 			sourceTree = "<group>";
@@ -3793,6 +3796,7 @@
 				BA289B722BE45A39000E6794 /* IntentsConstants.swift in Sources */,
 				BA34B0572BEC216B00580E15 /* IntentNote+Helpers.swift in Sources */,
 				BAB5762726703C8200B0C56F /* IntentHandler.swift in Sources */,
+				BA9C7EC92BED7AB1007A8460 /* CopyNoteContentIntentHandler.swift in Sources */,
 				BA289B652BE43963000E6794 /* OpenNewNoteIntentHandler.swift in Sources */,
 				BA289B592BE436EB000E6794 /* ShortcutIntents.intentdefinition in Sources */,
 				BA0AF10D2BE996600050EEBD /* KeychainManager.swift in Sources */,
