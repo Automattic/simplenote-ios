@@ -87,6 +87,8 @@
 			<string>sqM3pN</string>
 			<key>INIntentIneligibleForSuggestions</key>
 			<true/>
+			<key>INIntentInput</key>
+			<string>note</string>
 			<key>INIntentLastParameterTag</key>
 			<integer>2</integer>
 			<key>INIntentManagedParameterCombinations</key>
