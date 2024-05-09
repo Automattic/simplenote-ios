@@ -437,7 +437,7 @@
 			<key>INIntentIneligibleForSuggestions</key>
 			<true/>
 			<key>INIntentLastParameterTag</key>
-			<integer>4</integer>
+			<integer>7</integer>
 			<key>INIntentManagedParameterCombinations</key>
 			<dict>
 				<key>content</key>
@@ -488,6 +488,26 @@
 							<key>INIntentParameterPromptDialogType</key>
 							<string>Primary</string>
 						</dict>
+						<dict>
+							<key>INIntentParameterPromptDialogCustom</key>
+							<true/>
+							<key>INIntentParameterPromptDialogFormatString</key>
+							<string>There are ${count} options matching ‘${content}’.</string>
+							<key>INIntentParameterPromptDialogFormatStringID</key>
+							<string>NAzeXM</string>
+							<key>INIntentParameterPromptDialogType</key>
+							<string>DisambiguationIntroduction</string>
+						</dict>
+						<dict>
+							<key>INIntentParameterPromptDialogCustom</key>
+							<true/>
+							<key>INIntentParameterPromptDialogFormatString</key>
+							<string>Just to confirm, you wanted ‘${content}’?</string>
+							<key>INIntentParameterPromptDialogFormatStringID</key>
+							<string>wgf6Li</string>
+							<key>INIntentParameterPromptDialogType</key>
+							<string>Confirmation</string>
+						</dict>
 					</array>
 					<key>INIntentParameterTag</key>
 					<integer>4</integer>
@@ -506,12 +526,16 @@
 						<true/>
 					</dict>
 					<dict>
+						<key>INIntentResponseCodeFormatString</key>
+						<string>${failureReason}</string>
+						<key>INIntentResponseCodeFormatStringID</key>
+						<string>ThMQV4</string>
 						<key>INIntentResponseCodeName</key>
 						<string>failure</string>
 					</dict>
 				</array>
 				<key>INIntentResponseLastParameterTag</key>
-				<integer>4</integer>
+				<integer>5</integer>
 				<key>INIntentResponseOutput</key>
 				<string>note</string>
 				<key>INIntentResponseParameters</key>
@@ -533,6 +557,20 @@
 						<integer>4</integer>
 						<key>INIntentResponseParameterType</key>
 						<string>Object</string>
+					</dict>
+					<dict>
+						<key>INIntentResponseParameterDisplayName</key>
+						<string>Failure Reason</string>
+						<key>INIntentResponseParameterDisplayNameID</key>
+						<string>Gde29V</string>
+						<key>INIntentResponseParameterDisplayPriority</key>
+						<integer>2</integer>
+						<key>INIntentResponseParameterName</key>
+						<string>failureReason</string>
+						<key>INIntentResponseParameterTag</key>
+						<integer>5</integer>
+						<key>INIntentResponseParameterType</key>
+						<string>String</string>
 					</dict>
 				</array>
 			</dict>

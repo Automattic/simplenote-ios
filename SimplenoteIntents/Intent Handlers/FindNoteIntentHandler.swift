@@ -8,12 +8,26 @@
 
 import Intents
 
+enum FindNoteError: String {
+    case couldNotFetchNotes
+    case noMatchingNotesFound
+
+    var localizedDescription: String {
+        switch self {
+        case .couldNotFetchNotes:
+            NSLocalizedString("Could not fetch notes", comment: "Error warning user that their notes could not be fetched")
+        case .noMatchingNotesFound:
+            NSLocalizedString("Could not find notes matching the search terms", comment: "Error warning user that a matching note could not be found")
+        }
+    }
+}
+
 class FindNoteIntentHandler: NSObject, FindNoteIntentHandling {
     let coreDataWrapper = ExtensionCoreDataWrapper()
 
     func handle(intent: FindNoteIntent) async -> FindNoteIntentResponse {
         guard let notes = coreDataWrapper.resultsController()?.notes() else {
-            return FindNoteIntentResponse(code: .failure, userActivity: nil)
+            return FindNoteIntentResponse.failure(failureReason: FindNoteError.couldNotFetchNotes.localizedDescription)
         }
 
         guard let content = intent.content else {
@@ -28,8 +42,7 @@ class FindNoteIntentHandler: NSObject, FindNoteIntentHandling {
         })
 
         guard matchingNotes.isEmpty == false else {
-            // TODO: Create custom respond code to alert user that no notes were found
-            return FindNoteIntentResponse(code: .failure, userActivity: nil)
+            return FindNoteIntentResponse.failure(failureReason: FindNoteError.noMatchingNotesFound.localizedDescription)
         }
 
         guard matchingNotes.count == 1 else {
