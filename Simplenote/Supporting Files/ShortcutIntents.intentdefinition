@@ -437,10 +437,10 @@
 			<key>INIntentIneligibleForSuggestions</key>
 			<true/>
 			<key>INIntentLastParameterTag</key>
-			<integer>7</integer>
+			<integer>13</integer>
 			<key>INIntentManagedParameterCombinations</key>
 			<dict>
-				<key>content</key>
+				<key>content,note</key>
 				<dict>
 					<key>INIntentParameterCombinationSupportsBackgroundExecution</key>
 					<true/>
@@ -485,6 +485,10 @@
 						<dict>
 							<key>INIntentParameterPromptDialogCustom</key>
 							<true/>
+							<key>INIntentParameterPromptDialogFormatString</key>
+							<string>Which One?</string>
+							<key>INIntentParameterPromptDialogFormatStringID</key>
+							<string>yuIu0n</string>
 							<key>INIntentParameterPromptDialogType</key>
 							<string>Primary</string>
 						</dict>
@@ -514,6 +518,51 @@
 					<key>INIntentParameterType</key>
 					<string>String</string>
 				</dict>
+				<dict>
+					<key>INIntentParameterConfigurable</key>
+					<true/>
+					<key>INIntentParameterDisplayName</key>
+					<string>Note</string>
+					<key>INIntentParameterDisplayNameID</key>
+					<string>pFkRQX</string>
+					<key>INIntentParameterDisplayPriority</key>
+					<integer>2</integer>
+					<key>INIntentParameterName</key>
+					<string>note</string>
+					<key>INIntentParameterObjectType</key>
+					<string>IntentNote</string>
+					<key>INIntentParameterObjectTypeNamespace</key>
+					<string>BxdWY5</string>
+					<key>INIntentParameterPromptDialogs</key>
+					<array>
+						<dict>
+							<key>INIntentParameterPromptDialogCustom</key>
+							<true/>
+							<key>INIntentParameterPromptDialogFormatString</key>
+							<string>Which Note?</string>
+							<key>INIntentParameterPromptDialogFormatStringID</key>
+							<string>OOdDHV</string>
+							<key>INIntentParameterPromptDialogType</key>
+							<string>Configuration</string>
+						</dict>
+						<dict>
+							<key>INIntentParameterPromptDialogCustom</key>
+							<true/>
+							<key>INIntentParameterPromptDialogFormatString</key>
+							<string>Which One?</string>
+							<key>INIntentParameterPromptDialogFormatStringID</key>
+							<string>sOjweW</string>
+							<key>INIntentParameterPromptDialogType</key>
+							<string>Primary</string>
+						</dict>
+					</array>
+					<key>INIntentParameterSupportsResolution</key>
+					<true/>
+					<key>INIntentParameterTag</key>
+					<integer>13</integer>
+					<key>INIntentParameterType</key>
+					<string>Object</string>
+				</dict>
 			</array>
 			<key>INIntentResponse</key>
 			<dict>
@@ -535,7 +584,7 @@
 					</dict>
 				</array>
 				<key>INIntentResponseLastParameterTag</key>
-				<integer>5</integer>
+				<integer>10</integer>
 				<key>INIntentResponseOutput</key>
 				<string>note</string>
 				<key>INIntentResponseParameters</key>
@@ -554,7 +603,7 @@
 						<key>INIntentResponseParameterObjectTypeNamespace</key>
 						<string>BxdWY5</string>
 						<key>INIntentResponseParameterTag</key>
-						<integer>4</integer>
+						<integer>10</integer>
 						<key>INIntentResponseParameterType</key>
 						<string>Object</string>
 					</dict>

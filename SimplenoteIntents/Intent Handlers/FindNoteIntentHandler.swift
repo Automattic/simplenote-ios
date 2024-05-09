@@ -8,55 +8,35 @@
 
 import Intents
 
-enum FindNoteError: String {
-    case couldNotFetchNotes
-    case noMatchingNotesFound
-
-    var localizedDescription: String {
-        switch self {
-        case .couldNotFetchNotes:
-            NSLocalizedString("Could not fetch notes", comment: "Error warning user that their notes could not be fetched")
-        case .noMatchingNotesFound:
-            NSLocalizedString("Could not find notes matching the search terms", comment: "Error warning user that a matching note could not be found")
-        }
-    }
-}
-
 class FindNoteIntentHandler: NSObject, FindNoteIntentHandling {
     let coreDataWrapper = ExtensionCoreDataWrapper()
 
-    func handle(intent: FindNoteIntent) async -> FindNoteIntentResponse {
-        guard let notes = coreDataWrapper.resultsController()?.notes() else {
-            return FindNoteIntentResponse.failure(failureReason: FindNoteError.couldNotFetchNotes.localizedDescription)
+    func resolveNote(for intent: FindNoteIntent) async -> IntentNoteResolutionResult {
+        // If the user has already selected a note return that note with success
+        if let selectedNote = intent.note {
+            return IntentNoteResolutionResult.success(with: selectedNote)
         }
 
         guard let content = intent.content else {
-            return FindNoteIntentResponse(code: .unspecified, userActivity: nil)
+            return IntentNoteResolutionResult.needsValue()
         }
 
-        let matchingNotes: [Note] = notes.compactMap({
-            if $0.content?.contains(content) == true {
-                return $0
-            }
-            return nil
-        })
+        return IntentNoteResolutionResult.resolveIntentNote(for: content, in: coreDataWrapper)
+    }
 
-        guard matchingNotes.isEmpty == false else {
-            return FindNoteIntentResponse.failure(failureReason: FindNoteError.noMatchingNotesFound.localizedDescription)
-        }
+    func provideNoteOptionsCollection(for intent: FindNoteIntent) async throws -> INObjectCollection<IntentNote> {
+        let intentNotes = try IntentNote.allNotes(in: coreDataWrapper)
+        return INObjectCollection(items: intentNotes)
+    }
 
-        guard matchingNotes.count == 1 else {
-            // TODO: Disambiguate the notes
+    func handle(intent: FindNoteIntent) async -> FindNoteIntentResponse {
+        guard let intentNote = intent.note else {
             return FindNoteIntentResponse(code: .failure, userActivity: nil)
         }
 
-        guard let matchingNote = matchingNotes.first else {
-            return FindNoteIntentResponse(code: .failure, userActivity: nil)
-        }
         let success = FindNoteIntentResponse(code: .success, userActivity: nil)
-        success.note = IntentNote(identifier: matchingNote.simperiumKey, display: matchingNote.title)
+        success.note = intentNote
 
         return success
-
     }
 }
