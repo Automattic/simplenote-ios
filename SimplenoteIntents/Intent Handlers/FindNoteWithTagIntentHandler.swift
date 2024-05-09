@@ -12,7 +12,15 @@ class FindNoteWithTagIntentHandler: NSObject, FindNoteWithTagIntentHandling {
     let coreDataWrapper = ExtensionCoreDataWrapper()
 
     func resolveNote(for intent: FindNoteWithTagIntent) async -> IntentNoteResolutionResult {
-        IntentNoteResolutionResult.success(with: IntentNote(identifier: "", display: ""))
+        if let selectedNote = intent.note {
+            return IntentNoteResolutionResult.success(with: selectedNote)
+        }
+
+        guard let selectedTag = intent.tag else {
+            return IntentNoteResolutionResult.needsValue()
+        }
+
+        return IntentNoteResolutionResult.resolveIntentNote(forTag: selectedTag, in: coreDataWrapper)
     }
 
     func provideTagOptionsCollection(for intent: FindNoteWithTagIntent) async throws -> INObjectCollection<IntentTag> {
@@ -21,6 +29,12 @@ class FindNoteWithTagIntentHandler: NSObject, FindNoteWithTagIntentHandling {
     }
 
     func handle(intent: FindNoteWithTagIntent) async -> FindNoteWithTagIntentResponse {
-        FindNoteWithTagIntentResponse(code: .success, userActivity: nil)
+        guard let note = intent.note else {
+            return FindNoteWithTagIntentResponse(code: .failure, userActivity: nil)
+        }
+
+        let response = FindNoteWithTagIntentResponse(code: .success, userActivity: nil)
+        response.note = note
+        return response
     }
 }
