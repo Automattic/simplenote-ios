@@ -1,6 +1,6 @@
 4.52
 -----
-
+- Extended support for iOS Shortcuts
 
 4.51
 -----
