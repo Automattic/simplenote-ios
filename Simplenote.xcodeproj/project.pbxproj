@@ -540,6 +540,7 @@
 		BABFFF2326CF9094003A4C25 /* WidgetDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABFFF2126CF9094003A4C25 /* WidgetDefaults.swift */; };
 		BABFFF2426CF9094003A4C25 /* WidgetDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABFFF2126CF9094003A4C25 /* WidgetDefaults.swift */; };
 		BAC7264E2BD96E7C0002FA68 /* SPAddCollaboratorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC7264D2BD96E7C0002FA68 /* SPAddCollaboratorsViewController.swift */; };
+		BAD0F1ED2BED49C200E73E45 /* FindNoteIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD0F1EC2BED49C200E73E45 /* FindNoteIntentHandler.swift */; };
 		BAE08626261282D1009D40CD /* Note+Publish.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE08625261282D1009D40CD /* Note+Publish.swift */; };
 		BAE63CAF26E05312002BF81A /* NSString+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59188C124005B8A0069EF96 /* NSString+Simplenote.swift */; };
 		BAE63CB026E05313002BF81A /* NSString+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59188C124005B8A0069EF96 /* NSString+Simplenote.swift */; };
@@ -1217,6 +1218,7 @@
 		BAB898D22BEC404200E238B8 /* CreateNewNoteIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewNoteIntentHandler.swift; sourceTree = "<group>"; };
 		BABFFF2126CF9094003A4C25 /* WidgetDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDefaults.swift; sourceTree = "<group>"; };
 		BAC7264D2BD96E7C0002FA68 /* SPAddCollaboratorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPAddCollaboratorsViewController.swift; sourceTree = "<group>"; };
+		BAD0F1EC2BED49C200E73E45 /* FindNoteIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindNoteIntentHandler.swift; sourceTree = "<group>"; };
 		BAE08625261282D1009D40CD /* Note+Publish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+Publish.swift"; sourceTree = "<group>"; };
 		BAF4A96E26DB085D00C51C1D /* NSURLComponents+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSURLComponents+Simplenote.swift"; sourceTree = "<group>"; };
 		BAF8D42226AE10F100CA9383 /* Tag+Widget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tag+Widget.swift"; sourceTree = "<group>"; };
@@ -2347,6 +2349,7 @@
 				BA289B742BE45BBB000E6794 /* OpenNoteIntentHandler.swift */,
 				BA35808F2BE95BE100CE1590 /* AppendNoteIntentHandler.swift */,
 				BAB898D22BEC404200E238B8 /* CreateNewNoteIntentHandler.swift */,
+				BAD0F1EC2BED49C200E73E45 /* FindNoteIntentHandler.swift */,
 			);
 			path = "Intent Handlers";
 			sourceTree = "<group>";
@@ -3776,6 +3779,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA86620E26B3A73D00466746 /* UserDefaults+Simplenote.swift in Sources */,
+				BAD0F1ED2BED49C200E73E45 /* FindNoteIntentHandler.swift in Sources */,
 				BAF8D52826AE173D00CA9383 /* FileManager+Simplenote.swift in Sources */,
 				BA34B04D2BEAE9FE00580E15 /* SPConstants.m in Sources */,
 				BA289B5F2BE43728000E6794 /* NoteWidgetIntentHandler.swift in Sources */,
