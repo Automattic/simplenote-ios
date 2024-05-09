@@ -492,26 +492,6 @@
 							<key>INIntentParameterPromptDialogType</key>
 							<string>Primary</string>
 						</dict>
-						<dict>
-							<key>INIntentParameterPromptDialogCustom</key>
-							<true/>
-							<key>INIntentParameterPromptDialogFormatString</key>
-							<string>There are ${count} options matching ‘${content}’.</string>
-							<key>INIntentParameterPromptDialogFormatStringID</key>
-							<string>NAzeXM</string>
-							<key>INIntentParameterPromptDialogType</key>
-							<string>DisambiguationIntroduction</string>
-						</dict>
-						<dict>
-							<key>INIntentParameterPromptDialogCustom</key>
-							<true/>
-							<key>INIntentParameterPromptDialogFormatString</key>
-							<string>Just to confirm, you wanted ‘${content}’?</string>
-							<key>INIntentParameterPromptDialogFormatStringID</key>
-							<string>wgf6Li</string>
-							<key>INIntentParameterPromptDialogType</key>
-							<string>Confirmation</string>
-						</dict>
 					</array>
 					<key>INIntentParameterTag</key>
 					<integer>4</integer>
@@ -606,20 +586,6 @@
 						<integer>10</integer>
 						<key>INIntentResponseParameterType</key>
 						<string>Object</string>
-					</dict>
-					<dict>
-						<key>INIntentResponseParameterDisplayName</key>
-						<string>Failure Reason</string>
-						<key>INIntentResponseParameterDisplayNameID</key>
-						<string>Gde29V</string>
-						<key>INIntentResponseParameterDisplayPriority</key>
-						<integer>2</integer>
-						<key>INIntentResponseParameterName</key>
-						<string>failureReason</string>
-						<key>INIntentResponseParameterTag</key>
-						<integer>5</integer>
-						<key>INIntentResponseParameterType</key>
-						<string>String</string>
 					</dict>
 				</array>
 			</dict>
