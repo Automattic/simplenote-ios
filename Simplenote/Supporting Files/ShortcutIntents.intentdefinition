@@ -749,7 +749,7 @@
 			<key>INIntentIneligibleForSuggestions</key>
 			<true/>
 			<key>INIntentLastParameterTag</key>
-			<integer>3</integer>
+			<integer>4</integer>
 			<key>INIntentManagedParameterCombinations</key>
 			<dict>
 				<key>tag,note</key>
@@ -780,7 +780,7 @@
 					<key>INIntentParameterName</key>
 					<string>tag</string>
 					<key>INIntentParameterObjectType</key>
-					<string>Tag</string>
+					<string>IntentTag</string>
 					<key>INIntentParameterObjectTypeNamespace</key>
 					<string>BxdWY5</string>
 					<key>INIntentParameterPromptDialogs</key>
@@ -834,15 +834,12 @@
 					<string>wLeRnn</string>
 					<key>INIntentParameterDisplayPriority</key>
 					<integer>2</integer>
-					<key>INIntentParameterMetadata</key>
-					<dict>
-						<key>INIntentParameterMetadataCapitalization</key>
-						<string>Sentences</string>
-						<key>INIntentParameterMetadataDefaultValueID</key>
-						<string>Y8F8kT</string>
-					</dict>
 					<key>INIntentParameterName</key>
 					<string>note</string>
+					<key>INIntentParameterObjectType</key>
+					<string>IntentNote</string>
+					<key>INIntentParameterObjectTypeNamespace</key>
+					<string>BxdWY5</string>
 					<key>INIntentParameterPromptDialogs</key>
 					<array>
 						<dict>
@@ -865,9 +862,9 @@
 					<key>INIntentParameterSupportsResolution</key>
 					<true/>
 					<key>INIntentParameterTag</key>
-					<integer>2</integer>
+					<integer>4</integer>
 					<key>INIntentParameterType</key>
-					<string>String</string>
+					<string>Object</string>
 				</dict>
 			</array>
 			<key>INIntentResponse</key>
@@ -991,16 +988,18 @@
 			</array>
 		</dict>
 		<dict>
+			<key>INTypeClassName</key>
+			<string>IntentTag</string>
 			<key>INTypeClassPrefix</key>
 			<string>SP</string>
 			<key>INTypeDisplayName</key>
-			<string>Tag</string>
+			<string>Intent Tag</string>
 			<key>INTypeDisplayNameID</key>
 			<string>IIfrvb</string>
 			<key>INTypeLastPropertyTag</key>
 			<integer>99</integer>
 			<key>INTypeName</key>
-			<string>Tag</string>
+			<string>IntentTag</string>
 			<key>INTypeProperties</key>
 			<array>
 				<dict>
