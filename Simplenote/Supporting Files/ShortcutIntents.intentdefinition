@@ -555,10 +555,6 @@
 						<true/>
 					</dict>
 					<dict>
-						<key>INIntentResponseCodeFormatString</key>
-						<string>${failureReason}</string>
-						<key>INIntentResponseCodeFormatStringID</key>
-						<string>ThMQV4</string>
 						<key>INIntentResponseCodeName</key>
 						<string>failure</string>
 					</dict>
