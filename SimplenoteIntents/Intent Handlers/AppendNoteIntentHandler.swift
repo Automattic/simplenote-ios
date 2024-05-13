@@ -39,7 +39,7 @@ class AppendNoteIntentHandler: NSObject, AppendNoteIntentHandling {
             return AppendNoteIntentResponse(code: .failure, userActivity: nil)
         }
 
-        note.content = existingContent + "\n\n\(content)"
+        note.content = existingContent + "\n\(content)"
         let uploader = Uploader(simperiumToken: token)
         uploader.send(note)
 
