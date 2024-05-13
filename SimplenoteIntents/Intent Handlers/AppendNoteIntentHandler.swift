@@ -35,7 +35,11 @@ class AppendNoteIntentHandler: NSObject, AppendNoteIntentHandling {
             return AppendNoteIntentResponse(code: .failure, userActivity: nil)
         }
 
-        note.content? += "\n\n\(content)"
+        guard let existingContent = try? await Downloader(simperiumToken: token).getNoteContent(for: identifier) else {
+            return AppendNoteIntentResponse(code: .failure, userActivity: nil)
+        }
+
+        note.content = existingContent + "\n\n\(content)"
         let uploader = Uploader(simperiumToken: token)
         uploader.send(note)
 
