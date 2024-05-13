@@ -16,6 +16,14 @@ extension Note {
         return NSFetchRequest<Note>(entityName: "Note")
     }
 
+    public override func awakeFromInsert() {
+        super.awakeFromInsert()
+
+        if simperiumKey.isEmpty {
+            simperiumKey = UUID().uuidString.replacingOccurrences(of: "-", with: "")
+        }
+    }
+
     @NSManaged public var content: String?
     @NSManaged public var creationDate: Date?
     @NSManaged public override var isDeleted: Bool

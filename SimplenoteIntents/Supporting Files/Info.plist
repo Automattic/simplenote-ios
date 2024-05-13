@@ -31,6 +31,7 @@
 			<key>IntentsSupported</key>
 			<array>
 				<string>AppendNoteIntent</string>
+				<string>CreateNewNoteIntent</string>
 				<string>ListWidgetIntent</string>
 				<string>NoteWidgetIntent</string>
 				<string>OpenNewNoteIntent</string>
