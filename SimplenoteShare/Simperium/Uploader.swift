@@ -23,7 +23,7 @@ class Uploader: NSObject {
 
         // Request
         var request = URLRequest(url: targetURL)
-        request.httpMethod = Settings.httpMethod
+        request.httpMethod = Settings.httpMethodPost
         request.httpBody = note.toJsonData()
         request.setValue(token, forHTTPHeaderField: Settings.authHeader)
 
@@ -66,5 +66,5 @@ extension Uploader: URLSessionTaskDelegate {
 private struct Settings {
     static let authHeader  = "X-Simperium-Token"
     static let bucketName  = "note"
-    static let httpMethod  = "POST"
+    static let httpMethodPost  = "POST"
 }

@@ -523,7 +523,6 @@
     BOOL isTrashOnScreen = self.isDeletedFilterActive;
 
     [self refreshEmptyTrashState];
-    self.tableView.allowsSelection = !isTrashOnScreen;
     
     [self displayPlaceholdersIfNeeded];
     [self refershNavigationButtons];
