@@ -74,6 +74,7 @@
 	<string>This app does not require Photo Library access.</string>
 	<key>NSUserActivityTypes</key>
 	<array>
+		<string>AppendNoteIntent</string>
 		<string>ListWidgetIntent</string>
 		<string>NoteWidgetIntent</string>
 		<string>OpenNewNoteIntent</string>

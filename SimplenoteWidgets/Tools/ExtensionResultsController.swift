@@ -3,7 +3,7 @@ import SimplenoteFoundation
 import SimplenoteSearch
 import CoreData
 
-class WidgetResultsController {
+class ExtensionResultsController {
 
     /// Data Controller
     ///
@@ -42,6 +42,10 @@ class WidgetResultsController {
     func firstNote() -> Note? {
         let fetched = notes(limit: 1)
         return fetched?.first
+    }
+
+    func noteExists(forSimperiumKey key: String) -> Bool {
+        note(forSimperiumKey: key) != nil
     }
 
     /// Creates a predicate for notes given a tag name.  If not specified the predicate is for all notes that are not deleted
