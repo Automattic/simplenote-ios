@@ -511,6 +511,8 @@
 		BA8FC2A5267AC7470082962E /* SharedStorageMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8FC2A4267AC7470082962E /* SharedStorageMigrator.swift */; };
 		BA9B19F926A8EF3200692366 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B19F826A8EF3200692366 /* SpinnerViewController.swift */; };
 		BA9B59022685549F00DAD1ED /* StorageSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B59012685549F00DAD1ED /* StorageSettings.swift */; };
+		BA9C7EFB2BF2CC3E007A8460 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9C7EFA2BF2CC3E007A8460 /* Downloader.swift */; };
+		BA9C7EFC2BF2CCAE007A8460 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9C7EFA2BF2CC3E007A8460 /* Downloader.swift */; };
 		BAA4856925D5E40900F3BDB9 /* SearchQuery+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */; };
 		BAA59E79269F9FE30068BD3D /* Date+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA59E78269F9FE30068BD3D /* Date+Simplenote.swift */; };
 		BAA63C3325EEDA83001589D7 /* NoteLinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA63C3225EEDA83001589D7 /* NoteLinkTests.swift */; };
@@ -1194,6 +1196,7 @@
 		BA8FC2A4267AC7470082962E /* SharedStorageMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStorageMigrator.swift; sourceTree = "<group>"; };
 		BA9B19F826A8EF3200692366 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 		BA9B59012685549F00DAD1ED /* StorageSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageSettings.swift; sourceTree = "<group>"; };
+		BA9C7EFA2BF2CC3E007A8460 /* Downloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
 		BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchQuery+Simplenote.swift"; sourceTree = "<group>"; };
 		BAA59E78269F9FE30068BD3D /* Date+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Simplenote.swift"; sourceTree = "<group>"; };
 		BAA63C3225EEDA83001589D7 /* NoteLinkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteLinkTests.swift; sourceTree = "<group>"; };
@@ -2242,6 +2245,7 @@
 			children = (
 				B5CFFFE822AA9DD700B968CD /* Note.swift */,
 				B5CFFFE622AA9DB100B968CD /* Uploader.swift */,
+				BA9C7EFA2BF2CC3E007A8460 /* Downloader.swift */,
 			);
 			path = Simperium;
 			sourceTree = "<group>";
@@ -3760,6 +3764,7 @@
 				B52893B12360B7E300DF2571 /* UIColor+Studio.swift in Sources */,
 				B5E196BC230F522D00F5658A /* SPCredentials.swift in Sources */,
 				B56A9FFE22AEDCB0003F85CB /* URLExtractor.swift in Sources */,
+				BA9C7EFB2BF2CC3E007A8460 /* Downloader.swift in Sources */,
 				B56315BE236BD9970066C151 /* UIKitConstants.swift in Sources */,
 				74F6638322BADD0300FA147E /* SharePresentationController.swift in Sources */,
 				74388F4822CFFABD001C5EC0 /* NSObject+Helpers.swift in Sources */,
@@ -3777,6 +3782,7 @@
 				BA34B04D2BEAE9FE00580E15 /* SPConstants.m in Sources */,
 				BA289B5F2BE43728000E6794 /* NoteWidgetIntentHandler.swift in Sources */,
 				BAF8D50026AE171400CA9383 /* CoreDataManager.swift in Sources */,
+				BA9C7EFC2BF2CCAE007A8460 /* Downloader.swift in Sources */,
 				BAE63CB026E05313002BF81A /* NSString+Simplenote.swift in Sources */,
 				BAE63CB226E05325002BF81A /* NSPredicate+Email.swift in Sources */,
 				BAF8D51426AE172600CA9383 /* StorageSettings.swift in Sources */,
