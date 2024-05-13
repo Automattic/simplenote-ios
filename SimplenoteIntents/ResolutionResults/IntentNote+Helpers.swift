@@ -24,27 +24,35 @@ extension IntentNoteResolutionResult {
 
     static func resolveIntentNote(for content: String, in coreDataWrapper: ExtensionCoreDataWrapper) -> IntentNoteResolutionResult {
         guard let notes = coreDataWrapper.resultsController()?.notes() else {
-            // TODO: Better error
             return IntentNoteResolutionResult.unsupported()
         }
         let filteredNotes = notes.filter({ $0.content?.contains(content) == true })
-        let intentNotes = filteredNotes.map({ IntentNote(identifier: $0.simperiumKey, display: $0.title) })
+        let intentNotes = IntentNote.makeIntentNotes(from: filteredNotes)
 
+        return resolve(intentNotes)
+    }
+
+    static func resolveIntentNote(forTag tag: IntentTag, in coreDataWrapper: ExtensionCoreDataWrapper) -> IntentNoteResolutionResult {
+        guard let notesForTag = coreDataWrapper.resultsController()?.notes(filteredBy: .tag(tag.displayString)) else {
+            return IntentNoteResolutionResult.unsupported()
+        }
+
+        let intentNotes = IntentNote.makeIntentNotes(from: notesForTag)
+
+        return resolve(intentNotes)
+    }
+
+    private static func resolve(_ intentNotes: [IntentNote]) -> IntentNoteResolutionResult {
         guard intentNotes.isEmpty == false else {
-            // TODO: Better error
             return IntentNoteResolutionResult.unsupported()
         }
 
-        guard intentNotes.count == 1 else {
-            return IntentNoteResolutionResult.disambiguation(with: intentNotes)
+        if intentNotes.count == 1,
+           let intentNote = intentNotes.first {
+            return IntentNoteResolutionResult.success(with: intentNote)
         }
 
-        //This shouldn't happen but we to unwrap the existing note we need to return something
-        guard let matchingNote = intentNotes.first else {
-            return IntentNoteResolutionResult.unsupported()
-        }
-
-        return IntentNoteResolutionResult.success(with: matchingNote)
+        return IntentNoteResolutionResult.disambiguation(with: intentNotes)
     }
 }
 
@@ -54,6 +62,10 @@ extension IntentNote {
             throw IntentsError.couldNotFetchNotes
         }
 
-        return notes.map({ IntentNote(identifier: $0.simperiumKey, display: $0.title) })
+        return makeIntentNotes(from: notes)
+    }
+
+    static func makeIntentNotes(from notes: [Note]) -> [IntentNote] {
+        notes.map({ IntentNote(identifier: $0.simperiumKey, display: $0.title) })
     }
 }

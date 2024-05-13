@@ -31,13 +31,14 @@
 			<key>IntentsSupported</key>
 			<array>
 				<string>AppendNoteIntent</string>
+				<string>CopyNoteContentIntent</string>
 				<string>CreateNewNoteIntent</string>
 				<string>FindNoteIntent</string>
+				<string>FindNoteWithTagIntent</string>
 				<string>ListWidgetIntent</string>
 				<string>NoteWidgetIntent</string>
 				<string>OpenNewNoteIntent</string>
 				<string>OpenNoteIntent</string>
-				<string>CopyNoteContentIntent</string>
 			</array>
 		</dict>
 		<key>NSExtensionPointIdentifier</key>
