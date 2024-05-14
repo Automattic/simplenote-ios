@@ -630,6 +630,7 @@ platform :ios do
   #####################################################################################
   desc 'Builds and uploads an installable build'
   lane :build_and_upload_installable_build do
+    ENV['MATCH_CERTIFICATE_ID'] = 'S8CMX4U6QW'
     alpha_code_signing
 
     # Get the current build version, and update it if needed
