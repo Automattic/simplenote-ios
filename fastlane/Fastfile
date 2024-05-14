@@ -630,7 +630,6 @@ platform :ios do
   #####################################################################################
   desc 'Builds and uploads an installable build'
   lane :build_and_upload_installable_build do
-    ENV['MATCH_CERTIFICATE_ID'] = 'S8CMX4U6QW'
     alpha_code_signing
 
     # Get the current build version, and update it if needed
@@ -1008,6 +1007,18 @@ end
 # @option [Boolean] readonly (default: true) Whether to only fetch existing certificates and profiles, without generating new ones.
 #
 private_lane :alpha_code_signing do |options|
+  # IMPORTANT: We need to update this value when the app's provision profiles are renewed.
+  #
+  # At the moment, we have two certificates for in-house distribution in the fastlane
+  # match repo. `fastlane match` will only install one of them (See [1]), which may not be
+  # the right one that's specified in the app's provision profiles.
+  #
+  # To work around this, we set the `MATCH_CERTIFICATE_ID` environment variable so that
+  # fastlane match can install the right certificate for us.
+  #
+  # [1]: https://github.com/fastlane/fastlane/blob/2.220.0/match/lib/match/runner.rb#L255-L258
+  ENV['MATCH_CERTIFICATE_ID'] = 'S8CMX4U6QW'
+
   update_code_signing_enterprise(
     app_identifiers: simplenote_app_identifiers(root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Alpha"),
     readonly: options.fetch(:readonly, true)
