@@ -10,6 +10,12 @@
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tapGestureRecognizer id="4op-51-Dvd">
+            <connections>
+                <action selector="bannerWasPresssed" destination="H3q-Rz-XVn" id="Nhw-t0-Xiw"/>
+            </connections>
+        </tapGestureRecognizer>
         <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" id="H3q-Rz-XVn" userLabel="BannerView" customClass="BannerView" customModule="Simplenote" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="390" height="72"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -84,10 +90,10 @@
                 <outlet property="titleLabel" destination="xLW-HX-XmH" id="G19-ww-50A"/>
                 <outlet property="topConstraint" destination="SUn-BD-pzh" id="e9F-8I-nc7"/>
                 <outlet property="widthConstraint" destination="kYU-Lx-Xbh" id="yEN-6g-UV9"/>
+                <outletCollection property="gestureRecognizers" destination="4op-51-Dvd" appends="YES" id="gpV-aI-zul"/>
             </connections>
             <point key="canvasLocation" x="87.692307692307693" y="-258.05687203791467"/>
         </view>
-        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
     </objects>
     <resources>
         <image name="simplenote-logo" width="64" height="64"/>

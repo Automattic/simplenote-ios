@@ -14,6 +14,7 @@
 static NSString *cellIdentifier = @"primaryCell";
 static NSString *autoCompleteCellIdentifier = @"autoCompleteCell";
 static CGFloat const EntryListTextFieldSidePadding = 15;
+static CGFloat const EntryListCellHeight = 44;
 
 @implementation SPEntryListViewController
 
@@ -31,7 +32,7 @@ static CGFloat const EntryListTextFieldSidePadding = 15;
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
-    [self.primaryTableView reloadData];
+    [primaryTableView reloadData];
 }
 
 - (void)setupViews {
@@ -39,25 +40,25 @@ static CGFloat const EntryListTextFieldSidePadding = 15;
     // setup views
     CGFloat yOrigin = self.view.safeAreaInsets.top;
     
-    self.entryFieldBackground = [[UIView alloc] initWithFrame:CGRectMake(0,
+    entryFieldBackground = [[UIView alloc] initWithFrame:CGRectMake(0,
                                                                     yOrigin,
                                                                     self.view.frame.size.width,
                                                                     EntryListCellHeight)];
-    self.entryFieldBackground.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
-    [self.view addSubview:self.entryFieldBackground];
-
+    entryFieldBackground.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
+    [self.view addSubview:entryFieldBackground];
+    
     entryTextField = [[SPTextField alloc] initWithFrame:CGRectMake(EntryListTextFieldSidePadding,
                                                                    0,
-                                                                   self.entryFieldBackground.frame.size.width - 2 * EntryListTextFieldSidePadding,
-                                                                   self.entryFieldBackground.frame.size.height)];
+                                                                   entryFieldBackground.frame.size.width - 2 * EntryListTextFieldSidePadding,
+                                                                   entryFieldBackground.frame.size.height)];
     entryTextField.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
     entryTextField.keyboardType = UIKeyboardTypeEmailAddress;
 
     entryTextField.keyboardAppearance = SPUserInterface.isDark ? UIKeyboardAppearanceDark : UIKeyboardAppearanceDefault;
     entryTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     entryTextField.delegate = self;
-    [self.entryFieldBackground addSubview:entryTextField];
-
+    [entryFieldBackground addSubview:entryTextField];
+    
     entryFieldPlusButton = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *pickerImage = [UIImage imageWithName:UIImageNameAdd];
     [entryFieldPlusButton setImage:pickerImage forState:UIControlStateNormal];
@@ -69,17 +70,17 @@ static CGFloat const EntryListTextFieldSidePadding = 15;
     entryTextField.rightViewMode = UITextFieldViewModeAlways;
     
     
-    self.primaryTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, yOrigin + entryTextField.frame.size.height,
+    primaryTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, yOrigin + entryTextField.frame.size.height,
                                                                      self.view.frame.size.width, self.view.frame.size.height - (yOrigin + entryTextField.frame.size.height))
                                                     style:UITableViewStyleGrouped];
-    self.primaryTableView.rowHeight = EntryListCellHeight;
-    self.primaryTableView.delegate = self;
-    self.primaryTableView.dataSource = self;
-    self.primaryTableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    [self.view addSubview:self.primaryTableView];
-
+    primaryTableView.rowHeight = EntryListCellHeight;
+    primaryTableView.delegate = self;
+    primaryTableView.dataSource = self;
+    primaryTableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    [self.view addSubview:primaryTableView];
     
-    [self.primaryTableView registerClass:[SPEntryListCell class]
+    
+    [primaryTableView registerClass:[SPEntryListCell class]
              forCellReuseIdentifier:cellIdentifier];
     
     [autoCompleteTableView registerClass:[SPEntryListAutoCompleteCell class]
@@ -123,7 +124,7 @@ static CGFloat const EntryListTextFieldSidePadding = 15;
     self.view.backgroundColor = tableBackgroundColor;
     
     // entry field
-    self.entryFieldBackground.backgroundColor = tableBackgroundColor;
+    entryFieldBackground.backgroundColor = tableBackgroundColor;
     entryTextField.backgroundColor = [UIColor clearColor];
     entryTextField.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     entryTextField.textColor = [UIColor simplenoteTextColor];
@@ -131,15 +132,15 @@ static CGFloat const EntryListTextFieldSidePadding = 15;
     
     CALayer *entryFieldBorder = [[CALayer alloc] init];
     entryFieldBorder.frame = CGRectMake(0,
-                                        self.entryFieldBackground.bounds.size.height - 1.0 / [[UIScreen mainScreen] scale],
+                                        entryFieldBackground.bounds.size.height - 1.0 / [[UIScreen mainScreen] scale],
                                         MAX(self.view.frame.size.width, self.view.frame.size.height),
                                         1.0 / [[UIScreen mainScreen] scale]);
     entryFieldBorder.backgroundColor = tableSeparatorColor.CGColor;
-    [self.entryFieldBackground.layer addSublayer:entryFieldBorder];
-
+    [entryFieldBackground.layer addSublayer:entryFieldBorder];
+    
     // tableview
-    self.primaryTableView.backgroundColor = [UIColor clearColor];
-    self.primaryTableView.separatorColor = tableSeparatorColor;
+    primaryTableView.backgroundColor = [UIColor clearColor];
+    primaryTableView.separatorColor = tableSeparatorColor;
     autoCompleteTableView.backgroundColor = backgroundColor;
     autoCompleteTableView.separatorColor = tableSeparatorColor;
 }
@@ -168,7 +169,7 @@ static CGFloat const EntryListTextFieldSidePadding = 15;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if ([tableView isEqual:self.primaryTableView])
+    if ([tableView isEqual:primaryTableView])
         return 0; // this is implemented by subclassing
     else if ([tableView isEqual:autoCompleteTableView])
         return _autoCompleteDataSource.count;
@@ -191,8 +192,8 @@ static CGFloat const EntryListTextFieldSidePadding = 15;
     
     UITableViewCell *finalCell;
     
-    if ([tableView isEqual:self.primaryTableView]) {
-
+    if ([tableView isEqual:primaryTableView]) {
+        
         
         SPEntryListCell *cell = (SPEntryListCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (!cell) {
@@ -219,7 +220,7 @@ static CGFloat const EntryListTextFieldSidePadding = 15;
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return [tableView isEqual:self.primaryTableView] ? YES : NO;
+    return [tableView isEqual:primaryTableView] ? YES : NO;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -237,10 +238,10 @@ static CGFloat const EntryListTextFieldSidePadding = 15;
     if (editingStyle == UITableViewCellEditingStyleDelete) {
 
         [self removeItemFromDataSourceAtIndexPath:indexPath];
-        [self.primaryTableView beginUpdates];
-        [self.primaryTableView deleteRowsAtIndexPaths:@[indexPath]
+        [primaryTableView beginUpdates];
+        [primaryTableView deleteRowsAtIndexPaths:@[indexPath]
                                 withRowAnimation:UITableViewRowAnimationLeft];
-        [self.primaryTableView endUpdates];
+        [primaryTableView endUpdates];
     }
 }
 - (void)removeItemFromDataSourceAtIndexPath:(NSIndexPath *)indexPath {
@@ -294,7 +295,7 @@ static CGFloat const EntryListTextFieldSidePadding = 15;
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     
-    if ([scrollView isEqual:self.primaryTableView])
+    if ([scrollView isEqual:primaryTableView])
         [entryTextField resignFirstResponder];    
 }
 
