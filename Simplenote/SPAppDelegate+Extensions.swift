@@ -151,13 +151,17 @@ extension SPAppDelegate {
     /// Opens editor with a new note
     ///
     @objc
-    func presentNewNoteEditor(animated: Bool = false) {
-        if isPresentingPasscodeLock && SPPinLockManager.shared.isEnabled {
-            verifyController?.addOnSuccesBlock {
+    func presentNewNoteEditor(useSelectedTag: Bool = true, animated: Bool = false) {
+        performActionAfterUnlock {
+            if useSelectedTag {
                 self.presentNote(nil, animated: animated)
+            } else {
+                // If we use the standard new note option and a tag is selected then the tag is applied
+                // in some cases, like shortcuts, we don't want it do apply the tag cause you can't see
+                // what tag is selected when the shortcut runs
+                let note = SPObjectManager.shared().newDefaultNote()
+                self.presentNote(note, animated: true)
             }
-        } else {
-            presentNote(nil, animated: animated)
         }
     }
 
@@ -203,6 +207,16 @@ extension SPAppDelegate {
     @objc
     func setupNoticeController() {
         NoticeController.shared.setupNoticeController()
+    }
+
+    func performActionAfterUnlock(action: @escaping () -> Void) {
+        if isPresentingPasscodeLock && SPPinLockManager.shared.isEnabled {
+            verifyController?.addOnSuccesBlock {
+                action()
+            }
+        } else {
+            action()
+        }
     }
 }
 
