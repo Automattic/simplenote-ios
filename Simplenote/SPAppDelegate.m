@@ -508,7 +508,7 @@
     }
 
     if ([[components host] isEqualToString:@"widgetNew"]) {
-        [self presentNewNoteEditorWithAnimated: NO];
+        [self presentNewNoteEditorWithUseSelectedTag:NO animated:NO];
     }
 
     return YES;

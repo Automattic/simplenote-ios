@@ -165,6 +165,11 @@ extension SPAppDelegate {
         }
     }
 
+    @objc
+    func presentNewNoteEditor(animated: Bool = false) {
+        presentNewNoteEditor(useSelectedTag: true, animated: animated)
+    }
+
     var verifyController: PinLockVerifyController? {
         (pinLockWindow?.rootViewController as? PinLockViewController)?.controller as? PinLockVerifyController
     }
