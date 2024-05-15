@@ -63,6 +63,8 @@
         [self refreshStyle];
         [self update];
         self.mustScrollToFirstRow = YES;
+
+        self.selectedNotesEnteringBackground = [NSArray new];
     }
     
     return self;
@@ -192,6 +194,9 @@
 
     // Themes
     [nc addObserver:self selector:@selector(themeDidChange) name:SPSimplenoteThemeChangedNotification object:nil];
+
+    // App Background
+    [nc addObserver:self selector:@selector(appWillEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
 }
 
 - (void)condensedPreferenceWasUpdated:(id)sender
@@ -211,6 +216,10 @@
 
 - (void)themeDidChange {
     [self refreshStyle];
+}
+
+- (void)appWillEnterBackground {
+    self.selectedNotesEnteringBackground = self.tableView.indexPathsForSelectedRows;
 }
 
 - (void)refreshStyle {

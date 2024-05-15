@@ -41,7 +41,6 @@
 @interface SPAppDelegate ()
 
 @property (weak,   nonatomic) SPModalActivityIndicator      *signOutActivityIndicator;
-@property (nonatomic) NSArray *selectedNotesEnteringBackground;
 
 @end
 
@@ -190,19 +189,13 @@
     [self cleanupScrollPositionCache];
     [self syncWidgetDefaults];
     [self resetWidgetTimelines];
-
-    self.selectedNotesEnteringBackground = self.noteListViewController.tableView.indexPathsForSelectedRows;
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     [self dismissPasscodeLockIfPossible];
     [self authenticateSimperiumIfAccountDeletionRequested];
-
-    if (self.selectedNotesEnteringBackground != nil) {
-        [self.noteListViewController selectRowsWith:self.selectedNotesEnteringBackground];
-        self.selectedNotesEnteringBackground = nil;
-    }
+    [self.noteListViewController restoreSelectedRowsAfterBackgrounding];
 }
 
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler

@@ -699,6 +699,13 @@ extension SPNoteListViewController {
     }
 
     @objc
+    func restoreSelectedRowsAfterBackgrounding() {
+        if selectedNotesEnteringBackground.isEmpty == false {
+            selectRows(with: selectedNotesEnteringBackground)
+            selectedNotesEnteringBackground.removeAll()
+        }
+    }
+
     func selectRows(with indexPaths: [IndexPath]) {
         guard isEditing else {
             return
