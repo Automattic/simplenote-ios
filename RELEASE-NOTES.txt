@@ -1,6 +1,7 @@
 4.52
 -----
 - Extended support for iOS Shortcuts
+- Fixed an issue can activate the faceid switch without a passcode
 
 4.51
 -----
