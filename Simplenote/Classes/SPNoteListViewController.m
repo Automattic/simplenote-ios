@@ -529,8 +529,6 @@
     [self refreshTitle];
     [self refreshSearchBar];
 
-    BOOL isTrashOnScreen = self.isDeletedFilterActive;
-
     [self refreshEmptyTrashState];
     
     [self displayPlaceholdersIfNeeded];
