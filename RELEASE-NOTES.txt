@@ -1,6 +1,7 @@
 4.52
 -----
 - Extended support for iOS Shortcuts
+- Fixed issue where notes selection was lost when app backgrounded
 
 4.51
 -----
