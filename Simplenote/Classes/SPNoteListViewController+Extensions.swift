@@ -697,6 +697,15 @@ extension SPNoteListViewController {
             return count > 0 ? Localization.selectedTitle(with: count) : notesListController.filter.title
         }()
     }
+
+    @objc
+    func selectRows(with indexPaths: [IndexPath]) {
+        guard isEditing else {
+            return
+        }
+
+        indexPaths.forEach({ tableView.selectRow(at: $0, animated: false, scrollPosition: .none) })
+    }
 }
 
 // MARK: - Row Actions
