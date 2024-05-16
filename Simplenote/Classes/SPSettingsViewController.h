@@ -2,7 +2,6 @@
 #import "SPTableViewController.h"
 
 @interface SPSettingsViewController : SPTableViewController <UIPickerViewDelegate, UIPickerViewDataSource> {
-    
     //Preferences
     NSNumber *sortOrderPref;
     NSNumber *numPreviewLinesPref;

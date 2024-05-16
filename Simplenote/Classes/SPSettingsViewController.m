@@ -747,11 +747,11 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 
 - (void)touchIdSwitchDidChangeValue:(UISwitch *)sender
 {
-    SPPinLockManager.shared.shouldUseBiometry = sender.on;
-
     if (![self isPinLockEnabled] && [self.biometrySwitch isOn]) {
         UIAlertController* alert = [self pinLockRequiredAlert];
         [self presentViewController:alert animated:YES completion:nil];
+    } else {
+        SPPinLockManager.shared.shouldUseBiometry = sender.on;
     }
 }
 

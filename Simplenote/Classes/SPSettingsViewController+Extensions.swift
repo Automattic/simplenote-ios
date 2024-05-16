@@ -87,6 +87,7 @@ extension SPSettingsViewController: PinLockSetupControllerDelegate {
     func pinLockSetupControllerDidComplete(_ controller: PinLockSetupController) {
         SPTracker.trackSettingsPinlockEnabled(true)
         dismissPresentedViewController()
+        SPPinLockManager.shared.shouldUseBiometry = true
     }
 
     func pinLockSetupControllerDidCancel(_ controller: PinLockSetupController) {
