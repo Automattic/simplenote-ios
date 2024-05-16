@@ -29,7 +29,7 @@ extension URL {
     }
 
     static func newNoteWidgetURL() -> URL {
-        guard var components = URLComponents.simplenoteURLComponents(with: Constants.newNotePath) else {
+        guard let components = URLComponents.simplenoteURLComponents(with: Constants.newNotePath) else {
             return URL(string: .simplenotePath())!
         }
 

@@ -33,6 +33,7 @@
 @property (nonatomic, strong) UIBarButtonItem                               *selectAllButton;
 @property (nonatomic, weak) Note                                            *selectedNote;
 @property (nonatomic) BOOL                                                  navigatingUsingKeyboard;
+@property (nonatomic) NSArray<NSIndexPath *>                                *selectedNotesEnteringBackground;
 
 - (void)update;
 - (void)openNote:(Note *)note animated:(BOOL)animated;
