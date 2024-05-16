@@ -195,7 +195,6 @@
 {
     [self dismissPasscodeLockIfPossible];
     [self authenticateSimperiumIfAccountDeletionRequested];
-    [self.noteListViewController restoreSelectedRowsAfterBackgrounding];
 }
 
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler

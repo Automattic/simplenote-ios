@@ -197,6 +197,7 @@
 
     // App Background
     [nc addObserver:self selector:@selector(appWillEnterBackground) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    [nc addObserver:self selector:@selector(appWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
 }
 
 - (void)condensedPreferenceWasUpdated:(id)sender
@@ -220,6 +221,10 @@
 
 - (void)appWillEnterBackground {
     self.selectedNotesEnteringBackground = self.tableView.indexPathsForSelectedRows;
+}
+
+- (void)appWillEnterForeground {
+    [self restoreSelectedRowsAfterBackgrounding];
 }
 
 - (void)refreshStyle {
