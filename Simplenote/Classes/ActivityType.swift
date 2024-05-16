@@ -11,12 +11,12 @@ enum ActivityType: String {
     /// New Note Activity
     ///
     case newNote = "com.codality.NotationalFlow.newNote"
-    case newNoteShortcut = "SPOpenNewNoteIntent"
+    case newNoteShortcut = "OpenNewNoteIntent"
 
     /// Open a Note!
     ///
     case openNote = "com.codality.NotationalFlow.openNote"
-    case openNoteShortcut = "SPOpenNoteIntent"
+    case openNoteShortcut = "OpenNoteIntent"
 
     /// Open an Item that was indexed by Spotlight
     ///

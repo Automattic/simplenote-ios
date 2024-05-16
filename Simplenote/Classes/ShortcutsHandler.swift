@@ -49,7 +49,7 @@ class ShortcutsHandler: NSObject {
         case .launch:
             break
         case .newNote, .newNoteShortcut:
-            SPAppDelegate.shared().presentNewNoteEditor()
+            SPAppDelegate.shared().presentNewNoteEditor(useSelectedTag: false)
         case .openNote, .openSpotlightItem:
             presentNote(for: userActivity)
         case .openNoteShortcut:
@@ -105,7 +105,7 @@ extension ShortcutsHandler {
         case .search:
             SPAppDelegate.shared().presentSearch()
         case .newNote:
-            SPAppDelegate.shared().presentNewNoteEditor()
+            SPAppDelegate.shared().presentNewNoteEditor(useSelectedTag: false)
         case .note:
             if let simperiumKey = shortcut.userInfo?[shortcutUserInfoNoteIdentifierKey] as? String {
                 SPAppDelegate.shared().presentNoteWithSimperiumKey(simperiumKey)
