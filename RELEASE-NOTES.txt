@@ -2,6 +2,7 @@
 -----
 - Extended support for iOS Shortcuts
 - Fixed issue where notes selection was lost when app backgrounded
+- Fixed an issue can activate the faceid switch without a passcode
 
 4.51
 -----
