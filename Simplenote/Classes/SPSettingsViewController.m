@@ -14,6 +14,7 @@ NSString *const SPSustainerAppIconName                              = @"AppIcon-
 @interface SPSettingsViewController ()
 @property (nonatomic, strong) UISwitch      *condensedNoteListSwitch;
 @property (nonatomic, strong) UISwitch      *alphabeticalTagSortSwitch;
+@property (nonatomic, strong) UISwitch      *biometrySwitch;
 @property (nonatomic, strong) UISwitch      *sustainerIconSwitch;
 @property (nonatomic, strong) UITextField   *pinTimeoutTextField;
 @property (nonatomic, strong) UIPickerView  *pinTimeoutPickerView;

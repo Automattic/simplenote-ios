@@ -7,8 +7,6 @@
     NSNumber *numPreviewLinesPref;
 }
 
-@property (nonatomic, strong) UISwitch      *biometrySwitch;
-
 @end
 
 extern NSString *const SPAlphabeticalTagSortPref;
