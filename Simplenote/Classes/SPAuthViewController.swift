@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 import SafariServices
+import AuthenticationServices
 
 // MARK: - SPAuthViewController
 //
@@ -188,6 +189,10 @@ class SPAuthViewController: UIViewController {
 
         passwordInputView.isHidden = mode.isPasswordHidden
 
+        if mode.isLogin {
+            displayAuthenticationOptions()
+        }
+
         // hiding text from back button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
@@ -288,12 +293,17 @@ private extension SPAuthViewController {
             return
         }
 
+        if passwordInputView.isHidden == true && passwordInputView.text?.isEmpty == true {
+            passwordInputView.isHidden = false
+            return
+        }
+
         if mustUpgradePasswordStrength() {
             performCredentialsValidation()
             return
         }
 
-        performSimperiumAuthentication()
+        performSimperiumAuthentication(username: email, password: password)
     }
 
     @IBAction func performSignUp() {
@@ -357,10 +367,10 @@ private extension SPAuthViewController {
         }
     }
 
-    func performSimperiumAuthentication() {
+    func performSimperiumAuthentication(username: String, password: String) {
         lockdownInterface()
 
-        controller.loginWithCredentials(username: email, password: password) { error in
+        controller.loginWithCredentials(username: username, password: password) { error in
             if let error = error {
                 self.handleError(error: error)
             } else {
@@ -616,6 +626,38 @@ extension SPAuthViewController: SPTextInputViewDelegate {
     }
 }
 
+// MARK: - ASAuthentication
+//
+extension SPAuthViewController: ASAuthorizationControllerDelegate {
+    private func displayAuthenticationOptions() {
+        let passwordRequest = ASAuthorizationPasswordProvider().createRequest()
+        let controller = ASAuthorizationController(authorizationRequests: [passwordRequest])
+        controller.delegate = self
+        controller.presentationContextProvider = self
+
+        controller.performRequests()
+    }
+
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        switch authorization.credential {
+        case let credential as ASPasswordCredential:
+            performSimperiumAuthentication(username: credential.user, password: credential.password)
+        default:
+            break
+        }
+    }
+
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: any Error) {
+        passwordInputView.isHidden = false
+    }
+}
+
+extension SPAuthViewController: ASAuthorizationControllerPresentationContextProviding {
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        view.window!
+    }
+}
+
 // MARK: - AuthenticationMode: Signup / Login
 //
 struct AuthenticationMode {
@@ -627,6 +669,7 @@ struct AuthenticationMode {
     let secondaryActionText: String?
     let secondaryActionAttributedText: NSAttributedString?
     let isPasswordHidden: Bool
+    let isLogin: Bool
 }
 
 // MARK: - Default Operation Modes
@@ -643,7 +686,8 @@ extension AuthenticationMode {
                      secondaryActionSelector: #selector(SPAuthViewController.presentPasswordReset),
                      secondaryActionText: AuthenticationStrings.loginSecondaryAction,
                      secondaryActionAttributedText: nil,
-                     isPasswordHidden: false)
+                     isPasswordHidden: true,
+                     isLogin: true)
     }
 
     /// Signup Operation Mode: Contains all of the strings + delegate wirings, so that the AuthUI handles user account creation scenarios.
@@ -656,7 +700,8 @@ extension AuthenticationMode {
                      secondaryActionSelector: #selector(SPAuthViewController.presentTermsOfService),
                      secondaryActionText: nil,
                      secondaryActionAttributedText: AuthenticationStrings.signupSecondaryAttributedAction,
-                     isPasswordHidden: true)
+                     isPasswordHidden: true,
+                     isLogin: false)
     }
 }
 
