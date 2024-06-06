@@ -81,6 +81,7 @@
 #pragma mark - User
 + (void)trackUserAccountCreated;
 + (void)trackUserSignedIn;
++ (void)trackUserRequestedLoginLink;
 + (void)trackUserSignedOut;
 
 #pragma mark - WP.com Sign In
