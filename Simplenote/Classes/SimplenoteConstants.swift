@@ -41,6 +41,8 @@ class SimplenoteConstants: NSObject {
     ///
     static let resetPasswordURL     = currentEngineBaseURL.appendingPathComponent("/reset/?redirect=simplenote://launch&email=")
     static let settingsURL          = currentEngineBaseURL.appendingPathComponent("/settings")
+/// TODO: FIXME
+    static let loginURL             = "https://magic-links-dot-simple-note-hrd.appspot.com/account/request-login" ////currentEngineBaseURL.appendingPathComponent("/account/request-login")
     static let signupURL            = currentEngineBaseURL.appendingPathComponent("/account/request-signup")
     static let verificationURL      = currentEngineBaseURL.appendingPathComponent("/account/verify-email/")
     static let accountDeletionURL   = currentEngineBaseURL.appendingPathComponent("/account/request-delete/")
