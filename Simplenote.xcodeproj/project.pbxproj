@@ -308,6 +308,7 @@
 		B55E428C22A1A4550018C0CE /* SPSortOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55E428B22A1A4550018C0CE /* SPSortOrderViewController.swift */; };
 		B56315BE236BD9970066C151 /* UIKitConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB169B22FB2DF300B4EBA5 /* UIKitConstants.swift */; };
 		B5686178195B9E93005F1245 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2F149471799F5A500DC9690 /* libsqlite3.dylib */; };
+		B5699B092C1246C40096D6B7 /* LoginRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5699B082C1246C40096D6B7 /* LoginRemote.swift */; };
 		B56A695822F9CD1500B90398 /* SPOnboardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B56A695622F9CD1500B90398 /* SPOnboardingViewController.xib */; };
 		B56A695922F9CD1500B90398 /* SPOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56A695722F9CD1500B90398 /* SPOnboardingViewController.swift */; };
 		B56A695B22F9CD4E00B90398 /* UINavigationBar+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56A695A22F9CD4E00B90398 /* UINavigationBar+Simplenote.swift */; };
@@ -509,13 +510,13 @@
 		BA8FC2A5267AC7470082962E /* SharedStorageMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8FC2A4267AC7470082962E /* SharedStorageMigrator.swift */; };
 		BA9B19F926A8EF3200692366 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B19F826A8EF3200692366 /* SpinnerViewController.swift */; };
 		BA9B59022685549F00DAD1ED /* StorageSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B59012685549F00DAD1ED /* StorageSettings.swift */; };
-		BA9C7EFB2BF2CC3E007A8460 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9C7EFA2BF2CC3E007A8460 /* Downloader.swift */; };
-		BA9C7EFC2BF2CCAE007A8460 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9C7EFA2BF2CC3E007A8460 /* Downloader.swift */; };
 		BA9C7EC92BED7AB1007A8460 /* CopyNoteContentIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9C7EC82BED7AB1007A8460 /* CopyNoteContentIntentHandler.swift */; };
 		BA9C7ECB2BED7F7B007A8460 /* FindNoteWithTagIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9C7ECA2BED7F7B007A8460 /* FindNoteWithTagIntentHandler.swift */; };
 		BA9C7ECD2BED813B007A8460 /* IntentTag+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9C7ECC2BED813B007A8460 /* IntentTag+Helpers.swift */; };
 		BA9C7ED02BEE9BA7007A8460 /* ShortcutIntents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BA9C7ECF2BEE9BA7007A8460 /* ShortcutIntents.intentdefinition */; };
 		BA9C7ED12BEE9BA7007A8460 /* ShortcutIntents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BA9C7ECF2BEE9BA7007A8460 /* ShortcutIntents.intentdefinition */; };
+		BA9C7EFB2BF2CC3E007A8460 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9C7EFA2BF2CC3E007A8460 /* Downloader.swift */; };
+		BA9C7EFC2BF2CCAE007A8460 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9C7EFA2BF2CC3E007A8460 /* Downloader.swift */; };
 		BAA4856925D5E40900F3BDB9 /* SearchQuery+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */; };
 		BAA59E79269F9FE30068BD3D /* Date+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA59E78269F9FE30068BD3D /* Date+Simplenote.swift */; };
 		BAA63C3325EEDA83001589D7 /* NoteLinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA63C3225EEDA83001589D7 /* NoteLinkTests.swift */; };
@@ -1013,6 +1014,7 @@
 		B55E428B22A1A4550018C0CE /* SPSortOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPSortOrderViewController.swift; path = Classes/SPSortOrderViewController.swift; sourceTree = "<group>"; };
 		B5651239243BC063001EFE77 /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B566A1DD189AA74600DC3F2D /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		B5699B082C1246C40096D6B7 /* LoginRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRemote.swift; sourceTree = "<group>"; };
 		B56A695622F9CD1500B90398 /* SPOnboardingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SPOnboardingViewController.xib; path = Classes/SPOnboardingViewController.xib; sourceTree = "<group>"; };
 		B56A695722F9CD1500B90398 /* SPOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SPOnboardingViewController.swift; path = Classes/SPOnboardingViewController.swift; sourceTree = "<group>"; };
 		B56A695A22F9CD4E00B90398 /* UINavigationBar+Simplenote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UINavigationBar+Simplenote.swift"; path = "Classes/UINavigationBar+Simplenote.swift"; sourceTree = "<group>"; };
@@ -1199,7 +1201,6 @@
 		BA8FC2A4267AC7470082962E /* SharedStorageMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStorageMigrator.swift; sourceTree = "<group>"; };
 		BA9B19F826A8EF3200692366 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 		BA9B59012685549F00DAD1ED /* StorageSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageSettings.swift; sourceTree = "<group>"; };
-		BA9C7EFA2BF2CC3E007A8460 /* Downloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
 		BA9C7EC82BED7AB1007A8460 /* CopyNoteContentIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyNoteContentIntentHandler.swift; sourceTree = "<group>"; };
 		BA9C7ECA2BED7F7B007A8460 /* FindNoteWithTagIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindNoteWithTagIntentHandler.swift; sourceTree = "<group>"; };
 		BA9C7ECC2BED813B007A8460 /* IntentTag+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IntentTag+Helpers.swift"; sourceTree = "<group>"; };
@@ -1224,6 +1225,7 @@
 		BA9C7EF52BEE9C3D007A8460 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/ShortcutIntents.strings; sourceTree = "<group>"; };
 		BA9C7EF72BEE9C3E007A8460 /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/ShortcutIntents.strings"; sourceTree = "<group>"; };
 		BA9C7EF92BEE9C3F007A8460 /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "zh-Hans-CN.lproj/ShortcutIntents.strings"; sourceTree = "<group>"; };
+		BA9C7EFA2BF2CC3E007A8460 /* Downloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
 		BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchQuery+Simplenote.swift"; sourceTree = "<group>"; };
 		BAA59E78269F9FE30068BD3D /* Date+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Simplenote.swift"; sourceTree = "<group>"; };
 		BAA63C3225EEDA83001589D7 /* NoteLinkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteLinkTests.swift; sourceTree = "<group>"; };
@@ -2413,6 +2415,7 @@
 		BA57692A269D2103008B510E /* Remotes */ = {
 			isa = PBXGroup;
 			children = (
+				B5699B082C1246C40096D6B7 /* LoginRemote.swift */,
 				A6C7647F25E9131C00A39067 /* SignupRemote.swift */,
 				A6CC0B0625B8287F00F12A85 /* AccountRemote.swift */,
 				BA5768E2269A803F008B510E /* Remote.swift */,
@@ -3595,6 +3598,7 @@
 				B52BB75022CFD18F0042C162 /* UIActivity+Simplenote.swift in Sources */,
 				F9E197D42283D05C0092B3E1 /* CrashLogging.swift in Sources */,
 				BA9B59022685549F00DAD1ED /* StorageSettings.swift in Sources */,
+				B5699B092C1246C40096D6B7 /* LoginRemote.swift in Sources */,
 				DE7E545B214E34C8008D9928 /* NSString+Count.swift in Sources */,
 				A6E6CE0025A4B0A9005A92DB /* PinLockVerifyController.swift in Sources */,
 				BA55124E2600210B00D8F882 /* TimerFactory.swift in Sources */,

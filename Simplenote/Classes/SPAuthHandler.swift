@@ -53,6 +53,20 @@ class SPAuthHandler {
         })
     }
 
+    /// Requests an Authentication Magic Link
+    ///
+    func requestLoginEmail(username: String, onCompletion: @escaping (SPAuthError?) -> Void) {
+        let remote = LoginRemote()
+        remote.requestLoginEmail(with: username) { (result) in
+            switch result {
+            case .success:
+                onCompletion(nil)
+            case .failure(let error):
+                onCompletion(self.authenticationError(for: error))
+            }
+        }
+    }
+
     /// Registers a new user in the Simperium Backend.
     ///
     /// - Note: Errors are mapped into SPAuthError Instances
