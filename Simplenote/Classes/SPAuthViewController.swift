@@ -295,7 +295,19 @@ private extension SPAuthViewController {
 
         performSimperiumAuthentication()
     }
+    
+    @IBAction func performLogInWithMagicLink() {
+        guard ensureWarningsAreOnScreenWhenNeeded() else {
+            return
+        }
 
+        requestLoginLink()
+    }
+
+    @IBAction func switchToLoginWithPassword() {
+
+    }
+    
     @IBAction func performSignUp() {
         guard ensureWarningsAreOnScreenWhenNeeded() else {
             return
@@ -366,6 +378,20 @@ private extension SPAuthViewController {
             } else {
                 SPTracker.trackUserSignedIn()
             }
+            self.unlockInterface()
+        }
+    }
+
+    func requestLoginLink() {
+        lockdownInterface()
+
+        controller.requestLoginEmail(username: email) { error in
+            if let error {
+                self.handleError(error: error)
+            } else {
+                SPTracker.trackUserRequestedLoginLink()
+            }
+
             self.unlockInterface()
         }
     }
@@ -646,6 +672,19 @@ extension AuthenticationMode {
                      isPasswordHidden: false)
     }
 
+    /// Login Operation Mode: Authentication is handled via Magic Links!
+    ///
+    static var loginWithMagicLink: AuthenticationMode {
+        return .init(title: AuthenticationStrings.loginTitle,
+                     validationStyle: .legacy,
+                     primaryActionSelector: #selector(SPAuthViewController.performLogInWithMagicLink),
+                     primaryActionText: AuthenticationStrings.loginWithLinkPrimaryAction,
+                     secondaryActionSelector: #selector(SPAuthViewController.switchToLoginWithPassword),
+                     secondaryActionText: AuthenticationStrings.loginWithLinkSecondaryAction,
+                     secondaryActionAttributedText: nil,
+                     isPasswordHidden: true)
+    }
+
     /// Signup Operation Mode: Contains all of the strings + delegate wirings, so that the AuthUI handles user account creation scenarios.
     ///
     static var signup: AuthenticationMode {
@@ -666,6 +705,8 @@ private enum AuthenticationStrings {
     static let loginTitle                   = NSLocalizedString("Log In", comment: "LogIn Interface Title")
     static let loginPrimaryAction           = NSLocalizedString("Log In", comment: "LogIn Action")
     static let loginSecondaryAction         = NSLocalizedString("Forgotten password?", comment: "Password Reset Action")
+    static let loginWithLinkPrimaryAction   = NSLocalizedString("Instantly Log In with Email", comment: "LogIn with Magic Link Action")
+    static let loginWithLinkSecondaryAction = NSLocalizedString("Continue with Password", comment: "Password fallback Action")
     static let signupTitle                  = NSLocalizedString("Sign Up", comment: "SignUp Interface Title")
     static let signupPrimaryAction          = NSLocalizedString("Sign Up", comment: "SignUp Action")
     static let signupSecondaryActionPrefix  = NSLocalizedString("By creating an account you agree to our", comment: "Terms of Service Legend *PREFIX*: printed in dark color")
