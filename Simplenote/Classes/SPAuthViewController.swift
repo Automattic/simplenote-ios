@@ -672,7 +672,6 @@ extension SPAuthViewController {
         refreshPasswordInput(isHidden: mode.isPasswordHidden, animated: animated)
         refreshPrimaryAction(mode: mode)
         refreshSecondaryAction(mode: mode)
-        
     }
     
     func refreshPasswordInput(isHidden: Bool, animated: Bool) {
