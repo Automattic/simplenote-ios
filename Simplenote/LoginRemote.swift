@@ -8,27 +8,50 @@
 
 import Foundation
 
-// MARK: - SignupRemote
+// MARK: - LoginRemote
 //
 class LoginRemote: Remote {
 
-    func requestLoginEmail(with email: String, completion: @escaping (_ result: Result<Data?, RemoteError>) -> Void) {
-        let urlRequest = request(with: email)
+    func requestLoginEmail(email: String, completion: @escaping (_ result: Result<Data?, RemoteError>) -> Void) {
+        let request = requestForLoginRequest(with: email)
 
-        performDataTask(with: urlRequest, completion: completion)
+        performDataTask(with: request, completion: completion)
     }
 
-    private func request(with email: String) -> URLRequest {
-        let url = URL(string: SimplenoteConstants.loginURL)!
+    func requestSyncToken(email: String, authCode: String) async throws -> String {
+        let request = requestForLoginCompletion(email: email, authCode: authCode)
+        let response = try await performDataTask(with: request, type: LoginConfirmationResponse.self)
+        
+        return response.syncToken
+    }
+}
 
-        var request = URLRequest(url: url,
-                                 cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
-                                 timeoutInterval: RemoteConstants.timeout)
 
-        request.httpMethod = RemoteConstants.Method.POST
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try? JSONEncoder().encode(["username": email.lowercased()])
+// MARK: - LoginConfirmationResponse
+//
+struct LoginConfirmationResponse: Decodable {
+    let syncToken: String
+}
 
-        return request
+
+// MARK: - Private API(s)
+//
+private extension LoginRemote {
+
+    func requestForLoginRequest(with email: String) -> URLRequest {
+        let url = URL(string: SimplenoteConstants.loginRequestURL)!
+
+        return requestForURL(url, method: RemoteConstants.Method.POST, httpBody: [
+            "username": email.lowercased()
+        ])
+    }
+
+    func requestForLoginCompletion(email: String, authCode: String) -> URLRequest {
+        let url = URL(string: SimplenoteConstants.loginCompletionURL)!
+
+        return requestForURL(url, method: RemoteConstants.Method.POST, httpBody: [
+            "username": email.lowercased(),
+            "auth_code": authCode
+        ])
     }
 }
