@@ -41,6 +41,8 @@ struct MagicLinkConfirmationView: View {
                 }
             }
         }
+        .navigationViewStyle(.stack)
+        .preferredColorScheme(.light)
     }
 }
 

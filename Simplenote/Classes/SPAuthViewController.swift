@@ -371,6 +371,7 @@ private extension SPAuthViewController {
     private func presentMagicLinkConfirmationView(email: String) {
         let rootView = MagicLinkConfirmationView(email: email)
         let hostingController = UIHostingController(rootView: rootView)
+        hostingController.modalPresentationStyle = .formSheet
         hostingController.sheetPresentationController?.detents = [.medium()]
 
         present(hostingController, animated: true)
