@@ -696,6 +696,7 @@ extension SPAuthViewController {
     
     func refreshPrimaryAction(mode: AuthenticationMode) {
         primaryActionButton.setTitleWithoutAnimation(mode.primaryActionText, for: .normal)
+        primaryActionButton.removeTarget(self, action: nil, for: .touchUpInside)
         primaryActionButton.addTarget(self, action: mode.primaryActionSelector, for: .touchUpInside)
     }
     
@@ -709,6 +710,7 @@ extension SPAuthViewController {
         }
 
         secondaryActionButton.setTitleColor(.simplenoteBlue60Color, for: .normal)
+        secondaryActionButton.removeTarget(self, action: nil, for: .touchUpInside)
         secondaryActionButton.addTarget(self, action: mode.secondaryActionSelector, for: .touchUpInside)
     }
 }
