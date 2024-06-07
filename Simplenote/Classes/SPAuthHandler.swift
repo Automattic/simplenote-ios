@@ -57,7 +57,7 @@ class SPAuthHandler {
     ///
     func requestLoginEmail(username: String, onCompletion: @escaping (SPAuthError?) -> Void) {
         let remote = LoginRemote()
-        remote.requestLoginEmail(with: username) { (result) in
+        remote.requestLoginEmail(email: username) { (result) in
             switch result {
             case .success:
                 onCompletion(nil)
