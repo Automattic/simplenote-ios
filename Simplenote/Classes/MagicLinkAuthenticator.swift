@@ -43,8 +43,7 @@ private extension MagicLinkAuthenticator {
     func attemptLoginWithAuthCode(queryItems: [URLQueryItem]) -> Bool {
         guard let email = queryItems.base64DecodedValue(for: Constants.emailField),
               let authCode = queryItems.value(for: Constants.authCodeField),
-              !email.isEmpty, !authCode.isEmpty
-        else {
+              !email.isEmpty, !authCode.isEmpty else {
             return false
         }
 
@@ -68,7 +67,6 @@ private extension MagicLinkAuthenticator {
         return true
     }
 }
-
 
 // MARK: - [URLQueryItem] Helper
 //
