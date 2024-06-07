@@ -295,6 +295,7 @@
 		B5476BC123D8E5D0000E7723 /* String+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5476BC023D8E5D0000E7723 /* String+Simplenote.swift */; };
 		B549E249290B3BDB0072C3E8 /* Preferences+IAP.swift in Sources */ = {isa = PBXBuildFile; fileRef = B549E248290B3BDB0072C3E8 /* Preferences+IAP.swift */; };
 		B549E24B290B3DD70072C3E8 /* StoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B549E24A290B3DD70072C3E8 /* StoreConstants.swift */; };
+		B54A11C22C135EA2002AC8AA /* UIButton+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54A11C12C135EA2002AC8AA /* UIButton+Simplenote.swift */; };
 		B54B04D82407169500401FBB /* SPAppDelegate+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54B04D72407169500401FBB /* SPAppDelegate+Extensions.swift */; };
 		B54D9C572909BA2600D0E0EC /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D9C562909BA2600D0E0EC /* StoreManager.swift */; };
 		B54D9C592909CC4400D0E0EC /* StoreProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D9C582909CC4400D0E0EC /* StoreProduct.swift */; };
@@ -989,6 +990,7 @@
 		B5476BC023D8E5D0000E7723 /* String+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "String+Simplenote.swift"; path = "Classes/String+Simplenote.swift"; sourceTree = "<group>"; };
 		B549E248290B3BDB0072C3E8 /* Preferences+IAP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Preferences+IAP.swift"; sourceTree = "<group>"; };
 		B549E24A290B3DD70072C3E8 /* StoreConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreConstants.swift; sourceTree = "<group>"; };
+		B54A11C12C135EA2002AC8AA /* UIButton+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Simplenote.swift"; sourceTree = "<group>"; };
 		B54B04D72407169500401FBB /* SPAppDelegate+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SPAppDelegate+Extensions.swift"; sourceTree = "<group>"; };
 		B54D9C542909B21700D0E0EC /* Simplenote 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Simplenote 6.xcdatamodel"; sourceTree = "<group>"; };
 		B54D9C562909BA2600D0E0EC /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
@@ -2018,6 +2020,7 @@
 				B50F479E1D1D77FC00822748 /* UIAlertController+Helpers.swift */,
 				B5757367232BED0700443C2E /* UIBezierPath+Simplenote.swift */,
 				B570D2D82360F16F006E1C85 /* UIBlurEffect+Simplenote.swift */,
+				B54A11C12C135EA2002AC8AA /* UIButton+Simplenote.swift */,
 				B575736B232D454300443C2E /* UIColor+Helpers.swift */,
 				B58BF1FA23D78ADF00515B50 /* UIContextualAction+Simplenote.swift */,
 				B5BA5B072551FB3C002AAD43 /* UIDevice+Simplenote.swift */,
@@ -3463,6 +3466,7 @@
 				B52BB74E22CFD1660042C162 /* SimplenoteActivityItemSource.swift in Sources */,
 				B537730F252E14C600BC78C5 /* OptionsViewController.swift in Sources */,
 				B56A696722F9D55F00B90398 /* UIView+Animations.swift in Sources */,
+				B54A11C22C135EA2002AC8AA /* UIButton+Simplenote.swift in Sources */,
 				BA9C7ED02BEE9BA7007A8460 /* ShortcutIntents.intentdefinition in Sources */,
 				BA3856CD2681715700F388CC /* CoreDataManager.swift in Sources */,
 				A60DF30825A44F0F00FDADF3 /* PinLockRemoveController.swift in Sources */,
