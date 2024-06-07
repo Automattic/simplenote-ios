@@ -18,6 +18,9 @@ struct MagicLinkAuthenticator {
             return
         }
 
+        attemptLoginWithAuthCode(queryItems: queryItems)
+    }
+}
 
 // MARK: - Private API(s)
 //
@@ -33,6 +36,35 @@ private extension MagicLinkAuthenticator {
         }
 
         authenticator.authenticate(withUsername: email, token: token)
+        return true
+    }
+
+    @discardableResult
+    func attemptLoginWithAuthCode(queryItems: [URLQueryItem]) -> Bool {
+        guard let email = queryItems.base64DecodedValue(for: Constants.emailField),
+              let authCode = queryItems.value(for: Constants.authCodeField),
+              !email.isEmpty, !authCode.isEmpty
+        else {
+            return false
+        }
+
+        NSLog("[MagicLinkAuthenticator] Requesting SyncToken for \(email) and \(authCode)")
+        
+        Task {
+            do {
+                let remote = LoginRemote()
+                let syncToken = try await remote.requestSyncToken(email: email, authCode: authCode)
+                
+                Task { @MainActor in
+                    NSLog("[MagicLinkAuthenticator] Should auth with token \(syncToken)")
+                    authenticator.authenticate(withUsername: email, token: syncToken)
+                }
+
+            } catch {
+                NSLog("[MagicLinkAuthenticator] Magic Link TokenExchange Error: \(error)")
+            }
+        }
+
         return true
     }
 }
@@ -61,4 +93,5 @@ private struct Constants {
     static let host = "login"
     static let emailField = "email"
     static let tokenField = "token"
+    static let authCodeField = "auth_code"
 }
