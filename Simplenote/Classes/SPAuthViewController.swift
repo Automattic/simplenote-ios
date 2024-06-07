@@ -674,6 +674,11 @@ extension SPAuthViewController {
         refreshPasswordInput(isHidden: mode.isPasswordHidden, animated: animated)
         refreshPrimaryAction(mode: mode)
         refreshSecondaryAction(mode: mode)
+
+        /// Workaround:
+        /// When revealing the Password Field, iOS's Autofill mechanism may not properly fill the password field!
+        passwordInputView.becomeFirstResponder()
+        emailInputView.becomeFirstResponder()
     }
     
     func refreshPasswordInput(isHidden: Bool, animated: Bool) {
