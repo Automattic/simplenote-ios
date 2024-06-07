@@ -191,7 +191,7 @@ extension SPSettingsViewController {
         switch error {
         case .network:
             NoticeController.shared.present(NoticeFactory.networkError())
-        case .requestError:
+        case .responseUnableToDecode, .requestError:
             presentRequestErrorAlert()
         }
     }

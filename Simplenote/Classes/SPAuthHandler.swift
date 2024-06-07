@@ -90,6 +90,8 @@ class SPAuthHandler {
         switch remoteError {
         case .network:
             return SPAuthError.network
+        case .responseUnableToDecode:
+            return SPAuthError.unableToDecode
         case .requestError(let statusCode, let error):
             return SPAuthError(signupErrorCode: statusCode, response: error?.localizedDescription, error: error)
         }

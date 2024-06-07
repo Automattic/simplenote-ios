@@ -39,7 +39,7 @@ class Remote {
         
         // Check for 2xx status code
         guard statusCode / 100 == 2 else {
-            throw RemoteError.serverError(statusCode: statusCode)
+            throw RemoteError.requestError(statusCode, nil)
         }
         
         return data
