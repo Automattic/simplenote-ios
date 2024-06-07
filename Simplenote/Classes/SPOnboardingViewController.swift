@@ -154,7 +154,7 @@ private extension SPOnboardingViewController {
         sheetController.setTitleForButton1(title: OnboardingStrings.loginWithWpcomText)
 
         sheetController.onClickButton0 = { [weak self] in
-            self?.presentAuthenticationInterface(mode: .login)
+            self?.presentAuthenticationInterface(mode: .loginWithMagicLink)
         }
 
         sheetController.onClickButton1 = { [weak self] in
