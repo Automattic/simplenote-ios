@@ -1,11 +1,3 @@
-//
-//  LoginRemote.swift
-//  Simplenote
-//
-//  Created by Jorge Leandro Perez on 6/6/24.
-//  Copyright © 2024 Automattic. All rights reserved.
-//
-
 import Foundation
 
 // MARK: - LoginRemote
