@@ -159,7 +159,11 @@ class SPAuthViewController: UIViewController {
 
     /// # Authentication Mode: Signup or Login
     ///
-    let mode: AuthenticationMode
+    private(set) var mode: AuthenticationMode {
+        didSet {
+            refreshInterface(mode: mode)
+        }
+    }
 
     /// Indicates if the Extended Debug Mode is enabled
     ///
@@ -173,7 +177,7 @@ class SPAuthViewController: UIViewController {
 
     /// Designated Initializer
     ///
-    init(controller: SPAuthHandler, mode: AuthenticationMode = .login) {
+    init(controller: SPAuthHandler, mode: AuthenticationMode = .loginWithMagicLink) {
         self.controller = controller
         self.mode = mode
         super.init(nibName: nil, bundle: nil)
@@ -305,7 +309,7 @@ private extension SPAuthViewController {
     }
 
     @IBAction func switchToLoginWithPassword() {
-
+        mode = .loginWithPassword
     }
     
     @IBAction func performSignUp() {
@@ -504,7 +508,7 @@ private extension SPAuthViewController {
         }
 
         // Prefill the LoginViewController
-        let loginViewController = SPAuthViewController(controller: controller, mode: .login)
+        let loginViewController = SPAuthViewController(controller: controller, mode: .loginWithPassword)
 
         loginViewController.loadViewIfNeeded()
         loginViewController.email = email
@@ -531,6 +535,11 @@ private extension SPAuthViewController {
         refreshPasswordInput(inErrorState: true)
     }
 
+    func dismissAllValidationWarnings() {
+        refreshEmailInput(inErrorState: false)
+        refreshPasswordInput(inErrorState: false)
+    }
+    
     func dismissEmailValidationWarning() {
         refreshEmailInput(inErrorState: false)
     }
@@ -642,6 +651,54 @@ extension SPAuthViewController: SPTextInputViewDelegate {
     }
 }
 
+// MARK: - Mode Switching
+//
+extension SPAuthViewController {
+    
+    func refreshInterface(mode: AuthenticationMode, animated: Bool = true) {
+        title = mode.title
+        
+        dismissAllValidationWarnings()
+
+        refreshPasswordInput(isHidden: mode.isPasswordHidden, animated: animated)
+        refreshPrimaryAction(mode: mode)
+        refreshSecondaryAction(mode: mode)
+        
+    }
+    
+    func refreshPasswordInput(isHidden: Bool, animated: Bool) {
+        let work = {
+            self.passwordInputView.isHidden = isHidden
+        }
+        
+        guard animated else {
+            work()
+            return
+        }
+
+        UIView.animate(withDuration: UIKitConstants.animationDelayShort, animations: work)
+    }
+    
+    func refreshPrimaryAction(mode: AuthenticationMode) {
+        primaryActionButton.setTitleWithoutAnimation(mode.primaryActionText, for: .normal)
+        primaryActionButton.addTarget(self, action: mode.primaryActionSelector, for: .touchUpInside)
+    }
+    
+    func refreshSecondaryAction(mode: AuthenticationMode) {
+        if let title = mode.secondaryActionText {
+            secondaryActionButton.setTitleWithoutAnimation(title, for: .normal)
+        }
+        
+        if let attributedTitle = mode.secondaryActionAttributedText {
+            secondaryActionButton.setAttributedTitleWithoutAnimation(attributedTitle, for: .normal)
+        }
+
+        secondaryActionButton.setTitleColor(.simplenoteBlue60Color, for: .normal)
+        secondaryActionButton.addTarget(self, action: mode.secondaryActionSelector, for: .touchUpInside)
+    }
+}
+
+
 // MARK: - AuthenticationMode: Signup / Login
 //
 struct AuthenticationMode {
@@ -661,7 +718,7 @@ extension AuthenticationMode {
 
     /// Login Operation Mode: Contains all of the strings + delegate wirings, so that the AuthUI handles authentication scenarios.
     ///
-    static var login: AuthenticationMode {
+    static var loginWithPassword: AuthenticationMode {
         return .init(title: AuthenticationStrings.loginTitle,
                      validationStyle: .legacy,
                      primaryActionSelector: #selector(SPAuthViewController.performLogIn),
