@@ -30,4 +30,49 @@ class Remote {
 
         dataTask.resume()
     }
+
+    /// Performs a URLSession Data Task
+    ///
+    func performDataTask(with request: URLRequest) async throws -> Data {
+        let (data, response) = try await urlSession.data(for: request)
+        let statusCode = (response as? HTTPURLResponse)?.statusCode ?? .zero
+        
+        // Check for 2xx status code
+        guard statusCode / 100 == 2 else {
+            throw RemoteError.serverError(statusCode: statusCode)
+        }
+        
+        return data
+    }
+    
+    /// Performs a URLSession Data Task, and decodes a given Type
+    ///
+    func performDataTask<T: Decodable>(with request: URLRequest, type: T.Type) async throws -> T {
+        let data = try await performDataTask(with: request)
+
+        do {
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+            return try decoder.decode(type, from: data)
+
+        } catch {
+            throw RemoteError.responseUnableToDecode
+        }
+    }
+    
+    /// Builds a URLRequest for the specified URL / Method / params
+    ///
+    func requestForURL(_ url: URL, method: String, httpBody: [String: String]?) -> URLRequest {
+        var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: RemoteConstants.timeout)
+
+        request.httpMethod = method
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        if let httpBody {
+            request.httpBody = try? JSONEncoder().encode(httpBody)
+        }
+
+        return request
+    }
 }

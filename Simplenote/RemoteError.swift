@@ -2,6 +2,8 @@ import Foundation
 
 enum RemoteError: Error {
     case network
+    case responseUnableToDecode
+    case serverError(statusCode: Int)
     case requestError(Int, Error?)
 }
 
