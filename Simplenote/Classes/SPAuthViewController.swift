@@ -81,6 +81,7 @@ class SPAuthViewController: UIViewController {
     @IBOutlet private var primaryActionSpinner: UIActivityIndicatorView! {
         didSet {
             primaryActionSpinner.style = .medium
+            primaryActionSpinner.color = .white
         }
     }
 
