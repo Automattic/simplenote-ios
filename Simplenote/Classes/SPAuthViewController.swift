@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 import SafariServices
+import SwiftUI
 
 // MARK: - SPAuthViewController
 //
@@ -305,11 +306,19 @@ private extension SPAuthViewController {
             return
         }
 
-        requestLoginLink()
-    }
+        lockdownInterface()
 
-    @IBAction func switchToLoginWithPassword() {
-        mode = .loginWithPassword
+        let email = self.email
+        controller.requestLoginEmail(username: email) { error in
+            if let error {
+                self.handleError(error: error)
+            } else {
+                self.presentMagicLinkConfirmationView(email: email)
+                SPTracker.trackUserRequestedLoginLink()
+            }
+
+            self.unlockInterface()
+        }
     }
     
     @IBAction func performSignUp() {
@@ -333,6 +342,10 @@ private extension SPAuthViewController {
             self.unlockInterface()
         }
     }
+    
+    @IBAction func switchToLoginWithPassword() {
+        mode = .loginWithPassword
+    }
 
     @IBAction func presentPasswordReset() {
         controller.presentPasswordReset(from: self, username: email)
@@ -353,7 +366,16 @@ private extension SPAuthViewController {
         viewController.title = title
         navigationController?.pushViewController(viewController, animated: true)
     }
+    
+    private func presentMagicLinkConfirmationView(email: String) {
+        let rootView = MagicLinkConfirmationView(email: email)
+        let hostingController = UIHostingController(rootView: rootView)
+        hostingController.sheetPresentationController?.detents = [.medium()]
+
+        present(hostingController, animated: true)
+    }
 }
+
 
 // MARK: - Simperium Services
 //
@@ -385,20 +407,6 @@ private extension SPAuthViewController {
             self.unlockInterface()
         }
     }
-
-    func requestLoginLink() {
-        lockdownInterface()
-
-        controller.requestLoginEmail(username: email) { error in
-            if let error {
-                self.handleError(error: error)
-            } else {
-                SPTracker.trackUserRequestedLoginLink()
-            }
-
-            self.unlockInterface()
-        }
-    }
 }
 
 // MARK: - Password Reset Flow
@@ -420,6 +428,7 @@ private extension SPAuthViewController {
         present(alertController, animated: true, completion: nil)
     }
 }
+
 
 // MARK: - Error Handling
 //
