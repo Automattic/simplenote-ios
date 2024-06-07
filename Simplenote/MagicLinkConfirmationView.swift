@@ -6,8 +6,10 @@ import Gridicons
 // MARK: - MagicLinkConfirmationView
 //
 struct MagicLinkConfirmationView: View {
-    let email: String
     @Environment(\.presentationMode) var presentationMode
+    @State private var displaysFullImage: Bool = false
+    let email: String
+    
 
     var body: some View {
         NavigationView {
@@ -15,6 +17,12 @@ struct MagicLinkConfirmationView: View {
                 Image(uiImage: MagicLinkImages.mail)
                     .renderingMode(.template)
                     .foregroundColor(Color(.simplenoteBlue60Color))
+                    .scaleEffect(displaysFullImage ? 1 : 0.4)
+                    .onAppear {
+                        withAnimation(.spring(response: 0.3, dampingFraction: 0.3)) {
+                            displaysFullImage = true
+                        }
+                    }
 
                 Text("Check your email")
                     .bold()
