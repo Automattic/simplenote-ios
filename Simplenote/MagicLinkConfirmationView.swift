@@ -42,7 +42,9 @@ struct MagicLinkConfirmationView: View {
             }
         }
         .navigationViewStyle(.stack)
-        .preferredColorScheme(.light)
+        
+        /// Force Light Mode (since the Authentication UI is all light!)
+        .environment(\.colorScheme, .light)
     }
 }
 
