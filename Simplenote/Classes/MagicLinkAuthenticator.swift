@@ -14,15 +14,29 @@ struct MagicLinkAuthenticator {
             return
         }
 
-        guard let email = queryItems.base64DecodedValue(for: Constants.emailField),
-              let token = queryItems.value(for: Constants.tokenField),
-              !email.isEmpty, !token.isEmpty else {
+        if attemptLoginWithToken(queryItems: queryItems) {
             return
         }
 
+
+// MARK: - Private API(s)
+//
+private extension MagicLinkAuthenticator {
+
+    @discardableResult
+    func attemptLoginWithToken(queryItems: [URLQueryItem]) -> Bool {
+        guard let email = queryItems.base64DecodedValue(for: Constants.emailField),
+              let token = queryItems.value(for: Constants.tokenField),
+              !email.isEmpty, !token.isEmpty
+        else {
+            return false
+        }
+
         authenticator.authenticate(withUsername: email, token: token)
+        return true
     }
 }
+
 
 // MARK: - [URLQueryItem] Helper
 //
