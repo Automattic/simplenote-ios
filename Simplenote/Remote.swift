@@ -30,4 +30,17 @@ class Remote {
 
         dataTask.resume()
     }
+
+    func performDataTask(with request: URLRequest) async throws -> Data? {
+        try await withCheckedThrowingContinuation { continuation in
+            performDataTask(with: request) { result in
+                switch result {
+                case .success(let data):
+                    continuation.resume(returning: data)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
+    }
 }

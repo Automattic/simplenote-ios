@@ -51,9 +51,10 @@ typedef NS_ENUM(NSInteger, SPOptionsViewSections) {
 
 typedef NS_ENUM(NSInteger, SPOptionsAccountRow) {
     SPOptionsAccountRowDescription      = 0,
-    SPOptionsAccountRowPrivacy          = 1,
-    SPOptionsAccountRowLogout           = 2,
-    SPOptionsAccountRowCount            = 3
+    SPOptionsAccountRowPasskeys         = 1,
+    SPOptionsAccountRowPrivacy          = 2,
+    SPOptionsAccountRowLogout           = 3,
+    SPOptionsAccountRowCount            = 4
 };
 
 typedef NS_ENUM(NSInteger, SPOptionsNotesRow) {
@@ -449,6 +450,11 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     break;
                 }
+                case SPOptionsAccountRowPasskeys: {
+                    cell.textLabel.text = NSLocalizedString(@"Add Passkey Authentication", @"Add passkeys to an account");
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    break;
+                }
                 case SPOptionsAccountRowPrivacy: {
                     cell.textLabel.text = NSLocalizedString(@"Privacy Settings", @"Privacy Settings");
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -577,6 +583,10 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
         } case SPOptionsViewSectionsAccount: {
             
             switch (indexPath.row) {
+                case SPOptionsAccountRowPasskeys: {
+                    [self presentEnterPasswordAlert];
+                    break;
+                }
                 case SPOptionsAccountRowPrivacy: {
                     SPPrivacyViewController *test = [[SPPrivacyViewController alloc] initWithStyle:UITableViewStyleGrouped];
                     [self.navigationController pushViewController:test animated:true];

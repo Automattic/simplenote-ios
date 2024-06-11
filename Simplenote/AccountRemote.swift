@@ -51,4 +51,45 @@ class AccountRemote: Remote {
 
         return request
     }
+
+    // MARK: - Passkeys
+    //
+    private func passkeyCredentialCreationRequest(withEmail email: String, password: String) -> URLRequest {
+        let params = [
+            "email": email.lowercased(),
+            "password": password,
+            "webauthn": "true"
+        ] as [String: Any]
+
+        let boundary = "Boundary-\(UUID().uuidString)"
+        var request = URLRequest(url: URL(string: "https://passkey-dev-dot-simple-note-hrd.appspot.com/api2/login")!, timeoutInterval: Double.infinity)
+        request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+
+        request.httpMethod = "POST"
+        request.httpBody = body(with: boundary, parameters: params)
+
+        return request
+    }
+
+    private func body(with boundary: String, parameters: [String: Any]) -> Data {
+        var body = Data()
+
+        for param in parameters {
+            let paramName = param.key
+            body += Data("--\(boundary)\r\n".utf8)
+            body += Data("Content-Disposition:form-data; name=\"\(paramName)\"".utf8)
+            let paramValue = param.value as! String
+            body += Data("\r\n\r\n\(paramValue)\r\n".utf8)
+        }
+
+        body += Data("--\(boundary)--\r\n".utf8)
+
+        return body
+    }
+
+    func requestChallengeResponseToCreatePasskey(forEmail email: String, password: String) async throws -> Data? {
+        let request = passkeyCredentialCreationRequest(withEmail: email, password: password)
+
+        return try await performDataTask(with: request)
+    }
 }
