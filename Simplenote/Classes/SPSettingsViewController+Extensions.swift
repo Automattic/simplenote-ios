@@ -1,4 +1,5 @@
 import UIKit
+import AuthenticationServices
 
 // MARK: - Subscriber UI
 //
@@ -215,6 +216,55 @@ extension SPSettingsViewController {
             alert.addDefaultActionWithTitle(IndexAlert.okay)
             self.present(alert, animated: true, completion: nil)
         }
+    }
+}
+
+// MARK: - Passkeys
+//
+extension SPSettingsViewController {
+    @objc
+    func presentEnterPasswordAlert() {
+        let alert = UIAlertController(title: "Passkey Setup", message: "To add passkeys you must enter your password", preferredStyle: .alert)
+        alert.addTextField { textField in
+            textField.textContentType = .password
+            textField.isSecureTextEntry = true
+        }
+
+        let action = UIAlertAction(title: "Submit", style: .default) { [unowned alert] _ in
+            guard let textfield = alert.textFields?.first,
+                  let password = textfield.text,
+                  let email = SPAppDelegate.shared().simperium.user?.email else {
+                return
+            }
+
+            Task {
+                guard let response = try? await AccountRemote().requestChallengeResponseToCreatePasskey(forEmail: email, password: password),
+                      let json = try? JSONSerialization.jsonObject(with: response, options: .topLevelDictionaryAssumed) as? [String: Any] else {
+                    return
+                }
+                print(json)
+            }
+        }
+        alert.addAction(action)
+        alert.addCancelActionWithTitle("Cancel")
+
+        present(alert, animated: true)
+    }
+}
+
+extension SPSettingsViewController: ASAuthorizationControllerDelegate {
+    public func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: any Error) {
+        print(error.localizedDescription)
+    }
+
+    public func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+
+    }
+}
+
+extension SPSettingsViewController: ASAuthorizationControllerPresentationContextProviding {
+    public func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        view.window!
     }
 }
 
