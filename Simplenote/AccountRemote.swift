@@ -62,10 +62,10 @@ class AccountRemote: Remote {
         ] as [String: Any]
 
         let boundary = "Boundary-\(UUID().uuidString)"
-        var request = URLRequest(url: URL(string: "https://passkey-dev-dot-simple-note-hrd.appspot.com/api2/login")!, timeoutInterval: Double.infinity)
+        var request = URLRequest(url: SimplenoteConstants.passkeyCredentialCreationURL)
         request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
 
-        request.httpMethod = "POST"
+        request.httpMethod = RemoteConstants.Method.POST
         request.httpBody = body(with: boundary, parameters: params)
 
         return request
@@ -92,4 +92,20 @@ class AccountRemote: Remote {
 
         return try await performDataTask(with: request)
     }
+
+    func passkeyCredentialRegistration(withData data: Data) -> URLRequest {
+        var urlRequest = URLRequest(url: SimplenoteConstants.passkeyRegistrationURL)
+        urlRequest.httpMethod = RemoteConstants.Method.POST
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        urlRequest.httpBody = data
+
+        return urlRequest
+    }
+
+    func registerCredential(with data: Data) async throws {
+        let request = passkeyCredentialRegistration(withData: data)
+        try await _ = performDataTask(with: request)
+    }
+
 }

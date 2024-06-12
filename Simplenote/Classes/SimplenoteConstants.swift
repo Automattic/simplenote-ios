@@ -49,4 +49,5 @@ class SimplenoteConstants: NSObject {
     ///
     static let currentPasskeyBaseURL = URL(string: "https://passkey-dev-dot-simple-note-hrd.appspot.com")!
     static let passkeyCredentialCreationURL = currentPasskeyBaseURL.appendingPathComponent("/api2/login")
+    static let passkeyRegistrationURL = currentPasskeyBaseURL.appendingPathComponent("/auth/add-credential")
 }

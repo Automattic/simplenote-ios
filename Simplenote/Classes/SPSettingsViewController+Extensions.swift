@@ -239,16 +239,31 @@ extension SPSettingsViewController {
 
             Task {
                 guard let response = try? await AccountRemote().requestChallengeResponseToCreatePasskey(forEmail: email, password: password),
-                      let json = try? JSONSerialization.jsonObject(with: response, options: .topLevelDictionaryAssumed) as? [String: Any] else {
+                      let passkeyChallenge = try? JSONDecoder().decode(PasskeyChallenge.self, from: response) else {
+                    //TODO: Throw instead
                     return
                 }
-                print(json)
+                self.attemptRegisteringPasskey(with: passkeyChallenge)
             }
         }
         alert.addAction(action)
         alert.addCancelActionWithTitle("Cancel")
 
         present(alert, animated: true)
+    }
+
+    private func attemptRegisteringPasskey(with passkeyChallenge: PasskeyChallenge) {
+        guard let challengeData = passkeyChallenge.challengeData,
+              let userID = passkeyChallenge.userID else {
+            return
+        }
+
+        let platformProvider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: passkeyChallenge.relayingPartyIdentifier)
+        let platformKeyRequest = platformProvider.createCredentialRegistrationRequest(challenge: challengeData, name: passkeyChallenge.displayName, userID: userID)
+        let authController = ASAuthorizationController(authorizationRequests: [platformKeyRequest])
+        authController.delegate = self
+        authController.presentationContextProvider = self
+        authController.performRequests()
     }
 }
 
@@ -259,6 +274,17 @@ extension SPSettingsViewController: ASAuthorizationControllerDelegate {
 
     public func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
 
+        if let credential = authorization.credential as? ASAuthorizationPlatformPublicKeyCredentialRegistration {
+            guard let registrationObject = PasskeyRegistration(from: credential),
+                  let data = try? JSONEncoder().encode(registrationObject) else {
+                //TODO: Should handle error
+                return
+            }
+
+            Task {
+                try? await AccountRemote().registerCredential(with: data)
+            }
+        }
     }
 }
 
