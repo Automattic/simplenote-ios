@@ -16,6 +16,7 @@ class Remote {
                 let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
 
                 // Check for 2xx status code
+                print("# statusCode: \(statusCode)")
                 guard statusCode / 100 == 2 else {
                     let error = statusCode > 0 ?
                         RemoteError.requestError(statusCode, dataTaskError):
