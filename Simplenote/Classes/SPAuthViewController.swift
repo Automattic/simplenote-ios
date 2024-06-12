@@ -712,7 +712,7 @@ extension SPAuthViewController: ASAuthorizationControllerDelegate {
         }
 
         let provider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: challenge.relayingParty)
-        let request = provider.createCredentialAssertionRequest(challenge: challenge.challenge)
+        let request = provider.createCredentialAssertionRequest(challenge: challenge.challenge.data(using: .utf8)!)
 
         let controller = ASAuthorizationController(authorizationRequests: [request])
         controller.delegate = self
@@ -753,7 +753,7 @@ extension SPAuthViewController: ASAuthorizationControllerPresentationContextProv
 
 struct PasskeyAuthChallenge: Decodable {
     let relayingParty: String
-    let challenge: Data
+    let challenge: String
 
     enum CodingKeys: String, CodingKey {
         case relayingParty = "rpId"
