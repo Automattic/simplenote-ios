@@ -127,4 +127,18 @@ class AccountRemote: Remote {
         let request = passkeyAuthChallengeRequest(forEmail: email)
         return try await performDataTask(with: request)
     }
+
+    private func verifyPassKeyRequest(with data: Data) -> URLRequest {
+        var urlRequest = URLRequest(url: SimplenoteConstants.verifyPasskeyAuthChallengeURL)
+        urlRequest.httpMethod = RemoteConstants.Method.POST
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.httpBody = data
+
+        return urlRequest
+    }
+
+    func verifyPasskeyLogin(with data: Data) async throws {
+        let request = verifyPassKeyRequest(with: data)
+        try await _ = performDataTask(with: request)
+    }
 }

@@ -206,7 +206,7 @@ class SPAuthViewController: UIViewController {
         setupNavigationController()
         startListeningToNotifications()
 
-        passwordInputView.isHidden = mode.isPasswordHidden\
+        passwordInputView.isHidden = mode.isPasswordHidden
 
         // hiding text from back button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
@@ -402,6 +402,59 @@ private extension SPAuthViewController {
             }
             self.unlockInterface()
         }
+    }
+
+    func performPasskeyAuthentication(with credential: ASAuthorizationPublicKeyCredentialAssertion) {
+        let response = PasskeyAuthVerify(email: email, credential: credential)!
+        let json = try! JSONEncoder().encode(response)
+
+        Task {
+            try? await AccountRemote().verifyPasskeyLogin(with: json)
+        }
+    }
+}
+
+struct PasskeyAuthVerify: Encodable {
+    private struct Response: Encodable {
+        let authenticatorData: String
+        let clientDataJSON: Data
+        let signature: String
+
+    }
+
+    private let email: String
+    private let id: String
+    private let rawId: String
+    private let response: PasskeyAuthVerify.Response
+    private let type: String
+
+    init?(email: String, credential: ASAuthorizationPublicKeyCredentialAssertion) {
+        guard let preparedJSON = Self.prepareJSON(from: credential.rawClientDataJSON) else {
+            return nil
+        }
+
+        self.email = email
+        self.id = credential.credentialID.base64EncodedString().toBase64url()
+        self.rawId = credential.credentialID.base64EncodedString()
+        self.type = "public-key"
+
+        self.response = Response(
+            authenticatorData: credential.rawAuthenticatorData.base64EncodedString().toBase64url(),
+            clientDataJSON: preparedJSON,
+            signature: credential.signature.base64EncodedString().toBase64url())
+    }
+
+    private static func prepareJSON(from data: Data) -> Data? {
+        guard var json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+              let base64challenge = json["challenge"] as? String,
+              let challengeData = Data(base64Encoded: base64challenge + "="),
+              let challenge = String(data: challengeData, encoding: .utf8) else {
+            return nil
+        }
+
+        json["challenge"] = challenge
+
+        return try? JSONSerialization.data(withJSONObject: json)
     }
 }
 
@@ -654,13 +707,12 @@ extension SPAuthViewController: SPTextInputViewDelegate {
 //
 extension SPAuthViewController: ASAuthorizationControllerDelegate {
     private func displayPasskeyAuthenticationOptions() async throws {
-        guard let challenge = try await fetchAuthChallenge(),
-        let challengeData = challenge.challengeData else {
+        guard let challenge = try await fetchAuthChallenge() else {
             return
         }
 
         let provider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: challenge.relayingParty)
-        let request = provider.createCredentialAssertionRequest(challenge: challengeData)
+        let request = provider.createCredentialAssertionRequest(challenge: challenge.challenge)
 
         let controller = ASAuthorizationController(authorizationRequests: [request])
         controller.delegate = self
@@ -673,15 +725,16 @@ extension SPAuthViewController: ASAuthorizationControllerDelegate {
         guard let data = try await AccountRemote().passkeyAuthChallenge(for: email) else {
             return nil
         }
-        let challenge = try JSONDecoder().decode(PasskeyAuthChallenge.self, from: data)
+        print("data")
 
+        let challenge = try JSONDecoder().decode(PasskeyAuthChallenge.self, from: data)
         return challenge
     }
 
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         switch authorization.credential {
-        case let credential as ASPasswordCredential:
-            performSimperiumAuthentication(username: credential.user, password: credential.password)
+        case let credential as ASAuthorizationPlatformPublicKeyCredentialAssertion:
+            performPasskeyAuthentication(with: credential)
         default:
             break
         }
@@ -700,15 +753,11 @@ extension SPAuthViewController: ASAuthorizationControllerPresentationContextProv
 
 struct PasskeyAuthChallenge: Decodable {
     let relayingParty: String
-    let challenge: String
+    let challenge: Data
 
     enum CodingKeys: String, CodingKey {
         case relayingParty = "rpId"
         case challenge
-    }
-
-    var challengeData: Data? {
-        challenge.data(using: .utf8)
     }
 }
 
