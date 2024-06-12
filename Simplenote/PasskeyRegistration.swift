@@ -23,7 +23,6 @@ struct PasskeyRegistration: Encodable {
         let idString = credentialRegistration.credentialID.base64EncodedString().toBase64url()
         let response = Response(clientDataJSON: clientJson.base64EncodedString(), attestationObject: rawAttestationObject.base64EncodedString())
 
-
         self.email = email
         self.id = idString
         self.rawId = idString
@@ -33,9 +32,9 @@ struct PasskeyRegistration: Encodable {
 
     private static func prepareJSON(from data: Data) -> Data? {
         guard var json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-              var base64challenge = json["challenge"] as? String,
-              var challengeData = Data(base64Encoded: base64challenge + "="),
-        var challenge = String(data: challengeData, encoding: .utf8) else {
+              let base64challenge = json["challenge"] as? String,
+              let challengeData = Data(base64Encoded: base64challenge + "="),
+              let challenge = String(data: challengeData, encoding: .utf8) else {
             return nil
         }
 
