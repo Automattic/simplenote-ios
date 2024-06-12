@@ -76,6 +76,17 @@ class SPAuthViewController: UIViewController {
         }
     }
 
+    /// # Passkey Button Action
+    ///
+    @IBOutlet weak var passkeySigninButton: SPSquaredButton! {
+        didSet {
+            passkeySigninButton.isHidden = !mode.isLogin
+            passkeySigninButton.setTitle(AuthenticationStrings.passkeyActionButton, for: .normal)
+            passkeySigninButton.setTitleColor(.white, for: .normal)
+            passkeySigninButton.addTarget(self, action: #selector(passkeyAuthAction), for: .touchUpInside)
+        }
+    }
+
     /// # Primary Action Spinner!
     ///
     @IBOutlet private var primaryActionSpinner: UIActivityIndicatorView! {
@@ -100,6 +111,14 @@ class SPAuthViewController: UIViewController {
             secondaryActionButton.titleLabel?.textAlignment = .center
             secondaryActionButton.titleLabel?.numberOfLines = 0
             secondaryActionButton.addTarget(self, action: mode.secondaryActionSelector, for: .touchUpInside)
+        }
+    }
+
+    /// # Passkey Action Spinner
+    ///
+    @IBOutlet weak var passkeyActivitySpinner: UIActivityIndicatorView! {
+        didSet {
+            passkeyActivitySpinner.style = .medium
         }
     }
 
@@ -187,11 +206,7 @@ class SPAuthViewController: UIViewController {
         setupNavigationController()
         startListeningToNotifications()
 
-        passwordInputView.isHidden = mode.isPasswordHidden
-
-        if mode.isLogin {
-            displayAuthenticationOptions()
-        }
+        passwordInputView.isHidden = mode.isPasswordHidden\
 
         // hiding text from back button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
@@ -246,6 +261,7 @@ private extension SPAuthViewController {
 
     func ensureStylesMatchValidationState() {
         primaryActionButton.backgroundColor = isInputValid ? .simplenoteBlue50Color : .simplenoteGray20Color
+        passkeySigninButton.backgroundColor = isInputValid ? .simplenoteBlue50Color : .simplenoteGray20Color
     }
 
     @objc
@@ -325,6 +341,14 @@ private extension SPAuthViewController {
             }
 
             self.unlockInterface()
+        }
+    }
+
+    @objc func passkeyAuthAction() {
+        Task {
+            //TODO: Handle errors
+            //TODO: Handle email not valid
+            try? await displayPasskeyAuthenticationOptions()
         }
     }
 
@@ -629,13 +653,29 @@ extension SPAuthViewController: SPTextInputViewDelegate {
 // MARK: - ASAuthentication
 //
 extension SPAuthViewController: ASAuthorizationControllerDelegate {
-    private func displayAuthenticationOptions() {
-        let passwordRequest = ASAuthorizationPasswordProvider().createRequest()
-        let controller = ASAuthorizationController(authorizationRequests: [passwordRequest])
+    private func displayPasskeyAuthenticationOptions() async throws {
+        guard let challenge = try await fetchAuthChallenge(),
+        let challengeData = challenge.challengeData else {
+            return
+        }
+
+        let provider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: challenge.relayingParty)
+        let request = provider.createCredentialAssertionRequest(challenge: challengeData)
+
+        let controller = ASAuthorizationController(authorizationRequests: [request])
         controller.delegate = self
         controller.presentationContextProvider = self
 
         controller.performRequests()
+    }
+
+    private func fetchAuthChallenge() async throws -> PasskeyAuthChallenge? {
+        guard let data = try await AccountRemote().passkeyAuthChallenge(for: email) else {
+            return nil
+        }
+        let challenge = try JSONDecoder().decode(PasskeyAuthChallenge.self, from: data)
+
+        return challenge
     }
 
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
@@ -655,6 +695,20 @@ extension SPAuthViewController: ASAuthorizationControllerDelegate {
 extension SPAuthViewController: ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         view.window!
+    }
+}
+
+struct PasskeyAuthChallenge: Decodable {
+    let relayingParty: String
+    let challenge: String
+
+    enum CodingKeys: String, CodingKey {
+        case relayingParty = "rpId"
+        case challenge
+    }
+
+    var challengeData: Data? {
+        challenge.data(using: .utf8)
     }
 }
 
@@ -711,6 +765,7 @@ private enum AuthenticationStrings {
     static let loginTitle                   = NSLocalizedString("Log In", comment: "LogIn Interface Title")
     static let loginPrimaryAction           = NSLocalizedString("Log In", comment: "LogIn Action")
     static let loginSecondaryAction         = NSLocalizedString("Forgotten password?", comment: "Password Reset Action")
+    static let passkeyActionButton          = NSLocalizedString("Log In With Passkeys", comment: "Login with Passkey action")
     static let signupTitle                  = NSLocalizedString("Sign Up", comment: "SignUp Interface Title")
     static let signupPrimaryAction          = NSLocalizedString("Sign Up", comment: "SignUp Action")
     static let signupSecondaryActionPrefix  = NSLocalizedString("By creating an account you agree to our", comment: "Terms of Service Legend *PREFIX*: printed in dark color")
