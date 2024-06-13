@@ -1,6 +1,6 @@
 import Foundation
 
-struct PasskeyChallenge: Decodable {
+struct PasskeyRegistrationChallenge: Decodable {
     private struct User: Decodable {
         let name: String
         let userID: String
@@ -15,8 +15,8 @@ struct PasskeyChallenge: Decodable {
         let id: String
     }
 
-    private let relayingParty: PasskeyChallenge.RelayingParty
-    private let user: PasskeyChallenge.User
+    private let relayingParty: PasskeyRegistrationChallenge.RelayingParty
+    private let user: PasskeyRegistrationChallenge.User
     private let challenge: String
 
     enum CodingKeys: String, CodingKey {

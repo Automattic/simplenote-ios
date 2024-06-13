@@ -1,7 +1,7 @@
 import Foundation
 import AuthenticationServices
 
-struct PasskeyRegistration: Encodable {
+struct PasskeyRegistrationResponse: Encodable {
     struct Response: Encodable {
         let clientDataJSON: String
         let attestationObject: String
@@ -11,7 +11,7 @@ struct PasskeyRegistration: Encodable {
     private let id: String
     private let rawId: String
     private let type: String
-    private let response: PasskeyRegistration.Response
+    private let response: PasskeyRegistrationResponse.Response
 
     init?(from credentialRegistration: ASAuthorizationPlatformPublicKeyCredentialRegistration) {
         guard let email = SPAppDelegate.shared().simperium.user?.email,

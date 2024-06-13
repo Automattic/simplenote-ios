@@ -30,14 +30,14 @@ class PasskeyAuthenticator: NSObject {
             guard let data = try await accountRemote.requestChallengeResponseToCreatePasskey(forEmail: email, password: password) else {
                 throw PasskeyError.couldNotRequestRegistrationChallenge
             }
-            let passkeyChallenge = try JSONDecoder().decode(PasskeyChallenge.self, from: data)
+            let passkeyChallenge = try JSONDecoder().decode(PasskeyRegistrationChallenge.self, from: data)
             attemptRegistration(with: passkeyChallenge, presentationContext: presentationContext)
         } catch {
             throw PasskeyError.couldNotRequestRegistrationChallenge
         }
     }
 
-    private func attemptRegistration(with passkeyChallenge: PasskeyChallenge, presentationContext: PresentationContext) {
+    private func attemptRegistration(with passkeyChallenge: PasskeyRegistrationChallenge, presentationContext: PresentationContext) {
         guard let challengeData = passkeyChallenge.challengeData,
               let userID = passkeyChallenge.userID else {
             return
@@ -91,7 +91,7 @@ class PasskeyAuthenticator: NSObject {
     }
 
     private func performPasskeyRegistration(with credential: ASAuthorizationPlatformPublicKeyCredentialRegistration) {
-        guard let registrationObject = PasskeyRegistration(from: credential) else {
+        guard let registrationObject = PasskeyRegistrationResponse(from: credential) else {
             //TODO: Should handle error
             return
         }
