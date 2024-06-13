@@ -75,7 +75,7 @@ class PasskeyAuthenticator: NSObject {
         return challenge
     }
 
-    private func performPasskeyAuthentication(with response: WebAuthnResponse) {
+    private func performPasskeyAuthentication(with response: PasskeyAuthResponse) {
         let json = try! JSONEncoder().encode(response)
 
         Task {
@@ -120,7 +120,7 @@ extension PasskeyAuthenticator: ASAuthorizationControllerDelegate {
                 performPasskeyRegistration(with: credential)
 
         case let credential as ASAuthorizationPlatformPublicKeyCredentialAssertion:
-                let response = WebAuthnResponse(from: credential)
+                let response = PasskeyAuthResponse(from: credential)
 
                 performPasskeyAuthentication(with: response)
         default:

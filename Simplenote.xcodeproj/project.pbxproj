@@ -450,6 +450,8 @@
 		BA289B762BE45BBB000E6794 /* OpenNoteIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA289B742BE45BBB000E6794 /* OpenNoteIntentHandler.swift */; };
 		BA289B782BE45BFB000E6794 /* ActivityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550F93022BA65CD00091939 /* ActivityType.swift */; };
 		BA2D82C6261522F100A1695B /* PublishNoticePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2D82C5261522F100A1695B /* PublishNoticePresenter.swift */; };
+		BA2E30E02C1B8B45002C7B10 /* PasskeyAuthChallenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2E30DF2C1B8B45002C7B10 /* PasskeyAuthChallenge.swift */; };
+		BA2E30E22C1B8B4E002C7B10 /* PasskeyAuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2E30E12C1B8B4E002C7B10 /* PasskeyAuthResponse.swift */; };
 		BA32A90F26B7469F00727247 /* WidgetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32A90E26B7469F00727247 /* WidgetError.swift */; };
 		BA32A91926B746A200727247 /* WidgetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32A90E26B7469F00727247 /* WidgetError.swift */; };
 		BA32A91A26B746A300727247 /* WidgetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32A90E26B7469F00727247 /* WidgetError.swift */; };
@@ -1162,6 +1164,8 @@
 		BA289B702BE45A39000E6794 /* IntentsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentsConstants.swift; sourceTree = "<group>"; };
 		BA289B742BE45BBB000E6794 /* OpenNoteIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenNoteIntentHandler.swift; sourceTree = "<group>"; };
 		BA2D82C5261522F100A1695B /* PublishNoticePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishNoticePresenter.swift; sourceTree = "<group>"; };
+		BA2E30DF2C1B8B45002C7B10 /* PasskeyAuthChallenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasskeyAuthChallenge.swift; sourceTree = "<group>"; };
+		BA2E30E12C1B8B4E002C7B10 /* PasskeyAuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasskeyAuthResponse.swift; sourceTree = "<group>"; };
 		BA32A90E26B7469F00727247 /* WidgetError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetError.swift; sourceTree = "<group>"; };
 		BA34B04F2BEAEF4800580E15 /* SimplenoteIntentsRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SimplenoteIntentsRelease.entitlements; sourceTree = "<group>"; };
 		BA34B0562BEC216B00580E15 /* IntentNote+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IntentNote+Helpers.swift"; sourceTree = "<group>"; };
@@ -2071,6 +2075,7 @@
 		B56A695122F9CCF400B90398 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				BA2E30DE2C1B8B0D002C7B10 /* Passkeys */,
 				B56A695722F9CD1500B90398 /* SPOnboardingViewController.swift */,
 				B56A695622F9CD1500B90398 /* SPOnboardingViewController.xib */,
 				B56A695D22F9D53300B90398 /* SPAuthError.swift */,
@@ -2080,7 +2085,6 @@
 				B5AB169722FA124F00B4EBA5 /* SPSheetController.swift */,
 				B5AB169922FA128000B4EBA5 /* SPSheetController.xib */,
 				A6CDD9C725F0163D00E0BC4D /* MagicLinkAuthenticator.swift */,
-				BAF694B12C1B753F000090E7 /* PasskeyAuthenticator.swift */,
 				A628BEB425ECD97900121B64 /* SignupVerificationViewController.swift */,
 				A628BEB525ECD97900121B64 /* SignupVerificationViewController.xib */,
 			);
@@ -2394,6 +2398,16 @@
 				BA9C7ECA2BED7F7B007A8460 /* FindNoteWithTagIntentHandler.swift */,
 			);
 			path = "Intent Handlers";
+			sourceTree = "<group>";
+		};
+		BA2E30DE2C1B8B0D002C7B10 /* Passkeys */ = {
+			isa = PBXGroup;
+			children = (
+				BAF694B12C1B753F000090E7 /* PasskeyAuthenticator.swift */,
+				BA2E30DF2C1B8B45002C7B10 /* PasskeyAuthChallenge.swift */,
+				BA2E30E12C1B8B4E002C7B10 /* PasskeyAuthResponse.swift */,
+			);
+			name = Passkeys;
 			sourceTree = "<group>";
 		};
 		BA34B0552BEC214800580E15 /* ResolutionResults */ = {
@@ -3595,6 +3609,7 @@
 				B58C9F5723F2FCEC008C3480 /* SPPlaceholderView.swift in Sources */,
 				BAB6C04726BA4CAF007495C4 /* WidgetController.swift in Sources */,
 				A6E1E79E24BDE401008A44BC /* SPCardTransitioningManager.swift in Sources */,
+				BA2E30E02C1B8B45002C7B10 /* PasskeyAuthChallenge.swift in Sources */,
 				74388F4622CFFA8B001C5EC0 /* NSObject+Helpers.swift in Sources */,
 				46A3C98617DFA81A002865AE /* SPEntryListViewController.m in Sources */,
 				A6ABB689256D95EB00E2A076 /* PinLockProgressView.swift in Sources */,
@@ -3614,6 +3629,7 @@
 				B5185CFB23427F2F0060145A /* SearchDisplayController.swift in Sources */,
 				B524AE0F2352BE9200EA11D4 /* UITableView+Simplenote.swift in Sources */,
 				A6FDF73E2542BDE100415C87 /* NoteInformationController.swift in Sources */,
+				BA2E30E22C1B8B4E002C7B10 /* PasskeyAuthResponse.swift in Sources */,
 				A604DB22255A993E00B802CA /* SearchMapView.swift in Sources */,
 				B5E951E624FEE2A8004B10B8 /* Note+Links.swift in Sources */,
 				A6BBDA46255034E6005C8343 /* SPEditorTextView+Simplenote.swift in Sources */,
