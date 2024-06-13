@@ -452,6 +452,7 @@
 		BA2D82C6261522F100A1695B /* PublishNoticePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2D82C5261522F100A1695B /* PublishNoticePresenter.swift */; };
 		BA2E30E02C1B8B45002C7B10 /* PasskeyAuthChallenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2E30DF2C1B8B45002C7B10 /* PasskeyAuthChallenge.swift */; };
 		BA2E30E22C1B8B4E002C7B10 /* PasskeyAuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2E30E12C1B8B4E002C7B10 /* PasskeyAuthResponse.swift */; };
+		BA2E30E42C1B8F13002C7B10 /* PasskeyVerifyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2E30E32C1B8F13002C7B10 /* PasskeyVerifyResponse.swift */; };
 		BA32A90F26B7469F00727247 /* WidgetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32A90E26B7469F00727247 /* WidgetError.swift */; };
 		BA32A91926B746A200727247 /* WidgetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32A90E26B7469F00727247 /* WidgetError.swift */; };
 		BA32A91A26B746A300727247 /* WidgetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32A90E26B7469F00727247 /* WidgetError.swift */; };
@@ -1166,6 +1167,7 @@
 		BA2D82C5261522F100A1695B /* PublishNoticePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishNoticePresenter.swift; sourceTree = "<group>"; };
 		BA2E30DF2C1B8B45002C7B10 /* PasskeyAuthChallenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasskeyAuthChallenge.swift; sourceTree = "<group>"; };
 		BA2E30E12C1B8B4E002C7B10 /* PasskeyAuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasskeyAuthResponse.swift; sourceTree = "<group>"; };
+		BA2E30E32C1B8F13002C7B10 /* PasskeyVerifyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasskeyVerifyResponse.swift; sourceTree = "<group>"; };
 		BA32A90E26B7469F00727247 /* WidgetError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetError.swift; sourceTree = "<group>"; };
 		BA34B04F2BEAEF4800580E15 /* SimplenoteIntentsRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SimplenoteIntentsRelease.entitlements; sourceTree = "<group>"; };
 		BA34B0562BEC216B00580E15 /* IntentNote+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IntentNote+Helpers.swift"; sourceTree = "<group>"; };
@@ -2408,6 +2410,7 @@
 				BA2E30E12C1B8B4E002C7B10 /* PasskeyAuthResponse.swift */,
 				BA0AC5432C1A0C65002964DB /* PasskeyRegistrationResponse.swift */,
 				BA0AC5452C1A0C71002964DB /* PasskeyRegistrationChallenge.swift */,
+				BA2E30E32C1B8F13002C7B10 /* PasskeyVerifyResponse.swift */,
 			);
 			name = Passkeys;
 			sourceTree = "<group>";
@@ -3526,6 +3529,7 @@
 				B550F93622BA7E9100091939 /* NSUserActivity+Simplenote.swift in Sources */,
 				B5BE054E1AB75902002417BF /* NSProcessInfo+Util.m in Sources */,
 				BA4C6CFC264C744300B723A7 /* SeparatorsView.swift in Sources */,
+				BA2E30E42C1B8F13002C7B10 /* PasskeyVerifyResponse.swift in Sources */,
 				375D24B821E01131007AB25A /* hash.c in Sources */,
 				BA5768EC269BE4D0008B510E /* AccountDeletionController.swift in Sources */,
 				A6D5AE6525483F8A00326C76 /* NSTextStorage+Simplenote.swift in Sources */,
