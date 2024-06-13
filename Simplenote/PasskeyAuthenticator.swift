@@ -25,6 +25,8 @@ class PasskeyAuthenticator: NSObject {
         self.accountRemote = AccountRemote()
     }
 
+    // MARK: - Registration
+    //
     func registerPasskey(for email: String, password: String, in presentationContext: PresentationContext) async throws {
         do {
             guard let data = try await accountRemote.requestChallengeResponseToCreatePasskey(forEmail: email, password: password) else {
@@ -51,6 +53,24 @@ class PasskeyAuthenticator: NSObject {
         authController.performRequests()
     }
 
+    private func performPasskeyRegistration(with credential: ASAuthorizationPlatformPublicKeyCredentialRegistration) {
+        guard let registrationObject = PasskeyRegistrationResponse(from: credential) else {
+            //TODO: Should handle error
+            return
+        }
+
+        Task {
+            do {
+                let data = try JSONEncoder().encode(registrationObject)
+                try await accountRemote.registerCredential(with: data)
+            } catch {
+                //TODO: Display error
+            }
+        }
+    }
+
+    // MARK: - Auth
+    //
     public func attemptPasskeyAuth(for email: String, in presentationContext: PresentationContext) async throws {
         guard let challenge = try await fetchAuthChallenge(for: email) else {
             return
@@ -89,24 +109,10 @@ class PasskeyAuthenticator: NSObject {
             authenticator.authenticate(withUsername: email, token: token)
         }
     }
-
-    private func performPasskeyRegistration(with credential: ASAuthorizationPlatformPublicKeyCredentialRegistration) {
-        guard let registrationObject = PasskeyRegistrationResponse(from: credential) else {
-            //TODO: Should handle error
-            return
-        }
-
-        Task {
-            do {
-                let data = try JSONEncoder().encode(registrationObject)
-                try await accountRemote.registerCredential(with: data)
-            } catch {
-                //TODO: Display error
-            }
-        }
-    }
 }
 
+// MARK: - ASAuthorizationControllerDelegate
+//
 extension PasskeyAuthenticator: ASAuthorizationControllerDelegate {
     public func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: any Error) {
         // TODO: handle error
