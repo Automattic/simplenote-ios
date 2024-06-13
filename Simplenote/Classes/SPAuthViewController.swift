@@ -412,7 +412,15 @@ private extension SPAuthViewController {
         let updatedJson = try! JSONSerialization.data(withJSONObject: jsonObject)
 
         Task {
-            try? await AccountRemote().verifyPasskeyLogin(with: updatedJson)
+
+            guard let tuple = try? await AccountRemote().verifyPasskeyLogin(with: updatedJson),
+                  let email = tuple.0,
+                  let token = tuple.1 else {
+                return
+            }
+            
+            let authenticator = SPAppDelegate.shared().simperium.authenticator
+            authenticator.authenticate(withUsername: email, token: token)
         }
     }
 }
