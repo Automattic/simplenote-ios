@@ -123,6 +123,7 @@
     [self setupThemeNotifications];
     [self setupSimperium];
     [self setupAuthenticator];
+    [self setupPasskeyAuthenticator];
     [self setupAppCenter];
     [self setupCrashLogging];
     [self configureVersionsController];

@@ -238,8 +238,10 @@ extension SPSettingsViewController {
             }
 
             Task {
+
                 do {
-                    try await self.passkeyAuthenticator.registerPasskey(for: email, password: password, in: self)
+                    let authenticator = SPAppDelegate.shared().passkeyAuthenticator
+                    try await authenticator.registerPasskey(for: email, password: password, in: self)
                 } catch {
                     // TODO: Display some action for failure
                 }
