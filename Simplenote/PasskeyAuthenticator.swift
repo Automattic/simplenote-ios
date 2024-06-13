@@ -90,7 +90,7 @@ class PasskeyAuthenticator: NSObject {
     private func performPasskeyAuthentication(with response: PasskeyAuthResponse) {
         let json = try! JSONEncoder().encode(response)
 
-        Task {
+        Task { @MainActor in
             guard let response = try? await accountRemote.verifyPasskeyLogin(with: json),
                   let verifyResponse = try? JSONDecoder().decode(PasskeyVerifyResponse.self, from: response) else {
                 return
