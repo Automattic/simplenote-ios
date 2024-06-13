@@ -137,8 +137,19 @@ class AccountRemote: Remote {
         return urlRequest
     }
 
-    func verifyPasskeyLogin(with data: Data) async throws {
+    func verifyPasskeyLogin(with data: Data) async throws -> (String?, String?)? {
         let request = verifyPassKeyRequest(with: data)
-        try await _ = performDataTask(with: request)
+        let data = try await performDataTask(with: request)
+
+        return parseUser(from: data)
+    }
+
+    private func parseUser(from data: Data?) -> (String?, String?)? {
+        guard let data else {
+            return nil
+        }
+
+        let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
+        return (json?["username"] as? String, json?["access_token"] as? String)
     }
 }
