@@ -193,8 +193,6 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                                                object:nil];
 
     [self refreshThemeStyles];
-
-    self.passkeyAuthenticator = [[PasskeyAuthenticator alloc] initWithAuthenticator: SPAppDelegate.sharedDelegate.simperium.authenticator];
 }
 
 - (void)viewWillAppear:(BOOL)animated

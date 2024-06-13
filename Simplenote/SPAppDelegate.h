@@ -14,6 +14,7 @@
 @class PublishStateObserver;
 @class AccountDeletionController;
 @class CoreDataManager;
+@class PasskeyAuthenticator;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -40,6 +41,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) BOOL										bSigningUserOut;
 
 @property (nullable, strong, nonatomic) AccountDeletionController       *accountDeletionController;
+
+@property (strong, nonatomic) PasskeyAuthenticator *passkeyAuthenticator;
 
 - (void)presentSettingsViewController;
 
