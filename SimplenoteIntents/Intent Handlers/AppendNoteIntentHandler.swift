@@ -1,11 +1,3 @@
-//
-//  AppendNoteIntentHandler.swift
-//  SimplenoteIntents
-//
-//  Created by Charlie Scheer on 5/6/24.
-//  Copyright © 2024 Automattic. All rights reserved.
-//
-
 import Intents
 
 class AppendNoteIntentHandler: NSObject, AppendNoteIntentHandling {
@@ -38,11 +30,24 @@ class AppendNoteIntentHandler: NSObject, AppendNoteIntentHandling {
         guard let existingContent = try? await Downloader(simperiumToken: token).getNoteContent(for: identifier) else {
             return AppendNoteIntentResponse(code: .failure, userActivity: nil)
         }
+        do {
+            let existingContent = try await Downloader(simperiumToken: token).getNoteContent(for: identifier) ?? String()
+            note.content = existingContent + "\n\(content)"
+        } catch {
+            return handleFailure(with: error, content: content)
+        }
 
-        note.content = existingContent + "\n\(content)"
         let uploader = Uploader(simperiumToken: token)
-        uploader.send(note)
 
-        return AppendNoteIntentResponse(code: .success, userActivity: nil)
+        do {
+            _ = try await uploader.send(note)
+            return AppendNoteIntentResponse(code: .success, userActivity: nil)
+        } catch {
+            return handleFailure(with: error, content: content)
+        }
+    }
+
+    private func handleFailure(with error: Error, content: String) -> AppendNoteIntentResponse {
+        return AppendNoteIntentResponse.failure(failureReason: error.localizedDescription)
     }
 }
