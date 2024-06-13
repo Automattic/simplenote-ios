@@ -420,8 +420,8 @@
 		BA0890A526BB9B680035CA48 /* NoteListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0890A426BB9B680035CA48 /* NoteListRow.swift */; };
 		BA0890A726BB9BE20035CA48 /* ListWidgetHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0890A626BB9BE20035CA48 /* ListWidgetHeaderView.swift */; };
 		BA0890A926BB9BF80035CA48 /* NewNoteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0890A826BB9BF80035CA48 /* NewNoteButton.swift */; };
-		BA0AC5442C1A0C65002964DB /* PasskeyRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0AC5432C1A0C65002964DB /* PasskeyRegistration.swift */; };
-		BA0AC5462C1A0C71002964DB /* PasskeyChallenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0AC5452C1A0C71002964DB /* PasskeyChallenge.swift */; };
+		BA0AC5442C1A0C65002964DB /* PasskeyRegistrationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0AC5432C1A0C65002964DB /* PasskeyRegistrationResponse.swift */; };
+		BA0AC5462C1A0C71002964DB /* PasskeyRegistrationChallenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0AC5452C1A0C71002964DB /* PasskeyRegistrationChallenge.swift */; };
 		BA0AF10D2BE996600050EEBD /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59560DF251A46D500A06788 /* KeychainManager.swift */; };
 		BA0AF10E2BE996630050EEBD /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FD30471FC4CFA2008D0B78 /* KeychainPasswordItem.swift */; };
 		BA0ED16E26D708AC002533B6 /* Color+Widgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0ED16D26D708AC002533B6 /* Color+Widgets.swift */; };
@@ -1146,8 +1146,8 @@
 		BA0890A426BB9B680035CA48 /* NoteListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListRow.swift; sourceTree = "<group>"; };
 		BA0890A626BB9BE20035CA48 /* ListWidgetHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWidgetHeaderView.swift; sourceTree = "<group>"; };
 		BA0890A826BB9BF80035CA48 /* NewNoteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNoteButton.swift; sourceTree = "<group>"; };
-		BA0AC5432C1A0C65002964DB /* PasskeyRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasskeyRegistration.swift; sourceTree = "<group>"; };
-		BA0AC5452C1A0C71002964DB /* PasskeyChallenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasskeyChallenge.swift; sourceTree = "<group>"; };
+		BA0AC5432C1A0C65002964DB /* PasskeyRegistrationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasskeyRegistrationResponse.swift; sourceTree = "<group>"; };
+		BA0AC5452C1A0C71002964DB /* PasskeyRegistrationChallenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasskeyRegistrationChallenge.swift; sourceTree = "<group>"; };
 		BA0ED16D26D708AC002533B6 /* Color+Widgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Widgets.swift"; sourceTree = "<group>"; };
 		BA0F5E0326B62A8B0098C605 /* RemoteError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteError.swift; sourceTree = "<group>"; };
 		BA113E4C269E860500F3E3B4 /* markdown-light.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "markdown-light.css"; sourceTree = "<group>"; };
@@ -2401,6 +2401,8 @@
 				BAF694B12C1B753F000090E7 /* PasskeyAuthenticator.swift */,
 				BA2E30DF2C1B8B45002C7B10 /* PasskeyAuthChallenge.swift */,
 				BA2E30E12C1B8B4E002C7B10 /* PasskeyAuthResponse.swift */,
+				BA0AC5432C1A0C65002964DB /* PasskeyRegistrationResponse.swift */,
+				BA0AC5452C1A0C71002964DB /* PasskeyRegistrationChallenge.swift */,
 			);
 			name = Passkeys;
 			sourceTree = "<group>";
@@ -2436,8 +2438,6 @@
 			children = (
 				A6C7647F25E9131C00A39067 /* SignupRemote.swift */,
 				A6CC0B0625B8287F00F12A85 /* AccountRemote.swift */,
-				BA0AC5432C1A0C65002964DB /* PasskeyRegistration.swift */,
-				BA0AC5452C1A0C71002964DB /* PasskeyChallenge.swift */,
 				BA5768E2269A803F008B510E /* Remote.swift */,
 				BA0F5E0326B62A8B0098C605 /* RemoteError.swift */,
 			);
@@ -3476,7 +3476,7 @@
 				B56E763422BD394C00C5AA47 /* UIImage+Simplenote.swift in Sources */,
 				B543C7E323CF76EA00003A80 /* NotesListFilter.swift in Sources */,
 				46A3C96717DFA81A002865AE /* NSManagedObjectContext+CoreDataExtensions.m in Sources */,
-				BA0AC5442C1A0C65002964DB /* PasskeyRegistration.swift in Sources */,
+				BA0AC5442C1A0C65002964DB /* PasskeyRegistrationResponse.swift in Sources */,
 				A6C0DFA725C0992D00B9BE39 /* NoteScrollPositionCache.swift in Sources */,
 				B59314D81A486B3800B651ED /* SPConstants.m in Sources */,
 				375D24B421E01131007AB25A /* escape.c in Sources */,
@@ -3528,7 +3528,7 @@
 				A60DF31025A4524100FDADF3 /* PinLockBaseController.swift in Sources */,
 				A6F487ED25A85F970050CFA8 /* TagTextFieldInputValidator.swift in Sources */,
 				B5AB169822FA124F00B4EBA5 /* SPSheetController.swift in Sources */,
-				BA0AC5462C1A0C71002964DB /* PasskeyChallenge.swift in Sources */,
+				BA0AC5462C1A0C71002964DB /* PasskeyRegistrationChallenge.swift in Sources */,
 				B511AEDA255A0A2A005B2159 /* InterlinkResultsController.swift in Sources */,
 				B5476BC123D8E5D0000E7723 /* String+Simplenote.swift in Sources */,
 				B5DF734222A565DA00602CE7 /* Options.swift in Sources */,
