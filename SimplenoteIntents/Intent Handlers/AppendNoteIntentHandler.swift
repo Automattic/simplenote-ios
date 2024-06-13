@@ -48,6 +48,7 @@ class AppendNoteIntentHandler: NSObject, AppendNoteIntentHandling {
     }
 
     private func handleFailure(with error: Error, content: String) -> AppendNoteIntentResponse {
+        ContentRecoveryManager().archiveContent(content)
         return AppendNoteIntentResponse.failure(failureReason: error.localizedDescription)
     }
 }

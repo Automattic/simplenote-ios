@@ -167,6 +167,7 @@
 
     [self setupNoticeController];
 
+    [self attemptContentRecoveryIfNeeded];
     return YES;
 }
 

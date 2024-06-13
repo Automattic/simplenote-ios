@@ -485,6 +485,8 @@
 		BA6DA19226DB5F1B000464C8 /* URLComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6DA19026DB5F1B000464C8 /* URLComponents.swift */; };
 		BA7071E526BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BA7071E426BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition */; };
 		BA7071E626BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BA7071E426BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition */; };
+		BA7240222C1BA1210088EC11 /* ContentRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7240212C1BA1210088EC11 /* ContentRecoveryManager.swift */; };
+		BA7240232C1BA1930088EC11 /* ContentRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7240212C1BA1210088EC11 /* ContentRecoveryManager.swift */; };
 		BA75D8A326C084E900883FFA /* Text+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA75D87D26C0843600883FFA /* Text+Simplenote.swift */; };
 		BA75D8AE26C0862E00883FFA /* View+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA75D8AD26C0862E00883FFA /* View+Simplenote.swift */; };
 		BA75D8BA26C0865C00883FFA /* Filling.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA75D8B926C0865C00883FFA /* Filling.swift */; };
@@ -509,13 +511,13 @@
 		BA8FC2A5267AC7470082962E /* SharedStorageMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8FC2A4267AC7470082962E /* SharedStorageMigrator.swift */; };
 		BA9B19F926A8EF3200692366 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B19F826A8EF3200692366 /* SpinnerViewController.swift */; };
 		BA9B59022685549F00DAD1ED /* StorageSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B59012685549F00DAD1ED /* StorageSettings.swift */; };
-		BA9C7EFB2BF2CC3E007A8460 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9C7EFA2BF2CC3E007A8460 /* Downloader.swift */; };
-		BA9C7EFC2BF2CCAE007A8460 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9C7EFA2BF2CC3E007A8460 /* Downloader.swift */; };
 		BA9C7EC92BED7AB1007A8460 /* CopyNoteContentIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9C7EC82BED7AB1007A8460 /* CopyNoteContentIntentHandler.swift */; };
 		BA9C7ECB2BED7F7B007A8460 /* FindNoteWithTagIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9C7ECA2BED7F7B007A8460 /* FindNoteWithTagIntentHandler.swift */; };
 		BA9C7ECD2BED813B007A8460 /* IntentTag+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9C7ECC2BED813B007A8460 /* IntentTag+Helpers.swift */; };
 		BA9C7ED02BEE9BA7007A8460 /* ShortcutIntents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BA9C7ECF2BEE9BA7007A8460 /* ShortcutIntents.intentdefinition */; };
 		BA9C7ED12BEE9BA7007A8460 /* ShortcutIntents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BA9C7ECF2BEE9BA7007A8460 /* ShortcutIntents.intentdefinition */; };
+		BA9C7EFB2BF2CC3E007A8460 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9C7EFA2BF2CC3E007A8460 /* Downloader.swift */; };
+		BA9C7EFC2BF2CCAE007A8460 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9C7EFA2BF2CC3E007A8460 /* Downloader.swift */; };
 		BAA4856925D5E40900F3BDB9 /* SearchQuery+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */; };
 		BAA59E79269F9FE30068BD3D /* Date+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA59E78269F9FE30068BD3D /* Date+Simplenote.swift */; };
 		BAA63C3325EEDA83001589D7 /* NoteLinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA63C3225EEDA83001589D7 /* NoteLinkTests.swift */; };
@@ -1185,6 +1187,7 @@
 		BA6D7B8A2BE588F0006AE368 /* IntentsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentsError.swift; sourceTree = "<group>"; };
 		BA6DA19026DB5F1B000464C8 /* URLComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLComponents.swift; sourceTree = "<group>"; };
 		BA7071E426BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = ListWidgetIntent.intentdefinition; sourceTree = "<group>"; };
+		BA7240212C1BA1210088EC11 /* ContentRecoveryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentRecoveryManager.swift; sourceTree = "<group>"; };
 		BA75D87D26C0843600883FFA /* Text+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Simplenote.swift"; sourceTree = "<group>"; };
 		BA75D8AD26C0862E00883FFA /* View+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Simplenote.swift"; sourceTree = "<group>"; };
 		BA75D8B926C0865C00883FFA /* Filling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filling.swift; sourceTree = "<group>"; };
@@ -1199,7 +1202,6 @@
 		BA8FC2A4267AC7470082962E /* SharedStorageMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStorageMigrator.swift; sourceTree = "<group>"; };
 		BA9B19F826A8EF3200692366 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 		BA9B59012685549F00DAD1ED /* StorageSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageSettings.swift; sourceTree = "<group>"; };
-		BA9C7EFA2BF2CC3E007A8460 /* Downloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
 		BA9C7EC82BED7AB1007A8460 /* CopyNoteContentIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyNoteContentIntentHandler.swift; sourceTree = "<group>"; };
 		BA9C7ECA2BED7F7B007A8460 /* FindNoteWithTagIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindNoteWithTagIntentHandler.swift; sourceTree = "<group>"; };
 		BA9C7ECC2BED813B007A8460 /* IntentTag+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IntentTag+Helpers.swift"; sourceTree = "<group>"; };
@@ -1224,6 +1226,7 @@
 		BA9C7EF52BEE9C3D007A8460 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/ShortcutIntents.strings; sourceTree = "<group>"; };
 		BA9C7EF72BEE9C3E007A8460 /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/ShortcutIntents.strings"; sourceTree = "<group>"; };
 		BA9C7EF92BEE9C3F007A8460 /* zh-Hans-CN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans-CN"; path = "zh-Hans-CN.lproj/ShortcutIntents.strings"; sourceTree = "<group>"; };
+		BA9C7EFA2BF2CC3E007A8460 /* Downloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
 		BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchQuery+Simplenote.swift"; sourceTree = "<group>"; };
 		BAA59E78269F9FE30068BD3D /* Date+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Simplenote.swift"; sourceTree = "<group>"; };
 		BAA63C3225EEDA83001589D7 /* NoteLinkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteLinkTests.swift; sourceTree = "<group>"; };
@@ -2233,6 +2236,7 @@
 				BA3856CC2681715700F388CC /* CoreDataManager.swift */,
 				BA9B59012685549F00DAD1ED /* StorageSettings.swift */,
 				BA32A90E26B7469F00727247 /* WidgetError.swift */,
+				BA7240212C1BA1210088EC11 /* ContentRecoveryManager.swift */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -3454,6 +3458,7 @@
 				B543C7E323CF76EA00003A80 /* NotesListFilter.swift in Sources */,
 				46A3C96717DFA81A002865AE /* NSManagedObjectContext+CoreDataExtensions.m in Sources */,
 				A6C0DFA725C0992D00B9BE39 /* NoteScrollPositionCache.swift in Sources */,
+				BA7240222C1BA1210088EC11 /* ContentRecoveryManager.swift in Sources */,
 				B59314D81A486B3800B651ED /* SPConstants.m in Sources */,
 				375D24B421E01131007AB25A /* escape.c in Sources */,
 				B50F47A61D1D791B00822748 /* NSURL+Extensions.swift in Sources */,
@@ -3858,6 +3863,7 @@
 				BAF8D45526AE10FC00CA9383 /* Tag+Widget.swift in Sources */,
 				BAFFCEA726DDA9F6007F5EE3 /* ExtensionCoreDataWrapper.swift in Sources */,
 				BAF8D53C26AE175C00CA9383 /* Bundle+Simplenote.swift in Sources */,
+				BA7240232C1BA1930088EC11 /* ContentRecoveryManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

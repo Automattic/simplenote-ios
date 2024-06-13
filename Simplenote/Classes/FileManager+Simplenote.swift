@@ -19,4 +19,18 @@ extension FileManager {
     var sharedContainerURL: URL {
         containerURL(forSecurityApplicationGroupIdentifier: SimplenoteConstants.sharedGroupDomain)!
     }
+
+    var recoveryDirectoryURL: URL {
+        sharedContainerURL.appendingPathComponent(Constants.recoveryDir)
+    }
+
+    func directoryExistsAtURL(_ url: URL) -> Bool {
+        var isDir: ObjCBool = false
+        let exists = self.fileExists(atPath: url.path, isDirectory: &isDir)
+        return exists && isDir.boolValue
+    }
+}
+
+private struct Constants {
+    static let recoveryDir = "Recovery"
 }
