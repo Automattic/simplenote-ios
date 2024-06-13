@@ -453,6 +453,7 @@
 		BA2E30E02C1B8B45002C7B10 /* PasskeyAuthChallenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2E30DF2C1B8B45002C7B10 /* PasskeyAuthChallenge.swift */; };
 		BA2E30E22C1B8B4E002C7B10 /* PasskeyAuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2E30E12C1B8B4E002C7B10 /* PasskeyAuthResponse.swift */; };
 		BA2E30E42C1B8F13002C7B10 /* PasskeyVerifyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2E30E32C1B8F13002C7B10 /* PasskeyVerifyResponse.swift */; };
+		BA2E30E62C1B8FD3002C7B10 /* Data+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2E30E52C1B8FD3002C7B10 /* Data+Simplenote.swift */; };
 		BA32A90F26B7469F00727247 /* WidgetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32A90E26B7469F00727247 /* WidgetError.swift */; };
 		BA32A91926B746A200727247 /* WidgetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32A90E26B7469F00727247 /* WidgetError.swift */; };
 		BA32A91A26B746A300727247 /* WidgetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA32A90E26B7469F00727247 /* WidgetError.swift */; };
@@ -1166,6 +1167,7 @@
 		BA2E30DF2C1B8B45002C7B10 /* PasskeyAuthChallenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasskeyAuthChallenge.swift; sourceTree = "<group>"; };
 		BA2E30E12C1B8B4E002C7B10 /* PasskeyAuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasskeyAuthResponse.swift; sourceTree = "<group>"; };
 		BA2E30E32C1B8F13002C7B10 /* PasskeyVerifyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasskeyVerifyResponse.swift; sourceTree = "<group>"; };
+		BA2E30E52C1B8FD3002C7B10 /* Data+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Simplenote.swift"; sourceTree = "<group>"; };
 		BA32A90E26B7469F00727247 /* WidgetError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetError.swift; sourceTree = "<group>"; };
 		BA34B04F2BEAEF4800580E15 /* SimplenoteIntentsRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SimplenoteIntentsRelease.entitlements; sourceTree = "<group>"; };
 		BA34B0562BEC216B00580E15 /* IntentNote+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IntentNote+Helpers.swift"; sourceTree = "<group>"; };
@@ -2066,6 +2068,7 @@
 				BAA59E78269F9FE30068BD3D /* Date+Simplenote.swift */,
 				BAF4A96E26DB085D00C51C1D /* NSURLComponents+Simplenote.swift */,
 				BA6DA19026DB5F1B000464C8 /* URLComponents.swift */,
+				BA2E30E52C1B8FD3002C7B10 /* Data+Simplenote.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -3531,6 +3534,7 @@
 				B575736A232C567000443C2E /* UIImage+Dynamic.swift in Sources */,
 				A60DF31025A4524100FDADF3 /* PinLockBaseController.swift in Sources */,
 				A6F487ED25A85F970050CFA8 /* TagTextFieldInputValidator.swift in Sources */,
+				BA2E30E62C1B8FD3002C7B10 /* Data+Simplenote.swift in Sources */,
 				B5AB169822FA124F00B4EBA5 /* SPSheetController.swift in Sources */,
 				BA0AC5462C1A0C71002964DB /* PasskeyRegistrationChallenge.swift in Sources */,
 				B511AEDA255A0A2A005B2159 /* InterlinkResultsController.swift in Sources */,

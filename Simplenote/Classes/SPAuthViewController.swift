@@ -657,10 +657,6 @@ extension SPAuthViewController: ASAuthorizationControllerPresentationContextProv
     }
 }
 
-
-
-
-
 // MARK: - AuthenticationMode: Signup / Login
 //
 struct AuthenticationMode {
@@ -773,25 +769,4 @@ private extension AuthenticationStrings {
 private enum AuthenticationConstants {
     static let accessoryViewInsets  = NSDirectionalEdgeInsets(top: .zero, leading: 16, bottom: .zero, trailing: 16)
     static let warningInsets        = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
-}
-
-// TODO Move this to a better place :)
-extension Data {
-    static func decodeUrlSafeBase64(_ value: String) throws -> Data {
-        var stringtoDecode: String = value.replacingOccurrences(of: "-", with: "+")
-        stringtoDecode = stringtoDecode.replacingOccurrences(of: "_", with: "/")
-        switch stringtoDecode.utf8.count % 4 {
-            case 2:
-                stringtoDecode += "=="
-            case 3:
-                stringtoDecode += "="
-            default:
-                break
-        }
-        guard let data = Data(base64Encoded: stringtoDecode, options: [.ignoreUnknownCharacters]) else {
-            throw NSError(domain: "decodeUrlSafeBase64", code: 1,
-                        userInfo: [NSLocalizedDescriptionKey: "Can't decode base64 string"])
-        }
-        return data
-    }
 }
