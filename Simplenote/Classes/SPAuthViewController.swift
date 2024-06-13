@@ -404,57 +404,16 @@ private extension SPAuthViewController {
         }
     }
 
-    func performPasskeyAuthentication(with credential: ASAuthorizationPublicKeyCredentialAssertion) {
-        let response = PasskeyAuthVerify(email: email, credential: credential)!
+    func performPasskeyAuthentication(with response: WebAuthnResponse) {
         let json = try! JSONEncoder().encode(response)
+        // TODO We probably don't need to pass email since we are passing the id which is stored on gae
+        var jsonObject = try! JSONSerialization.jsonObject(with: json, options: []) as! [String: Any]
+        jsonObject["email"] = email
+        let updatedJson = try! JSONSerialization.data(withJSONObject: jsonObject)
 
         Task {
-            try? await AccountRemote().verifyPasskeyLogin(with: json)
+            try? await AccountRemote().verifyPasskeyLogin(with: updatedJson)
         }
-    }
-}
-
-struct PasskeyAuthVerify: Encodable {
-    private struct Response: Encodable {
-        let authenticatorData: String
-        let clientDataJSON: Data
-        let signature: String
-
-    }
-
-    private let email: String
-    private let id: String
-    private let rawId: String
-    private let response: PasskeyAuthVerify.Response
-    private let type: String
-
-    init?(email: String, credential: ASAuthorizationPublicKeyCredentialAssertion) {
-        guard let preparedJSON = Self.prepareJSON(from: credential.rawClientDataJSON) else {
-            return nil
-        }
-
-        self.email = email
-        self.id = credential.credentialID.base64EncodedString().toBase64url()
-        self.rawId = credential.credentialID.base64EncodedString()
-        self.type = "public-key"
-
-        self.response = Response(
-            authenticatorData: credential.rawAuthenticatorData.base64EncodedString().toBase64url(),
-            clientDataJSON: preparedJSON,
-            signature: credential.signature.base64EncodedString().toBase64url())
-    }
-
-    private static func prepareJSON(from data: Data) -> Data? {
-        guard var json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-              let base64challenge = json["challenge"] as? String,
-              let challengeData = Data(base64Encoded: base64challenge + "="),
-              let challenge = String(data: challengeData, encoding: .utf8) else {
-            return nil
-        }
-
-        json["challenge"] = challenge
-
-        return try? JSONSerialization.data(withJSONObject: json)
     }
 }
 
@@ -711,13 +670,14 @@ extension SPAuthViewController: ASAuthorizationControllerDelegate {
             return
         }
 
+        // TODO add protection if challengeData could not be decoded
+        let challengeData = try Data.decodeUrlSafeBase64(challenge.challenge)
         let provider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: challenge.relayingParty)
-        let request = provider.createCredentialAssertionRequest(challenge: challenge.challenge.data(using: .utf8)!)
+        let request = provider.createCredentialAssertionRequest(challenge: challengeData)
 
         let controller = ASAuthorizationController(authorizationRequests: [request])
         controller.delegate = self
         controller.presentationContextProvider = self
-
         controller.performRequests()
     }
 
@@ -732,12 +692,24 @@ extension SPAuthViewController: ASAuthorizationControllerDelegate {
     }
 
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        switch authorization.credential {
-        case let credential as ASAuthorizationPlatformPublicKeyCredentialAssertion:
-            performPasskeyAuthentication(with: credential)
-        default:
-            break
+        if let credential = authorization.credential as? ASAuthorizationPlatformPublicKeyCredentialAssertion {
+            let id = credential.credentialID.base64EncodedString()
+            let rawId = credential.credentialID.base64EncodedString()
+
+            let response = WebAuthnResponse(
+                id: id.toBase64url(),
+                rawId: rawId.toBase64url(),
+                response: WebAuthnResponse.Response(
+                    clientDataJSON: credential.rawClientDataJSON.base64EncodedString(),
+                    authenticatorData: credential.rawAuthenticatorData.base64EncodedString(),
+                    signature: credential.signature.base64EncodedString(),
+                    userHandle: credential.userID.base64EncodedString()
+                )
+            )
+
+            performPasskeyAuthentication(with: response)
         }
+
     }
 
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: any Error) {
@@ -758,6 +730,20 @@ struct PasskeyAuthChallenge: Decodable {
     enum CodingKeys: String, CodingKey {
         case relayingParty = "rpId"
         case challenge
+    }
+}
+
+struct WebAuthnResponse: Codable {
+    let id: String
+    let rawId: String
+    let response: Response
+    var type: String = "public-key"
+
+    struct Response: Codable {
+        let clientDataJSON: String
+        let authenticatorData: String
+        let signature: String
+        let userHandle: String
     }
 }
 
@@ -873,4 +859,25 @@ private extension AuthenticationStrings {
 private enum AuthenticationConstants {
     static let accessoryViewInsets  = NSDirectionalEdgeInsets(top: .zero, leading: 16, bottom: .zero, trailing: 16)
     static let warningInsets        = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+}
+
+// TODO Move this to a better place :)
+extension Data {
+    static func decodeUrlSafeBase64(_ value: String) throws -> Data {
+        var stringtoDecode: String = value.replacingOccurrences(of: "-", with: "+")
+        stringtoDecode = stringtoDecode.replacingOccurrences(of: "_", with: "/")
+        switch stringtoDecode.utf8.count % 4 {
+            case 2:
+                stringtoDecode += "=="
+            case 3:
+                stringtoDecode += "="
+            default:
+                break
+        }
+        guard let data = Data(base64Encoded: stringtoDecode, options: [.ignoreUnknownCharacters]) else {
+            throw NSError(domain: "decodeUrlSafeBase64", code: 1,
+                        userInfo: [NSLocalizedDescriptionKey: "Can't decode base64 string"])
+        }
+        return data
+    }
 }
