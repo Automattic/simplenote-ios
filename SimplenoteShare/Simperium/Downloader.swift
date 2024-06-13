@@ -8,6 +8,24 @@
 
 import Foundation
 
+enum DownloaderError: Error {
+    case couldNotFetchNoteContent
+
+    var title: String {
+        switch self {
+        case .couldNotFetchNoteContent:
+            return NSLocalizedString("Could not fetch note content", comment: "note content fetch error title")
+        }
+    }
+
+    var message: String {
+        switch self {
+        case .couldNotFetchNoteContent:
+            return NSLocalizedString("Attempt to fetch current note content failed.  Please try again later.", comment: "Data Fetch error message")
+        }
+    }
+}
+
 class Downloader: NSObject {
 
     /// Simperium's Token
@@ -39,7 +57,11 @@ class Downloader: NSObject {
 
     func extractNoteContent(from data: Data) throws -> String? {
         let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any]
-        return jsonObject?["content"] as? String
+        guard let content =  jsonObject?["content"] as? String else {
+            throw DownloaderError.couldNotFetchNoteContent
+        }
+
+        return content
     }
 }
 
