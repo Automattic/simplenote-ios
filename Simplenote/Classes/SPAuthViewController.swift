@@ -348,7 +348,8 @@ private extension SPAuthViewController {
         Task {
             //TODO: Handle errors
             //TODO: Handle email not valid
-            try? await displayPasskeyAuthenticationOptions()
+            let passkeyAuthenticator = SPAppDelegate.shared().passkeyAuthenticator
+            try? await passkeyAuthenticator.attemptPasskeyAuth(for: email, in: self)
         }
     }
 
@@ -401,26 +402,6 @@ private extension SPAuthViewController {
                 SPTracker.trackUserSignedIn()
             }
             self.unlockInterface()
-        }
-    }
-
-    func performPasskeyAuthentication(with response: WebAuthnResponse) {
-        let json = try! JSONEncoder().encode(response)
-        // TODO We probably don't need to pass email since we are passing the id which is stored on gae
-        var jsonObject = try! JSONSerialization.jsonObject(with: json, options: []) as! [String: Any]
-        jsonObject["email"] = email
-        let updatedJson = try! JSONSerialization.data(withJSONObject: jsonObject)
-
-        Task {
-
-            guard let tuple = try? await AccountRemote().verifyPasskeyLogin(with: updatedJson),
-                  let email = tuple.0,
-                  let token = tuple.1 else {
-                return
-            }
-            
-            let authenticator = SPAppDelegate.shared().simperium.authenticator
-            authenticator.authenticate(withUsername: email, token: token)
         }
     }
 }
@@ -670,61 +651,6 @@ extension SPAuthViewController: SPTextInputViewDelegate {
     }
 }
 
-// MARK: - ASAuthentication
-//
-extension SPAuthViewController: ASAuthorizationControllerDelegate {
-    private func displayPasskeyAuthenticationOptions() async throws {
-        guard let challenge = try await fetchAuthChallenge() else {
-            return
-        }
-
-        // TODO add protection if challengeData could not be decoded
-        let challengeData = try Data.decodeUrlSafeBase64(challenge.challenge)
-        let provider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: challenge.relayingParty)
-        let request = provider.createCredentialAssertionRequest(challenge: challengeData)
-
-        let controller = ASAuthorizationController(authorizationRequests: [request])
-        controller.delegate = self
-        controller.presentationContextProvider = self
-        controller.performRequests()
-    }
-
-    private func fetchAuthChallenge() async throws -> PasskeyAuthChallenge? {
-        guard let data = try await AccountRemote().passkeyAuthChallenge(for: email) else {
-            return nil
-        }
-        print("data")
-
-        let challenge = try JSONDecoder().decode(PasskeyAuthChallenge.self, from: data)
-        return challenge
-    }
-
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        if let credential = authorization.credential as? ASAuthorizationPlatformPublicKeyCredentialAssertion {
-            let id = credential.credentialID.base64EncodedString()
-            let rawId = credential.credentialID.base64EncodedString()
-
-            let response = WebAuthnResponse(
-                id: id.toBase64url(),
-                rawId: rawId.toBase64url(),
-                response: WebAuthnResponse.Response(
-                    clientDataJSON: credential.rawClientDataJSON.base64EncodedString(),
-                    authenticatorData: credential.rawAuthenticatorData.base64EncodedString(),
-                    signature: credential.signature.base64EncodedString(),
-                    userHandle: credential.userID.base64EncodedString()
-                )
-            )
-
-            performPasskeyAuthentication(with: response)
-        }
-
-    }
-
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: any Error) {
-        passwordInputView.isHidden = false
-    }
-}
-
 extension SPAuthViewController: ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         view.window!
@@ -746,6 +672,12 @@ struct WebAuthnResponse: Codable {
     let rawId: String
     let response: Response
     var type: String = "public-key"
+
+    init(from credential: ASAuthorizationPlatformPublicKeyCredentialAssertion) {
+        self.id = credential.credentialID.base64EncodedString().toBase64url()
+        self.rawId = credential.credentialID.base64EncodedString().toBase64url()
+        self.response = WebAuthnResponse.Response(clientDataJSON: credential.rawClientDataJSON.base64EncodedString(), authenticatorData: credential.rawAuthenticatorData.base64EncodedString(), signature: credential.signature.base64EncodedString(), userHandle: credential.userID.base64EncodedString())
+    }
 
     struct Response: Codable {
         let clientDataJSON: String
