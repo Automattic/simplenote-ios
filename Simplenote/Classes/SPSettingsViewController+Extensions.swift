@@ -223,24 +223,24 @@ extension SPSettingsViewController {
 //
 extension SPSettingsViewController {
     @objc
-    func presentEnterPasswordAlert() {
-        let alert = UIAlertController(title: "Passkey Setup", message: "To add passkeys you must enter your password", preferredStyle: .alert)
+    func presentPasskeyAuthenticationSetupAlert() {
+        let alert = UIAlertController(title: PasskeyAuthentication.alertTitle, message: PasskeyAuthentication.message, preferredStyle: .alert)
         alert.addTextField { textField in
             textField.textContentType = .password
             textField.isSecureTextEntry = true
         }
 
-        let action = UIAlertAction(title: "Submit", style: .default) { [unowned alert] _ in
+        let action = UIAlertAction(title: PasskeyAuthentication.submit, style: .default) { [unowned alert] _ in
+            let appDelegate = SPAppDelegate.shared()
             guard let textfield = alert.textFields?.first,
                   let password = textfield.text,
-                  let email = SPAppDelegate.shared().simperium.user?.email else {
+                  let email = appDelegate.simperium.user?.email else {
                 return
             }
 
             Task {
-
                 do {
-                    let authenticator = SPAppDelegate.shared().passkeyAuthenticator
+                    let authenticator = appDelegate.passkeyAuthenticator
                     try await authenticator.registerPasskey(for: email, password: password, in: self)
                 } catch {
                     // TODO: Display some action for failure
@@ -248,7 +248,7 @@ extension SPSettingsViewController {
             }
         }
         alert.addAction(action)
-        alert.addCancelActionWithTitle("Cancel")
+        alert.addCancelActionWithTitle(PasskeyAuthentication.cancel)
 
         present(alert, animated: true)
     }
@@ -285,6 +285,13 @@ private struct AccountDeletion {
     static func successMessage(email: String) -> String {
         String(format: successAlertMessage, email)
     }
+}
+
+private struct PasskeyAuthentication {
+    static let alertTitle = NSLocalizedString("Passkey Setup", comment: "Alert title for setting up passkeys")
+    static let message = NSLocalizedString("To add passkeys you must enter your password", comment: "Message prompting user for password to create passkey")
+    static let submit = NSLocalizedString("Submit", comment: "Submit button title")
+    static let cancel = NSLocalizedString("cancel", comment: "Cancel button title")
 }
 
 // MARK: - RestorationAlert

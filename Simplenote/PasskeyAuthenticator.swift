@@ -1,11 +1,3 @@
-//
-//  PasskeyAuthenticator.swift
-//  Simplenote
-//
-//  Created by Charlie Scheer on 6/13/24.
-//  Copyright © 2024 Automattic. All rights reserved.
-//
-
 import Foundation
 import AuthenticationServices
 
@@ -71,7 +63,7 @@ class PasskeyAuthenticator: NSObject {
 
     // MARK: - Auth
     //
-    public func attemptPasskeyAuth(for email: String, in presentationContext: PresentationContext) async throws {
+    func attemptPasskeyAuth(for email: String, in presentationContext: PresentationContext) async throws {
         guard let challenge = try await fetchAuthChallenge(for: email) else {
             return
         }
