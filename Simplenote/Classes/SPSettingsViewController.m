@@ -11,8 +11,6 @@ NSString *const SPAlphabeticalTagSortPref                           = @"SPAlphab
 NSString *const SPThemePref                                         = @"SPThemePref";
 NSString *const SPSustainerAppIconName                              = @"AppIcon-Sustainer";
 
-
-
 @interface SPSettingsViewController ()
 @property (nonatomic, strong) UISwitch      *condensedNoteListSwitch;
 @property (nonatomic, strong) UISwitch      *alphabeticalTagSortSwitch;
@@ -27,7 +25,6 @@ NSString *const SPSustainerAppIconName                              = @"AppIcon-
 @implementation SPSettingsViewController {
     NSArray *timeoutPickerOptions;
 }
-
 
 #define kTagNoteListSort        1
 #define kTagTagsListSort        2
@@ -587,7 +584,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
             
             switch (indexPath.row) {
                 case SPOptionsAccountRowPasskeys: {
-                    [self presentEnterPasswordAlert];
+                    [self presentPasskeyAuthenticationSetupAlert];
                     break;
                 }
                 case SPOptionsAccountRowPrivacy: {
