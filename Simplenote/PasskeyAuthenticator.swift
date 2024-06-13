@@ -99,14 +99,12 @@ class PasskeyAuthenticator: NSObject {
         let json = try! JSONEncoder().encode(response)
 
         Task {
-
-            guard let tuple = try? await accountRemote.verifyPasskeyLogin(with: json),
-                  let email = tuple.0,
-                  let token = tuple.1 else {
+            guard let response = try? await accountRemote.verifyPasskeyLogin(with: json),
+                  let verifyResponse = try? JSONDecoder().decode(PasskeyVerifyResponse.self, from: response) else {
                 return
             }
 
-            authenticator.authenticate(withUsername: email, token: token)
+            authenticator.authenticate(withUsername: verifyResponse.username, token: verifyResponse.accessToken)
         }
     }
 }
