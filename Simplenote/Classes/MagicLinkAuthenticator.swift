@@ -57,6 +57,7 @@ private extension MagicLinkAuthenticator {
                 Task { @MainActor in
                     NSLog("[MagicLinkAuthenticator] Should auth with token \(confirmation.syncToken)")
                     authenticator.authenticate(withUsername: confirmation.username, token: confirmation.syncToken)
+                    SPTracker.trackUserConfirmedLoginLink()
                 }
 
             } catch {
