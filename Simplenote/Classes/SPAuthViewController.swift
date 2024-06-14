@@ -76,17 +76,6 @@ class SPAuthViewController: UIViewController {
         }
     }
 
-    /// # Passkey Button Action
-    ///
-    @IBOutlet weak var passkeySigninButton: SPSquaredButton! {
-        didSet {
-            passkeySigninButton.isHidden = !mode.isLogin
-            passkeySigninButton.setTitle(AuthenticationStrings.passkeyActionButton, for: .normal)
-            passkeySigninButton.setTitleColor(.white, for: .normal)
-            passkeySigninButton.addTarget(self, action: #selector(passkeyAuthAction), for: .touchUpInside)
-        }
-    }
-
     /// # Primary Action Spinner!
     ///
     @IBOutlet private var primaryActionSpinner: UIActivityIndicatorView! {
@@ -111,14 +100,6 @@ class SPAuthViewController: UIViewController {
             secondaryActionButton.titleLabel?.textAlignment = .center
             secondaryActionButton.titleLabel?.numberOfLines = 0
             secondaryActionButton.addTarget(self, action: mode.secondaryActionSelector, for: .touchUpInside)
-        }
-    }
-
-    /// # Passkey Action Spinner
-    ///
-    @IBOutlet weak var passkeyActivitySpinner: UIActivityIndicatorView! {
-        didSet {
-            passkeyActivitySpinner.style = .medium
         }
     }
 
@@ -261,7 +242,6 @@ private extension SPAuthViewController {
 
     func ensureStylesMatchValidationState() {
         primaryActionButton.backgroundColor = isInputValid ? .simplenoteBlue50Color : .simplenoteGray20Color
-        passkeySigninButton.backgroundColor = isInputValid ? .simplenoteBlue50Color : .simplenoteGray20Color
     }
 
     @objc
@@ -306,11 +286,6 @@ private extension SPAuthViewController {
 
     @IBAction func performLogIn() {
         guard ensureWarningsAreOnScreenWhenNeeded() else {
-            return
-        }
-
-        if passwordInputView.isHidden == true && passwordInputView.text?.isEmpty == true {
-            passwordInputView.isHidden = false
             return
         }
 
@@ -685,7 +660,7 @@ extension AuthenticationMode {
                      secondaryActionSelector: #selector(SPAuthViewController.presentPasswordReset),
                      secondaryActionText: AuthenticationStrings.loginSecondaryAction,
                      secondaryActionAttributedText: nil,
-                     isPasswordHidden: true,
+                     isPasswordHidden: false,
                      isLogin: true)
     }
 
@@ -701,6 +676,18 @@ extension AuthenticationMode {
                      secondaryActionAttributedText: AuthenticationStrings.signupSecondaryAttributedAction,
                      isPasswordHidden: true,
                      isLogin: false)
+    }
+
+    static var loginWithPasskeys: AuthenticationMode {
+        return .init(title: AuthenticationStrings.loginTitle,
+                     validationStyle: .legacy,
+                     primaryActionSelector: #selector(SPAuthViewController.passkeyAuthAction),
+                     primaryActionText: AuthenticationStrings.passkeyActionButton,
+                     secondaryActionSelector: #selector(SPAuthViewController.presentPasswordReset),
+                     secondaryActionText: AuthenticationStrings.loginSecondaryAction,
+                     secondaryActionAttributedText: nil,
+                     isPasswordHidden: true,
+                     isLogin: true)
     }
 }
 

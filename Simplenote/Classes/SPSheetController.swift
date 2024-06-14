@@ -29,7 +29,13 @@ class SPSheetController: UIViewController {
     ///
     @IBOutlet private var button1: SPSquaredButton! {
         didSet {
-            button1.backgroundColor = .simplenoteWPBlue50Color
+            button1.backgroundColor = .simplenoteBlue50Color
+        }
+    }
+
+    @IBOutlet weak var button2: SPSquaredButton! {
+        didSet {
+            button2.backgroundColor = .simplenoteWPBlue50Color
         }
     }
 
@@ -40,6 +46,10 @@ class SPSheetController: UIViewController {
     /// Closure to be executed whenever button1 is clicked
     ///
     var onClickButton1: (() -> Void)?
+
+    /// Closure to be executed whenever button2 is clicked
+    ///
+    var onClickButton2: (() -> Void)?
 
     /// Designated Initializer
     ///
@@ -86,6 +96,11 @@ class SPSheetController: UIViewController {
         loadViewIfNeeded()
         button1.setTitle(title, for: .normal)
     }
+
+    func setTitleForButton2(title: String) {
+        loadViewIfNeeded()
+        button2.setTitle(title, for: .normal)
+    }
 }
 
 // MARK: - Private Methods
@@ -123,6 +138,11 @@ private extension SPSheetController {
     @IBAction func button1WasPressed() {
         dismissWithAnimation()
         onClickButton1?()
+    }
+
+    @IBAction func button2WasPressed() {
+        dismissWithAnimation()
+        onClickButton2?()
     }
 
     @IBAction func backgroundWasPressed() {
