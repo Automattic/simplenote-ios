@@ -89,7 +89,7 @@ extension SPAuthError {
             return NSLocalizedString("You must verify your email before being able to login.", comment: "Error for un verified email")
         case .tooManyAttempts:
             return NSLocalizedString("Too many login attempts. Try again later.", comment: "Error message for too many login attempts")
-        default:
+        case .unknown:
             return NSLocalizedString("We're having problems. Please try again soon.", comment: "Generic error")
         }
     }
