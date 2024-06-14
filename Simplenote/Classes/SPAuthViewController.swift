@@ -644,11 +644,11 @@ extension SPAuthViewController: ASAuthorizationControllerPresentationContextProv
 }
 
 extension SPAuthViewController: PasskeyDelegate {
-    func passkeyRegistrationSucceed() async {
+    func passkeyRegistrationSucceed() {
         unlockInterface()
     }
 
-    func passkeyRegistrationFailed(_ error: any Error) async {
+    func passkeyRegistrationFailed(_ error: any Error) {
         unlockInterface()
     }
 

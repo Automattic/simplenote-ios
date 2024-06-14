@@ -273,19 +273,19 @@ extension SPSettingsViewController: ASAuthorizationControllerPresentationContext
 }
 
 extension SPSettingsViewController: PasskeyDelegate {
-    func passkeyRegistrationSucceed() async {
-        await removeActivityIndicator()
+    func passkeyRegistrationSucceed() {
+        removeActivityIndicator()
         presentPasskeySuccessAlert()
     }
 
-    func passkeyRegistrationFailed(_ error: any Error) async {
-        await removeActivityIndicator()
+    func passkeyRegistrationFailed(_ error: any Error) {
+        removeActivityIndicator()
         self.presentPasskeyRegistrationFailureAlert()
         NSLog("Failed to register Passkey.  Error: %@", error.localizedDescription)
     }
 
-    private func removeActivityIndicator() async {
-        await activityIndicator?.dismiss(true)
+    private func removeActivityIndicator() {
+        activityIndicator?.dismiss(true)
         activityIndicator = nil
     }
 
