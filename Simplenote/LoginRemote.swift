@@ -10,11 +10,11 @@ class LoginRemote: Remote {
         performDataTask(with: request, completion: completion)
     }
 
-    func requestSyncToken(email: String, authCode: String) async throws -> String {
-        let request = requestForLoginCompletion(email: email, authCode: authCode)
+    func requestLoginConfirmation(authKey: String, authCode: String) async throws -> LoginConfirmationResponse {
+        let request = requestForLoginCompletion(authKey: authKey, authCode: authCode)
         let response = try await performDataTask(with: request, type: LoginConfirmationResponse.self)
         
-        return response.syncToken
+        return response
     }
 }
 
@@ -22,6 +22,7 @@ class LoginRemote: Remote {
 // MARK: - LoginConfirmationResponse
 //
 struct LoginConfirmationResponse: Decodable {
+    let username: String
     let syncToken: String
 }
 
@@ -34,15 +35,16 @@ private extension LoginRemote {
         let url = URL(string: SimplenoteConstants.loginRequestURL)!
 
         return requestForURL(url, method: RemoteConstants.Method.POST, httpBody: [
+            "request_source": SimplenoteConstants.simplenotePlatformName,
             "username": email.lowercased()
         ])
     }
 
-    func requestForLoginCompletion(email: String, authCode: String) -> URLRequest {
+    func requestForLoginCompletion(authKey: String, authCode: String) -> URLRequest {
         let url = URL(string: SimplenoteConstants.loginCompletionURL)!
 
         return requestForURL(url, method: RemoteConstants.Method.POST, httpBody: [
-            "username": email.lowercased(),
+            "auth_key": authKey,
             "auth_code": authCode
         ])
     }

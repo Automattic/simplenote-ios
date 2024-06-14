@@ -28,6 +28,10 @@ class SimplenoteConstants: NSObject {
     /// Simplenote: Published Notes base URL
     ///
     static let simplenotePublishedBaseURL = "http://simp.ly/publish/"
+    
+    /// Simplenote: Current Platform
+    ///
+    static let simplenotePlatformName = "iOS"
 
     /// Simplenote: Domain for shared group directory
     ///

@@ -41,23 +41,23 @@ private extension MagicLinkAuthenticator {
 
     @discardableResult
     func attemptLoginWithAuthCode(queryItems: [URLQueryItem]) -> Bool {
-        guard let email = queryItems.base64DecodedValue(for: Constants.emailField),
+        guard let authKey = queryItems.value(for: Constants.authKeyField),
               let authCode = queryItems.value(for: Constants.authCodeField),
-              !email.isEmpty, !authCode.isEmpty
+              !authKey.isEmpty, !authCode.isEmpty
         else {
             return false
         }
 
-        NSLog("[MagicLinkAuthenticator] Requesting SyncToken for \(email) and \(authCode)")
+        NSLog("[MagicLinkAuthenticator] Requesting SyncToken for \(authKey) and \(authCode)")
         
         Task {
             do {
                 let remote = LoginRemote()
-                let syncToken = try await remote.requestSyncToken(email: email, authCode: authCode)
+                let confirmation = try await remote.requestLoginConfirmation(authKey: authKey, authCode: authCode)
                 
                 Task { @MainActor in
-                    NSLog("[MagicLinkAuthenticator] Should auth with token \(syncToken)")
-                    authenticator.authenticate(withUsername: email, token: syncToken)
+                    NSLog("[MagicLinkAuthenticator] Should auth with token \(confirmation.syncToken)")
+                    authenticator.authenticate(withUsername: confirmation.username, token: confirmation.syncToken)
                 }
 
             } catch {
@@ -92,5 +92,6 @@ private struct Constants {
     static let host = "login"
     static let emailField = "email"
     static let tokenField = "token"
+    static let authKeyField = "auth_key"
     static let authCodeField = "auth_code"
 }
