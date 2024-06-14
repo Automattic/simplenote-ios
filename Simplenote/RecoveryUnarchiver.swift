@@ -50,7 +50,7 @@ public class RecoveryUnarchiver {
 
         note.modificationDate = Date()
         note.creationDate = Date()
-        note.markdown = UserDefaults.standard.bool(forKey: "kMarkdownPreferencesKey")
+        note.markdown = UserDefaults.standard.bool(forKey: .markdown)
 
         simperium.save()
     }
