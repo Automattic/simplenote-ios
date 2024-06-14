@@ -5,9 +5,10 @@ enum PasskeyError: Error {
     case couldNotRequestRegistrationChallenge
     case couldNotEncodeRegistrationChallenge
     case couldNotPrepareRegistrationData
+    case authFailed
 }
 
-protocol PasskeyRegistrationDelegate: AnyObject {
+protocol PasskeyDelegate: AnyObject {
     func passkeyRegistrationSucceed() async
     func passkeyRegistrationFailed(_ error: Error) async
 }
@@ -18,7 +19,7 @@ class PasskeyAuthenticator: NSObject {
     let authenticator: SPAuthenticator
     let accountRemote: AccountRemote
 
-    weak var registrationDelegate: PasskeyRegistrationDelegate? = nil
+    weak var delegate: PasskeyDelegate? = nil
 
     @objc
     init(authenticator: SPAuthenticator) {
@@ -57,7 +58,7 @@ class PasskeyAuthenticator: NSObject {
     private func performPasskeyRegistration(with credential: ASAuthorizationPlatformPublicKeyCredentialRegistration) {
         guard let registrationObject = PasskeyRegistrationResponse(from: credential) else {
             Task {
-                await registrationDelegate?.passkeyRegistrationFailed(PasskeyError.couldNotPrepareRegistrationData)
+                await delegate?.passkeyRegistrationFailed(PasskeyError.couldNotPrepareRegistrationData)
             }
             return
         }
@@ -66,9 +67,9 @@ class PasskeyAuthenticator: NSObject {
             do {
                 let data = try JSONEncoder().encode(registrationObject)
                 try await accountRemote.registerCredential(with: data)
-                await registrationDelegate?.passkeyRegistrationSucceed()
+                await delegate?.passkeyRegistrationSucceed()
             } catch {
-                await registrationDelegate?.passkeyRegistrationFailed(error)
+                await delegate?.passkeyRegistrationFailed(error)
             }
         }
     }
@@ -105,10 +106,12 @@ class PasskeyAuthenticator: NSObject {
         Task { @MainActor in
             guard let response = try? await accountRemote.verifyPasskeyLogin(with: json),
                   let verifyResponse = try? JSONDecoder().decode(PasskeyVerifyResponse.self, from: response) else {
+                await self.delegate?.passkeyRegistrationFailed(PasskeyError.authFailed)
                 return
             }
 
             authenticator.authenticate(withUsername: verifyResponse.username, token: verifyResponse.accessToken)
+            await self.delegate?.passkeyRegistrationSucceed()
         }
     }
 }
@@ -117,12 +120,11 @@ class PasskeyAuthenticator: NSObject {
 //
 extension PasskeyAuthenticator: ASAuthorizationControllerDelegate {
     public func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: any Error) {
-        if let registrationDelegate {
+        if let delegate {
             Task {
-                await registrationDelegate.passkeyRegistrationFailed(error)
+                await delegate.passkeyRegistrationFailed(error)
             }
         }
-        print(error.localizedDescription)
     }
 
     public func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {

@@ -229,7 +229,7 @@ extension SPSettingsViewController {
             textField.textContentType = .password
             textField.isSecureTextEntry = true
         }
-        SPAppDelegate.shared().passkeyAuthenticator.registrationDelegate = self
+        SPAppDelegate.shared().passkeyAuthenticator.delegate = self
 
         let action = UIAlertAction(title: PasskeyAuthentication.submit, style: .default) { [unowned alert] _ in
             let appDelegate = SPAppDelegate.shared()
@@ -272,18 +272,18 @@ extension SPSettingsViewController: ASAuthorizationControllerPresentationContext
     }
 }
 
-extension SPSettingsViewController: PasskeyRegistrationDelegate {
+extension SPSettingsViewController: PasskeyDelegate {
     func passkeyRegistrationSucceed() async {
         await removeActivityIndicator()
         presentPasskeySuccessAlert()
     }
-    
+
     func passkeyRegistrationFailed(_ error: any Error) async {
         await removeActivityIndicator()
         self.presentPasskeyRegistrationFailureAlert()
         NSLog("Failed to register Passkey.  Error: %@", error.localizedDescription)
     }
-    
+
     private func removeActivityIndicator() async {
         await activityIndicator?.dismiss(true)
         activityIndicator = nil

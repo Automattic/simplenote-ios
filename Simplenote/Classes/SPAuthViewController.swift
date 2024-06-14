@@ -325,10 +325,16 @@ private extension SPAuthViewController {
         }
 
         Task {
-            //TODO: Handle errors
+            lockdownInterface()
 
             let passkeyAuthenticator = SPAppDelegate.shared().passkeyAuthenticator
-            try? await passkeyAuthenticator.attemptPasskeyAuth(for: email, in: self)
+            passkeyAuthenticator.delegate = self
+            do {
+                try await passkeyAuthenticator.attemptPasskeyAuth(for: email, in: self)
+            } catch {
+                unlockInterface()
+                //TODO: Show error message
+            }
         }
     }
 
@@ -630,10 +636,22 @@ extension SPAuthViewController: SPTextInputViewDelegate {
     }
 }
 
+// MARK: - Passkeys
 extension SPAuthViewController: ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         view.window!
     }
+}
+
+extension SPAuthViewController: PasskeyDelegate {
+    func passkeyRegistrationSucceed() async {
+        unlockInterface()
+    }
+
+    func passkeyRegistrationFailed(_ error: any Error) async {
+        unlockInterface()
+    }
+
 }
 
 // MARK: - AuthenticationMode: Signup / Login
