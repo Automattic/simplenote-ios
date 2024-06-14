@@ -557,3 +557,12 @@ extension SPAppDelegate {
         UserDefaults.standard.set(true, forKey: .hasMigratedSustainerPreferences)
     }
 }
+
+// MARK: - Content Recovery
+//
+extension SPAppDelegate {
+    @objc
+    func attemptContentRecoveryIfNeeded() {
+        RecoveryUnarchiver(simperium: simperium).insertNotesFromRecoveryFilesIfNeeded()
+    }
+}

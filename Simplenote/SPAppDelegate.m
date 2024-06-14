@@ -174,6 +174,7 @@
 {
     [SPTracker trackApplicationOpened];
     [self syncWidgetDefaults];
+    [self attemptContentRecoveryIfNeeded];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
