@@ -13,8 +13,6 @@
             <connections>
                 <outlet property="emailInputView" destination="hW6-K1-OyV" id="TyC-Uh-Kaf"/>
                 <outlet property="emailWarningLabel" destination="n7T-Gj-plH" id="STx-wz-jKg"/>
-                <outlet property="passkeyActivitySpinner" destination="1r4-a8-hNr" id="1yP-oN-4Fg"/>
-                <outlet property="passkeySigninButton" destination="h9W-v8-WKk" id="9pc-1i-vUF"/>
                 <outlet property="passwordInputView" destination="pdF-nK-gXE" id="18P-SU-c90"/>
                 <outlet property="passwordWarningLabel" destination="UyC-If-pXj" id="D2M-PR-Tph"/>
                 <outlet property="primaryActionButton" destination="q3p-Ji-dOm" id="l1t-x0-zva"/>
@@ -31,7 +29,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CJS-5O-pxK">
-                    <rect key="frame" x="332" y="60" width="360" height="304"/>
+                    <rect key="frame" x="332" y="60" width="360" height="252"/>
                     <subviews>
                         <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="hW6-K1-OyV" customClass="SPTextInputView" customModule="Simplenote" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="360" height="44"/>
@@ -88,31 +86,8 @@
                                 <constraint firstItem="o3M-2A-urw" firstAttribute="centerY" secondItem="CGr-O3-MBQ" secondAttribute="centerY" id="wvA-qg-zbY"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5h1-31-jFW" userLabel="Passkey Button">
-                            <rect key="frame" x="0.0" y="208" width="360" height="44"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h9W-v8-WKk" userLabel="Passkey" customClass="SPSquaredButton" customModule="Simplenote" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="360" height="44"/>
-                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                    <state key="normal" title="#Passkey#"/>
-                                </button>
-                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="1r4-a8-hNr">
-                                    <rect key="frame" x="322" y="12" width="20" height="20"/>
-                                </activityIndicatorView>
-                            </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            <constraints>
-                                <constraint firstItem="h9W-v8-WKk" firstAttribute="leading" secondItem="5h1-31-jFW" secondAttribute="leading" id="11w-Lz-NjB"/>
-                                <constraint firstAttribute="bottom" secondItem="h9W-v8-WKk" secondAttribute="bottom" id="JvA-Ah-SyT"/>
-                                <constraint firstItem="h9W-v8-WKk" firstAttribute="top" secondItem="5h1-31-jFW" secondAttribute="top" id="LcI-bp-W2p"/>
-                                <constraint firstItem="1r4-a8-hNr" firstAttribute="centerY" secondItem="5h1-31-jFW" secondAttribute="centerY" id="QHO-xZ-PfH"/>
-                                <constraint firstAttribute="trailing" secondItem="h9W-v8-WKk" secondAttribute="trailing" id="cNB-id-tDI"/>
-                                <constraint firstAttribute="trailing" secondItem="1r4-a8-hNr" secondAttribute="trailing" constant="18" id="ewS-87-pUI"/>
-                                <constraint firstAttribute="height" constant="44" id="sXy-jP-JIm"/>
-                            </constraints>
-                        </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PfS-vU-7i3">
-                            <rect key="frame" x="0.0" y="260" width="360" height="44"/>
+                            <rect key="frame" x="0.0" y="208" width="360" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="u8s-d9-Em4"/>
                             </constraints>
@@ -123,10 +98,8 @@
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="PfS-vU-7i3" secondAttribute="trailing" id="0QL-Iw-KLz"/>
                         <constraint firstItem="PfS-vU-7i3" firstAttribute="leading" secondItem="CJS-5O-pxK" secondAttribute="leading" id="314-fc-3eX"/>
-                        <constraint firstItem="5h1-31-jFW" firstAttribute="leading" secondItem="CJS-5O-pxK" secondAttribute="leading" id="36P-F4-cGU"/>
                         <constraint firstAttribute="trailing" secondItem="pdF-nK-gXE" secondAttribute="trailing" id="51g-0D-Oyv"/>
                         <constraint firstItem="CGr-O3-MBQ" firstAttribute="leading" secondItem="CJS-5O-pxK" secondAttribute="leading" id="BIX-Fy-gqY"/>
-                        <constraint firstAttribute="trailing" secondItem="5h1-31-jFW" secondAttribute="trailing" id="N0i-ud-dYk"/>
                         <constraint firstAttribute="trailing" secondItem="hW6-K1-OyV" secondAttribute="trailing" id="RSC-Vk-xbB"/>
                         <constraint firstItem="hW6-K1-OyV" firstAttribute="leading" secondItem="CJS-5O-pxK" secondAttribute="leading" id="UoC-hu-yxe"/>
                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="360" id="nLp-JP-Ott"/>
@@ -150,9 +123,6 @@
         <designable name="UyC-If-pXj">
             <size key="intrinsicContentSize" width="132" height="18"/>
         </designable>
-        <designable name="h9W-v8-WKk">
-            <size key="intrinsicContentSize" width="87" height="33"/>
-        </designable>
         <designable name="n7T-Gj-plH">
             <size key="intrinsicContentSize" width="102.5" height="18"/>
         </designable>
@@ -165,10 +135,10 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemPinkColor">
-            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
