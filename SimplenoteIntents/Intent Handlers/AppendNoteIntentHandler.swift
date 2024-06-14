@@ -27,9 +27,6 @@ class AppendNoteIntentHandler: NSObject, AppendNoteIntentHandling {
             return AppendNoteIntentResponse(code: .failure, userActivity: nil)
         }
 
-        guard let existingContent = try? await Downloader(simperiumToken: token).getNoteContent(for: identifier) else {
-            return AppendNoteIntentResponse(code: .failure, userActivity: nil)
-        }
         do {
             let existingContent = try await Downloader(simperiumToken: token).getNoteContent(for: identifier) ?? String()
             note.content = existingContent + "\n\(content)"
