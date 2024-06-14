@@ -320,11 +320,20 @@ private extension SPAuthViewController {
     }
 
     @objc func passkeyAuthAction() {
+        guard ensureWarningsAreOnScreenWhenNeeded() else {
+            return
+        }
+
         Task {
-            //TODO: Handle errors
-            //TODO: Handle email not valid
+            lockdownInterface()
+
             let passkeyAuthenticator = SPAppDelegate.shared().passkeyAuthenticator
-            try? await passkeyAuthenticator.attemptPasskeyAuth(for: email, in: self)
+            passkeyAuthenticator.delegate = self
+            do {
+                try await passkeyAuthenticator.attemptPasskeyAuth(for: email, in: self)
+            } catch {
+                failed(error)
+            }
         }
     }
 
@@ -626,9 +635,27 @@ extension SPAuthViewController: SPTextInputViewDelegate {
     }
 }
 
+// MARK: - Passkeys
 extension SPAuthViewController: ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         view.window!
+    }
+}
+
+extension SPAuthViewController: PasskeyDelegate {
+    func succeed() {
+        unlockInterface()
+    }
+
+    func failed(_ error: any Error) {
+        unlockInterface()
+        presentPasskeyAuthError(error)
+    }
+
+    private func presentPasskeyAuthError(_ error: any Error) {
+        let alert = UIAlertController(title: AuthenticationStrings.passkeyAuthFailureTitle, message: error.localizedDescription, preferredStyle: .alert)
+        alert.addCancelActionWithTitle(AuthenticationStrings.unverifiedCancelText)
+        present(alert, animated: true)
     }
 }
 
@@ -715,6 +742,7 @@ private enum AuthenticationStrings {
     static let unverifiedErrorMessage       = NSLocalizedString("There was an preparing your verification email, please try again later", comment: "Request error alert message")
     static let verificationSentTitle        = NSLocalizedString("Check your Email", comment: "Vefification sent alert title")
     static let verificationSentTemplate     = NSLocalizedString("We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions.", comment: "Confirmation that an email has been sent")
+    static let passkeyAuthFailureTitle      = NSLocalizedString("Passkey Authentication Failed", comment: "Title for passkey authentication failure")
 }
 
 // MARK: - PasswordInsecure Alert Strings

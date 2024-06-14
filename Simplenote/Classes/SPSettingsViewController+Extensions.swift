@@ -229,9 +229,12 @@ extension SPSettingsViewController {
             textField.textContentType = .password
             textField.isSecureTextEntry = true
         }
+        SPAppDelegate.shared().passkeyAuthenticator.delegate = self
 
         let action = UIAlertAction(title: PasskeyAuthentication.submit, style: .default) { [unowned alert] _ in
             let appDelegate = SPAppDelegate.shared()
+            self.activityIndicator = SPModalActivityIndicator.show(in: appDelegate.window)
+
             guard let textfield = alert.textFields?.first,
                   let password = textfield.text,
                   let email = appDelegate.simperium.user?.email else {
@@ -243,7 +246,7 @@ extension SPSettingsViewController {
                     let authenticator = appDelegate.passkeyAuthenticator
                     try await authenticator.registerPasskey(for: email, password: password, in: self)
                 } catch {
-                    // TODO: Display some action for failure
+                    self.failed(error)
                 }
             }
         }
@@ -252,11 +255,43 @@ extension SPSettingsViewController {
 
         present(alert, animated: true)
     }
+
+    private func presentPasskeyRegistrationFailureAlert() {
+        let failureAlert = UIAlertController(title: PasskeyAuthentication.failureTitle, message: PasskeyAuthentication.failureMessage, preferredStyle: .alert)
+        failureAlert.addCancelActionWithTitle(PasskeyAuthentication.okay)
+        self.present(failureAlert, animated: true)
+    }
 }
 
+// MARK: - Passkeys
+//
 extension SPSettingsViewController: ASAuthorizationControllerPresentationContextProviding {
+    // To present the passkey modals we need to give it a window to appear in
     public func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         view.window!
+    }
+}
+
+extension SPSettingsViewController: PasskeyDelegate {
+    func succeed() {
+        removeActivityIndicator()
+        presentPasskeySuccessAlert()
+    }
+
+    func failed(_ error: any Error) {
+        removeActivityIndicator()
+        self.presentPasskeyRegistrationFailureAlert()
+        NSLog("Failed to register Passkey.  Error: %@", error.localizedDescription)
+    }
+
+    private func removeActivityIndicator() {
+        activityIndicator?.dismiss(true)
+        activityIndicator = nil
+    }
+
+    private func presentPasskeySuccessAlert() {
+        let alert = UIAlertController(title: PasskeyAuthentication.registrationSuccessfullTitle, message: nil, preferredStyle: .alert)
+        alert.addCancelActionWithTitle(PasskeyAuthentication.okay)
     }
 }
 
@@ -291,7 +326,11 @@ private struct PasskeyAuthentication {
     static let alertTitle = NSLocalizedString("Passkey Setup", comment: "Alert title for setting up passkeys")
     static let message = NSLocalizedString("To add passkeys you must enter your password", comment: "Message prompting user for password to create passkey")
     static let submit = NSLocalizedString("Submit", comment: "Submit button title")
-    static let cancel = NSLocalizedString("cancel", comment: "Cancel button title")
+    static let cancel = NSLocalizedString("Cancel", comment: "Cancel button title")
+    static let failureTitle = NSLocalizedString("Passkey Registration Failed", comment: "Title for alert when passkey registration fails")
+    static let failureMessage = NSLocalizedString("Could not register passkey.  Please try again later", comment: "Message for when passkey registration fails")
+    static let okay = NSLocalizedString("Okay", comment: "confirm button title")
+    static let registrationSuccessfullTitle = NSLocalizedString("Passkey Registration Successful", comment: "Alert title confirm passkey registration")
 }
 
 // MARK: - RestorationAlert

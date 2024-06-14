@@ -439,6 +439,7 @@
 		BA12B06F26B0D0150026F31D /* SPManagedObject+Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA12B06C26B0D0150026F31D /* SPManagedObject+Widget.swift */; };
 		BA12B07026B0D0150026F31D /* SPManagedObject+Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA12B06C26B0D0150026F31D /* SPManagedObject+Widget.swift */; };
 		BA18532826488DBC00D9A347 /* SignupRemoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA18532726488DBC00D9A347 /* SignupRemoteTests.swift */; };
+		BA1B70142C1CEC6F008282D7 /* SPModalActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1B70132C1CEC6F008282D7 /* SPModalActivityIndicator.swift */; };
 		BA2015BB2B57384F005E59AA /* AutomatticTracks in Frameworks */ = {isa = PBXBuildFile; productRef = BA2015BA2B57384F005E59AA /* AutomatticTracks */; };
 		BA289B5C2BE4371A000E6794 /* ListWidgetIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA289B5A2BE4371A000E6794 /* ListWidgetIntentHandler.swift */; };
 		BA289B5F2BE43728000E6794 /* NoteWidgetIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA289B5D2BE43728000E6794 /* NoteWidgetIntentHandler.swift */; };
@@ -1158,6 +1159,7 @@
 		BA12B06C26B0D0150026F31D /* SPManagedObject+Widget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SPManagedObject+Widget.swift"; sourceTree = "<group>"; };
 		BA16C6A82BC4968400C9079F /* Simplenote 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Simplenote 7.xcdatamodel"; sourceTree = "<group>"; };
 		BA18532726488DBC00D9A347 /* SignupRemoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupRemoteTests.swift; sourceTree = "<group>"; };
+		BA1B70132C1CEC6F008282D7 /* SPModalActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPModalActivityIndicator.swift; sourceTree = "<group>"; };
 		BA289B5A2BE4371A000E6794 /* ListWidgetIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWidgetIntentHandler.swift; sourceTree = "<group>"; };
 		BA289B5D2BE43728000E6794 /* NoteWidgetIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteWidgetIntentHandler.swift; sourceTree = "<group>"; };
 		BA289B632BE43963000E6794 /* OpenNewNoteIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenNewNoteIntentHandler.swift; sourceTree = "<group>"; };
@@ -2588,6 +2590,7 @@
 				B56A696422F9D54600B90398 /* SPLabel.swift */,
 				E230E39C17D0F33B009B5EBB /* SPModalActivityIndicator.h */,
 				E230E39D17D0F33B009B5EBB /* SPModalActivityIndicator.m */,
+				BA1B70132C1CEC6F008282D7 /* SPModalActivityIndicator.swift */,
 				B5D982D122F8644000C37C29 /* SPSquaredButton.swift */,
 				E215C79B180B228800AD36B5 /* SPTextField.h */,
 				E215C79C180B228800AD36B5 /* SPTextField.m */,
@@ -3599,6 +3602,7 @@
 				375D24BA21E01131007AB25A /* document.c in Sources */,
 				BA6DA19126DB5F1B000464C8 /* URLComponents.swift in Sources */,
 				46A3C98317DFA81A002865AE /* main.m in Sources */,
+				BA1B70142C1CEC6F008282D7 /* SPModalActivityIndicator.swift in Sources */,
 				B58C9F5723F2FCEC008C3480 /* SPPlaceholderView.swift in Sources */,
 				BAB6C04726BA4CAF007495C4 /* WidgetController.swift in Sources */,
 				A6E1E79E24BDE401008A44BC /* SPCardTransitioningManager.swift in Sources */,
