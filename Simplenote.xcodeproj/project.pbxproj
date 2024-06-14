@@ -464,6 +464,7 @@
 		BA4499B325ED8AB0000C563E /* NoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4499B225ED8AB0000C563E /* NoticeView.swift */; };
 		BA4499BC25ED95D0000C563E /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4499BB25ED95D0000C563E /* Notice.swift */; };
 		BA4499C525ED95E5000C563E /* NoticeAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4499C425ED95E5000C563E /* NoticeAction.swift */; };
+		BA4A01902C1CCEC100EEE567 /* RecoveryArchiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4A018F2C1CCEC100EEE567 /* RecoveryArchiver.swift */; };
 		BA4C6CFC264C744300B723A7 /* SeparatorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4C6CFB264C744300B723A7 /* SeparatorsView.swift */; };
 		BA5249FD26DF0BC600DAC945 /* WidgetWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5249FC26DF0BC600DAC945 /* WidgetWarningView.swift */; };
 		BA524A0226DF1AE800DAC945 /* WidgetsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA524A0126DF1AE800DAC945 /* WidgetsState.swift */; };
@@ -485,8 +486,7 @@
 		BA6DA19226DB5F1B000464C8 /* URLComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6DA19026DB5F1B000464C8 /* URLComponents.swift */; };
 		BA7071E526BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BA7071E426BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition */; };
 		BA7071E626BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = BA7071E426BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition */; };
-		BA7240222C1BA1210088EC11 /* ContentRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7240212C1BA1210088EC11 /* ContentRecoveryManager.swift */; };
-		BA7240232C1BA1930088EC11 /* ContentRecoveryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7240212C1BA1210088EC11 /* ContentRecoveryManager.swift */; };
+		BA7240222C1BA1210088EC11 /* RecoveryUnarchiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7240212C1BA1210088EC11 /* RecoveryUnarchiver.swift */; };
 		BA75D8A326C084E900883FFA /* Text+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA75D87D26C0843600883FFA /* Text+Simplenote.swift */; };
 		BA75D8AE26C0862E00883FFA /* View+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA75D8AD26C0862E00883FFA /* View+Simplenote.swift */; };
 		BA75D8BA26C0865C00883FFA /* Filling.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA75D8B926C0865C00883FFA /* Filling.swift */; };
@@ -1168,6 +1168,7 @@
 		BA4499B225ED8AB0000C563E /* NoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeView.swift; sourceTree = "<group>"; };
 		BA4499BB25ED95D0000C563E /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
 		BA4499C425ED95E5000C563E /* NoticeAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeAction.swift; sourceTree = "<group>"; };
+		BA4A018F2C1CCEC100EEE567 /* RecoveryArchiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryArchiver.swift; sourceTree = "<group>"; };
 		BA4C6CFB264C744300B723A7 /* SeparatorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorsView.swift; sourceTree = "<group>"; };
 		BA5249FC26DF0BC600DAC945 /* WidgetWarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetWarningView.swift; sourceTree = "<group>"; };
 		BA524A0126DF1AE800DAC945 /* WidgetsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetsState.swift; sourceTree = "<group>"; };
@@ -1187,7 +1188,7 @@
 		BA6D7B8A2BE588F0006AE368 /* IntentsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentsError.swift; sourceTree = "<group>"; };
 		BA6DA19026DB5F1B000464C8 /* URLComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLComponents.swift; sourceTree = "<group>"; };
 		BA7071E426BB68A300D5DFF0 /* ListWidgetIntent.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = ListWidgetIntent.intentdefinition; sourceTree = "<group>"; };
-		BA7240212C1BA1210088EC11 /* ContentRecoveryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentRecoveryManager.swift; sourceTree = "<group>"; };
+		BA7240212C1BA1210088EC11 /* RecoveryUnarchiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryUnarchiver.swift; sourceTree = "<group>"; };
 		BA75D87D26C0843600883FFA /* Text+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Simplenote.swift"; sourceTree = "<group>"; };
 		BA75D8AD26C0862E00883FFA /* View+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Simplenote.swift"; sourceTree = "<group>"; };
 		BA75D8B926C0865C00883FFA /* Filling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filling.swift; sourceTree = "<group>"; };
@@ -2236,7 +2237,7 @@
 				BA3856CC2681715700F388CC /* CoreDataManager.swift */,
 				BA9B59012685549F00DAD1ED /* StorageSettings.swift */,
 				BA32A90E26B7469F00727247 /* WidgetError.swift */,
-				BA7240212C1BA1210088EC11 /* ContentRecoveryManager.swift */,
+				BA7240212C1BA1210088EC11 /* RecoveryUnarchiver.swift */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -2414,6 +2415,14 @@
 			name = Notices;
 			sourceTree = "<group>";
 		};
+		BA4A018E2C1CCEB300EEE567 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				BA4A018F2C1CCEC100EEE567 /* RecoveryArchiver.swift */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
 		BA57692A269D2103008B510E /* Remotes */ = {
 			isa = PBXGroup;
 			children = (
@@ -2461,6 +2470,7 @@
 		BAB5762526703C8200B0C56F /* SimplenoteIntents */ = {
 			isa = PBXGroup;
 			children = (
+				BA4A018E2C1CCEB300EEE567 /* Tools */,
 				BA34B04F2BEAEF4800580E15 /* SimplenoteIntentsRelease.entitlements */,
 				092FD78026D7BB72006BE8E2 /* Supporting Files */,
 				BAB5762626703C8200B0C56F /* IntentHandler.swift */,
@@ -3458,7 +3468,7 @@
 				B543C7E323CF76EA00003A80 /* NotesListFilter.swift in Sources */,
 				46A3C96717DFA81A002865AE /* NSManagedObjectContext+CoreDataExtensions.m in Sources */,
 				A6C0DFA725C0992D00B9BE39 /* NoteScrollPositionCache.swift in Sources */,
-				BA7240222C1BA1210088EC11 /* ContentRecoveryManager.swift in Sources */,
+				BA7240222C1BA1210088EC11 /* RecoveryUnarchiver.swift in Sources */,
 				B59314D81A486B3800B651ED /* SPConstants.m in Sources */,
 				375D24B421E01131007AB25A /* escape.c in Sources */,
 				B50F47A61D1D791B00822748 /* NSURL+Extensions.swift in Sources */,
@@ -3845,6 +3855,7 @@
 				BA86622426B3AE4A00466746 /* ExtensionResultsController.swift in Sources */,
 				BABFFF2426CF9094003A4C25 /* WidgetDefaults.swift in Sources */,
 				BA289B762BE45BBB000E6794 /* OpenNoteIntentHandler.swift in Sources */,
+				BA4A01902C1CCEC100EEE567 /* RecoveryArchiver.swift in Sources */,
 				BAF8D46E26AE118800CA9383 /* SPCredentials.swift in Sources */,
 				BAF8D5C526AE254100CA9383 /* Simplenote.xcdatamodeld in Sources */,
 				BAB6C04426BA49F3007495C4 /* ContentSlice.swift in Sources */,
@@ -3863,7 +3874,6 @@
 				BAF8D45526AE10FC00CA9383 /* Tag+Widget.swift in Sources */,
 				BAFFCEA726DDA9F6007F5EE3 /* ExtensionCoreDataWrapper.swift in Sources */,
 				BAF8D53C26AE175C00CA9383 /* Bundle+Simplenote.swift in Sources */,
-				BA7240232C1BA1930088EC11 /* ContentRecoveryManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

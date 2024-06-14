@@ -2,7 +2,7 @@ import Foundation
 import UniformTypeIdentifiers
 import CoreData
 
-public class ContentRecoveryManager {
+public class RecoveryUnarchiver {
     private let fileManager: FileManager
 
     public init(fileManager: FileManager = .default) {
@@ -15,23 +15,6 @@ public class ContentRecoveryManager {
         }
 
         try? fileManager.createDirectory(at: fileManager.recoveryDirectoryURL, withIntermediateDirectories: true)
-    }
-
-    // MARK: Archive
-    //
-    public func archiveContent(_ content: String) {
-        createRecoveryDirIfNeeded()
-
-        guard let data = content.data(using: .utf8) else {
-            return
-        }
-        try? data.write(to: url(for: UUID().uuidString))
-    }
-
-    private func url(for identifier: String) -> URL {
-        let formattedID = identifier.replacingOccurrences(of: "/", with: "-")
-        let fileName = "\(Constants.recoveredContent)-\(formattedID)"
-        return fileManager.recoveryDirectoryURL.appendingPathComponent(fileName, conformingTo: UTType.json)
     }
 
     // MARK: Restore
@@ -68,7 +51,6 @@ public class ContentRecoveryManager {
  }
 
 private struct Constants {
-    static let recoveredContent = "recoveredContent"
     static let richTextKey = "richText"
     static let recoveredContentHeader = NSLocalizedString("Recovered Note Cotent - ", comment: "Header to put on any files that need to be recovered")
 }
