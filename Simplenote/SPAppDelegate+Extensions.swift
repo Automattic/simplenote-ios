@@ -563,8 +563,6 @@ extension SPAppDelegate {
 extension SPAppDelegate {
     @objc
     func attemptContentRecoveryIfNeeded() {
-        let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-        context.persistentStoreCoordinator = coreDataManager.persistentStoreCoordinator
         RecoveryUnarchiver().prepareRecoveredNoteContentIfNeeded()
     }
 }
