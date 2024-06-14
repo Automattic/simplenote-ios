@@ -9,8 +9,8 @@ enum PasskeyError: Error {
 }
 
 protocol PasskeyDelegate: AnyObject {
-    func passkeyRegistrationSucceed()
-    func passkeyRegistrationFailed(_ error: Error)
+    func succeed()
+    func failed(_ error: Error)
 }
 
 @objcMembers
@@ -57,7 +57,7 @@ class PasskeyAuthenticator: NSObject {
 
     private func performPasskeyRegistration(with credential: ASAuthorizationPlatformPublicKeyCredentialRegistration) {
         guard let registrationObject = PasskeyRegistrationResponse(from: credential) else {
-            delegate?.passkeyRegistrationFailed(PasskeyError.couldNotPrepareRegistrationData)
+            delegate?.failed(PasskeyError.couldNotPrepareRegistrationData)
             return
         }
 
@@ -65,9 +65,9 @@ class PasskeyAuthenticator: NSObject {
             do {
                 let data = try JSONEncoder().encode(registrationObject)
                 try await accountRemote.registerCredential(with: data)
-                delegate?.passkeyRegistrationSucceed()
+                delegate?.succeed()
             } catch {
-                delegate?.passkeyRegistrationFailed(error)
+                delegate?.failed(error)
             }
         }
     }
@@ -104,12 +104,12 @@ class PasskeyAuthenticator: NSObject {
         Task { @MainActor in
             guard let response = try? await accountRemote.verifyPasskeyLogin(with: json),
                   let verifyResponse = try? JSONDecoder().decode(PasskeyVerifyResponse.self, from: response) else {
-                self.delegate?.passkeyRegistrationFailed(PasskeyError.authFailed)
+                self.delegate?.failed(PasskeyError.authFailed)
                 return
             }
 
             authenticator.authenticate(withUsername: verifyResponse.username, token: verifyResponse.accessToken)
-            self.delegate?.passkeyRegistrationSucceed()
+            self.delegate?.succeed()
         }
     }
 }
@@ -119,7 +119,7 @@ class PasskeyAuthenticator: NSObject {
 extension PasskeyAuthenticator: ASAuthorizationControllerDelegate {
     public func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: any Error) {
         if let delegate {
-            delegate.passkeyRegistrationFailed(error)
+            delegate.failed(error)
         }
     }
 

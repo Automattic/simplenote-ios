@@ -246,7 +246,7 @@ extension SPSettingsViewController {
                     let authenticator = appDelegate.passkeyAuthenticator
                     try await authenticator.registerPasskey(for: email, password: password, in: self)
                 } catch {
-                    await self.passkeyRegistrationFailed(error)
+                    self.failed(error)
                 }
             }
         }
@@ -273,12 +273,12 @@ extension SPSettingsViewController: ASAuthorizationControllerPresentationContext
 }
 
 extension SPSettingsViewController: PasskeyDelegate {
-    func passkeyRegistrationSucceed() {
+    func succeed() {
         removeActivityIndicator()
         presentPasskeySuccessAlert()
     }
 
-    func passkeyRegistrationFailed(_ error: any Error) {
+    func failed(_ error: any Error) {
         removeActivityIndicator()
         self.presentPasskeyRegistrationFailureAlert()
         NSLog("Failed to register Passkey.  Error: %@", error.localizedDescription)

@@ -332,8 +332,7 @@ private extension SPAuthViewController {
             do {
                 try await passkeyAuthenticator.attemptPasskeyAuth(for: email, in: self)
             } catch {
-                unlockInterface()
-                //TODO: Show error message
+                failed(error)
             }
         }
     }
@@ -644,14 +643,20 @@ extension SPAuthViewController: ASAuthorizationControllerPresentationContextProv
 }
 
 extension SPAuthViewController: PasskeyDelegate {
-    func passkeyRegistrationSucceed() {
+    func succeed() {
         unlockInterface()
     }
 
-    func passkeyRegistrationFailed(_ error: any Error) {
+    func failed(_ error: any Error) {
         unlockInterface()
+        presentPasskeyAuthError(error)
     }
 
+    private func presentPasskeyAuthError(_ error: any Error) {
+        let alert = UIAlertController(title: AuthenticationStrings.passkeyAuthFailureTitle, message: error.localizedDescription, preferredStyle: .alert)
+        alert.addCancelActionWithTitle(AuthenticationStrings.unverifiedCancelText)
+        present(alert, animated: true)
+    }
 }
 
 // MARK: - AuthenticationMode: Signup / Login
@@ -737,6 +742,7 @@ private enum AuthenticationStrings {
     static let unverifiedErrorMessage       = NSLocalizedString("There was an preparing your verification email, please try again later", comment: "Request error alert message")
     static let verificationSentTitle        = NSLocalizedString("Check your Email", comment: "Vefification sent alert title")
     static let verificationSentTemplate     = NSLocalizedString("We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions.", comment: "Confirmation that an email has been sent")
+    static let passkeyAuthFailureTitle      = NSLocalizedString("Passkey Authentication Failed", comment: "Title for passkey authentication failure")
 }
 
 // MARK: - PasswordInsecure Alert Strings
