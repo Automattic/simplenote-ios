@@ -14,7 +14,7 @@ class CreateNewNoteIntentHandler: NSObject, CreateNewNoteIntentHandling {
             return CreateNewNoteIntentResponse(code: .success, userActivity: nil)
         } catch {
             RecoveryArchiver().archiveContent(content)
-            return CreateNewNoteIntentResponse.failure(failureReason: error.localizedDescription)
+            return CreateNewNoteIntentResponse.failure(failureReason: "\(error.localizedDescription) - \(IntentsConstants.recoveryMessage)")
         }
     }
 
