@@ -28,20 +28,23 @@ class AppendNoteIntentHandler: NSObject, AppendNoteIntentHandling {
         }
 
         do {
-            let existingContent = try await Downloader(simperiumToken: token).getNoteContent(for: identifier) ?? String()
+            let existingContent = try await downloadNoteContent(for: identifier, token: token) ?? String()
             note.content = existingContent + "\n\(content)"
+
+            try await uploadNoteContent(note, token: token)
         } catch {
             return handleFailure(with: error, content: content)
         }
+    }
 
+    private func downloadNoteContent(for identifier: String, token: String) async throws -> String? {
+        let downloader = Downloader(simperiumToken: token)
+        return try await downloader.getNoteContent(for: identifier)
+    }
+
+    private func uploadNoteContent(_ note: Note, token: String) async throws {
         let uploader = Uploader(simperiumToken: token)
-
-        do {
-            _ = try await uploader.send(note)
-            return AppendNoteIntentResponse(code: .success, userActivity: nil)
-        } catch {
-            return handleFailure(with: error, content: content)
-        }
+        _ = try await uploader.send(note)
     }
 
     private func handleFailure(with error: Error, content: String) -> AppendNoteIntentResponse {
