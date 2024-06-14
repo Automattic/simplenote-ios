@@ -10,7 +10,6 @@ enum SPAuthError: Error {
     case compromisedPassword
     case unverifiedEmail
     case tooManyAttempts
-    case unableToDecode
     case unknown(statusCode: Int, response: String?, error: Error?)
 }
 

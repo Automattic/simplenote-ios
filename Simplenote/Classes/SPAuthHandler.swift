@@ -89,9 +89,9 @@ class SPAuthHandler {
     private func authenticationError(for remoteError: RemoteError) -> SPAuthError {
         switch remoteError {
         case .network:
-            return SPAuthError.network
-        case .responseUnableToDecode:
-            return SPAuthError.unableToDecode
+            return .network
+        case .tooManyAttempts:
+            return .tooManyAttempts
         case .requestError(let statusCode, let error):
             return SPAuthError(signupErrorCode: statusCode, response: error?.localizedDescription, error: error)
         }
