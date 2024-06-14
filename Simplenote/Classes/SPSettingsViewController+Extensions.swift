@@ -191,7 +191,10 @@ extension SPSettingsViewController {
         switch error {
         case .network:
             NoticeController.shared.present(NoticeFactory.networkError())
-        case .responseUnableToDecode, .requestError:
+        case .tooManyAttempts:
+// TODO
+            break
+        case .requestError:
             presentRequestErrorAlert()
         }
     }
