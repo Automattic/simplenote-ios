@@ -32,6 +32,7 @@ class AppendNoteIntentHandler: NSObject, AppendNoteIntentHandling {
             note.content = existingContent + "\n\(content)"
 
             try await uploadNoteContent(note, token: token)
+            return AppendNoteIntentResponse(code: .success, userActivity: nil)
         } catch {
             return handleFailure(with: error, content: content)
         }
