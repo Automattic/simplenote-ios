@@ -563,6 +563,6 @@ extension SPAppDelegate {
 extension SPAppDelegate {
     @objc
     func attemptContentRecoveryIfNeeded() {
-        RecoveryUnarchiver().insertNotesFromRecoveryFilesIfNeeded()
+        RecoveryUnarchiver(simperium: simperium).insertNotesFromRecoveryFilesIfNeeded()
     }
 }

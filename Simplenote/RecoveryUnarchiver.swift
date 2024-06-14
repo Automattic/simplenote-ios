@@ -4,13 +4,11 @@ import CoreData
 
 public class RecoveryUnarchiver {
     private let fileManager: FileManager
+    private let simperium: Simperium
 
-    public init(fileManager: FileManager = .default) {
+    public init(fileManager: FileManager = .default, simperium: Simperium) {
         self.fileManager = fileManager
-    }
-
-    var simperium: Simperium {
-        SPAppDelegate.shared().simperium
+        self.simperium = simperium
     }
 
     // MARK: Restore
