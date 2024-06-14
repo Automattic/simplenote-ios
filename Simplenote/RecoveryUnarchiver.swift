@@ -15,7 +15,7 @@ public class RecoveryUnarchiver {
 
     // MARK: Restore
     //
-    public func prepareRecoveredNoteContentIfNeeded() {
+    public func insertNotesFromRecoveryFilesIfNeeded() {
         guard let recoveryURL = fileManager.recoveryDirectoryURL(),
               let recoveryFiles = try? fileManager.contentsOfDirectory(at: recoveryURL, includingPropertiesForKeys: nil),
               !recoveryFiles.isEmpty else {

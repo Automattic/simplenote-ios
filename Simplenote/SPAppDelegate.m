@@ -167,7 +167,6 @@
 
     [self setupNoticeController];
 
-    [self attemptContentRecoveryIfNeeded];
     return YES;
 }
 
@@ -175,6 +174,7 @@
 {
     [SPTracker trackApplicationOpened];
     [self syncWidgetDefaults];
+    [self attemptContentRecoveryIfNeeded];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
