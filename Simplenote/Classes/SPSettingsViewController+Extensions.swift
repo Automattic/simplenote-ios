@@ -232,6 +232,8 @@ extension SPSettingsViewController {
 
         let action = UIAlertAction(title: PasskeyAuthentication.submit, style: .default) { [unowned alert] _ in
             let appDelegate = SPAppDelegate.shared()
+            let activityIndicator = SPModalActivityIndicator.show(in: appDelegate.window)
+
             guard let textfield = alert.textFields?.first,
                   let password = textfield.text,
                   let email = appDelegate.simperium.user?.email else {
@@ -242,8 +244,10 @@ extension SPSettingsViewController {
                 do {
                     let authenticator = appDelegate.passkeyAuthenticator
                     try await authenticator.registerPasskey(for: email, password: password, in: self)
+                    await activityIndicator?.dismiss(true)
                 } catch {
-                    // TODO: Display some action for failure
+                    await self.presentPasskeyRegistrationFailureAlert(activityIndicator: activityIndicator)
+                    NSLog("Failed to register Passkey.  Error: %@", error.localizedDescription)
                 }
             }
         }
@@ -251,6 +255,13 @@ extension SPSettingsViewController {
         alert.addCancelActionWithTitle(PasskeyAuthentication.cancel)
 
         present(alert, animated: true)
+    }
+
+    private func presentPasskeyRegistrationFailureAlert(activityIndicator: SPModalActivityIndicator?) async {
+        await activityIndicator?.dismiss(true)
+        let failureAlert = UIAlertController(title: PasskeyAuthentication.failureTitle, message: PasskeyAuthentication.failureMessage, preferredStyle: .alert)
+        failureAlert.addCancelActionWithTitle(PasskeyAuthentication.okay)
+        self.present(failureAlert, animated: true)
     }
 }
 
@@ -292,6 +303,9 @@ private struct PasskeyAuthentication {
     static let message = NSLocalizedString("To add passkeys you must enter your password", comment: "Message prompting user for password to create passkey")
     static let submit = NSLocalizedString("Submit", comment: "Submit button title")
     static let cancel = NSLocalizedString("cancel", comment: "Cancel button title")
+    static let failureTitle = NSLocalizedString("Passkey Registration Failed", comment: "Title for alert when passkey registration fails")
+    static let failureMessage = NSLocalizedString("Could not register passkey.  Please try again later", comment: "Message for when passkey registration fails")
+    static let okay = NSLocalizedString("Okay", comment: "confirm button title")
 }
 
 // MARK: - RestorationAlert
