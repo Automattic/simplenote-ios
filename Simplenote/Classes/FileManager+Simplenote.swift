@@ -20,8 +20,25 @@ extension FileManager {
         containerURL(forSecurityApplicationGroupIdentifier: SimplenoteConstants.sharedGroupDomain)!
     }
 
-    var recoveryDirectoryURL: URL {
-        sharedContainerURL.appendingPathComponent(Constants.recoveryDir)
+    func recoveryDirectoryURL() -> URL? {
+        let dir = sharedContainerURL.appendingPathComponent(Constants.recoveryDir)
+
+        do {
+            try createDirectoryIfNeeded(at: dir)
+        } catch {
+            NSLog("Could not create recovery directory because: $@", error.localizedDescription)
+            return nil
+        }
+
+        return dir
+    }
+
+    func createDirectoryIfNeeded(at url: URL, withIntermediateDirectories: Bool = true) throws {
+        if directoryExistsAtURL(url) {
+            return
+        }
+
+        try createDirectory(at: url, withIntermediateDirectories: true)
     }
 
     func directoryExistsAtURL(_ url: URL) -> Bool {

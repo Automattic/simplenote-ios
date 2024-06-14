@@ -13,20 +13,12 @@ public class RecoveryUnarchiver {
         SPAppDelegate.shared().simperium
     }
 
-    private func createRecoveryDirIfNeeded() {
-        guard !fileManager.directoryExistsAtURL(fileManager.recoveryDirectoryURL) else {
-            return
-        }
-
-        try? fileManager.createDirectory(at: fileManager.recoveryDirectoryURL, withIntermediateDirectories: true)
-    }
-
     // MARK: Restore
     //
     public func prepareRecoveredNoteContentIfNeeded() {
-        createRecoveryDirIfNeeded()
-        guard let recoveryFiles = try? fileManager.contentsOfDirectory(at: fileManager.recoveryDirectoryURL, includingPropertiesForKeys: nil),
-        !recoveryFiles.isEmpty else {
+        guard let recoveryURL = fileManager.recoveryDirectoryURL(),
+              let recoveryFiles = try? fileManager.contentsOfDirectory(at: recoveryURL, includingPropertiesForKeys: nil),
+              !recoveryFiles.isEmpty else {
             return
         }
 
