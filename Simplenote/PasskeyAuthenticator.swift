@@ -3,6 +3,13 @@ import AuthenticationServices
 
 enum PasskeyError: Error {
     case couldNotRequestRegistrationChallenge
+    case couldNotEncodeRegistrationChallenge
+    case couldNotPrepareRegistrationData
+}
+
+protocol PasskeyRegistrationDelegate: AnyObject {
+    func passkeyRegistrationSucceed() async
+    func passkeyRegistrationFailed(_ error: Error) async
 }
 
 @objcMembers
@@ -10,6 +17,8 @@ class PasskeyAuthenticator: NSObject {
     typealias PresentationContext = ASAuthorizationControllerPresentationContextProviding
     let authenticator: SPAuthenticator
     let accountRemote: AccountRemote
+
+    weak var registrationDelegate: PasskeyRegistrationDelegate? = nil
 
     @objc
     init(authenticator: SPAuthenticator) {
@@ -27,7 +36,7 @@ class PasskeyAuthenticator: NSObject {
             let passkeyChallenge = try JSONDecoder().decode(PasskeyRegistrationChallenge.self, from: data)
             attemptRegistration(with: passkeyChallenge, presentationContext: presentationContext)
         } catch {
-            throw PasskeyError.couldNotRequestRegistrationChallenge
+            throw PasskeyError.couldNotEncodeRegistrationChallenge
         }
     }
 
@@ -47,7 +56,9 @@ class PasskeyAuthenticator: NSObject {
 
     private func performPasskeyRegistration(with credential: ASAuthorizationPlatformPublicKeyCredentialRegistration) {
         guard let registrationObject = PasskeyRegistrationResponse(from: credential) else {
-            //TODO: Should handle error
+            Task {
+                await registrationDelegate?.passkeyRegistrationFailed(PasskeyError.couldNotPrepareRegistrationData)
+            }
             return
         }
 
@@ -55,8 +66,9 @@ class PasskeyAuthenticator: NSObject {
             do {
                 let data = try JSONEncoder().encode(registrationObject)
                 try await accountRemote.registerCredential(with: data)
+                await registrationDelegate?.passkeyRegistrationSucceed()
             } catch {
-                //TODO: Display error
+                await registrationDelegate?.passkeyRegistrationFailed(error)
             }
         }
     }
@@ -105,7 +117,11 @@ class PasskeyAuthenticator: NSObject {
 //
 extension PasskeyAuthenticator: ASAuthorizationControllerDelegate {
     public func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: any Error) {
-        // TODO: handle error
+        if let registrationDelegate {
+            Task {
+                await registrationDelegate.passkeyRegistrationFailed(error)
+            }
+        }
         print(error.localizedDescription)
     }
 

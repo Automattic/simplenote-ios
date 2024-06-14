@@ -20,6 +20,7 @@ NSString *const SPSustainerAppIconName                              = @"AppIcon-
 @property (nonatomic, strong) UIPickerView  *pinTimeoutPickerView;
 @property (nonatomic, strong) UIToolbar     *doneToolbar;
 @property (nonatomic, strong) UISwitch      *indexNotesSwitch;
+
 @end
 
 @implementation SPSettingsViewController {
