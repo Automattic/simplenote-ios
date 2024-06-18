@@ -14,7 +14,7 @@ class Remote {
         let dataTask = urlSession.dataTask(with: request) { (data, response, dataTaskError) in
             DispatchQueue.main.async {
                 
-                if let response, let error = RemoteError(statusCode: response.responseStatusCode, error: dataTaskError) {
+                if let error = RemoteError(statusCode: response?.responseStatusCode ?? .zero, error: dataTaskError) {
                     completion(.failure(error))
                     return
                 }
