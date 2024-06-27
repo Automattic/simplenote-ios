@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 import SafariServices
+import SwiftUI
 
 // MARK: - SPOnboardingViewController
 //
@@ -196,8 +197,10 @@ private extension SPOnboardingViewController {
 
     func startListeningToNotifications() {
         let name = NSNotification.Name(rawValue: kSignInErrorNotificationName)
-
-        NotificationCenter.default.addObserver(self, selector: #selector(handleSignInError), name: name, object: nil)
+        
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(handleSignInError), name: name, object: nil)
+        nc.addObserver(self, selector: #selector(handleMagicLinkAuthDidFail), name: .magicLinkAuthDidFail, object: nil)
     }
 
     @objc func handleSignInError(note: Notification) {
@@ -210,8 +213,30 @@ private extension SPOnboardingViewController {
         presentedViewController?.dismiss(animated: true, completion: nil)
         present(alertController, animated: true, completion: nil)
     }
-
+    
+    @objc func handleMagicLinkAuthDidFail() {
+        DispatchQueue.main.async {
+            self.presentMagicLinkInvalidView()
+        }
+    }
 }
+
+
+// MARK: - Magic Link Helpers
+//
+private extension SPOnboardingViewController {
+
+    private func presentMagicLinkInvalidView() {
+        let rootView = MagicLinkInvalidView()
+        let hostingController = UIHostingController(rootView: rootView)
+        hostingController.modalPresentationStyle = .formSheet
+        hostingController.sheetPresentationController?.detents = [.medium()]
+
+        let presenter = presentedViewController ?? self
+        presenter.present(hostingController, animated: true)
+    }
+}
+
 
 // MARK: - Private Types
 //
