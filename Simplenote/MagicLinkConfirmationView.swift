@@ -31,7 +31,7 @@ struct MagicLinkConfirmationView: View {
                 Spacer()
                     .frame(height: Metrics.titlePaddingBottom)
                 
-                Text("If an account exists, we've sent an email to **\(email)** containing a link that'll log you in.")
+                Text("If an account exists, we've sent an email with a link that'll log you in to **\(email)**")
                     .font(.system(size: Metrics.detailsFontSize))
                     .multilineTextAlignment(.center)
             }
