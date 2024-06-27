@@ -3,9 +3,9 @@ import SwiftUI
 import Gridicons
 
 
-// MARK: - MagicLinkConfirmationView
+// MARK: - MagicLinkRequestedView
 //
-struct MagicLinkConfirmationView: View {
+struct MagicLinkRequestedView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var displaysFullImage: Bool = false
     let email: String
@@ -73,8 +73,8 @@ private enum MagicLinkImages {
 }
 
 
-struct MagicLinkConfirmationView_Previews: PreviewProvider {
+struct MagicLinkRequestedView_Previews: PreviewProvider {
     static var previews: some View {
-        MagicLinkConfirmationView(email: "lord@yosemite.com")
+        MagicLinkRequestedView(email: "lord@yosemite.com")
     }
 }

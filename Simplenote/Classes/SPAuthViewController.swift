@@ -314,7 +314,7 @@ private extension SPAuthViewController {
             if let error {
                 self.handleError(error: error)
             } else {
-                self.presentMagicLinkConfirmationView(email: email)
+                self.presentMagicLinkRequestedView(email: email)
                 SPTracker.trackUserRequestedLoginLink()
             }
 
@@ -368,8 +368,8 @@ private extension SPAuthViewController {
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    private func presentMagicLinkConfirmationView(email: String) {
-        let rootView = MagicLinkConfirmationView(email: email)
+    private func presentMagicLinkRequestedView(email: String) {
+        let rootView = MagicLinkRequestedView(email: email)
         let hostingController = UIHostingController(rootView: rootView)
         hostingController.modalPresentationStyle = .formSheet
         hostingController.sheetPresentationController?.detents = [.medium()]
