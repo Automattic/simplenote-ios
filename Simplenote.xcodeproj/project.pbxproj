@@ -327,6 +327,7 @@
 		B56AA00022AEDD06003F85CB /* PlainTextExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56A9FFF22AEDD06003F85CB /* PlainTextExtractor.swift */; };
 		B56AA00622B03CBB003F85CB /* Extractors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56AA00522B03CBB003F85CB /* Extractors.swift */; };
 		B56B357F1AC3565600B9F365 /* UITextView+Simplenote.m in Sources */ = {isa = PBXBuildFile; fileRef = B56B357D1AC3565600B9F365 /* UITextView+Simplenote.m */; };
+		B56BAF612C2DE317005065C9 /* MagicLinkInvalidView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56BAF602C2DE317005065C9 /* MagicLinkInvalidView.swift */; };
 		B56C8CA2234CEAF100FE55F4 /* TagListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B56C8CA1234CEAF100FE55F4 /* TagListViewController.xib */; };
 		B56E763422BD394C00C5AA47 /* UIImage+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E763322BD394C00C5AA47 /* UIImage+Simplenote.swift */; };
 		B56E763622BD565700C5AA47 /* UIView+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E763522BD565700C5AA47 /* UIView+Simplenote.swift */; };
@@ -1036,6 +1037,7 @@
 		B56AA00522B03CBB003F85CB /* Extractors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extractors.swift; sourceTree = "<group>"; };
 		B56B357C1AC3565600B9F365 /* UITextView+Simplenote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITextView+Simplenote.h"; path = "Classes/UITextView+Simplenote.h"; sourceTree = "<group>"; };
 		B56B357D1AC3565600B9F365 /* UITextView+Simplenote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITextView+Simplenote.m"; path = "Classes/UITextView+Simplenote.m"; sourceTree = "<group>"; };
+		B56BAF602C2DE317005065C9 /* MagicLinkInvalidView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicLinkInvalidView.swift; sourceTree = "<group>"; };
 		B56C8CA1234CEAF100FE55F4 /* TagListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = TagListViewController.xib; path = Classes/TagListViewController.xib; sourceTree = "<group>"; };
 		B56E763322BD394C00C5AA47 /* UIImage+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIImage+Simplenote.swift"; path = "Classes/UIImage+Simplenote.swift"; sourceTree = "<group>"; };
 		B56E763522BD565700C5AA47 /* UIView+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIView+Simplenote.swift"; path = "Classes/UIView+Simplenote.swift"; sourceTree = "<group>"; };
@@ -2078,6 +2080,7 @@
 				B5AB169922FA128000B4EBA5 /* SPSheetController.xib */,
 				A6CDD9C725F0163D00E0BC4D /* MagicLinkAuthenticator.swift */,
 				B54A11C32C136225002AC8AA /* MagicLinkRequestedView.swift */,
+				B56BAF602C2DE317005065C9 /* MagicLinkInvalidView.swift */,
 				A628BEB425ECD97900121B64 /* SignupVerificationViewController.swift */,
 				A628BEB525ECD97900121B64 /* SignupVerificationViewController.xib */,
 			);
@@ -3441,6 +3444,7 @@
 				E215C793180B115C00AD36B5 /* SPNavigationController.m in Sources */,
 				B5DF734422A56E2800602CE7 /* UserDefaults+Simplenote.swift in Sources */,
 				A6DB2C1525BF5D6E00437B99 /* SPMarkdownPreviewViewController+Extensions.swift in Sources */,
+				B56BAF612C2DE317005065C9 /* MagicLinkInvalidView.swift in Sources */,
 				B56A696022F9D53400B90398 /* SPAuthHandler.swift in Sources */,
 				A6E1E78924B5196C008A44BC /* SPNoteHistoryControllerDelegate.swift in Sources */,
 				B5B9AB4522EE8AF0001CB0AD /* UIImageName.swift in Sources */,
