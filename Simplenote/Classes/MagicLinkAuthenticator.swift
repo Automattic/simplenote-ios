@@ -1,5 +1,15 @@
 import Foundation
 
+
+// MARK: - Notifications
+//
+extension NSNotification.Name {
+    static let magicLinkAuthWillStart = NSNotification.Name("magicLinkAuthWillStart")
+    static let magicLinkAuthDidSucceed = NSNotification.Name("magicLinkAuthDidSucceed")
+    static let magicLinkAuthDidFail = NSNotification.Name("magicLinkAuthDidFail")
+}
+
+
 // MARK: - MagicLinkAuthenticator
 //
 struct MagicLinkAuthenticator {
@@ -48,7 +58,8 @@ private extension MagicLinkAuthenticator {
         }
 
         NSLog("[MagicLinkAuthenticator] Requesting SyncToken for \(authKey) and \(authCode)")
-        
+        NotificationCenter.default.post(name: .magicLinkAuthWillStart, object: nil)
+
         Task {
             do {
                 let remote = LoginRemote()
@@ -57,11 +68,14 @@ private extension MagicLinkAuthenticator {
                 Task { @MainActor in
                     NSLog("[MagicLinkAuthenticator] Should auth with token \(confirmation.syncToken)")
                     authenticator.authenticate(withUsername: confirmation.username, token: confirmation.syncToken)
+                    
+                    NotificationCenter.default.post(name: .magicLinkAuthDidSucceed, object: nil)
                     SPTracker.trackUserConfirmedLoginLink()
                 }
 
             } catch {
                 NSLog("[MagicLinkAuthenticator] Magic Link TokenExchange Error: \(error)")
+                NotificationCenter.default.post(name: .magicLinkAuthDidFail, object: error)
             }
         }
 
