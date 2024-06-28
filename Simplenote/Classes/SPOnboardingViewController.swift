@@ -226,14 +226,32 @@ private extension SPOnboardingViewController {
 //
 private extension SPOnboardingViewController {
 
+    /// Presents the Invalid Magic Link UI
+    ///
     private func presentMagicLinkInvalidView() {
-        let rootView = MagicLinkInvalidView()
+        var rootView = MagicLinkInvalidView()
+        rootView.onPressRequestNewLink = { [weak self] in
+            self?.presentAuthenticationInterfaceIfNeeded(mode: .loginWithMagicLink)
+        }
+
         let hostingController = UIHostingController(rootView: rootView)
         hostingController.modalPresentationStyle = .formSheet
         hostingController.sheetPresentationController?.detents = [.medium()]
 
         let presenter = presentedViewController ?? self
         presenter.present(hostingController, animated: true)
+    }
+    
+    /// Dismisses all of the presented ViewControllers, and pushes the Authentication UI with the specified mode.
+    /// - Note: Whenever the required AuthUI is already onscreen, we'll do nothing
+    ///
+    func presentAuthenticationInterfaceIfNeeded(mode: AuthenticationMode) {
+        if let authController = navigationController?.topViewController as? SPAuthViewController, authController.mode == mode {
+            return
+        }
+
+        navigationController?.popToRootViewController(animated: true)
+        presentAuthenticationInterface(mode: mode)
     }
 }
 

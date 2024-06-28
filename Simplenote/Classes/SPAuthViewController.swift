@@ -718,7 +718,7 @@ extension SPAuthViewController {
 
 // MARK: - AuthenticationMode: Signup / Login
 //
-struct AuthenticationMode {
+struct AuthenticationMode: Equatable {
     let title: String
     let validationStyle: AuthenticationValidator.Style
     let primaryActionSelector: Selector
