@@ -452,13 +452,13 @@ extension SPAppDelegate {
     func performMagicLinkAuthentication(with url: URL) -> Bool {
         MagicLinkAuthenticator(authenticator: simperium.authenticator).handle(url: url)
     }
-    
+
     @objc(performMagicLinkAuthenticationWithUserActivity:)
     func performMagicLinkAuthentication(with userActivity: NSUserActivity) -> Bool {
         guard let url = userActivity.webpageURL else {
             return false
         }
-        
+
         return performMagicLinkAuthentication(with: url)
     }
 }
