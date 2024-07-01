@@ -13,8 +13,8 @@ struct PasskeyRegistrationResponse: Encodable {
     private let type: String
     private let response: PasskeyRegistrationResponse.Response
 
-    init?(from credentialRegistration: ASAuthorizationPlatformPublicKeyCredentialRegistration) {
-        guard let email = SPAppDelegate.shared().simperium.user?.email,
+    init?(from credentialRegistration: ASAuthorizationPlatformPublicKeyCredentialRegistration, with email: String?) {
+        guard let email
         let clientJson = Self.prepareJSON(from: credentialRegistration.rawClientDataJSON),
         let rawAttestationObject = credentialRegistration.rawAttestationObject else {
             return nil
