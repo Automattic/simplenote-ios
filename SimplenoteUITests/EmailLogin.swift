@@ -34,6 +34,7 @@ class EmailLogin {
 
     class func logIn(email: String, password: String) {
         enterEmail(enteredValue: email)
+        app.buttons[UID.Button.continueWithPassword].tap()
         enterPassword(enteredValue: password)
         app.buttons[UID.Button.logIn].tap()
         handleSavePasswordPrompt()
