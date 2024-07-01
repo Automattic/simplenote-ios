@@ -5,22 +5,23 @@ import Foundation
 struct MagicLinkAuthenticator {
     let authenticator: SPAuthenticator
 
-    func handle(url: URL) {
+    func handle(url: URL) -> Bool {
         guard url.host == Constants.host else {
-            return
+            return false
         }
 
         guard let queryItems = URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems else {
-            return
+            return false
         }
 
         guard let email = queryItems.base64DecodedValue(for: Constants.emailField),
               let token = queryItems.value(for: Constants.tokenField),
               !email.isEmpty, !token.isEmpty else {
-            return
+            return false
         }
 
         authenticator.authenticate(withUsername: email, token: token)
+        return true
     }
 }
 
