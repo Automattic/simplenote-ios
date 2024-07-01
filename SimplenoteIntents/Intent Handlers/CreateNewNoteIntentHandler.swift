@@ -1,11 +1,3 @@
-//
-//  CreateNewNoteIntentHandler.swift
-//  SimplenoteIntents
-//
-//  Created by Charlie Scheer on 5/8/24.
-//  Copyright © 2024 Automattic. All rights reserved.
-//
-
 import Intents
 
 class CreateNewNoteIntentHandler: NSObject, CreateNewNoteIntentHandling {
@@ -17,8 +9,13 @@ class CreateNewNoteIntentHandler: NSObject, CreateNewNoteIntentHandling {
             return CreateNewNoteIntentResponse(code: .failure, userActivity: nil)
         }
 
-        Uploader(simperiumToken: token).send(note(with: content))
-        return CreateNewNoteIntentResponse(code: .success, userActivity: nil)
+        do {
+            _ = try await Uploader(simperiumToken: token).send(note(with: content))
+            return CreateNewNoteIntentResponse(code: .success, userActivity: nil)
+        } catch {
+            RecoveryArchiver().archiveContent(content)
+            return CreateNewNoteIntentResponse.failure(failureReason: "\(error.localizedDescription) - \(IntentsConstants.recoveryMessage)")
+        }
     }
 
     private func note(with content: String) -> Note {

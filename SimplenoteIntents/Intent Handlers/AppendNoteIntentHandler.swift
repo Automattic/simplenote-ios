@@ -1,11 +1,3 @@
-//
-//  AppendNoteIntentHandler.swift
-//  SimplenoteIntents
-//
-//  Created by Charlie Scheer on 5/6/24.
-//  Copyright © 2024 Automattic. All rights reserved.
-//
-
 import Intents
 
 class AppendNoteIntentHandler: NSObject, AppendNoteIntentHandling {
@@ -35,14 +27,29 @@ class AppendNoteIntentHandler: NSObject, AppendNoteIntentHandling {
             return AppendNoteIntentResponse(code: .failure, userActivity: nil)
         }
 
-        guard let existingContent = try? await Downloader(simperiumToken: token).getNoteContent(for: identifier) else {
-            return AppendNoteIntentResponse(code: .failure, userActivity: nil)
+        do {
+            let existingContent = try await downloadNoteContent(for: identifier, token: token) ?? String()
+            note.content = existingContent + "\n\(content)"
+
+            try await uploadNoteContent(note, token: token)
+            return AppendNoteIntentResponse(code: .success, userActivity: nil)
+        } catch {
+            return handleFailure(with: error, content: content)
         }
+    }
 
-        note.content = existingContent + "\n\(content)"
+    private func downloadNoteContent(for identifier: String, token: String) async throws -> String? {
+        let downloader = Downloader(simperiumToken: token)
+        return try await downloader.getNoteContent(for: identifier)
+    }
+
+    private func uploadNoteContent(_ note: Note, token: String) async throws {
         let uploader = Uploader(simperiumToken: token)
-        uploader.send(note)
+        _ = try await uploader.send(note)
+    }
 
-        return AppendNoteIntentResponse(code: .success, userActivity: nil)
+    private func handleFailure(with error: Error, content: String) -> AppendNoteIntentResponse {
+        RecoveryArchiver().archiveContent(content)
+        return AppendNoteIntentResponse.failure(failureReason: "\(error.localizedDescription) - \(IntentsConstants.recoveryMessage)")
     }
 }

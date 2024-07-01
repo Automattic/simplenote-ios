@@ -11,9 +11,9 @@
 	<key>INIntentDefinitionSystemVersion</key>
 	<string>23E214</string>
 	<key>INIntentDefinitionToolsBuildVersion</key>
-	<string>15E204a</string>
+	<string>15F31d</string>
 	<key>INIntentDefinitionToolsVersion</key>
-	<string>15.3</string>
+	<string>15.4</string>
 	<key>INIntents</key>
 	<array>
 		<dict>
@@ -308,8 +308,31 @@
 						<true/>
 					</dict>
 					<dict>
+						<key>INIntentResponseCodeFormatString</key>
+						<string>${failureReason}</string>
+						<key>INIntentResponseCodeFormatStringID</key>
+						<string>Lyqq4K</string>
 						<key>INIntentResponseCodeName</key>
 						<string>failure</string>
+					</dict>
+				</array>
+				<key>INIntentResponseLastParameterTag</key>
+				<integer>1</integer>
+				<key>INIntentResponseParameters</key>
+				<array>
+					<dict>
+						<key>INIntentResponseParameterDisplayName</key>
+						<string>Failure Reason</string>
+						<key>INIntentResponseParameterDisplayNameID</key>
+						<string>PueDbo</string>
+						<key>INIntentResponseParameterDisplayPriority</key>
+						<integer>1</integer>
+						<key>INIntentResponseParameterName</key>
+						<string>failureReason</string>
+						<key>INIntentResponseParameterTag</key>
+						<integer>1</integer>
+						<key>INIntentResponseParameterType</key>
+						<string>String</string>
 					</dict>
 				</array>
 			</dict>
@@ -409,8 +432,31 @@
 						<true/>
 					</dict>
 					<dict>
+						<key>INIntentResponseCodeFormatString</key>
+						<string>${failureReason}</string>
+						<key>INIntentResponseCodeFormatStringID</key>
+						<string>d67xB8</string>
 						<key>INIntentResponseCodeName</key>
 						<string>failure</string>
+					</dict>
+				</array>
+				<key>INIntentResponseLastParameterTag</key>
+				<integer>1</integer>
+				<key>INIntentResponseParameters</key>
+				<array>
+					<dict>
+						<key>INIntentResponseParameterDisplayName</key>
+						<string>Failure Reason</string>
+						<key>INIntentResponseParameterDisplayNameID</key>
+						<string>2w6Mce</string>
+						<key>INIntentResponseParameterDisplayPriority</key>
+						<integer>1</integer>
+						<key>INIntentResponseParameterName</key>
+						<string>failureReason</string>
+						<key>INIntentResponseParameterTag</key>
+						<integer>1</integer>
+						<key>INIntentResponseParameterType</key>
+						<string>String</string>
 					</dict>
 				</array>
 			</dict>
@@ -660,26 +706,6 @@
 							<key>INIntentParameterPromptDialogType</key>
 							<string>Primary</string>
 						</dict>
-						<dict>
-							<key>INIntentParameterPromptDialogCustom</key>
-							<true/>
-							<key>INIntentParameterPromptDialogFormatString</key>
-							<string>There are ${count} options matching ‘${note}’.</string>
-							<key>INIntentParameterPromptDialogFormatStringID</key>
-							<string>VBtgac</string>
-							<key>INIntentParameterPromptDialogType</key>
-							<string>DisambiguationIntroduction</string>
-						</dict>
-						<dict>
-							<key>INIntentParameterPromptDialogCustom</key>
-							<true/>
-							<key>INIntentParameterPromptDialogFormatString</key>
-							<string>Just to confirm, you wanted ‘${note}’?</string>
-							<key>INIntentParameterPromptDialogFormatStringID</key>
-							<string>MdiZid</string>
-							<key>INIntentParameterPromptDialogType</key>
-							<string>Confirmation</string>
-						</dict>
 					</array>
 					<key>INIntentParameterSupportsDynamicEnumeration</key>
 					<true/>
@@ -796,26 +822,6 @@
 							<true/>
 							<key>INIntentParameterPromptDialogType</key>
 							<string>Primary</string>
-						</dict>
-						<dict>
-							<key>INIntentParameterPromptDialogCustom</key>
-							<true/>
-							<key>INIntentParameterPromptDialogFormatString</key>
-							<string>There are ${count} options matching ‘${tag}’.</string>
-							<key>INIntentParameterPromptDialogFormatStringID</key>
-							<string>U4ce2H</string>
-							<key>INIntentParameterPromptDialogType</key>
-							<string>DisambiguationIntroduction</string>
-						</dict>
-						<dict>
-							<key>INIntentParameterPromptDialogCustom</key>
-							<true/>
-							<key>INIntentParameterPromptDialogFormatString</key>
-							<string>Just to confirm, you wanted ‘${tag}’?</string>
-							<key>INIntentParameterPromptDialogFormatStringID</key>
-							<string>qYKqOP</string>
-							<key>INIntentParameterPromptDialogType</key>
-							<string>Confirmation</string>
 						</dict>
 					</array>
 					<key>INIntentParameterSupportsDynamicEnumeration</key>
