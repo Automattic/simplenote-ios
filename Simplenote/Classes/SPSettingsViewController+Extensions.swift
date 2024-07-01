@@ -224,6 +224,13 @@ extension SPSettingsViewController {
 extension SPSettingsViewController {
     @objc
     func presentPasskeyAuthenticationSetupAlert() {
+        let appDelegate = SPAppDelegate.shared()
+        guard let email = appDelegate.simperium.user?.email else {
+            return
+        }
+        let authenticator = PasskeyAuthenticator(authenticator: appDelegate.simperium.authenticator)
+        self.passkeyAuthenticator = authenticator
+
         let alert = UIAlertController(title: PasskeyAuthentication.alertTitle, message: PasskeyAuthentication.message, preferredStyle: .alert)
         alert.addTextField { textField in
             textField.textContentType = .password
@@ -231,16 +238,13 @@ extension SPSettingsViewController {
         }
 
         let action = UIAlertAction(title: PasskeyAuthentication.submit, style: .default) { [unowned alert] _ in
-            let appDelegate = SPAppDelegate.shared()
             guard let textfield = alert.textFields?.first,
-                  let password = textfield.text,
-                  let email = appDelegate.simperium.user?.email else {
+                  let password = textfield.text else {
                 return
             }
 
             Task {
                 do {
-                    let authenticator = appDelegate.passkeyAuthenticator
                     try await authenticator.registerPasskey(for: email, password: password, in: self)
                 } catch {
                     // TODO: Display some action for failure

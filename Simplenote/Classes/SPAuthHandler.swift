@@ -7,7 +7,7 @@ class SPAuthHandler {
 
     /// Simperium Authenticator
     ///
-    private let simperiumService: SPAuthenticator
+    let simperiumService: SPAuthenticator
 
     /// Designated Initializer.
     ///

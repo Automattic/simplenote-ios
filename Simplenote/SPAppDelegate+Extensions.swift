@@ -40,10 +40,6 @@ extension SPAppDelegate {
     func setupStoreManager() {
         StoreManager.shared.initialize()
     }
-
-    @objc func setupPasskeyAuthenticator() {
-        passkeyAuthenticator = PasskeyAuthenticator(authenticator: simperium.authenticator)
-    }
 }
 
 // MARK: - Internal Methods

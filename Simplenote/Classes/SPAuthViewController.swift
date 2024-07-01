@@ -126,6 +126,8 @@ class SPAuthViewController: UIViewController {
     ///
     private lazy var validator = AuthenticationValidator()
 
+    private var passkeyAuthenticator: PasskeyAuthenticator?
+
     /// # Indicates if we've got valid Credentials. Doesn't display any validation warnings onscreen
     ///
     private var isInputValid: Bool {
@@ -323,8 +325,8 @@ private extension SPAuthViewController {
         Task {
             //TODO: Handle errors
             //TODO: Handle email not valid
-            let passkeyAuthenticator = SPAppDelegate.shared().passkeyAuthenticator
-            try? await passkeyAuthenticator.attemptPasskeyAuth(for: email, in: self)
+            passkeyAuthenticator = PasskeyAuthenticator(authenticator: controller.simperiumService)
+            try? await passkeyAuthenticator?.attemptPasskeyAuth(for: email, in: self)
         }
     }
 
