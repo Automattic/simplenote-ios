@@ -1,6 +1,8 @@
 import Foundation
 
 extension Data {
+    /// Certain base 64 data values are encoded to be url safe.  For the webauthn authentication we will need to decode the url safe data so that we can read it locally.
+    /// 
     static func decodeUrlSafeBase64(_ value: String) throws -> Data {
         var stringtoDecode: String = value.replacingOccurrences(of: "-", with: "+")
         stringtoDecode = stringtoDecode.replacingOccurrences(of: "_", with: "/")
