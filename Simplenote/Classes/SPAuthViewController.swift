@@ -643,7 +643,6 @@ struct AuthenticationMode {
     let secondaryActionText: String?
     let secondaryActionAttributedText: NSAttributedString?
     let isPasswordHidden: Bool
-    let isLogin: Bool
 }
 
 // MARK: - Default Operation Modes
@@ -660,8 +659,7 @@ extension AuthenticationMode {
                      secondaryActionSelector: #selector(SPAuthViewController.presentPasswordReset),
                      secondaryActionText: AuthenticationStrings.loginSecondaryAction,
                      secondaryActionAttributedText: nil,
-                     isPasswordHidden: false,
-                     isLogin: true)
+                     isPasswordHidden: false)
     }
 
     /// Signup Operation Mode: Contains all of the strings + delegate wirings, so that the AuthUI handles user account creation scenarios.
@@ -674,8 +672,7 @@ extension AuthenticationMode {
                      secondaryActionSelector: #selector(SPAuthViewController.presentTermsOfService),
                      secondaryActionText: nil,
                      secondaryActionAttributedText: AuthenticationStrings.signupSecondaryAttributedAction,
-                     isPasswordHidden: true,
-                     isLogin: false)
+                     isPasswordHidden: true)
     }
 
     static var loginWithPasskeys: AuthenticationMode {
@@ -686,8 +683,7 @@ extension AuthenticationMode {
                      secondaryActionSelector: #selector(SPAuthViewController.presentPasswordReset),
                      secondaryActionText: AuthenticationStrings.loginSecondaryAction,
                      secondaryActionAttributedText: nil,
-                     isPasswordHidden: true,
-                     isLogin: true)
+                     isPasswordHidden: true)
     }
 }
 
