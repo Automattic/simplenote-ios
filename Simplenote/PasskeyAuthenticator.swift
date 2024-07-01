@@ -11,6 +11,8 @@ class PasskeyAuthenticator: NSObject {
     let authenticator: SPAuthenticator
     let accountRemote: AccountRemote
 
+    var registrationEmail: String?
+
     @objc
     init(authenticator: SPAuthenticator) {
         self.authenticator = authenticator
@@ -20,6 +22,7 @@ class PasskeyAuthenticator: NSObject {
     // MARK: - Registration
     //
     func registerPasskey(for email: String, password: String, in presentationContext: PresentationContext) async throws {
+        registrationEmail = email
         do {
             guard let data = try await accountRemote.requestChallengeResponseToCreatePasskey(forEmail: email, password: password) else {
                 throw PasskeyError.couldNotRequestRegistrationChallenge
@@ -46,7 +49,7 @@ class PasskeyAuthenticator: NSObject {
     }
 
     private func performPasskeyRegistration(with credential: ASAuthorizationPlatformPublicKeyCredentialRegistration) {
-        guard let registrationObject = PasskeyRegistrationResponse(from: credential) else {
+        guard let registrationObject = PasskeyRegistrationResponse(from: credential, with: registrationEmail) else {
             //TODO: Should handle error
             return
         }
@@ -108,16 +111,16 @@ extension PasskeyAuthenticator: ASAuthorizationControllerDelegate {
         // TODO: handle error
         print(error.localizedDescription)
     }
-    
+
     public func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        
+
         switch authorization.credential {
         case let credential as ASAuthorizationPlatformPublicKeyCredentialRegistration:
             performPasskeyRegistration(with: credential)
-            
+
         case let credential as ASAuthorizationPlatformPublicKeyCredentialAssertion:
             let response = PasskeyAuthResponse(from: credential)
-            
+
             performPasskeyAuthentication(with: response)
         default:
             break
