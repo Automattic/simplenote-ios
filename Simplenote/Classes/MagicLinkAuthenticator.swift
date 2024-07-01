@@ -16,7 +16,7 @@ struct MagicLinkAuthenticator {
     let authenticator: SPAuthenticator
 
     func handle(url: URL) -> Bool {
-        guard url.host == Constants.host else {
+        guard AllowedHosts.all.contains(url.host) else {
             return false
         }
 
@@ -102,8 +102,13 @@ private extension Array where Element == URLQueryItem {
 
 // MARK: - Constants
 //
+private struct AllowedHosts {
+    static let hostForSimplenoteSchema = "login"
+    static let hostForUniversalLinks = URL(string: SPCredentials.defaultEngineURL)!.host
+    static let all = [hostForSimplenoteSchema, hostForUniversalLinks]
+}
+
 private struct Constants {
-    static let host = "login"
     static let emailField = "email"
     static let tokenField = "token"
     static let authKeyField = "auth_key"
