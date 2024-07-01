@@ -14,7 +14,7 @@ struct PasskeyRegistrationResponse: Encodable {
     private let response: PasskeyRegistrationResponse.Response
 
     init?(from credentialRegistration: ASAuthorizationPlatformPublicKeyCredentialRegistration, with email: String?) {
-        guard let email
+        guard let email,
         let clientJson = Self.prepareJSON(from: credentialRegistration.rawClientDataJSON),
         let rawAttestationObject = credentialRegistration.rawAttestationObject else {
             return nil
