@@ -447,9 +447,19 @@ private extension SPAppDelegate {
 // MARK: - Magic Link authentication
 //
 extension SPAppDelegate {
-    @objc
-    func performMagicLinkAuthentication(with url: URL) {
+
+    @objc @discardableResult
+    func performMagicLinkAuthentication(with url: URL) -> Bool {
         MagicLinkAuthenticator(authenticator: simperium.authenticator).handle(url: url)
+    }
+    
+    @objc(performMagicLinkAuthenticationWithUserActivity:)
+    func performMagicLinkAuthentication(with userActivity: NSUserActivity) -> Bool {
+        guard let url = userActivity.webpageURL else {
+            return false
+        }
+        
+        return performMagicLinkAuthentication(with: url)
     }
 }
 
@@ -555,5 +565,14 @@ extension SPAppDelegate {
         simperium.saveWithoutSyncing()
 
         UserDefaults.standard.set(true, forKey: .hasMigratedSustainerPreferences)
+    }
+}
+
+// MARK: - Content Recovery
+//
+extension SPAppDelegate {
+    @objc
+    func attemptContentRecoveryIfNeeded() {
+        RecoveryUnarchiver(simperium: simperium).insertNotesFromRecoveryFilesIfNeeded()
     }
 }
