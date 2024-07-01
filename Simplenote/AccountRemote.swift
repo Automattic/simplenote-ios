@@ -72,19 +72,19 @@ class AccountRemote: Remote {
     }
 
     private func body(with boundary: String, parameters: [String: Any]) -> Data {
-        var body = Data()
+        var body = String()
 
         for param in parameters {
             let paramName = param.key
-            body += Data("--\(boundary)\r\n".utf8)
-            body += Data("Content-Disposition:form-data; name=\"\(paramName)\"".utf8)
+            body += "--\(boundary)\r\n"
+            body += "Content-Disposition:form-data; name=\"\(paramName)\""
             let paramValue = param.value as! String
-            body += Data("\r\n\r\n\(paramValue)\r\n".utf8)
+            body += "\r\n\r\n\(paramValue)\r\n"
         }
 
-        body += Data("--\(boundary)--\r\n".utf8)
+        body += "--\(boundary)--\r\n"
 
-        return body
+        return Data(body.utf8)
     }
 
     func requestChallengeResponseToCreatePasskey(forEmail email: String, password: String) async throws -> Data? {
