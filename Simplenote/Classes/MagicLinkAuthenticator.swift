@@ -15,20 +15,20 @@ extension NSNotification.Name {
 struct MagicLinkAuthenticator {
     let authenticator: SPAuthenticator
 
-    func handle(url: URL) {
+    func handle(url: URL) -> Bool {
         guard url.host == Constants.host else {
-            return
+            return false
         }
 
         guard let queryItems = URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems else {
-            return
+            return false
         }
 
         if attemptLoginWithToken(queryItems: queryItems) {
-            return
+            return false
         }
 
-        attemptLoginWithAuthCode(queryItems: queryItems)
+        return attemptLoginWithAuthCode(queryItems: queryItems)
     }
 }
 

@@ -199,6 +199,10 @@
 
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler
 {
+    if ([self performMagicLinkAuthenticationWithUserActivity:userActivity]) {
+        return YES;
+    }
+    
     return [[ShortcutsHandler shared] handleUserActivity:userActivity];
 }
 
