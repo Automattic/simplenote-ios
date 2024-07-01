@@ -108,17 +108,17 @@ extension PasskeyAuthenticator: ASAuthorizationControllerDelegate {
         // TODO: handle error
         print(error.localizedDescription)
     }
-
+    
     public func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-
+        
         switch authorization.credential {
         case let credential as ASAuthorizationPlatformPublicKeyCredentialRegistration:
-                performPasskeyRegistration(with: credential)
-
+            performPasskeyRegistration(with: credential)
+            
         case let credential as ASAuthorizationPlatformPublicKeyCredentialAssertion:
-                let response = PasskeyAuthResponse(from: credential)
-
-                performPasskeyAuthentication(with: response)
+            let response = PasskeyAuthResponse(from: credential)
+            
+            performPasskeyAuthentication(with: response)
         default:
             break
         }
