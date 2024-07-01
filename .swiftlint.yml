@@ -45,7 +45,6 @@ only_rules:
   # - trailing_whitespace
 
   # - vertical_whitespace
-
   - custom_rules
 
 # Rules configuration
