@@ -10,6 +10,7 @@ class PasskeyAuthenticator: NSObject {
     typealias PresentationContext = ASAuthorizationControllerPresentationContextProviding
     let authenticator: SPAuthenticator
     let accountRemote: AccountRemote
+    let passkeyRemote = PasskeyRemote()
 
     var registrationEmail: String?
 
@@ -24,7 +25,7 @@ class PasskeyAuthenticator: NSObject {
     func registerPasskey(for email: String, password: String, in presentationContext: PresentationContext) async throws {
         registrationEmail = email
         do {
-            guard let data = try await accountRemote.requestChallengeResponseToCreatePasskey(forEmail: email, password: password) else {
+            guard let data = try await passkeyRemote.requestChallengeResponseToCreatePasskey(forEmail: email, password: password) else {
                 throw PasskeyError.couldNotRequestRegistrationChallenge
             }
             let passkeyChallenge = try JSONDecoder().decode(PasskeyRegistrationChallenge.self, from: data)
@@ -57,7 +58,7 @@ class PasskeyAuthenticator: NSObject {
         Task {
             do {
                 let data = try JSONEncoder().encode(registrationObject)
-                try await accountRemote.registerCredential(with: data)
+                try await passkeyRemote.registerCredential(with: data)
             } catch {
                 //TODO: Display error
             }

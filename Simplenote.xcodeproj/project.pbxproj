@@ -590,6 +590,7 @@
 		BAFDBBDA26B88BD200119615 /* Date+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFDBBD726B88BD200119615 /* Date+Simplenote.swift */; };
 		BAFFCEA626DDA9F6007F5EE3 /* ExtensionCoreDataWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFFCEA526DDA9F6007F5EE3 /* ExtensionCoreDataWrapper.swift */; };
 		BAFFCEA726DDA9F6007F5EE3 /* ExtensionCoreDataWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFFCEA526DDA9F6007F5EE3 /* ExtensionCoreDataWrapper.swift */; };
+		BAFFE74C2C3490A300673C1C /* PasskeyRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFFE74B2C3490A300673C1C /* PasskeyRemote.swift */; };
 		D435D38FCA5863E8447D5C2C /* Pods_Automattic_SimplenoteShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183BAB896957F07FDCAB6DF5 /* Pods_Automattic_SimplenoteShare.framework */; };
 		D82BFE4B2624A8AB003DFA32 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82BFE4A2624A8AB003DFA32 /* Settings.swift */; };
 		D82BFE542624A8C5003DFA32 /* SimplenoteUISmokeTestsSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82BFE532624A8C5003DFA32 /* SimplenoteUISmokeTestsSettings.swift */; };
@@ -1280,6 +1281,7 @@
 		BAFA93F0265DE45D0009DCFB /* NewNoteWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNoteWidgetProvider.swift; sourceTree = "<group>"; };
 		BAFDBBD726B88BD200119615 /* Date+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Simplenote.swift"; sourceTree = "<group>"; };
 		BAFFCEA526DDA9F6007F5EE3 /* ExtensionCoreDataWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionCoreDataWrapper.swift; sourceTree = "<group>"; };
+		BAFFE74B2C3490A300673C1C /* PasskeyRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasskeyRemote.swift; sourceTree = "<group>"; };
 		C07B32800E3C783BDF105B3A /* Pods-Automattic-SimplenoteShare.distribution alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-SimplenoteShare.distribution alpha.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-SimplenoteShare/Pods-Automattic-SimplenoteShare.distribution alpha.xcconfig"; sourceTree = "<group>"; };
 		D82BFE4A2624A8AB003DFA32 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		D82BFE532624A8C5003DFA32 /* SimplenoteUISmokeTestsSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplenoteUISmokeTestsSettings.swift; sourceTree = "<group>"; };
@@ -2459,6 +2461,7 @@
 				A6CC0B0625B8287F00F12A85 /* AccountRemote.swift */,
 				BA5768E2269A803F008B510E /* Remote.swift */,
 				BA0F5E0326B62A8B0098C605 /* RemoteError.swift */,
+				BAFFE74B2C3490A300673C1C /* PasskeyRemote.swift */,
 			);
 			name = Remotes;
 			sourceTree = "<group>";
@@ -3667,6 +3670,7 @@
 				375D24B321E01131007AB25A /* autolink.c in Sources */,
 				A66E41D0256D08E6000C6FCB /* PinLockViewController.swift in Sources */,
 				46A3C99217DFA81A002865AE /* SPEditorTextView.m in Sources */,
+				BAFFE74C2C3490A300673C1C /* PasskeyRemote.swift in Sources */,
 				B537733B252E29D400BC78C5 /* SwitchTableViewCell.swift in Sources */,
 				46A3C99417DFA81A002865AE /* Note.m in Sources */,
 				B52F35CF22F3243900724793 /* SPThemeViewController.swift in Sources */,
