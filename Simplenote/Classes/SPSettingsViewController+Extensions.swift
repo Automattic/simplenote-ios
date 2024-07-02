@@ -254,7 +254,8 @@ extension SPSettingsViewController {
                 do {
                     try await self.registerPasskey(for: email, password: password)
                 } catch {
-                    await self.presentPasskeyRegistrationFailureAlert()
+                    NSLog("[PasskeyRegistration] Could not register passkey: %@", error.localizedDescription)
+                    self.presentPasskeyRegistrationFailureAlert()
                 }
             }
         }
@@ -271,8 +272,11 @@ extension SPSettingsViewController {
         registrator.attemptRegistration(with: challenge, presentationContext: self, delegate: self)
     }
 
-    private func presentPasskeyRegistrationFailureAlert() async {
-        await passkeyActivityIndicator?.dismiss(true)
+    private func presentPasskeyRegistrationFailureAlert() {
+        Task { @MainActor in
+            await passkeyActivityIndicator?.dismiss(true)
+        }
+
         let failureAlert = UIAlertController(title: PasskeyAuthentication.failureTitle, message: PasskeyAuthentication.failureMessage, preferredStyle: .alert)
         failureAlert.addCancelActionWithTitle(PasskeyAuthentication.okay)
         self.present(failureAlert, animated: true)
@@ -281,8 +285,8 @@ extension SPSettingsViewController {
 
 extension SPSettingsViewController: ASAuthorizationControllerDelegate {
     public func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: any Error) {
-        // TODO: handle error
-        print(error.localizedDescription)
+        NSLog("[PasskeyRegistration] Could not register passkey: %@", error.localizedDescription)
+        presentPasskeyRegistrationFailureAlert()
     }
 
     public func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
