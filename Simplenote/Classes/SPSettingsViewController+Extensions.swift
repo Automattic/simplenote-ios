@@ -222,16 +222,16 @@ extension SPSettingsViewController {
 // MARK: - Passkeys
 //
 extension SPSettingsViewController {
+    var userEmail: String? {
+        SPAppDelegate.shared().simperium.user?.email
+    }
+
     @objc
     func presentPasskeyAuthenticationSetupAlert() {
-        let appDelegate = SPAppDelegate.shared()
-        guard let email = appDelegate.simperium.user?.email else {
+        guard let userEmail else {
             return
         }
-        let authenticator = PasskeyAuthenticator(authenticator: appDelegate.simperium.authenticator)
-        self.passkeyAuthenticator = authenticator
-
-        let alert = passkeyRegistrationAlert(for: email)
+        let alert = passkeyRegistrationAlert(for: userEmail)
 
         present(alert, animated: true)
     }
@@ -264,12 +264,44 @@ extension SPSettingsViewController {
     }
 
     private func registerPasskey(for email: String, password: String) async throws {
-        guard let passkeyAuthenticator else {
-            // TODO: Handle error
+        let registrator = PasskeyRegistrator()
+
+        let challenge = try await registrator.requestChallenge(for: email, password: password)
+        registrator.attemptRegistration(with: challenge, presentationContext: self, delegate: self)
+    }
+}
+
+extension SPSettingsViewController: ASAuthorizationControllerDelegate {
+    public func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: any Error) {
+        // TODO: handle error
+        print(error.localizedDescription)
+    }
+
+    public func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+
+        switch authorization.credential {
+        case let credential as ASAuthorizationPlatformPublicKeyCredentialRegistration:
+            performPasskeyRegistration(with: credential)
+
+        default:
+            break
+        }
+    }
+
+    private func performPasskeyRegistration(with credential: ASAuthorizationPlatformPublicKeyCredentialRegistration) {
+        guard let registrationObject = PasskeyRegistrationResponse(from: credential, with: userEmail) else {
+            //TODO: Should handle error
             return
         }
 
-        try await passkeyAuthenticator.registerPasskey(for: email, password: password, in: self)
+        Task {
+            do {
+                let data = try JSONEncoder().encode(registrationObject)
+                try await PasskeyRemote().registerCredential(with: data)
+            } catch {
+                //TODO: Display error
+            }
+        }
     }
 }
 
@@ -311,6 +343,9 @@ private struct PasskeyAuthentication {
     static let message = NSLocalizedString("To add passkeys you must enter your password", comment: "Message prompting user for password to create passkey")
     static let submit = NSLocalizedString("Submit", comment: "Submit button title")
     static let cancel = NSLocalizedString("Cancel", comment: "Cancel button title")
+    static let failureTitle = NSLocalizedString("Passkey Registration Failed", comment: "Title for alert when passkey registration fails")
+    static let failureMessage = NSLocalizedString("Could not register passkey.  Please try again later", comment: "Message for when passkey registration fails")
+    static let okay = NSLocalizedString("Okay", comment: "confirm button title")
 }
 
 // MARK: - RestorationAlert
