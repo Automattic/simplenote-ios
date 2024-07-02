@@ -254,7 +254,7 @@ extension SPSettingsViewController {
                 do {
                     try await self.registerPasskey(for: email, password: password)
                 } catch {
-                    // TODO: Display some action for failure
+                    await self.presentPasskeyRegistrationFailureAlert()
                 }
             }
         }
@@ -269,6 +269,13 @@ extension SPSettingsViewController {
 
         let challenge = try await registrator.requestChallenge(for: email, password: password)
         registrator.attemptRegistration(with: challenge, presentationContext: self, delegate: self)
+    }
+
+    private func presentPasskeyRegistrationFailureAlert() async {
+        await passkeyActivityIndicator?.dismiss(true)
+        let failureAlert = UIAlertController(title: PasskeyAuthentication.failureTitle, message: PasskeyAuthentication.failureMessage, preferredStyle: .alert)
+        failureAlert.addCancelActionWithTitle(PasskeyAuthentication.okay)
+        self.present(failureAlert, animated: true)
     }
 }
 
