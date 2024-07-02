@@ -5,6 +5,7 @@
 	<key>com.apple.developer.associated-domains</key>
 	<array>
 		<string>webcredentials:simplenote.com</string>
+		<string>applinks:app.simplenote.com</string>
 	</array>
 	<key>com.apple.security.application-groups</key>
 	<array>

@@ -5,22 +5,23 @@ import Foundation
 struct MagicLinkAuthenticator {
     let authenticator: SPAuthenticator
 
-    func handle(url: URL) {
-        guard url.host == Constants.host else {
-            return
+    func handle(url: URL) -> Bool {
+        guard AllowedHosts.all.contains(url.host) else {
+            return false
         }
 
         guard let queryItems = URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems else {
-            return
+            return false
         }
 
         guard let email = queryItems.base64DecodedValue(for: Constants.emailField),
               let token = queryItems.value(for: Constants.tokenField),
               !email.isEmpty, !token.isEmpty else {
-            return
+            return false
         }
 
         authenticator.authenticate(withUsername: email, token: token)
+        return true
     }
 }
 
@@ -43,8 +44,13 @@ private extension Array where Element == URLQueryItem {
 
 // MARK: - Constants
 //
+private struct AllowedHosts {
+    static let hostForSimplenoteSchema = "login"
+    static let hostForUniversalLinks = URL(string: SPCredentials.defaultEngineURL)!.host
+    static let all = [hostForSimplenoteSchema, hostForUniversalLinks]
+}
+
 private struct Constants {
-    static let host = "login"
     static let emailField = "email"
     static let tokenField = "token"
 }
