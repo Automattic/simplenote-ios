@@ -322,9 +322,13 @@ private extension SPAuthViewController {
     }
 
     @objc func passkeyAuthAction() {
+        guard ensureWarningsAreOnScreenWhenNeeded() else {
+            return
+        }
+
         Task {
             //TODO: Handle errors
-            //TODO: Handle email not valid
+
             passkeyAuthenticator = PasskeyAuthenticator(authenticator: controller.simperiumService)
             try? await passkeyAuthenticator?.attemptPasskeyAuth(for: email, in: self)
         }
