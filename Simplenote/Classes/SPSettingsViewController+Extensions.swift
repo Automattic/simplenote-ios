@@ -231,6 +231,12 @@ extension SPSettingsViewController {
         let authenticator = PasskeyAuthenticator(authenticator: appDelegate.simperium.authenticator)
         self.passkeyAuthenticator = authenticator
 
+        let alert = passkeyRegistrationAlert(for: email)
+
+        present(alert, animated: true)
+    }
+
+    private func passkeyRegistrationAlert(for email: String) -> UIAlertController {
         let alert = UIAlertController(title: PasskeyAuthentication.alertTitle, message: PasskeyAuthentication.message, preferredStyle: .alert)
         alert.addTextField { textField in
             textField.textContentType = .password
@@ -245,7 +251,7 @@ extension SPSettingsViewController {
 
             Task {
                 do {
-                    try await authenticator.registerPasskey(for: email, password: password, in: self)
+                    try await self.registerPasskey(for: email, password: password)
                 } catch {
                     // TODO: Display some action for failure
                 }
@@ -254,7 +260,16 @@ extension SPSettingsViewController {
         alert.addAction(action)
         alert.addCancelActionWithTitle(PasskeyAuthentication.cancel)
 
-        present(alert, animated: true)
+        return alert
+    }
+
+    private func registerPasskey(for email: String, password: String) async throws {
+        guard let passkeyAuthenticator else {
+            // TODO: Handle error
+            return
+        }
+
+        try await passkeyAuthenticator.registerPasskey(for: email, password: password, in: self)
     }
 }
 
@@ -295,7 +310,7 @@ private struct PasskeyAuthentication {
     static let alertTitle = NSLocalizedString("Passkey Setup", comment: "Alert title for setting up passkeys")
     static let message = NSLocalizedString("To add passkeys you must enter your password", comment: "Message prompting user for password to create passkey")
     static let submit = NSLocalizedString("Submit", comment: "Submit button title")
-    static let cancel = NSLocalizedString("cancel", comment: "Cancel button title")
+    static let cancel = NSLocalizedString("Cancel", comment: "Cancel button title")
 }
 
 // MARK: - RestorationAlert

@@ -13,12 +13,12 @@ class PasskeyRemote: Remote {
         request.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
 
         request.httpMethod = RemoteConstants.Method.POST
-        request.httpBody = body(with: boundary, parameters: params)
+        request.httpBody = passkeyRegistrationBody(with: boundary, parameters: params)
 
         return request
     }
 
-    private func body(with boundary: String, parameters: [String: Any]) -> Data {
+    private func passkeyRegistrationBody(with boundary: String, parameters: [String: Any]) -> Data {
         var body = String()
 
         for param in parameters {
@@ -40,7 +40,7 @@ class PasskeyRemote: Remote {
         return try await performDataTask(with: request)
     }
 
-    private func passkeyCredentialRegistration(withData data: Data) -> URLRequest {
+    private func requestForPasskeyCredentialRegistration(withData data: Data) -> URLRequest {
         var urlRequest = URLRequest(url: SimplenoteConstants.passkeyRegistrationURL)
         urlRequest.httpMethod = RemoteConstants.Method.POST
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -51,7 +51,7 @@ class PasskeyRemote: Remote {
     }
 
     func registerCredential(with data: Data) async throws {
-        let request = passkeyCredentialRegistration(withData: data)
+        let request = requestForPasskeyCredentialRegistration(withData: data)
         try await _ = performDataTask(with: request)
     }
 
