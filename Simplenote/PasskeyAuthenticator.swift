@@ -9,7 +9,6 @@ enum PasskeyError: Error {
 class PasskeyAuthenticator: NSObject {
     typealias PresentationContext = ASAuthorizationControllerPresentationContextProviding
     let authenticator: SPAuthenticator
-    let accountRemote: AccountRemote
     let passkeyRemote = PasskeyRemote()
 
     var registrationEmail: String?
@@ -17,7 +16,6 @@ class PasskeyAuthenticator: NSObject {
     @objc
     init(authenticator: SPAuthenticator) {
         self.authenticator = authenticator
-        self.accountRemote = AccountRemote()
     }
 
     // MARK: - Registration
@@ -83,7 +81,7 @@ class PasskeyAuthenticator: NSObject {
     }
 
     private func fetchAuthChallenge(for email: String) async throws -> PasskeyAuthChallenge? {
-        guard let data = try await AccountRemote().passkeyAuthChallenge(for: email) else {
+        guard let data = try await passkeyRemote.passkeyAuthChallenge(for: email) else {
             return nil
         }
 
@@ -94,7 +92,7 @@ class PasskeyAuthenticator: NSObject {
     private func performPasskeyAuthentication(with response: PasskeyAuthResponse) {
         Task { @MainActor in
             guard let json = try? JSONEncoder().encode(response),
-                  let response = try? await accountRemote.verifyPasskeyLogin(with: json),
+                  let response = try? await passkeyRemote.verifyPasskeyLogin(with: json),
                   let verifyResponse = try? JSONDecoder().decode(PasskeyVerifyResponse.self, from: response) else {
                 // TODO: handle auth failure
                 return
