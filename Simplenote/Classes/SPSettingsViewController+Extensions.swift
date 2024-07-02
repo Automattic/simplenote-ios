@@ -248,6 +248,7 @@ extension SPSettingsViewController {
                   let password = textfield.text else {
                 return
             }
+            self.passkeyActivityIndicator = SPModalActivityIndicator.show(in: SPAppDelegate.shared().window)
 
             Task {
                 do {
@@ -298,6 +299,7 @@ extension SPSettingsViewController: ASAuthorizationControllerDelegate {
             do {
                 let data = try JSONEncoder().encode(registrationObject)
                 try await PasskeyRemote().registerCredential(with: data)
+                await passkeyActivityIndicator?.dismiss(true)
             } catch {
                 //TODO: Display error
             }

@@ -33,7 +33,7 @@
 #import "SPTagEntryField.h"
 #import "WPAuthHandler.h"
 #import "NSManagedObjectContext+CoreDataExtensions.h"
-
+#import "SPModalActivityIndicator.h"
 
 #pragma mark - Extensions
 
