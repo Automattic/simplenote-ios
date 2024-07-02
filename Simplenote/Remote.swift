@@ -16,6 +16,7 @@ class Remote {
                 let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
 
                 // Check for 2xx status code
+                print("# statusCode: \(statusCode)")
                 guard statusCode / 100 == 2 else {
                     let error = statusCode > 0 ?
                         RemoteError.requestError(statusCode, dataTaskError):
@@ -29,5 +30,18 @@ class Remote {
         }
 
         dataTask.resume()
+    }
+
+    func performDataTask(with request: URLRequest) async throws -> Data? {
+        try await withCheckedThrowingContinuation { continuation in
+            performDataTask(with: request) { result in
+                switch result {
+                case .success(let data):
+                    continuation.resume(returning: data)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
     }
 }

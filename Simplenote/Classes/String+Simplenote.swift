@@ -194,6 +194,14 @@ extension String {
 
         return base + host + "/"
     }
+
+    func toBase64url() -> String {
+        let base64url = self
+            .replacingOccurrences(of: "+", with: "-")
+            .replacingOccurrences(of: "/", with: "_")
+            .replacingOccurrences(of: "=", with: "")
+        return base64url
+    }
 }
 
 // MARK: Replacing newlines with spaces

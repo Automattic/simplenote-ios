@@ -1,4 +1,5 @@
 import UIKit
+import AuthenticationServices
 
 // MARK: - Subscriber UI
 //
@@ -218,6 +219,66 @@ extension SPSettingsViewController {
     }
 }
 
+// MARK: - Passkeys
+//
+extension SPSettingsViewController {
+    @objc
+    func presentPasskeyAuthenticationSetupAlert() {
+        let appDelegate = SPAppDelegate.shared()
+        guard let email = appDelegate.simperium.user?.email else {
+            return
+        }
+        let authenticator = PasskeyAuthenticator(authenticator: appDelegate.simperium.authenticator)
+        self.passkeyAuthenticator = authenticator
+
+        let alert = passkeyRegistrationAlert(for: email)
+
+        present(alert, animated: true)
+    }
+
+    private func passkeyRegistrationAlert(for email: String) -> UIAlertController {
+        let alert = UIAlertController(title: PasskeyAuthentication.alertTitle, message: PasskeyAuthentication.message, preferredStyle: .alert)
+        alert.addTextField { textField in
+            textField.textContentType = .password
+            textField.isSecureTextEntry = true
+        }
+
+        let action = UIAlertAction(title: PasskeyAuthentication.submit, style: .default) { [unowned alert] _ in
+            guard let textfield = alert.textFields?.first,
+                  let password = textfield.text else {
+                return
+            }
+
+            Task {
+                do {
+                    try await self.registerPasskey(for: email, password: password)
+                } catch {
+                    // TODO: Display some action for failure
+                }
+            }
+        }
+        alert.addAction(action)
+        alert.addCancelActionWithTitle(PasskeyAuthentication.cancel)
+
+        return alert
+    }
+
+    private func registerPasskey(for email: String, password: String) async throws {
+        guard let passkeyAuthenticator else {
+            // TODO: Handle error
+            return
+        }
+
+        try await passkeyAuthenticator.registerPasskey(for: email, password: password, in: self)
+    }
+}
+
+extension SPSettingsViewController: ASAuthorizationControllerPresentationContextProviding {
+    public func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        view.window!
+    }
+}
+
 private struct IndexAlert {
     static let title = NSLocalizedString("Index Removed", comment: "Alert title letting user know their search index has been removed")
     static let message = NSLocalizedString("Spotlight history may still appear in search results, but notes have be unindexed", comment: "Details that some results may still appear in searches on device")
@@ -243,6 +304,13 @@ private struct AccountDeletion {
     static func successMessage(email: String) -> String {
         String(format: successAlertMessage, email)
     }
+}
+
+private struct PasskeyAuthentication {
+    static let alertTitle = NSLocalizedString("Passkey Setup", comment: "Alert title for setting up passkeys")
+    static let message = NSLocalizedString("To add passkeys you must enter your password", comment: "Message prompting user for password to create passkey")
+    static let submit = NSLocalizedString("Submit", comment: "Submit button title")
+    static let cancel = NSLocalizedString("Cancel", comment: "Cancel button title")
 }
 
 // MARK: - RestorationAlert

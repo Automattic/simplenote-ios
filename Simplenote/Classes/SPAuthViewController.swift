@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 import SafariServices
+import AuthenticationServices
 
 // MARK: - SPAuthViewController
 //
@@ -124,6 +125,8 @@ class SPAuthViewController: UIViewController {
     /// # Simperium's Validator
     ///
     private lazy var validator = AuthenticationValidator()
+
+    private var passkeyAuthenticator: PasskeyAuthenticator?
 
     /// # Indicates if we've got valid Credentials. Doesn't display any validation warnings onscreen
     ///
@@ -293,7 +296,7 @@ private extension SPAuthViewController {
             return
         }
 
-        performSimperiumAuthentication()
+        performSimperiumAuthentication(username: email, password: password)
     }
 
     @IBAction func performSignUp() {
@@ -315,6 +318,15 @@ private extension SPAuthViewController {
             }
 
             self.unlockInterface()
+        }
+    }
+
+    @objc func passkeyAuthAction() {
+        Task {
+            //TODO: Handle errors
+            //TODO: Handle email not valid
+            passkeyAuthenticator = PasskeyAuthenticator(authenticator: controller.simperiumService)
+            try? await passkeyAuthenticator?.attemptPasskeyAuth(for: email, in: self)
         }
     }
 
@@ -357,10 +369,10 @@ private extension SPAuthViewController {
         }
     }
 
-    func performSimperiumAuthentication() {
+    func performSimperiumAuthentication(username: String, password: String) {
         lockdownInterface()
 
-        controller.loginWithCredentials(username: email, password: password) { error in
+        controller.loginWithCredentials(username: username, password: password) { error in
             if let error = error {
                 self.handleError(error: error)
             } else {
@@ -616,6 +628,12 @@ extension SPAuthViewController: SPTextInputViewDelegate {
     }
 }
 
+extension SPAuthViewController: ASAuthorizationControllerPresentationContextProviding {
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        view.window!
+    }
+}
+
 // MARK: - AuthenticationMode: Signup / Login
 //
 struct AuthenticationMode {
@@ -658,6 +676,17 @@ extension AuthenticationMode {
                      secondaryActionAttributedText: AuthenticationStrings.signupSecondaryAttributedAction,
                      isPasswordHidden: true)
     }
+
+    static var loginWithPasskeys: AuthenticationMode {
+        return .init(title: AuthenticationStrings.loginTitle,
+                     validationStyle: .legacy,
+                     primaryActionSelector: #selector(SPAuthViewController.passkeyAuthAction),
+                     primaryActionText: AuthenticationStrings.passkeyActionButton,
+                     secondaryActionSelector: #selector(SPAuthViewController.presentPasswordReset),
+                     secondaryActionText: AuthenticationStrings.loginSecondaryAction,
+                     secondaryActionAttributedText: nil,
+                     isPasswordHidden: true)
+    }
 }
 
 // MARK: - Authentication Strings
@@ -666,6 +695,7 @@ private enum AuthenticationStrings {
     static let loginTitle                   = NSLocalizedString("Log In", comment: "LogIn Interface Title")
     static let loginPrimaryAction           = NSLocalizedString("Log In", comment: "LogIn Action")
     static let loginSecondaryAction         = NSLocalizedString("Forgotten password?", comment: "Password Reset Action")
+    static let passkeyActionButton          = NSLocalizedString("Log In With Passkeys", comment: "Login with Passkey action")
     static let signupTitle                  = NSLocalizedString("Sign Up", comment: "SignUp Interface Title")
     static let signupPrimaryAction          = NSLocalizedString("Sign Up", comment: "SignUp Action")
     static let signupSecondaryActionPrefix  = NSLocalizedString("By creating an account you agree to our", comment: "Terms of Service Legend *PREFIX*: printed in dark color")

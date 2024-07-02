@@ -151,13 +151,18 @@ private extension SPOnboardingViewController {
         let sheetController = SPSheetController()
 
         sheetController.setTitleForButton0(title: OnboardingStrings.loginWithEmailText)
-        sheetController.setTitleForButton1(title: OnboardingStrings.loginWithWpcomText)
+        sheetController.setTitleForButton1(title: OnboardingStrings.loginWithPasskeysText)
+        sheetController.setTitleForButton2(title: OnboardingStrings.loginWithWpcomText)
 
         sheetController.onClickButton0 = { [weak self] in
             self?.presentAuthenticationInterface(mode: .login)
         }
 
         sheetController.onClickButton1 = { [weak self] in
+            self?.presentAuthenticationInterface(mode: .loginWithPasskeys)
+        }
+
+        sheetController.onClickButton2 = { [weak self] in
             self?.presentWordpressSSO()
         }
 
@@ -224,6 +229,7 @@ private struct OnboardingStrings {
     static let headerText = NSLocalizedString("The simplest way to keep notes.", comment: "Onboarding Header Text")
     static let loginWithEmailText = NSLocalizedString("Log in with email", comment: "Presents the regular Email signin flow")
     static let loginWithWpcomText = NSLocalizedString("Log in with WordPress.com", comment: "Allows the user to SignIn using their WPCOM Account")
+    static let loginWithPasskeysText = NSLocalizedString("Log in with Passkeys", comment: "Allows the user to SignIn using Passkeys")
 }
 
 private struct SignInError {
