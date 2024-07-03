@@ -332,7 +332,7 @@ private extension SPAuthViewController {
                 try await passkeyAuthenticator.attemptPasskeyAuth(challenge: challenge, in: self, delegate: self)
             } catch {
                 unlockInterface()
-                //TODO: Handle errors
+                passkeyAuthFailed(error)
             }
         }
     }
@@ -645,8 +645,7 @@ extension SPAuthViewController: ASAuthorizationControllerPresentationContextProv
 
 extension SPAuthViewController: ASAuthorizationControllerDelegate {
     public func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: any Error) {
-        // TODO: handle error
-        unlockInterface()
+        passkeyAuthFailed(error)
         print(error.localizedDescription)
     }
 
@@ -668,14 +667,24 @@ extension SPAuthViewController: ASAuthorizationControllerDelegate {
             guard let json = try? JSONEncoder().encode(response),
                   let response = try? await PasskeyRemote().verifyPasskeyLogin(with: json),
                   let verifyResponse = try? JSONDecoder().decode(PasskeyVerifyResponse.self, from: response) else {
-                // TODO: handle auth failure
-                unlockInterface()
+                passkeyAuthFailed(PasskeyError.authFailed)
                 return
             }
 
             controller.simperiumService.authenticate(withUsername: verifyResponse.username, token: verifyResponse.accessToken)
             unlockInterface()
         }
+    }
+
+    private func passkeyAuthFailed(_ error: any Error) {
+        unlockInterface()
+        presentPasskeyAuthError(error)
+    }
+
+    private func presentPasskeyAuthError(_ error: any Error) {
+        let alert = UIAlertController(title: AuthenticationStrings.passkeyAuthFailureTitle, message: error.localizedDescription, preferredStyle: .alert)
+        alert.addCancelActionWithTitle(AuthenticationStrings.unverifiedCancelText)
+        present(alert, animated: true)
     }
 }
 
@@ -758,6 +767,7 @@ private enum AuthenticationStrings {
     static let unverifiedErrorMessage       = NSLocalizedString("There was an preparing your verification email, please try again later", comment: "Request error alert message")
     static let verificationSentTitle        = NSLocalizedString("Check your Email", comment: "Vefification sent alert title")
     static let verificationSentTemplate     = NSLocalizedString("We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions.", comment: "Confirmation that an email has been sent")
+    static let passkeyAuthFailureTitle      = NSLocalizedString("Passkey Authentication Failed", comment: "Title for passkey authentication failure")
 }
 
 // MARK: - PasswordInsecure Alert Strings

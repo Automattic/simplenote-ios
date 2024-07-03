@@ -3,7 +3,19 @@ import AuthenticationServices
 
 enum PasskeyError: Error {
     case couldNotRequestRegistrationChallenge
-    case counldNotFetchAuthChallenge
+    case couldNotFetchAuthChallenge
+    case authFailed
+
+    var localizedDescription: String {
+        switch self {
+        case .couldNotRequestRegistrationChallenge:
+            return NSLocalizedString("Could not prepare an registration challenge", comment: "Error message that registering passkeys could not receive needed challeng")
+        case .couldNotFetchAuthChallenge:
+            return NSLocalizedString("Could not prepare an authorization challenge", comment: "Error message that authorizing passkeys could not receive needed challeng")
+        case .authFailed:
+            return NSLocalizedString("Authorization Failed", comment: "Error message that passkey authorization failed")
+        }
+    }
 }
 
 typealias PresentationContext = ASAuthorizationControllerPresentationContextProviding
@@ -17,7 +29,7 @@ class PasskeyAuthenticator: NSObject {
 
     func attemptPasskeyAuth(challenge: PasskeyAuthChallenge?, in presentationContext: PresentationContext, delegate: ASAuthorizationControllerDelegate) async throws {
         guard let challenge else {
-            throw PasskeyError.counldNotFetchAuthChallenge
+            throw PasskeyError.couldNotFetchAuthChallenge
         }
 
         let challengeData = try Data.decodeUrlSafeBase64(challenge.challenge)

@@ -273,9 +273,7 @@ extension SPSettingsViewController {
     }
 
     private func presentPasskeyRegistrationFailureAlert() {
-        Task { @MainActor in
-            await passkeyActivityIndicator?.dismiss(true)
-        }
+        removeActivityIndicator()
 
         let failureAlert = UIAlertController(title: PasskeyAuthentication.failureTitle, message: PasskeyAuthentication.failureMessage, preferredStyle: .alert)
         failureAlert.addCancelActionWithTitle(PasskeyAuthentication.okay)
@@ -310,11 +308,16 @@ extension SPSettingsViewController: ASAuthorizationControllerDelegate {
             do {
                 let data = try JSONEncoder().encode(registrationObject)
                 try await PasskeyRemote().registerCredential(with: data)
-                await passkeyActivityIndicator?.dismiss(true)
+                removeActivityIndicator()
             } catch {
                 //TODO: Display error
             }
         }
+    }
+
+    private func removeActivityIndicator() {
+        passkeyActivityIndicator?.dismiss(true)
+        passkeyActivityIndicator = nil
     }
 }
 
