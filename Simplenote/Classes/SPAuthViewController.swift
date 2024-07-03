@@ -126,8 +126,6 @@ class SPAuthViewController: UIViewController {
     ///
     private lazy var validator = AuthenticationValidator()
 
-    private var passkeyAuthenticator: PasskeyAuthenticator?
-
     /// # Indicates if we've got valid Credentials. Doesn't display any validation warnings onscreen
     ///
     private var isInputValid: Bool {
@@ -329,8 +327,9 @@ private extension SPAuthViewController {
         Task {
             //TODO: Handle errors
 
-            passkeyAuthenticator = PasskeyAuthenticator(authenticator: controller.simperiumService)
-            try? await passkeyAuthenticator?.attemptPasskeyAuth(for: email, in: self)
+            let passkeyAuthenticator = PasskeyAuthenticator()
+            let challenge = try? await passkeyAuthenticator.fetchAuthChallenge(for: email)
+            try? await passkeyAuthenticator.attemptPasskeyAuth(challenge: challenge, in: self, delegate: self)
         }
     }
 
@@ -632,9 +631,44 @@ extension SPAuthViewController: SPTextInputViewDelegate {
     }
 }
 
+// MARK: - Passkeys
+//
 extension SPAuthViewController: ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         view.window!
+    }
+}
+
+extension SPAuthViewController: ASAuthorizationControllerDelegate {
+    public func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: any Error) {
+        // TODO: handle error
+        print(error.localizedDescription)
+    }
+
+    public func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+
+        switch authorization.credential {
+
+        case let credential as ASAuthorizationPlatformPublicKeyCredentialAssertion:
+            let response = PasskeyAuthResponse(from: credential)
+
+            performPasskeyAuthentication(with: response)
+        default:
+            break
+        }
+    }
+
+    private func performPasskeyAuthentication(with response: PasskeyAuthResponse) {
+        Task { @MainActor in
+            guard let json = try? JSONEncoder().encode(response),
+                  let response = try? await PasskeyRemote().verifyPasskeyLogin(with: json),
+                  let verifyResponse = try? JSONDecoder().decode(PasskeyVerifyResponse.self, from: response) else {
+                // TODO: handle auth failure
+                return
+            }
+
+            controller.simperiumService.authenticate(withUsername: verifyResponse.username, token: verifyResponse.accessToken)
+        }
     }
 }
 
