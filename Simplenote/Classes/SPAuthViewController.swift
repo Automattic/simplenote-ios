@@ -325,11 +325,15 @@ private extension SPAuthViewController {
         }
 
         Task {
-            //TODO: Handle errors
-
-            let passkeyAuthenticator = PasskeyAuthenticator()
-            let challenge = try? await passkeyAuthenticator.fetchAuthChallenge(for: email)
-            try? await passkeyAuthenticator.attemptPasskeyAuth(challenge: challenge, in: self, delegate: self)
+            lockdownInterface()
+            do {
+                let passkeyAuthenticator = PasskeyAuthenticator()
+                let challenge = try await passkeyAuthenticator.fetchAuthChallenge(for: email)
+                try await passkeyAuthenticator.attemptPasskeyAuth(challenge: challenge, in: self, delegate: self)
+            } catch {
+                unlockInterface()
+                //TODO: Handle errors
+            }
         }
     }
 
@@ -642,6 +646,7 @@ extension SPAuthViewController: ASAuthorizationControllerPresentationContextProv
 extension SPAuthViewController: ASAuthorizationControllerDelegate {
     public func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: any Error) {
         // TODO: handle error
+        unlockInterface()
         print(error.localizedDescription)
     }
 
@@ -664,10 +669,12 @@ extension SPAuthViewController: ASAuthorizationControllerDelegate {
                   let response = try? await PasskeyRemote().verifyPasskeyLogin(with: json),
                   let verifyResponse = try? JSONDecoder().decode(PasskeyVerifyResponse.self, from: response) else {
                 // TODO: handle auth failure
+                unlockInterface()
                 return
             }
 
             controller.simperiumService.authenticate(withUsername: verifyResponse.username, token: verifyResponse.accessToken)
+            unlockInterface()
         }
     }
 }
