@@ -42,10 +42,9 @@ only_rules:
   - trailing_semicolon
 
   # Lines should not have trailing whitespace.
-#  - trailing_whitespace
+  # - trailing_whitespace
 
-#  - vertical_whitespace
-
+  # - vertical_whitespace
   - custom_rules
 
 # Rules configuration

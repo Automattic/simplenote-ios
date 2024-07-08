@@ -26,6 +26,7 @@ enum UID {
         static let menu = "menu"
         static let signUp = "Sign Up"
         static let logIn = "Log In"
+        static let continueWithPassword = "Continue with Password"
         static let logInWithEmail = "Log in with email"
         static let allNotes = "All Notes"
         static let trash = "Trash"

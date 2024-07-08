@@ -317,6 +317,16 @@
     [self trackAutomatticEventWithName:@"user_signed_in" properties:nil];
 }
 
++ (void)trackUserRequestedLoginLink
+{
+    [self trackAutomatticEventWithName:@"user_requested_login_link" properties:nil];
+}
+
++ (void)trackUserConfirmedLoginLink
+{
+    [self trackAutomatticEventWithName:@"user_confirmed_login_link" properties:nil];
+}
+
 + (void)trackUserSignedOut
 {
     [self trackAutomatticEventWithName:@"user_signed_out" properties:nil];
