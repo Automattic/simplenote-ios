@@ -324,7 +324,7 @@ private extension SPAuthViewController {
             return
         }
 
-        Task {
+        Task { @MainActor in
             lockdownInterface()
             do {
                 let passkeyAuthenticator = PasskeyAuthenticator()
