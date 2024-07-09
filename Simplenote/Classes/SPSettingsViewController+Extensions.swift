@@ -273,13 +273,15 @@ extension SPSettingsViewController {
     }
 
     private func presentPasskeyRegistrationAlert(succeeded: Bool) {
-        removeActivityIndicator()
+        DispatchQueue.main.async {
+            self.removeActivityIndicator()
 
-        let title = succeeded ? PasskeyAuthentication.successTitle : PasskeyAuthentication.failureTitle
-        let message = succeeded ? PasskeyAuthentication.successMessage : PasskeyAuthentication.failureMessage
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addCancelActionWithTitle(PasskeyAuthentication.okay)
-        self.present(alert, animated: true)
+            let title = succeeded ? PasskeyAuthentication.successTitle : PasskeyAuthentication.failureTitle
+            let message = succeeded ? PasskeyAuthentication.successMessage : PasskeyAuthentication.failureMessage
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.addCancelActionWithTitle(PasskeyAuthentication.okay)
+            self.present(alert, animated: true)
+        }
     }
 
 }
