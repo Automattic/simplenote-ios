@@ -205,8 +205,8 @@ class SPAuthViewController: UIViewController {
         // Note: running becomeFirstResponder in `viewWillAppear` has the weird side effect of breaking caret
         // repositioning in the Text Field. Seriously.
         // Ref. https://github.com/Automattic/simplenote-ios/issues/453
+        prepareAutoPasskeyAuthIfNeeded()
         self.emailInputView.becomeFirstResponder()
-        attemptAutoPasskeyAuthentication()
     }
 }
 
@@ -320,12 +320,28 @@ private extension SPAuthViewController {
         }
     }
 
+    private func prepareAutoPasskeyAuthIfNeeded() {
+        guard mode == .login else {
+            return
+        }
+
+        Task {
+            do {
+                let passkeyAuthenticator = PasskeyAuthenticator()
+                let challenge = try await passkeyAuthenticator.fetchAuthChallenge()
+                try await passkeyAuthenticator.attemptPasskeyAuth(challenge: challenge, in: self, delegate: self)
+            } catch {
+                //TODO: Error?
+            }
+        }
+    }
+
     private func attemptAutoPasskeyAuthentication() {
         Task { @MainActor in
             lockdownInterface()
             do {
                 let passkeyAuthenticator = PasskeyAuthenticator()
-                let challenge = try await passkeyAuthenticator.fetchAuthChallenge()
+                let challenge = try await passkeyAuthenticator.fetchAuthChallenge(for: email)
                 try await passkeyAuthenticator.attemptPasskeyAuth(challenge: challenge, in: self, delegate: self)
             } catch {
                 unlockInterface()
@@ -705,7 +721,7 @@ extension SPAuthViewController: ASAuthorizationControllerDelegate {
 
 // MARK: - AuthenticationMode: Signup / Login
 //
-struct AuthenticationMode {
+struct AuthenticationMode: Equatable {
     let title: String
     let validationStyle: AuthenticationValidator.Style
     let primaryActionSelector: Selector
