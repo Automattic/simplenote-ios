@@ -42,17 +42,8 @@ class PasskeyAuthenticator: NSObject {
         controller.performRequests()
     }
 
-    func fetchAuthChallenge(for email: String) async throws -> PasskeyAuthChallenge? {
+    func fetchAuthChallenge(for email: String? = nil) async throws -> PasskeyAuthChallenge? {
         guard let data = try await passkeyRemote.authChallenge(for: email) else {
-            return nil
-        }
-
-        let challenge = try JSONDecoder().decode(PasskeyAuthChallenge.self, from: data)
-        return challenge
-    }
-
-    func fetchAutoAuthChallenge() async throws -> PasskeyAuthChallenge? {
-        guard let data = try await passkeyRemote.autoAuthChallenge() else {
             return nil
         }
 

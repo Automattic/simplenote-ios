@@ -55,22 +55,31 @@ class PasskeyRemote: Remote {
         try await _ = performDataTask(with: request)
     }
 
-    private func authChallengeRequest(forEmail email: String) -> URLRequest {
-        var urlRequest = URLRequest(url: SimplenoteConstants.passkeyAuthChallengeURL)
-        urlRequest.httpMethod = RemoteConstants.Method.POST
+    private func authChallengeRequest(forEmail email: String?) -> URLRequest {
+        let isAutoLogin = email == nil
+        let url = isAutoLogin ?
+        SimplenoteConstants.autoPasskeyAuthChallengeURL :
+        SimplenoteConstants.passkeyAuthChallengeURL
+        let method = isAutoLogin ? RemoteConstants.Method.GET : RemoteConstants.Method.POST
+
+        var urlRequest =  URLRequest(url: url)
+        urlRequest.httpMethod = method
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
-        let body = [
-            "email": email.lowercased()
-        ]
-        let json = try? JSONEncoder().encode(body)
+        if let email {
+            let body = [
+                "email": email.lowercased()
+            ]
+            let json = try? JSONEncoder().encode(body)
 
-        urlRequest.httpBody = json
+            urlRequest.httpBody = json
+        }
 
         return urlRequest
     }
 
-    func authChallenge(for email: String) async throws -> Data? {
+    func authChallenge(for email: String?) async throws -> Data? {
+
         let request = authChallengeRequest(forEmail: email)
         return try await performDataTask(with: request)
     }
@@ -87,18 +96,5 @@ class PasskeyRemote: Remote {
     func verifyPasskeyLogin(with data: Data) async throws -> Data? {
         let request = verifyPassKeyRequest(with: data)
         return try await performDataTask(with: request)
-    }
-
-    func autoAuthChallenge() async throws -> Data? {
-        let request = autoAuthChallengeRequest()
-        return try await performDataTask(with: request)
-    }
-
-    private func autoAuthChallengeRequest() -> URLRequest {
-        var urlRequest = URLRequest(url: SimplenoteConstants.autoPasskeyAuthChallengeURL)
-        urlRequest.httpMethod = RemoteConstants.Method.GET
-        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
-        return urlRequest
     }
 }

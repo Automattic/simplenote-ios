@@ -325,7 +325,7 @@ private extension SPAuthViewController {
             lockdownInterface()
             do {
                 let passkeyAuthenticator = PasskeyAuthenticator()
-                let challenge = try await passkeyAuthenticator.fetchAutoAuthChallenge()
+                let challenge = try await passkeyAuthenticator.fetchAuthChallenge()
                 try await passkeyAuthenticator.attemptPasskeyAuth(challenge: challenge, in: self, delegate: self)
             } catch {
                 unlockInterface()
