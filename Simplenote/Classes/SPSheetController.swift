@@ -29,13 +29,7 @@ class SPSheetController: UIViewController {
     ///
     @IBOutlet private var button1: SPSquaredButton! {
         didSet {
-            button1.backgroundColor = .simplenoteBlue50Color
-        }
-    }
-
-    @IBOutlet weak var button2: SPSquaredButton! {
-        didSet {
-            button2.backgroundColor = .simplenoteWPBlue50Color
+            button1.backgroundColor = .simplenoteWPBlue50Color
         }
     }
 
@@ -95,11 +89,6 @@ class SPSheetController: UIViewController {
     func setTitleForButton1(title: String) {
         loadViewIfNeeded()
         button1.setTitle(title, for: .normal)
-    }
-
-    func setTitleForButton2(title: String) {
-        loadViewIfNeeded()
-        button2.setTitle(title, for: .normal)
     }
 }
 

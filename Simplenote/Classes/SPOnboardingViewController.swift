@@ -151,18 +151,13 @@ private extension SPOnboardingViewController {
         let sheetController = SPSheetController()
 
         sheetController.setTitleForButton0(title: OnboardingStrings.loginWithEmailText)
-        sheetController.setTitleForButton1(title: OnboardingStrings.loginWithPasskeysText)
-        sheetController.setTitleForButton2(title: OnboardingStrings.loginWithWpcomText)
+        sheetController.setTitleForButton1(title: OnboardingStrings.loginWithWpcomText)
 
         sheetController.onClickButton0 = { [weak self] in
             self?.presentAuthenticationInterface(mode: .login)
         }
 
         sheetController.onClickButton1 = { [weak self] in
-            self?.presentAuthenticationInterface(mode: .loginWithPasskeys)
-        }
-
-        sheetController.onClickButton2 = { [weak self] in
             self?.presentWordpressSSO()
         }
 
