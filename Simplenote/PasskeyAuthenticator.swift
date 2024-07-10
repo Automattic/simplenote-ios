@@ -43,7 +43,7 @@ class PasskeyAuthenticator: NSObject {
     }
 
     @available(iOS 16.0, *)
-    func prepareAutoAuthRequest(for challenge: PasskeyAuthChallenge?, in presentationContext: PresentationContext, delegate: ASAuthorizationControllerDelegate) async throws {
+    func prepareAutoAuthRequest(for challenge: PasskeyAuthChallenge?, in presentationContext: PresentationContext, delegate: ASAuthorizationControllerDelegate) throws {
         guard let challenge else {
             throw PasskeyError.couldNotFetchAuthChallenge
         }
@@ -51,6 +51,7 @@ class PasskeyAuthenticator: NSObject {
         let challengeData = try Data.decodeUrlSafeBase64(challenge.challenge)
         let provider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: challenge.relayingParty)
         let request = provider.createCredentialAssertionRequest(challenge: challengeData)
+        
 
         let controller = ASAuthorizationController(authorizationRequests: [request])
         controller.delegate = delegate

@@ -172,6 +172,10 @@ class SPAuthViewController: UIViewController {
     ///
     var debugEnabled = false
 
+    /// Passkeys will attempt login on view did load, if it fails we want to ignore the error
+    ///
+    var attemptingAutoLogin = false
+
     /// NSCodable Required Initializer
     ///
     required init?(coder aDecoder: NSCoder) {
@@ -203,6 +207,11 @@ class SPAuthViewController: UIViewController {
         super.viewWillAppear(animated)
         ensureStylesMatchValidationState()
         ensureNavigationBarIsVisible()
+
+        // We want to prepare to authorize with passkey if the user has existing passkeys
+        if #available(iOS 16.0, *) {
+            prepareAutoPasskeyAuthIfNeeded()
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -211,8 +220,8 @@ class SPAuthViewController: UIViewController {
         // Note: running becomeFirstResponder in `viewWillAppear` has the weird side effect of breaking caret
         // repositioning in the Text Field. Seriously.
         // Ref. https://github.com/Automattic/simplenote-ios/issues/453
-        prepareAutoPasskeyAuthIfNeeded()
         self.emailInputView.becomeFirstResponder()
+//        autoPasskeyAuth()
     }
 }
 
@@ -350,18 +359,19 @@ private extension SPAuthViewController {
         mode = .loginWithPassword
     }
 
+    @available(iOS 16.0, *)
     private func prepareAutoPasskeyAuthIfNeeded() {
         guard mode == .loginWithMagicLink else {
             return
         }
-
-        Task {
+        attemptingAutoLogin = true
+        Task { @MainActor in
             do {
                 let passkeyAuthenticator = PasskeyAuthenticator()
                 let challenge = try await passkeyAuthenticator.fetchAuthChallenge()
-                try await passkeyAuthenticator.attemptPasskeyAuth(challenge: challenge, in: self, delegate: self)
+                try passkeyAuthenticator.prepareAutoAuthRequest(for: challenge, in: self, delegate: self)
             } catch {
-                //TODO: Error?
+                NSLog("[Passkey Authentication] Couldn't setup auto auth challenge", error.localizedDescription)
             }
         }
     }
@@ -376,6 +386,16 @@ private extension SPAuthViewController {
             } catch {
                 unlockInterface()
                 passkeyAuthFailed(error)
+            }
+        }
+    }
+
+    private func autoPasskeyAuth() {
+        Task {
+            do {
+                let passkeyAuthenticator = PasskeyAuthenticator()
+                let challenge = try await passkeyAuthenticator.fetchAuthChallenge()
+                try await passkeyAuthenticator.attemptPasskeyAuth(challenge: challenge, in: self, delegate: self)
             }
         }
     }
@@ -776,12 +796,15 @@ extension SPAuthViewController: ASAuthorizationControllerPresentationContextProv
 
 extension SPAuthViewController: ASAuthorizationControllerDelegate {
     public func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: any Error) {
+        guard attemptingAutoLogin == false else {
+            attemptingAutoLogin = false
+            return
+        }
+
         passkeyAuthFailed(error)
-        print(error.localizedDescription)
     }
 
     public func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-
         switch authorization.credential {
 
         case let credential as ASAuthorizationPlatformPublicKeyCredentialAssertion:
@@ -791,6 +814,8 @@ extension SPAuthViewController: ASAuthorizationControllerDelegate {
         default:
             break
         }
+
+        attemptingAutoLogin = false
     }
 
     private func performPasskeyAuthentication(with response: PasskeyAuthResponse) {
