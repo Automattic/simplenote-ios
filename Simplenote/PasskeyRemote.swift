@@ -88,4 +88,17 @@ class PasskeyRemote: Remote {
         let request = verifyPassKeyRequest(with: data)
         return try await performDataTask(with: request)
     }
+
+    func autoAuthChallenge() async throws -> Data? {
+        let request = autoAuthChallengeRequest()
+        return try await performDataTask(with: request)
+    }
+
+    private func autoAuthChallengeRequest() -> URLRequest {
+        var urlRequest = URLRequest(url: SimplenoteConstants.autoPasskeyAuthChallengeURL)
+        urlRequest.httpMethod = RemoteConstants.Method.GET
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        return urlRequest
+    }
 }

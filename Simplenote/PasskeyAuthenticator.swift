@@ -50,4 +50,13 @@ class PasskeyAuthenticator: NSObject {
         let challenge = try JSONDecoder().decode(PasskeyAuthChallenge.self, from: data)
         return challenge
     }
+
+    func fetchAutoAuthChallenge() async throws -> PasskeyAuthChallenge? {
+        guard let data = try await passkeyRemote.autoAuthChallenge() else {
+            return nil
+        }
+
+        let challenge = try JSONDecoder().decode(PasskeyAuthChallenge.self, from: data)
+        return challenge
+    }
 }

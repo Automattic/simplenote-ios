@@ -206,6 +206,7 @@ class SPAuthViewController: UIViewController {
         // repositioning in the Text Field. Seriously.
         // Ref. https://github.com/Automattic/simplenote-ios/issues/453
         self.emailInputView.becomeFirstResponder()
+        attemptAutoPasskeyAuthentication()
     }
 }
 
@@ -316,6 +317,20 @@ private extension SPAuthViewController {
             }
 
             self.unlockInterface()
+        }
+    }
+
+    private func attemptAutoPasskeyAuthentication() {
+        Task { @MainActor in
+            lockdownInterface()
+            do {
+                let passkeyAuthenticator = PasskeyAuthenticator()
+                let challenge = try await passkeyAuthenticator.fetchAutoAuthChallenge()
+                try await passkeyAuthenticator.attemptPasskeyAuth(challenge: challenge, in: self, delegate: self)
+            } catch {
+                unlockInterface()
+                passkeyAuthFailed(error)
+            }
         }
     }
 

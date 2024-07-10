@@ -52,4 +52,5 @@ class SimplenoteConstants: NSObject {
     static let passkeyRegistrationURL = currentPasskeyBaseURL.appendingPathComponent("/auth/add-credential")
     static let passkeyAuthChallengeURL = currentPasskeyBaseURL.appendingPathComponent("/auth/prepare-auth-challenge")
     static let verifyPasskeyAuthChallengeURL = currentPasskeyBaseURL.appendingPathComponent("/auth/verify-login-credential")
+    static let autoPasskeyAuthChallengeURL = currentPasskeyBaseURL.appendingPathComponent("/auth/prepare-autofill-auth-challenge")
 }
