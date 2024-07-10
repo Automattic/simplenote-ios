@@ -43,7 +43,7 @@ class PasskeyAuthenticator: NSObject {
     }
 
     func fetchAuthChallenge(for email: String) async throws -> PasskeyAuthChallenge? {
-        guard let data = try await passkeyRemote.passkeyAuthChallenge(for: email) else {
+        guard let data = try await passkeyRemote.authChallenge(for: email) else {
             return nil
         }
 
