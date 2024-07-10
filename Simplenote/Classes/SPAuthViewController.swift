@@ -874,17 +874,6 @@ extension AuthenticationMode {
                      secondaryActionAttributedText: AuthenticationStrings.signupSecondaryAttributedAction,
                      isPasswordHidden: true)
     }
-
-    static var loginWithPasskeys: AuthenticationMode {
-        return .init(title: AuthenticationStrings.loginTitle,
-                     validationStyle: .legacy,
-                     primaryActionSelector: #selector(SPAuthViewController.passkeyAuthAction),
-                     primaryActionText: AuthenticationStrings.passkeyActionButton,
-                     secondaryActionSelector: #selector(SPAuthViewController.presentPasswordReset),
-                     secondaryActionText: AuthenticationStrings.loginSecondaryAction,
-                     secondaryActionAttributedText: nil,
-                     isPasswordHidden: true)
-    }
 }
 
 // MARK: - Authentication Strings
