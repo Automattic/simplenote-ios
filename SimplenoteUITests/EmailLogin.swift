@@ -34,6 +34,8 @@ class EmailLogin {
 
     class func logIn(email: String, password: String) {
         enterEmail(enteredValue: email)
+        app.buttons[UID.Button.continueWithPassword].tap()
+        _ = app.buttons[UID.Button.logIn].waitForExistence(timeout: minLoadTimeout)
         enterPassword(enteredValue: password)
         app.buttons[UID.Button.logIn].tap()
         handleSavePasswordPrompt()

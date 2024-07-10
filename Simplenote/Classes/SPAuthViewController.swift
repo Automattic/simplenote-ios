@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 import SafariServices
+import SwiftUI
 import AuthenticationServices
 
 // MARK: - SPAuthViewController
@@ -81,6 +82,7 @@ class SPAuthViewController: UIViewController {
     @IBOutlet private var primaryActionSpinner: UIActivityIndicatorView! {
         didSet {
             primaryActionSpinner.style = .medium
+            primaryActionSpinner.color = .white
         }
     }
 
@@ -160,7 +162,11 @@ class SPAuthViewController: UIViewController {
 
     /// # Authentication Mode: Signup or Login
     ///
-    let mode: AuthenticationMode
+    private(set) var mode: AuthenticationMode {
+        didSet {
+            refreshInterface(mode: mode)
+        }
+    }
 
     /// Indicates if the Extended Debug Mode is enabled
     ///
@@ -174,7 +180,7 @@ class SPAuthViewController: UIViewController {
 
     /// Designated Initializer
     ///
-    init(controller: SPAuthHandler, mode: AuthenticationMode = .login) {
+    init(controller: SPAuthHandler, mode: AuthenticationMode = .loginWithMagicLink) {
         self.controller = controller
         self.mode = mode
         super.init(nibName: nil, bundle: nil)
@@ -297,7 +303,27 @@ private extension SPAuthViewController {
 
         performSimperiumAuthentication(username: email, password: password)
     }
+    
+    @IBAction func performLogInWithMagicLink() {
+        guard ensureWarningsAreOnScreenWhenNeeded() else {
+            return
+        }
 
+        lockdownInterface()
+
+        let email = self.email
+        controller.requestLoginEmail(username: email) { error in
+            if let error {
+                self.handleError(error: error)
+            } else {
+                self.presentMagicLinkRequestedView(email: email)
+                SPTracker.trackUserRequestedLoginLink()
+            }
+
+            self.unlockInterface()
+        }
+    }
+    
     @IBAction func performSignUp() {
         guard ensureWarningsAreOnScreenWhenNeeded() else {
             return
@@ -318,6 +344,10 @@ private extension SPAuthViewController {
 
             self.unlockInterface()
         }
+    }
+    
+    @IBAction func switchToLoginWithPassword() {
+        mode = .loginWithPassword
     }
 
     private func prepareAutoPasskeyAuthIfNeeded() {
@@ -387,7 +417,17 @@ private extension SPAuthViewController {
         viewController.title = title
         navigationController?.pushViewController(viewController, animated: true)
     }
+    
+    private func presentMagicLinkRequestedView(email: String) {
+        let rootView = MagicLinkRequestedView(email: email)
+        let hostingController = UIHostingController(rootView: rootView)
+        hostingController.modalPresentationStyle = .formSheet
+        hostingController.sheetPresentationController?.detents = [.medium()]
+
+        present(hostingController, animated: true)
+    }
 }
+
 
 // MARK: - Simperium Services
 //
@@ -440,6 +480,7 @@ private extension SPAuthViewController {
         present(alertController, animated: true, completion: nil)
     }
 }
+
 
 // MARK: - Error Handling
 //
@@ -528,7 +569,7 @@ private extension SPAuthViewController {
         }
 
         // Prefill the LoginViewController
-        let loginViewController = SPAuthViewController(controller: controller, mode: .login)
+        let loginViewController = SPAuthViewController(controller: controller, mode: .loginWithPassword)
 
         loginViewController.loadViewIfNeeded()
         loginViewController.email = email
@@ -555,6 +596,11 @@ private extension SPAuthViewController {
         refreshPasswordInput(inErrorState: true)
     }
 
+    func dismissAllValidationWarnings() {
+        refreshEmailInput(inErrorState: false)
+        refreshPasswordInput(inErrorState: false)
+    }
+    
     func dismissEmailValidationWarning() {
         refreshEmailInput(inErrorState: false)
     }
@@ -666,6 +712,60 @@ extension SPAuthViewController: SPTextInputViewDelegate {
     }
 }
 
+// MARK: - Mode Switching
+//
+extension SPAuthViewController {
+    
+    func refreshInterface(mode: AuthenticationMode, animated: Bool = true) {
+        title = mode.title
+        
+        dismissAllValidationWarnings()
+
+        refreshPasswordInput(isHidden: mode.isPasswordHidden, animated: animated)
+        refreshPrimaryAction(mode: mode)
+        refreshSecondaryAction(mode: mode)
+
+        /// Workaround:
+        /// When revealing the Password Field, iOS's Autofill mechanism may not properly fill the password field!
+        passwordInputView.becomeFirstResponder()
+        emailInputView.becomeFirstResponder()
+    }
+    
+    func refreshPasswordInput(isHidden: Bool, animated: Bool) {
+        let work = {
+            self.passwordInputView.isHidden = isHidden
+        }
+        
+        guard animated else {
+            work()
+            return
+        }
+
+        UIView.animate(withDuration: UIKitConstants.animationDelayShort, animations: work)
+    }
+    
+    func refreshPrimaryAction(mode: AuthenticationMode) {
+        primaryActionButton.setTitleWithoutAnimation(mode.primaryActionText, for: .normal)
+        primaryActionButton.removeTarget(self, action: nil, for: .touchUpInside)
+        primaryActionButton.addTarget(self, action: mode.primaryActionSelector, for: .touchUpInside)
+    }
+    
+    func refreshSecondaryAction(mode: AuthenticationMode) {
+        if let title = mode.secondaryActionText {
+            secondaryActionButton.setTitleWithoutAnimation(title, for: .normal)
+        }
+        
+        if let attributedTitle = mode.secondaryActionAttributedText {
+            secondaryActionButton.setAttributedTitleWithoutAnimation(attributedTitle, for: .normal)
+        }
+
+        secondaryActionButton.setTitleColor(.simplenoteBlue60Color, for: .normal)
+        secondaryActionButton.removeTarget(self, action: nil, for: .touchUpInside)
+        secondaryActionButton.addTarget(self, action: mode.secondaryActionSelector, for: .touchUpInside)
+    }
+}
+
+
 // MARK: - Passkeys
 //
 extension SPAuthViewController: ASAuthorizationControllerPresentationContextProviding {
@@ -738,7 +838,7 @@ extension AuthenticationMode {
 
     /// Login Operation Mode: Contains all of the strings + delegate wirings, so that the AuthUI handles authentication scenarios.
     ///
-    static var login: AuthenticationMode {
+    static var loginWithPassword: AuthenticationMode {
         return .init(title: AuthenticationStrings.loginTitle,
                      validationStyle: .legacy,
                      primaryActionSelector: #selector(SPAuthViewController.performLogIn),
@@ -747,6 +847,19 @@ extension AuthenticationMode {
                      secondaryActionText: AuthenticationStrings.loginSecondaryAction,
                      secondaryActionAttributedText: nil,
                      isPasswordHidden: false)
+    }
+
+    /// Login Operation Mode: Authentication is handled via Magic Links!
+    ///
+    static var loginWithMagicLink: AuthenticationMode {
+        return .init(title: AuthenticationStrings.loginTitle,
+                     validationStyle: .legacy,
+                     primaryActionSelector: #selector(SPAuthViewController.performLogInWithMagicLink),
+                     primaryActionText: AuthenticationStrings.loginWithLinkPrimaryAction,
+                     secondaryActionSelector: #selector(SPAuthViewController.switchToLoginWithPassword),
+                     secondaryActionText: AuthenticationStrings.loginWithLinkSecondaryAction,
+                     secondaryActionAttributedText: nil,
+                     isPasswordHidden: true)
     }
 
     /// Signup Operation Mode: Contains all of the strings + delegate wirings, so that the AuthUI handles user account creation scenarios.
@@ -780,6 +893,8 @@ private enum AuthenticationStrings {
     static let loginTitle                   = NSLocalizedString("Log In", comment: "LogIn Interface Title")
     static let loginPrimaryAction           = NSLocalizedString("Log In", comment: "LogIn Action")
     static let loginSecondaryAction         = NSLocalizedString("Forgotten password?", comment: "Password Reset Action")
+    static let loginWithLinkPrimaryAction   = NSLocalizedString("Instantly Log In with Email", comment: "LogIn with Magic Link Action")
+    static let loginWithLinkSecondaryAction = NSLocalizedString("Continue with Password", comment: "Password fallback Action")
     static let passkeyActionButton          = NSLocalizedString("Log In With Passkeys", comment: "Login with Passkey action")
     static let signupTitle                  = NSLocalizedString("Sign Up", comment: "SignUp Interface Title")
     static let signupPrimaryAction          = NSLocalizedString("Sign Up", comment: "SignUp Action")
