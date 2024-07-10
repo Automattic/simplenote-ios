@@ -351,7 +351,7 @@ private extension SPAuthViewController {
     }
 
     private func prepareAutoPasskeyAuthIfNeeded() {
-        guard mode == .login else {
+        guard mode == .loginWithMagicLink else {
             return
         }
 
