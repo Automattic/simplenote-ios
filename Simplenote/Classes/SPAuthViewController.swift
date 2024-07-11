@@ -329,7 +329,6 @@ private extension SPAuthViewController {
             do {
                 try await attemptPasskeyAuthentication(for: email)
             } catch {
-                unlockInterface()
                 passkeyAuthFailed(error)
             }
         }
