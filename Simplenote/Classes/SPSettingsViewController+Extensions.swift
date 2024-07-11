@@ -222,7 +222,7 @@ extension SPSettingsViewController {
 // MARK: - Passkeys
 //
 extension SPSettingsViewController {
-    var userEmail: String? {
+    private var userEmail: String? {
         SPAppDelegate.shared().simperium.user?.email
     }
 
