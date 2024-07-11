@@ -329,7 +329,9 @@ private extension SPAuthViewController {
             do {
                 let passkeyAuthenticator = PasskeyAuthenticator()
                 let challenge = try await passkeyAuthenticator.fetchAuthChallenge(for: email)
-                try await passkeyAuthenticator.attemptPasskeyAuth(challenge: challenge, in: self, delegate: self)
+                let verify = try await passkeyAuthenticator.attemptPasskeyAuth(challenge: challenge, in: self, delegate: self)
+                controller.simperiumService.authenticate(withUsername: verify.username, token: verify.accessToken)
+                unlockInterface()
             } catch {
                 unlockInterface()
                 passkeyAuthFailed(error)
