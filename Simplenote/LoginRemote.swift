@@ -9,8 +9,8 @@ class LoginRemote: Remote {
         performDataTask(with: request, completion: completion)
     }
 
-    func requestLoginConfirmation(authKey: String, authCode: String) async throws -> LoginConfirmationResponse {
-        let request = requestForLoginCompletion(authKey: authKey, authCode: authCode)
+    func requestLoginConfirmation(email: String, authCode: String) async throws -> LoginConfirmationResponse {
+        let request = requestForLoginCompletion(email: email, authCode: authCode)
         return try await performDataTask(with: request, type: LoginConfirmationResponse.self)
     }
 }
@@ -36,11 +36,11 @@ private extension LoginRemote {
         ])
     }
 
-    func requestForLoginCompletion(authKey: String, authCode: String) -> URLRequest {
+    func requestForLoginCompletion(username: String, authCode: String) -> URLRequest {
         let url = URL(string: SimplenoteConstants.loginCompletionURL)!
         return requestForURL(url, method: RemoteConstants.Method.POST, httpBody: [
             "auth_key": authKey,
-            "auth_code": authCode
+            "username": username
         ])
     }
 }
