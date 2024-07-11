@@ -66,7 +66,7 @@ class PasskeyAuthenticator: NSObject {
         self.internalAuthControllerDelegate = authControllerDelegate
     }
 
-    func attemptPasskeyAuth(challenge: PasskeyAuthChallenge?, in presentationContext: PresentationContext, delegate: ASAuthorizationControllerDelegate) async throws -> PasskeyVerifyResponse {
+    func attemptPasskeyAuth(challenge: PasskeyAuthChallenge?, in presentationContext: PresentationContext) async throws -> PasskeyVerifyResponse {
         guard let challenge else {
             throw PasskeyError.couldNotFetchAuthChallenge
         }
@@ -78,6 +78,7 @@ class PasskeyAuthenticator: NSObject {
         let controller = ASAuthorizationController(authorizationRequests: [request])
         controller.delegate = internalAuthControllerDelegate
         controller.presentationContextProvider = presentationContext
+
         return try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<PasskeyVerifyResponse, any Error>) in
             internalAuthControllerDelegate.onCompletion = { result in
                 switch result {

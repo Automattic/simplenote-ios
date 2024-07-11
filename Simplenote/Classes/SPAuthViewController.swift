@@ -327,16 +327,20 @@ private extension SPAuthViewController {
         Task { @MainActor in
             lockdownInterface()
             do {
-                let passkeyAuthenticator = PasskeyAuthenticator()
-                let challenge = try await passkeyAuthenticator.fetchAuthChallenge(for: email)
-                let verify = try await passkeyAuthenticator.attemptPasskeyAuth(challenge: challenge, in: self, delegate: self)
-                controller.simperiumService.authenticate(withUsername: verify.username, token: verify.accessToken)
-                unlockInterface()
+                try await attemptPasskeyAuthentication(for: email)
             } catch {
                 unlockInterface()
                 passkeyAuthFailed(error)
             }
         }
+    }
+
+    private func attemptPasskeyAuthentication(for email: String) async throws {
+        let passkeyAuthenticator = PasskeyAuthenticator()
+        let challenge = try await passkeyAuthenticator.fetchAuthChallenge(for: email)
+        let verify = try await passkeyAuthenticator.attemptPasskeyAuth(challenge: challenge, in: self)
+        controller.simperiumService.authenticate(withUsername: verify.username, token: verify.accessToken)
+        unlockInterface()
     }
 
     @IBAction func presentPasswordReset() {
@@ -642,40 +646,6 @@ extension SPAuthViewController: SPTextInputViewDelegate {
 extension SPAuthViewController: ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         view.window!
-    }
-}
-
-extension SPAuthViewController: ASAuthorizationControllerDelegate {
-    public func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: any Error) {
-        passkeyAuthFailed(error)
-        print(error.localizedDescription)
-    }
-
-    public func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-
-        switch authorization.credential {
-
-        case let credential as ASAuthorizationPlatformPublicKeyCredentialAssertion:
-            let response = PasskeyAuthResponse(from: credential)
-
-            performPasskeyAuthentication(with: response)
-        default:
-            break
-        }
-    }
-
-    private func performPasskeyAuthentication(with response: PasskeyAuthResponse) {
-        Task { @MainActor in
-            guard let json = try? JSONEncoder().encode(response),
-                  let response = try? await PasskeyRemote().verifyPasskeyLogin(with: json),
-                  let verifyResponse = try? JSONDecoder().decode(PasskeyVerifyResponse.self, from: response) else {
-                passkeyAuthFailed(PasskeyError.authFailed)
-                return
-            }
-
-            controller.simperiumService.authenticate(withUsername: verifyResponse.username, token: verifyResponse.accessToken)
-            unlockInterface()
-        }
     }
 
     private func passkeyAuthFailed(_ error: any Error) {
