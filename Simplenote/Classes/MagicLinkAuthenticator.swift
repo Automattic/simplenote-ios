@@ -50,7 +50,7 @@ private extension MagicLinkAuthenticator {
 
     @discardableResult
     func attemptLoginWithAuthCode(queryItems: [URLQueryItem]) -> Bool {
-        guard let email = queryItems.value(for: Constants.emailField),
+        guard let email = queryItems.base64DecodedValue(for: Constants.emailField),
               let authCode = queryItems.value(for: Constants.authCodeField),
               !email.isEmpty, !authCode.isEmpty
         else {
