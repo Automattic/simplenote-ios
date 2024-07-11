@@ -5,7 +5,7 @@ import Foundation
 class LoginRemote: Remote {
 
     func requestLoginEmail(email: String, completion: @escaping (_ result: Result<Data?, RemoteError>) -> Void) {
-        let request = requestForLoginRequest(with: email)
+        let request = requestForLoginRequest(email: email)
         performDataTask(with: request, completion: completion)
     }
 
@@ -28,7 +28,7 @@ struct LoginConfirmationResponse: Decodable {
 //
 private extension LoginRemote {
 
-    func requestForLoginRequest(with email: String) -> URLRequest {
+    func requestForLoginRequest(email: String) -> URLRequest {
         let url = URL(string: SimplenoteConstants.loginRequestURL)!
         return requestForURL(url, method: RemoteConstants.Method.POST, httpBody: [
             "request_source": SimplenoteConstants.simplenotePlatformName,
@@ -36,11 +36,11 @@ private extension LoginRemote {
         ])
     }
 
-    func requestForLoginCompletion(username: String, authCode: String) -> URLRequest {
+    func requestForLoginCompletion(email: String, authCode: String) -> URLRequest {
         let url = URL(string: SimplenoteConstants.loginCompletionURL)!
         return requestForURL(url, method: RemoteConstants.Method.POST, httpBody: [
-            "auth_key": authKey,
-            "username": username
+            "auth_code": authCode,
+            "username": email
         ])
     }
 }
