@@ -253,6 +253,7 @@ extension SPSettingsViewController {
             Task {
                 do {
                     try await self.registerPasskey(for: email, password: password)
+                    self.presentPasskeyRegistrationAlert(succeeded: true)
                 } catch {
                     NSLog("[PasskeyRegistration] Could not register passkey: %@", error.localizedDescription)
                     self.presentPasskeyRegistrationAlert(succeeded: false)
@@ -269,7 +270,8 @@ extension SPSettingsViewController {
         let registrator = PasskeyRegistrator()
 
         let challenge = try await registrator.requestChallenge(for: email, password: password)
-        registrator.attemptRegistration(with: challenge, presentationContext: self, delegate: self)
+        let registrationData = try await registrator.attemptRegistration(with: challenge, presentationContext: self, delegate: self)
+        try await PasskeyRemote().registerCredential(with: registrationData)
     }
 
     private func presentPasskeyRegistrationAlert(succeeded: Bool) {
