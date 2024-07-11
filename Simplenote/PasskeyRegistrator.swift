@@ -42,7 +42,7 @@ class PasskeyRegistrator {
         }
     }
 
-    func attemptRegistration(with passkeyChallenge: PasskeyRegistrationChallenge, presentationContext: PresentationContext, delegate: ASAuthorizationControllerDelegate) async throws -> Data {
+    func attemptRegistration(with passkeyChallenge: PasskeyRegistrationChallenge, presentationContext: PresentationContext) async throws -> Data {
         guard let challengeData = passkeyChallenge.challengeData,
               let userID = passkeyChallenge.userID else {
             throw PasskeyError.couldNotRequestRegistrationChallenge
