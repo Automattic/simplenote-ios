@@ -126,8 +126,6 @@ class SPAuthViewController: UIViewController {
     ///
     private lazy var validator = AuthenticationValidator()
 
-    private var passkeyAuthenticator: PasskeyAuthenticator?
-
     /// # Indicates if we've got valid Credentials. Doesn't display any validation warnings onscreen
     ///
     private var isInputValid: Bool {
@@ -322,12 +320,25 @@ private extension SPAuthViewController {
     }
 
     @objc func passkeyAuthAction() {
-        Task {
-            //TODO: Handle errors
-            //TODO: Handle email not valid
-            passkeyAuthenticator = PasskeyAuthenticator(authenticator: controller.simperiumService)
-            try? await passkeyAuthenticator?.attemptPasskeyAuth(for: email, in: self)
+        guard ensureWarningsAreOnScreenWhenNeeded() else {
+            return
         }
+
+        Task { @MainActor in
+            lockdownInterface()
+            do {
+                try await attemptPasskeyAuthentication(for: email)
+            } catch {
+                passkeyAuthFailed(error)
+            }
+            unlockInterface()
+        }
+    }
+
+    private func attemptPasskeyAuthentication(for email: String) async throws {
+        let passkeyAuthenticator = PasskeyAuthenticator()
+        let verify = try await passkeyAuthenticator.attemptPasskeyAuth(for: email, in: self)
+        controller.simperiumService.authenticate(withUsername: verify.username, token: verify.accessToken)
     }
 
     @IBAction func presentPasswordReset() {
@@ -628,9 +639,21 @@ extension SPAuthViewController: SPTextInputViewDelegate {
     }
 }
 
+// MARK: - Passkeys
+//
 extension SPAuthViewController: ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         view.window!
+    }
+
+    private func passkeyAuthFailed(_ error: any Error) {
+        presentPasskeyAuthError(error)
+    }
+
+    private func presentPasskeyAuthError(_ error: any Error) {
+        let alert = UIAlertController(title: AuthenticationStrings.passkeyAuthFailureTitle, message: error.localizedDescription, preferredStyle: .alert)
+        alert.addCancelActionWithTitle(AuthenticationStrings.unverifiedCancelText)
+        present(alert, animated: true)
     }
 }
 
@@ -713,6 +736,7 @@ private enum AuthenticationStrings {
     static let unverifiedErrorMessage       = NSLocalizedString("There was an preparing your verification email, please try again later", comment: "Request error alert message")
     static let verificationSentTitle        = NSLocalizedString("Check your Email", comment: "Vefification sent alert title")
     static let verificationSentTemplate     = NSLocalizedString("We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions.", comment: "Confirmation that an email has been sent")
+    static let passkeyAuthFailureTitle      = NSLocalizedString("Passkey Authentication Failed", comment: "Title for passkey authentication failure")
 }
 
 // MARK: - PasswordInsecure Alert Strings

@@ -222,16 +222,16 @@ extension SPSettingsViewController {
 // MARK: - Passkeys
 //
 extension SPSettingsViewController {
+    private var userEmail: String? {
+        SPAppDelegate.shared().simperium.user?.email
+    }
+
     @objc
     func presentPasskeyAuthenticationSetupAlert() {
-        let appDelegate = SPAppDelegate.shared()
-        guard let email = appDelegate.simperium.user?.email else {
+        guard let userEmail else {
             return
         }
-        let authenticator = PasskeyAuthenticator(authenticator: appDelegate.simperium.authenticator)
-        self.passkeyAuthenticator = authenticator
-
-        let alert = passkeyRegistrationAlert(for: email)
+        let alert = passkeyRegistrationAlert(for: userEmail)
 
         present(alert, animated: true)
     }
@@ -248,13 +248,11 @@ extension SPSettingsViewController {
                   let password = textfield.text else {
                 return
             }
+            let passkeyActivityIndicator = SPModalActivityIndicator.show(in: SPAppDelegate.shared().window)
 
-            Task {
-                do {
-                    try await self.registerPasskey(for: email, password: password)
-                } catch {
-                    // TODO: Display some action for failure
-                }
+            Task { @MainActor in
+                await self.attemptPasskeyRegistration(for: email, password: password)
+                passkeyActivityIndicator?.dismiss(animated: true)
             }
         }
         alert.addAction(action)
@@ -263,13 +261,25 @@ extension SPSettingsViewController {
         return alert
     }
 
-    private func registerPasskey(for email: String, password: String) async throws {
-        guard let passkeyAuthenticator else {
-            // TODO: Handle error
-            return
+    private func attemptPasskeyRegistration(for email: String, password: String) async {
+        do {
+            let registrator = PasskeyRegistrator()
+            try await registrator.attemptPasskeyRegistration(for: email, password: password, presentationContext: self)
+            presentPasskeyRegistrationAlert(succeeded: true)
+        } catch {
+            NSLog("[PasskeyRegistration] Could not register passkey: %@", error.localizedDescription)
+            presentPasskeyRegistrationAlert(succeeded: false)
         }
+    }
 
-        try await passkeyAuthenticator.registerPasskey(for: email, password: password, in: self)
+    private func presentPasskeyRegistrationAlert(succeeded: Bool) {
+        DispatchQueue.main.async {
+            let title = succeeded ? PasskeyAuthentication.successTitle : PasskeyAuthentication.failureTitle
+            let message = succeeded ? PasskeyAuthentication.successMessage : PasskeyAuthentication.failureMessage
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.addCancelActionWithTitle(PasskeyAuthentication.okay)
+            self.present(alert, animated: true)
+        }
     }
 }
 
@@ -311,6 +321,11 @@ private struct PasskeyAuthentication {
     static let message = NSLocalizedString("To add passkeys you must enter your password", comment: "Message prompting user for password to create passkey")
     static let submit = NSLocalizedString("Submit", comment: "Submit button title")
     static let cancel = NSLocalizedString("Cancel", comment: "Cancel button title")
+    static let failureTitle = NSLocalizedString("Passkey Registration Failed", comment: "Title for alert when passkey registration fails")
+    static let failureMessage = NSLocalizedString("Could not register passkey.  Please try again later", comment: "Message for when passkey registration fails")
+    static let okay = NSLocalizedString("Okay", comment: "confirm button title")
+    static let successTitle = NSLocalizedString("Success!!", comment: "Title for alert when passkey registration succeeds")
+    static let successMessage = NSLocalizedString("Passkey Registration Succeeded", comment: "message for alert when passkey registration succeeds")
 }
 
 // MARK: - RestorationAlert
