@@ -214,6 +214,7 @@ class SPAuthViewController: UIViewController {
         setupNavigationController()
         startListeningToNotifications()
 
+        emailInputView.isHidden = mode.isUsernameHidden
         passwordInputView.isHidden = mode.isPasswordHidden
 
         // hiding text from back button
@@ -232,7 +233,9 @@ class SPAuthViewController: UIViewController {
         // Note: running becomeFirstResponder in `viewWillAppear` has the weird side effect of breaking caret
         // repositioning in the Text Field. Seriously.
         // Ref. https://github.com/Automattic/simplenote-ios/issues/453
-        self.emailInputView.becomeFirstResponder()
+        //
+        let initialFirstResponder = mode.isPasswordHidden ? emailInputView : passwordInputView
+        initialFirstResponder?.becomeFirstResponder()
     }
 }
 
