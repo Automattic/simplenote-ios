@@ -185,7 +185,7 @@ class SPAuthViewController: UIViewController {
     ///
     private var mustResetPasswordField = false
 
-    /// # Authentication Mode: Signup or Login
+    /// # Authentication Mode: Signup / Login with Password / Login with Link
     ///
     private let mode: AuthenticationMode
 
