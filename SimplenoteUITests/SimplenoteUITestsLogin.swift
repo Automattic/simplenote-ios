@@ -17,24 +17,13 @@ class SimplenoteUISmokeTestsLogin: XCTestCase {
         let _ = attemptLogOut()
     }
 
-    func testLogInWithNoEmailNoPassword() throws {
-        trackTest()
-
-        trackStep()
-        EmailLogin.open()
-        EmailLogin.logIn(email: "", password: "")
-        app.assertLabelExists(withText: Text.loginEmailInvalid)
-        app.assertLabelExists(withText: Text.loginPasswordShort)
-    }
-
     func testLogInWithNoEmail() throws {
         trackTest()
 
         trackStep()
         EmailLogin.open()
-        EmailLogin.logIn(email: "", password: testDataPassword)
+        EmailLogin.enterEmailAndAttemptLogin(email: "")
         Assert.labelExists(labelText: Text.loginEmailInvalid)
-        Assert.labelAbsent(labelText: Text.loginPasswordShort)
     }
 
     func testLogInWithInvalidEmail() throws {
@@ -42,7 +31,7 @@ class SimplenoteUISmokeTestsLogin: XCTestCase {
 
         trackStep()
         EmailLogin.open()
-        EmailLogin.logIn(email: testDataInvalidEmail, password: testDataPassword)
+        EmailLogin.enterEmailAndAttemptLogin(email: testDataInvalidEmail)
         Assert.labelExists(labelText: Text.loginEmailInvalid)
         Assert.labelAbsent(labelText: Text.loginPasswordShort)
     }

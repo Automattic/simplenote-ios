@@ -5,8 +5,6 @@ class EmailLogin {
     class func open() {
         app.buttons[UID.Button.logIn].waitForIsHittable()
         app.buttons[UID.Button.logIn].tap()
-        app.buttons[UID.Button.logInWithEmail].waitForIsHittable()
-        app.buttons[UID.Button.logInWithEmail].tap()
     }
 
     class func close() {
@@ -34,13 +32,18 @@ class EmailLogin {
 
     class func logIn(email: String, password: String) {
         enterEmail(enteredValue: email)
-        app.buttons[UID.Button.continueWithPassword].tap()
+        app.buttons[UID.Button.logInWithEmail].tap()
         _ = app.buttons[UID.Button.logIn].waitForExistence(timeout: minLoadTimeout)
         enterPassword(enteredValue: password)
-        app.buttons[UID.Button.logIn].tap()
+        app.buttons[UID.Button.mainAction].tap()
         handleSavePasswordPrompt()
         waitForSpinnerToDisappear()
     }
+    
+    class func enterEmailAndAttemptLogin(email: String) {
+        enterEmail(enteredValue: email)
+        app.buttons[UID.Button.logInWithEmail].tap()
+     }
 
     class func enterEmail(enteredValue: String) {
         let field = app.textFields[UID.TextField.email]
