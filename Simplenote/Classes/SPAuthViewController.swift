@@ -337,8 +337,7 @@ private extension SPAuthViewController {
 
     private func attemptPasskeyAuthentication(for email: String) async throws {
         let passkeyAuthenticator = PasskeyAuthenticator()
-        let challenge = try await passkeyAuthenticator.fetchAuthChallenge(for: email)
-        let verify = try await passkeyAuthenticator.attemptPasskeyAuth(challenge: challenge, in: self)
+        let verify = try await passkeyAuthenticator.attemptPasskeyAuth(for: email, in: self)
         controller.simperiumService.authenticate(withUsername: verify.username, token: verify.accessToken)
     }
 

@@ -23,7 +23,7 @@ enum PasskeyError: Error {
 
 class PasskeyAuthControllerDelegate: NSObject, ASAuthorizationControllerDelegate {
 
-    var onCompletion: ((Result<PasskeyVerifyResponse, Error>) -> Void)?
+    var onCompletion: ((Result<PasskeyAuthResponse, Error>) -> Void)?
 
     public func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: any Error) {
         onCompletion?(.failure(error))
@@ -35,25 +35,8 @@ class PasskeyAuthControllerDelegate: NSObject, ASAuthorizationControllerDelegate
             return
         }
 
-        Task {
-            do {
-                let response = PasskeyAuthResponse(from: credential)
-                let verify = try await performPasskeyAuthentication(with: response)
-                onCompletion?(.success(verify))
-            } catch {
-                onCompletion?(.failure(error))
-            }
-        }
-    }
-
-    private func performPasskeyAuthentication(with response: PasskeyAuthResponse) async throws -> PasskeyVerifyResponse {
-        guard let json = try? JSONEncoder().encode(response),
-              let response = try? await PasskeyRemote().verifyPasskeyLogin(with: json),
-              let verifyResponse = try? JSONDecoder().decode(PasskeyVerifyResponse.self, from: response) else {
-            throw PasskeyError.authFailed
-        }
-
-        return verifyResponse
+        let response = PasskeyAuthResponse(from: credential)
+        onCompletion?(.success(response))
     }
 }
 
@@ -61,16 +44,27 @@ typealias PresentationContext = ASAuthorizationControllerPresentationContextProv
 typealias PublicKeyCredentialAssertion = ASAuthorizationPlatformPublicKeyCredentialAssertion
 
 class PasskeyAuthenticator: NSObject {
-    let passkeyRemote: PasskeyRemote
-    let internalAuthControllerDelegate: PasskeyAuthControllerDelegate
+    private let passkeyRemote: PasskeyRemote
+    private let internalAuthControllerDelegate: PasskeyAuthControllerDelegate
 
     init(passkeyRemote: PasskeyRemote = PasskeyRemote(), authControllerDelegate: PasskeyAuthControllerDelegate = .init()) {
         self.passkeyRemote = passkeyRemote
         self.internalAuthControllerDelegate = authControllerDelegate
     }
 
-    func attemptPasskeyAuth(challenge: PasskeyAuthChallenge?, in presentationContext: PresentationContext) async throws -> PasskeyVerifyResponse {
-        guard let challenge else {
+    fileprivate func extractedFunc(_ response: PasskeyAuthResponse) -> Task<(), Never> {
+        return Task {
+            do {
+                let verify = try await self.performPasskeyAuthentication(with: response)
+                continuation.resume(returning: verify)
+            } catch {
+                continuation.resume(throwing: error)
+            }
+        }
+    }
+    
+    func attemptPasskeyAuth(for email: String, in presentationContext: PresentationContext) async throws -> PasskeyVerifyResponse {
+        guard let challenge = try await passkeyRemote.passkeyAuthChallenge(for: email) else {
             throw PasskeyError.couldNotFetchAuthChallenge
         }
 
@@ -85,8 +79,9 @@ class PasskeyAuthenticator: NSObject {
         return try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<PasskeyVerifyResponse, any Error>) in
             internalAuthControllerDelegate.onCompletion = { result in
                 switch result {
-                case .success(let verify):
-                    continuation.resume(returning: verify)
+                case .success(let response):
+                    extractedFunc(response)
+
                 case .failure(let error):
                     continuation.resume(throwing: error)
                 }
@@ -96,12 +91,12 @@ class PasskeyAuthenticator: NSObject {
         }
     }
 
-    func fetchAuthChallenge(for email: String) async throws -> PasskeyAuthChallenge? {
-        guard let data = try await passkeyRemote.passkeyAuthChallenge(for: email) else {
-            return nil
+    private func performPasskeyAuthentication(with response: PasskeyAuthResponse) async throws -> PasskeyVerifyResponse {
+        guard let json = try? JSONEncoder().encode(response),
+              let response = try? await PasskeyRemote().verifyPasskeyLogin(with: json) else {
+            throw PasskeyError.authFailed
         }
 
-        let challenge = try JSONDecoder().decode(PasskeyAuthChallenge.self, from: data)
-        return challenge
+        return response
     }
 }

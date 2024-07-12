@@ -21,9 +21,9 @@ class PasskeyRegistrationControllerDelegate: NSObject, ASAuthorizationController
 typealias PublicKeyCredentialRegistration = ASAuthorizationPlatformPublicKeyCredentialRegistration
 
 class PasskeyRegistrator {
-    let passkeyRemote: PasskeyRemote
-    let internalAuthControllerDelegate: PasskeyRegistrationControllerDelegate
-    var userEmail: String? = nil
+    private let passkeyRemote: PasskeyRemote
+    private let internalAuthControllerDelegate: PasskeyRegistrationControllerDelegate
+    private var userEmail: String? = nil
 
     init(passkeyRemote: PasskeyRemote = PasskeyRemote(), registrationDelegate: PasskeyRegistrationControllerDelegate = .init()) {
         self.passkeyRemote = passkeyRemote
