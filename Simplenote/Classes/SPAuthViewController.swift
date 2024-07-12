@@ -100,7 +100,10 @@ class SPAuthViewController: UIViewController {
 
             secondaryActionButton.titleLabel?.textAlignment = .center
             secondaryActionButton.titleLabel?.numberOfLines = 0
-            secondaryActionButton.addTarget(self, action: mode.secondaryActionSelector, for: .touchUpInside)
+            
+            if let action = mode.secondaryActionSelector {
+                secondaryActionButton.addTarget(self, action: action, for: .touchUpInside)
+            }
         }
     }
 
@@ -118,6 +121,29 @@ class SPAuthViewController: UIViewController {
 
         return button
     }()
+
+    /// # Tertiary Action: Container View
+    ///
+    @IBOutlet private var tertiaryActionContainerView: UIView! {
+        didSet {
+            tertiaryActionContainerView.isHidden = mode.tertiaryActionSelector == nil
+        }
+    }
+
+    /// # Tertiary Action: WPCOM SSO
+    ///
+    @IBOutlet private var tertiaryActionButton: SPSquaredButton! {
+        didSet {
+            guard let title = mode.tertiaryActionText, let action = mode.tertiaryActionSelector else {
+                return
+            }
+            
+            tertiaryActionButton.setTitle(title, for: .normal)
+            tertiaryActionButton.setTitleColor(.white, for: .normal)
+            tertiaryActionButton.backgroundColor = .simplenoteWPBlue50Color
+            tertiaryActionButton.addTarget(self, action: action, for: .touchUpInside)
+        }
+    }
 
     /// # Simperium's Authenticator Instance
     ///
