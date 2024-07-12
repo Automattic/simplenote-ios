@@ -1,7 +1,7 @@
 import Foundation
 
 extension SPModalActivityIndicator {
-    func dismiss(_ animated: Bool) {
+    func dismiss(animated: Bool) {
         dismiss(animated, completion: nil)
     }
 }

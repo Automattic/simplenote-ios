@@ -10,9 +10,7 @@
     NSNumber *numPreviewLinesPref;
 }
 
-@property (nonatomic, strong, nullable) SPModalActivityIndicator *passkeyActivityIndicator;
-
 @end
 
-extern NSString * _Nonnull const SPAlphabeticalTagSortPref;
-extern NSString * _Nonnull const SPSustainerAppIconName;
+extern NSString * const SPAlphabeticalTagSortPref;
+extern NSString * const SPSustainerAppIconName;

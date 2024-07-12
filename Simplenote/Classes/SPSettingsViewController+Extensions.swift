@@ -248,10 +248,11 @@ extension SPSettingsViewController {
                   let password = textfield.text else {
                 return
             }
-            self.passkeyActivityIndicator = SPModalActivityIndicator.show(in: SPAppDelegate.shared().window)
+            let passkeyActivityIndicator = SPModalActivityIndicator.show(in: SPAppDelegate.shared().window)
 
-            Task {
+            Task { @MainActor in
                 await self.attemptPasskeyRegistration(for: email, password: password)
+                passkeyActivityIndicator?.dismiss(animated: true)
             }
         }
         alert.addAction(action)
@@ -269,7 +270,6 @@ extension SPSettingsViewController {
             NSLog("[PasskeyRegistration] Could not register passkey: %@", error.localizedDescription)
             presentPasskeyRegistrationAlert(succeeded: false)
         }
-        self.removeActivityIndicator()
     }
 
     private func presentPasskeyRegistrationAlert(succeeded: Bool) {
@@ -279,13 +279,6 @@ extension SPSettingsViewController {
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alert.addCancelActionWithTitle(PasskeyAuthentication.okay)
             self.present(alert, animated: true)
-        }
-    }
-
-    private func removeActivityIndicator() {
-        DispatchQueue.main.async {
-            self.passkeyActivityIndicator?.dismiss(true)
-            self.passkeyActivityIndicator = nil
         }
     }
 }
