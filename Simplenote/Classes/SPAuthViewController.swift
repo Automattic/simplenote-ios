@@ -602,16 +602,21 @@ private extension SPAuthViewController {
 private extension SPAuthViewController {
 
     func performUsernameValidation() -> AuthenticationValidator.Result {
-        validator.performUsernameValidation(username: email)
+        if mode.isUsernameHidden {
+            return .success
+        }
+
+        return validator.performUsernameValidation(username: email)
     }
 
     /// When we're in `.login` mode, password requirements are relaxed (since we must allow users with old passwords to sign in).
     /// That's where the `validationStyle` comes in.
     ///
     func performPasswordValidation() -> AuthenticationValidator.Result {
-        guard !mode.isPasswordHidden else {
+        if mode.isPasswordHidden {
             return .success
         }
+
         return validator.performPasswordValidation(username: email, password: password, style: mode.validationStyle)
     }
 
