@@ -149,20 +149,7 @@ private extension SPOnboardingViewController {
 
     @IBAction
     func loginWasPressed() {
-        let sheetController = SPSheetController()
-
-        sheetController.setTitleForButton0(title: OnboardingStrings.loginWithEmailText)
-        sheetController.setTitleForButton1(title: OnboardingStrings.loginWithWpcomText)
-
-        sheetController.onClickButton0 = { [weak self] in
-            self?.presentAuthenticationInterface(mode: .loginWithMagicLink)
-        }
-
-        sheetController.onClickButton1 = { [weak self] in
-            self?.presentWordpressSSO()
-        }
-
-        sheetController.present(from: self)
+        presentAuthenticationInterface(mode: .loginWithMagicLink)
     }
 
     @IBAction
@@ -184,10 +171,6 @@ private extension SPOnboardingViewController {
         let viewController = SPAuthViewController(controller: controller, mode: mode)
         viewController.debugEnabled = debugEnabled
         navigationController?.pushViewController(viewController, animated: true)
-    }
-
-    func presentWordpressSSO() {
-        WPAuthHandler.presentWordPressSSO(from: self)
     }
 }
 
@@ -246,10 +229,6 @@ private extension SPOnboardingViewController {
     /// - Note: Whenever the required AuthUI is already onscreen, we'll do nothing
     ///
     func presentAuthenticationInterfaceIfNeeded(mode: AuthenticationMode) {
-        if let authController = navigationController?.topViewController as? SPAuthViewController, authController.mode == mode {
-            return
-        }
-
         navigationController?.popToRootViewController(animated: true)
         presentAuthenticationInterface(mode: mode)
     }
@@ -265,8 +244,6 @@ private struct OnboardingStrings {
     static let signupText = NSLocalizedString("Sign Up", comment: "Signup Action")
     static let loginText = NSLocalizedString("Log In", comment: "Login Action")
     static let headerText = NSLocalizedString("The simplest way to keep notes.", comment: "Onboarding Header Text")
-    static let loginWithEmailText = NSLocalizedString("Log in with email", comment: "Presents the regular Email signin flow")
-    static let loginWithWpcomText = NSLocalizedString("Log in with WordPress.com", comment: "Allows the user to SignIn using their WPCOM Account")
 }
 
 private struct SignInError {
