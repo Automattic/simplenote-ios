@@ -357,20 +357,22 @@ private extension SPAuthViewController {
         safariViewController.modalPresentationStyle = .overFullScreen
         present(safariViewController, animated: true, completion: nil)
     }
+}
 
-    private func presentSignupVerification() {
+
+// MARK: - Navigation Helpers
+//
+private extension SPAuthViewController {
+
+    func presentSignupVerification() {
         let viewController = SignupVerificationViewController(email: email)
         viewController.title = title
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    private func presentMagicLinkRequestedView(email: String) {
-        let rootView = MagicLinkRequestedView(email: email)
-        let hostingController = UIHostingController(rootView: rootView)
-        hostingController.modalPresentationStyle = .formSheet
-        hostingController.sheetPresentationController?.detents = [.medium()]
-
-        present(hostingController, animated: true)
+    func presentPasswordInterface() {
+        let viewController = SPAuthViewController(controller: controller, mode: .loginWithPassword)
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
