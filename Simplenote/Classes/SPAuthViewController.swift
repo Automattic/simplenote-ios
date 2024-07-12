@@ -122,6 +122,22 @@ class SPAuthViewController: UIViewController {
         return button
     }()
 
+    /// # Tertiary Separator: COntainer
+    ///
+    @IBOutlet private var tertiaryTopSeparator: UIView! {
+        didSet {
+            tertiaryTopSeparator.isHidden = mode.tertiaryActionSelector == nil
+        }
+    }
+
+    /// # Tertiary Separator: Label (Or)
+    ///
+    @IBOutlet private var tertiaryTopSeparatorLabel: UILabel! {
+        didSet {
+            tertiaryTopSeparatorLabel.text = AuthenticationStrings.separatorText
+        }
+    }
+    
     /// # Tertiary Action: Container View
     ///
     @IBOutlet private var tertiaryActionContainerView: UIView! {
@@ -214,6 +230,7 @@ class SPAuthViewController: UIViewController {
         setupNavigationController()
         startListeningToNotifications()
 
+        refreshActions()
         refreshInputViews()
 
         // hiding text from back button
@@ -267,6 +284,11 @@ private extension SPAuthViewController {
 
     func ensureNavigationBarIsVisible() {
         navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+
+    func refreshActions() {
+        secondaryActionButton.isHidden = mode.secondaryActionSelector == nil
+        tertiaryActionButton.isHidden = mode.tertiaryActionSelector == nil
     }
 
     func refreshInputViews() {
@@ -790,6 +812,7 @@ extension AuthenticationMode {
 // MARK: - Authentication Strings
 //
 private enum AuthenticationStrings {
+    static let separatorText                = NSLocalizedString("Or", comment: "Or, used as a separator between Actions")
     static let emailPlaceholder             = NSLocalizedString("Email", comment: "Email TextField Placeholder")
     static let passwordPlaceholder          = NSLocalizedString("Password", comment: "Password TextField Placeholder")
     static let acceptActionText             = NSLocalizedString("Accept", comment: "Accept Action")
