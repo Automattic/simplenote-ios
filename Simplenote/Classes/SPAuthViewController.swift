@@ -664,12 +664,18 @@ extension SPAuthViewController: SPTextInputViewDelegate {
 struct AuthenticationMode: Equatable {
     let title: String
     let validationStyle: AuthenticationValidator.Style
+    let isUsernameHidden: Bool
+    let isPasswordHidden: Bool
+    
     let primaryActionSelector: Selector
     let primaryActionText: String
-    let secondaryActionSelector: Selector
+
+    let secondaryActionSelector: Selector?
     let secondaryActionText: String?
     let secondaryActionAttributedText: NSAttributedString?
-    let isPasswordHidden: Bool
+    
+    let tertiaryActionSelector: Selector?
+    let tertiaryActionText: String?
 }
 
 // MARK: - Default Operation Modes
@@ -679,55 +685,56 @@ extension AuthenticationMode {
     /// Login Operation Mode: Contains all of the strings + delegate wirings, so that the AuthUI handles authentication scenarios.
     ///
     static var loginWithPassword: AuthenticationMode {
-        return .init(title: AuthenticationStrings.loginTitle,
+        return .init(title: PasswordStrings.title,
                      validationStyle: .legacy,
-                     primaryActionSelector: #selector(SPAuthViewController.performLogIn),
-                     primaryActionText: AuthenticationStrings.loginPrimaryAction,
+                     isUsernameHidden: true,
+                     isPasswordHidden: false,
+                     primaryActionSelector: #selector(SPAuthViewController.performLogInWithPassword),
+                     primaryActionText: PasswordStrings.login,
                      secondaryActionSelector: #selector(SPAuthViewController.presentPasswordReset),
-                     secondaryActionText: AuthenticationStrings.loginSecondaryAction,
+                     secondaryActionText: PasswordStrings.forgotPassword,
                      secondaryActionAttributedText: nil,
-                     isPasswordHidden: false)
+                     tertiaryActionSelector: nil,
+                     tertiaryActionText: nil)
     }
 
     /// Login Operation Mode: Authentication is handled via Magic Links!
     ///
     static var loginWithMagicLink: AuthenticationMode {
-        return .init(title: AuthenticationStrings.loginTitle,
+        return .init(title: MagicLinkStrings.title,
                      validationStyle: .legacy,
+                     isUsernameHidden: false,
+                     isPasswordHidden: true,
                      primaryActionSelector: #selector(SPAuthViewController.performLogInWithMagicLink),
-                     primaryActionText: AuthenticationStrings.loginWithLinkPrimaryAction,
-                     secondaryActionSelector: #selector(SPAuthViewController.switchToLoginWithPassword),
-                     secondaryActionText: AuthenticationStrings.loginWithLinkSecondaryAction,
+                     primaryActionText: MagicLinkStrings.loginWithEmail,
+                     secondaryActionSelector: nil,
+                     secondaryActionText: nil,
                      secondaryActionAttributedText: nil,
-                     isPasswordHidden: true)
+                     tertiaryActionSelector: #selector(SPAuthViewController.performLogInWithWPCOM),
+                     tertiaryActionText: MagicLinkStrings.loginWithWPCOM)
     }
 
     /// Signup Operation Mode: Contains all of the strings + delegate wirings, so that the AuthUI handles user account creation scenarios.
     ///
     static var signup: AuthenticationMode {
-        return .init(title: AuthenticationStrings.signupTitle,
+        return .init(title: SignupStrings.title,
                      validationStyle: .strong,
+                     isUsernameHidden: false,
+                     isPasswordHidden: true,
                      primaryActionSelector: #selector(SPAuthViewController.performSignUp),
-                     primaryActionText: AuthenticationStrings.signupPrimaryAction,
+                     primaryActionText: SignupStrings.signup,
                      secondaryActionSelector: #selector(SPAuthViewController.presentTermsOfService),
                      secondaryActionText: nil,
-                     secondaryActionAttributedText: AuthenticationStrings.signupSecondaryAttributedAction,
-                     isPasswordHidden: true)
+                     secondaryActionAttributedText: SignupStrings.termsOfService,
+                     tertiaryActionSelector: nil,
+                     tertiaryActionText: nil)
     }
 }
+
 
 // MARK: - Authentication Strings
 //
 private enum AuthenticationStrings {
-    static let loginTitle                   = NSLocalizedString("Log In", comment: "LogIn Interface Title")
-    static let loginPrimaryAction           = NSLocalizedString("Log In", comment: "LogIn Action")
-    static let loginSecondaryAction         = NSLocalizedString("Forgotten password?", comment: "Password Reset Action")
-    static let loginWithLinkPrimaryAction   = NSLocalizedString("Instantly Log In with Email", comment: "LogIn with Magic Link Action")
-    static let loginWithLinkSecondaryAction = NSLocalizedString("Continue with Password", comment: "Password fallback Action")
-    static let signupTitle                  = NSLocalizedString("Sign Up", comment: "SignUp Interface Title")
-    static let signupPrimaryAction          = NSLocalizedString("Sign Up", comment: "SignUp Action")
-    static let signupSecondaryActionPrefix  = NSLocalizedString("By creating an account you agree to our", comment: "Terms of Service Legend *PREFIX*: printed in dark color")
-    static let signupSecondaryActionSuffix  = NSLocalizedString("Terms and Conditions", comment: "Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue")
     static let emailPlaceholder             = NSLocalizedString("Email", comment: "Email TextField Placeholder")
     static let passwordPlaceholder          = NSLocalizedString("Password", comment: "Password TextField Placeholder")
     static let acceptActionText             = NSLocalizedString("Accept", comment: "Accept Action")
@@ -758,20 +765,46 @@ private enum PasswordInsecureString {
     ].joined(separator: .newline)
 }
 
-// MARK: - Strings >> Authenticated Strings Convenience Properties
+
+// MARK: - Mode: .loginWithPassword
 //
-private extension AuthenticationStrings {
+private enum PasswordStrings {
+    static let title            = NSLocalizedString("Log In", comment: "LogIn Interface Title")
+    static let login            = NSLocalizedString("Log In", comment: "LogIn Action")
+    static let forgotPassword   = NSLocalizedString("Forgot your password?", comment: "Password Reset Action")
+}
+
+
+// MARK: - Mode: .loginWithMagicLink
+//
+private enum MagicLinkStrings {
+    static let title            = NSLocalizedString("Log In", comment: "LogIn Interface Title")
+    static let loginWithEmail   = NSLocalizedString("Log in with email", comment: "Sends the User an email with an Authentication Code")
+    static let loginWithWPCOM   = NSLocalizedString("Log in with WordPress.com", comment: "Password fallback Action")
+}
+
+
+// MARK: - Mode: .signup
+//
+private enum SignupStrings {
+    static let title                = NSLocalizedString("Sign Up", comment: "SignUp Interface Title")
+    static let signup               = NSLocalizedString("Sign Up", comment: "SignUp Action")
+    static let termsOfServicePrefix = NSLocalizedString("By creating an account you agree to our", comment: "Terms of Service Legend *PREFIX*: printed in dark color")
+    static let termsOfServiceSuffix = NSLocalizedString("Terms and Conditions", comment: "Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue")
+}
+
+private extension SignupStrings {
 
     /// Returns a properly formatted Secondary Action String for Signup
     ///
-    static var signupSecondaryAttributedAction: NSAttributedString {
+    static var termsOfService: NSAttributedString {
         let output = NSMutableAttributedString(string: String(), attributes: [
             .font: UIFont.preferredFont(forTextStyle: .subheadline)
         ])
 
-        output.append(string: signupSecondaryActionPrefix, foregroundColor: .simplenoteGray60Color)
+        output.append(string: termsOfServicePrefix, foregroundColor: .simplenoteGray60Color)
         output.append(string: " ")
-        output.append(string: signupSecondaryActionSuffix, foregroundColor: .simplenoteBlue60Color)
+        output.append(string: termsOfServiceSuffix, foregroundColor: .simplenoteBlue60Color)
 
         return output
     }
