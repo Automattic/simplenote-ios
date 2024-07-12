@@ -88,7 +88,11 @@ class PasskeyRemote: Remote {
         return urlRequest
     }
 
-    func verifyPasskeyLogin(with data: Data) async throws -> PasskeyVerifyResponse? {
+    func verifyPasskeyLogin(with response: PasskeyAuthResponse) async throws -> PasskeyVerifyResponse? {
+        guard let data = try? JSONEncoder().encode(response) else {
+            throw PasskeyError.authFailed
+        }
+
         let request = verifyPassKeyRequest(with: data)
         guard let data = try await performDataTask(with: request) else {
             throw PasskeyError.authFailed
