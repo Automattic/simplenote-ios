@@ -262,21 +262,14 @@ extension SPSettingsViewController {
 
     private func attemptPasskeyRegistration(for email: String, password: String) async {
         do {
-            try await self.registerPasskey(for: email, password: password)
+            let registrator = PasskeyRegistrator()
+            try await registrator.attemptPasskeyRegistration(for: email, password: password, presentationContext: self)
             presentPasskeyRegistrationAlert(succeeded: true)
         } catch {
             NSLog("[PasskeyRegistration] Could not register passkey: %@", error.localizedDescription)
             presentPasskeyRegistrationAlert(succeeded: false)
         }
         self.removeActivityIndicator()
-    }
-
-    private func registerPasskey(for email: String, password: String) async throws {
-        let registrator = PasskeyRegistrator()
-
-        let challenge = try await registrator.requestChallenge(for: email, password: password)
-        let registrationData = try await registrator.attemptRegistration(with: challenge, presentationContext: self)
-        try await PasskeyRemote().registerCredential(with: registrationData)
     }
 
     private func presentPasskeyRegistrationAlert(succeeded: Bool) {

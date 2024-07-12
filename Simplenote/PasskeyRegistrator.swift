@@ -30,7 +30,13 @@ class PasskeyRegistrator {
         self.internalAuthControllerDelegate = registrationDelegate
     }
 
-    func requestChallenge(for email: String, password: String) async throws -> PasskeyRegistrationChallenge {
+    func attemptPasskeyRegistration(for email: String, password: String, presentationContext: PresentationContext) async throws {
+        let challenge = try await requestChallenge(for: email, password: password)
+        let registrationData = try await attemptRegistration(with: challenge, presentationContext: presentationContext)
+        try await passkeyRemote.registerCredential(with: registrationData)
+    }
+
+    private func requestChallenge(for email: String, password: String) async throws -> PasskeyRegistrationChallenge {
         userEmail = email
         do {
             guard let data = try await passkeyRemote.requestChallengeResponseToCreatePasskey(forEmail: email, password: password) else {
@@ -42,7 +48,7 @@ class PasskeyRegistrator {
         }
     }
 
-    func attemptRegistration(with passkeyChallenge: PasskeyRegistrationChallenge, presentationContext: PresentationContext) async throws -> Data {
+    private func attemptRegistration(with passkeyChallenge: PasskeyRegistrationChallenge, presentationContext: PresentationContext) async throws -> Data {
         guard let challengeData = passkeyChallenge.challengeData,
               let userID = passkeyChallenge.userID else {
             throw PasskeyError.couldNotRequestRegistrationChallenge
