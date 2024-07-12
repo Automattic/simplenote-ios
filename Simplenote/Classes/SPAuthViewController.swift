@@ -318,6 +318,10 @@ private extension SPAuthViewController {
         }
     }
     
+    @IBAction func performLogInWithWPCOM() {
+        WPAuthHandler.presentWordPressSSO(from: self)
+    }
+    
     @IBAction func performSignUp() {
         guard ensureWarningsAreOnScreenWhenNeeded() else {
             return
