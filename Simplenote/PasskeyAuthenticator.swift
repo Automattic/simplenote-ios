@@ -52,17 +52,6 @@ class PasskeyAuthenticator: NSObject {
         self.internalAuthControllerDelegate = authControllerDelegate
     }
 
-    fileprivate func extractedFunc(_ response: PasskeyAuthResponse) -> Task<(), Never> {
-        return Task {
-            do {
-                let verify = try await self.performPasskeyAuthentication(with: response)
-                continuation.resume(returning: verify)
-            } catch {
-                continuation.resume(throwing: error)
-            }
-        }
-    }
-    
     func attemptPasskeyAuth(for email: String, in presentationContext: PresentationContext) async throws -> PasskeyVerifyResponse {
         guard let challenge = try await passkeyRemote.passkeyAuthChallenge(for: email) else {
             throw PasskeyError.couldNotFetchAuthChallenge
@@ -80,7 +69,14 @@ class PasskeyAuthenticator: NSObject {
             internalAuthControllerDelegate.onCompletion = { result in
                 switch result {
                 case .success(let response):
-                    extractedFunc(response)
+                    Task {
+                        do {
+                            let verify = try await self.performPasskeyAuthentication(with: response)
+                            continuation.resume(returning: verify)
+                        } catch {
+                            continuation.resume(throwing: error)
+                        }
+                    }
 
                 case .failure(let error):
                     continuation.resume(throwing: error)
@@ -93,7 +89,7 @@ class PasskeyAuthenticator: NSObject {
 
     private func performPasskeyAuthentication(with response: PasskeyAuthResponse) async throws -> PasskeyVerifyResponse {
         guard let json = try? JSONEncoder().encode(response),
-              let response = try? await PasskeyRemote().verifyPasskeyLogin(with: json) else {
+              let response = try? await passkeyRemote.verifyPasskeyLogin(with: json) else {
             throw PasskeyError.authFailed
         }
 
