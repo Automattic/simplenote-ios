@@ -161,11 +161,7 @@ class SPAuthViewController: UIViewController {
 
     /// # Authentication Mode: Signup or Login
     ///
-    private(set) var mode: AuthenticationMode {
-        didSet {
-            refreshInterface(mode: mode)
-        }
-    }
+    private let mode: AuthenticationMode
 
     /// Indicates if the Extended Debug Mode is enabled
     ///
@@ -659,59 +655,6 @@ extension SPAuthViewController: SPTextInputViewDelegate {
         }
 
         return false
-    }
-}
-
-// MARK: - Mode Switching
-//
-extension SPAuthViewController {
-    
-    func refreshInterface(mode: AuthenticationMode, animated: Bool = true) {
-        title = mode.title
-        
-        dismissAllValidationWarnings()
-
-        refreshPasswordInput(isHidden: mode.isPasswordHidden, animated: animated)
-        refreshPrimaryAction(mode: mode)
-        refreshSecondaryAction(mode: mode)
-
-        /// Workaround:
-        /// When revealing the Password Field, iOS's Autofill mechanism may not properly fill the password field!
-        passwordInputView.becomeFirstResponder()
-        emailInputView.becomeFirstResponder()
-    }
-    
-    func refreshPasswordInput(isHidden: Bool, animated: Bool) {
-        let work = {
-            self.passwordInputView.isHidden = isHidden
-        }
-        
-        guard animated else {
-            work()
-            return
-        }
-
-        UIView.animate(withDuration: UIKitConstants.animationDelayShort, animations: work)
-    }
-    
-    func refreshPrimaryAction(mode: AuthenticationMode) {
-        primaryActionButton.setTitleWithoutAnimation(mode.primaryActionText, for: .normal)
-        primaryActionButton.removeTarget(self, action: nil, for: .touchUpInside)
-        primaryActionButton.addTarget(self, action: mode.primaryActionSelector, for: .touchUpInside)
-    }
-    
-    func refreshSecondaryAction(mode: AuthenticationMode) {
-        if let title = mode.secondaryActionText {
-            secondaryActionButton.setTitleWithoutAnimation(title, for: .normal)
-        }
-        
-        if let attributedTitle = mode.secondaryActionAttributedText {
-            secondaryActionButton.setAttributedTitleWithoutAnimation(attributedTitle, for: .normal)
-        }
-
-        secondaryActionButton.setTitleColor(.simplenoteBlue60Color, for: .normal)
-        secondaryActionButton.removeTarget(self, action: nil, for: .touchUpInside)
-        secondaryActionButton.addTarget(self, action: mode.secondaryActionSelector, for: .touchUpInside)
     }
 }
 
