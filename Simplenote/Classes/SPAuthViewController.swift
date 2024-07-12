@@ -805,7 +805,7 @@ private enum PasswordInsecureString {
 // MARK: - Mode: .loginWithPassword
 //
 private enum PasswordStrings {
-    static let title            = NSLocalizedString("Log In", comment: "LogIn Interface Title")
+    static let title            = NSLocalizedString("Log In with Password", comment: "LogIn Interface Title")
     static let login            = NSLocalizedString("Log In", comment: "LogIn Action")
     static let forgotPassword   = NSLocalizedString("Forgot your password?", comment: "Password Reset Action")
 }
