@@ -340,10 +340,6 @@ private extension SPAuthViewController {
         }
     }
     
-    @IBAction func switchToLoginWithPassword() {
-        mode = .loginWithPassword
-    }
-
     @IBAction func presentPasswordReset() {
         controller.presentPasswordReset(from: self, username: email)
     }
