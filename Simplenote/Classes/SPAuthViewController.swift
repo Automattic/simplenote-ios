@@ -162,23 +162,13 @@ class SPAuthViewController: UIViewController {
     /// # Returns the EmailInputView's Text: When empty this getter returns an empty string, instead of nil
     ///
     private var email: String {
-        get {
-            return emailInputView.text ?? String()
-        }
-        set {
-            emailInputView.text = newValue
-        }
+        state.username
     }
 
     /// # Returns the PasswordInputView's Text: When empty this getter returns an empty string, instead of nil
     ///
     private var password: String {
-        get {
-            return passwordInputView.text ?? String()
-        }
-        set {
-            passwordInputView.text = newValue
-        }
+        state.password
     }
 
     /// Indicates if we must nuke the Password Field's contents whenever the App becomes active
@@ -188,6 +178,15 @@ class SPAuthViewController: UIViewController {
     /// # Authentication Mode: Signup / Login with Password / Login with Link
     ///
     private let mode: AuthenticationMode
+    
+    /// # State: Allows us to preserve State, when dealing with a multi staged flow
+    ///
+    private var state: AuthenticationState {
+        didSet {
+            ensureStylesMatchValidationState()
+            ensureWarningsAreDismissedWhenNeeded()
+        }
+    }
 
     /// Indicates if the Extended Debug Mode is enabled
     ///
@@ -201,9 +200,10 @@ class SPAuthViewController: UIViewController {
 
     /// Designated Initializer
     ///
-    init(controller: SPAuthHandler, mode: AuthenticationMode = .loginWithMagicLink) {
+    init(controller: SPAuthHandler, mode: AuthenticationMode = .loginWithMagicLink, state: AuthenticationState = .init()) {
         self.controller = controller
         self.mode = mode
+        self.state = state
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -214,8 +214,7 @@ class SPAuthViewController: UIViewController {
         setupNavigationController()
         startListeningToNotifications()
 
-        emailInputView.isHidden = mode.isUsernameHidden
-        passwordInputView.isHidden = mode.isPasswordHidden
+        refreshInputViews()
 
         // hiding text from back button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
@@ -268,6 +267,14 @@ private extension SPAuthViewController {
 
     func ensureNavigationBarIsVisible() {
         navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+
+    func refreshInputViews() {
+        emailInputView.text = state.username
+        passwordInputView.text = state.password
+        
+        emailInputView.isHidden = mode.isUsernameHidden
+        passwordInputView.isHidden = mode.isPasswordHidden
     }
 
     func ensureStylesMatchValidationState() {
@@ -400,7 +407,7 @@ private extension SPAuthViewController {
     }
     
     func presentPasswordInterface() {
-        let viewController = SPAuthViewController(controller: controller, mode: .loginWithPassword)
+        let viewController = SPAuthViewController(controller: controller, mode: .loginWithPassword, state: state)
         navigationController?.pushViewController(viewController, animated: true)
     }
 }
@@ -546,11 +553,8 @@ private extension SPAuthViewController {
         }
 
         // Prefill the LoginViewController
-        let loginViewController = SPAuthViewController(controller: controller, mode: .loginWithPassword)
-
+        let loginViewController = SPAuthViewController(controller: controller, mode: .loginWithPassword, state: state)
         loginViewController.loadViewIfNeeded()
-        loginViewController.email = email
-        loginViewController.password = password
 
         // Swap the current VC
         var updatedHierarchy = navigationController.viewControllers.filter { ($0 is SPAuthViewController) == false }
@@ -653,13 +657,20 @@ private extension SPAuthViewController {
     }
 }
 
+
 // MARK: - UITextFieldDelegate Conformance
 //
 extension SPAuthViewController: SPTextInputViewDelegate {
 
     func textInputDidChange(_ textInput: SPTextInputView) {
-        ensureStylesMatchValidationState()
-        ensureWarningsAreDismissedWhenNeeded()
+        switch textInput {
+        case emailInputView:
+            state.username = textInput.text ?? ""
+        case passwordInputView:
+            state.password = textInput.text ?? ""
+        default:
+            break
+        }
     }
 
     func textInputShouldReturn(_ textInput: SPTextInputView) -> Bool {
@@ -692,6 +703,14 @@ extension SPAuthViewController: SPTextInputViewDelegate {
 
         return false
     }
+}
+
+
+// MARK: - State
+//
+struct AuthenticationState {
+    var username = String()
+    var password = String()
 }
 
 
