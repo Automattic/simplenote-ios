@@ -73,6 +73,7 @@ class SPAuthViewController: UIViewController {
             primaryActionButton.setTitle(mode.primaryActionText, for: .normal)
             primaryActionButton.setTitleColor(.white, for: .normal)
             primaryActionButton.addTarget(self, action: mode.primaryActionSelector, for: .touchUpInside)
+            primaryActionButton.accessibilityIdentifier = "Main Action"
         }
     }
 
@@ -361,19 +362,24 @@ private extension SPAuthViewController {
             return
         }
 
-        lockdownInterface()
-
-        let email = self.email
-        controller.requestLoginEmail(username: email) { error in
-            if let error {
-                self.handleError(error: error)
-            } else {
-                self.presentMagicLinkRequestedView(email: email)
-                SPTracker.trackUserRequestedLoginLink()
-            }
-
-            self.unlockInterface()
-        }
+        presentPasswordInterface()
+        
+// TODO: Restore Mail + Code Auth Flow
+//        lockdownInterface()
+//
+//        let email = self.email
+//        controller.requestLoginEmail(username: email) { error in
+//            // TODO: 429 (Rate Limited)? push PW auth instead
+//            self.presentPasswordInterface()
+//            
+//            if let error {
+//                self.handleError(error: error)
+//            } else {
+//                SPTracker.trackUserRequestedLoginLink()
+//            }
+//            
+//            self.unlockInterface()
+//        }
     }
     
     @IBAction func performLogInWithWPCOM() {
