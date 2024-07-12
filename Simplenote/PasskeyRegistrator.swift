@@ -61,7 +61,12 @@ class PasskeyRegistrator {
         authController.presentationContextProvider = presentationContext
 
         return try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Data, any Error>) in
-            internalAuthControllerDelegate.onCompletion = { result in
+            internalAuthControllerDelegate.onCompletion = { [weak self] result in
+                guard let self else {
+                    continuation.resume(throwing: PasskeyError.registrationFailed)
+                    return
+                }
+
                 switch result {
                 case .success(let credential):
                     do {
