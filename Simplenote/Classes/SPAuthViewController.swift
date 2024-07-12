@@ -313,8 +313,8 @@ private extension SPAuthViewController {
 
         perform(mode.primaryActionSelector)
     }
-
-    @IBAction func performLogIn() {
+    
+    @IBAction func performLogInWithPassword() {
         guard ensureWarningsAreOnScreenWhenNeeded() else {
             return
         }
