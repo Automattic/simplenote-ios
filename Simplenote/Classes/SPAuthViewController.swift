@@ -331,6 +331,7 @@ private extension SPAuthViewController {
             } catch {
                 passkeyAuthFailed(error)
             }
+            unlockInterface()
         }
     }
 
@@ -339,7 +340,6 @@ private extension SPAuthViewController {
         let challenge = try await passkeyAuthenticator.fetchAuthChallenge(for: email)
         let verify = try await passkeyAuthenticator.attemptPasskeyAuth(challenge: challenge, in: self)
         controller.simperiumService.authenticate(withUsername: verify.username, token: verify.accessToken)
-        unlockInterface()
     }
 
     @IBAction func presentPasswordReset() {
@@ -648,7 +648,6 @@ extension SPAuthViewController: ASAuthorizationControllerPresentationContextProv
     }
 
     private func passkeyAuthFailed(_ error: any Error) {
-        unlockInterface()
         presentPasskeyAuthError(error)
     }
 
