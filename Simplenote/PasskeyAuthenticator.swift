@@ -66,7 +66,12 @@ class PasskeyAuthenticator: NSObject {
         controller.presentationContextProvider = presentationContext
 
         return try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<PasskeyVerifyResponse, any Error>) in
-            internalAuthControllerDelegate.onCompletion = { result in
+            internalAuthControllerDelegate.onCompletion = { [weak self] result in
+                guard let self else {
+                    continuation.resume(throwing: PasskeyError.authFailed)
+                    return
+                }
+
                 switch result {
                 case .success(let response):
                     Task {
