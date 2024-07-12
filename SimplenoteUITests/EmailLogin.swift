@@ -8,10 +8,19 @@ class EmailLogin {
     }
 
     class func close() {
-        let backButton = app.navigationBars[UID.NavBar.logIn].buttons[UID.Button.back]
-        guard backButton.isHittable else { return }
+        /// Back from Password > Email UI
+        let backFromPasswordUI = app.navigationBars[UID.NavBar.logInWithPassword].buttons.element(boundBy: 0)
+        if backFromPasswordUI.exists {
+            backFromPasswordUI.tap()
+            _ = app.navigationBars[UID.NavBar.logIn].waitForExistence(timeout: minLoadTimeout)
+        }
 
-        backButton.tap()
+        /// Back from Email UI > Onboarding
+        let backButton = app.navigationBars[UID.NavBar.logIn].buttons.element(boundBy: 0)
+        if backButton.isHittable {
+            backButton.tap()
+        }
+
         handleSavePasswordPrompt()
     }
 
