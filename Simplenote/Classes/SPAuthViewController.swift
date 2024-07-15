@@ -65,6 +65,19 @@ class SPAuthViewController: UIViewController {
             passwordWarningLabel.isHidden = true
         }
     }
+    
+    /// # Password: Input Field
+    ///
+    @IBOutlet private var codeInputView: SPTextInputView! {
+        didSet {
+            codeInputView.placeholder = AuthenticationStrings.codePlaceholder
+            codeInputView.passwordRules = UITextInputPasswordRules(descriptor: SimplenoteConstants.passwordRules)
+            codeInputView.returnKeyType = .done
+            codeInputView.textColor = .simplenoteGray80Color
+            codeInputView.delegate = self
+            codeInputView.textContentType = .oneTimeCode
+        }
+    }
 
     /// # Primary Action: LogIn / SignUp
     ///
