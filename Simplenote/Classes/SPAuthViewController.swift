@@ -402,29 +402,47 @@ private extension SPAuthViewController {
         performSimperiumAuthentication()
     }
     
-    @IBAction func performLogInWithMagicLink() {
+    @IBAction func requestLogInCode() {
         guard ensureWarningsAreOnScreenWhenNeeded() else {
             return
         }
-
-        presentPasswordInterface()
         
-// TODO: Restore Mail + Code Auth Flow
-//        lockdownInterface()
-//
-//        let email = self.email
-//        controller.requestLoginEmail(username: email) { error in
-//            // TODO: 429 (Rate Limited)? push PW auth instead
-//            self.presentPasswordInterface()
-//            
-//            if let error {
-//                self.handleError(error: error)
-//            } else {
-//                SPTracker.trackUserRequestedLoginLink()
-//            }
-//            
-//            self.unlockInterface()
-//        }
+        lockdownInterface()
+
+        controller.requestLoginEmail(username: email) { error in
+// TODO: 429 (Rate Limited)? push PW auth instead
+
+            if let error {
+                self.handleError(error: error)
+            } else {
+                self.presentCodeInterface()
+                SPTracker.trackUserRequestedLoginLink()
+            }
+
+            self.unlockInterface()
+        }
+    }
+    
+    @IBAction func performLogInWithCode() {
+        Task { @MainActor in
+            await performLogInWithCodeInTask()
+        }
+    }
+    
+    @MainActor
+    private func performLogInWithCodeInTask() async {
+        lockdownInterface()
+        
+        do {
+            try await controller.loginWithCode(username: state.username, code: state.code)
+            SPTracker.trackUserConfirmedLoginLink()
+        } catch let error as SPAuthError {
+            self.handleError(error: error)
+        } catch {
+// TODO: Fixme
+        }
+        
+        unlockInterface()
     }
     
     @IBAction func performLogInWithWPCOM() {
