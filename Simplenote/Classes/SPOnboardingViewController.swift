@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 import SafariServices
+import SwiftUI
 
 // MARK: - SPOnboardingViewController
 //
@@ -155,7 +156,7 @@ private extension SPOnboardingViewController {
         sheetController.setTitleForButton2(title: OnboardingStrings.loginWithWpcomText)
 
         sheetController.onClickButton0 = { [weak self] in
-            self?.presentAuthenticationInterface(mode: .login)
+            self?.presentAuthenticationInterface(mode: .loginWithMagicLink)
         }
 
         sheetController.onClickButton1 = { [weak self] in
@@ -201,8 +202,10 @@ private extension SPOnboardingViewController {
 
     func startListeningToNotifications() {
         let name = NSNotification.Name(rawValue: kSignInErrorNotificationName)
-
-        NotificationCenter.default.addObserver(self, selector: #selector(handleSignInError), name: name, object: nil)
+        
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(handleSignInError), name: name, object: nil)
+        nc.addObserver(self, selector: #selector(handleMagicLinkAuthDidFail), name: .magicLinkAuthDidFail, object: nil)
     }
 
     @objc func handleSignInError(note: Notification) {
@@ -215,8 +218,48 @@ private extension SPOnboardingViewController {
         presentedViewController?.dismiss(animated: true, completion: nil)
         present(alertController, animated: true, completion: nil)
     }
-
+    
+    @objc func handleMagicLinkAuthDidFail() {
+        DispatchQueue.main.async {
+            self.presentMagicLinkInvalidView()
+        }
+    }
 }
+
+
+// MARK: - Magic Link Helpers
+//
+private extension SPOnboardingViewController {
+
+    /// Presents the Invalid Magic Link UI
+    ///
+    private func presentMagicLinkInvalidView() {
+        var rootView = MagicLinkInvalidView()
+        rootView.onPressRequestNewLink = { [weak self] in
+            self?.presentAuthenticationInterfaceIfNeeded(mode: .loginWithMagicLink)
+        }
+
+        let hostingController = UIHostingController(rootView: rootView)
+        hostingController.modalPresentationStyle = .formSheet
+        hostingController.sheetPresentationController?.detents = [.medium()]
+
+        let presenter = presentedViewController ?? self
+        presenter.present(hostingController, animated: true)
+    }
+    
+    /// Dismisses all of the presented ViewControllers, and pushes the Authentication UI with the specified mode.
+    /// - Note: Whenever the required AuthUI is already onscreen, we'll do nothing
+    ///
+    func presentAuthenticationInterfaceIfNeeded(mode: AuthenticationMode) {
+        if let authController = navigationController?.topViewController as? SPAuthViewController, authController.mode == mode {
+            return
+        }
+
+        navigationController?.popToRootViewController(animated: true)
+        presentAuthenticationInterface(mode: mode)
+    }
+}
+
 
 // MARK: - Private Types
 //

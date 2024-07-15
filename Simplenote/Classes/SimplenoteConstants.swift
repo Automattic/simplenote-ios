@@ -28,6 +28,10 @@ class SimplenoteConstants: NSObject {
     /// Simplenote: Published Notes base URL
     ///
     static let simplenotePublishedBaseURL = "http://simp.ly/publish/"
+    
+    /// Simplenote: Current Platform
+    ///
+    static let simplenotePlatformName = "iOS"
 
     /// Simplenote: Domain for shared group directory
     ///
@@ -41,6 +45,8 @@ class SimplenoteConstants: NSObject {
     ///
     static let resetPasswordURL     = currentEngineBaseURL.appendingPathComponent("/reset/?redirect=simplenote://launch&email=")
     static let settingsURL          = currentEngineBaseURL.appendingPathComponent("/settings")
+    static let loginRequestURL      = currentEngineBaseURL.appendingPathComponent("/account/request-login")
+    static let loginCompletionURL   = currentEngineBaseURL.appendingPathComponent("/account/complete-login")
     static let signupURL            = currentEngineBaseURL.appendingPathComponent("/account/request-signup")
     static let verificationURL      = currentEngineBaseURL.appendingPathComponent("/account/verify-email/")
     static let accountDeletionURL   = currentEngineBaseURL.appendingPathComponent("/account/request-delete/")

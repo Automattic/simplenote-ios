@@ -322,6 +322,25 @@
     [self trackAutomatticEventWithName:@"user_signed_out" properties:nil];
 }
 
+
+#pragma mark - Login Links
+
++ (void)trackLoginLinkRequested
+{
+    [self trackAutomatticEventWithName:@"login_link_requested" properties:nil];
+}
+
++ (void)trackLoginLinkConfirmationSuccess
+{
+    [self trackAutomatticEventWithName:@"login_link_confirmation_success" properties:nil];
+}
+
++ (void)trackLoginLinkConfirmationFailure
+{
+    [self trackAutomatticEventWithName:@"login_link_confirmation_failure" properties:nil];
+}
+
+
 #pragma mark - WP.com Sign In
 
 + (void)trackWPCCButtonPressed

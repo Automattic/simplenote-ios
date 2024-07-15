@@ -4,6 +4,7 @@
 - Fixed issue where notes selection was lost when app backgrounded
 - Fixed an issue can activate the faceid switch without a passcode
 - Added passkey authentication support
+- Magic Link Login Support
 
 4.51
 -----

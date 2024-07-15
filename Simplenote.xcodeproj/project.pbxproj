@@ -295,6 +295,8 @@
 		B5476BC123D8E5D0000E7723 /* String+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5476BC023D8E5D0000E7723 /* String+Simplenote.swift */; };
 		B549E249290B3BDB0072C3E8 /* Preferences+IAP.swift in Sources */ = {isa = PBXBuildFile; fileRef = B549E248290B3BDB0072C3E8 /* Preferences+IAP.swift */; };
 		B549E24B290B3DD70072C3E8 /* StoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B549E24A290B3DD70072C3E8 /* StoreConstants.swift */; };
+		B54A11C22C135EA2002AC8AA /* UIButton+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54A11C12C135EA2002AC8AA /* UIButton+Simplenote.swift */; };
+		B54A11C42C136225002AC8AA /* MagicLinkRequestedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54A11C32C136225002AC8AA /* MagicLinkRequestedView.swift */; };
 		B54B04D82407169500401FBB /* SPAppDelegate+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54B04D72407169500401FBB /* SPAppDelegate+Extensions.swift */; };
 		B54D9C572909BA2600D0E0EC /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D9C562909BA2600D0E0EC /* StoreManager.swift */; };
 		B54D9C592909CC4400D0E0EC /* StoreProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D9C582909CC4400D0E0EC /* StoreProduct.swift */; };
@@ -308,6 +310,7 @@
 		B55E428C22A1A4550018C0CE /* SPSortOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55E428B22A1A4550018C0CE /* SPSortOrderViewController.swift */; };
 		B56315BE236BD9970066C151 /* UIKitConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB169B22FB2DF300B4EBA5 /* UIKitConstants.swift */; };
 		B5686178195B9E93005F1245 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2F149471799F5A500DC9690 /* libsqlite3.dylib */; };
+		B5699B092C1246C40096D6B7 /* LoginRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5699B082C1246C40096D6B7 /* LoginRemote.swift */; };
 		B56A695822F9CD1500B90398 /* SPOnboardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B56A695622F9CD1500B90398 /* SPOnboardingViewController.xib */; };
 		B56A695922F9CD1500B90398 /* SPOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56A695722F9CD1500B90398 /* SPOnboardingViewController.swift */; };
 		B56A695B22F9CD4E00B90398 /* UINavigationBar+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56A695A22F9CD4E00B90398 /* UINavigationBar+Simplenote.swift */; };
@@ -324,6 +327,7 @@
 		B56AA00022AEDD06003F85CB /* PlainTextExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56A9FFF22AEDD06003F85CB /* PlainTextExtractor.swift */; };
 		B56AA00622B03CBB003F85CB /* Extractors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56AA00522B03CBB003F85CB /* Extractors.swift */; };
 		B56B357F1AC3565600B9F365 /* UITextView+Simplenote.m in Sources */ = {isa = PBXBuildFile; fileRef = B56B357D1AC3565600B9F365 /* UITextView+Simplenote.m */; };
+		B56BAF612C2DE317005065C9 /* MagicLinkInvalidView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56BAF602C2DE317005065C9 /* MagicLinkInvalidView.swift */; };
 		B56C8CA2234CEAF100FE55F4 /* TagListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B56C8CA1234CEAF100FE55F4 /* TagListViewController.xib */; };
 		B56E763422BD394C00C5AA47 /* UIImage+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E763322BD394C00C5AA47 /* UIImage+Simplenote.swift */; };
 		B56E763622BD565700C5AA47 /* UIView+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E763522BD565700C5AA47 /* UIView+Simplenote.swift */; };
@@ -1000,6 +1004,8 @@
 		B5476BC023D8E5D0000E7723 /* String+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "String+Simplenote.swift"; path = "Classes/String+Simplenote.swift"; sourceTree = "<group>"; };
 		B549E248290B3BDB0072C3E8 /* Preferences+IAP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Preferences+IAP.swift"; sourceTree = "<group>"; };
 		B549E24A290B3DD70072C3E8 /* StoreConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreConstants.swift; sourceTree = "<group>"; };
+		B54A11C12C135EA2002AC8AA /* UIButton+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Simplenote.swift"; sourceTree = "<group>"; };
+		B54A11C32C136225002AC8AA /* MagicLinkRequestedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicLinkRequestedView.swift; sourceTree = "<group>"; };
 		B54B04D72407169500401FBB /* SPAppDelegate+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SPAppDelegate+Extensions.swift"; sourceTree = "<group>"; };
 		B54D9C542909B21700D0E0EC /* Simplenote 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Simplenote 6.xcdatamodel"; sourceTree = "<group>"; };
 		B54D9C562909BA2600D0E0EC /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
@@ -1025,6 +1031,7 @@
 		B55E428B22A1A4550018C0CE /* SPSortOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPSortOrderViewController.swift; path = Classes/SPSortOrderViewController.swift; sourceTree = "<group>"; };
 		B5651239243BC063001EFE77 /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B566A1DD189AA74600DC3F2D /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		B5699B082C1246C40096D6B7 /* LoginRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRemote.swift; sourceTree = "<group>"; };
 		B56A695622F9CD1500B90398 /* SPOnboardingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SPOnboardingViewController.xib; path = Classes/SPOnboardingViewController.xib; sourceTree = "<group>"; };
 		B56A695722F9CD1500B90398 /* SPOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SPOnboardingViewController.swift; path = Classes/SPOnboardingViewController.swift; sourceTree = "<group>"; };
 		B56A695A22F9CD4E00B90398 /* UINavigationBar+Simplenote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UINavigationBar+Simplenote.swift"; path = "Classes/UINavigationBar+Simplenote.swift"; sourceTree = "<group>"; };
@@ -1042,6 +1049,7 @@
 		B56AA00522B03CBB003F85CB /* Extractors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extractors.swift; sourceTree = "<group>"; };
 		B56B357C1AC3565600B9F365 /* UITextView+Simplenote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITextView+Simplenote.h"; path = "Classes/UITextView+Simplenote.h"; sourceTree = "<group>"; };
 		B56B357D1AC3565600B9F365 /* UITextView+Simplenote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITextView+Simplenote.m"; path = "Classes/UITextView+Simplenote.m"; sourceTree = "<group>"; };
+		B56BAF602C2DE317005065C9 /* MagicLinkInvalidView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicLinkInvalidView.swift; sourceTree = "<group>"; };
 		B56C8CA1234CEAF100FE55F4 /* TagListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = TagListViewController.xib; path = Classes/TagListViewController.xib; sourceTree = "<group>"; };
 		B56E763322BD394C00C5AA47 /* UIImage+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIImage+Simplenote.swift"; path = "Classes/UIImage+Simplenote.swift"; sourceTree = "<group>"; };
 		B56E763522BD565700C5AA47 /* UIView+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIView+Simplenote.swift"; path = "Classes/UIView+Simplenote.swift"; sourceTree = "<group>"; };
@@ -2040,6 +2048,7 @@
 				B50F479E1D1D77FC00822748 /* UIAlertController+Helpers.swift */,
 				B5757367232BED0700443C2E /* UIBezierPath+Simplenote.swift */,
 				B570D2D82360F16F006E1C85 /* UIBlurEffect+Simplenote.swift */,
+				B54A11C12C135EA2002AC8AA /* UIButton+Simplenote.swift */,
 				B575736B232D454300443C2E /* UIColor+Helpers.swift */,
 				B58BF1FA23D78ADF00515B50 /* UIContextualAction+Simplenote.swift */,
 				B5BA5B072551FB3C002AAD43 /* UIDevice+Simplenote.swift */,
@@ -2096,6 +2105,8 @@
 				B5AB169722FA124F00B4EBA5 /* SPSheetController.swift */,
 				B5AB169922FA128000B4EBA5 /* SPSheetController.xib */,
 				A6CDD9C725F0163D00E0BC4D /* MagicLinkAuthenticator.swift */,
+				B54A11C32C136225002AC8AA /* MagicLinkRequestedView.swift */,
+				B56BAF602C2DE317005065C9 /* MagicLinkInvalidView.swift */,
 				A628BEB425ECD97900121B64 /* SignupVerificationViewController.swift */,
 				A628BEB525ECD97900121B64 /* SignupVerificationViewController.xib */,
 			);
@@ -2462,6 +2473,7 @@
 		BA57692A269D2103008B510E /* Remotes */ = {
 			isa = PBXGroup;
 			children = (
+				B5699B082C1246C40096D6B7 /* LoginRemote.swift */,
 				A6C7647F25E9131C00A39067 /* SignupRemote.swift */,
 				A6CC0B0625B8287F00F12A85 /* AccountRemote.swift */,
 				BA5768E2269A803F008B510E /* Remote.swift */,
@@ -3484,6 +3496,7 @@
 				E215C793180B115C00AD36B5 /* SPNavigationController.m in Sources */,
 				B5DF734422A56E2800602CE7 /* UserDefaults+Simplenote.swift in Sources */,
 				A6DB2C1525BF5D6E00437B99 /* SPMarkdownPreviewViewController+Extensions.swift in Sources */,
+				B56BAF612C2DE317005065C9 /* MagicLinkInvalidView.swift in Sources */,
 				B56A696022F9D53400B90398 /* SPAuthHandler.swift in Sources */,
 				A6E1E78924B5196C008A44BC /* SPNoteHistoryControllerDelegate.swift in Sources */,
 				B5B9AB4522EE8AF0001CB0AD /* UIImageName.swift in Sources */,
@@ -3514,6 +3527,7 @@
 				B52BB74E22CFD1660042C162 /* SimplenoteActivityItemSource.swift in Sources */,
 				B537730F252E14C600BC78C5 /* OptionsViewController.swift in Sources */,
 				B56A696722F9D55F00B90398 /* UIView+Animations.swift in Sources */,
+				B54A11C22C135EA2002AC8AA /* UIButton+Simplenote.swift in Sources */,
 				BA9C7ED02BEE9BA7007A8460 /* ShortcutIntents.intentdefinition in Sources */,
 				BA3856CD2681715700F388CC /* CoreDataManager.swift in Sources */,
 				A60DF30825A44F0F00FDADF3 /* PinLockRemoveController.swift in Sources */,
@@ -3655,6 +3669,7 @@
 				B52BB75022CFD18F0042C162 /* UIActivity+Simplenote.swift in Sources */,
 				F9E197D42283D05C0092B3E1 /* CrashLogging.swift in Sources */,
 				BA9B59022685549F00DAD1ED /* StorageSettings.swift in Sources */,
+				B5699B092C1246C40096D6B7 /* LoginRemote.swift in Sources */,
 				DE7E545B214E34C8008D9928 /* NSString+Count.swift in Sources */,
 				A6E6CE0025A4B0A9005A92DB /* PinLockVerifyController.swift in Sources */,
 				BA55124E2600210B00D8F882 /* TimerFactory.swift in Sources */,
@@ -3754,6 +3769,7 @@
 				B5CBEF4222D3B419009DBE67 /* Bundle+Simplenote.swift in Sources */,
 				B575736C232D454300443C2E /* UIColor+Helpers.swift in Sources */,
 				37E55A6721BF2B1800F14241 /* SPTextAttachment.swift in Sources */,
+				B54A11C42C136225002AC8AA /* MagicLinkRequestedView.swift in Sources */,
 				BA8FC2A5267AC7470082962E /* SharedStorageMigrator.swift in Sources */,
 				BAFFE74E2C34BE7800673C1C /* SPModalActivityIndicator.swift in Sources */,
 				A69F850F253EC2B2005140F2 /* SPCardConfigurable.swift in Sources */,

@@ -83,6 +83,11 @@
 + (void)trackUserSignedIn;
 + (void)trackUserSignedOut;
 
+#pragma mark - Login Links
++ (void)trackLoginLinkRequested;
++ (void)trackLoginLinkConfirmationSuccess;
++ (void)trackLoginLinkConfirmationFailure;
+
 #pragma mark - WP.com Sign In
 + (void)trackWPCCButtonPressed;
 + (void)trackWPCCLoginSucceeded;
