@@ -244,8 +244,9 @@ class SPAuthViewController: UIViewController {
         setupNavigationController()
         startListeningToNotifications()
 
-        refreshActions()
-        refreshInputViews()
+        refreshVisibleElements()
+        refreshActionViews()
+        reloadInputViewsFromState()
 
         // hiding text from back button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
@@ -300,17 +301,50 @@ private extension SPAuthViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
-    func refreshActions() {
-        secondaryActionButton.isHidden = mode.secondaryActionSelector == nil
-        tertiaryActionButton.isHidden = mode.tertiaryActionSelector == nil
+    func refreshVisibleElements() {
+        let visibleElements = mode.visibleElements
+        
+        emailInputView.isHidden         = !visibleElements.contains(.username)
+        passwordInputView.isHidden      = !visibleElements.contains(.password)
+        codeInputView.isHidden          = !visibleElements.contains(.code)
+        actionsSeparator.isHidden       = !visibleElements.contains(.actionSeparator)
     }
+    
+    func refreshActionViews() {
+        let viewMap: [AuthenticationActionName: UIButton] = [
+            .primary: primaryActionButton,
+            .secondary: secondaryActionButton,
+            .tertiary: tertiaryActionButton,
+            .quaternary: quaternaryActionButton
+        ]
+        
+        for actionView in allActionViews {
+            actionView.isHidden = true
+        }
 
-    func refreshInputViews() {
+        for descriptor in mode.actions {
+            guard let actionView = viewMap[descriptor.name] else {
+                assertionFailure()
+                continue
+            }
+
+            if let title = descriptor.text {
+                actionView.setTitle(title, for: .normal)
+            }
+            
+            if let attributedTitle = descriptor.attributedText {
+                actionView.setAttributedTitle(attributedTitle, for: .normal)
+            }
+
+            actionView.addTarget(self, action: descriptor.selector, for: .touchUpInside)
+            actionView.isHidden = false
+        }
+    }
+    
+    func reloadInputViewsFromState() {
         emailInputView.text = state.username
         passwordInputView.text = state.password
-        
-        emailInputView.isHidden = mode.isUsernameHidden
-        passwordInputView.isHidden = mode.isPasswordHidden
+        codeInputView.text = state.code
     }
 
     func ensureStylesMatchValidationState() {
