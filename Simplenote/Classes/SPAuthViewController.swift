@@ -672,7 +672,7 @@ private extension SPAuthViewController {
 private extension SPAuthViewController {
 
     func performUsernameValidation() -> AuthenticationValidator.Result {
-        if mode.isUsernameHidden {
+        guard mode.visibleElements.contains(.username) else {
             return .success
         }
 
@@ -683,7 +683,7 @@ private extension SPAuthViewController {
     /// That's where the `validationStyle` comes in.
     ///
     func performPasswordValidation() -> AuthenticationValidator.Result {
-        if mode.isPasswordHidden {
+        guard mode.visibleElements.contains(.password) else {
             return .success
         }
 
