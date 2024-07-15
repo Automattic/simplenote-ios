@@ -387,8 +387,13 @@ private extension SPAuthViewController {
         guard isInputValid else {
             return
         }
+        
+        guard let primaryActionDescriptor = mode.actions.first(where: { $0.name == .primary}) else {
+            assertionFailure()
+            return
+        }
 
-        perform(mode.primaryActionSelector)
+        perform(primaryActionDescriptor.selector)
     }
     
     @IBAction func performLogInWithPassword() {
