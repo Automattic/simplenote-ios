@@ -83,9 +83,7 @@ class SPAuthViewController: UIViewController {
     ///
     @IBOutlet private var primaryActionButton: SPSquaredButton! {
         didSet {
-            primaryActionButton.setTitle(mode.primaryActionText, for: .normal)
             primaryActionButton.setTitleColor(.white, for: .normal)
-            primaryActionButton.addTarget(self, action: mode.primaryActionSelector, for: .touchUpInside)
             primaryActionButton.accessibilityIdentifier = "Main Action"
         }
     }
@@ -103,21 +101,9 @@ class SPAuthViewController: UIViewController {
     ///
     @IBOutlet private var secondaryActionButton: UIButton! {
         didSet {
-            if let title = mode.secondaryActionText {
-                secondaryActionButton.setTitle(title, for: .normal)
-                secondaryActionButton.setTitleColor(.simplenoteBlue60Color, for: .normal)
-            }
-
-            if let attributedTitle = mode.secondaryActionAttributedText {
-                secondaryActionButton.setAttributedTitle(attributedTitle, for: .normal)
-            }
-
+            secondaryActionButton.setTitleColor(.simplenoteBlue60Color, for: .normal)
             secondaryActionButton.titleLabel?.textAlignment = .center
             secondaryActionButton.titleLabel?.numberOfLines = 0
-            
-            if let action = mode.secondaryActionSelector {
-                secondaryActionButton.addTarget(self, action: action, for: .touchUpInside)
-            }
         }
     }
 
