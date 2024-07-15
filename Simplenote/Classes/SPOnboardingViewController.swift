@@ -221,7 +221,7 @@ private extension SPOnboardingViewController {
         hostingController.modalPresentationStyle = .formSheet
         hostingController.sheetPresentationController?.detents = [.medium()]
 
-        let presenter = presentedViewController ?? self
+        let presenter = navigationController?.visibleViewController ?? self
         presenter.present(hostingController, animated: true)
     }
     
