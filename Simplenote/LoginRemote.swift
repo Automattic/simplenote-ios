@@ -5,12 +5,12 @@ import Foundation
 class LoginRemote: Remote {
 
     func requestLoginEmail(email: String, completion: @escaping (_ result: Result<Data?, RemoteError>) -> Void) {
-        let request = requestForLoginRequest(with: email)
+        let request = requestForLoginRequest(email: email)
         performDataTask(with: request, completion: completion)
     }
 
-    func requestLoginConfirmation(authKey: String, authCode: String) async throws -> LoginConfirmationResponse {
-        let request = requestForLoginCompletion(authKey: authKey, authCode: authCode)
+    func requestLoginConfirmation(email: String, authCode: String) async throws -> LoginConfirmationResponse {
+        let request = requestForLoginCompletion(email: email, authCode: authCode)
         return try await performDataTask(with: request, type: LoginConfirmationResponse.self)
     }
 }
@@ -28,7 +28,7 @@ struct LoginConfirmationResponse: Decodable {
 //
 private extension LoginRemote {
 
-    func requestForLoginRequest(with email: String) -> URLRequest {
+    func requestForLoginRequest(email: String) -> URLRequest {
         let url = URL(string: SimplenoteConstants.loginRequestURL)!
         return requestForURL(url, method: RemoteConstants.Method.POST, httpBody: [
             "request_source": SimplenoteConstants.simplenotePlatformName,
@@ -36,11 +36,11 @@ private extension LoginRemote {
         ])
     }
 
-    func requestForLoginCompletion(authKey: String, authCode: String) -> URLRequest {
+    func requestForLoginCompletion(email: String, authCode: String) -> URLRequest {
         let url = URL(string: SimplenoteConstants.loginCompletionURL)!
         return requestForURL(url, method: RemoteConstants.Method.POST, httpBody: [
-            "auth_key": authKey,
-            "auth_code": authCode
+            "auth_code": authCode,
+            "username": email
         ])
     }
 }
