@@ -383,6 +383,7 @@
 		B5C2EDD4255ACB4900C09B32 /* InterlinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C2EDD1255ACB4800C09B32 /* InterlinkViewController.swift */; };
 		B5C2EDF0255AFB6C00C09B32 /* PassthruView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C2EDEF255AFB6C00C09B32 /* PassthruView.swift */; };
 		B5C2EDFE255B19D300C09B32 /* NSAttributedString+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C2EDFD255B19D300C09B32 /* NSAttributedString+Simplenote.swift */; };
+		B5C99A512C45B94600728813 /* AuthenticationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C99A502C45B94600728813 /* AuthenticationMode.swift */; };
 		B5C9F71E193E75FE00FD2491 /* SPDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5C9F71C193E75FE00FD2491 /* SPDebugViewController.m */; };
 		B5CBEF4022D3AD92009DBE67 /* MigrationsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CBEF3F22D3AD92009DBE67 /* MigrationsHandler.swift */; };
 		B5CBEF4222D3B419009DBE67 /* Bundle+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CBEF4122D3B419009DBE67 /* Bundle+Simplenote.swift */; };
@@ -1103,6 +1104,7 @@
 		B5C2EDD1255ACB4800C09B32 /* InterlinkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InterlinkViewController.swift; path = Classes/InterlinkViewController.swift; sourceTree = "<group>"; };
 		B5C2EDEF255AFB6C00C09B32 /* PassthruView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PassthruView.swift; path = Classes/PassthruView.swift; sourceTree = "<group>"; };
 		B5C2EDFD255B19D300C09B32 /* NSAttributedString+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSAttributedString+Simplenote.swift"; path = "Classes/NSAttributedString+Simplenote.swift"; sourceTree = "<group>"; };
+		B5C99A502C45B94600728813 /* AuthenticationMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationMode.swift; sourceTree = "<group>"; };
 		B5C9F71B193E75FE00FD2491 /* SPDebugViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPDebugViewController.h; path = Classes/SPDebugViewController.h; sourceTree = "<group>"; };
 		B5C9F71C193E75FE00FD2491 /* SPDebugViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPDebugViewController.m; path = Classes/SPDebugViewController.m; sourceTree = "<group>"; };
 		B5CA3E0D22B1503700AC0D47 /* RELEASE-NOTES.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "RELEASE-NOTES.txt"; sourceTree = "<group>"; };
@@ -2078,6 +2080,7 @@
 				B56A695622F9CD1500B90398 /* SPOnboardingViewController.xib */,
 				B56A695D22F9D53300B90398 /* SPAuthError.swift */,
 				B56A695C22F9D53300B90398 /* SPAuthHandler.swift */,
+				B5C99A502C45B94600728813 /* AuthenticationMode.swift */,
 				B56A695F22F9D53400B90398 /* SPAuthViewController.swift */,
 				B56A695E22F9D53300B90398 /* SPAuthViewController.xib */,
 				B5AB169722FA124F00B4EBA5 /* SPSheetController.swift */,
@@ -3735,6 +3738,7 @@
 				A6BF0E352567B29B008DE8E0 /* RoundedCrossButton.swift in Sources */,
 				375D24B121E01131007AB25A /* html5_blocks.c in Sources */,
 				B504D4DE23D2014200AEED27 /* IndexPath+Simplenote.swift in Sources */,
+				B5C99A512C45B94600728813 /* AuthenticationMode.swift in Sources */,
 				A6CC0B0725B8287F00F12A85 /* AccountRemote.swift in Sources */,
 				A61471B925D70C190065D849 /* PopoverViewController.swift in Sources */,
 				B536988D25646C9400817E30 /* CGRect+Simplenote.swift in Sources */,
