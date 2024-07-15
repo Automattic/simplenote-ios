@@ -315,7 +315,7 @@ private extension SPAuthViewController {
                 self.handleError(error: error)
             } else {
                 self.presentMagicLinkRequestedView(email: email)
-                SPTracker.trackUserRequestedLoginLink()
+                SPTracker.trackLoginLinkRequested()
             }
 
             self.unlockInterface()
