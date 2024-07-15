@@ -53,9 +53,7 @@ class PasskeyAuthenticator: NSObject {
     }
 
     func attemptPasskeyAuth(for email: String, in presentationContext: PresentationContext) async throws -> PasskeyVerifyResponse {
-        guard let challenge = try await passkeyRemote.passkeyAuthChallenge(for: email) else {
-            throw PasskeyError.couldNotFetchAuthChallenge
-        }
+        let challenge = try await passkeyRemote.passkeyAuthChallenge(for: email)
 
         let challengeData = try Data.decodeUrlSafeBase64(challenge.challenge)
         let provider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: challenge.relayingParty)

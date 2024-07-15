@@ -70,11 +70,9 @@ class PasskeyRemote: Remote {
         return urlRequest
     }
 
-    func passkeyAuthChallenge(for email: String) async throws -> PasskeyAuthChallenge? {
+    func passkeyAuthChallenge(for email: String) async throws -> PasskeyAuthChallenge {
         let request = passkeyAuthChallengeRequest(forEmail: email)
-        guard let data = try await performDataTask(with: request) else {
-            return nil
-        }
+        let data = try await performDataTask(with: request)
 
         return try JSONDecoder().decode(PasskeyAuthChallenge.self, from: data)
     }
@@ -88,16 +86,14 @@ class PasskeyRemote: Remote {
         return urlRequest
     }
 
-    func verifyPasskeyLogin(with response: PasskeyAuthResponse) async throws -> PasskeyVerifyResponse? {
+    func verifyPasskeyLogin(with response: PasskeyAuthResponse) async throws -> PasskeyVerifyResponse {
         guard let data = try? JSONEncoder().encode(response) else {
             throw PasskeyError.authFailed
         }
 
         let request = verifyPassKeyRequest(with: data)
-        guard let data = try await performDataTask(with: request) else {
-            throw PasskeyError.authFailed
-        }
+        let verify = try await performDataTask(with: request)
 
-        return try JSONDecoder().decode(PasskeyVerifyResponse.self, from: data)
+        return try JSONDecoder().decode(PasskeyVerifyResponse.self, from: verify)
     }
 }
