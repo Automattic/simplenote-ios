@@ -14,6 +14,7 @@
                 <outlet property="actionsSeparator" destination="Kpm-3a-0Z7" id="1in-6f-hpi"/>
                 <outlet property="actionsSeparatorLabel" destination="223-DD-dLN" id="GpO-BP-sli"/>
                 <outlet property="codeInputView" destination="OP1-hm-GRS" id="2HQ-Db-x3W"/>
+                <outlet property="codeWarningLabel" destination="Jbg-WU-heV" id="Qjt-NJ-s8f"/>
                 <outlet property="emailInputView" destination="hW6-K1-OyV" id="TyC-Uh-Kaf"/>
                 <outlet property="emailWarningLabel" destination="n7T-Gj-plH" id="STx-wz-jKg"/>
                 <outlet property="passwordInputView" destination="pdF-nK-gXE" id="18P-SU-c90"/>
@@ -34,7 +35,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CJS-5O-pxK">
-                    <rect key="frame" x="332" y="60" width="360" height="460"/>
+                    <rect key="frame" x="332" y="60" width="360" height="486"/>
                     <subviews>
                         <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="hW6-K1-OyV" userLabel="Email Input View" customClass="SPTextInputView" customModule="Simplenote" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="360" height="44"/>
@@ -78,8 +79,14 @@
                                 <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="#Password#"/>
                             </userDefinedRuntimeAttributes>
                         </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#Invalid code#" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jbg-WU-heV" userLabel="#Invalid code#" customClass="SPLabel" customModule="Simplenote" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="208" width="100.5" height="18"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                            <color key="textColor" systemColor="systemRedColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CGr-O3-MBQ" userLabel="Primary Action View">
-                            <rect key="frame" x="0.0" y="208" width="360" height="44"/>
+                            <rect key="frame" x="0.0" y="234" width="360" height="44"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q3p-Ji-dOm" customClass="SPSquaredButton" customModule="Simplenote" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="360" height="44"/>
@@ -102,7 +109,7 @@
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PfS-vU-7i3">
-                            <rect key="frame" x="0.0" y="260" width="360" height="44"/>
+                            <rect key="frame" x="0.0" y="286" width="360" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="u8s-d9-Em4"/>
                             </constraints>
@@ -112,7 +119,7 @@
                             </state>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kpm-3a-0Z7" userLabel="Actions Separator View">
-                            <rect key="frame" x="0.0" y="312" width="360" height="44"/>
+                            <rect key="frame" x="0.0" y="338" width="360" height="44"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Ls-SS-l0Q" userLabel="Leading View">
                                     <rect key="frame" x="0.0" y="21.5" width="167" height="1"/>
@@ -149,7 +156,7 @@
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uy8-va-3uF" userLabel="#Tertiary#" customClass="SPSquaredButton" customModule="Simplenote" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="364" width="360" height="44"/>
+                            <rect key="frame" x="0.0" y="390" width="360" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="lt7-Yn-pzG"/>
                             </constraints>
@@ -159,7 +166,7 @@
                             </state>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ILr-Ij-XBq" userLabel="#Quaternary#" customClass="SPSquaredButton" customModule="Simplenote" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="416" width="360" height="44"/>
+                            <rect key="frame" x="0.0" y="442" width="360" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="cE4-3n-khh"/>
                             </constraints>
@@ -202,6 +209,9 @@
     <designables>
         <designable name="ILr-Ij-XBq">
             <size key="intrinsicContentSize" width="112" height="33"/>
+        </designable>
+        <designable name="Jbg-WU-heV">
+            <size key="intrinsicContentSize" width="100.5" height="18"/>
         </designable>
         <designable name="Uy8-va-3uF">
             <size key="intrinsicContentSize" width="83" height="33"/>

@@ -66,7 +66,7 @@ class SPAuthViewController: UIViewController {
         }
     }
     
-    /// # Password: Input Field
+    /// # Code: Input Field
     ///
     @IBOutlet private var codeInputView: SPTextInputView! {
         didSet {
@@ -76,6 +76,16 @@ class SPAuthViewController: UIViewController {
             codeInputView.textColor = .simplenoteGray80Color
             codeInputView.delegate = self
             codeInputView.textContentType = .oneTimeCode
+        }
+    }
+    
+    /// # Code: Warning Label
+    ///
+    @IBOutlet private var codeWarningLabel: SPLabel! {
+        didSet {
+            codeWarningLabel.textInsets = AuthenticationConstants.warningInsets
+            codeWarningLabel.textColor = .simplenoteRed60Color
+            codeWarningLabel.isHidden = true
         }
     }
 
@@ -179,7 +189,7 @@ class SPAuthViewController: UIViewController {
     /// # Indicates if we've got valid Credentials. Doesn't display any validation warnings onscreen
     ///
     private var isInputValid: Bool {
-        return performUsernameValidation() == .success && performPasswordValidation() == .success
+        return performUsernameValidation() == .success && performPasswordValidation() == .success && performCodeValidation() == .success
     }
 
     /// # Returns the EmailInputView's Text: When empty this getter returns an empty string, instead of nil
@@ -671,6 +681,11 @@ private extension SPAuthViewController {
         passwordWarningLabel.text = string
         refreshPasswordInput(inErrorState: true)
     }
+    
+    func displayCodeValidationWarning(_ string: String) {
+        codeWarningLabel.text = string
+        refreshCodeInput(inErrorState: true)
+    }
 
     func dismissAllValidationWarnings() {
         refreshEmailInput(inErrorState: false)
@@ -684,6 +699,10 @@ private extension SPAuthViewController {
     func dismissPasswordValidationWarning() {
         refreshPasswordInput(inErrorState: false)
     }
+    
+    func dismissCodeValidationWarning() {
+        refreshCodeInput(inErrorState: false)
+    }
 
     func refreshEmailInput(inErrorState: Bool) {
         emailWarningLabel.animateVisibility(isHidden: !inErrorState)
@@ -693,6 +712,11 @@ private extension SPAuthViewController {
     func refreshPasswordInput(inErrorState: Bool) {
         passwordWarningLabel.animateVisibility(isHidden: !inErrorState)
         passwordInputView.inErrorState = inErrorState
+    }
+    
+    func refreshCodeInput(inErrorState: Bool) {
+        codeWarningLabel.animateVisibility(isHidden: !inErrorState)
+        codeInputView.inErrorState = inErrorState
     }
 }
 
@@ -718,6 +742,14 @@ private extension SPAuthViewController {
 
         return validator.performPasswordValidation(username: email, password: password, style: mode.validationStyle)
     }
+    
+    func performCodeValidation() -> AuthenticationValidator.Result {
+        guard mode.visibleElements.contains(.code) else {
+            return .success
+        }
+        
+        return validator.performCodeValidation(code: state.code)
+    }
 
     /// Whenever we're in `.login` mode, and the password is valid in `.legacy` terms (but invalid in `.strong` mode), we must request the
     /// user to reset the password associated to his/her account.
@@ -729,6 +761,7 @@ private extension SPAuthViewController {
     func ensureWarningsAreOnScreenWhenNeeded() -> Bool {
         let usernameValidationResult = performUsernameValidation()
         let passwordValidationResult = performPasswordValidation()
+        let codeValidationResult = performCodeValidation()
 
         if usernameValidationResult != .success {
             displayEmailValidationWarning(usernameValidationResult.description)
@@ -737,8 +770,12 @@ private extension SPAuthViewController {
         if passwordValidationResult != .success {
             displayPasswordValidationWarning(passwordValidationResult.description)
         }
+        
+        if codeValidationResult != .success {
+            displayCodeValidationWarning(codeValidationResult.description)
+        }
 
-        return usernameValidationResult == .success && passwordValidationResult == .success
+        return usernameValidationResult == .success && passwordValidationResult == .success && codeValidationResult == .success
     }
 
     func ensureWarningsAreDismissedWhenNeeded() {
@@ -748,6 +785,10 @@ private extension SPAuthViewController {
 
         if performPasswordValidation() == .success {
             dismissPasswordValidationWarning()
+        }
+        
+        if performCodeValidation() == .success {
+            dismissCodeValidationWarning()
         }
     }
 }
@@ -794,6 +835,15 @@ extension SPAuthViewController: SPTextInputViewDelegate {
                 displayPasswordValidationWarning(error.description)
             }
 
+        case codeInputView:
+            switch performCodeValidation() {
+            case .success:
+                performPrimaryActionIfPossible()
+                
+            case let error:
+                displayCodeValidationWarning(error.description)
+            }
+            
         default:
             break
         }
