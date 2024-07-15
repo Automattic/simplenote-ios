@@ -317,20 +317,29 @@
     [self trackAutomatticEventWithName:@"user_signed_in" properties:nil];
 }
 
-+ (void)trackUserRequestedLoginLink
-{
-    [self trackAutomatticEventWithName:@"user_requested_login_link" properties:nil];
-}
-
-+ (void)trackUserConfirmedLoginLink
-{
-    [self trackAutomatticEventWithName:@"user_confirmed_login_link" properties:nil];
-}
-
 + (void)trackUserSignedOut
 {
     [self trackAutomatticEventWithName:@"user_signed_out" properties:nil];
 }
+
+
+#pragma mark - Login Links
+
++ (void)trackLoginLinkRequested
+{
+    [self trackAutomatticEventWithName:@"login_link_requested" properties:nil];
+}
+
++ (void)trackLoginLinkConfirmationSuccess
+{
+    [self trackAutomatticEventWithName:@"login_link_confirmation_success" properties:nil];
+}
+
++ (void)trackLoginLinkConfirmationFailure
+{
+    [self trackAutomatticEventWithName:@"login_link_confirmation_failure" properties:nil];
+}
+
 
 #pragma mark - WP.com Sign In
 

@@ -18,15 +18,11 @@ struct MagicLinkInvalidView: View {
                     .renderingMode(.template)
                     .foregroundColor(Color(.simplenoteLightBlueColor))
 
-                Text("Invalid Link")
+                Text("Link no longer valid")
                     .bold()
                     .font(.system(size: Metrics.titleFontSize))
-                    .padding()
-                
-                Text("Your authentication link is no longer valid")
-                    .font(.system(size: Metrics.detailsFontSize))
                     .multilineTextAlignment(.center)
-                    .padding(.bottom, Metrics.detailsPaddingBottom)
+                    .padding(.bottom, Metrics.titlePaddingBottom)
                 
                 Button(action: pressedRequestNewLink) {
                     Text("Request a new Link")
@@ -71,9 +67,8 @@ struct MagicLinkInvalidView: View {
 private enum Metrics {
     static let crossIconSize = CGSize(width: 100, height: 100)
     static let dismissSize = CGSize(width: 30, height: 30)
-    static let titleFontSize: CGFloat = 22
-    static let detailsFontSize: CGFloat = 17
-    static let detailsPaddingBottom: CGFloat = 30
+    static let titleFontSize: CGFloat = 20
+    static let titlePaddingBottom: CGFloat = 30
     static let actionCornerRadius: CGFloat = 10
 }
 
