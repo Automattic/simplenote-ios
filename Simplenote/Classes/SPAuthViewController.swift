@@ -434,24 +434,19 @@ private extension SPAuthViewController {
     
     @IBAction func performLogInWithCode() {
         Task { @MainActor in
-            await performLogInWithCodeInTask()
-        }
-    }
-    
-    @MainActor
-    private func performLogInWithCodeInTask() async {
-        lockdownInterface()
-        
-        do {
-            try await controller.loginWithCode(username: state.username, code: state.code)
-            SPTracker.trackUserConfirmedLoginLink()
-        } catch let error as SPAuthError {
-            self.handleError(error: error)
-        } catch {
+            lockdownInterface()
+            
+            do {
+                try await controller.loginWithCode(username: state.username, code: state.code)
+                SPTracker.trackUserConfirmedLoginLink()
+            } catch let error as SPAuthError {
+                self.handleError(error: error)
+            } catch {
 // TODO: Fixme
+            }
+            
+            unlockInterface()
         }
-        
-        unlockInterface()
     }
     
     @IBAction func performLogInWithWPCOM() {
