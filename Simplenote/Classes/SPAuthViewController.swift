@@ -686,11 +686,6 @@ private extension SPAuthViewController {
         codeWarningLabel.text = string
         refreshCodeInput(inErrorState: true)
     }
-
-    func dismissAllValidationWarnings() {
-        refreshEmailInput(inErrorState: false)
-        refreshPasswordInput(inErrorState: false)
-    }
     
     func dismissEmailValidationWarning() {
         refreshEmailInput(inErrorState: false)
@@ -870,6 +865,9 @@ struct AuthenticationElements: OptionSet {
     static let actionSeparator  = AuthenticationElements(rawValue: 1 << 7)
 }
 
+
+// MARK: - Authentication Actions
+//
 enum AuthenticationActionName {
     case primary
     case secondary
@@ -877,13 +875,12 @@ enum AuthenticationActionName {
     case quaternary
 }
 
-struct AuthenticationAction {
+struct AuthenticationActionDescriptor {
     let name: AuthenticationActionName
     let selector: Selector
     let text: String?
     let attributedText: NSAttributedString?
 }
-
 
 
 // MARK: - AuthenticationMode: Signup / Login
@@ -892,7 +889,7 @@ struct AuthenticationMode {
     let title: String
     let validationStyle: AuthenticationValidator.Style
     let visibleElements: AuthenticationElements
-    let actions: [AuthenticationAction]
+    let actions: [AuthenticationActionDescriptor]
 }
 
 // MARK: - Default Operation Modes
@@ -906,14 +903,14 @@ extension AuthenticationMode {
                      validationStyle: .legacy,
                      visibleElements: [.password],
                      actions: [
-                        AuthenticationAction(name: .primary,
-                                             selector: #selector(SPAuthViewController.performLogInWithPassword),
-                                             text: PasswordStrings.login,
-                                             attributedText: nil),
-                        AuthenticationAction(name: .secondary,
-                                             selector: #selector(SPAuthViewController.presentPasswordReset),
-                                             text: PasswordStrings.forgotPassword,
-                                             attributedText: nil)
+                        AuthenticationActionDescriptor(name: .primary,
+                                                       selector: #selector(SPAuthViewController.performLogInWithPassword),
+                                                       text: PasswordStrings.login,
+                                                       attributedText: nil),
+                        AuthenticationActionDescriptor(name: .secondary,
+                                                       selector: #selector(SPAuthViewController.presentPasswordReset),
+                                                       text: PasswordStrings.forgotPassword,
+                                                       attributedText: nil)
                      ])
     }
 
@@ -924,14 +921,14 @@ extension AuthenticationMode {
                      validationStyle: .legacy,
                      visibleElements: [.username, .actionSeparator],
                      actions: [
-                        AuthenticationAction(name: .primary,
-                                            selector: #selector(SPAuthViewController.requestLogInCode),
-                                            text: RequestCodeStrings.loginWithEmail,
-                                            attributedText: nil),
-                        AuthenticationAction(name: .tertiary,
-                                            selector: #selector(SPAuthViewController.performLogInWithWPCOM),
-                                            text: RequestCodeStrings.loginWithWPCOM,
-                                            attributedText: nil),
+                        AuthenticationActionDescriptor(name: .primary,
+                                                       selector: #selector(SPAuthViewController.requestLogInCode),
+                                                       text: RequestCodeStrings.loginWithEmail,
+                                                       attributedText: nil),
+                        AuthenticationActionDescriptor(name: .tertiary,
+                                                       selector: #selector(SPAuthViewController.performLogInWithWPCOM),
+                                                       text: RequestCodeStrings.loginWithWPCOM,
+                                                       attributedText: nil),
                      ])
     }
     
@@ -942,14 +939,14 @@ extension AuthenticationMode {
                      validationStyle: .legacy,
                      visibleElements: [.code, .actionSeparator],
                      actions: [
-                        AuthenticationAction(name: .primary,
-                                            selector: #selector(SPAuthViewController.performLogInWithCode),
-                                            text: LoginWithCodeStrings.login,
-                                            attributedText: nil),
-                        AuthenticationAction(name: .quaternary,
-                                            selector: #selector(SPAuthViewController.presentPasswordInterface),
-                                            text: LoginWithCodeStrings.enterPassword,
-                                            attributedText: nil),
+                        AuthenticationActionDescriptor(name: .primary,
+                                                       selector: #selector(SPAuthViewController.performLogInWithCode),
+                                                       text: LoginWithCodeStrings.login,
+                                                       attributedText: nil),
+                        AuthenticationActionDescriptor(name: .quaternary,
+                                                       selector: #selector(SPAuthViewController.presentPasswordInterface),
+                                                       text: LoginWithCodeStrings.enterPassword,
+                                                       attributedText: nil),
                      ])
     }
 
@@ -960,14 +957,14 @@ extension AuthenticationMode {
                      validationStyle: .strong,
                      visibleElements: [.username],
                      actions: [
-                        AuthenticationAction(name: .primary,
-                                            selector: #selector(SPAuthViewController.performSignUp),
-                                            text: SignupStrings.signup,
-                                            attributedText: nil),
-                        AuthenticationAction(name: .secondary,
-                                            selector: #selector(SPAuthViewController.presentTermsOfService),
-                                            text: nil,
-                                            attributedText: SignupStrings.termsOfService)
+                        AuthenticationActionDescriptor(name: .primary,
+                                                       selector: #selector(SPAuthViewController.performSignUp),
+                                                       text: SignupStrings.signup,
+                                                       attributedText: nil),
+                        AuthenticationActionDescriptor(name: .secondary,
+                                                       selector: #selector(SPAuthViewController.presentTermsOfService),
+                                                       text: nil,
+                                                       attributedText: SignupStrings.termsOfService)
                      ])
     }
 }
