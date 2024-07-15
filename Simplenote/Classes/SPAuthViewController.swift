@@ -466,6 +466,11 @@ private extension SPAuthViewController {
         safariViewController.modalPresentationStyle = .overFullScreen
         present(safariViewController, animated: true, completion: nil)
     }
+    
+    @IBAction func presentPasswordInterface() {
+        let viewController = SPAuthViewController(controller: controller, mode: .loginWithPassword, state: state)
+        navigationController?.pushViewController(viewController, animated: true)
+    }
 }
 
 
@@ -478,9 +483,9 @@ private extension SPAuthViewController {
         viewController.title = title
         navigationController?.pushViewController(viewController, animated: true)
     }
-    
-    func presentPasswordInterface() {
-        let viewController = SPAuthViewController(controller: controller, mode: .loginWithPassword, state: state)
+        
+    func presentCodeInterface() {
+        let viewController = SPAuthViewController(controller: controller, mode: .loginWithCode, state: state)
         navigationController?.pushViewController(viewController, animated: true)
     }
 }
@@ -741,6 +746,8 @@ extension SPAuthViewController: SPTextInputViewDelegate {
             state.username = textInput.text ?? ""
         case passwordInputView:
             state.password = textInput.text ?? ""
+        case codeInputView:
+            state.code = textInput.text ?? ""
         default:
             break
         }
@@ -751,10 +758,10 @@ extension SPAuthViewController: SPTextInputViewDelegate {
         case emailInputView:
             switch performUsernameValidation() {
             case .success:
-                if mode.isPasswordHidden {
-                    performPrimaryActionIfPossible()
-                } else {
+                if mode.visibleElements.contains(.password) {
                     passwordInputView.becomeFirstResponder()
+                } else {
+                    performPrimaryActionIfPossible()
                 }
 
             case let error:
