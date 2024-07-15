@@ -154,7 +154,7 @@ class SPAuthViewController: UIViewController {
         }
     }
 
-    /// # Tertiary Action: WPCOM SSO
+    /// # All of the Visible InputView(s)
     ///
     private var visibleInputViews: [SPTextInputView] {
         [emailInputView, passwordInputView, codeInputView].filter { inputView in
