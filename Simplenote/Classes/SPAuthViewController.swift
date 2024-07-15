@@ -752,26 +752,41 @@ extension SPAuthViewController: SPTextInputViewDelegate {
 struct AuthenticationState {
     var username = String()
     var password = String()
+    var code = String()
 }
+
+struct AuthenticationElements: OptionSet {
+    let rawValue: UInt
+    
+    static let username         = AuthenticationElements(rawValue: 1 << 0)
+    static let password         = AuthenticationElements(rawValue: 1 << 1)
+    static let code             = AuthenticationElements(rawValue: 1 << 2)
+    static let actionSeparator  = AuthenticationElements(rawValue: 1 << 7)
+}
+
+enum AuthenticationActionName {
+    case primary
+    case secondary
+    case tertiary
+    case quaternary
+}
+
+struct AuthenticationAction {
+    let name: AuthenticationActionName
+    let selector: Selector
+    let text: String?
+    let attributedText: NSAttributedString?
+}
+
 
 
 // MARK: - AuthenticationMode: Signup / Login
 //
-struct AuthenticationMode: Equatable {
+struct AuthenticationMode {
     let title: String
     let validationStyle: AuthenticationValidator.Style
-    let isUsernameHidden: Bool
-    let isPasswordHidden: Bool
-    
-    let primaryActionSelector: Selector
-    let primaryActionText: String
-
-    let secondaryActionSelector: Selector?
-    let secondaryActionText: String?
-    let secondaryActionAttributedText: NSAttributedString?
-    
-    let tertiaryActionSelector: Selector?
-    let tertiaryActionText: String?
+    let visibleElements: AuthenticationElements
+    let actions: [AuthenticationAction]
 }
 
 // MARK: - Default Operation Modes
@@ -783,31 +798,53 @@ extension AuthenticationMode {
     static var loginWithPassword: AuthenticationMode {
         return .init(title: PasswordStrings.title,
                      validationStyle: .legacy,
-                     isUsernameHidden: true,
-                     isPasswordHidden: false,
-                     primaryActionSelector: #selector(SPAuthViewController.performLogInWithPassword),
-                     primaryActionText: PasswordStrings.login,
-                     secondaryActionSelector: #selector(SPAuthViewController.presentPasswordReset),
-                     secondaryActionText: PasswordStrings.forgotPassword,
-                     secondaryActionAttributedText: nil,
-                     tertiaryActionSelector: nil,
-                     tertiaryActionText: nil)
+                     visibleElements: [.password],
+                     actions: [
+                        AuthenticationAction(name: .primary,
+                                             selector: #selector(SPAuthViewController.performLogInWithPassword),
+                                             text: PasswordStrings.login,
+                                             attributedText: nil),
+                        AuthenticationAction(name: .secondary,
+                                             selector: #selector(SPAuthViewController.presentPasswordReset),
+                                             text: PasswordStrings.forgotPassword,
+                                             attributedText: nil)
+                     ])
     }
 
-    /// Login Operation Mode: Authentication is handled via Magic Links!
+    /// Login Operation Mode: Request Login Code
     ///
-    static var loginWithMagicLink: AuthenticationMode {
-        return .init(title: MagicLinkStrings.title,
+    static var requestLoginCode: AuthenticationMode {
+        return .init(title: RequestCodeStrings.title,
                      validationStyle: .legacy,
-                     isUsernameHidden: false,
-                     isPasswordHidden: true,
-                     primaryActionSelector: #selector(SPAuthViewController.performLogInWithMagicLink),
-                     primaryActionText: MagicLinkStrings.loginWithEmail,
-                     secondaryActionSelector: nil,
-                     secondaryActionText: nil,
-                     secondaryActionAttributedText: nil,
-                     tertiaryActionSelector: #selector(SPAuthViewController.performLogInWithWPCOM),
-                     tertiaryActionText: MagicLinkStrings.loginWithWPCOM)
+                     visibleElements: [.username, .actionSeparator],
+                     actions: [
+                        AuthenticationAction(name: .primary,
+                                            selector: #selector(SPAuthViewController.requestLogInCode),
+                                            text: RequestCodeStrings.loginWithEmail,
+                                            attributedText: nil),
+                        AuthenticationAction(name: .tertiary,
+                                            selector: #selector(SPAuthViewController.performLogInWithWPCOM),
+                                            text: RequestCodeStrings.loginWithWPCOM,
+                                            attributedText: nil),
+                     ])
+    }
+    
+    /// Login Operation Mode: Submit Code + Authenticate the user
+    ///
+    static var loginWithCode: AuthenticationMode {
+        return .init(title: LoginWithCodeStrings.title,
+                     validationStyle: .legacy,
+                     visibleElements: [.code, .actionSeparator],
+                     actions: [
+                        AuthenticationAction(name: .primary,
+                                            selector: #selector(SPAuthViewController.performLogInWithCode),
+                                            text: LoginWithCodeStrings.login,
+                                            attributedText: nil),
+                        AuthenticationAction(name: .quaternary,
+                                            selector: #selector(SPAuthViewController.presentPasswordInterface),
+                                            text: LoginWithCodeStrings.enterPassword,
+                                            attributedText: nil),
+                     ])
     }
 
     /// Signup Operation Mode: Contains all of the strings + delegate wirings, so that the AuthUI handles user account creation scenarios.
@@ -815,15 +852,17 @@ extension AuthenticationMode {
     static var signup: AuthenticationMode {
         return .init(title: SignupStrings.title,
                      validationStyle: .strong,
-                     isUsernameHidden: false,
-                     isPasswordHidden: true,
-                     primaryActionSelector: #selector(SPAuthViewController.performSignUp),
-                     primaryActionText: SignupStrings.signup,
-                     secondaryActionSelector: #selector(SPAuthViewController.presentTermsOfService),
-                     secondaryActionText: nil,
-                     secondaryActionAttributedText: SignupStrings.termsOfService,
-                     tertiaryActionSelector: nil,
-                     tertiaryActionText: nil)
+                     visibleElements: [.username],
+                     actions: [
+                        AuthenticationAction(name: .primary,
+                                            selector: #selector(SPAuthViewController.performSignUp),
+                                            text: SignupStrings.signup,
+                                            attributedText: nil),
+                        AuthenticationAction(name: .secondary,
+                                            selector: #selector(SPAuthViewController.presentTermsOfService),
+                                            text: nil,
+                                            attributedText: SignupStrings.termsOfService)
+                     ])
     }
 }
 
@@ -834,6 +873,7 @@ private enum AuthenticationStrings {
     static let separatorText                = NSLocalizedString("Or", comment: "Or, used as a separator between Actions")
     static let emailPlaceholder             = NSLocalizedString("Email", comment: "Email TextField Placeholder")
     static let passwordPlaceholder          = NSLocalizedString("Password", comment: "Password TextField Placeholder")
+    static let codePlaceholder              = NSLocalizedString("Code", comment: "Code TextField Placeholder")
     static let acceptActionText             = NSLocalizedString("Accept", comment: "Accept Action")
     static let cancelActionText             = NSLocalizedString("Cancel", comment: "Cancel Action")
     static let loginActionText              = NSLocalizedString("Log In", comment: "Log In Action")
@@ -872,12 +912,21 @@ private enum PasswordStrings {
 }
 
 
-// MARK: - Mode: .loginWithMagicLink
+// MARK: - Mode: .requestLoginCode
 //
-private enum MagicLinkStrings {
+private enum RequestCodeStrings {
     static let title            = NSLocalizedString("Log In", comment: "LogIn Interface Title")
     static let loginWithEmail   = NSLocalizedString("Log in with email", comment: "Sends the User an email with an Authentication Code")
     static let loginWithWPCOM   = NSLocalizedString("Log in with WordPress.com", comment: "Password fallback Action")
+}
+
+
+// MARK: - Mode: .code
+//
+private enum LoginWithCodeStrings {
+    static let title            = NSLocalizedString("Enter Code", comment: "LogIn Interface Title")
+    static let login            = NSLocalizedString("Log In", comment: "LogIn Interface Title")
+    static let enterPassword    = NSLocalizedString("Enter password", comment: "Enter Password fallback Action")
 }
 
 
