@@ -386,10 +386,10 @@ extension SPAuthViewController {
     /// Whenever the input is Valid, we'll perform the Primary Action
     ///
     func performPrimaryActionIfPossible() {
-        guard isInputValid else {
+        guard ensureWarningsAreOnScreenWhenNeeded() else {
             return
         }
-        
+
         guard let primaryActionDescriptor = mode.actions.first(where: { $0.name == .primary}) else {
             assertionFailure()
             return
@@ -433,6 +433,10 @@ extension SPAuthViewController {
     }
     
     @IBAction func performLogInWithCode() {
+        guard ensureWarningsAreOnScreenWhenNeeded() else {
+            return
+        }
+
         Task { @MainActor in
             lockdownInterface()
             
@@ -803,42 +807,7 @@ extension SPAuthViewController: SPTextInputViewDelegate {
     }
 
     func textInputShouldReturn(_ textInput: SPTextInputView) -> Bool {
-        switch textInput {
-        case emailInputView:
-            switch performUsernameValidation() {
-            case .success:
-                if mode.inputElements.contains(.password) {
-                    passwordInputView.becomeFirstResponder()
-                } else {
-                    performPrimaryActionIfPossible()
-                }
-
-            case let error:
-                displayEmailValidationWarning(error.description)
-            }
-
-        case passwordInputView:
-            switch performPasswordValidation() {
-            case .success:
-                performPrimaryActionIfPossible()
-
-            case let error:
-                displayPasswordValidationWarning(error.description)
-            }
-
-        case codeInputView:
-            switch performCodeValidation() {
-            case .success:
-                performPrimaryActionIfPossible()
-                
-            case let error:
-                displayCodeValidationWarning(error.description)
-            }
-            
-        default:
-            break
-        }
-
+        performPrimaryActionIfPossible()
         return false
     }
 }
