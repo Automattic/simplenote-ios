@@ -122,27 +122,15 @@ class SPAuthViewController: UIViewController {
         return button
     }()
 
-    /// # Tertiary Separator: COntainer
+    /// # Actions Separator: Container
     ///
-    @IBOutlet private var tertiaryTopSeparator: UIView! {
-        didSet {
-            tertiaryTopSeparator.isHidden = mode.tertiaryActionSelector == nil
-        }
-    }
+    @IBOutlet private var actionsSeparator: UIView!
 
     /// # Tertiary Separator: Label (Or)
     ///
-    @IBOutlet private var tertiaryTopSeparatorLabel: UILabel! {
+    @IBOutlet private var actionsSeparatorLabel: UILabel! {
         didSet {
-            tertiaryTopSeparatorLabel.text = AuthenticationStrings.separatorText
-        }
-    }
-    
-    /// # Tertiary Action: Container View
-    ///
-    @IBOutlet private var tertiaryActionContainerView: UIView! {
-        didSet {
-            tertiaryActionContainerView.isHidden = mode.tertiaryActionSelector == nil
+            actionsSeparatorLabel.text = AuthenticationStrings.separatorText
         }
     }
 
@@ -150,15 +138,34 @@ class SPAuthViewController: UIViewController {
     ///
     @IBOutlet private var tertiaryActionButton: SPSquaredButton! {
         didSet {
-            guard let title = mode.tertiaryActionText, let action = mode.tertiaryActionSelector else {
-                return
-            }
-            
-            tertiaryActionButton.setTitle(title, for: .normal)
             tertiaryActionButton.setTitleColor(.white, for: .normal)
             tertiaryActionButton.backgroundColor = .simplenoteWPBlue50Color
-            tertiaryActionButton.addTarget(self, action: action, for: .touchUpInside)
         }
+    }
+    
+    /// # Tertiary Action:
+    ///
+    @IBOutlet private var quaternaryActionButton: SPSquaredButton! {
+        didSet {
+            quaternaryActionButton.setTitleColor(.black, for: .normal)
+            quaternaryActionButton.backgroundColor = .clear
+            quaternaryActionButton.layer.borderWidth = 1
+            quaternaryActionButton.layer.borderColor = UIColor.black.cgColor
+        }
+    }
+
+    /// # Tertiary Action: WPCOM SSO
+    ///
+    private var visibleInputViews: [SPTextInputView] {
+        [emailInputView, passwordInputView, codeInputView].filter { inputView in
+            inputView.isHidden == false
+        }
+    }
+    
+    /// # All of the Action Views
+    ///
+    private var allActionViews: [UIButton] {
+        [primaryActionButton, secondaryActionButton, tertiaryActionButton, quaternaryActionButton]
     }
 
     /// # Simperium's Authenticator Instance
