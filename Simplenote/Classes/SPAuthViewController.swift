@@ -247,7 +247,7 @@ class SPAuthViewController: UIViewController {
         setupNavigationController()
         startListeningToNotifications()
 
-        refreshVisibleElements()
+        refreshInputViews()
         refreshActionViews()
         reloadInputViewsFromState()
 
@@ -303,13 +303,13 @@ private extension SPAuthViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
-    func refreshVisibleElements() {
-        let visibleElements = mode.visibleElements
+    func refreshInputViews() {
+        let inputElements = mode.inputElements
         
-        emailInputView.isHidden         = !visibleElements.contains(.username)
-        passwordInputView.isHidden      = !visibleElements.contains(.password)
-        codeInputView.isHidden          = !visibleElements.contains(.code)
-        actionsSeparator.isHidden       = !visibleElements.contains(.actionSeparator)
+        emailInputView.isHidden     = !inputElements.contains(.username)
+        passwordInputView.isHidden  = !inputElements.contains(.password)
+        codeInputView.isHidden      = !inputElements.contains(.code)
+        actionsSeparator.isHidden   = !inputElements.contains(.actionSeparator)
     }
     
     func refreshActionViews() {
@@ -716,7 +716,7 @@ private extension SPAuthViewController {
 private extension SPAuthViewController {
 
     func performUsernameValidation() -> AuthenticationValidator.Result {
-        guard mode.visibleElements.contains(.username) else {
+        guard mode.inputElements.contains(.username) else {
             return .success
         }
 
@@ -727,7 +727,7 @@ private extension SPAuthViewController {
     /// That's where the `validationStyle` comes in.
     ///
     func performPasswordValidation() -> AuthenticationValidator.Result {
-        guard mode.visibleElements.contains(.password) else {
+        guard mode.inputElements.contains(.password) else {
             return .success
         }
 
@@ -735,7 +735,7 @@ private extension SPAuthViewController {
     }
     
     func performCodeValidation() -> AuthenticationValidator.Result {
-        guard mode.visibleElements.contains(.code) else {
+        guard mode.inputElements.contains(.code) else {
             return .success
         }
         
@@ -807,7 +807,7 @@ extension SPAuthViewController: SPTextInputViewDelegate {
         case emailInputView:
             switch performUsernameValidation() {
             case .success:
-                if mode.visibleElements.contains(.password) {
+                if mode.inputElements.contains(.password) {
                     passwordInputView.becomeFirstResponder()
                 } else {
                     performPrimaryActionIfPossible()

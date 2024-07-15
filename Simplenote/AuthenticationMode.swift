@@ -17,13 +17,16 @@ struct AuthenticationState {
     var code = String()
 }
 
-struct AuthenticationElements: OptionSet {
+
+// MARK: - Authentication Elements
+//
+struct AuthenticationInputElements: OptionSet {
     let rawValue: UInt
     
-    static let username         = AuthenticationElements(rawValue: 1 << 0)
-    static let password         = AuthenticationElements(rawValue: 1 << 1)
-    static let code             = AuthenticationElements(rawValue: 1 << 2)
-    static let actionSeparator  = AuthenticationElements(rawValue: 1 << 7)
+    static let username         = AuthenticationInputElements(rawValue: 1 << 0)
+    static let password         = AuthenticationInputElements(rawValue: 1 << 1)
+    static let code             = AuthenticationInputElements(rawValue: 1 << 2)
+    static let actionSeparator  = AuthenticationInputElements(rawValue: 1 << 3)
 }
 
 
@@ -41,6 +44,13 @@ struct AuthenticationActionDescriptor {
     let selector: Selector
     let text: String?
     let attributedText: NSAttributedString?
+        
+    init(name: AuthenticationActionName, selector: Selector, text: String?, attributedText: NSAttributedString? = nil) {
+        self.name = name
+        self.selector = selector
+        self.text = text
+        self.attributedText = attributedText
+    }
 }
 
 
@@ -48,8 +58,8 @@ struct AuthenticationActionDescriptor {
 //
 struct AuthenticationMode {
     let title: String
+    let inputElements: AuthenticationInputElements
     let validationStyle: AuthenticationValidator.Style
-    let visibleElements: AuthenticationElements
     let actions: [AuthenticationActionDescriptor]
 }
 
@@ -57,71 +67,64 @@ struct AuthenticationMode {
 //
 extension AuthenticationMode {
 
-    /// Login Operation Mode: Contains all of the strings + delegate wirings, so that the AuthUI handles authentication scenarios.
+    /// Login with Password
     ///
     static var loginWithPassword: AuthenticationMode {
-        return .init(title: PasswordStrings.title,
+        return .init(title: NSLocalizedString("Log In with Password", comment: "LogIn Interface Title"),
+                     inputElements: [.password],
                      validationStyle: .legacy,
-                     visibleElements: [.password],
                      actions: [
                         AuthenticationActionDescriptor(name: .primary,
                                                        selector: #selector(SPAuthViewController.performLogInWithPassword),
-                                                       text: PasswordStrings.login,
-                                                       attributedText: nil),
+                                                       text: NSLocalizedString("Log In", comment: "LogIn Action")),
                         AuthenticationActionDescriptor(name: .secondary,
                                                        selector: #selector(SPAuthViewController.presentPasswordReset),
-                                                       text: PasswordStrings.forgotPassword,
-                                                       attributedText: nil)
+                                                       text: NSLocalizedString("Forgot your password?", comment: "Password Reset Action"))
                      ])
     }
 
-    /// Login Operation Mode: Request Login Code
+    /// Requests a Login Code
     ///
     static var requestLoginCode: AuthenticationMode {
-        return .init(title: RequestCodeStrings.title,
+        return .init(title: NSLocalizedString("Log In", comment: "LogIn Interface Title"),
+                     inputElements: [.username, .actionSeparator],
                      validationStyle: .legacy,
-                     visibleElements: [.username, .actionSeparator],
                      actions: [
                         AuthenticationActionDescriptor(name: .primary,
                                                        selector: #selector(SPAuthViewController.requestLogInCode),
-                                                       text: RequestCodeStrings.loginWithEmail,
-                                                       attributedText: nil),
+                                                       text: NSLocalizedString("Log in with email", comment: "Sends the User an email with an Authentication Code")),
                         AuthenticationActionDescriptor(name: .tertiary,
                                                        selector: #selector(SPAuthViewController.performLogInWithWPCOM),
-                                                       text: RequestCodeStrings.loginWithWPCOM,
-                                                       attributedText: nil),
+                                                       text: NSLocalizedString("Log in with WordPress.com", comment: "Password fallback Action"))
                      ])
     }
     
-    /// Login Operation Mode: Submit Code + Authenticate the user
+    /// Login with Code: Submit Code + Authenticate the user
     ///
     static var loginWithCode: AuthenticationMode {
-        return .init(title: LoginWithCodeStrings.title,
+        return .init(title: NSLocalizedString("Enter Code", comment: "LogIn Interface Title"),
+                     inputElements: [.code, .actionSeparator],
                      validationStyle: .legacy,
-                     visibleElements: [.code, .actionSeparator],
                      actions: [
                         AuthenticationActionDescriptor(name: .primary,
                                                        selector: #selector(SPAuthViewController.performLogInWithCode),
-                                                       text: LoginWithCodeStrings.login,
-                                                       attributedText: nil),
+                                                       text: NSLocalizedString("Log In", comment: "LogIn Interface Title")),
                         AuthenticationActionDescriptor(name: .quaternary,
                                                        selector: #selector(SPAuthViewController.presentPasswordInterface),
-                                                       text: LoginWithCodeStrings.enterPassword,
-                                                       attributedText: nil),
+                                                       text: NSLocalizedString("Enter password", comment: "Enter Password fallback Action")),
                      ])
     }
 
-    /// Signup Operation Mode: Contains all of the strings + delegate wirings, so that the AuthUI handles user account creation scenarios.
+    /// Signup: Contains all of the strings + delegate wirings, so that the AuthUI handles user account creation scenarios.
     ///
     static var signup: AuthenticationMode {
-        return .init(title: SignupStrings.title,
+        return .init(title: NSLocalizedString("Sign Up", comment: "SignUp Interface Title"),
+                     inputElements: [.username],
                      validationStyle: .strong,
-                     visibleElements: [.username],
                      actions: [
                         AuthenticationActionDescriptor(name: .primary,
                                                        selector: #selector(SPAuthViewController.performSignUp),
-                                                       text: SignupStrings.signup,
-                                                       attributedText: nil),
+                                                       text: NSLocalizedString("Sign Up", comment: "SignUp Action")),
                         AuthenticationActionDescriptor(name: .secondary,
                                                        selector: #selector(SPAuthViewController.presentTermsOfService),
                                                        text: nil,
@@ -131,54 +134,23 @@ extension AuthenticationMode {
 }
 
 
-// MARK: - Mode: .loginWithPassword
-//
-private enum PasswordStrings {
-    static let title            = NSLocalizedString("Log In with Password", comment: "LogIn Interface Title")
-    static let login            = NSLocalizedString("Log In", comment: "LogIn Action")
-    static let forgotPassword   = NSLocalizedString("Forgot your password?", comment: "Password Reset Action")
-}
-
-
-// MARK: - Mode: .requestLoginCode
-//
-private enum RequestCodeStrings {
-    static let title            = NSLocalizedString("Log In", comment: "LogIn Interface Title")
-    static let loginWithEmail   = NSLocalizedString("Log in with email", comment: "Sends the User an email with an Authentication Code")
-    static let loginWithWPCOM   = NSLocalizedString("Log in with WordPress.com", comment: "Password fallback Action")
-}
-
-
-// MARK: - Mode: .code
-//
-private enum LoginWithCodeStrings {
-    static let title            = NSLocalizedString("Enter Code", comment: "LogIn Interface Title")
-    static let login            = NSLocalizedString("Log In", comment: "LogIn Interface Title")
-    static let enterPassword    = NSLocalizedString("Enter password", comment: "Enter Password fallback Action")
-}
-
-
 // MARK: - Mode: .signup
 //
 private enum SignupStrings {
-    static let title                = NSLocalizedString("Sign Up", comment: "SignUp Interface Title")
-    static let signup               = NSLocalizedString("Sign Up", comment: "SignUp Action")
-    static let termsOfServicePrefix = NSLocalizedString("By creating an account you agree to our", comment: "Terms of Service Legend *PREFIX*: printed in dark color")
-    static let termsOfServiceSuffix = NSLocalizedString("Terms and Conditions", comment: "Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue")
-}
 
-private extension SignupStrings {
-
-    /// Returns a properly formatted Secondary Action String for Signup
+    /// Returns a formatted Secondary Action String for Signup
     ///
     static var termsOfService: NSAttributedString {
         let output = NSMutableAttributedString(string: String(), attributes: [
             .font: UIFont.preferredFont(forTextStyle: .subheadline)
         ])
 
-        output.append(string: termsOfServicePrefix, foregroundColor: .simplenoteGray60Color)
+        let prefix = NSLocalizedString("By creating an account you agree to our", comment: "Terms of Service Legend *PREFIX*: printed in dark color")
+        let suffix = NSLocalizedString("Terms and Conditions", comment: "Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue")
+
+        output.append(string: prefix, foregroundColor: .simplenoteGray60Color)
         output.append(string: " ")
-        output.append(string: termsOfServiceSuffix, foregroundColor: .simplenoteBlue60Color)
+        output.append(string: suffix, foregroundColor: .simplenoteBlue60Color)
 
         return output
     }
