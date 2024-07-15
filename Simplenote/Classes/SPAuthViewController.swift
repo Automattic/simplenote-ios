@@ -258,8 +258,7 @@ class SPAuthViewController: UIViewController {
         // repositioning in the Text Field. Seriously.
         // Ref. https://github.com/Automattic/simplenote-ios/issues/453
         //
-        let initialFirstResponder = mode.isPasswordHidden ? emailInputView : passwordInputView
-        initialFirstResponder?.becomeFirstResponder()
+        visibleInputViews.first?.becomeFirstResponder()
     }
 }
 
