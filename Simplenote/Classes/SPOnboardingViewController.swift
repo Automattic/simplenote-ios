@@ -149,7 +149,7 @@ private extension SPOnboardingViewController {
 
     @IBAction
     func loginWasPressed() {
-        presentAuthenticationInterface(mode: .loginWithMagicLink)
+        presentAuthenticationInterface(mode: .requestLoginCode)
     }
 
     @IBAction
@@ -214,7 +214,7 @@ private extension SPOnboardingViewController {
     private func presentMagicLinkInvalidView() {
         var rootView = MagicLinkInvalidView()
         rootView.onPressRequestNewLink = { [weak self] in
-            self?.presentAuthenticationInterfaceIfNeeded(mode: .loginWithMagicLink)
+            self?.presentAuthenticationInterfaceIfNeeded(mode: .requestLoginCode)
         }
 
         let hostingController = UIHostingController(rootView: rootView)

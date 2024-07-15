@@ -230,7 +230,7 @@ class SPAuthViewController: UIViewController {
 
     /// Designated Initializer
     ///
-    init(controller: SPAuthHandler, mode: AuthenticationMode = .loginWithMagicLink, state: AuthenticationState = .init()) {
+    init(controller: SPAuthHandler, mode: AuthenticationMode = .requestLoginCode, state: AuthenticationState = .init()) {
         self.controller = controller
         self.mode = mode
         self.state = state
