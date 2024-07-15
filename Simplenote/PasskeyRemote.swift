@@ -34,10 +34,11 @@ class PasskeyRemote: Remote {
         return Data(body.utf8)
     }
 
-    func requestChallengeResponseToCreatePasskey(forEmail email: String, password: String) async throws -> Data? {
+    func requestChallengeResponseToCreatePasskey(forEmail email: String, password: String) async throws -> PasskeyRegistrationChallenge {
         let request = passkeyCredentialCreationRequest(withEmail: email, password: password)
+        let data = try await performDataTask(with: request)
 
-        return try await performDataTask(with: request)
+        return try JSONDecoder().decode(PasskeyRegistrationChallenge.self, from: data)
     }
 
     private func requestForPasskeyCredentialRegistration(withData data: Data) -> URLRequest {
@@ -50,7 +51,8 @@ class PasskeyRemote: Remote {
         return urlRequest
     }
 
-    func registerCredential(with data: Data) async throws {
+    func registerCredential(with response: PasskeyRegistrationResponse) async throws {
+        let data = try JSONEncoder().encode(response)
         let request = requestForPasskeyCredentialRegistration(withData: data)
         try await _ = performDataTask(with: request)
     }

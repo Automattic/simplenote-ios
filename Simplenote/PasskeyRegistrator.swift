@@ -32,23 +32,20 @@ class PasskeyRegistrator {
 
     func attemptPasskeyRegistration(for email: String, password: String, presentationContext: PresentationContext) async throws {
         let challenge = try await requestChallenge(for: email, password: password)
-        let registrationData = try await attemptRegistration(with: challenge, presentationContext: presentationContext)
-        try await passkeyRemote.registerCredential(with: registrationData)
+        let registrationResponse = try await attemptRegistration(with: challenge, presentationContext: presentationContext)
+        try await passkeyRemote.registerCredential(with: registrationResponse)
     }
 
     private func requestChallenge(for email: String, password: String) async throws -> PasskeyRegistrationChallenge {
         userEmail = email
         do {
-            guard let data = try await passkeyRemote.requestChallengeResponseToCreatePasskey(forEmail: email, password: password) else {
-                throw PasskeyError.couldNotRequestRegistrationChallenge
-            }
-            return try JSONDecoder().decode(PasskeyRegistrationChallenge.self, from: data)
+            return try await passkeyRemote.requestChallengeResponseToCreatePasskey(forEmail: email, password: password)
         } catch {
             throw PasskeyError.couldNotRequestRegistrationChallenge
         }
     }
 
-    private func attemptRegistration(with passkeyChallenge: PasskeyRegistrationChallenge, presentationContext: PresentationContext) async throws -> Data {
+    private func attemptRegistration(with passkeyChallenge: PasskeyRegistrationChallenge, presentationContext: PresentationContext) async throws -> PasskeyRegistrationResponse {
         guard let challengeData = passkeyChallenge.challengeData,
               let userID = passkeyChallenge.userID else {
             throw PasskeyError.couldNotRequestRegistrationChallenge
@@ -60,7 +57,7 @@ class PasskeyRegistrator {
         authController.delegate = internalAuthControllerDelegate
         authController.presentationContextProvider = presentationContext
 
-        return try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Data, any Error>) in
+        return try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<PasskeyRegistrationResponse, any Error>) in
             internalAuthControllerDelegate.onCompletion = { [weak self] result in
                 guard let self else {
                     continuation.resume(throwing: PasskeyError.registrationFailed)
@@ -70,7 +67,7 @@ class PasskeyRegistrator {
                 switch result {
                 case .success(let credential):
                     do {
-                        let registrationData = try self.registrationData(from: credential)
+                        let registrationData = try PasskeyRegistrationResponse(from: credential, with: userEmail)
                         continuation.resume(returning: registrationData)
                     } catch {
                         continuation.resume(throwing: error)
@@ -82,13 +79,5 @@ class PasskeyRegistrator {
 
             authController.performRequests()
         }
-    }
-
-    private func registrationData(from credential: PublicKeyCredentialRegistration) throws -> Data {
-        guard let registrationObject = PasskeyRegistrationResponse(from: credential, with: userEmail) else {
-            throw PasskeyError.registrationFailed
-        }
-
-        return try JSONEncoder().encode(registrationObject)
     }
 }
