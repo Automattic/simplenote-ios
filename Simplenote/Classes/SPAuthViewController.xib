@@ -17,6 +17,8 @@
                 <outlet property="codeWarningLabel" destination="Jbg-WU-heV" id="Qjt-NJ-s8f"/>
                 <outlet property="emailInputView" destination="hW6-K1-OyV" id="TyC-Uh-Kaf"/>
                 <outlet property="emailWarningLabel" destination="n7T-Gj-plH" id="STx-wz-jKg"/>
+                <outlet property="headerContainerView" destination="21r-m3-SHF" id="Xq3-9q-6S5"/>
+                <outlet property="headerLabel" destination="dyz-Qu-NbA" id="NTY-Hk-4TL"/>
                 <outlet property="passwordInputView" destination="pdF-nK-gXE" id="18P-SU-c90"/>
                 <outlet property="passwordWarningLabel" destination="UyC-If-pXj" id="D2M-PR-Tph"/>
                 <outlet property="primaryActionButton" destination="q3p-Ji-dOm" id="l1t-x0-zva"/>
@@ -35,10 +37,30 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CJS-5O-pxK">
-                    <rect key="frame" x="332" y="60" width="360" height="486"/>
+                    <rect key="frame" x="332" y="60" width="360" height="544"/>
                     <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="21r-m3-SHF" userLabel="Header View">
+                            <rect key="frame" x="0.0" y="0.0" width="360" height="50"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#Invalid email#" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dyz-Qu-NbA" userLabel="#Header#" customClass="SPLabel" customModule="Simplenote" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="360" height="22"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="dyz-Qu-NbA" firstAttribute="leading" secondItem="21r-m3-SHF" secondAttribute="leading" id="b5f-gA-Nwm"/>
+                                <constraint firstItem="dyz-Qu-NbA" firstAttribute="top" secondItem="21r-m3-SHF" secondAttribute="top" id="c6e-bm-SCF"/>
+                                <constraint firstAttribute="bottom" secondItem="dyz-Qu-NbA" secondAttribute="bottom" constant="28" id="cXX-Ay-fX0"/>
+                                <constraint firstAttribute="trailing" secondItem="dyz-Qu-NbA" secondAttribute="trailing" id="cXw-PW-hT0"/>
+                                <constraint firstAttribute="trailing" secondItem="dyz-Qu-NbA" secondAttribute="trailing" id="fo5-rG-yNP"/>
+                                <constraint firstItem="dyz-Qu-NbA" firstAttribute="leading" secondItem="21r-m3-SHF" secondAttribute="leading" id="mLJ-h5-MHz"/>
+                            </constraints>
+                        </view>
                         <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="hW6-K1-OyV" userLabel="Email Input View" customClass="SPTextInputView" customModule="Simplenote" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="360" height="44"/>
+                            <rect key="frame" x="0.0" y="58" width="360" height="44"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="fUk-5j-zZS"/>
@@ -48,13 +70,13 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#Invalid email#" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n7T-Gj-plH" customClass="SPLabel" customModule="Simplenote" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="52" width="102.5" height="18"/>
+                            <rect key="frame" x="0.0" y="110" width="102.5" height="18"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                             <color key="textColor" systemColor="systemPinkColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="pdF-nK-gXE" userLabel="Password Input View" customClass="SPTextInputView" customModule="Simplenote" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="78" width="360" height="44"/>
+                            <rect key="frame" x="0.0" y="136" width="360" height="44"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="uss-fG-PtW"/>
@@ -64,13 +86,13 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#Invalid password#" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UyC-If-pXj" customClass="SPLabel" customModule="Simplenote" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="130" width="132" height="18"/>
+                            <rect key="frame" x="0.0" y="188" width="132" height="18"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                             <color key="textColor" systemColor="systemRedColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="OP1-hm-GRS" userLabel="Code Input View" customClass="SPTextInputView" customModule="Simplenote" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="156" width="360" height="44"/>
+                            <rect key="frame" x="0.0" y="214" width="360" height="44"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="im0-Ei-pV0"/>
@@ -80,13 +102,13 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#Invalid code#" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jbg-WU-heV" userLabel="#Invalid code#" customClass="SPLabel" customModule="Simplenote" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="208" width="100.5" height="18"/>
+                            <rect key="frame" x="0.0" y="266" width="100.5" height="18"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                             <color key="textColor" systemColor="systemRedColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CGr-O3-MBQ" userLabel="Primary Action View">
-                            <rect key="frame" x="0.0" y="234" width="360" height="44"/>
+                            <rect key="frame" x="0.0" y="292" width="360" height="44"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q3p-Ji-dOm" customClass="SPSquaredButton" customModule="Simplenote" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="360" height="44"/>
@@ -109,7 +131,7 @@
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PfS-vU-7i3">
-                            <rect key="frame" x="0.0" y="286" width="360" height="44"/>
+                            <rect key="frame" x="0.0" y="344" width="360" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="u8s-d9-Em4"/>
                             </constraints>
@@ -119,7 +141,7 @@
                             </state>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kpm-3a-0Z7" userLabel="Actions Separator View">
-                            <rect key="frame" x="0.0" y="338" width="360" height="44"/>
+                            <rect key="frame" x="0.0" y="396" width="360" height="44"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Ls-SS-l0Q" userLabel="Leading View">
                                     <rect key="frame" x="0.0" y="21.5" width="167" height="1"/>
@@ -156,7 +178,7 @@
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uy8-va-3uF" userLabel="#Tertiary#" customClass="SPSquaredButton" customModule="Simplenote" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="390" width="360" height="44"/>
+                            <rect key="frame" x="0.0" y="448" width="360" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="lt7-Yn-pzG"/>
                             </constraints>
@@ -166,7 +188,7 @@
                             </state>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ILr-Ij-XBq" userLabel="#Quaternary#" customClass="SPSquaredButton" customModule="Simplenote" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="442" width="360" height="44"/>
+                            <rect key="frame" x="0.0" y="500" width="360" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="cE4-3n-khh"/>
                             </constraints>
@@ -184,9 +206,11 @@
                         <constraint firstAttribute="trailing" secondItem="OP1-hm-GRS" secondAttribute="trailing" id="R55-ao-psA"/>
                         <constraint firstAttribute="trailing" secondItem="hW6-K1-OyV" secondAttribute="trailing" id="RSC-Vk-xbB"/>
                         <constraint firstItem="Kpm-3a-0Z7" firstAttribute="leading" secondItem="CJS-5O-pxK" secondAttribute="leading" id="S94-pS-Aza"/>
+                        <constraint firstAttribute="trailing" secondItem="21r-m3-SHF" secondAttribute="trailing" id="TYA-Ld-6r8"/>
                         <constraint firstItem="hW6-K1-OyV" firstAttribute="leading" secondItem="CJS-5O-pxK" secondAttribute="leading" id="UoC-hu-yxe"/>
                         <constraint firstItem="ILr-Ij-XBq" firstAttribute="leading" secondItem="CJS-5O-pxK" secondAttribute="leading" id="Wey-0k-g9U"/>
                         <constraint firstAttribute="trailing" secondItem="ILr-Ij-XBq" secondAttribute="trailing" id="dxd-sM-fG7"/>
+                        <constraint firstItem="21r-m3-SHF" firstAttribute="leading" secondItem="CJS-5O-pxK" secondAttribute="leading" id="gL3-JZ-h7b"/>
                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="360" id="nLp-JP-Ott"/>
                         <constraint firstItem="Uy8-va-3uF" firstAttribute="leading" secondItem="CJS-5O-pxK" secondAttribute="leading" id="s8W-Vc-jxA"/>
                         <constraint firstAttribute="trailing" secondItem="Uy8-va-3uF" secondAttribute="trailing" id="sI0-Z8-I2B"/>
@@ -218,6 +242,9 @@
         </designable>
         <designable name="UyC-If-pXj">
             <size key="intrinsicContentSize" width="132" height="18"/>
+        </designable>
+        <designable name="dyz-Qu-NbA">
+            <size key="intrinsicContentSize" width="102.5" height="18"/>
         </designable>
         <designable name="n7T-Gj-plH">
             <size key="intrinsicContentSize" width="102.5" height="18"/>

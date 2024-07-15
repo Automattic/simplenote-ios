@@ -15,6 +15,14 @@ class SPAuthViewController: UIViewController {
     ///
     @IBOutlet private var stackView: UIStackView!
 
+    /// # Header: Container View
+    ///
+    @IBOutlet private var headerContainerView: UIView!
+    
+    /// # Header: Title Label
+    ///
+    @IBOutlet private var headerLabel: SPLabel!
+
     /// # Email: Input Field
     ///
     @IBOutlet private var emailInputView: SPTextInputView! {
@@ -247,6 +255,7 @@ class SPAuthViewController: UIViewController {
         setupNavigationController()
         startListeningToNotifications()
 
+        refreshHeaderView()
         refreshInputViews()
         refreshActionViews()
         reloadInputViewsFromState()
@@ -303,6 +312,13 @@ private extension SPAuthViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
+    func refreshHeaderView() {
+        let headerText = mode.buildHeaderText(email: email)
+
+        headerLabel.attributedText = headerText
+        headerContainerView.isHidden = headerText == nil
+    }
+    
     func refreshInputViews() {
         let inputElements = mode.inputElements
         
