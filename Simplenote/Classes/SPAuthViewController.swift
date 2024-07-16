@@ -435,13 +435,16 @@ extension SPAuthViewController {
         lockdownInterface()
 
         controller.requestLoginEmail(username: email) { error in
-// TODO: 429 (Rate Limited)? push PW auth instead
-
-            if let error {
-                self.handleError(error: error)
-            } else {
+            switch error {
+            case .none:
                 self.presentCodeInterface()
                 SPTracker.trackLoginLinkRequested()
+                
+            case .tooManyAttempts:
+                self.presentExcessiveCodesRequestedAlert()
+                
+            case .some(let error):
+                self.handleError(error: error)
             }
 
             self.unlockInterface()
@@ -660,6 +663,14 @@ private extension SPAuthViewController {
         navigationController.modalPresentationStyle = .formSheet
 
         present(navigationController, animated: true, completion: nil)
+    }
+
+    func presentExcessiveCodesRequestedAlert() {
+        let alertController = UIAlertController.buildExcessiveLoginCodesRequestedAlert { [weak self] in
+            self?.presentPasswordInterface()
+        }
+        
+        present(alertController, animated: true)
     }
 
     func presentGenericError(error: SPAuthError) {
