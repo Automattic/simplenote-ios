@@ -241,7 +241,6 @@
 		B518899E1E0D5EF800E71B83 /* SPContactsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B518899D1E0D5EF800E71B83 /* SPContactsManager.swift */; };
 		B51889A01E0D5F2200E71B83 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B518899F1E0D5F2200E71B83 /* Contacts.framework */; };
 		B51889A41E0DB01E00E71B83 /* ContactsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51889A31E0DB01E00E71B83 /* ContactsUI.framework */; };
-		B51C71B12C47011A0065F610 /* UIAlertController+Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51C71B02C47011A0065F610 /* UIAlertController+Auth.swift */; };
 		B51F6DD12460C3EE0074DDD9 /* AuthenticationValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51F6DD02460C3EE0074DDD9 /* AuthenticationValidator.swift */; };
 		B51F6DD32460D12B0074DDD9 /* AuthenticationValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51F6DD22460D12B0074DDD9 /* AuthenticationValidatorTests.swift */; };
 		B51F6DD52460D7540074DDD9 /* NSPredicate+Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51F6DD42460D7540074DDD9 /* NSPredicate+Email.swift */; };
@@ -944,7 +943,6 @@
 		B518899D1E0D5EF800E71B83 /* SPContactsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SPContactsManager.swift; path = Classes/SPContactsManager.swift; sourceTree = "<group>"; };
 		B518899F1E0D5F2200E71B83 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		B51889A31E0DB01E00E71B83 /* ContactsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContactsUI.framework; path = System/Library/Frameworks/ContactsUI.framework; sourceTree = SDKROOT; };
-		B51C71B02C47011A0065F610 /* UIAlertController+Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Auth.swift"; sourceTree = "<group>"; };
 		B51F6DD02460C3EE0074DDD9 /* AuthenticationValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationValidator.swift; sourceTree = "<group>"; };
 		B51F6DD22460D12B0074DDD9 /* AuthenticationValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationValidatorTests.swift; sourceTree = "<group>"; };
 		B51F6DD42460D7540074DDD9 /* NSPredicate+Email.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPredicate+Email.swift"; sourceTree = "<group>"; };
@@ -2085,7 +2083,6 @@
 				B5C99A502C45B94600728813 /* AuthenticationMode.swift */,
 				B56A695F22F9D53400B90398 /* SPAuthViewController.swift */,
 				B56A695E22F9D53300B90398 /* SPAuthViewController.xib */,
-				B51C71B02C47011A0065F610 /* UIAlertController+Auth.swift */,
 				B5AB169722FA124F00B4EBA5 /* SPSheetController.swift */,
 				B5AB169922FA128000B4EBA5 /* SPSheetController.xib */,
 				A6CDD9C725F0163D00E0BC4D /* MagicLinkAuthenticator.swift */,
@@ -3646,7 +3643,6 @@
 				46A3C98F17DFA81A002865AE /* SPNoteListViewController.m in Sources */,
 				B5BD6AF51BF66093004ECE33 /* SPMarkdownPreviewViewController.m in Sources */,
 				B5F3FFFF23F44679007A7C59 /* SPSortBar.swift in Sources */,
-				B51C71B12C47011A0065F610 /* UIAlertController+Auth.swift in Sources */,
 				BA4499C525ED95E5000C563E /* NoticeAction.swift in Sources */,
 				A6E02778256E9487002054DF /* PinLockSetupController.swift in Sources */,
 				B513F2B42319A8D50021CFA4 /* SPNoteTableViewCell.swift in Sources */,
