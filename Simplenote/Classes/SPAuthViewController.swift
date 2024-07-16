@@ -441,7 +441,7 @@ extension SPAuthViewController {
                 SPTracker.trackLoginLinkRequested()
                 
             case .tooManyAttempts:
-                self.presentExcessiveCodesRequestedAlert()
+                self.presentPasswordInterfaceWithRateLimitingHeader()
                 
             case .some(let error):
                 self.handleError(error: error)
@@ -514,9 +514,13 @@ extension SPAuthViewController {
         present(safariViewController, animated: true, completion: nil)
     }
     
-    @IBAction func presentPasswordInterface() {
-        let viewController = SPAuthViewController(controller: controller, mode: .loginWithPassword, state: state)
+    @IBAction func presentPasswordInterface(header: String? = nil) {
+        let viewController = SPAuthViewController(controller: controller, mode: .loginWithPassword(header: header), state: state)
         navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    @IBAction func presentPasswordInterfaceWithRateLimitingHeader() {
+        presentPasswordInterface(header: AuthenticationStrings.loginWithEmailLimitHeader)
     }
 }
 
@@ -686,7 +690,7 @@ private extension SPAuthViewController {
         }
 
         // Prefill the LoginViewController
-        let loginViewController = SPAuthViewController(controller: controller, mode: .loginWithPassword, state: state)
+        let loginViewController = SPAuthViewController(controller: controller, mode: .loginWithPassword(), state: state)
         loginViewController.loadViewIfNeeded()
 
         // Swap the current VC
@@ -851,6 +855,7 @@ private enum AuthenticationStrings {
     static let acceptActionText             = NSLocalizedString("Accept", comment: "Accept Action")
     static let cancelActionText             = NSLocalizedString("Cancel", comment: "Cancel Action")
     static let loginActionText              = NSLocalizedString("Log In", comment: "Log In Action")
+    static let loginWithEmailLimitHeader    = NSLocalizedString("Log in with email failed, please enter your password", comment: "Header for Enter Password UI, when the user performed too many requests")
     static let compromisedAlertCancel       = NSLocalizedString("Cancel", comment: "Cancel action for password alert")
     static let compromisedAlertReset        = NSLocalizedString("Change Password", comment: "Change password action")
     static let unverifiedCancelText         = NSLocalizedString("Ok", comment: "Email unverified alert dismiss")
