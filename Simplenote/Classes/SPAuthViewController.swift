@@ -670,14 +670,6 @@ private extension SPAuthViewController {
         present(navigationController, animated: true, completion: nil)
     }
 
-    func presentExcessiveCodesRequestedAlert() {
-        let alertController = UIAlertController.buildExcessiveLoginCodesRequestedAlert { [weak self] in
-            self?.presentPasswordInterface()
-        }
-        
-        present(alertController, animated: true)
-    }
-
     func presentGenericError(error: SPAuthError) {
         let alertController = UIAlertController(title: error.title, message: error.message, preferredStyle: .alert)
         alertController.addDefaultActionWithTitle(AuthenticationStrings.acceptActionText)
