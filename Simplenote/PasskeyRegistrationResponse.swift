@@ -13,11 +13,11 @@ struct PasskeyRegistrationResponse: Encodable {
     private let type: String
     private let response: PasskeyRegistrationResponse.Response
 
-    init?(from credentialRegistration: ASAuthorizationPlatformPublicKeyCredentialRegistration, with email: String?) {
+    init(from credentialRegistration: ASAuthorizationPlatformPublicKeyCredentialRegistration, with email: String?) throws {
         guard let email,
         let clientJson = Self.prepareJSON(from: credentialRegistration.rawClientDataJSON),
         let rawAttestationObject = credentialRegistration.rawAttestationObject else {
-            return nil
+            throw PasskeyError.registrationFailed
         }
 
         let idString = credentialRegistration.credentialID.base64EncodedString().toBase64url()
