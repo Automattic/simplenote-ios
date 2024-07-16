@@ -197,7 +197,9 @@ class SPAuthViewController: UIViewController {
     /// # Indicates if we've got valid Credentials. Doesn't display any validation warnings onscreen
     ///
     private var isInputValid: Bool {
-        return performUsernameValidation() == .success && performPasswordValidation() == .success && performCodeValidation() == .success
+        performInputElementsValidation().values.allSatisfy { result in
+            result == .success
+        }
     }
 
     /// # Returns the EmailInputView's Text: When empty this getter returns an empty string, instead of nil
@@ -747,31 +749,25 @@ private extension SPAuthViewController {
 //
 private extension SPAuthViewController {
 
-    func performUsernameValidation() -> AuthenticationValidator.Result {
-        guard mode.inputElements.contains(.username) else {
-            return .success
-        }
-
-        return validator.performUsernameValidation(username: email)
-    }
-
     /// When we're in `.login` mode, password requirements are relaxed (since we must allow users with old passwords to sign in).
     /// That's where the `validationStyle` comes in.
     ///
-    func performPasswordValidation() -> AuthenticationValidator.Result {
-        guard mode.inputElements.contains(.password) else {
-            return .success
-        }
-
-        return validator.performPasswordValidation(username: email, password: password, style: mode.validationStyle)
-    }
-    
-    func performCodeValidation() -> AuthenticationValidator.Result {
-        guard mode.inputElements.contains(.code) else {
-            return .success
+    func performInputElementsValidation() -> [AuthenticationInputElements: AuthenticationValidator.Result] {
+        var result = [AuthenticationInputElements: AuthenticationValidator.Result]()
+        
+        if mode.inputElements.contains(.username) {
+            result[.username] = validator.performUsernameValidation(username: email)
         }
         
-        return validator.performCodeValidation(code: state.code)
+        if mode.inputElements.contains(.password) {
+            result[.password] = validator.performPasswordValidation(username: email, password: password, style: mode.validationStyle)
+        }
+        
+        if mode.inputElements.contains(.code) {
+            result[.code] = validator.performCodeValidation(code: state.code)
+        }
+        
+        return result
     }
 
     /// Whenever we're in `.login` mode, and the password is valid in `.legacy` terms (but invalid in `.strong` mode), we must request the
@@ -781,36 +777,43 @@ private extension SPAuthViewController {
         validator.performPasswordValidation(username: email, password: password, style: .strong) != .success
     }
 
+    /// Validates all of the Input Fields, and presents warnings accordingly.
+    /// - Returns true: When all validations are passed
+    ///
     func ensureWarningsAreOnScreenWhenNeeded() -> Bool {
-        let usernameValidationResult = performUsernameValidation()
-        let passwordValidationResult = performPasswordValidation()
-        let codeValidationResult = performCodeValidation()
+        let validationMap = performInputElementsValidation()
 
-        if usernameValidationResult != .success {
-            displayEmailValidationWarning(usernameValidationResult.description)
+        if let result = validationMap[.username], result != .success {
+            displayEmailValidationWarning(result.description)
         }
 
-        if passwordValidationResult != .success {
-            displayPasswordValidationWarning(passwordValidationResult.description)
+        if let result = validationMap[.password], result != .success {
+            displayPasswordValidationWarning(result.description)
         }
         
-        if codeValidationResult != .success {
-            displayCodeValidationWarning(codeValidationResult.description)
+        if let result = validationMap[.code], result != .success {
+            displayCodeValidationWarning(result.description)
         }
 
-        return usernameValidationResult == .success && passwordValidationResult == .success && codeValidationResult == .success
+        return validationMap.values.allSatisfy { result in
+            result == .success
+        }
     }
 
+    /// Validates all of the Input Fields, and dismisses validation warnings, when possible
+    ///
     func ensureWarningsAreDismissedWhenNeeded() {
-        if performUsernameValidation() == .success {
+        let validationMap = performInputElementsValidation()
+
+        if validationMap[.username] == .success {
             dismissEmailValidationWarning()
         }
 
-        if performPasswordValidation() == .success {
+        if validationMap[.password] == .success {
             dismissPasswordValidationWarning()
         }
         
-        if performCodeValidation() == .success {
+        if validationMap[.code] == .success {
             dismissCodeValidationWarning()
         }
     }
