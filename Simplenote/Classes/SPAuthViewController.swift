@@ -515,14 +515,14 @@ extension SPAuthViewController {
     }
     
     @IBAction func presentPasswordInterface() {
-        presentPasswordInterface(header: nil)
+        presentPasswordInterfaceWithHeader(header: nil)
     }
     
     @IBAction func presentPasswordInterfaceWithRateLimitingHeader() {
-        presentPasswordInterface(header: AuthenticationStrings.loginWithEmailLimitHeader)
+        presentPasswordInterfaceWithHeader(header: AuthenticationStrings.loginWithEmailLimitHeader)
     }
 
-    @IBAction func presentPasswordInterface(header: String?) {
+    @IBAction func presentPasswordInterfaceWithHeader(header: String?) {
         let viewController = SPAuthViewController(controller: controller, mode: .loginWithPassword(header: header), state: state)
         navigationController?.pushViewController(viewController, animated: true)
     }
