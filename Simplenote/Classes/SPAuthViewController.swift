@@ -462,11 +462,12 @@ extension SPAuthViewController {
             do {
                 try await controller.loginWithCode(username: state.username, code: state.code)
                 SPTracker.trackLoginLinkConfirmationSuccess()
-            } catch let error as SPAuthError {
-                SPTracker.trackLoginLinkConfirmationFailure()
-                self.handleError(error: error)
             } catch {
-// TODO: Fixme
+                /// Errors will always be of the `SPAuthError` type. Let's switch to Typed Errors, as soon as we migrate over to Xcode 16
+                let error = error as? SPAuthError ?? .generic
+                self.handleError(error: error)
+
+                SPTracker.trackLoginLinkConfirmationFailure()
             }
             
             unlockInterface()
