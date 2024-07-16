@@ -50,10 +50,38 @@ struct AuthenticationActionDescriptor {
 //
 struct AuthenticationMode {
     let title: String
+    let header: String?
     let inputElements: AuthenticationInputElements
     let validationStyle: AuthenticationValidator.Style
     let actions: [AuthenticationActionDescriptor]
+    
+    init(title: String, header: String? = nil, inputElements: AuthenticationInputElements, validationStyle: AuthenticationValidator.Style, actions: [AuthenticationActionDescriptor]) {
+        self.title = title
+        self.header = header
+        self.inputElements = inputElements
+        self.validationStyle = validationStyle
+        self.actions = actions
+    }
 }
+
+
+// MARK: - Public Properties
+//
+extension AuthenticationMode {
+    
+    func buildHeaderText(email: String) -> NSAttributedString? {
+        guard let header = header?.replacingOccurrences(of: "{{EMAIL}}", with: email) else {
+            return nil
+        }
+                
+        return NSMutableAttributedString(string: header, attributes: [
+            .font: UIFont.preferredFont(for: .headline, weight: .regular)
+        ], highlighting: email, highlightAttributes: [
+            .font: UIFont.preferredFont(for: .headline, weight: .bold)
+        ])
+    }
+}
+
 
 // MARK: - Default Operation Modes
 //
@@ -95,6 +123,7 @@ extension AuthenticationMode {
     ///
     static var loginWithCode: AuthenticationMode {
         return .init(title: NSLocalizedString("Enter Code", comment: "LogIn Interface Title"),
+                     header: NSLocalizedString("We've sent a code to {{EMAIL}}. The code will be valid for a few minutes.", comment: "Header for the Login with Code UI. Please preserve the {{EMAIL}} string as is!"),
                      inputElements: [.code, .actionSeparator],
                      validationStyle: .legacy,
                      actions: [

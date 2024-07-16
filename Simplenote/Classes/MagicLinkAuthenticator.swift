@@ -60,7 +60,7 @@ private extension MagicLinkAuthenticator {
         NSLog("[MagicLinkAuthenticator] Requesting SyncToken for \(email) and \(authCode)")
         NotificationCenter.default.post(name: .magicLinkAuthWillStart, object: nil)
 
-        Task {
+        Task { @MainActor in
             do {
                 let remote = LoginRemote()
                 let confirmation = try await remote.requestLoginConfirmation(email: email, authCode: authCode)
