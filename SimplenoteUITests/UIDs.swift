@@ -11,6 +11,7 @@ enum UID {
     enum NavBar {
         static let allNotes = "All Notes"
         static let logIn = "Log In"
+        static let logInWithPassword = "Log In with Password"
         static let noteEditorPreview = "Preview"
         static let noteEditorOptions = "Options"
         static let trash = "Trash"
@@ -26,7 +27,7 @@ enum UID {
         static let menu = "menu"
         static let signUp = "Sign Up"
         static let logIn = "Log In"
-        static let continueWithPassword = "Continue with Password"
+        static let mainAction = "Main Action"
         static let logInWithEmail = "Log in with email"
         static let allNotes = "All Notes"
         static let trash = "Trash"

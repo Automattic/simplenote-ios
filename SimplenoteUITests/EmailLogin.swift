@@ -5,15 +5,22 @@ class EmailLogin {
     class func open() {
         app.buttons[UID.Button.logIn].waitForIsHittable()
         app.buttons[UID.Button.logIn].tap()
-        app.buttons[UID.Button.logInWithEmail].waitForIsHittable()
-        app.buttons[UID.Button.logInWithEmail].tap()
     }
 
     class func close() {
-        let backButton = app.navigationBars[UID.NavBar.logIn].buttons[UID.Button.back]
-        guard backButton.isHittable else { return }
+        /// Back from Password > Email UI
+        let backFromPasswordUI = app.navigationBars[UID.NavBar.logInWithPassword].buttons.element(boundBy: 0)
+        if backFromPasswordUI.exists {
+            backFromPasswordUI.tap()
+            _ = app.navigationBars[UID.NavBar.logIn].waitForExistence(timeout: minLoadTimeout)
+        }
 
-        backButton.tap()
+        /// Back from Email UI > Onboarding
+        let backButton = app.navigationBars[UID.NavBar.logIn].buttons.element(boundBy: 0)
+        if backButton.isHittable {
+            backButton.tap()
+        }
+
         handleSavePasswordPrompt()
     }
 
@@ -34,13 +41,18 @@ class EmailLogin {
 
     class func logIn(email: String, password: String) {
         enterEmail(enteredValue: email)
-        app.buttons[UID.Button.continueWithPassword].tap()
+        app.buttons[UID.Button.logInWithEmail].tap()
         _ = app.buttons[UID.Button.logIn].waitForExistence(timeout: minLoadTimeout)
         enterPassword(enteredValue: password)
-        app.buttons[UID.Button.logIn].tap()
+        app.buttons[UID.Button.mainAction].tap()
         handleSavePasswordPrompt()
         waitForSpinnerToDisappear()
     }
+    
+    class func enterEmailAndAttemptLogin(email: String) {
+        enterEmail(enteredValue: email)
+        app.buttons[UID.Button.logInWithEmail].tap()
+     }
 
     class func enterEmail(enteredValue: String) {
         let field = app.textFields[UID.TextField.email]
