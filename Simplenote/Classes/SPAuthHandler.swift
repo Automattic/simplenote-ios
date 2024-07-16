@@ -53,7 +53,7 @@ class SPAuthHandler {
         })
     }
 
-    /// Requests an Authentication Magic Link
+    /// Requests an Authentication Email
     ///
     func requestLoginEmail(username: String, onCompletion: @escaping (SPAuthError?) -> Void) {
         let remote = LoginRemote()
@@ -64,6 +64,20 @@ class SPAuthHandler {
             case .failure(let error):
                 onCompletion(self.authenticationError(for: error))
             }
+        }
+    }
+
+    /// Performs LogIn the User with an Authentication Code
+    ///
+    @MainActor
+    func loginWithCode(username: String, code: String) async throws {
+        let remote = LoginRemote()
+        do {
+            let confirmation = try await remote.requestLoginConfirmation(email: username, authCode: code.uppercased())
+            simperiumService.authenticate(withUsername: confirmation.username, token: confirmation.syncToken)
+            
+        } catch let error as RemoteError {
+            throw authenticationError(for: error)
         }
     }
 

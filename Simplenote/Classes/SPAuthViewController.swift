@@ -65,14 +65,35 @@ class SPAuthViewController: UIViewController {
             passwordWarningLabel.isHidden = true
         }
     }
+    
+    /// # Code: Input Field
+    ///
+    @IBOutlet private var codeInputView: SPTextInputView! {
+        didSet {
+            codeInputView.placeholder = AuthenticationStrings.codePlaceholder
+            codeInputView.passwordRules = UITextInputPasswordRules(descriptor: SimplenoteConstants.passwordRules)
+            codeInputView.returnKeyType = .done
+            codeInputView.textColor = .simplenoteGray80Color
+            codeInputView.delegate = self
+            codeInputView.textContentType = .oneTimeCode
+        }
+    }
+    
+    /// # Code: Warning Label
+    ///
+    @IBOutlet private var codeWarningLabel: SPLabel! {
+        didSet {
+            codeWarningLabel.textInsets = AuthenticationConstants.warningInsets
+            codeWarningLabel.textColor = .simplenoteRed60Color
+            codeWarningLabel.isHidden = true
+        }
+    }
 
     /// # Primary Action: LogIn / SignUp
     ///
     @IBOutlet private var primaryActionButton: SPSquaredButton! {
         didSet {
-            primaryActionButton.setTitle(mode.primaryActionText, for: .normal)
             primaryActionButton.setTitleColor(.white, for: .normal)
-            primaryActionButton.addTarget(self, action: mode.primaryActionSelector, for: .touchUpInside)
             primaryActionButton.accessibilityIdentifier = "Main Action"
         }
     }
@@ -90,21 +111,9 @@ class SPAuthViewController: UIViewController {
     ///
     @IBOutlet private var secondaryActionButton: UIButton! {
         didSet {
-            if let title = mode.secondaryActionText {
-                secondaryActionButton.setTitle(title, for: .normal)
-                secondaryActionButton.setTitleColor(.simplenoteBlue60Color, for: .normal)
-            }
-
-            if let attributedTitle = mode.secondaryActionAttributedText {
-                secondaryActionButton.setAttributedTitle(attributedTitle, for: .normal)
-            }
-
+            secondaryActionButton.setTitleColor(.simplenoteBlue60Color, for: .normal)
             secondaryActionButton.titleLabel?.textAlignment = .center
             secondaryActionButton.titleLabel?.numberOfLines = 0
-            
-            if let action = mode.secondaryActionSelector {
-                secondaryActionButton.addTarget(self, action: action, for: .touchUpInside)
-            }
         }
     }
 
@@ -123,27 +132,15 @@ class SPAuthViewController: UIViewController {
         return button
     }()
 
-    /// # Tertiary Separator: COntainer
+    /// # Actions Separator: Container
     ///
-    @IBOutlet private var tertiaryTopSeparator: UIView! {
-        didSet {
-            tertiaryTopSeparator.isHidden = mode.tertiaryActionSelector == nil
-        }
-    }
+    @IBOutlet private var actionsSeparator: UIView!
 
     /// # Tertiary Separator: Label (Or)
     ///
-    @IBOutlet private var tertiaryTopSeparatorLabel: UILabel! {
+    @IBOutlet private var actionsSeparatorLabel: UILabel! {
         didSet {
-            tertiaryTopSeparatorLabel.text = AuthenticationStrings.separatorText
-        }
-    }
-    
-    /// # Tertiary Action: Container View
-    ///
-    @IBOutlet private var tertiaryActionContainerView: UIView! {
-        didSet {
-            tertiaryActionContainerView.isHidden = mode.tertiaryActionSelector == nil
+            actionsSeparatorLabel.text = AuthenticationStrings.separatorText
         }
     }
 
@@ -151,15 +148,34 @@ class SPAuthViewController: UIViewController {
     ///
     @IBOutlet private var tertiaryActionButton: SPSquaredButton! {
         didSet {
-            guard let title = mode.tertiaryActionText, let action = mode.tertiaryActionSelector else {
-                return
-            }
-            
-            tertiaryActionButton.setTitle(title, for: .normal)
             tertiaryActionButton.setTitleColor(.white, for: .normal)
             tertiaryActionButton.backgroundColor = .simplenoteWPBlue50Color
-            tertiaryActionButton.addTarget(self, action: action, for: .touchUpInside)
         }
+    }
+    
+    /// # Tertiary Action:
+    ///
+    @IBOutlet private var quaternaryActionButton: SPSquaredButton! {
+        didSet {
+            quaternaryActionButton.setTitleColor(.black, for: .normal)
+            quaternaryActionButton.backgroundColor = .clear
+            quaternaryActionButton.layer.borderWidth = 1
+            quaternaryActionButton.layer.borderColor = UIColor.black.cgColor
+        }
+    }
+
+    /// # All of the Visible InputView(s)
+    ///
+    private var visibleInputViews: [SPTextInputView] {
+        [emailInputView, passwordInputView, codeInputView].filter { inputView in
+            inputView.isHidden == false
+        }
+    }
+    
+    /// # All of the Action Views
+    ///
+    private var allActionViews: [UIButton] {
+        [primaryActionButton, secondaryActionButton, tertiaryActionButton, quaternaryActionButton]
     }
 
     /// # Simperium's Authenticator Instance
@@ -173,7 +189,7 @@ class SPAuthViewController: UIViewController {
     /// # Indicates if we've got valid Credentials. Doesn't display any validation warnings onscreen
     ///
     private var isInputValid: Bool {
-        return performUsernameValidation() == .success && performPasswordValidation() == .success
+        return performUsernameValidation() == .success && performPasswordValidation() == .success && performCodeValidation() == .success
     }
 
     /// # Returns the EmailInputView's Text: When empty this getter returns an empty string, instead of nil
@@ -217,7 +233,7 @@ class SPAuthViewController: UIViewController {
 
     /// Designated Initializer
     ///
-    init(controller: SPAuthHandler, mode: AuthenticationMode = .loginWithMagicLink, state: AuthenticationState = .init()) {
+    init(controller: SPAuthHandler, mode: AuthenticationMode = .requestLoginCode, state: AuthenticationState = .init()) {
         self.controller = controller
         self.mode = mode
         self.state = state
@@ -231,8 +247,9 @@ class SPAuthViewController: UIViewController {
         setupNavigationController()
         startListeningToNotifications()
 
-        refreshActions()
         refreshInputViews()
+        refreshActionViews()
+        reloadInputViewsFromState()
 
         // hiding text from back button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
@@ -251,8 +268,7 @@ class SPAuthViewController: UIViewController {
         // repositioning in the Text Field. Seriously.
         // Ref. https://github.com/Automattic/simplenote-ios/issues/453
         //
-        let initialFirstResponder = mode.isPasswordHidden ? emailInputView : passwordInputView
-        initialFirstResponder?.becomeFirstResponder()
+        visibleInputViews.first?.becomeFirstResponder()
     }
 }
 
@@ -287,17 +303,50 @@ private extension SPAuthViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
-    func refreshActions() {
-        secondaryActionButton.isHidden = mode.secondaryActionSelector == nil
-        tertiaryActionButton.isHidden = mode.tertiaryActionSelector == nil
-    }
-
     func refreshInputViews() {
+        let inputElements = mode.inputElements
+        
+        emailInputView.isHidden     = !inputElements.contains(.username)
+        passwordInputView.isHidden  = !inputElements.contains(.password)
+        codeInputView.isHidden      = !inputElements.contains(.code)
+        actionsSeparator.isHidden   = !inputElements.contains(.actionSeparator)
+    }
+    
+    func refreshActionViews() {
+        let viewMap: [AuthenticationActionName: UIButton] = [
+            .primary: primaryActionButton,
+            .secondary: secondaryActionButton,
+            .tertiary: tertiaryActionButton,
+            .quaternary: quaternaryActionButton
+        ]
+        
+        for actionView in allActionViews {
+            actionView.isHidden = true
+        }
+
+        for descriptor in mode.actions {
+            guard let actionView = viewMap[descriptor.name] else {
+                assertionFailure()
+                continue
+            }
+
+            if let title = descriptor.text {
+                actionView.setTitle(title, for: .normal)
+            }
+            
+            if let attributedTitle = descriptor.attributedText {
+                actionView.setAttributedTitle(attributedTitle, for: .normal)
+            }
+
+            actionView.addTarget(self, action: descriptor.selector, for: .touchUpInside)
+            actionView.isHidden = false
+        }
+    }
+    
+    func reloadInputViewsFromState() {
         emailInputView.text = state.username
         passwordInputView.text = state.password
-        
-        emailInputView.isHidden = mode.isUsernameHidden
-        passwordInputView.isHidden = mode.isPasswordHidden
+        codeInputView.text = state.code
     }
 
     func ensureStylesMatchValidationState() {
@@ -332,16 +381,21 @@ private extension SPAuthViewController {
 
 // MARK: - Actions
 //
-private extension SPAuthViewController {
+extension SPAuthViewController {
 
     /// Whenever the input is Valid, we'll perform the Primary Action
     ///
     func performPrimaryActionIfPossible() {
-        guard isInputValid else {
+        guard ensureWarningsAreOnScreenWhenNeeded() else {
             return
         }
 
-        perform(mode.primaryActionSelector)
+        guard let primaryActionDescriptor = mode.actions.first(where: { $0.name == .primary}) else {
+            assertionFailure()
+            return
+        }
+
+        perform(primaryActionDescriptor.selector)
     }
     
     @IBAction func performLogInWithPassword() {
@@ -357,29 +411,47 @@ private extension SPAuthViewController {
         performSimperiumAuthentication()
     }
     
-    @IBAction func performLogInWithMagicLink() {
+    @IBAction func requestLogInCode() {
+        guard ensureWarningsAreOnScreenWhenNeeded() else {
+            return
+        }
+        
+        lockdownInterface()
+
+        controller.requestLoginEmail(username: email) { error in
+// TODO: 429 (Rate Limited)? push PW auth instead
+
+            if let error {
+                self.handleError(error: error)
+            } else {
+                self.presentCodeInterface()
+                SPTracker.trackLoginLinkRequested()
+            }
+
+            self.unlockInterface()
+        }
+    }
+    
+    @IBAction func performLogInWithCode() {
         guard ensureWarningsAreOnScreenWhenNeeded() else {
             return
         }
 
-        presentPasswordInterface()
-        
-// TODO: Restore Mail + Code Auth Flow
-//        lockdownInterface()
-//
-//        let email = self.email
-//        controller.requestLoginEmail(username: email) { error in
-//            // TODO: 429 (Rate Limited)? push PW auth instead
-//            self.presentPasswordInterface()
-//            
-//            if let error {
-//                self.handleError(error: error)
-//            } else {
-//                SPTracker.trackUserRequestedLoginLink()
-//            }
-//            
-//            self.unlockInterface()
-//        }
+        Task { @MainActor in
+            lockdownInterface()
+            
+            do {
+                try await controller.loginWithCode(username: state.username, code: state.code)
+                SPTracker.trackLoginLinkConfirmationSuccess()
+            } catch let error as SPAuthError {
+                SPTracker.trackLoginLinkConfirmationFailure()
+                self.handleError(error: error)
+            } catch {
+// TODO: Fixme
+            }
+            
+            unlockInterface()
+        }
     }
     
     @IBAction func performLogInWithWPCOM() {
@@ -421,6 +493,11 @@ private extension SPAuthViewController {
         safariViewController.modalPresentationStyle = .overFullScreen
         present(safariViewController, animated: true, completion: nil)
     }
+    
+    @IBAction func presentPasswordInterface() {
+        let viewController = SPAuthViewController(controller: controller, mode: .loginWithPassword, state: state)
+        navigationController?.pushViewController(viewController, animated: true)
+    }
 }
 
 
@@ -433,9 +510,9 @@ private extension SPAuthViewController {
         viewController.title = title
         navigationController?.pushViewController(viewController, animated: true)
     }
-    
-    func presentPasswordInterface() {
-        let viewController = SPAuthViewController(controller: controller, mode: .loginWithPassword, state: state)
+        
+    func presentCodeInterface() {
+        let viewController = SPAuthViewController(controller: controller, mode: .loginWithCode, state: state)
         navigationController?.pushViewController(viewController, animated: true)
     }
 }
@@ -604,10 +681,10 @@ private extension SPAuthViewController {
         passwordWarningLabel.text = string
         refreshPasswordInput(inErrorState: true)
     }
-
-    func dismissAllValidationWarnings() {
-        refreshEmailInput(inErrorState: false)
-        refreshPasswordInput(inErrorState: false)
+    
+    func displayCodeValidationWarning(_ string: String) {
+        codeWarningLabel.text = string
+        refreshCodeInput(inErrorState: true)
     }
     
     func dismissEmailValidationWarning() {
@@ -616,6 +693,10 @@ private extension SPAuthViewController {
 
     func dismissPasswordValidationWarning() {
         refreshPasswordInput(inErrorState: false)
+    }
+    
+    func dismissCodeValidationWarning() {
+        refreshCodeInput(inErrorState: false)
     }
 
     func refreshEmailInput(inErrorState: Bool) {
@@ -627,6 +708,11 @@ private extension SPAuthViewController {
         passwordWarningLabel.animateVisibility(isHidden: !inErrorState)
         passwordInputView.inErrorState = inErrorState
     }
+    
+    func refreshCodeInput(inErrorState: Bool) {
+        codeWarningLabel.animateVisibility(isHidden: !inErrorState)
+        codeInputView.inErrorState = inErrorState
+    }
 }
 
 // MARK: - Validation
@@ -634,7 +720,7 @@ private extension SPAuthViewController {
 private extension SPAuthViewController {
 
     func performUsernameValidation() -> AuthenticationValidator.Result {
-        if mode.isUsernameHidden {
+        guard mode.inputElements.contains(.username) else {
             return .success
         }
 
@@ -645,11 +731,19 @@ private extension SPAuthViewController {
     /// That's where the `validationStyle` comes in.
     ///
     func performPasswordValidation() -> AuthenticationValidator.Result {
-        if mode.isPasswordHidden {
+        guard mode.inputElements.contains(.password) else {
             return .success
         }
 
         return validator.performPasswordValidation(username: email, password: password, style: mode.validationStyle)
+    }
+    
+    func performCodeValidation() -> AuthenticationValidator.Result {
+        guard mode.inputElements.contains(.code) else {
+            return .success
+        }
+        
+        return validator.performCodeValidation(code: state.code)
     }
 
     /// Whenever we're in `.login` mode, and the password is valid in `.legacy` terms (but invalid in `.strong` mode), we must request the
@@ -662,6 +756,7 @@ private extension SPAuthViewController {
     func ensureWarningsAreOnScreenWhenNeeded() -> Bool {
         let usernameValidationResult = performUsernameValidation()
         let passwordValidationResult = performPasswordValidation()
+        let codeValidationResult = performCodeValidation()
 
         if usernameValidationResult != .success {
             displayEmailValidationWarning(usernameValidationResult.description)
@@ -670,8 +765,12 @@ private extension SPAuthViewController {
         if passwordValidationResult != .success {
             displayPasswordValidationWarning(passwordValidationResult.description)
         }
+        
+        if codeValidationResult != .success {
+            displayCodeValidationWarning(codeValidationResult.description)
+        }
 
-        return usernameValidationResult == .success && passwordValidationResult == .success
+        return usernameValidationResult == .success && passwordValidationResult == .success && codeValidationResult == .success
     }
 
     func ensureWarningsAreDismissedWhenNeeded() {
@@ -681,6 +780,10 @@ private extension SPAuthViewController {
 
         if performPasswordValidation() == .success {
             dismissPasswordValidationWarning()
+        }
+        
+        if performCodeValidation() == .success {
+            dismissCodeValidationWarning()
         }
     }
 }
@@ -696,121 +799,16 @@ extension SPAuthViewController: SPTextInputViewDelegate {
             state.username = textInput.text ?? ""
         case passwordInputView:
             state.password = textInput.text ?? ""
+        case codeInputView:
+            state.code = textInput.text ?? ""
         default:
             break
         }
     }
 
     func textInputShouldReturn(_ textInput: SPTextInputView) -> Bool {
-        switch textInput {
-        case emailInputView:
-            switch performUsernameValidation() {
-            case .success:
-                if mode.isPasswordHidden {
-                    performPrimaryActionIfPossible()
-                } else {
-                    passwordInputView.becomeFirstResponder()
-                }
-
-            case let error:
-                displayEmailValidationWarning(error.description)
-            }
-
-        case passwordInputView:
-            switch performPasswordValidation() {
-            case .success:
-                performPrimaryActionIfPossible()
-
-            case let error:
-                displayPasswordValidationWarning(error.description)
-            }
-
-        default:
-            break
-        }
-
+        performPrimaryActionIfPossible()
         return false
-    }
-}
-
-
-// MARK: - State
-//
-struct AuthenticationState {
-    var username = String()
-    var password = String()
-}
-
-
-// MARK: - AuthenticationMode: Signup / Login
-//
-struct AuthenticationMode: Equatable {
-    let title: String
-    let validationStyle: AuthenticationValidator.Style
-    let isUsernameHidden: Bool
-    let isPasswordHidden: Bool
-    
-    let primaryActionSelector: Selector
-    let primaryActionText: String
-
-    let secondaryActionSelector: Selector?
-    let secondaryActionText: String?
-    let secondaryActionAttributedText: NSAttributedString?
-    
-    let tertiaryActionSelector: Selector?
-    let tertiaryActionText: String?
-}
-
-// MARK: - Default Operation Modes
-//
-extension AuthenticationMode {
-
-    /// Login Operation Mode: Contains all of the strings + delegate wirings, so that the AuthUI handles authentication scenarios.
-    ///
-    static var loginWithPassword: AuthenticationMode {
-        return .init(title: PasswordStrings.title,
-                     validationStyle: .legacy,
-                     isUsernameHidden: true,
-                     isPasswordHidden: false,
-                     primaryActionSelector: #selector(SPAuthViewController.performLogInWithPassword),
-                     primaryActionText: PasswordStrings.login,
-                     secondaryActionSelector: #selector(SPAuthViewController.presentPasswordReset),
-                     secondaryActionText: PasswordStrings.forgotPassword,
-                     secondaryActionAttributedText: nil,
-                     tertiaryActionSelector: nil,
-                     tertiaryActionText: nil)
-    }
-
-    /// Login Operation Mode: Authentication is handled via Magic Links!
-    ///
-    static var loginWithMagicLink: AuthenticationMode {
-        return .init(title: MagicLinkStrings.title,
-                     validationStyle: .legacy,
-                     isUsernameHidden: false,
-                     isPasswordHidden: true,
-                     primaryActionSelector: #selector(SPAuthViewController.performLogInWithMagicLink),
-                     primaryActionText: MagicLinkStrings.loginWithEmail,
-                     secondaryActionSelector: nil,
-                     secondaryActionText: nil,
-                     secondaryActionAttributedText: nil,
-                     tertiaryActionSelector: #selector(SPAuthViewController.performLogInWithWPCOM),
-                     tertiaryActionText: MagicLinkStrings.loginWithWPCOM)
-    }
-
-    /// Signup Operation Mode: Contains all of the strings + delegate wirings, so that the AuthUI handles user account creation scenarios.
-    ///
-    static var signup: AuthenticationMode {
-        return .init(title: SignupStrings.title,
-                     validationStyle: .strong,
-                     isUsernameHidden: false,
-                     isPasswordHidden: true,
-                     primaryActionSelector: #selector(SPAuthViewController.performSignUp),
-                     primaryActionText: SignupStrings.signup,
-                     secondaryActionSelector: #selector(SPAuthViewController.presentTermsOfService),
-                     secondaryActionText: nil,
-                     secondaryActionAttributedText: SignupStrings.termsOfService,
-                     tertiaryActionSelector: nil,
-                     tertiaryActionText: nil)
     }
 }
 
@@ -821,6 +819,7 @@ private enum AuthenticationStrings {
     static let separatorText                = NSLocalizedString("Or", comment: "Or, used as a separator between Actions")
     static let emailPlaceholder             = NSLocalizedString("Email", comment: "Email TextField Placeholder")
     static let passwordPlaceholder          = NSLocalizedString("Password", comment: "Password TextField Placeholder")
+    static let codePlaceholder              = NSLocalizedString("Code", comment: "Code TextField Placeholder")
     static let acceptActionText             = NSLocalizedString("Accept", comment: "Accept Action")
     static let cancelActionText             = NSLocalizedString("Cancel", comment: "Cancel Action")
     static let loginActionText              = NSLocalizedString("Log In", comment: "Log In Action")
@@ -833,6 +832,7 @@ private enum AuthenticationStrings {
     static let verificationSentTitle        = NSLocalizedString("Check your Email", comment: "Vefification sent alert title")
     static let verificationSentTemplate     = NSLocalizedString("We’ve sent a verification email to %1$@. Please check your inbox and follow the instructions.", comment: "Confirmation that an email has been sent")
 }
+
 
 // MARK: - PasswordInsecure Alert Strings
 //
@@ -849,50 +849,6 @@ private enum PasswordInsecureString {
     ].joined(separator: .newline)
 }
 
-
-// MARK: - Mode: .loginWithPassword
-//
-private enum PasswordStrings {
-    static let title            = NSLocalizedString("Log In with Password", comment: "LogIn Interface Title")
-    static let login            = NSLocalizedString("Log In", comment: "LogIn Action")
-    static let forgotPassword   = NSLocalizedString("Forgot your password?", comment: "Password Reset Action")
-}
-
-
-// MARK: - Mode: .loginWithMagicLink
-//
-private enum MagicLinkStrings {
-    static let title            = NSLocalizedString("Log In", comment: "LogIn Interface Title")
-    static let loginWithEmail   = NSLocalizedString("Log in with email", comment: "Sends the User an email with an Authentication Code")
-    static let loginWithWPCOM   = NSLocalizedString("Log in with WordPress.com", comment: "Password fallback Action")
-}
-
-
-// MARK: - Mode: .signup
-//
-private enum SignupStrings {
-    static let title                = NSLocalizedString("Sign Up", comment: "SignUp Interface Title")
-    static let signup               = NSLocalizedString("Sign Up", comment: "SignUp Action")
-    static let termsOfServicePrefix = NSLocalizedString("By creating an account you agree to our", comment: "Terms of Service Legend *PREFIX*: printed in dark color")
-    static let termsOfServiceSuffix = NSLocalizedString("Terms and Conditions", comment: "Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue")
-}
-
-private extension SignupStrings {
-
-    /// Returns a properly formatted Secondary Action String for Signup
-    ///
-    static var termsOfService: NSAttributedString {
-        let output = NSMutableAttributedString(string: String(), attributes: [
-            .font: UIFont.preferredFont(forTextStyle: .subheadline)
-        ])
-
-        output.append(string: termsOfServicePrefix, foregroundColor: .simplenoteGray60Color)
-        output.append(string: " ")
-        output.append(string: termsOfServiceSuffix, foregroundColor: .simplenoteBlue60Color)
-
-        return output
-    }
-}
 
 // MARK: - Authentication Constants
 //

@@ -11,19 +11,21 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SPAuthViewController" customModule="Simplenote" customModuleProvider="target">
             <connections>
+                <outlet property="actionsSeparator" destination="Kpm-3a-0Z7" id="1in-6f-hpi"/>
+                <outlet property="actionsSeparatorLabel" destination="223-DD-dLN" id="GpO-BP-sli"/>
+                <outlet property="codeInputView" destination="OP1-hm-GRS" id="2HQ-Db-x3W"/>
+                <outlet property="codeWarningLabel" destination="Jbg-WU-heV" id="Qjt-NJ-s8f"/>
                 <outlet property="emailInputView" destination="hW6-K1-OyV" id="TyC-Uh-Kaf"/>
                 <outlet property="emailWarningLabel" destination="n7T-Gj-plH" id="STx-wz-jKg"/>
                 <outlet property="passwordInputView" destination="pdF-nK-gXE" id="18P-SU-c90"/>
                 <outlet property="passwordWarningLabel" destination="UyC-If-pXj" id="D2M-PR-Tph"/>
                 <outlet property="primaryActionButton" destination="q3p-Ji-dOm" id="l1t-x0-zva"/>
                 <outlet property="primaryActionSpinner" destination="o3M-2A-urw" id="pe9-Bb-Kf7"/>
+                <outlet property="quaternaryActionButton" destination="ILr-Ij-XBq" id="jBw-3a-pKE"/>
                 <outlet property="secondaryActionButton" destination="PfS-vU-7i3" id="zj3-Ly-5X9"/>
                 <outlet property="stackView" destination="CJS-5O-pxK" id="Grg-ZD-DYy"/>
                 <outlet property="stackViewTopConstraint" destination="Cyh-nE-ql7" id="WHM-m6-Cht"/>
                 <outlet property="tertiaryActionButton" destination="Uy8-va-3uF" id="NfE-QO-aLc"/>
-                <outlet property="tertiaryActionContainerView" destination="nxG-8M-wxx" id="FtU-Ac-O5T"/>
-                <outlet property="tertiaryTopSeparator" destination="Kpm-3a-0Z7" id="vyp-IY-5NB"/>
-                <outlet property="tertiaryTopSeparatorLabel" destination="223-DD-dLN" id="4cS-eP-Gg8"/>
                 <outlet property="view" destination="iN0-l3-epB" id="bxN-Zo-xBW"/>
             </connections>
         </placeholder>
@@ -33,9 +35,9 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CJS-5O-pxK">
-                    <rect key="frame" x="332" y="60" width="360" height="356"/>
+                    <rect key="frame" x="332" y="60" width="360" height="486"/>
                     <subviews>
-                        <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="hW6-K1-OyV" customClass="SPTextInputView" customModule="Simplenote" customModuleProvider="target">
+                        <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="hW6-K1-OyV" userLabel="Email Input View" customClass="SPTextInputView" customModule="Simplenote" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="360" height="44"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
@@ -51,7 +53,7 @@
                             <color key="textColor" systemColor="systemPinkColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="pdF-nK-gXE" customClass="SPTextInputView" customModule="Simplenote" customModuleProvider="target">
+                        <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="pdF-nK-gXE" userLabel="Password Input View" customClass="SPTextInputView" customModule="Simplenote" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="78" width="360" height="44"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
@@ -67,8 +69,24 @@
                             <color key="textColor" systemColor="systemRedColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CGr-O3-MBQ" userLabel="Primary Action View">
+                        <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="OP1-hm-GRS" userLabel="Code Input View" customClass="SPTextInputView" customModule="Simplenote" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="156" width="360" height="44"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="im0-Ei-pV0"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="#Password#"/>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#Invalid code#" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jbg-WU-heV" userLabel="#Invalid code#" customClass="SPLabel" customModule="Simplenote" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="208" width="100.5" height="18"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                            <color key="textColor" systemColor="systemRedColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CGr-O3-MBQ" userLabel="Primary Action View">
+                            <rect key="frame" x="0.0" y="234" width="360" height="44"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q3p-Ji-dOm" customClass="SPSquaredButton" customModule="Simplenote" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="360" height="44"/>
@@ -91,7 +109,7 @@
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PfS-vU-7i3">
-                            <rect key="frame" x="0.0" y="208" width="360" height="44"/>
+                            <rect key="frame" x="0.0" y="286" width="360" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="u8s-d9-Em4"/>
                             </constraints>
@@ -100,8 +118,8 @@
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                         </button>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kpm-3a-0Z7" userLabel="Tertiary Separator View">
-                            <rect key="frame" x="0.0" y="260" width="360" height="44"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kpm-3a-0Z7" userLabel="Actions Separator View">
+                            <rect key="frame" x="0.0" y="338" width="360" height="44"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Ls-SS-l0Q" userLabel="Leading View">
                                     <rect key="frame" x="0.0" y="21.5" width="167" height="1"/>
@@ -137,38 +155,42 @@
                                 <constraint firstItem="zDI-3J-P7n" firstAttribute="leading" secondItem="223-DD-dLN" secondAttribute="trailing" constant="5" id="vE8-Zf-q7V"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nxG-8M-wxx" userLabel="Tertiary Action View">
-                            <rect key="frame" x="0.0" y="312" width="360" height="44"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uy8-va-3uF" userLabel="#Tertiary#" customClass="SPSquaredButton" customModule="Simplenote" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="360" height="44"/>
-                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                    <state key="normal" title="#Tertiary#"/>
-                                </button>
-                            </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uy8-va-3uF" userLabel="#Tertiary#" customClass="SPSquaredButton" customModule="Simplenote" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="390" width="360" height="44"/>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="Uy8-va-3uF" secondAttribute="trailing" id="4sz-wJ-Fm5"/>
-                                <constraint firstAttribute="bottom" secondItem="Uy8-va-3uF" secondAttribute="bottom" id="7XH-hU-NF8"/>
-                                <constraint firstItem="Uy8-va-3uF" firstAttribute="leading" secondItem="nxG-8M-wxx" secondAttribute="leading" id="F1T-yV-yFY"/>
-                                <constraint firstAttribute="height" constant="44" id="jJo-79-bms"/>
-                                <constraint firstItem="Uy8-va-3uF" firstAttribute="top" secondItem="nxG-8M-wxx" secondAttribute="top" id="rt4-P1-Ygd"/>
+                                <constraint firstAttribute="height" constant="44" id="lt7-Yn-pzG"/>
                             </constraints>
-                        </view>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                            <state key="normal" title="#Tertiary#">
+                                <color key="titleColor" systemColor="systemIndigoColor"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ILr-Ij-XBq" userLabel="#Quaternary#" customClass="SPSquaredButton" customModule="Simplenote" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="442" width="360" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="cE4-3n-khh"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                            <state key="normal" title="#Quaternary#"/>
+                        </button>
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="PfS-vU-7i3" secondAttribute="trailing" id="0QL-Iw-KLz"/>
+                        <constraint firstItem="OP1-hm-GRS" firstAttribute="leading" secondItem="CJS-5O-pxK" secondAttribute="leading" id="22g-Kt-93q"/>
                         <constraint firstItem="PfS-vU-7i3" firstAttribute="leading" secondItem="CJS-5O-pxK" secondAttribute="leading" id="314-fc-3eX"/>
                         <constraint firstAttribute="trailing" secondItem="pdF-nK-gXE" secondAttribute="trailing" id="51g-0D-Oyv"/>
                         <constraint firstAttribute="trailing" secondItem="Kpm-3a-0Z7" secondAttribute="trailing" id="7SY-4J-Rv5"/>
                         <constraint firstItem="CGr-O3-MBQ" firstAttribute="leading" secondItem="CJS-5O-pxK" secondAttribute="leading" id="BIX-Fy-gqY"/>
+                        <constraint firstAttribute="trailing" secondItem="OP1-hm-GRS" secondAttribute="trailing" id="R55-ao-psA"/>
                         <constraint firstAttribute="trailing" secondItem="hW6-K1-OyV" secondAttribute="trailing" id="RSC-Vk-xbB"/>
                         <constraint firstItem="Kpm-3a-0Z7" firstAttribute="leading" secondItem="CJS-5O-pxK" secondAttribute="leading" id="S94-pS-Aza"/>
                         <constraint firstItem="hW6-K1-OyV" firstAttribute="leading" secondItem="CJS-5O-pxK" secondAttribute="leading" id="UoC-hu-yxe"/>
+                        <constraint firstItem="ILr-Ij-XBq" firstAttribute="leading" secondItem="CJS-5O-pxK" secondAttribute="leading" id="Wey-0k-g9U"/>
+                        <constraint firstAttribute="trailing" secondItem="ILr-Ij-XBq" secondAttribute="trailing" id="dxd-sM-fG7"/>
                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="360" id="nLp-JP-Ott"/>
-                        <constraint firstItem="nxG-8M-wxx" firstAttribute="leading" secondItem="CJS-5O-pxK" secondAttribute="leading" id="sEH-qo-ZdT"/>
+                        <constraint firstItem="Uy8-va-3uF" firstAttribute="leading" secondItem="CJS-5O-pxK" secondAttribute="leading" id="s8W-Vc-jxA"/>
+                        <constraint firstAttribute="trailing" secondItem="Uy8-va-3uF" secondAttribute="trailing" id="sI0-Z8-I2B"/>
                         <constraint firstAttribute="trailing" secondItem="CGr-O3-MBQ" secondAttribute="trailing" id="vUF-qZ-Vmm"/>
-                        <constraint firstAttribute="trailing" secondItem="nxG-8M-wxx" secondAttribute="trailing" id="w8N-O1-2au"/>
                         <constraint firstItem="pdF-nK-gXE" firstAttribute="leading" secondItem="CJS-5O-pxK" secondAttribute="leading" id="xzh-aD-Ag5"/>
                     </constraints>
                 </stackView>
@@ -185,6 +207,12 @@
         </view>
     </objects>
     <designables>
+        <designable name="ILr-Ij-XBq">
+            <size key="intrinsicContentSize" width="112" height="33"/>
+        </designable>
+        <designable name="Jbg-WU-heV">
+            <size key="intrinsicContentSize" width="100.5" height="18"/>
+        </designable>
         <designable name="Uy8-va-3uF">
             <size key="intrinsicContentSize" width="83" height="33"/>
         </designable>
@@ -202,11 +230,14 @@
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemPinkColor">
-            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

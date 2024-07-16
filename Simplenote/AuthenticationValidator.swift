@@ -11,6 +11,10 @@ struct AuthenticationValidator {
     /// Minimum Password Length: SignUp
     ///
     private let strongPasswordLength = UInt(8)
+    
+    /// Login Code Length
+    ///
+    private let loginCodeLength = UInt(6)
 
     /// Returns the Validation Result for a given Username
     ///
@@ -48,6 +52,14 @@ struct AuthenticationValidator {
     private func minimumPasswordLength(for style: Style) -> UInt {
         return (style == .legacy) ? legacyPasswordLength : strongPasswordLength
     }
+    
+    func performCodeValidation(code: String) -> Result {
+        if code.count >= loginCodeLength {
+            return .success
+        }
+        
+        return .codeTooShort
+    }
 }
 
 // MARK: - Nested Types
@@ -65,6 +77,7 @@ extension AuthenticationValidator {
         case passwordMatchesUsername
         case passwordTooShort(length: UInt)
         case passwordContainsInvalidCharacter
+        case codeTooShort
     }
 }
 
@@ -91,6 +104,8 @@ extension AuthenticationValidator.Result: CustomStringConvertible {
         case .passwordContainsInvalidCharacter:
             return NSLocalizedString("Password must not contain tabs nor newlines", comment: "Message displayed when a password contains a disallowed character")
 
+        case .codeTooShort:
+            return NSLocalizedString("Login Code is too short", comment: "Message displayed when a login code is too short")
         }
     }
 }
