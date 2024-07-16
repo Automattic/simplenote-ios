@@ -8,6 +8,12 @@ class EmailLogin {
     }
 
     class func close() {
+        /// Exit: We're already in the Onboarding UI
+        ///
+        if app.buttons[UID.Button.logIn].exists, app.buttons[UID.Button.signUp].exists {
+            return
+        }
+        
         /// Back from Password > Code UI
         ///
         let backFromPasswordUI = app.navigationBars[UID.NavBar.logInWithPassword].buttons.element(boundBy: 0)
