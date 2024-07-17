@@ -8,28 +8,32 @@ class EmailLogin {
     }
 
     class func close() {
+        /// Exit: We're already in the Onboarding UI
+        ///
+        if app.buttons[UID.Button.logIn].exists, app.buttons[UID.Button.signUp].exists {
+            return
+        }
+        
         /// Back from Password > Code UI
         ///
         let backFromPasswordUI = app.navigationBars[UID.NavBar.logInWithPassword].buttons.element(boundBy: 0)
         if backFromPasswordUI.exists {
             backFromPasswordUI.tap()
+            _ = app.navigationBars[UID.NavBar.enterCode].waitForExistence(timeout: minLoadTimeout)
         }
         
         /// Back from Code UI > Email UI
         /// Important: When rate-limited, the Code UI is skipped
         ///
         let codeNavigationBar = app.navigationBars[UID.NavBar.enterCode]
-        _ = codeNavigationBar.waitForExistence(timeout: minLoadTimeout)
-        
         if codeNavigationBar.exists {
             codeNavigationBar.buttons.element(boundBy: 0).tap()
+            _ = app.navigationBars[UID.NavBar.logIn].waitForExistence(timeout: minLoadTimeout)
         }
 
         /// Back from Email UI > Onboarding
         ///
         let emailNavigationBar = app.navigationBars[UID.NavBar.logIn]
-        _ = emailNavigationBar.waitForExistence(timeout: minLoadTimeout)
-
         if emailNavigationBar.exists {
             emailNavigationBar.buttons.element(boundBy: 0).tap()
         }
