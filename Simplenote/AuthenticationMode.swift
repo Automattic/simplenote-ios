@@ -12,7 +12,7 @@ struct AuthenticationState {
 
 // MARK: - Authentication Elements
 //
-struct AuthenticationInputElements: OptionSet {
+struct AuthenticationInputElements: OptionSet, Hashable {
     let rawValue: UInt
     
     static let username         = AuthenticationInputElements(rawValue: 1 << 0)
