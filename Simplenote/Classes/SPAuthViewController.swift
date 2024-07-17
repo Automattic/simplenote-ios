@@ -435,13 +435,16 @@ extension SPAuthViewController {
         lockdownInterface()
 
         controller.requestLoginEmail(username: email) { error in
-// TODO: 429 (Rate Limited)? push PW auth instead
-
-            if let error {
-                self.handleError(error: error)
-            } else {
+            switch error {
+            case .none:
                 self.presentCodeInterface()
                 SPTracker.trackLoginLinkRequested()
+                
+            case .tooManyAttempts:
+                self.presentPasswordInterfaceWithRateLimitingHeader()
+                
+            case .some(let error):
+                self.handleError(error: error)
             }
 
             self.unlockInterface()
@@ -459,11 +462,12 @@ extension SPAuthViewController {
             do {
                 try await controller.loginWithCode(username: state.username, code: state.code)
                 SPTracker.trackLoginLinkConfirmationSuccess()
-            } catch let error as SPAuthError {
-                SPTracker.trackLoginLinkConfirmationFailure()
-                self.handleError(error: error)
             } catch {
-// TODO: Fixme
+                /// Errors will always be of the `SPAuthError` type. Let's switch to Typed Errors, as soon as we migrate over to Xcode 16
+                let error = error as? SPAuthError ?? .generic
+                self.handleError(error: error)
+
+                SPTracker.trackLoginLinkConfirmationFailure()
             }
             
             unlockInterface()
@@ -511,7 +515,15 @@ extension SPAuthViewController {
     }
     
     @IBAction func presentPasswordInterface() {
-        let viewController = SPAuthViewController(controller: controller, mode: .loginWithPassword, state: state)
+        presentPasswordInterfaceWithHeader(header: nil)
+    }
+    
+    @IBAction func presentPasswordInterfaceWithRateLimitingHeader() {
+        presentPasswordInterfaceWithHeader(header: AuthenticationStrings.loginWithEmailLimitHeader)
+    }
+
+    @IBAction func presentPasswordInterfaceWithHeader(header: String?) {
+        let viewController = SPAuthViewController(controller: controller, mode: .loginWithPassword(header: header), state: state)
         navigationController?.pushViewController(viewController, animated: true)
     }
 }
@@ -674,7 +686,7 @@ private extension SPAuthViewController {
         }
 
         // Prefill the LoginViewController
-        let loginViewController = SPAuthViewController(controller: controller, mode: .loginWithPassword, state: state)
+        let loginViewController = SPAuthViewController(controller: controller, mode: .loginWithPassword(), state: state)
         loginViewController.loadViewIfNeeded()
 
         // Swap the current VC
@@ -839,6 +851,7 @@ private enum AuthenticationStrings {
     static let acceptActionText             = NSLocalizedString("Accept", comment: "Accept Action")
     static let cancelActionText             = NSLocalizedString("Cancel", comment: "Cancel Action")
     static let loginActionText              = NSLocalizedString("Log In", comment: "Log In Action")
+    static let loginWithEmailLimitHeader    = NSLocalizedString("Log in with email failed, please enter your password", comment: "Header for Enter Password UI, when the user performed too many requests")
     static let compromisedAlertCancel       = NSLocalizedString("Cancel", comment: "Cancel action for password alert")
     static let compromisedAlertReset        = NSLocalizedString("Change Password", comment: "Change password action")
     static let unverifiedCancelText         = NSLocalizedString("Ok", comment: "Email unverified alert dismiss")

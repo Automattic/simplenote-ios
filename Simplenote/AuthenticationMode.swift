@@ -89,8 +89,9 @@ extension AuthenticationMode {
 
     /// Login with Password
     ///
-    static var loginWithPassword: AuthenticationMode {
+    static func loginWithPassword(header: String? = nil) -> AuthenticationMode {
         return .init(title: NSLocalizedString("Log In with Password", comment: "LogIn Interface Title"),
+                     header: header,
                      inputElements: [.password],
                      validationStyle: .legacy,
                      actions: [

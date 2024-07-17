@@ -8,17 +8,34 @@ class EmailLogin {
     }
 
     class func close() {
-        /// Back from Password > Email UI
+        /// Exit: We're already in the Onboarding UI
+        ///
+        if app.buttons[UID.Button.logIn].exists, app.buttons[UID.Button.signUp].exists {
+            return
+        }
+        
+        /// Back from Password > Code UI
+        ///
         let backFromPasswordUI = app.navigationBars[UID.NavBar.logInWithPassword].buttons.element(boundBy: 0)
         if backFromPasswordUI.exists {
             backFromPasswordUI.tap()
+            _ = app.navigationBars[UID.NavBar.enterCode].waitForExistence(timeout: minLoadTimeout)
+        }
+        
+        /// Back from Code UI > Email UI
+        /// Important: When rate-limited, the Code UI is skipped
+        ///
+        let codeNavigationBar = app.navigationBars[UID.NavBar.enterCode]
+        if codeNavigationBar.exists {
+            codeNavigationBar.buttons.element(boundBy: 0).tap()
             _ = app.navigationBars[UID.NavBar.logIn].waitForExistence(timeout: minLoadTimeout)
         }
 
         /// Back from Email UI > Onboarding
-        let backButton = app.navigationBars[UID.NavBar.logIn].buttons.element(boundBy: 0)
-        if backButton.isHittable {
-            backButton.tap()
+        ///
+        let emailNavigationBar = app.navigationBars[UID.NavBar.logIn]
+        if emailNavigationBar.exists {
+            emailNavigationBar.buttons.element(boundBy: 0).tap()
         }
 
         handleSavePasswordPrompt()
@@ -42,6 +59,19 @@ class EmailLogin {
     class func logIn(email: String, password: String) {
         enterEmail(enteredValue: email)
         app.buttons[UID.Button.logInWithEmail].tap()
+        
+        /// Code UI > Password UI
+        /// Important: When rate-limited, the Code UI is skipped
+        ///
+        let codeNavigationBar = app.navigationBars[UID.NavBar.enterCode]
+        _ = codeNavigationBar.waitForExistence(timeout: minLoadTimeout)
+        
+        if codeNavigationBar.exists {
+            app.buttons[UID.Button.enterPassword].tap()
+        }
+        
+        /// Password UI
+        ///
         _ = app.buttons[UID.Button.logIn].waitForExistence(timeout: minLoadTimeout)
         enterPassword(enteredValue: password)
         app.buttons[UID.Button.mainAction].tap()
