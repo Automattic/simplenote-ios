@@ -11,10 +11,10 @@ class Remote {
     /// Sublcassing Notes: To be able to send a task it is required to first setup the URL request for the task to use
     ///
     func performDataTask(with request: URLRequest, completion: @escaping (_ result: Result<Data?, RemoteError>) -> Void) {
-        let dataTask = urlSession.dataTask(with: request) { (data, response, dataTaskError) in
+        let dataTask = urlSession.dataTask(with: request) { (data, response, networkError) in
             DispatchQueue.main.async {
                 
-                if let error = RemoteError(statusCode: response?.responseStatusCode ?? .zero, error: dataTaskError) {
+                if let error = RemoteError(statusCode: response?.responseStatusCode, responseData: data, networkError: networkError) {
                     completion(.failure(error))
                     return
                 }
@@ -30,8 +30,7 @@ class Remote {
     ///
     func performDataTask(with request: URLRequest) async throws -> Data {
         let (data, response) = try await urlSession.data(for: request)
-
-        if let error = RemoteError(statusCode: response.responseStatusCode) {
+        if let error = RemoteError(statusCode: response.responseStatusCode, responseData: data) {
             throw error
         }
         
