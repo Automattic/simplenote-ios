@@ -61,8 +61,9 @@ class SPAuthHandler {
             switch result {
             case .success:
                 onCompletion(nil)
-            case .failure(let error):
-                onCompletion(self.authenticationError(for: error))
+            case .failure(let remoteError):
+                let error = SPAuthError(loginRemoteError: remoteError)
+                onCompletion(error)
             }
         }
     }
@@ -76,8 +77,8 @@ class SPAuthHandler {
             let confirmation = try await remote.requestLoginConfirmation(email: username, authCode: code.uppercased())
             simperiumService.authenticate(withUsername: confirmation.username, token: confirmation.syncToken)
             
-        } catch let error as RemoteError {
-            throw authenticationError(for: error)
+        } catch let remoteError as RemoteError {
+            throw SPAuthError(loginRemoteError: remoteError)
         }
     }
 
@@ -94,20 +95,10 @@ class SPAuthHandler {
             switch result {
             case .success:
                 onCompletion(nil)
-            case .failure(let error):
-                onCompletion(self.authenticationError(for: error))
+            case .failure(let remoteError):
+                let error = SPAuthError(signupRemoteError: remoteError)
+                onCompletion(error)
             }
-        }
-    }
-
-    private func authenticationError(for remoteError: RemoteError) -> SPAuthError {
-        switch remoteError {
-        case .network:
-            return .network
-        case .tooManyAttempts:
-            return .tooManyAttempts
-        case .requestError(let statusCode, let error):
-            return SPAuthError(signupErrorCode: statusCode, response: error?.localizedDescription, error: error)
         }
     }
 
