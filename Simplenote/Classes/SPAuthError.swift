@@ -114,6 +114,10 @@ extension SPAuthError {
             return NSLocalizedString("You must verify your email before being able to login.", comment: "Error for un verified email")
         case .tooManyAttempts:
             return NSLocalizedString("Too many login attempts. Try again later.", comment: "Error message for too many login attempts")
+        case .requestNotFound:
+            return NSLocalizedString("Your authentication code has expired. Please request a new one", comment: "Error message for Invalid Login Code")
+        case .invalidCode:
+            return NSLocalizedString("The code you've entered is not correct. Please try again", comment: "Error message for Invalid Login Code")
         default:
             return NSLocalizedString("We're having problems. Please try again soon.", comment: "Generic error")
         }
