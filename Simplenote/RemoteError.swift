@@ -1,38 +1,50 @@
 import Foundation
 
-enum RemoteError: Error {
-    case network
-    case tooManyAttempts
-    case requestError(Int, Error?)
+
+// MARK: - RemoteError
+//
+struct RemoteError: Error {
+    let statusCode: Int
+    let response: String?
+    let networkError: Error?
 }
 
 
+// MARK: - RemoteError
+//
 extension RemoteError {
     
-    init?(statusCode: Int, error: Error? = nil) {
-        if statusCode / 100 == 2 {
+    init?(statusCode: Int?, responseData: Data? = nil, networkError: Error? = nil) {
+        if let statusCode, statusCode / 100 == 2 {
             return nil
         }
+
+        let response = ReponseErrorContainer(body: responseData)
         
-        switch statusCode {
-        case 429:
-            self = .tooManyAttempts
-        default:
-            self = statusCode > 0 ? .requestError(statusCode, error) : .network
-        }
+        self.statusCode = statusCode ?? .zero
+        self.response = response?.error
+        self.networkError = networkError
     }
 }
 
 
 extension RemoteError: Equatable {
     static func == (lhs: RemoteError, rhs: RemoteError) -> Bool {
-        switch (lhs, rhs) {
-        case (.network, .network):
-            return true
-        case (.requestError(let lhsStatus, let lhsError), .requestError(let rhsStatus, let rhsError)):
-            return lhsStatus == rhsStatus && lhsError?.localizedDescription == rhsError?.localizedDescription
-        default:
-            return false
+        lhs.statusCode == rhs.statusCode && lhs.response == rhs.response && lhs.networkError?.localizedDescription == rhs.networkError?.localizedDescription
+    }
+}
+
+
+// MARK: - ReponseErrorContainer
+//
+private struct ReponseErrorContainer: Decodable, Equatable {
+    let error: String
+
+    init?(body: Data?) {
+        guard let body, let decoded = try? JSONDecoder().decode(ReponseErrorContainer.self, from: body) else {
+            return nil
         }
+        
+        self = decoded
     }
 }
