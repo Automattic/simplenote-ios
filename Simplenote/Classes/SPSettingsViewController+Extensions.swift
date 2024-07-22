@@ -188,12 +188,7 @@ extension SPSettingsViewController {
     }
 
     private func handleError(_ error: RemoteError) {
-        switch error {
-        case .network:
-            NoticeController.shared.present(NoticeFactory.networkError())
-        default:
-            presentRequestErrorAlert()
-        }
+        presentRequestErrorAlert()
     }
 
     private func presentSuccessAlert(for user: SPUser) {
