@@ -517,7 +517,7 @@ extension SPAuthViewController {
     }
     
     @IBAction func presentPasswordInterface() {
-        presentPasswordInterfaceWithHeader(header: nil)
+        presentPasswordInterfaceWithHeader(header: AuthenticationStrings.loginWithEmailEmailHeader)
     }
     
     @IBAction func presentPasswordInterfaceWithRateLimitingHeader() {
@@ -854,6 +854,7 @@ private enum AuthenticationStrings {
     static let acceptActionText             = NSLocalizedString("Accept", comment: "Accept Action")
     static let cancelActionText             = NSLocalizedString("Cancel", comment: "Cancel Action")
     static let loginActionText              = NSLocalizedString("Log In", comment: "Log In Action")
+    static let loginWithEmailEmailHeader    = NSLocalizedString("Enter the password for the account {{EMAIL}}", comment: "Header for Login With Password. Please preserve the {{EMAIL}} substring")
     static let loginWithEmailLimitHeader    = NSLocalizedString("Log in with email failed, please enter your password", comment: "Header for Enter Password UI, when the user performed too many requests")
     static let compromisedAlertCancel       = NSLocalizedString("Cancel", comment: "Cancel action for password alert")
     static let compromisedAlertReset        = NSLocalizedString("Change Password", comment: "Change password action")
