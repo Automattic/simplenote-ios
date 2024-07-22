@@ -13,6 +13,3 @@ gem 'fastlane-plugin-wpmreleasetoolkit', '~> 11.0', '>= 11.0.1'
 group :screenshots, optional: true do
   gem 'rmagick', '~> 3.2.0'
 end
-
-plugins_path = File.join(File.dirname(__FILE__), 'fastlane', 'Pluginfile')
-eval_gemfile(plugins_path) if File.exist?(plugins_path)
