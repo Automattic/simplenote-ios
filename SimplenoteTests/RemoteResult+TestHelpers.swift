@@ -7,6 +7,6 @@ extension Remote {
             return .success(nil)
         }
 
-        return .failure(RemoteError.requestError(0, nil))
+        return .failure(RemoteError(statusCode: 0, response: nil, networkError: nil))
     }
 }

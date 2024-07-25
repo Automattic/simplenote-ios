@@ -298,6 +298,7 @@
 		B54A11C22C135EA2002AC8AA /* UIButton+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54A11C12C135EA2002AC8AA /* UIButton+Simplenote.swift */; };
 		B54A11C42C136225002AC8AA /* MagicLinkRequestedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54A11C32C136225002AC8AA /* MagicLinkRequestedView.swift */; };
 		B54B04D82407169500401FBB /* SPAppDelegate+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54B04D72407169500401FBB /* SPAppDelegate+Extensions.swift */; };
+		B54C1B552C4EE350001E9E18 /* UIAlertController+Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54C1B542C4EE350001E9E18 /* UIAlertController+Auth.swift */; };
 		B54D9C572909BA2600D0E0EC /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D9C562909BA2600D0E0EC /* StoreManager.swift */; };
 		B54D9C592909CC4400D0E0EC /* StoreProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D9C582909CC4400D0E0EC /* StoreProduct.swift */; };
 		B55051821A4328B9002A1093 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B55051811A4328B9002A1093 /* LocalAuthentication.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -998,6 +999,7 @@
 		B54A11C12C135EA2002AC8AA /* UIButton+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Simplenote.swift"; sourceTree = "<group>"; };
 		B54A11C32C136225002AC8AA /* MagicLinkRequestedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicLinkRequestedView.swift; sourceTree = "<group>"; };
 		B54B04D72407169500401FBB /* SPAppDelegate+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SPAppDelegate+Extensions.swift"; sourceTree = "<group>"; };
+		B54C1B542C4EE350001E9E18 /* UIAlertController+Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Auth.swift"; sourceTree = "<group>"; };
 		B54D9C542909B21700D0E0EC /* Simplenote 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Simplenote 6.xcdatamodel"; sourceTree = "<group>"; };
 		B54D9C562909BA2600D0E0EC /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
 		B54D9C582909CC4400D0E0EC /* StoreProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreProduct.swift; sourceTree = "<group>"; };
@@ -2081,6 +2083,7 @@
 				B56A695D22F9D53300B90398 /* SPAuthError.swift */,
 				B56A695C22F9D53300B90398 /* SPAuthHandler.swift */,
 				B5C99A502C45B94600728813 /* AuthenticationMode.swift */,
+				B54C1B542C4EE350001E9E18 /* UIAlertController+Auth.swift */,
 				B56A695F22F9D53400B90398 /* SPAuthViewController.swift */,
 				B56A695E22F9D53300B90398 /* SPAuthViewController.xib */,
 				B5AB169722FA124F00B4EBA5 /* SPSheetController.swift */,
@@ -3643,6 +3646,7 @@
 				46A3C98F17DFA81A002865AE /* SPNoteListViewController.m in Sources */,
 				B5BD6AF51BF66093004ECE33 /* SPMarkdownPreviewViewController.m in Sources */,
 				B5F3FFFF23F44679007A7C59 /* SPSortBar.swift in Sources */,
+				B54C1B552C4EE350001E9E18 /* UIAlertController+Auth.swift in Sources */,
 				BA4499C525ED95E5000C563E /* NoticeAction.swift in Sources */,
 				A6E02778256E9487002054DF /* PinLockSetupController.swift in Sources */,
 				B513F2B42319A8D50021CFA4 /* SPNoteTableViewCell.swift in Sources */,

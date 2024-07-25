@@ -452,6 +452,19 @@ extension SPAuthViewController {
             self.unlockInterface()
         }
     }
+
+    /// Requests a new Login Code, without pushing any secondary UI on success
+    ///
+    @IBAction func requestLogInCodeAndDontPush() {
+        controller.requestLoginEmail(username: email) { error in
+            if let error {
+                self.handleError(error: error)
+                return
+            }
+            
+            SPTracker.trackLoginLinkRequested()
+        }
+    }
     
     @IBAction func performLogInWithCode() {
         guard ensureWarningsAreOnScreenWhenNeeded() else {
@@ -613,6 +626,8 @@ private extension SPAuthViewController {
             presentPasswordCompromisedError(error: error)
         case .unverifiedEmail:
             presentUserUnverifiedError(error: error, email: email)
+        case .requestNotFound:
+            presentLoginCodeExpiredError()
         case .unknown(let statusCode, let response, let error) where debugEnabled:
             let details = NSAttributedString.stringFromNetworkError(statusCode: statusCode, response: response, error: error)
             presentDebugDetails(details: details)
@@ -638,6 +653,14 @@ private extension SPAuthViewController {
         }
         alertController.addCancelActionWithTitle(AuthenticationStrings.compromisedAlertCancel)
 
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func presentLoginCodeExpiredError() {
+        let alertController = UIAlertController.buildLoginCodeNotFoundAlert {
+            self.requestLogInCodeAndDontPush()
+        }
+        
         present(alertController, animated: true, completion: nil)
     }
 
