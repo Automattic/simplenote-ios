@@ -2,6 +2,8 @@ import Foundation
 import UIKit
 import SafariServices
 import SwiftUI
+import SimplenoteEndpoints
+
 
 // MARK: - SPAuthViewController
 //
@@ -433,37 +435,52 @@ extension SPAuthViewController {
         guard ensureWarningsAreOnScreenWhenNeeded() else {
             return
         }
-        
+
+        Task { @MainActor in
+            await requestLogInCodeAsync()
+        }
+    }
+    
+    @MainActor
+    private func requestLogInCodeAsync() async {
         lockdownInterface()
 
-        controller.requestLoginEmail(username: email) { error in
-            switch error {
-            case .none:
-                self.presentCodeInterface()
-                SPTracker.trackLoginLinkRequested()
-                
-            case .tooManyAttempts:
-                self.presentPasswordInterfaceWithRateLimitingHeader()
-                
-            case .some(let error):
-                self.handleError(error: error)
-            }
+        do {
+            try await controller.requestLoginEmail(username: email)
+            self.presentCodeInterface()
+            SPTracker.trackLoginLinkRequested()
+            
+        } catch SPAuthError.tooManyAttempts {
+            self.presentPasswordInterfaceWithRateLimitingHeader()
 
-            self.unlockInterface()
+        } catch {
+            let error = error as? SPAuthError ?? .generic
+            self.handleError(error: error)
         }
+        
+        self.unlockInterface()
     }
 
     /// Requests a new Login Code, without pushing any secondary UI on success
     ///
     @IBAction func requestLogInCodeAndDontPush() {
-        controller.requestLoginEmail(username: email) { error in
-            if let error {
-                self.handleError(error: error)
-                return
-            }
-            
-            SPTracker.trackLoginLinkRequested()
+        Task { @MainActor in
+            await self.requestLogInCodeAndDontPushAsync()
         }
+    }
+
+    /// Requests a new Login Code, without pushing any secondary UI on success. Asynchronous API!
+    ///
+    @MainActor
+    private func requestLogInCodeAndDontPushAsync() async {
+        do {
+            try await controller.requestLoginEmail(username: email)
+        } catch {
+            let error = error as? SPAuthError ?? .generic
+            self.handleError(error: error)
+        }
+        
+        SPTracker.trackLoginLinkRequested()
     }
     
     @IBAction func performLogInWithCode() {

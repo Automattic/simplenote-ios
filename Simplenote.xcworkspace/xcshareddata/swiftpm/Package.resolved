@@ -1,4 +1,5 @@
 {
+  "originHash" : "f6a7610fd9e0ddbd97380e25a842046d3c6a6b02bac538637af84160717aaa8f",
   "pins" : [
     {
       "identity" : "automattic-tracks-ios",
@@ -25,6 +26,15 @@
       "state" : {
         "revision" : "3b9a8e69ca296bd8cd0e317ad7a448e5daf4a342",
         "version" : "8.18.0"
+      }
+    },
+    {
+      "identity" : "simplenoteendpoints-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:Automattic/SimplenoteEndpoints-Swift.git",
+      "state" : {
+        "branch" : "trunk",
+        "revision" : "3d1c0a5db39ca798a7de10e7faeef8ae66e941e6"
       }
     },
     {
@@ -82,5 +92,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

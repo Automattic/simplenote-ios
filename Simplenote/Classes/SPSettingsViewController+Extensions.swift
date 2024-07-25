@@ -1,4 +1,6 @@
 import UIKit
+import SimplenoteEndpoints
+
 
 // MARK: - Subscriber UI
 //

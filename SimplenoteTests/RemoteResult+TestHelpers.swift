@@ -1,4 +1,5 @@
 import Foundation
+import SimplenoteEndpoints
 @testable import Simplenote
 
 extension Remote {
