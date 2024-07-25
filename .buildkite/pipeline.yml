@@ -5,7 +5,7 @@ common_params:
     - automattic/a8c-ci-toolkit#3.1.0
   # Common environment values to use with the `env` key.
   - &common_env
-    IMAGE_ID: xcode-15.1
+    IMAGE_ID: xcode-15.4
 
 # This is the default pipeline – it will build and test the app
 steps:
