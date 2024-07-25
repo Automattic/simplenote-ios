@@ -1,5 +1,6 @@
 import Foundation
 import SafariServices
+import SimplenoteEndpoints
 
 // MARK: - SPAuthHandler
 //
@@ -55,15 +56,13 @@ class SPAuthHandler {
 
     /// Requests an Authentication Email
     ///
-    func requestLoginEmail(username: String, onCompletion: @escaping (SPAuthError?) -> Void) {
+    @MainActor
+    func requestLoginEmail(username: String) async throws {
         let remote = LoginRemote()
-        remote.requestLoginEmail(email: username) { (result) in
-            switch result {
-            case .success:
-                onCompletion(nil)
-            case .failure(let error):
-                onCompletion(self.authenticationError(for: error))
-            }
+        do {
+            try await remote.requestLoginEmail(email: username)
+        } catch let remoteError as RemoteError {
+            throw SPAuthError(loginRemoteError: remoteError)
         }
     }
 
@@ -76,8 +75,8 @@ class SPAuthHandler {
             let confirmation = try await remote.requestLoginConfirmation(email: username, authCode: code.uppercased())
             simperiumService.authenticate(withUsername: confirmation.username, token: confirmation.syncToken)
             
-        } catch let error as RemoteError {
-            throw authenticationError(for: error)
+        } catch let remoteError as RemoteError {
+            throw SPAuthError(loginRemoteError: remoteError)
         }
     }
 
@@ -90,24 +89,14 @@ class SPAuthHandler {
     ///     - onCompletion: Closure to be executed on completion
     ///
     func signupWithCredentials(username: String, onCompletion: @escaping (SPAuthError?) -> Void) {
-        SignupRemote().signup(with: username) { (result) in
+        SignupRemote().requestSignup(email: username) { (result) in
             switch result {
             case .success:
                 onCompletion(nil)
-            case .failure(let error):
-                onCompletion(self.authenticationError(for: error))
+            case .failure(let remoteError):
+                let error = SPAuthError(signupRemoteError: remoteError)
+                onCompletion(error)
             }
-        }
-    }
-
-    private func authenticationError(for remoteError: RemoteError) -> SPAuthError {
-        switch remoteError {
-        case .network:
-            return .network
-        case .tooManyAttempts:
-            return .tooManyAttempts
-        case .requestError(let statusCode, let error):
-            return SPAuthError(signupErrorCode: statusCode, response: error?.localizedDescription, error: error)
         }
     }
 

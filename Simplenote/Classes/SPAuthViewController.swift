@@ -2,6 +2,8 @@ import Foundation
 import UIKit
 import SafariServices
 import SwiftUI
+import SimplenoteEndpoints
+
 
 // MARK: - SPAuthViewController
 //
@@ -433,24 +435,52 @@ extension SPAuthViewController {
         guard ensureWarningsAreOnScreenWhenNeeded() else {
             return
         }
-        
+
+        Task { @MainActor in
+            await requestLogInCodeAsync()
+        }
+    }
+    
+    @MainActor
+    private func requestLogInCodeAsync() async {
         lockdownInterface()
 
-        controller.requestLoginEmail(username: email) { error in
-            switch error {
-            case .none:
-                self.presentCodeInterface()
-                SPTracker.trackLoginLinkRequested()
-                
-            case .tooManyAttempts:
-                self.presentPasswordInterfaceWithRateLimitingHeader()
-                
-            case .some(let error):
-                self.handleError(error: error)
-            }
+        do {
+            try await controller.requestLoginEmail(username: email)
+            self.presentCodeInterface()
+            SPTracker.trackLoginLinkRequested()
+            
+        } catch SPAuthError.tooManyAttempts {
+            self.presentPasswordInterfaceWithRateLimitingHeader()
 
-            self.unlockInterface()
+        } catch {
+            let error = error as? SPAuthError ?? .generic
+            self.handleError(error: error)
         }
+        
+        self.unlockInterface()
+    }
+
+    /// Requests a new Login Code, without pushing any secondary UI on success
+    ///
+    @IBAction func requestLogInCodeAndDontPush() {
+        Task { @MainActor in
+            await self.requestLogInCodeAndDontPushAsync()
+        }
+    }
+
+    /// Requests a new Login Code, without pushing any secondary UI on success. Asynchronous API!
+    ///
+    @MainActor
+    private func requestLogInCodeAndDontPushAsync() async {
+        do {
+            try await controller.requestLoginEmail(username: email)
+        } catch {
+            let error = error as? SPAuthError ?? .generic
+            self.handleError(error: error)
+        }
+        
+        SPTracker.trackLoginLinkRequested()
     }
     
     @IBAction func performLogInWithCode() {
@@ -517,7 +547,7 @@ extension SPAuthViewController {
     }
     
     @IBAction func presentPasswordInterface() {
-        presentPasswordInterfaceWithHeader(header: nil)
+        presentPasswordInterfaceWithHeader(header: AuthenticationStrings.loginWithEmailEmailHeader)
     }
     
     @IBAction func presentPasswordInterfaceWithRateLimitingHeader() {
@@ -613,6 +643,8 @@ private extension SPAuthViewController {
             presentPasswordCompromisedError(error: error)
         case .unverifiedEmail:
             presentUserUnverifiedError(error: error, email: email)
+        case .requestNotFound:
+            presentLoginCodeExpiredError()
         case .unknown(let statusCode, let response, let error) where debugEnabled:
             let details = NSAttributedString.stringFromNetworkError(statusCode: statusCode, response: response, error: error)
             presentDebugDetails(details: details)
@@ -638,6 +670,14 @@ private extension SPAuthViewController {
         }
         alertController.addCancelActionWithTitle(AuthenticationStrings.compromisedAlertCancel)
 
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func presentLoginCodeExpiredError() {
+        let alertController = UIAlertController.buildLoginCodeNotFoundAlert {
+            self.navigationController?.popViewController(animated: true)
+        }
+        
         present(alertController, animated: true, completion: nil)
     }
 
@@ -854,6 +894,7 @@ private enum AuthenticationStrings {
     static let acceptActionText             = NSLocalizedString("Accept", comment: "Accept Action")
     static let cancelActionText             = NSLocalizedString("Cancel", comment: "Cancel Action")
     static let loginActionText              = NSLocalizedString("Log In", comment: "Log In Action")
+    static let loginWithEmailEmailHeader    = NSLocalizedString("Enter the password for the account {{EMAIL}}", comment: "Header for Login With Password. Please preserve the {{EMAIL}} substring")
     static let loginWithEmailLimitHeader    = NSLocalizedString("Log in with email failed, please enter your password", comment: "Header for Enter Password UI, when the user performed too many requests")
     static let compromisedAlertCancel       = NSLocalizedString("Cancel", comment: "Cancel action for password alert")
     static let compromisedAlertReset        = NSLocalizedString("Change Password", comment: "Change password action")
