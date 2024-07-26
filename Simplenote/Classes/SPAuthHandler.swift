@@ -1,5 +1,6 @@
 import Foundation
 import SafariServices
+import SimplenoteEndpoints
 
 // MARK: - SPAuthHandler
 //
@@ -55,16 +56,13 @@ class SPAuthHandler {
 
     /// Requests an Authentication Email
     ///
-    func requestLoginEmail(username: String, onCompletion: @escaping (SPAuthError?) -> Void) {
+    @MainActor
+    func requestLoginEmail(username: String) async throws {
         let remote = LoginRemote()
-        remote.requestLoginEmail(email: username) { (result) in
-            switch result {
-            case .success:
-                onCompletion(nil)
-            case .failure(let remoteError):
-                let error = SPAuthError(loginRemoteError: remoteError)
-                onCompletion(error)
-            }
+        do {
+            try await remote.requestLoginEmail(email: username)
+        } catch let remoteError as RemoteError {
+            throw SPAuthError(loginRemoteError: remoteError)
         }
     }
 
@@ -91,7 +89,7 @@ class SPAuthHandler {
     ///     - onCompletion: Closure to be executed on completion
     ///
     func signupWithCredentials(username: String, onCompletion: @escaping (SPAuthError?) -> Void) {
-        SignupRemote().signup(with: username) { (result) in
+        SignupRemote().requestSignup(email: username) { (result) in
             switch result {
             case .success:
                 onCompletion(nil)
