@@ -675,7 +675,7 @@ private extension SPAuthViewController {
     
     func presentLoginCodeExpiredError() {
         let alertController = UIAlertController.buildLoginCodeNotFoundAlert {
-            self.requestLogInCodeAndDontPush()
+            self.navigationController?.popViewController(animated: true)
         }
         
         present(alertController, animated: true, completion: nil)
