@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 # Lanes related to the Release Process (Code Freeze, Betas, Final Build, App Store Submission…)
+
 platform :ios do
   lane :code_freeze do |options|
     ios_codefreeze_prechecks(options)
@@ -35,6 +36,18 @@ platform :ios do
     )
 
     trigger_beta_build(branch_to_build: "release/#{new_version}")
+  end
+
+  lane :new_beta_release do |options|
+    ios_betabuild_prechecks(options)
+    download_localized_strings_and_metadata_from_glotpress
+    ios_lint_localizations(
+      input_dir: 'Simplenote',
+      allow_retry: true
+    )
+    ios_bump_version_beta
+    version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
+    trigger_beta_build(branch_to_build: "release/#{version}")
   end
 
   lane :trigger_beta_build do |options|
