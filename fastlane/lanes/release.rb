@@ -30,7 +30,7 @@ platform :ios do
       from_branch: DEFAULT_BRANCH,
       to_branch: "release/#{new_version}"
     )
-    setfrozentag(
+    set_milestone_frozen_marker(
       repository: GITHUB_REPO,
       milestone: new_version
     )
