@@ -8,31 +8,20 @@ fastlane_require 'buildkit'
 
 UI.user_error!('Please run fastlane via `bundle exec`') unless FastlaneCore::Helper.bundler?
 
-USER_ENV_FILE_PATH = File.join(Dir.home, '.simplenoteios-env.default')
-PROJECT_ENV_FILE_PATH = File.join(
-  Dir.home, '.configure', 'simplenote-ios', 'secrets', 'project.env'
-)
 SECRETS_ROOT = File.join(Dir.home, '.configure', 'simplenote-ios', 'secrets')
 APP_STORE_CONNECT_KEY_PATH = File.join(SECRETS_ROOT, 'app_store_connect_fastlane_api_key.json')
 $used_test_account_index = nil
 
 import 'lanes/localization'
+import 'lanes/release'
+
+require_relative 'lib/env_manager'
 
 before_all do
   # Ensure we use the latest version of the toolkit
   check_for_toolkit_updates unless is_ci || ENV['FASTLANE_SKIP_TOOLKIT_UPDATE_CHECK']
 
-  # Check that the env files exist
-  unless is_ci || File.file?(USER_ENV_FILE_PATH)
-    error_message = <<~ERROR
-      ~/.simplenoteios-env.default not found. Please copy env/user.env-example to #{USER_ENV_FILE_PATH} and fill in the values") using the following command:
-
-      \tcp #{PROJECT_ROOT_FOLDER}/fastlane/env/user.env-example #{USER_ENV_FILE_PATH}
-    ERROR
-    UI.user_error!(error_message)
-  end
-
-  UI.user_error!('project.env not found: Make sure your configuration is up to date with `rake dependencies`') unless File.file?(PROJECT_ENV_FILE_PATH)
+  EnvManager.set_up(env_file_name: 'simplenote-ios')
 
   setup_ci
 end
@@ -52,22 +41,12 @@ DEFAULT_BRANCH = 'trunk'
 ########################################################################
 # Environment
 ########################################################################
-Dotenv.load(USER_ENV_FILE_PATH)
-Dotenv.load(PROJECT_ENV_FILE_PATH)
-
 ENV['PROJECT_NAME'] = 'Simplenote'
 ENV['PROJECT_ROOT_FOLDER'] = PROJECT_ROOT_FOLDER
 ENV['APP_STORE_STRINGS_FILE_NAME'] = 'AppStoreStrings.pot'
 ENV['PUBLIC_CONFIG_FILE'] = VERSION_FILE_PATH
 ENV['DOWNLOAD_METADATA'] = './fastlane/download_metadata.swift'
 ENV['FL_RELEASE_TOOLKIT_DEFAULT_BRANCH'] = 'trunk'
-
-# Use this instead of getting values from ENV directly
-# It will throw an error if the requested value is missing
-def get_required_env(key)
-  UI.user_error!("Environment variable '#{key}' is not set. Have you setup #{USER_ENV_FILE_PATH} correctly?") unless ENV.key?(key)
-  ENV.fetch(key)
-end
 
 platform :ios do
   #####################################################################################
@@ -353,7 +332,7 @@ platform :ios do
       export_method: 'enterprise',
       clean: true,
       output_directory: OUTPUT_DIRECTORY_PATH,
-      export_team_id: get_required_env('INT_EXPORT_TEAM_ID'),
+      export_team_id: EnvManager.get_required_env!('INT_EXPORT_TEAM_ID'),
       export_options: {
         method: 'enterprise',
         provisioningProfiles: simplenote_provisioning_profiles(
@@ -366,7 +345,7 @@ platform :ios do
     File.rename(File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote.ipa'), File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote Internal.ipa'))
 
     appcenter_upload(
-      api_token: get_required_env('APPCENTER_API_TOKEN'),
+      api_token: EnvManager.get_required_env!('APPCENTER_API_TOKEN'),
       owner_name: 'automattic',
       owner_type: 'organization',
       app_name: 'Simplenote',
@@ -375,7 +354,7 @@ platform :ios do
     )
 
     sentry_upload_dsym(
-      auth_token: get_required_env('SENTRY_API_TOKEN'),
+      auth_token: EnvManager.get_required_env!('SENTRY_AUTH_TOKEN'),
       org_slug: 'a8c',
       project_slug: 'simplenote-ios',
       dsym_path: lane_context[SharedValues::DSYM_OUTPUT_PATH]
@@ -413,7 +392,7 @@ platform :ios do
       clean: true,
       export_options: {
         method: 'app-store',
-        export_team_id: get_required_env('EXT_EXPORT_TEAM_ID'),
+        export_team_id: EnvManager.get_required_env!('EXT_EXPORT_TEAM_ID'),
         provisioningProfiles: simplenote_provisioning_profiles
       }
     )
@@ -428,7 +407,7 @@ platform :ios do
 
     sentry_upload_dsym(
       dsym_path: dsym_path,
-      auth_token: get_required_env('SENTRY_AUTH_TOKEN'),
+      auth_token: EnvManager.get_required_env!('SENTRY_AUTH_TOKEN'),
       org_slug: 'a8c',
       project_slug: 'simplenote-ios'
     )
@@ -503,7 +482,7 @@ platform :ios do
       export_method: 'enterprise',
       clean: true,
       output_directory: OUTPUT_DIRECTORY_PATH,
-      export_team_id: get_required_env('INT_EXPORT_TEAM_ID'),
+      export_team_id: EnvManager.get_required_env!('INT_EXPORT_TEAM_ID'),
       export_options: {
         method: 'enterprise',
         provisioningProfiles: simplenote_provisioning_profiles(
@@ -516,7 +495,7 @@ platform :ios do
     File.rename(File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote.ipa'), File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote Alpha.ipa'))
 
     appcenter_upload(
-      api_token: get_required_env('APPCENTER_API_TOKEN'),
+      api_token: EnvManager.get_required_env!('APPCENTER_API_TOKEN'),
       owner_name: 'automattic',
       owner_type: 'organization',
       app_name: 'Simplenote-Installable-Builds',
@@ -526,7 +505,7 @@ platform :ios do
     )
 
     sentry_upload_dsym(
-      auth_token: get_required_env('SENTRY_AUTH_TOKEN'),
+      auth_token: EnvManager.get_required_env!('SENTRY_AUTH_TOKEN'),
       org_slug: 'a8c',
       project_slug: 'simplenote-ios',
       dsym_path: lane_context[SharedValues::DSYM_OUTPUT_PATH]
@@ -790,7 +769,7 @@ platform :ios do
     if is_ci
       sanitize_test_accounts
       find_free_test_account
-      run_ui_tests(options.merge({ test_account: get_required_env('UI_TESTS_ACCOUNT_EMAIL').sub('X', $used_test_account_index.to_s) }))
+      run_ui_tests(options.merge({ test_account: EnvManager.get_required_env!('UI_TESTS_ACCOUNT_EMAIL').sub('X', $used_test_account_index.to_s) }))
       deoccupy_test_account
     else
       UI.user_error!('This lane should be run only from CI')
@@ -811,7 +790,7 @@ platform :ios do
       UI.message "\t#{identifier}"
     end
 
-    team_id = get_required_env('EXT_EXPORT_TEAM_ID')
+    team_id = EnvManager.get_required_env!('EXT_EXPORT_TEAM_ID')
 
     # Register the user's device
     register_device(
@@ -892,7 +871,7 @@ end
 private_lane :appstore_code_signing do |options|
   update_code_signing(
     type: 'appstore',
-    team_id: get_required_env('EXT_EXPORT_TEAM_ID'),
+    team_id: EnvManager.get_required_env!('EXT_EXPORT_TEAM_ID'),
     readonly: options.fetch(:readonly, true),
     app_identifiers: simplenote_app_identifiers,
     api_key_path: APP_STORE_CONNECT_KEY_PATH,
@@ -916,7 +895,7 @@ def update_code_signing_enterprise(readonly:, app_identifiers:)
   update_code_signing(
     type: 'enterprise',
     # Enterprise builds belong to the "internal" team
-    team_id: get_required_env('INT_EXPORT_TEAM_ID'),
+    team_id: EnvManager.get_required_env!('INT_EXPORT_TEAM_ID'),
     readonly: readonly,
     app_identifiers: app_identifiers,
     api_key_path: api_key_path
@@ -928,10 +907,10 @@ def update_code_signing(type:, team_id:, readonly:, app_identifiers:, api_key_pa
   # NOTE: It might be neccessary to add `force: true` alongside `readonly: true` in order to regenerate some provisioning profiles.
   # If this turns out to be a hard requirement, we should consider updating the method with logic to toggle the two setting based on whether we're fetching or renewing.
 
-  # Fail early if secrets not available via `get_required_env`.
+  # Fail early if secrets not available via `EnvManager.get_required_env!`.
   # Otherwise, Fastlane will prompt to type them.
-  access_key = get_required_env('MATCH_S3_ACCESS_KEY')
-  secret_access_key = get_required_env('MATCH_S3_SECRET_ACCESS_KEY')
+  access_key = EnvManager.get_required_env!('MATCH_S3_ACCESS_KEY')
+  secret_access_key = EnvManager.get_required_env!('MATCH_S3_SECRET_ACCESS_KEY')
 
   match(
     storage_mode: 's3',
@@ -1064,7 +1043,7 @@ end
 #   fetch_test_accounts_hash
 #     => {"0"=>"4079", "1"=>"free", "2"=>"free", "3"=>"free"}
 def fetch_test_accounts_hash
-  uri = URI.parse(get_required_env('UI_TESTS_ACCOUNTS_JSON_URL'))
+  uri = URI.parse(EnvManager.get_required_env!('UI_TESTS_ACCOUNTS_JSON_URL'))
   response = Net::HTTP.get_response(uri)
   accounts_state = response.body.chomp
   JSON.parse(accounts_state)
@@ -1081,7 +1060,7 @@ def find_free_test_account
 
   UI.user_error!('Could not find free UI Test account. Quitting.') if $used_test_account_index.nil?
   UI.message("Free account index: #{$used_test_account_index}")
-  change_test_account_availability(get_required_env('BUILDKITE_BUILD_NUMBER').to_s)
+  change_test_account_availability(ENV['BUILDKITE_BUILD_NUMBER'].to_s)
 end
 
 # Replace a value in a key which is equal to $used_test_account_index global variable
@@ -1111,7 +1090,7 @@ def sanitize_test_accounts
 end
 
 def job_running?(job_number)
-  client = Buildkit.new(token: get_required_env('BUILDKITE_TOKEN'))
+  client = Buildkit.new(token: EnvManager.get_required_env!('BUILDKITE_TOKEN'))
   build = client.build('automattic', 'simplenote-ios', job_number)
 
   state = build['state']
@@ -1125,7 +1104,7 @@ end
 
 def submit_accounts_hash(accounts_hash)
   UI.message("Writing new accounts state: #{accounts_hash}")
-  uri = URI.parse(get_required_env('UI_TESTS_ACCOUNTS_JSON_URL'))
+  uri = URI.parse(EnvManager.get_required_env!('UI_TESTS_ACCOUNTS_JSON_URL'))
   request = Net::HTTP::Post.new(uri)
   request.body = accounts_hash.to_json
 
