@@ -1,48 +1,36 @@
+# This is the default pipeline – it will build and test the app
+
 agents:
   queue: mac
 
 env:
   IMAGE_ID: $IMAGE_ID
 
-# This is the default pipeline – it will build and test the app
 steps:
-
-  #################
-  # Run Unit Tests
-  #################
-  - label: "🔬 Build and Test"
-    command: ".buildkite/commands/build-and-test.sh"
+  - label: 🔬 Build and Test
+    command: .buildkite/commands/build-and-test.sh
     plugins: [$CI_TOOLKIT_PLUGIN]
     artifact_paths:
-      - "build/results/*"
+      - build/results/*
 
-  #################
-  # Linters
-  #################
   - label: ":swift: SwiftLint"
     command: run_swiftlint --strict
     plugins: [$CI_TOOLKIT_PLUGIN]
     notify:
       - github_commit_status:
-          context: "SwiftLint"
+          context: SwiftLint
     agents:
-      queue: "default"
+      queue: default
 
-  #################
-  # Create Installable Build
-  #################
-  - label: "🛠 Installable Build"
-    command: ".buildkite/commands/build-prototype.sh"
+  - label: 🛠 Installable Build
+    command: .buildkite/commands/build-prototype.sh
     plugins: [$CI_TOOLKIT_PLUGIN]
     if: "build.pull_request.id != null || build.pull_request.draft"
     artifact_paths:
-      - "build/results/*"
+      - build/results/*
 
-  #################
-  # UI Tests
-  #################
-  - label: "🔬 UI Test (Full)"
-    command: ".buildkite/commands/build-and-ui-test.sh SimplenoteUITests 'iPhone SE (3rd generation)'"
+  - label: 🔬 UI Test (Full)
+    command: .buildkite/commands/build-and-ui-test.sh SimplenoteUITests 'iPhone SE (3rd generation)'
     plugins: [$CI_TOOLKIT_PLUGIN]
     artifact_paths:
-      - "build/results/*"
+      - build/results/*
