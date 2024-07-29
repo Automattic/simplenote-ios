@@ -74,8 +74,7 @@ platform :ios do
       allow_retry: true
     )
     ios_bump_version_beta
-    version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
-    trigger_beta_build(branch_to_build: "release/#{version}")
+    trigger_beta_build(branch_to_build: release_branch_name)
   end
 
   lane :trigger_beta_build do |options|
