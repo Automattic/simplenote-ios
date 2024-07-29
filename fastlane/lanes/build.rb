@@ -3,12 +3,12 @@
 desc 'Builds and uploads for distribution via App Store Connect'
 lane :build_and_upload_to_app_store_connect do |beta_release:, skip_prechecks: false, skip_confirm: false, create_release: false|
   unless skip_prechecks
-    ios_build_prechecks(
-      skip_confirm: skip_confirm,
-      external: true
-    )
-    ios_build_preflight
+    ensure_git_status_clean unless skip_prechecks || is_ci
+    sentry_check_cli_installed
   end
+
+  UI.important("Building version #{release_version_current} (#{build_code_current}) and uploading to TestFlight...")
+  UI.user_error!('Aborted by user request') unless skip_confirm || UI.confirm('Do you want to continue?')
 
   appstore_code_signing
 
