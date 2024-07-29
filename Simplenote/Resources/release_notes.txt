@@ -1,3 +1,6 @@
-• Fixed issue where note cell appearance changes on press down instead of when the cell is selected
-• Fixed an issue where using the new note widget with the lock screen could create empty notes while the app was locked
-• Removed Sustainer plan information and upgrade UI
+- Extended support for iOS Shortcuts
+- Fixed issue where notes selection was lost when app backgrounded
+- Fixed an issue can activate the faceid switch without a passcode
+- Magic Link Login Support
+- Login UI has been overhauled
+
