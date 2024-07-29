@@ -10,19 +10,7 @@ lane :build_and_upload_to_app_store_connect do |beta_release:, skip_prechecks: f
   UI.important("Building version #{release_version_current} (#{build_code_current}) and uploading to TestFlight...")
   UI.user_error!('Aborted by user request') unless skip_confirm || UI.confirm('Do you want to continue?')
 
-  appstore_code_signing
-
-  gym(
-    scheme: 'Simplenote',
-    workspace: 'Simplenote.xcworkspace',
-    configuration: 'Distribution AppStore',
-    clean: true,
-    export_options: {
-      method: 'app-store',
-      export_team_id: TEAM_ID_APP_STORE_CONNECT,
-      provisioningProfiles: simplenote_provisioning_profiles
-    }
-  )
+  build_for_app_store_connect
 
   testflight(
     skip_waiting_for_build_processing: true,
@@ -50,5 +38,21 @@ lane :build_and_upload_to_app_store_connect do |beta_release:, skip_prechecks: f
     release_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt'),
     release_assets: archive_zip_path.to_s,
     prerelease: beta_release
+  )
+end
+
+lane :build_for_app_store_connect do |fetch_code_signig: true|
+  appstore_code_signing if fetch_code_signig
+
+  gym(
+    scheme: 'Simplenote',
+    workspace: 'Simplenote.xcworkspace',
+    configuration: 'Distribution AppStore',
+    clean: true,
+    export_options: {
+      method: 'app-store',
+      export_team_id: TEAM_ID_APP_STORE_CONNECT,
+      provisioningProfiles: simplenote_provisioning_profiles
+    }
   )
 end
