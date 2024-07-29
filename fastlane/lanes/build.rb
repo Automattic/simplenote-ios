@@ -49,10 +49,6 @@ lane :build_for_app_store_connect do |fetch_code_signig: true|
     workspace: 'Simplenote.xcworkspace',
     configuration: 'Distribution AppStore',
     clean: true,
-    export_options: {
-      method: 'app-store',
-      export_team_id: TEAM_ID_APP_STORE_CONNECT,
-      provisioningProfiles: simplenote_provisioning_profiles
-    }
+    export_method: 'app-store'
   )
 end
