@@ -51,6 +51,11 @@ ENV['PUBLIC_CONFIG_FILE'] = VERSION_FILE_PATH
 ENV['DOWNLOAD_METADATA'] = './fastlane/download_metadata.swift'
 ENV['FL_RELEASE_TOOLKIT_DEFAULT_BRANCH'] = 'trunk'
 
+VERSION_CALCULATOR = Fastlane::Wpmreleasetoolkit::Versioning::MarketingVersionCalculator.new
+VERSION_FORMATTER = Fastlane::Wpmreleasetoolkit::Versioning::FourPartVersionFormatter.new
+BUILD_CODE_FORMATTER = Fastlane::Wpmreleasetoolkit::Versioning::FourPartBuildCodeFormatter.new
+PUBLIC_VERSION_FILE = Fastlane::Wpmreleasetoolkit::Versioning::IOSVersionFile.new(xcconfig_path: VERSION_FILE_PATH)
+
 platform :ios do
   #####################################################################################
   # update_appstore_strings
@@ -1096,4 +1101,58 @@ def generate_installable_build_number
 
     "#{branch}-#{commit}"
   end
+end
+
+# Returns the release version of the app in the format `1.2` or `1.2.3` if it is a hotfix
+#
+def release_version_current
+  current_version = VERSION_FORMATTER.parse(PUBLIC_VERSION_FILE.read_release_version)
+  VERSION_FORMATTER.release_version(current_version)
+end
+
+#  Returns the next release version of the app in the format `1.2` or `1.2.3` if it is a hotfix
+#
+def release_version_next
+  current_version = VERSION_FORMATTER.parse(PUBLIC_VERSION_FILE.read_release_version)
+  next_calculated_release_version = VERSION_CALCULATOR.next_release_version(version: current_version)
+  VERSION_FORMATTER.release_version(next_calculated_release_version)
+end
+
+# Returns the current build code of the app
+#
+def build_code_current
+  # We use the four part (1.2.3.4) build code format, so the version calculator can be used to calculate the next four-part version
+  version = VERSION_FORMATTER.parse(PUBLIC_VERSION_FILE.read_build_code(attribute_name: 'VERSION_LONG'))
+  BUILD_CODE_FORMATTER.build_code(version: version)
+end
+
+# Returns the build code of the app for the code freeze.
+# It is the release version name with build number (last of the four components) set to 0.
+#
+def build_code_code_freeze
+  # We use the four part (1.2.3.4) build code format, so the version calculator can be used to calculate the next four-part version
+  release_version_current = VERSION_FORMATTER.parse(INTERNAL_VERSION_FILE.read_release_version)
+  build_code_code_freeze = VERSION_CALCULATOR.next_release_version(version: release_version_current)
+  BUILD_CODE_FORMATTER.build_code(version: build_code_code_freeze)
+end
+
+# Returns the build code of the app for the code freeze.
+# It is the release version name with build number (last of the four components) set to 0.
+#
+def build_code_hotfix(release_version:)
+  version = VERSION_FORMATTER.parse(release_version)
+  BUILD_CODE_FORMATTER.build_code(version: version)
+end
+
+# Returns the next build code of the app
+#
+def build_code_next
+  # We use the four part (1.2.3.4) build code format, so the version calculator can be used to calculate the next four-part version
+  build_code_current = VERSION_FORMATTER.parse(PUBLIC_VERSION_FILE.read_build_code(attribute_name: 'VERSION_LONG'))
+  build_code_next = VERSION_CALCULATOR.next_build_number(version: build_code_current)
+  BUILD_CODE_FORMATTER.build_code(version: build_code_next)
+end
+
+def release_branch_name(release_version: release_version_current)
+  "release/#{release_version}"
 end
