@@ -41,12 +41,12 @@ lane :build_and_upload_to_app_store_connect do |beta_release:, skip_prechecks: f
   )
 end
 
-lane :build_for_app_store_connect do |fetch_code_signig: true|
-  appstore_code_signing if fetch_code_signig
+lane :build_for_app_store_connect do |fetch_code_signing: true|
+  appstore_code_signing if fetch_code_signing
 
   gym(
     scheme: 'Simplenote',
-    workspace: 'Simplenote.xcworkspace',
+    workspace: WORKSPACE,
     configuration: 'Distribution AppStore',
     clean: true,
     export_method: 'app-store'
