@@ -47,6 +47,8 @@ GITHUB_REPO = "#{ORGANIZATION}/#{PROJECT_SLUG}".freeze
 BUILDKITE_ORGANIZATION = ORGANIZATION
 BUILDKITE_PIPELINE = PROJECT_SLUG
 
+WORKSPACE = 'Simplenote.xcworkspace'
+
 ########################################################################
 # Environment
 ########################################################################
@@ -342,7 +344,7 @@ platform :ios do
     gym(
       scheme: 'Simplenote',
       configuration: 'Distribution Internal',
-      workspace: 'Simplenote.xcworkspace',
+      workspace: WORKSPACE,
       export_method: 'enterprise',
       clean: true,
       output_directory: OUTPUT_DIRECTORY_PATH,
@@ -422,7 +424,7 @@ platform :ios do
     gym(
       scheme: 'Simplenote',
       configuration: 'Distribution Alpha',
-      workspace: 'Simplenote.xcworkspace',
+      workspace: WORKSPACE,
       export_method: 'enterprise',
       clean: true,
       output_directory: OUTPUT_DIRECTORY_PATH,
