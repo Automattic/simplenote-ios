@@ -34,12 +34,17 @@ end
 PROJECT_ROOT_FOLDER = File.dirname(File.expand_path(__dir__))
 VERSION_FILE_PATH = File.join(PROJECT_ROOT_FOLDER, 'config', 'Version.Public.xcconfig')
 OUTPUT_DIRECTORY_PATH = File.join(PROJECT_ROOT_FOLDER, 'build', 'results')
-GITHUB_REPO = 'Automattic/simplenote-ios'
 APP_STORE_BUNDLE_IDENTIFIER = 'com.codality.NotationalFlow'
 DEFAULT_BRANCH = 'trunk'
 
 TEAM_ID_APP_STORE_CONNECT = 'PZYM8XX95Q'
 TEAM_ID_ENTERPRISE = '99KV9Z6BKV'
+
+ORGANIZATION = 'automattic'
+PROJECT_SLUG = 'simplenote-ios'
+GITHUB_REPO = "#{ORGANIZATION}/#{PROJECT_SLUG}".freeze
+BUILDKITE_ORGANIZATION = ORGANIZATION
+BUILDKITE_PIPELINE = PROJECT_SLUG
 
 ########################################################################
 # Environment
@@ -929,22 +934,6 @@ end
 ########################################################################
 # Helper Lanes
 ########################################################################
-
-# Triggers a Release Build on Buildkite
-#
-# @param [String] branch The branch to build
-# @param [Boolean] beta Indicate if we should build a beta or regular release
-#
-def trigger_buildkite_release_build(branch:, beta:)
-  push_to_git_remote(tags: false)
-  buildkite_trigger_build(
-    buildkite_organization: 'automattic',
-    buildkite_pipeline: 'simplenote-ios',
-    branch: branch,
-    environment: { BETA_RELEASE: beta },
-    pipeline_file: 'release-build.yml'
-  )
-end
 
 def fastlane_directory
   __dir__
