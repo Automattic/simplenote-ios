@@ -59,7 +59,7 @@ ENV['PUBLIC_CONFIG_FILE'] = VERSION_FILE_PATH
 ENV['DOWNLOAD_METADATA'] = './fastlane/download_metadata.swift'
 ENV['FL_RELEASE_TOOLKIT_DEFAULT_BRANCH'] = 'trunk'
 
-VERSION_CALCULATOR = Fastlane::Wpmreleasetoolkit::Versioning::MarketingVersionCalculator.new
+VERSION_CALCULATOR = Fastlane::Wpmreleasetoolkit::Versioning::SemanticVersionCalculator.new
 VERSION_FORMATTER = Fastlane::Wpmreleasetoolkit::Versioning::FourPartVersionFormatter.new
 BUILD_CODE_FORMATTER = Fastlane::Wpmreleasetoolkit::Versioning::FourPartBuildCodeFormatter.new
 PUBLIC_VERSION_FILE = Fastlane::Wpmreleasetoolkit::Versioning::IOSVersionFile.new(xcconfig_path: VERSION_FILE_PATH)
@@ -1032,7 +1032,7 @@ def release_version_current
   VERSION_FORMATTER.release_version(current_version)
 end
 
-#  Returns the next release version of the app in the format `1.2` or `1.2.3` if it is a hotfix
+# Returns the next release version of the app in the format `1.2` or `1.2.3` if it is a hotfix
 #
 def release_version_next
   current_version = VERSION_FORMATTER.parse(PUBLIC_VERSION_FILE.read_release_version)
@@ -1053,7 +1053,7 @@ end
 #
 def build_code_code_freeze
   # We use the four part (1.2.3.4) build code format, so the version calculator can be used to calculate the next four-part version
-  release_version_current = VERSION_FORMATTER.parse(INTERNAL_VERSION_FILE.read_release_version)
+  release_version_current = VERSION_FORMATTER.parse(PUBLIC_VERSION_FILE.read_release_version)
   build_code_code_freeze = VERSION_CALCULATOR.next_release_version(version: release_version_current)
   BUILD_CODE_FORMATTER.build_code(version: build_code_code_freeze)
 end
