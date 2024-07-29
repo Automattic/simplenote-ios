@@ -4,7 +4,8 @@
 
 platform :ios do
   lane :code_freeze do |options|
-    ios_codefreeze_prechecks(options)
+    ensure_git_status_clean
+    Fastlane::Helper::GitHelper.checkout_and_pull(DEFAULT_BRANCH)
 
     ios_bump_version_release
     new_version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
