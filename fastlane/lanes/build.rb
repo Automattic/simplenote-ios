@@ -29,7 +29,6 @@ lane :build_and_upload_to_app_store_connect do |beta_release:, skip_prechecks: f
     api_key_path: APP_STORE_CONNECT_KEY_PATH
   )
 
-  sh('rm ../Simplenote.ipa')
   dsym_path = File.join(File.dirname(Dir.pwd), 'Simplenote.app.dSYM.zip')
 
   sentry_upload_dsym(
@@ -38,8 +37,6 @@ lane :build_and_upload_to_app_store_connect do |beta_release:, skip_prechecks: f
     org_slug: 'a8c',
     project_slug: 'simplenote-ios'
   )
-
-  sh("rm #{dsym_path}")
 
   next unless create_release
 
@@ -54,6 +51,4 @@ lane :build_and_upload_to_app_store_connect do |beta_release:, skip_prechecks: f
     release_assets: archive_zip_path.to_s,
     prerelease: beta_release
   )
-
-  sh("rm #{archive_zip_path}")
 end
