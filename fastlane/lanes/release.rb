@@ -88,7 +88,7 @@ end
 
 def commit_version_and_build_files
   git_commit(
-    path: [PUBLIC_CONFIG_FILE],
+    path: [VERSION_FILE_PATH],
     message: 'Bump version number',
     allow_nothing_to_commit: false
   )
