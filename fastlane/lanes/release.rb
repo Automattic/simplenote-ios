@@ -3,8 +3,9 @@
 # Lanes related to the Release Process (Code Freeze, Betas, Final Build, App Store Submission…)
 
 platform :ios do
-  lane :code_freeze do |options|
+  lane :code_freeze do |skip_confirm: false|
     ensure_git_status_clean
+
     Fastlane::Helper::GitHelper.checkout_and_pull(DEFAULT_BRANCH)
 
     ios_bump_version_release
@@ -20,9 +21,7 @@ platform :ios do
     generate_strings_file_for_glotpress
 
     UI.important('Pushing changes to remote, configuring the release on GitHub, and triggering the beta build')
-    unless options[:skip_confirm] || UI.confirm('Do you want to continue?')
-      UI.user_error!("Terminating as requested. Don't forget to run the remainder of this automation manually.")
-    end
+    UI.user_error!("Terminating as requested. Don't forget to run the remainder of this automation manually.") unless skip_confirm || UI.confirm('Do you want to continue?')
 
     push_to_git_remote(tags: false)
 
