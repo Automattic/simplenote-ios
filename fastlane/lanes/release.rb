@@ -77,18 +77,12 @@ platform :ios do
     trigger_beta_build(branch_to_build: release_branch_name)
   end
 
-  lane :trigger_beta_build do |options|
-    trigger_buildkite_release_build(
-      branch: options[:branch_to_build],
-      beta: true
-    )
+  lane :trigger_beta_build do |branch_to_build:|
+    trigger_buildkite_release_build(branch: branch_to_build, beta: true)
   end
 
-  lane :trigger_release_build do |options|
-    trigger_buildkite_release_build(
-      branch: options[:branch_to_build],
-      beta: false
-    )
+  lane :trigger_release_build do |branch_to_build:|
+    trigger_buildkite_release_build(branch: branch_to_build, beta: false)
   end
 end
 
@@ -107,4 +101,14 @@ def check_pods_references
   style = result[:pods].nil? || result[:pods].empty? ? 'success' : 'warning'
   message = "### Checking Internal Dependencies are all on a **stable** version\n\n#{result[:message]}"
   buildkite_annotate(context: 'pods-check', style: style, message: message) if is_ci
+end
+
+def trigger_buildkite_release_build(branch:, beta:)
+  buildkite_trigger_build(
+    buildkite_organization: BUILDKITE_ORGANIZATION,
+    buildkite_pipeline: BUILDKITE_PIPELINE,
+    branch: branch,
+    environment: { BETA_RELEASE: beta },
+    pipeline_file: 'release-build.yml'
+  )
 end
