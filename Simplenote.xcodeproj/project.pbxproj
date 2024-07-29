@@ -4618,7 +4618,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.codality.NotationalFlow;
 				PRODUCT_NAME = Simplenote;
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "Simplenote Release";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "RELEASE $(SP_IOS_SDK)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Simplenote/Simplenote-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -4927,7 +4926,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.codality.NotationalFlow;
 				PRODUCT_NAME = Simplenote;
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.codality.NotationalFlow";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "BUILD_APP_STORE $(SP_IOS_SDK)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Simplenote/Simplenote-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -5288,7 +5286,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.codality.NotationalFlow.Share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "Simplenote Release Share";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APP_EXTENSION;
 				SWIFT_OBJC_BRIDGING_HEADER = "SimplenoteShare/Simplenote-Share-Bridging-Header.h";
@@ -5369,7 +5366,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.codality.NotationalFlow.Share;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.codality.NotationalFlow.Share";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APP_EXTENSION;
 				SWIFT_OBJC_BRIDGING_HEADER = "SimplenoteShare/Simplenote-Share-Bridging-Header.h";
@@ -5449,7 +5445,6 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.codality.NotationalFlow.Intents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.codality.NotationalFlow.Intents";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APP_EXTENSION;
 				SWIFT_OBJC_BRIDGING_HEADER = "SimplenoteIntents/Simplenote-Intents-Bridging-Header.h";
@@ -5562,7 +5557,6 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.codality.NotationalFlow.Intents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.codality.NotationalFlow.Intents";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APP_EXTENSION;
 				SWIFT_OBJC_BRIDGING_HEADER = "SimplenoteIntents/Simplenote-Intents-Bridging-Header.h";
@@ -5649,7 +5643,6 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.codality.NotationalFlow.Widgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.codality.NotationalFlow.Widgets";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APP_EXTENSION;
 				SWIFT_OBJC_BRIDGING_HEADER = "SimplenoteWidgets/Simplenote-Widgets-Bridging-Header.h";
@@ -5774,7 +5767,6 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.codality.NotationalFlow.Widgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.codality.NotationalFlow.Widgets";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APP_EXTENSION;
 				SWIFT_OBJC_BRIDGING_HEADER = "SimplenoteWidgets/Simplenote-Widgets-Bridging-Header.h";
