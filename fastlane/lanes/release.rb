@@ -8,6 +8,8 @@ platform :ios do
 
     Fastlane::Helper::GitHelper.checkout_and_pull(DEFAULT_BRANCH)
 
+    check_pods_references
+
     computed_release_branch_name = release_branch_name(release_version: release_version_next)
 
     message = <<~MESSAGE
@@ -97,4 +99,13 @@ def commit_version_and_build_files
     message: 'Bump version number',
     allow_nothing_to_commit: false
   )
+end
+
+def check_pods_references
+  # This will also print the result to STDOUT
+  result = ios_check_beta_deps(lockfile: File.join(PROJECT_ROOT_FOLDER, 'Podfile.lock'))
+
+  style = result[:pods].nil? || result[:pods].empty? ? 'success' : 'warning'
+  message = "### Checking Internal Dependencies are all on a **stable** version\n\n#{result[:message]}"
+  buildkite_annotate(context: 'pods-check', style: style, message: message) if is_ci
 end
