@@ -1,11 +1,8 @@
-# Nodes with values to reuse in the pipeline.
-common_params:
-  # Common plugin settings to use with the `plugins` key.
-  - &common_plugins
-    - automattic/a8c-ci-toolkit#3.1.0
-  # Common environment values to use with the `env` key.
-  - &common_env
-    IMAGE_ID: xcode-15.1
+agents:
+  queue: mac
+
+env:
+  IMAGE_ID: $IMAGE_ID
 
 # This is the default pipeline – it will build and test the app
 steps:
@@ -15,8 +12,7 @@ steps:
   #################
   - label: "🔬 Build and Test"
     command: ".buildkite/commands/build-and-test.sh"
-    env: *common_env
-    plugins: *common_plugins
+    plugins: [$CI_TOOLKIT_PLUGIN]
     artifact_paths:
       - "build/results/*"
 
@@ -25,7 +21,7 @@ steps:
   #################
   - label: ":swift: SwiftLint"
     command: run_swiftlint --strict
-    plugins: *common_plugins
+    plugins: [$CI_TOOLKIT_PLUGIN]
     notify:
       - github_commit_status:
           context: "SwiftLint"
@@ -37,8 +33,7 @@ steps:
   #################
   - label: "🛠 Installable Build"
     command: ".buildkite/commands/build-prototype.sh"
-    env: *common_env
-    plugins: *common_plugins
+    plugins: [$CI_TOOLKIT_PLUGIN]
     if: "build.pull_request.id != null || build.pull_request.draft"
     artifact_paths:
       - "build/results/*"
@@ -48,7 +43,6 @@ steps:
   #################
   - label: "🔬 UI Test (Full)"
     command: ".buildkite/commands/build-and-ui-test.sh SimplenoteUITests 'iPhone SE (3rd generation)'"
-    env: *common_env
-    plugins: *common_plugins
+    plugins: [$CI_TOOLKIT_PLUGIN]
     artifact_paths:
       - "build/results/*"
