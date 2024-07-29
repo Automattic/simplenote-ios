@@ -1,4 +1,5 @@
 import XCTest
+@testable import SimplenoteEndpoints
 @testable import Simplenote
 
 class MockAccountVerificationRemote: AccountRemote {
