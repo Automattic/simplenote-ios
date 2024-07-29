@@ -38,6 +38,9 @@ GITHUB_REPO = 'Automattic/simplenote-ios'
 APP_STORE_BUNDLE_IDENTIFIER = 'com.codality.NotationalFlow'
 DEFAULT_BRANCH = 'trunk'
 
+TEAM_ID_APP_STORE_CONNECT = 'PZYM8XX95Q'
+TEAM_ID_ENTERPRISE = '99KV9Z6BKV'
+
 ########################################################################
 # Environment
 ########################################################################
@@ -332,7 +335,7 @@ platform :ios do
       export_method: 'enterprise',
       clean: true,
       output_directory: OUTPUT_DIRECTORY_PATH,
-      export_team_id: EnvManager.get_required_env!('INT_EXPORT_TEAM_ID'),
+      export_team_id: TEAM_ID_ENTERPRISE,
       export_options: {
         method: 'enterprise',
         provisioningProfiles: simplenote_provisioning_profiles(
@@ -392,7 +395,7 @@ platform :ios do
       clean: true,
       export_options: {
         method: 'app-store',
-        export_team_id: EnvManager.get_required_env!('EXT_EXPORT_TEAM_ID'),
+        export_team_id: TEAM_ID_APP_STORE_CONNECT,
         provisioningProfiles: simplenote_provisioning_profiles
       }
     )
@@ -482,7 +485,7 @@ platform :ios do
       export_method: 'enterprise',
       clean: true,
       output_directory: OUTPUT_DIRECTORY_PATH,
-      export_team_id: EnvManager.get_required_env!('INT_EXPORT_TEAM_ID'),
+      export_team_id: TEAM_ID_ENTERPRISE,
       export_options: {
         method: 'enterprise',
         provisioningProfiles: simplenote_provisioning_profiles(
@@ -822,7 +825,7 @@ end
 private_lane :appstore_code_signing do |options|
   update_code_signing(
     type: 'appstore',
-    team_id: EnvManager.get_required_env!('EXT_EXPORT_TEAM_ID'),
+    team_id: TEAM_ID_APP_STORE_CONNECT,
     readonly: options.fetch(:readonly, true),
     app_identifiers: simplenote_app_identifiers,
     api_key_path: APP_STORE_CONNECT_KEY_PATH,
@@ -846,7 +849,7 @@ def update_code_signing_enterprise(readonly:, app_identifiers:)
   update_code_signing(
     type: 'enterprise',
     # Enterprise builds belong to the "internal" team
-    team_id: EnvManager.get_required_env!('INT_EXPORT_TEAM_ID'),
+    team_id: TEAM_ID_ENTERPRISE,
     readonly: readonly,
     app_identifiers: app_identifiers,
     api_key_path: api_key_path
