@@ -1,3 +1,4 @@
 #include "Version.public.xcconfig"
+#include "Project.Release.xcconfig"
 
 DISPLAY_NAME=Simplenote
