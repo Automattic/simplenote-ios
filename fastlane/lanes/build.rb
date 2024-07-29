@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 desc 'Builds and uploads for distribution via App Store Connect'
-lane :build_and_upload_to_app_store_connect do |options|
-  unless options[:skip_prechecks]
+lane :build_and_upload_to_app_store_connect do |beta_release:, skip_prechecks: false, skip_confirm: false, create_release: false|
+  unless skip_prechecks
     ios_build_prechecks(
-      skip_confirm: options[:skip_confirm],
+      skip_confirm: skip_confirm,
       external: true
     )
     ios_build_preflight
@@ -41,19 +41,19 @@ lane :build_and_upload_to_app_store_connect do |options|
 
   sh("rm #{dsym_path}")
 
-  if options[:create_release]
-    archive_zip_path = File.join(File.dirname(Dir.pwd), 'Simplenote.xarchive.zip')
-    zip(path: lane_context[SharedValues::XCODEBUILD_ARCHIVE], output_path: archive_zip_path)
+  next unless create_release
 
-    version = options[:beta_release] ? ios_get_build_version : ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
-    create_release(
-      repository: GITHUB_REPO,
-      version: version,
-      release_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt'),
-      release_assets: archive_zip_path.to_s,
-      prerelease: options[:beta_release]
-    )
+  archive_zip_path = File.join(File.dirname(Dir.pwd), 'Simplenote.xarchive.zip')
+  zip(path: lane_context[SharedValues::XCODEBUILD_ARCHIVE], output_path: archive_zip_path)
 
-    sh("rm #{archive_zip_path}")
-  end
+  version = beta_release ? ios_get_build_version : ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
+  create_release(
+    repository: GITHUB_REPO,
+    version: version,
+    release_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt'),
+    release_assets: archive_zip_path.to_s,
+    prerelease: beta_release
+  )
+
+  sh("rm #{archive_zip_path}")
 end
