@@ -1,36 +1,54 @@
+# Nodes with values to reuse in the pipeline.
+common_params:
+  # Common plugin settings to use with the `plugins` key.
+  - &common_plugins
+    - automattic/a8c-ci-toolkit#3.1.0
+  # Common environment values to use with the `env` key.
+  - &common_env
+    IMAGE_ID: xcode-15.1
+
 # This is the default pipeline – it will build and test the app
-
-agents:
-  queue: mac
-
-env:
-  IMAGE_ID: $IMAGE_ID
-
 steps:
-  - label: 🔬 Build and Test
-    command: .buildkite/commands/build-and-test.sh
-    plugins: [$CI_TOOLKIT_PLUGIN]
-    artifact_paths:
-      - build/results/*
 
+  #################
+  # Run Unit Tests
+  #################
+  - label: "🔬 Build and Test"
+    command: ".buildkite/commands/build-and-test.sh"
+    env: *common_env
+    plugins: *common_plugins
+    artifact_paths:
+      - "build/results/*"
+
+  #################
+  # Linters
+  #################
   - label: ":swift: SwiftLint"
     command: run_swiftlint --strict
-    plugins: [$CI_TOOLKIT_PLUGIN]
+    plugins: *common_plugins
     notify:
       - github_commit_status:
-          context: SwiftLint
+          context: "SwiftLint"
     agents:
-      queue: default
+      queue: "default"
 
-  - label: 🛠 Installable Build
-    command: .buildkite/commands/build-prototype.sh
-    plugins: [$CI_TOOLKIT_PLUGIN]
+  #################
+  # Create Installable Build
+  #################
+  - label: "🛠 Installable Build"
+    command: ".buildkite/commands/build-prototype.sh"
+    env: *common_env
+    plugins: *common_plugins
     if: "build.pull_request.id != null || build.pull_request.draft"
     artifact_paths:
-      - build/results/*
+      - "build/results/*"
 
-  - label: 🔬 UI Test (Full)
-    command: .buildkite/commands/build-and-ui-test.sh SimplenoteUITests 'iPhone SE (3rd generation)'
-    plugins: [$CI_TOOLKIT_PLUGIN]
+  #################
+  # UI Tests
+  #################
+  - label: "🔬 UI Test (Full)"
+    command: ".buildkite/commands/build-and-ui-test.sh SimplenoteUITests 'iPhone SE (3rd generation)'"
+    env: *common_env
+    plugins: *common_plugins
     artifact_paths:
-      - build/results/*
+      - "build/results/*"

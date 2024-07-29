@@ -16,9 +16,8 @@ Layout/LineLength:
   Max: 180
 
 Metrics/BlockLength:
-  Exclude: &xfiles
+  Exclude:
     - fastlane/Fastfile
-    - fastlane/lanes/*.rb
     - Rakefile
 
 Style/HashSyntax:

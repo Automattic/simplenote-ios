@@ -1,5 +1,4 @@
 import XCTest
-import SimplenoteEndpoints
 @testable import Simplenote
 
 // MARK: - AccountVerificationControllerTests

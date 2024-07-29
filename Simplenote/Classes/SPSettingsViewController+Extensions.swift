@@ -1,6 +1,4 @@
 import UIKit
-import SimplenoteEndpoints
-
 
 // MARK: - Subscriber UI
 //
@@ -190,7 +188,12 @@ extension SPSettingsViewController {
     }
 
     private func handleError(_ error: RemoteError) {
-        presentRequestErrorAlert()
+        switch error {
+        case .network:
+            NoticeController.shared.present(NoticeFactory.networkError())
+        default:
+            presentRequestErrorAlert()
+        }
     }
 
     private func presentSuccessAlert(for user: SPUser) {
