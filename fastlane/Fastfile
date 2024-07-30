@@ -65,20 +65,8 @@ BUILD_CODE_FORMATTER = Fastlane::Wpmreleasetoolkit::Versioning::FourPartBuildCod
 PUBLIC_VERSION_FILE = Fastlane::Wpmreleasetoolkit::Versioning::IOSVersionFile.new(xcconfig_path: VERSION_FILE_PATH)
 
 platform :ios do
-  #####################################################################################
-  # update_appstore_strings
-  # -----------------------------------------------------------------------------------
-  # This lane updates the AppStoreStrings.pot files with the latest content from
-  # the release_notes.txt file and the other text sources
-  # -----------------------------------------------------------------------------------
-  # Usage:
-  # bundle exec fastlane update_appstore_strings version:<release note version>
-  #
-  # Example:
-  # bundle exec fastlane update_appstore_strings version:1.1
-  #####################################################################################
   desc 'Updates the AppStoreStrings.pot file with the latest data'
-  lane :update_appstore_strings do |options|
+  lane :update_appstore_strings do |version: release_version_current|
     prj_folder = Pathname.new(File.join(Dir.pwd, '..')).expand_path.to_s
     source_metadata_folder = File.join(prj_folder, 'fastlane', 'appstoreres', 'metadata', 'source')
 
@@ -92,7 +80,7 @@ platform :ios do
     ios_update_metadata_source(
       po_file_path: File.join(prj_folder, 'Simplenote', 'Resources', 'AppStoreStrings.pot'),
       source_files: files,
-      release_version: options[:version]
+      release_version: version
     )
   end
 
