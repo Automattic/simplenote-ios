@@ -1,4 +1,6 @@
 import Foundation
+import SimplenoteEndpoints
+
 
 // MARK: - SPAuthError
 //
@@ -11,17 +13,38 @@ enum SPAuthError: Error {
     case unverifiedEmail
     case tooManyAttempts
     case generic
+    case requestNotFound
+    case invalidCode
     case unknown(statusCode: Int, response: String?, error: Error?)
 }
+
 
 // MARK: - SPAuthError Convenience Initializers
 //
 extension SPAuthError {
 
-    /// Returns the SPAuthError matching a given Simperium Login Error Code
+    /// Returns an AuthError matching a RemoteError (Login) Counterpart
+    ///
+    init(loginRemoteError: RemoteError) {
+        self = SPAuthError(loginErrorCode: loginRemoteError.statusCode, response: loginRemoteError.response, error: loginRemoteError.networkError)
+    }
+
+    /// Returns an AuthError matching a RemoteError (Signup) Counterpart
+    ///
+    init(signupRemoteError: RemoteError) {
+        self = SPAuthError(signupErrorCode: signupRemoteError.statusCode, response: signupRemoteError.response, error: signupRemoteError.networkError)
+    }
+
+    /// Returns the AuthError matching a given Simperium Login Error Code
     ///
     init(loginErrorCode: Int, response: String?, error: Error?) {
         switch loginErrorCode {
+        case .zero:
+            self = .network
+        case 400 where response == Constants.requestNotFound:
+            self = .requestNotFound
+        case 400 where response == Constants.invalidCode:
+            self = .invalidCode
         case 401 where response == Constants.compromisedPassword:
             self = .compromisedPassword
         case 401:
@@ -35,10 +58,12 @@ extension SPAuthError {
         }
     }
 
-    /// Returns the SPAuthError matching a given Simperium Signup Error Code
+    /// Returns the AuthError matching a given a Signup Error Code
     ///
     init(signupErrorCode: Int, response: String?, error: Error?) {
         switch signupErrorCode {
+        case .zero:
+            self = .network
         case 401:
             self = .signupBadCredentials
         case 409:
@@ -50,6 +75,7 @@ extension SPAuthError {
         }
     }
 }
+
 
 // MARK: - SPAuthError Public Methods
 //
@@ -90,6 +116,10 @@ extension SPAuthError {
             return NSLocalizedString("You must verify your email before being able to login.", comment: "Error for un verified email")
         case .tooManyAttempts:
             return NSLocalizedString("Too many login attempts. Try again later.", comment: "Error message for too many login attempts")
+        case .requestNotFound:
+            return NSLocalizedString("Your authentication code has expired. Please request a new one", comment: "Error message for Invalid Login Code")
+        case .invalidCode:
+            return NSLocalizedString("The code you've entered is not correct. Please try again", comment: "Error message for Invalid Login Code")
         default:
             return NSLocalizedString("We're having problems. Please try again soon.", comment: "Generic error")
         }
@@ -99,4 +129,6 @@ extension SPAuthError {
 private struct Constants {
     static let compromisedPassword = "compromised password"
     static let requiresVerification = "verification required"
+    static let requestNotFound = "request-not-found"
+    static let invalidCode = "invalid-code"
 }
