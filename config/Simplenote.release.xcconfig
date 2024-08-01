@@ -1,3 +1,6 @@
 #include "Version.public.xcconfig"
+#include "Project.Release.xcconfig"
 
 DISPLAY_NAME=Simplenote
+
+PROVISIONING_PROFILE_SPECIFIER = match AppStore $(PRODUCT_BUNDLE_IDENTIFIER)

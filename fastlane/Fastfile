@@ -8,29 +8,21 @@ fastlane_require 'buildkit'
 
 UI.user_error!('Please run fastlane via `bundle exec`') unless FastlaneCore::Helper.bundler?
 
-USER_ENV_FILE_PATH = File.join(Dir.home, '.simplenoteios-env.default')
-PROJECT_ENV_FILE_PATH = File.join(
-  Dir.home, '.configure', 'simplenote-ios', 'secrets', 'project.env'
-)
 SECRETS_ROOT = File.join(Dir.home, '.configure', 'simplenote-ios', 'secrets')
 APP_STORE_CONNECT_KEY_PATH = File.join(SECRETS_ROOT, 'app_store_connect_fastlane_api_key.json')
 $used_test_account_index = nil
+
+require_relative 'lib/env_manager'
+
+import 'lanes/localization.rb'
+import 'lanes/release.rb'
+import 'lanes/build.rb'
 
 before_all do
   # Ensure we use the latest version of the toolkit
   check_for_toolkit_updates unless is_ci || ENV['FASTLANE_SKIP_TOOLKIT_UPDATE_CHECK']
 
-  # Check that the env files exist
-  unless is_ci || File.file?(USER_ENV_FILE_PATH)
-    error_message = <<~ERROR
-      ~/.simplenoteios-env.default not found. Please copy env/user.env-example to #{USER_ENV_FILE_PATH} and fill in the values") using the following command:
-
-      \tcp #{PROJECT_ROOT_FOLDER}/fastlane/env/user.env-example #{USER_ENV_FILE_PATH}
-    ERROR
-    UI.user_error!(error_message)
-  end
-
-  UI.user_error!('project.env not found: Make sure your configuration is up to date with `rake dependencies`') unless File.file?(PROJECT_ENV_FILE_PATH)
+  EnvManager.set_up(env_file_name: 'simplenote-ios')
 
   setup_ci
 end
@@ -43,42 +35,23 @@ end
 PROJECT_ROOT_FOLDER = File.dirname(File.expand_path(__dir__))
 VERSION_FILE_PATH = File.join(PROJECT_ROOT_FOLDER, 'config', 'Version.Public.xcconfig')
 OUTPUT_DIRECTORY_PATH = File.join(PROJECT_ROOT_FOLDER, 'build', 'results')
-GITHUB_REPO = 'Automattic/simplenote-ios'
 APP_STORE_BUNDLE_IDENTIFIER = 'com.codality.NotationalFlow'
 DEFAULT_BRANCH = 'trunk'
 
-# List of locales used for the app strings (GlotPress code => `*.lproj` folder name`)
-#
-# TODO: Replace with `LocaleHelper` once provided by release toolkit (https://github.com/wordpress-mobile/release-toolkit/pull/296)
-GLOTPRESS_TO_LPROJ_APP_LOCALE_CODES = {
-  'ar' => 'ar',             # Arabic
-  'cy' => 'cy',             # Welsh
-  'de' => 'de',             # German
-  'el' => 'el',             # Greek
-  'en' => 'en',             # English
-  'es' => 'es',             # Spanish
-  'fa' => 'fa',             # Persian
-  'fr' => 'fr',             # French
-  'he' => 'he',             # Hebrew
-  'id' => 'id',             # Indonesian
-  'it' => 'it',             # Italian
-  'ja' => 'ja',             # Japanese
-  'ko' => 'ko',             # Korean
-  'nl' => 'nl',             # Dutch
-  'pt-br' => 'pt-BR',       # Portuguese (Brazil)
-  'ru' => 'ru',             # Russian
-  'sv' => 'sv',             # Swedish
-  'tr' => 'tr',             # Turkish
-  'zh-cn' => 'zh-Hans-CN',  # Chinese (China)
-  'zh-tw' => 'zh-Hant-TW'   # Chinese (Taiwan)
-}.freeze
+TEAM_ID_APP_STORE_CONNECT = 'PZYM8XX95Q'
+TEAM_ID_ENTERPRISE = '99KV9Z6BKV'
+
+ORGANIZATION = 'automattic'
+PROJECT_SLUG = 'simplenote-ios'
+GITHUB_REPO = "#{ORGANIZATION}/#{PROJECT_SLUG}".freeze
+BUILDKITE_ORGANIZATION = ORGANIZATION
+BUILDKITE_PIPELINE = PROJECT_SLUG
+
+WORKSPACE = 'Simplenote.xcworkspace'
 
 ########################################################################
 # Environment
 ########################################################################
-Dotenv.load(USER_ENV_FILE_PATH)
-Dotenv.load(PROJECT_ENV_FILE_PATH)
-
 ENV['PROJECT_NAME'] = 'Simplenote'
 ENV['PROJECT_ROOT_FOLDER'] = PROJECT_ROOT_FOLDER
 ENV['APP_STORE_STRINGS_FILE_NAME'] = 'AppStoreStrings.pot'
@@ -86,79 +59,14 @@ ENV['PUBLIC_CONFIG_FILE'] = VERSION_FILE_PATH
 ENV['DOWNLOAD_METADATA'] = './fastlane/download_metadata.swift'
 ENV['FL_RELEASE_TOOLKIT_DEFAULT_BRANCH'] = 'trunk'
 
-# Use this instead of getting values from ENV directly
-# It will throw an error if the requested value is missing
-def get_required_env(key)
-  UI.user_error!("Environment variable '#{key}' is not set. Have you setup #{USER_ENV_FILE_PATH} correctly?") unless ENV.key?(key)
-  ENV.fetch(key)
-end
+VERSION_CALCULATOR = Fastlane::Wpmreleasetoolkit::Versioning::SemanticVersionCalculator.new
+VERSION_FORMATTER = Fastlane::Wpmreleasetoolkit::Versioning::FourPartVersionFormatter.new
+BUILD_CODE_FORMATTER = Fastlane::Wpmreleasetoolkit::Versioning::FourPartBuildCodeFormatter.new
+PUBLIC_VERSION_FILE = Fastlane::Wpmreleasetoolkit::Versioning::IOSVersionFile.new(xcconfig_path: VERSION_FILE_PATH)
 
 platform :ios do
-  ########################################################################
-  # Release Lanes
-  ########################################################################
-  #####################################################################################
-  # code_freeze
-  # -----------------------------------------------------------------------------------
-  # This lane executes the steps planned on code freeze
-  # -----------------------------------------------------------------------------------
-  # Usage:
-  # bundle exec fastlane code_freeze [skip_confirm:<skip confirm>]
-  #
-  # Example:
-  # bundle exec fastlane code_freeze
-  # bundle exec fastlane code_freeze skip_confirm:true
-  #####################################################################################
-  desc 'Creates a new release branch from the current trunk'
-  lane :code_freeze do |options|
-    ios_codefreeze_prechecks(options)
-
-    ios_bump_version_release
-    new_version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
-
-    extract_release_notes_for_version(
-      version: new_version,
-      release_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'RELEASE-NOTES.txt'),
-      extracted_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt')
-    )
-    ios_update_release_notes(new_version: new_version)
-
-    generate_strings_file_for_glotpress
-
-    UI.important('Pushing changes to remote, configuring the release on GitHub, and triggering the beta build')
-    unless options[:skip_confirm] || UI.confirm('Do you want to continue?')
-      UI.user_error!("Terminating as requested. Don't forget to run the remainder of this automation manually.")
-    end
-
-    push_to_git_remote(tags: false)
-
-    copy_branch_protection(
-      repository: GITHUB_REPO,
-      from_branch: DEFAULT_BRANCH,
-      to_branch: "release/#{new_version}"
-    )
-    setfrozentag(
-      repository: GITHUB_REPO,
-      milestone: new_version
-    )
-
-    trigger_beta_build(branch_to_build: "release/#{new_version}")
-  end
-
-  #####################################################################################
-  # update_appstore_strings
-  # -----------------------------------------------------------------------------------
-  # This lane updates the AppStoreStrings.pot files with the latest content from
-  # the release_notes.txt file and the other text sources
-  # -----------------------------------------------------------------------------------
-  # Usage:
-  # bundle exec fastlane update_appstore_strings version:<release note version>
-  #
-  # Example:
-  # bundle exec fastlane update_appstore_strings version:1.1
-  #####################################################################################
   desc 'Updates the AppStoreStrings.pot file with the latest data'
-  lane :update_appstore_strings do |options|
+  lane :update_appstore_strings do |version: release_version_current|
     prj_folder = Pathname.new(File.join(Dir.pwd, '..')).expand_path.to_s
     source_metadata_folder = File.join(prj_folder, 'fastlane', 'appstoreres', 'metadata', 'source')
 
@@ -172,7 +80,7 @@ platform :ios do
     ios_update_metadata_source(
       po_file_path: File.join(prj_folder, 'Simplenote', 'Resources', 'AppStoreStrings.pot'),
       source_files: files,
-      release_version: options[:version]
+      release_version: version
     )
   end
 
@@ -206,35 +114,6 @@ platform :ios do
 
       File.write(keywords_path, keywords)
     end
-  end
-
-  #####################################################################################
-  # new_beta_release
-  # -----------------------------------------------------------------------------------
-  # This lane updates the release branch for a new beta release. It will update the
-  # current release branch by default. If you want to update a different branch
-  # (i.e. hotfix branch) pass the related version with the 'base_version' param
-  # (example: base_version:10.6.1 will work on the 10.6.1 branch)
-  # -----------------------------------------------------------------------------------
-  # Usage:
-  # bundle exec fastlane new_beta_release [skip_confirm:<skip confirm>] [base_version:<version>]
-  #
-  # Example:
-  # bundle exec fastlane new_beta_release
-  # bundle exec fastlane new_beta_release skip_confirm:true
-  # bundle exec fastlane new_beta_release base_version:10.6.1
-  #####################################################################################
-  desc 'Updates a release branch for a new beta release'
-  lane :new_beta_release do |options|
-    ios_betabuild_prechecks(options)
-    download_localized_strings_and_metadata_from_glotpress
-    ios_lint_localizations(
-      input_dir: 'Simplenote',
-      allow_retry: true
-    )
-    ios_bump_version_beta
-    version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
-    trigger_beta_build(branch_to_build: "release/#{version}")
   end
 
   #####################################################################################
@@ -325,7 +204,7 @@ platform :ios do
       repository: GITHUB_REPO,
       branch: "release/#{version}"
     )
-    setfrozentag(
+    set_milestone_frozen_marker(
       repository: GITHUB_REPO,
       milestone: version,
       freeze: false
@@ -453,11 +332,11 @@ platform :ios do
     gym(
       scheme: 'Simplenote',
       configuration: 'Distribution Internal',
-      workspace: 'Simplenote.xcworkspace',
+      workspace: WORKSPACE,
       export_method: 'enterprise',
       clean: true,
       output_directory: OUTPUT_DIRECTORY_PATH,
-      export_team_id: get_required_env('INT_EXPORT_TEAM_ID'),
+      export_team_id: TEAM_ID_ENTERPRISE,
       export_options: {
         method: 'enterprise',
         provisioningProfiles: simplenote_provisioning_profiles(
@@ -470,7 +349,7 @@ platform :ios do
     File.rename(File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote.ipa'), File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote Internal.ipa'))
 
     appcenter_upload(
-      api_token: get_required_env('APPCENTER_API_TOKEN'),
+      api_token: EnvManager.get_required_env!('APPCENTER_API_TOKEN'),
       owner_name: 'automattic',
       owner_type: 'organization',
       app_name: 'Simplenote',
@@ -479,81 +358,11 @@ platform :ios do
     )
 
     sentry_upload_dsym(
-      auth_token: get_required_env('SENTRY_API_TOKEN'),
+      auth_token: EnvManager.get_required_env!('SENTRY_AUTH_TOKEN'),
       org_slug: 'a8c',
       project_slug: 'simplenote-ios',
       dsym_path: lane_context[SharedValues::DSYM_OUTPUT_PATH]
     )
-  end
-
-  #####################################################################################
-  # build_and_upload_to_app_store_connect
-  # -----------------------------------------------------------------------------------
-  # This lane builds the app and upload it for external distribution
-  # -----------------------------------------------------------------------------------
-  # Usage:
-  # bundle exec fastlane build_and_upload_to_app_store_connect [skip_confirm:<skip confirm>] [create_release:<Create release on GH>] [beta_release:<intermediate beta?>]
-  #
-  # Example:
-  # bundle exec fastlane build_and_upload_to_app_store_connect
-  # bundle exec fastlane build_and_upload_to_app_store_connect skip_confirm:true
-  #####################################################################################
-  desc 'Builds and uploads for distribution'
-  lane :build_and_upload_to_app_store_connect do |options|
-    unless options[:skip_prechecks]
-      ios_build_prechecks(
-        skip_confirm: options[:skip_confirm],
-        external: true
-      )
-      ios_build_preflight
-    end
-
-    appstore_code_signing
-
-    gym(
-      scheme: 'Simplenote',
-      workspace: 'Simplenote.xcworkspace',
-      configuration: 'Distribution AppStore',
-      clean: true,
-      export_options: {
-        method: 'app-store',
-        export_team_id: get_required_env('EXT_EXPORT_TEAM_ID'),
-        provisioningProfiles: simplenote_provisioning_profiles
-      }
-    )
-
-    testflight(
-      skip_waiting_for_build_processing: true,
-      api_key_path: APP_STORE_CONNECT_KEY_PATH
-    )
-
-    sh('rm ../Simplenote.ipa')
-    dsym_path = File.join(File.dirname(Dir.pwd), 'Simplenote.app.dSYM.zip')
-
-    sentry_upload_dsym(
-      dsym_path: dsym_path,
-      auth_token: get_required_env('SENTRY_AUTH_TOKEN'),
-      org_slug: 'a8c',
-      project_slug: 'simplenote-ios'
-    )
-
-    sh("rm #{dsym_path}")
-
-    if options[:create_release]
-      archive_zip_path = File.join(File.dirname(Dir.pwd), 'Simplenote.xarchive.zip')
-      zip(path: lane_context[SharedValues::XCODEBUILD_ARCHIVE], output_path: archive_zip_path)
-
-      version = options[:beta_release] ? ios_get_build_version : ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
-      create_release(
-        repository: GITHUB_REPO,
-        version: version,
-        release_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt'),
-        release_assets: archive_zip_path.to_s,
-        prerelease: options[:beta_release]
-      )
-
-      sh("rm #{archive_zip_path}")
-    end
   end
 
   # Upload the localized metadata (from `fastlane/metadata/`) to App Store Connect
@@ -582,42 +391,6 @@ platform :ios do
   end
 
   #####################################################################################
-  # trigger_beta_build
-  # -----------------------------------------------------------------------------------
-  # This lane triggers a beta build on CI
-  # -----------------------------------------------------------------------------------
-  # @option [String] branch_to_build The name of the branch we want the CI to build, e.g. `release/19.3`
-  #
-  # Usage:
-  # bundle exec fastlane trigger_beta_build [branch_to_build:<branch_name>]
-  #
-  #####################################################################################
-  lane :trigger_beta_build do |options|
-    trigger_buildkite_release_build(
-      branch: options[:branch_to_build],
-      beta: true
-    )
-  end
-
-  #####################################################################################
-  # trigger_release_build
-  # -----------------------------------------------------------------------------------
-  # This lane triggers a stable release build on CI
-  # -----------------------------------------------------------------------------------
-  # @option [String] branch_to_build The name of the branch we want the CI to build, e.g. `release/19.3`
-  #
-  # Usage:
-  # bundle exec fastlane trigger_release_build [branch_to_build:<branch_name>]
-  #
-  #####################################################################################
-  lane :trigger_release_build do |options|
-    trigger_buildkite_release_build(
-      branch: options[:branch_to_build],
-      beta: false
-    )
-  end
-
-  #####################################################################################
   # build_and_upload_installable_build
   # -----------------------------------------------------------------------------------
   # This lane builds the app and upload it for adhoc testing
@@ -639,11 +412,11 @@ platform :ios do
     gym(
       scheme: 'Simplenote',
       configuration: 'Distribution Alpha',
-      workspace: 'Simplenote.xcworkspace',
+      workspace: WORKSPACE,
       export_method: 'enterprise',
       clean: true,
       output_directory: OUTPUT_DIRECTORY_PATH,
-      export_team_id: get_required_env('INT_EXPORT_TEAM_ID'),
+      export_team_id: TEAM_ID_ENTERPRISE,
       export_options: {
         method: 'enterprise',
         provisioningProfiles: simplenote_provisioning_profiles(
@@ -656,7 +429,7 @@ platform :ios do
     File.rename(File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote.ipa'), File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote Alpha.ipa'))
 
     appcenter_upload(
-      api_token: get_required_env('APPCENTER_API_TOKEN'),
+      api_token: EnvManager.get_required_env!('APPCENTER_API_TOKEN'),
       owner_name: 'automattic',
       owner_type: 'organization',
       app_name: 'Simplenote-Installable-Builds',
@@ -666,7 +439,7 @@ platform :ios do
     )
 
     sentry_upload_dsym(
-      auth_token: get_required_env('SENTRY_AUTH_TOKEN'),
+      auth_token: EnvManager.get_required_env!('SENTRY_AUTH_TOKEN'),
       org_slug: 'a8c',
       project_slug: 'simplenote-ios',
       dsym_path: lane_context[SharedValues::DSYM_OUTPUT_PATH]
@@ -930,60 +703,11 @@ platform :ios do
     if is_ci
       sanitize_test_accounts
       find_free_test_account
-      run_ui_tests(options.merge({ test_account: get_required_env('UI_TESTS_ACCOUNT_EMAIL').sub('X', $used_test_account_index.to_s) }))
+      run_ui_tests(options.merge({ test_account: EnvManager.get_required_env!('UI_TESTS_ACCOUNT_EMAIL').sub('X', $used_test_account_index.to_s) }))
       deoccupy_test_account
     else
       UI.user_error!('This lane should be run only from CI')
     end
-  end
-
-  desc 'Registers a Device in the developer console'
-  lane :register_new_device do |options|
-    device_name = UI.input('Device Name: ') if options[:device_name].nil?
-    device_id = UI.input('Device ID: ') if options[:device_id].nil?
-    # Currently, Simplenote has an odd setup with a dedicated app id for development builds
-    all_bundle_ids =
-      simplenote_app_identifiers +
-      simplenote_app_identifiers(root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Development")
-
-    UI.message "Registering #{device_name} with ID #{device_id} and registering it with any provisioning profiles associated with these bundle identifiers:"
-    all_bundle_ids.each do |identifier|
-      UI.message "\t#{identifier}"
-    end
-
-    team_id = get_required_env('EXT_EXPORT_TEAM_ID')
-
-    # Register the user's device
-    register_device(
-      name: device_name,
-      udid: device_id,
-      team_id: team_id,
-      api_key_path: APP_STORE_CONNECT_KEY_PATH
-    )
-
-    # We're about to use `add_development_certificates_to_provisioning_profiles` and `add_all_devices_to_provisioning_profiles`.
-    # These actions use Developer Portal APIs that don't yet support authentication via API key (-.-').
-    # Let's preemptively ask for and set the email here to avoid being asked twice for it if not set.
-
-    require 'credentials_manager'
-
-    # If Fastlane cannot instantiate a user, it will ask the caller for the email.
-    # Once we have it, we can set it as `FASTLANE_USER` in the environment (which has lifecycle limited to this call) so that the next commands will already have access to it.
-    # Note that if the user is already available to `AccountManager`, setting it in the environment is redundant, but Fastlane
-    # doesn't provide a way to check it so we have to do it anyway.
-    ENV['FASTLANE_USER'] = CredentialsManager::AccountManager.new.user
-
-    # Add all development certificates to the provisioning profiles (just in case – this is an easy step to miss)
-    add_development_certificates_to_provisioning_profiles(
-      team_id: team_id,
-      app_identifier: all_bundle_ids
-    )
-
-    # Add all devices to the provisioning profiles
-    add_all_devices_to_provisioning_profiles(
-      team_id: team_id,
-      app_identifier: all_bundle_ids
-    )
   end
 end
 
@@ -1032,7 +756,7 @@ end
 private_lane :appstore_code_signing do |options|
   update_code_signing(
     type: 'appstore',
-    team_id: get_required_env('EXT_EXPORT_TEAM_ID'),
+    team_id: TEAM_ID_APP_STORE_CONNECT,
     readonly: options.fetch(:readonly, true),
     app_identifiers: simplenote_app_identifiers,
     api_key_path: APP_STORE_CONNECT_KEY_PATH,
@@ -1056,7 +780,7 @@ def update_code_signing_enterprise(readonly:, app_identifiers:)
   update_code_signing(
     type: 'enterprise',
     # Enterprise builds belong to the "internal" team
-    team_id: get_required_env('INT_EXPORT_TEAM_ID'),
+    team_id: TEAM_ID_ENTERPRISE,
     readonly: readonly,
     app_identifiers: app_identifiers,
     api_key_path: api_key_path
@@ -1068,10 +792,10 @@ def update_code_signing(type:, team_id:, readonly:, app_identifiers:, api_key_pa
   # NOTE: It might be neccessary to add `force: true` alongside `readonly: true` in order to regenerate some provisioning profiles.
   # If this turns out to be a hard requirement, we should consider updating the method with logic to toggle the two setting based on whether we're fetching or renewing.
 
-  # Fail early if secrets not available via `get_required_env`.
+  # Fail early if secrets not available via `EnvManager.get_required_env!`.
   # Otherwise, Fastlane will prompt to type them.
-  access_key = get_required_env('MATCH_S3_ACCESS_KEY')
-  secret_access_key = get_required_env('MATCH_S3_SECRET_ACCESS_KEY')
+  access_key = EnvManager.get_required_env!('MATCH_S3_ACCESS_KEY')
+  secret_access_key = EnvManager.get_required_env!('MATCH_S3_SECRET_ACCESS_KEY')
 
   match(
     storage_mode: 's3',
@@ -1128,42 +852,9 @@ end
 # Localization Lanes
 ########################################################################
 
-desc 'Updates the main `Localizable.strings` file — that will be imported by GlotPress'
-lane :generate_strings_file_for_glotpress do
-  en_lproj_path = File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'en.lproj')
-  ios_generate_strings_file_from_code(
-    paths: ['Simplenote/', 'SimplenoteIntents/', 'SimplenoteShare/',
-            'SimplenoteWidgets/', 'Pods/Simperium/Simperium/',
-            'Pods/Simperium/Simperium-iOS'],
-    output_dir: en_lproj_path
-  )
-
-  git_commit(
-    path: en_lproj_path,
-    message: 'Freeze strings for localization',
-    allow_nothing_to_commit: true
-  )
-end
-
 ########################################################################
 # Helper Lanes
 ########################################################################
-
-# Triggers a Release Build on Buildkite
-#
-# @param [String] branch The branch to build
-# @param [Boolean] beta Indicate if we should build a beta or regular release
-#
-def trigger_buildkite_release_build(branch:, beta:)
-  push_to_git_remote(tags: false)
-  buildkite_trigger_build(
-    buildkite_organization: 'automattic',
-    buildkite_pipeline: 'simplenote-ios',
-    branch: branch,
-    environment: { BETA_RELEASE: beta },
-    pipeline_file: 'release-build.yml'
-  )
-end
 
 def fastlane_directory
   __dir__
@@ -1221,7 +912,7 @@ end
 #   fetch_test_accounts_hash
 #     => {"0"=>"4079", "1"=>"free", "2"=>"free", "3"=>"free"}
 def fetch_test_accounts_hash
-  uri = URI.parse(get_required_env('UI_TESTS_ACCOUNTS_JSON_URL'))
+  uri = URI.parse(EnvManager.get_required_env!('UI_TESTS_ACCOUNTS_JSON_URL'))
   response = Net::HTTP.get_response(uri)
   accounts_state = response.body.chomp
   JSON.parse(accounts_state)
@@ -1238,7 +929,7 @@ def find_free_test_account
 
   UI.user_error!('Could not find free UI Test account. Quitting.') if $used_test_account_index.nil?
   UI.message("Free account index: #{$used_test_account_index}")
-  change_test_account_availability(get_required_env('BUILDKITE_BUILD_NUMBER').to_s)
+  change_test_account_availability(ENV['BUILDKITE_BUILD_NUMBER'].to_s)
 end
 
 # Replace a value in a key which is equal to $used_test_account_index global variable
@@ -1268,7 +959,7 @@ def sanitize_test_accounts
 end
 
 def job_running?(job_number)
-  client = Buildkit.new(token: get_required_env('BUILDKITE_TOKEN'))
+  client = Buildkit.new(token: EnvManager.get_required_env!('BUILDKITE_TOKEN'))
   build = client.build('automattic', 'simplenote-ios', job_number)
 
   state = build['state']
@@ -1282,7 +973,7 @@ end
 
 def submit_accounts_hash(accounts_hash)
   UI.message("Writing new accounts state: #{accounts_hash}")
-  uri = URI.parse(get_required_env('UI_TESTS_ACCOUNTS_JSON_URL'))
+  uri = URI.parse(EnvManager.get_required_env!('UI_TESTS_ACCOUNTS_JSON_URL'))
   request = Net::HTTP::Post.new(uri)
   request.body = accounts_hash.to_json
 
@@ -1320,4 +1011,58 @@ def generate_installable_build_number
 
     "#{branch}-#{commit}"
   end
+end
+
+# Returns the release version of the app in the format `1.2` or `1.2.3` if it is a hotfix
+#
+def release_version_current
+  current_version = VERSION_FORMATTER.parse(PUBLIC_VERSION_FILE.read_release_version)
+  VERSION_FORMATTER.release_version(current_version)
+end
+
+# Returns the next release version of the app in the format `1.2` or `1.2.3` if it is a hotfix
+#
+def release_version_next
+  current_version = VERSION_FORMATTER.parse(PUBLIC_VERSION_FILE.read_release_version)
+  next_calculated_release_version = VERSION_CALCULATOR.next_release_version(version: current_version)
+  VERSION_FORMATTER.release_version(next_calculated_release_version)
+end
+
+# Returns the current build code of the app
+#
+def build_code_current
+  # We use the four part (1.2.3.4) build code format, so the version calculator can be used to calculate the next four-part version
+  version = VERSION_FORMATTER.parse(PUBLIC_VERSION_FILE.read_build_code(attribute_name: 'VERSION_LONG'))
+  BUILD_CODE_FORMATTER.build_code(version: version)
+end
+
+# Returns the build code of the app for the code freeze.
+# It is the release version name with build number (last of the four components) set to 0.
+#
+def build_code_code_freeze
+  # We use the four part (1.2.3.4) build code format, so the version calculator can be used to calculate the next four-part version
+  release_version_current = VERSION_FORMATTER.parse(PUBLIC_VERSION_FILE.read_release_version)
+  build_code_code_freeze = VERSION_CALCULATOR.next_release_version(version: release_version_current)
+  BUILD_CODE_FORMATTER.build_code(version: build_code_code_freeze)
+end
+
+# Returns the build code of the app for the code freeze.
+# It is the release version name with build number (last of the four components) set to 0.
+#
+def build_code_hotfix(release_version:)
+  version = VERSION_FORMATTER.parse(release_version)
+  BUILD_CODE_FORMATTER.build_code(version: version)
+end
+
+# Returns the next build code of the app
+#
+def build_code_next
+  # We use the four part (1.2.3.4) build code format, so the version calculator can be used to calculate the next four-part version
+  build_code_current = VERSION_FORMATTER.parse(PUBLIC_VERSION_FILE.read_build_code(attribute_name: 'VERSION_LONG'))
+  build_code_next = VERSION_CALCULATOR.next_build_number(version: build_code_current)
+  BUILD_CODE_FORMATTER.build_code(version: build_code_next)
+end
+
+def release_branch_name(release_version: release_version_current)
+  "release/#{release_version}"
 end

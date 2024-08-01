@@ -1,6 +1,6 @@
 steps:
   - label: ":testflight: Simplenote iOS Release Build (App Store Connect)"
-    command: ".buildkite/commands/release-build.sh"
+    command: .buildkite/commands/release-build.sh
     priority: 1
     env:
       IMAGE_ID: $IMAGE_ID
