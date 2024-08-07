@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+APP_STORE_CONNECT_OUTPUT_NAME = 'Simplenote-AppStore'
+
 desc 'Builds and uploads for distribution via App Store Connect'
 lane :build_and_upload_to_app_store_connect do |beta_release:, skip_prechecks: false, skip_confirm: false, create_release: false|
   unless skip_prechecks
@@ -49,6 +51,8 @@ lane :build_for_app_store_connect do |fetch_code_signing: true|
     workspace: WORKSPACE,
     configuration: 'Distribution AppStore',
     clean: true,
-    export_method: 'app-store'
+    export_method: 'app-store',
+    output_directory: OUTPUT_DIRECTORY_PATH,
+    output_name: APP_STORE_CONNECT_OUTPUT_NAME
   )
 end
