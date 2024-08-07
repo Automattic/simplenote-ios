@@ -44,7 +44,7 @@ end
 lane :build_for_app_store_connect do |fetch_code_signing: true|
   appstore_code_signing if fetch_code_signing
 
-  gym(
+  build_app(
     scheme: 'Simplenote',
     workspace: WORKSPACE,
     configuration: 'Distribution AppStore',
