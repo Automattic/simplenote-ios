@@ -4,25 +4,6 @@ APP_STORE_CONNECT_OUTPUT_NAME = 'Simplenote-AppStore'
 XCARCHIVE_PATH = File.join(OUTPUT_DIRECTORY_PATH, "#{APP_STORE_CONNECT_OUTPUT_NAME}.xcarchive")
 XCARCHIVE_ZIP_PATH = File.join(OUTPUT_DIRECTORY_PATH, "#{APP_STORE_CONNECT_OUTPUT_NAME}.xcarchive.zip")
 
-desc 'Builds and uploads for distribution via App Store Connect'
-lane :build_and_upload_to_app_store_connect do |beta_release:, skip_prechecks: false, skip_confirm: false, create_release: false|
-  unless skip_prechecks
-    ensure_git_status_clean unless skip_prechecks || is_ci
-    sentry_check_cli_installed
-  end
-
-  UI.important("Building version #{release_version_current} (#{build_code_current}) and uploading to TestFlight...")
-  UI.user_error!('Aborted by user request') unless skip_confirm || UI.confirm('Do you want to continue?')
-
-  build_for_app_store_connect
-
-  upload_to_app_store_connect(
-    beta_release: beta_release,
-    skip_prechecks: skip_prechecks,
-    create_release: create_release
-  )
-end
-
 lane :build_for_app_store_connect do |fetch_code_signing: true|
   appstore_code_signing if fetch_code_signing
 
