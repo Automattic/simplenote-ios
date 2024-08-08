@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 APP_STORE_CONNECT_OUTPUT_NAME = 'Simplenote-AppStore'
+XCARCHIVE_PATH = File.join(OUTPUT_DIRECTORY_PATH, "#{APP_STORE_CONNECT_OUTPUT_NAME}.xcarchive")
 
 desc 'Builds and uploads for distribution via App Store Connect'
 lane :build_and_upload_to_app_store_connect do |beta_release:, skip_prechecks: false, skip_confirm: false, create_release: false|
@@ -30,9 +31,14 @@ lane :build_for_app_store_connect do |fetch_code_signing: true|
     configuration: 'Distribution AppStore',
     clean: true,
     export_method: 'app-store',
-    # "build" is where the xcarchive will go, "output" where the ipa and dSYM will go.
-    # We need to define both to have predictable artifact paths to use in other lanes and automation.
-    build_path: OUTPUT_DIRECTORY_PATH,
+    # The options below might seem redundant but are currently all necessary to have predictable artifact paths to use in other lanes.
+    #
+    # - archive_path sets the full path for the xcarchive.
+    # - output_directory and output_name set the path and basename for the ipa and dSYM.
+    #
+    # We could have use 'build_path: OUTPUT_DIRECTORY_PATH' for the xcarchive...
+    # ...but doing so would append a timestamp and unnecessarily complicate other logic to get the path
+    archive_path: XCARCHIVE_PATH,
     output_directory: OUTPUT_DIRECTORY_PATH,
     output_name: APP_STORE_CONNECT_OUTPUT_NAME
   )
@@ -70,15 +76,15 @@ lane :upload_to_app_store_connect do |beta_release:, skip_prechecks: false, crea
 
   next unless create_release
 
-  archive_zip_path = File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote.xarchive.zip')
-  zip(path: lane_context[SharedValues::XCODEBUILD_ARCHIVE], output_path: archive_zip_path)
+  xcarchive_zip_path = File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote.xarchive.zip')
+  zip(path: XCARCHIVE_PATH, output_path: xcarchive_zip_path)
 
   version = beta_release ? build_code_current : release_version_current
   create_release(
     repository: GITHUB_REPO,
     version: version,
     release_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt'),
-    release_assets: archive_zip_path.to_s,
+    release_assets: xcarchive_zip_path.to_s,
     prerelease: beta_release
   )
 end
