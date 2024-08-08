@@ -37,7 +37,7 @@ lane :build_for_app_store_connect do |fetch_code_signing: true|
     # - archive_path sets the full path for the xcarchive.
     # - output_directory and output_name set the path and basename for the ipa and dSYM.
     #
-    # We could have use 'build_path: OUTPUT_DIRECTORY_PATH' for the xcarchive...
+    # We could have used 'build_path: OUTPUT_DIRECTORY_PATH' for the xcarchive...
     # ...but doing so would append a timestamp and unnecessarily complicate other logic to get the path
     archive_path: XCARCHIVE_PATH,
     output_directory: OUTPUT_DIRECTORY_PATH,

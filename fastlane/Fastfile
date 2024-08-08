@@ -39,7 +39,7 @@ RELEASE_NOTES_SOURCE_PATH = File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resour
 
 require_relative 'lib/env_manager'
 
-# Important: These need to be imported after all the constants have be defined because the access them.
+# Important: These need to be imported after all the constants have be defined because they access them.
 # A bit of a leaky abstraction but makes for lanes that are easier to write...
 import 'lanes/localization.rb'
 import 'lanes/release.rb'
