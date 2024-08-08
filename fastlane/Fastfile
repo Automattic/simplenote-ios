@@ -34,6 +34,8 @@ SECRETS_ROOT = File.join(Dir.home, '.configure', 'simplenote-ios', 'secrets')
 APP_STORE_CONNECT_KEY_PATH = File.join(SECRETS_ROOT, 'app_store_connect_fastlane_api_key.json')
 $used_test_account_index = nil
 
+RELEASE_NOTES_SOURCE_PATH = File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt')
+
 require_relative 'lib/env_manager'
 
 # Important: These need to be imported after all the constants have be defined because the access them.
@@ -72,7 +74,7 @@ platform :ios do
     source_metadata_folder = File.join(prj_folder, 'fastlane', 'appstoreres', 'metadata', 'source')
 
     files = {
-      whats_new: File.join(prj_folder, 'Simplenote', 'Resources', 'release_notes.txt'),
+      whats_new: RELEASE_NOTES_SOURCE_PATH,
       app_store_subtitle: File.join(source_metadata_folder, 'subtitle.txt'),
       app_store_desc: File.join(source_metadata_folder, 'description.txt'),
       app_store_keywords: File.join(source_metadata_folder, 'keywords.txt')
