@@ -59,7 +59,7 @@ lane :upload_to_app_store_connect do |beta_release:, skip_prechecks: false, crea
   UI.user_error!("Could not find dSYM at #{dsym_path}!") unless File.exist?(ipa_path)
 
   UI.important("Uploading ipa at #{ipa_path} to TestFlight...")
-  testflight(
+  upload_to_testflight(
     ipa: ipa_path,
     skip_waiting_for_build_processing: true,
     api_key_path: APP_STORE_CONNECT_KEY_PATH
