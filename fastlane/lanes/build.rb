@@ -73,8 +73,7 @@ lane :upload_to_app_store_connect do |beta_release:, skip_prechecks: false, crea
   archive_zip_path = File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote.xarchive.zip')
   zip(path: lane_context[SharedValues::XCODEBUILD_ARCHIVE], output_path: archive_zip_path)
 
-  # TODO: Use Versioning module to get the version
-  version = beta_release ? ios_get_build_version : ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
+  version = beta_release ? build_code_current : release_version_current
   create_release(
     repository: GITHUB_REPO,
     version: version,
