@@ -8,12 +8,39 @@ fastlane_require 'buildkit'
 
 UI.user_error!('Please run fastlane via `bundle exec`') unless FastlaneCore::Helper.bundler?
 
+PROJECT_ROOT_FOLDER = File.dirname(File.expand_path(__dir__))
+VERSION_FILE_PATH = File.join(PROJECT_ROOT_FOLDER, 'config', 'Version.Public.xcconfig')
+OUTPUT_DIRECTORY_PATH = File.join(PROJECT_ROOT_FOLDER, 'build', 'results')
+APP_STORE_BUNDLE_IDENTIFIER = 'com.codality.NotationalFlow'
+DEFAULT_BRANCH = 'trunk'
+
+TEAM_ID_APP_STORE_CONNECT = 'PZYM8XX95Q'
+TEAM_ID_ENTERPRISE = '99KV9Z6BKV'
+
+ORGANIZATION = 'automattic'
+PROJECT_SLUG = 'simplenote-ios'
+GITHUB_REPO = "#{ORGANIZATION}/#{PROJECT_SLUG}".freeze
+BUILDKITE_ORGANIZATION = ORGANIZATION
+BUILDKITE_PIPELINE = PROJECT_SLUG
+APPCENTER_OWNER_NAME = ORGANIZATION
+
+WORKSPACE = 'Simplenote.xcworkspace'
+
+VERSION_CALCULATOR = Fastlane::Wpmreleasetoolkit::Versioning::SemanticVersionCalculator.new
+VERSION_FORMATTER = Fastlane::Wpmreleasetoolkit::Versioning::FourPartVersionFormatter.new
+BUILD_CODE_FORMATTER = Fastlane::Wpmreleasetoolkit::Versioning::FourPartBuildCodeFormatter.new
+PUBLIC_VERSION_FILE = Fastlane::Wpmreleasetoolkit::Versioning::IOSVersionFile.new(xcconfig_path: VERSION_FILE_PATH)
+
 SECRETS_ROOT = File.join(Dir.home, '.configure', 'simplenote-ios', 'secrets')
 APP_STORE_CONNECT_KEY_PATH = File.join(SECRETS_ROOT, 'app_store_connect_fastlane_api_key.json')
 $used_test_account_index = nil
 
+RELEASE_NOTES_SOURCE_PATH = File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt')
+
 require_relative 'lib/env_manager'
 
+# Important: These need to be imported after all the constants have be defined because they access them.
+# A bit of a leaky abstraction but makes for lanes that are easier to write...
 import 'lanes/localization.rb'
 import 'lanes/release.rb'
 import 'lanes/build.rb'
@@ -31,24 +58,6 @@ error do |lane, _exception, _options|
   deoccupy_test_account if lane == :run_ui_tests
 end
 
-# Constants
-PROJECT_ROOT_FOLDER = File.dirname(File.expand_path(__dir__))
-VERSION_FILE_PATH = File.join(PROJECT_ROOT_FOLDER, 'config', 'Version.Public.xcconfig')
-OUTPUT_DIRECTORY_PATH = File.join(PROJECT_ROOT_FOLDER, 'build', 'results')
-APP_STORE_BUNDLE_IDENTIFIER = 'com.codality.NotationalFlow'
-DEFAULT_BRANCH = 'trunk'
-
-TEAM_ID_APP_STORE_CONNECT = 'PZYM8XX95Q'
-TEAM_ID_ENTERPRISE = '99KV9Z6BKV'
-
-ORGANIZATION = 'automattic'
-PROJECT_SLUG = 'simplenote-ios'
-GITHUB_REPO = "#{ORGANIZATION}/#{PROJECT_SLUG}".freeze
-BUILDKITE_ORGANIZATION = ORGANIZATION
-BUILDKITE_PIPELINE = PROJECT_SLUG
-
-WORKSPACE = 'Simplenote.xcworkspace'
-
 ########################################################################
 # Environment
 ########################################################################
@@ -59,11 +68,6 @@ ENV['PUBLIC_CONFIG_FILE'] = VERSION_FILE_PATH
 ENV['DOWNLOAD_METADATA'] = './fastlane/download_metadata.swift'
 ENV['FL_RELEASE_TOOLKIT_DEFAULT_BRANCH'] = 'trunk'
 
-VERSION_CALCULATOR = Fastlane::Wpmreleasetoolkit::Versioning::SemanticVersionCalculator.new
-VERSION_FORMATTER = Fastlane::Wpmreleasetoolkit::Versioning::FourPartVersionFormatter.new
-BUILD_CODE_FORMATTER = Fastlane::Wpmreleasetoolkit::Versioning::FourPartBuildCodeFormatter.new
-PUBLIC_VERSION_FILE = Fastlane::Wpmreleasetoolkit::Versioning::IOSVersionFile.new(xcconfig_path: VERSION_FILE_PATH)
-
 platform :ios do
   desc 'Updates the AppStoreStrings.pot file with the latest data'
   lane :update_appstore_strings do |version: release_version_current|
@@ -71,7 +75,7 @@ platform :ios do
     source_metadata_folder = File.join(prj_folder, 'fastlane', 'appstoreres', 'metadata', 'source')
 
     files = {
-      whats_new: File.join(prj_folder, 'Simplenote', 'Resources', 'release_notes.txt'),
+      whats_new: RELEASE_NOTES_SOURCE_PATH,
       app_store_subtitle: File.join(source_metadata_folder, 'subtitle.txt'),
       app_store_desc: File.join(source_metadata_folder, 'description.txt'),
       app_store_keywords: File.join(source_metadata_folder, 'keywords.txt')
@@ -447,44 +451,30 @@ platform :ios do
 
     return if ENV['BUILDKITE_PULL_REQUEST'].nil?
 
-    post_installable_build_pr_comment(
-      app_name: 'simplenote-ios',
-      build_number: build_number,
-      url_slug: 'Simplenote-Installable-Builds'
-    )
+    post_installable_build_pr_comment
   end
 
   # Posts a comment on the current PR to inform where to download a given Installable Build that was just published to App Center.
   #
   # Use this only after `upload_to_app_center` as been called, as it announces how said App Center build can be installed.
   #
-  # @param [String] app_name The display name to use in the comment text to identify which app this Installable Build is about
-  # @param [String] build_number The App Center's build number for this build
-  # @param [String] url_slug The last component of the `install.appcenter.ms` URL used to install the app. Typically a sluggified version of the app name
-  #                          in App Center (e.g. `WPiOS-One-Offs`)
-  #
   # @called_by CI — especially, relies on `BUILDKITE_PULL_REQUEST` being defined
   #
-  def post_installable_build_pr_comment(app_name:, build_number:, url_slug:)
-    UI.message("Successfully built and uploaded installable build `#{build_number}` to App Center.")
+  def post_installable_build_pr_comment
+    pr = ENV.fetch('BUILDKITE_PULL_REQUEST', nil)
 
-    return if ENV['BUILDKITE_PULL_REQUEST'].nil?
+    return if pr.nil?
 
-    install_url = "https://install.appcenter.ms/orgs/automattic/apps/#{url_slug}/"
-    qr_code_url = "https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=#{CGI.escape(install_url)}&choe=UTF-8"
-    comment_body = <<~COMMENT_BODY
-      You can test the changes in <strong>#{app_name}</strong> from this Pull Request by:<ul>
-        <li><a href='#{install_url}'>Clicking here</a> or scanning the QR code below to access App Center</li>
-        <li>Then installing the build number <code>#{build_number}</code> on your iPhone</li>
-      </ul>
-      <img src='#{qr_code_url}' width='150' height='150' />
-      If you need access to App Center, please ask a maintainer to add you.
-    COMMENT_BODY
+    comment_body = prototype_build_details_comment(
+      app_display_name: 'Simplenote Prototype Build',
+      app_center_org_name: APPCENTER_OWNER_NAME,
+      fold: true
+    )
 
     comment_on_pr(
-      project: 'automattic/simplenote-ios',
-      pr_number: Integer(ENV.fetch('BUILDKITE_PULL_REQUEST', nil)),
-      reuse_identifier: "installable-build-link--#{url_slug}",
+      project: GITHUB_REPO,
+      pr_number: Integer(pr),
+      reuse_identifier: 'installable-build-link--Simplenote-Installable-Builds',
       body: comment_body
     )
   end
