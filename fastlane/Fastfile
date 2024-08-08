@@ -8,30 +8,6 @@ fastlane_require 'buildkit'
 
 UI.user_error!('Please run fastlane via `bundle exec`') unless FastlaneCore::Helper.bundler?
 
-SECRETS_ROOT = File.join(Dir.home, '.configure', 'simplenote-ios', 'secrets')
-APP_STORE_CONNECT_KEY_PATH = File.join(SECRETS_ROOT, 'app_store_connect_fastlane_api_key.json')
-$used_test_account_index = nil
-
-require_relative 'lib/env_manager'
-
-import 'lanes/localization.rb'
-import 'lanes/release.rb'
-import 'lanes/build.rb'
-
-before_all do
-  # Ensure we use the latest version of the toolkit
-  check_for_toolkit_updates unless is_ci || ENV['FASTLANE_SKIP_TOOLKIT_UPDATE_CHECK']
-
-  EnvManager.set_up(env_file_name: 'simplenote-ios')
-
-  setup_ci
-end
-
-error do |lane, _exception, _options|
-  deoccupy_test_account if lane == :run_ui_tests
-end
-
-# Constants
 PROJECT_ROOT_FOLDER = File.dirname(File.expand_path(__dir__))
 VERSION_FILE_PATH = File.join(PROJECT_ROOT_FOLDER, 'config', 'Version.Public.xcconfig')
 OUTPUT_DIRECTORY_PATH = File.join(PROJECT_ROOT_FOLDER, 'build', 'results')
@@ -49,6 +25,36 @@ BUILDKITE_PIPELINE = PROJECT_SLUG
 
 WORKSPACE = 'Simplenote.xcworkspace'
 
+VERSION_CALCULATOR = Fastlane::Wpmreleasetoolkit::Versioning::SemanticVersionCalculator.new
+VERSION_FORMATTER = Fastlane::Wpmreleasetoolkit::Versioning::FourPartVersionFormatter.new
+BUILD_CODE_FORMATTER = Fastlane::Wpmreleasetoolkit::Versioning::FourPartBuildCodeFormatter.new
+PUBLIC_VERSION_FILE = Fastlane::Wpmreleasetoolkit::Versioning::IOSVersionFile.new(xcconfig_path: VERSION_FILE_PATH)
+
+SECRETS_ROOT = File.join(Dir.home, '.configure', 'simplenote-ios', 'secrets')
+APP_STORE_CONNECT_KEY_PATH = File.join(SECRETS_ROOT, 'app_store_connect_fastlane_api_key.json')
+$used_test_account_index = nil
+
+require_relative 'lib/env_manager'
+
+# Important: These need to be imported after all the constants have be defined because the access them.
+# A bit of a leaky abstraction but makes for lanes that are easier to write...
+import 'lanes/localization.rb'
+import 'lanes/release.rb'
+import 'lanes/build.rb'
+
+before_all do
+  # Ensure we use the latest version of the toolkit
+  check_for_toolkit_updates unless is_ci || ENV['FASTLANE_SKIP_TOOLKIT_UPDATE_CHECK']
+
+  EnvManager.set_up(env_file_name: 'simplenote-ios')
+
+  setup_ci
+end
+
+error do |lane, _exception, _options|
+  deoccupy_test_account if lane == :run_ui_tests
+end
+
 ########################################################################
 # Environment
 ########################################################################
@@ -58,11 +64,6 @@ ENV['APP_STORE_STRINGS_FILE_NAME'] = 'AppStoreStrings.pot'
 ENV['PUBLIC_CONFIG_FILE'] = VERSION_FILE_PATH
 ENV['DOWNLOAD_METADATA'] = './fastlane/download_metadata.swift'
 ENV['FL_RELEASE_TOOLKIT_DEFAULT_BRANCH'] = 'trunk'
-
-VERSION_CALCULATOR = Fastlane::Wpmreleasetoolkit::Versioning::SemanticVersionCalculator.new
-VERSION_FORMATTER = Fastlane::Wpmreleasetoolkit::Versioning::FourPartVersionFormatter.new
-BUILD_CODE_FORMATTER = Fastlane::Wpmreleasetoolkit::Versioning::FourPartBuildCodeFormatter.new
-PUBLIC_VERSION_FILE = Fastlane::Wpmreleasetoolkit::Versioning::IOSVersionFile.new(xcconfig_path: VERSION_FILE_PATH)
 
 platform :ios do
   desc 'Updates the AppStoreStrings.pot file with the latest data'

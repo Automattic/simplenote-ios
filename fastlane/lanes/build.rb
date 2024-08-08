@@ -60,12 +60,6 @@ lane :upload_to_app_store_connect do |beta_release:, skip_prechecks: false, crea
     api_key_path: APP_STORE_CONNECT_KEY_PATH
   )
 
-  if File.exist?(dsym_path)
-    UI.important("Uploading ipa at #{ipa_path} to TestFlight...")
-  else
-    UI.user_error!("Could not find ipa at #{ipa_path}!")
-  end
-
   UI.important("Uploading dSYM at #{dsym_path} to Sentry...")
   sentry_upload_dsym(
     dsym_path: dsym_path,
