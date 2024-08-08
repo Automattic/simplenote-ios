@@ -2,6 +2,7 @@
 
 APP_STORE_CONNECT_OUTPUT_NAME = 'Simplenote-AppStore'
 XCARCHIVE_PATH = File.join(OUTPUT_DIRECTORY_PATH, "#{APP_STORE_CONNECT_OUTPUT_NAME}.xcarchive")
+XCARCHIVE_ZIP_PATH = File.join(OUTPUT_DIRECTORY_PATH, "#{APP_STORE_CONNECT_OUTPUT_NAME}.xcarchive.zip")
 
 desc 'Builds and uploads for distribution via App Store Connect'
 lane :build_and_upload_to_app_store_connect do |beta_release:, skip_prechecks: false, skip_confirm: false, create_release: false|
@@ -42,6 +43,10 @@ lane :build_for_app_store_connect do |fetch_code_signing: true|
     output_directory: OUTPUT_DIRECTORY_PATH,
     output_name: APP_STORE_CONNECT_OUTPUT_NAME
   )
+
+  # It's convenient to have a ZIP available for things like CI uploads
+  UI.message("Zipping #{XCARCHIVE_PATH} to #{XCARCHIVE_ZIP_PATH}...")
+  zip(path: XCARCHIVE_PATH, output_path: XCARCHIVE_ZIP_PATH)
 end
 
 lane :upload_to_app_store_connect do |beta_release:, skip_prechecks: false, create_release: false|
@@ -70,15 +75,12 @@ lane :upload_to_app_store_connect do |beta_release:, skip_prechecks: false, crea
 
   next unless create_release
 
-  xcarchive_zip_path = File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote.xarchive.zip')
-  zip(path: XCARCHIVE_PATH, output_path: xcarchive_zip_path)
-
   version = beta_release ? build_code_current : release_version_current
   create_release(
     repository: GITHUB_REPO,
     version: version,
     release_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt'),
-    release_assets: xcarchive_zip_path.to_s,
+    release_assets: XCARCHIVE_ZIP_PATH.to_s,
     prerelease: beta_release
   )
 end

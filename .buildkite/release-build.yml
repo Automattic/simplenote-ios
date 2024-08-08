@@ -12,7 +12,6 @@ steps:
     artifact_paths:
       - build/results/*.zip
       - build/results/*.ipa
-      - build/results/*.xcarchive
 
   - label: ":testflight: Upload Simplenote iOS to App Store Connect"
     depends_on: testflight_build
