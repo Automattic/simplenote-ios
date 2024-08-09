@@ -454,6 +454,12 @@
 /* Widget warning if user is logged out */
 "Log in to see your notes" = "تسجيل الدخول للاطلاع على ملحوظاتك";
 
+/* Widget warning if user has set pin lock */
+"Unlock to see your note" = "افتح القفل لعرض ملاحظتك";
+
+/* Widget warning if user has set pin lock */
+"Unlock to see your note list" = "افتح القفل لعرض قائمة ملاحظاتك";
+
 /* Allows the user to SignIn using their WPCOM Account */
 "Log in with WordPress.com" = "تسجيل دخول باستخدام ووردبريس.كوم";
 

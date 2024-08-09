@@ -4,13 +4,17 @@ struct ListWidgetEntry: TimelineEntry {
     let date: Date
     let widgetTag: WidgetTag
     let noteProxies: [ListWidgetNoteProxy]
-    let loggedIn: Bool
     let state: State
 
     enum State {
         case standard
         case tagDeleted
         case loggedOut
+        case pinLockIsEnabled
+    }
+
+    var noteIsAvailable: Bool {
+        return state != .loggedOut && state != .pinLockIsEnabled
     }
 }
 
@@ -19,15 +23,13 @@ extension ListWidgetEntry {
         self.date = Date()
         self.widgetTag = widgetTag
         self.noteProxies = noteProxies
-        self.loggedIn = WidgetDefaults.shared.loggedIn
         self.state = state
     }
 
-    static func placeholder(loggedIn: Bool = false, state: State = .standard) -> ListWidgetEntry {
+    static func placeholder(state: State = .standard) -> ListWidgetEntry {
         return ListWidgetEntry(date: Date(),
                                widgetTag: WidgetTag(kind: .tag, name: DemoContent.listTag),
                                noteProxies: DemoContent.listProxies,
-                               loggedIn: loggedIn,
                                state: state)
 
     }
@@ -45,11 +47,19 @@ struct ListWidgetProvider: IntentTimelineProvider {
     let coreDataWrapper = ExtensionCoreDataWrapper()
 
     func placeholder(in context: Context) -> ListWidgetEntry {
-        return ListWidgetEntry.placeholder()
+        var state: ListWidgetEntry.State = if WidgetDefaults.shared.loggedIn == false {
+            .loggedOut
+        } else if WidgetDefaults.shared.pinLockIsEnabled == true {
+            .pinLockIsEnabled
+        } else {
+            .standard
+        }
+        return ListWidgetEntry.placeholder(state: state)
     }
 
     func getSnapshot(for configuration: ListWidgetIntent, in context: Context, completion: @escaping (ListWidgetEntry) -> Void) {
         guard WidgetDefaults.shared.loggedIn,
+              WidgetDefaults.shared.pinLockIsEnabled == false,
               let allNotes = coreDataWrapper.resultsController()?.notes() else {
             completion(placeholder(in: context))
             return
@@ -66,6 +76,10 @@ struct ListWidgetProvider: IntentTimelineProvider {
         // Confirm valid configuration
         guard WidgetDefaults.shared.loggedIn else {
             completion(errorTimeline(withState: .loggedOut))
+            return
+        }
+        guard WidgetDefaults.shared.pinLockIsEnabled == false else {
+            completion(errorTimeline(withState: .pinLockIsEnabled))
             return
         }
 
@@ -85,7 +99,7 @@ struct ListWidgetProvider: IntentTimelineProvider {
             guard let date = Date().increased(byHours: index) else {
                 return nil
             }
-            return ListWidgetEntry(date: date, widgetTag: widgetTag, noteProxies: proxies, loggedIn: WidgetDefaults.shared.loggedIn, state: .standard)
+            return ListWidgetEntry(date: date, widgetTag: widgetTag, noteProxies: proxies, state: .standard)
         }
 
         completion(Timeline(entries: entries, policy: .atEnd))

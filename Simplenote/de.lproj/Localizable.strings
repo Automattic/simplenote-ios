@@ -454,6 +454,12 @@
 /* Widget warning if user is logged out */
 "Log in to see your notes" = "Melde dich an, um deine Notizen zu sehen";
 
+/* Widget warning if user has set pin lock */
+"Unlock to see your note" = "Entsperren, um Ihre Notiz zu sehen";
+
+/* Widget warning if user has set pin lock */
+"Unlock to see your note list" = "Entsperren, um Ihre Notizliste zu sehen";
+
 /* Allows the user to SignIn using their WPCOM Account */
 "Log in with WordPress.com" = "Mit WordPress.com anmelden";
 

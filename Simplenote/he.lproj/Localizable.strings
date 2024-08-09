@@ -454,6 +454,12 @@
 /* Widget warning if user is logged out */
 "Log in to see your notes" = "יש להתחבר לחשבון כדי לצפות בפתקים שלך";
 
+/* Widget warning if user has set pin lock */
+"Unlock to see your note" = "Ξεκλειδώστε για να δείτε τη σημείωσή σας";
+
+/* Widget warning if user has set pin lock */
+"Unlock to see your note list" = "Ξεκλειδώστε για να δείτε τη λίστα σημειώσεών σας";
+
 /* Allows the user to SignIn using their WPCOM Account */
 "Log in with WordPress.com" = "התחברו באמצעות WordPress.com";
 

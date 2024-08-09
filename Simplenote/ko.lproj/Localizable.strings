@@ -454,6 +454,12 @@
 /* Widget warning if user is logged out */
 "Log in to see your notes" = "로그인하여 메모 보기";
 
+/* Widget warning if user has set pin lock */
+"Unlock to see your note" = "메모를 보려면 잠금을 해제하세요";
+
+/* Widget warning if user has set pin lock */
+"Unlock to see your note list" = "메모 목록을 보려면 잠금을 해제하세요";
+
 /* Allows the user to SignIn using their WPCOM Account */
 "Log in with WordPress.com" = "워드프레스닷컴으로 로그인";
 

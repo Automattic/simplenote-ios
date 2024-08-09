@@ -454,6 +454,12 @@
 /* Widget warning if user is logged out */
 "Log in to see your notes" = "你需要登入才能查看筆記";
 
+/* Widget warning if user has set pin lock */
+"Unlock to see your note" = "解鎖以查看您的筆記";
+
+/* Widget warning if user has set pin lock */
+"Unlock to see your note list" = "解鎖以查看您的筆記列表";
+
 /* Allows the user to SignIn using their WPCOM Account */
 "Log in with WordPress.com" = "透過 WordPress.com 登入";
 

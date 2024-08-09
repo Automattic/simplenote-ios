@@ -12,7 +12,8 @@ class ListWidgetIntentHandler: NSObject, ListWidgetIntentHandling {
     let coreDataWrapper = ExtensionCoreDataWrapper()
 
     func provideTagOptionsCollection(for intent: ListWidgetIntent, with completion: @escaping (INObjectCollection<WidgetTag>?, Error?) -> Void) {
-        guard WidgetDefaults.shared.loggedIn else {
+        guard WidgetDefaults.shared.loggedIn,
+              WidgetDefaults.shared.pinLockIsEnabled == false else {
             completion(nil, WidgetError.appConfigurationError)
             return
         }

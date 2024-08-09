@@ -5,6 +5,8 @@ enum WidgetsState {
     case noteMissing
     case tagDeleted
     case loggedOut
+    case noteLocked
+    case listLocked
 }
 
 extension WidgetsState {
@@ -18,6 +20,10 @@ extension WidgetsState {
             return NSLocalizedString("Tag no longer available", comment: "Widget warning if tag is deleted")
         case .loggedOut:
             return NSLocalizedString("Log in to see your notes", comment: "Widget warning if user is logged out")
+        case .noteLocked:
+            return NSLocalizedString("Unlock to see your note", comment: "Widget warning if pin lock is enabled")
+        case .listLocked:
+            return NSLocalizedString("Unlock to see your note list", comment: "Widget warning if pin lock is enabled")
         }
     }
 }

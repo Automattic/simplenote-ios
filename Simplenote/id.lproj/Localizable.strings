@@ -451,6 +451,12 @@
 /* Widget warning if user is logged out */
 "Log in to see your notes" = "Masuk untuk melihat catatan Anda";
 
+/* Widget warning if user has set pin lock */
+"Unlock to see your note" = "Buka kunci untuk melihat catatan Anda";
+
+/* Widget warning if user has set pin lock */
+"Unlock to see your note list" = "Buka kunci untuk melihat daftar catatan Anda";
+
 /* Allows the user to SignIn using their WPCOM Account */
 "Log in with WordPress.com" = "Login dengan WordPress.com";
 

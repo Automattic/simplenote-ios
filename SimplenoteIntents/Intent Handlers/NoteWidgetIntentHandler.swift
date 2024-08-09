@@ -12,7 +12,8 @@ class NoteWidgetIntentHandler: NSObject, NoteWidgetIntentHandling {
     let coreDataWrapper = ExtensionCoreDataWrapper()
 
     func provideNoteOptionsCollection(for intent: NoteWidgetIntent, with completion: @escaping (INObjectCollection<WidgetNote>?, Error?) -> Void) {
-        guard WidgetDefaults.shared.loggedIn else {
+        guard WidgetDefaults.shared.loggedIn,
+              WidgetDefaults.shared.pinLockIsEnabled == false else {
             completion(nil, WidgetError.appConfigurationError)
             return
         }
@@ -35,6 +36,7 @@ class NoteWidgetIntentHandler: NSObject, NoteWidgetIntentHandling {
 
     func defaultNote(for intent: NoteWidgetIntent) -> WidgetNote? {
         guard WidgetDefaults.shared.loggedIn,
+              WidgetDefaults.shared.pinLockIsEnabled == false,
               let note = coreDataWrapper.resultsController()?.firstNote() else {
             return nil
         }

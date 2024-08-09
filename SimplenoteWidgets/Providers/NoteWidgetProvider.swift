@@ -5,32 +5,34 @@ struct NoteWidgetEntry: TimelineEntry {
     let title: String
     let content: String
     let url: URL
-    let loggedIn: Bool
     let state: State
 
     enum State {
         case standard
         case noteMissing
         case loggedOut
+        case pinLockIsEnabled
+    }
+
+    var noteIsAvailable: Bool {
+        return state != .loggedOut && state != .pinLockIsEnabled
     }
 }
 
 extension NoteWidgetEntry {
-    init(date: Date, note: Note, loggedIn: Bool = WidgetDefaults.shared.loggedIn, state: State = .standard) {
+    init(date: Date, note: Note, state: State = .standard) {
         self.init(date: date,
                   title: note.title,
                   content: note.body,
                   url: note.url,
-                  loggedIn: loggedIn,
                   state: state)
     }
 
-    static func placeholder(loggedIn: Bool = false, state: State = .standard) -> NoteWidgetEntry {
+    static func placeholder(state: State = .standard) -> NoteWidgetEntry {
         return NoteWidgetEntry(date: Date(),
                                title: DemoContent.singleNoteTitle,
                                content: DemoContent.singleNoteContent,
                                url: DemoContent.demoURL,
-                               loggedIn: loggedIn,
                                state: state)
     }
 
@@ -43,11 +45,19 @@ struct NoteWidgetProvider: IntentTimelineProvider {
     let coreDataWrapper = ExtensionCoreDataWrapper()
 
     func placeholder(in context: Context) -> NoteWidgetEntry {
-        return NoteWidgetEntry.placeholder()
+        var state: NoteWidgetEntry.State = if WidgetDefaults.shared.loggedIn == false {
+            .loggedOut
+        } else if WidgetDefaults.shared.pinLockIsEnabled == true {
+            .pinLockIsEnabled
+        } else {
+            .standard
+        }
+        return NoteWidgetEntry.placeholder(state: state)
     }
 
     func getSnapshot(for configuration: NoteWidgetIntent, in context: Context, completion: @escaping (NoteWidgetEntry) -> Void) {
         guard WidgetDefaults.shared.loggedIn,
+              WidgetDefaults.shared.pinLockIsEnabled == false,
               let note = coreDataWrapper.resultsController()?.firstNote() else {
             completion(placeholder(in: context))
             return
@@ -62,7 +72,10 @@ struct NoteWidgetProvider: IntentTimelineProvider {
             completion(errorTimeline(withState: .loggedOut))
             return
         }
-
+        guard WidgetDefaults.shared.pinLockIsEnabled == false else {
+            completion(errorTimeline(withState: .pinLockIsEnabled))
+            return
+        }
         guard let widgetNote = configuration.note,
               let simperiumKey = widgetNote.identifier,
               let note = coreDataWrapper.resultsController()?.note(forSimperiumKey: simperiumKey) else {

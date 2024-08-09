@@ -19,6 +19,8 @@ struct ListWidget: Widget {
             return AnyView(ListWidgetView(entry: entry))
         case .loggedOut:
             return AnyView(WidgetWarningView(warning: .loggedOut))
+        case .pinLockIsEnabled:
+            return AnyView(WidgetWarningView(warning: .listLocked))
         case .tagDeleted:
             return AnyView(WidgetWarningView(warning: .tagDeleted))
         }

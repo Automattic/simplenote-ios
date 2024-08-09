@@ -15,6 +15,15 @@ class WidgetDefaults {
         }
     }
 
+    var pinLockIsEnabled: Bool {
+        get {
+            defaults?.bool(forKey: .pinLockIsEnabled) ?? false
+        }
+        set {
+            defaults?.set(newValue, forKey: .pinLockIsEnabled)
+        }
+    }
+
     var sortMode: SortMode {
         get {
             SortMode(rawValue: defaults?.integer(forKey: .listSortMode) ?? .zero) ?? .alphabeticallyAscending

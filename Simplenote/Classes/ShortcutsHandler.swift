@@ -135,6 +135,9 @@ extension ShortcutsHandler {
         guard let note = note, let simperiumKey = note.simperiumKey else {
             return nil
         }
+        guard UserDefaults.standard.bool(forKey: .pinLockIsEnabled) == false else {
+            return nil
+        }
 
         let icon = UIApplicationShortcutIcon(templateImageName: UIImageName.allNotes.lightAssetFilename)
         return UIApplicationShortcutItem(type: ApplicationShortcutItemType.note.rawValue,

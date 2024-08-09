@@ -23,7 +23,7 @@ struct NoteWidgetView: View {
             .widgetBackground(content: {
                 Color.widgetBackgroundColor
             })
-            .redacted(reason: [entry.loggedIn ? [] : .placeholder])
+            .redacted(reason: [entry.noteIsAvailable ? [] : .placeholder])
         }
     }
 }

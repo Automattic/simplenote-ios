@@ -454,6 +454,12 @@
 /* Widget warning if user is logged out */
 "Log in to see your notes" = "Notlarınızı görmek için giriş yapın";
 
+/* Widget warning if user has set pin lock */
+"Unlock to see your note" = "Notunuzu görmek için kilidi açın";
+
+/* Widget warning if user has set pin lock */
+"Unlock to see your note list" = "Not listenizi görmek için kilidi açın";
+
 /* Allows the user to SignIn using their WPCOM Account */
 "Log in with WordPress.com" = "WordPress.com ile oturum aç";
 
