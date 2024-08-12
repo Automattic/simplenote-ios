@@ -501,7 +501,7 @@ extension TagListViewController: TagListViewCellDelegate {
                                                 preferredStyle: .actionSheet)
 
         alertController.addDestructiveActionWithTitle(Localization.TagDeletionConfirmation.confirmationButton) { (_) in
-            guard self.shouldRemove(tag, at: indexPath) else {
+            guard self.verifyTagIsAtIndexPath(tag, at: indexPath) else {
                 self.present(UIAlertController.dismissableAlert(
                     title: Localization.tagDeleteFailedTitle,
                     message: Localization.tagDeleteFailedMessage), animated: true)
@@ -527,7 +527,7 @@ extension TagListViewController: TagListViewCellDelegate {
         present(alertController, animated: true, completion: nil)
     }
 
-    private func shouldRemove(_ tagToRemove: Tag, at indexPath: IndexPath) -> Bool {
+    private func verifyTagIsAtIndexPath(_ tagToRemove: Tag, at indexPath: IndexPath) -> Bool {
         // REF: https://github.com/Automattic/simplenote-ios/issues/1312
         // If you initiate deleting a tag and the tag is deleted before you confirm then another tag is deleted
         // This method confirms the selected tag is the same as the tag at index path before removing.
