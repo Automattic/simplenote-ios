@@ -60,6 +60,10 @@ CGFloat const SPPushAnimationDurationCompact = 0.3f;
     CGPoint location = [panGestureRecognizer locationInView:navigationBar];
     CGPoint translation = [panGestureRecognizer translationInView:navigationBar];
     BOOL isLeftTranslation = translation.x < 0;
+    BOOL isRightTranslation = translation.x > 0;
+    BOOL isLTR = [UIView userInterfaceLayoutDirectionForSemanticContentAttribute: topViewController.view.semanticContentAttribute] == UIUserInterfaceLayoutDirectionLeftToRight;
+
+    BOOL isSwipeTranslation = isLTR ? isLeftTranslation : isRightTranslation;
 
     // Ignore touches within the navigation bar
     if (CGRectContainsPoint(navigationBar.bounds, location)) {
@@ -67,7 +71,7 @@ CGFloat const SPPushAnimationDurationCompact = 0.3f;
     }
 
     // TopViewController conforms to SPInteractivePushViewControllerProvider AND We're Swiping Right to Left: Support Push!
-    if ([topViewController conformsToProtocol:@protocol(SPInteractivePushViewControllerProvider)] && isLeftTranslation) {
+    if ([topViewController conformsToProtocol:@protocol(SPInteractivePushViewControllerProvider)] && isSwipeTranslation) {
         UIViewController <SPInteractivePushViewControllerProvider> *pushProviderController = (UIViewController <SPInteractivePushViewControllerProvider> *)topViewController;
         CGPoint locationInView = [panGestureRecognizer locationInView:pushProviderController.view];
         if (![pushProviderController interactivePushPopAnimationControllerShouldBeginPush:self touchPoint:locationInView]) {
