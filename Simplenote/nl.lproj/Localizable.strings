@@ -1,15 +1,9 @@
-/* Translation-Revision-Date: 2022-11-24 00:43:48+0000 */
+/* Translation-Revision-Date: 2024-08-08 11:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: nl */
 
-/* Monthly Subscription Option. Please preserve the special marker! */
-"%@ per Month" = "%@ Per maand";
-
-/* Yearly Subscription Option. Please preserve the special marker! */
-"%@ per Year" = "%@ Per jaar";
-
-/* Number of found search results */
+/* No comment provided by engineer. */
 "%d Result" = "%d resultaat";
 
 /* Number of found search results */
@@ -73,6 +67,7 @@
 "About" = "Over";
 
 /* Accept Action
+   Accept Message
    Label of accept button on alert dialog */
 "Accept" = "Accepteren";
 
@@ -124,7 +119,16 @@
 "Are you sure you want to empty the trash? This cannot be undone." = "Weet je zeker dat je de prullenbak wilt leegmaken? Deze actie kan niet ongedaan worden gemaakt.";
 
 /* Data Fetch error message */
+"Attempt to fetch current note content failed.  Please try again later." = "Het is niet gelukt om de inhoud van de huidige notitie op te halen.  Probeer het later opnieuw.";
+
+/* Data Fetch error message */
 "Attempt to fetch entities failed.  Please try again later." = "Het is niet gelukt om entiteiten op te halen.  Probeer het later opnieuw.";
+
+/* Data Fetch error message */
+"Attempt to fetch notes failed.  Please try again later." = "Het is niet gelukt om notities op te halen.  Probeer het later opnieuw.";
+
+/* Data Fetch error message */
+"Attempt to fetch tags failed.  Please try again later." = "Het is niet gelukt om tags op te halen.  Probeer het later opnieuw.";
 
 /* User Authenticated */
 "Authenticated" = "Geverifieerd";
@@ -151,7 +155,6 @@
    Cancel button for authentication
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
-   Dismisses the alert
    Dismissing an interface
    PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
@@ -187,8 +190,8 @@
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "Kies een viercijferige pincode";
 
-/* Sustainer Alert's Message */
-"Choose a plan and help unlock future features" = "Kies een abonnement en help mee toekomstige functies mogelijk te maken";
+/* Code TextField Placeholder */
+"Code" = "Code";
 
 /* Opens the Collaborate UI */
 "Collaborate" = "Samenwerken";
@@ -231,8 +234,17 @@
 /* Error for bad email or password */
 "Could not create an account with the provided email address and password." = "Kan geen account maken met het opgegeven e-mailadres en wachtwoord.";
 
+/* Note fetch error title */
+"Could not fetch Notes" = "Het is niet gelukt om notities op te halen";
+
+/* Tag fetch error title */
+"Could not fetch Tags" = "Het is niet gelukt om tags op te halen";
+
 /* Fetch error title */
 "Could not fetch entities" = "Het is niet gelukt om entiteiten op te halen";
+
+/* note content fetch error title */
+"Could not fetch note content" = "Het is niet gelukt om de notitie-inhoud op te halen";
 
 /* Message displayed when login fails */
 "Could not login with the provided email address and password." = "Kan niet inloggen met het opgegeven e-mailadres en wachtwoord.";
@@ -360,6 +372,15 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "Aantal in wachtrij";
 
+/* LogIn Interface Title */
+"Enter Code" = "Voer code in";
+
+/* Enter Password fallback Action */
+"Enter password" = "Voer wachtwoord in";
+
+/* Header for Login With Password. Please preserve the {{EMAIL}} substring */
+"Enter the password for the account {{EMAIL}}" = "Voer het wachtwoord van het account {{EMAIL}} in";
+
 /* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "Voer je wachtwoordcode in";
 
@@ -386,7 +407,7 @@
 "Forgot password? »" = "Wachtwoord vergeten? »";
 
 /* Password Reset Action */
-"Forgotten password?" = "Wachtwoord vergeten?";
+"Forgot your password?" = "Wachtwoord vergeten?";
 
 /* FAQ or contact us */
 "Get Help" = "Ontvang hulp";
@@ -411,6 +432,12 @@
 
 /* Rating view - initial - liked button */
 "I like it" = "Ik vind het leuk";
+
+/* Option to add notes to spotlight search */
+"Index Notes in Spotlight" = "Notities indexeren in Spotlight";
+
+/* Alert title letting user know their search index has been removed */
+"Index Removed" = "Index verwijderd";
 
 /* Note Information Button (metrics + references) */
 "Information" = "Informatie";
@@ -448,17 +475,26 @@
    LogIn Interface Title */
 "Log In" = "Inloggen";
 
+/* LogIn Interface Title */
+"Log In with Password" = "Inloggen met wachtwoord";
+
 /* Log out of the active account in the app */
 "Log Out" = "Uitloggen";
 
 /* Widget warning if user is logged out */
 "Log in to see your notes" = "Log in om je notitites te bekijken";
 
-/* Allows the user to SignIn using their WPCOM Account */
+/* Password fallback Action */
 "Log in with WordPress.com" = "Inloggen met WordPress.com";
 
-/* Presents the regular Email signin flow */
+/* Sends the User an email with an Authentication Code */
 "Log in with email" = "Inloggen met e-mail";
+
+/* Header for Enter Password UI, when the user performed too many requests */
+"Log in with email failed, please enter your password" = "Inloggen met e-mail is mislukt, voer je wachtwoord in";
+
+/* Message displayed when a login code is too short */
+"Login Code is too short" = "Inlogcode is te kort";
 
 /* Month and day date formatter */
 "MMM d" = "d MMM";
@@ -489,9 +525,6 @@
 
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "Aangepast op: Oudste";
-
-/* Monthly Subscription Option (Used when / if the price fails to load) */
-"Monthly" = "Maandelijks";
 
 /* Accessibility hint for trash selected notes button */
 "Move selected notes to trash" = "Verplaats de geselecteerde notities naar de prullenbak";
@@ -579,6 +612,9 @@
    Email unverified alert dismiss */
 "Ok" = "Ok";
 
+/* confirm button title */
+"Okay" = "Oké";
+
 /* No comment provided by engineer. */
 "On" = "Aan";
 
@@ -593,6 +629,9 @@
 
 /* Note Options Title */
 "Options" = "Opties";
+
+/* Or, used as a separator between Actions */
+"Or" = "Of";
 
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "Wachtwoordcode";
@@ -678,6 +717,9 @@
 /* Home screen quick action: Recent Note */
 "Recent" = "Recent";
 
+/* Header to put on any files that need to be recovered */
+"Recovered Note Cotent - " = "Inhoud herstelde notitie - ";
+
 /* References section header on Info Card */
 "Referenced In" = "Naar verwezen in";
 
@@ -714,9 +756,6 @@
 /* Restore a note from trash
    Restore a note to a previous version */
 "Restore Note" = "Notitie herstellen";
-
-/* Manually Restores IAP Purchases */
-"Restore Purchases" = "Herstel aankopen";
 
 /* Title -> Review you account screen */
 "Review Your Account" = "Controleer je account";
@@ -800,8 +839,7 @@
    Title of main share extension view */
 "Simplenote" = "Simplenote";
 
-/* Restoration Successful Title
-   Sustainer Alert's Title */
+/* Restoration Successful Title */
 "Simplenote Sustainer" = "Simplenote Sustainer";
 
 /* Simplenote's Feedback Email Title */
@@ -810,7 +848,8 @@
 /* Message displayed when app is not configured */
 "Simplenote must be configured and logged in to setup widgets" = "Simplenote moet worden geconfigureerd en ingelogd bij configuratiewidgets";
 
-/* Authentication Error Alert Title */
+/* Authentication Error Alert Title
+   Email TextField Placeholder */
 "Sorry!" = "Sorry!";
 
 /* Option to sort tags alphabetically. The default is by manual ordering. */
@@ -823,14 +862,17 @@
 /* Sort By Title */
 "Sort by:" = "Sorteren op:";
 
+/* Details that some results may still appear in searches on device */
+"Spotlight history may still appear in search results, but notes have be unindexed" = "Spotlight-geschiedenis kan nog steeds in zoekresultaten verschijnen, maar notities zijn niet meer geïndexeerd";
+
 /* Title for the response's Status Code */
 "Status Code" = "Statuscode";
 
 /* Become a Sustainer Details */
 "Support your favorite notes app to help unlock future features" = "Steun je favoriete notitie-app en help toekomstige functies mogelijk te maken";
 
-/* No comment provided by engineer. */
-"Sustainer" = "Sustainer";
+/* Switch app icon */
+"Sustainer App Icon" = "Sustainer-app-pictogram";
 
 /* Restoration Successful Message */
 "Sustainer subscription restored. Thank you for supporting Simplenote!" = "Sustainer-abonnement hersteld. Bedankt voor je steun aan Simplenote!";
@@ -867,6 +909,12 @@
 
 /* Error when address is in use */
 "That email is already being used" = "Dit e-mailadres is al in gebruik";
+
+/* Email TextField Placeholder */
+"The authentication code you've requested has expired. Please request a new one" = "De authenticatiecode die je aangevraagd hebt, is verlopen. Vraag een nieuwe aan";
+
+/* Error message for Invalid Login Code */
+"The code you've entered is not correct. Please try again" = "De code die je hebt ingevuld, is onjuist. Probeer het nog eens";
 
 /* Error when address is in use */
 "The email you've entered is already associated with a Simplenote account." = "Het e-mailadres dat je hebt ingevoerd, is al gekoppeld aan een Simplenote-account.";
@@ -980,6 +1028,9 @@
 /* Generic error */
 "We're having problems. Please try again soon." = "We ondervinden wat problemen. Probeer het later opnieuw.";
 
+/* Header for the Login with Code UI. Please preserve the {{EMAIL}} string as is! */
+"We've sent a code to {{EMAIL}}. The code will be valid for a few minutes." = "We hebben een code gestuurd naar {{EMAIL}}. De code is een paar minuten geldig.";
+
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
 
@@ -993,11 +1044,11 @@
 /* Rating view initial title */
 "What do you think about Simplenote?" = "Wat vind je van Simplenote?";
 
+/* Alerting users that we will attempt to restore lost content on next launch */
+"Will attempt to recover shortcut content on next launch" = "Bij het opstarten wordt geprobeerd de shortcut-inhoud te herstellen";
+
 /* Number of words in the note */
 "Words" = "Woorden";
-
-/* Yearly Subscription Option (Used when / if the price fails to load) */
-"Yearly" = "Jaarlijks";
 
 /* Proceeds with the Empty Trash OP */
 "Yes" = "Ja";
@@ -1016,6 +1067,9 @@
 
 /* Restoration Successful Message */
 "You're already a Sustainer. Thank you for supporting Simplenote!" = "Je bent al een Sustainer. Bedankt voor je steun aan Simplenote!";
+
+/* Error message for Invalid Login Code */
+"Your authentication code has expired. Please request a new one" = "Je authenticatiecode is verlopen. Vraag een nieuwe aan";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "Je e-mailadres is niet geldig.";
