@@ -37,6 +37,11 @@ $used_test_account_index = nil
 
 RELEASE_NOTES_SOURCE_PATH = File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt')
 
+# Notice the trailing / is required.
+# Without it, GlotPress will redirect to the version with /
+GLOTPRESS_APP_STRINGS_PROJECT_URL = 'https://translate.wordpress.com/projects/simplenote/ios/'
+GLOTPRESS_RELEASE_NOTES_PROJECT_URL = "#{GLOTPRESS_APP_STRINGS_PROJECT_URL}release-notes".freeze
+
 require_relative 'lib/env_manager'
 
 # Important: These need to be imported after all the constants have be defined because they access them.
@@ -180,18 +185,18 @@ platform :ios do
 
     UI.message('Checking app strings translation status...')
     check_translation_progress(
-      glotpress_url: 'https://translate.wordpress.com/projects/simplenote/ios/',
+      glotpress_url: GLOTPRESS_APP_STRINGS_PROJECT_URL,
       abort_on_violations: false
     )
 
     UI.message('Checking release notes strings translation status...')
     check_translation_progress(
-      glotpress_url: 'https://translate.wordpress.com/projects/simplenote/ios/release-notes/',
+      glotpress_url: GLOTPRESS_RELEASE_NOTES_PROJECT_URL,
       abort_on_violations: false
     )
 
     ios_download_strings_files_from_glotpress(
-      project_url: 'https://translate.wordpress.com/projects/simplenote/ios/',
+      project_url:GLOTPRESS_APP_STRINGS_PROJECT_URL,
       locales: GLOTPRESS_TO_LPROJ_APP_LOCALE_CODES,
       download_dir: File.join(PROJECT_ROOT_FOLDER, 'Simplenote')
     )
