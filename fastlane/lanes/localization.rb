@@ -48,4 +48,27 @@ platform :ios do
       allow_nothing_to_commit: true
     )
   end
+
+  lane :download_localized_strings_and_metadata_from_glotpress do
+    download_localized_strings_from_glotpress
+    download_localized_metadata_from_glotpress
+  end
+
+  lane :download_localized_strings_from_glotpress do
+    parent_dir_for_lprojs = File.join(PROJECT_ROOT_FOLDER, 'Simplenote')
+    ios_download_strings_files_from_glotpress(
+      project_url: GLOTPRESS_APP_STRINGS_PROJECT_URL,
+      locales: GLOTPRESS_TO_LPROJ_APP_LOCALE_CODES,
+      download_dir: parent_dir_for_lprojs
+    )
+    git_commit(
+      path: File.join(parent_dir_for_lprojs, '*.lproj', 'Localizable.strings'),
+      message: 'Update app translations – `Localizable.strings`',
+      allow_nothing_to_commit: true
+    )
+  end
+
+  lane :download_localized_metadata_from_glotpress do
+    UI.important('TODO: Not yet implemented!')
+  end
 end

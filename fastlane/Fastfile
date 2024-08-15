@@ -195,11 +195,7 @@ platform :ios do
       abort_on_violations: false
     )
 
-    ios_download_strings_files_from_glotpress(
-      project_url:GLOTPRESS_APP_STRINGS_PROJECT_URL,
-      locales: GLOTPRESS_TO_LPROJ_APP_LOCALE_CODES,
-      download_dir: File.join(PROJECT_ROOT_FOLDER, 'Simplenote')
-    )
+    download_localized_strings_and_metadata_from_glotpress
     sanitize_appstore_keywords
     ios_lint_localizations(
       input_dir: 'Simplenote',
