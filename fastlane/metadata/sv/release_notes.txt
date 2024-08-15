@@ -1,2 +1,6 @@
-- Lägg till bakgrundsfärg till kodblocket vid förhandsgranskning i mörkt läge
-- Lägg till widget för stora anteckningar
+- Vi har utökat stödet för iOS-genvägar
+- Vi har åtgärdat ett problem som gjorde att anteckningsval gick förlorade när appen placerades i bakgrunden
+- Vi har åtgärdat ett problem som gjorde att omkopplaren för ansiktsidentifiering kunde aktiveras utan en lösenkod
+- Stöd för inloggning via magisk länk
+- Användargränssnittet för inloggning har fått en översyn
+

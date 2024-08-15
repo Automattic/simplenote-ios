@@ -1,2 +1,6 @@
-- Add background color to code block in dark mode preview
-- Add large note widget
+- Extended support for iOS Shortcuts
+- Fixed issue where notes selection was lost when app backgrounded
+- Fixed an issue can activate the faceid switch without a passcode
+- Magic Link Login Support
+- Login UI has been overhauled
+
