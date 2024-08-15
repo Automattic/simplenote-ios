@@ -8,7 +8,6 @@ GLOTPRESS_TO_LPROJ_APP_LOCALE_CODES = {
   'cy' => 'cy',             # Welsh
   'de' => 'de',             # German
   'el' => 'el',             # Greek
-  'en' => 'en',             # English
   'es' => 'es',             # Spanish
   'fa' => 'fa',             # Persian
   'fr' => 'fr',             # French
