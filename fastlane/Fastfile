@@ -41,7 +41,9 @@ GLOTPRESS_BASE_URL = 'https://translate.wordpress.com/projects'
 # Notice the trailing / is required.
 # Without it, GlotPress will redirect to the version with /
 GLOTPRESS_APP_STRINGS_PROJECT_URL = "#{GLOTPRESS_BASE_URL}/simplenote/ios/".freeze
-GLOTPRESS_STORE_METADATA_PROJECT_URL = "#{GLOTPRESS_APP_STRINGS_PROJECT_URL}release-notes".freeze
+GLOTPRESS_STORE_METADATA_PROJECT_URL = "#{GLOTPRESS_APP_STRINGS_PROJECT_URL}release-notes/".freeze
+
+STORE_METADATA_FOLDER = File.join(PROJECT_ROOT_FOLDER, 'fastlane', 'metadata')
 
 require_relative 'lib/env_manager'
 
@@ -165,6 +167,7 @@ platform :ios do
     )
 
     download_localized_strings_and_metadata_from_glotpress
+
     ios_lint_localizations(
       input_dir: 'Simplenote',
       allow_retry: true
