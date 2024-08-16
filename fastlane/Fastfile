@@ -169,10 +169,8 @@ platform :ios do
 
     download_localized_strings_and_metadata_from_glotpress
 
-    ios_lint_localizations(
-      input_dir: 'Simplenote',
-      allow_retry: true
-    )
+    lint_localizations
+
     ios_bump_version_beta
 
     # Wrap up

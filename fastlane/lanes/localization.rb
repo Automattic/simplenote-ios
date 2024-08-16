@@ -178,6 +178,10 @@ def ensure_default_metadata_are_not_overridden(metadata_files_hash:)
     MSG
     UI.user_error!(override_not_allowed_message) if File.exist?(en_file_path)
   end
+
+  lane :lint_localizations do
+    ios_lint_localizations(input_dir: APP_RESOURCES_DIR, allow_retry: true)
+  end
 end
 
 # Ensure even empty locale folders have an empty `.gitkeep` file.

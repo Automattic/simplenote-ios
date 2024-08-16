@@ -69,10 +69,9 @@ platform :ios do
   lane :new_beta_release do |options|
     ios_betabuild_prechecks(options)
     download_localized_strings_and_metadata_from_glotpress
-    ios_lint_localizations(
-      input_dir: 'Simplenote',
-      allow_retry: true
-    )
+
+    lint_localizations
+
     ios_bump_version_beta
     trigger_beta_build(branch_to_build: release_branch_name)
   end
