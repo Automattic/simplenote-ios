@@ -1027,5 +1027,12 @@ def build_code_next
 end
 
 def release_branch_name(release_version: release_version_current)
-  "release/#{release_version}"
+  "#{RELEASE_BRANCH_ROOT}#{release_version}"
 end
+
+def ensure_git_branch_is_release_branch
+  # Verify that the current branch is a release branch. Notice that `ensure_git_branch` expects a RegEx parameter
+  ensure_git_branch(branch: "^#{RELEASE_BRANCH_ROOT}")
+end
+
+RELEASE_BRANCH_ROOT = 'release/'
