@@ -37,6 +37,14 @@ $used_test_account_index = nil
 
 RELEASE_NOTES_SOURCE_PATH = File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt')
 
+GLOTPRESS_BASE_URL = 'https://translate.wordpress.com/projects'
+# Notice the trailing / is required.
+# Without it, GlotPress will redirect to the version with /
+GLOTPRESS_APP_STRINGS_PROJECT_URL = "#{GLOTPRESS_BASE_URL}/simplenote/ios/".freeze
+GLOTPRESS_STORE_METADATA_PROJECT_URL = "#{GLOTPRESS_APP_STRINGS_PROJECT_URL}release-notes/".freeze
+
+STORE_METADATA_FOLDER = File.join(PROJECT_ROOT_FOLDER, 'fastlane', 'metadata')
+
 require_relative 'lib/env_manager'
 
 # Important: These need to be imported after all the constants have be defined because they access them.
@@ -65,7 +73,6 @@ ENV['PROJECT_NAME'] = 'Simplenote'
 ENV['PROJECT_ROOT_FOLDER'] = PROJECT_ROOT_FOLDER
 ENV['APP_STORE_STRINGS_FILE_NAME'] = 'AppStoreStrings.pot'
 ENV['PUBLIC_CONFIG_FILE'] = VERSION_FILE_PATH
-ENV['DOWNLOAD_METADATA'] = './fastlane/download_metadata.swift'
 ENV['FL_RELEASE_TOOLKIT_DEFAULT_BRANCH'] = 'trunk'
 
 platform :ios do
@@ -86,38 +93,6 @@ platform :ios do
       source_files: files,
       release_version: version
     )
-  end
-
-  # This lane lacks documentation because it ought to be part of the localized
-  # metadata download script instead!
-  desc 'Updates the files with the localized keywords values for App Store Connect to match the 100 characters requirement'
-  lane :sanitize_appstore_keywords do
-    Dir['./metadata/**'].each do |locale_dir|
-      keywords_path = File.join(locale_dir, 'keywords.txt')
-
-      unless File.exist?(keywords_path)
-        UI.message "Could not find keywords file in #{locale_dir}. Skipping."
-        next
-      end
-
-      keywords = File.read(keywords_path)
-      app_store_connect_keywords_length_limit = 100
-
-      if keywords.length <= app_store_connect_keywords_length_limit
-        UI.verbose "#{keywords_path} has less than #{app_store_connect_keywords_length_limit} characters. Not trimming."
-        next
-      end
-
-      UI.message "#{keywords_path} has more than #{app_store_connect_keywords_length_limit} characters. Trimming it..."
-
-      english_comma = ','
-      arabic_comma = '،'
-      keywords = keywords.gsub(arabic_comma, english_comma) if File.basename(locale_dir) == 'ar-SA'
-
-      keywords = keywords.split(english_comma)[0...-1].join(english_comma) until keywords.length <= app_store_connect_keywords_length_limit
-
-      File.write(keywords_path, keywords)
-    end
   end
 
   #####################################################################################
@@ -180,22 +155,18 @@ platform :ios do
 
     UI.message('Checking app strings translation status...')
     check_translation_progress(
-      glotpress_url: 'https://translate.wordpress.com/projects/simplenote/ios/',
+      glotpress_url: GLOTPRESS_APP_STRINGS_PROJECT_URL,
       abort_on_violations: false
     )
 
     UI.message('Checking release notes strings translation status...')
     check_translation_progress(
-      glotpress_url: 'https://translate.wordpress.com/projects/simplenote/ios/release-notes/',
+      glotpress_url: GLOTPRESS_STORE_METADATA_PROJECT_URL,
       abort_on_violations: false
     )
 
-    ios_download_strings_files_from_glotpress(
-      project_url: 'https://translate.wordpress.com/projects/simplenote/ios/',
-      locales: GLOTPRESS_TO_LPROJ_APP_LOCALE_CODES,
-      download_dir: File.join(PROJECT_ROOT_FOLDER, 'Simplenote')
-    )
-    sanitize_appstore_keywords
+    download_localized_strings_and_metadata_from_glotpress
+
     ios_lint_localizations(
       input_dir: 'Simplenote',
       allow_retry: true
