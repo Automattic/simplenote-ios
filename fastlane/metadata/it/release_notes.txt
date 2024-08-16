@@ -1,2 +1,6 @@
-- Aggiungere il colore di sfondo al blocco di codice nell'anteprima in modalità scura
-- Aggiungere widget nota di grandi dimensioni
+- Supporto esteso per Tasti di scelta rapida di iOS
+- Risolto un problema per cui la selezione delle note andava persa quando l'app era in background
+- Risolto un problema per cui FaceID poteva essere attivato senza PIN
+- Supporto per l'accesso tramite link magico
+- La UI di accesso è stata revisionata
+

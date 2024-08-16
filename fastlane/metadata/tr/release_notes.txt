@@ -1,2 +1,6 @@
-- Karanlık mod önizlemesinde kod blokuna arka plan rengi ekleyin
-- Büyük not bileşeni ekleyin
+- iOS Kısayollar için genişletilmiş destek
+- Uygulama arkaplandayken not seçiminin kaybolmasına neden olan sorun düzeltildi
+- Şifre olmadan FaceID anahtarını etkinleştirebilen bir sorun düzeltildi
+- Sihirli Bağlantı Oturum Açma Desteği
+- Oturum açma kullanıcı arayüzü değiştirildi
+

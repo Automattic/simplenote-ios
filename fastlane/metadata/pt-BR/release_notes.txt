@@ -1,2 +1,6 @@
-- Adição de cor de fundo ao bloco de código na visualização do modo escuro
-- Adição do widget de anotação grande
+- Suporte estendido para os Atalhos do iOS
+- Problema corrigido em que a seleção de notas era perdida quando o aplicativo ficava em segundo plano
+- Problema corrigido para ativar a configuração do Face ID sem uma senha
+- Suporte para login com link mágico
+- A IU de login foi modificada
+
