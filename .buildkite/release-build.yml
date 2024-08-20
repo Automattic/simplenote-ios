@@ -1,11 +1,22 @@
+env:
+  IMAGE_ID: $IMAGE_ID
+agents:
+  queue: mac
+
 steps:
-  - label: ":testflight: Simplenote iOS Release Build (App Store Connect)"
+  - label: ":testflight: Build Simplenote iOS for App Store Connect"
+    key: testflight_build
     command: .buildkite/commands/release-build.sh
     priority: 1
-    env:
-      IMAGE_ID: $IMAGE_ID
-    agents:
-      queue: mac
+    plugins: [$CI_TOOLKIT_PLUGIN]
+    artifact_paths:
+      - build/results/*.zip
+      - build/results/*.ipa
+
+  - label: ":testflight: Upload Simplenote iOS to App Store Connect"
+    depends_on: testflight_build
+    command: .buildkite/commands/release-upload.sh
+    priority: 1
     plugins: [$CI_TOOLKIT_PLUGIN]
     notify:
     - slack: "#build-and-ship"

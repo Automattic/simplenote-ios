@@ -1,2 +1,6 @@
-- Menambahkan warna latar belakang ke blok kode dalam pratinjau mode gelap
-- Menambahkan widget catatan besar
+- Peningkatan dukungan untuk Pintasan iOS
+- Perbaikan masalah hilangnya pemilihan catatan saat aplikasi dijalankan di latar belakang
+- Perbaikan masalah aktivasi tombol faceid tanpa kode sandi
+- Dukungan Login Tautan Ajaib
+- Perombakan UI Login
+
