@@ -1,15 +1,9 @@
-/* Translation-Revision-Date: 2022-11-24 00:43:04+0000 */
+/* Translation-Revision-Date: 2024-08-06 21:54:03+0000 */
 /* Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ar */
 
-/* Monthly Subscription Option. Please preserve the special marker! */
-"%@ per Month" = "%@ شهريًا ";
-
-/* Yearly Subscription Option. Please preserve the special marker! */
-"%@ per Year" = "%@ سنويًا";
-
-/* Number of found search results */
+/* No comment provided by engineer. */
 "%d Result" = "%d من النتائج";
 
 /* Number of found search results */
@@ -73,6 +67,7 @@
 "About" = "نبذة عن";
 
 /* Accept Action
+   Accept Message
    Label of accept button on alert dialog */
 "Accept" = "قبول";
 
@@ -124,7 +119,16 @@
 "Are you sure you want to empty the trash? This cannot be undone." = "هل أنت متأكد من رغبتك في إفراغ سلة المهملات؟ يتعذر التراجع عن هذا.";
 
 /* Data Fetch error message */
+"Attempt to fetch current note content failed.  Please try again later." = "فشلت محاولة إحضار محتوى الملاحظات الحالي.  يرجى المحاولة مرة أخرى لاحقًا.";
+
+/* Data Fetch error message */
 "Attempt to fetch entities failed.  Please try again later." = "فشلت محاولة إحضار الكيانات.  يرجى المحاولة لاحقًا.";
+
+/* Data Fetch error message */
+"Attempt to fetch notes failed.  Please try again later." = "فشلت محاولة إحضار الملاحظات.  يرجى المحاولة مرة أخرى لاحقًا.";
+
+/* Data Fetch error message */
+"Attempt to fetch tags failed.  Please try again later." = "فشلت محاولة إحضار الوسوم.  يرجى المحاولة مرة أخرى لاحقًا.";
 
 /* User Authenticated */
 "Authenticated" = "مصادَق عليه";
@@ -151,7 +155,6 @@
    Cancel button for authentication
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
-   Dismisses the alert
    Dismissing an interface
    PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
@@ -187,8 +190,8 @@
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "اختيار رمز مرور مكوَّن من 4 أرقام";
 
-/* Sustainer Alert's Message */
-"Choose a plan and help unlock future features" = "اختيار خطة للمساعدة على فتح الميزات في المستقبل";
+/* Code TextField Placeholder */
+"Code" = "رمز";
 
 /* Opens the Collaborate UI */
 "Collaborate" = "تشارك";
@@ -231,8 +234,17 @@
 /* Error for bad email or password */
 "Could not create an account with the provided email address and password." = "تعذر إنشاء حساب بعنوان البريد الإلكتروني وكلمة المرور اللذين تم إدخالهما.";
 
+/* Note fetch error title */
+"Could not fetch Notes" = "يتعذر إحضار الملاحظات";
+
+/* Tag fetch error title */
+"Could not fetch Tags" = "يتعذر إحضار الوسوم";
+
 /* Fetch error title */
 "Could not fetch entities" = "يتعذر إحضار الكيانات";
+
+/* note content fetch error title */
+"Could not fetch note content" = "يتعذر إحضار المحتوى";
 
 /* Message displayed when login fails */
 "Could not login with the provided email address and password." = "تعذر تسجيل الدخول بعنوان البريد الإلكتروني وكلمة المرور اللذين تم إدخالهما.";
@@ -360,6 +372,15 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "بقائمة الانتظار";
 
+/* LogIn Interface Title */
+"Enter Code" = "إدخال الكود";
+
+/* Enter Password fallback Action */
+"Enter password" = "إدخال كلمة المرور";
+
+/* Header for Login With Password. Please preserve the {{EMAIL}} substring */
+"Enter the password for the account {{EMAIL}}" = "إدخال كلمة المرور الخاصة بالحساب {{EMAIL}}";
+
 /* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "إدخال رمز المرور الخاص بك";
 
@@ -386,7 +407,7 @@
 "Forgot password? »" = "هل نسيت كلمة المرور؟ »";
 
 /* Password Reset Action */
-"Forgotten password?" = "هل نسيت كلمة المرور؟";
+"Forgot your password?" = "هل نسيت كلمة مرورك؟";
 
 /* FAQ or contact us */
 "Get Help" = "إحصل على المساعدة";
@@ -411,6 +432,12 @@
 
 /* Rating view - initial - liked button */
 "I like it" = "يعجبني هذا";
+
+/* Option to add notes to spotlight search */
+"Index Notes in Spotlight" = "ملاحظات الفهرس في Spotlight";
+
+/* Alert title letting user know their search index has been removed */
+"Index Removed" = "تمت إزالة الفهرس";
 
 /* Note Information Button (metrics + references) */
 "Information" = "معلومات";
@@ -448,6 +475,9 @@
    LogIn Interface Title */
 "Log In" = "تسجيل الدخول";
 
+/* LogIn Interface Title */
+"Log In with Password" = "تسجيل الدخول باستخدام كلمة المرور";
+
 /* Log out of the active account in the app */
 "Log Out" = "تسجيل الخروج";
 
@@ -460,11 +490,17 @@
 /* Widget warning if user has set pin lock */
 "Unlock to see your note list" = "افتح القفل لعرض قائمة ملاحظاتك";
 
-/* Allows the user to SignIn using their WPCOM Account */
+/* Password fallback Action */
 "Log in with WordPress.com" = "تسجيل دخول باستخدام ووردبريس.كوم";
 
-/* Presents the regular Email signin flow */
+/* Sends the User an email with an Authentication Code */
 "Log in with email" = "تسجيل الدخول باستخدام البريد الإلكتروني";
+
+/* Header for Enter Password UI, when the user performed too many requests */
+"Log in with email failed, please enter your password" = "فشل تسجل الدخول باستخدام البريد الإلكتروني، يرجى إدخال كلمة مرورك";
+
+/* Message displayed when a login code is too short */
+"Login Code is too short" = "كود تسجيل الدخول قصير للغاية";
 
 /* Month and day date formatter */
 "MMM d" = "MMM d";
@@ -495,9 +531,6 @@
 
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "تاريخ التعديل: الأقدم";
-
-/* Monthly Subscription Option (Used when / if the price fails to load) */
-"Monthly" = "شهريًا";
 
 /* Accessibility hint for trash selected notes button */
 "Move selected notes to trash" = "نقل الملحوظات المحدَّدة إلى سلة المهملات";
@@ -585,6 +618,9 @@
    Email unverified alert dismiss */
 "Ok" = "موافق";
 
+/* confirm button title */
+"Okay" = "حسنًا";
+
 /* No comment provided by engineer. */
 "On" = "تشغيل";
 
@@ -599,6 +635,9 @@
 
 /* Note Options Title */
 "Options" = "خيارات";
+
+/* Or, used as a separator between Actions */
+"Or" = "أو";
 
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "رمز المرور";
@@ -684,6 +723,9 @@
 /* Home screen quick action: Recent Note */
 "Recent" = "الحديث";
 
+/* Header to put on any files that need to be recovered */
+"Recovered Note Cotent - " = "تم استرداد Note Cotent - ";
+
 /* References section header on Info Card */
 "Referenced In" = "تمت الإشارة في";
 
@@ -720,9 +762,6 @@
 /* Restore a note from trash
    Restore a note to a previous version */
 "Restore Note" = "استعادة الملاحظة";
-
-/* Manually Restores IAP Purchases */
-"Restore Purchases" = "استعادة عمليات الشراء";
 
 /* Title -> Review you account screen */
 "Review Your Account" = "مراجعة حسابك";
@@ -806,8 +845,7 @@
    Title of main share extension view */
 "Simplenote" = "Simplenote";
 
-/* Restoration Successful Title
-   Sustainer Alert's Title */
+/* Restoration Successful Title */
 "Simplenote Sustainer" = "Simplenote Sustainer";
 
 /* Simplenote's Feedback Email Title */
@@ -816,7 +854,8 @@
 /* Message displayed when app is not configured */
 "Simplenote must be configured and logged in to setup widgets" = "يجب تكوين Simplenote وتسجيل الدخول إليه لإعداد المربعات الجانبية";
 
-/* Authentication Error Alert Title */
+/* Authentication Error Alert Title
+   Email TextField Placeholder */
 "Sorry!" = "عذرًا!";
 
 /* Option to sort tags alphabetically. The default is by manual ordering. */
@@ -829,14 +868,17 @@
 /* Sort By Title */
 "Sort by:" = "فرز حسب:";
 
+/* Details that some results may still appear in searches on device */
+"Spotlight history may still appear in search results, but notes have be unindexed" = "قد يستمر سجل Spotlight في الظهور في نتائج البحث، لكن يجب إلغاء فهرسة الملاحظات";
+
 /* Title for the response's Status Code */
 "Status Code" = "كود الحالة";
 
 /* Become a Sustainer Details */
 "Support your favorite notes app to help unlock future features" = "دعم تطبيق الملحوظات المفضَّل لديك للمساعدة على فتح الميزات في المستقبل";
 
-/* No comment provided by engineer. */
-"Sustainer" = "Sustainer";
+/* Switch app icon */
+"Sustainer App Icon" = "أيقونة تطبيق Sustainer";
 
 /* Restoration Successful Message */
 "Sustainer subscription restored. Thank you for supporting Simplenote!" = "تم استعادة اشتراك Sustainer. شكرًا لك على دعم Simplenote!";
@@ -873,6 +915,12 @@
 
 /* Error when address is in use */
 "That email is already being used" = "يتم استخدام ذلك البريد الإلكتروني بالفعل";
+
+/* Email TextField Placeholder */
+"The authentication code you've requested has expired. Please request a new one" = "انتهت صلاحية كود المصادقة الذي طلبته. يرجى طلب واحد جديد";
+
+/* Error message for Invalid Login Code */
+"The code you've entered is not correct. Please try again" = "الكود الذي أدخلته غير صحيح. يرجى المحاولة مجددًا";
 
 /* Error when address is in use */
 "The email you've entered is already associated with a Simplenote account." = "البريد الإلكتروني الذي أدخلته مرتبط بالفعل بحساب Simplenote.";
@@ -986,6 +1034,9 @@
 /* Generic error */
 "We're having problems. Please try again soon." = "لدينا مشكلات. يُرجى المحاولة مرة أخرى لاحقًا.";
 
+/* Header for the Login with Code UI. Please preserve the {{EMAIL}} string as is! */
+"We've sent a code to {{EMAIL}}. The code will be valid for a few minutes." = "لقد أرسلنا كودًا إلى {{EMAIL}} سيكون هذا الكود صالحًا لبضع دقائق.";
+
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
 
@@ -999,11 +1050,11 @@
 /* Rating view initial title */
 "What do you think about Simplenote?" = "ما رأيك في Simplenote؟";
 
+/* Alerting users that we will attempt to restore lost content on next launch */
+"Will attempt to recover shortcut content on next launch" = "ستتم محاولة استعادة محتوى الاختصارات في الطرح المقبل";
+
 /* Number of words in the note */
 "Words" = "الكلمات";
-
-/* Yearly Subscription Option (Used when / if the price fails to load) */
-"Yearly" = "سنوي";
 
 /* Proceeds with the Empty Trash OP */
 "Yes" = "نعم";
@@ -1022,6 +1073,9 @@
 
 /* Restoration Successful Message */
 "You're already a Sustainer. Thank you for supporting Simplenote!" = "أصبحت Sustainer بالفعل. شكرًا لك على دعم Simplenote!";
+
+/* Error message for Invalid Login Code */
+"Your authentication code has expired. Please request a new one" = "انتهت صلاحية كود المصادقة الخاص بك. يرجى طلب واحد جديد";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "عنوان البريد الإلكتروني الخاص بك غير صالح.";

@@ -33,7 +33,7 @@ platform :ios do
       version_short: release_version_next,
       version_long: build_code_code_freeze
     )
-    UI.success "Done! New Release Version: #{release_version_current}. New Build Code: #{build_code_current}."
+    UI.success "Done! New release version: #{release_version_current}. New build code: #{build_code_current}."
 
     commit_version_and_build_files
 
@@ -64,17 +64,43 @@ platform :ios do
     )
 
     trigger_beta_build(branch_to_build: computed_release_branch_name)
+
+    # TODO: Switch to working branch and open back-merge PR
   end
 
-  lane :new_beta_release do |options|
-    ios_betabuild_prechecks(options)
+  lane :new_beta_release do |skip_confirm: false|
+    ensure_git_status_clean
+    ensure_git_branch_is_release_branch
+
+    new_build_code = build_code_next
+    UI.important <<~MESSAGE
+      New beta:
+      • Current build code: #{build_code_current}
+      • New build code: #{new_build_code}
+    MESSAGE
+
+    UI.user_error!("Terminating as requested. Don't forget to run the remainder of this automation manually.") unless skip_confirm || UI.confirm('Do you want to continue?')
+
     download_localized_strings_and_metadata_from_glotpress
-    ios_lint_localizations(
-      input_dir: 'Simplenote',
-      allow_retry: true
+
+    lint_localizations
+
+    UI.message "Bumping build code to #{new_build_code}..."
+    PUBLIC_VERSION_FILE.write(
+      version_long: new_build_code
     )
-    ios_bump_version_beta
+    commit_version_and_build_files
+    # Uses build_code_current let user double-check result.
+    UI.success "Done! Release version: #{release_version_current}. New build code: #{build_code_current}."
+
+    UI.important('Pushing changes to remote and triggering the beta build...')
+    UI.user_error!("Terminating as requested. Don't forget to run the remainder of this automation manually.") unless skip_confirm || UI.confirm('Do you want to continue?')
+
+    push_to_git_remote(tags: false)
+
     trigger_beta_build(branch_to_build: release_branch_name)
+
+    # TODO: Switch to working branch and open back-merge PR
   end
 
   lane :trigger_beta_build do |branch_to_build:|

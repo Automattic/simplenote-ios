@@ -386,13 +386,15 @@ CGFloat const SPSelectedAreaPadding = 20;
     [snapshot addSubview:fakeMarkdownPreviewSnapshot];
 
     // Offset the fake markdown preview off to the right of the screen
+    bool isLTR = [UIView userInterfaceLayoutDirectionForSemanticContentAttribute: self.view.semanticContentAttribute] == UIUserInterfaceLayoutDirectionLeftToRight;
+    int multiplier = isLTR ? 1 : -1;
     CGRect frame = snapshot.frame;
-    frame.origin.x = CGRectGetWidth(self.view.bounds);
+    frame.origin.x = CGRectGetWidth(self.view.bounds) * multiplier;
     fakeMarkdownPreviewSnapshot.frame = frame;
 
     self.noteEditorTextView.hidden = YES;
 
-    CGFloat bounceDistance = -40;
+    CGFloat bounceDistance = -40 * multiplier;
 
     // Do a nice bounce animation
     [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{

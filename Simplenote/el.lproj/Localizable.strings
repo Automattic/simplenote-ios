@@ -1,9 +1,9 @@
-/* Translation-Revision-Date: 2020-06-15 15:27:25+0000 */
+/* Translation-Revision-Date: 2019-11-22 16:18:55+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: el_GR */
 
-/* Number of found search results */
+/* No comment provided by engineer. */
 "%d Result" = "%d αποτέλεσμα";
 
 /* Number of found search results */
@@ -16,6 +16,7 @@
 "%i Failed Passcode Attempts" = "%i αποτυχημένες απόπειρες συνθηματικού";
 
 /* Accept Action
+   Accept Message
    Label of accept button on alert dialog */
 "Accept" = "Αποδοχή";
 
@@ -38,7 +39,6 @@
    Cancel button for authentication
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
-   Dismisses the alert
    Dismissing an interface
    PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */

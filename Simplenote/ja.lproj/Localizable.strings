@@ -1,15 +1,9 @@
-/* Translation-Revision-Date: 2022-11-23 11:54:04+0000 */
+/* Translation-Revision-Date: 2024-08-07 09:54:03+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ja_JP */
 
-/* Monthly Subscription Option. Please preserve the special marker! */
-"%@ per Month" = "月額 %@";
-
-/* Yearly Subscription Option. Please preserve the special marker! */
-"%@ per Year" = "年額 %@";
-
-/* Number of found search results */
+/* No comment provided by engineer. */
 "%d Result" = "%d件の検索結果";
 
 /* Number of found search results */
@@ -73,6 +67,7 @@
 "About" = "このサイトについて";
 
 /* Accept Action
+   Accept Message
    Label of accept button on alert dialog */
 "Accept" = "承認";
 
@@ -124,7 +119,16 @@
 "Are you sure you want to empty the trash? This cannot be undone." = "ゴミ箱を空にしてもよいですか ?この操作は元に戻すことができません。";
 
 /* Data Fetch error message */
+"Attempt to fetch current note content failed.  Please try again later." = "現在のメモ内容を取得しようとしましたが失敗しました。  後でもう一度お試しください。";
+
+/* Data Fetch error message */
 "Attempt to fetch entities failed.  Please try again later." = "エンティティの取得の試みに失敗しました。  後ほど、もう一度お試しください。";
+
+/* Data Fetch error message */
+"Attempt to fetch notes failed.  Please try again later." = "メモを取得しようとしましたが失敗しました。  後でもう一度お試しください。";
+
+/* Data Fetch error message */
+"Attempt to fetch tags failed.  Please try again later." = "タグを取得しようとしましたが失敗しました。  後でもう一度お試しください。";
 
 /* User Authenticated */
 "Authenticated" = "認証済み";
@@ -151,7 +155,6 @@
    Cancel button for authentication
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
-   Dismisses the alert
    Dismissing an interface
    PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
@@ -187,8 +190,8 @@
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "4桁のパスコードを選択してください";
 
-/* Sustainer Alert's Message */
-"Choose a plan and help unlock future features" = "プランを選択して将来の機能のロックを解除する";
+/* Code TextField Placeholder */
+"Code" = "ソースコード";
 
 /* Opens the Collaborate UI */
 "Collaborate" = "共同編集";
@@ -231,8 +234,17 @@
 /* Error for bad email or password */
 "Could not create an account with the provided email address and password." = "入力されたメールアドレスとパスワードではアカウントを作成できませんでした。";
 
+/* Note fetch error title */
+"Could not fetch Notes" = "メモを取得できませんでした";
+
+/* Tag fetch error title */
+"Could not fetch Tags" = "タグを取得できませんでした";
+
 /* Fetch error title */
 "Could not fetch entities" = "エンティティを取得できませんでした";
+
+/* note content fetch error title */
+"Could not fetch note content" = "メモの内容を取得できませんでした";
 
 /* Message displayed when login fails */
 "Could not login with the provided email address and password." = "入力されたメールアドレスとパスワードではログインできませんでした。";
@@ -360,6 +372,15 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "待機状態";
 
+/* LogIn Interface Title */
+"Enter Code" = "コードを入力";
+
+/* Enter Password fallback Action */
+"Enter password" = "パスワードを入力";
+
+/* Header for Login With Password. Please preserve the {{EMAIL}} substring */
+"Enter the password for the account {{EMAIL}}" = "アカウント {{EMAIL}} のパスワードを入力";
+
 /* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "パスコードを入力してください";
 
@@ -386,7 +407,7 @@
 "Forgot password? »" = "パスワードをお忘れですか ? »";
 
 /* Password Reset Action */
-"Forgotten password?" = "パスワードを忘れましたか ?";
+"Forgot your password?" = "パスワードを忘れた場合";
 
 /* FAQ or contact us */
 "Get Help" = "ヘルプ";
@@ -411,6 +432,12 @@
 
 /* Rating view - initial - liked button */
 "I like it" = "満足している";
+
+/* Option to add notes to spotlight search */
+"Index Notes in Spotlight" = "スポットライトでメモをインデックス";
+
+/* Alert title letting user know their search index has been removed */
+"Index Removed" = "インデックスが削除されました";
 
 /* Note Information Button (metrics + references) */
 "Information" = "情報";
@@ -448,6 +475,9 @@
    LogIn Interface Title */
 "Log In" = "ログイン";
 
+/* LogIn Interface Title */
+"Log In with Password" = "パスワードでログイン";
+
 /* Log out of the active account in the app */
 "Log Out" = "ログアウト";
 
@@ -460,11 +490,17 @@
 /* Widget warning if user has set pin lock */
 "Unlock to see your note list" = "メモリストを見るにはロックを解除してください";
 
-/* Allows the user to SignIn using their WPCOM Account */
+/* Password fallback Action */
 "Log in with WordPress.com" = "WordPress.com アカウントでログイン";
 
-/* Presents the regular Email signin flow */
+/* Sends the User an email with an Authentication Code */
 "Log in with email" = "メールアドレスでログイン";
+
+/* Header for Enter Password UI, when the user performed too many requests */
+"Log in with email failed, please enter your password" = "メールアドレスでのログインに失敗しました。パスワードを入力してください";
+
+/* Message displayed when a login code is too short */
+"Login Code is too short" = "ログインコードが短すぎます";
 
 /* Month and day date formatter */
 "MMM d" = "M月d日";
@@ -495,9 +531,6 @@
 
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "更新日 :最も古い";
-
-/* Monthly Subscription Option (Used when / if the price fails to load) */
-"Monthly" = "毎月";
 
 /* Accessibility hint for trash selected notes button */
 "Move selected notes to trash" = "選択したメモをゴミ箱に移動";
@@ -585,6 +618,9 @@
    Email unverified alert dismiss */
 "Ok" = "OK";
 
+/* confirm button title */
+"Okay" = "OK";
+
 /* No comment provided by engineer. */
 "On" = "オン";
 
@@ -599,6 +635,9 @@
 
 /* Note Options Title */
 "Options" = "オプション";
+
+/* Or, used as a separator between Actions */
+"Or" = "OR";
 
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "パスコード";
@@ -684,6 +723,9 @@
 /* Home screen quick action: Recent Note */
 "Recent" = "最近";
 
+/* Header to put on any files that need to be recovered */
+"Recovered Note Cotent - " = "復元されたメモの内容 - ";
+
 /* References section header on Info Card */
 "Referenced In" = "参照先";
 
@@ -720,9 +762,6 @@
 /* Restore a note from trash
    Restore a note to a previous version */
 "Restore Note" = "ノートを復元";
-
-/* Manually Restores IAP Purchases */
-"Restore Purchases" = "購入したものを復元";
 
 /* Title -> Review you account screen */
 "Review Your Account" = "アカウントの設定を確認";
@@ -806,8 +845,7 @@
    Title of main share extension view */
 "Simplenote" = "Simplenote";
 
-/* Restoration Successful Title
-   Sustainer Alert's Title */
+/* Restoration Successful Title */
 "Simplenote Sustainer" = "Simplenote Sustainer";
 
 /* Simplenote's Feedback Email Title */
@@ -816,7 +854,8 @@
 /* Message displayed when app is not configured */
 "Simplenote must be configured and logged in to setup widgets" = "ウィジェットを設定するには Simplenote を構成してログインする必要があります";
 
-/* Authentication Error Alert Title */
+/* Authentication Error Alert Title
+   Email TextField Placeholder */
 "Sorry!" = "申し訳ございません。";
 
 /* Option to sort tags alphabetically. The default is by manual ordering. */
@@ -829,14 +868,17 @@
 /* Sort By Title */
 "Sort by:" = "並び順 :";
 
+/* Details that some results may still appear in searches on device */
+"Spotlight history may still appear in search results, but notes have be unindexed" = "スポットライト履歴が検索結果に引き続き表示される可能性がありますが、メモのインデックスは解除されます";
+
 /* Title for the response's Status Code */
 "Status Code" = "ステータスコード";
 
 /* Become a Sustainer Details */
 "Support your favorite notes app to help unlock future features" = "お気に入りのメモアプリをサポートして将来の機能のロックを解除できるようにする";
 
-/* No comment provided by engineer. */
-"Sustainer" = "Sustainer";
+/* Switch app icon */
+"Sustainer App Icon" = "Sustainer アプリアイコン";
 
 /* Restoration Successful Message */
 "Sustainer subscription restored. Thank you for supporting Simplenote!" = "Sustainer サブスクリプションが復元されました。 Simplenote をサポートいただきありがとうございます。";
@@ -873,6 +915,12 @@
 
 /* Error when address is in use */
 "That email is already being used" = "そのメールアドレスはすでに使用されています";
+
+/* Email TextField Placeholder */
+"The authentication code you've requested has expired. Please request a new one" = "リクエストした認証コードの有効期限が切れています。 新しいコードをリクエストしてください";
+
+/* Error message for Invalid Login Code */
+"The code you've entered is not correct. Please try again" = "入力したコードが正しくありません。 もう一度お試しください";
 
 /* Error when address is in use */
 "The email you've entered is already associated with a Simplenote account." = "このメールアドレスは、すでに他の Simplenote アカウントで使用されています。";
@@ -986,6 +1034,9 @@
 /* Generic error */
 "We're having problems. Please try again soon." = "問題が発生しました。すぐにもう一度実行してください。";
 
+/* Header for the Login with Code UI. Please preserve the {{EMAIL}} string as is! */
+"We've sent a code to {{EMAIL}}. The code will be valid for a few minutes." = "コードを {{EMAIL}} に送信しました。 コードは数分間有効です。";
+
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
 
@@ -999,11 +1050,11 @@
 /* Rating view initial title */
 "What do you think about Simplenote?" = "Simplenote アプリに満足していますか ?";
 
+/* Alerting users that we will attempt to restore lost content on next launch */
+"Will attempt to recover shortcut content on next launch" = "次回起動時に、ショートカットの内容の復元を試みます";
+
 /* Number of words in the note */
 "Words" = "単語";
-
-/* Yearly Subscription Option (Used when / if the price fails to load) */
-"Yearly" = "毎年";
 
 /* Proceeds with the Empty Trash OP */
 "Yes" = "はい";
@@ -1022,6 +1073,9 @@
 
 /* Restoration Successful Message */
 "You're already a Sustainer. Thank you for supporting Simplenote!" = "すでに Sustainer です。 Simplenote をサポートいただきありがとうございます。";
+
+/* Error message for Invalid Login Code */
+"Your authentication code has expired. Please request a new one" = "認証コードの有効期限が切れています。 新しいコードをリクエストしてください";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "無効なメールアドレスです。";

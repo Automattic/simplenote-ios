@@ -1,15 +1,9 @@
-/* Translation-Revision-Date: 2022-11-22 15:54:03+0000 */
+/* Translation-Revision-Date: 2024-08-07 17:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: he_IL */
 
-/* Monthly Subscription Option. Please preserve the special marker! */
-"%@ per Month" = "%@ לחודש";
-
-/* Yearly Subscription Option. Please preserve the special marker! */
-"%@ per Year" = "%@ לשנה";
-
-/* Number of found search results */
+/* No comment provided by engineer. */
 "%d Result" = "תוצאה %d";
 
 /* Number of found search results */
@@ -73,6 +67,7 @@
 "About" = "אודות";
 
 /* Accept Action
+   Accept Message
    Label of accept button on alert dialog */
 "Accept" = "קבלה";
 
@@ -124,7 +119,16 @@
 "Are you sure you want to empty the trash? This cannot be undone." = "האם ברצונך לרוקן את הפח? לא ניתן לבטל את הפעולה.";
 
 /* Data Fetch error message */
+"Attempt to fetch current note content failed.  Please try again later." = "ניסיון להביא את תוכן הפתק הנוכחי נכשל.  יש לנסות שוב מאוחר יותר.";
+
+/* Data Fetch error message */
 "Attempt to fetch entities failed.  Please try again later." = "ניסיון להביא את הישויות נכשל.  יש לנסות שוב מאוחר יותר.";
+
+/* Data Fetch error message */
+"Attempt to fetch notes failed.  Please try again later." = "ניסיון להביא 'פתקים' נכשל.  יש לנסות שוב מאוחר יותר.";
+
+/* Data Fetch error message */
+"Attempt to fetch tags failed.  Please try again later." = "ניסיון להביא 'תגיות' נכשל.  יש לנסות שוב מאוחר יותר.";
 
 /* User Authenticated */
 "Authenticated" = "האימות בוצע";
@@ -151,7 +155,6 @@
    Cancel button for authentication
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
-   Dismisses the alert
    Dismissing an interface
    PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
@@ -187,8 +190,8 @@
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "לבחור קוד סיסמה בן 4 ספרות";
 
-/* Sustainer Alert's Message */
-"Choose a plan and help unlock future features" = "יש לבחור תוכנית כדי לעזור בהפעלת אפשרויות בעתיד";
+/* Code TextField Placeholder */
+"Code" = "קוד";
 
 /* Opens the Collaborate UI */
 "Collaborate" = "שיתוף פעולה בעריכה";
@@ -231,8 +234,17 @@
 /* Error for bad email or password */
 "Could not create an account with the provided email address and password." = "לא ניתן ליצור חשבון באמצעות כתובת האימייל והסיסמה שסופקו.";
 
+/* Note fetch error title */
+"Could not fetch Notes" = "לא ניתן היה להביא 'פתקים'";
+
+/* Tag fetch error title */
+"Could not fetch Tags" = "לא ניתן היה להביא 'תגיות'";
+
 /* Fetch error title */
 "Could not fetch entities" = "לא ניתן היה להביא את הישויות";
+
+/* note content fetch error title */
+"Could not fetch note content" = "לא ניתן היה להביא את תוכן הפתקים";
 
 /* Message displayed when login fails */
 "Could not login with the provided email address and password." = "לא ניתן להיכנס באמצעות כתובת האימייל והסיסמה שסופקו.";
@@ -360,6 +372,15 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "צורף לתור";
 
+/* LogIn Interface Title */
+"Enter Code" = "להזין קוד";
+
+/* Enter Password fallback Action */
+"Enter password" = "להזין סיסמה";
+
+/* Header for Login With Password. Please preserve the {{EMAIL}} substring */
+"Enter the password for the account {{EMAIL}}" = "יש להזין את הסיסמה לחשבון {{EMAIL}}";
+
 /* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "הזנת קוד סיסמה";
 
@@ -386,7 +407,7 @@
 "Forgot password? »" = "שכחת את הסיסמה? »";
 
 /* Password Reset Action */
-"Forgotten password?" = "שכחת את הסיסמה?";
+"Forgot your password?" = "שכחת סיסמה?";
 
 /* FAQ or contact us */
 "Get Help" = "לקבלת עזרה";
@@ -411,6 +432,12 @@
 
 /* Rating view - initial - liked button */
 "I like it" = "אהבתי את זה";
+
+/* Option to add notes to spotlight search */
+"Index Notes in Spotlight" = "להוסיף אינדקס של פתקים אל Spotlight";
+
+/* Alert title letting user know their search index has been removed */
+"Index Removed" = "האינדקס הוסר";
 
 /* Note Information Button (metrics + references) */
 "Information" = "מידע";
@@ -448,6 +475,9 @@
    LogIn Interface Title */
 "Log In" = "התחבר";
 
+/* LogIn Interface Title */
+"Log In with Password" = "להתחבר באמצעות סיסמה";
+
 /* Log out of the active account in the app */
 "Log Out" = "התנתקות";
 
@@ -460,11 +490,17 @@
 /* Widget warning if user has set pin lock */
 "Unlock to see your note list" = "Ξεκλειδώστε για να δείτε τη λίστα σημειώσεών σας";
 
-/* Allows the user to SignIn using their WPCOM Account */
+/* Password fallback Action */
 "Log in with WordPress.com" = "התחברו באמצעות WordPress.com";
 
-/* Presents the regular Email signin flow */
+/* Sends the User an email with an Authentication Code */
 "Log in with email" = "התחברות באמצעות אימייל";
+
+/* Header for Enter Password UI, when the user performed too many requests */
+"Log in with email failed, please enter your password" = "ההתחברות באמצעות האימייל נכשלה, יש להזין סיסמה";
+
+/* Message displayed when a login code is too short */
+"Login Code is too short" = "קוד ההתחברות קצר מדי";
 
 /* Month and day date formatter */
 "MMM d" = "d ‏MMM";
@@ -495,9 +531,6 @@
 
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "עודכן: הישן ביותר";
-
-/* Monthly Subscription Option (Used when / if the price fails to load) */
-"Monthly" = "חודשי";
 
 /* Accessibility hint for trash selected notes button */
 "Move selected notes to trash" = "להעביר את הפתקים שנבחרו לפח";
@@ -585,6 +618,9 @@
    Email unverified alert dismiss */
 "Ok" = "OK";
 
+/* confirm button title */
+"Okay" = "בסדר";
+
 /* No comment provided by engineer. */
 "On" = "מופעל";
 
@@ -599,6 +635,9 @@
 
 /* Note Options Title */
 "Options" = "אפשרויות";
+
+/* Or, used as a separator between Actions */
+"Or" = "או";
 
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "קוד סיסמה";
@@ -684,6 +723,9 @@
 /* Home screen quick action: Recent Note */
 "Recent" = "אחרונים";
 
+/* Header to put on any files that need to be recovered */
+"Recovered Note Cotent - " = "תוכן הפתק ששוחזר – ";
+
 /* References section header on Info Card */
 "Referenced In" = "מאוזכר בפתק";
 
@@ -720,9 +762,6 @@
 /* Restore a note from trash
    Restore a note to a previous version */
 "Restore Note" = "שחזור פתק";
-
-/* Manually Restores IAP Purchases */
-"Restore Purchases" = "לשחזר רכישות";
 
 /* Title -> Review you account screen */
 "Review Your Account" = "לבדוק את החשבון שלך";
@@ -806,8 +845,7 @@
    Title of main share extension view */
 "Simplenote" = "Simplenote";
 
-/* Restoration Successful Title
-   Sustainer Alert's Title */
+/* Restoration Successful Title */
 "Simplenote Sustainer" = "Simplenote Sustainer";
 
 /* Simplenote's Feedback Email Title */
@@ -816,7 +854,8 @@
 /* Message displayed when app is not configured */
 "Simplenote must be configured and logged in to setup widgets" = "יש להגדיר את Simplenote ולהתחבר אל השירות כדי להגדיר את הווידג'טים";
 
-/* Authentication Error Alert Title */
+/* Authentication Error Alert Title
+   Email TextField Placeholder */
 "Sorry!" = "מצטערים!";
 
 /* Option to sort tags alphabetically. The default is by manual ordering. */
@@ -829,14 +868,17 @@
 /* Sort By Title */
 "Sort by:" = "למיין לפי:";
 
+/* Details that some results may still appear in searches on device */
+"Spotlight history may still appear in search results, but notes have be unindexed" = "תוצאות החיפוש עדיין עשויות להציג את ההיסטוריה של Spotlight, אבל הפתקים הוסרו מהאינדקס";
+
 /* Title for the response's Status Code */
 "Status Code" = "קוד מצב";
 
 /* Become a Sustainer Details */
 "Support your favorite notes app to help unlock future features" = "ניתן לתמוך באפליקציית הפתקים המועדפת עליך כדי לעזור בהפעלת אפשרויות בעתיד";
 
-/* No comment provided by engineer. */
-"Sustainer" = "Sustainer";
+/* Switch app icon */
+"Sustainer App Icon" = "סמל האפליקציה של Sustainer";
 
 /* Restoration Successful Message */
 "Sustainer subscription restored. Thank you for supporting Simplenote!" = "המינוי של Sustainer שוחזר. תודה על התמיכה ב-Simplenote!";
@@ -873,6 +915,12 @@
 
 /* Error when address is in use */
 "That email is already being used" = "כתובת האימייל הזאת כבר נמצאת בשימוש";
+
+/* Email TextField Placeholder */
+"The authentication code you've requested has expired. Please request a new one" = "פג תוקפו של קוד האימות שביקשת. יש לבקש קוד חדש";
+
+/* Error message for Invalid Login Code */
+"The code you've entered is not correct. Please try again" = "הקוד שהזנת שגוי. יש לנסות שוב";
 
 /* Error when address is in use */
 "The email you've entered is already associated with a Simplenote account." = "כתובת האימייל שהזנת כבר משויכת לחשבון Simplenote.";
@@ -986,6 +1034,9 @@
 /* Generic error */
 "We're having problems. Please try again soon." = "נתקלנו בבעיות. יש לנסות שוב בקרוב.";
 
+/* Header for the Login with Code UI. Please preserve the {{EMAIL}} string as is! */
+"We've sent a code to {{EMAIL}}. The code will be valid for a few minutes." = "שלחנו קוד אל {{EMAIL}}. הקוד הזה יהיה בתוקף למשך מספר דקות.";
+
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
 
@@ -999,11 +1050,11 @@
 /* Rating view initial title */
 "What do you think about Simplenote?" = "מה דעתך על Simplenote?";
 
+/* Alerting users that we will attempt to restore lost content on next launch */
+"Will attempt to recover shortcut content on next launch" = "ננסה לשחזר את התוכן של הקיצור בהפעלה הבאה";
+
 /* Number of words in the note */
 "Words" = "מילים";
-
-/* Yearly Subscription Option (Used when / if the price fails to load) */
-"Yearly" = "שנתי";
 
 /* Proceeds with the Empty Trash OP */
 "Yes" = "כן";
@@ -1022,6 +1073,9 @@
 
 /* Restoration Successful Message */
 "You're already a Sustainer. Thank you for supporting Simplenote!" = "כבר הצטרפת בתור Sustainer. תודה על התמיכה ב-Simplenote!";
+
+/* Error message for Invalid Login Code */
+"Your authentication code has expired. Please request a new one" = "פג תוקפו של קוד האימות. יש לבקש קוד חדש";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "כתובת האימייל שלך אינה חוקית.";
