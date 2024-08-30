@@ -70,7 +70,7 @@ platform :ios do
 
   lane :new_beta_release do |skip_confirm: false|
     ensure_git_status_clean
-    ensure_git_branch_is_release_branch
+    ensure_git_branch_is_release_branch!
 
     new_build_code = build_code_next
     UI.important <<~MESSAGE

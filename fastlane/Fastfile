@@ -1028,8 +1028,11 @@ def release_branch_name(release_version: release_version_current)
   "#{RELEASE_BRANCH_ROOT}#{release_version}"
 end
 
-def ensure_git_branch_is_release_branch
-  # Verify that the current branch is a release branch. Notice that `ensure_git_branch` expects a RegEx parameter
+def ensure_git_branch_is_release_branch!
+  # Verify that the current branch is a release branch.
+  #
+  # Notice that `ensure_git_branch` expects a RegEx parameter
+  # Also, ensure_git_branch will fail the lane if the branch doesn't match, hence the ! in the method name.
   ensure_git_branch(branch: "^#{RELEASE_BRANCH_ROOT}")
 end
 
