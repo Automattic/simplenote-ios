@@ -137,64 +137,6 @@ platform :ios do
   end
 
   #####################################################################################
-  # finalize_release
-  # -----------------------------------------------------------------------------------
-  # This lane finalize a release: updates store metadata, bump final version number,
-  # remove branch protection and close milestone, then trigger the final release on CI
-  # -----------------------------------------------------------------------------------
-  # Usage:
-  # bundle exec fastlane finalize_release [skip_confirm:<skip confirm>] [version:<version>]
-  #
-  # Example:
-  # bundle exec fastlane finalize_release
-  # bundle exec fastlane finalize_release skip_confirm:true
-  #####################################################################################
-  desc 'Trigger the final release build on CI'
-  lane :finalize_release do |options|
-    UI.user_error!('To finalize a hotfix, please use the finalize_hotfix_release lane instead') if ios_current_branch_is_hotfix
-
-    ios_finalize_prechecks(options)
-
-    UI.message('Checking app strings translation status...')
-    check_translation_progress(
-      glotpress_url: GLOTPRESS_APP_STRINGS_PROJECT_URL,
-      abort_on_violations: false
-    )
-
-    UI.message('Checking release notes strings translation status...')
-    check_translation_progress(
-      glotpress_url: GLOTPRESS_STORE_METADATA_PROJECT_URL,
-      abort_on_violations: false
-    )
-
-    download_localized_strings_and_metadata_from_glotpress
-
-    lint_localizations
-
-    ios_bump_version_beta
-
-    # Wrap up
-    version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
-    remove_branch_protection(
-      repository: GITHUB_REPO,
-      branch: "release/#{version}"
-    )
-    set_milestone_frozen_marker(
-      repository: GITHUB_REPO,
-      milestone: version,
-      freeze: false
-    )
-    create_new_milestone(repository: GITHUB_REPO)
-    close_milestone(
-      repository: GITHUB_REPO,
-      milestone: version
-    )
-
-    # Start the build
-    trigger_release_build(branch_to_build: "release/#{version}")
-  end
-
-  #####################################################################################
   # build_and_upload_beta_release
   # -----------------------------------------------------------------------------------
   # This lane builds a beta release of the app and optionally uploads
