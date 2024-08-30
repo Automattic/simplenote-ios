@@ -161,19 +161,6 @@ platform :ios do
     rescue StandardError => e
       report_milestone_error(error_title: "Error in milestone finalization process for `#{version}`: #{e.message}")
     end
-
-    UI.message("Moved the following PRs to milestone #{release_version_next}: #{moved_prs.join(', ')}")
-
-    next unless is_ci
-
-    moved_prs_info = if moved_prs.empty?
-                       "No open PR were targeting `#{new_version}` at the time of code-freeze."
-                     else
-                       "#{moved_prs.count} PRs targeting `#{new_version}` were still open and thus moved to `#{release_version_next}`:\n" \
-                         + moved_prs.map { |pr_num| "[##{pr_num}](https://github.com/#{GITHUB_REPO}/pull/#{pr_num})" }.join(', ')
-                     end
-
-    buildkite_annotate(style: moved_prs.empty? ? 'success' : 'warning', context: 'start-code-freeze', message: moved_prs_info)
   end
 
   lane :trigger_beta_build do |branch_to_build:|
