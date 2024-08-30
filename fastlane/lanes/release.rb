@@ -138,6 +138,8 @@ platform :ios do
 
     trigger_release_build(branch_to_build: release_branch_name)
 
+    create_release_backmerge_pr(version_to_merge: version, next_version: release_version_next)
+
     remove_branch_protection(
       repository: GITHUB_REPO,
       branch: release_branch_name
@@ -208,6 +210,25 @@ def trigger_buildkite_release_build(branch:, beta:)
     environment: { BETA_RELEASE: beta },
     pipeline_file: 'release-build.yml'
   )
+end
+
+def create_release_backmerge_pr(version_to_merge:, next_version:)
+  create_release_backmerge_pull_request(
+    repository: GITHUB_REPO,
+    source_branch: release_branch_name(release_version: version_to_merge),
+    labels: ['Releases'],
+    milestone_title: next_version
+  )
+rescue StandardError => e
+  error_message = <<-MESSAGE
+    Error creating backmerge pull request: #{e.message}
+    If this is not the first time you are running the release task, the backmerge PR for the version `#{version_to_merge}` might have already been previously created.
+    Please close any previous backmerge PR for `#{version_to_merge}`, delete the previous merge branch, then run the release task again.
+  MESSAGE
+
+  buildkite_annotate(style: 'error', context: 'error-creating-backmerge', message: error_message) if is_ci
+
+  UI.user_error!(error_message)
 end
 
 def report_milestone_error(error_title:)
