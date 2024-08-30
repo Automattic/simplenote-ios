@@ -218,6 +218,49 @@ rescue StandardError => e
   UI.user_error!(error_message)
 end
 
+def freeze_milestone_and_move_assigned_prs_to_next_milestone(
+  milestone_to_freeze:,
+  next_milestone:,
+  github_repository: GITHUB_REPO
+)
+  begin
+    # Move PRs to next milestone
+    moved_prs = update_assigned_milestone(
+      repository: github_repository,
+      from_milestone: milestone_to_freeze,
+      to_milestone: next_milestone,
+      comment: "Version `#{milestone_to_freeze}` has entered code-freeze. The milestone of this PR has been updated to `#{next_milestone}`."
+    )
+
+    # Add ❄️ marker to milestone title to indicate we entered code-freeze
+    set_milestone_frozen_marker(
+      repository: github_repository,
+      milestone: milestone_to_freeze
+    )
+  rescue StandardError => e
+    moved_prs = []
+
+    report_milestone_error(error_title: "Error during milestone `#{milestone_to_freeze}` freezing and PRs milestone updating process: #{e.message}")
+  end
+
+  UI.message("Moved the following PRs to milestone #{next_milestone}: #{moved_prs.join(', ')}")
+
+  next unless is_ci
+
+  moved_prs_info = if moved_prs.empty?
+                     "No open PRs were targeting `#{milestone_to_freeze}` at the time of code-freeze."
+                   else
+                     "#{moved_prs.count} PRs targeting `#{milestone_to_freeze}` were still open at the time of code-freeze. They have been moved to `#{next_milestone}`:\n" \
+                       + moved_prs.map { |pr_num| "[##{pr_num}](https://github.com/#{GITHUB_REPO}/pull/#{pr_num})" }.join(', ')
+                   end
+
+  buildkite_annotate(
+    style: moved_prs.empty? ? 'success' : 'warning',
+    context: 'code-freeze-milestone-updates',
+    message: moved_prs_info
+  )
+end
+
 def report_milestone_error(error_title:)
   error_message = <<-MESSAGE
     #{error_title}
