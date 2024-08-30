@@ -169,7 +169,7 @@ platform :ios do
     ios_lint_localizations(input_dir: APP_RESOURCES_DIR, allow_retry: true)
   end
 
-  lane :check_translation_progress do
+  lane :check_translation_progress_all do
     check_translation_progress_strings
     check_translation_progress_release_notes
   end
