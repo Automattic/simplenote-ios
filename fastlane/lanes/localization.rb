@@ -164,6 +164,31 @@ platform :ios do
       )
     end
   end
+
+  lane :lint_localizations do
+    ios_lint_localizations(input_dir: APP_RESOURCES_DIR, allow_retry: true)
+  end
+
+  lane :check_translation_progress_all do
+    check_translation_progress_strings
+    check_translation_progress_release_notes
+  end
+
+  lane :check_translation_progress_strings do
+    UI.message('Checking app strings translation status...')
+    check_translation_progress(
+      glotpress_url: GLOTPRESS_APP_STRINGS_PROJECT_URL,
+      abort_on_violations: false
+    )
+  end
+
+  lane :check_translation_progress_release_notes do
+    UI.message('Checking release notes strings translation status...')
+    check_translation_progress(
+      glotpress_url: GLOTPRESS_STORE_METADATA_PROJECT_URL,
+      abort_on_violations: false
+    )
+  end
 end
 
 # Ensure that none of the `.txt` files in `en-US` would accidentally override our originals in `default`
@@ -177,10 +202,6 @@ def ensure_default_metadata_are_not_overridden(metadata_files_hash:)
       Delete `#{en_file_path}`, ensure the version in `default/` has the expected original copy, and try again.
     MSG
     UI.user_error!(override_not_allowed_message) if File.exist?(en_file_path)
-  end
-
-  lane :lint_localizations do
-    ios_lint_localizations(input_dir: APP_RESOURCES_DIR, allow_retry: true)
   end
 end
 

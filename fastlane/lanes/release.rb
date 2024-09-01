@@ -70,7 +70,7 @@ platform :ios do
 
   lane :new_beta_release do |skip_confirm: false|
     ensure_git_status_clean
-    ensure_git_branch_is_release_branch
+    ensure_git_branch_is_release_branch!
 
     new_build_code = build_code_next
     UI.important <<~MESSAGE
@@ -101,6 +101,66 @@ platform :ios do
     trigger_beta_build(branch_to_build: release_branch_name)
 
     # TODO: Switch to working branch and open back-merge PR
+  end
+
+  desc 'Trigger the final release build on CI'
+  lane :finalize_release do |skip_confirm: false|
+    UI.user_error!('To finalize a hotfix, please use the finalize_hotfix_release lane instead') if ios_current_branch_is_hotfix
+
+    ensure_git_status_clean
+    ensure_git_branch_is_release_branch!
+
+    check_translation_progress_all
+
+    new_build_code = build_code_next
+    version = release_version_current
+    UI.important <<~MESSAGE
+      Finalizing release #{version}:
+      • Current build code: #{build_code_current}
+      • Final build code: #{new_build_code}
+    MESSAGE
+
+    UI.user_error!("Terminating as requested. Don't forget to run the remainder of this automation manually.") unless skip_confirm || UI.confirm('Do you want to continue?')
+
+    download_localized_strings_and_metadata_from_glotpress
+    lint_localizations
+
+    UI.message "Bumping build code to #{new_build_code}..."
+    PUBLIC_VERSION_FILE.write(version_long: new_build_code)
+    commit_version_and_build_files
+    # Uses build_code_current let user double-check result.
+    UI.success "Done! Release version: #{version}. Final build code: #{build_code_current}."
+
+    UI.important('Will push changes to remote and trigger the release build.')
+    UI.user_error!("Terminating as requested. Don't forget to run the remainder of this automation manually.") unless skip_confirm || UI.confirm('Do you want to continue?')
+
+    push_to_git_remote(tags: false)
+
+    trigger_release_build(branch_to_build: release_branch_name)
+
+    create_release_backmerge_pr(version_to_merge: version, next_version: release_version_next)
+
+    remove_branch_protection(
+      repository: GITHUB_REPO,
+      branch: release_branch_name
+    )
+
+    begin
+      set_milestone_frozen_marker(
+        repository: GITHUB_REPO,
+        milestone: version,
+        freeze: false
+      )
+
+      create_new_milestone(repository: GITHUB_REPO)
+
+      close_milestone(
+        repository: GITHUB_REPO,
+        milestone: version
+      )
+    rescue StandardError => e
+      report_milestone_error(error_title: "Error in milestone finalization process for `#{version}`: #{e.message}")
+    end
   end
 
   lane :trigger_beta_build do |branch_to_build:|
@@ -137,4 +197,35 @@ def trigger_buildkite_release_build(branch:, beta:)
     environment: { BETA_RELEASE: beta },
     pipeline_file: 'release-build.yml'
   )
+end
+
+def create_release_backmerge_pr(version_to_merge:, next_version:)
+  create_release_backmerge_pull_request(
+    repository: GITHUB_REPO,
+    source_branch: release_branch_name(release_version: version_to_merge),
+    labels: ['Releases'],
+    milestone_title: next_version
+  )
+rescue StandardError => e
+  error_message = <<-MESSAGE
+    Error creating backmerge pull request: #{e.message}
+    If this is not the first time you are running the release task, the backmerge PR for the version `#{version_to_merge}` might have already been previously created.
+    Please close any previous backmerge PR for `#{version_to_merge}`, delete the previous merge branch, then run the release task again.
+  MESSAGE
+
+  buildkite_annotate(style: 'error', context: 'error-creating-backmerge', message: error_message) if is_ci
+
+  UI.user_error!(error_message)
+end
+
+def report_milestone_error(error_title:)
+  error_message = <<-MESSAGE
+    #{error_title}
+    - If this is not the first time you are running the release task (e.g. retrying because it failed on first attempt), the milestone might have already been closed and this error is expected.
+    - Otherwise, please investigate the error.
+  MESSAGE
+
+  UI.error(error_message)
+
+  buildkite_annotate(style: 'warning', context: 'error-with-milestone', message: error_message) if is_ci
 end
