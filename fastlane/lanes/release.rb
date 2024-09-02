@@ -4,40 +4,40 @@
 
 platform :ios do
   lane :code_freeze do |skip_confirm: false|
-    ensure_git_status_clean
+    # ensure_git_status_clean
 
-    Fastlane::Helper::GitHelper.checkout_and_pull(DEFAULT_BRANCH)
+    # Fastlane::Helper::GitHelper.checkout_and_pull(DEFAULT_BRANCH)
 
-    check_pods_references
+    # check_pods_references
 
-    computed_release_branch_name = release_branch_name(release_version: release_version_next)
+    # computed_release_branch_name = release_branch_name(release_version: release_version_next)
 
-    message = <<~MESSAGE
-      Code Freeze:
-      • New release branch from #{DEFAULT_BRANCH}: #{computed_release_branch_name}
+    # message = <<~MESSAGE
+    #   Code Freeze:
+    #   • New release branch from #{DEFAULT_BRANCH}: #{computed_release_branch_name}
 
-      • Current release version and build code: #{release_version_current} (#{build_code_current}).
-      • New release version and build code: #{release_version_next} (#{build_code_code_freeze}).
-    MESSAGE
+    #   • Current release version and build code: #{release_version_current} (#{build_code_current}).
+    #   • New release version and build code: #{release_version_next} (#{build_code_code_freeze}).
+    # MESSAGE
 
-    UI.important(message)
+    # UI.important(message)
 
-    UI.user_error!('Aborted by user request') unless skip_confirm || UI.confirm('Do you want to continue?')
+    # UI.user_error!('Aborted by user request') unless skip_confirm || UI.confirm('Do you want to continue?')
 
-    UI.message 'Creating release branch...'
-    Fastlane::Helper::GitHelper.create_branch(computed_release_branch_name, from: DEFAULT_BRANCH)
-    UI.success "Done! New release branch is: #{git_branch}"
+    # UI.message 'Creating release branch...'
+    # Fastlane::Helper::GitHelper.create_branch(computed_release_branch_name, from: DEFAULT_BRANCH)
+    # UI.success "Done! New release branch is: #{git_branch}"
 
-    UI.message 'Bumping release version and build code...'
-    PUBLIC_VERSION_FILE.write(
-      version_short: release_version_next,
-      version_long: build_code_code_freeze
-    )
-    UI.success "Done! New release version: #{release_version_current}. New build code: #{build_code_current}."
+    # UI.message 'Bumping release version and build code...'
+    # PUBLIC_VERSION_FILE.write(
+    #   version_short: release_version_next,
+    #   version_long: build_code_code_freeze
+    # )
+    # UI.success "Done! New release version: #{release_version_current}. New build code: #{build_code_current}."
 
-    commit_version_and_build_files
+    # commit_version_and_build_files
 
-    new_version = release_version_current
+    new_version = '4.53'
 
     # Delete all release notes metadata, including the source of truth.
     # We'll generate a new source of truth next, and the localized versions will be re-downloaded once translated on GlotPress.
@@ -56,25 +56,28 @@ platform :ios do
       release_notes_file_path: changelog_path
     )
 
-    generate_strings_file_for_glotpress
+    UI.message('Running update_appstore_strings for testing purposes...')
+    update_appstore_strings(version: new_version)
 
-    UI.important('Pushing changes to remote, configuring the release on GitHub, and triggering the beta build...')
-    UI.user_error!("Terminating as requested. Don't forget to run the remainder of this automation manually.") unless skip_confirm || UI.confirm('Do you want to continue?')
+    # generate_strings_file_for_glotpress
 
-    push_to_git_remote(tags: false)
+    # UI.important('Pushing changes to remote, configuring the release on GitHub, and triggering the beta build...')
+    # UI.user_error!("Terminating as requested. Don't forget to run the remainder of this automation manually.") unless skip_confirm || UI.confirm('Do you want to continue?')
 
-    copy_branch_protection(
-      repository: GITHUB_REPO,
-      from_branch: DEFAULT_BRANCH,
-      to_branch: computed_release_branch_name
-    )
+    # push_to_git_remote(tags: false)
 
-    freeze_milestone_and_move_assigned_prs_to_next_milestone(
-      milestone_to_freeze: new_version,
-      next_milestone: release_version_next
-    )
+    # copy_branch_protection(
+    #   repository: GITHUB_REPO,
+    #   from_branch: DEFAULT_BRANCH,
+    #   to_branch: computed_release_branch_name
+    # )
 
-    trigger_beta_build(branch_to_build: computed_release_branch_name)
+    # freeze_milestone_and_move_assigned_prs_to_next_milestone(
+    #   milestone_to_freeze: new_version,
+    #   next_milestone: release_version_next
+    # )
+
+    # trigger_beta_build(branch_to_build: computed_release_branch_name)
 
     # TODO: Switch to working branch and open back-merge PR
   end
