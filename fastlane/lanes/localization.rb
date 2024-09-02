@@ -90,12 +90,6 @@ platform :ios do
   end
 
   lane :download_localized_metadata_from_glotpress do
-    # FIXME: We should make the `fastlane/metadata/default/release_notes.txt` path be the source of truth for the original copies in the future.
-    # (will require changes in the `update_appstore_strings` lane, the Release Scenario, the MC tool to generate the announcement post…)
-    #
-    # In the meantime, just copy the file to the right place for `deliver` to find, for the `default` pseudo-locale which is used as fallback
-    FileUtils.cp(RELEASE_NOTES_SOURCE_PATH, File.join(STORE_METADATA_FOLDER, 'default', 'release_notes.txt'))
-
     # FIXME: Replace this with a call to the future replacement of `gp_downloadmetadata` once it's implemented in the release-toolkit (see paaHJt-31O-p2).
     target_files = {
       "v#{release_version_current}-whats-new": { desc: 'release_notes.txt', max_size: 4000 },

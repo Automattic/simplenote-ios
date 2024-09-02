@@ -42,7 +42,7 @@ platform :ios do
     extract_release_notes_for_version(
       version: new_version,
       release_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'RELEASE-NOTES.txt'),
-      extracted_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt')
+      extracted_notes_file_path: RELEASE_NOTES_SOURCE_PATH
     )
     ios_update_release_notes(new_version: new_version)
 
