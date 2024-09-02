@@ -224,6 +224,13 @@ def freeze_milestone_and_move_assigned_prs_to_next_milestone(
   next_milestone:,
   github_repository: GITHUB_REPO
 )
+  # Notice that the order of execution is important here and should not be changed.
+  #
+  # First, we move the PR from milestone_to_freeze to next_milestone.
+  # Then, we update milestone_to_freeze's tile with the frozen marker (traditionally ❄️ )
+  #
+  # If the order were to be reversed, the PRs lookup for milestone_to_freeze would yeld no value.
+  # That's because the lookup uses the milestone title, which would no longer be milestone_to_freeze, but milestone_to_freeze + the frozen marker.
   begin
     # Move PRs to next milestone
     moved_prs = update_assigned_milestone(
