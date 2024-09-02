@@ -253,7 +253,7 @@ def freeze_milestone_and_move_assigned_prs_to_next_milestone(
 
   UI.message("Moved the following PRs to milestone #{next_milestone}: #{moved_prs.join(', ')}")
 
-  next unless is_ci
+  return unless is_ci
 
   moved_prs_info = if moved_prs.empty?
                      "No open PRs were targeting `#{milestone_to_freeze}` at the time of code-freeze."
