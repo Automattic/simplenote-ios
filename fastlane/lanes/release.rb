@@ -39,12 +39,17 @@ platform :ios do
 
     new_version = release_version_current
 
+    changelog_path = File.join(PROJECT_ROOT_FOLDER, 'RELEASE-NOTES.txt')
     extract_release_notes_for_version(
       version: new_version,
-      release_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'RELEASE-NOTES.txt'),
+      release_notes_file_path: changelog_path,
       extracted_notes_file_path: RELEASE_NOTES_SOURCE_PATH
     )
-    ios_update_release_notes(new_version: new_version)
+    # Add a new section to the changelog for the version _after_ the one we are code freezing
+    ios_update_release_notes(
+      new_version: new_version,
+      release_notes_file_path: changelog_path
+    )
 
     generate_strings_file_for_glotpress
 
