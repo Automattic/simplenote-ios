@@ -58,9 +58,10 @@ platform :ios do
       from_branch: DEFAULT_BRANCH,
       to_branch: computed_release_branch_name
     )
-    set_milestone_frozen_marker(
-      repository: GITHUB_REPO,
-      milestone: new_version
+
+    freeze_milestone_and_move_assigned_prs_to_next_milestone(
+      milestone_to_freeze: new_version,
+      next_milestone: release_version_next
     )
 
     trigger_beta_build(branch_to_build: computed_release_branch_name)
