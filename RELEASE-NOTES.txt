@@ -2,7 +2,6 @@
 -----
 - Test release notes Gio added to verify automation
 
-
 4.52
 -----
 - Extended support for iOS Shortcuts
