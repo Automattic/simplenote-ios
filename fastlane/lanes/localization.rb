@@ -70,7 +70,7 @@ platform :ios do
     )
   end
 
-  desc 'Updates the AppStoreStrings.pot file with the latest data'
+  desc 'Updates the localization source POT file with the latest metadata for App Store Connect.'
   lane :update_appstore_strings do |version: release_version_current|
     files = {
       whats_new: RELEASE_NOTES_SOURCE_PATH,
