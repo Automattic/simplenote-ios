@@ -43,8 +43,8 @@ GLOTPRESS_STORE_METADATA_PROJECT_URL = "#{GLOTPRESS_APP_STRINGS_PROJECT_URL}rele
 
 APP_RESOURCES_DIR = File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources')
 STORE_METADATA_FOLDER = File.join(PROJECT_ROOT_FOLDER, 'fastlane', 'metadata')
-DEFAULT_METADATA_FOLDER = File.join(STORE_METADATA_FOLDER, 'default')
-RELEASE_NOTES_SOURCE_PATH = File.join(DEFAULT_METADATA_FOLDER, 'release_notes.txt')
+STORE_METADATA_DEFAULT_LOCALE_FOLDER = File.join(STORE_METADATA_FOLDER, 'default')
+RELEASE_NOTES_SOURCE_PATH = File.join(STORE_METADATA_DEFAULT_LOCALE_FOLDER, 'release_notes.txt')
 
 require_relative 'lib/env_manager'
 
@@ -81,9 +81,9 @@ platform :ios do
   lane :update_appstore_strings do |version: release_version_current|
     files = {
       whats_new: RELEASE_NOTES_SOURCE_PATH,
-      app_store_subtitle: File.join(default_metadata_folder, 'subtitle.txt'),
-      app_store_desc: File.join(default_metadata_folder, 'description.txt'),
-      app_store_keywords: File.join(default_metadata_folder, 'keywords.txt')
+      app_store_subtitle: File.join(STORE_METADATA_DEFAULT_LOCALE_FOLDER, 'subtitle.txt'),
+      app_store_desc: File.join(STORE_METADATA_DEFAULT_LOCALE_FOLDER, 'description.txt'),
+      app_store_keywords: File.join(STORE_METADATA_DEFAULT_LOCALE_FOLDER, 'keywords.txt')
     }
 
     ios_update_metadata_source(
