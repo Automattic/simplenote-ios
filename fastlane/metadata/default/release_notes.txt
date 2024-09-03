@@ -1,0 +1,2 @@
+- Test release notes Gio added to verify automation
+
