@@ -39,12 +39,22 @@ platform :ios do
 
     new_version = release_version_current
 
+    # Delete all release notes metadata, including the source of truth.
+    # We'll generate a new source of truth next, and the localized versions will be re-downloaded once translated on GlotPress.
+    # It's important we delete them, otherwise we risk using old release notes for locales that won't get translated in time for the release finalization.
+    delete_all_metadata_release_notes
+
+    changelog_path = File.join(PROJECT_ROOT_FOLDER, 'RELEASE-NOTES.txt')
     extract_release_notes_for_version(
       version: new_version,
-      release_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'RELEASE-NOTES.txt'),
-      extracted_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt')
+      release_notes_file_path: changelog_path,
+      extracted_notes_file_path: RELEASE_NOTES_SOURCE_PATH
     )
-    ios_update_release_notes(new_version: new_version)
+    # Add a new section to the changelog for the version _after_ the one we are code freezing
+    ios_update_release_notes(
+      new_version: new_version,
+      release_notes_file_path: changelog_path
+    )
 
     generate_strings_file_for_glotpress
 
@@ -279,4 +289,16 @@ def report_milestone_error(error_title:)
   UI.error(error_message)
 
   buildkite_annotate(style: 'warning', context: 'error-with-milestone', message: error_message) if is_ci
+end
+
+def delete_all_metadata_release_notes(store_metadata_folder: STORE_METADATA_FOLDER)
+  files = Dir.glob(File.join(store_metadata_folder, '**', 'release_notes.txt'))
+  files.each { |path| File.delete(path) }
+  git_add(path: files)
+  git_commit(
+    path: files,
+    message: 'Delete release notes source and localization before code freeze',
+    # Even if no locale was translated in the previous cycle, default/relaese_notes.txt should always be present, and therefore deleted at this stage.
+    allow_nothing_to_commit: false
+  )
 end

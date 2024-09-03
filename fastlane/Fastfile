@@ -35,17 +35,16 @@ SECRETS_ROOT = File.join(Dir.home, '.configure', 'simplenote-ios', 'secrets')
 APP_STORE_CONNECT_KEY_PATH = File.join(SECRETS_ROOT, 'app_store_connect_fastlane_api_key.json')
 $used_test_account_index = nil
 
-APP_RESOURCES_DIR = File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources')
-
-RELEASE_NOTES_SOURCE_PATH = File.join(APP_RESOURCES_DIR, 'release_notes.txt')
-
 GLOTPRESS_BASE_URL = 'https://translate.wordpress.com/projects'
 # Notice the trailing / is required.
 # Without it, GlotPress will redirect to the version with /
 GLOTPRESS_APP_STRINGS_PROJECT_URL = "#{GLOTPRESS_BASE_URL}/simplenote/ios/".freeze
 GLOTPRESS_STORE_METADATA_PROJECT_URL = "#{GLOTPRESS_APP_STRINGS_PROJECT_URL}release-notes/".freeze
 
+APP_RESOURCES_DIR = File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources')
 STORE_METADATA_FOLDER = File.join(PROJECT_ROOT_FOLDER, 'fastlane', 'metadata')
+STORE_METADATA_DEFAULT_LOCALE_FOLDER = File.join(STORE_METADATA_FOLDER, 'default')
+RELEASE_NOTES_SOURCE_PATH = File.join(STORE_METADATA_DEFAULT_LOCALE_FOLDER, 'release_notes.txt')
 
 require_relative 'lib/env_manager'
 
@@ -73,30 +72,10 @@ end
 ########################################################################
 ENV['PROJECT_NAME'] = 'Simplenote'
 ENV['PROJECT_ROOT_FOLDER'] = PROJECT_ROOT_FOLDER
-ENV['APP_STORE_STRINGS_FILE_NAME'] = 'AppStoreStrings.pot'
 ENV['PUBLIC_CONFIG_FILE'] = VERSION_FILE_PATH
 ENV['FL_RELEASE_TOOLKIT_DEFAULT_BRANCH'] = 'trunk'
 
 platform :ios do
-  desc 'Updates the AppStoreStrings.pot file with the latest data'
-  lane :update_appstore_strings do |version: release_version_current|
-    prj_folder = Pathname.new(File.join(Dir.pwd, '..')).expand_path.to_s
-    source_metadata_folder = File.join(prj_folder, 'fastlane', 'appstoreres', 'metadata', 'source')
-
-    files = {
-      whats_new: RELEASE_NOTES_SOURCE_PATH,
-      app_store_subtitle: File.join(source_metadata_folder, 'subtitle.txt'),
-      app_store_desc: File.join(source_metadata_folder, 'description.txt'),
-      app_store_keywords: File.join(source_metadata_folder, 'keywords.txt')
-    }
-
-    ios_update_metadata_source(
-      po_file_path: File.join(APP_RESOURCES_DIR, 'AppStoreStrings.pot'),
-      source_files: files,
-      release_version: version
-    )
-  end
-
   #####################################################################################
   # new_hotfix_release
   # -----------------------------------------------------------------------------------

@@ -64,7 +64,7 @@ lane :upload_to_app_store_connect do |beta_release:, skip_prechecks: false, crea
   create_release(
     repository: GITHUB_REPO,
     version: version,
-    release_notes_file_path: File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources', 'release_notes.txt'),
+    release_notes_file_path: RELEASE_NOTES_SOURCE_PATH,
     release_assets: XCARCHIVE_ZIP_PATH.to_s,
     prerelease: beta_release
   )
