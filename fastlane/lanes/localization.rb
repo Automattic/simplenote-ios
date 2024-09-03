@@ -70,6 +70,22 @@ platform :ios do
     )
   end
 
+  desc 'Updates the AppStoreStrings.pot file with the latest data'
+  lane :update_appstore_strings do |version: release_version_current|
+    files = {
+      whats_new: RELEASE_NOTES_SOURCE_PATH,
+      app_store_subtitle: File.join(STORE_METADATA_DEFAULT_LOCALE_FOLDER, 'subtitle.txt'),
+      app_store_desc: File.join(STORE_METADATA_DEFAULT_LOCALE_FOLDER, 'description.txt'),
+      app_store_keywords: File.join(STORE_METADATA_DEFAULT_LOCALE_FOLDER, 'keywords.txt')
+    }
+
+    ios_update_metadata_source(
+      po_file_path: File.join(APP_RESOURCES_DIR, 'AppStoreStrings.pot'),
+      source_files: files,
+      release_version: version
+    )
+  end
+
   lane :download_localized_strings_and_metadata_from_glotpress do
     download_localized_strings_from_glotpress
     download_localized_metadata_from_glotpress
