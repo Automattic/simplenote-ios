@@ -1,5 +1,6 @@
 4.53
 -----
+- Test release notes Gio added to verify automation
 
 
 4.52
