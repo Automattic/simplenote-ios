@@ -8,16 +8,14 @@ platform :ios do
 
     Fastlane::Helper::GitHelper.checkout_and_pull(DEFAULT_BRANCH)
 
-    check_pods_references
-
     computed_release_branch_name = release_branch_name(release_version: release_version_next)
 
     message = <<~MESSAGE
       Code Freeze:
-      • New release branch from #{DEFAULT_BRANCH}: #{computed_release_branch_name}
+      - New release branch from #{DEFAULT_BRANCH}: #{computed_release_branch_name}
 
-      • Current release version and build code: #{release_version_current} (#{build_code_current}).
-      • New release version and build code: #{release_version_next} (#{build_code_code_freeze}).
+      - Current release version and build code: #{release_version_current} (#{build_code_current}).
+      - New release version and build code: #{release_version_next} (#{build_code_code_freeze}).
     MESSAGE
 
     UI.important(message)
@@ -56,12 +54,13 @@ platform :ios do
       release_notes_file_path: changelog_path
     )
 
-    generate_strings_file_for_glotpress
-
     UI.important('Pushing changes to remote, configuring the release on GitHub, and triggering the beta build...')
     UI.user_error!("Terminating as requested. Don't forget to run the remainder of this automation manually.") unless skip_confirm || UI.confirm('Do you want to continue?')
 
-    push_to_git_remote(tags: false)
+    push_to_git_remote(
+      tags: false,
+      set_upstream: is_ci == false # only set upstream when running locally, useless in transient CI builds
+    )
 
     copy_branch_protection(
       repository: GITHUB_REPO,
@@ -74,9 +73,57 @@ platform :ios do
       next_milestone: release_version_next
     )
 
+    check_pods_references
+
+    next unless is_ci
+
+    message = <<~MESSAGE
+      Code freeze started successfully.
+
+      Next steps:
+
+      - Checkout `#{release_branch_name}` branch locally
+      - Update Pods and release notes if needed
+      - Finalize the code freeze
+    MESSAGE
+    buildkite_annotate(context: 'code-freeze-success', style: 'success', message: message)
+  end
+
+  lane :complete_code_freeze do |skip_confirm: false|
+    ensure_git_branch_is_release_branch
+    ensure_git_status_clean
+
+    version = release_version_current
+
+    UI.important("Completing code freeze for: #{version}")
+
+    UI.user_error!('Aborted by user request') unless skip_confirm || UI.confirm('Do you want to continue?')
+
+    generate_strings_file_for_glotpress
+
+    update_appstore_strings
+
+    unless skip_confirm || UI.confirm('Ready to push changes to remote and trigger the beta build?')
+      UI.message("Terminating as requested. Don't forget to run the remainder of this automation manually.")
+      next
+    end
+
+    push_to_git_remote(tags: false)
+
     trigger_beta_build(branch_to_build: computed_release_branch_name)
 
-    # TODO: Switch to working branch and open back-merge PR
+    pr_url = create_release_management_pull_request(
+      release_version: version,
+      base_branch: DEFAULT_BRANCH,
+      title: "Merge #{version} code freeze"
+    )
+
+    next unless is_ci
+
+    message = <<~MESSAGE
+      Code freeze completed successfully. Next, review and merge the [integration PR](#{pr_url}).
+    MESSAGE
+    buildkite_annotate(context: 'code-freeze-completed', style: 'success', message: message)
   end
 
   lane :new_beta_release do |skip_confirm: false|
@@ -301,4 +348,33 @@ def delete_all_metadata_release_notes(store_metadata_folder: STORE_METADATA_FOLD
     # Even if no locale was translated in the previous cycle, default/relaese_notes.txt should always be present, and therefore deleted at this stage.
     allow_nothing_to_commit: false
   )
+end
+
+def create_release_management_pull_request(release_version:, base_branch:, title:)
+  token = EnvManager.get_required_env!('GITHUB_TOKEN')
+
+  pr_url = create_pull_request(
+    api_token: token,
+    repo: GITHUB_REPO,
+    title: title,
+    head: Fastlane::Helper::GitHelper.current_git_branch,
+    base: base_branch,
+    labels: 'Releases'
+  )
+
+  # Next, set the milestone for the PR
+  #
+  # The create_pull_request action has a 'milestone' parameter, but it expects the milestone id.
+  # We don't know the id of the milestone, but we can use a different action to set it.
+  #
+  # PR URLs are in the format github.com/org/repo/pull/id
+  pr_number = File.basename(pr_url)
+  update_assigned_milestone(
+    repository: GITHUB_REPO,
+    numbers: [pr_number],
+    to_milestone: release_version
+  )
+
+  # Return the PR URL
+  pr_url
 end

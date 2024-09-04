@@ -45,7 +45,7 @@ lane :upload_to_app_store_connect do |beta_release:, skip_prechecks: false, crea
     api_key_path: APP_STORE_CONNECT_KEY_PATH,
     skip_waiting_for_build_processing: false,
     distribute_external: true,
-    changelog: RELEASE_NOTES_SOURCE_PATH,
+    changelog: File.read(RELEASE_NOTES_SOURCE_PATH),
     reject_build_waiting_for_review: true,
     groups: ['Internal A8C Beta Testers', 'External Beta Testers']
   )
