@@ -15,10 +15,14 @@ steps:
     key: complete_code_freeze
     plugins: [$CI_TOOLKIT_PLUGIN]
     command: |
-      .buildkite/commands/configure-environment.sh
+      echo '--- :git: Configure Git for Release Management'
+      .buildkite/commands/configure-git-for-release-management.sh
 
       echo '--- :git: Checkout release branch'
       .buildkite/commands/checkout-release-branch.sh
+
+      echo '--- :ruby: Set up Ruby Tools'
+      install_gems
 
       echo '--- :closed_lock_with_key: Access secrets'
       bundle exec fastlane run configure_apply

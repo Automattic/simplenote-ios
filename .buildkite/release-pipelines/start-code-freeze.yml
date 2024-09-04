@@ -10,9 +10,13 @@ steps:
     # The first client to implement releases in CI was Android so the automation works in that queue.
     # We might want to move it to a leaner one in the future.
     agents:
-        queue: android
+        queue: tumblr-metal
     command: |
-      .buildkite/commands/configure-environment.sh
+      echo '--- :robot_face: Use bot for git operations'
+      source use-bot-for-git
+
+      echo '--- :ruby: Setup Ruby Tools'
+      install_gems
 
       echo '--- :shipit: Start code freeze'
       bundle exec fastlane code_freeze skip_confirm:true
