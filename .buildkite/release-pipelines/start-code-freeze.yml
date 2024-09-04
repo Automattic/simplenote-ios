@@ -13,7 +13,7 @@ steps:
         queue: tumblr-metal
     command: |
       echo '--- :robot_face: Use bot for git operations'
-      source use-bot-for-git
+      source use-bot-for-git wpmobilebot
 
       echo '--- :ruby: Setup Ruby Tools'
       install_gems
