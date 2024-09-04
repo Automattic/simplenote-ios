@@ -14,7 +14,17 @@ steps:
   - label: Complete Code Freeze
     key: complete_code_freeze
     plugins: [$CI_TOOLKIT_PLUGIN]
-    command: .buildkite/commands/complete-code-freeze.sh $RELEASE_VERSION
+    command: |
+      .buildkite/commands/configure-environment.sh
+
+      echo '--- :git: Checkout release branch'
+      .buildkite/commands/checkout-release-branch.sh
+
+      echo '--- :closed_lock_with_key: Access secrets'
+      bundle exec fastlane run configure_apply
+
+      echo '--- :shipit: Complete code freeze'
+      bundle exec fastlane complete_code_freeze skip_confirm:true
     retry:
       manual:
         # If failed, we prefer retrying via ReleaseV2 rather than Buildkite.
