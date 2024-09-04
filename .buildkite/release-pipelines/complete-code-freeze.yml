@@ -10,8 +10,3 @@ steps:
     key: complete_code_freeze
     plugins: [$CI_TOOLKIT_PLUGIN]
     command: .buildkite/commands/complete-code-freeze.sh $RELEASE_VERSION
-
-  - label: Log Outdated Pods
-    depends_on: complete_code_freeze
-    plugins: [$CI_TOOLKIT_PLUGIN]
-    command: .buildkite/commands/log-outdated-pods.sh $RELEASE_VERSION
