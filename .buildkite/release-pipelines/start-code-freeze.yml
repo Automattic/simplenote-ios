@@ -7,8 +7,6 @@ steps:
   - label: Start Code Freeze
     plugins:
       - $CI_TOOLKIT_PLUGIN
-    # The first client to implement releases in CI was Android so the automation works in that queue.
-    # We might want to move it to a leaner one in the future.
     agents:
         queue: tumblr-metal
     command: |
