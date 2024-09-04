@@ -11,5 +11,5 @@ gem 'fastlane-plugin-sentry', '~> 1.6'
 gem 'fastlane-plugin-wpmreleasetoolkit', '~> 11.0', '>= 11.0.1'
 
 group :screenshots, optional: true do
-  gem 'rmagick', '~> 3.2.0'
+  gem 'rmagick', '~> 5.3.0'
 end
