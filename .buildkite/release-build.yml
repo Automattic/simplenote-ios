@@ -15,7 +15,7 @@ steps:
 
   - label: ":testflight: Upload Simplenote iOS to App Store Connect"
     depends_on: testflight_build
-    command: .buildkite/commands/release-upload.sh
+    command: .buildkite/commands/release-upload.sh $BETA_RELEASE
     priority: 1
     plugins: [$CI_TOOLKIT_PLUGIN]
     notify:
