@@ -10,3 +10,8 @@ steps:
     key: complete_code_freeze
     plugins: [$CI_TOOLKIT_PLUGIN]
     command: .buildkite/commands/complete-code-freeze.sh $RELEASE_VERSION
+    retry:
+      manual:
+        # If failed, we prefer retrying via ReleaseV2 rather than Buildkite.
+        # Rationale: ReleaseV2 is the source of truth for the process and track links to the various builds.
+        allowed: false

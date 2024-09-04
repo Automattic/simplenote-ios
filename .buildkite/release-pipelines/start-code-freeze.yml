@@ -15,3 +15,8 @@ steps:
 
       echo '--- :shipit: Start code freeze'
       bundle exec fastlane code_freeze skip_confirm:true
+    retry:
+      manual:
+        # If failed, we prefer retrying via ReleaseV2 rather than Buildkite.
+        # Rationale: ReleaseV2 is the source of truth for the process and track links to the various builds.
+        allowed: false
