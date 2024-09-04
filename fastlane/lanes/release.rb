@@ -110,7 +110,7 @@ platform :ios do
 
     push_to_git_remote(tags: false)
 
-    trigger_beta_build(branch_to_build: computed_release_branch_name)
+    trigger_beta_build(branch_to_build: release_branch_name(release_version: version))
 
     pr_url = create_release_management_pull_request(
       release_version: version,
