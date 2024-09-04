@@ -1,0 +1,17 @@
+env:
+  IMAGE_ID: $IMAGE_ID
+
+# The code freeze completion needs to run on macOS because it uses genstrings under the hood.
+agents:
+    queue: mac
+
+steps:
+  - label: Complete Code Freeze
+    key: complete_code_freeze
+    plugins: [$CI_TOOLKIT_PLUGIN]
+    command: .buildkite/commands/complete-code-freeze.sh $RELEASE_VERSION
+
+  - label: Log Outdated Pods
+    depends_on: complete_code_freeze
+    plugins: [$CI_TOOLKIT_PLUGIN]
+    command: .buildkite/commands/log-outdated-pods.sh $RELEASE_VERSION

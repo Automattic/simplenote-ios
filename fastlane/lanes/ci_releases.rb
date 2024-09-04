@@ -12,4 +12,15 @@ platform :ios do
       message: 'Start Code Freeze'
     )
   end
+
+  lane :trigger_complete_code_freeze_in_ci do |release_version: release_version_current|
+    buildkite_trigger_build(
+      buildkite_organization: BUILDKITE_ORGANIZATION,
+      buildkite_pipeline: BUILDKITE_PIPELINE,
+      branch: release_branch_name(release_version: release_version),
+      pipeline_file: File.join(PIPELINES_ROOT, 'complete-code-freeze.yml'),
+      message: "Complete code freeze for #{release_version}",
+      environment: { RELEASE_VERSION: release_version }
+    )
+  end
 end

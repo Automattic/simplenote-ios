@@ -57,7 +57,10 @@ platform :ios do
     UI.important('Pushing changes to remote, configuring the release on GitHub, and triggering the beta build...')
     UI.user_error!("Terminating as requested. Don't forget to run the remainder of this automation manually.") unless skip_confirm || UI.confirm('Do you want to continue?')
 
-    push_to_git_remote(tags: false, set_upstream: true)
+    push_to_git_remote(
+      tags: false,
+      set_upstream: is_ci == false # only set upstream when running locally, useless in transient CI builds
+    )
 
     copy_branch_protection(
       repository: GITHUB_REPO,
@@ -113,10 +116,12 @@ platform :ios do
       title: "Merge #{version} code freeze"
     )
 
+    next unless is_ci
+
     message = <<~MESSAGE
       Code freeze completed successfully. Next, review and merge the [integration PR](#{pr_url}).
     MESSAGE
-    buildkite_annotate(context: 'code-freeze-completed', style: 'success', message: message) if is_ci
+    buildkite_annotate(context: 'code-freeze-completed', style: 'success', message: message)
   end
 
   lane :new_beta_release do |skip_confirm: false|
