@@ -12,7 +12,7 @@ steps:
     agents:
         queue: tumblr-metal
     command: |
-      echo '--- :robot_face: Use bot for git operations'
+      echo '--- :robot_face: Use bot for Git operations'
       source use-bot-for-git wpmobilebot
 
       echo '--- :ruby: Setup Ruby Tools'
