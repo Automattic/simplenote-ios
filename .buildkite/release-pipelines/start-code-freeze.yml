@@ -12,11 +12,7 @@ steps:
     agents:
         queue: android
     command: |
-      echo '--- :git: Configure Git for release management'
-      .buildkite/commands/configure-git-for-release-management.sh
-
-      echo '--- :ruby: Setup Ruby tools'
-      install_gems
+      .buildkite/commands/configure-environment.sh
 
       echo '--- :shipit: Start code freeze'
       bundle exec fastlane code_freeze skip_confirm:true
