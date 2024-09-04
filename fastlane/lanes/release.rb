@@ -90,7 +90,7 @@ platform :ios do
   end
 
   lane :complete_code_freeze do |skip_confirm: false|
-    ensure_git_branch_is_release_branch
+    ensure_git_branch_is_release_branch!
     ensure_git_status_clean
 
     version = release_version_current
