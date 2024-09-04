@@ -101,6 +101,8 @@ platform :ios do
 
     generate_strings_file_for_glotpress
 
+    update_appstore_strings
+
     unless skip_confirm || UI.confirm('Ready to push changes to remote and trigger the beta build?')
       UI.message("Terminating as requested. Don't forget to run the remainder of this automation manually.")
       next
