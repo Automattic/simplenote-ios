@@ -255,6 +255,11 @@ def trigger_buildkite_release_build(branch:, beta:)
     environment: { BETA_RELEASE: beta },
     pipeline_file: 'release-build.yml'
   )
+
+  return unless is_ci
+
+  message = "This build triggered #{build_url} on <code>#{branch}</code>."
+  buildkite_annotate(style: 'info', context: 'trigger-release-build', message: message)
 end
 
 def create_release_backmerge_pr(version_to_merge:, next_version:)
