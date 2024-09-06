@@ -349,8 +349,8 @@ def delete_all_metadata_release_notes(store_metadata_folder: STORE_METADATA_FOLD
   git_add(path: files)
   git_commit(
     path: files,
-    message: 'Delete release notes source and localization before code freeze',
-    # Even if no locale was translated in the previous cycle, default/relaese_notes.txt should always be present, and therefore deleted at this stage.
+    message: 'Delete previous version release notes before code freeze',
+    # Even if no locale was translated in the previous cycle, default/release_notes.txt should always be present, and therefore deleted at this stage.
     allow_nothing_to_commit: false
   )
 end
