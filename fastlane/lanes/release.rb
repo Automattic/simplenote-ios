@@ -248,13 +248,18 @@ def check_pods_references
 end
 
 def trigger_buildkite_release_build(branch:, beta:)
-  buildkite_trigger_build(
+  build_url = buildkite_trigger_build(
     buildkite_organization: BUILDKITE_ORGANIZATION,
     buildkite_pipeline: BUILDKITE_PIPELINE,
     branch: branch,
     environment: { BETA_RELEASE: beta },
     pipeline_file: 'release-build.yml'
   )
+
+  return unless is_ci
+
+  message = "This build triggered #{build_url} on <code>#{branch}</code>."
+  buildkite_annotate(style: 'info', context: 'trigger-release-build', message: message)
 end
 
 def create_release_backmerge_pr(version_to_merge:, next_version:)
@@ -344,8 +349,8 @@ def delete_all_metadata_release_notes(store_metadata_folder: STORE_METADATA_FOLD
   git_add(path: files)
   git_commit(
     path: files,
-    message: 'Delete release notes source and localization before code freeze',
-    # Even if no locale was translated in the previous cycle, default/relaese_notes.txt should always be present, and therefore deleted at this stage.
+    message: 'Delete previous version release notes before code freeze',
+    # Even if no locale was translated in the previous cycle, default/release_notes.txt should always be present, and therefore deleted at this stage.
     allow_nothing_to_commit: false
   )
 end
