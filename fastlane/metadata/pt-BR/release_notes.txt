@@ -1,6 +1,0 @@
-- Suporte estendido para os Atalhos do iOS
-- Problema corrigido em que a seleção de notas era perdida quando o aplicativo ficava em segundo plano
-- Problema corrigido para ativar a configuração do Face ID sem uma senha
-- Suporte para login com link mágico
-- A IU de login foi modificada
-

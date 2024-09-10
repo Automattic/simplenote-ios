@@ -90,7 +90,7 @@ platform :ios do
   end
 
   lane :complete_code_freeze do |skip_confirm: false|
-    ensure_git_branch_is_release_branch
+    ensure_git_branch_is_release_branch!
     ensure_git_status_clean
 
     version = release_version_current
@@ -110,7 +110,7 @@ platform :ios do
 
     push_to_git_remote(tags: false)
 
-    trigger_beta_build(branch_to_build: computed_release_branch_name)
+    trigger_beta_build(branch_to_build: release_branch_name(release_version: version))
 
     pr_url = create_release_management_pull_request(
       release_version: version,
@@ -248,13 +248,18 @@ def check_pods_references
 end
 
 def trigger_buildkite_release_build(branch:, beta:)
-  buildkite_trigger_build(
+  build_url = buildkite_trigger_build(
     buildkite_organization: BUILDKITE_ORGANIZATION,
     buildkite_pipeline: BUILDKITE_PIPELINE,
     branch: branch,
     environment: { BETA_RELEASE: beta },
     pipeline_file: 'release-build.yml'
   )
+
+  return unless is_ci
+
+  message = "This build triggered #{build_url} on <code>#{branch}</code>."
+  buildkite_annotate(style: 'info', context: 'trigger-release-build', message: message)
 end
 
 def create_release_backmerge_pr(version_to_merge:, next_version:)
@@ -344,8 +349,8 @@ def delete_all_metadata_release_notes(store_metadata_folder: STORE_METADATA_FOLD
   git_add(path: files)
   git_commit(
     path: files,
-    message: 'Delete release notes source and localization before code freeze',
-    # Even if no locale was translated in the previous cycle, default/relaese_notes.txt should always be present, and therefore deleted at this stage.
+    message: 'Delete previous version release notes before code freeze',
+    # Even if no locale was translated in the previous cycle, default/release_notes.txt should always be present, and therefore deleted at this stage.
     allow_nothing_to_commit: false
   )
 end

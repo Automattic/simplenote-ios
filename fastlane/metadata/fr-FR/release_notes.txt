@@ -1,6 +1,0 @@
-- Prise en charge étendue des raccourcis sur iOS
-- Correction d’un problème de perte de la sélection de notes lors du passage de l’application en arrière-plan
-- Correction d’un problème susceptible d’activer le basculement vers Face ID sans mot de passe
-- Prise en charge de la connexion par lien magique
-- Interface utilisateur de connexion remaniée
-

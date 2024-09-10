@@ -1,6 +1,0 @@
-- Uitgebreide ondersteuning voor iOS Shortcuts
-- Probleem opgelost waarbij de selectie van notities verloren ging als de app op de achtergrond draaide
-- Probleem opgelost waarbij de FaceID veranderd kon worden zonder wachtwoordcode
-- Ondersteuning voor inloggen via magische link
-- De UI voor het inloggen heeft een opknapbeurt gekregen
-

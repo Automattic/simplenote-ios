@@ -1,6 +1,0 @@
-- Erweiterter Support für iOS-Kurzbefehle
-- Fehler behoben, durch den die Notizenauswahl verloren ging, wenn die App im Hintergrund lief
-- Fehler behoben, durch den der Wechsel zu Face ID ohne Zugangscode aktiviert wurde
-- Support für die Anmeldung mit magischem Link
-- Anmelde-UI wurde überarbeitet
-
