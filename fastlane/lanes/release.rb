@@ -176,7 +176,7 @@ platform :ios do
 
   desc 'Trigger the final release build on CI'
   lane :finalize_release do |skip_confirm: false|
-    UI.user_error!('To finalize a hotfix, please use the finalize_hotfix_release lane instead') if ios_current_branch_is_hotfix
+    UI.user_error!('To finalize a hotfix, please use the finalize_hotfix_release lane instead') if release_is_hotfix?
 
     ensure_git_status_clean
     ensure_git_branch_is_release_branch!
@@ -479,4 +479,10 @@ def create_release_management_pull_request(
 
   # Return the PR URL
   pr_url
+end
+
+def release_is_hotfix?
+  VERSION_CALCULATOR.release_is_hotfix?(
+    version: VERSION_FORMATTER.parse(VERSION_FILE.read_release_version)
+  )
 end
