@@ -228,7 +228,6 @@ platform :ios do
   lane :new_hotfix_release do |version:, skip_confirm: false, skip_prechecks: false|
     ensure_git_status_clean unless skip_prechecks
 
-    # Parse the provided version into an AppVersion object
     parsed_version = VERSION_FORMATTER.parse(version)
     build_code_hotfix = BUILD_CODE_FORMATTER.build_code(version: parsed_version)
     previous_version = VERSION_FORMATTER.release_version(VERSION_CALCULATOR.previous_patch_version(version: parsed_version))
