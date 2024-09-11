@@ -279,10 +279,31 @@ platform :ios do
   end
 
   desc 'Performs the final checks and triggers a release build for the hotfix in the current branch'
-  lane :finalize_hotfix_release do |skip_prechecks: false|
-    ios_finalize_prechecks unless skip_prechecks
-    version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
-    trigger_release_build(branch_to_build: "release/#{version}")
+  lane :finalize_hotfix_release do |skip_confirm: true, skip_prechecks: false|
+    unless skip_prechecks
+      ensure_git_branch_is_release_branch!
+      ensure_git_status_clean
+    end
+
+    hotfix_version = release_version_current
+
+    UI.important("Will triggrer hotfix build for version #{hotfix_version}")
+    UI.user_error!("Terminating as requested. Don't forget to run the remainder of this automation manually.") unless skip_confirm || UI.confirm('Do you want to continue?')
+
+    trigger_release_build(branch_to_build: release_branch_name(release_version: hotfix_version))
+
+    # TODO: Create backmerge PR once migrated to release-toolkit 12.0
+    # create_backmerge_pr
+
+    # Close hotfix milestone
+    begin
+      close_milestone(
+        repository: GITHUB_REPO,
+        milestone: hotfix_version
+      )
+    rescue StandardError => e
+      report_milestone_error(error_title: "Error closing milestone `#{hotfix_version}`: #{e.message}")
+    end
   end
 
   lane :trigger_beta_build do |branch_to_build:|
