@@ -133,8 +133,8 @@ platform :ios do
     new_build_code = build_code_next
     UI.important <<~MESSAGE
       New beta:
-      • Current build code: #{build_code_current}
-      • New build code: #{new_build_code}
+      - Current build code: #{build_code_current}
+      - New build code: #{new_build_code}
     MESSAGE
 
     UI.user_error!("Terminating as requested. Don't forget to run the remainder of this automation manually.") unless skip_confirm || UI.confirm('Do you want to continue?')
@@ -148,8 +148,10 @@ platform :ios do
       version_long: new_build_code
     )
     commit_version_and_build_files
+
+    version = release_version_current
     # Uses build_code_current let user double-check result.
-    UI.success "Done! Release version: #{release_version_current}. New build code: #{build_code_current}."
+    UI.success "Done! Release version: #{version}. New build code: #{build_code_current}."
 
     UI.important('Pushing changes to remote and triggering the beta build...')
     UI.user_error!("Terminating as requested. Don't forget to run the remainder of this automation manually.") unless skip_confirm || UI.confirm('Do you want to continue?')
@@ -158,7 +160,7 @@ platform :ios do
 
     trigger_beta_build(branch_to_build: release_branch_name)
 
-    # TODO: Switch to working branch and open back-merge PR
+    create_release_backmerge_pr(version_to_merge: version, next_version: release_version_next)
   end
 
   desc 'Trigger the final release build on CI'
