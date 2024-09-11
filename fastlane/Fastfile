@@ -179,26 +179,29 @@ platform :ios do
   # bundle exec fastlane build_and_upload_release beta_release:true
   #####################################################################################
   desc 'Builds and uploads for distribution'
-  lane :build_and_upload_release do |options|
-    ios_build_prechecks(
-      skip_confirm: options[:skip_confirm],
-      internal: false,
-      internal_on_single_version: options[:beta_release],
-      external: true
-    )
+  lane :build_and_upload_release do |skip_confirm: false, skip_prechecks: false, beta_release: true, create_gh_release: false|
+    unless skip_prechecks
+      ios_build_prechecks(
+        skip_confirm: skip_confirm,
+        internal: false,
+        internal_on_single_version: beta_release,
+        external: true
+      )
+      ios_build_preflight
+    end
 
-    ios_build_preflight
-    if options[:beta_release]
+    if beta_release
       build_and_upload_internal(
         skip_prechecks: true,
-        skip_confirm: options[:skip_confirm]
+        skip_confirm: skip_confirm
       )
     end
+
     build_and_upload_to_app_store_connect(
       skip_prechecks: true,
-      skip_confirm: options[:skip_confirm],
-      beta_release: options[:beta_release],
-      create_release: options[:create_gh_release]
+      skip_confirm: skip_confirm,
+      beta_release: beta_release,
+      create_release: create_gh_release
     )
   end
 
