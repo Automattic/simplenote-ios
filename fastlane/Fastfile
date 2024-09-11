@@ -90,7 +90,7 @@ platform :ios do
 
     upload_to_app_store(
       app_identifier: APP_STORE_BUNDLE_IDENTIFIER,
-      app_version: ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH),
+      app_version: release_version_current,
       skip_binary_upload: true,
       screenshots_path: promo_screenshots_directory,
       skip_screenshots: skip_screenshots,
