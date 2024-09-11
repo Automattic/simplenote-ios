@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/buildkite/pipeline-schema/main/schema.json
+---
+
+agents:
+  queue: mac
+
+# The new beta workflow needs to run on macOS because it uses SwiftGen under the hood.
+#
+# Notice that SwiftGen should work Linux, but we haven't tested it yet.
+# One thing at a time...
+env:
+  IMAGE_ID: $IMAGE_ID
+
+steps:
+  - label: New Beta Release
+    plugins: [$CI_TOOLKIT]
+    command: |
+      echo '--- :git: Configure Git for Release Management'
+      .buildkite/commands/configure-git-for-release-management.sh
+
+      echo '--- :git: Checkout Release Branch'
+      .buildkite/commands/checkout-release-branch.sh
+
+      echo '--- :ruby: Set up Ruby Tools'
+      install_gems
+
+      echo '--- :closed_lock_with_key: Access Secrets'
+      bundle exec fastlane run configure_apply
+
+      echo '--- :shipit: New Beta Release'
+      bundle exec fastlane new_beta_release skip_confirm:true
+    retry:
+      manual:
+        # If those jobs fail, one should always prefer re-triggering a new build from ReleaseV2 rather than retrying the individual job from Buildkite
+        allowed: false
