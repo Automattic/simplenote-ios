@@ -143,10 +143,8 @@ platform :ios do
       version_long: new_build_code
     )
     commit_version_and_build_files
-
-    version = release_version_current
     # Uses build_code_current let user double-check result.
-    UI.success "Done! Release version: #{version}. New build code: #{build_code_current}."
+    UI.success "Done! Release version: #{release_version_current}. New build code: #{build_code_current}."
 
     UI.important('Pushing changes to remote and triggering the beta build...')
     UI.user_error!("Terminating as requested. Don't forget to run the remainder of this automation manually.") unless skip_confirm || UI.confirm('Do you want to continue?')
