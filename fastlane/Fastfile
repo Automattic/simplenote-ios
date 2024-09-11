@@ -77,66 +77,6 @@ ENV['PUBLIC_CONFIG_FILE'] = VERSION_FILE_PATH
 ENV['FL_RELEASE_TOOLKIT_DEFAULT_BRANCH'] = 'trunk'
 
 platform :ios do
-  #####################################################################################
-  # build_and_upload_internal
-  # -----------------------------------------------------------------------------------
-  # This lane builds the app and upload it for internal testing
-  # -----------------------------------------------------------------------------------
-  # Usage:
-  # bundle exec fastlane build_and_upload_internal [skip_confirm:<skip confirm>]
-  #
-  # Example:
-  # bundle exec fastlane build_and_upload_internal
-  # bundle exec fastlane build_and_upload_internal skip_confirm:true
-  #####################################################################################
-  desc 'Builds and updates for distribution'
-  lane :build_and_upload_internal do |skip_prechecks: false, skip_confirm: false|
-    unless options[:skip_prechecks]
-      ios_build_prechecks(
-        skip_confirm: skip_confirm,
-        internal: false
-      )
-    end
-    ios_build_preflight unless skip_prechecks
-
-    internal_code_signing
-
-    gym(
-      scheme: 'Simplenote',
-      configuration: 'Distribution Internal',
-      workspace: WORKSPACE,
-      export_method: 'enterprise',
-      clean: true,
-      output_directory: OUTPUT_DIRECTORY_PATH,
-      export_team_id: TEAM_ID_ENTERPRISE,
-      export_options: {
-        method: 'enterprise',
-        provisioningProfiles: simplenote_provisioning_profiles(
-          root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Internal",
-          match_type: 'InHouse'
-        )
-      }
-    )
-
-    File.rename(File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote.ipa'), File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote Internal.ipa'))
-
-    appcenter_upload(
-      api_token: EnvManager.get_required_env!('APPCENTER_API_TOKEN'),
-      owner_name: 'automattic',
-      owner_type: 'organization',
-      app_name: 'Simplenote',
-      file: File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote Internal.ipa'),
-      notify_testers: false
-    )
-
-    sentry_upload_dsym(
-      auth_token: EnvManager.get_required_env!('SENTRY_AUTH_TOKEN'),
-      org_slug: 'a8c',
-      project_slug: 'simplenote-ios',
-      dsym_path: lane_context[SharedValues::DSYM_OUTPUT_PATH]
-    )
-  end
-
   # Upload the localized metadata (from `fastlane/metadata/`) to App Store Connect
   #
   # @option [Boolean] with_screenshots (default: false) If true, will also upload the latest screenshot files to ASC
