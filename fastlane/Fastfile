@@ -218,14 +218,14 @@ platform :ios do
   # bundle exec fastlane build_and_upload_internal skip_confirm:true
   #####################################################################################
   desc 'Builds and updates for distribution'
-  lane :build_and_upload_internal do |options|
+  lane :build_and_upload_internal do |skip_prechecks: false, skip_confirm: false|
     unless options[:skip_prechecks]
       ios_build_prechecks(
-        skip_confirm: options[:skip_confirm],
+        skip_confirm: skip_confirm,
         internal: false
       )
     end
-    ios_build_preflight unless options[:skip_prechecks]
+    ios_build_preflight unless skip_prechecks
 
     internal_code_signing
 
