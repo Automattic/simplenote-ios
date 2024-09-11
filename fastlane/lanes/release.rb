@@ -283,7 +283,6 @@ platform :ios do
 
     create_backmerge_prs
 
-    # Close hotfix milestone
     begin
       close_milestone(
         repository: GITHUB_REPO,
