@@ -278,6 +278,13 @@ platform :ios do
     )
   end
 
+  desc 'Performs the final checks and triggers a release build for the hotfix in the current branch'
+  lane :finalize_hotfix_release do |skip_prechecks: false|
+    ios_finalize_prechecks unless skip_prechecks
+    version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
+    trigger_release_build(branch_to_build: "release/#{version}")
+  end
+
   lane :trigger_beta_build do |branch_to_build:|
     trigger_buildkite_release_build(branch: branch_to_build, beta: true)
   end

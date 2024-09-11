@@ -78,37 +78,6 @@ ENV['FL_RELEASE_TOOLKIT_DEFAULT_BRANCH'] = 'trunk'
 
 platform :ios do
   #####################################################################################
-  # new_hotfix_release
-  # -----------------------------------------------------------------------------------
-  # This lane creates the release branch for a new hotfix release.
-  # -----------------------------------------------------------------------------------
-  # Usage:
-  # bundle exec fastlane new_hotfix_release [skip_confirm:<skip confirm>] [version:<version>]
-  #
-  # Example:
-  # bundle exec fastlane new_hotfix_release version:10.6.1
-  # bundle exec fastlane new_hotfix_release skip_confirm:true version:10.6.1
-  #####################################################################################
-
-  #####################################################################################
-  # finalize_hotfix_release
-  # -----------------------------------------------------------------------------------
-  # This lane finalizes the hotfix branch.
-  # -----------------------------------------------------------------------------------
-  # Usage:
-  # bundle exec fastlane finalize_hotfix_release [skip_confirm:<skip confirm>]
-  #
-  # Example:
-  # bundle exec fastlane finalize_hotfix_release skip_confirm:true
-  #####################################################################################
-  desc 'Performs the final checks and triggers a release build for the hotfix in the current branch'
-  lane :finalize_hotfix_release do |skip_prechecks: false|
-    ios_finalize_prechecks unless skip_prechecks
-    version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
-    trigger_release_build(branch_to_build: "release/#{version}")
-  end
-
-  #####################################################################################
   # build_and_upload_beta_release
   # -----------------------------------------------------------------------------------
   # This lane builds a beta release of the app and optionally uploads
