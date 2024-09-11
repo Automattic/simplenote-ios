@@ -160,7 +160,18 @@ platform :ios do
 
     trigger_beta_build(branch_to_build: release_branch_name)
 
-    create_release_backmerge_pr(version_to_merge: version, next_version: release_version_next)
+    pr_url = create_release_management_pull_request(
+      release_version: version,
+      base_branch: DEFAULT_BRANCH,
+      title: "Merge #{new_build_code} beta"
+    )
+
+    next unless is_ci
+
+    message = <<~MESSAGE
+      New beta triggered successfully. Next, review and merge the [integration PR](#{pr_url}).
+    MESSAGE
+    buildkite_annotate(context: 'new-beta-completed', style: 'success', message: message)
   end
 
   desc 'Trigger the final release build on CI'
@@ -357,8 +368,20 @@ def delete_all_metadata_release_notes(store_metadata_folder: STORE_METADATA_FOLD
   )
 end
 
-def create_release_management_pull_request(release_version:, base_branch:, title:)
+def create_release_management_pull_request(
+  release_version:,
+  base_branch:,
+  title:,
+  use_integration_branch: true
+)
   token = EnvManager.get_required_env!('GITHUB_TOKEN')
+
+  if use_integration_branch
+    Fastlane::Helper::GitHelper.create_branch(
+      title.downcase.gsub(' ', '-'),
+      from: git_branch
+    )
+  end
 
   pr_url = create_pull_request(
     api_token: token,
