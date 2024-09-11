@@ -23,4 +23,15 @@ platform :ios do
       environment: { RELEASE_VERSION: release_version }
     )
   end
+
+  lane :trigger_new_beta_in_ci do |release_version: release_version_current|
+    buildkite_trigger_build(
+      buildkite_organization: BUILDKITE_ORGANIZATION,
+      buildkite_pipeline: BUILDKITE_PIPELINE,
+      branch: release_branch_name(release_version: release_version),
+      pipeline_file: File.join(PIPELINES_ROOT, 'new-beta-release.yml'),
+      message: "New beta for #{release_version}",
+      environment: { RELEASE_VERSION: release_version }
+    )
+  end
 end
