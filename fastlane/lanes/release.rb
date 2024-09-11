@@ -112,18 +112,13 @@ platform :ios do
 
     trigger_beta_build(branch_to_build: release_branch_name(release_version: version))
 
-    pr_url = create_release_management_pull_request(
-      release_version: version,
-      base_branch: DEFAULT_BRANCH,
-      title: "Merge #{version} code freeze"
-    )
-
-    next unless is_ci
+    pr_url = create_backmerge_pr!
 
     message = <<~MESSAGE
       Code freeze completed successfully. Next, review and merge the [integration PR](#{pr_url}).
     MESSAGE
-    buildkite_annotate(context: 'code-freeze-completed', style: 'success', message: message)
+    buildkite_annotate(context: 'code-freeze-completed', style: 'success', message: message) if is_ci
+    UI.success(message)
   end
 
   lane :new_beta_release do |skip_confirm: false|
@@ -160,18 +155,13 @@ platform :ios do
 
     trigger_beta_build(branch_to_build: release_branch_name)
 
-    pr_url = create_release_management_pull_request(
-      release_version: version,
-      base_branch: DEFAULT_BRANCH,
-      title: "Merge #{new_build_code} beta"
-    )
-
-    next unless is_ci
+    pr_url = create_backmerge_pr!
 
     message = <<~MESSAGE
       New beta triggered successfully. Next, review and merge the [integration PR](#{pr_url}).
     MESSAGE
-    buildkite_annotate(context: 'new-beta-completed', style: 'success', message: message)
+    buildkite_annotate(context: 'new-beta-completed', style: 'success', message: message) if is_ci
+    UI.success(message)
   end
 
   desc 'Trigger the final release build on CI'
@@ -209,7 +199,7 @@ platform :ios do
 
     trigger_release_build(branch_to_build: release_branch_name)
 
-    create_release_backmerge_pr(version_to_merge: version, next_version: release_version_next)
+    create_backmerge_prs
 
     remove_branch_protection(
       repository: GITHUB_REPO,
@@ -292,8 +282,7 @@ platform :ios do
 
     trigger_release_build(branch_to_build: release_branch_name(release_version: hotfix_version))
 
-    # TODO: Create backmerge PR once migrated to release-toolkit 12.0
-    # create_backmerge_pr
+    create_backmerge_prs
 
     # Close hotfix milestone
     begin
@@ -347,18 +336,40 @@ def trigger_buildkite_release_build(branch:, beta:)
   buildkite_annotate(style: 'info', context: 'trigger-release-build', message: message)
 end
 
-def create_release_backmerge_pr(version_to_merge:, next_version:)
+def create_backmerge_pr!
+  pr_urls = create_backmerge_prs
+
+  return pr_urls unless pr_urls > 1
+
+  backmerge_error_message = UI.user_error! <<~ERROR
+    Unexpectedly opened more than one backmerge pull request. URLs:
+    #{pr_urls.map { |url| "- #{url}" }.join("\n")}
+  ERROR
+  buildkite_annotate(style: 'error', context: 'error-creating-backmerge', message: backmerge_error_message) if is_ci
+  UI.user_error!(backmerge_error_message)
+end
+
+# Notice the plural in the name.
+# The action this method calls may create multiple backmerge PRs, depending on how many releas branches with version greater than the source are in the remote.
+def create_backmerge_prs
+  version = release_version_current
+
   create_release_backmerge_pull_request(
     repository: GITHUB_REPO,
-    source_branch: release_branch_name(release_version: version_to_merge),
+    source_branch: release_branch_name(release_version: version),
     labels: ['Releases'],
-    milestone_title: next_version
+    milestone_title: release_version_next
   )
 rescue StandardError => e
   error_message = <<-MESSAGE
-    Error creating backmerge pull request: #{e.message}
-    If this is not the first time you are running the release task, the backmerge PR for the version `#{version_to_merge}` might have already been previously created.
-    Please close any previous backmerge PR for `#{version_to_merge}`, delete the previous merge branch, then run the release task again.
+    Error creating backmerge pull request:
+
+    ```
+    #{e.message}
+    ```
+
+    If this is not the first time you are running the release task, the backmerge PR for version `#{version}` might have already been created.
+    Please close any pre-existing backmerge PR for `#{version}`, delete the previous merge branch, then run the release automation again.
   MESSAGE
 
   buildkite_annotate(style: 'error', context: 'error-creating-backmerge', message: error_message) if is_ci
@@ -438,47 +449,6 @@ def delete_all_metadata_release_notes(store_metadata_folder: STORE_METADATA_FOLD
     # Even if no locale was translated in the previous cycle, default/release_notes.txt should always be present, and therefore deleted at this stage.
     allow_nothing_to_commit: false
   )
-end
-
-def create_release_management_pull_request(
-  release_version:,
-  base_branch:,
-  title:,
-  use_integration_branch: true
-)
-  token = EnvManager.get_required_env!('GITHUB_TOKEN')
-
-  if use_integration_branch
-    Fastlane::Helper::GitHelper.create_branch(
-      title.downcase.gsub(' ', '-'),
-      from: git_branch
-    )
-  end
-
-  pr_url = create_pull_request(
-    api_token: token,
-    repo: GITHUB_REPO,
-    title: title,
-    head: Fastlane::Helper::GitHelper.current_git_branch,
-    base: base_branch,
-    labels: 'Releases'
-  )
-
-  # Next, set the milestone for the PR
-  #
-  # The create_pull_request action has a 'milestone' parameter, but it expects the milestone id.
-  # We don't know the id of the milestone, but we can use a different action to set it.
-  #
-  # PR URLs are in the format github.com/org/repo/pull/id
-  pr_number = File.basename(pr_url)
-  update_assigned_milestone(
-    repository: GITHUB_REPO,
-    numbers: [pr_number],
-    to_milestone: release_version
-  )
-
-  # Return the PR URL
-  pr_url
 end
 
 def release_is_hotfix?
