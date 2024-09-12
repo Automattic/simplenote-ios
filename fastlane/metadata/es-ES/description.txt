@@ -30,7 +30,7 @@ ORGANIZA Y BUSCA
 
 Política de privacidad: https://automattic.com/privacy/
 Condiciones del servicio: https://simplenote.com/terms/
-Aviso de privacidad para usuarios de California: https://wp.me/Pe4R-d/#california-consumer-privacy-act-ccpa
+Aviso de privacidad para usuarios de California: https://automattic.com/privacy/#us-privacy-laws
 
 --
 
