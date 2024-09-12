@@ -346,7 +346,7 @@ def create_backmerge_pr!
 end
 
 # Notice the plural in the name.
-# The action this method calls may create multiple backmerge PRs, depending on how many releas branches with version greater than the source are in the remote.
+# The action this method calls may create multiple backmerge PRs, depending on how many release branches with version greater than the source are in the remote.
 def create_backmerge_prs
   version = release_version_current
 
