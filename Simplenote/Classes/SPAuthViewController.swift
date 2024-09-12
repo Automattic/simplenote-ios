@@ -560,7 +560,7 @@ extension SPAuthViewController {
     }
 
     @IBAction func presentUsernameAndPasswordInterface() {
-        presentPasswordInterfaceWithHeader(header: AuthenticationStrings.loginWithEmailLimitHeader, includeUsername: true)
+        presentPasswordInterfaceWithHeader(header: nil, includeUsername: true)
     }
 }
 
