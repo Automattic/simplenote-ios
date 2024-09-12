@@ -30,7 +30,7 @@ Simplenote로 손쉽게 메모를 작성하고 할 일 목록을 만들고 아�
 
 개인정보 취급방침: https://automattic.com/privacy/
 서비스 약관: https://simplenote.com/terms/
-캘리포니아 사용자 개인정보 고지사항: https://wp.me/Pe4R-d/#california-consumer-privacy-act-ccpa
+캘리포니아 사용자 개인정보 고지사항: https://automattic.com/privacy/#us-privacy-laws
 
 --
 
