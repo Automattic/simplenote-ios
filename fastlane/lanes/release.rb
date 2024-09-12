@@ -360,9 +360,7 @@ rescue StandardError => e
   error_message = <<-MESSAGE
     Error creating backmerge pull request:
 
-    ```
     #{e.message}
-    ```
 
     If this is not the first time you are running the release task, the backmerge PR for version `#{version}` might have already been created.
     Please close any pre-existing backmerge PR for `#{version}`, delete the previous merge branch, then run the release automation again.
