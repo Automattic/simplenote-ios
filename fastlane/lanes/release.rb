@@ -335,7 +335,7 @@ end
 def create_backmerge_pr!
   pr_urls = create_backmerge_prs
 
-  return pr_urls unless pr_urls > 1
+  return pr_urls unless pr_urls.length > 1
 
   backmerge_error_message = UI.user_error! <<~ERROR
     Unexpectedly opened more than one backmerge pull request. URLs:
