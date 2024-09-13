@@ -333,7 +333,7 @@ private enum Constants {
     static let termsString      = NSLocalizedString("Terms of Service", comment: "Simplenote terms of service")
     static let termsURLString   = "https://simplenote.com/terms/"
     static let californiaString = NSLocalizedString("Privacy Notice for California Users", comment: "Simplenote terms of service")
-    static let californiaURLString = "https://automattic.com/privacy/#california-consumer-privacy-act-ccpa"
+    static let californiaURLString = "https://automattic.com/privacy/#us-privacy-laws"
 
     static let titles: [String] = [
         NSLocalizedString("Blog", comment: "The Simplenote blog"),

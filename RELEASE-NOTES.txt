@@ -1,6 +1,6 @@
 4.54
 -----
-
+- Updated link to privacy notice for California users
 
 4.53
 -----
