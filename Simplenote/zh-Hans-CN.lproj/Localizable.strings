@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2024-08-06 11:54:03+0000 */
+/* Translation-Revision-Date: 2024-09-11 19:54:04+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: zh_CN */
@@ -94,9 +94,6 @@
    Title: No filters applied */
 "All Notes" = "全部笔记";
 
-/* A short description to access the account login screen */
-"Already have an account?" = "已有帐户？";
-
 /* Delete account confirmation instructions */
 "An email has been sent to %@. Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation." = "我们已向 %@ 发送一封电子邮件。请检查您的收件箱，按照电子邮件中的说明来确认账户删除。\n\n在收到您的确认之前，我们不会删除您的账户。";
 
@@ -145,14 +142,10 @@
 /* Delete account confirmation alert message */
 "By deleting the account for %@, all notes created with this account will be permanently deleted. This action is not reversible" = "删除 %@ 的账户后，使用此账户创建的所有笔记将永久删除。 此操作不可撤消";
 
-/* Terms Button Text */
-"By signing up, you agree to our Terms of Service »" = "注册即表示您同意我们的服务条款 »";
-
 /* Cancel Action
    Cancel action button
    Cancel action for password alert
    Cancel action on share extension.
-   Cancel button for authentication
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
@@ -208,8 +201,7 @@
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "压缩的笔记列表";
 
-/* Confirm button -> Review you account screen
-   Hint displayed in the password confirmation field */
+/* Confirm button -> Review you account screen */
 "Confirm" = "确认";
 
 /* Title on the PinLock screen asking to confirm a passcode */
@@ -233,6 +225,9 @@
 
 /* Error for bad email or password */
 "Could not create an account with the provided email address and password." = "无法使用所提供的电子邮件地址和密码创建帐户。";
+
+/* Notifies user tag delete failed */
+"Could not delete tag" = "无法删除标签";
 
 /* Note fetch error title */
 "Could not fetch Notes" = "无法获取注释";
@@ -338,9 +333,6 @@
 /* Card title showing information about the note (metrics, references) */
 "Document" = "文档";
 
-/* A short description to access the account creation screen */
-"Don't have an account?" = "还没有帐户？";
-
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
    Done editing tags
@@ -388,12 +380,6 @@
    Error Title */
 "Error" = "错误";
 
-/* No comment provided by engineer. */
-"Error: NSManagedObjectContext's persistentStoreCoordinator must be nil. Simperium will handle CoreData connections for you." = "错误：NSManagedObjectContext 的 persistentStoreCoordinator 必须为 nil。 Simperium 将为您处理 CoreData 连接。";
-
-/* No comment provided by engineer. */
-"Error: you must initialize your context with 'NSMainQueueConcurrencyType' concurrency type." = "错误：您必须使用“NSMainQueueConcurrencyType”并发类型初始化您的上下文。";
-
 /* Get Help Description Label */
 "FAQ or contact us" = "常见问题解答或与我们联系";
 
@@ -402,9 +388,6 @@
 
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "正在提取版本";
-
-/* Forgot password Button Text */
-"Forgot password? »" = "忘记密码？»";
 
 /* Password Reset Action */
 "Forgot your password?" = "忘记密码？";
@@ -581,9 +564,6 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "没有未标记的笔记";
 
-/* Error when you enter a bad email address */
-"Not a valid email address" = "电子邮件地址无效";
-
 /* Note Widget Title */
 "Note" = "注意";
 
@@ -639,22 +619,17 @@
 /* Pin Lock */
 "Passcodes did not match. Try again." = "密码不匹配。重试。";
 
-/* Hint displayed in the password field
-   Password TextField Placeholder */
+/* Password TextField Placeholder */
 "Password" = "密码";
 
 /* Message displayed when password is invalid (Signup) */
 "Password cannot match email" = "密码不能与电子邮件相同";
 
-/* Message displayed when password is too short. Please preserve the Percent D!
-   Message displayed when password is too short. The %%d is a placeholder for a numeral. Please preserve it! */
+/* Message displayed when password is too short. Please preserve the Percent D! */
 "Password must contain at least %d characters" = "密码中必须至少包含 %d个字符";
 
 /* Message displayed when a password contains a disallowed character */
 "Password must not contain tabs nor newlines" = "密码不得包含制表符或换行符";
-
-/* Password Validation: Confirmation doesn't match */
-"Passwords do not match" = "密码不匹配";
 
 /* Number of changes pending to be sent */
 "Pendings" = "待处理数";
@@ -674,6 +649,9 @@
 
 /* Extension Missing Token Alert Title */
 "Please log into your Simplenote account first by using the Simplenote app." = "请先使用 Simplenote 应用程序登录您的 Simplenote 账户。";
+
+/* Encourages trying delete again */
+"Please try again" = "请重试";
 
 /* Upgrade Alert Message */
 "Please upgrade to the latest iOS release to restore purchases" = "请升级至最新 iOS 版本以恢复购买";
@@ -817,20 +795,10 @@
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "侧边栏";
 
-/* Title of button for logging in (must be short) */
-"Sign In" = "登录";
-
-/* SignUp Action
-   Signup Action
-   SignUp Interface Title
-   Title of button to create a new account (must be short) */
+/* Signup Action
+   SignUp Action
+   SignUp Interface Title */
 "Sign Up" = "注册";
-
-/* A short link to access the account login screen */
-"Sign in" = "登录";
-
-/* A short link to access the account creation screen */
-"Sign up" = "注册";
 
 /* Alert message displayed when an account has unsynced notes */
 "Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "注销会删除所有未同步的备注。您可以通过登录 Web 应用程序以确认您已同步的备注。";
@@ -907,9 +875,6 @@
 /* Current Sustainer Details */
 "Thank you for your continued support" = "感谢您的继续支持";
 
-/* Error when address is in use */
-"That email is already being used" = "该电子邮件已被使用";
-
 /* Email TextField Placeholder */
 "The authentication code you've requested has expired. Please request a new one" = "您请求的验证码已过期。 请重新请求";
 
@@ -976,9 +941,6 @@
 
 /* Undo action */
 "Undo" = "撤消";
-
-/* WebSocket not initialized */
-"Uninitialized" = "未初始化";
 
 /* Default title for an unnamed tag */
 "Unnamed Tag" = "未命名标签";

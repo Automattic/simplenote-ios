@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2024-08-07 17:54:03+0000 */
+/* Translation-Revision-Date: 2024-09-11 16:54:02+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: he_IL */
@@ -94,9 +94,6 @@
    Title: No filters applied */
 "All Notes" = "כל הפתקים";
 
-/* A short description to access the account login screen */
-"Already have an account?" = "יש לך כבר חשבון?";
-
 /* Delete account confirmation instructions */
 "An email has been sent to %@. Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation." = "הודעת אימייל נשלחה לכתובת %@. יש לבדוק את תיבת הדואר הנכנס ולפעול לפי ההוראות לאישור המחיקה של החשבון.\n\nהחשבון שלך לא יימחק עד שנקבל את אישורך";
 
@@ -145,14 +142,10 @@
 /* Delete account confirmation alert message */
 "By deleting the account for %@, all notes created with this account will be permanently deleted. This action is not reversible" = "על ידי מחיקת החשבון עבור %@, כל הפתקים שנוצרו באמצעות החשבון הזה יימחקו לצמיתות. לא ניתן לבטל את הפעולה הזאת";
 
-/* Terms Button Text */
-"By signing up, you agree to our Terms of Service »" = "הרשמתך מהווה הסכמה לתנאי השימוש שלנו »";
-
 /* Cancel Action
    Cancel action button
    Cancel action for password alert
    Cancel action on share extension.
-   Cancel button for authentication
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
@@ -208,8 +201,7 @@
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "רשימת פתקים מכווצת";
 
-/* Confirm button -> Review you account screen
-   Hint displayed in the password confirmation field */
+/* Confirm button -> Review you account screen */
 "Confirm" = "פעם נוספת";
 
 /* Title on the PinLock screen asking to confirm a passcode */
@@ -233,6 +225,9 @@
 
 /* Error for bad email or password */
 "Could not create an account with the provided email address and password." = "לא ניתן ליצור חשבון באמצעות כתובת האימייל והסיסמה שסופקו.";
+
+/* Notifies user tag delete failed */
+"Could not delete tag" = "לא ניתן למחוק את התגית";
 
 /* Note fetch error title */
 "Could not fetch Notes" = "לא ניתן היה להביא 'פתקים'";
@@ -338,9 +333,6 @@
 /* Card title showing information about the note (metrics, references) */
 "Document" = "מסמך";
 
-/* A short description to access the account creation screen */
-"Don't have an account?" = "אין לך חשבון עדיין?";
-
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
    Done editing tags
@@ -388,12 +380,6 @@
    Error Title */
 "Error" = "שגיאה";
 
-/* No comment provided by engineer. */
-"Error: NSManagedObjectContext's persistentStoreCoordinator must be nil. Simperium will handle CoreData connections for you." = "שגיאה: הערך 'persistentStoreCoordinator' של 'NSManagedObjectContext' חייב להיות \"nil\". השירות של Simperium יטפל בחיבורים של CoreData עבורך.";
-
-/* No comment provided by engineer. */
-"Error: you must initialize your context with 'NSMainQueueConcurrencyType' concurrency type." = "שגיאה: עליך להפעיל את ההקשר באמצעות סוג המטבע 'NSMainQueueConcurrencyType'.";
-
 /* Get Help Description Label */
 "FAQ or contact us" = "שאלות נפוצות או יצירת קשר";
 
@@ -402,9 +388,6 @@
 
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "מוריד גרסה";
-
-/* Forgot password Button Text */
-"Forgot password? »" = "שכחת את הסיסמה? »";
 
 /* Password Reset Action */
 "Forgot your password?" = "שכחת סיסמה?";
@@ -581,9 +564,6 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "אין פתקים ללא תגיות";
 
-/* Error when you enter a bad email address */
-"Not a valid email address" = "כתובת האימייל לא חוקית";
-
 /* Note Widget Title */
 "Note" = "פתק";
 
@@ -639,22 +619,17 @@
 /* Pin Lock */
 "Passcodes did not match. Try again." = "קודי הסיסמה לא התאימו. יש לנסות שוב.";
 
-/* Hint displayed in the password field
-   Password TextField Placeholder */
+/* Password TextField Placeholder */
 "Password" = "סיסמה";
 
 /* Message displayed when password is invalid (Signup) */
 "Password cannot match email" = "הסיסמה לא יכולה להיות כתובת האימייל";
 
-/* Message displayed when password is too short. Please preserve the Percent D!
-   Message displayed when password is too short. The %%d is a placeholder for a numeral. Please preserve it! */
+/* Message displayed when password is too short. Please preserve the Percent D! */
 "Password must contain at least %d characters" = "הסיסמה חייבת להכיל לפחות %d תווים";
 
 /* Message displayed when a password contains a disallowed character */
 "Password must not contain tabs nor newlines" = "הסיסמה לא יכולה להכיל סימני Tab או שורות חדשות";
-
-/* Password Validation: Confirmation doesn't match */
-"Passwords do not match" = "הסיסמאות לא תואמות";
 
 /* Number of changes pending to be sent */
 "Pendings" = "בהמתנה";
@@ -674,6 +649,9 @@
 
 /* Extension Missing Token Alert Title */
 "Please log into your Simplenote account first by using the Simplenote app." = "ראשית עליך להתחבר לחשבון שלך ב-Simplenote באמצעות האפליקציה של Simplenote.";
+
+/* Encourages trying delete again */
+"Please try again" = "יש לנסות שוב";
 
 /* Upgrade Alert Message */
 "Please upgrade to the latest iOS release to restore purchases" = "יש לשדרג לגרסה האחרונה של iOS כדי לשחזר רכישות";
@@ -817,20 +795,10 @@
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "סרגל צדדי";
 
-/* Title of button for logging in (must be short) */
-"Sign In" = "התחברות";
-
-/* SignUp Action
-   Signup Action
-   SignUp Interface Title
-   Title of button to create a new account (must be short) */
+/* Signup Action
+   SignUp Action
+   SignUp Interface Title */
 "Sign Up" = "הרשמה";
-
-/* A short link to access the account login screen */
-"Sign in" = "כניסה למערכת";
-
-/* A short link to access the account creation screen */
-"Sign up" = "הרשמה";
 
 /* Alert message displayed when an account has unsynced notes */
 "Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "לאחר ההתנתקות, כל הפתקים שלא סוכרנו יימחקו. אפשר לאמת אילו פתקים סונכרנו באמצעות התחברות לאפליקציית הרשת.";
@@ -907,9 +875,6 @@
 /* Current Sustainer Details */
 "Thank you for your continued support" = "תודה על התמיכה המתמשכת";
 
-/* Error when address is in use */
-"That email is already being used" = "כתובת האימייל הזאת כבר נמצאת בשימוש";
-
 /* Email TextField Placeholder */
 "The authentication code you've requested has expired. Please request a new one" = "פג תוקפו של קוד האימות שביקשת. יש לבקש קוד חדש";
 
@@ -976,9 +941,6 @@
 
 /* Undo action */
 "Undo" = "ביטול פעולה אחרונה";
-
-/* WebSocket not initialized */
-"Uninitialized" = "לא הופעל";
 
 /* Default title for an unnamed tag */
 "Unnamed Tag" = "תגית ללא שם";

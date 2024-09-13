@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2024-08-07 09:54:03+0000 */
+/* Translation-Revision-Date: 2024-09-12 09:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n > 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: id */
@@ -94,9 +94,6 @@
    Title: No filters applied */
 "All Notes" = "Semua Catatan";
 
-/* A short description to access the account login screen */
-"Already have an account?" = "Sudah memiliki akun?";
-
 /* Delete account confirmation instructions */
 "An email has been sent to %@. Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation." = "Email sudah dikirimkan ke %@ Periksa kotak masuk Anda dan ikuti petunjuk untuk mengonfirmasi penghapusan akun.\n\nAkun tidak akan dihapus hingga kami menerima konfirmasi Anda.";
 
@@ -142,14 +139,10 @@
 /* Delete account confirmation alert message */
 "By deleting the account for %@, all notes created with this account will be permanently deleted. This action is not reversible" = "Dengan menghapus akun untuk  %@, semua catatan yang dibuat dengan akun ini akan dihapus secara permanen. Tindakan ini tidak dapat dibatalkan";
 
-/* Terms Button Text */
-"By signing up, you agree to our Terms of Service »" = "Dengan mendaftar, berarti Anda menyetujui Ketentuan Layanan »";
-
 /* Cancel Action
    Cancel action button
    Cancel action for password alert
    Cancel action on share extension.
-   Cancel button for authentication
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
@@ -205,8 +198,7 @@
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "Daftar Catatan Ringkas";
 
-/* Confirm button -> Review you account screen
-   Hint displayed in the password confirmation field */
+/* Confirm button -> Review you account screen */
 "Confirm" = "Konfirmasi";
 
 /* Title on the PinLock screen asking to confirm a passcode */
@@ -230,6 +222,9 @@
 
 /* Error for bad email or password */
 "Could not create an account with the provided email address and password." = "Tidak dapat membuat akun dengan alamat email dan kata sandi yang diberikan.";
+
+/* Notifies user tag delete failed */
+"Could not delete tag" = "Tidak dapat menghapus tag";
 
 /* Note fetch error title */
 "Could not fetch Notes" = "Tidak dapat mengambil Catatan";
@@ -335,9 +330,6 @@
 /* Card title showing information about the note (metrics, references) */
 "Document" = "Dokumen";
 
-/* A short description to access the account creation screen */
-"Don't have an account?" = "Belum memiliki akun?";
-
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
    Done editing tags
@@ -385,12 +377,6 @@
    Error Title */
 "Error" = "Kesalahan";
 
-/* No comment provided by engineer. */
-"Error: NSManagedObjectContext's persistentStoreCoordinator must be nil. Simperium will handle CoreData connections for you." = "Error: persistentStoreCoordinator NSManagedObjectContext harus nol. Simperium akan menangani penyambungan CoreData untuk Anda.";
-
-/* No comment provided by engineer. */
-"Error: you must initialize your context with 'NSMainQueueConcurrencyType' concurrency type." = "Error: Anda harus memulai konteks dengan tipe konkurensi 'NSMainQueueConcurrencyType'.";
-
 /* Get Help Description Label */
 "FAQ or contact us" = "FAQ atau hubungi kami";
 
@@ -399,9 +385,6 @@
 
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "Mengambil Versi";
-
-/* Forgot password Button Text */
-"Forgot password? »" = "Lupa kata sandi? »";
 
 /* Password Reset Action */
 "Forgot your password?" = "Lupa kata sandi?";
@@ -578,9 +561,6 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "Tidak ada catatan tanpa tag";
 
-/* Error when you enter a bad email address */
-"Not a valid email address" = "Bukan alamat email yang valid";
-
 /* Note Widget Title */
 "Note" = "Catatan";
 
@@ -636,22 +616,17 @@
 /* Pin Lock */
 "Passcodes did not match. Try again." = "Kode sandi tidak cocok. Coba lagi.";
 
-/* Hint displayed in the password field
-   Password TextField Placeholder */
+/* Password TextField Placeholder */
 "Password" = "Kata sandi";
 
 /* Message displayed when password is invalid (Signup) */
 "Password cannot match email" = "Kata sandi tidak boleh sama dengan email";
 
-/* Message displayed when password is too short. Please preserve the Percent D!
-   Message displayed when password is too short. The %%d is a placeholder for a numeral. Please preserve it! */
+/* Message displayed when password is too short. Please preserve the Percent D! */
 "Password must contain at least %d characters" = "Kata sandi harus berisi setidaknya %d karakter";
 
 /* Message displayed when a password contains a disallowed character */
 "Password must not contain tabs nor newlines" = "Kata sandi tidak boleh berisi tab atau baris baru";
-
-/* Password Validation: Confirmation doesn't match */
-"Passwords do not match" = "Kata sandi tidak cocok";
 
 /* Number of changes pending to be sent */
 "Pendings" = "Tertunda";
@@ -671,6 +646,9 @@
 
 /* Extension Missing Token Alert Title */
 "Please log into your Simplenote account first by using the Simplenote app." = "Silakan masuk ke akun Simplenote Anda terlebih dahulu menggunakan aplikasi Simplenote.";
+
+/* Encourages trying delete again */
+"Please try again" = "Coba lagi";
 
 /* Upgrade Alert Message */
 "Please upgrade to the latest iOS release to restore purchases" = "Upgrade ke rilis iOS terbaru untuk memulihkan pembelian";
@@ -814,20 +792,10 @@
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "Panel Sisi";
 
-/* Title of button for logging in (must be short) */
-"Sign In" = "Masuk";
-
-/* SignUp Action
-   Signup Action
-   SignUp Interface Title
-   Title of button to create a new account (must be short) */
+/* Signup Action
+   SignUp Action
+   SignUp Interface Title */
 "Sign Up" = "Mendaftar";
-
-/* A short link to access the account login screen */
-"Sign in" = "Masuk";
-
-/* A short link to access the account creation screen */
-"Sign up" = "Mendaftar";
 
 /* Alert message displayed when an account has unsynced notes */
 "Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "Catatan yang tidak disinkronkan akan dihapus saat Anda keluar. Anda dapat memverifikasi catatan Anda yang disinkronkan dengan masuk ke Aplikasi Web.";
@@ -904,9 +872,6 @@
 /* Current Sustainer Details */
 "Thank you for your continued support" = "Terima kasih atas dukungan Anda yang berkelanjutan";
 
-/* Error when address is in use */
-"That email is already being used" = "Email sudah digunakan";
-
 /* Email TextField Placeholder */
 "The authentication code you've requested has expired. Please request a new one" = "Kode autentikasi yang diminta telah kedaluwarsa. Silakan minta kode yang baru";
 
@@ -973,9 +938,6 @@
 
 /* Undo action */
 "Undo" = "Urungkan";
-
-/* WebSocket not initialized */
-"Uninitialized" = "Belum Dimulai";
 
 /* Default title for an unnamed tag */
 "Unnamed Tag" = "Tag Tanpa Nama";
