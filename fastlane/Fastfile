@@ -51,7 +51,6 @@ require_relative 'lib/env_manager'
 # Important: These need to be imported after all the constants have been defined because they access them.
 # A bit of a leaky abstraction but makes for lanes that are easier to write...
 import 'lanes/build.rb'
-import 'lanes/ci_releases.rb'
 import 'lanes/localization.rb'
 import 'lanes/release.rb'
 
