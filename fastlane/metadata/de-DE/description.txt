@@ -30,7 +30,7 @@ ORGANISEREN UND SUCHEN
 
 Datenschutzerklärung: https://automattic.com/privacy/
 Geschäftsbedingungen: https://simplenote.com/terms/
-Datenschutzhinweis für Benutzer in Kalifornien: https://wp.me/Pe4R-d/#california-consumer-privacy-act-ccpa
+Datenschutzhinweis für Benutzer in Kalifornien: https://automattic.com/privacy/#us-privacy-laws
 
 --
 

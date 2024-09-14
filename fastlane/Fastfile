@@ -35,25 +35,25 @@ SECRETS_ROOT = File.join(Dir.home, '.configure', 'simplenote-ios', 'secrets')
 APP_STORE_CONNECT_KEY_PATH = File.join(SECRETS_ROOT, 'app_store_connect_fastlane_api_key.json')
 $used_test_account_index = nil
 
-APP_RESOURCES_DIR = File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources')
-
-RELEASE_NOTES_SOURCE_PATH = File.join(APP_RESOURCES_DIR, 'release_notes.txt')
-
 GLOTPRESS_BASE_URL = 'https://translate.wordpress.com/projects'
 # Notice the trailing / is required.
 # Without it, GlotPress will redirect to the version with /
 GLOTPRESS_APP_STRINGS_PROJECT_URL = "#{GLOTPRESS_BASE_URL}/simplenote/ios/".freeze
 GLOTPRESS_STORE_METADATA_PROJECT_URL = "#{GLOTPRESS_APP_STRINGS_PROJECT_URL}release-notes/".freeze
 
+APP_RESOURCES_DIR = File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources')
 STORE_METADATA_FOLDER = File.join(PROJECT_ROOT_FOLDER, 'fastlane', 'metadata')
+STORE_METADATA_DEFAULT_LOCALE_FOLDER = File.join(STORE_METADATA_FOLDER, 'default')
+RELEASE_NOTES_SOURCE_PATH = File.join(STORE_METADATA_DEFAULT_LOCALE_FOLDER, 'release_notes.txt')
 
 require_relative 'lib/env_manager'
 
-# Important: These need to be imported after all the constants have be defined because they access them.
+# Important: These need to be imported after all the constants have been defined because they access them.
 # A bit of a leaky abstraction but makes for lanes that are easier to write...
+import 'lanes/build.rb'
+import 'lanes/ci_releases.rb'
 import 'lanes/localization.rb'
 import 'lanes/release.rb'
-import 'lanes/build.rb'
 
 before_all do
   # Ensure we use the latest version of the toolkit
@@ -73,30 +73,10 @@ end
 ########################################################################
 ENV['PROJECT_NAME'] = 'Simplenote'
 ENV['PROJECT_ROOT_FOLDER'] = PROJECT_ROOT_FOLDER
-ENV['APP_STORE_STRINGS_FILE_NAME'] = 'AppStoreStrings.pot'
 ENV['PUBLIC_CONFIG_FILE'] = VERSION_FILE_PATH
 ENV['FL_RELEASE_TOOLKIT_DEFAULT_BRANCH'] = 'trunk'
 
 platform :ios do
-  desc 'Updates the AppStoreStrings.pot file with the latest data'
-  lane :update_appstore_strings do |version: release_version_current|
-    prj_folder = Pathname.new(File.join(Dir.pwd, '..')).expand_path.to_s
-    source_metadata_folder = File.join(prj_folder, 'fastlane', 'appstoreres', 'metadata', 'source')
-
-    files = {
-      whats_new: RELEASE_NOTES_SOURCE_PATH,
-      app_store_subtitle: File.join(source_metadata_folder, 'subtitle.txt'),
-      app_store_desc: File.join(source_metadata_folder, 'description.txt'),
-      app_store_keywords: File.join(source_metadata_folder, 'keywords.txt')
-    }
-
-    ios_update_metadata_source(
-      po_file_path: File.join(APP_RESOURCES_DIR, 'AppStoreStrings.pot'),
-      source_files: files,
-      release_version: version
-    )
-  end
-
   #####################################################################################
   # new_hotfix_release
   # -----------------------------------------------------------------------------------
@@ -133,64 +113,6 @@ platform :ios do
   lane :finalize_hotfix_release do |options|
     ios_finalize_prechecks(options)
     version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
-    trigger_release_build(branch_to_build: "release/#{version}")
-  end
-
-  #####################################################################################
-  # finalize_release
-  # -----------------------------------------------------------------------------------
-  # This lane finalize a release: updates store metadata, bump final version number,
-  # remove branch protection and close milestone, then trigger the final release on CI
-  # -----------------------------------------------------------------------------------
-  # Usage:
-  # bundle exec fastlane finalize_release [skip_confirm:<skip confirm>] [version:<version>]
-  #
-  # Example:
-  # bundle exec fastlane finalize_release
-  # bundle exec fastlane finalize_release skip_confirm:true
-  #####################################################################################
-  desc 'Trigger the final release build on CI'
-  lane :finalize_release do |options|
-    UI.user_error!('To finalize a hotfix, please use the finalize_hotfix_release lane instead') if ios_current_branch_is_hotfix
-
-    ios_finalize_prechecks(options)
-
-    UI.message('Checking app strings translation status...')
-    check_translation_progress(
-      glotpress_url: GLOTPRESS_APP_STRINGS_PROJECT_URL,
-      abort_on_violations: false
-    )
-
-    UI.message('Checking release notes strings translation status...')
-    check_translation_progress(
-      glotpress_url: GLOTPRESS_STORE_METADATA_PROJECT_URL,
-      abort_on_violations: false
-    )
-
-    download_localized_strings_and_metadata_from_glotpress
-
-    lint_localizations
-
-    ios_bump_version_beta
-
-    # Wrap up
-    version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
-    remove_branch_protection(
-      repository: GITHUB_REPO,
-      branch: "release/#{version}"
-    )
-    set_milestone_frozen_marker(
-      repository: GITHUB_REPO,
-      milestone: version,
-      freeze: false
-    )
-    create_new_milestone(repository: GITHUB_REPO)
-    close_milestone(
-      repository: GITHUB_REPO,
-      milestone: version
-    )
-
-    # Start the build
     trigger_release_build(branch_to_build: "release/#{version}")
   end
 
@@ -1028,8 +950,10 @@ def release_branch_name(release_version: release_version_current)
   "#{RELEASE_BRANCH_ROOT}#{release_version}"
 end
 
-def ensure_git_branch_is_release_branch
-  # Verify that the current branch is a release branch. Notice that `ensure_git_branch` expects a RegEx parameter
+def ensure_git_branch_is_release_branch!
+  # Verify that the current branch is a release branch.
+  # Notice that `ensure_git_branch` expects a RegEx parameter.
+  # Also, ensure_git_branch will fail the lane if the branch doesn't match, hence the ! in the method name.
   ensure_git_branch(branch: "^#{RELEASE_BRANCH_ROOT}")
 end
 

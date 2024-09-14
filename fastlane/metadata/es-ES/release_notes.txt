@@ -1,6 +1,0 @@
-- Mayor compatibilidad con los accesos directos de iOS
-- Se ha solucionado un problema por el que se perdía la selección de notas al pasar la aplicación a segundo plano
-- Se ha solucionado un problema; ya se puede activar el interruptor de ID facial sin un código de acceso
-- Compatibilidad con el acceso mediante enlaces mágicos
-- Se ha revisado la interfaz de acceso
-
