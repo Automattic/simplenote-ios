@@ -89,10 +89,12 @@ extension AuthenticationMode {
 
     /// Login with Password
     ///
-    static func loginWithPassword(header: String? = nil) -> AuthenticationMode {
+    static func loginWithPassword(header: String? = nil, includeUsername: Bool = false) -> AuthenticationMode {
+        var inputElements: AuthenticationInputElements  = includeUsername ? [.username, .password] : [.password]
+
         return .init(title: NSLocalizedString("Log In with Password", comment: "LogIn Interface Title"),
                      header: header,
-                     inputElements: [.password],
+                     inputElements: inputElements,
                      validationStyle: .legacy,
                      actions: [
                         AuthenticationActionDescriptor(name: .primary,
@@ -114,6 +116,7 @@ extension AuthenticationMode {
                         AuthenticationActionDescriptor(name: .primary,
                                                        selector: #selector(SPAuthViewController.requestLogInCode),
                                                        text: NSLocalizedString("Log in with email", comment: "Sends the User an email with an Authentication Code")),
+                        AuthenticationActionDescriptor(name: .secondary, selector: #selector(SPAuthViewController.presentUsernameAndPasswordInterface), text: nil, attributedText: Strings.usernameAndPasswordOption),
                         AuthenticationActionDescriptor(name: .tertiary,
                                                        selector: #selector(SPAuthViewController.performLogInWithWPCOM),
                                                        text: NSLocalizedString("Log in with WordPress.com", comment: "Password fallback Action"))
@@ -150,15 +153,15 @@ extension AuthenticationMode {
                         AuthenticationActionDescriptor(name: .secondary,
                                                        selector: #selector(SPAuthViewController.presentTermsOfService),
                                                        text: nil,
-                                                       attributedText: SignupStrings.termsOfService)
+                                                       attributedText: Strings.termsOfService)
                      ])
     }
 }
 
 
-// MARK: - Mode: .signup
+// MARK: - String Constants
 //
-private enum SignupStrings {
+private enum Strings {
 
     /// Returns a formatted Secondary Action String for Signup
     ///
@@ -169,6 +172,23 @@ private enum SignupStrings {
 
         let prefix = NSLocalizedString("By creating an account you agree to our", comment: "Terms of Service Legend *PREFIX*: printed in dark color")
         let suffix = NSLocalizedString("Terms and Conditions", comment: "Terms of Service Legend *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue")
+
+        output.append(string: prefix, foregroundColor: .simplenoteGray60Color)
+        output.append(string: " ")
+        output.append(string: suffix, foregroundColor: .simplenoteBlue60Color)
+
+        return output
+    }
+
+    /// Returns a formatted Secondary Action String for Optional Username and password login
+    ///
+    static var usernameAndPasswordOption: NSAttributedString {
+        let output = NSMutableAttributedString(string: String(), attributes: [
+            .font: UIFont.preferredFont(forTextStyle: .subheadline)
+        ])
+
+        let prefix = NSLocalizedString("We'll email you a code to log in, or you can", comment: "Option to login with username and password *PREFIX*: printed in dark color")
+        let suffix = NSLocalizedString("log in manually.", comment: "Option to login with username and password *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue")
 
         output.append(string: prefix, foregroundColor: .simplenoteGray60Color)
         output.append(string: " ")
