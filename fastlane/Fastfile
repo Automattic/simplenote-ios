@@ -51,7 +51,6 @@ require_relative 'lib/env_manager'
 # Important: These need to be imported after all the constants have been defined because they access them.
 # A bit of a leaky abstraction but makes for lanes that are easier to write...
 import 'lanes/build.rb'
-import 'lanes/ci_releases.rb'
 import 'lanes/localization.rb'
 import 'lanes/release.rb'
 
@@ -77,206 +76,20 @@ ENV['PUBLIC_CONFIG_FILE'] = VERSION_FILE_PATH
 ENV['FL_RELEASE_TOOLKIT_DEFAULT_BRANCH'] = 'trunk'
 
 platform :ios do
-  #####################################################################################
-  # new_hotfix_release
-  # -----------------------------------------------------------------------------------
-  # This lane creates the release branch for a new hotfix release.
-  # -----------------------------------------------------------------------------------
-  # Usage:
-  # bundle exec fastlane new_hotfix_release [skip_confirm:<skip confirm>] [version:<version>]
-  #
-  # Example:
-  # bundle exec fastlane new_hotfix_release version:10.6.1
-  # bundle exec fastlane new_hotfix_release skip_confirm:true version:10.6.1
-  #####################################################################################
-  desc 'Creates a new hotfix branch for the given version:x.y.z. The branch will be cut from the tag x.y of the previous release'
-  lane :new_hotfix_release do |options|
-    prev_ver = ios_hotfix_prechecks(options)
-    ios_bump_version_hotfix(
-      previous_version: prev_ver,
-      version: options[:version]
-    )
-  end
-
-  #####################################################################################
-  # finalize_hotfix_release
-  # -----------------------------------------------------------------------------------
-  # This lane finalizes the hotfix branch.
-  # -----------------------------------------------------------------------------------
-  # Usage:
-  # bundle exec fastlane finalize_hotfix_release [skip_confirm:<skip confirm>]
-  #
-  # Example:
-  # bundle exec fastlane finalize_hotfix_release skip_confirm:true
-  #####################################################################################
-  desc 'Performs the final checks and triggers a release build for the hotfix in the current branch'
-  lane :finalize_hotfix_release do |options|
-    ios_finalize_prechecks(options)
-    version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
-    trigger_release_build(branch_to_build: "release/#{version}")
-  end
-
-  #####################################################################################
-  # build_and_upload_beta_release
-  # -----------------------------------------------------------------------------------
-  # This lane builds a beta release of the app and optionally uploads
-  # it for both internal and external distribution
-  # -----------------------------------------------------------------------------------
-  # Usage:
-  # bundle exec fastlane build_and_upload_beta_release [skip_confirm:<skip confirm>]
-  #   [create_gh_release:<create release on GH>]
-  #
-  # Example:
-  # bundle exec fastlane build_and_upload_beta_release
-  # bundle exec fastlane build_and_upload_beta_release skip_confirm:true
-  # bundle exec fastlane build_and_upload_beta_release create_gh_release:true
-  #####################################################################################
-  desc 'Builds and uploads a beta release for distribution'
-  lane :build_and_upload_beta_release do |options|
-    build_and_upload_release(
-      skip_confirm: options[:skip_confirm],
-      create_gh_release: options[:create_gh_release],
-      beta_release: true
-    )
-  end
-
-  #####################################################################################
-  # build_and_upload_stable_release
-  # -----------------------------------------------------------------------------------
-  # This lane builds a stable release of the app and optionally uploads
-  # it for distribution
-  # -----------------------------------------------------------------------------------
-  # Usage:
-  # bundle exec fastlane build_and_upload_stable_release [skip_confirm:<skip confirm>]
-  #   [create_gh_release:<create release on GH>]
-  #
-  # Example:
-  # bundle exec fastlane build_and_upload_stable_release
-  # bundle exec fastlane build_and_upload_stable_release skip_confirm:true
-  # bundle exec fastlane build_and_upload_stable_release create_gh_release:true
-  #####################################################################################
-  desc 'Builds and uploads a stable release for distribution'
-  lane :build_and_upload_stable_release do |options|
-    build_and_upload_release(
-      skip_confirm: options[:skip_confirm],
-      create_gh_release: options[:create_gh_release],
-      beta_release: false
-    )
-  end
-
-  #####################################################################################
-  # build_and_upload_release
-  # -----------------------------------------------------------------------------------
-  # This lane builds the app and uploads it for both internal and external distribution
-  # -----------------------------------------------------------------------------------
-  # Usage:
-  # bundle exec fastlane build_and_upload_release [skip_confirm:<skip confirm>]
-  #   [create_gh_release:<create release on GH>] [beta_release:<is a beta release>]
-  #
-  # Example:
-  # bundle exec fastlane build_and_upload_release
-  # bundle exec fastlane build_and_upload_release skip_confirm:true
-  # bundle exec fastlane build_and_upload_release beta_release:true
-  #####################################################################################
-  desc 'Builds and uploads for distribution'
-  lane :build_and_upload_release do |options|
-    ios_build_prechecks(
-      skip_confirm: options[:skip_confirm],
-      internal: false,
-      internal_on_single_version: options[:beta_release],
-      external: true
-    )
-
-    ios_build_preflight
-    if options[:beta_release]
-      build_and_upload_internal(
-        skip_prechecks: true,
-        skip_confirm: options[:skip_confirm]
-      )
-    end
-    build_and_upload_to_app_store_connect(
-      skip_prechecks: true,
-      skip_confirm: options[:skip_confirm],
-      beta_release: options[:beta_release],
-      create_release: options[:create_gh_release]
-    )
-  end
-
-  #####################################################################################
-  # build_and_upload_internal
-  # -----------------------------------------------------------------------------------
-  # This lane builds the app and upload it for internal testing
-  # -----------------------------------------------------------------------------------
-  # Usage:
-  # bundle exec fastlane build_and_upload_internal [skip_confirm:<skip confirm>]
-  #
-  # Example:
-  # bundle exec fastlane build_and_upload_internal
-  # bundle exec fastlane build_and_upload_internal skip_confirm:true
-  #####################################################################################
-  desc 'Builds and updates for distribution'
-  lane :build_and_upload_internal do |options|
-    unless options[:skip_prechecks]
-      ios_build_prechecks(
-        skip_confirm: options[:skip_confirm],
-        internal: false
-      )
-    end
-    ios_build_preflight unless options[:skip_prechecks]
-
-    internal_code_signing
-
-    gym(
-      scheme: 'Simplenote',
-      configuration: 'Distribution Internal',
-      workspace: WORKSPACE,
-      export_method: 'enterprise',
-      clean: true,
-      output_directory: OUTPUT_DIRECTORY_PATH,
-      export_team_id: TEAM_ID_ENTERPRISE,
-      export_options: {
-        method: 'enterprise',
-        provisioningProfiles: simplenote_provisioning_profiles(
-          root_bundle_id: "#{APP_STORE_BUNDLE_IDENTIFIER}.Internal",
-          match_type: 'InHouse'
-        )
-      }
-    )
-
-    File.rename(File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote.ipa'), File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote Internal.ipa'))
-
-    appcenter_upload(
-      api_token: EnvManager.get_required_env!('APPCENTER_API_TOKEN'),
-      owner_name: 'automattic',
-      owner_type: 'organization',
-      app_name: 'Simplenote',
-      file: File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote Internal.ipa'),
-      notify_testers: false
-    )
-
-    sentry_upload_dsym(
-      auth_token: EnvManager.get_required_env!('SENTRY_AUTH_TOKEN'),
-      org_slug: 'a8c',
-      project_slug: 'simplenote-ios',
-      dsym_path: lane_context[SharedValues::DSYM_OUTPUT_PATH]
-    )
-  end
-
   # Upload the localized metadata (from `fastlane/metadata/`) to App Store Connect
   #
   # @option [Boolean] with_screenshots (default: false) If true, will also upload the latest screenshot files to ASC
   #
   desc 'Upload the localized metadata to App Store Connect, optionally including screenshots.'
-  lane :update_metadata_on_app_store_connect do |options|
+  lane :update_metadata_on_app_store_connect do |with_screenshots: false|
     # Skip screenshots by default. The naming is "with" to make it clear that
     # callers need to opt-in to adding screenshots. The naming of the deliver
     # (upload_to_app_store) parameter, on the other hand, uses the skip verb.
-    with_screenshots = options.fetch(:with_screenshots, false)
     skip_screenshots = !with_screenshots
 
     upload_to_app_store(
       app_identifier: APP_STORE_BUNDLE_IDENTIFIER,
-      app_version: ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH),
+      app_version: release_version_current,
       skip_binary_upload: true,
       screenshots_path: promo_screenshots_directory,
       skip_screenshots: skip_screenshots,
