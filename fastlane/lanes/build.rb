@@ -61,7 +61,7 @@ lane :upload_to_app_store_connect do |beta_release:, skip_prechecks: false, crea
   next unless create_release
 
   version = beta_release ? build_code_current : release_version_current
-  create_release(
+  create_github_release(
     repository: GITHUB_REPO,
     version: version,
     release_notes_file_path: RELEASE_NOTES_SOURCE_PATH,
