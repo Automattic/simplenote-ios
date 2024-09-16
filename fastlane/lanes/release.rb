@@ -3,7 +3,7 @@
 # Lanes related to the Release Process (Code Freeze, Betas, Final Build, App Store Submission…)
 
 platform :ios do
-  lane :code_freeze do |skip_confirm: false|
+  lane :start_code_freeze do |skip_confirm: false|
     ensure_git_status_clean
 
     Fastlane::Helper::GitHelper.checkout_and_pull(DEFAULT_BRANCH)
