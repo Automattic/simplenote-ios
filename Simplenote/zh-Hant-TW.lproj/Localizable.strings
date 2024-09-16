@@ -1,15 +1,9 @@
-/* Translation-Revision-Date: 2022-11-22 09:54:03+0000 */
+/* Translation-Revision-Date: 2024-08-07 09:54:02+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: zh_TW */
 
-/* Monthly Subscription Option. Please preserve the special marker! */
-"%@ per Month" = "每月 %@";
-
-/* Yearly Subscription Option. Please preserve the special marker! */
-"%@ per Year" = "每年 %@";
-
-/* Number of found search results */
+/* No comment provided by engineer. */
 "%d Result" = "%d 個搜尋結果";
 
 /* Number of found search results */
@@ -73,6 +67,7 @@
 "About" = "關於";
 
 /* Accept Action
+   Accept Message
    Label of accept button on alert dialog */
 "Accept" = "接受";
 
@@ -124,7 +119,16 @@
 "Are you sure you want to empty the trash? This cannot be undone." = "確定要清空垃圾桶？此動作無法復原。";
 
 /* Data Fetch error message */
+"Attempt to fetch current note content failed.  Please try again later." = "嘗試擷取目前備註內容失敗。  請稍後再試。";
+
+/* Data Fetch error message */
 "Attempt to fetch entities failed.  Please try again later." = "嘗試擷取實體失敗。  請稍後再試一次。";
+
+/* Data Fetch error message */
+"Attempt to fetch notes failed.  Please try again later." = "嘗試擷取備註失敗。  請稍後再試。";
+
+/* Data Fetch error message */
+"Attempt to fetch tags failed.  Please try again later." = "嘗試擷取標籤失敗。  請稍後再試。";
 
 /* User Authenticated */
 "Authenticated" = "已驗證";
@@ -151,7 +155,6 @@
    Cancel button for authentication
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
-   Dismisses the alert
    Dismissing an interface
    PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
@@ -187,8 +190,8 @@
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "選擇 4 位數的密碼";
 
-/* Sustainer Alert's Message */
-"Choose a plan and help unlock future features" = "選擇方案，協助日後解鎖更多功能";
+/* Code TextField Placeholder */
+"Code" = "程式碼";
 
 /* Opens the Collaborate UI */
 "Collaborate" = "協作";
@@ -231,8 +234,17 @@
 /* Error for bad email or password */
 "Could not create an account with the provided email address and password." = "無法使用提供的電子郵件地址和密碼建立帳號。";
 
+/* Note fetch error title */
+"Could not fetch Notes" = "無法擷取備註";
+
+/* Tag fetch error title */
+"Could not fetch Tags" = "無法擷取標籤";
+
 /* Fetch error title */
 "Could not fetch entities" = "無法擷取實體";
+
+/* note content fetch error title */
+"Could not fetch note content" = "無法擷取備註內容";
 
 /* Message displayed when login fails */
 "Could not login with the provided email address and password." = "無法使用提供的電子郵件地址和密碼登入。";
@@ -360,6 +372,15 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "加入佇列";
 
+/* LogIn Interface Title */
+"Enter Code" = "輸入驗證碼";
+
+/* Enter Password fallback Action */
+"Enter password" = "輸入密碼";
+
+/* Header for Login With Password. Please preserve the {{EMAIL}} substring */
+"Enter the password for the account {{EMAIL}}" = "輸入 {{EMAIL}} 帳號的密碼";
+
 /* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "輸入你的密碼";
 
@@ -389,7 +410,7 @@
 "Forgot password? »" = "忘記密碼？»";
 
 /* Password Reset Action */
-"Forgotten password?" = "忘記密碼了嗎？";
+"Forgot your password?" = "忘記密碼？";
 
 /* FAQ or contact us */
 "Get Help" = "取得協助";
@@ -414,6 +435,12 @@
 
 /* Rating view - initial - liked button */
 "I like it" = "我喜歡";
+
+/* Option to add notes to spotlight search */
+"Index Notes in Spotlight" = "焦點中的索引備註";
+
+/* Alert title letting user know their search index has been removed */
+"Index Removed" = "已移除索引";
 
 /* Note Information Button (metrics + references) */
 "Information" = "資訊";
@@ -451,6 +478,9 @@
    LogIn Interface Title */
 "Log In" = "登入";
 
+/* LogIn Interface Title */
+"Log In with Password" = "使用密碼登入";
+
 /* Log out of the active account in the app */
 "Log Out" = "登出";
 
@@ -463,11 +493,17 @@
 /* Widget warning if user has set pin lock */
 "Unlock to see your note list" = "解鎖以查看您的筆記列表";
 
-/* Allows the user to SignIn using their WPCOM Account */
+/* Password fallback Action */
 "Log in with WordPress.com" = "透過 WordPress.com 登入";
 
-/* Presents the regular Email signin flow */
+/* Sends the User an email with an Authentication Code */
 "Log in with email" = "透過電子郵件登入";
+
+/* Header for Enter Password UI, when the user performed too many requests */
+"Log in with email failed, please enter your password" = "透過電子郵件地址登入失敗，請輸入你的密碼";
+
+/* Message displayed when a login code is too short */
+"Login Code is too short" = "登入碼過短";
 
 /* Month and day date formatter */
 "MMM d" = "MMM d";
@@ -498,9 +534,6 @@
 
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "修改時間：最舊";
-
-/* Monthly Subscription Option (Used when / if the price fails to load) */
-"Monthly" = "每月";
 
 /* Accessibility hint for trash selected notes button */
 "Move selected notes to trash" = "將選取的筆記移至垃圾桶";
@@ -588,6 +621,9 @@
    Email unverified alert dismiss */
 "Ok" = "確定";
 
+/* confirm button title */
+"Okay" = "確定";
+
 /* No comment provided by engineer. */
 "On" = "開啟";
 
@@ -602,6 +638,9 @@
 
 /* Note Options Title */
 "Options" = "選項";
+
+/* Or, used as a separator between Actions */
+"Or" = "或者";
 
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "密碼";
@@ -687,6 +726,9 @@
 /* Home screen quick action: Recent Note */
 "Recent" = "最近的";
 
+/* Header to put on any files that need to be recovered */
+"Recovered Note Cotent - " = "已還原的備註內容 - ";
+
 /* References section header on Info Card */
 "Referenced In" = "參考位置";
 
@@ -723,9 +765,6 @@
 /* Restore a note from trash
    Restore a note to a previous version */
 "Restore Note" = "還原筆記";
-
-/* Manually Restores IAP Purchases */
-"Restore Purchases" = "恢復購買";
 
 /* Title -> Review you account screen */
 "Review Your Account" = "檢閱你的帳號";
@@ -809,8 +848,7 @@
    Title of main share extension view */
 "Simplenote" = "Simplenote";
 
-/* Restoration Successful Title
-   Sustainer Alert's Title */
+/* Restoration Successful Title */
 "Simplenote Sustainer" = "Simplenote Sustainer";
 
 /* Simplenote's Feedback Email Title */
@@ -819,7 +857,8 @@
 /* Message displayed when app is not configured */
 "Simplenote must be configured and logged in to setup widgets" = "你必須設定並登入 Simplenote 才能設定小工具";
 
-/* Authentication Error Alert Title */
+/* Authentication Error Alert Title
+   Email TextField Placeholder */
 "Sorry!" = "很抱歉！";
 
 /* Option to sort tags alphabetically. The default is by manual ordering. */
@@ -832,14 +871,17 @@
 /* Sort By Title */
 "Sort by:" = "排序依據：";
 
+/* Details that some results may still appear in searches on device */
+"Spotlight history may still appear in search results, but notes have be unindexed" = "焦點記錄可能仍會在搜尋結果中顯示，但備註已取消索引";
+
 /* Title for the response's Status Code */
 "Status Code" = "狀態代碼";
 
 /* Become a Sustainer Details */
 "Support your favorite notes app to help unlock future features" = "支持你最愛的筆記應用程式，協助日後解鎖更多功能";
 
-/* No comment provided by engineer. */
-"Sustainer" = "Sustainer";
+/* Switch app icon */
+"Sustainer App Icon" = "Sustainer 應用程式圖示";
 
 /* Restoration Successful Message */
 "Sustainer subscription restored. Thank you for supporting Simplenote!" = "已恢復 Sustainer 訂購。 感謝你支持 Simplenote！";
@@ -876,6 +918,12 @@
 
 /* Error when address is in use */
 "That email is already being used" = "此電子信箱已被使用";
+
+/* Email TextField Placeholder */
+"The authentication code you've requested has expired. Please request a new one" = "你要求的驗證碼已過期。 請申請新的驗證碼";
+
+/* Error message for Invalid Login Code */
+"The code you've entered is not correct. Please try again" = "你輸入的驗證碼不正確。 請再試一次";
 
 /* Error when address is in use */
 "The email you've entered is already associated with a Simplenote account." = "你輸入的電子郵件地址已與 Simplenote 帳號建立關聯。";
@@ -989,6 +1037,9 @@
 /* Generic error */
 "We're having problems. Please try again soon." = "發生問題，請再試一次。";
 
+/* Header for the Login with Code UI. Please preserve the {{EMAIL}} string as is! */
+"We've sent a code to {{EMAIL}}. The code will be valid for a few minutes." = "我們已傳送驗證碼到 {{EMAIL}}。 此驗證碼在幾分鐘內有效。";
+
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
 
@@ -1002,11 +1053,11 @@
 /* Rating view initial title */
 "What do you think about Simplenote?" = "你覺得 Simplenote 如何？";
 
+/* Alerting users that we will attempt to restore lost content on next launch */
+"Will attempt to recover shortcut content on next launch" = "會嘗試在下一次推出時還原捷徑內容";
+
 /* Number of words in the note */
 "Words" = "字";
-
-/* Yearly Subscription Option (Used when / if the price fails to load) */
-"Yearly" = "每年";
 
 /* Proceeds with the Empty Trash OP */
 "Yes" = "是";
@@ -1025,6 +1076,9 @@
 
 /* Restoration Successful Message */
 "You're already a Sustainer. Thank you for supporting Simplenote!" = "你已經是 Sustainer。 感謝你支持 Simplenote！";
+
+/* Error message for Invalid Login Code */
+"Your authentication code has expired. Please request a new one" = "你的驗證碼已過期。 請申請新的驗證碼";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "你的電子郵件地址無效。";

@@ -1,2 +1,0 @@
-- Menambahkan warna latar belakang ke blok kode dalam pratinjau mode gelap
-- Menambahkan widget catatan besar

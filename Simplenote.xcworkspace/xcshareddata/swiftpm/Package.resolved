@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Automattic/Automattic-Tracks-iOS",
       "state" : {
-        "revision" : "b6979ef69b4b094c8809ba83661222dcd0d7667e",
-        "version" : "3.2.0"
+        "revision" : "4d7d7138a9f2b36c3fd4618aa488ed9e8de2f726",
+        "version" : "3.5.0"
       }
     },
     {
@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/getsentry/sentry-cocoa",
       "state" : {
-        "revision" : "3b9a8e69ca296bd8cd0e317ad7a448e5daf4a342",
-        "version" : "8.18.0"
+        "revision" : "5421f94cc859eb65f5ae3866165a053aa634431e",
+        "version" : "8.32.0"
       }
     },
     {

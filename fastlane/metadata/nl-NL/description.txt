@@ -30,7 +30,7 @@ ORGANISEREN EN ZOEKEN
 
 Privacybeleid: https://automattic.com/privacy/
 Servicevoorwaarden: https://simplenote.com/terms/
-Privacyverklaring voor gebruikers in Californië: https://wp.me/Pe4R-d/#california-consumer-privacy-act-ccpa
+Privacyverklaring voor gebruikers in Californië: https://automattic.com/privacy/#us-privacy-laws
 
 --
 

@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/buildkite/pipeline-schema/main/schema.json
+---
+
+# Variables used in this pipeline are defined in `shared-pipeline-vars`, which is `source`'d before calling `buildkite-agent pipeline upload`
+
+env:
+  IMAGE_ID: $IMAGE_ID
+
+# The code freeze completion needs to run on macOS because it uses genstrings under the hood.
+agents:
+    queue: mac
+
+steps:
+  - label: Complete Code Freeze
+    key: complete_code_freeze
+    plugins: [$CI_TOOLKIT_PLUGIN]
+    command: |
+      echo '--- :git: Configure Git for Release Management'
+      .buildkite/commands/configure-git-for-release-management.sh
+
+      echo '--- :git: Checkout release branch'
+      .buildkite/commands/checkout-release-branch.sh
+
+      echo '--- :ruby: Set up Ruby Tools'
+      install_gems
+
+      echo '--- :closed_lock_with_key: Access secrets'
+      bundle exec fastlane run configure_apply
+
+      echo '--- :shipit: Complete code freeze'
+      bundle exec fastlane complete_code_freeze skip_confirm:true
+    retry:
+      manual:
+        # If failed, we prefer retrying via ReleaseV2 rather than Buildkite.
+        # Rationale: ReleaseV2 is the source of truth for the process and track links to the various builds.
+        allowed: false

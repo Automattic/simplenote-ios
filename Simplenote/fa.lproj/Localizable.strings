@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2020-05-26 04:07:15+0000 */
+/* Translation-Revision-Date: 2024-08-02 02:10:07+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: fa */
@@ -66,9 +66,6 @@
 
 /* Email TextField Placeholder */
 "Email" = "ایمیل";
-
-/* Password Reset Action */
-"Forgotten password?" = "گذرواژه فراموش شده؟";
 
 /* Rating view liked title */
 "Great! Mind leaving a review to tell us what you like?" = "عالی! اگر مشکلی نیست لطفاً با نوشتنِ یک بررسی به ما بگویید چه چیزی دوست دارید؟";
@@ -180,10 +177,14 @@
    Title of button to create a new account (must be short) */
 "Sign Up" = "نام‌نویسی";
 
+/* A short link to access the account creation screen */
+"Sign up" = "نام‌نویسی";
+
 /* Simplenote's Feedback Email Title */
 "Simplenote iOS Feedback" = "بازخوردِ Simplenote iOS";
 
-/* Authentication Error Alert Title */
+/* Authentication Error Alert Title
+   Email TextField Placeholder */
 "Sorry!" = "پوزش!";
 
 /* Option to sort tags alphabetically. The default is by manual ordering. */

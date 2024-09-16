@@ -30,7 +30,7 @@ Skydda ditt innehåll med ett lösenordslås.
 
 Sekretesspolicy: https://automattic.com/privacy/
 Användarvillkor: https://simplenote.com/terms/
-Sekretessmeddelande för användare i Kalifornien: https://wp.me/Pe4R-d/#california-consumer-privacy-act-ccpa
+Sekretessmeddelande för användare i Kalifornien: https://automattic.com/privacy/#us-privacy-laws
 
 –
 

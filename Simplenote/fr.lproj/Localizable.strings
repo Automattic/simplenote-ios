@@ -1,15 +1,9 @@
-/* Translation-Revision-Date: 2022-11-22 15:54:03+0000 */
+/* Translation-Revision-Date: 2024-08-07 12:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n > 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: fr */
 
-/* Monthly Subscription Option. Please preserve the special marker! */
-"%@ per Month" = "%@ par mois";
-
-/* Yearly Subscription Option. Please preserve the special marker! */
-"%@ per Year" = "%@ par an";
-
-/* Number of found search results */
+/* No comment provided by engineer. */
 "%d Result" = "%d résultats";
 
 /* Number of found search results */
@@ -73,6 +67,7 @@
 "About" = "À propos";
 
 /* Accept Action
+   Accept Message
    Label of accept button on alert dialog */
 "Accept" = "Accepter";
 
@@ -124,7 +119,16 @@
 "Are you sure you want to empty the trash? This cannot be undone." = "Voulez-vous vraiment vider la corbeille ? Cette opération ne pourra pas être annulée.";
 
 /* Data Fetch error message */
+"Attempt to fetch current note content failed.  Please try again later." = "La tentative d’extraction du contenu de la note actuelle a échoué.  Veuillez réessayer plus tard.";
+
+/* Data Fetch error message */
 "Attempt to fetch entities failed.  Please try again later." = "La tentative de récupération des entités a échoué  Veuillez réessayer plus tard.";
+
+/* Data Fetch error message */
+"Attempt to fetch notes failed.  Please try again later." = "La tentative d’extraction des notes a échoué.  Veuillez réessayer plus tard.";
+
+/* Data Fetch error message */
+"Attempt to fetch tags failed.  Please try again later." = "La tentative d’extraction des étiquettes a échoué.  Veuillez réessayer plus tard.";
 
 /* User Authenticated */
 "Authenticated" = "Authentifié";
@@ -151,7 +155,6 @@
    Cancel button for authentication
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
-   Dismisses the alert
    Dismissing an interface
    PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
@@ -187,8 +190,8 @@
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "Choisir un code d’accès à 4 chiffres";
 
-/* Sustainer Alert's Message */
-"Choose a plan and help unlock future features" = "Choisissez un plan et aidez à créer de nouvelles fonctionnalités.";
+/* Code TextField Placeholder */
+"Code" = "Code";
 
 /* Opens the Collaborate UI */
 "Collaborate" = "Collaborer";
@@ -231,8 +234,17 @@
 /* Error for bad email or password */
 "Could not create an account with the provided email address and password." = "Impossible de créer un compte avec l'e-mail et le mot de passe fourni.";
 
+/* Note fetch error title */
+"Could not fetch Notes" = "Impossible d’extraire les notes";
+
+/* Tag fetch error title */
+"Could not fetch Tags" = "Impossible d’extraire les étiquettes";
+
 /* Fetch error title */
 "Could not fetch entities" = "Impossible de récupérer les entités";
+
+/* note content fetch error title */
+"Could not fetch note content" = "Impossible d’extraire le contenu des notes";
 
 /* Message displayed when login fails */
 "Could not login with the provided email address and password." = "Impossible de se connecter avec l'e-mail et le mot de passe fourni.";
@@ -360,6 +372,15 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "En file d'attente";
 
+/* LogIn Interface Title */
+"Enter Code" = "Saisir le code";
+
+/* Enter Password fallback Action */
+"Enter password" = "Saisir le mot de passe";
+
+/* Header for Login With Password. Please preserve the {{EMAIL}} substring */
+"Enter the password for the account {{EMAIL}}" = "Saisir le mot de passe associé au compte {{EMAIL}}";
+
 /* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "Entrez votre code PIN";
 
@@ -389,7 +410,7 @@
 "Forgot password? »" = "Mot de passe oublié ?";
 
 /* Password Reset Action */
-"Forgotten password?" = "Mot de passe oublié ?";
+"Forgot your password?" = "Mot de passe oublié ?";
 
 /* FAQ or contact us */
 "Get Help" = "Obtenir de l’aide";
@@ -414,6 +435,12 @@
 
 /* Rating view - initial - liked button */
 "I like it" = "J’aime";
+
+/* Option to add notes to spotlight search */
+"Index Notes in Spotlight" = "Indexer les notes dans Spotlight";
+
+/* Alert title letting user know their search index has been removed */
+"Index Removed" = "Index supprimé";
 
 /* Note Information Button (metrics + references) */
 "Information" = "Information";
@@ -451,6 +478,9 @@
    LogIn Interface Title */
 "Log In" = "Connexion";
 
+/* LogIn Interface Title */
+"Log In with Password" = "Se connecter avec un mot de passe";
+
 /* Log out of the active account in the app */
 "Log Out" = "Se déconnecter";
 
@@ -463,11 +493,17 @@
 /* Widget warning if user has set pin lock */
 "Unlock to see your note list" = "Déverrouillez pour voir votre liste de notes";
 
-/* Allows the user to SignIn using their WPCOM Account */
+/* Password fallback Action */
 "Log in with WordPress.com" = "Se connecter avec WordPress.com";
 
-/* Presents the regular Email signin flow */
+/* Sends the User an email with an Authentication Code */
 "Log in with email" = "Se connecter avec une adresse e-mail";
+
+/* Header for Enter Password UI, when the user performed too many requests */
+"Log in with email failed, please enter your password" = "Échec de la connexion avec l’adresse e-mail, veuillez saisir votre mot de passe";
+
+/* Message displayed when a login code is too short */
+"Login Code is too short" = "Le code de connexion est trop court";
 
 /* Month and day date formatter */
 "MMM d" = "d MMM";
@@ -498,9 +534,6 @@
 
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "Modification : Plus anciennes";
-
-/* Monthly Subscription Option (Used when / if the price fails to load) */
-"Monthly" = "Mensuel";
 
 /* Accessibility hint for trash selected notes button */
 "Move selected notes to trash" = "Déplacer les notes sélectionnées vers la corbeille";
@@ -588,6 +621,9 @@
    Email unverified alert dismiss */
 "Ok" = "Valider";
 
+/* confirm button title */
+"Okay" = "OK";
+
 /* No comment provided by engineer. */
 "On" = "Activé";
 
@@ -602,6 +638,9 @@
 
 /* Note Options Title */
 "Options" = "Options";
+
+/* Or, used as a separator between Actions */
+"Or" = "Ou";
 
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "Code PIN";
@@ -687,6 +726,9 @@
 /* Home screen quick action: Recent Note */
 "Recent" = "Récent";
 
+/* Header to put on any files that need to be recovered */
+"Recovered Note Cotent - " = "Contenu de note récupéré - ";
+
 /* References section header on Info Card */
 "Referenced In" = "Référencé dans";
 
@@ -723,9 +765,6 @@
 /* Restore a note from trash
    Restore a note to a previous version */
 "Restore Note" = "Restaurer la note";
-
-/* Manually Restores IAP Purchases */
-"Restore Purchases" = "Rétablir les achats";
 
 /* Title -> Review you account screen */
 "Review Your Account" = "Passez en revue votre compte";
@@ -809,8 +848,7 @@
    Title of main share extension view */
 "Simplenote" = "Simplenote";
 
-/* Restoration Successful Title
-   Sustainer Alert's Title */
+/* Restoration Successful Title */
 "Simplenote Sustainer" = "Contributeur de Simplenote";
 
 /* Simplenote's Feedback Email Title */
@@ -819,7 +857,8 @@
 /* Message displayed when app is not configured */
 "Simplenote must be configured and logged in to setup widgets" = "Vous devez configurer Simplenote en étant connecté pour configurer des widgets";
 
-/* Authentication Error Alert Title */
+/* Authentication Error Alert Title
+   Email TextField Placeholder */
 "Sorry!" = "Désolé !";
 
 /* Option to sort tags alphabetically. The default is by manual ordering. */
@@ -832,14 +871,17 @@
 /* Sort By Title */
 "Sort by:" = "Trier par :";
 
+/* Details that some results may still appear in searches on device */
+"Spotlight history may still appear in search results, but notes have be unindexed" = "L’historique Spotlight peut encore apparaître dans les résultats de recherche, mais les notes ont été désindexées";
+
 /* Title for the response's Status Code */
 "Status Code" = "Code d’état";
 
 /* Become a Sustainer Details */
 "Support your favorite notes app to help unlock future features" = "Soutenez votre application de notes préférée pour aider à créer de nouvelles fonctionnalités.";
 
-/* No comment provided by engineer. */
-"Sustainer" = "Contributeur";
+/* Switch app icon */
+"Sustainer App Icon" = "Icône de l’application Sustainer";
 
 /* Restoration Successful Message */
 "Sustainer subscription restored. Thank you for supporting Simplenote!" = "L’abonnement de soutien est restauré. Nous vous remercions de soutenir Simplenote !";
@@ -876,6 +918,12 @@
 
 /* Error when address is in use */
 "That email is already being used" = "Cette adresse e-mail est déjà utilisée";
+
+/* Email TextField Placeholder */
+"The authentication code you've requested has expired. Please request a new one" = "Le code d’authentification que vous avez demandé a expiré. Veuillez en demander un nouveau";
+
+/* Error message for Invalid Login Code */
+"The code you've entered is not correct. Please try again" = "Le code que vous avez saisi est incorrect. Veuillez réessayer";
 
 /* Error when address is in use */
 "The email you've entered is already associated with a Simplenote account." = "L'adresse e-mail saisie est déjà associée à un compte Simplenote.";
@@ -989,6 +1037,9 @@
 /* Generic error */
 "We're having problems. Please try again soon." = "Nous rencontrons des problèmes. Veuillez réessayer dans quelques instants.";
 
+/* Header for the Login with Code UI. Please preserve the {{EMAIL}} string as is! */
+"We've sent a code to {{EMAIL}}. The code will be valid for a few minutes." = "Nous avons envoyé un code à {{EMAIL}}. Ce code sera valide pendant quelques minutes.";
+
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
 
@@ -1002,11 +1053,11 @@
 /* Rating view initial title */
 "What do you think about Simplenote?" = "Que pensez-vous de Simplenote ?";
 
+/* Alerting users that we will attempt to restore lost content on next launch */
+"Will attempt to recover shortcut content on next launch" = "Tentera de récupérer le contenu du raccourci au prochain lancement";
+
 /* Number of words in the note */
 "Words" = "Mots";
-
-/* Yearly Subscription Option (Used when / if the price fails to load) */
-"Yearly" = "Annuellement";
 
 /* Proceeds with the Empty Trash OP */
 "Yes" = "Oui";
@@ -1025,6 +1076,9 @@
 
 /* Restoration Successful Message */
 "You're already a Sustainer. Thank you for supporting Simplenote!" = "Vous êtes déjà contributeur. Nous vous remercions de soutenir Simplenote !";
+
+/* Error message for Invalid Login Code */
+"Your authentication code has expired. Please request a new one" = "Votre code d’authentification a expiré. Veuillez en demander un nouveau";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "Votre adresse e-mail n'est pas valide.";

@@ -1,15 +1,9 @@
-/* Translation-Revision-Date: 2022-11-22 13:54:03+0000 */
+/* Translation-Revision-Date: 2024-08-08 11:54:02+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: sv_SE */
 
-/* Monthly Subscription Option. Please preserve the special marker! */
-"%@ per Month" = "%@ per månad";
-
-/* Yearly Subscription Option. Please preserve the special marker! */
-"%@ per Year" = "%@ per år";
-
-/* Number of found search results */
+/* No comment provided by engineer. */
 "%d Result" = "%d resultat";
 
 /* Number of found search results */
@@ -73,6 +67,7 @@
 "About" = "Om";
 
 /* Accept Action
+   Accept Message
    Label of accept button on alert dialog */
 "Accept" = "Acceptera";
 
@@ -124,7 +119,16 @@
 "Are you sure you want to empty the trash? This cannot be undone." = "Är du säker på att du vill tömma papperskorgen?  Detta kan inte göras ogjort.";
 
 /* Data Fetch error message */
+"Attempt to fetch current note content failed.  Please try again later." = "Försöket att hämta aktuellt anteckningsinnehåll misslyckades.  Försök igen senare.";
+
+/* Data Fetch error message */
 "Attempt to fetch entities failed.  Please try again later." = "Försöket att hämta enheter misslyckades.  Försök igen senare.";
+
+/* Data Fetch error message */
+"Attempt to fetch notes failed.  Please try again later." = "Försöket att hämta anteckningar misslyckades.  Försök igen senare.";
+
+/* Data Fetch error message */
+"Attempt to fetch tags failed.  Please try again later." = "Försök att hämta etiketter misslyckades. Försök igen senare.";
 
 /* User Authenticated */
 "Authenticated" = "Autentiserad";
@@ -151,14 +155,13 @@
    Cancel button for authentication
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
-   Dismisses the alert
    Dismissing an interface
    PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */
 "Cancel" = "Avbryt";
 
 /* Name of button to cancel iOS share extension in missing token alert */
-"Cancel Share" = "Avbryt Dela";
+"Cancel Share" = "Avbryt dela";
 
 /* Error message title. Review you account screen */
 "Cannot Confirm Account" = "Kan inte bekräfta konto";
@@ -187,8 +190,8 @@
 /* Title on the PinLock screen asking to create a passcode */
 "Choose a 4 digit passcode" = "Välj en fyrsiffrig låskod";
 
-/* Sustainer Alert's Message */
-"Choose a plan and help unlock future features" = "Välj ett paket och hjälp till att låsa upp framtida funktioner";
+/* Code TextField Placeholder */
+"Code" = "Kod";
 
 /* Opens the Collaborate UI */
 "Collaborate" = "Samarbeta";
@@ -231,8 +234,17 @@
 /* Error for bad email or password */
 "Could not create an account with the provided email address and password." = "Kunde inte skapa ett konto med den e-postadressen och det lösenordet.";
 
+/* Note fetch error title */
+"Could not fetch Notes" = "Det gick inte att hämta anteckningar";
+
+/* Tag fetch error title */
+"Could not fetch Tags" = "Kunde inte hämta etiketter";
+
 /* Fetch error title */
 "Could not fetch entities" = "Kunde inte hämta enheter";
+
+/* note content fetch error title */
+"Could not fetch note content" = "Det gick inte att hämta anteckningsinnehållet";
 
 /* Message displayed when login fails */
 "Could not login with the provided email address and password." = "Kunde inte logga in med den e-postadressen och det lösenordet.";
@@ -360,6 +372,15 @@
 /* Number of objects enqueued for processing */
 "Enqueued" = "I kö";
 
+/* LogIn Interface Title */
+"Enter Code" = "Ange kod";
+
+/* Enter Password fallback Action */
+"Enter password" = "Ange lösenord";
+
+/* Header for Login With Password. Please preserve the {{EMAIL}} substring */
+"Enter the password for the account {{EMAIL}}" = "Ange lösenordet för kontot {{EMAIL}}";
+
 /* Title on the PinLock screen asking to enter a passcode */
 "Enter your passcode" = "Ange lösenkod";
 
@@ -389,7 +410,7 @@
 "Forgot password? »" = "Glömt lösenord? »";
 
 /* Password Reset Action */
-"Forgotten password?" = "Glömt lösenordet?";
+"Forgot your password?" = "Glömt ditt lösenord?";
 
 /* FAQ or contact us */
 "Get Help" = "Skaffa hjälp";
@@ -414,6 +435,12 @@
 
 /* Rating view - initial - liked button */
 "I like it" = "Jag gillar den";
+
+/* Option to add notes to spotlight search */
+"Index Notes in Spotlight" = "Indexera anteckningar i Spotlight";
+
+/* Alert title letting user know their search index has been removed */
+"Index Removed" = "Index borttaget";
 
 /* Note Information Button (metrics + references) */
 "Information" = "Information";
@@ -451,6 +478,9 @@
    LogIn Interface Title */
 "Log In" = "Logga in";
 
+/* LogIn Interface Title */
+"Log In with Password" = "Logga in med lösenord";
+
 /* Log out of the active account in the app */
 "Log Out" = "Logga ut";
 
@@ -463,11 +493,17 @@
 /* Widget warning if user has set pin lock */
 "Unlock to see your note list" = "Lås upp för att se din anteckningslista";
 
-/* Allows the user to SignIn using their WPCOM Account */
+/* Password fallback Action */
 "Log in with WordPress.com" = "Logga in med WordPress.com";
 
-/* Presents the regular Email signin flow */
+/* Sends the User an email with an Authentication Code */
 "Log in with email" = "Logga in med e-post";
+
+/* Header for Enter Password UI, when the user performed too many requests */
+"Log in with email failed, please enter your password" = "Inloggning med e-post misslyckades, ange ditt lösenord";
+
+/* Message displayed when a login code is too short */
+"Login Code is too short" = "Inloggningskod är för kort";
 
 /* Month and day date formatter */
 "MMM d" = "d MMM";
@@ -498,9 +534,6 @@
 
 /* Sort Mode: Modified Date, ascending */
 "Modified: Oldest" = "Modifierad: Äldsta";
-
-/* Monthly Subscription Option (Used when / if the price fails to load) */
-"Monthly" = "Månadsvis";
 
 /* Accessibility hint for trash selected notes button */
 "Move selected notes to trash" = "Flytta markerade anteckningar till papperskorgen";
@@ -588,6 +621,9 @@
    Email unverified alert dismiss */
 "Ok" = "Okej";
 
+/* confirm button title */
+"Okay" = "Okey";
+
 /* No comment provided by engineer. */
 "On" = "På";
 
@@ -602,6 +638,9 @@
 
 /* Note Options Title */
 "Options" = "Alternativ";
+
+/* Or, used as a separator between Actions */
+"Or" = "Eller";
 
 /* A 4-digit code to lock the app when it is closed */
 "Passcode" = "Lösenkod";
@@ -687,6 +726,9 @@
 /* Home screen quick action: Recent Note */
 "Recent" = "Senaste";
 
+/* Header to put on any files that need to be recovered */
+"Recovered Note Cotent - " = "Återställt anteckningsinnehåll – ";
+
 /* References section header on Info Card */
 "Referenced In" = "Refereras i";
 
@@ -723,9 +765,6 @@
 /* Restore a note from trash
    Restore a note to a previous version */
 "Restore Note" = "Återställ anteckning";
-
-/* Manually Restores IAP Purchases */
-"Restore Purchases" = "Återställ köp";
 
 /* Title -> Review you account screen */
 "Review Your Account" = "Granska ditt konto";
@@ -809,8 +848,7 @@
    Title of main share extension view */
 "Simplenote" = "Simplenote";
 
-/* Restoration Successful Title
-   Sustainer Alert's Title */
+/* Restoration Successful Title */
 "Simplenote Sustainer" = "Simplenote Sustainer";
 
 /* Simplenote's Feedback Email Title */
@@ -819,7 +857,8 @@
 /* Message displayed when app is not configured */
 "Simplenote must be configured and logged in to setup widgets" = "Du måste konfigurera Simplenote och logga in för att konfigurera widgetar";
 
-/* Authentication Error Alert Title */
+/* Authentication Error Alert Title
+   Email TextField Placeholder */
 "Sorry!" = "Tyvärr!";
 
 /* Option to sort tags alphabetically. The default is by manual ordering. */
@@ -832,14 +871,17 @@
 /* Sort By Title */
 "Sort by:" = "Sortera efter:";
 
+/* Details that some results may still appear in searches on device */
+"Spotlight history may still appear in search results, but notes have be unindexed" = "Spotlight-historik kan fortfarande visas i sökresultaten, men anteckningar är inte längre indexerade";
+
 /* Title for the response's Status Code */
 "Status Code" = "Statuskod";
 
 /* Become a Sustainer Details */
 "Support your favorite notes app to help unlock future features" = "Stöd din favoritanteckningsapp och hjälp till att låsa upp framtida funktioner";
 
-/* No comment provided by engineer. */
-"Sustainer" = "Sustainer";
+/* Switch app icon */
+"Sustainer App Icon" = "Sustainer-appikon";
 
 /* Restoration Successful Message */
 "Sustainer subscription restored. Thank you for supporting Simplenote!" = "Sustainer-prenumeration återställd. Tack för att du stödjer Simplenote.";
@@ -876,6 +918,12 @@
 
 /* Error when address is in use */
 "That email is already being used" = "Den e-posten används redan";
+
+/* Email TextField Placeholder */
+"The authentication code you've requested has expired. Please request a new one" = "Autentiseringskoden du har begärt har löpt ut. Begär en ny";
+
+/* Error message for Invalid Login Code */
+"The code you've entered is not correct. Please try again" = "Koden du har angett är inte korrekt. Försök igen";
 
 /* Error when address is in use */
 "The email you've entered is already associated with a Simplenote account." = "Den angivna e-postadressen är redan associerad med ett Simplenote-konto.";
@@ -989,6 +1037,9 @@
 /* Generic error */
 "We're having problems. Please try again soon." = "Vi har problem. Försök igen om en stund.";
 
+/* Header for the Login with Code UI. Please preserve the {{EMAIL}} string as is! */
+"We've sent a code to {{EMAIL}}. The code will be valid for a few minutes." = "Vi har skickat en kod till {{EMAIL}}. Koden kommer vara giltig i några minuter.";
+
 /* WebSocket Status */
 "WebSocket" = "WebSocket";
 
@@ -1002,11 +1053,11 @@
 /* Rating view initial title */
 "What do you think about Simplenote?" = "Vad tycker du om Simplenote?";
 
+/* Alerting users that we will attempt to restore lost content on next launch */
+"Will attempt to recover shortcut content on next launch" = "Kommer att försöka återställa genvägsinnehållet vid nästa start";
+
 /* Number of words in the note */
 "Words" = "ord";
-
-/* Yearly Subscription Option (Used when / if the price fails to load) */
-"Yearly" = "Årligen";
 
 /* Proceeds with the Empty Trash OP */
 "Yes" = "Ja";
@@ -1025,6 +1076,9 @@
 
 /* Restoration Successful Message */
 "You're already a Sustainer. Thank you for supporting Simplenote!" = "Du är redan en Sustainer. Tack för att du stödjer Simplenote.";
+
+/* Error message for Invalid Login Code */
+"Your authentication code has expired. Please request a new one" = "Din autentiseringskod har löpt ut. Begär en ny";
 
 /* Message displayed when email address is invalid */
 "Your email address is not valid" = "Din e-postadress är inte giltig";

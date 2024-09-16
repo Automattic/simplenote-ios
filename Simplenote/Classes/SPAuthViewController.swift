@@ -549,14 +549,18 @@ extension SPAuthViewController {
     @IBAction func presentPasswordInterface() {
         presentPasswordInterfaceWithHeader(header: AuthenticationStrings.loginWithEmailEmailHeader)
     }
-    
+
     @IBAction func presentPasswordInterfaceWithRateLimitingHeader() {
         presentPasswordInterfaceWithHeader(header: AuthenticationStrings.loginWithEmailLimitHeader)
     }
 
-    @IBAction func presentPasswordInterfaceWithHeader(header: String?) {
-        let viewController = SPAuthViewController(controller: controller, mode: .loginWithPassword(header: header), state: state)
+    @IBAction func presentPasswordInterfaceWithHeader(header: String?, includeUsername: Bool = false) {
+        let viewController = SPAuthViewController(controller: controller, mode: .loginWithPassword(header: header, includeUsername: includeUsername), state: state)
         navigationController?.pushViewController(viewController, animated: true)
+    }
+
+    @IBAction func presentUsernameAndPasswordInterface() {
+        presentPasswordInterfaceWithHeader(header: nil, includeUsername: true)
     }
 }
 
@@ -880,6 +884,18 @@ extension SPAuthViewController: SPTextInputViewDelegate {
     func textInputShouldReturn(_ textInput: SPTextInputView) -> Bool {
         performPrimaryActionIfPossible()
         return false
+    }
+
+    func textInput(_ textInput: SPTextInputView, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard textInput == codeInputView else {
+            return true
+        }
+
+        let maxLength = 6
+        let currentString = (textInput.text ?? "") as NSString
+        let newString = currentString.replacingCharacters(in: range, with: string)
+
+        return newString.count <= maxLength
     }
 }
 

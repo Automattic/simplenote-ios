@@ -8,30 +8,6 @@ fastlane_require 'buildkit'
 
 UI.user_error!('Please run fastlane via `bundle exec`') unless FastlaneCore::Helper.bundler?
 
-SECRETS_ROOT = File.join(Dir.home, '.configure', 'simplenote-ios', 'secrets')
-APP_STORE_CONNECT_KEY_PATH = File.join(SECRETS_ROOT, 'app_store_connect_fastlane_api_key.json')
-$used_test_account_index = nil
-
-require_relative 'lib/env_manager'
-
-import 'lanes/localization.rb'
-import 'lanes/release.rb'
-import 'lanes/build.rb'
-
-before_all do
-  # Ensure we use the latest version of the toolkit
-  check_for_toolkit_updates unless is_ci || ENV['FASTLANE_SKIP_TOOLKIT_UPDATE_CHECK']
-
-  EnvManager.set_up(env_file_name: 'simplenote-ios')
-
-  setup_ci
-end
-
-error do |lane, _exception, _options|
-  deoccupy_test_account if lane == :run_ui_tests
-end
-
-# Constants
 PROJECT_ROOT_FOLDER = File.dirname(File.expand_path(__dir__))
 VERSION_FILE_PATH = File.join(PROJECT_ROOT_FOLDER, 'config', 'Version.Public.xcconfig')
 OUTPUT_DIRECTORY_PATH = File.join(PROJECT_ROOT_FOLDER, 'build', 'results')
@@ -46,76 +22,61 @@ PROJECT_SLUG = 'simplenote-ios'
 GITHUB_REPO = "#{ORGANIZATION}/#{PROJECT_SLUG}".freeze
 BUILDKITE_ORGANIZATION = ORGANIZATION
 BUILDKITE_PIPELINE = PROJECT_SLUG
+APPCENTER_OWNER_NAME = ORGANIZATION
 
 WORKSPACE = 'Simplenote.xcworkspace'
-
-########################################################################
-# Environment
-########################################################################
-ENV['PROJECT_NAME'] = 'Simplenote'
-ENV['PROJECT_ROOT_FOLDER'] = PROJECT_ROOT_FOLDER
-ENV['APP_STORE_STRINGS_FILE_NAME'] = 'AppStoreStrings.pot'
-ENV['PUBLIC_CONFIG_FILE'] = VERSION_FILE_PATH
-ENV['DOWNLOAD_METADATA'] = './fastlane/download_metadata.swift'
-ENV['FL_RELEASE_TOOLKIT_DEFAULT_BRANCH'] = 'trunk'
 
 VERSION_CALCULATOR = Fastlane::Wpmreleasetoolkit::Versioning::SemanticVersionCalculator.new
 VERSION_FORMATTER = Fastlane::Wpmreleasetoolkit::Versioning::FourPartVersionFormatter.new
 BUILD_CODE_FORMATTER = Fastlane::Wpmreleasetoolkit::Versioning::FourPartBuildCodeFormatter.new
 PUBLIC_VERSION_FILE = Fastlane::Wpmreleasetoolkit::Versioning::IOSVersionFile.new(xcconfig_path: VERSION_FILE_PATH)
 
+SECRETS_ROOT = File.join(Dir.home, '.configure', 'simplenote-ios', 'secrets')
+APP_STORE_CONNECT_KEY_PATH = File.join(SECRETS_ROOT, 'app_store_connect_fastlane_api_key.json')
+$used_test_account_index = nil
+
+GLOTPRESS_BASE_URL = 'https://translate.wordpress.com/projects'
+# Notice the trailing / is required.
+# Without it, GlotPress will redirect to the version with /
+GLOTPRESS_APP_STRINGS_PROJECT_URL = "#{GLOTPRESS_BASE_URL}/simplenote/ios/".freeze
+GLOTPRESS_STORE_METADATA_PROJECT_URL = "#{GLOTPRESS_APP_STRINGS_PROJECT_URL}release-notes/".freeze
+
+APP_RESOURCES_DIR = File.join(PROJECT_ROOT_FOLDER, 'Simplenote', 'Resources')
+STORE_METADATA_FOLDER = File.join(PROJECT_ROOT_FOLDER, 'fastlane', 'metadata')
+STORE_METADATA_DEFAULT_LOCALE_FOLDER = File.join(STORE_METADATA_FOLDER, 'default')
+RELEASE_NOTES_SOURCE_PATH = File.join(STORE_METADATA_DEFAULT_LOCALE_FOLDER, 'release_notes.txt')
+
+require_relative 'lib/env_manager'
+
+# Important: These need to be imported after all the constants have been defined because they access them.
+# A bit of a leaky abstraction but makes for lanes that are easier to write...
+import 'lanes/build.rb'
+import 'lanes/ci_releases.rb'
+import 'lanes/localization.rb'
+import 'lanes/release.rb'
+
+before_all do
+  # Ensure we use the latest version of the toolkit
+  check_for_toolkit_updates unless is_ci || ENV['FASTLANE_SKIP_TOOLKIT_UPDATE_CHECK']
+
+  EnvManager.set_up(env_file_name: 'simplenote-ios')
+
+  setup_ci
+end
+
+error do |lane, _exception, _options|
+  deoccupy_test_account if lane == :run_ui_tests
+end
+
+########################################################################
+# Environment
+########################################################################
+ENV['PROJECT_NAME'] = 'Simplenote'
+ENV['PROJECT_ROOT_FOLDER'] = PROJECT_ROOT_FOLDER
+ENV['PUBLIC_CONFIG_FILE'] = VERSION_FILE_PATH
+ENV['FL_RELEASE_TOOLKIT_DEFAULT_BRANCH'] = 'trunk'
+
 platform :ios do
-  desc 'Updates the AppStoreStrings.pot file with the latest data'
-  lane :update_appstore_strings do |version: release_version_current|
-    prj_folder = Pathname.new(File.join(Dir.pwd, '..')).expand_path.to_s
-    source_metadata_folder = File.join(prj_folder, 'fastlane', 'appstoreres', 'metadata', 'source')
-
-    files = {
-      whats_new: File.join(prj_folder, 'Simplenote', 'Resources', 'release_notes.txt'),
-      app_store_subtitle: File.join(source_metadata_folder, 'subtitle.txt'),
-      app_store_desc: File.join(source_metadata_folder, 'description.txt'),
-      app_store_keywords: File.join(source_metadata_folder, 'keywords.txt')
-    }
-
-    ios_update_metadata_source(
-      po_file_path: File.join(prj_folder, 'Simplenote', 'Resources', 'AppStoreStrings.pot'),
-      source_files: files,
-      release_version: version
-    )
-  end
-
-  # This lane lacks documentation because it ought to be part of the localized
-  # metadata download script instead!
-  desc 'Updates the files with the localized keywords values for App Store Connect to match the 100 characters requirement'
-  lane :sanitize_appstore_keywords do
-    Dir['./metadata/**'].each do |locale_dir|
-      keywords_path = File.join(locale_dir, 'keywords.txt')
-
-      unless File.exist?(keywords_path)
-        UI.message "Could not find keywords file in #{locale_dir}. Skipping."
-        next
-      end
-
-      keywords = File.read(keywords_path)
-      app_store_connect_keywords_length_limit = 100
-
-      if keywords.length <= app_store_connect_keywords_length_limit
-        UI.verbose "#{keywords_path} has less than #{app_store_connect_keywords_length_limit} characters. Not trimming."
-        next
-      end
-
-      UI.message "#{keywords_path} has more than #{app_store_connect_keywords_length_limit} characters. Trimming it..."
-
-      english_comma = ','
-      arabic_comma = '،'
-      keywords = keywords.gsub(arabic_comma, english_comma) if File.basename(locale_dir) == 'ar-SA'
-
-      keywords = keywords.split(english_comma)[0...-1].join(english_comma) until keywords.length <= app_store_connect_keywords_length_limit
-
-      File.write(keywords_path, keywords)
-    end
-  end
-
   #####################################################################################
   # new_hotfix_release
   # -----------------------------------------------------------------------------------
@@ -152,70 +113,6 @@ platform :ios do
   lane :finalize_hotfix_release do |options|
     ios_finalize_prechecks(options)
     version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
-    trigger_release_build(branch_to_build: "release/#{version}")
-  end
-
-  #####################################################################################
-  # finalize_release
-  # -----------------------------------------------------------------------------------
-  # This lane finalize a release: updates store metadata, bump final version number,
-  # remove branch protection and close milestone, then trigger the final release on CI
-  # -----------------------------------------------------------------------------------
-  # Usage:
-  # bundle exec fastlane finalize_release [skip_confirm:<skip confirm>] [version:<version>]
-  #
-  # Example:
-  # bundle exec fastlane finalize_release
-  # bundle exec fastlane finalize_release skip_confirm:true
-  #####################################################################################
-  desc 'Trigger the final release build on CI'
-  lane :finalize_release do |options|
-    UI.user_error!('To finalize a hotfix, please use the finalize_hotfix_release lane instead') if ios_current_branch_is_hotfix
-
-    ios_finalize_prechecks(options)
-
-    UI.message('Checking app strings translation status...')
-    check_translation_progress(
-      glotpress_url: 'https://translate.wordpress.com/projects/simplenote/ios/',
-      abort_on_violations: false
-    )
-
-    UI.message('Checking release notes strings translation status...')
-    check_translation_progress(
-      glotpress_url: 'https://translate.wordpress.com/projects/simplenote/ios/release-notes/',
-      abort_on_violations: false
-    )
-
-    ios_download_strings_files_from_glotpress(
-      project_url: 'https://translate.wordpress.com/projects/simplenote/ios/',
-      locales: GLOTPRESS_TO_LPROJ_APP_LOCALE_CODES,
-      download_dir: File.join(PROJECT_ROOT_FOLDER, 'Simplenote')
-    )
-    sanitize_appstore_keywords
-    ios_lint_localizations(
-      input_dir: 'Simplenote',
-      allow_retry: true
-    )
-    ios_bump_version_beta
-
-    # Wrap up
-    version = ios_get_app_version(public_version_xcconfig_file: VERSION_FILE_PATH)
-    remove_branch_protection(
-      repository: GITHUB_REPO,
-      branch: "release/#{version}"
-    )
-    set_milestone_frozen_marker(
-      repository: GITHUB_REPO,
-      milestone: version,
-      freeze: false
-    )
-    create_new_milestone(repository: GITHUB_REPO)
-    close_milestone(
-      repository: GITHUB_REPO,
-      milestone: version
-    )
-
-    # Start the build
     trigger_release_build(branch_to_build: "release/#{version}")
   end
 
@@ -447,44 +344,30 @@ platform :ios do
 
     return if ENV['BUILDKITE_PULL_REQUEST'].nil?
 
-    post_installable_build_pr_comment(
-      app_name: 'simplenote-ios',
-      build_number: build_number,
-      url_slug: 'Simplenote-Installable-Builds'
-    )
+    post_installable_build_pr_comment
   end
 
   # Posts a comment on the current PR to inform where to download a given Installable Build that was just published to App Center.
   #
   # Use this only after `upload_to_app_center` as been called, as it announces how said App Center build can be installed.
   #
-  # @param [String] app_name The display name to use in the comment text to identify which app this Installable Build is about
-  # @param [String] build_number The App Center's build number for this build
-  # @param [String] url_slug The last component of the `install.appcenter.ms` URL used to install the app. Typically a sluggified version of the app name
-  #                          in App Center (e.g. `WPiOS-One-Offs`)
-  #
   # @called_by CI — especially, relies on `BUILDKITE_PULL_REQUEST` being defined
   #
-  def post_installable_build_pr_comment(app_name:, build_number:, url_slug:)
-    UI.message("Successfully built and uploaded installable build `#{build_number}` to App Center.")
+  def post_installable_build_pr_comment
+    pr = ENV.fetch('BUILDKITE_PULL_REQUEST', nil)
 
-    return if ENV['BUILDKITE_PULL_REQUEST'].nil?
+    return if pr.nil?
 
-    install_url = "https://install.appcenter.ms/orgs/automattic/apps/#{url_slug}/"
-    qr_code_url = "https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=#{CGI.escape(install_url)}&choe=UTF-8"
-    comment_body = <<~COMMENT_BODY
-      You can test the changes in <strong>#{app_name}</strong> from this Pull Request by:<ul>
-        <li><a href='#{install_url}'>Clicking here</a> or scanning the QR code below to access App Center</li>
-        <li>Then installing the build number <code>#{build_number}</code> on your iPhone</li>
-      </ul>
-      <img src='#{qr_code_url}' width='150' height='150' />
-      If you need access to App Center, please ask a maintainer to add you.
-    COMMENT_BODY
+    comment_body = prototype_build_details_comment(
+      app_display_name: 'Simplenote Prototype Build',
+      app_center_org_name: APPCENTER_OWNER_NAME,
+      fold: true
+    )
 
     comment_on_pr(
-      project: 'automattic/simplenote-ios',
-      pr_number: Integer(ENV.fetch('BUILDKITE_PULL_REQUEST', nil)),
-      reuse_identifier: "installable-build-link--#{url_slug}",
+      project: GITHUB_REPO,
+      pr_number: Integer(pr),
+      reuse_identifier: 'installable-build-link--Simplenote-Installable-Builds',
       body: comment_body
     )
   end
@@ -1064,5 +947,14 @@ def build_code_next
 end
 
 def release_branch_name(release_version: release_version_current)
-  "release/#{release_version}"
+  "#{RELEASE_BRANCH_ROOT}#{release_version}"
 end
+
+def ensure_git_branch_is_release_branch!
+  # Verify that the current branch is a release branch.
+  # Notice that `ensure_git_branch` expects a RegEx parameter.
+  # Also, ensure_git_branch will fail the lane if the branch doesn't match, hence the ! in the method name.
+  ensure_git_branch(branch: "^#{RELEASE_BRANCH_ROOT}")
+end
+
+RELEASE_BRANCH_ROOT = 'release/'

@@ -3,7 +3,7 @@
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: cy_GB */
 
-/* Number of found search results */
+/* No comment provided by engineer. */
 "%d Result" = "%d Canlyniad";
 
 /* Number of found search results */
@@ -16,6 +16,7 @@
 "%i Failed Passcode Attempts" = "%i Ymgais Aflwyddiannus gyda'r Cod Cyfrin";
 
 /* Accept Action
+   Accept Message
    Label of accept button on alert dialog */
 "Accept" = "Derbyn";
 
@@ -49,7 +50,6 @@
    Cancel button for authentication
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
-   Dismisses the alert
    Dismissing an interface
    PinLock screen \"cancel\" button
    Verb, cancel an alert dialog */

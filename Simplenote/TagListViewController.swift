@@ -501,6 +501,13 @@ extension TagListViewController: TagListViewCellDelegate {
                                                 preferredStyle: .actionSheet)
 
         alertController.addDestructiveActionWithTitle(Localization.TagDeletionConfirmation.confirmationButton) { (_) in
+            guard self.verifyTagIsAtIndexPath(tag, at: indexPath) else {
+                self.present(UIAlertController.dismissableAlert(
+                    title: Localization.tagDeleteFailedTitle,
+                    message: Localization.tagDeleteFailedMessage), animated: true)
+                return
+            }
+
             switch source {
             case .accessory:
                 SPTracker.trackTagRowDeleted()
@@ -518,6 +525,17 @@ extension TagListViewController: TagListViewCellDelegate {
         alertController.popoverPresentationController?.permittedArrowDirections = .any
 
         present(alertController, animated: true, completion: nil)
+    }
+
+    private func verifyTagIsAtIndexPath(_ tagToRemove: Tag, at indexPath: IndexPath) -> Bool {
+        // REF: https://github.com/Automattic/simplenote-ios/issues/1312
+        // If you initiate deleting a tag and the tag is deleted before you confirm then another tag is deleted
+        // This method confirms the selected tag is the same as the tag at index path before removing.
+        guard let tagAtIndexPath = tag(at: indexPath) else {
+            return false
+        }
+
+        return tagToRemove.simperiumKey == tagAtIndexPath.simperiumKey
     }
 }
 
@@ -887,6 +905,9 @@ private struct Localization {
 
     static let tags = NSLocalizedString("Tags", comment: "Tags List Header")
     static let untaggedNotes = NSLocalizedString("Untagged Notes", comment: "Allows selecting notes with no tags")
+
+    static let tagDeleteFailedTitle = NSLocalizedString("Could not delete tag", comment: "Notifies user tag delete failed")
+    static let tagDeleteFailedMessage = NSLocalizedString("Please try again", comment: "Encourages trying delete again")
 
     struct TagDeletionConfirmation {
         static func title(with tagName: String) -> String {
