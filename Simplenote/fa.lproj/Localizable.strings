@@ -12,6 +12,9 @@
 /* Password Requirement: Email Match */
 "- Password cannot match email" = "- گذرواژه نمی‌تواند مطابقِ ایمیل باشد";
 
+/* Lock Widgets if passcode is on. */
+"Lock Widgets" = "قفل ویجت‌ها";
+
 /* 1 minute passcode lock timeout */
 "1 Minute" = "۱ دقیقه";
 

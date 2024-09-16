@@ -158,6 +158,18 @@ extension Options {
             defaults.set(newValue, forKey: .indexNotesInSpotlight)
         }
     }
+    
+    @objc 
+    var lockWidgetsWithPasscode: Bool {
+        get {
+            defaults.bool(forKey: .lockWidgetsWithPasscode)
+        }
+        
+        set {
+            defaults.set(newValue, forKey: .lockWidgetsWithPasscode)
+            ShortcutsHandler.shared.updateHomeScreenQuickActions(with: nil)
+        }
+    }
 }
 
 // MARK: - Private

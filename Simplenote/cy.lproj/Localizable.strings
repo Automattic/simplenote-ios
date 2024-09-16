@@ -127,6 +127,9 @@
    Error Title */
 "Error" = "Gwall";
 
+/* Lock Widgets if passcode is on. */
+"Lock Widgets" = "Cloi teclynnau";
+
 /* Forgot password Button Text */
 "Forgot password? »" = "Wedi anghofio eich cyfrinair? »";
 

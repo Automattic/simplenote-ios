@@ -540,9 +540,9 @@ extension SPAppDelegate {
     @objc
     func syncWidgetDefaults() {
         let authenticated = simperium.user?.authenticated() ?? false
-        let pinLockIsEnabled = SPPinLockManager.shared.isEnabled
+        let lockWidgets = SPPinLockManager.shared.isEnabled && Options.shared.lockWidgetsWithPasscode
         let sortMode = Options.shared.listSortMode
-        WidgetController.syncWidgetDefaults(authenticated: authenticated, pinLockIsEnabled: pinLockIsEnabled, sortMode: sortMode)
+        WidgetController.syncWidgetDefaults(authenticated: authenticated, lockWidgets: lockWidgets, sortMode: sortMode)
     }
 }
 

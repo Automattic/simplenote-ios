@@ -15,6 +15,7 @@ NSString *const SPSustainerAppIconName                              = @"AppIcon-
 @property (nonatomic, strong) UISwitch      *condensedNoteListSwitch;
 @property (nonatomic, strong) UISwitch      *alphabeticalTagSortSwitch;
 @property (nonatomic, strong) UISwitch      *biometrySwitch;
+@property (nonatomic, strong) UISwitch      *lockWidgetsSwitch;
 @property (nonatomic, strong) UISwitch      *sustainerIconSwitch;
 @property (nonatomic, strong) UITextField   *pinTimeoutTextField;
 @property (nonatomic, strong) UIPickerView  *pinTimeoutPickerView;
@@ -35,6 +36,7 @@ NSString *const SPSustainerAppIconName                              = @"AppIcon-
 #define kTagTouchID             7
 #define kTagSustainerIcon       8
 #define kTagIndexNotes          9
+#define kTagLockWidgets         10
 
 typedef NS_ENUM(NSInteger, SPOptionsViewSections) {
     SPOptionsViewSectionsNotes          = 0,
@@ -77,8 +79,9 @@ typedef NS_ENUM(NSInteger, SPOptionsAppearanceRow) {
 typedef NS_ENUM(NSInteger, SPOptionsSecurityRow) {
     SPOptionsSecurityRowRowPasscode     = 0,
     SPOptionsSecurityRowRowBiometry     = 1,
-    SPOptionsSecurityRowTimeout         = 2,
-    SPOptionsSecurityRowRowCount        = 3
+    SPOptionsSecurityRowLockWidgets     = 2,
+    SPOptionsSecurityRowTimeout         = 3,
+    SPOptionsSecurityRowRowCount        = 4
 };
 
 typedef NS_ENUM(NSInteger, SPOptionsDeleteRow) {
@@ -153,6 +156,11 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     [self.biometrySwitch addTarget:self
                            action:@selector(touchIdSwitchDidChangeValue:)
                  forControlEvents:UIControlEventValueChanged];
+    
+    self.lockWidgetsSwitch = [UISwitch new];
+    [self.lockWidgetsSwitch addTarget:self
+                               action:@selector(touchLockWidgetsSwitchDidChangeValue:)
+                     forControlEvents:UIControlEventValueChanged];
 
     self.sustainerIconSwitch = [UISwitch new];
     [self.sustainerIconSwitch addTarget:self
@@ -232,7 +240,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 
         case SPOptionsViewSectionsSecurity: {
             int rowsToRemove = [self isBiometryAvailable] ? 0 : 1;
-            int disabledPinLockRows = [self isBiometryAvailable] ? 2 : 1;
+            int disabledPinLockRows = [self isBiometryAvailable] ? 3 : 2;
             return [self isPinLockEnabled] ? SPOptionsSecurityRowRowCount - rowsToRemove : disabledPinLockRows;
         }
 
@@ -421,6 +429,16 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
                     }
                     
                     // No break here so we intentionally render the Timeout cell if biometry is disabled
+                }
+                case SPOptionsSecurityRowLockWidgets: {
+                    cell.textLabel.text = [self lockWidgetsTitle];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
+                    self.lockWidgetsSwitch.on = Options.shared.lockWidgetsWithPasscode;
+                    cell.accessoryView = self.lockWidgetsSwitch;
+                    cell.tag = kTagLockWidgets;
+                    
+                    break;
                 }
                 case SPOptionsSecurityRowTimeout: {
                     cell.textLabel.text = NSLocalizedString(@"Lock Timeout", @"Setting for when the passcode lock should enable");
@@ -755,6 +773,11 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
     }
 }
 
+- (void)touchLockWidgetsSwitchDidChangeValue:(UISwitch *)sender
+{
+    Options.shared.lockWidgetsWithPasscode = sender.on;
+}
+
 - (UIAlertController*)pinLockRequiredAlert
 {
     NSString *alertTitleTemplate = NSLocalizedString(@"To enable %1$@, you must have a passcode setup first.",
@@ -789,7 +812,7 @@ typedef NS_ENUM(NSInteger, SPOptionsDebugRow) {
 - (void)refreshThemeStyles
 {
     // Reload Switch Styles
-    NSArray *switches       = @[ _condensedNoteListSwitch, _alphabeticalTagSortSwitch, _biometrySwitch ];
+    NSArray *switches       = @[ _condensedNoteListSwitch, _indexNotesSwitch, _alphabeticalTagSortSwitch, _biometrySwitch, _lockWidgetsSwitch ];
     
     for (UISwitch *theSwitch in switches) {
         theSwitch.onTintColor   = [UIColor simplenoteSwitchOnTintColor];

@@ -379,6 +379,9 @@
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Yüz Kimliği";
 
+/* Lock Widgets if passcode is on. */
+"Lock Widgets" = "Widget’leri kilitle";
+
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "Sürüm Alınıyor";
 

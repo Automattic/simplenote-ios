@@ -379,6 +379,9 @@
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "面容 ID";
 
+/* Lock Widgets if passcode is on. */
+"Lock Widgets" = "锁定小组件";
+
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "正在提取版本";
 

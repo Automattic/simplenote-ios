@@ -19,7 +19,7 @@ struct NoteWidget: Widget {
             return AnyView(NoteWidgetView(entry: entry))
         case .loggedOut:
             return AnyView(WidgetWarningView(warning: .loggedOut))
-        case .pinLockIsEnabled:
+        case .lockWidgets:
             return AnyView(WidgetWarningView(warning: .noteLocked))
         case .noteMissing:
             return AnyView(WidgetWarningView(warning: .noteMissing))

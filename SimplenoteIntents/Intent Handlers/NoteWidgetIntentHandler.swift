@@ -13,7 +13,7 @@ class NoteWidgetIntentHandler: NSObject, NoteWidgetIntentHandling {
 
     func provideNoteOptionsCollection(for intent: NoteWidgetIntent, with completion: @escaping (INObjectCollection<WidgetNote>?, Error?) -> Void) {
         guard WidgetDefaults.shared.loggedIn,
-              WidgetDefaults.shared.pinLockIsEnabled == false else {
+              WidgetDefaults.shared.lockWidgets == false else {
             completion(nil, WidgetError.appConfigurationError)
             return
         }
@@ -36,7 +36,7 @@ class NoteWidgetIntentHandler: NSObject, NoteWidgetIntentHandling {
 
     func defaultNote(for intent: NoteWidgetIntent) -> WidgetNote? {
         guard WidgetDefaults.shared.loggedIn,
-              WidgetDefaults.shared.pinLockIsEnabled == false,
+              WidgetDefaults.shared.lockWidgets == false,
               let note = coreDataWrapper.resultsController()?.firstNote() else {
             return nil
         }

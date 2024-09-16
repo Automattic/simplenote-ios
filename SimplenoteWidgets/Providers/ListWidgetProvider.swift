@@ -10,11 +10,11 @@ struct ListWidgetEntry: TimelineEntry {
         case standard
         case tagDeleted
         case loggedOut
-        case pinLockIsEnabled
+        case lockWidgets
     }
 
     var noteIsAvailable: Bool {
-        return state != .loggedOut && state != .pinLockIsEnabled
+        return state != .loggedOut && state != .lockWidgets
     }
 }
 
@@ -47,10 +47,10 @@ struct ListWidgetProvider: IntentTimelineProvider {
     let coreDataWrapper = ExtensionCoreDataWrapper()
 
     func placeholder(in context: Context) -> ListWidgetEntry {
-        var state: ListWidgetEntry.State = if WidgetDefaults.shared.loggedIn == false {
+        let state: ListWidgetEntry.State = if WidgetDefaults.shared.loggedIn == false {
             .loggedOut
-        } else if WidgetDefaults.shared.pinLockIsEnabled == true {
-            .pinLockIsEnabled
+        } else if WidgetDefaults.shared.lockWidgets == true {
+            .lockWidgets
         } else {
             .standard
         }
@@ -59,7 +59,7 @@ struct ListWidgetProvider: IntentTimelineProvider {
 
     func getSnapshot(for configuration: ListWidgetIntent, in context: Context, completion: @escaping (ListWidgetEntry) -> Void) {
         guard WidgetDefaults.shared.loggedIn,
-              WidgetDefaults.shared.pinLockIsEnabled == false,
+              WidgetDefaults.shared.lockWidgets == false,
               let allNotes = coreDataWrapper.resultsController()?.notes() else {
             completion(placeholder(in: context))
             return
@@ -78,8 +78,8 @@ struct ListWidgetProvider: IntentTimelineProvider {
             completion(errorTimeline(withState: .loggedOut))
             return
         }
-        guard WidgetDefaults.shared.pinLockIsEnabled == false else {
-            completion(errorTimeline(withState: .pinLockIsEnabled))
+        guard WidgetDefaults.shared.lockWidgets == false else {
+            completion(errorTimeline(withState: .lockWidgets))
             return
         }
 

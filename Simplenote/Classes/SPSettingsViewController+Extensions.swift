@@ -132,6 +132,11 @@ extension SPSettingsViewController {
     var biometryTitle: String? {
         SPPinLockManager.shared.availableBiometry?.title
     }
+    
+    @objc
+    var lockWidgetsTitle: String? {
+        return NSLocalizedString("Lock Widgets", comment: "Lock Widgets if passcode is on.")
+    }
 }
 
 // MARK: - BiometricAuthentication.Biometry

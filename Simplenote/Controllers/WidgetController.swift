@@ -24,10 +24,10 @@ struct WidgetController {
         }
     }
 
-    static func syncWidgetDefaults(authenticated: Bool, pinLockIsEnabled: Bool, sortMode: SortMode) {
+    static func syncWidgetDefaults(authenticated: Bool, lockWidgets: Bool, sortMode: SortMode) {
         let widgetDefaults = WidgetDefaults.shared
         widgetDefaults.sortMode = sortMode
         widgetDefaults.loggedIn = authenticated
-        widgetDefaults.pinLockIsEnabled = pinLockIsEnabled
+        widgetDefaults.lockWidgets = lockWidgets
     }
 }

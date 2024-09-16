@@ -376,6 +376,9 @@
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Face ID";
 
+/* Lock Widgets if passcode is on. */
+"Lock Widgets" = "Kunci widget";
+
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "Mengambil Versi";
 

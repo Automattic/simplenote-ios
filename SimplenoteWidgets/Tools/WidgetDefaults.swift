@@ -15,12 +15,12 @@ class WidgetDefaults {
         }
     }
 
-    var pinLockIsEnabled: Bool {
+    var lockWidgets: Bool {
         get {
-            defaults?.bool(forKey: .pinLockIsEnabled) ?? false
+            defaults?.bool(forKey: .lockWidgets) ?? false
         }
         set {
-            defaults?.set(newValue, forKey: .pinLockIsEnabled)
+            defaults?.set(newValue, forKey: .lockWidgets)
         }
     }
 

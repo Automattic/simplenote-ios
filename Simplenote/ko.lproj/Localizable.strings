@@ -379,6 +379,9 @@
 /* Offer to enable Face ID support if available and passcode is on. */
 "Face ID" = "Face ID";
 
+/* Lock Widgets if passcode is on. */
+"Lock Widgets" = "위젯 잠금";
+
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "버전 가져오기";
 

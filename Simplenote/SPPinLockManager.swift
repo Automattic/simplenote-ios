@@ -101,7 +101,6 @@ class SPPinLockManager: NSObject {
 
         set {
             KeychainManager.pinlock = newValue
-            UserDefaults.standard.set(isEnabled, forKey: .pinLockIsEnabled)
             ShortcutsHandler.shared.updateHomeScreenQuickActions(with: nil)
         }
     }

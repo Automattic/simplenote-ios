@@ -135,7 +135,10 @@ extension ShortcutsHandler {
         guard let note = note, let simperiumKey = note.simperiumKey else {
             return nil
         }
-        guard UserDefaults.standard.bool(forKey: .pinLockIsEnabled) == false else {
+        guard SPPinLockManager.shared.isEnabled == false else {
+            return nil
+        }
+        guard Options.shared.lockWidgetsWithPasscode == false else {
             return nil
         }
 
