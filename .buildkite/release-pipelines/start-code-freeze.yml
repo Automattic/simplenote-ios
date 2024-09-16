@@ -17,7 +17,7 @@ steps:
       install_gems
 
       echo '--- :shipit: Start code freeze'
-      bundle exec fastlane code_freeze skip_confirm:true
+      bundle exec fastlane start_code_freeze skip_confirm:true
     retry:
       manual:
         # If failed, we prefer retrying via ReleaseV2 rather than Buildkite.
