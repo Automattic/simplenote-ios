@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2024-08-07 09:54:03+0000 */
+/* Translation-Revision-Date: 2024-09-12 09:54:03+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ko_KR */
@@ -94,9 +94,6 @@
    Title: No filters applied */
 "All Notes" = "모든 메모";
 
-/* A short description to access the account login screen */
-"Already have an account?" = "이미 계정이 있으세요?";
-
 /* Delete account confirmation instructions */
 "An email has been sent to %@. Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation." = "이메일을 %@(으)로 보냈으니 받은 편지함을 확인하고 지침에 따라 계정 삭제를 확인하세요.\n\n시스템에 확인이 수신될 때까지 계정이 삭제되지 않음";
 
@@ -145,14 +142,10 @@
 /* Delete account confirmation alert message */
 "By deleting the account for %@, all notes created with this account will be permanently deleted. This action is not reversible" = "%@에 대한 계정을 삭제하면 이 계정을 통해 생성된 모든 메모가 영구적으로 삭제됩니다. 이 작업은 되돌릴 수 없습니다.";
 
-/* Terms Button Text */
-"By signing up, you agree to our Terms of Service »" = "가입하려면 서비스 약관에 동의해야 합니다. »";
-
 /* Cancel Action
    Cancel action button
    Cancel action for password alert
    Cancel action on share extension.
-   Cancel button for authentication
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
@@ -208,8 +201,7 @@
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "메모 요약 목록";
 
-/* Confirm button -> Review you account screen
-   Hint displayed in the password confirmation field */
+/* Confirm button -> Review you account screen */
 "Confirm" = "확인";
 
 /* Title on the PinLock screen asking to confirm a passcode */
@@ -233,6 +225,9 @@
 
 /* Error for bad email or password */
 "Could not create an account with the provided email address and password." = "입력하신 이메일 주소와 비밀번호로 계정을 만들지 못했습니다.";
+
+/* Notifies user tag delete failed */
+"Could not delete tag" = "태그를 삭제할 수 없습니다";
 
 /* Note fetch error title */
 "Could not fetch Notes" = "메모를 가져올 수 없음";
@@ -338,9 +333,6 @@
 /* Card title showing information about the note (metrics, references) */
 "Document" = "문서";
 
-/* A short description to access the account creation screen */
-"Don't have an account?" = "아직 계정이 없으세요?";
-
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
    Done editing tags
@@ -388,12 +380,6 @@
    Error Title */
 "Error" = "오류";
 
-/* No comment provided by engineer. */
-"Error: NSManagedObjectContext's persistentStoreCoordinator must be nil. Simperium will handle CoreData connections for you." = "오류: NSManagedObjectContext의 persistentStoreCoordinator는 nil이어야 합니다. Simperium에서 자동으로 CoreData 연결을 처리합니다.";
-
-/* No comment provided by engineer. */
-"Error: you must initialize your context with 'NSMainQueueConcurrencyType' concurrency type." = "오류: 동시성 유형 'NSMainQueueConcurrencyType'으로 컨텍스트를 초기화해야 합니다.";
-
 /* Get Help Description Label */
 "FAQ or contact us" = "FAQ 또는 문의";
 
@@ -402,9 +388,6 @@
 
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "버전 가져오기";
-
-/* Forgot password Button Text */
-"Forgot password? »" = "비밀번호를 잊으셨나요? »";
 
 /* Password Reset Action */
 "Forgot your password?" = "비밀번호를 잊으셨나요?";
@@ -581,9 +564,6 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "태그 없는 메모 없음";
 
-/* Error when you enter a bad email address */
-"Not a valid email address" = "유효한 이메일 주소가 아닙니다.";
-
 /* Note Widget Title */
 "Note" = "메모";
 
@@ -639,22 +619,17 @@
 /* Pin Lock */
 "Passcodes did not match. Try again." = "패스코드가 일치하지 않습니다. 다시 시도해 주세요.";
 
-/* Hint displayed in the password field
-   Password TextField Placeholder */
+/* Password TextField Placeholder */
 "Password" = "비밀번호";
 
 /* Message displayed when password is invalid (Signup) */
 "Password cannot match email" = "비밀번호는 이메일과 일치할 수 없습니다.";
 
-/* Message displayed when password is too short. Please preserve the Percent D!
-   Message displayed when password is too short. The %%d is a placeholder for a numeral. Please preserve it! */
+/* Message displayed when password is too short. Please preserve the Percent D! */
 "Password must contain at least %d characters" = "비밀번호는 %d자 이상이어야 합니다.";
 
 /* Message displayed when a password contains a disallowed character */
 "Password must not contain tabs nor newlines" = "비밀번호에는 탭이나 줄 바꿈이 없어야 합니다.";
-
-/* Password Validation: Confirmation doesn't match */
-"Passwords do not match" = "비밀번호가 일치하지 않습니다.";
 
 /* Number of changes pending to be sent */
 "Pendings" = "대기 중";
@@ -674,6 +649,9 @@
 
 /* Extension Missing Token Alert Title */
 "Please log into your Simplenote account first by using the Simplenote app." = "Simplenote 앱을 사용하여 먼저 Simplenote에 로그인하세요.";
+
+/* Encourages trying delete again */
+"Please try again" = "다시 시도해 주세요.";
 
 /* Upgrade Alert Message */
 "Please upgrade to the latest iOS release to restore purchases" = "구매 항목을 복원하려면 최신 iOS 릴리스로 업그레이드하세요.";
@@ -817,20 +795,10 @@
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "사이드바";
 
-/* Title of button for logging in (must be short) */
-"Sign In" = "로그인";
-
-/* SignUp Action
-   Signup Action
-   SignUp Interface Title
-   Title of button to create a new account (must be short) */
+/* Signup Action
+   SignUp Action
+   SignUp Interface Title */
 "Sign Up" = "가입";
-
-/* A short link to access the account login screen */
-"Sign in" = "로그인";
-
-/* A short link to access the account creation screen */
-"Sign up" = "가입";
 
 /* Alert message displayed when an account has unsynced notes */
 "Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "로그아웃하면 동기화되지 않은 모든 메모가 삭제됩니다. 웹 앱에 로그인하여 동기화된 메모를 확인할 수 있습니다.";
@@ -907,9 +875,6 @@
 /* Current Sustainer Details */
 "Thank you for your continued support" = "계속 지지해 주셔서 감사합니다.";
 
-/* Error when address is in use */
-"That email is already being used" = "해당 이메일 주소가 이미 사용되고 있습니다.";
-
 /* Email TextField Placeholder */
 "The authentication code you've requested has expired. Please request a new one" = "요청하신 인증 코드가 만료되었습니다. 새 인증 코드를 요청하세요.";
 
@@ -976,9 +941,6 @@
 
 /* Undo action */
 "Undo" = "실행 취소";
-
-/* WebSocket not initialized */
-"Uninitialized" = "초기화되지 않음";
 
 /* Default title for an unnamed tag */
 "Unnamed Tag" = "이름 없는 태그";
