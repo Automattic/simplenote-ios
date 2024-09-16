@@ -34,20 +34,13 @@
    Title: No filters applied */
 "All Notes" = "Pob Nodyn";
 
-/* A short description to access the account login screen */
-"Already have an account?" = "Eisoes â chyfrif?";
-
 /* The Simplenote blog */
 "Blog" = "Blog";
-
-/* Terms Button Text */
-"By signing up, you agree to our Terms of Service »" = "Drwy ymuno, rydych yn cytuno i'n Amodau Gwasanaeth »";
 
 /* Cancel Action
    Cancel action button
    Cancel action for password alert
    Cancel action on share extension.
-   Cancel button for authentication
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
@@ -64,8 +57,7 @@
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "Rhestr Gryno o Nodiadau";
 
-/* Confirm button -> Review you account screen
-   Hint displayed in the password confirmation field */
+/* Confirm button -> Review you account screen */
 "Confirm" = "Cadarnhau";
 
 /* Rating view - initial - could be better button */
@@ -101,9 +93,6 @@
 
 /* Dismiss Keyboard Button */
 "Dismiss keyboard" = "Cau'r bysellfwrdd";
-
-/* A short description to access the account creation screen */
-"Don't have an account?" = "Heb greu cyfrif?";
 
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
@@ -189,12 +178,10 @@
 /* Pin Lock */
 "Passcodes did not match. Try again." = "Nid oedd y codau cyfrin yn cyfateb. Rhowch gynnig arall arni.";
 
-/* Hint displayed in the password field
-   Password TextField Placeholder */
+/* Password TextField Placeholder */
 "Password" = "Cyfrinair";
 
-/* Message displayed when password is too short. Please preserve the Percent D!
-   Message displayed when password is too short. The %%d is a placeholder for a numeral. Please preserve it! */
+/* Message displayed when password is too short. Please preserve the Percent D! */
 "Password must contain at least %d characters" = "Rhaid i'r cyfrinair gynnwys o leiaf %d nod.";
 
 /* Pin State Accessibility Hint */
@@ -249,20 +236,10 @@
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "Bar ochr";
 
-/* Title of button for logging in (must be short) */
-"Sign In" = "Mewngofnodi";
-
-/* SignUp Action
-   Signup Action
-   SignUp Interface Title
-   Title of button to create a new account (must be short) */
+/* Signup Action
+   SignUp Action
+   SignUp Interface Title */
 "Sign Up" = "Cofrestru";
-
-/* A short link to access the account login screen */
-"Sign in" = "Mewngofnodi";
-
-/* A short link to access the account creation screen */
-"Sign up" = "Cofrestru";
 
 /* Alert message displayed when an account has unsynced notes */
 "Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "Bydd all-gofnodi'n dileu unrhyw nodau heb eu cydweddu. Gallwch ddilysu eich nodau wedi eu cydweddu drwy fewngofnodi i'r Web App.";

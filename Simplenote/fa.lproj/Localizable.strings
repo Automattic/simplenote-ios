@@ -109,15 +109,13 @@
 /* Rating view - liked or disliked - no thanks button */
 "No thanks" = "نه ممنون";
 
-/* Hint displayed in the password field
-   Password TextField Placeholder */
+/* Password TextField Placeholder */
 "Password" = "گذرواژه";
 
 /* Message displayed when password is invalid (Signup) */
 "Password cannot match email" = "گذرواژه نمی‌تواند مطابقِ ایمیل باشد";
 
-/* Message displayed when password is too short. Please preserve the Percent D!
-   Message displayed when password is too short. The %%d is a placeholder for a numeral. Please preserve it! */
+/* Message displayed when password is too short. Please preserve the Percent D! */
 "Password must contain at least %d characters" = "گذرواژه دست‌ِکم باید حاویِ %d نویسه باشد";
 
 /* Message displayed when a password contains a disallowed character */
@@ -171,14 +169,10 @@
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "نوارِ کناری";
 
-/* SignUp Action
-   Signup Action
-   SignUp Interface Title
-   Title of button to create a new account (must be short) */
+/* Signup Action
+   SignUp Action
+   SignUp Interface Title */
 "Sign Up" = "نام‌نویسی";
-
-/* A short link to access the account creation screen */
-"Sign up" = "نام‌نویسی";
 
 /* Simplenote's Feedback Email Title */
 "Simplenote iOS Feedback" = "بازخوردِ Simplenote iOS";

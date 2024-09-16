@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2024-08-07 09:54:03+0000 */
+/* Translation-Revision-Date: 2024-09-12 09:54:03+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ja_JP */
@@ -94,9 +94,6 @@
    Title: No filters applied */
 "All Notes" = "すべてのノート";
 
-/* A short description to access the account login screen */
-"Already have an account?" = "すでにアカウントを持ちですか ?";
-
 /* Delete account confirmation instructions */
 "An email has been sent to %@. Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation." = "%@ にメールが送信されました。受信トレイを確認し、手順に従ってアカウントの削除を確定してください。\n\n当社がお客様から確認を得るまでアカウントは削除されません。";
 
@@ -145,14 +142,10 @@
 /* Delete account confirmation alert message */
 "By deleting the account for %@, all notes created with this account will be permanently deleted. This action is not reversible" = "%@ のアカウントを削除すると、このアカウントで作成したすべてのメモが完全に削除されます。 この操作を元に戻すことはできません";
 
-/* Terms Button Text */
-"By signing up, you agree to our Terms of Service »" = "登録すると、利用規約に合意したものとみなされます。»";
-
 /* Cancel Action
    Cancel action button
    Cancel action for password alert
    Cancel action on share extension.
-   Cancel button for authentication
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
@@ -208,8 +201,7 @@
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "要約ノート一覧";
 
-/* Confirm button -> Review you account screen
-   Hint displayed in the password confirmation field */
+/* Confirm button -> Review you account screen */
 "Confirm" = "確認";
 
 /* Title on the PinLock screen asking to confirm a passcode */
@@ -233,6 +225,9 @@
 
 /* Error for bad email or password */
 "Could not create an account with the provided email address and password." = "入力されたメールアドレスとパスワードではアカウントを作成できませんでした。";
+
+/* Notifies user tag delete failed */
+"Could not delete tag" = "タグを削除できませんでした";
 
 /* Note fetch error title */
 "Could not fetch Notes" = "メモを取得できませんでした";
@@ -338,9 +333,6 @@
 /* Card title showing information about the note (metrics, references) */
 "Document" = "文書";
 
-/* A short description to access the account creation screen */
-"Don't have an account?" = "アカウントが無い場合";
-
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
    Done editing tags
@@ -388,12 +380,6 @@
    Error Title */
 "Error" = "エラー";
 
-/* No comment provided by engineer. */
-"Error: NSManagedObjectContext's persistentStoreCoordinator must be nil. Simperium will handle CoreData connections for you." = "エラー: NSManagedObjectContext の persistentStoreCoordinator が nil です。 Simperium が CoreData の接続に対応します。";
-
-/* No comment provided by engineer. */
-"Error: you must initialize your context with 'NSMainQueueConcurrencyType' concurrency type." = "エラー: 「NSMainQueueConcurrencyType」同時実行タイプでコンテキストを初期化する必要があります。";
-
 /* Get Help Description Label */
 "FAQ or contact us" = "FAQ またはお問い合わせ";
 
@@ -405,9 +391,6 @@
 
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "バージョンを取得中";
-
-/* Forgot password Button Text */
-"Forgot password? »" = "パスワードをお忘れですか ? »";
 
 /* Password Reset Action */
 "Forgot your password?" = "パスワードを忘れた場合";
@@ -590,9 +573,6 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "タグが付けられていないメモはありません";
 
-/* Error when you enter a bad email address */
-"Not a valid email address" = "メールアドレスが無効です";
-
 /* Note Widget Title */
 "Note" = "ノート";
 
@@ -648,22 +628,17 @@
 /* Pin Lock */
 "Passcodes did not match. Try again." = "パスコードが一致しませんでした。もう一度お試しください。";
 
-/* Hint displayed in the password field
-   Password TextField Placeholder */
+/* Password TextField Placeholder */
 "Password" = "パスワード";
 
 /* Message displayed when password is invalid (Signup) */
 "Password cannot match email" = "パスワードがメールと一致しません";
 
-/* Message displayed when password is too short. Please preserve the Percent D!
-   Message displayed when password is too short. The %%d is a placeholder for a numeral. Please preserve it! */
+/* Message displayed when password is too short. Please preserve the Percent D! */
 "Password must contain at least %d characters" = "パスワードは%d文字以上にしてください";
 
 /* Message displayed when a password contains a disallowed character */
 "Password must not contain tabs nor newlines" = "パスワードにタブや改行を含めることはできません";
-
-/* Password Validation: Confirmation doesn't match */
-"Passwords do not match" = "パスワードが一致しません";
 
 /* Number of changes pending to be sent */
 "Pendings" = "保留中";
@@ -683,6 +658,9 @@
 
 /* Extension Missing Token Alert Title */
 "Please log into your Simplenote account first by using the Simplenote app." = "まず、Simplenote アプリを使用して Simplenote アカウントにログインしてください。";
+
+/* Encourages trying delete again */
+"Please try again" = "もう一度お試しください";
 
 /* Upgrade Alert Message */
 "Please upgrade to the latest iOS release to restore purchases" = "最新の iOS リリースをアップグレードして購入したものを復元してください";
@@ -826,20 +804,10 @@
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "サイドバー";
 
-/* Title of button for logging in (must be short) */
-"Sign In" = "ログイン";
-
-/* SignUp Action
-   Signup Action
-   SignUp Interface Title
-   Title of button to create a new account (must be short) */
+/* Signup Action
+   SignUp Action
+   SignUp Interface Title */
 "Sign Up" = "登録";
-
-/* A short link to access the account login screen */
-"Sign in" = "ログイン";
-
-/* A short link to access the account creation screen */
-"Sign up" = "登録";
 
 /* Alert message displayed when an account has unsynced notes */
 "Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "ログアウトすると、同期されていないメモはすべて削除されます。同期したメモを確認するには、Web アプリにログインします。";
@@ -916,9 +884,6 @@
 /* Current Sustainer Details */
 "Thank you for your continued support" = "今後とも末永くご支援いただきますよう、宜しくお願い申し上げます";
 
-/* Error when address is in use */
-"That email is already being used" = "そのメールアドレスはすでに使用されています";
-
 /* Email TextField Placeholder */
 "The authentication code you've requested has expired. Please request a new one" = "リクエストした認証コードの有効期限が切れています。 新しいコードをリクエストしてください";
 
@@ -985,9 +950,6 @@
 
 /* Undo action */
 "Undo" = "元に戻す";
-
-/* WebSocket not initialized */
-"Uninitialized" = "未初期化";
 
 /* Default title for an unnamed tag */
 "Unnamed Tag" = "名前のないタグ";

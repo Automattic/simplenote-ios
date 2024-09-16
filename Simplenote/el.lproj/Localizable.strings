@@ -29,14 +29,10 @@
 /* Label on button to add a new tag to a note */
 "Add tag" = "Προσθήκη ετικέτας";
 
-/* A short description to access the account login screen */
-"Already have an account?" = "Έχετε ήδη λογαριασμό;";
-
 /* Cancel Action
    Cancel action button
    Cancel action for password alert
    Cancel action on share extension.
-   Cancel button for authentication
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
@@ -50,8 +46,7 @@
 /* Noun - collaborators are other Simplenote users who you chose to share a note with */
 "Collaborators" = "Συνεργάτες";
 
-/* Confirm button -> Review you account screen
-   Hint displayed in the password confirmation field */
+/* Confirm button -> Review you account screen */
 "Confirm" = "Επιβεβαίωση";
 
 /* Error for bad email or password */
@@ -68,9 +63,6 @@
 
 /* Dismiss Keyboard Button */
 "Dismiss keyboard" = "Απόκρυψη";
-
-/* A short description to access the account creation screen */
-"Don't have an account?" = "Δεν έχετε λογαριασμό;";
 
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
@@ -119,8 +111,7 @@
 /* Pin Lock */
 "Passcodes did not match. Try again." = "Τα συνθηματικά δεν συμφωνούν. Δοκιμάστε ξανά.";
 
-/* Hint displayed in the password field
-   Password TextField Placeholder */
+/* Password TextField Placeholder */
 "Password" = "Κωδικός";
 
 /* Pin State Accessibility Hint */
@@ -156,20 +147,10 @@
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "Στήλη";
 
-/* Title of button for logging in (must be short) */
-"Sign In" = "Σύνδεση";
-
-/* SignUp Action
-   Signup Action
-   SignUp Interface Title
-   Title of button to create a new account (must be short) */
+/* Signup Action
+   SignUp Action
+   SignUp Interface Title */
 "Sign Up" = "Εγγραφή";
-
-/* A short link to access the account login screen */
-"Sign in" = "Σύνδεση";
-
-/* A short link to access the account creation screen */
-"Sign up" = "Εγγραφή";
 
 /* Displayed as a date in the case where a note was modified today, for example */
 "Today" = "Σήμερα";

@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2024-08-07 15:54:03+0000 */
+/* Translation-Revision-Date: 2024-09-12 09:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=(n > 1); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: tr */
@@ -94,9 +94,6 @@
    Title: No filters applied */
 "All Notes" = "Tüm Notlar";
 
-/* A short description to access the account login screen */
-"Already have an account?" = "Hesabınız zaten var mı?";
-
 /* Delete account confirmation instructions */
 "An email has been sent to %@. Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation." = "%@ adresine bir e-posta gönderildi Gelen kutunuzu kontrol edin ve hesap silme işlemini onaylamak için talimatları izleyin.\n\nOnayınız alınana kadar hesabınız silinmeyecek.";
 
@@ -145,14 +142,10 @@
 /* Delete account confirmation alert message */
 "By deleting the account for %@, all notes created with this account will be permanently deleted. This action is not reversible" = "%@ için hesabınızı sildiğinizde bu hesapla oluşturulan tüm notlar kalıcı olarak silinecektir. Bu eylem geri alınamaz.";
 
-/* Terms Button Text */
-"By signing up, you agree to our Terms of Service »" = "Kaydolmakla Hizmet Koşulları'nı kabul etmiş olursunuz »";
-
 /* Cancel Action
    Cancel action button
    Cancel action for password alert
    Cancel action on share extension.
-   Cancel button for authentication
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
@@ -208,8 +201,7 @@
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "Sıkıştırılmış Not Listesi";
 
-/* Confirm button -> Review you account screen
-   Hint displayed in the password confirmation field */
+/* Confirm button -> Review you account screen */
 "Confirm" = "Onayla";
 
 /* Title on the PinLock screen asking to confirm a passcode */
@@ -233,6 +225,9 @@
 
 /* Error for bad email or password */
 "Could not create an account with the provided email address and password." = "Verilen e-posta adresi ve parolayla hesap oluşturulamadı.";
+
+/* Notifies user tag delete failed */
+"Could not delete tag" = "Etiket silinemedi";
 
 /* Note fetch error title */
 "Could not fetch Notes" = "Notlar getirilemedi";
@@ -338,9 +333,6 @@
 /* Card title showing information about the note (metrics, references) */
 "Document" = "Belge";
 
-/* A short description to access the account creation screen */
-"Don't have an account?" = "Hesabınız yok mu?";
-
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
    Done editing tags
@@ -388,12 +380,6 @@
    Error Title */
 "Error" = "Hata";
 
-/* No comment provided by engineer. */
-"Error: NSManagedObjectContext's persistentStoreCoordinator must be nil. Simperium will handle CoreData connections for you." = "Hata: NSManagedObjectContext'in persistentStoreCoordinator değeri sıfır olmalıdır. Simperium, CoreData bağlantılarını sizin için yönetecek.";
-
-/* No comment provided by engineer. */
-"Error: you must initialize your context with 'NSMainQueueConcurrencyType' concurrency type." = "Hata: Bağlamınızı 'NSMainQueueConcurrencyType' eşzamanlılık türüyle başlatmalısınız.";
-
 /* Get Help Description Label */
 "FAQ or contact us" = "SSS veya bize ulaşın";
 
@@ -405,9 +391,6 @@
 
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "Sürüm Alınıyor";
-
-/* Forgot password Button Text */
-"Forgot password? »" = "Şifrenizi mi unuttunuz? »";
 
 /* Password Reset Action */
 "Forgot your password?" = "Şifrenizi mi unuttunuz?";
@@ -590,9 +573,6 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "Etiketsiz not yok";
 
-/* Error when you enter a bad email address */
-"Not a valid email address" = "Geçerli bir e-posta adresi değil";
-
 /* Note Widget Title */
 "Note" = "Not";
 
@@ -648,22 +628,17 @@
 /* Pin Lock */
 "Passcodes did not match. Try again." = "Parolalar eşleşmiyor. Tekrar deneyin.";
 
-/* Hint displayed in the password field
-   Password TextField Placeholder */
+/* Password TextField Placeholder */
 "Password" = "Parola";
 
 /* Message displayed when password is invalid (Signup) */
 "Password cannot match email" = "Parola ile e-posta adresi aynı olamaz";
 
-/* Message displayed when password is too short. Please preserve the Percent D!
-   Message displayed when password is too short. The %%d is a placeholder for a numeral. Please preserve it! */
+/* Message displayed when password is too short. Please preserve the Percent D! */
 "Password must contain at least %d characters" = "Parola en az %d karakter içermelidir";
 
 /* Message displayed when a password contains a disallowed character */
 "Password must not contain tabs nor newlines" = "Parola sekme veya satır başı içermemelidir";
-
-/* Password Validation: Confirmation doesn't match */
-"Passwords do not match" = "Parolalar eşleşmiyor";
 
 /* Number of changes pending to be sent */
 "Pendings" = "Bekleyenler";
@@ -683,6 +658,9 @@
 
 /* Extension Missing Token Alert Title */
 "Please log into your Simplenote account first by using the Simplenote app." = "Lütfen önce Simplenote uygulamasını kullanarak Simplenote hesabınıza giriş yapın.";
+
+/* Encourages trying delete again */
+"Please try again" = "Lütfen tekrar deneyin";
 
 /* Upgrade Alert Message */
 "Please upgrade to the latest iOS release to restore purchases" = "Satın alınanları geri yüklemek için lütfen en son iOS sürümüne yükseltin";
@@ -826,20 +804,10 @@
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "Kenar çubuğu";
 
-/* Title of button for logging in (must be short) */
-"Sign In" = "Oturum Aç";
-
-/* SignUp Action
-   Signup Action
-   SignUp Interface Title
-   Title of button to create a new account (must be short) */
+/* Signup Action
+   SignUp Action
+   SignUp Interface Title */
 "Sign Up" = "Kaydol";
-
-/* A short link to access the account login screen */
-"Sign in" = "Oturum aç";
-
-/* A short link to access the account creation screen */
-"Sign up" = "Kaydol";
 
 /* Alert message displayed when an account has unsynced notes */
 "Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "Oturumu kapattığınızda, senkronize edilmemiş tüm notlar silinir. Senkronize edilmiş notlarınızı Web Uygulamasında oturum açarak doğrulayabilirsiniz.";
@@ -916,9 +884,6 @@
 /* Current Sustainer Details */
 "Thank you for your continued support" = "Devam eden desteğiniz için teşekkür ederiz";
 
-/* Error when address is in use */
-"That email is already being used" = "Bu e-posta zaten kullanılıyor";
-
 /* Email TextField Placeholder */
 "The authentication code you've requested has expired. Please request a new one" = "Talep ettiğiniz doğrulama kodunun geçerlilik süresi doldu. Lütfen yeni bir kod talep edin";
 
@@ -985,9 +950,6 @@
 
 /* Undo action */
 "Undo" = "Geri al";
-
-/* WebSocket not initialized */
-"Uninitialized" = "Başlatılmamış";
 
 /* Default title for an unnamed tag */
 "Unnamed Tag" = "Adsız Etiket";

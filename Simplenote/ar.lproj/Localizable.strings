@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2024-08-06 21:54:03+0000 */
+/* Translation-Revision-Date: 2024-09-12 11:54:02+0000 */
 /* Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ar */
@@ -94,9 +94,6 @@
    Title: No filters applied */
 "All Notes" = "كل الملاحظات";
 
-/* A short description to access the account login screen */
-"Already have an account?" = "هل لديك حساب بالفعل؟";
-
 /* Delete account confirmation instructions */
 "An email has been sent to %@. Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation." = "تم إرسال بريد إلكتروني إلى %@، راجع علبة الوارد لديك واتبع الإرشادات لتأكيد حذف الحساب.\n\nلن يتم حذف حسابك حتى نتلقى تأكيدك";
 
@@ -145,14 +142,10 @@
 /* Delete account confirmation alert message */
 "By deleting the account for %@, all notes created with this account will be permanently deleted. This action is not reversible" = "عن طريق حذف الحساب الخاص بـ %@,، سيتم حذف جميع الملحوظات التي تم إنشاؤها باستخدام هذا الحساب نهائيًا. لا يمكن التراجع عن هذا الإجراء";
 
-/* Terms Button Text */
-"By signing up, you agree to our Terms of Service »" = "يعني تسجيلك موافقتك على شروط الخدمة »";
-
 /* Cancel Action
    Cancel action button
    Cancel action for password alert
    Cancel action on share extension.
-   Cancel button for authentication
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
@@ -208,8 +201,7 @@
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "قائمة الملاحظات الموجزة";
 
-/* Confirm button -> Review you account screen
-   Hint displayed in the password confirmation field */
+/* Confirm button -> Review you account screen */
 "Confirm" = "تأكيد";
 
 /* Title on the PinLock screen asking to confirm a passcode */
@@ -233,6 +225,9 @@
 
 /* Error for bad email or password */
 "Could not create an account with the provided email address and password." = "تعذر إنشاء حساب بعنوان البريد الإلكتروني وكلمة المرور اللذين تم إدخالهما.";
+
+/* Notifies user tag delete failed */
+"Could not delete tag" = "تعذر حذف الوسم";
 
 /* Note fetch error title */
 "Could not fetch Notes" = "يتعذر إحضار الملاحظات";
@@ -338,9 +333,6 @@
 /* Card title showing information about the note (metrics, references) */
 "Document" = "مستند";
 
-/* A short description to access the account creation screen */
-"Don't have an account?" = "ليس لديك حساب؟";
-
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
    Done editing tags
@@ -388,12 +380,6 @@
    Error Title */
 "Error" = "خطأ";
 
-/* No comment provided by engineer. */
-"Error: NSManagedObjectContext's persistentStoreCoordinator must be nil. Simperium will handle CoreData connections for you." = "خطأ: يجب أن يكون persistentStoreCoordinator الخاص بـ NSManagedObjectContext عديم القيمة. سيقوم Simperium بمعالجة اتصالات CoreData من أجلك.";
-
-/* No comment provided by engineer. */
-"Error: you must initialize your context with 'NSMainQueueConcurrencyType' concurrency type." = "خطأ: تجب عليك تهيئة سياقك الذي يحمل نوع التزامن \"NSMainQueueConcurrencyType\".";
-
 /* Get Help Description Label */
 "FAQ or contact us" = "الأسئلة المتداولة أو اتصل بنا";
 
@@ -405,9 +391,6 @@
 
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "سحب الإصدار";
-
-/* Forgot password Button Text */
-"Forgot password? »" = "هل نسيت كلمة المرور؟ »";
 
 /* Password Reset Action */
 "Forgot your password?" = "هل نسيت كلمة مرورك؟";
@@ -590,9 +573,6 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "لا توجد أي ملاحظات غير موسومة";
 
-/* Error when you enter a bad email address */
-"Not a valid email address" = "ليس بريدًا إلكترونيًا صالحًا";
-
 /* Note Widget Title */
 "Note" = "ملاحظة";
 
@@ -648,22 +628,17 @@
 /* Pin Lock */
 "Passcodes did not match. Try again." = "رموز المرور غير متطابقة. حاول مرة أخرى.";
 
-/* Hint displayed in the password field
-   Password TextField Placeholder */
+/* Password TextField Placeholder */
 "Password" = "كلمة المرور";
 
 /* Message displayed when password is invalid (Signup) */
 "Password cannot match email" = "يتعذر تطابق كلمة المرور مع البريد الإلكتروني";
 
-/* Message displayed when password is too short. Please preserve the Percent D!
-   Message displayed when password is too short. The %%d is a placeholder for a numeral. Please preserve it! */
+/* Message displayed when password is too short. Please preserve the Percent D! */
 "Password must contain at least %d characters" = "يجب أن تحتوي كلمة المرور على %d من الأحرف على الأقل";
 
 /* Message displayed when a password contains a disallowed character */
 "Password must not contain tabs nor newlines" = "يجب ألا تحتوي كلمة المرور على علامات جدولة أو خطوط جديدة";
-
-/* Password Validation: Confirmation doesn't match */
-"Passwords do not match" = "كلمات المرور غير متطابقة";
 
 /* Number of changes pending to be sent */
 "Pendings" = "معلّق";
@@ -683,6 +658,9 @@
 
 /* Extension Missing Token Alert Title */
 "Please log into your Simplenote account first by using the Simplenote app." = "يرجى تسجيل الدخول إلى حسابك على Simplenote أولاً عن طريق استخدام تطبيق Simplenote.";
+
+/* Encourages trying delete again */
+"Please try again" = "يرجى المحاولة مجددًا";
 
 /* Upgrade Alert Message */
 "Please upgrade to the latest iOS release to restore purchases" = "ترجى الترقية إلى أحدث إصدار من نظام التشغيل iOS لاستعادة عمليات الشراء";
@@ -826,20 +804,10 @@
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "الشريط الجانبي";
 
-/* Title of button for logging in (must be short) */
-"Sign In" = "تسجيل الدخول";
-
-/* SignUp Action
-   Signup Action
-   SignUp Interface Title
-   Title of button to create a new account (must be short) */
+/* Signup Action
+   SignUp Action
+   SignUp Interface Title */
 "Sign Up" = "التسجيل";
-
-/* A short link to access the account login screen */
-"Sign in" = "تسجيل الدخول";
-
-/* A short link to access the account creation screen */
-"Sign up" = "التسجيل";
 
 /* Alert message displayed when an account has unsynced notes */
 "Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "سيؤدي تسجيل الخروج إلى حذف أي ملحوظات غير متزامنة. يمكنك التحقق من ملحوظاتك المتزامنة عن طريق تسجيل الدخول إلى تطبيق الويب.";
@@ -916,9 +884,6 @@
 /* Current Sustainer Details */
 "Thank you for your continued support" = "شكرًا لك على دعمك المتواصل";
 
-/* Error when address is in use */
-"That email is already being used" = "يتم استخدام ذلك البريد الإلكتروني بالفعل";
-
 /* Email TextField Placeholder */
 "The authentication code you've requested has expired. Please request a new one" = "انتهت صلاحية كود المصادقة الذي طلبته. يرجى طلب واحد جديد";
 
@@ -985,9 +950,6 @@
 
 /* Undo action */
 "Undo" = "تراجع";
-
-/* WebSocket not initialized */
-"Uninitialized" = "غير مهيأ";
 
 /* Default title for an unnamed tag */
 "Unnamed Tag" = "وسم بلا اسم.";

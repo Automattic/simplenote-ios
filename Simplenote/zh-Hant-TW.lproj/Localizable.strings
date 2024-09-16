@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2024-08-07 09:54:02+0000 */
+/* Translation-Revision-Date: 2024-09-12 09:54:03+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: zh_TW */
@@ -94,9 +94,6 @@
    Title: No filters applied */
 "All Notes" = "所有筆記";
 
-/* A short description to access the account login screen */
-"Already have an account?" = "已經有帳號了？";
-
 /* Delete account confirmation instructions */
 "An email has been sent to %@. Check your inbox and follow the instructions to confirm account deletion.\n\nYour account won't be deleted until we receive your confirmation." = "電子郵件已傳送至 %@。請檢查你的收件匣，並按照說明確認刪除帳號。\n\n在收到你的確認之前，我們不會刪除你的帳號";
 
@@ -145,14 +142,10 @@
 /* Delete account confirmation alert message */
 "By deleting the account for %@, all notes created with this account will be permanently deleted. This action is not reversible" = "若刪除 %@ 的帳號，此帳號建立的所有筆記將永久刪除。 此動作無法復原";
 
-/* Terms Button Text */
-"By signing up, you agree to our Terms of Service »" = "註冊即代表你同意我們的「服務條款」»";
-
 /* Cancel Action
    Cancel action button
    Cancel action for password alert
    Cancel action on share extension.
-   Cancel button for authentication
    Cancel button title
    Cancellation button of deletion confirmation message for a tag.
    Dismissing an interface
@@ -208,8 +201,7 @@
 /* Option to make the note list show only 1 line of text. The default is 3. */
 "Condensed Note List" = "精簡版筆記清單";
 
-/* Confirm button -> Review you account screen
-   Hint displayed in the password confirmation field */
+/* Confirm button -> Review you account screen */
 "Confirm" = "確認";
 
 /* Title on the PinLock screen asking to confirm a passcode */
@@ -233,6 +225,9 @@
 
 /* Error for bad email or password */
 "Could not create an account with the provided email address and password." = "無法使用提供的電子郵件地址和密碼建立帳號。";
+
+/* Notifies user tag delete failed */
+"Could not delete tag" = "無法刪除標籤";
 
 /* Note fetch error title */
 "Could not fetch Notes" = "無法擷取備註";
@@ -338,9 +333,6 @@
 /* Card title showing information about the note (metrics, references) */
 "Document" = "內容";
 
-/* A short description to access the account creation screen */
-"Don't have an account?" = "還沒有帳號？";
-
 /* Dismisses the Note Information UI
    Dismisses the Note Options UI
    Done editing tags
@@ -388,12 +380,6 @@
    Error Title */
 "Error" = "錯誤";
 
-/* No comment provided by engineer. */
-"Error: NSManagedObjectContext's persistentStoreCoordinator must be nil. Simperium will handle CoreData connections for you." = "錯誤：NSManagedObjectContext 的 persistentStoreCoordinator 必須為 nil。 Simperium 將為你處理 CoreData 連結。";
-
-/* No comment provided by engineer. */
-"Error: you must initialize your context with 'NSMainQueueConcurrencyType' concurrency type." = "錯誤：你必須使用「NSMainQueueConcurrencyType」並行類型來初始化內容。";
-
 /* Get Help Description Label */
 "FAQ or contact us" = "常見問題集或與我們聯絡";
 
@@ -405,9 +391,6 @@
 
 /* Accessibility hint used when previous versions of a note are being fetched */
 "Fetching Version" = "正在擷取版本";
-
-/* Forgot password Button Text */
-"Forgot password? »" = "忘記密碼？»";
 
 /* Password Reset Action */
 "Forgot your password?" = "忘記密碼？";
@@ -590,9 +573,6 @@
 /* Message shown in note list when no notes are untagged */
 "No untagged notes" = "沒有未標籤筆記";
 
-/* Error when you enter a bad email address */
-"Not a valid email address" = "電子郵件地址格式不正確";
-
 /* Note Widget Title */
 "Note" = "備註";
 
@@ -648,22 +628,17 @@
 /* Pin Lock */
 "Passcodes did not match. Try again." = "密碼不相符。請再試一次。";
 
-/* Hint displayed in the password field
-   Password TextField Placeholder */
+/* Password TextField Placeholder */
 "Password" = "密碼";
 
 /* Message displayed when password is invalid (Signup) */
 "Password cannot match email" = "密碼不能和電子郵件地址相同";
 
-/* Message displayed when password is too short. Please preserve the Percent D!
-   Message displayed when password is too short. The %%d is a placeholder for a numeral. Please preserve it! */
+/* Message displayed when password is too short. Please preserve the Percent D! */
 "Password must contain at least %d characters" = "密碼必須包含至少 %d 個字元";
 
 /* Message displayed when a password contains a disallowed character */
 "Password must not contain tabs nor newlines" = "密碼不得包含定位字元或換行";
-
-/* Password Validation: Confirmation doesn't match */
-"Passwords do not match" = "密碼不符";
 
 /* Number of changes pending to be sent */
 "Pendings" = "待確認";
@@ -683,6 +658,9 @@
 
 /* Extension Missing Token Alert Title */
 "Please log into your Simplenote account first by using the Simplenote app." = "請先使用 Simplenote 應用程式登入 Simplenote 帳號。";
+
+/* Encourages trying delete again */
+"Please try again" = "請再試一次";
 
 /* Upgrade Alert Message */
 "Please upgrade to the latest iOS release to restore purchases" = "請升級至最新 iOS 版本以恢復購買";
@@ -826,20 +804,10 @@
 /* UI region to the left of the note list which shows all of a users tags */
 "Sidebar" = "側選單";
 
-/* Title of button for logging in (must be short) */
-"Sign In" = "登入";
-
-/* SignUp Action
-   Signup Action
-   SignUp Interface Title
-   Title of button to create a new account (must be short) */
+/* Signup Action
+   SignUp Action
+   SignUp Interface Title */
 "Sign Up" = "註冊";
-
-/* A short link to access the account login screen */
-"Sign in" = "登入";
-
-/* A short link to access the account creation screen */
-"Sign up" = "註冊";
 
 /* Alert message displayed when an account has unsynced notes */
 "Signing out will delete any unsynced notes. You can verify your synced notes by signing in to the Web App." = "登出將會刪除任何尚未同步的備註。登入網頁應用程式即可驗證已同步的備註。";
@@ -916,9 +884,6 @@
 /* Current Sustainer Details */
 "Thank you for your continued support" = "感謝你持續支持";
 
-/* Error when address is in use */
-"That email is already being used" = "此電子信箱已被使用";
-
 /* Email TextField Placeholder */
 "The authentication code you've requested has expired. Please request a new one" = "你要求的驗證碼已過期。 請申請新的驗證碼";
 
@@ -985,9 +950,6 @@
 
 /* Undo action */
 "Undo" = "復原";
-
-/* WebSocket not initialized */
-"Uninitialized" = "未初始化";
 
 /* Default title for an unnamed tag */
 "Unnamed Tag" = "未命名標籤";
