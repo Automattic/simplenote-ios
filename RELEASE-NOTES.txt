@@ -1,10 +1,12 @@
 4.54
 -----
+- Updated icons to work with new iOS 18 styles
+- Add fall back login with username and password option to login
 - Updated link to privacy notice for California users
 
 4.53
 -----
-
+- Under the hood improvements
 
 4.52
 -----
