@@ -30,7 +30,7 @@ ORGANISATION ET RECHERCHE
 
 Politique de confidentialité : https://automattic.com/privacy/
 Conditions d’utilisation : https://simplenote.com/terms/
-Avis de confidentialité pour les utilisateurs californiens : https://wp.me/Pe4R-d/#california-consumer-privacy-act-ccpa
+Avis de confidentialité pour les utilisateurs californiens : https://automattic.com/privacy/#us-privacy-laws
 
 --
 

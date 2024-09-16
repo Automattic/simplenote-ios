@@ -30,7 +30,7 @@ DÜZENLEYİN VE ARAYIN
 
 Gizlilik Politikası: https://automattic.com/privacy/
 Hizmet Şartları: https://simplenote.com/terms/
-Kaliforniya'daki Kullanıcılar için Gizlilik Bildirimi: https://wp.me/Pe4R-d/#california-consumer-privacy-act-ccpa
+Kaliforniya'daki Kullanıcılar için Gizlilik Bildirimi: https://automattic.com/privacy/#us-privacy-laws
 
 --
 
