@@ -1,1 +1,4 @@
-Improvements under the hood.
+- Updated icons to work with new iOS 18 styles
+- Add fall back login with username and password option to login
+- Updated link to privacy notice for California users
+
