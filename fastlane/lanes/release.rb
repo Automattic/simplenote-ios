@@ -315,7 +315,9 @@ def check_pods_references
   return unless is_ci
 
   style = result[:pods].nil? || result[:pods].empty? ? 'success' : 'warning'
-  buildkite_annotate(context: 'pods-check', style: style, message: result[:message])
+  # Notice the double new line to produce a new HTML paragraph from the Markdown formatting.
+  message = "Internal dependencies check result:\n\n#{result[:message]}"
+  buildkite_annotate(context: 'pods-check', style: style, message: message)
 end
 
 def trigger_buildkite_release_build(branch:, beta:)
