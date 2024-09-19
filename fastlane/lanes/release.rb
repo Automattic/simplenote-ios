@@ -312,9 +312,10 @@ def check_pods_references
   # This will also print the result to STDOUT
   result = ios_check_beta_deps(lockfile: File.join(PROJECT_ROOT_FOLDER, 'Podfile.lock'))
 
+  return unless is_ci
+
   style = result[:pods].nil? || result[:pods].empty? ? 'success' : 'warning'
-  message = "### Checking Internal Dependencies are all on a **stable** version\n\n#{result[:message]}"
-  buildkite_annotate(context: 'pods-check', style: style, message: message) if is_ci
+  buildkite_annotate(context: 'pods-check', style: style, message: result[:message])
 end
 
 def trigger_buildkite_release_build(branch:, beta:)
