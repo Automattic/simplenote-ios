@@ -1,37 +1,37 @@
-Simplenote är ett enkelt sätt att göra anteckningar, skapa att-göra-listor, skriva ner idéer med mera. Öppna appen, skriv ner några tankar och du är klar. Allteftersom din samling växer kan du hålla dig organiserad med hjälp av etiketter och stift samt hitta vad du behöver med omedelbara sökningar. Eftersom Simplenote synkroniseras kostnadsfritt på alla dina enheter kan du alltd komma åt dina anteckningar.
+Simplenote är ett enkelt sätt att göra anteckningar, skapa att-göra-listor, skriva ner idéer med mera. Öppna appen, skriv ner några tankar och du är klar. Allteftersom din samling växer kan du hålla dig organiserad med hjälp av etiketter och stift samt hitta vad du behöver med omedelbara sökningar. Eftersom Simplenote synkroniseras kostnadsfritt på alla dina enheter kan du alltid komma åt dina anteckningar.
 
 - En enkel anteckningsupplevelse
-- Synkronisera allt över dina enheter
+- Synkronisera allt på alla dina enheter
 - Samarbeta och dela
-- Var organiserad med etiketter
-- Logga in på din e-post eller ditt WordPress.com-konto
+- Håll ordning och reda med etiketter
+- Logga in med din e-postadress eller ditt WordPress.com-konto
 
-SYNKRONISERA TRYGGT
-- Synkronisera automatiskt och sömlöst mellan alla datorer, telefoner och surfplattor.
+SYNKRONISERA MED SJÄLVFÖRTROENDE
+- Synkronisera automatiskt och smidigt på dator, telefon eller surfplatta.
 - Säkerhetskopiera och synkronisera allt när du gör anteckningar, så att du aldrig förlorar ditt innehåll
 
 SAMARBETA OCH DELA
-Samarbeta och arbeta tillsammans – dela idéer med en kollega eller skriv en inköpslista med din rumskamrat.
+- Samarbeta och arbeta tillsammans – dela idéer med en kollega eller skriv en handlingslista tillsammans med din rumskamrat.
 - Välj om du vill publicera ditt innehåll på webben och dela länkar med vem du vill.
 - Publicera direkt till en WordPress-webbplats genom att ansluta ditt WordPress.com-konto.
 - Dela snabbt och enkelt med tredjepartsappar.
 
 ORGANISERA OCH SÖK
-- Håll dig organiserad med etiketter och använd dem för snabb sökning och sortering.
+- Håll ordning och reda med etiketter och använd dem för snabb sökning och sortering.
 - Hitta vad du letar efter omedelbart med nyckelordsmarkering.
 - Använd markdown för att lägga till formatering.
 - Skapa att göra-listor.
 - Välj sorteringsordningen för dina anteckningar och etiketter.
 - Fäst de anteckningar som du använder mest.
 - Redigera etiketter direkt genom att byta namn eller ändra ordning på dem.
-Skydda ditt innehåll med ett lösenordslås.
+- Skydda ditt innehåll med ett lösenordslås.
 
-–
+--
 
-Sekretesspolicy: https://automattic.com/privacy/
+Integritetspolicy: https://automattic.com/privacy/
 Användarvillkor: https://simplenote.com/terms/
-Sekretessmeddelande för användare i Kalifornien: https://automattic.com/privacy/#us-privacy-laws
+Integritetsmeddelande för användare i Kalifornien: https://automattic.com/privacy/#us-privacy-laws
 
-–
+--
 
 Besök simplenote.com för att ladda ner Simplenote till dina andra enheter.

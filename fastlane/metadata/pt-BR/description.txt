@@ -1,30 +1,30 @@
-O Simplenote é uma maneira fácil de fazer anotações, criar listas de tarefas, captar ideias e muito mais. Abra-o, escreva o que quiser e pronto. Conforme a sua coleção aumenta, organize-a usando tags e pins, e encontre o que precisa com a pesquisa instantânea. Como o Simplenote será sincronizado em todos os seus dispositivos gratuitamente, suas anotações o acompanharão o tempo todo.
+O Simplenote é uma maneira fácil de fazer anotações, criar listas de tarefas, captar ideias e muito mais. Abra-o, escreva o que quiser e pronto. Conforme sua coleção cresce, mantenha tudo no seu devido lugar com tags e anotações fixadas para encontrar o que você precisa com uma pesquisa instantânea. Como o Simplenote é sincronizado em todos os seus dispositivos gratuitamente, suas anotações acompanham você o tempo todo.
 
-- Faça anotações de forma simples.
-- Sincronize tudo em todos os seus dispositivos.
-- Colabore e compartilhe.
-- Mantenha seu conteúdo organizado com tags.
-- Faça login com seu e-mail ou sua conta do WordPress.com.
+- Desfrute de uma experiência simples de anotação
+- Sincronize tudo em todos os seus dispositivos
+- Colabore e compartilhe
+- Mantenha tudo organizado com as tags
+- Faça login com seu e-mail ou conta do WordPress.com
 
 SINCRONIZE COM CONFIANÇA
-- Sincronize seu conteúdo automaticamente em qualquer computador, celular ou tablet.
-- Faça backup e sincronize tudo enquanto faz suas anotações, para não perder nenhum conteúdo.
+- Sincronize suas anotações de forma ininterrupta e automática em computadores, celulares e tablets.
+- Faça backup e sincronize tudo enquanto faz suas anotações para não perder nenhum conteúdo.
 
 COLABORE E COMPARTILHE
-- Colabore e trabalhe com outras pessoas: compartilhe ideias com um amigo ou faça uma lista de compras com seu colega de quarto.
-- Escolha se quer ou não publicar o seu conteúdo na Web e compartilhe um link com quem você desejar.
+- Colabore e trabalhe em conjunto: compartilhe suas ideias com um colega de trabalho, ou escreva uma lista de compras junto com seu colega de quarto.
+- Decida se quer publicar o conteúdo na Web e compartilhe um link com quem você quiser.
 - Publique diretamente em um site do WordPress ao conectar-se a sua conta do WordPress.com.
 - Compartilhe de forma rápida e simples com aplicativos de terceiros.
 
 ORGANIZE E PESQUISE
-- Mantenha seu conteúdo organizado com tags e use-as para classificar e pesquisar de forma rápida.
+- Organize seu conteúdo com as tags e as use para pesquisas e classificações rápidas.
 - Encontre o que está procurando, de forma instantânea, com o destaque de palavras-chave.
 - Use o markdown para adicionar formatação.
 - Crie listas de tarefas.
 - Selecione a ordem de classificação de suas anotações e tags.
 - Marque as anotações que mais usa.
 - Edite as tags diretamente, renomeando-as e reorganizando-as.
-- Proteja seu conteúdo usando o bloqueio com senha.
+- Proteja o seu conteúdo com um bloqueio por senha.
 
 --
 

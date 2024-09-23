@@ -13,7 +13,7 @@ env:
 
 steps:
   - label: New Beta Release
-    plugins: [$CI_TOOLKIT]
+    plugins: [$CI_TOOLKIT_PLUGIN]
     command: |
       echo '--- :git: Configure Git for Release Management'
       .buildkite/commands/configure-git-for-release-management.sh

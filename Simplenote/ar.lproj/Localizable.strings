@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2024-09-12 11:54:02+0000 */
+/* Translation-Revision-Date: 2024-09-19 12:54:03+0000 */
 /* Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ar */
@@ -987,6 +987,9 @@
 /* Visit app.simplenote.com in the browser */
 "Visit Web App" = "زيارة تطبيق الويب";
 
+/* Option to login with username and password *PREFIX*: printed in dark color */
+"We'll email you a code to log in, or you can" = "سنرسل إليك كودًا بالبريد لتسجيل الدخول، أو يمكنك";
+
 /* Generic error */
 "We're having problems. Please try again soon." = "لدينا مشكلات. يُرجى المحاولة مرة أخرى لاحقًا.";
 
@@ -1041,6 +1044,9 @@
 
 /* Message shown in note list when no notes are in the trash */
 "Your trash is empty" = "سلة المهملات لديك فارغة";
+
+/* Option to login with username and password *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
+"log in manually." = "التسجيل يدويًا.";
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "وسم:";

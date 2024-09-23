@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2024-09-12 09:54:03+0000 */
+/* Translation-Revision-Date: 2024-09-19 09:54:03+0000 */
 /* Plural-Forms: nplurals=2; plural=n > 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: id */
@@ -984,6 +984,9 @@
 /* Visit app.simplenote.com in the browser */
 "Visit Web App" = "Kunjungi Aplikasi Web";
 
+/* Option to login with username and password *PREFIX*: printed in dark color */
+"We'll email you a code to log in, or you can" = "Kami akan mengirimkan email berisi kode untuk login atau Anda dapat";
+
 /* Generic error */
 "We're having problems. Please try again soon." = "Kami mengalami masalah. Harap coba lagi nanti.";
 
@@ -1038,6 +1041,9 @@
 
 /* Message shown in note list when no notes are in the trash */
 "Your trash is empty" = "Sampah Anda kosong";
+
+/* Option to login with username and password *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
+"log in manually." = "login secara manual";
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "tag:";

@@ -1,0 +1,4 @@
+- Aggiornato le icone per renderle compatibili con i nuovi stili di iOS 18
+- Aggiunto un accesso di ripiego con opzioni di nome utente e password per l'accesso
+- Aggiornato il link alla nota sulla privacy per utenti in California
+

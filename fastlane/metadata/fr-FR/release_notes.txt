@@ -1,0 +1,4 @@
+- Mise à jour des icônes pour qu’elles fonctionnent avec les nouveaux styles d’iOS 18
+- Ajout d’une connexion de secours avec identifiant et mot de passe en option
+- Mise à jour du lien vers l’avis de confidentialité pour les utilisateurs californiens
+

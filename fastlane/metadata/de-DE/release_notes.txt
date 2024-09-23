@@ -1,0 +1,4 @@
+- Aktualisierte Icons, die mit den neuen iOS 18-Stilen funktionieren
+- Fallback-Anmeldung mit Option für den Benutzernamen und das Passwort zur Anmeldung hinzufügen
+- Aktualisierter Link zu den Datenschutzhinweisen für Benutzer in Kalifornien
+

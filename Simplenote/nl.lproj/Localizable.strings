@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2024-09-12 15:54:02+0000 */
+/* Translation-Revision-Date: 2024-09-20 09:54:07+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: nl */
@@ -227,7 +227,7 @@
 "Could not create an account with the provided email address and password." = "Kan geen account maken met het opgegeven e-mailadres en wachtwoord.";
 
 /* Notifies user tag delete failed */
-"Could not delete tag" = "Kon de tag niet verwijderen";
+"Could not delete tag" = "Kon tag niet verwijderen";
 
 /* Note fetch error title */
 "Could not fetch Notes" = "Het is niet gelukt om notities op te halen";
@@ -987,6 +987,9 @@
 /* Visit app.simplenote.com in the browser */
 "Visit Web App" = "Web-app bezoeken";
 
+/* Option to login with username and password *PREFIX*: printed in dark color */
+"We'll email you a code to log in, or you can" = "We sturen je via e-mail een code die je kan gebruiken om in te loggen, of je kan";
+
 /* Generic error */
 "We're having problems. Please try again soon." = "We ondervinden wat problemen. Probeer het later opnieuw.";
 
@@ -1041,6 +1044,9 @@
 
 /* Message shown in note list when no notes are in the trash */
 "Your trash is empty" = "Je prullenbak is leeg";
+
+/* Option to login with username and password *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
+"log in manually." = "handmatig inloggen.";
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "tag:";

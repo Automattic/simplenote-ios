@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2024-09-12 11:54:03+0000 */
+/* Translation-Revision-Date: 2024-09-18 20:54:02+0000 */
 /* Plural-Forms: nplurals=2; plural=n != 1; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: it */
@@ -987,6 +987,9 @@
 /* Visit app.simplenote.com in the browser */
 "Visit Web App" = "Visita l'app web";
 
+/* Option to login with username and password *PREFIX*: printed in dark color */
+"We'll email you a code to log in, or you can" = "Ti invieremo un codice per l'accesso, oppure puoi";
+
 /* Generic error */
 "We're having problems. Please try again soon." = "Stiamo riscontrando dei problemi. Riprova a breve.";
 
@@ -1041,6 +1044,9 @@
 
 /* Message shown in note list when no notes are in the trash */
 "Your trash is empty" = "Il tuo cestino è vuoto";
+
+/* Option to login with username and password *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
+"log in manually." = "accedere manualmente.";
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "- Tag:";
