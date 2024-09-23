@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2024-09-12 09:54:03+0000 */
+/* Translation-Revision-Date: 2024-09-20 09:54:08+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ko_KR */
@@ -987,6 +987,9 @@
 /* Visit app.simplenote.com in the browser */
 "Visit Web App" = "웹 앱 방문";
 
+/* Option to login with username and password *PREFIX*: printed in dark color */
+"We'll email you a code to log in, or you can" = "이메일을 통해 받으신 코드로 로그인할 수 있으며";
+
 /* Generic error */
 "We're having problems. Please try again soon." = "문제가 있습니다. 나중에 다시 시도하세요.";
 
@@ -1041,6 +1044,9 @@
 
 /* Message shown in note list when no notes are in the trash */
 "Your trash is empty" = "휴지통이 비어 있습니다.";
+
+/* Option to login with username and password *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
+"log in manually." = "직접 로그인하셔도 됩니다.";
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "태그:";

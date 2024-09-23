@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2024-09-12 15:54:03+0000 */
+/* Translation-Revision-Date: 2024-09-19 09:54:03+0000 */
 /* Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2); */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: ru */
@@ -987,6 +987,9 @@
 /* Visit app.simplenote.com in the browser */
 "Visit Web App" = "Перейти в веб-приложение";
 
+/* Option to login with username and password *PREFIX*: printed in dark color */
+"We'll email you a code to log in, or you can" = "Мы пришлём вам код для входа по электронной почте, а кроме того, вы можете";
+
 /* Generic error */
 "We're having problems. Please try again soon." = "Произошла ошибка. Повторите попытку позже.";
 
@@ -1041,6 +1044,9 @@
 
 /* Message shown in note list when no notes are in the trash */
 "Your trash is empty" = "Корзина пуста";
+
+/* Option to login with username and password *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
+"log in manually." = "выполнить вход вручную.";
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "метка:";

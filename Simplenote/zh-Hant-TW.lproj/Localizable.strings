@@ -1,4 +1,4 @@
-/* Translation-Revision-Date: 2024-09-12 09:54:03+0000 */
+/* Translation-Revision-Date: 2024-09-20 11:54:02+0000 */
 /* Plural-Forms: nplurals=1; plural=0; */
 /* Generator: GlotPress/2.4.0-alpha */
 /* Language: zh_TW */
@@ -987,6 +987,9 @@
 /* Visit app.simplenote.com in the browser */
 "Visit Web App" = "前往網頁應用程式";
 
+/* Option to login with username and password *PREFIX*: printed in dark color */
+"We'll email you a code to log in, or you can" = "我們會透過電子郵件傳送登入代碼給你，你也可以";
+
 /* Generic error */
 "We're having problems. Please try again soon." = "發生問題，請再試一次。";
 
@@ -1041,6 +1044,9 @@
 
 /* Message shown in note list when no notes are in the trash */
 "Your trash is empty" = "你的垃圾桶是空的";
+
+/* Option to login with username and password *SUFFIX*: Concatenated with a space, after the PREFIX, and printed in blue */
+"log in manually." = "手動登入。";
 
 /* Search Operator for tags. Please preserve the semicolons when translating! */
 "tag:" = "標籤：";
