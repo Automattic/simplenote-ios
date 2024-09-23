@@ -1,0 +1,4 @@
+- Ícones atualizados para funcionar com novos estilos do iOS 18
+- Adicionamos uma alternativa de login com opção de nome de usuário e senha
+- Link do aviso de privacidade para usuários residentes da Califórnia atualizado
+

@@ -1,0 +1,4 @@
+- Yeni iOS 18 stilleriyle çalışması için simgeler güncellendi
+- Oturum açmak için kullanıcı ve şifre seçeneği içeren ikinci oturum açma eklendi
+- Kaliforniya'daki kullanıcılar için gizlilik bildirimine giden bağlantı güncellendi
+

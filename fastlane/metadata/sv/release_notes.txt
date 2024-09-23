@@ -1,0 +1,4 @@
+- Uppdaterade ikoner som fungerar med nya iOS 18-stilar
+- Lägg till fallback-inloggning med alternativ för användarnamn och lösenord för att logga in
+- Uppdaterad länk till integritetsmeddelande för användare i Kalifornien
+

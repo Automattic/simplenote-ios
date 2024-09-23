@@ -1,36 +1,36 @@
 Simplenote adalah cara yang mudah untuk menulis catatan, membuat daftar hal yang harus dilakukan, mengembangkan ide, dan banyak lagi. Buka, catat beberapa ide, dan selesai. Seiring dengan berkembangnya koleksi Anda, tetap rapi dengan tag dan fitur sematkan, serta temukan hal yang Anda butuhkan dengan pencarian instan. Karena Simplenote akan tersinkron dengan seluruh perangkat secara gratis, catatan akan terus bersama Anda kapan saja.
 
-- Pengalaman mencatat yang sederhana
-- Menyinkronkan semua catatan di berbagai perangkat Anda
-- Berkolaborasi dan berbagi
+- Pengalaman mencatat yang simpel
+- Sinkronkan semua catatan di seluruh perangkat
+- Lakukan kolaborasi dan bagikan
 - Tetap rapi dengan tag
-- Masuk dengan email atau akun WordPress.com Anda
+- Login dengan email atau akun WordPress.com Anda
 
-SINKRONISASI ANDAL
-- Menyinkronkan dengan lancar di semua jenis komputer, ponsel atau tablet secara otomatis.
+SINKRONKAN DENGAN PERCAYA DIRI
+- Sinkronkan dengan mulus secara otomatis di seluruh komputer, ponsel, atau tablet.
 - Cadangkan dan sinkronkan segala hal selagi Anda mencatat, sehingga Anda tidak akan kehilangan isi catatan.
 
-KOLABORASI DAN BERBAGI
-- Lakukan kolaborasi dan bekerja bersama -- bagikan ide dengan rekan kerja, atau tulis daftar belanja bersama teman sekamar.
+LAKUKAN KOLABORASI DAN BAGIKAN
+- Lakukan kolaborasi dan bekerja bersama -- bagikan ide dengan rekan kerja, atau tulis daftar belanja dengan rekan sekamar Anda.
 - Pilih untuk memublikasikan konten Anda ke web, dan bagikan tautan ke siapa pun yang Anda mau.
 - Publikasikan secara langsung ke situs WordPress dengan menyambungkan akun WordPress.com Anda.
 - Bagikan dengan aplikasi pihak ketiga secara mudah dan cepat.
 
-ATUR DAN CARI
-- Tetap rapi dengan tag; gunakan untuk pencarian dan penyortiran cepat.
+RAPIKAN DAN CARI
+- Tetap rapi dengan tag, dan gunakan untuk pencarian dan penyortiran cepat.
 - Temukan apa yang Anda cari secara instan dengan penyorotan kata kunci.
 - Gunakan markdown untuk menambahkan pemformatan.
 - Buat daftar hal yang harus dilakukan.
 - Pilih urutan penyortiran catatan dan tag.
 - Sematkan catatan yang paling sering Anda gunakan.
 - Sunting tag secara langsung dengan menamai dan mengurutkan ulang.
-- Lindungi konten Anda dengan kunci kode sandi.
+- Lindungi isi catatan Anda dengan kunci kode.
 
 --
 
 Kebijakan Privasi: https://automattic.com/privacy/
 Ketentuan Layanan: https://simplenote.com/terms/
-Pemberitahuan Privasi Pengguna California: https://automattic.com/privacy/#us-privacy-laws
+Pemberitahuan Privasi Pengguna di California: https://automattic.com/privacy/#us-privacy-laws
 
 --
 

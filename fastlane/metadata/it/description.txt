@@ -1,7 +1,7 @@
 Con Simplenote puoi prendere appunti in modo semplice, creare elenchi di cose da fare, registrare le tue idee e molto altro. Aprilo, annota alcune idee e il gioco è fatto. Mentre la tua raccolta cresce, organizzala con tag e spilli e cerca quello di cui hai bisogno con la funzione di ricerca istantanea. I tuoi appunti saranno sempre con te poiché Simplenote si sincronizzerà gratuitamente su tutti i tuoi dispositivi.
 
 - Vivi un'esperienza semplice per prendere appunti
-- Sincronizza di ogni cosa su tutti i tuoi dispositivi
+- Sincronizza ogni cosa su tutti i tuoi dispositivi
 - Collabora e condividi
 - Rimani organizzato con i tag
 - Accedi con la tua e-mail o con il tuo account WordPress.com
@@ -34,4 +34,4 @@ Nota sulla privacy per utenti in California: https://automattic.com/privacy/#us-
 
 --
 
-Visita simplenote.com per scaricare Simplenote per altri dispositivi.
+Visita simplenote.com e scarica Simplenote sugli altri dispositivi.

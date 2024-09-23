@@ -1,22 +1,22 @@
 Simplenote es una forma fácil de tomar notas, crear listas de tareas, capturar ideas y mucho más. Abre la aplicación, escribe algunas líneas y listo. A medida que tu colección crezca, mantén el orden con etiquetas y chinchetas, y encuentra lo que necesites con la búsqueda instantánea. Como Simplenote se sincronizará gratuitamente con tus dispositivos, tus notas estarán contigo en todo momento.
 
-- Una experiencia sencilla para tomar notas
-- Sincroniza todos tus dispositivos
-- Colabora y comparte 
-- Organízate con las etiquetas
-- Inicia sesión con tu correo electrónico o cuenta WordPress.com
+- Una experiencia sencilla de toma de notas
+- Sincroniza tus datos en todos tus dispositivos
+- Colabora y comparte contenido
+- Mantén el orden con etiquetas
+- Accede con tu correo electrónico o con tu cuenta de WordPress.com
 
-SINCRONIZA CON CONFIANZA
-- Sincroniza fácilmente cualquier ordenador, teléfono móvil o tableta.
+SINCRONIZAR CON CONFIANZA
+- Tus datos se sincronizan automáticamente sin problemas en cualquier ordenador, teléfono o tableta.
 - Haz una copia de seguridad y sincronízalo todo mientras tomas notas, para que nunca pierdas tu contenido.
 
-COLABORA Y COMPARTE
-- Colabora y trabaja en equipo: comparte ideas con un compañero de trabajo o escribe la lista de la compra con tu compañero de piso.
+COLABORAR Y COMPARTIR
+- Colabora y trabaja en equipo: comparte ideas con un compañero de trabajo o crea una lista de la compra con tu compañero de piso.
 - Decide si quieres publicar tu contenido en la Web y comparte un enlace con quien tú quieras.
 - Publica contenido directamente en un sitio de WordPress conectando tu cuenta de WordPress.com.
 - Comparte contenido rápida y fácilmente con aplicaciones de terceros.
 
-ORGANIZA Y BUSCA
+ORGANIZAR Y BUSCAR
 - Mantén el orden aplicando etiquetas y úsalas para buscar y clasificar información rápidamente.
 - Encuentra de inmediato lo que buscas con el resaltado de palabras clave.
 - Utiliza el marcado para añadir formato.
@@ -30,8 +30,8 @@ ORGANIZA Y BUSCA
 
 Política de privacidad: https://automattic.com/privacy/
 Condiciones del servicio: https://simplenote.com/terms/
-Aviso de privacidad para usuarios de California: https://automattic.com/privacy/#us-privacy-laws
+Aviso de privacidad dirigido a los usuarios de California: https://automattic.com/privacy/#us-privacy-laws
 
 --
 
-Visita simplenote.com para descargar Simplenote en otros dispositivos.
+Ve a simplenote.com y descarga Simplenote en el resto de tus dispositivos.

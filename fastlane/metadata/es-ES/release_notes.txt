@@ -1,0 +1,4 @@
+- Se han actualizado los iconos para que funcionen con los nuevos estilos de iOS 18
+- Añade la opción de inicio de sesión «fall back» con nombre de usuario y contraseña para iniciar sesión
+- Se ha actualizado el enlace que lleva al aviso de privacidad para usuarios de California
+

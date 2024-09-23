@@ -1,0 +1,4 @@
+- Perbarui ikon untuk dapat bekerja dengan penataan iOS 18 yang baru
+- Tambahkan login sementara dengan menggunakan nama pengguna dan kata sandi
+- Tautan diperbarui untuk pemberitahuan privasi untuk pengguna di California
+
