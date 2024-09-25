@@ -312,9 +312,13 @@ def check_pods_references
   # This will also print the result to STDOUT
   result = ios_check_beta_deps(lockfile: File.join(PROJECT_ROOT_FOLDER, 'Podfile.lock'))
 
-  style = result[:pods].nil? || result[:pods].empty? ? 'success' : 'warning'
-  message = "### Checking Internal Dependencies are all on a **stable** version\n\n#{result[:message]}"
-  buildkite_annotate(context: 'pods-check', style: style, message: message) if is_ci
+  return unless is_ci
+
+  all_dependencies_stable = result[:pods].nil? || result[:pods].empty?
+  style = all_dependencies_stable ? 'success' : 'warning'
+  # Notice the double new line to produce a new HTML paragraph from the Markdown formatting.
+  message = "Stable dependencies check result:\n\n#{result[:message]}"
+  buildkite_annotate(context: 'pods-check', style: style, message: message)
 end
 
 def trigger_buildkite_release_build(branch:, beta:)
