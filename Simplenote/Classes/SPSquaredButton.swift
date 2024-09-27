@@ -7,7 +7,7 @@ class SPSquaredButton: UIButton {
 
     /// Default Radius
     ///
-    private let defaultCornerRadius = CGFloat(4)
+    private let defaultCornerRadius = CGFloat(8)
 
     /// Outer Border Radius
     ///
