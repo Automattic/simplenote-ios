@@ -509,7 +509,7 @@ extension SPNoteEditorViewController {
 
     @objc
     func ensureEmptyNoteIsDeleted() {
-        guard note.isBlank, noteEditorTextView.text.isEmpty else {
+        guard noteEditorTextView.text.isEmpty else {
             save()
             return
         }
