@@ -3,15 +3,19 @@
 
 # Variables used in this pipeline are defined in `shared-pipeline-vars`, which is `source`'d before calling `buildkite-agent pipeline upload`
 
+env:
+  IMAGE_ID: $IMAGE_ID
+
+agents:
+  queue: mac
+
 steps:
   - label: Start Code Freeze
     plugins:
       - $CI_TOOLKIT_PLUGIN
-    agents:
-        queue: tumblr-metal
     command: |
-      echo '--- :robot_face: Use bot for Git operations'
-      source use-bot-for-git wpmobilebot
+      echo '--- :git: Configure Git for Release Management'
+      source .buildkite/commands/configure-for-release.sh
 
       echo '--- :ruby: Setup Ruby Tools'
       install_gems
