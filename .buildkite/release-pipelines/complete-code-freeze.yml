@@ -16,7 +16,7 @@ steps:
     plugins: [$CI_TOOLKIT_PLUGIN]
     command: |
       echo '--- :git: Configure Git for Release Management'
-      .buildkite/commands/configure-git-for-release-management.sh
+      source .buildkite/commands/configure-for-release.sh
 
       echo '--- :git: Checkout release branch'
       .buildkite/commands/checkout-release-branch.sh
