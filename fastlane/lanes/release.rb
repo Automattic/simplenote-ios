@@ -6,25 +6,26 @@ platform :ios do
   lane :start_code_freeze do |skip_confirm: false|
     ensure_git_status_clean
 
-    Fastlane::Helper::GitHelper.checkout_and_pull(DEFAULT_BRANCH)
+    # Fastlane::Helper::GitHelper.checkout_and_pull(DEFAULT_BRANCH)
+    Fastlane::Helper::GitHelper.checkout_and_pull('iangmaia/use-trusted-mac-agents-for-releases')
 
-    computed_release_branch_name = release_branch_name(release_version: release_version_next)
+    # computed_release_branch_name = release_branch_name(release_version: release_version_next)
 
-    message = <<~MESSAGE
-      Code Freeze:
-      - New release branch from #{DEFAULT_BRANCH}: #{computed_release_branch_name}
+    # message = <<~MESSAGE
+    #   Code Freeze:
+    #   - New release branch from #{DEFAULT_BRANCH}: #{computed_release_branch_name}
 
-      - Current release version and build code: #{release_version_current} (#{build_code_current}).
-      - New release version and build code: #{release_version_next} (#{build_code_code_freeze}).
-    MESSAGE
+    #   - Current release version and build code: #{release_version_current} (#{build_code_current}).
+    #   - New release version and build code: #{release_version_next} (#{build_code_code_freeze}).
+    # MESSAGE
 
-    UI.important(message)
+    # UI.important(message)
 
-    UI.user_error!('Aborted by user request') unless skip_confirm || UI.confirm('Do you want to continue?')
+    # UI.user_error!('Aborted by user request') unless skip_confirm || UI.confirm('Do you want to continue?')
 
-    UI.message 'Creating release branch...'
-    Fastlane::Helper::GitHelper.create_branch(computed_release_branch_name, from: DEFAULT_BRANCH)
-    UI.success "Done! New release branch is: #{git_branch}"
+    # UI.message 'Creating release branch...'
+    # Fastlane::Helper::GitHelper.create_branch(computed_release_branch_name, from: DEFAULT_BRANCH)
+    # UI.success "Done! New release branch is: #{git_branch}"
 
     UI.message 'Bumping release version and build code...'
     PUBLIC_VERSION_FILE.write(
@@ -35,58 +36,58 @@ platform :ios do
 
     commit_version_and_build_files
 
-    new_version = release_version_current
+    # new_version = release_version_current
 
-    # Delete all release notes metadata, including the source of truth.
-    # We'll generate a new source of truth next, and the localized versions will be re-downloaded once translated on GlotPress.
-    # It's important we delete them, otherwise we risk using old release notes for locales that won't get translated in time for the release finalization.
-    delete_all_metadata_release_notes
+    # # Delete all release notes metadata, including the source of truth.
+    # # We'll generate a new source of truth next, and the localized versions will be re-downloaded once translated on GlotPress.
+    # # It's important we delete them, otherwise we risk using old release notes for locales that won't get translated in time for the release finalization.
+    # delete_all_metadata_release_notes
 
-    changelog_path = File.join(PROJECT_ROOT_FOLDER, 'RELEASE-NOTES.txt')
-    extract_release_notes_for_version(
-      version: new_version,
-      release_notes_file_path: changelog_path,
-      extracted_notes_file_path: RELEASE_NOTES_SOURCE_PATH
-    )
-    # Add a new section to the changelog for the version _after_ the one we are code freezing
-    ios_update_release_notes(
-      new_version: new_version,
-      release_notes_file_path: changelog_path
-    )
+    # changelog_path = File.join(PROJECT_ROOT_FOLDER, 'RELEASE-NOTES.txt')
+    # extract_release_notes_for_version(
+    #   version: new_version,
+    #   release_notes_file_path: changelog_path,
+    #   extracted_notes_file_path: RELEASE_NOTES_SOURCE_PATH
+    # )
+    # # Add a new section to the changelog for the version _after_ the one we are code freezing
+    # ios_update_release_notes(
+    #   new_version: new_version,
+    #   release_notes_file_path: changelog_path
+    # )
 
-    UI.important('Pushing changes to remote, configuring the release on GitHub, and triggering the beta build...')
-    UI.user_error!("Terminating as requested. Don't forget to run the remainder of this automation manually.") unless skip_confirm || UI.confirm('Do you want to continue?')
+    # UI.important('Pushing changes to remote, configuring the release on GitHub, and triggering the beta build...')
+    # UI.user_error!("Terminating as requested. Don't forget to run the remainder of this automation manually.") unless skip_confirm || UI.confirm('Do you want to continue?')
 
     push_to_git_remote(
       tags: false,
       set_upstream: is_ci == false # only set upstream when running locally, useless in transient CI builds
     )
 
-    copy_branch_protection(
-      repository: GITHUB_REPO,
-      from_branch: DEFAULT_BRANCH,
-      to_branch: computed_release_branch_name
-    )
+    # copy_branch_protection(
+    #   repository: GITHUB_REPO,
+    #   from_branch: DEFAULT_BRANCH,
+    #   to_branch: computed_release_branch_name
+    # )
 
-    freeze_milestone_and_move_assigned_prs_to_next_milestone(
-      milestone_to_freeze: new_version,
-      next_milestone: release_version_next
-    )
+    # freeze_milestone_and_move_assigned_prs_to_next_milestone(
+    #   milestone_to_freeze: new_version,
+    #   next_milestone: release_version_next
+    # )
 
-    check_pods_references
+    # check_pods_references
 
-    next unless is_ci
+    # next unless is_ci
 
-    message = <<~MESSAGE
-      Code freeze started successfully.
+    # message = <<~MESSAGE
+    #   Code freeze started successfully.
 
-      Next steps:
+    #   Next steps:
 
-      - Checkout `#{release_branch_name}` branch locally
-      - Update Pods and release notes if needed
-      - Finalize the code freeze
-    MESSAGE
-    buildkite_annotate(context: 'code-freeze-success', style: 'success', message: message)
+    #   - Checkout `#{release_branch_name}` branch locally
+    #   - Update Pods and release notes if needed
+    #   - Finalize the code freeze
+    # MESSAGE
+    # buildkite_annotate(context: 'code-freeze-success', style: 'success', message: message)
   end
 
   lane :complete_code_freeze do |skip_confirm: false|
