@@ -15,8 +15,8 @@ steps:
     key: complete_code_freeze
     plugins: [$CI_TOOLKIT_PLUGIN]
     command: |
-      echo '--- :git: Configure Git for Release Management'
-      source .buildkite/commands/configure-for-release.sh
+      echo '--- :robot_face: Use bot for git operations'
+      source use-bot-for-git
 
       echo '--- :git: Checkout release branch'
       .buildkite/commands/checkout-release-branch.sh

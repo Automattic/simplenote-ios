@@ -14,8 +14,8 @@ steps:
     plugins:
       - $CI_TOOLKIT_PLUGIN
     command: |
-      echo '--- :git: Configure Git for Release Management'
-      source .buildkite/commands/configure-for-release.sh
+      echo '--- :robot_face: Use bot for git operations'
+      source use-bot-for-git
 
       echo '--- :ruby: Setup Ruby Tools'
       install_gems

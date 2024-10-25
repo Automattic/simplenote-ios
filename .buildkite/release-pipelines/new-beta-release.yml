@@ -17,8 +17,8 @@ steps:
   - label: New Beta Release
     plugins: [$CI_TOOLKIT_PLUGIN]
     command: |
-      echo '--- :git: Configure Git for Release Management'
-      source .buildkite/commands/configure-for-release.sh
+      echo '--- :robot_face: Use bot for git operations'
+      source use-bot-for-git
 
       echo '--- :git: Checkout Release Branch'
       .buildkite/commands/checkout-release-branch.sh
