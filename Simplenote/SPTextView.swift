@@ -14,7 +14,7 @@ extension SPTextView {
         container.heightTracksTextView = true
 
 
-        if #available(iOS 16.0, *) {
+        if #available(iOS 17.0, *) {
             let textLayoutManager = NSTextLayoutManager()
             let contentStorage = NSTextContentStorage()
             contentStorage.delegate = self
