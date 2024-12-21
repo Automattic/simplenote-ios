@@ -21,8 +21,16 @@ extension UIGestureRecognizer {
         locationInContainer.x -= textView.textContainerInset.left
         locationInContainer.y -= textView.textContainerInset.top
 
-        return textView.layoutManager.characterIndex(for: locationInContainer,
-                                                     in: textView.textContainer,
-                                                     fractionOfDistanceBetweenInsertionPoints: nil)
+        guard #available(iOS 17.0, *),
+              let textLayoutManager = textView.textLayoutManager else {
+            // TextKit 1 fallback
+            return textView.layoutManager.characterIndex(
+                for: locationInContainer,
+                in: textView.textContainer,
+                fractionOfDistanceBetweenInsertionPoints: nil)
+        }
+
+        // TextKit 2
+        return textLayoutManager.characterIndex(for: locationInContainer) ?? .zero
     }
 }
