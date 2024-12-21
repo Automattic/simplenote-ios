@@ -20,14 +20,10 @@ CGFloat const TextViewHighlightCornerRadius = 3;
 @implementation SPTextView
 
 - (instancetype)init {
-    
-    SPInteractiveTextStorage *textStorage = [[SPInteractiveTextStorage alloc] init];
-    
-    NSTextContainer *container = [self setupTextContainerWith:textStorage];
+    NSTextContainer *container = [self setupTextContainer];
 
     self = [super initWithFrame:CGRectZero textContainer:container];
     if (self) {
-        self.interactiveTextStorage = textStorage;
         
     /*
         Issue #188:

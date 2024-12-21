@@ -8,11 +8,13 @@
 
 extension SPTextView {
     @objc
-    func setupTextContainer(with textStorage: SPInteractiveTextStorage) -> NSTextContainer {
+    func setupTextContainer() -> NSTextContainer {
         let container = NSTextContainer(size: .zero)
         container.widthTracksTextView = true
         container.heightTracksTextView = true
 
+        let textStorage = SPInteractiveTextStorage()
+        interactiveTextStorage = textStorage
 
         if #available(iOS 16.0, *) {
             let textLayoutManager = NSTextLayoutManager()
@@ -22,8 +24,26 @@ extension SPTextView {
             textLayoutManager.textContainer = container
 
         } else {
+            let layoutManager = NSLayoutManager()
             layoutManager.addTextContainer(container)
             textStorage.addLayoutManager(layoutManager)
+        }
+
+        return container
+    }
+
+    private func makeContainer() -> NSTextContainer {
+        var container: NSTextContainer
+        if #available(iOS 17.0, *) {
+            let fallbackContainer = SPFallbackTextContainer(size: .zero)
+
+            // This value is set incase we need to fall back to text kit 1
+            //
+            fallbackContainer.textView = self
+
+            container = fallbackContainer
+        } else {
+            container = NSTextContainer()
         }
 
         return container
