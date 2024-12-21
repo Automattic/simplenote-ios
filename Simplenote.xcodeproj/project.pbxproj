@@ -541,6 +541,7 @@
 		BAB6C04726BA4CAF007495C4 /* WidgetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6C04626BA4CAF007495C4 /* WidgetController.swift */; };
 		BAB898D32BEC404200E238B8 /* CreateNewNoteIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB898D22BEC404200E238B8 /* CreateNewNoteIntentHandler.swift */; };
 		BABB22DF2D14DA6600FCF47D /* SPTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABB22DE2D14DA6300FCF47D /* SPTextView.swift */; };
+		BABB22E52D1779D000FCF47D /* SPFallbackTextContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABB22E42D1779C700FCF47D /* SPFallbackTextContainer.swift */; };
 		BABFFF2226CF9094003A4C25 /* WidgetDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABFFF2126CF9094003A4C25 /* WidgetDefaults.swift */; };
 		BABFFF2326CF9094003A4C25 /* WidgetDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABFFF2126CF9094003A4C25 /* WidgetDefaults.swift */; };
 		BABFFF2426CF9094003A4C25 /* WidgetDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABFFF2126CF9094003A4C25 /* WidgetDefaults.swift */; };
@@ -1244,6 +1245,7 @@
 		BAB6C04626BA4CAF007495C4 /* WidgetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetController.swift; sourceTree = "<group>"; };
 		BAB898D22BEC404200E238B8 /* CreateNewNoteIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewNoteIntentHandler.swift; sourceTree = "<group>"; };
 		BABB22DE2D14DA6300FCF47D /* SPTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPTextView.swift; sourceTree = "<group>"; };
+		BABB22E42D1779C700FCF47D /* SPFallbackTextContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPFallbackTextContainer.swift; sourceTree = "<group>"; };
 		BABFFF2126CF9094003A4C25 /* WidgetDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDefaults.swift; sourceTree = "<group>"; };
 		BAD0F1EC2BED49C200E73E45 /* FindNoteIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindNoteIntentHandler.swift; sourceTree = "<group>"; };
 		BAE08625261282D1009D40CD /* Note+Publish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+Publish.swift"; sourceTree = "<group>"; };
@@ -1879,6 +1881,7 @@
 				E21F57B817C1244E001F02D3 /* SPEditorTextView.m */,
 				A6BBDA45255034E6005C8343 /* SPEditorTextView+Simplenote.swift */,
 				B52E2B142537480A0074509A /* SPEditorTapRecognizerDelegate.swift */,
+				BABB22E42D1779C700FCF47D /* SPFallbackTextContainer.swift */,
 			);
 			name = Editor;
 			sourceTree = "<group>";
@@ -3448,6 +3451,7 @@
 				46A3C96317DFA81A002865AE /* NSString+Metadata.m in Sources */,
 				B5E4082B235DDFC800D4E1DF /* ColorStudio.swift in Sources */,
 				B552AB8724B8E75E00E5E115 /* SPNoteEditorViewController+Extensions.swift in Sources */,
+				BABB22E52D1779D000FCF47D /* SPFallbackTextContainer.swift in Sources */,
 				A69F851D253EC877005140F2 /* UISlider+Simplenote.swift in Sources */,
 				46A3C96617DFA81A002865AE /* SPAcitivitySafari.m in Sources */,
 				B5E951E424FEE26E004B10B8 /* NSURL+Links.swift in Sources */,
