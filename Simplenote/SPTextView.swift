@@ -31,23 +31,6 @@ extension SPTextView {
 
         return container
     }
-
-    private func makeContainer() -> NSTextContainer {
-        var container: NSTextContainer
-        if #available(iOS 17.0, *) {
-            let fallbackContainer = SPFallbackTextContainer(size: .zero)
-
-            // This value is set incase we need to fall back to text kit 1
-            //
-            fallbackContainer.textView = self
-
-            container = fallbackContainer
-        } else {
-            container = NSTextContainer()
-        }
-
-        return container
-    }
 }
 
 // MARK: NSTextContentStorageDelegate
