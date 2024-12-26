@@ -22,6 +22,7 @@ extension SPTextView {
             textLayoutManager.textContainer = container
 
         } else {
+            let layoutManager = NSLayoutManager()
             layoutManager.addTextContainer(container)
             textStorage.addLayoutManager(layoutManager)
         }
