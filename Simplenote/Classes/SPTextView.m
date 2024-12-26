@@ -22,14 +22,9 @@ CGFloat const TextViewHighlightCornerRadius = 3;
 - (instancetype)init {
     
     SPInteractiveTextStorage *textStorage = [[SPInteractiveTextStorage alloc] init];
-    NSLayoutManager *layoutManager = [[NSLayoutManager alloc] init];
     
-    NSTextContainer *container = [[NSTextContainer alloc] initWithSize:CGSizeMake(0, CGFLOAT_MAX)];
-    container.widthTracksTextView = YES;
-    container.heightTracksTextView = YES;
-    [layoutManager addTextContainer:container];
-    [textStorage addLayoutManager:layoutManager];
-    
+    NSTextContainer *container = [self setupTextContainerWith:textStorage];
+
     self = [super initWithFrame:CGRectZero textContainer:container];
     if (self) {
         self.interactiveTextStorage = textStorage;
