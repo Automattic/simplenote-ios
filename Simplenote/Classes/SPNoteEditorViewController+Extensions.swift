@@ -870,7 +870,13 @@ extension SPNoteEditorViewController {
     }
 
     private func textContainerHeightForSearchMap() -> CGFloat {
-        var textContainerHeight = noteEditorTextView.layoutManager.usedRect(for: noteEditorTextView.textContainer).size.height
+        var textContainerHeight: CGFloat = 0
+
+        if #available (iOS 17.0, *) {
+            textContainerHeight = noteEditorTextView.textLayoutManager?.usageBoundsForTextContainer.size.height ?? CGFloat.leastNormalMagnitude
+        } else {
+            textContainerHeight = noteEditorTextView.layoutManager.usedRect(for: noteEditorTextView.textContainer).size.height
+        }
         textContainerHeight = textContainerHeight + noteEditorTextView.textContainerInset.top + noteEditorTextView.textContainerInset.bottom
 
         let textContainerMinHeight = noteEditorTextView.editingRectInWindow().size.height
