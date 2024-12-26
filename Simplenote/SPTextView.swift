@@ -37,7 +37,7 @@ extension SPTextView {
 //
 extension SPTextView: NSTextContentStorageDelegate {
     public func textContentStorage(_ textContentStorage: NSTextContentStorage, textParagraphWith range: NSRange) -> NSTextParagraph? {
-        guard let originalText = textContentStorage.textStorage?.attributedSubstring(from: range) as? NSMutableAttributedString else {
+        guard let originalText = textContentStorage.textStorage?.attributedSubstring(from: range).mutableCopy() as? NSMutableAttributedString else {
             return nil
         }
 
