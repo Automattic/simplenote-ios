@@ -1,0 +1,96 @@
+{
+  "originHash" : "5c7dc5a8c3fa899620d4a2168cf121438ee740cb5c2b5fac978ee6263951dbe7",
+  "pins" : [
+    {
+      "identity" : "automattic-tracks-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Automattic/Automattic-Tracks-iOS",
+      "state" : {
+        "revision" : "4d7d7138a9f2b36c3fd4618aa488ed9e8de2f726",
+        "version" : "3.5.0"
+      }
+    },
+    {
+      "identity" : "screenobject",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Automattic/ScreenObject",
+      "state" : {
+        "revision" : "328db56c62aab91440ec5e07cc9f7eef6e26a26e",
+        "version" : "0.2.3"
+      }
+    },
+    {
+      "identity" : "sentry-cocoa",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/getsentry/sentry-cocoa",
+      "state" : {
+        "revision" : "5421f94cc859eb65f5ae3866165a053aa634431e",
+        "version" : "8.32.0"
+      }
+    },
+    {
+      "identity" : "simplenoteendpoints-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:Automattic/SimplenoteEndpoints-Swift.git",
+      "state" : {
+        "revision" : "3d1c0a5db39ca798a7de10e7faeef8ae66e941e6",
+        "version" : "1.0.0"
+      }
+    },
+    {
+      "identity" : "simplenotefoundation-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:Automattic/SimplenoteFoundation-Swift.git",
+      "state" : {
+        "revision" : "2731e4d28c42d394ddc62cd864d9f7ff96759228",
+        "version" : "1.3.0"
+      }
+    },
+    {
+      "identity" : "simplenoteinterlinks-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:Automattic/SimplenoteInterlinks-Swift.git",
+      "state" : {
+        "revision" : "be3827a5bf05c5349ed62126c3e1dc60a2a6cee6",
+        "version" : "1.1.0"
+      }
+    },
+    {
+      "identity" : "simplenotesearch-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:Automattic/SimplenoteSearch-Swift.git",
+      "state" : {
+        "revision" : "499d2809d169fcbeb9ff75568d9f1f937f290ffc",
+        "version" : "1.3.0"
+      }
+    },
+    {
+      "identity" : "swift-sodium",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/jedisct1/swift-sodium",
+      "state" : {
+        "revision" : "4f9164a0a2c9a6a7ff53a2833d54a5c79c957342",
+        "version" : "0.9.1"
+      }
+    },
+    {
+      "identity" : "uideviceidentifier",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/squarefrog/UIDeviceIdentifier",
+      "state" : {
+        "revision" : "4699794b08bb79a4d77785edaba6ea739e298e4b",
+        "version" : "2.3.0"
+      }
+    },
+    {
+      "identity" : "xcuitesthelpers",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Automattic/XCUITestHelpers",
+      "state" : {
+        "revision" : "5179cb69d58b90761cc713bdee7740c4889d3295",
+        "version" : "0.4.0"
+      }
+    }
+  ],
+  "version" : 3
+}
