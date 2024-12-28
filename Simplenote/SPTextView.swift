@@ -8,13 +8,10 @@
 
 extension SPTextView {
     @objc
-    func setupTextContainer() -> NSTextContainer {
+    func setupTextContainer(with textStorage: SPInteractiveTextStorage) -> NSTextContainer {
         let container = NSTextContainer(size: .zero)
         container.widthTracksTextView = true
         container.heightTracksTextView = true
-
-        let textStorage = SPInteractiveTextStorage()
-        interactiveTextStorage = textStorage
 
         if #available(iOS 16.0, *) {
             let textLayoutManager = NSTextLayoutManager()
