@@ -541,6 +541,8 @@
 		BAB6C04726BA4CAF007495C4 /* WidgetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB6C04626BA4CAF007495C4 /* WidgetController.swift */; };
 		BAB898D32BEC404200E238B8 /* CreateNewNoteIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB898D22BEC404200E238B8 /* CreateNewNoteIntentHandler.swift */; };
 		BABB22DF2D14DA6600FCF47D /* SPTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABB22DE2D14DA6300FCF47D /* SPTextView.swift */; };
+		BABB22E12D162E6D00FCF47D /* NSTextLayoutManager+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABB22E02D162E6200FCF47D /* NSTextLayoutManager+Simplenote.swift */; };
+		BABB22E32D162E8400FCF47D /* NSTextLayoutFragment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABB22E22D162E7D00FCF47D /* NSTextLayoutFragment.swift */; };
 		BABFFF2226CF9094003A4C25 /* WidgetDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABFFF2126CF9094003A4C25 /* WidgetDefaults.swift */; };
 		BABFFF2326CF9094003A4C25 /* WidgetDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABFFF2126CF9094003A4C25 /* WidgetDefaults.swift */; };
 		BABFFF2426CF9094003A4C25 /* WidgetDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABFFF2126CF9094003A4C25 /* WidgetDefaults.swift */; };
@@ -1244,6 +1246,8 @@
 		BAB6C04626BA4CAF007495C4 /* WidgetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetController.swift; sourceTree = "<group>"; };
 		BAB898D22BEC404200E238B8 /* CreateNewNoteIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewNoteIntentHandler.swift; sourceTree = "<group>"; };
 		BABB22DE2D14DA6300FCF47D /* SPTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPTextView.swift; sourceTree = "<group>"; };
+		BABB22E02D162E6200FCF47D /* NSTextLayoutManager+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextLayoutManager+Simplenote.swift"; sourceTree = "<group>"; };
+		BABB22E22D162E7D00FCF47D /* NSTextLayoutFragment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTextLayoutFragment.swift; sourceTree = "<group>"; };
 		BABFFF2126CF9094003A4C25 /* WidgetDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDefaults.swift; sourceTree = "<group>"; };
 		BAD0F1EC2BED49C200E73E45 /* FindNoteIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindNoteIntentHandler.swift; sourceTree = "<group>"; };
 		BAE08625261282D1009D40CD /* Note+Publish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+Publish.swift"; sourceTree = "<group>"; };
@@ -1879,6 +1883,8 @@
 				E21F57B817C1244E001F02D3 /* SPEditorTextView.m */,
 				A6BBDA45255034E6005C8343 /* SPEditorTextView+Simplenote.swift */,
 				B52E2B142537480A0074509A /* SPEditorTapRecognizerDelegate.swift */,
+				BABB22E02D162E6200FCF47D /* NSTextLayoutManager+Simplenote.swift */,
+				BABB22E22D162E7D00FCF47D /* NSTextLayoutFragment.swift */,
 			);
 			name = Editor;
 			sourceTree = "<group>";
@@ -3471,6 +3477,7 @@
 				A60DF30825A44F0F00FDADF3 /* PinLockRemoveController.swift in Sources */,
 				A694ABAB25D1549D00CC3A2D /* FileStorage.swift in Sources */,
 				B513FB2422EF6A4B00B178AC /* SPUserInterface.swift in Sources */,
+				BABB22E32D162E8400FCF47D /* NSTextLayoutFragment.swift in Sources */,
 				B5DF734022A54EE800602CE7 /* SPDefaultTableViewCell.swift in Sources */,
 				B5796549250684EC00DFD6F7 /* EditorFactory.swift in Sources */,
 				A6C2721825AF0C1E00593731 /* TagListViewCell.swift in Sources */,
@@ -3542,6 +3549,7 @@
 				A6CDF900256B9CB900CF2F27 /* ViewSpinner.swift in Sources */,
 				375D24B721E01131007AB25A /* stack.c in Sources */,
 				373AD30821C4739500A4EA89 /* NSMutableAttributedString+Styling.m in Sources */,
+				BABB22E12D162E6D00FCF47D /* NSTextLayoutManager+Simplenote.swift in Sources */,
 				B524AE112352CC7900EA11D4 /* UIScreen+Simplenote.swift in Sources */,
 				A68A4345256FEE3000D1CA5D /* SPSettingsViewController+Extensions.swift in Sources */,
 				B543C7E523CF775C00003A80 /* NSSortDescriptor+Simplenote.swift in Sources */,
