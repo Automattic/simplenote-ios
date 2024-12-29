@@ -77,7 +77,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 - (void)configureTextView
 {
-    _noteEditorTextView = [[SPEditorTextView alloc] init];
+    _noteEditorTextView = [self makeTextView];
     _noteEditorTextView.delegate = self;
     _noteEditorTextView.dataDetectorTypes = UIDataDetectorTypeAll;
     _noteEditorTextView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
@@ -539,6 +539,14 @@ CGFloat const SPSelectedAreaPadding = 20;
     _searchQuery = searchQuery;
     self.searchResultRanges = nil;
     [self.navigationController setToolbarHidden:NO animated:YES];
+}
+
+- (NSString *)searchQueryText
+{
+    if (!_searchQuery) {
+        return nil;
+    }
+    return _searchQuery.searchText;
 }
 
 - (void)highlightNextSearchResult

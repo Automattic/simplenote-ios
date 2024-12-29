@@ -1065,6 +1065,102 @@ private enum Metrics {
     static let additionalTagViewAndEditorCollisionDistance: CGFloat = 16.0
 }
 
+// MARK: - TextKit 2
+//
+extension SPNoteEditorViewController {
+    @objc
+    func makeTextView() -> SPEditorTextView {
+        let textStorage = SPInteractiveTextStorage()
+        let textContainer = setupTextContainer(with: textStorage)
+
+        return SPEditorTextView(frame: .zero, textContainer: textContainer)
+    }
+
+    @objc
+    func setupTextContainer(with textStorage: SPInteractiveTextStorage) -> NSTextContainer {
+        let container = NSTextContainer(size: .zero)
+        container.widthTracksTextView = true
+        container.heightTracksTextView = true
+
+        if #available(iOS 16.0, *) {
+            let textLayoutManager = NSTextLayoutManager()
+            let contentStorage = NSTextContentStorage()
+            contentStorage.delegate = self
+            contentStorage.addTextLayoutManager(textLayoutManager)
+            textLayoutManager.textContainer = container
+
+        } else {
+            let layoutManager = NSLayoutManager()
+            layoutManager.addTextContainer(container)
+            textStorage.addLayoutManager(layoutManager)
+        }
+
+        return container
+    }
+
+    
+}
+
+// MARK: NSTextContentStorageDelegate
+//
+extension SPNoteEditorViewController: NSTextContentStorageDelegate {
+    public func textContentStorage(_ textContentStorage: NSTextContentStorage, textParagraphWith range: NSRange) -> NSTextParagraph? {
+        guard let originalText = textContentStorage.textStorage?.attributedSubstring(from: range).mutableCopy() as? NSMutableAttributedString else {
+            return nil
+        }
+
+        let style = textInRangeIsHeader(range) ? headlineStyle : defaultStyle
+        originalText.addAttributes(style, range: originalText.fullRange)
+
+        /*if (!self.searching || !self.searchQuery || self.searchQuery.isEmpty || self.searchResultRanges)*/
+        
+        guard searching,
+            let searchQuery = searchQueryText(),
+              searchQuery.isEmpty == false else {
+            return NSTextParagraph(attributedString: originalText)
+        }
+
+        return SearchHighlightableTextParagraph(attributedString: originalText, searchText: searchQuery)
+    }
+
+    func textInRangeIsHeader(_ range: NSRange) -> Bool {
+        range.location == .zero
+    }
+
+    // MARK: Styles
+    //
+    var headlineFont: UIFont {
+        UIFont.preferredFont(for: .title1, weight: .bold)
+    }
+
+    var defaultFont: UIFont {
+        UIFont.preferredFont(forTextStyle: .body)
+    }
+
+    var defaultTextColor: UIColor {
+        UIColor.simplenoteNoteHeadlineColor
+    }
+
+    var lineSpacing: CGFloat {
+        defaultFont.lineHeight * Metrics.lineSpacingMultipler
+    }
+
+    var defaultStyle: [NSAttributedString.Key: Any] {
+        [
+            .font: defaultFont,
+            .foregroundColor: defaultTextColor,
+            .paragraphStyle: NSMutableParagraphStyle(lineSpacing: lineSpacing)
+        ]
+    }
+
+    var headlineStyle: [NSAttributedString.Key: Any] {
+        [
+            .font: headlineFont,
+            .foregroundColor: defaultTextColor,
+        ]
+    }
+}
+
 // MARK: - Localization
 //
 private enum Localization {

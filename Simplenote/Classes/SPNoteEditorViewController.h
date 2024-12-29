@@ -78,6 +78,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 // TODO: We can't use `SearchQuery` as a type here because it doesn't work from swift code (because of SPM) :-(
 - (void)updateWithSearchQuery:(id _Nullable )query;
+- (nullable NSString *)searchQueryText;
 
 @end
 
