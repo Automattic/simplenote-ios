@@ -13,7 +13,9 @@ class SearchHighlightableTextParagraph: NSTextParagraph {
 
         let range = plainText.nsString.range(of: searchText)
         mutableString.addAttributes([
-            .backgroundColor: UIColor.simplenoteEditorSearchHighlightSelectedColor,
+            .backgroundColor: isSelected ?
+                UIColor.simplenoteEditorSearchHighlightSelectedColor:
+                UIColor.simplenoteEditorSearchHighlightColor,
             .foregroundColor: UIColor.simplenoteEditorSearchHighlightTextColor
         ], range: range)
 

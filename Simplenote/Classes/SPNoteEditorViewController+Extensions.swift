@@ -1098,7 +1098,26 @@ extension SPNoteEditorViewController {
         return container
     }
 
-    
+    @objc
+    func highlight(range: NSRange) {
+
+        if #available(iOS 17.0, *) {
+            let textContentManager = noteEditorTextView.textLayoutManager!.textContentManager!
+
+            let startLocation = textContentManager.location(textContentManager.documentRange.location,
+                                                            offsetBy: range.location)!
+
+            let endLocation = textContentManager.location(startLocation,
+                                                          offsetBy: range.length)
+
+            let nsTextRange = NSTextRange(location: startLocation, end: endLocation)!
+            noteEditorTextView.textLayoutManager?.invalidateLayout(for: nsTextRange)
+        } else {
+            noteEditorTextView.highlight(range, animated: true) { highlightFrame in
+                self.noteEditorTextView.scrollRectToVisible(highlightFrame, animated: true)
+            }
+        }
+    }
 }
 
 // MARK: NSTextContentStorageDelegate
@@ -1111,20 +1130,28 @@ extension SPNoteEditorViewController: NSTextContentStorageDelegate {
 
         let style = textInRangeIsHeader(range) ? headlineStyle : defaultStyle
         originalText.addAttributes(style, range: originalText.fullRange)
-
-        /*if (!self.searching || !self.searchQuery || self.searchQuery.isEmpty || self.searchResultRanges)*/
         
         guard searching,
             let searchQuery = searchQueryText(),
-              searchQuery.isEmpty == false else {
+              searchQuery.isEmpty == false,
+              let searchResultRanges else {
             return NSTextParagraph(attributedString: originalText)
         }
 
-        return SearchHighlightableTextParagraph(attributedString: originalText, searchText: searchQuery)
+        return SearchHighlightableTextParagraph(attributedString: originalText, searchText: searchQuery, isSelected: rangeIsSelected(range))
     }
 
     func textInRangeIsHeader(_ range: NSRange) -> Bool {
         range.location == .zero
+    }
+
+    func rangeIsSelected(_ range: NSRange) -> Bool {
+        guard let searchResultRanges,
+              let selected = searchResultRanges[highlightedSearchResultIndex] as? NSRange else {
+            return false
+        }
+
+        return NSIntersectionRange(range, selected).length > .zero
     }
 
     // MARK: Styles

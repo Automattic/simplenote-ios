@@ -576,9 +576,7 @@ CGFloat const SPSelectedAreaPadding = 20;
     self.nextSearchButton.enabled = index < searchResultCount - 1;
 
     NSRange targetRange = [(NSValue *)self.searchResultRanges[index] rangeValue];
-    [_noteEditorTextView highlightRange:targetRange animated:YES withBlock:^(CGRect highlightFrame) {
-        [self.noteEditorTextView scrollRectToVisible:highlightFrame animated:animated];
-    }];
+    [self highlightWithRange:targetRange];
 }
 
 - (void)endSearching:(id)sender {
