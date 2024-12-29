@@ -472,6 +472,7 @@
 		BA55B06325F068650042582B /* NoticeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA55B06225F068650042582B /* NoticeController.swift */; };
 		BA5768EC269BE4D0008B510E /* AccountDeletionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5768EB269BE4D0008B510E /* AccountDeletionController.swift */; };
 		BA5C1C0725BF9D6C006E3820 /* SPDragBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5C1C0625BF9D6C006E3820 /* SPDragBar.swift */; };
+		BA5ED24C2D1F7B4C005ECF89 /* SearchHighlightableTextParagraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5ED24B2D1F7B40005ECF89 /* SearchHighlightableTextParagraph.swift */; };
 		BA608EF526BB6E0200A9D94E /* ListWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA608EF426BB6E0200A9D94E /* ListWidget.swift */; };
 		BA608EF726BB6E7400A9D94E /* ListWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA608EF626BB6E7400A9D94E /* ListWidgetProvider.swift */; };
 		BA608EF926BB6F4C00A9D94E /* ListWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA608EF826BB6F4C00A9D94E /* ListWidgetView.swift */; };
@@ -1176,6 +1177,7 @@
 		BA55B06225F068650042582B /* NoticeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeController.swift; sourceTree = "<group>"; };
 		BA5768EB269BE4D0008B510E /* AccountDeletionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDeletionController.swift; sourceTree = "<group>"; };
 		BA5C1C0625BF9D6C006E3820 /* SPDragBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPDragBar.swift; sourceTree = "<group>"; };
+		BA5ED24B2D1F7B40005ECF89 /* SearchHighlightableTextParagraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHighlightableTextParagraph.swift; sourceTree = "<group>"; };
 		BA608EF426BB6E0200A9D94E /* ListWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWidget.swift; sourceTree = "<group>"; };
 		BA608EF626BB6E7400A9D94E /* ListWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWidgetProvider.swift; sourceTree = "<group>"; };
 		BA608EF826BB6F4C00A9D94E /* ListWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWidgetView.swift; sourceTree = "<group>"; };
@@ -1885,6 +1887,7 @@
 				B52E2B142537480A0074509A /* SPEditorTapRecognizerDelegate.swift */,
 				BABB22E02D162E6200FCF47D /* NSTextLayoutManager+Simplenote.swift */,
 				BABB22E22D162E7D00FCF47D /* NSTextLayoutFragment.swift */,
+				BA5ED24B2D1F7B40005ECF89 /* SearchHighlightableTextParagraph.swift */,
 			);
 			name = Editor;
 			sourceTree = "<group>";
@@ -3674,6 +3677,7 @@
 				B5C2EDF0255AFB6C00C09B32 /* PassthruView.swift in Sources */,
 				A6F4882325A8889E0050CFA8 /* UITextField+Tag.swift in Sources */,
 				A64DE6F1255D1CD9001D0526 /* NoteContentHelper.swift in Sources */,
+				BA5ED24C2D1F7B4C005ECF89 /* SearchHighlightableTextParagraph.swift in Sources */,
 				A628BEB625ECD97900121B64 /* SignupVerificationViewController.swift in Sources */,
 				B550F93322BA6A3300091939 /* ShortcutsHandler.swift in Sources */,
 				A6C0589424AD2B8F006BC572 /* SPNoteHistoryViewController.swift in Sources */,
