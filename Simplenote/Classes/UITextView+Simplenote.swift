@@ -134,8 +134,24 @@ extension UITextView {
     /// Returns the Bounding Rect for the specified NSRange
     ///
     func boundingRect(for range: NSRange) -> CGRect {
-        let glyphRange = layoutManager.glyphRange(forCharacterRange: range, actualCharacterRange: nil)
-        let rect = layoutManager.boundingRect(forGlyphRange: glyphRange, in: textContainer)
+        var rect: CGRect = .zero
+        if #available(iOS 17.0, *) {
+            guard let textLayoutManager,
+                  let contentManager = textLayoutManager.textContentManager,
+                  let startLocation = contentManager.location(contentManager.documentRange.location,
+                                                              offsetBy: range.location) else {
+                return .zero
+            }
+
+            textLayoutManager.enumerateTextLayoutFragments(from: startLocation, using: { fragment in
+                // We want the frame of the first layout fragment at the given location, so we can return false
+                rect = fragment.layoutFragmentFrame
+                return false
+            })
+        } else {
+            let glyphRange = layoutManager.glyphRange(forCharacterRange: range, actualCharacterRange: nil)
+            rect = layoutManager.boundingRect(forGlyphRange: glyphRange, in: textContainer)
+        }
 
         return rect.offsetBy(dx: textContainerInset.left, dy: textContainerInset.top)
     }

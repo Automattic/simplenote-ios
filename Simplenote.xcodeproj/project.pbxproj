@@ -472,6 +472,7 @@
 		BA55B06325F068650042582B /* NoticeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA55B06225F068650042582B /* NoticeController.swift */; };
 		BA5768EC269BE4D0008B510E /* AccountDeletionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5768EB269BE4D0008B510E /* AccountDeletionController.swift */; };
 		BA5C1C0725BF9D6C006E3820 /* SPDragBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5C1C0625BF9D6C006E3820 /* SPDragBar.swift */; };
+		BA5ED24C2D1F7B4C005ECF89 /* SearchHighlightableTextParagraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5ED24B2D1F7B40005ECF89 /* SearchHighlightableTextParagraph.swift */; };
 		BA608EF526BB6E0200A9D94E /* ListWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA608EF426BB6E0200A9D94E /* ListWidget.swift */; };
 		BA608EF726BB6E7400A9D94E /* ListWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA608EF626BB6E7400A9D94E /* ListWidgetProvider.swift */; };
 		BA608EF926BB6F4C00A9D94E /* ListWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA608EF826BB6F4C00A9D94E /* ListWidgetView.swift */; };
@@ -520,6 +521,7 @@
 		BAA63C3325EEDA83001589D7 /* NoteLinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA63C3225EEDA83001589D7 /* NoteLinkTests.swift */; };
 		BAADC8A426C634DB004CAAA9 /* WidgetConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAADC8A326C634DB004CAAA9 /* WidgetConstants.swift */; };
 		BAADC8A526C634DB004CAAA9 /* WidgetConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAADC8A326C634DB004CAAA9 /* WidgetConstants.swift */; };
+		BAAE76BB2D21FCD800D04273 /* NSTextContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAE76BA2D21FCD200D04273 /* NSTextContentManager.swift */; };
 		BAB017722609456D007A9CC3 /* PublishController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB017712609456D007A9CC3 /* PublishController.swift */; };
 		BAB01792260AAE93007A9CC3 /* NoticeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB01791260AAE93007A9CC3 /* NoticeFactory.swift */; };
 		BAB0179B260AD591007A9CC3 /* PublishControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB0179A260AD591007A9CC3 /* PublishControllerTests.swift */; };
@@ -1176,6 +1178,7 @@
 		BA55B06225F068650042582B /* NoticeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeController.swift; sourceTree = "<group>"; };
 		BA5768EB269BE4D0008B510E /* AccountDeletionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDeletionController.swift; sourceTree = "<group>"; };
 		BA5C1C0625BF9D6C006E3820 /* SPDragBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPDragBar.swift; sourceTree = "<group>"; };
+		BA5ED24B2D1F7B40005ECF89 /* SearchHighlightableTextParagraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHighlightableTextParagraph.swift; sourceTree = "<group>"; };
 		BA608EF426BB6E0200A9D94E /* ListWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWidget.swift; sourceTree = "<group>"; };
 		BA608EF626BB6E7400A9D94E /* ListWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWidgetProvider.swift; sourceTree = "<group>"; };
 		BA608EF826BB6F4C00A9D94E /* ListWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListWidgetView.swift; sourceTree = "<group>"; };
@@ -1229,6 +1232,7 @@
 		BAA59E78269F9FE30068BD3D /* Date+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Simplenote.swift"; sourceTree = "<group>"; };
 		BAA63C3225EEDA83001589D7 /* NoteLinkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteLinkTests.swift; sourceTree = "<group>"; };
 		BAADC8A326C634DB004CAAA9 /* WidgetConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetConstants.swift; sourceTree = "<group>"; };
+		BAAE76BA2D21FCD200D04273 /* NSTextContentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTextContentManager.swift; sourceTree = "<group>"; };
 		BAB017712609456D007A9CC3 /* PublishController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishController.swift; sourceTree = "<group>"; };
 		BAB01791260AAE93007A9CC3 /* NoticeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeFactory.swift; sourceTree = "<group>"; };
 		BAB0179A260AD591007A9CC3 /* PublishControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishControllerTests.swift; sourceTree = "<group>"; };
@@ -1885,6 +1889,8 @@
 				B52E2B142537480A0074509A /* SPEditorTapRecognizerDelegate.swift */,
 				BABB22E02D162E6200FCF47D /* NSTextLayoutManager+Simplenote.swift */,
 				BABB22E22D162E7D00FCF47D /* NSTextLayoutFragment.swift */,
+				BAAE76BA2D21FCD200D04273 /* NSTextContentManager.swift */,
+				BA5ED24B2D1F7B40005ECF89 /* SearchHighlightableTextParagraph.swift */,
 			);
 			name = Editor;
 			sourceTree = "<group>";
@@ -3585,6 +3591,7 @@
 				46A3C98617DFA81A002865AE /* SPEntryListViewController.m in Sources */,
 				A6ABB689256D95EB00E2A076 /* PinLockProgressView.swift in Sources */,
 				B56A696322F9D53400B90398 /* SPAuthViewController.swift in Sources */,
+				BAAE76BB2D21FCD800D04273 /* NSTextContentManager.swift in Sources */,
 				B50789FE1C1F5517009F097A /* SPInteractivePushPopAnimationController.m in Sources */,
 				B5D3FCD0201F96AC00A813B7 /* StatusChecker.m in Sources */,
 				B57DE27825013C6600B4D435 /* Simperium+Simplenote.swift in Sources */,
@@ -3674,6 +3681,7 @@
 				B5C2EDF0255AFB6C00C09B32 /* PassthruView.swift in Sources */,
 				A6F4882325A8889E0050CFA8 /* UITextField+Tag.swift in Sources */,
 				A64DE6F1255D1CD9001D0526 /* NoteContentHelper.swift in Sources */,
+				BA5ED24C2D1F7B4C005ECF89 /* SearchHighlightableTextParagraph.swift in Sources */,
 				A628BEB625ECD97900121B64 /* SignupVerificationViewController.swift in Sources */,
 				B550F93322BA6A3300091939 /* ShortcutsHandler.swift in Sources */,
 				A6C0589424AD2B8F006BC572 /* SPNoteHistoryViewController.swift in Sources */,

@@ -53,6 +53,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) BOOL searching;
 @property (nonatomic, assign) NSInteger highlightedSearchResultIndex;
 
+// Search
+@property (nonatomic, strong, nullable) NSArray                   *searchResultRanges;
+
 @property (nonatomic, strong) NoteScrollPositionCache *scrollPositionCache;
 
 - (instancetype)initWithNote:(Note *)note;
@@ -78,6 +81,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 // TODO: We can't use `SearchQuery` as a type here because it doesn't work from swift code (because of SPM) :-(
 - (void)updateWithSearchQuery:(id _Nullable )query;
+- (nullable NSString *)searchQueryText;
 
 @end
 

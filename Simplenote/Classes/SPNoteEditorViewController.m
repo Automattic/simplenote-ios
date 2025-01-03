@@ -55,7 +55,6 @@ CGFloat const SPSelectedAreaPadding = 20;
 @property (nonatomic, strong) NSMutableDictionary       *noteVersionData;
 
 // Search
-@property (nonatomic, strong) NSArray                   *searchResultRanges;
 @property (nonatomic, strong) SearchQuery               *searchQuery;
 
 @end
@@ -77,7 +76,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 - (void)configureTextView
 {
-    _noteEditorTextView = [[SPEditorTextView alloc] init];
+    _noteEditorTextView = [self makeTextView];
     _noteEditorTextView.delegate = self;
     _noteEditorTextView.dataDetectorTypes = UIDataDetectorTypeAll;
     _noteEditorTextView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
@@ -541,6 +540,14 @@ CGFloat const SPSelectedAreaPadding = 20;
     [self.navigationController setToolbarHidden:NO animated:YES];
 }
 
+- (NSString *)searchQueryText
+{
+    if (!_searchQuery) {
+        return nil;
+    }
+    return _searchQuery.searchText;
+}
+
 - (void)highlightNextSearchResult
 {
     [self highlightSearchResultAtIndex:(self.highlightedSearchResultIndex + 1) animated:YES];
@@ -568,13 +575,12 @@ CGFloat const SPSelectedAreaPadding = 20;
     self.nextSearchButton.enabled = index < searchResultCount - 1;
 
     NSRange targetRange = [(NSValue *)self.searchResultRanges[index] rangeValue];
-    [_noteEditorTextView highlightRange:targetRange animated:YES withBlock:^(CGRect highlightFrame) {
-        [self.noteEditorTextView scrollRectToVisible:highlightFrame animated:animated];
-    }];
+    [self highlightWithRange:targetRange];
 }
 
 - (void)endSearching:(id)sender {
     [self hideSearchMap];
+    self.searching = NO;
 
     if ([sender isEqual:self.doneSearchButton])
         [[SPAppDelegate sharedDelegate].noteListViewController endSearching];
@@ -587,7 +593,6 @@ CGFloat const SPSelectedAreaPadding = 20;
     
     [_noteEditorTextView clearHighlights:(sender ? YES : NO)];
     
-    self.searching = NO;
 
     [self configureNavigationController];
     [self configureNavigationControllerToolbar];
