@@ -521,6 +521,7 @@
 		BAA63C3325EEDA83001589D7 /* NoteLinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA63C3225EEDA83001589D7 /* NoteLinkTests.swift */; };
 		BAADC8A426C634DB004CAAA9 /* WidgetConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAADC8A326C634DB004CAAA9 /* WidgetConstants.swift */; };
 		BAADC8A526C634DB004CAAA9 /* WidgetConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAADC8A326C634DB004CAAA9 /* WidgetConstants.swift */; };
+		BAAE76BB2D21FCD800D04273 /* NSTextContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAE76BA2D21FCD200D04273 /* NSTextContentManager.swift */; };
 		BAB017722609456D007A9CC3 /* PublishController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB017712609456D007A9CC3 /* PublishController.swift */; };
 		BAB01792260AAE93007A9CC3 /* NoticeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB01791260AAE93007A9CC3 /* NoticeFactory.swift */; };
 		BAB0179B260AD591007A9CC3 /* PublishControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB0179A260AD591007A9CC3 /* PublishControllerTests.swift */; };
@@ -1231,6 +1232,7 @@
 		BAA59E78269F9FE30068BD3D /* Date+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Simplenote.swift"; sourceTree = "<group>"; };
 		BAA63C3225EEDA83001589D7 /* NoteLinkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteLinkTests.swift; sourceTree = "<group>"; };
 		BAADC8A326C634DB004CAAA9 /* WidgetConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetConstants.swift; sourceTree = "<group>"; };
+		BAAE76BA2D21FCD200D04273 /* NSTextContentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTextContentManager.swift; sourceTree = "<group>"; };
 		BAB017712609456D007A9CC3 /* PublishController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishController.swift; sourceTree = "<group>"; };
 		BAB01791260AAE93007A9CC3 /* NoticeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeFactory.swift; sourceTree = "<group>"; };
 		BAB0179A260AD591007A9CC3 /* PublishControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishControllerTests.swift; sourceTree = "<group>"; };
@@ -1887,6 +1889,7 @@
 				B52E2B142537480A0074509A /* SPEditorTapRecognizerDelegate.swift */,
 				BABB22E02D162E6200FCF47D /* NSTextLayoutManager+Simplenote.swift */,
 				BABB22E22D162E7D00FCF47D /* NSTextLayoutFragment.swift */,
+				BAAE76BA2D21FCD200D04273 /* NSTextContentManager.swift */,
 				BA5ED24B2D1F7B40005ECF89 /* SearchHighlightableTextParagraph.swift */,
 			);
 			name = Editor;
@@ -3588,6 +3591,7 @@
 				46A3C98617DFA81A002865AE /* SPEntryListViewController.m in Sources */,
 				A6ABB689256D95EB00E2A076 /* PinLockProgressView.swift in Sources */,
 				B56A696322F9D53400B90398 /* SPAuthViewController.swift in Sources */,
+				BAAE76BB2D21FCD800D04273 /* NSTextContentManager.swift in Sources */,
 				B50789FE1C1F5517009F097A /* SPInteractivePushPopAnimationController.m in Sources */,
 				B5D3FCD0201F96AC00A813B7 /* StatusChecker.m in Sources */,
 				B57DE27825013C6600B4D435 /* Simperium+Simplenote.swift in Sources */,
