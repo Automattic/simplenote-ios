@@ -1086,6 +1086,7 @@ extension SPNoteEditorViewController {
             let textLayoutManager = NSTextLayoutManager()
             let contentStorage = NSTextContentStorage()
             contentStorage.delegate = self
+            textLayoutManager.delegate = self
             contentStorage.addTextLayoutManager(textLayoutManager)
             textLayoutManager.textContainer = container
 
@@ -1100,18 +1101,22 @@ extension SPNoteEditorViewController {
 
     @objc
     func highlight(range: NSRange) {
-
         if #available(iOS 17.0, *) {
-            let textContentManager = noteEditorTextView.textLayoutManager!.textContentManager!
+            guard let textLayoutManager = noteEditorTextView.textLayoutManager,
+                  let nsTextRange = textLayoutManager.textContentManager?.textRangeInDocument(for: range) else {
+                return
+            }
 
-            let startLocation = textContentManager.location(textContentManager.documentRange.location,
-                                                            offsetBy: range.location)!
+            textLayoutManager.replaceContents(in: nsTextRange, with: NSAttributedString(string: "This is a string"))
 
-            let endLocation = textContentManager.location(startLocation,
-                                                          offsetBy: range.length)
+            //            textLayoutManager.invalidateLayout(for: nsTextRange)
 
-            let nsTextRange = NSTextRange(location: startLocation, end: endLocation)!
-            noteEditorTextView.textLayoutManager?.invalidateLayout(for: nsTextRange)
+            //            textLayoutManager.ensureLayout(for: nsTextRange)
+
+            //            textLayoutManager.textContentManager?.performEditingTransaction({
+            //                let newString = NSAttributedString(string: "new string")
+            //                (textLayoutManager.textContentManager as! NSTextContentStorage).textStorage!.insert(newString, at: 0)
+            //            })
         } else {
             noteEditorTextView.highlight(range, animated: true) { highlightFrame in
                 self.noteEditorTextView.scrollRectToVisible(highlightFrame, animated: true)
@@ -1122,6 +1127,13 @@ extension SPNoteEditorViewController {
 
 // MARK: NSTextContentStorageDelegate
 //
+
+extension SPNoteEditorViewController: NSTextLayoutManagerDelegate {
+    public func textLayoutManager(_ textLayoutManager: NSTextLayoutManager, textLayoutFragmentFor location: any NSTextLocation, in textElement: NSTextElement) -> NSTextLayoutFragment {
+        NSTextLayoutFragment(textElement: textElement, range: textElement.elementRange)
+    }
+}
+
 extension SPNoteEditorViewController: NSTextContentStorageDelegate {
     public func textContentStorage(_ textContentStorage: NSTextContentStorage, textParagraphWith range: NSRange) -> NSTextParagraph? {
         guard let originalText = textContentStorage.textStorage?.attributedSubstring(from: range).mutableCopy() as? NSMutableAttributedString else {

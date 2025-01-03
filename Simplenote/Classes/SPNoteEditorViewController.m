@@ -55,7 +55,6 @@ CGFloat const SPSelectedAreaPadding = 20;
 @property (nonatomic, strong) NSMutableDictionary       *noteVersionData;
 
 // Search
-@property (nonatomic, strong) NSArray                   *searchResultRanges;
 @property (nonatomic, strong) SearchQuery               *searchQuery;
 
 @end
@@ -581,6 +580,7 @@ CGFloat const SPSelectedAreaPadding = 20;
 
 - (void)endSearching:(id)sender {
     [self hideSearchMap];
+    self.searching = NO;
 
     if ([sender isEqual:self.doneSearchButton])
         [[SPAppDelegate sharedDelegate].noteListViewController endSearching];
@@ -593,7 +593,6 @@ CGFloat const SPSelectedAreaPadding = 20;
     
     [_noteEditorTextView clearHighlights:(sender ? YES : NO)];
     
-    self.searching = NO;
 
     [self configureNavigationController];
     [self configureNavigationControllerToolbar];
