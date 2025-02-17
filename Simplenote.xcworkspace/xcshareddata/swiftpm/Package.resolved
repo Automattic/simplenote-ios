@@ -1,5 +1,5 @@
 {
-  "originHash" : "5c7dc5a8c3fa899620d4a2168cf121438ee740cb5c2b5fac978ee6263951dbe7",
+  "originHash" : "3dd6595724cdd9c11b66b7239306094edda86a9c111ac85bd439e7d15d1d1a8c",
   "pins" : [
     {
       "identity" : "automattic-tracks-ios",
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Automattic/ScreenObject",
       "state" : {
-        "revision" : "328db56c62aab91440ec5e07cc9f7eef6e26a26e",
-        "version" : "0.2.3"
+        "revision" : "5a62548524a0ad65d8e2e5d4f665981c48066253",
+        "version" : "0.3.0"
       }
     },
     {
@@ -80,15 +80,6 @@
       "state" : {
         "revision" : "4699794b08bb79a4d77785edaba6ea739e298e4b",
         "version" : "2.3.0"
-      }
-    },
-    {
-      "identity" : "xcuitesthelpers",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Automattic/XCUITestHelpers",
-      "state" : {
-        "revision" : "5179cb69d58b90761cc713bdee7740c4889d3295",
-        "version" : "0.4.0"
       }
     }
   ],
