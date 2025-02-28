@@ -55,14 +55,13 @@
 		3F1BB4A0242DB81E006D1A04 /* ScreenshotsCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1BB49F242DB81E006D1A04 /* ScreenshotsCredentials.swift */; };
 		3F1BB4A3242DC162006D1A04 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1BB4A2242DC162006D1A04 /* SnapshotHelper.swift */; };
 		3F4BA07E26CDF295000619B1 /* ScreenObject in Frameworks */ = {isa = PBXBuildFile; productRef = 3F4BA07D26CDF295000619B1 /* ScreenObject */; };
-		3F762E8F2677F19C0088CD45 /* XCUITestHelpers in Frameworks */ = {isa = PBXBuildFile; productRef = 3F762E8E2677F19C0088CD45 /* XCUITestHelpers */; };
-		3F762E912677F1AA0088CD45 /* XCUITestHelpers in Frameworks */ = {isa = PBXBuildFile; productRef = 3F762E902677F1AA0088CD45 /* XCUITestHelpers */; };
 		3FA17B5626240FF000C11C46 /* NoteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA17B5526240FF000C11C46 /* NoteData.swift */; };
+		3FA323292D63E5A90017AE66 /* XCUITestHelpers in Frameworks */ = {isa = PBXBuildFile; productRef = 3FA323282D63E5A90017AE66 /* XCUITestHelpers */; };
+		3FA3232B2D63E6F50017AE66 /* XCUITestHelpers in Frameworks */ = {isa = PBXBuildFile; productRef = 3FA3232A2D63E6F50017AE66 /* XCUITestHelpers */; };
 		3FA6013C242C5AAE0068FC52 /* SimplenoteScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6013B242C5AAE0068FC52 /* SimplenoteScreenshots.swift */; };
 		3FF314CE26FC20FD0012E68E /* PasscodeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4BA07F26CE00A2000619B1 /* PasscodeScreen.swift */; };
 		3FF314D326FC47720012E68E /* XCUIApplication+Assertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF314D226FC47720012E68E /* XCUIApplication+Assertions.swift */; };
 		3FFBDBEE26FBF132008AD052 /* UITestsFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FFBDBED26FBF132008AD052 /* UITestsFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3FFBDBF626FBF143008AD052 /* XCUITestHelpers in Frameworks */ = {isa = PBXBuildFile; productRef = 3FFBDBF526FBF143008AD052 /* XCUITestHelpers */; };
 		3FFBDBF826FBF148008AD052 /* ScreenObject in Frameworks */ = {isa = PBXBuildFile; productRef = 3FFBDBF726FBF148008AD052 /* ScreenObject */; };
 		3FFBDBF926FBF161008AD052 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F3CA94826255FA800F6316F /* XCTest.framework */; platformFilter = ios; };
 		4352BA0867E0E416EB5FF6B9 /* Pods_Automattic_Simplenote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3318C36BBA08D53624E27EFC /* Pods_Automattic_Simplenote.framework */; };
@@ -1359,8 +1358,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F762E912677F1AA0088CD45 /* XCUITestHelpers in Frameworks */,
 				3F4BA07E26CDF295000619B1 /* ScreenObject in Frameworks */,
+				3FA323292D63E5A90017AE66 /* XCUITestHelpers in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1368,7 +1367,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3FFBDBF626FBF143008AD052 /* XCUITestHelpers in Frameworks */,
 				3FFBDBF926FBF161008AD052 /* XCTest.framework in Frameworks */,
 				3FFBDBF826FBF148008AD052 /* ScreenObject in Frameworks */,
 			);
@@ -1444,7 +1442,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F762E8F2677F19C0088CD45 /* XCUITestHelpers in Frameworks */,
+				3FA3232B2D63E6F50017AE66 /* XCUITestHelpers in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2826,8 +2824,8 @@
 			);
 			name = SimplenoteScreenshots;
 			packageProductDependencies = (
-				3F762E902677F1AA0088CD45 /* XCUITestHelpers */,
 				3F4BA07D26CDF295000619B1 /* ScreenObject */,
+				3FA323282D63E5A90017AE66 /* XCUITestHelpers */,
 			);
 			productName = SimplenoteScreenshots;
 			productReference = 3FA60139242C5AAD0068FC52 /* SimplenoteScreenshots.xctest */;
@@ -2848,7 +2846,6 @@
 			);
 			name = UITestsFoundation;
 			packageProductDependencies = (
-				3FFBDBF526FBF143008AD052 /* XCUITestHelpers */,
 				3FFBDBF726FBF148008AD052 /* ScreenObject */,
 			);
 			productName = UITestsFoundation;
@@ -2986,7 +2983,7 @@
 			);
 			name = SimplenoteUITests;
 			packageProductDependencies = (
-				3F762E8E2677F19C0088CD45 /* XCUITestHelpers */,
+				3FA3232A2D63E6F50017AE66 /* XCUITestHelpers */,
 			);
 			productName = SimplenoteUITests;
 			productReference = D864B15425CAE25000F9B73E /* SimplenoteUITests.xctest */;
@@ -3099,7 +3096,6 @@
 				B5BAF9EB24E4D0D2000917C0 /* XCRemoteSwiftPackageReference "SimplenoteFoundation-Swift" */,
 				B50D2FB424E6DFAC00163FC3 /* XCRemoteSwiftPackageReference "SimplenoteSearch-Swift" */,
 				B59CACFA2541E05400958330 /* XCRemoteSwiftPackageReference "SimplenoteInterlinks-Swift" */,
-				3F762E8D2677F19C0088CD45 /* XCRemoteSwiftPackageReference "XCUITestHelpers" */,
 				3F4BA07C26CDF295000619B1 /* XCRemoteSwiftPackageReference "ScreenObject" */,
 				BA2015B92B573761005E59AA /* XCRemoteSwiftPackageReference "Automattic-Tracks-iOS" */,
 				B51D44592C52CB4000F296A7 /* XCRemoteSwiftPackageReference "SimplenoteEndpoints-Swift" */,
@@ -6205,15 +6201,7 @@
 			repositoryURL = "https://github.com/Automattic/ScreenObject";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.2.0;
-			};
-		};
-		3F762E8D2677F19C0088CD45 /* XCRemoteSwiftPackageReference "XCUITestHelpers" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Automattic/XCUITestHelpers";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.0;
+				minimumVersion = 0.3.0;
 			};
 		};
 		B50D2FB424E6DFAC00163FC3 /* XCRemoteSwiftPackageReference "SimplenoteSearch-Swift" */ = {
@@ -6264,19 +6252,14 @@
 			package = 3F4BA07C26CDF295000619B1 /* XCRemoteSwiftPackageReference "ScreenObject" */;
 			productName = ScreenObject;
 		};
-		3F762E8E2677F19C0088CD45 /* XCUITestHelpers */ = {
+		3FA323282D63E5A90017AE66 /* XCUITestHelpers */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3F762E8D2677F19C0088CD45 /* XCRemoteSwiftPackageReference "XCUITestHelpers" */;
+			package = 3F4BA07C26CDF295000619B1 /* XCRemoteSwiftPackageReference "ScreenObject" */;
 			productName = XCUITestHelpers;
 		};
-		3F762E902677F1AA0088CD45 /* XCUITestHelpers */ = {
+		3FA3232A2D63E6F50017AE66 /* XCUITestHelpers */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3F762E8D2677F19C0088CD45 /* XCRemoteSwiftPackageReference "XCUITestHelpers" */;
-			productName = XCUITestHelpers;
-		};
-		3FFBDBF526FBF143008AD052 /* XCUITestHelpers */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3F762E8D2677F19C0088CD45 /* XCRemoteSwiftPackageReference "XCUITestHelpers" */;
+			package = 3F4BA07C26CDF295000619B1 /* XCRemoteSwiftPackageReference "ScreenObject" */;
 			productName = XCUITestHelpers;
 		};
 		3FFBDBF726FBF148008AD052 /* ScreenObject */ = {
