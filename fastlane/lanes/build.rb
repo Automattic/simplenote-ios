@@ -66,6 +66,7 @@ lane :upload_to_app_store_connect do |beta_release:, skip_prechecks: false, crea
     version: version,
     release_notes_file_path: RELEASE_NOTES_SOURCE_PATH,
     release_assets: XCARCHIVE_ZIP_PATH.to_s,
-    prerelease: beta_release
+    prerelease: beta_release, # Beta = prerelease, Final = normal Release
+    is_draft: !beta_release # Beta = publish immediately, Final = Draft (only publish after Apple approval)
   )
 end
