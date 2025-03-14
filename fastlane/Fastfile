@@ -109,7 +109,7 @@ platform :ios do
 
   # Build the app and upload it to Firebase App Distribution for adhoc testing
   #
-  desc 'Builds and uploads an installable build'
+  desc 'Builds and uploads a prototype build'
   lane :build_and_upload_prototype_build do
     update_certs_and_profiles_enterprise
 
