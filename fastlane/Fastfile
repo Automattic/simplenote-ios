@@ -124,6 +124,7 @@ platform :ios do
       clean: true,
       xcargs: { VERSION_SHORT: pr_or_branch, VERSION_LONG: build_number },
       output_directory: OUTPUT_DIRECTORY_PATH,
+      output_name: 'Simplenote Alpha',
       export_team_id: TEAM_ID_ENTERPRISE,
       export_options: {
         method: 'enterprise',
@@ -134,9 +135,6 @@ platform :ios do
       }
     )
 
-    new_ipa_path = File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote Alpha.ipa')
-    File.rename(File.join(OUTPUT_DIRECTORY_PATH, 'Simplenote.ipa'), new_ipa_path)
-
     release_notes = <<~NOTES
       Pull Request: ##{ENV.fetch('BUILDKITE_PULL_REQUEST', 'N/A')}
       Branch: `#{ENV.fetch('BUILDKITE_BRANCH', 'N/A')}`
@@ -145,7 +143,6 @@ platform :ios do
 
     firebase_app_distribution(
       app: FIREBASE_APP_ID,
-      ipa_path: new_ipa_path,
       service_credentials_json_data: EnvManager.get_required_env!('FIREBASE_APP_DISTRIBUTION_ACCOUNT_KEY'),
       release_notes: release_notes,
       groups: FIREBASE_TESTERS_GROUP
