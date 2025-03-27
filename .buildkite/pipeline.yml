@@ -40,9 +40,9 @@ steps:
       queue: "linter"
 
   #################
-  # Create Installable Build
+  # Prototype Build
   #################
-  - label: "🛠 Installable Build"
+  - label: "🛠 Prototype Build"
     command: ".buildkite/commands/build-prototype.sh"
     plugins: [$CI_TOOLKIT_PLUGIN]
     if: "build.pull_request.id != null || build.pull_request.draft"

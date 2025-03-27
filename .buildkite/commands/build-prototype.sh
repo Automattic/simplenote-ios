@@ -9,5 +9,5 @@ install_cocoapods
 echo "--- :closed_lock_with_key: Installing Secrets"
 bundle exec fastlane run configure_apply
 
-echo "--- :hammer_and_wrench: Build and Upload to App Center"
-bundle exec fastlane build_and_upload_installable_build
+echo "--- :hammer_and_wrench: Build and Upload to Firebase App Distribution"
+bundle exec fastlane build_and_upload_prototype_build
