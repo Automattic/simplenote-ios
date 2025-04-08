@@ -28,11 +28,6 @@
 
 @class KeychainMigrator;
 
-#if USE_APPCENTER
-@import AppCenter;
-@import AppCenterDistribute;
-#endif
-
 
 #pragma mark ================================================================================
 #pragma mark Private Properties
@@ -90,17 +85,6 @@
     [self.window makeKeyAndVisible];
 }
 
-- (void)setupAppCenter
-{
-#if USE_APPCENTER
-    NSLog(@"Initializing AppCenter...");
-    
-    NSString *identifier = [SPCredentials appCenterIdentifier];
-    [MSACAppCenter start:identifier withServices:@[[MSACDistribute class]]];
-    [MSACDistribute setEnabled:true];
-#endif
-}
-
 - (void)setupCrashLogging
 {
     [[CrashLogging shared] startWithSimperium: self.simperium];
@@ -123,7 +107,6 @@
     [self setupThemeNotifications];
     [self setupSimperium];
     [self setupAuthenticator];
-    [self setupAppCenter];
     [self setupCrashLogging];
     [self configureVersionsController];
     [self configurePublishController];
