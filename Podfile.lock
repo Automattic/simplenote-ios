@@ -1,14 +1,4 @@
 PODS:
-  - AppCenter (5.0.5):
-    - AppCenter/Analytics (= 5.0.5)
-    - AppCenter/Crashes (= 5.0.5)
-  - AppCenter/Analytics (5.0.5):
-    - AppCenter/Core
-  - AppCenter/Core (5.0.5)
-  - AppCenter/Crashes (5.0.5):
-    - AppCenter/Core
-  - AppCenter/Distribute (5.0.5):
-    - AppCenter/Core
   - Gridicons (0.19)
   - Simperium (1.9.0):
     - Simperium/DiffMatchPach (= 1.9.0)
@@ -26,8 +16,6 @@ PODS:
   - ZIPFoundation (0.9.15)
 
 DEPENDENCIES:
-  - AppCenter (~> 5.0)
-  - AppCenter/Distribute (~> 5.0)
   - Gridicons (~> 0.18)
   - Simperium (= 1.9.0)
   - SwiftLint (= 0.54.0)
@@ -36,7 +24,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - AppCenter
     - Gridicons
     - Simperium
     - SwiftLint
@@ -44,13 +31,12 @@ SPEC REPOS:
     - ZIPFoundation
 
 SPEC CHECKSUMS:
-  AppCenter: 994875ea7941b9e168babb98299f900a94bcef13
   Gridicons: dc92efbe5fd60111d2e8ea051d84a60cca552abc
   Simperium: 45d828d68aad71f3449371346f270013943eff78
   SwiftLint: c1de071d9d08c8aba837545f6254315bc900e211
   WordPress-Ratings-iOS: 9f83dbba6e728c5121b1fd21b5683cf2fd120646
   ZIPFoundation: 063163dc828bf699c5be160eb4f58f676322d94f
 
-PODFILE CHECKSUM: b7dd9a755e346db3012689d69789e5d8b55a10a4
+PODFILE CHECKSUM: 1a6145a673ddc931a81b1fbd59e20edfdbaca298
 
 COCOAPODS: 1.16.0

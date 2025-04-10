@@ -20,10 +20,6 @@ abstract_target 'Automattic' do
     #
     pod 'Gridicons', '~> 0.18'
 
-    app_center_rule = '~> 5.0'
-    pod 'AppCenter', app_center_rule
-    pod 'AppCenter/Distribute', app_center_rule
-
     # Automattic
     #
     pod 'Simperium', '1.9.0'

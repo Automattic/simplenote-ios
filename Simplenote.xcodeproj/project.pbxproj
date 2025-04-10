@@ -2863,7 +2863,6 @@
 				46A3C9C117DFA81A002865AE /* Resources */,
 				B5EB1EFC1C204EBE0080A1B3 /* Embed Foundation Extensions */,
 				730A1CB888B6254066EA8CAA /* [CP] Embed Pods Frameworks */,
-				1FED62BA1BD3808429C8CEE9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3220,23 +3219,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1FED62BA1BD3808429C8CEE9 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		3F1BB4B524319A04006D1A04 /* Copy Secrets */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -4707,7 +4689,6 @@
 				GCC_PREFIX_HEADER = "Simplenote/Supporting Files/Simplenote-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"INTERNAL_DISTRIBUTION=1",
-					"USE_APPCENTER=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Simplenote/Supporting Files/Simplenote-Info.plist";
@@ -5014,7 +4995,6 @@
 				GCC_PREFIX_HEADER = "Simplenote/Supporting Files/Simplenote-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"INTERNAL_DISTRIBUTION=1",
-					"USE_APPCENTER=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Simplenote/Supporting Files/Simplenote-Info.plist";
