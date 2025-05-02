@@ -28,7 +28,8 @@ class SignupVerificationViewController: UIViewController {
     @IBOutlet private weak var footerTextView: UITextView! {
         didSet {
             let email = SPCredentials.simplenoteFeedbackMail
-            guard let emailURL = URL(string: "mailto:\(SPCredentials.simplenoteFeedbackMail)") else {
+
+            guard let emailURL = URL(string: "mailto:\(email)") else {
                 footerTextView.text = ""
                 return
             }
