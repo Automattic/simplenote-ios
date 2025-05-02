@@ -706,17 +706,6 @@
     [self hideRatingViewIfNeeded];
 }
 
-- (void)displayFeedbackUI
-{
-    UIViewController *feedbackViewController = [[SPFeedbackManager shared] feedbackViewController];
-    feedbackViewController.modalPresentationStyle = UIModalPresentationFormSheet;
-    [self presentViewController:feedbackViewController animated:YES completion:nil];
-
-    [SPTracker trackRatingsFeedbackScreenOpened];
-    [[SPRatingsHelper sharedInstance] gaveFeedbackForCurrentVersion];
-    [self hideRatingViewIfNeeded];
-}
-
 - (void)dismissRatingsUI
 {
     [SPTracker trackRatingsDeclinedToRate];
