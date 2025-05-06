@@ -360,7 +360,6 @@
 		B5AD0357251446B900255D5C /* UIBarButtonItem+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AD0356251446B900255D5C /* UIBarButtonItem+Appearance.swift */; };
 		B5AD7AB11D1C82D3009725FB /* NSURLSessionConfiguration+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AD7AB01D1C82D3009725FB /* NSURLSessionConfiguration+Extensions.swift */; };
 		B5AEC38423FAC5D600D24221 /* DateFormatter+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AEC38323FAC5D600D24221 /* DateFormatter+Simplenote.swift */; };
-		B5B0DE24239AFD1D00F1009D /* SPFeedbackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B0DE23239AFD1D00F1009D /* SPFeedbackManager.swift */; };
 		B5B9AB4522EE8AF0001CB0AD /* UIImageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B9AB4422EE8AF0001CB0AD /* UIImageName.swift */; };
 		B5B9AB4722EE9CC2001CB0AD /* UIImageSimplenoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B9AB4622EE9CC2001CB0AD /* UIImageSimplenoteTests.swift */; };
 		B5BA5B082551FB3C002AAD43 /* UIDevice+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA5B072551FB3C002AAD43 /* UIDevice+Simplenote.swift */; };
@@ -1070,7 +1069,6 @@
 		B5AEC38323FAC5D600D24221 /* DateFormatter+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DateFormatter+Simplenote.swift"; path = "Classes/DateFormatter+Simplenote.swift"; sourceTree = "<group>"; };
 		B5AEC38523FAE70600D24221 /* Note+Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Note+Properties.swift"; path = "Classes/Note+Properties.swift"; sourceTree = "<group>"; };
 		B5B06F3B1C31E119006F4495 /* SimplenoteShare-AppStore.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "SimplenoteShare-AppStore.entitlements"; sourceTree = "<group>"; };
-		B5B0DE23239AFD1D00F1009D /* SPFeedbackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SPFeedbackManager.swift; path = Classes/SPFeedbackManager.swift; sourceTree = "<group>"; };
 		B5B9AB4422EE8AF0001CB0AD /* UIImageName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIImageName.swift; path = Classes/UIImageName.swift; sourceTree = "<group>"; };
 		B5B9AB4622EE9CC2001CB0AD /* UIImageSimplenoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageSimplenoteTests.swift; sourceTree = "<group>"; };
 		B5BA5B072551FB3C002AAD43 /* UIDevice+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIDevice+Simplenote.swift"; path = "Classes/UIDevice+Simplenote.swift"; sourceTree = "<group>"; };
@@ -2178,7 +2176,6 @@
 				B53929482398642800ACEE00 /* SPRatingsPromptView.xib */,
 				B50F47A21D1D78EA00822748 /* SPRatingsHelper.h */,
 				B50F47A31D1D78EA00822748 /* SPRatingsHelper.m */,
-				B5B0DE23239AFD1D00F1009D /* SPFeedbackManager.swift */,
 			);
 			name = Ratings;
 			sourceTree = "<group>";
@@ -3506,7 +3503,6 @@
 				B59188C224005B8A0069EF96 /* NSString+Simplenote.swift in Sources */,
 				B57CFA4925B11AA800ABA284 /* EmailVerification.swift in Sources */,
 				375D24BB21E01131007AB25A /* html.c in Sources */,
-				B5B0DE24239AFD1D00F1009D /* SPFeedbackManager.swift in Sources */,
 				46A3C97B17DFA81A002865AE /* SPInteractiveTextStorage.m in Sources */,
 				A66E41E1256D0F44000C6FCB /* RoundedButton.swift in Sources */,
 				F920265B2294661C0061B1DE /* BuildConfiguration.swift in Sources */,
