@@ -11,14 +11,14 @@ PODS:
   - Simperium/SocketTrust (1.9.0)
   - Simperium/SPReachability (1.9.0)
   - Simperium/SSKeychain (1.9.0)
-  - SwiftLint (0.54.0)
+  - SwiftLint (0.58.2)
   - WordPress-Ratings-iOS (0.0.2)
   - ZIPFoundation (0.9.15)
 
 DEPENDENCIES:
   - Gridicons (~> 0.18)
   - Simperium (= 1.9.0)
-  - SwiftLint (= 0.54.0)
+  - SwiftLint (= 0.58.2)
   - WordPress-Ratings-iOS (= 0.0.2)
   - ZIPFoundation (~> 0.9.9)
 
@@ -33,7 +33,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Gridicons: dc92efbe5fd60111d2e8ea051d84a60cca552abc
   Simperium: 45d828d68aad71f3449371346f270013943eff78
-  SwiftLint: c1de071d9d08c8aba837545f6254315bc900e211
+  SwiftLint: 365bcd9ffc83d0deb874e833556d82549919d6cd
   WordPress-Ratings-iOS: 9f83dbba6e728c5121b1fd21b5683cf2fd120646
   ZIPFoundation: 063163dc828bf699c5be160eb4f58f676322d94f
 
