@@ -17,6 +17,18 @@ LOCAL_PATH = 'vendor/bundle'
 
 task default: %w[test]
 
+desc 'Checks the source for style errors'
+task :lint do
+  swiftlint
+end
+
+namespace :lint do
+  desc 'Automatically corrects style errors where possible'
+  task :autocorrect do
+    swiftlint(additional_args: ['--fix'])
+  end
+end
+
 desc 'Install required dependencies'
 task dependencies: %w[dependencies:check]
 
@@ -250,4 +262,17 @@ def check_dependencies_hook
     puts e.message
     exit 1
   end
+end
+
+def swiftlint(additional_args: [])
+  run_package_plugin(cmd: "swiftlint --working-directory .. --quiet #{additional_args.join(' ')}")
+end
+
+def run_package_plugin(cmd:)
+  run_in_build_tools(cmd: "swift package plugin --allow-writing-to-directory .. --allow-writing-to-package-directory #{cmd}")
+end
+
+# We could use more idiomatic Ruby here, with `Dir.chdir`, but leaving as raw shell commands for when we'll drop Ruby and rake for tooling.
+def run_in_build_tools(cmd:)
+  sh "pushd BuildTools && export SDKROOT=$(xcrun --sdk macosx --show-sdk-path) && #{cmd} && popd"
 end

@@ -20,7 +20,8 @@ Third party libraries and resources managed by CocoaPods will be installed by th
 
 #### SwiftLint
 
-We use [SwiftLint](https://github.com/realm/SwiftLint) to enforce a common style for Swift code. If you plan to write code, SwiftLint is going to be installed when you run `bundle exec pod install` and SwiftLint will run during the build.
+We use [SwiftLint](https://github.com/realm/SwiftLint) to enforce a common style for Swift code.
+If you plan to write code, SwiftLint is going to be installed automatically when you build the app.
 No commit should have lint warnings or errors.
 
 ### Open Xcode

@@ -2,6 +2,7 @@ swiftlint_version: 0.58.2
 
 # Project configuration
 excluded:
+  - BuildTools
   - DerivedData
   - Pods
   - fastlane
