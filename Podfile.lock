@@ -12,27 +12,23 @@ PODS:
   - Simperium/SPReachability (1.9.0)
   - Simperium/SSKeychain (1.9.0)
   - WordPress-Ratings-iOS (0.0.2)
-  - ZIPFoundation (0.9.15)
 
 DEPENDENCIES:
   - Gridicons (~> 0.18)
   - Simperium (= 1.9.0)
   - WordPress-Ratings-iOS (= 0.0.2)
-  - ZIPFoundation (~> 0.9.9)
 
 SPEC REPOS:
   trunk:
     - Gridicons
     - Simperium
     - WordPress-Ratings-iOS
-    - ZIPFoundation
 
 SPEC CHECKSUMS:
   Gridicons: dc92efbe5fd60111d2e8ea051d84a60cca552abc
   Simperium: 45d828d68aad71f3449371346f270013943eff78
   WordPress-Ratings-iOS: 9f83dbba6e728c5121b1fd21b5683cf2fd120646
-  ZIPFoundation: 063163dc828bf699c5be160eb4f58f676322d94f
 
-PODFILE CHECKSUM: 14904fe5db303e2b35352af2f191345f1edf8f0a
+PODFILE CHECKSUM: 97fe6e830ededaf4f7d24a45cebbc443e307535d
 
 COCOAPODS: 1.16.0

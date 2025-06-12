@@ -31,14 +31,6 @@ abstract_target 'Automattic' do
       inherit! :search_paths
     end
   end
-
-  # Extension Target
-  #
-  target 'SimplenoteShare' do
-    # Third Party
-    #
-    pod 'ZIPFoundation', '~> 0.9.9'
-  end
 end
 
 # Post Install
