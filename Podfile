@@ -41,20 +41,6 @@ abstract_target 'Automattic' do
   end
 end
 
-## Tools
-## ===================
-##
-
-def swiftlint_version
-  require 'yaml'
-
-  YAML.load_file('.swiftlint.yml')['swiftlint_version']
-end
-
-abstract_target 'Tools' do
-  pod 'SwiftLint', swiftlint_version
-end
-
 # Post Install
 #
 post_install do |installer|
