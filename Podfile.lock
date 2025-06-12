@@ -1,5 +1,4 @@
 PODS:
-  - Gridicons (0.19)
   - Simperium (1.9.0):
     - Simperium/DiffMatchPach (= 1.9.0)
     - Simperium/JRSwizzle (= 1.9.0)
@@ -14,21 +13,18 @@ PODS:
   - WordPress-Ratings-iOS (0.0.2)
 
 DEPENDENCIES:
-  - Gridicons (~> 0.18)
   - Simperium (= 1.9.0)
   - WordPress-Ratings-iOS (= 0.0.2)
 
 SPEC REPOS:
   trunk:
-    - Gridicons
     - Simperium
     - WordPress-Ratings-iOS
 
 SPEC CHECKSUMS:
-  Gridicons: dc92efbe5fd60111d2e8ea051d84a60cca552abc
   Simperium: 45d828d68aad71f3449371346f270013943eff78
   WordPress-Ratings-iOS: 9f83dbba6e728c5121b1fd21b5683cf2fd120646
 
-PODFILE CHECKSUM: 97fe6e830ededaf4f7d24a45cebbc443e307535d
+PODFILE CHECKSUM: b13ff98d32d399a84f009b104b8f891deeb505d9
 
 COCOAPODS: 1.16.0
