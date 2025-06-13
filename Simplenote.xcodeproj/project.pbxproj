@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -1346,6 +1346,10 @@
 		F9E197D32283D05C0092B3E1 /* CrashLogging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashLogging.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		3FA8C2862DFBAF7900E1F4A3 /* WordPressRatings */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = WordPressRatings; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		3FA60136242C5AAD0068FC52 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -2671,6 +2675,7 @@
 				E29ADD7117848F9700E55842 /* Transitions */,
 				E22BCDF11794F42000A17ED2 /* Views */,
 				E29ADD751784902700E55842 /* ViewControllers */,
+				3FA8C2862DFBAF7900E1F4A3 /* WordPressRatings */,
 				E2FCA5FB1789136D00FC229D /* Resources */,
 				E29ADD4217848E8500E55842 /* Supporting Files */,
 				B5BDD8721BEA6B01006EB940 /* Simplenote-Bridging-Header.h */,
@@ -2858,6 +2863,9 @@
 				B5EB1EF51C204EBD0080A1B3 /* PBXTargetDependency */,
 				BAFA93E4265DCFCD0009DCFB /* PBXTargetDependency */,
 				BAB5762A26703C8200B0C56F /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				3FA8C2862DFBAF7900E1F4A3 /* WordPressRatings */,
 			);
 			name = Simplenote;
 			packageProductDependencies = (
@@ -3236,9 +3244,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
