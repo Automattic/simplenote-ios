@@ -8,9 +8,8 @@ require 'yaml'
 require 'digest'
 
 # Constants
-SWIFTLINT_VERSION = '0.41.0'
 PROJECT_DIR = __dir__
-XCODE_WORKSPACE = 'Simplenote.xcworkspace'
+XCODE_PROJECT = 'Simplenote.xcodeproj'
 XCODE_SCHEME = 'Simplenote'
 XCODE_CONFIGURATION = 'Debug'
 LOCAL_PATH = 'vendor/bundle'
@@ -33,7 +32,7 @@ desc 'Install required dependencies'
 task dependencies: %w[dependencies:check]
 
 namespace :dependencies do
-  task check: %w[bundler:check bundle:check credentials:apply pod:check]
+  task check: %w[bundler:check bundle:check credentials:apply]
 
   namespace :bundler do
     task :check do
@@ -76,28 +75,6 @@ namespace :dependencies do
 
       sh('FASTLANE_SKIP_UPDATE_CHECK=1 FASTLANE_ENV_PRINTER=1 bundle exec fastlane run configure_apply force:true')
     end
-  end
-
-  namespace :pod do
-    task :check do
-      unless podfile_locked? && lockfiles_match?
-        dependency_failed('CocoaPods')
-        Rake::Task['dependencies:pod:install'].invoke
-      end
-    end
-
-    task :install do
-      fold('install.cocoapds') do
-        pod %w[install]
-      end
-    end
-
-    task :clean do
-      fold('clean.cocoapds') do
-        FileUtils.rm_rf('Pods')
-      end
-    end
-    CLOBBER << 'Pods'
   end
 end
 
@@ -198,7 +175,7 @@ end
 
 desc 'Open the project in Xcode'
 task xcode: [:dependencies] do
-  sh "open #{XCODE_WORKSPACE}"
+  sh "open #{XCODE_PROJECT}"
 end
 
 def fold(label)
@@ -206,27 +183,11 @@ def fold(label)
   yield
 end
 
-def pod(args)
-  args = %w[bundle exec pod] + args
-  sh(*args)
-end
-
-def lockfiles_match?
-  File.file?('Pods/Manifest.lock') && FileUtils.compare_file('Podfile.lock', 'Pods/Manifest.lock')
-end
-
-def podfile_locked?
-  podfile_checksum = Digest::SHA1.file('Podfile')
-  lockfile_checksum = YAML.load_file('Podfile.lock')['PODFILE CHECKSUM']
-
-  podfile_checksum == lockfile_checksum
-end
-
 def xcodebuild(*build_cmds)
   cmd = 'xcodebuild'
   cmd += " -destination 'platform=iOS Simulator,name=iPhone 16'"
   cmd += ' -sdk iphonesimulator'
-  cmd += " -workspace #{XCODE_WORKSPACE}"
+  cmd += " -project #{XCODE_PROJECT}"
   cmd += " -scheme #{XCODE_SCHEME}"
   cmd += " -configuration #{xcode_configuration}"
   cmd += ' '

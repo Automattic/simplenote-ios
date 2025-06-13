@@ -391,7 +391,7 @@ extension SPNoteEditorViewController {
     func presentInformationController(for note: Note, from barButtonItem: UIBarButtonItem) {
         let informationViewController = NoteInformationViewController(note: note)
 
-        let presentAsPopover = UIDevice.sp_isPad() && traitCollection.horizontalSizeClass == .regular
+        let presentAsPopover = UIDevice.isPad && traitCollection.horizontalSizeClass == .regular
 
         if presentAsPopover {
             let navigationController = SPNavigationController(rootViewController: informationViewController)

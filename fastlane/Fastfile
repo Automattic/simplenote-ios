@@ -27,7 +27,7 @@ BUILDKITE_PIPELINE = PROJECT_SLUG
 FIREBASE_APP_ID = '1:124902176124:ios:d21314b0300402801620f9'
 FIREBASE_TESTERS_GROUP = 'simplenote-ios---prototype-builds'
 
-WORKSPACE = 'Simplenote.xcworkspace'
+PROJECT = 'Simplenote.xcodeproj'
 
 VERSION_CALCULATOR = Fastlane::Wpmreleasetoolkit::Versioning::SemanticVersionCalculator.new
 VERSION_FORMATTER = Fastlane::Wpmreleasetoolkit::Versioning::FourPartVersionFormatter.new
@@ -119,7 +119,7 @@ platform :ios do
     gym(
       scheme: 'Simplenote',
       configuration: 'Distribution Alpha',
-      workspace: WORKSPACE,
+      project: PROJECT,
       export_method: 'enterprise',
       clean: true,
       xcargs: { VERSION_SHORT: pr_or_branch, VERSION_LONG: build_number },
@@ -197,7 +197,7 @@ platform :ios do
   desc 'Build the binaries to run to take the screenshots'
   lane :build_app_for_screenshots do
     scan(
-      workspace: workspace_path,
+      project: project_path,
       scheme: screenshots_scheme,
       build_for_testing: true,
       derived_data_path: derived_data_directory
@@ -333,7 +333,7 @@ platform :ios do
   desc 'Run Unit Tests'
   lane :run_unit_tests do |options|
     scan(
-      workspace: workspace_name,
+      project: project_name,
       scheme: 'Simplenote',
       device: options[:device] || 'iPhone 14',
       output_directory: OUTPUT_DIRECTORY_PATH,
@@ -357,7 +357,7 @@ platform :ios do
   desc 'Run UI tests'
   lane :run_ui_tests do |options|
     scan(
-      workspace: workspace_name,
+      project: project_name,
       scheme: options[:scheme] || 'SimplenoteUITests_Subset',
       device: options[:device] || 'iPhone 14',
       output_directory: OUTPUT_DIRECTORY_PATH,
@@ -538,16 +538,16 @@ def derived_data_directory
   File.join(fastlane_directory, 'DerivedData')
 end
 
-def workspace_name
-  'Simplenote.xcworkspace'
+def project_name
+  'Simplenote.xcodeproj'
 end
 
 def screenshots_scheme
   'SimplenoteScreenshots'
 end
 
-def workspace_path
-  File.join(fastlane_directory, "../#{workspace_name}")
+def project_path
+  File.join(fastlane_directory, "../#{project_name}")
 end
 
 def screenshots_directory

@@ -2,8 +2,6 @@
 
 source 'https://rubygems.org'
 
-# 1.14.0 fixes a bug that broke compatibility with Ruby 3
-gem 'cocoapods', '~> 1.14'
 gem 'danger-dangermattic', '~> 1.0'
 gem 'fastlane', '~> 2'
 gem 'fastlane-plugin-firebase_app_distribution', '~> 0.10'

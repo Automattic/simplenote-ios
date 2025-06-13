@@ -9,7 +9,7 @@ lane :build_for_app_store_connect do |fetch_code_signing: true|
 
   build_app(
     scheme: 'Simplenote',
-    workspace: WORKSPACE,
+    project: PROJECT,
     configuration: 'Distribution AppStore',
     clean: true,
     export_method: 'app-store',

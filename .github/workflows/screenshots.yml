@@ -36,13 +36,6 @@ jobs:
       run: |
         bundle install
 
-    - name: Restore CocoaPods Dependency Cache
-      id: restore-cocoapods-dependency-cache
-      uses: actions/cache@v4
-      with:
-        path: Pods
-        key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
-
     - name: Install App Dependencies
       run: bundle exec rake dependencies
 
