@@ -1,5 +1,5 @@
 {
-  "originHash" : "8712cda104f3acc0774f606ed8e1db7edf4bed3719cb8ef3c55e2ff48e1b60ff",
+  "originHash" : "cd6dcdee888bd99257b35bdbb33ba82a0700d3d23c3817320a0f87dd45264413",
   "pins" : [
     {
       "identity" : "automattic-tracks-ios",
@@ -8,6 +8,14 @@
       "state" : {
         "revision" : "4d7d7138a9f2b36c3fd4618aa488ed9e8de2f726",
         "version" : "3.5.0"
+      }
+    },
+    {
+      "identity" : "gridicons-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Automattic/Gridicons-iOS",
+      "state" : {
+        "revision" : "c904cb73e26e86463a78e1335c6f4fd54a9e9223"
       }
     },
     {

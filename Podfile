@@ -16,10 +16,6 @@ abstract_target 'Automattic' do
   # Main Target
   #
   target 'Simplenote' do
-    # Third Party
-    #
-    pod 'Gridicons', '~> 0.18'
-
     # Automattic
     #
     pod 'Simperium', '1.9.0'

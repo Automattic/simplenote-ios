@@ -60,6 +60,7 @@
 		3FA3232B2D63E6F50017AE66 /* XCUITestHelpers in Frameworks */ = {isa = PBXBuildFile; productRef = 3FA3232A2D63E6F50017AE66 /* XCUITestHelpers */; };
 		3FA6013C242C5AAE0068FC52 /* SimplenoteScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6013B242C5AAE0068FC52 /* SimplenoteScreenshots.swift */; };
 		3FA8817E2DFAADD200E1F4A3 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 3FA8817D2DFAADD200E1F4A3 /* ZIPFoundation */; };
+		3FA88CF12DFABAA100E1F4A3 /* Gridicons in Frameworks */ = {isa = PBXBuildFile; productRef = 3FA88CF02DFABAA100E1F4A3 /* Gridicons */; };
 		3FF314CE26FC20FD0012E68E /* PasscodeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4BA07F26CE00A2000619B1 /* PasscodeScreen.swift */; };
 		3FF314D326FC47720012E68E /* XCUIApplication+Assertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF314D226FC47720012E68E /* XCUIApplication+Assertions.swift */; };
 		3FFBDBEE26FBF132008AD052 /* UITestsFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FFBDBED26FBF132008AD052 /* UITestsFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1381,6 +1382,7 @@
 				46A3C9B517DFA81A002865AE /* CoreFoundation.framework in Frameworks */,
 				BA2015BB2B57384F005E59AA /* AutomatticTracks in Frameworks */,
 				B59CACFC2541E05400958330 /* SimplenoteInterlinks in Frameworks */,
+				3FA88CF12DFABAA100E1F4A3 /* Gridicons in Frameworks */,
 				46A3C9B617DFA81A002865AE /* SystemConfiguration.framework in Frameworks */,
 				46A3C9B717DFA81A002865AE /* CoreData.framework in Frameworks */,
 				46A3C9B817DFA81A002865AE /* CFNetwork.framework in Frameworks */,
@@ -2864,6 +2866,7 @@
 				B59CACFB2541E05400958330 /* SimplenoteInterlinks */,
 				BA2015BA2B57384F005E59AA /* AutomatticTracks */,
 				B51D445A2C52CB4000F296A7 /* SimplenoteEndpoints */,
+				3FA88CF02DFABAA100E1F4A3 /* Gridicons */,
 			);
 			productName = Simplenote;
 			productReference = 46A3C9D717DFA81A002865AE /* Simplenote.app */;
@@ -3083,6 +3086,7 @@
 				BA2015B92B573761005E59AA /* XCRemoteSwiftPackageReference "Automattic-Tracks-iOS" */,
 				B51D44592C52CB4000F296A7 /* XCRemoteSwiftPackageReference "SimplenoteEndpoints-Swift" */,
 				3FA8817C2DFAADD200E1F4A3 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
+				3FA88CEF2DFABAA100E1F4A3 /* XCRemoteSwiftPackageReference "Gridicons-iOS" */,
 			);
 			productRefGroup = E29ADD3917848E8500E55842 /* Products */;
 			projectDirPath = "";
@@ -6153,6 +6157,14 @@
 				version = 0.9.15;
 			};
 		};
+		3FA88CEF2DFABAA100E1F4A3 /* XCRemoteSwiftPackageReference "Gridicons-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Automattic/Gridicons-iOS";
+			requirement = {
+				kind = revision;
+				revision = c904cb73e26e86463a78e1335c6f4fd54a9e9223;
+			};
+		};
 		B50D2FB424E6DFAC00163FC3 /* XCRemoteSwiftPackageReference "SimplenoteSearch-Swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:Automattic/SimplenoteSearch-Swift.git";
@@ -6215,6 +6227,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3FA8817C2DFAADD200E1F4A3 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
 			productName = ZIPFoundation;
+		};
+		3FA88CF02DFABAA100E1F4A3 /* Gridicons */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3FA88CEF2DFABAA100E1F4A3 /* XCRemoteSwiftPackageReference "Gridicons-iOS" */;
+			productName = Gridicons;
 		};
 		3FFBDBF726FBF148008AD052 /* ScreenObject */ = {
 			isa = XCSwiftPackageProductDependency;
