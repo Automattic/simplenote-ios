@@ -862,7 +862,7 @@ private extension SPNoteListViewController {
 
         SPTracker.trackEditorNoteContentShared()
 
-        guard UIDevice.sp_isPad(), let indexPath = notesListController.indexPath(forObject: note) else {
+        guard UIDevice.isPad, let indexPath = notesListController.indexPath(forObject: note) else {
             present(activityController, animated: true, completion: nil)
             return
         }

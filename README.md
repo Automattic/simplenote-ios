@@ -13,11 +13,6 @@ We use a few tools to help with development. To install or update the required d
 
 `rake dependencies`
 
-#### CocoaPods
-
-Simplenote for iOS uses [CocoaPods](http://cocoapods.org/) to manage third party libraries.
-Third party libraries and resources managed by CocoaPods will be installed by the `rake dependencies` command above.
-
 #### SwiftLint
 
 We use [SwiftLint](https://github.com/realm/SwiftLint) to enforce a common style for Swift code.
@@ -26,13 +21,13 @@ No commit should have lint warnings or errors.
 
 ### Open Xcode
 
-Launch the workspace by running the following from the command line:
+Launch the project by running the following from the command line:
 
 `rake xcode`
 
 This will ensure any dependencies are ready before launching Xcode.
 
-You can also open the project by double clicking on Simplenote.xcworkspace file, or launching Xcode and choose `File` > `Open` and browse to `Simplenote.xcworkspace`.
+You can also open the project by double clicking on `Simplenote.xcodeproj` file, or launching Xcode and choose `File` > `Open` and browse to `Simplenote.xcodeproj`.
 
 Once you have opened Simpleonte iOS in Xcode, depending on your setup, you may need to make a few changes before you can build the app.  In Xcode hit `Command + B` and see if you get any errors.  
 

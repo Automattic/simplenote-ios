@@ -1,5 +1,6 @@
 import Foundation
 import AutomatticTracks
+import Simperium
 
 /// This exists to bridge CrashLogging with Objective-C. Once the App Delegate is moved over to Swift,
 /// this shim can be removed, and the cache methods moved to a `CrashLogging` extension. At that time,

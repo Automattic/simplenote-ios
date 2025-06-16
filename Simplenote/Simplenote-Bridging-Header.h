@@ -5,7 +5,7 @@
 
 #pragma mark - External
 
-#import <Simperium/Simperium.h>
+@import Simperium;
 
 
 #pragma mark - Simplenote-Y

@@ -1,4 +1,5 @@
 import Foundation
+import Simperium
 import SimplenoteEndpoints
 
 @objc
