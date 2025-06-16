@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -1347,7 +1347,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		3FA8C2862DFBAF7900E1F4A3 /* WordPressRatings */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = WordPressRatings; sourceTree = "<group>"; };
+		3FA8C2862DFBAF7900E1F4A3 /* WordPressRatings */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+			);
+			path = WordPressRatings;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3059,7 +3065,6 @@
 				};
 			};
 			buildConfigurationList = E29ADD3317848E8500E55842 /* Build configuration list for PBXProject "Simplenote" */;
-			compatibilityVersion = "Xcode 11.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -3096,6 +3101,7 @@
 				3FA8817C2DFAADD200E1F4A3 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
 				3FA88CEF2DFABAA100E1F4A3 /* XCRemoteSwiftPackageReference "Gridicons-iOS" */,
 			);
+			preferredProjectObjectVersion = 77;
 			productRefGroup = E29ADD3917848E8500E55842 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -3244,13 +3250,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Automattic-Simplenote/Pods-Automattic-Simplenote-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
