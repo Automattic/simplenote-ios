@@ -19,7 +19,6 @@ abstract_target 'Automattic' do
     # Automattic
     #
     pod 'Simperium', '1.9.0'
-    pod 'WordPress-Ratings-iOS', '0.0.2'
 
     # Testing Target
     #

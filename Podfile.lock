@@ -10,21 +10,17 @@ PODS:
   - Simperium/SocketTrust (1.9.0)
   - Simperium/SPReachability (1.9.0)
   - Simperium/SSKeychain (1.9.0)
-  - WordPress-Ratings-iOS (0.0.2)
 
 DEPENDENCIES:
   - Simperium (= 1.9.0)
-  - WordPress-Ratings-iOS (= 0.0.2)
 
 SPEC REPOS:
   trunk:
     - Simperium
-    - WordPress-Ratings-iOS
 
 SPEC CHECKSUMS:
   Simperium: 45d828d68aad71f3449371346f270013943eff78
-  WordPress-Ratings-iOS: 9f83dbba6e728c5121b1fd21b5683cf2fd120646
 
-PODFILE CHECKSUM: b13ff98d32d399a84f009b104b8f891deeb505d9
+PODFILE CHECKSUM: 2ea4b4b61a4ba52432b097db5c9335458e4efd41
 
 COCOAPODS: 1.16.0
