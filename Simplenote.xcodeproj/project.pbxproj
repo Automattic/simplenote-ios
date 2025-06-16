@@ -6061,7 +6061,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Simperium/simperium-ios/";
 			requirement = {
-				branch = "v1.9.1-beta.1";
+				branch = "v1.9.1-beta.2";
 				kind = branch;
 			};
 		};
