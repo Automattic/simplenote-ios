@@ -3,19 +3,26 @@
 # Lanes related to the Release Process (Code Freeze, Betas, Final Build, App Store Submission…)
 
 platform :ios do
-  lane :start_code_freeze do |skip_confirm: false|
+  lane :start_code_freeze do |version: nil, skip_confirm: false|
     ensure_git_status_clean
 
     Fastlane::Helper::GitHelper.checkout_and_pull(DEFAULT_BRANCH)
 
-    computed_release_branch_name = release_branch_name(release_version: release_version_next)
+    expected_version = release_version_next
+    computed_release_branch_name = release_branch_name(release_version: expected_version)
+
+    # Validate provided version matches the calculated version
+    if version && version != expected_version
+      UI.user_error!("Version mismatch: Provided version '#{version}' does not match calculated version '#{expected_version}'. Please check the release scenario version matches the project version.")
+    end
+    UI.success("✓ Version validation passed: Version (#{version || expected_version}) matches calculated version") if version
 
     message = <<~MESSAGE
       Code Freeze:
       - New release branch from #{DEFAULT_BRANCH}: #{computed_release_branch_name}
 
       - Current release version and build code: #{release_version_current} (#{build_code_current}).
-      - New release version and build code: #{release_version_next} (#{build_code_code_freeze}).
+      - New release version and build code: #{expected_version} (#{build_code_code_freeze}).
     MESSAGE
 
     UI.important(message)
