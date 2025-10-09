@@ -3,6 +3,11 @@
 # Lanes related to the Release Process (Code Freeze, Betas, Final Build, App Store Submission…)
 
 platform :ios do
+  # Creates a new release branch from the current default branch
+  #
+  # @param [String] version (optional) The version number for the release from the release tool. If not provided, uses the calculated version.
+  # @param [Boolean] skip_confirm (default: false) If set, will skip the confirmation prompt
+  #
   lane :start_code_freeze do |version: nil, skip_confirm: false|
     ensure_git_status_clean
 
