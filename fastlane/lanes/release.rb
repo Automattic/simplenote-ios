@@ -8,21 +8,24 @@ platform :ios do
 
     Fastlane::Helper::GitHelper.checkout_and_pull(DEFAULT_BRANCH)
 
-    expected_version = release_version_next
-    computed_release_branch_name = release_branch_name(release_version: expected_version)
+    # Use provided version from release tool, or fall back to calculated version
+    calculated_version = release_version_next
+    release_version = version || calculated_version
+    computed_release_branch_name = release_branch_name(release_version: release_version)
 
-    # Validate provided version matches the calculated version
-    if version && version != expected_version
-      UI.user_error!("Version mismatch: Provided version '#{version}' does not match calculated version '#{expected_version}'. Please check the release scenario version matches the project version.")
+    # Warn if provided version differs from calculated version
+    if version && version != calculated_version
+      warning_message = "⚠️ Version mismatch: Release tool version is '#{version}' but calculated version is '#{calculated_version}'. Using '#{version}' from release tool."
+      UI.important(warning_message)
+      buildkite_annotate(style: 'warning', context: 'start-code-freeze-version-mismatch', message: warning_message) if is_ci
     end
-    UI.success("✓ Version validation passed: Version (#{version || expected_version}) matches calculated version") if version
 
     message = <<~MESSAGE
       Code Freeze:
       - New release branch from #{DEFAULT_BRANCH}: #{computed_release_branch_name}
 
       - Current release version and build code: #{release_version_current} (#{build_code_current}).
-      - New release version and build code: #{expected_version} (#{build_code_code_freeze}).
+      - New release version and build code: #{release_version} (#{build_code_code_freeze}).
     MESSAGE
 
     UI.important(message)
