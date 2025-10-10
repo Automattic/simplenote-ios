@@ -5,7 +5,8 @@
 platform :ios do
   # Creates a new release branch from the current default branch
   #
-  # @param [String] version (optional) The version number for the release from the release tool. If not provided, uses the calculated version.
+  # @param [String] version (optional) The version to use for the new release version to code freeze for.
+  #                 Typically auto-provided by ReleasesV2. If nil, computes the new version based on current one.
   # @param [Boolean] skip_confirm (default: false) If set, will skip the confirmation prompt
   #
   lane :start_code_freeze do |version: nil, skip_confirm: false|
@@ -13,14 +14,18 @@ platform :ios do
 
     Fastlane::Helper::GitHelper.checkout_and_pull(DEFAULT_BRANCH)
 
-    # Use provided version from release tool, or fall back to calculated version
-    calculated_version = release_version_next
-    release_version = version || calculated_version
-    computed_release_branch_name = release_branch_name(release_version: release_version)
+    # Use provided version from release tool, or fall back to computed version
+    computed_version = release_version_next
+    new_version = version || computed_version
+    computed_release_branch_name = release_branch_name(release_version: new_version)
 
-    # Warn if provided version differs from calculated version
-    if version && version != calculated_version
-      warning_message = "⚠️ Version mismatch: Release tool version is '#{version}' but calculated version is '#{calculated_version}'. Using '#{version}' from release tool."
+    # Warn if provided version differs from computed version
+    if version && version != computed_version
+      warning_message = <<~WARNING
+        ⚠️ Version mismatch: The explicitly-provided version was '#{version}' while new computed version would have been '#{computed_version}'.
+        If this is unexpected, you might want to investigate the discrepency.
+        Continuing with the explicitly-provided verison '#{version}'.
+      WARNING
       UI.important(warning_message)
       buildkite_annotate(style: 'warning', context: 'start-code-freeze-version-mismatch', message: warning_message) if is_ci
     end
@@ -30,7 +35,7 @@ platform :ios do
       - New release branch from #{DEFAULT_BRANCH}: #{computed_release_branch_name}
 
       - Current release version and build code: #{release_version_current} (#{build_code_current}).
-      - New release version and build code: #{release_version} (#{build_code_code_freeze}).
+      - New release version and build code: #{new_version} (#{build_code_code_freeze}).
     MESSAGE
 
     UI.important(message)
@@ -49,8 +54,6 @@ platform :ios do
     UI.success "Done! New release version: #{release_version_current}. New build code: #{build_code_current}."
 
     commit_version_and_build_files
-
-    new_version = release_version_current
 
     # Delete all release notes metadata, including the source of truth.
     # We'll generate a new source of truth next, and the localized versions will be re-downloaded once translated on GlotPress.
