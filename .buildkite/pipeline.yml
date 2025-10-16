@@ -20,6 +20,10 @@ steps:
     plugins: [$CI_TOOLKIT_PLUGIN]
     artifact_paths:
       - "build/results/*"
+      # TODO: Figure out which path is correct and remove the others
+      - DerivedData/**/*.xcactivitylog
+      - build/**/*.xcactivitylog
+      - fastlane/DerivedData/**/*.xcactivitylog
 
   #################
   # Linters
