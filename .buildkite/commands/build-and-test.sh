@@ -27,7 +27,7 @@ aws s3 cp DerivedData s3://a8c-apps-metrics/simplenote-ios/ \
   --exclude "*" \
   --include "*.xcactivitylog"
 
-echo "--- :up_arrow: Sync with Apps Metrics"
+echo "--- :arrow_up: Sync with Apps Metrics"
 API_URL='https://metrics.a8c-ci.services/api/pending-build-logs'
 TOKEN="$APPS_METRICS_UPLOAD_TOKEN"
 
