@@ -54,6 +54,9 @@ for file in DerivedData/Logs/Build/*.xcactivitylog; do
   echo " ✅ $filename queued"
 done
 
+echo "--- :arrow_up: Upload build metrics to Apps Metrics"
+ruby .buildkite/commands/upload_metrics.rb
+
 echo "--- 🚦 Report Tests Status"
 if [[ $TESTS_EXIT_STATUS -eq 0 ]]; then
   echo "Unit Tests seems to have passed (exit code 0). All good 👍"
