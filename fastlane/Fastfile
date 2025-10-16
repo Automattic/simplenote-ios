@@ -337,6 +337,7 @@ platform :ios do
       scheme: 'Simplenote',
       device: options[:device] || 'iPhone 14',
       output_directory: OUTPUT_DIRECTORY_PATH,
+      derived_data_path: derived_data_directory,
       reset_simulator: true,
       result_bundle: true
     )
