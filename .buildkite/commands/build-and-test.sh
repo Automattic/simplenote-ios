@@ -21,6 +21,20 @@ fi
 echo "--- 📦 Zipping test results"
 cd build/results/ && zip -rq Simplenote.xcresult.zip Simplenote.xcresult && cd -
 
+echo "--- :xcode: Print some metrics"
+pushd build/results/
+
+start_time=$(xcrun xcresulttool get build-results --path build/results/Simplenote.xcresult --format json \
+  | jq -r '.startTime')
+end_time=$(xcrun xcresulttool get build-results --path build/results/Simplenote.xcresult --format json \
+  | jq -r '.endTime')
+
+echo "start time: $startTime"
+echo "end time: $endTime"
+echo "build and test time: $(echo "$endTime - $startTime" | bc)"
+
+popd
+
 echo "--- 🚦 Report Tests Status"
 if [[ $TESTS_EXIT_STATUS -eq 0 ]]; then
   echo "Unit Tests seems to have passed (exit code 0). All good 👍"
