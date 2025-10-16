@@ -27,6 +27,33 @@ aws s3 cp DerivedData s3://a8c-apps-metrics/simplenote-ios/ \
   --exclude "*" \
   --include "*.xcactivitylog"
 
+echo "--- :up_arrow: Sync with Apps Metrics"
+API_URL='https://metrics.a8c-ci.services/api/pending-build-logs'
+TOKEN="$APPS_METRICS_UPLOAD_TOKEN"
+
+for file in DerivedData/Logs/Build/*.xcactivitylog; do
+  filename=$(basename "$file")
+
+  echo "📤 Posting $filename to $API_URL ..."
+
+  curl -sf -X POST "$API_URL" \
+    -H 'Content-Type: application/json' \
+    -H 'Accept: application/json' \
+    -H "Authorization: Bearer $TOKEN" \
+    -d "{
+      \"file_path\": \"simplenote-ios/Logs/Build/$filename\",
+      \"type\": \"xcactivitylog\",
+      \"meta\": [
+        { \"name\": \"simplenote-ios-user\", \"value\": \"CI\" },
+        { \"name\": \"simplenote-ios-environment\", \"value\": \"CI\" },
+        { \"name\": \"simplenote-ios-architecture\", \"value\": \"$(arch)\" },
+        { \"name\": \"simplenote-ios-operating-system\", \"value\": \"$(sw_vers -productName) $(sw_vers -productVersion)\" },
+      ]
+    }"
+
+  echo " ✅ $filename queued"
+done
+
 echo "--- 🚦 Report Tests Status"
 if [[ $TESTS_EXIT_STATUS -eq 0 ]]; then
   echo "Unit Tests seems to have passed (exit code 0). All good 👍"
