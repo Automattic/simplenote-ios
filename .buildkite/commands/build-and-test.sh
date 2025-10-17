@@ -47,7 +47,8 @@ for file in DerivedData/Logs/Build/*.xcactivitylog; do
         { \"name\": \"simplenote-ios-user\", \"value\": \"CI\" },
         { \"name\": \"simplenote-ios-environment\", \"value\": \"CI\" },
         { \"name\": \"simplenote-ios-architecture\", \"value\": \"$(arch)\" },
-        { \"name\": \"simplenote-ios-operating-system\", \"value\": \"$(sw_vers -productName) $(sw_vers -productVersion)\" }
+        { \"name\": \"simplenote-ios-operating-system\", \"value\": \"$(sw_vers -productName) $(sw_vers -productVersion)\" },
+        { \"name\": \"simplenote-ios-metrics-source\", \"value\": \"xcactivitylog\" }
       ]
     }"
 
