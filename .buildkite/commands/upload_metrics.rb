@@ -21,7 +21,8 @@ META = [
   { name: 'simplenote-ios-environment',      value: ENV['CI'] ? 'CI' : 'LOCAL' },
   { name: 'simplenote-ios-architecture',     value: `uname -m`.strip },
   { name: 'simplenote-ios-operating-system', value: `uname -s`.strip.downcase },
-  { name: 'simplenote-ios-metrics-source',   value: 'grouped-metrics' }
+  { name: 'simplenote-ios-metrics-source',   value: 'grouped-metrics' },
+  { name: 'simplenote-ios-branch',           value: `git rev-parse --abbrev-ref HEAD`.strip }
 ].freeze
 
 # ---------- HELPERS ----------
