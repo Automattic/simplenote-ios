@@ -69,11 +69,13 @@ brew install xclogparser
 echo "~~~ Generate HTML report"
 xclogparser parse \
   --project Simplenote \
+  --derived_data ./DerivedData \
   --reporter html \
   --rootOutput build/reports
 echo "~~~ Generate HTML report"
 xclogparser parse \
   --project Simplenote \
+  --derived_data ./DerivedData \
   --reporter json > build/reports/report.json
 
 echo "~~~ Annotate build"
