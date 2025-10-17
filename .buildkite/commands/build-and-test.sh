@@ -68,13 +68,13 @@ echo "~~~ Install XCLogParser"
 brew install xclogparser
 echo "~~~ Generate HTML report"
 xclogparser parse \
-  --project Simplenote \
+  --xcodeproj Simplenote.xcodeproj \
   --derived_data ./DerivedData \
   --reporter html \
   --rootOutput build/reports
 echo "~~~ Generate JSON report"
 xclogparser parse \
-  --project Simplenote \
+  --xcodeproj Simplenote.xcodeproj \
   --derived_data ./DerivedData \
   --reporter json > build/reports/report.json
 
