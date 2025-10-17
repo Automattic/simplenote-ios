@@ -23,3 +23,5 @@ steps:
       - DerivedData/**/*.xcactivitylog
       - build-results.json
       - tests-results.json
+      - build/reports/index.html
+      - build/reports/report.json
