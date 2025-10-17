@@ -63,6 +63,19 @@ echo "--- :xcode: Store raw result JSON"
 xcrun xcresulttool get build-results --path build/results/Simplenote.xcresult --format json > build-results.json
 xcrun xcresulttool get test-results tests --path build/results/Simplenote.xcresult --format json > tests-results.json
 
+echo "--- :xcode: Track XCLogParser report"
+brew install xclogparser
+xclogparser parse \
+  --project Simplenote \
+  --reporter html \
+  --rootOutput build/reports
+xclogparser parse \
+  --project Simplenote \
+  --reporter json > build/reports/report.json
+
+buildkite-agent annotate "[View build report](artifact://build/reports/index.html)" \
+  --style "info"
+
 echo "--- 🚦 Report Tests Status"
 if [[ $TESTS_EXIT_STATUS -eq 0 ]]; then
   echo "Unit Tests seems to have passed (exit code 0). All good 👍"
