@@ -36,22 +36,27 @@ for file in DerivedData/Logs/Build/*.xcactivitylog; do
 
   echo "📤 Posting $filename to $API_URL ..."
 
-  curl -sf -X POST "$API_URL" \
+  arch_val=$(arch)
+  os_val="$(sw_vers -productName) $(sw_vers -productVersion)"
+  branch_val="${BUILDKITE_BRANCH:-$(git rev-parse --abbrev-ref HEAD)}"
+
+  curl -s -o /dev/null -w "\nHTTP CODE: %{http_code}\n" \
+    -X POST "$API_URL" \
     -H 'Content-Type: application/json' \
     -H 'Accept: application/json' \
     -H "Authorization: Bearer $TOKEN" \
     -d "{
-      \"file_path\": \"simplenote-ios/Logs/Build/$filename\",
-      \"type\": \"xcactivitylog\",
-      \"meta\": [
-        { \"name\": \"simplenote-ios-user\", \"value\": \"CI\" },
-        { \"name\": \"simplenote-ios-environment\", \"value\": \"CI\" },
-        { \"name\": \"simplenote-ios-architecture\", \"value\": \"$(arch)\" },
-        { \"name\": \"simplenote-ios-operating-system\", \"value\": \"$(sw_vers -productName) $(sw_vers -productVersion)\" },
-        { \"name\": \"simplenote-ios-metrics-source\", \"value\": \"xcactivitylog\" },
-        { \"name\": \"simplenote-ios-branch\", \"value\": \"${BUILDKITE_BRANCH:-$(git rev-parse --abbrev-ref HEAD)}\" }
-      ]
-    }"
+        \"file_path\": \"simplenote-ios/Logs/Build/$filename\",
+        \"type\": \"xcactivitylog\",
+        \"meta\": [
+          { \"name\": \"simplenote-ios-user\", \"value\": \"CI\" },
+          { \"name\": \"simplenote-ios-environment\", \"value\": \"CI\" },
+          { \"name\": \"simplenote-ios-architecture\", \"value\": \"$arch_val\" },
+          { \"name\": \"simplenote-ios-operating-system\", \"value\": \"$os_val\" },
+          { \"name\": \"simplenote-ios-metrics-source\", \"value\": \"xcactivitylog\" },
+          { \"name\": \"simplenote-ios-branch\", \"value\": \"$branch_val\" }
+        ]
+      }"
 
   echo " ✅ $filename queued"
 done
