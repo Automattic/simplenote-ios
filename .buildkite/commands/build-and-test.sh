@@ -72,7 +72,7 @@ xclogparser parse \
   --derived_data ./DerivedData \
   --reporter html \
   --rootOutput build/reports
-echo "~~~ Generate HTML report"
+echo "~~~ Generate JSON report"
 xclogparser parse \
   --project Simplenote \
   --derived_data ./DerivedData \
