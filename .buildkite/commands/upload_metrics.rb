@@ -22,7 +22,7 @@ META = [
   { name: 'simplenote-ios-architecture',     value: `uname -m`.strip },
   { name: 'simplenote-ios-operating-system', value: `uname -s`.strip.downcase },
   { name: 'simplenote-ios-metrics-source',   value: 'grouped-metrics' },
-  { name: 'simplenote-ios-branch',           value: `git rev-parse --abbrev-ref HEAD`.strip }
+  { name: 'simplenote-ios-branch',           value: ENV['BUILDKITE_BRANCH'] || `git rev-parse --abbrev-ref HEAD`.strip }
 ].freeze
 
 # ---------- HELPERS ----------

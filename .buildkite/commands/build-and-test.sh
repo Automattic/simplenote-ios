@@ -49,7 +49,7 @@ for file in DerivedData/Logs/Build/*.xcactivitylog; do
         { \"name\": \"simplenote-ios-architecture\", \"value\": \"$(arch)\" },
         { \"name\": \"simplenote-ios-operating-system\", \"value\": \"$(sw_vers -productName) $(sw_vers -productVersion)\" },
         { \"name\": \"simplenote-ios-metrics-source\", \"value\": \"xcactivitylog\" },
-        { \"name\": \"simplenote-ios-branch\", \"value\": \"$(git rev-parse --abbrev-ref HEAD)\" }
+        { \"name\": \"simplenote-ios-branch\", \"value\": \"${BUILDKITE_BRANCH:-$(git rev-parse --abbrev-ref HEAD)}\" }
       ]
     }"
 
