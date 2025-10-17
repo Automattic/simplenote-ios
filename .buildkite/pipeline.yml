@@ -21,3 +21,5 @@ steps:
     artifact_paths:
       - "build/results/*"
       - DerivedData/**/*.xcactivitylog
+      - build-results.json
+      - tests-results.json

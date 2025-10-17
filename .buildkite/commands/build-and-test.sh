@@ -57,6 +57,10 @@ done
 echo "--- :arrow_up: Upload build metrics to Apps Metrics"
 ruby .buildkite/commands/upload_metrics.rb
 
+echo "--- :xcode: Store raw result JSON"
+xcrun xcresulttool get build-results --path build/results/Simplenote.xcresult --format json > build-results.json
+xcrun xcresulttool get test-results tests --path build/results/Simplenote.xcresult --format json > tests-results.json
+
 echo "--- 🚦 Report Tests Status"
 if [[ $TESTS_EXIT_STATUS -eq 0 ]]; then
   echo "Unit Tests seems to have passed (exit code 0). All good 👍"
