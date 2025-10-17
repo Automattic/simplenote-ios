@@ -64,15 +64,19 @@ xcrun xcresulttool get build-results --path build/results/Simplenote.xcresult --
 xcrun xcresulttool get test-results tests --path build/results/Simplenote.xcresult --format json > tests-results.json
 
 echo "--- :xcode: Track XCLogParser report"
+echo "~~~ Install XCLogParser"
 brew install xclogparser
+echo "~~~ Generate HTML report"
 xclogparser parse \
   --project Simplenote \
   --reporter html \
   --rootOutput build/reports
+echo "~~~ Generate HTML report"
 xclogparser parse \
   --project Simplenote \
   --reporter json > build/reports/report.json
 
+echo "~~~ Annotate build"
 buildkite-agent annotate "[View build report](artifact://build/reports/index.html)" \
   --style "info"
 
