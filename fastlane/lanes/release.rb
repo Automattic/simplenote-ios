@@ -14,33 +14,24 @@ platform :ios do
 
     Fastlane::Helper::GitHelper.checkout_and_pull(DEFAULT_BRANCH)
 
-    # Use provided version from release tool, or fall back to computed version
-    computed_version = release_version_next
-    new_version = version || computed_version
+    # If a new version is passed, use it as source of truth from now on
+    new_version = version || release_version_next
     computed_release_branch_name = release_branch_name(release_version: new_version)
-
-    # Warn if provided version differs from computed version
-    if version && version != computed_version
-      warning_message = <<~WARNING
-        ⚠️ Version mismatch: The explicitly-provided version was '#{version}' while new computed version would have been '#{computed_version}'.
-        If this is unexpected, you might want to investigate the discrepency.
-        Continuing with the explicitly-provided verison '#{version}'.
-      WARNING
-      UI.important(warning_message)
-      buildkite_annotate(style: 'warning', context: 'start-code-freeze-version-mismatch', message: warning_message) if is_ci
-    end
+    new_build_code = build_code_code_freeze(version_short: new_version)
 
     message = <<~MESSAGE
       Code Freeze:
       - New release branch from #{DEFAULT_BRANCH}: #{computed_release_branch_name}
 
       - Current release version and build code: #{release_version_current} (#{build_code_current}).
-      - New release version and build code: #{new_version} (#{build_code_code_freeze}).
+      - New release version and build code: #{new_version} (#{new_build_code}).
     MESSAGE
 
     UI.important(message)
 
     UI.user_error!('Aborted by user request') unless skip_confirm || UI.confirm('Do you want to continue?')
+
+    ensure_branch_does_not_exist!(computed_release_branch_name)
 
     UI.message 'Creating release branch...'
     Fastlane::Helper::GitHelper.create_branch(computed_release_branch_name, from: DEFAULT_BRANCH)
@@ -48,8 +39,8 @@ platform :ios do
 
     UI.message 'Bumping release version and build code...'
     PUBLIC_VERSION_FILE.write(
-      version_short: release_version_next,
-      version_long: build_code_code_freeze
+      version_short: new_version,
+      version_long: new_build_code
     )
     UI.success "Done! New release version: #{release_version_current}. New build code: #{build_code_current}."
 
@@ -98,7 +89,7 @@ platform :ios do
 
       Next steps:
 
-      - Checkout `#{release_branch_name}` branch locally
+      - Checkout `#{computed_release_branch_name}` branch locally
       - Update Pods and release notes if needed
       - Finalize the code freeze
     MESSAGE
@@ -424,4 +415,15 @@ def release_is_hotfix?
   VERSION_CALCULATOR.release_is_hotfix?(
     version: VERSION_FORMATTER.parse(PUBLIC_VERSION_FILE.read_release_version)
   )
+end
+
+def ensure_branch_does_not_exist!(branch_name)
+  return unless Fastlane::Helper::GitHelper.branch_exists_on_remote?(branch_name: branch_name)
+
+  error_message = "The branch `#{branch_name}` already exists. Please check first if there is an existing Pull Request that needs to be merged or closed first, " \
+                  'or delete the branch to then run again the release task.'
+
+  buildkite_annotate(style: 'error', context: 'error-checking-branch', message: error_message) if is_ci
+
+  UI.user_error!(error_message)
 end
