@@ -242,21 +242,30 @@ platform :ios do
     parsed_version = VERSION_FORMATTER.parse(version)
     build_code_hotfix = BUILD_CODE_FORMATTER.build_code(version: parsed_version)
     previous_version = VERSION_FORMATTER.release_version(VERSION_CALCULATOR.previous_patch_version(version: parsed_version))
+    previous_release_branch = release_branch_name(release_version: previous_version)
+
+    # Determine the base for the hotfix branch: either a tag or a release branch
+    base_ref_for_hotfix = if git_tag_exists(tag: previous_version)
+                            previous_version
+                          elsif Fastlane::Helper::GitHelper.branch_exists_on_remote?(branch_name: previous_release_branch)
+                            previous_release_branch
+                          else
+                            UI.user_error!("Neither tag #{previous_version} nor branch #{previous_release_branch} exists! A hotfix branch cannot be created.")
+                          end
 
     UI.important <<-MESSAGE
       New hotfix version: #{version}
       New build code: #{build_code_hotfix}
-      Branching from tag: #{previous_version}
+      Branching from #{base_ref_for_hotfix}
     MESSAGE
     UI.user_error!("Terminating as requested. Don't forget to run the remainder of this automation manually.") unless skip_confirm || UI.confirm('Do you want to continue?')
 
     UI.user_error!("Version #{version} already exists! Abort!") if git_tag_exists(tag: version)
-    UI.user_error!("No tag found for version #{previous_version}. A hotfix branch cannot be created.") unless git_tag_exists(tag: previous_version)
 
-    UI.message('Creating hotfix branch...')
+    UI.message("Creating hotfix branch from #{base_ref_for_hotfix}...")
     Fastlane::Helper::GitHelper.create_branch(
       release_branch_name(release_version: version),
-      from: previous_version
+      from: base_ref_for_hotfix
     )
     UI.success("Done! New hotfix branch is: #{git_branch}")
 
