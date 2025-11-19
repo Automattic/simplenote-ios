@@ -265,6 +265,9 @@ platform :ios do
 
     UI.user_error!("Version '#{version}' already exists on the remote! Abort!") if git_tag_exists(tag: version, remote: true)
 
+    # Fetch the base ref to ensure it's available locally
+    sh('git', 'fetch', 'origin', base_ref_for_hotfix)
+
     UI.message("Creating hotfix branch from '#{base_ref_for_hotfix}'...")
     Fastlane::Helper::GitHelper.create_branch(
       release_branch_name(release_version: version),
