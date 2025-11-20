@@ -256,11 +256,14 @@ platform :ios do
                             UI.user_error!("Neither tag '#{previous_version}' nor branch '#{previous_release_branch}' exists on the remote! A hotfix branch cannot be created.")
                           end
 
-    UI.important <<-MESSAGE
-      New hotfix version: #{version}
-      New build code: #{build_code_hotfix}
-      Branching from #{base_ref_for_hotfix}
+    message = <<~MESSAGE
+      Hotfix release:
+      - New hotfix version: #{version}
+      - New build code: #{build_code_hotfix}
+      - Branching from #{base_ref_for_hotfix}
     MESSAGE
+    UI.important(message)
+
     UI.user_error!("Terminating as requested. Don't forget to run the remainder of this automation manually.") unless skip_confirm || UI.confirm('Do you want to continue?')
 
     UI.user_error!("Version '#{version}' already exists on the remote! Abort!") if git_tag_exists(tag: version, remote: true)
