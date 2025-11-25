@@ -286,7 +286,7 @@ platform :ios do
       version_short: version,
       version_long: build_code_hotfix
     )
-    commit_version_bump
+    commit_version_and_build_files
 
     unless skip_confirm || UI.confirm('Ready to push changes to remote?')
       UI.message("Terminating as requested. Don't forget to run the remainder of this automation manually.")
