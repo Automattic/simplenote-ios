@@ -282,7 +282,7 @@ platform :ios do
     UI.success("Done! New hotfix branch is: '#{git_branch}'")
 
     UI.message('Bumping hotfix version and build code...')
-    VERSION_FILE.write(
+    PUBLIC_VERSION_FILE.write(
       version_short: version,
       version_long: build_code_hotfix
     )
