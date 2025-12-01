@@ -12,8 +12,10 @@ PREFIX = 'simplenote-ios'
 XCRESULT_PATH = ARGV[0] || 'build/results/Simplenote.xcresult'
 
 # Hardcoded auth config (or set via ENV)
-METRICS_URL   = ENV['METRICS_URL'] || 'https://metrics.a8c-ci.services/api/grouped-metrics'
-TOKEN         = ENV['APPS_METRICS_UPLOAD_TOKEN']
+METRICS_URL = ENV['METRICS_URL'] || 'https://metrics.a8c-ci.services/api/grouped-metrics'
+TOKEN = ENV['APPS_METRICS_UPLOAD_TOKEN'] || nil
+
+raise 'No APPS_METRICS_UPLOAD_TOKEN found in environment.' unless TOKEN
 
 META = [
   { name: 'simplenote-ios-user',             value: ENV['USER'] || ENV['USERNAME'] || 'unknown' },
