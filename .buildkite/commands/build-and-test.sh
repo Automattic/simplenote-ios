@@ -61,9 +61,6 @@ for file in DerivedData/Logs/Build/*.xcactivitylog; do
   echo " ✅ $filename queued"
 done
 
-echo "--- :arrow_up: Upload build metrics to Apps Metrics"
-ruby .buildkite/commands/upload_metrics.rb
-
 echo "--- :xcode: Store raw result JSON"
 xcrun xcresulttool get build-results --path build/results/Simplenote.xcresult --format json > build-results.json
 xcrun xcresulttool get test-results tests --path build/results/Simplenote.xcresult --format json > tests-results.json
@@ -82,6 +79,9 @@ xclogparser parse \
   --xcodeproj Simplenote.xcodeproj \
   --derived_data ./DerivedData \
   --reporter json > build/reports/report.json
+
+echo "--- :arrow_up::ruby: Upload build metrics to Apps Metrics"
+ruby .buildkite/commands/upload_metrics.rb
 
 echo "~~~ Annotate build"
 buildkite-agent annotate "[View build report](artifact://build/reports/index.html)" \
