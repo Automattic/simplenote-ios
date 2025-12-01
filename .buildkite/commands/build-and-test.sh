@@ -70,7 +70,7 @@ xcrun xcresulttool get test-results tests \
   --path build/results/Simplenote.xcresult \
   --format json > build/xcresulttool/xcresulttool-tests-results.json
 
-echo "--- :json: Extract build info"
+echo "+++ :json: Extract build info from xcresulttool"
 jq '{
   timestamp: .startTime | strftime("%Y-%m-%d %H:%M:%S"),
   duration_ms: ((.endTime - .startTime) * 1000 | round),
@@ -81,7 +81,7 @@ jq '{
   warning_breakdown: (.warnings | group_by(.issueType) | map({type: .[0].issueType, count: length}) | sort_by(-.count))
 }' build/xcresulttool/xcresulttool-build-results.json
 
-echo "--- :json: Extract success/fail test count"
+echo "+++ :json: Extract success/fail test count from xcresulttool"
 jq '[.. | objects | select(has("result")) | .result] | {passed: map(select(. == "Passed")) | length, failed: map(select(. == "Failed")) | length}' \
   build/xcresulttool/xcresulttool-tests-results.json
 
