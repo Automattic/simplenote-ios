@@ -12,16 +12,13 @@ env:
 # This is the default pipeline – it will build and test the app
 steps:
 
-  #################
-  # Run Unit Tests
-  #################
   - label: "🔬 Build and Test"
+    key: build_and_test
     command: ".buildkite/commands/build-and-test.sh"
     plugins: [$CI_TOOLKIT_PLUGIN]
     artifact_paths:
       - "build/results/*"
       - DerivedData/**/*.xcactivitylog
-      - build-results.json
-      - tests-results.json
-      - build/reports/index.html
-      - build/reports/report.json
+      - build/xcresulttool/*.json
+      - build/xclogparser-reports/index.html
+      - build/xclogparser-reports/report.json
