@@ -15,7 +15,7 @@ XCRESULT_PATH = ARGV[0] || 'build/results/Simplenote.xcresult'
 METRICS_URL = ENV['METRICS_URL'] || 'https://metrics.a8c-ci.services/api/grouped-metrics'
 TOKEN = ENV['APPS_METRICS_UPLOAD_TOKEN'] || nil
 
-raise 'No APPS_METRICS_UPLOAD_TOKEN found in environment.' unless TOKEN
+raise 'No APPS_METRICS_UPLOAD_TOKEN found in environment.' if TOKEN.nil? || TOKEN.empty?
 
 META = [
   { name: 'simplenote-ios-user',             value: ENV['USER'] || ENV['USERNAME'] || 'unknown' },
@@ -39,7 +39,8 @@ def to_epoch_ms(str_time)
   return nil if str_time.nil? || str_time.empty?
 
   (Time.parse(str_time).to_f * 1000).to_i
-rescue
+rescue ArgumentError => e
+  puts "`Time.parse` failed with '#{e}'."
   nil
 end
 
@@ -77,6 +78,7 @@ payload = {
   metrics: metrics_payload
 }
 
+puts 'Will attempt to upload the following JSON:'
 puts JSON.pretty_generate(payload)
 
 uri = URI(METRICS_URL)
