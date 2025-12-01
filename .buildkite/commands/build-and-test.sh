@@ -62,23 +62,29 @@ for file in DerivedData/Logs/Build/*.xcactivitylog; do
 done
 
 echo "--- :xcode: Store raw result JSON"
-xcrun xcresulttool get build-results --path build/results/Simplenote.xcresult --format json > build-results.json
-xcrun xcresulttool get test-results tests --path build/results/Simplenote.xcresult --format json > tests-results.json
+mkdir -p build/xcresulttool
+xcrun xcresulttool get build-results \
+  --path build/results/Simplenote.xcresult \
+  --format json > build/xcresulttool/xcresulttool-build-results.json
+xcrun xcresulttool get test-results tests \
+  --path build/results/Simplenote.xcresult \
+  --format json > build/xcresulttool/xcresulttool-tests-results.json
 
 echo "--- :xcode: Track XCLogParser report"
 echo "~~~ Install XCLogParser"
 brew install xclogparser
+mkdir -p build/xclogparser-reports
 echo "~~~ Generate HTML report"
 xclogparser parse \
   --xcodeproj Simplenote.xcodeproj \
   --derived_data ./DerivedData \
   --reporter html \
-  --rootOutput build/reports
+  --rootOutput build/xclogparser-reports
 echo "~~~ Generate JSON report"
 xclogparser parse \
   --xcodeproj Simplenote.xcodeproj \
   --derived_data ./DerivedData \
-  --reporter json > build/reports/report.json
+  --reporter json > build/xclogparser-reports/report.json
 
 echo "--- :arrow_up::ruby: Upload build metrics to Apps Metrics"
 ruby .buildkite/commands/upload_metrics.rb
