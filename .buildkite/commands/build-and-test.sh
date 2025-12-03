@@ -49,6 +49,11 @@ echo "--- :xcode: Track XCLogParser report"
 echo "~~~ Install XCLogParser"
 brew install xclogparser
 mkdir -p build/xclogparser-reports
+echo "~~~ Dump xcactivitylog to JSON"
+xclogparser dump \
+  --xcodeproj Simplenote.xcodeproj \
+  --derived_data ./DerivedData \
+  --output build/xclogparser-reports/xcactivitylog-raw.json
 echo "~~~ Generate HTML report"
 xclogparser parse \
   --xcodeproj Simplenote.xcodeproj \
