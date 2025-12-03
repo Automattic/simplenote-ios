@@ -19,6 +19,4 @@ steps:
     artifact_paths:
       - "build/results/*"
       - DerivedData/**/*.xcactivitylog
-      - build/xcresulttool/*.json
       - build/xclogparser-reports/index.html
-      - build/xclogparser-reports/*.json
