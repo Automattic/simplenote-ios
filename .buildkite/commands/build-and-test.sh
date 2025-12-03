@@ -21,46 +21,6 @@ fi
 echo "--- 📦 Zipping test results"
 cd build/results/ && zip -rq Simplenote.xcresult.zip Simplenote.xcresult && cd -
 
-echo "--- :s3: Upload xcactivitylog to S3"
-aws s3 cp DerivedData s3://a8c-apps-metrics/simplenote-ios/ \
-  --recursive \
-  --exclude "*" \
-  --include "*.xcactivitylog"
-
-echo "--- :arrow_up: Sync with Apps Metrics"
-API_URL='https://metrics.a8c-ci.services/api/pending-build-logs'
-TOKEN="$APPS_METRICS_UPLOAD_TOKEN"
-
-for file in DerivedData/Logs/Build/*.xcactivitylog; do
-  filename=$(basename "$file")
-
-  echo "📤 Posting $filename to $API_URL ..."
-
-  arch_val=$(arch)
-  os_val="$(sw_vers -productName) $(sw_vers -productVersion)"
-  branch_val="${BUILDKITE_BRANCH:-$(git rev-parse --abbrev-ref HEAD)}"
-
-  curl -s -o /dev/null -w "\nHTTP CODE: %{http_code}\n" \
-    -X POST "$API_URL" \
-    -H 'Content-Type: application/json' \
-    -H 'Accept: application/json' \
-    -H "Authorization: Bearer $TOKEN" \
-    -d "{
-        \"file_path\": \"simplenote-ios/Logs/Build/$filename\",
-        \"type\": \"xcactivitylog\",
-        \"meta\": [
-          { \"name\": \"simplenote-ios-user\", \"value\": \"CI\" },
-          { \"name\": \"simplenote-ios-environment\", \"value\": \"CI\" },
-          { \"name\": \"simplenote-ios-architecture\", \"value\": \"$arch_val\" },
-          { \"name\": \"simplenote-ios-operating-system\", \"value\": \"$os_val\" },
-          { \"name\": \"simplenote-ios-metrics-source\", \"value\": \"xcactivitylog\" },
-          { \"name\": \"simplenote-ios-branch\", \"value\": \"$branch_val\" }
-        ]
-      }"
-
-  echo " ✅ $filename queued"
-done
-
 echo "--- :xcode: Store raw xcresulttool JSONs"
 mkdir -p build/xcresulttool
 xcrun xcresulttool get build-results \
