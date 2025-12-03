@@ -2,7 +2,6 @@
 
 set -euo pipefail
 
-# Require paths as inputs
 XCRESULT_PATH="${1:?Error: xcresult path required as first argument}"
 DERIVED_DATA_PATH="${2:?Error: DerivedData path required as second argument}"
 
