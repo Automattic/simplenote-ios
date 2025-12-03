@@ -21,7 +21,7 @@ fi
 echo "--- 📦 Zipping test results"
 cd build/results/ && zip -rq Simplenote.xcresult.zip Simplenote.xcresult && cd -
 
-.buildkite/commands/track-apple-metrics.sh
+.buildkite/commands/track-apple-metrics.sh "build/results/Simplenote.xcresult" "./DerivedData"
 
 echo "--- :arrow_up::ruby: Upload build metrics to Apps Metrics"
 ruby .buildkite/commands/upload_metrics.rb
