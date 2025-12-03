@@ -21,4 +21,4 @@ steps:
       - DerivedData/**/*.xcactivitylog
       - build/xcresulttool/*.json
       - build/xclogparser-reports/index.html
-      - build/xclogparser-reports/report.json
+      - build/xclogparser-reports/*.json
