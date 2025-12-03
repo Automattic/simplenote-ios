@@ -70,3 +70,9 @@ xclogparser parse \
   --reporter chromeTracer > build/xclogparser-reports/build-trace.json
 
 buildkite-agent artifact upload "build/xclogparser-reports/build-trace.json"
+
+echo "--- :arrow_up::ruby: Upload build metrics to Apps Metrics"
+# FIXME: Ignoring errors for the time being. Seems like the token has expired...
+set +e
+ruby .buildkite/commands/upload_metrics.rb
+set -e

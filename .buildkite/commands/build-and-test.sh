@@ -23,13 +23,6 @@ cd build/results/ && zip -rq Simplenote.xcresult.zip Simplenote.xcresult && cd -
 
 .buildkite/commands/track-apple-metrics.sh "build/results/Simplenote.xcresult" "./DerivedData"
 
-echo "--- :arrow_up::ruby: Upload build metrics to Apps Metrics"
-ruby .buildkite/commands/upload_metrics.rb
-
-echo "~~~ Annotate build"
-buildkite-agent annotate "[View build report](artifact://build/reports/index.html)" \
-  --style "info"
-
 echo "--- 🚦 Report Tests Status"
 if [[ $TESTS_EXIT_STATUS -eq 0 ]]; then
   echo "Unit Tests seems to have passed (exit code 0). All good 👍"
