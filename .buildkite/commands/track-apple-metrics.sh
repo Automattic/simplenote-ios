@@ -2,9 +2,9 @@
 
 set -euo pipefail
 
-# Accept paths as inputs, with sensible defaults
-XCRESULT_PATH="${1:-build/results/Simplenote.xcresult}"
-DERIVED_DATA_PATH="${2:-./DerivedData}"
+# Require paths as inputs
+XCRESULT_PATH="${1:?Error: xcresult path required as first argument}"
+DERIVED_DATA_PATH="${2:?Error: DerivedData path required as second argument}"
 
 echo "--- :xcode: Store raw xcresulttool JSONs"
 
@@ -13,10 +13,12 @@ mkdir -p build/xcresulttool
 xcrun xcresulttool get build-results \
   --path "$XCRESULT_PATH" \
   --format json > build/xcresulttool/xcresulttool-build-results.json
+buildkite-agent artifact upload "build/xcresulttool/xcresulttool-build-results.json"
 
 xcrun xcresulttool get test-results tests \
   --path "$XCRESULT_PATH" \
   --format json > build/xcresulttool/xcresulttool-tests-results.json
+buildkite-agent artifact upload "build/xcresulttool/xcresulttool-tests-results.json"
 
 echo "+++ :json: Extract build info from xcresulttool"
 jq '{
@@ -42,6 +44,7 @@ xclogparser dump \
   --xcodeproj Simplenote.xcodeproj \
   --derived_data "$DERIVED_DATA_PATH" \
   --output build/xclogparser-reports/xcactivitylog-raw.json
+buildkite-agent artifact upload "build/xclogparser-reports/xcactivitylog-raw.json"
 echo "~~~ Generate HTML report"
 xclogparser parse \
   --xcodeproj Simplenote.xcodeproj \
@@ -53,8 +56,5 @@ xclogparser parse \
   --xcodeproj Simplenote.xcodeproj \
   --derived_data "$DERIVED_DATA_PATH" \
   --reporter json > build/xclogparser-reports/report.json
-
-echo "--- :buildkite: Upload JSON artifacts"
-buildkite-agent artifact upload "build/xcresulttool/*.json"
-buildkite-agent artifact upload "build/xclogparser-reports/*.json"
+buildkite-agent artifact upload "build/xclogparser-reports/report.json"
 
