@@ -268,7 +268,6 @@ payload=$(jq -n \
       { name: ($prefix + "-branch"),           value: $branch }
     ],
     metrics: [
-      { name: ($prefix + "-action-title"),           value: $action_title },
       { name: ($prefix + "-analyzer-warning-count"), value: ($analyzer_warning_count | tostring) },
       { name: ($prefix + "-error-count"),            value: ($error_count | tostring) },
       { name: ($prefix + "-status"),                 value: $status },
@@ -278,9 +277,6 @@ payload=$(jq -n \
       { name: ($prefix + "-warning-preprocessor-count"),    value: ($warning_preprocessor_count | tostring) },
       { name: ($prefix + "-warning-swift-compiler-count"),  value: ($warning_swift_compiler_count | tostring) },
       { name: ($prefix + "-warning-semantic-count"),        value: ($warning_semantic_count | tostring) },
-      { name: ($prefix + "-destination-os-version"), value: $destination_os_version },
-      { name: ($prefix + "-destination-device"),     value: $destination_device },
-      { name: ($prefix + "-destination-platform"),   value: $destination_platform },
       { name: ($prefix + "-test-count-total"),       value: ($test_count_total | tostring) },
       { name: ($prefix + "-test-count-passed"),      value: ($test_count_passed | tostring) },
       { name: ($prefix + "-test-count-failed"),      value: ($test_count_failed | tostring) },
