@@ -16,13 +16,17 @@ while [[ $# -gt 0 ]]; do
       DRY_RUN=true
       shift
       ;;
+    --xcresult-path)
+      XCRESULT_PATH="$2"
+      shift 2
+      ;;
     --xclogparser-json)
       XCLOGPARSER_JSON="$2"
       shift 2
       ;;
     *)
-      XCRESULT_PATH="$1"
-      shift
+      echo "Unknown option: $1" >&2
+      exit 1
       ;;
   esac
 done

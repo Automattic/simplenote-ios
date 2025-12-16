@@ -55,12 +55,13 @@ buildkite-agent artifact upload "build/xclogparser-reports/xcactivitylog-raw.jso
 
 echo "~~~ Generate JSON report"
 
+xclogparser_json_path=build/xclogparser-reports/report.json
 xclogparser parse \
   --xcodeproj Simplenote.xcodeproj \
   --derived_data "$DERIVED_DATA_PATH" \
-  --reporter json > build/xclogparser-reports/report.json
+  --reporter json > "$xclogparser_json_path"
 
-buildkite-agent artifact upload "build/xclogparser-reports/report.json"
+buildkite-agent artifact upload "$xclogparser_json_path"
 
 echo "~~~ Generate Chrome tracer report"
 
@@ -73,4 +74,6 @@ buildkite-agent artifact upload "build/xclogparser-reports/build-trace.json"
 
 # This could be inlined once/if moving ti CI toolkit
 echo "--- :arrow_up: Upload to Apps Metrics"
-.buildkite/commands/upload-metrics.sh "$XCRESULT_PATH"
+.buildkite/commands/upload-metrics.sh \
+  --xcresult-path "$XCRESULT_PATH" \
+  --xclogparser-json "$xclogparser_json_path"
