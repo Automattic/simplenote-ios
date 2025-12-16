@@ -78,9 +78,7 @@ payload=$(jq -n \
     metrics: [
       { name: ($prefix + "-action-title"),           value: $action_title },
       { name: ($prefix + "-analyzer-warning-count"), value: ($analyzer_warning_count | tostring) },
-      { name: ($prefix + "-end-time-unix-ms"),       value: ($end_time | tostring) },
       { name: ($prefix + "-error-count"),            value: ($error_count | tostring) },
-      { name: ($prefix + "-start-time-unix-ms"),     value: ($start_time | tostring) },
       { name: ($prefix + "-status"),                 value: $status },
       { name: ($prefix + "-warning-count"),          value: ($warning_count | tostring) },
       { name: ($prefix + "-build-time"),             value: ($build_time | tostring) }
