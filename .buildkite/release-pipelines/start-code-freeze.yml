@@ -26,4 +26,5 @@ steps:
       manual:
         # If failed, we prefer retrying via ReleaseV2 rather than Buildkite.
         # Rationale: ReleaseV2 is the source of truth for the process and track links to the various builds.
+        reason: If release jobs fail, you should always re-trigger the task from ReleaseV2 rather than retrying the individual job from Buildkite
         allowed: false
