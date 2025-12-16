@@ -64,7 +64,7 @@ upload_artifact() {
   if [[ "$DRY_RUN" == true ]]; then
     echo "[dry-run] Skipping artifact upload: $path"
   else
-    upload_artifact "$path"
+    buildkite-agent artifact upload "$path"
   fi
 }
 
@@ -76,6 +76,7 @@ xcresulttool_build_results_path=build/xcresulttool/xcresulttool-build-results.js
 xcrun xcresulttool get build-results \
   --path "$XCRESULT_PATH" \
   --format json > "$xcresulttool_build_results_path"
+echo "Dumped xcresult build results to $xcresulttool_build_results_path"
 
 upload_artifact "$xcresulttool_build_results_path"
 
@@ -83,6 +84,7 @@ xcresulttool_test_results_path=build/xcresulttool/xcresulttool-tests-results.jso
 xcrun xcresulttool get test-results tests \
   --path "$XCRESULT_PATH" \
   --format json > "$xcresulttool_test_results_path"
+echo "Dumped xcresult test results to $xcresulttool_test_results_path"
 
 upload_artifact "$xcresulttool_test_results_path"
 
