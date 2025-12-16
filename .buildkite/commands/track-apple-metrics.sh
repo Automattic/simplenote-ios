@@ -78,11 +78,12 @@ xcrun xcresulttool get build-results \
 
 upload_artifact "build/xcresulttool/xcresulttool-build-results.json"
 
+xcresulttool_test_results_path=build/xcresulttool/xcresulttool-tests-results.json
 xcrun xcresulttool get test-results tests \
   --path "$XCRESULT_PATH" \
-  --format json > build/xcresulttool/xcresulttool-tests-results.json
+  --format json > "$xcresulttool_test_results_path"
 
-upload_artifact "build/xcresulttool/xcresulttool-tests-results.json"
+upload_artifact "$xcresulttool_test_results_path"
 
 echo "+++ :json: Extract build info from xcresulttool"
 jq '{
@@ -170,45 +171,29 @@ destination_os_version=$(echo "$build_json" | jq -r '.destination.osVersion // "
 destination_device=$(echo "$build_json" | jq -r '.destination.modelName // "unknown"')
 destination_platform=$(echo "$build_json" | jq -r '.destination.platform // "unknown"')
 
-echo "Extracting test results from $XCRESULT_PATH..."
-test_json=$(xcrun xcresulttool get test-results --path "$XCRESULT_PATH" --format json 2>/dev/null || echo '{}')
+# Test counts - use recursive descent to handle variable nesting depth
+test_count_total=$(jq '[.. | objects | select(.nodeType == "Test Case")] | length' $xcresulttool_test_results_path)
+test_count_passed=$(jq '[.. | objects | select(.nodeType == "Test Case" and .result == "Passed")] | length' $xcresulttool_test_results_path)
+test_count_failed=$(jq '[.. | objects | select(.nodeType == "Test Case" and .result == "Failed")] | length' $xcresulttool_test_results_path)
+test_count_skipped=$(jq '[.. | objects | select(.nodeType == "Test Case" and .result == "Skipped")] | length' $xcresulttool_test_results_path)
 
-if [[ "$test_json" != "{}" ]]; then
-  # Test counts - handle nested structure
-  test_count_total=$(echo "$test_json" | jq '[.testNodes[].children[]?.children[]?.children[]? | select(.nodeType == "Test Case")] | length')
-  test_count_passed=$(echo "$test_json" | jq '[.testNodes[].children[]?.children[]?.children[]? | select(.nodeType == "Test Case" and .result == "Passed")] | length')
-  test_count_failed=$(echo "$test_json" | jq '[.testNodes[].children[]?.children[]?.children[]? | select(.nodeType == "Test Case" and .result == "Failed")] | length')
-  test_count_skipped=$(echo "$test_json" | jq '[.testNodes[].children[]?.children[]?.children[]? | select(.nodeType == "Test Case" and .result == "Skipped")] | length')
-
-  # Test pass rate (as percentage, avoid division by zero)
-  if [[ "$test_count_total" -gt 0 ]]; then
-    test_pass_rate=$(echo "scale=2; $test_count_passed * 100 / $test_count_total" | bc)
-  else
-    test_pass_rate="0"
-  fi
-
-  # Test duration (sum of all test durations in ms)
-  test_duration_total_ms=$(echo "$test_json" | jq '([.testNodes[].children[]?.children[]?.children[]?.durationInSeconds? // 0] | add) * 1000 | round')
-
-  # Test suite count
-  test_suite_count=$(echo "$test_json" | jq '[.testNodes[].children[]?.children[]? | select(.nodeType == "Test Suite")] | length')
-
-  # Slowest test
-  slowest_test=$(echo "$test_json" | jq -r '[.testNodes[].children[]?.children[]?.children[]? | select(.nodeType == "Test Case")] | sort_by(-.durationInSeconds) | .[0] // {}')
-  test_slowest_name=$(echo "$slowest_test" | jq -r '.name // "none"')
-  test_slowest_duration_ms=$(echo "$slowest_test" | jq '((.durationInSeconds // 0) * 1000) | round')
+# Test pass rate (as percentage, avoid division by zero)
+if [[ "$test_count_total" -gt 0 ]]; then
+  test_pass_rate=$(echo "scale=2; $test_count_passed * 100 / $test_count_total" | bc)
 else
-  echo "No test results found, skipping test metrics."
-  test_count_total=0
-  test_count_passed=0
-  test_count_failed=0
-  test_count_skipped=0
   test_pass_rate="0"
-  test_duration_total_ms=0
-  test_suite_count=0
-  test_slowest_name="none"
-  test_slowest_duration_ms=0
 fi
+
+# Test duration (sum of all test durations in ms)
+test_duration_total_ms=$(jq '([.. | objects | select(.nodeType == "Test Case") | .durationInSeconds // 0] | add) * 1000 | round' $xcresulttool_test_results_path)
+
+# Test suite count
+test_suite_count=$(jq '[.. | objects | select(.nodeType == "Test Suite")] | length' $xcresulttool_test_results_path)
+
+# Slowest test
+slowest_test=$(jq '[.. | objects | select(.nodeType == "Test Case")] | sort_by(-.durationInSeconds) | .[0] // {}' $xcresulttool_test_results_path)
+test_slowest_name=$(echo "$slowest_test" | jq -r '.name // "none"')
+test_slowest_duration_ms=$(echo "$slowest_test" | jq '((.durationInSeconds // 0) * 1000) | round')
 
 echo "Extracting xclogparser metrics from $xclogparser_json_path..."
 xlp_json=$(cat "$xclogparser_json_path")
