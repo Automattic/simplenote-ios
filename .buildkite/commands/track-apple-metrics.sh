@@ -59,6 +59,15 @@ if [[ "$DRY_RUN" == false && -z "$TOKEN" ]]; then
   exit 1
 fi
 
+upload_artifact() {
+  local path="$1"
+  if [[ "$DRY_RUN" == true ]]; then
+    echo "[dry-run] Skipping artifact upload: $path"
+  else
+    upload_artifact "$path"
+  fi
+}
+
 echo "--- :xcode: Store raw xcresulttool JSONs"
 
 mkdir -p build/xcresulttool
@@ -67,13 +76,13 @@ xcrun xcresulttool get build-results \
   --path "$XCRESULT_PATH" \
   --format json > build/xcresulttool/xcresulttool-build-results.json
 
-buildkite-agent artifact upload "build/xcresulttool/xcresulttool-build-results.json"
+upload_artifact "build/xcresulttool/xcresulttool-build-results.json"
 
 xcrun xcresulttool get test-results tests \
   --path "$XCRESULT_PATH" \
   --format json > build/xcresulttool/xcresulttool-tests-results.json
 
-buildkite-agent artifact upload "build/xcresulttool/xcresulttool-tests-results.json"
+upload_artifact "build/xcresulttool/xcresulttool-tests-results.json"
 
 echo "+++ :json: Extract build info from xcresulttool"
 jq '{
@@ -105,7 +114,7 @@ xclogparser dump \
   --derived_data "$DERIVED_DATA_PATH" \
   --output build/xclogparser-reports/xcactivitylog-raw.json
 
-buildkite-agent artifact upload "build/xclogparser-reports/xcactivitylog-raw.json"
+upload_artifact "build/xclogparser-reports/xcactivitylog-raw.json"
 
 echo "~~~ Generate JSON report"
 
@@ -115,7 +124,7 @@ xclogparser parse \
   --derived_data "$DERIVED_DATA_PATH" \
   --reporter json > "$xclogparser_json_path"
 
-buildkite-agent artifact upload "$xclogparser_json_path"
+upload_artifact "$xclogparser_json_path"
 
 echo "~~~ Generate Chrome tracer report"
 
@@ -124,7 +133,7 @@ xclogparser parse \
   --derived_data "$DERIVED_DATA_PATH" \
   --reporter chromeTracer > build/xclogparser-reports/build-trace.json
 
-buildkite-agent artifact upload "build/xclogparser-reports/build-trace.json"
+upload_artifact "build/xclogparser-reports/build-trace.json"
 
 echo "--- :arrow_up: Upload to Apps Metrics"
 
@@ -301,7 +310,7 @@ echo "$payload" | jq . > "$apps_metrics_path"
 echo "Will attempt to post the following metrics (saved to $apps_metrics_path):"
 cat "$apps_metrics_path"
 
-buildkite-agent artifact upload "$apps_metrics_path"
+upload_artifact "$apps_metrics_path"
 
 if [[ "$DRY_RUN" == true ]]; then
   echo "[dry-run] Skipping POST to $METRICS_URL"
