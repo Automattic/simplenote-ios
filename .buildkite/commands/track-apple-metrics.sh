@@ -73,4 +73,4 @@ buildkite-agent artifact upload "build/xclogparser-reports/build-trace.json"
 
 # This could be inlined once/if moving ti CI toolkit
 echo "--- :arrow_up: Upload to Apps Metrics"
-.buildkite/commands/upload_metrics.sh "$XCRESULT_PATH"
+.buildkite/commands/upload-metrics.sh "$XCRESULT_PATH"
