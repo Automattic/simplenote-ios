@@ -250,7 +250,7 @@ payload=$(jq -n \
       { name: ($prefix + "-analyzer-warning-count"), value: ($analyzer_warning_count | tostring) },
       { name: ($prefix + "-error-count"),            value: ($error_count | tostring) },
       { name: ($prefix + "-status"),                 value: $status },
-      { name: ($prefix + "-warning-count"),          value: ($warning_count | tostring) },
+      { name: ($prefix + "-warning-count-total"),    value: ($warning_count | tostring) },
       { name: ($prefix + "-build-time"),             value: ($build_time | tostring) },
       { name: ($prefix + "-warning-deprecation-count"),     value: ($warning_deprecation_count | tostring) },
       { name: ($prefix + "-warning-preprocessor-count"),    value: ($warning_preprocessor_count | tostring) },
