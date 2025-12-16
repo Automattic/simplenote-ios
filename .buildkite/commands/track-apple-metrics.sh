@@ -2,11 +2,16 @@
 
 set -euo pipefail
 
+DRY_RUN=false
 XCRESULT_PATH=""
 DERIVED_DATA_PATH=""
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
+    --dry-run)
+      DRY_RUN=true
+      shift
+      ;;
     --xcresult-path)
       XCRESULT_PATH="$2"
       shift 2
@@ -99,8 +104,9 @@ xclogparser parse \
 
 buildkite-agent artifact upload "build/xclogparser-reports/build-trace.json"
 
-# This could be inlined once/if moving ti CI toolkit
+# This could be inlined once/if moving to CI toolkit
 echo "--- :arrow_up: Upload to Apps Metrics"
 .buildkite/commands/upload-metrics.sh \
   --xcresult-path "$XCRESULT_PATH" \
-  --xclogparser-json "$xclogparser_json_path"
+  --xclogparser-json "$xclogparser_json_path" \
+  $( [[ "$DRY_RUN" == true ]] && echo "--dry-run" )
