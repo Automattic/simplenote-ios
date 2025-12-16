@@ -24,7 +24,7 @@ steps:
       bundle exec fastlane start_code_freeze version:"${RELEASE_VERSION}" skip_confirm:true
     retry:
       manual:
-        # If failed, we prefer retrying via ReleaseV2 rather than Buildkite.
-        # Rationale: ReleaseV2 is the source of truth for the process and track links to the various builds.
-        reason: If release jobs fail, you should always re-trigger the task from ReleaseV2 rather than retrying the individual job from Buildkite
+        # If failed, we prefer retrying via Releases V2 rather than Buildkite.
+        # Rationale: Releases V2 is the source of truth for the process and track links to the various builds.
+        reason: If release jobs fail, you should always re-trigger the task from Releases V2 rather than retrying the individual job from Buildkite
         allowed: false
