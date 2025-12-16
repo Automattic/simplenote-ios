@@ -2,8 +2,35 @@
 
 set -euo pipefail
 
-XCRESULT_PATH="${1:?Error: xcresult path required as first argument}"
-DERIVED_DATA_PATH="${2:?Error: DerivedData path required as second argument}"
+XCRESULT_PATH=""
+DERIVED_DATA_PATH=""
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --xcresult-path)
+      XCRESULT_PATH="$2"
+      shift 2
+      ;;
+    --derived-data-path)
+      DERIVED_DATA_PATH="$2"
+      shift 2
+      ;;
+    *)
+      echo "Unknown option: $1" >&2
+      exit 1
+      ;;
+  esac
+done
+
+if [[ -z "$XCRESULT_PATH" ]]; then
+  echo "Error: --xcresult-path is required" >&2
+  exit 1
+fi
+
+if [[ -z "$DERIVED_DATA_PATH" ]]; then
+  echo "Error: --derived-data-path is required" >&2
+  exit 1
+fi
 
 echo "--- :xcode: Store raw xcresulttool JSONs"
 

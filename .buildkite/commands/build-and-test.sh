@@ -21,7 +21,9 @@ fi
 echo "--- 📦 Zipping test results"
 cd build/results/ && zip -rq Simplenote.xcresult.zip Simplenote.xcresult && cd -
 
-.buildkite/commands/track-apple-metrics.sh "build/results/Simplenote.xcresult" "./DerivedData"
+.buildkite/commands/track-apple-metrics.sh \
+  --xcresult-path "build/results/Simplenote.xcresult" \
+  --derived-data-path "./DerivedData"
 
 echo "--- 🚦 Report Tests Status"
 if [[ $TESTS_EXIT_STATUS -eq 0 ]]; then

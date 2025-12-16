@@ -31,7 +31,10 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-XCRESULT_PATH="${XCRESULT_PATH:-build/results/Simplenote.xcresult}"
+if [[ -z "$XCRESULT_PATH" ]]; then
+  echo "Error: --xcresult-path is required" >&2
+  exit 1
+fi
 
 if [[ "$DRY_RUN" == false && -z "$TOKEN" ]]; then
   echo "No APPS_METRICS_UPLOAD_TOKEN found in environment." >&2
