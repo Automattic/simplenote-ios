@@ -72,11 +72,12 @@ echo "--- :xcode: Store raw xcresulttool JSONs"
 
 mkdir -p build/xcresulttool
 
+xcresulttool_build_results_path=build/xcresulttool/xcresulttool-build-results.json
 xcrun xcresulttool get build-results \
   --path "$XCRESULT_PATH" \
-  --format json > build/xcresulttool/xcresulttool-build-results.json
+  --format json > "$xcresulttool_build_results_path"
 
-upload_artifact "build/xcresulttool/xcresulttool-build-results.json"
+upload_artifact "$xcresulttool_build_results_path"
 
 xcresulttool_test_results_path=build/xcresulttool/xcresulttool-tests-results.json
 xcrun xcresulttool get test-results tests \
@@ -147,29 +148,26 @@ ARCHITECTURE=$(uname -m)
 OPERATING_SYSTEM=$(uname -s | tr '[:upper:]' '[:lower:]')
 BRANCH="${BUILDKITE_BRANCH:-$(git rev-parse --abbrev-ref HEAD)}"
 
-echo "Extracting build results from $XCRESULT_PATH..."
-build_json=$(xcrun xcresulttool get build-results --path "$XCRESULT_PATH" --format json)
-
 # Core build metrics
-end_time=$(echo "$build_json" | jq '(.endTime * 1000) | round')
-start_time=$(echo "$build_json" | jq '(.startTime * 1000) | round')
+end_time=$(jq '(.endTime * 1000) | round' $xcresulttool_build_results_path)
+start_time=$(jq '(.startTime * 1000) | round' $xcresulttool_build_results_path)
 build_time=$((end_time - start_time))
-action_title=$(echo "$build_json" | jq -r '.actionTitle')
-analyzer_warning_count=$(echo "$build_json" | jq '.analyzerWarningCount')
-error_count=$(echo "$build_json" | jq '.errorCount')
-status=$(echo "$build_json" | jq -r '.status')
-warning_count=$(echo "$build_json" | jq '.warningCount')
+action_title=$(jq -r '.actionTitle' $xcresulttool_build_results_path)
+analyzer_warning_count=$(jq '.analyzerWarningCount' $xcresulttool_build_results_path)
+error_count=$(jq '.errorCount' $xcresulttool_build_results_path)
+status=$(jq -r '.status' $xcresulttool_build_results_path)
+warning_count=$(jq '.warningCount' $xcresulttool_build_results_path)
 
 # Warning breakdown by type
-warning_deprecation_count=$(echo "$build_json" | jq '[.warnings[] | select(.issueType == "DeprecatedDeclaration")] | length')
-warning_preprocessor_count=$(echo "$build_json" | jq '[.warnings[] | select(.issueType == "Lexical or Preprocessor Issue")] | length')
-warning_swift_compiler_count=$(echo "$build_json" | jq '[.warnings[] | select(.issueType == "Swift Compiler Warning")] | length')
-warning_semantic_count=$(echo "$build_json" | jq '[.warnings[] | select(.issueType == "Semantic Issue")] | length')
+warning_deprecation_count=$(jq '[.warnings[] | select(.issueType == "DeprecatedDeclaration")] | length' $xcresulttool_build_results_path)
+warning_preprocessor_count=$(jq '[.warnings[] | select(.issueType == "Lexical or Preprocessor Issue")] | length' $xcresulttool_build_results_path)
+warning_swift_compiler_count=$(jq '[.warnings[] | select(.issueType == "Swift Compiler Warning")] | length' $xcresulttool_build_results_path)
+warning_semantic_count=$(jq '[.warnings[] | select(.issueType == "Semantic Issue")] | length' $xcresulttool_build_results_path)
 
 # Destination info
-destination_os_version=$(echo "$build_json" | jq -r '.destination.osVersion // "unknown"')
-destination_device=$(echo "$build_json" | jq -r '.destination.modelName // "unknown"')
-destination_platform=$(echo "$build_json" | jq -r '.destination.platform // "unknown"')
+destination_os_version=$(jq -r '.destination.osVersion // "unknown"' $xcresulttool_build_results_path)
+destination_device=$(jq -r '.destination.modelName // "unknown"' $xcresulttool_build_results_path)
+destination_platform=$(jq -r '.destination.platform // "unknown"' $xcresulttool_build_results_path)
 
 # Test counts - use recursive descent to handle variable nesting depth
 test_count_total=$(jq '[.. | objects | select(.nodeType == "Test Case")] | length' $xcresulttool_test_results_path)
