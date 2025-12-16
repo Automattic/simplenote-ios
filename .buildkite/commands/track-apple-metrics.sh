@@ -2,12 +2,11 @@
 
 set -euo pipefail
 
-# TODO: read these as options, too
-PREFIX='simplenote-ios'
 METRICS_URL="${METRICS_URL:-https://metrics.a8c-ci.services/api/grouped-metrics}"
-TOKEN="${APPS_METRICS_UPLOAD_TOKEN:-}"
 
 DRY_RUN=false
+PREFIX=""
+TOKEN="${APPS_METRICS_UPLOAD_TOKEN:-}"
 XCRESULT_PATH=""
 DERIVED_DATA_PATH=""
 
@@ -16,6 +15,14 @@ while [[ $# -gt 0 ]]; do
     --dry-run)
       DRY_RUN=true
       shift
+      ;;
+    --prefix)
+      PREFIX="$2"
+      shift 2
+      ;;
+    --token)
+      TOKEN="$2"
+      shift 2
       ;;
     --xcresult-path)
       XCRESULT_PATH="$2"
@@ -32,6 +39,11 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
+if [[ -z "$PREFIX" ]]; then
+  echo "Error: --prefix is required" >&2
+  exit 1
+fi
+
 if [[ -z "$XCRESULT_PATH" ]]; then
   echo "Error: --xcresult-path is required" >&2
   exit 1
@@ -39,6 +51,11 @@ fi
 
 if [[ -z "$DERIVED_DATA_PATH" ]]; then
   echo "Error: --derived-data-path is required" >&2
+  exit 1
+fi
+
+if [[ "$DRY_RUN" == false && -z "$TOKEN" ]]; then
+  echo "Error: --token or APPS_METRICS_UPLOAD_TOKEN is required" >&2
   exit 1
 fi
 

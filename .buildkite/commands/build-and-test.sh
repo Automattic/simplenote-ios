@@ -22,6 +22,7 @@ echo "--- 📦 Zipping test results"
 cd build/results/ && zip -rq Simplenote.xcresult.zip Simplenote.xcresult && cd -
 
 .buildkite/commands/track-apple-metrics.sh \
+  --prefix "simplenote-ios" \
   --xcresult-path "build/results/Simplenote.xcresult" \
   --derived-data-path "./DerivedData"
 
