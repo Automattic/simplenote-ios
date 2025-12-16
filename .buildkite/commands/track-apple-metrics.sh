@@ -98,7 +98,7 @@ jq '{
 }' build/xcresulttool/xcresulttool-build-results.json
 
 echo "+++ :json: Extract success/fail test count from xcresulttool"
-jq '[.. | objects | select(has("result")) | .result] | {passed: map(select(. == "Passed")) | length, failed: map(select(. == "Failed")) | length}' \
+jq '[.. | objects | select(.nodeType == "Test Case")] | {passed: map(select(.result == "Passed")) | length, failed: map(select(.result == "Failed")) | length}' \
   build/xcresulttool/xcresulttool-tests-results.json
 
 echo "--- :xcode: Track XCLogParser report"
