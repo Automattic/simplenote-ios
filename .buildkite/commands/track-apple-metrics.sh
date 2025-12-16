@@ -86,21 +86,6 @@ xcrun xcresulttool get test-results tests \
 
 upload_artifact "$xcresulttool_test_results_path"
 
-echo "+++ :json: Extract build info from xcresulttool"
-jq '{
-  timestamp: .startTime | strftime("%Y-%m-%d %H:%M:%S"),
-  duration_ms: ((.endTime - .startTime) * 1000 | round),
-  status: .status,
-  errors: .errorCount,
-  warnings: .warningCount,
-  analyzer_warnings: .analyzerWarningCount,
-  warning_breakdown: (.warnings | group_by(.issueType) | map({type: .[0].issueType, count: length}) | sort_by(-.count))
-}' build/xcresulttool/xcresulttool-build-results.json
-
-echo "+++ :json: Extract success/fail test count from xcresulttool"
-jq '[.. | objects | select(.nodeType == "Test Case")] | {passed: map(select(.result == "Passed")) | length, failed: map(select(.result == "Failed")) | length}' \
-  build/xcresulttool/xcresulttool-tests-results.json
-
 echo "--- :xcode: Track XCLogParser report"
 
 echo "~~~ Install XCLogParser"
