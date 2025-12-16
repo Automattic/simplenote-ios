@@ -300,8 +300,12 @@ payload=$(jq -n \
   }'
 )
 
-echo "Will attempt to upload the following JSON:"
-echo "$payload" | jq .
+apps_metrics_path="build/apps-metrics-payload.json"
+echo "$payload" | jq . > "$apps_metrics_path"
+echo "Will attempt to post the following metrics (saved to $apps_metrics_path):"
+cat "$apps_metrics_path"
+
+buildkite-agent artifact upload "$apps_metrics_path"
 
 if [[ "$DRY_RUN" == true ]]; then
   echo "[dry-run] Skipping POST to $METRICS_URL"
