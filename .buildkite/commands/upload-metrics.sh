@@ -8,12 +8,17 @@ TOKEN="${APPS_METRICS_UPLOAD_TOKEN:-}"
 
 DRY_RUN=false
 XCRESULT_PATH=""
+XCLOGPARSER_JSON=""
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --dry-run)
       DRY_RUN=true
       shift
+      ;;
+    --xclogparser-json)
+      XCLOGPARSER_JSON="$2"
+      shift 2
       ;;
     *)
       XCRESULT_PATH="$1"
@@ -102,6 +107,36 @@ else
   test_slowest_duration_ms=0
 fi
 
+if [[ -n "$XCLOGPARSER_JSON" && -f "$XCLOGPARSER_JSON" ]]; then
+  echo "Extracting xclogparser metrics from $XCLOGPARSER_JSON..."
+  xlp_json=$(cat "$XCLOGPARSER_JSON")
+
+  compilation_duration_ms=$(echo "$xlp_json" | jq '(.compilationDuration * 1000) | round')
+  target_count=$(echo "$xlp_json" | jq '[.subSteps[] | select(.title | startswith("Build target"))] | length')
+  cached_step_count=$(echo "$xlp_json" | jq '[.subSteps[] | select(.fetchedFromCache == true)] | length')
+  total_step_count=$(echo "$xlp_json" | jq '.subSteps | length')
+
+  if [[ "$total_step_count" -gt 0 ]]; then
+    cache_hit_rate=$(echo "scale=1; $cached_step_count * 100 / $total_step_count" | bc)
+  else
+    cache_hit_rate="0"
+  fi
+
+  slowest_target=$(echo "$xlp_json" | jq '[.subSteps[] | select(.title | startswith("Build target"))] | sort_by(-.duration) | .[0] // {}')
+  slowest_target_name=$(echo "$slowest_target" | jq -r '.title // "none"')
+  slowest_target_duration_ms=$(echo "$slowest_target" | jq '((.duration // 0) * 1000) | round')
+else
+  if [[ -n "$XCLOGPARSER_JSON" ]]; then
+    echo "xclogparser JSON not found at $XCLOGPARSER_JSON, skipping."
+  fi
+  compilation_duration_ms=0
+  target_count=0
+  cached_step_count=0
+  cache_hit_rate="0"
+  slowest_target_name="none"
+  slowest_target_duration_ms=0
+fi
+
 payload=$(jq -n \
   --arg prefix "$PREFIX" \
   --arg user "$USER_NAME" \
@@ -134,6 +169,12 @@ payload=$(jq -n \
   --argjson test_suite_count "$test_suite_count" \
   --arg test_slowest_name "$test_slowest_name" \
   --argjson test_slowest_duration_ms "$test_slowest_duration_ms" \
+  --argjson compilation_duration_ms "$compilation_duration_ms" \
+  --argjson target_count "$target_count" \
+  --argjson cached_step_count "$cached_step_count" \
+  --arg cache_hit_rate "$cache_hit_rate" \
+  --arg slowest_target_name "$slowest_target_name" \
+  --argjson slowest_target_duration_ms "$slowest_target_duration_ms" \
   '{
     meta: [
       { name: ($prefix + "-user"),             value: $user },
@@ -166,7 +207,13 @@ payload=$(jq -n \
       { name: ($prefix + "-test-duration-total-ms"), value: ($test_duration_total_ms | tostring) },
       { name: ($prefix + "-test-suite-count"),       value: ($test_suite_count | tostring) },
       { name: ($prefix + "-test-slowest-name"),      value: $test_slowest_name },
-      { name: ($prefix + "-test-slowest-duration-ms"), value: ($test_slowest_duration_ms | tostring) }
+      { name: ($prefix + "-test-slowest-duration-ms"), value: ($test_slowest_duration_ms | tostring) },
+      { name: ($prefix + "-compilation-duration-ms"),  value: ($compilation_duration_ms | tostring) },
+      { name: ($prefix + "-target-count"),             value: ($target_count | tostring) },
+      { name: ($prefix + "-cached-step-count"),        value: ($cached_step_count | tostring) },
+      { name: ($prefix + "-cache-hit-rate"),           value: $cache_hit_rate },
+      { name: ($prefix + "-slowest-target-name"),      value: $slowest_target_name },
+      { name: ($prefix + "-slowest-target-duration-ms"), value: ($slowest_target_duration_ms | tostring) }
     ]
   }'
 )
