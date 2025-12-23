@@ -354,10 +354,7 @@ GEM
       xcpretty (~> 0.2, >= 0.0.7)
 
 PLATFORMS
-  arm64-darwin-21
-  arm64-darwin-22
-  arm64-darwin-23
-  x86_64-linux
+  ruby
 
 DEPENDENCIES
   danger-dangermattic (~> 1.0)
