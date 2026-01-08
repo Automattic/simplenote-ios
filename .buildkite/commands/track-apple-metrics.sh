@@ -285,13 +285,13 @@ payload=$(jq -n \
       { name: ($prefix + "-warning-preprocessor-count"),    value: ($warning_preprocessor_count | tostring) },
       { name: ($prefix + "-warning-swift-compiler-count"),  value: ($warning_swift_compiler_count | tostring) },
       { name: ($prefix + "-warning-semantic-count"),        value: ($warning_semantic_count | tostring) },
-      { name: ($prefix + "-test-count-total"),       value: ($test_count_total | tostring) },
-      { name: ($prefix + "-test-count-passed"),      value: ($test_count_passed | tostring) },
-      { name: ($prefix + "-test-count-failed"),      value: ($test_count_failed | tostring) },
-      { name: ($prefix + "-test-count-skipped"),     value: ($test_count_skipped | tostring) },
-      { name: ($prefix + "-test-pass-rate"),         value: $test_pass_rate },
-      { name: ($prefix + "-test-duration-total-ms"), value: ($test_duration_total_ms | tostring) },
-      { name: ($prefix + "-test-suite-count"),       value: ($test_suite_count | tostring) },
+      { name: ($prefix + "-test-total-count"),       value: ($test_count_total | tostring) },
+      { name: ($prefix + "-test-total-count-passed"),      value: ($test_count_passed | tostring) },
+      { name: ($prefix + "-test-total-count-failed"),      value: ($test_count_failed | tostring) },
+      { name: ($prefix + "-test-total-count-skipped"),     value: ($test_count_skipped | tostring) },
+      { name: ($prefix + "-test-total-pass-rate"),         value: $test_pass_rate },
+      { name: ($prefix + "-test-total-duration-ms"), value: ($test_duration_total_ms | tostring) },
+      { name: ($prefix + "-test-total-suite-count"),       value: ($test_suite_count | tostring) },
       { name: ($prefix + "-test-slowest-name"),      value: $test_slowest_name },
       { name: ($prefix + "-test-slowest-duration-ms"), value: ($test_slowest_duration_ms | tostring) },
       { name: ($prefix + "-compilation-duration-ms"),  value: ($compilation_duration_ms | tostring) },
@@ -300,7 +300,7 @@ payload=$(jq -n \
       { name: ($prefix + "-cache-hit-rate"),           value: $cache_hit_rate },
       { name: ($prefix + "-slowest-target-name"),      value: $slowest_target_name },
       { name: ($prefix + "-slowest-target-duration-ms"), value: ($slowest_target_duration_ms | tostring) },
-      { name: ($prefix + "-test-coverage-line-percentage"), value: $coverage_line_percentage }
+      { name: ($prefix + "-test-total-coverage-line-percentage"), value: $coverage_line_percentage }
     ]
   }'
 )
