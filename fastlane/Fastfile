@@ -339,7 +339,8 @@ platform :ios do
       output_directory: OUTPUT_DIRECTORY_PATH,
       derived_data_path: DERIVED_DATA_DIRECTORY,
       reset_simulator: true,
-      result_bundle: true
+      result_bundle: true,
+      code_coverage: true
     )
   end
 
