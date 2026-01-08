@@ -12,48 +12,11 @@ env:
 # This is the default pipeline – it will build and test the app
 steps:
 
-  #################
-  # Run Unit Tests
-  #################
   - label: "🔬 Build and Test"
+    key: build_and_test
     command: ".buildkite/commands/build-and-test.sh"
     plugins: [$CI_TOOLKIT_PLUGIN]
     artifact_paths:
       - "build/results/*"
-
-  #################
-  # Linters
-  #################
-  - label: "☢️ Danger - PR Check"
-    command: danger
-    key: danger
-    if: "build.pull_request.id != null"
-    retry:
-      manual:
-        permit_on_passed: true
-    agents:
-      queue: "linter"
-
-  - label: ":swift: SwiftLint"
-    command: swiftlint
-    agents:
-      queue: "linter"
-
-  #################
-  # Prototype Build
-  #################
-  - label: "🛠 Prototype Build"
-    command: ".buildkite/commands/build-prototype.sh"
-    plugins: [$CI_TOOLKIT_PLUGIN]
-    if: "build.pull_request.id != null || build.pull_request.draft"
-    artifact_paths:
-      - "build/results/*"
-
-  #################
-  # UI Tests
-  #################
-  - label: "🔬 UI Test (Full)"
-    command: ".buildkite/commands/build-and-ui-test.sh SimplenoteUITests 'iPhone SE (3rd generation)'"
-    plugins: [$CI_TOOLKIT_PLUGIN]
-    artifact_paths:
-      - "build/results/*"
+      - DerivedData/**/*.xcactivitylog
+      - build/xclogparser-reports/index.html

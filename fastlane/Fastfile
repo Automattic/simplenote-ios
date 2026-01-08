@@ -200,7 +200,7 @@ platform :ios do
       project: project_path,
       scheme: screenshots_scheme,
       build_for_testing: true,
-      derived_data_path: derived_data_directory
+      derived_data_path: DERIVED_DATA_DIRECTORY
     )
   end
 
@@ -232,7 +232,7 @@ platform :ios do
       # folder. This is so that we can parallelize test runs with multiple
       # device and locale combinations.
       test_without_building: true,
-      derived_data_path: derived_data_directory,
+      derived_data_path: DERIVED_DATA_DIRECTORY,
 
       output_directory: screenshots_directory,
       clear_previous_screenshots: options.fetch(:clear_previous_screenshots, true),
@@ -337,8 +337,10 @@ platform :ios do
       scheme: 'Simplenote',
       device: options[:device] || 'iPhone 14',
       output_directory: OUTPUT_DIRECTORY_PATH,
+      derived_data_path: DERIVED_DATA_DIRECTORY,
       reset_simulator: true,
-      result_bundle: true
+      result_bundle: true,
+      code_coverage: true
     )
   end
 
@@ -534,9 +536,7 @@ def fastlane_directory
   __dir__
 end
 
-def derived_data_directory
-  File.join(fastlane_directory, 'DerivedData')
-end
+DERIVED_DATA_DIRECTORY = File.join(fastlane_directory, 'DerivedData')
 
 def project_name
   'Simplenote.xcodeproj'
