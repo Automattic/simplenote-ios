@@ -353,8 +353,7 @@ payload=$(jq -n \
       { name: ($prefix + "-test-total-duration-ms"), value: ($test_duration_total_ms | tostring) },
       { name: ($prefix + "-test-total-suite-count"),       value: ($test_suite_count | tostring) },
       { name: ($prefix + "-test-slowest-name"),      value: $test_slowest_name },
-      { name: ($prefix + "-test-slowest-duration-ms"), value: ($test_slowest_duration_ms | tostring) }
-    ] + $per_target_metrics + [
+      { name: ($prefix + "-test-slowest-duration-ms"), value: ($test_slowest_duration_ms | tostring) },
       { name: ($prefix + "-compilation-duration-ms"),  value: ($compilation_duration_ms | tostring) },
       { name: ($prefix + "-target-count"),             value: ($target_count | tostring) },
       { name: ($prefix + "-cached-step-count"),        value: ($cached_step_count | tostring) },
@@ -362,7 +361,7 @@ payload=$(jq -n \
       { name: ($prefix + "-slowest-target-name"),      value: $slowest_target_name },
       { name: ($prefix + "-slowest-target-duration-ms"), value: ($slowest_target_duration_ms | tostring) },
       { name: ($prefix + "-test-total-coverage-line-percentage"), value: $coverage_line_percentage }
-    ]
+    ] + $per_target_metrics
   }'
 )
 
