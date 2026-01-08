@@ -285,6 +285,48 @@ slowest_target=$(echo "$xlp_json" | jq '[.subSteps[] | select(.title | startswit
 slowest_target_name=$(echo "$slowest_target" | jq -r '.title // "none"')
 slowest_target_duration_ms=$(echo "$slowest_target" | jq '((.duration // 0) * 1000) | round')
 
+# Per-build-target metrics
+per_build_target_metrics_json="[]"
+
+# Get all build target names
+build_target_titles=$(echo "$xlp_json" | jq -r '[.subSteps[] | select(.title | startswith("Build target")) | .title] | .[]')
+
+while IFS= read -r target_title; do
+  [[ -z "$target_title" ]] && continue
+
+  # Extract target name without "Build target " prefix
+  target_name="${target_title#Build target }"
+  echo "Extracting metrics for build target: $target_name"
+  target_key=$(to_kebab_case "$target_name")
+
+  # Extract metrics for this target
+  target_json=$(echo "$xlp_json" | jq --arg title "$target_title" '.subSteps[] | select(.title == $title)')
+
+  target_duration_ms=$(echo "$target_json" | jq '((.duration // 0) * 1000) | round')
+  target_warning_count=$(echo "$target_json" | jq '.warningCount // 0')
+  target_error_count=$(echo "$target_json" | jq '.errorCount // 0')
+  target_cached=$(echo "$target_json" | jq -r 'if .fetchedFromCache then "true" else "false" end')
+
+  # Build metrics for this target and append to array
+  build_target_metrics=$(jq -n \
+    --arg prefix "$PREFIX" \
+    --arg target "$target_key" \
+    --arg duration_ms "$target_duration_ms" \
+    --arg warning_count "$target_warning_count" \
+    --arg error_count "$target_error_count" \
+    --arg cached "$target_cached" \
+    '[
+      { name: ($prefix + "-build-target-" + $target + "-duration-ms"), value: $duration_ms },
+      { name: ($prefix + "-build-target-" + $target + "-warning-count"), value: $warning_count },
+      { name: ($prefix + "-build-target-" + $target + "-error-count"), value: $error_count },
+      { name: ($prefix + "-build-target-" + $target + "-cached"), value: $cached }
+    ]')
+
+  per_build_target_metrics_json=$(echo "$per_build_target_metrics_json" "$build_target_metrics" | jq -s 'add')
+done <<< "$build_target_titles"
+
+echo "Found $(echo "$per_build_target_metrics_json" | jq 'length') per-build-target metrics"
+
 payload=$(jq -n \
   --arg prefix "$PREFIX" \
   --arg user "$USER_NAME" \
@@ -325,6 +367,7 @@ payload=$(jq -n \
   --arg slowest_target_name "$slowest_target_name" \
   --argjson slowest_target_duration_ms "$slowest_target_duration_ms" \
   --arg coverage_line_percentage "$coverage_line_percentage" \
+  --argjson per_build_target_metrics "$per_build_target_metrics_json" \
   '{
     meta: [
       { name: ($prefix + "-user"),             value: $user },
@@ -361,7 +404,7 @@ payload=$(jq -n \
       { name: ($prefix + "-slowest-target-name"),      value: $slowest_target_name },
       { name: ($prefix + "-slowest-target-duration-ms"), value: ($slowest_target_duration_ms | tostring) },
       { name: ($prefix + "-test-total-coverage-line-percentage"), value: $coverage_line_percentage }
-    ] + $per_target_metrics)
+    ] + $per_target_metrics + $per_build_target_metrics)
   }'
 )
 
