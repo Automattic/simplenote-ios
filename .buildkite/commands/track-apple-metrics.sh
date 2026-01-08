@@ -288,19 +288,16 @@ slowest_target_duration_ms=$(echo "$slowest_target" | jq '((.duration // 0) * 10
 # Per-build-target metrics
 per_build_target_metrics_json="[]"
 
-# Get all build target names
-build_target_titles=$(echo "$xlp_json" | jq -r '[.subSteps[] | select(.title | startswith("Build target")) | .title] | .[]')
+# Get all build target names (strip "Build target " prefix in jq)
+# Use process substitution to iterate reliably across different shell environments
+while IFS= read -r target_name; do
+  [[ -z "$target_name" ]] && continue
 
-while IFS= read -r target_title; do
-  [[ -z "$target_title" ]] && continue
-
-  # Extract target name without "Build target " prefix
-  target_name="${target_title#Build target }"
   echo "Extracting metrics for build target: $target_name"
   target_key=$(to_kebab_case "$target_name")
 
-  # Extract metrics for this target
-  target_json=$(echo "$xlp_json" | jq --arg title "$target_title" '.subSteps[] | select(.title == $title)')
+  # Extract metrics for this target (reconstruct full title for matching)
+  target_json=$(jq --arg title "Build target $target_name" '.subSteps[] | select(.title == $title)' "$xclogparser_json_path")
 
   target_duration_ms=$(echo "$target_json" | jq '((.duration // 0) * 1000) | round')
   target_warning_count=$(echo "$target_json" | jq '.warningCount // 0')
@@ -323,7 +320,7 @@ while IFS= read -r target_title; do
     ]')
 
   per_build_target_metrics_json=$(echo "$per_build_target_metrics_json" "$build_target_metrics" | jq -s 'add')
-done <<< "$build_target_titles"
+done < <(jq -r '[.subSteps[] | select(.title | startswith("Build target")) | .title | sub("^Build target "; "")] | .[]' "$xclogparser_json_path")
 
 echo "Found $(echo "$per_build_target_metrics_json" | jq 'length') per-build-target metrics"
 
