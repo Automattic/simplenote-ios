@@ -335,7 +335,7 @@ payload=$(jq -n \
       { name: ($prefix + "-metrics-source"),   value: "grouped-metrics" },
       { name: ($prefix + "-branch"),           value: $branch }
     ],
-    metrics: [
+    metrics: ([
       { name: ($prefix + "-analyzer-warning-count"), value: ($analyzer_warning_count | tostring) },
       { name: ($prefix + "-error-count"),            value: ($error_count | tostring) },
       { name: ($prefix + "-status"),                 value: $status },
@@ -361,7 +361,7 @@ payload=$(jq -n \
       { name: ($prefix + "-slowest-target-name"),      value: $slowest_target_name },
       { name: ($prefix + "-slowest-target-duration-ms"), value: ($slowest_target_duration_ms | tostring) },
       { name: ($prefix + "-test-total-coverage-line-percentage"), value: $coverage_line_percentage }
-    ] + $per_target_metrics
+    ] + $per_target_metrics)
   }'
 )
 
