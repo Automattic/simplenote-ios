@@ -88,6 +88,34 @@ echo "Dumped xcresult test results to $xcresulttool_test_results_path"
 
 upload_artifact "$xcresulttool_test_results_path"
 
+echo "--- :coverage: Extract code coverage (if available)"
+
+# Check if code coverage data is available in the xcresult bundle
+coverage_availability=$(xcrun xcresulttool get content-availability --path "$XCRESULT_PATH" --compact)
+has_coverage=$(echo "$coverage_availability" | jq -r '.hasCoverage // false')
+
+if [[ "$has_coverage" == "true" ]]; then
+  echo "Code coverage data found, extracting..."
+
+  xccov_report_path=build/xcresulttool/xccov-report.json
+  xcrun xccov view --report --json "$XCRESULT_PATH" > "$xccov_report_path"
+  echo "Dumped code coverage report to $xccov_report_path"
+
+  upload_artifact "$xccov_report_path"
+
+  # Extract overall coverage percentage
+  # xccov reports lineCoverage as a decimal (e.g., 0.4523 = 45.23%)
+  coverage_line_percentage=$(jq '(.lineCoverage * 100) | round' "$xccov_report_path")
+
+  echo "Line coverage: ${coverage_line_percentage}%"
+else
+  echo "No code coverage data available in xcresult bundle!"
+  echo "To enable coverage, add 'code_coverage: true' to your Fastlane scan action,"
+  echo "or pass '-enableCodeCoverage YES' to xcodebuild."
+
+  coverage_line_percentage="n.a."
+fi
+
 echo "--- :xcode: Track XCLogParser report"
 
 echo "~~~ Install XCLogParser"
@@ -236,6 +264,7 @@ payload=$(jq -n \
   --arg cache_hit_rate "$cache_hit_rate" \
   --arg slowest_target_name "$slowest_target_name" \
   --argjson slowest_target_duration_ms "$slowest_target_duration_ms" \
+  --arg coverage_line_percentage "$coverage_line_percentage" \
   '{
     meta: [
       { name: ($prefix + "-user"),             value: $user },
@@ -270,7 +299,8 @@ payload=$(jq -n \
       { name: ($prefix + "-cached-step-count"),        value: ($cached_step_count | tostring) },
       { name: ($prefix + "-cache-hit-rate"),           value: $cache_hit_rate },
       { name: ($prefix + "-slowest-target-name"),      value: $slowest_target_name },
-      { name: ($prefix + "-slowest-target-duration-ms"), value: ($slowest_target_duration_ms | tostring) }
+      { name: ($prefix + "-slowest-target-duration-ms"), value: ($slowest_target_duration_ms | tostring) },
+      { name: ($prefix + "-test-coverage-line-percentage"), value: $coverage_line_percentage }
     ]
   }'
 )
