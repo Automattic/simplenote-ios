@@ -208,6 +208,65 @@ slowest_test=$(jq '[.. | objects | select(.nodeType == "Test Case")] | sort_by(-
 test_slowest_name=$(echo "$slowest_test" | jq -r '.name // "none"')
 test_slowest_duration_ms=$(echo "$slowest_test" | jq '((.durationInSeconds // 0) * 1000) | round')
 
+# Per-target test metrics (dynamically extract for each test bundle)
+# Convert target name to kebab-case for metric names (e.g., SimplenoteTests -> simplenote-tests)
+to_kebab_case() {
+  echo "$1" | sed 's/\([a-z]\)\([A-Z]\)/\1-\2/g' | tr '[:upper:]' '[:lower:]'
+}
+
+# Build metrics JSON array for all test bundles
+per_target_metrics_json="[]"
+
+# Get all test bundle names (both Unit and UI test bundles)
+test_bundle_names=$(jq -r '[.. | objects | select(.nodeType == "Unit test bundle" or .nodeType == "UI test bundle") | .name] | .[]' $xcresulttool_test_results_path)
+
+for bundle_name in $test_bundle_names; do
+  echo "Extracting metrics for test target: $bundle_name"
+  target_key=$(to_kebab_case "$bundle_name")
+
+  # Extract the bundle object
+  bundle_json=$(jq --arg name "$bundle_name" '[.. | objects | select((.nodeType == "Unit test bundle" or .nodeType == "UI test bundle") and .name == $name)][0]' $xcresulttool_test_results_path)
+
+  # Extract metrics from the bundle
+  target_count=$(echo "$bundle_json" | jq '[.. | objects | select(.nodeType == "Test Case")] | length')
+  target_passed=$(echo "$bundle_json" | jq '[.. | objects | select(.nodeType == "Test Case" and .result == "Passed")] | length')
+  target_failed=$(echo "$bundle_json" | jq '[.. | objects | select(.nodeType == "Test Case" and .result == "Failed")] | length')
+  target_skipped=$(echo "$bundle_json" | jq '[.. | objects | select(.nodeType == "Test Case" and .result == "Skipped")] | length')
+  target_duration_ms=$(echo "$bundle_json" | jq '([.. | objects | select(.nodeType == "Test Case") | .durationInSeconds // 0] | add) * 1000 | round')
+  target_suite_count=$(echo "$bundle_json" | jq '[.. | objects | select(.nodeType == "Test Suite")] | length')
+
+  if [[ "$target_count" -gt 0 ]]; then
+    target_pass_rate=$(echo "scale=2; $target_passed * 100 / $target_count" | bc)
+  else
+    target_pass_rate="0"
+  fi
+
+  # Build metrics for this target and append to array
+  target_metrics=$(jq -n \
+    --arg prefix "$PREFIX" \
+    --arg target "$target_key" \
+    --arg count "$target_count" \
+    --arg passed "$target_passed" \
+    --arg failed "$target_failed" \
+    --arg skipped "$target_skipped" \
+    --arg pass_rate "$target_pass_rate" \
+    --arg duration_ms "$target_duration_ms" \
+    --arg suite_count "$target_suite_count" \
+    '[
+      { name: ($prefix + "-test-target-" + $target + "-count"), value: $count },
+      { name: ($prefix + "-test-target-" + $target + "-count-passed"), value: $passed },
+      { name: ($prefix + "-test-target-" + $target + "-count-failed"), value: $failed },
+      { name: ($prefix + "-test-target-" + $target + "-count-skipped"), value: $skipped },
+      { name: ($prefix + "-test-target-" + $target + "-pass-rate"), value: $pass_rate },
+      { name: ($prefix + "-test-target-" + $target + "-duration-ms"), value: $duration_ms },
+      { name: ($prefix + "-test-target-" + $target + "-suite-count"), value: $suite_count }
+    ]')
+
+  per_target_metrics_json=$(echo "$per_target_metrics_json" "$target_metrics" | jq -s 'add')
+done
+
+echo "Found $(echo "$per_target_metrics_json" | jq 'length') per-target metrics"
+
 echo "Extracting xclogparser metrics from $xclogparser_json_path..."
 xlp_json=$(cat "$xclogparser_json_path")
 
@@ -258,6 +317,7 @@ payload=$(jq -n \
   --argjson test_suite_count "$test_suite_count" \
   --arg test_slowest_name "$test_slowest_name" \
   --argjson test_slowest_duration_ms "$test_slowest_duration_ms" \
+  --argjson per_target_metrics "$per_target_metrics_json" \
   --argjson compilation_duration_ms "$compilation_duration_ms" \
   --argjson target_count "$target_count" \
   --argjson cached_step_count "$cached_step_count" \
@@ -293,7 +353,8 @@ payload=$(jq -n \
       { name: ($prefix + "-test-total-duration-ms"), value: ($test_duration_total_ms | tostring) },
       { name: ($prefix + "-test-total-suite-count"),       value: ($test_suite_count | tostring) },
       { name: ($prefix + "-test-slowest-name"),      value: $test_slowest_name },
-      { name: ($prefix + "-test-slowest-duration-ms"), value: ($test_slowest_duration_ms | tostring) },
+      { name: ($prefix + "-test-slowest-duration-ms"), value: ($test_slowest_duration_ms | tostring) }
+    ] + $per_target_metrics + [
       { name: ($prefix + "-compilation-duration-ms"),  value: ($compilation_duration_ms | tostring) },
       { name: ($prefix + "-target-count"),             value: ($target_count | tostring) },
       { name: ($prefix + "-cached-step-count"),        value: ($cached_step_count | tostring) },
