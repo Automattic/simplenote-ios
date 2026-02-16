@@ -19,13 +19,18 @@ only_rules:
   # if,for,while,do statements shouldn't wrap their conditionals in parentheses.
   - control_statement
 
+  - contains_over_filter_is_empty
+
   - discarded_notification_center_observer
 
   - duplicate_imports
 
   # Arguments can be omitted when matching enums with associated types if they
   # are not used.
+  - empty_count
   - empty_enum_arguments
+
+  - empty_string
 
   # Prefer `() -> ` over `Void -> `.
   - empty_parameters

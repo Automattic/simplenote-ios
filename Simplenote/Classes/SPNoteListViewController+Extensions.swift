@@ -398,7 +398,7 @@ extension SPNoteListViewController {
             trashButton.isEnabled = false
             return
         }
-        trashButton.isEnabled = selectedRows.count > 0
+        trashButton.isEnabled = !selectedRows.isEmpty
     }
 }
 
