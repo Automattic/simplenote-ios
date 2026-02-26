@@ -10,11 +10,7 @@ require 'digest'
 # Constants
 PROJECT_DIR = __dir__
 XCODE_PROJECT = 'Simplenote.xcodeproj'
-XCODE_SCHEME = 'Simplenote'
-XCODE_CONFIGURATION = 'Debug'
 LOCAL_PATH = 'vendor/bundle'
-
-task default: %w[test]
 
 desc 'Checks the source for style errors'
 task :lint do
@@ -79,36 +75,6 @@ namespace :dependencies do
 end
 
 CLOBBER << 'vendor'
-
-desc "Build #{XCODE_SCHEME}"
-task build: [:dependencies] do
-  xcodebuild(:build)
-end
-
-desc "Profile build #{XCODE_SCHEME}"
-task buildprofile: [:dependencies] do
-  ENV['verbose'] = '1'
-  xcodebuild(:build, "OTHER_SWIFT_FLAGS='-Xfrontend -debug-time-compilation -Xfrontend -debug-time-expression-type-checking'")
-end
-
-task timed_build: [:clean] do
-  require 'benchmark'
-  time = Benchmark.measure do
-    Rake::Task['build'].invoke
-  end
-  puts "CPU Time: #{time.total}"
-  puts "Wall Time: #{time.real}"
-end
-
-desc 'Run test suite'
-task test: [:dependencies] do
-  xcodebuild(:build, :test)
-end
-
-desc 'Remove any temporary products'
-task :clean do
-  xcodebuild(:clean)
-end
 
 namespace :git do
   hooks = %w[post-checkout post-merge]
@@ -181,23 +147,6 @@ end
 def fold(label)
   puts "--- #{label}" if ENV['BUILDKITE']
   yield
-end
-
-def xcodebuild(*build_cmds)
-  cmd = 'xcodebuild'
-  cmd += " -destination 'platform=iOS Simulator,name=iPhone 16'"
-  cmd += ' -sdk iphonesimulator'
-  cmd += " -project #{XCODE_PROJECT}"
-  cmd += " -scheme #{XCODE_SCHEME}"
-  cmd += " -configuration #{xcode_configuration}"
-  cmd += ' '
-  cmd += build_cmds.map(&:to_s).join(' ')
-  cmd += ' | bundle exec xcpretty && exit ${PIPESTATUS[0]}' unless ENV['verbose']
-  sh(cmd)
-end
-
-def xcode_configuration
-  ENV['XCODE_CONFIGURATION'] || XCODE_CONFIGURATION
 end
 
 def command?(command)
