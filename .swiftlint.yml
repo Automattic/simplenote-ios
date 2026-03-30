@@ -26,6 +26,9 @@ only_rules:
   # Prefer checking `isEmpty` over comparing `count` to zero.
   - empty_count
 
+  # Prefer checking `isEmpty` over comparing `string` to an empty string literal.
+  - empty_string
+
   # Arguments can be omitted when matching enums with associated types if they
   # are not used.
   - empty_enum_arguments
