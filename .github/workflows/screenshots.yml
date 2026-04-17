@@ -18,9 +18,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - uses: actions/setup-ruby@v1
-      with:
-        ruby-version: '2.5.x' # Same as project's .ruby-version
+    - uses: ruby/setup-ruby@v1
 
     - name: Install Bundler
       run: gem install bundler
