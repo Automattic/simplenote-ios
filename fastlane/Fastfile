@@ -576,7 +576,7 @@ def screenshot_devices
 end
 
 def simulator_version
-  '14.5'
+  '26.3'
 end
 
 def deoccupy_test_account
