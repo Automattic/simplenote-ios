@@ -55,6 +55,9 @@ only_rules:
   # Lines should not have trailing whitespace.
   # - trailing_whitespace
 
+  # All imported modules should be required to make the file compile.
+  - unused_import
+
   # - vertical_whitespace
   - custom_rules
 
