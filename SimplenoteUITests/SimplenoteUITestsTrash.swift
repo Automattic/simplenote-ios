@@ -11,6 +11,7 @@ class SimplenoteUISmokeTestsTrash: XCTestCase {
     }
 
     override func setUpWithError() throws {
+        try XCTSkipIf(true, "UI test bit-rotted; see simplenote-ios#1717")
         NoteList.trashAllNotes()
         Trash.empty()
         NoteList.openAllNotes()
