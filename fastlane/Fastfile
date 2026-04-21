@@ -382,10 +382,18 @@ platform :ios do
   desc 'Occupy a free test account and run UI tests with it'
   lane :pick_test_account_and_run_ui_tests do |options|
     if is_ci
-      sanitize_test_accounts
-      find_free_test_account
-      run_ui_tests(options.merge({ test_account: EnvManager.get_required_env!('UI_TESTS_ACCOUNT_EMAIL').sub('X', $used_test_account_index.to_s) }))
-      deoccupy_test_account
+      UI.important('=' * 72)
+      UI.important('UI test account pool lookup is BYPASSED.')
+      UI.important('UI_TESTS_ACCOUNTS_JSON_URL endpoint is dead; see simplenote-ios#1717.')
+      UI.important('Running UI tests with the default hardcoded account.')
+      UI.important('=' * 72)
+
+      # To restore the pool lookup, replace the run_ui_tests call below with:
+      #   sanitize_test_accounts
+      #   find_free_test_account
+      #   run_ui_tests(options.merge({ test_account: EnvManager.get_required_env!('UI_TESTS_ACCOUNT_EMAIL').sub('X', $used_test_account_index.to_s) }))
+      #   deoccupy_test_account
+      run_ui_tests(options)
     else
       UI.user_error!('This lane should be run only from CI')
     end
