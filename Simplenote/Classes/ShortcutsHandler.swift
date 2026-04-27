@@ -132,7 +132,7 @@ extension ShortcutsHandler {
     }
 
     private func noteItem(with note: Note?) -> UIApplicationShortcutItem? {
-        guard let note = note, let simperiumKey = note.simperiumKey else {
+        guard let note, let simperiumKey = note.simperiumKey else {
             return nil
         }
 

@@ -52,7 +52,7 @@ extension SPObjectManager {
     func newNote(withContent content: String?, tags: [String]?) -> Note {
         let newNote = newDefaultNote()
 
-        if let content = content {
+        if let content {
             newNote.content = content
         }
 

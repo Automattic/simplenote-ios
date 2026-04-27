@@ -22,7 +22,7 @@ extension UIKeyCommand {
                      title: String? = nil) {
         self.init(input: input, modifierFlags: modifierFlags, action: action)
 
-        if let title = title {
+        if let title {
             self.title = title
         }
     }

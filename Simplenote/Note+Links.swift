@@ -17,7 +17,7 @@ extension Note {
     /// Returns the receiver's Markdown Internal Reference, when possible
     ///
     var markdownInternalLink: String? {
-        guard let title = titlePreview, let plainInternalLink = plainInternalLink else {
+        guard let title = titlePreview, let plainInternalLink else {
             return nil
         }
 

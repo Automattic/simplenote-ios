@@ -55,7 +55,7 @@ extension Note {
     }
 
     private func titlePreview(with range: Range<String.Index>?) -> String {
-        guard let range = range, let content = content else {
+        guard let range, let content else {
             return NSLocalizedString("New note...", comment: "Empty Note Placeholder")
         }
 
@@ -64,7 +64,7 @@ extension Note {
     }
 
     private func bodyPreview(with range: Range<String.Index>?) -> String? {
-        guard let range = range, let content = content else {
+        guard let range, let content else {
             return nil
         }
 
@@ -82,7 +82,7 @@ extension Note {
     /// Returns excerpt of the content around the first match of one of the keywords
     ///
     func bodyExcerpt(keywords: [String]?) -> String? {
-        guard let keywords = keywords, !keywords.isEmpty, let content = content?.precomposedStringWithCanonicalMapping else {
+        guard let keywords, !keywords.isEmpty, let content = content?.precomposedStringWithCanonicalMapping else {
             return bodyPreview
         }
 

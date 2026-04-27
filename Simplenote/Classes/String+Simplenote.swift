@@ -188,7 +188,7 @@ extension String {
     static func simplenotePath(withHost host: String? = nil) -> String {
         let base = SimplenoteConstants.simplenoteScheme + "://"
 
-        guard let host = host else {
+        guard let host else {
             return base
         }
 

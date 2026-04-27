@@ -127,7 +127,7 @@ private extension SPCardPresentationController {
     }
 
     func addCardView() {
-        guard let containerView = containerView else {
+        guard let containerView else {
             return
         }
 

@@ -164,7 +164,7 @@ extension NoteInformationViewController: UITableViewDelegate {
         let row = sections[indexPath.section].rows[indexPath.row]
         switch row {
         case .reference(let interLink, _, _):
-            if let interLink = interLink, let url = URL(string: interLink) {
+            if let interLink, let url = URL(string: interLink) {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
         default:

@@ -10,7 +10,7 @@ enum NoteContentHelper {
     ///     - content: note content
     ///
     static func structure(of content: String?) -> (title: Range<String.Index>?, body: Range<String.Index>?, trimmedBody: Range<String.Index>?) {
-        guard let content = content, !content.isEmpty else {
+        guard let content, !content.isEmpty else {
             return (title: nil, body: nil, trimmedBody: nil)
         }
 

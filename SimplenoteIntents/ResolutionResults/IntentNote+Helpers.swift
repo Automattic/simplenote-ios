@@ -10,7 +10,7 @@ import Intents
 
 extension IntentNoteResolutionResult {
     static func resolve(_ intentNote: IntentNote?, in coreDataWrapper: ExtensionCoreDataWrapper) -> IntentNoteResolutionResult {
-        guard let intentNote = intentNote,
+        guard let intentNote,
               let identifier = intentNote.identifier else {
             return IntentNoteResolutionResult.needsValue()
         }

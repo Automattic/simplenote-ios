@@ -3,7 +3,7 @@ import Foundation
 extension NSTextStorage {
     @objc(applyBackgroundColor:toRanges:)
     func applyBackgroundColor(_ color: UIColor?, toRanges wordRanges: [NSValue]?) {
-        guard let color = color, let wordRanges = wordRanges else {
+        guard let color, let wordRanges else {
             return
         }
 

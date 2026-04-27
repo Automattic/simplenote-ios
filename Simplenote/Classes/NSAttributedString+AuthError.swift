@@ -22,7 +22,7 @@ extension NSAttributedString {
         output.append(string: .space)
         output.append(statusText)
 
-        if let error = error {
+        if let error {
             let title = NSAttributedString(string: Title.error, attributes: Style.title)
             let text = NSAttributedString(string: error.localizedDescription, attributes: Style.text)
 
@@ -33,7 +33,7 @@ extension NSAttributedString {
             output.append(text)
         }
 
-        if let response = response {
+        if let response {
             let title = NSAttributedString(string: Title.response, attributes: Style.title)
             let text = NSAttributedString(string: response, attributes: Style.text)
 

@@ -16,7 +16,7 @@ final class SPCardDismissalAnimator: NSObject, UIViewControllerAnimatedTransitio
 
     func interruptibleAnimator(using transitionContext: UIViewControllerContextTransitioning) -> UIViewImplicitlyAnimating {
         // According to docs we must return the same animator object during transition
-        if let animator = animator {
+        if let animator {
             return animator
         }
 

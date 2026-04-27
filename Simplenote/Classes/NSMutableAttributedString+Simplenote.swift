@@ -15,7 +15,7 @@ extension NSMutableAttributedString {
     ///
     func append(string: String, foregroundColor: UIColor? = nil) {
         var attributes = [NSAttributedString.Key: Any]()
-        if let foregroundColor = foregroundColor {
+        if let foregroundColor {
             attributes[.foregroundColor] = foregroundColor
         }
 

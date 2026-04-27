@@ -7,7 +7,7 @@ extension UITextField {
     ///
     @objc
     func pasteTag() {
-        guard let selectedRange = selectedRange,
+        guard let selectedRange,
               let pasteboardText = UIPasteboard.general.string, !pasteboardText.isEmpty else {
             return
         }

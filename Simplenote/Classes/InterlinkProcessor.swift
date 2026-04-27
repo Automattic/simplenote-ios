@@ -105,7 +105,7 @@ private extension InterlinkProcessor {
 
     func setupInterlinkEventListeners(replacementRange: Range<String.Index>) {
         interlinkViewController?.onInsertInterlink = { [weak self] text in
-            guard let self = self else {
+            guard let self else {
                 return
             }
 

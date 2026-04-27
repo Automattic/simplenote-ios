@@ -113,7 +113,7 @@ private extension ShareViewController {
     /// Submits a given Note to the user's Simplenote account
     ///
     func submit(note: Note) {
-        guard let simperiumToken = simperiumToken else {
+        guard let simperiumToken else {
             return
         }
 
@@ -174,12 +174,12 @@ private extension ShareViewController {
     /// Attempts to extract the Note's Payload from the current ExtensionContext
     ///
     func loadContent() {
-        guard let context = context else {
+        guard let context else {
             fatalError()
         }
 
         context.extractNote(from: context) { note in
-            guard let note = note else {
+            guard let note else {
                 return
             }
             self.originalNote = note

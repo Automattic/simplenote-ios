@@ -79,7 +79,7 @@ extension UIView {
             return
         }
 
-        guard let superview = superview, let snapshot = snapshotView(afterScreenUpdates: true) else {
+        guard let superview, let snapshot = snapshotView(afterScreenUpdates: true) else {
             viewUpdateBlock()
             return
         }
