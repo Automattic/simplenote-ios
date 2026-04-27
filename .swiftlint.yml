@@ -48,6 +48,9 @@ only_rules:
 
   # Prefer `.zero` over explicit init with zero parameters (e.g., `CGPoint(x: 0, y: 0)`).
   - prefer_zero_over_explicit_init
+  
+  # Prefer `someBool.toggle()` over `someBool = !someBool`.
+  - toggle_bool
 
   # Files should have a single trailing newline.
   - trailing_newline
