@@ -43,7 +43,7 @@ class SPEditorTapRecognizerDelegate: NSObject, UIGestureRecognizerDelegate {
     }
 
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        guard let excludedView = excludedView, let touchView = touch.view else {
+        guard let excludedView, let touchView = touch.view else {
             return true
         }
 

@@ -63,7 +63,7 @@ class NoticePresenter {
     }
 
     private func prepareContainerView() -> PassthruView? {
-        guard let keyWindow = keyWindow else {
+        guard let keyWindow else {
             return nil
         }
 
@@ -106,8 +106,8 @@ class NoticePresenter {
     // MARK: Dismissing Methods
     //
     func dismissNotification(withDuration duration: TimeInterval, completion: @escaping () -> Void) {
-        guard let containerView = containerView,
-              let noticeView = noticeView else {
+        guard let containerView,
+              let noticeView else {
             return
         }
         UIView.animate(withDuration: duration,
@@ -130,9 +130,9 @@ class NoticePresenter {
 //
 extension NoticePresenter: KeyboardObservable {
     func keyboardDidChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
-        guard let endFrame = endFrame,
-              let animationCurve = animationCurve,
-              let animationDuration = animationDuration else {
+        guard let endFrame,
+              let animationCurve,
+              let animationDuration else {
             return
         }
         updateKeyboardHeight(with: endFrame)
@@ -140,9 +140,9 @@ extension NoticePresenter: KeyboardObservable {
     }
 
     func keyboardWillChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
-        guard let endFrame = endFrame,
-              let animationCurve = animationCurve,
-              let animationDuration = animationDuration else {
+        guard let endFrame,
+              let animationCurve,
+              let animationDuration else {
             return
         }
         updateKeyboardHeight(with: endFrame)
@@ -155,7 +155,7 @@ extension NoticePresenter: KeyboardObservable {
     }
 
     private func animateNoticeToNewKeyboardLocation(frame: CGRect, curve: UInt, animationDuration: TimeInterval) {
-        guard let containerView = containerView else {
+        guard let containerView else {
             return
         }
 

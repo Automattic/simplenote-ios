@@ -188,7 +188,7 @@ extension SPNoteEditorViewController: KeyboardObservable {
     }
 
     public func keyboardWillChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
-        guard let _ = view.window, let endFrame = endFrame, let duration = animationDuration, let curve = animationCurve else {
+        guard let _ = view.window, let endFrame, let duration = animationDuration, let curve = animationCurve else {
             return
         }
 
@@ -196,7 +196,7 @@ extension SPNoteEditorViewController: KeyboardObservable {
     }
 
     public func keyboardDidChangeFrame(beginFrame: CGRect?, endFrame: CGRect?, animationDuration: TimeInterval?, animationCurve: UInt?) {
-        guard let _ = view.window, let endFrame = endFrame, let duration = animationDuration, let curve = animationCurve else {
+        guard let _ = view.window, let endFrame, let duration = animationDuration, let curve = animationCurve else {
             return
         }
 
@@ -415,13 +415,13 @@ extension SPNoteEditorViewController {
     ///
     @objc
     func updateInformationControllerPresentation() {
-        guard let informationViewController = informationViewController else {
+        guard let informationViewController else {
             return
         }
 
         restoreDefaultLinksDimmingInEditor()
         informationViewController.dismiss(animated: false) { [weak self] in
-            guard let self = self else {
+            guard let self else {
                 return
             }
             self.presentInformationController(for: self.note, from: self.informationButton)
@@ -532,7 +532,7 @@ extension SPNoteEditorViewController {
     }
 
     private func presentNewNoteReplacingCurrentEditor() {
-        guard let navigationController = navigationController,
+        guard let navigationController,
               let snapshotView = createAndAddEditorSnapshotView() else {
             return
         }
@@ -560,7 +560,7 @@ extension SPNoteEditorViewController {
                                   height: noteEditorTextView.frame.height - noteEditorTextView.adjustedContentInset.top)
 
         guard let snapshotView = view.resizableSnapshotView(from: snapshotRect, afterScreenUpdates: false, withCapInsets: .zero),
-              let navigationController = navigationController else {
+              let navigationController else {
             return nil
         }
 

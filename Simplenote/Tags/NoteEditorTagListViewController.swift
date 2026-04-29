@@ -37,7 +37,7 @@ class NoteEditorTagListViewController: UIViewController {
     private lazy var suggestionsViewController: NoteEditorTagSuggestionsViewController = {
         let viewController = NoteEditorTagSuggestionsViewController(note: note)
         viewController.onSelectionCallback = { [weak self] tagName in
-            guard let self = self else {
+            guard let self else {
                 return
             }
 
@@ -117,7 +117,7 @@ private extension NoteEditorTagListViewController {
     }
 
     func deleteTagIfCreatedRecently(tagName: String) {
-        guard let recentlyCreatedTag = recentlyCreatedTag, recentlyCreatedTag == tagName else {
+        guard let recentlyCreatedTag, recentlyCreatedTag == tagName else {
             return
         }
 

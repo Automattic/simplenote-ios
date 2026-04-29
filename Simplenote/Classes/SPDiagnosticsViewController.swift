@@ -59,7 +59,7 @@ private extension SPDiagnosticsViewController {
 
     @IBAction
     func shareWasPressed() {
-        guard let attributedText = attributedText else {
+        guard let attributedText else {
             fatalError()
         }
 

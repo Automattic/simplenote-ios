@@ -612,7 +612,7 @@ private extension TagListViewController {
     }
 
     func renameTag(_ tag: Tag) {
-        if let renameTag = renameTag {
+        if let renameTag {
             cell(for: renameTag)?.textField.endEditing(true)
         }
 
@@ -652,7 +652,7 @@ extension TagListViewController: UITextFieldDelegate {
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let renameTag = renameTag else {
+        guard let renameTag else {
             return
         }
 
@@ -719,7 +719,7 @@ private extension TagListViewController {
 
     func startListeningForChanges() {
         resultsController.onDidChangeContent = { [weak self] (sectionsChangeset, objectsChangeset) in
-            guard let self = self else {
+            guard let self else {
                 return
             }
 

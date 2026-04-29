@@ -262,7 +262,7 @@ extension SPNoteListViewController {
             return .generic
         }
 
-        if let searchQuery = searchQuery, !searchQuery.isEmpty {
+        if let searchQuery, !searchQuery.isEmpty {
             let actionHandler: () -> Void = { [weak self] in
                 self?.openNewNote(with: searchQuery.searchText)
             }
@@ -364,7 +364,7 @@ extension SPNoteListViewController {
     @objc
     func configureNavigationToolbarButton() {
         // TODO: When multi select is added to iPad, revist the conditionals here
-        guard let trashButton = trashButton else {
+        guard let trashButton else {
             return
         }
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
@@ -970,7 +970,7 @@ extension SPNoteListViewController {
 
     private var popoverPresenter: PopoverPresenter {
         let viewportProvider: () -> CGRect = { [weak self] in
-            guard let self = self else {
+            guard let self else {
                 return .zero
             }
 

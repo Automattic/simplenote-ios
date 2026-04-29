@@ -83,7 +83,7 @@ private extension PinLockVerifyController {
         hasShownBiometryVerification = true
 
         pinLockManager.evaluateBiometry { [weak self] (success) in
-            guard let self = self else {
+            guard let self else {
                 return
             }
 

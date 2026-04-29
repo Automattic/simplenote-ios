@@ -44,7 +44,7 @@ class SPTextAttachment: NSTextAttachment {
 private extension SPTextAttachment {
 
     func refreshImage() {
-        guard let tintColor = tintColor else {
+        guard let tintColor else {
             return
         }
 

@@ -50,7 +50,7 @@ private extension UITextView {
     ///
     @discardableResult
     func registerUndoCheckpointAndPerform(block: (NSTextStorage) -> Void) -> Bool {
-        guard let undoManager = undoManager else {
+        guard let undoManager else {
             return false
         }
 
@@ -97,7 +97,7 @@ extension UITextView {
     /// Returns the Interlinking Keyword at the current Location (if any)
     ///
     var interlinkKeywordAtSelectedLocation: (Range<String.Index>, Range<String.Index>, String)? {
-        guard let text = text, let range = Range(selectedRange, in: text) else {
+        guard let text, let range = Range(selectedRange, in: text) else {
             return nil
         }
 

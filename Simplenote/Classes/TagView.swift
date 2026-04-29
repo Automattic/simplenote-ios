@@ -193,14 +193,14 @@ private extension TagView {
         let cell = TagViewCell(tagName: tagName)
 
         cell.onTap = { [weak self, weak cell] in
-            guard let self = self, let cell = cell else {
+            guard let self, let cell else {
                 return
             }
             self.toggleDeleteButton(for: cell)
         }
 
         cell.onDelete = { [weak self] in
-            guard let self = self else {
+            guard let self else {
                 return
             }
             self.delegate?.tagView(self, wantsToRemoveTagWithName: tagName)

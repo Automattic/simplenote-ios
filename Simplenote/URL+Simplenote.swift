@@ -3,7 +3,7 @@ import Foundation
 extension URL {
     static func internalUrl(forTag tag: String?) -> URL {
         guard var components = URLComponents.simplenoteURLComponents(with: SimplenoteConstants.simplenoteInternalTagHost),
-              let tag = tag else {
+              let tag else {
             return URL(string: .simplenotePath(withHost: SimplenoteConstants.simplenoteInternalTagHost))!
         }
 
@@ -19,7 +19,7 @@ extension URL {
             return URL(string: .simplenotePath())!
         }
 
-        if let tag = tag {
+        if let tag {
             components.queryItems = [
                 URLQueryItem(name: Constants.tagQueryBase, value: tag)
             ]

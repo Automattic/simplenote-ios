@@ -194,7 +194,7 @@ class SPNoteTableViewCell: UITableViewCell {
     ///
     private func refreshBodyAttributedString() {
         let bodyString = NSMutableAttributedString()
-        if let prefixText = prefixText {
+        if let prefixText {
             let prefixString = NSAttributedString(string: prefixText + String.space, attributes: [
                 .font: Style.prefixFont,
                 .foregroundColor: Style.headlineColor,
@@ -465,7 +465,7 @@ private extension NSAttributedString {
 
         output.processChecklists(with: textColor, sizingFont: font, allowsMultiplePerLine: true)
 
-        if let keywords = keywords, !keywords.isEmpty {
+        if let keywords, !keywords.isEmpty {
             output.apply(color: highlightColor, toSubstringsMatching: keywords)
         }
 

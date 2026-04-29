@@ -72,7 +72,7 @@ final class PopoverPresenter {
     /// - Important: Frame must be expressed in Window Coordinates. Capisce?
     ///
     func relocate(around anchorInWindow: CGRect) {
-        guard let popoverController = popoverController, let view = popoverController.view else {
+        guard let popoverController, let view = popoverController.view else {
             return
         }
 
@@ -147,7 +147,7 @@ private extension PopoverPresenter {
 
         let (viewportBelow, viewportAbove)  = viewport.split(by: anchor)
 
-        guard let desiredHeight = desiredHeight else {
+        guard let desiredHeight else {
             if viewportAbove.height > viewportBelow.height {
                 return (.above, viewportAbove)
             }

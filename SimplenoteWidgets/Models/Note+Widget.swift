@@ -46,7 +46,7 @@ extension Note {
     }
 
     private func title(with range: Range<String.Index>?) -> String {
-        guard let range = range, let content = content else {
+        guard let range, let content else {
             return Constants.defaultTitle
         }
 
@@ -60,7 +60,7 @@ extension Note {
     }
 
     private func content(with range: Range<String.Index>?) -> String {
-        guard let range = range, let content = content else {
+        guard let range, let content else {
             // Note. Swift UI Text will crash if given String() so need to use this version of an empty string
             return ""
         }

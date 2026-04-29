@@ -518,11 +518,11 @@ extension SPAuthViewController {
         lockdownInterface()
 
         controller.signupWithCredentials(username: email) { [weak self] error in
-            guard let self = self else {
+            guard let self else {
                 return
             }
 
-            if let error = error {
+            if let error {
                 self.handleError(error: error)
             } else {
                 self.presentSignupVerification()
@@ -590,7 +590,7 @@ private extension SPAuthViewController {
         lockdownInterface()
 
         controller.validateWithCredentials(username: email, password: password) { error in
-            if let error = error {
+            if let error {
                 self.handleError(error: error)
             } else {
                 self.presentPasswordResetRequiredAlert(email: self.email)
@@ -604,7 +604,7 @@ private extension SPAuthViewController {
         lockdownInterface()
 
         controller.loginWithCredentials(username: email, password: password) { error in
-            if let error = error {
+            if let error {
                 self.handleError(error: error)
             } else {
                 SPTracker.trackUserSignedIn()
@@ -727,7 +727,7 @@ private extension SPAuthViewController {
     }
 
     func attemptLoginWithCurrentCredentials() {
-        guard let navigationController = navigationController else {
+        guard let navigationController else {
             fatalError()
         }
 

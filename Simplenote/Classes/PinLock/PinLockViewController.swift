@@ -122,7 +122,7 @@ private extension PinLockViewController {
     }
 
     func update(with configuration: PinLockControllerConfiguration, animation: UIView.ReloadAnimation?) {
-        guard let animation = animation else {
+        guard let animation else {
             update(with: configuration)
             return
         }

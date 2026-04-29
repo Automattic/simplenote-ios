@@ -54,7 +54,7 @@ class MockupStorageManager {
             }
 
             storeCoordinator.addPersistentStore(with: storeDescriptor) { (_, error) in
-                guard let error = error else {
+                guard let error else {
                     return
                 }
 

@@ -127,7 +127,7 @@ enum TagsFilter {
 
 extension TagsFilter {
     init(from tag: String?) {
-        guard let tag = tag else {
+        guard let tag else {
             self = .allNotes
             return
         }

@@ -57,7 +57,7 @@ extension CSSearchableIndex {
 
         let item = CSSearchableItem(note: note)
         indexSearchableItems([item]) { error in
-            if let error = error {
+            if let error {
                 NSLog("Couldn't index note in spotlight: \(error.localizedDescription)")
             }
         }
@@ -73,7 +73,7 @@ extension CSSearchableIndex {
         }
 
         indexSearchableItems(items) { error in
-            if let error = error {
+            if let error {
                 NSLog("Couldn't index notes in spotlight: \(error.localizedDescription)")
             }
         }
@@ -89,7 +89,7 @@ extension CSSearchableIndex {
         }
 
         deleteSearchableItems(withIdentifiers: ids) { error in
-            if let error = error {
+            if let error {
                 NSLog("Couldn't delete notes from spotlight index: \(error.localizedDescription)")
             }
         }
