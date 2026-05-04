@@ -549,7 +549,7 @@ extension SPNoteListViewController: UITableViewDelegate {
         return UIContextMenuConfiguration(identifier: nil, previewProvider: {
             return self.previewingViewController(for: note)
 
-        }, actionProvider: { suggestedActions in
+        }, actionProvider: { _ in
             return self.contextMenu(for: note, at: indexPath)
         })
     }
