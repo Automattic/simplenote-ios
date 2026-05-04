@@ -4,7 +4,7 @@ import WidgetKit
 @available(iOS 14.0, *)
 struct NoteWidget: Widget {
     var body: some WidgetConfiguration {
-        IntentConfiguration(kind: Constants.configurationKind, intent: NoteWidgetIntent.self, provider: NoteWidgetProvider()) { (entry) in
+        IntentConfiguration(kind: Constants.configurationKind, intent: NoteWidgetIntent.self, provider: NoteWidgetProvider()) { entry in
             prepareWidgetView(fromEntry: entry)
         }
         .configurationDisplayName(Constants.displayName)

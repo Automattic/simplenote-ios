@@ -118,7 +118,7 @@ extension String {
         var matchingWordsRange: [Range<String.Index>] = []
         var trailingWordsRange: [Range<String.Index>] = []
 
-        enumerateSubstrings(in: range, options: [.byWords, .localized, .substringNotRequired]) { (_, wordRange, _, stop) in
+        enumerateSubstrings(in: range, options: [.byWords, .localized, .substringNotRequired]) { _, wordRange, _, stop in
 
             if trailingLimit > 0, let firstMatch = matchingWordsRange.first {
                 if distance(from: firstMatch.upperBound, to: wordRange.upperBound) > trailingLimit {

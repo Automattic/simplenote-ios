@@ -122,7 +122,7 @@ extension SPNoteListViewController {
     func startDisplayingEntities() {
         tableView.dataSource = self
 
-        notesListController.onBatchChanges = { [weak self] (sectionsChangeset, objectsChangeset) in
+        notesListController.onBatchChanges = { [weak self] sectionsChangeset, objectsChangeset in
             guard let `self` = self else {
                 return
             }
@@ -731,14 +731,14 @@ private extension SPNoteListViewController {
 
     func deletedContextActions(for note: Note) -> [UIContextualAction] {
 
-        let restoreAction = UIContextualAction(style: .normal, image: .image(name: .restore), backgroundColor: .simplenoteRestoreActionColor) { (_, _, completion) in
+        let restoreAction = UIContextualAction(style: .normal, image: .image(name: .restore), backgroundColor: .simplenoteRestoreActionColor) { _, _, completion in
                 SPObjectManager.shared().restoreNote(note)
                 CSSearchableIndex.default().indexSearchableNote(note)
                 completion(true)
             }
         restoreAction.accessibilityLabel = ActionTitle.restore
 
-        let deleteAction = UIContextualAction(style: .destructive, image: .image(name: .trash), backgroundColor: .simplenoteDestructiveActionColor) { (_, _, completion) in
+        let deleteAction = UIContextualAction(style: .destructive, image: .image(name: .trash), backgroundColor: .simplenoteDestructiveActionColor) { _, _, completion in
                 SPTracker.trackListNoteDeleted()
                 SPObjectManager.shared().permenentlyDeleteNote(note)
                 completion(true)
@@ -752,7 +752,7 @@ private extension SPNoteListViewController {
         let pinImageName: UIImageName = note.pinned ? .unpin : .pin
         let pinActionTitle: String = note.pinned ? ActionTitle.unpin : ActionTitle.pin
 
-        let trashAction = UIContextualAction(style: .destructive, title: nil, image: .image(name: .trash), backgroundColor: .simplenoteDestructiveActionColor) { [weak self] (_, _, completion) in
+        let trashAction = UIContextualAction(style: .destructive, title: nil, image: .image(name: .trash), backgroundColor: .simplenoteDestructiveActionColor) { [weak self] _, _, completion in
                 self?.delete(note: note)
                 NoticeController.shared.present(NoticeFactory.noteTrashed(onUndo: {
                     SPObjectManager.shared().restoreNote(note)
@@ -764,13 +764,13 @@ private extension SPNoteListViewController {
         }
         trashAction.accessibilityLabel = ActionTitle.trash
 
-        let pinAction = UIContextualAction(style: .normal, title: nil, image: .image(name: pinImageName), backgroundColor: .simplenoteSecondaryActionColor) { [weak self] (_, _, completion) in
+        let pinAction = UIContextualAction(style: .normal, title: nil, image: .image(name: pinImageName), backgroundColor: .simplenoteSecondaryActionColor) { [weak self] _, _, completion in
                 self?.togglePinnedState(note: note)
                 completion(true)
             }
         pinAction.accessibilityLabel = pinActionTitle
 
-        let copyAction = UIContextualAction(style: .normal, title: nil, image: .image(name: .link), backgroundColor: .simplenoteTertiaryActionColor) { [weak self] (_, _, completion) in
+        let copyAction = UIContextualAction(style: .normal, title: nil, image: .image(name: .link), backgroundColor: .simplenoteTertiaryActionColor) { [weak self] _, _, completion in
                 self?.copyInternalLink(to: note)
                 NoticeController.shared.present(NoticeFactory.linkCopied())
             SPTracker.trackPresentedNotice(ofType: .internalLinkCopied)
@@ -778,7 +778,7 @@ private extension SPNoteListViewController {
             }
         copyAction.accessibilityLabel = ActionTitle.copyLink
 
-        let shareAction = UIContextualAction(style: .normal, title: nil, image: .image(name: .share), backgroundColor: .simplenoteQuaternaryActionColor) { [weak self] (_, _, completion) in
+        let shareAction = UIContextualAction(style: .normal, title: nil, image: .image(name: .share), backgroundColor: .simplenoteQuaternaryActionColor) { [weak self] _, _, completion in
                 self?.share(note: note)
                 completion(true)
             }

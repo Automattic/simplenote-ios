@@ -111,7 +111,7 @@ extension SPNoteHistoryController {
 //
 private extension SPNoteHistoryController {
     func loadData() {
-        versionsToken = versionsController.requestVersions(for: note.simperiumKey, currentVersion: note.versionInt) { [weak self] (version) in
+        versionsToken = versionsController.requestVersions(for: note.simperiumKey, currentVersion: note.versionInt) { [weak self] version in
             self?.process(noteVersion: version)
         }
     }

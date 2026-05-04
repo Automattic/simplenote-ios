@@ -47,7 +47,7 @@ class PinLockViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        controller.configurationObserver = { [weak self] (configuration, animation) in
+        controller.configurationObserver = { [weak self] configuration, animation in
             self?.update(with: configuration, animation: animation)
         }
     }

@@ -232,7 +232,7 @@ private extension TagView {
         if newValue {
             autohideDeleteButtonTimer = Timer.scheduledTimer(withTimeInterval: Constants.autohideDeleteButtonTimeout,
                                                              repeats: false,
-                                                             block: { [weak self] (_) in
+                                                             block: { [weak self] _ in
                                                                 self?.hideDeleteButton()
                                                              })
         }

@@ -17,7 +17,7 @@ struct NSAttributedStringToMarkdownConverter {
     static func convert(string: NSAttributedString) -> String {
         let fullRange = NSRange(location: 0, length: string.length)
         let adjusted = NSMutableAttributedString(attributedString: string)
-        adjusted.enumerateAttribute(.attachment, in: fullRange, options: .reverse) { (value, range, _) in
+        adjusted.enumerateAttribute(.attachment, in: fullRange, options: .reverse) { value, range, _ in
             guard let attachment = value as? SPTextAttachment else {
                 return
             }

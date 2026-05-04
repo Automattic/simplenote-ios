@@ -110,7 +110,7 @@ private extension NoteEditorTagListViewController {
         objectManager.createTag(from: tagName)
 
         recentlyCreatedTag = tagName
-        recentlyCreatedTagTimer = Timer.scheduledTimer(withTimeInterval: Constants.clearRecentlyCreatedTagTimeout, repeats: false) { [weak self] (_) in
+        recentlyCreatedTagTimer = Timer.scheduledTimer(withTimeInterval: Constants.clearRecentlyCreatedTagTimeout, repeats: false) { [weak self] _ in
             self?.recentlyCreatedTagTimer = nil
             self?.recentlyCreatedTag = nil
         }

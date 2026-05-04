@@ -238,13 +238,13 @@ private extension NotesListController {
 private extension NotesListController {
 
     func startListeningToNoteEvents() {
-        notesController.onDidChangeContent = { [weak self] (sectionsChangeset, objectsChangeset) in
+        notesController.onDidChangeContent = { [weak self] sectionsChangeset, objectsChangeset in
             self?.notifyNotesDidChange(sectionsChangeset: sectionsChangeset, objectsChangeset: objectsChangeset)
         }
     }
 
     func startListeningToTagEvents() {
-        tagsController.onDidChangeContent = { [weak self] (sectionsChangeset, objectsChangeset) in
+        tagsController.onDidChangeContent = { [weak self] sectionsChangeset, objectsChangeset in
             self?.notifyTagsDidChange(sectionsChangeset: sectionsChangeset, objectsChangeset: objectsChangeset)
         }
     }

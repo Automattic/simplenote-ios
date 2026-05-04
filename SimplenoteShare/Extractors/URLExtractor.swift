@@ -25,7 +25,7 @@ struct URLExtractor: Extractor {
             return
         }
 
-        provider.loadItem(forTypeIdentifier: acceptedType, options: nil) { (payload, _) in
+        provider.loadItem(forTypeIdentifier: acceptedType, options: nil) { payload, _ in
             guard let url = payload as? URL else {
                 onCompletion(nil)
                 return

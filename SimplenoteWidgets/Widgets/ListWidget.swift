@@ -4,7 +4,7 @@ import WidgetKit
 @available(iOS 14.0, *)
 struct ListWidget: Widget {
     var body: some WidgetConfiguration {
-        IntentConfiguration(kind: Constants.configurationKind, intent: ListWidgetIntent.self, provider: ListWidgetProvider()) { (entry) in
+        IntentConfiguration(kind: Constants.configurationKind, intent: ListWidgetIntent.self, provider: ListWidgetProvider()) { entry in
             prepareWidgetView(fromEntry: entry)
         }
         .configurationDisplayName(Constants.displayName)

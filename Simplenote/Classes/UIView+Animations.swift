@@ -145,7 +145,7 @@ extension UIView {
             UIView.modifyAnimations(withRepeatCount: 5, autoreverses: true, animations: {
                 self.transform = rightTranslation
             })
-        } completion: { (completed) in
+        } completion: { completed in
             self.transform = originalTransform
             onCompletion?(completed)
         }

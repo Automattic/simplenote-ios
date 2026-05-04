@@ -55,7 +55,7 @@ struct ListWidgetProvider: IntentTimelineProvider {
             return
         }
 
-        let proxies: [ListWidgetNoteProxy] = allNotes.map { (note) -> ListWidgetNoteProxy in
+        let proxies: [ListWidgetNoteProxy] = allNotes.map { note -> ListWidgetNoteProxy in
             ListWidgetNoteProxy(title: note.title, url: note.url)
         }
 
@@ -75,13 +75,13 @@ struct ListWidgetProvider: IntentTimelineProvider {
             return
         }
 
-        let proxies: [ListWidgetNoteProxy] = notes.map { (note) -> ListWidgetNoteProxy in
+        let proxies: [ListWidgetNoteProxy] = notes.map { note -> ListWidgetNoteProxy in
             ListWidgetNoteProxy(title: note.title, url: note.url)
         }
 
         // Prepare timeline entry for every hour for the next 6 hours
         // Create a new set of entries at the end of the 6 entries
-        let entries: [ListWidgetEntry] = WidgetConstants.rangeForSixEntries.compactMap { (index) in
+        let entries: [ListWidgetEntry] = WidgetConstants.rangeForSixEntries.compactMap { index in
             guard let date = Date().increased(byHours: index) else {
                 return nil
             }

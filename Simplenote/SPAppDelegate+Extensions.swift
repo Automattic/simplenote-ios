@@ -80,7 +80,7 @@ extension SPAppDelegate {
     @objc
     func configurePublishController() {
         publishController = PublishController()
-        publishController.onUpdate = { (note) in
+        publishController.onUpdate = { note in
             PublishNoticePresenter.presentNotice(for: note)
         }
     }
@@ -395,7 +395,7 @@ extension SPAppDelegate: PinLockVerifyControllerDelegate {
     func pinLockVerifyControllerDidComplete(_ controller: PinLockVerifyController) {
         UIView.animate(withDuration: UIKitConstants.animationShortDuration) {
             self.pinLockWindow?.alpha = UIKitConstants.alpha0_0
-        } completion: { (_) in
+        } completion: { _ in
             self.dismissPasscodeLock()
         }
     }
@@ -409,7 +409,7 @@ private extension SPAppDelegate {
             return
         }
         verificationController = AccountVerificationController(email: email)
-        verificationController?.onStateChange = { [weak self] (oldState, state) in
+        verificationController?.onStateChange = { [weak self] oldState, state in
             switch (oldState, state) {
             case (.unknown, .unverified):
                 self?.showVerificationViewController(with: .review)

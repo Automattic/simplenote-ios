@@ -21,7 +21,7 @@ class MockupStorageManager {
     private(set) lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: name, managedObjectModel: managedModel)
         container.persistentStoreDescriptions = [storeDescription]
-        container.loadPersistentStores { (storeDescription, error) in
+        container.loadPersistentStores { storeDescription, error in
             if let error = error as NSError? {
                 fatalError("[MockupStorageManager] Fatal Error: \(error) [\(error.userInfo)]")
             }
@@ -53,7 +53,7 @@ class MockupStorageManager {
                 fatalError("☠️ [MockupStorageManager] Cannot Destroy persistentStore! \(error)")
             }
 
-            storeCoordinator.addPersistentStore(with: storeDescriptor) { (_, error) in
+            storeCoordinator.addPersistentStore(with: storeDescriptor) { _, error in
                 guard let error else {
                     return
                 }

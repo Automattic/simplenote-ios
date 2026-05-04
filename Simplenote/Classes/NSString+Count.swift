@@ -23,7 +23,7 @@ import Foundation
         }
         let ChineseCharacterSet = CharacterSet.CJKUniHan.union(CharacterSet.Hiragana).union(CharacterSet.Katakana)
         var result = 0
-        enumerateSubstrings(in: NSMakeRange(0, length), options: [.byWords, .localized]) { (substring, substringRange, enclosingRange, stop) in
+        enumerateSubstrings(in: NSMakeRange(0, length), options: [.byWords, .localized]) { substring, substringRange, enclosingRange, stop in
             if ChineseCharacterSet.contains(substring!.unicodeScalars.first!) {
                 result += substring!.count
             } else if !CharacterSet.whitespacesAndNewlines.contains(substring!.unicodeScalars.first!) { // Sometimes NSString treat "\n" and " " as a word.
