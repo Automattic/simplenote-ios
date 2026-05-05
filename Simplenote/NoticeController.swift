@@ -52,7 +52,8 @@ class NoticeController {
     }
 
     private func makeNoticeView(from notice: Notice) -> NoticeView {
-        let noticeView = NoticeView.instantiateFromNib()
+        // swiftlint:disable:next redundant_type_annotation
+        let noticeView: NoticeView = NoticeView.instantiateFromNib()
         noticeView.message = notice.message
         noticeView.actionTitle = notice.action?.title
         noticeView.handler = notice.action?.handler
