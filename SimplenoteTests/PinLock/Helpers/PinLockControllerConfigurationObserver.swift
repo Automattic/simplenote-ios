@@ -9,7 +9,7 @@ class PinLockControllerConfigurationObserver {
     }
 
     var lastAnimation: UIView.ReloadAnimation? {
-        animations.last ?? nil
+        animations.last
     }
 
     var configurations: [PinLockControllerConfiguration] {

@@ -48,7 +48,10 @@ only_rules:
 
   # Prefer `.zero` over explicit init with zero parameters (e.g., `CGPoint(x: 0, y: 0)`).
   - prefer_zero_over_explicit_init
-  
+
+  # `nil` coalescing on a non-optional is redundant.
+  - redundant_nil_coalescing
+
   # Prefer `someBool.toggle()` over `someBool = !someBool`.
   - toggle_bool
 
