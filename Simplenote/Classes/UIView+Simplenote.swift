@@ -75,8 +75,8 @@ extension UIView {
     /// Returns the first Object contained within the nib with a name whose name matches with the receiver's type.
     /// Note: On error this method is expected to break, by design!
     ///
-    class func instantiateFromNib<T>() -> T {
-        return loadNib().instantiate(withOwner: nil, options: nil).first as! T
+    class func instantiateFromNib() -> Self {
+        return loadNib().instantiate(withOwner: nil, options: nil).first as! Self
     }
 
     /// ObjC Convenience wrapper: Returns the first object contained within the receiver's nib.
