@@ -48,6 +48,9 @@ only_rules:
   # Prefer `() -> ` over `Void -> `.
   - empty_parameters
 
+  # Prefer `flatMap { ... }` over `map { ... }.reduce([], +)`.
+  - flatmap_over_map_reduce
+
   # Prefer `last(where:)` over `filter { }.last`.
   - last_where
 
