@@ -48,7 +48,10 @@ only_rules:
 
   # Prefer `.zero` over explicit init with zero parameters (e.g., `CGPoint(x: 0, y: 0)`).
   - prefer_zero_over_explicit_init
-  
+
+  # Type annotations are redundant when the type can be inferred.
+  - redundant_type_annotation
+
   # Prefer `someBool.toggle()` over `someBool = !someBool`.
   - toggle_bool
 
