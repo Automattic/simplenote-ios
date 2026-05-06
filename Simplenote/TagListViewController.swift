@@ -8,7 +8,7 @@ final class TagListViewController: UIViewController {
     @IBOutlet private weak var rightBorderView: UIView!
     @IBOutlet private weak var rightBorderWidthConstraint: NSLayoutConstraint!
 
-    private lazy var tagsHeaderView: SPTagHeaderView = SPTagHeaderView.instantiateFromNib()
+    private lazy var tagsHeaderView = SPTagHeaderView.instantiateFromNib()
 
     private lazy var resultsController: ResultsController<Tag> = {
         let mainContext = SPAppDelegate.shared().managedObjectContext
