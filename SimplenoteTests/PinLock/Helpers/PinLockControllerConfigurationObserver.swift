@@ -9,8 +9,7 @@ class PinLockControllerConfigurationObserver {
     }
 
     var lastAnimation: UIView.ReloadAnimation? {
-        // swiftlint:disable:next redundant_nil_coalescing
-        animations.last ?? nil
+        animations.last.flatMap { $0 }
     }
 
     var configurations: [PinLockControllerConfiguration] {
