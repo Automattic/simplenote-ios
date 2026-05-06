@@ -50,6 +50,9 @@ only_rules:
 
   # Prefer `() -> ` over `Void -> `.
   - empty_parameters
+  
+  # Prefer `first(where:)` over `filter { }.first`.
+  - first_where
 
   # Prefer `flatMap { ... }` over `map { ... }.reduce([], +)`.
   - flatmap_over_map_reduce
