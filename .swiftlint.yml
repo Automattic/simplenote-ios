@@ -79,6 +79,9 @@ only_rules:
   # Prefer the shorthand `if let foo` over `if let foo = foo` when binding an optional with the same name.
   - shorthand_optional_binding
 
+  # Prefer `min(by:)` / `max(by:)` over `sorted { ... }.first` / `.last`.
+  - sorted_first_last
+
   # Files should have a single trailing newline.
   - trailing_newline
 
