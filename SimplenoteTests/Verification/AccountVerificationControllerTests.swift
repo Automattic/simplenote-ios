@@ -23,7 +23,7 @@ extension AccountVerificationControllerTests {
         // When
         let expectedResult = Remote.randomResult()
         var verificationResult: Result<Data?, RemoteError>?
-        controller.verify { (result) in
+        controller.verify { result in
             verificationResult = result
         }
 
@@ -78,7 +78,7 @@ extension AccountVerificationControllerTests {
             .unverified, .verified
         ]
         var stateChangeHistory: [AccountVerificationController.State] = []
-        controller.onStateChange = { (oldState, state) in
+        controller.onStateChange = { oldState, state in
             stateChangeHistory.append(oldState)
             stateChangeHistory.append(state)
         }
@@ -97,7 +97,7 @@ extension AccountVerificationControllerTests {
             .unknown, .unverified
         ]
         var stateChangeHistory: [AccountVerificationController.State] = []
-        controller.onStateChange = { (oldState, state) in
+        controller.onStateChange = { oldState, state in
             stateChangeHistory.append(oldState)
             stateChangeHistory.append(state)
         }

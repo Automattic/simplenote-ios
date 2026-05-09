@@ -53,7 +53,7 @@ class SPContactsManager: NSObject {
             return
         }
 
-        store.requestAccess(for: .contacts) { (success, error) in
+        store.requestAccess(for: .contacts) { success, error in
             completion?(success)
         }
     }
@@ -124,7 +124,7 @@ private extension SPContactsManager {
         var contacts = [CNContact]()
 
         do {
-            try store.enumerateContacts(with: request) { (contact, _) in
+            try store.enumerateContacts(with: request) { contact, _ in
                 contacts.append(contact)
             }
         } catch {

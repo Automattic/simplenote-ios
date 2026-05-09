@@ -15,7 +15,7 @@ class AccountDeletionController: NSObject {
     }
 
     func requestAccountDeletion(_ user: SPUser, completion: @escaping (_ result: Result<Data?, RemoteError>) -> Void) {
-        AccountRemote().requestDelete(user) { [weak self] (result) in
+        AccountRemote().requestDelete(user) { [weak self] result in
             if case .success = result {
                 self?.accountDeletionRequestDate = Date()
             }

@@ -500,7 +500,7 @@ extension TagListViewController: TagListViewCellDelegate {
                                                 message: nil,
                                                 preferredStyle: .actionSheet)
 
-        alertController.addDestructiveActionWithTitle(Localization.TagDeletionConfirmation.confirmationButton) { (_) in
+        alertController.addDestructiveActionWithTitle(Localization.TagDeletionConfirmation.confirmationButton) { _ in
             guard self.verifyTagIsAtIndexPath(tag, at: indexPath) else {
                 self.present(UIAlertController.dismissableAlert(
                     title: Localization.tagDeleteFailedTitle,
@@ -718,7 +718,7 @@ private extension TagListViewController {
     }
 
     func startListeningForChanges() {
-        resultsController.onDidChangeContent = { [weak self] (sectionsChangeset, objectsChangeset) in
+        resultsController.onDidChangeContent = { [weak self] sectionsChangeset, objectsChangeset in
             guard let self else {
                 return
             }

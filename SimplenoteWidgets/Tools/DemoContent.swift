@@ -19,7 +19,7 @@ struct DemoContent {
         "Lobortis elementum nibh tellus molestie.",
         "Lorem Ipsum"
     ]
-    static let listProxies: [ListWidgetNoteProxy] = listTitles.map { (title) in
+    static let listProxies: [ListWidgetNoteProxy] = listTitles.map { title in
         ListWidgetNoteProxy(title: title, url: demoURL)
     }
 }

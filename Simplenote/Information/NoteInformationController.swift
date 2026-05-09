@@ -141,7 +141,7 @@ private extension NoteInformationController {
             return []
         }
 
-        let referenceRows = references.map { (referenceNote) -> Row in
+        let referenceRows = references.map { referenceNote -> Row in
             let date = DateFormatter.dateFormatter.string(from: referenceNote.modificationDate)
             let instancesOfReference = referenceNote.instancesOfReference(to: note)
 

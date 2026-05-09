@@ -41,7 +41,7 @@ class BiometricAuthentication {
         }
 
         let context = LAContext()
-        context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: Localization.biometryReason) { (success, _) in
+        context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: Localization.biometryReason) { success, _ in
             DispatchQueue.main.async {
                 completion(success)
             }

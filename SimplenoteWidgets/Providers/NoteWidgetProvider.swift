@@ -72,7 +72,7 @@ struct NoteWidgetProvider: IntentTimelineProvider {
 
         // Prepare timeline entry for every hour for the next 6 hours
         // Create a new set of entries at the end of the 6 entries
-        let entries: [NoteWidgetEntry] = WidgetConstants.rangeForSixEntries.compactMap({ (index)  in
+        let entries: [NoteWidgetEntry] = WidgetConstants.rangeForSixEntries.compactMap({ index in
             guard let date = Date().increased(byHours: index) else {
                 return nil
             }

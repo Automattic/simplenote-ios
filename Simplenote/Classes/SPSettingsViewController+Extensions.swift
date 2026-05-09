@@ -159,9 +159,9 @@ extension SPSettingsViewController {
         SPTracker.trackDeleteAccountButttonTapped()
         let spinnerViewController = SpinnerViewController()
 
-        presentAccountDeletionConfirmation(forEmail: user.email) { (_) in
+        presentAccountDeletionConfirmation(forEmail: user.email) { _ in
             self.present(spinnerViewController, animated: false, completion: nil)
-            deletionController.requestAccountDeletion(user) { [weak self] (result) in
+            deletionController.requestAccountDeletion(user) { [weak self] result in
                 spinnerViewController.dismiss(animated: false, completion: nil)
                 self?.handleDeletionResult(user: user, result)
             }

@@ -26,7 +26,7 @@ final class SPCardPresentationAnimator: NSObject, UIViewControllerAnimatedTransi
                                               curve: .easeOut,
                                               animations: animationBlock)
 
-        animator.addCompletion { (_) in
+        animator.addCompletion { _ in
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         }
         animator.startAnimation()

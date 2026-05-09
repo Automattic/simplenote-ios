@@ -135,7 +135,7 @@ class NoticeControllerTests: XCTestCase {
 
 extension NoticeControllerTests {
     static var timeInterval = TimeInterval.zero
-    static var timerNoActionCompletionHandler: (Timer) -> Void = { (_) in }
+    static var timerNoActionCompletionHandler: (Timer) -> Void = { _ in }
 }
 
 class MockNoticePresenter: NoticePresenter {

@@ -548,7 +548,7 @@ extension SPNoteEditorViewController {
 
         UIView.animate(withDuration: 0.2) {
             snapshotView.transform = .init(translationX: 0, y: snapshotView.frame.height)
-        } completion: { (_) in
+        } completion: { _ in
             snapshotView.removeFromSuperview()
         }
     }

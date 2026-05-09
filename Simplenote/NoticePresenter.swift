@@ -115,7 +115,7 @@ class NoticePresenter {
                        options: [.allowUserInteraction]) {
             noticeView.alpha = .zero
             containerView.alpha = .zero
-        } completion: { (_) in
+        } completion: { _ in
             noticeView.removeFromSuperview()
             containerView.removeFromSuperview()
             completion()

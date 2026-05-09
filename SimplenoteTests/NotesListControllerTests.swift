@@ -259,7 +259,7 @@ class NotesListControllerTests: XCTestCase {
     ///     - OP: Insert / Update / Delete
     ///
     func testOnBatchChangesDoesntRunForInsertUpdateNorDeleteOpsOverTagsWhenInResultsMode() {
-        noteListController.onBatchChanges = { (_, _) in
+        noteListController.onBatchChanges = { _, _ in
             XCTFail()
         }
 
@@ -532,7 +532,7 @@ private extension NotesListControllerTests {
     func expectBatchChanges(objectsChangeset: ResultsObjectsChangeset) -> XCTestExpectation {
         let expectation = self.expectation(description: "Waiting...")
 
-        noteListController.onBatchChanges = { (receivedSectionChanges, receivedObjectChanges) in
+        noteListController.onBatchChanges = { receivedSectionChanges, receivedObjectChanges in
             for (index, change) in objectsChangeset.deleted.enumerated() {
                 XCTAssertEqual(change, objectsChangeset.deleted[index])
             }
