@@ -131,7 +131,6 @@ private extension StoreManager {
                     await self.refreshPurchasedProducts()
                     await self.refreshSubscriptionGroupStatus()
                     await transaction.finish()
-
                 } catch {
                     NSLog("[StoreKit] Transaction failed verification. Error \(error)")
                 }
@@ -146,7 +145,6 @@ private extension StoreManager {
             storeProductMap = self.buildStoreProductMap(products: allProducts)
 
             NSLog("[StoreKit] Retrieved \(storeProductMap.count) Subscription Products")
-
         } catch {
             NSLog("[StoreKit] Failed product request from the App Store server: \(error)")
         }
@@ -164,7 +162,6 @@ private extension StoreManager {
                 if let subscription = storeProductMap.values.first(where: { $0.id == transaction.productID }) {
                     newPurchasedProducts.append(subscription)
                 }
-
             } catch {
                 NSLog("[StoreKit] Failed to refresh Current Entitlements: \(error)")
             }

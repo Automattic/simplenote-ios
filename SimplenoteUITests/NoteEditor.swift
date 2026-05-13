@@ -199,7 +199,6 @@ class NoteEditor {
         guard historyButton.waitForExistence(timeout: minLoadTimeout) else { return }
         historyButton.tap()
     }
-
 }
 
 class NoteEditorAssert {

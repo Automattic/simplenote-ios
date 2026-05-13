@@ -7,7 +7,6 @@ import CoreData
 
 @objc(Tag)
 public class Tag: SPManagedObject {
-
 }
 
 extension Tag {

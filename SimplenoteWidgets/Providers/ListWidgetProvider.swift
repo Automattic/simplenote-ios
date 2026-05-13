@@ -29,7 +29,6 @@ extension ListWidgetEntry {
                                noteProxies: DemoContent.listProxies,
                                loggedIn: loggedIn,
                                state: state)
-
     }
 }
 

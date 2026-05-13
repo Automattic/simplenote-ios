@@ -113,7 +113,6 @@ extension SPNoteListViewController {
             placeholderView.topAnchor.constraint(greaterThanOrEqualTo: view.layoutMarginsGuide.topAnchor),
             placeholderView.bottomAnchor.constraint(lessThanOrEqualTo: view.layoutMarginsGuide.bottomAnchor)
         ])
-
     }
 
     /// Initializes the UITableView <> NoteListController Link. Should be called once both UITableView + ListController have been initialized
@@ -531,7 +530,6 @@ extension SPNoteListViewController: UITableViewDelegate {
         default:
             break
         }
-
     }
 
     public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
@@ -548,7 +546,6 @@ extension SPNoteListViewController: UITableViewDelegate {
 
         return UIContextMenuConfiguration(identifier: nil, previewProvider: {
             return self.previewingViewController(for: note)
-
         }, actionProvider: { suggestedActions in
             return self.contextMenu(for: note, at: indexPath)
         })

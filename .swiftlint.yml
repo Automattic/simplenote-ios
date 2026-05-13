@@ -92,6 +92,10 @@ only_rules:
   # - trailing_whitespace
 
   # - vertical_whitespace
+
+  # Empty lines should not be present right before a closing brace.
+  - vertical_whitespace_closing_braces
+
   - custom_rules
 
 # Rules configuration

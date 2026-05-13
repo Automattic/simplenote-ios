@@ -183,9 +183,7 @@ class SPNoteTableViewCell: UITableViewCell {
                                              highlighing: keywords,
                                              highlightColor: keywordsTintColor,
                                              paragraphStyle: Style.paragraphStyle)
-
         }
-
     }
 
     /// Refreshes the Body AttributedString: We'll consider Keyword Highlight and Text Attachments (bullets)

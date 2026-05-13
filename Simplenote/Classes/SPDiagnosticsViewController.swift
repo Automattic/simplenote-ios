@@ -70,7 +70,6 @@ private extension SPDiagnosticsViewController {
         activityViewController.excludedActivityTypes = excludedActivities
 
         present(activityViewController, animated: true)
-
     }
 
     @IBAction

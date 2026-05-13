@@ -11,7 +11,6 @@ struct NewNoteWidget: Widget {
         .description(Constants.description)
         .supportedFamilies([.systemSmall])
         .contentMarginsDisabled()
-
     }
 }
 
