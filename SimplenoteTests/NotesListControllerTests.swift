@@ -532,7 +532,7 @@ private extension NotesListControllerTests {
     func expectBatchChanges(objectsChangeset: ResultsObjectsChangeset) -> XCTestExpectation {
         let expectation = self.expectation(description: "Waiting...")
 
-        noteListController.onBatchChanges = { (receivedSectionChanges, receivedObjectChanges) in
+        noteListController.onBatchChanges = { (_, receivedObjectChanges) in
             for (index, change) in objectsChangeset.deleted.enumerated() {
                 XCTAssertEqual(change, objectsChangeset.deleted[index])
             }
