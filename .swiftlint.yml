@@ -16,6 +16,9 @@ only_rules:
   # Colons should be next to the identifier when specifying a type.
   - colon
 
+  # All elements in a collection literal should be vertically aligned.
+  - collection_alignment
+
   # There should be no space before and one after any comma.
   - comma
 
