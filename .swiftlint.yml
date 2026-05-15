@@ -60,6 +60,9 @@ only_rules:
   # Prefer `last(where:)` over `filter { }.last`.
   - last_where
 
+  # Closing brackets of array and dictionary literals should match their opening lines' indentation.
+  - literal_expression_end_indentation
+
   # MARK comment should be in valid format.
   - mark
 
