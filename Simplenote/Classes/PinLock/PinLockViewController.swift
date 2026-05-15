@@ -202,7 +202,6 @@ private extension PinLockViewController {
         }
 
         addDigit(index)
-
     }
 
     @IBAction

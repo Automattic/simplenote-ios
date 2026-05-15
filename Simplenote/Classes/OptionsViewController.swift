@@ -299,7 +299,6 @@ extension OptionsViewController {
             NSLocalizedString("Copy Link", comment: "Copies the Note's Public Link") :
             NSLocalizedString("Unpublishing...", comment: "Indicates the Note is being unpublished")
     }
-
 }
 
 // MARK: - Action Handlers

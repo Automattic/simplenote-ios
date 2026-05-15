@@ -74,7 +74,6 @@ class SPAuthHandler {
         do {
             let confirmation = try await remote.requestLoginConfirmation(email: username, authCode: code.uppercased())
             simperiumService.authenticate(withUsername: confirmation.username, token: confirmation.syncToken)
-            
         } catch let remoteError as RemoteError {
             throw SPAuthError(loginRemoteError: remoteError)
         }

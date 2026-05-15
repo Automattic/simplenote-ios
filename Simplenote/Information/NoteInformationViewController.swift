@@ -96,7 +96,6 @@ private extension NoteInformationViewController {
                                                             style: .done,
                                                             target: self,
                                                             action: #selector(handleTapOnDismissButton))
-
     }
 
     func configureViews() {

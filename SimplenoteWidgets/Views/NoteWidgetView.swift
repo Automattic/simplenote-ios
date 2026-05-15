@@ -6,7 +6,7 @@ struct NoteWidgetView: View {
     @Environment(\.widgetFamily) var widgetFamily
 
     var body: some View {
-        GeometryReader { geometry in
+        GeometryReader { _ in
             ZStack {
                 VStack(alignment: .leading) {
                     Text(entry.title)

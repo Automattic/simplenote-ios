@@ -73,7 +73,6 @@ private extension MagicLinkAuthenticator {
                     NotificationCenter.default.post(name: .magicLinkAuthDidSucceed, object: nil)
                     SPTracker.trackLoginLinkConfirmationSuccess()
                 }
-
             } catch {
                 NSLog("[MagicLinkAuthenticator] Magic Link TokenExchange Error: \(error)")
                 NotificationCenter.default.post(name: .magicLinkAuthDidFail, object: error)
