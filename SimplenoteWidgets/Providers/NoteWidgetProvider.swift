@@ -33,7 +33,6 @@ extension NoteWidgetEntry {
                                loggedIn: loggedIn,
                                state: state)
     }
-
 }
 
 struct NoteWidgetProvider: IntentTimelineProvider {

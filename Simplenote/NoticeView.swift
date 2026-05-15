@@ -71,7 +71,6 @@ class NoticeView: UIView {
         noticeButton.isHidden = true
         noticeButton.titleLabel?.font = UIFont.preferredFont(for: .subheadline, weight: .semibold)
         noticeButton.titleLabel?.adjustsFontForContentSizeCategory = true
-
     }
 
     private func configureAccessibilityIfNeeded() {

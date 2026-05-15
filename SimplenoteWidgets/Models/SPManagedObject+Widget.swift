@@ -7,7 +7,6 @@ import CoreData
 
 @objc(SPManagedObject)
 public class SPManagedObject: NSManagedObject {
-
 }
 
 extension SPManagedObject {
