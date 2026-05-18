@@ -449,10 +449,8 @@ extension SPAuthViewController {
             try await controller.requestLoginEmail(username: email)
             self.presentCodeInterface()
             SPTracker.trackLoginLinkRequested()
-            
         } catch SPAuthError.tooManyAttempts {
             self.presentPasswordInterfaceWithRateLimitingHeader()
-
         } catch {
             let error = error as? SPAuthError ?? .generic
             self.handleError(error: error)

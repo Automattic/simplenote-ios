@@ -7,7 +7,6 @@ import CoreData
 
 @objc(Note)
 public class Note: SPManagedObject {
-
 }
 
 extension Note {

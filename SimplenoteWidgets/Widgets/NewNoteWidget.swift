@@ -4,14 +4,13 @@ import WidgetKit
 @available(iOS 14.0, *)
 struct NewNoteWidget: Widget {
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: Constants.configurationKind, provider: NewNoteTimelineProvider()) { entry in
+        StaticConfiguration(kind: Constants.configurationKind, provider: NewNoteTimelineProvider()) { _ in
             NewNoteWidgetView()
         }
         .configurationDisplayName(Constants.displayName)
         .description(Constants.description)
         .supportedFamilies([.systemSmall])
         .contentMarginsDisabled()
-
     }
 }
 

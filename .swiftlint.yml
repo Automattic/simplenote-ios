@@ -10,14 +10,29 @@ excluded:
 
 # Rules
 only_rules:
+  # Prefer `Array(xs)` over `xs.map { $0 }`.
+  - array_init
+
   # Colons should be next to the identifier when specifying a type.
   - colon
+
+  # All elements in a collection literal should be vertically aligned.
+  - collection_alignment
 
   # There should be no space before and one after any comma.
   - comma
 
+  # Prefer `contains` over `filter(where:).count`.
+  - contains_over_filter_count
+
   # Prefer `contains` over comparing `filter(where:)` to empty.
   - contains_over_filter_is_empty
+
+  # Prefer `contains` over `first(where:) != nil`.
+  - contains_over_first_not_nil
+
+  # Prefer `contains` over `range(of:) != nil` and `range(of:) == nil`.
+  - contains_over_range_nil_comparison
 
   # if,for,while,do statements shouldn't wrap their conditionals in parentheses.
   - control_statement
@@ -38,6 +53,15 @@ only_rules:
 
   # Prefer `() -> ` over `Void -> `.
   - empty_parameters
+  
+  # Prefer `first(where:)` over `filter { }.first`.
+  - first_where
+
+  # Prefer `flatMap { ... }` over `map { ... }.reduce([], +)`.
+  - flatmap_over_map_reduce
+
+  # Prefer `last(where:)` over `filter { }.last`.
+  - last_where
 
   # MARK comment should be in valid format.
   - mark
@@ -52,11 +76,17 @@ only_rules:
   # `nil` coalescing on a non-optional is redundant.
   - redundant_nil_coalescing
 
+  # Type annotations are redundant when the type can be inferred.
+  - redundant_type_annotation
+
   # Prefer `someBool.toggle()` over `someBool = !someBool`.
   - toggle_bool
 
   # Prefer the shorthand `if let foo` over `if let foo = foo` when binding an optional with the same name.
   - shorthand_optional_binding
+
+  # Prefer `min(by:)` / `max(by:)` over `sorted { ... }.first` / `.last`.
+  - sorted_first_last
 
   # Files should have a single trailing newline.
   - trailing_newline
@@ -67,7 +97,14 @@ only_rules:
   # Lines should not have trailing whitespace.
   # - trailing_whitespace
 
+  # Unused parameter in a closure should be replaced with `_`.
+  - unused_closure_parameter
+
   # - vertical_whitespace
+
+  # Empty lines should not be present right before a closing brace.
+  - vertical_whitespace_closing_braces
+
   - custom_rules
 
 # Rules configuration

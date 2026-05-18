@@ -31,5 +31,4 @@ extension UISearchBar {
             }
         }
     }
-
 }

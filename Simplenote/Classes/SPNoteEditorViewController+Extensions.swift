@@ -478,7 +478,6 @@ private extension SPNoteEditorViewController {
 
         present(activityController, animated: true, completion: nil)
         SPTracker.trackEditorNoteContentShared()
-
     }
 
     func presentMarkdownPreview() {

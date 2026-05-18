@@ -33,7 +33,6 @@ struct MagicLinkInvalidView: View {
                 .background(Color(.simplenoteBlue50Color))
                 .cornerRadius(Metrics.actionCornerRadius)
                 .buttonStyle(PlainButtonStyle())
-                
             }
             .padding()
             .navigationBarTitleDisplayMode(.inline)
