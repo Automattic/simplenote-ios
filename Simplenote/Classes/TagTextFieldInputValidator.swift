@@ -52,8 +52,7 @@ struct TagTextFieldInputValidator {
     ///
     func preprocessForPasting(tag: String) -> String? {
         return tag.components(separatedBy: disallowedCharacterSet)
-            .filter({ !$0.isEmpty })
-            .first
+            .first(where: { !$0.isEmpty })
     }
 
     /// Indicates if the receivers length is within allowed values

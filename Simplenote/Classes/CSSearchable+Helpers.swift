@@ -19,7 +19,6 @@ extension CSSearchableItemAttributeSet {
         title = note.titlePreview
         contentDescription = note.bodyPreview
     }
-
 }
 
 extension CSSearchableItem {
@@ -28,7 +27,6 @@ extension CSSearchableItem {
         let attributeSet = CSSearchableItemAttributeSet(note: note)
         self.init(uniqueIdentifier: note.simperiumKey, domainIdentifier: "notes", attributeSet: attributeSet)
     }
-
 }
 
 extension CSSearchableIndex {

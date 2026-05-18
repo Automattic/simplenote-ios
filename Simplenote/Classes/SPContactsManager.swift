@@ -53,7 +53,7 @@ class SPContactsManager: NSObject {
             return
         }
 
-        store.requestAccess(for: .contacts) { (success, error) in
+        store.requestAccess(for: .contacts) { (success, _) in
             completion?(success)
         }
     }

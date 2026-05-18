@@ -8,7 +8,7 @@ final class TagListViewController: UIViewController {
     @IBOutlet private weak var rightBorderView: UIView!
     @IBOutlet private weak var rightBorderWidthConstraint: NSLayoutConstraint!
 
-    private lazy var tagsHeaderView: SPTagHeaderView = SPTagHeaderView.instantiateFromNib()
+    private lazy var tagsHeaderView = SPTagHeaderView.instantiateFromNib()
 
     private lazy var resultsController: ResultsController<Tag> = {
         let mainContext = SPAppDelegate.shared().managedObjectContext
@@ -290,7 +290,6 @@ extension TagListViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
-
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -82,7 +82,6 @@ class NoticePresenter {
         noticeVariableConstraint?.isActive = true
         view.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
         containerView.layoutIfNeeded()
-
     }
 
     private func display(view: UIView, in containerView: UIView, completion: @escaping () -> Void) {

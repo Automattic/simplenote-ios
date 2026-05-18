@@ -132,11 +132,11 @@ extension SearchMapView {
     private func barView(with point: CGPoint) -> UIView? {
         return barViews.filter {
             $0.frame.insetBy(dx: -Metrics.extraHorizontalTouchMargin, dy: -Metrics.extraVerticalTouchMargin).contains(point)
-        }.sorted {
+        }.min {
             let distance1 = abs($0.frame.midY - point.y)
             let distance2 = abs($1.frame.midY - point.y)
             return distance1 < distance2
-        }.first
+        }
     }
 }
 
