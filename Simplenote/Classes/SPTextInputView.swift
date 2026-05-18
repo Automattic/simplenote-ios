@@ -293,7 +293,7 @@ private extension SPTextInputView {
             textField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Defaults.insets.right),
             textField.topAnchor.constraint(equalTo: topAnchor, constant: Defaults.insets.top),
             textField.bottomAnchor.constraint(equalTo: bottomAnchor, constant: Defaults.insets.bottom),
-            ])
+        ])
     }
 
     func refreshBorderStyle() {
