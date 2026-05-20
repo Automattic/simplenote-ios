@@ -73,6 +73,9 @@ only_rules:
   # the declaration.
   - opening_brace
 
+  # Periods should not be followed by whitespace.
+  - period_spacing
+
   # Prefer `.zero` over explicit init with zero parameters (e.g., `CGPoint(x: 0, y: 0)`).
   - prefer_zero_over_explicit_init
 

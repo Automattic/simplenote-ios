@@ -48,7 +48,7 @@ class ExtensionResultsController {
         note(forSimperiumKey: key) != nil
     }
 
-    /// Creates a predicate for notes given a tag name.  If not specified the predicate is for all notes that are not deleted
+    /// Creates a predicate for notes given a tag name. If not specified the predicate is for all notes that are not deleted
     ///
     private func predicateForNotes(filteredBy tagFilter: TagsFilter = .allNotes) -> NSPredicate {
         switch tagFilter {
