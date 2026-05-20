@@ -82,6 +82,9 @@ only_rules:
   # Type annotations are redundant when the type can be inferred.
   - redundant_type_annotation
 
+  # Returning a value from a function that has Void return type.
+  - return_value_from_void_function
+
   # Prefer `someBool.toggle()` over `someBool = !someBool`.
   - toggle_bool
 
