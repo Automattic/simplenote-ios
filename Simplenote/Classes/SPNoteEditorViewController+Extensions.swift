@@ -121,14 +121,14 @@ extension SPNoteEditorViewController {
 // MARK: - Layout
 //
 extension SPNoteEditorViewController {
-    open override func viewWillLayoutSubviews() {
+    override open func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         // We need to reset transform to prevent tagView from loosing `safeArea`
         // We restore transform back in viewDidLayoutSubviews
         tagView.transform = .identity
     }
 
-    open override func viewDidLayoutSubviews() {
+    override open func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         // Adding async here to break a strange layout loop
         // It happens when add tag field is first responder and device is rotated
@@ -257,7 +257,7 @@ extension SPNoteEditorViewController {
 
     /// Sets behavior for accessibility three finger scroll
     ///
-    open override func accessibilityScroll(_ direction: UIAccessibilityScrollDirection) -> Bool {
+    override open func accessibilityScroll(_ direction: UIAccessibilityScrollDirection) -> Bool {
         switch direction {
         case .left:
             presentMarkdownPreview()
@@ -287,7 +287,7 @@ extension SPNoteEditorViewController {
         SPAppDelegate.shared().simperium
     }
 
-    open override func encodeRestorableState(with coder: NSCoder) {
+    override open func encodeRestorableState(with coder: NSCoder) {
         super.encodeRestorableState(with: coder)
 
         // Always make sure the object is persisted before proceeding
@@ -919,11 +919,11 @@ extension SPNoteEditorViewController {
 // MARK: - Keyboard
 //
 extension SPNoteEditorViewController {
-    open override var canBecomeFirstResponder: Bool {
+    override open var canBecomeFirstResponder: Bool {
         return true
     }
 
-    open override var keyCommands: [UIKeyCommand]? {
+    override open var keyCommands: [UIKeyCommand]? {
         guard presentedViewController == nil else {
             return nil
         }

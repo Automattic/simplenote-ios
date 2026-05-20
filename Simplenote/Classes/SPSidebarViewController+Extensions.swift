@@ -3,11 +3,11 @@ import UIKit
 // MARK: - Keyboard shortcuts
 //
 extension SPSidebarContainerViewController {
-    open override var canBecomeFirstResponder: Bool {
+    override open var canBecomeFirstResponder: Bool {
         return true
     }
 
-    open override var keyCommands: [UIKeyCommand]? {
+    override open var keyCommands: [UIKeyCommand]? {
         guard presentedViewController == nil else {
             return nil
         }

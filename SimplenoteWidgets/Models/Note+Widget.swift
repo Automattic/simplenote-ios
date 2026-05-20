@@ -15,7 +15,7 @@ extension Note {
         return NSFetchRequest<Note>(entityName: "Note")
     }
 
-    public override func awakeFromInsert() {
+    override public func awakeFromInsert() {
         super.awakeFromInsert()
 
         if simperiumKey.isEmpty {
@@ -25,7 +25,7 @@ extension Note {
 
     @NSManaged public var content: String?
     @NSManaged public var creationDate: Date?
-    @NSManaged public override var isDeleted: Bool
+    @NSManaged override public var isDeleted: Bool
     @NSManaged public var lastPosition: NSNumber?
     @NSManaged public var modificationDate: Date?
     @NSManaged public var noteSynced: NSNumber?

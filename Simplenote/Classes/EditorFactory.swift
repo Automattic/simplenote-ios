@@ -22,7 +22,7 @@ class EditorFactory: NSObject {
 
     /// You shall not pass!
     ///
-    private override init() {
+    override private init() {
         super.init()
     }
 
