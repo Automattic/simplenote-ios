@@ -41,6 +41,9 @@ only_rules:
 
   - duplicate_imports
 
+  # Prefer checking `isEmpty` over comparing collection to an empty array or dictionary literal.
+  - empty_collection_literal
+
   # Prefer checking `isEmpty` over comparing `count` to zero.
   - empty_count
 
