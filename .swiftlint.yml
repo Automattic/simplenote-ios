@@ -69,6 +69,9 @@ only_rules:
   # MARK comment should be in valid format.
   - mark
 
+  # Functions and methods parameters should be either on the same line, or one per line.
+  - multiline_parameters
+
   # Opening braces should be preceded by a single space and on the same line as
   # the declaration.
   - opening_brace
