@@ -209,14 +209,11 @@ private extension StoreManager {
 private extension StoreManager {
 
     func buildStoreProductMap(products: [Product]) -> [StoreProduct: Product] {
-        return products.reduce([StoreProduct: Product]()) { partialResult, product in
+        return products.reduce(into: [StoreProduct: Product]()) { partialResult, product in
             guard let storeProduct = StoreProduct.findStoreProduct(identifier: product.id) else {
-                return partialResult
+                return
             }
-
-            var updated = partialResult
-            updated[storeProduct] = product
-            return updated
+            partialResult[storeProduct] = product
         }
     }
 
