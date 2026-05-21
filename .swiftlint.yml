@@ -53,7 +53,10 @@ only_rules:
 
   # Prefer `() -> ` over `Void -> `.
   - empty_parameters
-  
+
+  # Prefer explicit `.init(...)` when calling an initializer.
+  - explicit_init
+
   # Prefer `first(where:)` over `filter { }.first`.
   - first_where
 
