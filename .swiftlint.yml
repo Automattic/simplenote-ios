@@ -100,7 +100,8 @@ only_rules:
   # Lines should not have trailing whitespace.
   # - trailing_whitespace
 
-  # Catch clauses should declare the error type as `Error` or a specific concrete type, rather than being untyped.
+  # Prefer plain `catch` over redundant `catch let error` or `catch let error as Error`,
+  # since Swift already provides an implicit `error` in a plain `catch`.
   - untyped_error_in_catch
 
   # Unused parameter in a closure should be replaced with `_`.
