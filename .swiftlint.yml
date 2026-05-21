@@ -53,7 +53,10 @@ only_rules:
 
   # Prefer `() -> ` over `Void -> `.
   - empty_parameters
-  
+
+  # Prefer `Type(...)` over `Type.init(...)` when calling an initializer.
+  - explicit_init
+
   # Prefer `first(where:)` over `filter { }.first`.
   - first_where
 
@@ -62,6 +65,9 @@ only_rules:
 
   # Prefer `last(where:)` over `filter { }.last`.
   - last_where
+
+  # Closing brackets of array and dictionary literals should match their opening lines' indentation.
+  - literal_expression_end_indentation
 
   # MARK comment should be in valid format.
   - mark
@@ -72,6 +78,9 @@ only_rules:
 
   # Prefer `.zero` over explicit init with zero parameters (e.g., `CGPoint(x: 0, y: 0)`).
   - prefer_zero_over_explicit_init
+  
+  # Prefer `reduce(into:_:)` over `reduce(_:_:)` for non-trivial accumulator types.
+  - reduce_into
 
   # `nil` coalescing on a non-optional is redundant.
   - redundant_nil_coalescing
@@ -96,6 +105,10 @@ only_rules:
 
   # Lines should not have trailing whitespace.
   # - trailing_whitespace
+
+  # Prefer plain `catch` over redundant `catch let error` or `catch let error as Error`,
+  # since Swift already provides an implicit `error` in a plain `catch`.
+  - untyped_error_in_catch
 
   # Unused parameter in a closure should be replaced with `_`.
   - unused_closure_parameter
