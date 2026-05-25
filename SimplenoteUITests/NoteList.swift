@@ -283,7 +283,8 @@ class NoteListAssert {
         print(">>>> \"\(expectedContent)\"")
 
         guard NoteList.isNotePresent(noteName) else {
-            return XCTFail(">>>> Note not found")
+            XCTFail(">>>> Note not found")
+            return
         }
 
         if let noteContent = Table.getContentOfCell(noteName: noteName) {
