@@ -559,8 +559,8 @@ private extension TagListViewController {
         tagsHeaderView.actionButton.setTitle(title, for: .normal)
     }
 
-    // This method is for refreshing the size of the sustainer view.  We are retiring sustainer so this is no longer needed
-    // but we may want to use the banner again in the future, so leaving this here in case.  Method is not being called anywhere
+    // This method is for refreshing the size of the sustainer view. We are retiring sustainer so this is no longer needed
+    // but we may want to use the banner again in the future, so leaving this here in case. Method is not being called anywhere
     func refreshTableHeaderView() {
         guard let bannerView else {
             return

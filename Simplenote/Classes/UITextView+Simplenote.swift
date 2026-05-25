@@ -44,9 +44,9 @@ private extension UITextView {
 
     /// Registers an Undo Checkpoint, and performs a given block `in a transactional fashion`: an Undo Group will wrap its execution
     ///
-    ///     1.  Registers an Undo Operation which is expected to restore the TextView to its previous state
-    ///     2.  Wraps up a given `Block` within an Undo Group
-    ///     3.  Post a TextDidChange Notification
+    ///     1. Registers an Undo Operation which is expected to restore the TextView to its previous state
+    ///     2. Wraps up a given `Block` within an Undo Group
+    ///     3. Post a TextDidChange Notification
     ///
     @discardableResult
     func registerUndoCheckpointAndPerform(block: (NSTextStorage) -> Void) -> Bool {
@@ -66,9 +66,9 @@ private extension UITextView {
 
     /// Registers an Undo Checkpoint, which is expected to restore the receiver to its previous state:
     ///
-    ///     1.  Restores the full contents of our TextStorage
-    ///     2.  Reverts the SelectedRange
-    ///     3.  Post a textDidChange Notification
+    ///     1. Restores the full contents of our TextStorage
+    ///     2. Reverts the SelectedRange
+    ///     3. Post a textDidChange Notification
     ///
     func registerUndoCheckpoint(in undoManager: UndoManager, storage: NSTextStorage) {
         let oldSelectedRange = selectedRange
