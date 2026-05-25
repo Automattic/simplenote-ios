@@ -9,6 +9,8 @@ class PinLockControllerConfigurationObserver {
     }
 
     var lastAnimation: UIView.ReloadAnimation? {
+        // Keep `?? nil` because it reads more clearly than flattening `UIView.ReloadAnimation??`.
+        // swiftlint:disable:next redundant_nil_coalescing
         animations.last ?? nil
     }
 
