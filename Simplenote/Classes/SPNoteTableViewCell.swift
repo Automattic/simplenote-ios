@@ -317,7 +317,7 @@ extension SPNoteTableViewCell {
     ///
     ///     1. tableViewCell(s).layoutMargins = .zero
     ///     2. tableView.layoutMargins = .zero
-    ///     2. tableView.separatorInsetReference = `.fromAutomaticInsets
+    ///     3. tableView.separatorInsetReference = `.fromAutomaticInsets`
     ///
     /// Then, and only then, this will work ferpectly 🔥
     ///
@@ -346,7 +346,7 @@ extension SPNoteTableViewCell {
 
     // Ref: https://github.com/Automattic/simplenote-ios/issues/1307
     // setHighlighted gets called on press down and on setSelected. This causes the highlighting to change on press down but selection is on press up
-    // By only updating the highlighting if the cell is the cell is selected fixes this issue
+    // Only updating the highlighting if the cell is selected fixes this issue
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         if isSelected {
             super.setHighlighted(highlighted, animated: animated)
