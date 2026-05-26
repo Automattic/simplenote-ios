@@ -57,12 +57,12 @@ class StoreManager {
 
     // MARK: - Public API(s)
 
-    /// Initialization involves three major steps:
+    /// Initialization involves these major steps:
     ///
-    ///     1.  Listen for Pending Transactions
-    ///     2.  Request the Known Products
-    ///     3.  Refresh the Purchased Products
-    ///     4.  Refresh the SubscriptionGroup Status (and update Core Data / refresh UI all over!)
+    ///     1. Listen for Pending Transactions
+    ///     2. Request the Known Products
+    ///     3. Refresh the Purchased Products
+    ///     4. Refresh the SubscriptionGroup Status (and update Core Data / refresh UI all over!)
     ///
     /// This API should be invoked shortly after the Launch Sequence is complete.
     ///

@@ -41,10 +41,10 @@ class InterlinkProcessor: NSObject {
 
     /// Displays the Interlink Lookup UI at the cursor's location when all of the following are **true**:
     ///
-    ///     1.  The Editor isn't Undoing nor Highlighting
-    ///     2.  The Editor is the first responder
-    ///     3.  There is an interlink `[keyword` at the current location
-    ///     4.  There are Notes with `keyword` in their title
+    ///     1. The Editor isn't Undoing nor Highlighting
+    ///     2. The Editor is the first responder
+    ///     3. There is an interlink `[keyword` at the current location
+    ///     4. There are Notes with `keyword` in their title
     ///
     ///  Otherwise we'll simply dismiss the Autocomplete View, if any.
     ///

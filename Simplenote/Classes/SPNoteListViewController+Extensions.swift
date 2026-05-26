@@ -469,8 +469,8 @@ extension SPNoteListViewController: UITableViewDelegate {
 
     public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         // Notes:
-        //  1.  No need to estimate. We precalculate the Height elsewhere, and we can return the *Actual* value
-        //  2.  We always scroll to the first row whenever Search Results are updated. If we don't implement this method,
+        //  1. No need to estimate. We precalculate the Height elsewhere, and we can return the *Actual* value
+        //  2. We always scroll to the first row whenever Search Results are updated. If we don't implement this method,
         //      UITableView ends up jumping off elsewhere!
         //
         return self.tableView(tableView, heightForRowAt: indexPath)

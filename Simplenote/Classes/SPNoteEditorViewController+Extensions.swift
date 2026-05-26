@@ -265,7 +265,7 @@ extension SPNoteEditorViewController {
             navigationController?.popViewController(animated: true)
         default:
             // With VoiceOver on, three finger scroll up and down will cause a page up/page down action
-            // If this method returns true that is disabled.  Returning false to maintain page up/page down
+            // If this method returns true that is disabled. Returning false to maintain page up/page down
             return false
         }
 

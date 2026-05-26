@@ -22,6 +22,9 @@ only_rules:
   # There should be no space before and one after any comma.
   - comma
 
+  # There should be a space after the comma in inheritance lists.
+  - comma_inheritance
+
   # Prefer `contains` over `filter(where:).count`.
   - contains_over_filter_count
 
@@ -41,6 +44,9 @@ only_rules:
 
   - duplicate_imports
 
+  # Prefer checking `isEmpty` over comparing collection to an empty array or dictionary literal.
+  - empty_collection_literal
+
   # Prefer checking `isEmpty` over comparing `count` to zero.
   - empty_count
 
@@ -53,7 +59,10 @@ only_rules:
 
   # Prefer `() -> ` over `Void -> `.
   - empty_parameters
-  
+
+  # Prefer `Type(...)` over `Type.init(...)` when calling an initializer.
+  - explicit_init
+
   # Prefer `first(where:)` over `filter { }.first`.
   - first_where
 
@@ -72,18 +81,30 @@ only_rules:
   # Modifiers should be in a canonical order (e.g., `public final lazy var`).
   - modifier_order
 
+  # Function and method parameters should be either on the same line, or one per line.
+  - multiline_parameters
+
   # Opening braces should be preceded by a single space and on the same line as
   # the declaration.
   - opening_brace
 
+  # Periods should not be followed by whitespace.
+  - period_spacing
+
   # Prefer `.zero` over explicit init with zero parameters (e.g., `CGPoint(x: 0, y: 0)`).
   - prefer_zero_over_explicit_init
-
+  
   # Prefer `reduce(into:_:)` over `reduce(_:_:)` for non-trivial accumulator types.
   - reduce_into
 
+  # `nil` coalescing on a non-optional is redundant.
+  - redundant_nil_coalescing
+
   # Type annotations are redundant when the type can be inferred.
   - redundant_type_annotation
+
+  # Returning a value from a function that has Void return type.
+  - return_value_from_void_function
 
   # Prefer `someBool.toggle()` over `someBool = !someBool`.
   - toggle_bool
@@ -102,6 +123,13 @@ only_rules:
 
   # Lines should not have trailing whitespace.
   # - trailing_whitespace
+
+  # Errors thrown from inside a `Task { ... }` block must be handled — otherwise they are silently discarded.
+  - unhandled_throwing_task
+
+  # Prefer plain `catch` over redundant `catch let error` or `catch let error as Error`,
+  # since Swift already provides an implicit `error` in a plain `catch`.
+  - untyped_error_in_catch
 
   # Unused parameter in a closure should be replaced with `_`.
   - unused_closure_parameter
