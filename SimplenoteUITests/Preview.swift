@@ -30,7 +30,7 @@ class Preview {
         let predicate = NSPredicate(format: "value == '" + value + "'")
 
         // We wait for at least one element with exact value to appear before counting
-        // all occurences. The downside is having one extra call before the actual count.
+        // all occurrences. The downside is having one extra call before the actual count.
         _ = app
             .webViews
             .descendants(matching: .staticText)
