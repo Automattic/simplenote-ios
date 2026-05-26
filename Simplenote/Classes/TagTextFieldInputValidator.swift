@@ -57,7 +57,7 @@ struct TagTextFieldInputValidator {
 
     /// Indicates if the receivers length is within allowed values
     /// - Important: `Tag.name` is used as the entity's `simperiumKey`, and the backend imposes a length.
-    ///              For that reason we must check on the `encoded` lenght (and not the actual raw string length)
+    ///              For that reason we must check on the `encoded` length (and not the actual raw string length)
     private func validateLength(tag: String) -> Bool {
         tag.byEncodingAsTagHash.count <= Constants.maximumTagLength
     }
