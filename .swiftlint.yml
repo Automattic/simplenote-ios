@@ -78,6 +78,9 @@ only_rules:
   # MARK comment should be in valid format.
   - mark
 
+  # Modifiers should be in a canonical order (e.g., `public final lazy var`).
+  - modifier_order
+
   # Function and method parameters should be either on the same line, or one per line.
   - multiline_parameters
 

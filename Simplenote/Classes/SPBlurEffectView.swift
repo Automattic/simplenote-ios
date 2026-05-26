@@ -29,7 +29,7 @@ class SPBlurEffectView: UIVisualEffectView {
         self.init(effect: .simplenoteBlurEffect)
     }
 
-    convenience required init?(coder: NSCoder) {
+    required convenience init?(coder: NSCoder) {
         self.init(effect: .simplenoteBlurEffect)
     }
 

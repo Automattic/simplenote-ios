@@ -20,11 +20,11 @@ extension SPEditorTextView {
         return NSAttributedStringToMarkdownConverter.convert(string: selectedAttributedText)
     }
 
-    open override func copy(_ sender: Any?) {
+    override open func copy(_ sender: Any?) {
         UIPasteboard.general.string = plainSelectedText
     }
 
-    open override func cut(_ sender: Any?) {
+    override open func cut(_ sender: Any?) {
         let text = plainSelectedText
         super.cut(sender)
         UIPasteboard.general.string = text
@@ -34,19 +34,19 @@ extension SPEditorTextView {
 // MARK: - Observer content position
 //
 extension SPEditorTextView {
-    open override var contentSize: CGSize {
+    override open var contentSize: CGSize {
         didSet {
             onContentPositionChange?()
         }
     }
 
-    open override var contentOffset: CGPoint {
+    override open var contentOffset: CGPoint {
         didSet {
             onContentPositionChange?()
         }
     }
 
-    open override var contentInset: UIEdgeInsets {
+    override open var contentInset: UIEdgeInsets {
         didSet {
             onContentPositionChange?()
         }

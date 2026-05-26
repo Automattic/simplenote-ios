@@ -46,7 +46,7 @@ enum UID {
 
         // "Empty Trash" button label is generated
         // differently by Xcode 12.4 and 12.5 (runs iOS 14.5+)
-        static private(set) var trashEmptyTrash: String = {
+        private(set) static var trashEmptyTrash: String = {
             "Empty trash"
         }()
 

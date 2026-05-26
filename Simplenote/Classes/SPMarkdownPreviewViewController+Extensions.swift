@@ -3,11 +3,11 @@ import UIKit
 // MARK: - SPMarkdownPreviewViewController
 //
 extension SPMarkdownPreviewViewController {
-    open override var canBecomeFirstResponder: Bool {
+    override open var canBecomeFirstResponder: Bool {
         return true
     }
 
-    open override var keyCommands: [UIKeyCommand]? {
+    override open var keyCommands: [UIKeyCommand]? {
         return [
             UIKeyCommand(input: "p",
                          modifierFlags: [.command, .shift],

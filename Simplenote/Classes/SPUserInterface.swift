@@ -26,7 +26,7 @@ class SPUserInterface: NSObject {
 
     /// Initializer
     ///
-    private override init() {
+    override private init() {
         super.init()
         startListeningToNotifications()
     }

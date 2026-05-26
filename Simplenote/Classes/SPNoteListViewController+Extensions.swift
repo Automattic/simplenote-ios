@@ -656,7 +656,7 @@ extension SPNoteListViewController {
         }
     }
 
-    open override func setEditing(_ editing: Bool, animated: Bool) {
+    override open func setEditing(_ editing: Bool, animated: Bool) {
         ensureTableViewEditingIsInSync()
         super.setEditing(editing, animated: animated)
         tableView.setEditing(editing, animated: animated)
@@ -987,11 +987,11 @@ extension SPNoteListViewController {
 // MARK: - Keyboard
 //
 extension SPNoteListViewController {
-    open override var canBecomeFirstResponder: Bool {
+    override open var canBecomeFirstResponder: Bool {
         return true
     }
 
-    open override var keyCommands: [UIKeyCommand]? {
+    override open var keyCommands: [UIKeyCommand]? {
         var commands = tableCommands
         if isSearchActive {
             commands.append(UIKeyCommand(input: UIKeyCommand.inputEscape, modifierFlags: [], action: #selector(keyboardStopSearching)))
