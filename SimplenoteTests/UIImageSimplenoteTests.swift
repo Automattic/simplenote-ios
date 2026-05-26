@@ -5,7 +5,7 @@ import XCTest
 //
 class UIImageSimplenoteTests: XCTestCase {
 
-    /// Verify every single UIColorName in existance yields a valid UIColor instancce
+    /// Verify every single UIColorName in existence yields a valid UIColor instance
     ///
     func testEverySingleUIImageNameEffectivelyYieldsSomeUIImageInstance() {
         for imageName in UIImageName.allCases {
