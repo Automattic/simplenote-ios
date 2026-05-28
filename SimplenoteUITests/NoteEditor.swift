@@ -163,7 +163,7 @@ class NoteEditor {
 
     class func getTextViewsWithExactValueCount(value: String) -> Int {
         // We wait for at least one element with exact value to appear before counting
-        // all occurences. The downside is having one extra call before the actual count.
+        // all occurrences. The downside is having one extra call before the actual count.
         let equalValuePredicate = NSPredicate(format: "value == '" + value + "'")
         _ = app
             .descendants(matching: .textView)
@@ -184,7 +184,7 @@ class NoteEditor {
         let equalLabelPredicate = NSPredicate(format: "label == '" + label + "'")
 
         // We wait for at least one element with exact label to appear before counting
-        // all occurences. The downside is having one extra call before the actual count.
+        // all occurrences. The downside is having one extra call before the actual count.
         _ = app.textViews[label].waitForExistence(timeout: averageLoadTimeout)
 
         let matchingTextViews = app.textViews.matching(equalLabelPredicate)

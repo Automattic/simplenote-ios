@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-/// Adopters of this protocol will recieve interactive keyboard-based notifications
+/// Adopters of this protocol will receive interactive keyboard-based notifications
 /// by implmenting the provided functions within.
 ///
 public protocol KeyboardObservable: AnyObject {

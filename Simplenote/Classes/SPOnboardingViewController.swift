@@ -43,7 +43,7 @@ class SPOnboardingViewController: UIViewController, SPAuthenticationInterface {
     ///
     var authenticator: SPAuthenticator?
 
-    // MARK: - Overriden Properties
+    // MARK: - Overridden Properties
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait

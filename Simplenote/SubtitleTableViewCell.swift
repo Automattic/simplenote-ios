@@ -38,7 +38,7 @@ final class SubtitleTableViewCell: UITableViewCell {
         fatalError("Unsupported Initializer")
     }
 
-    // MARK: - Overriden
+    // MARK: - Overridden
 
     override func prepareForReuse() {
         super.prepareForReuse()
