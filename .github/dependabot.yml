@@ -20,3 +20,13 @@ updates:
           - "major"
     cooldown:
       default-days: 7
+  - package-ecosystem: "bundler"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    groups:
+      ruby-minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+    open-pull-requests-limit: 5
