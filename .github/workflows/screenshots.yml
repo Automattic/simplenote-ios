@@ -17,7 +17,7 @@ jobs:
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6.0.3
     - uses: ruby/setup-ruby@afeafc3d1ab54a631816aba4c914a0081c12ff2f # v1.310.0
 
     - name: Install Bundler
@@ -25,7 +25,7 @@ jobs:
 
     - name: Restore Ruby Dependency Cache
       id: restore-ruby-dependency-cache
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: vendor/bundle
         key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
@@ -40,7 +40,7 @@ jobs:
     - name: Take all screenshots
       run: bundle exec fastlane take_screenshots
 
-    - uses: actions/upload-artifact@v4
+    - uses: actions/upload-artifact@v7
       name: Upload all screenshots as artifacts
       with:
         name: screenshots
@@ -53,7 +53,7 @@ jobs:
         BUNDLE_WITH=screenshots bundle install
         bundle exec fastlane create_promo_screenshots
 
-    - uses: actions/upload-artifact@v4
+    - uses: actions/upload-artifact@v7
       name: Upload all promo screenshots as artifacts
       with:
         name: promo_screenshots
