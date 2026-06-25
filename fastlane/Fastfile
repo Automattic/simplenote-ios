@@ -6,6 +6,8 @@ fastlane_require 'xcodeproj'
 fastlane_require 'dotenv'
 fastlane_require 'open-uri'
 fastlane_require 'buildkit'
+require 'json'
+require 'tmpdir'
 
 UI.user_error!('Please run fastlane via `bundle exec`') unless FastlaneCore::Helper.bundler?
 
@@ -34,8 +36,12 @@ VERSION_FORMATTER = Fastlane::Wpmreleasetoolkit::Versioning::FourPartVersionForm
 BUILD_CODE_FORMATTER = Fastlane::Wpmreleasetoolkit::Versioning::FourPartBuildCodeFormatter.new
 PUBLIC_VERSION_FILE = Fastlane::Wpmreleasetoolkit::Versioning::IOSVersionFile.new(xcconfig_path: VERSION_FILE_PATH)
 
-SECRETS_ROOT = File.join(Dir.home, '.configure', 'simplenote-ios', 'secrets')
-APP_STORE_CONNECT_KEY_PATH = File.join(SECRETS_ROOT, 'app_store_connect_fastlane_api_key.json')
+APP_STORE_CONNECT_KEY_PATH = File.join(Dir.tmpdir, 'simplenote-ios-app-store-connect-fastlane-api-key.json')
+APP_STORE_CONNECT_API_KEY_ENV_VARS = %w[
+  APP_STORE_CONNECT_API_KEY_KEY_ID
+  APP_STORE_CONNECT_API_KEY_ISSUER_ID
+  APP_STORE_CONNECT_API_KEY_KEY
+].freeze
 $used_test_account_index = nil
 
 GLOTPRESS_BASE_URL = 'https://translate.wordpress.com/projects'
@@ -101,7 +107,7 @@ platform :ios do
       overwrite_screenshots: true, # won't have effect if `skip_screenshots` is true
       phased_release: true,
       precheck_include_in_app_purchases: false,
-      api_key_path: APP_STORE_CONNECT_KEY_PATH,
+      api_key_path: app_store_connect_api_key_path,
       force: skip_confirm,
       copyright: "© #{Time.now.year} Automattic, Inc."
     )
@@ -427,23 +433,15 @@ lane :update_certs_and_profiles_app_store do |readonly: true|
     team_id: TEAM_ID_APP_STORE_CONNECT,
     readonly: readonly,
     app_identifiers: simplenote_app_identifiers,
-    api_key_path: APP_STORE_CONNECT_KEY_PATH,
+    api_key_path: readonly ? nil : app_store_connect_api_key_path,
     template_name: 'NotationalFlow Keychain Access (Distribution)'
   )
 end
 
 def update_code_signing_enterprise(readonly:, app_identifiers:)
-  if readonly
-    # In readonly mode, we can use the API key
-    api_key_path = APP_STORE_CONNECT_KEY_PATH
-  else
-    # The Enterprise account APIs do not support authentication via API key.
-    # If we want to modify data (readonly = false) we need to authenticate manually.
-    prompt_user_for_app_store_connect_credentials
-    # We also need to pass no API key path, otherwise Fastlane will give
-    # precedence to that authentication mode.
-    api_key_path = nil
-  end
+  # The Enterprise account APIs do not support authentication via API key.
+  # If we want to modify data (readonly = false) we need to authenticate manually.
+  prompt_user_for_app_store_connect_credentials unless readonly
 
   update_code_signing(
     type: 'enterprise',
@@ -451,7 +449,7 @@ def update_code_signing_enterprise(readonly:, app_identifiers:)
     team_id: TEAM_ID_ENTERPRISE,
     readonly: readonly,
     app_identifiers: app_identifiers,
-    api_key_path: api_key_path
+    api_key_path: nil
   )
 end
 
@@ -514,6 +512,20 @@ def prompt_user_for_app_store_connect_credentials
   # Note that if the user is already available to `AccountManager`, setting it in the environment is redundant, but Fastlane doesn't provide a way
   # to check it so we have to do it anyway.
   ENV['FASTLANE_USER'] = CredentialsManager::AccountManager.new.user
+end
+
+def app_store_connect_api_key_path
+  EnvManager.require_env_vars!(*APP_STORE_CONNECT_API_KEY_ENV_VARS)
+
+  key_json = {
+    key_id: EnvManager.get_required_env!('APP_STORE_CONNECT_API_KEY_KEY_ID'),
+    issuer_id: EnvManager.get_required_env!('APP_STORE_CONNECT_API_KEY_ISSUER_ID'),
+    key: EnvManager.get_required_env!('APP_STORE_CONNECT_API_KEY_KEY').gsub('\n', "\n")
+  }
+
+  File.write(APP_STORE_CONNECT_KEY_PATH, JSON.pretty_generate(key_json), perm: 0o600)
+
+  APP_STORE_CONNECT_KEY_PATH
 end
 
 ########################################################################
