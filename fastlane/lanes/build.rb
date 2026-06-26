@@ -42,7 +42,7 @@ lane :upload_to_app_store_connect do |beta_release:, skip_prechecks: false, crea
   UI.important("Uploading ipa at #{ipa_path} to TestFlight...")
   upload_to_testflight(
     ipa: ipa_path,
-    api_key_path: app_store_connect_api_key_path,
+    api_key: asc_api_key,
     skip_waiting_for_build_processing: false,
     distribute_external: true,
     changelog: File.read(RELEASE_NOTES_SOURCE_PATH),

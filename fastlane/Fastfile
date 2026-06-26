@@ -6,8 +6,6 @@ fastlane_require 'xcodeproj'
 fastlane_require 'dotenv'
 fastlane_require 'open-uri'
 fastlane_require 'buildkit'
-require 'json'
-require 'tmpdir'
 
 UI.user_error!('Please run fastlane via `bundle exec`') unless FastlaneCore::Helper.bundler?
 
@@ -36,7 +34,6 @@ VERSION_FORMATTER = Fastlane::Wpmreleasetoolkit::Versioning::FourPartVersionForm
 BUILD_CODE_FORMATTER = Fastlane::Wpmreleasetoolkit::Versioning::FourPartBuildCodeFormatter.new
 PUBLIC_VERSION_FILE = Fastlane::Wpmreleasetoolkit::Versioning::IOSVersionFile.new(xcconfig_path: VERSION_FILE_PATH)
 
-APP_STORE_CONNECT_KEY_PATH = File.join(Dir.tmpdir, 'simplenote-ios-app-store-connect-fastlane-api-key.json')
 APP_STORE_CONNECT_API_KEY_ENV_VARS = %w[
   APP_STORE_CONNECT_API_KEY_KEY_ID
   APP_STORE_CONNECT_API_KEY_ISSUER_ID
@@ -107,7 +104,7 @@ platform :ios do
       overwrite_screenshots: true, # won't have effect if `skip_screenshots` is true
       phased_release: true,
       precheck_include_in_app_purchases: false,
-      api_key_path: app_store_connect_api_key_path,
+      api_key: asc_api_key,
       force: skip_confirm,
       copyright: "© #{Time.now.year} Automattic, Inc."
     )
@@ -433,7 +430,7 @@ lane :update_certs_and_profiles_app_store do |readonly: true|
     team_id: TEAM_ID_APP_STORE_CONNECT,
     readonly: readonly,
     app_identifiers: simplenote_app_identifiers,
-    api_key_path: readonly ? nil : app_store_connect_api_key_path,
+    api_key: readonly ? nil : asc_api_key,
     template_name: 'NotationalFlow Keychain Access (Distribution)'
   )
 end
@@ -449,12 +446,12 @@ def update_code_signing_enterprise(readonly:, app_identifiers:)
     team_id: TEAM_ID_ENTERPRISE,
     readonly: readonly,
     app_identifiers: app_identifiers,
-    api_key_path: nil
+    api_key: nil
   )
 end
 
 # rubocop:disable Metrics/ParameterLists
-def update_code_signing(type:, team_id:, readonly:, app_identifiers:, api_key_path:, template_name: nil)
+def update_code_signing(type:, team_id:, readonly:, app_identifiers:, api_key: nil, template_name: nil)
   # NOTE: It might be neccessary to add `force: true` alongside `readonly: true` in order to regenerate some provisioning profiles.
   # If this turns out to be a hard requirement, we should consider updating the method with logic to toggle the two setting based on whether we're fetching or renewing.
 
@@ -473,7 +470,7 @@ def update_code_signing(type:, team_id:, readonly:, app_identifiers:, api_key_pa
     team_id: team_id,
     readonly: readonly,
     app_identifier: app_identifiers,
-    api_key_path: api_key_path,
+    api_key: api_key,
     template_name: template_name
   )
 end
@@ -514,18 +511,14 @@ def prompt_user_for_app_store_connect_credentials
   ENV['FASTLANE_USER'] = CredentialsManager::AccountManager.new.user
 end
 
-def app_store_connect_api_key_path
+def asc_api_key
   EnvManager.require_env_vars!(*APP_STORE_CONNECT_API_KEY_ENV_VARS)
 
-  key_json = {
+  app_store_connect_api_key(
     key_id: EnvManager.get_required_env!('APP_STORE_CONNECT_API_KEY_KEY_ID'),
     issuer_id: EnvManager.get_required_env!('APP_STORE_CONNECT_API_KEY_ISSUER_ID'),
-    key: EnvManager.get_required_env!('APP_STORE_CONNECT_API_KEY_KEY').gsub('\n', "\n")
-  }
-
-  File.write(APP_STORE_CONNECT_KEY_PATH, JSON.pretty_generate(key_json), perm: 0o600)
-
-  APP_STORE_CONNECT_KEY_PATH
+    key_content: EnvManager.get_required_env!('APP_STORE_CONNECT_API_KEY_KEY').gsub('\n', "\n")
+  )
 end
 
 ########################################################################
