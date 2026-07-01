@@ -447,8 +447,8 @@ end
 
 # rubocop:disable Metrics/ParameterLists
 def update_code_signing(type:, team_id:, readonly:, app_identifiers:, api_key: nil, template_name: nil)
-  # NOTE: It might be neccessary to add `force: true` alongside `readonly: true` in order to regenerate some provisioning profiles.
-  # If this turns out to be a hard requirement, we should consider updating the method with logic to toggle the two setting based on whether we're fetching or renewing.
+  # NOTE: It might be necessary to add `force: true` alongside `readonly: true` in order to regenerate some provisioning profiles.
+  # If this turns out to be a hard requirement, we should consider updating the method with logic to toggle the two settings based on whether we're fetching or renewing.
 
   # Fail early if secrets not available via `EnvManager.get_required_env!`.
   # Otherwise, Fastlane will prompt to type them.
