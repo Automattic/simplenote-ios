@@ -25,7 +25,7 @@ jobs:
 
     - name: Restore Ruby Dependency Cache
       id: restore-ruby-dependency-cache
-      uses: actions/cache@v5.0.5
+      uses: actions/cache@v6.1.0
       with:
         path: vendor/bundle
         key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
