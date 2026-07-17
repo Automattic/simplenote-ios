@@ -905,7 +905,7 @@ private enum AuthenticationStrings {
     static let emailPlaceholder             = NSLocalizedString("Email", comment: "Email TextField Placeholder")
     static let passwordPlaceholder          = NSLocalizedString("Password", comment: "Password TextField Placeholder")
     static let codePlaceholder              = NSLocalizedString("Code", comment: "Code TextField Placeholder")
-    static let dismissActionText            = NSLocalizedString("OK", comment: "Dismisses an authentication error alert")
+    static let dismissActionText            = NSLocalizedString("OK", comment: "Dismisses an auth error alert")
     static let cancelActionText             = NSLocalizedString("Cancel", comment: "Cancel Action")
     static let loginActionText              = NSLocalizedString("Log In", comment: "Log In Action")
     static let loginWithEmailEmailHeader    = NSLocalizedString("Enter the password for the account {{EMAIL}}", comment: "Header for Login With Password. Please preserve the {{EMAIL}} substring")
