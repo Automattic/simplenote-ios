@@ -5,7 +5,6 @@ default_platform(:ios)
 fastlane_require 'xcodeproj'
 fastlane_require 'dotenv'
 fastlane_require 'open-uri'
-fastlane_require 'buildkit'
 
 UI.user_error!('Please run fastlane via `bundle exec`') unless FastlaneCore::Helper.bundler?
 
@@ -33,8 +32,6 @@ VERSION_CALCULATOR = Fastlane::Wpmreleasetoolkit::Versioning::SemanticVersionCal
 VERSION_FORMATTER = Fastlane::Wpmreleasetoolkit::Versioning::FourPartVersionFormatter.new
 BUILD_CODE_FORMATTER = Fastlane::Wpmreleasetoolkit::Versioning::FourPartBuildCodeFormatter.new
 PUBLIC_VERSION_FILE = Fastlane::Wpmreleasetoolkit::Versioning::IOSVersionFile.new(xcconfig_path: VERSION_FILE_PATH)
-
-$used_test_account_index = nil
 
 GLOTPRESS_BASE_URL = 'https://translate.wordpress.com/projects'
 # Notice the trailing / is required.
@@ -64,10 +61,6 @@ before_all do
   EnvManager.set_up(env_file_name: 'simplenote-ios')
 
   setup_ci
-end
-
-error do |lane, _exception, _options|
-  deoccupy_test_account if lane == :run_ui_tests
 end
 
 ########################################################################
@@ -343,50 +336,24 @@ platform :ios do
   #####################################################################################
   # run_ui_tests
   # -----------------------------------------------------------------------------------
-  # A lane to run a subset of automated UI tests. Since only login tests are
-  # selected for now, there will be no credentials race condition.
+  # A lane to run automated UI tests.
   # -----------------------------------------------------------------------------------
   # Usage:
-  # bundle exec fastlane run_ui_tests [scheme:<Xcode scheme with UI tests>] [device:<Name of the iOS Simulator>] [test_account:<Test account email>]
+  # bundle exec fastlane run_ui_tests [scheme:<Xcode scheme with UI tests>] [device:<Name of the iOS Simulator>]
   #
   # Example:
-  # bundle exec fastlane run_ui_tests scheme:"SimplenoteUITests_Subset" device:"iPhone 14" test_account:"test.account@test.com"
+  # bundle exec fastlane run_ui_tests scheme:"SimplenoteUITests" device:"iPhone 14"
   #####################################################################################
   desc 'Run UI tests'
   lane :run_ui_tests do |options|
     scan(
       project: project_name,
-      scheme: options[:scheme] || 'SimplenoteUITests_Subset',
+      scheme: options[:scheme] || 'SimplenoteUITests',
       device: options[:device] || 'iPhone 14',
       output_directory: OUTPUT_DIRECTORY_PATH,
       reset_simulator: true,
-      xcargs: { UI_TEST_ACCOUNT: options[:test_account] || '' },
       result_bundle: true
     )
-  end
-
-  #####################################################################################
-  # pick_test_account_and_run_ui_tests
-  # -----------------------------------------------------------------------------------
-  # Firstly tries to occupy a free test account, and then passes the account to
-  # `run_ui_tests` lane. Frees up the account afterwards.
-  # -----------------------------------------------------------------------------------
-  # Usage:
-  # bundle exec fastlane pick_test_account_and_run_ui_tests [device:<Name of the iOS Simulator>]
-  #
-  # Example:
-  # bundle exec fastlane pick_test_account_and_run_ui_tests device:"iPhone 14"
-  #####################################################################################
-  desc 'Occupy a free test account and run UI tests with it'
-  lane :pick_test_account_and_run_ui_tests do |options|
-    if is_ci
-      sanitize_test_accounts
-      find_free_test_account
-      run_ui_tests(options.merge({ test_account: EnvManager.get_required_env!('UI_TESTS_ACCOUNT_EMAIL').sub('X', $used_test_account_index.to_s) }))
-      deoccupy_test_account
-    else
-      UI.user_error!('This lane should be run only from CI')
-    end
   end
 end
 
@@ -559,97 +526,6 @@ end
 
 def simulator_version
   '14.5'
-end
-
-def deoccupy_test_account
-  return if $used_test_account_index.nil?
-
-  UI.message("Freeing used test account #{$used_test_account_index}")
-  change_test_account_availability('free')
-  $used_test_account_index = nil
-end
-
-# Test accounts info is stored in JSON-formatted string, where keys represent
-# the account index, and values are either "free" or BUILDKITE_BUILD_NUMBER, in case if account
-# was occupied by a build. Returns the hash.
-# Example:
-#   fetch_test_accounts_hash
-#     => {"0"=>"4079", "1"=>"free", "2"=>"free", "3"=>"free"}
-def fetch_test_accounts_hash
-  uri = URI.parse(EnvManager.get_required_env!('UI_TESTS_ACCOUNTS_JSON_URL'))
-  response = Net::HTTP.get_response(uri)
-  accounts_state = response.body.chomp
-  JSON.parse(accounts_state)
-end
-
-# Finds the index of first free account in accounts hash, and marks it as accupied by current build.
-# Crashed fastlane if free account was not found.
-def find_free_test_account
-  accounts_hash = fetch_test_accounts_hash
-  UI.message('Looking for a free test account...')
-  UI.message("Accounts state: #{accounts_hash}")
-
-  $used_test_account_index = accounts_hash.key('free')
-
-  UI.user_error!('Could not find free UI Test account. Quitting.') if $used_test_account_index.nil?
-  UI.message("Free account index: #{$used_test_account_index}")
-  change_test_account_availability(ENV['BUILDKITE_BUILD_NUMBER'].to_s)
-end
-
-# Replace a value in a key which is equal to $used_test_account_index global variable
-# Example:
-#   change_test_account_availability("free")
-#     => {"0"=>"free", "1"=>"free", "2"=>"free", "3"=>"free"}
-#
-#   change_test_account_availability("4820")
-#     => {"0"=>"4820", "1"=>"free", "2"=>"free", "3"=>"free"}
-def change_test_account_availability(availability)
-  accounts_hash = fetch_test_accounts_hash
-  accounts_hash[$used_test_account_index.to_s] = availability
-  submit_accounts_hash(accounts_hash)
-end
-
-def sanitize_test_accounts
-  accounts_hash = fetch_test_accounts_hash
-  UI.message('Sanitizing stale test accounts...')
-  UI.message("Accounts before sanitizing: #{accounts_hash}")
-
-  accounts_hash.each do |key, value|
-    next if value == 'free' || job_running?(value)
-
-    accounts_hash[key] = 'free'
-    submit_accounts_hash(accounts_hash)
-  end
-end
-
-def job_running?(job_number)
-  client = Buildkit.new(token: EnvManager.get_required_env!('BUILDKITE_TOKEN'))
-  build = client.build('automattic', 'simplenote-ios', job_number)
-
-  state = build['state']
-
-  UI.message("Status of Job Number #{job_number} is #{state}")
-
-  build['state'] == 'running'
-rescue StandardError
-  false
-end
-
-def submit_accounts_hash(accounts_hash)
-  UI.message("Writing new accounts state: #{accounts_hash}")
-  uri = URI.parse(EnvManager.get_required_env!('UI_TESTS_ACCOUNTS_JSON_URL'))
-  request = Net::HTTP::Post.new(uri)
-  request.body = accounts_hash.to_json
-
-  req_options = {
-    use_ssl: uri.scheme == 'https'
-  }
-
-  Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
-    http.request(request)
-  end
-
-  UI.message("Accounts state after write: #{fetch_test_accounts_hash}")
 end
 
 # Returns the release version of the app in the format `1.2` or `1.2.3` if it is a hotfix
