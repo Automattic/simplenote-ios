@@ -60,5 +60,4 @@ class EmailLogin {
             app.buttons["Not Now"].tap()
         }
     }
-
 }
