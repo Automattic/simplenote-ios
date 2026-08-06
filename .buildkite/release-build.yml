@@ -13,7 +13,7 @@ steps:
   - label: ":testflight: Build Simplenote iOS for App Store Connect"
     key: testflight_build
     command: |
-      .buildkite/commands/checkout-release-branch.sh $RELEASE_VERSION
+      checkout_release_branch $RELEASE_VERSION
       .buildkite/commands/release-build.sh
     priority: 1
     plugins: [$CI_TOOLKIT_PLUGIN]
@@ -26,7 +26,7 @@ steps:
     # This step does not only upload to ASC, but also create a GitHub release.
     # For that, it needs to be on the latest release branch commit, hence the checkout command
     command: |
-      .buildkite/commands/checkout-release-branch.sh $RELEASE_VERSION
+      checkout_release_branch $RELEASE_VERSION
       .buildkite/commands/release-upload.sh $BETA_RELEASE
     priority: 1
     plugins: [$CI_TOOLKIT_PLUGIN]
