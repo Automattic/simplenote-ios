@@ -94,7 +94,7 @@ extension SPAuthError {
         case .tooManyAttempts:
             return NSLocalizedString("Too Many Login Attempts", comment: "Title for too many login attempts error")
         default:
-            return NSLocalizedString("Sorry!", comment: "Authentication Error Alert Title")
+            return NSLocalizedString("Login Failed", comment: "Authentication Error Alert Title")
         }
     }
 
@@ -103,7 +103,10 @@ extension SPAuthError {
     var message: String {
         switch self {
         case .loginBadCredentials:
-            return NSLocalizedString("Could not login with the provided email address and password.", comment: "Message displayed when login fails")
+            return NSLocalizedString(
+                "The email address or password you entered is incorrect.",
+                comment: "Message displayed when login fails"
+            )
         case .signupBadCredentials:
             return NSLocalizedString("Could not create an account with the provided email address and password.", comment: "Error for bad email or password")
         case .signupUserAlreadyExists:
