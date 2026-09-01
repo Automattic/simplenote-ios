@@ -21,98 +21,6 @@
                BlueprintName = "SimplenoteUITests"
                ReferencedContainer = "container:Simplenote.xcodeproj">
             </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "SimplenoteUISmokeTestsHistory/testCanRestorePreviousVersion()">
-               </Test>
-               <Test
-                  Identifier = "SimplenoteUISmokeTestsHistory/testHistoryCanBeDismissed()">
-               </Test>
-               <Test
-                  Identifier = "SimplenoteUISmokeTestsHistory/testHistoryIsKeptAfterRecoveringNoteFromTrash()">
-               </Test>
-               <Test
-                  Identifier = "SimplenoteUISmokeTestsHistory/testPreviousNoteIsNotRestoredWhenTheHistoryPanelIsDismissed()">
-               </Test>
-               <Test
-                  Identifier = "SimplenoteUISmokeTestsHistory/testRestoreButtonIsEnabledWhenAPreviousVersionIsSelected()">
-               </Test>
-               <Test
-                  Identifier = "SimplenoteUISmokeTestsHistory/testRestoreNoteButtonIsDisabledByDefault()">
-               </Test>
-               <Test
-                  Identifier = "SimplenoteUISmokeTestsLogin/testLogInWithCorrectCredentials()">
-               </Test>
-               <Test
-                  Identifier = "SimplenoteUISmokeTestsLogin/testLogInWithNoEmail()">
-               </Test>
-               <Test
-                  Identifier = "SimplenoteUISmokeTestsLogin/testLogInWithNoEmailNoPassword()">
-               </Test>
-               <Test
-                  Identifier = "SimplenoteUISmokeTestsLogin/testLogInWithNoPassword()">
-               </Test>
-               <Test
-                  Identifier = "SimplenoteUISmokeTestsLogin/testLogInWithTooShortPassword()">
-               </Test>
-               <Test
-                  Identifier = "SimplenoteUISmokeTestsLogin/testLogOut()">
-               </Test>
-               <Test
-                  Identifier = "SimplenoteUISmokeTestsNoteEditor/testAddedURLIsLinkified()">
-               </Test>
-               <Test
-                  Identifier = "SimplenoteUISmokeTestsNoteEditor/testCanPreviewMarkdownBySwiping()">
-               </Test>
-               <Test
-                  Identifier = "SimplenoteUISmokeTestsNoteEditor/testCreateCheckedItem()">
-               </Test>
-               <Test
-                  Identifier = "SimplenoteUISmokeTestsNoteEditor/testCreateUncheckedItem()">
-               </Test>
-               <Test
-                  Identifier = "SimplenoteUISmokeTestsNoteEditor/testTappingOnLinkInPreviewOpensLinkInNewWindow()">
-               </Test>
-               <Test
-                  Identifier = "SimplenoteUISmokeTestsNoteEditor/testUndoUndoesTheLastEdit()">
-               </Test>
-               <Test
-                  Identifier = "SimplenoteUISmokeTestsSearch">
-               </Test>
-               <Test
-                  Identifier = "SimplenoteUISmokeTestsSearch/testCanFilterByTagWhenClickingOnTagInTagDrawer()">
-               </Test>
-               <Test
-                  Identifier = "SimplenoteUISmokeTestsSearch/testClearingSearchFieldUpdatesFilteredNotes()">
-               </Test>
-               <Test
-                  Identifier = "SimplenoteUISmokeTestsSearch/testClickingOnDifferentTagsOrAllNotesOrTrashImmediatelyUpdatesFilteredNotes()">
-               </Test>
-               <Test
-                  Identifier = "SimplenoteUISmokeTestsSearch/testSearchFieldUpdatesWithResultsOfTagFormatSearchString()">
-               </Test>
-               <Test
-                  Identifier = "SimplenoteUISmokeTestsSearch/testTagAutoCompletesAppearWhenTypingInSearchField()">
-               </Test>
-               <Test
-                  Identifier = "SimplenoteUISmokeTestsSearch/testTagSuggestionsSuggestTagsRegardlessOfCase()">
-               </Test>
-               <Test
-                  Identifier = "SimplenoteUISmokeTestsSearch/testTypingTagAndSomethingElseResultsInAutocompleteTagResultsIncludingThatSomethingElse()">
-               </Test>
-               <Test
-                  Identifier = "SimplenoteUISmokeTestsTrash/testCanDeleteNoteForeverIndividually()">
-               </Test>
-               <Test
-                  Identifier = "SimplenoteUISmokeTestsTrash/testCanDeleteNotesForeverViaEmpty()">
-               </Test>
-               <Test
-                  Identifier = "SimplenoteUISmokeTestsTrash/testCanTrashNote()">
-               </Test>
-               <Test
-                  Identifier = "SimplenoteUISmokeTestsTrash/testCanViewTrashedNotes()">
-               </Test>
-            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>
@@ -136,13 +44,6 @@
             ReferencedContainer = "container:Simplenote.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "UI_TEST_ACCOUNT"
-            value = "$(UI_TEST_ACCOUNT)"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
