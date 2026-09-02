@@ -14,5 +14,5 @@ gem 'fastlane-plugin-wpmreleasetoolkit', '~> 15.0'
 gem 'nokogiri', '~> 1.19'
 
 group :screenshots, optional: true do
-  gem 'rmagick', '~> 3.2.0'
+  gem 'rmagick', '~> 7.1.2'
 end
