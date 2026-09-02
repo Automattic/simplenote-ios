@@ -9,6 +9,8 @@ agents:
 env:
   IMAGE_ID: $IMAGE_ID
 
+priority: 1
+
 steps:
   - label: Finalize Release
     plugins: [$CI_TOOLKIT_PLUGIN]
