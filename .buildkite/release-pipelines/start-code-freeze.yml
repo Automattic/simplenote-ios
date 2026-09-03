@@ -9,6 +9,8 @@ env:
 agents:
   queue: mac
 
+priority: 1
+
 steps:
   - label: Start Code Freeze
     plugins:

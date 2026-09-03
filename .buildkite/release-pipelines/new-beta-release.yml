@@ -13,6 +13,8 @@ env:
 agents:
   queue: mac
 
+priority: 1
+
 steps:
   - label: New Beta Release
     plugins: [$CI_TOOLKIT_PLUGIN]

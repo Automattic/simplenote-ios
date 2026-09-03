@@ -9,6 +9,8 @@ agents:
 env:
   IMAGE_ID: $IMAGE_ID
 
+priority: 1
+
 steps:
   - label: Update Release Notes and Other Metadata on App Store Connect
     plugins: [$CI_TOOLKIT_PLUGIN]
