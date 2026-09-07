@@ -146,11 +146,11 @@ platform :ios do
       groups: FIREBASE_TESTERS_GROUP
     )
 
-    sentry_upload_dsym(
+    sentry_debug_files_upload(
       auth_token: EnvManager.get_required_env!('SENTRY_AUTH_TOKEN'),
       org_slug: 'a8c',
       project_slug: 'simplenote-ios',
-      dsym_path: lane_context[SharedValues::DSYM_OUTPUT_PATH]
+      path: [lane_context[SharedValues::DSYM_OUTPUT_PATH]]
     )
 
     next if pull_request_number.nil?

@@ -37,7 +37,7 @@ lane :upload_to_app_store_connect do |beta_release:, skip_prechecks: false, crea
   UI.user_error!("Could not find ipa at #{ipa_path}!") unless File.exist?(ipa_path)
 
   dsym_path = File.join(OUTPUT_DIRECTORY_PATH, "#{APP_STORE_CONNECT_OUTPUT_NAME}.app.dSYM.zip")
-  UI.user_error!("Could not find dSYM at #{dsym_path}!") unless File.exist?(ipa_path)
+  UI.user_error!("Could not find dSYM at #{dsym_path}!") unless File.exist?(dsym_path)
 
   UI.important("Uploading ipa at #{ipa_path} to TestFlight...")
   upload_to_testflight(
@@ -51,8 +51,8 @@ lane :upload_to_app_store_connect do |beta_release:, skip_prechecks: false, crea
   )
 
   UI.important("Uploading dSYM at #{dsym_path} to Sentry...")
-  sentry_upload_dsym(
-    dsym_path: dsym_path,
+  sentry_debug_files_upload(
+    path: [dsym_path],
     auth_token: EnvManager.get_required_env!('SENTRY_AUTH_TOKEN'),
     org_slug: 'a8c',
     project_slug: 'simplenote-ios'
