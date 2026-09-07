@@ -36,7 +36,9 @@ lane :upload_to_app_store_connect do |beta_release:, skip_prechecks: false, crea
   ipa_path = File.join(OUTPUT_DIRECTORY_PATH, "#{APP_STORE_CONNECT_OUTPUT_NAME}.ipa")
   UI.user_error!("Could not find ipa at #{ipa_path}!") unless File.exist?(ipa_path)
 
-  dsym_path = File.join(OUTPUT_DIRECTORY_PATH, "#{APP_STORE_CONNECT_OUTPUT_NAME}.app.dSYM.zip")
+  dsym_path = File.join(
+    OUTPUT_DIRECTORY_PATH, "#{APP_STORE_CONNECT_OUTPUT_NAME}.app.dSYM.zip"
+  )
   UI.user_error!("Could not find dSYM at #{dsym_path}!") unless File.exist?(dsym_path)
 
   UI.important("Uploading ipa at #{ipa_path} to TestFlight...")

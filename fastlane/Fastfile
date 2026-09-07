@@ -133,6 +133,10 @@ platform :ios do
       }
     )
 
+    dsym_path = lane_context[SharedValues::DSYM_OUTPUT_PATH]
+    UI.user_error!('Build did not produce a dSYM path') unless dsym_path
+    UI.user_error!("Missing dSYM: #{dsym_path}") unless File.exist?(dsym_path)
+
     release_notes = <<~NOTES
       Pull Request: ##{pull_request_number || 'N/A'}
       Branch: `#{ENV.fetch('BUILDKITE_BRANCH', 'N/A')}`
@@ -150,7 +154,7 @@ platform :ios do
       auth_token: EnvManager.get_required_env!('SENTRY_AUTH_TOKEN'),
       org_slug: 'a8c',
       project_slug: 'simplenote-ios',
-      path: [lane_context[SharedValues::DSYM_OUTPUT_PATH]]
+      path: [dsym_path]
     )
 
     next if pull_request_number.nil?
