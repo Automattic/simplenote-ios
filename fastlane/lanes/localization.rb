@@ -74,15 +74,28 @@ platform :ios do
   lane :update_appstore_strings do |version: release_version_current|
     files = {
       whats_new: RELEASE_NOTES_SOURCE_PATH,
-      app_store_subtitle: File.join(STORE_METADATA_DEFAULT_LOCALE_FOLDER, 'subtitle.txt'),
-      app_store_desc: File.join(STORE_METADATA_DEFAULT_LOCALE_FOLDER, 'description.txt'),
-      app_store_keywords: File.join(STORE_METADATA_DEFAULT_LOCALE_FOLDER, 'keywords.txt')
+      app_store_subtitle: {
+        path: File.join(STORE_METADATA_DEFAULT_LOCALE_FOLDER, 'subtitle.txt'),
+        comment: 'translators: Subtitle to be displayed below the application name in the Apple App Store. Limit to 30 characters including spaces and commas!'
+      },
+      app_store_desc: {
+        path: File.join(STORE_METADATA_DEFAULT_LOCALE_FOLDER, 'description.txt'),
+        comment: 'translators: Multi-paragraph text used to display in the Apple App Store.'
+      },
+      app_store_keywords: {
+        path: File.join(STORE_METADATA_DEFAULT_LOCALE_FOLDER, 'keywords.txt'),
+        comment: <<~COMMENT.chomp
+          translators: Keywords used in the App Store search engine to find the app.
+          Delimit with an English comma between each keyword. Limit to 100 characters including spaces and commas.
+        COMMENT
+      }
     }
 
-    ios_update_metadata_source(
+    gp_update_metadata_source(
       po_file_path: File.join(APP_RESOURCES_DIR, 'AppStoreStrings.pot'),
       source_files: files,
-      release_version: version
+      release_version: version,
+      commit_changes: true
     )
   end
 
