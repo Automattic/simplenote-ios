@@ -6061,8 +6061,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Simperium/simperium-ios/";
 			requirement = {
-				branch = "v1.9.1-beta.2";
-				kind = branch;
+				kind = exactVersion;
+				version = 1.9.2;
 			};
 		};
 		3F4BA07C26CDF295000619B1 /* XCRemoteSwiftPackageReference "ScreenObject" */ = {
