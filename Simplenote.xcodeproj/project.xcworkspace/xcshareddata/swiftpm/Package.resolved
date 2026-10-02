@@ -41,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Simperium/simperium-ios/",
       "state" : {
-        "branch" : "v1.9.1-beta.2",
-        "revision" : "5561a15a4836efe5d068a366b60599b7b794af70"
+        "revision" : "50a3a39811f3cbcbece755eee259fa72bc424e95",
+        "version" : "1.9.2"
       }
     },
     {
