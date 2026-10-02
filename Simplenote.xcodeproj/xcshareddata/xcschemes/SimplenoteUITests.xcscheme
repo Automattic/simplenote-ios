@@ -44,13 +44,6 @@
             ReferencedContainer = "container:Simplenote.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "UI_TEST_ACCOUNT"
-            value = "$(UI_TEST_ACCOUNT)"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
