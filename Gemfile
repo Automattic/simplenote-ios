@@ -6,7 +6,7 @@ gem 'danger-dangermattic', '~> 1.4'
 gem 'fastlane', '~> 2'
 gem 'fastlane-plugin-firebase_app_distribution', '~> 1.0'
 gem 'fastlane-plugin-sentry', '~> 2.8'
-gem 'fastlane-plugin-wpmreleasetoolkit', '~> 15.0'
+gem 'fastlane-plugin-wpmreleasetoolkit', '~> 15.1'
 
 # Pinned to pull in the fix for GHSA-c4rq-3m3g-8wgx (CSS selector ReDoS).
 # Drop once `fastlane-plugin-wpmreleasetoolkit` moves to >= 14.4.1, whose
