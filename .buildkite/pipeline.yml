@@ -52,7 +52,7 @@ steps:
   #################
   # UI Tests
   #################
-  - label: "🔬 UI Test (Full)"
+  - label: "🔬 UI Test (Login Form)"
     command: ".buildkite/commands/build-and-ui-test.sh SimplenoteUITests 'iPhone SE (3rd generation)'"
     plugins: [$CI_TOOLKIT_PLUGIN]
     artifact_paths:
