@@ -13,7 +13,9 @@ class NoteEditorPopoverTests: XCTestCase {
         try super.setUpWithError()
 
         storage = MockupStorageManager()
-        scrollPositionCache = NoteScrollPositionCache(storage: PopoverTestScrollPositionStorage(fileURL: URL(fileURLWithPath: "")))
+        scrollPositionCache = NoteScrollPositionCache(
+            storage: PopoverTestScrollPositionStorage(fileURL: URL(fileURLWithPath: ""))
+        )
         editor = PopoverTestEditorViewController(note: storage.insertSampleNote(contents: "A note to keep"))
         editor.scrollPositionCache = scrollPositionCache
         navigationController = SPNavigationController(rootViewController: editor)
@@ -183,7 +185,9 @@ class NoteEditorPopoverTests: XCTestCase {
     }
 
     func testCompactInformationStillUsesCardPresentation() throws {
-        navigationController.setOverrideTraitCollection(UITraitCollection(horizontalSizeClass: .compact), forChild: editor)
+        navigationController.setOverrideTraitCollection(
+            UITraitCollection(horizontalSizeClass: .compact), forChild: editor
+        )
 
         tap(editor.informationButton)
 

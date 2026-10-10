@@ -439,7 +439,8 @@ private extension SPNoteEditorViewController {
               traitCollection.horizontalSizeClass == .regular,
               let popover = presentedViewController as? SPNavigationController,
               popover.modalPresentationStyle == .popover,
-              popover.viewControllers.first is NoteInformationViewController || popover.viewControllers.first is OptionsViewController else {
+              popover.viewControllers.first is NoteInformationViewController ||
+                popover.viewControllers.first is OptionsViewController else {
             completion()
             return
         }
