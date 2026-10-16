@@ -101,10 +101,6 @@ extension UIColor {
         UIColor(studioColor: .red60)
     }
 
-    @objc
-    static var simplenoteWPBlue50Color: UIColor {
-        UIColor(studioColor: .wpBlue50)
-    }
 
     @objc
     static var simplenoteAutocompleteBackgroundColor: UIColor {
