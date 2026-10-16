@@ -42,12 +42,20 @@ steps:
   #################
   # Prototype Build
   #################
-  - label: "🛠 Prototype Build"
-    command: ".buildkite/commands/build-prototype.sh"
-    plugins: [$CI_TOOLKIT_PLUGIN]
+  # On demand, so that a Mac doesn't build a prototype for every push to a PR.
+  # The group keeps the input from blocking the steps that follow it.
+  - group: "🛠 Prototype Build"
     if: "build.pull_request.id != null || build.pull_request.draft"
-    artifact_paths:
-      - "build/results/*"
+    steps:
+      - input: "Deploy Prototype Build?"
+        prompt: "Share a Prototype Build via Firebase App Distribution?"
+        key: prototype_triggered
+      - label: "🛠 Prototype Build"
+        depends_on: prototype_triggered
+        command: ".buildkite/commands/build-prototype.sh"
+        plugins: [$CI_TOOLKIT_PLUGIN]
+        artifact_paths:
+          - "build/results/*"
 
   #################
   # UI Tests
