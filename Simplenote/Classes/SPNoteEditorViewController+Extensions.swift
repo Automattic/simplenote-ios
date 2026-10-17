@@ -433,6 +433,30 @@ extension SPNoteEditorViewController {
 //
 private extension SPNoteEditorViewController {
 
+    /// Completes the current note popover's dismissal before performing another editor action.
+    func dismissNotePopoverIfNeeded(completion: @escaping () -> Void) {
+        guard UIDevice.isPad,
+              traitCollection.horizontalSizeClass == .regular,
+              let popover = presentedViewController as? SPNavigationController,
+              popover.modalPresentationStyle == .popover,
+              popover.viewControllers.first is NoteInformationViewController ||
+                popover.viewControllers.first is OptionsViewController else {
+            completion()
+            return
+        }
+
+        guard !popover.isBeingDismissed else {
+            return
+        }
+
+        popover.dismiss(animated: true) { [weak self] in
+            if self?.informationViewController === popover {
+                self?.informationViewController = nil
+            }
+            completion()
+        }
+    }
+
     func dismissKeyboardAndSave() {
         endEditing()
         save()
@@ -518,16 +542,22 @@ extension SPNoteEditorViewController {
 
     @objc
     private func handleTapOnCreateNewNoteButton() {
-        saveIfNeeded()
+        dismissNotePopoverIfNeeded { [weak self] in
+            guard let self else {
+                return
+            }
 
-        if note.isBlank {
-            noteEditorTextView.becomeFirstResponder()
-            return
+            self.saveIfNeeded()
+
+            if self.note.isBlank {
+                self.noteEditorTextView.becomeFirstResponder()
+                return
+            }
+
+            SPTracker.trackEditorNoteCreated()
+
+            self.presentNewNoteReplacingCurrentEditor()
         }
-
-        SPTracker.trackEditorNoteCreated()
-
-        presentNewNoteReplacingCurrentEditor()
     }
 
     private func presentNewNoteReplacingCurrentEditor() {
@@ -665,12 +695,22 @@ extension SPNoteEditorViewController {
 
     @IBAction
     func noteOptionsWasPressed(_ sender: UIBarButtonItem) {
-        presentOptionsController(for: note, from: sender)
+        dismissNotePopoverIfNeeded { [weak self] in
+            guard let self else {
+                return
+            }
+            self.presentOptionsController(for: self.note, from: sender)
+        }
     }
 
     @objc
     private func noteInformationWasPressed(_ sender: UIBarButtonItem) {
-        presentInformationController(for: note, from: sender)
+        dismissNotePopoverIfNeeded { [weak self] in
+            guard let self else {
+                return
+            }
+            self.presentInformationController(for: self.note, from: sender)
+        }
     }
 }
 

@@ -1,5 +1,6 @@
 4.56
 -----
+- Fixed note information and options popovers staying open when creating a note or switching popovers on iPad #1023
 
 
 4.55
