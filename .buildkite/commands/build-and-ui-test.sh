@@ -1,4 +1,6 @@
-#! /bin/bash -eu
+#!/usr/bin/env bash
+
+set -euo pipefail
 
 echo "--- :rubygems: Setting up Gems"
 install_gems
@@ -8,7 +10,7 @@ bundle exec fastlane run configure_apply
 
 echo "--- :hammer_and_wrench: Build and Test"
 set +e
-bundle exec fastlane pick_test_account_and_run_ui_tests scheme:"$1" device:"$2"
+bundle exec fastlane run_ui_tests scheme:"$1" device:"$2"
 TESTS_EXIT_STATUS=$?
 set -e
 
