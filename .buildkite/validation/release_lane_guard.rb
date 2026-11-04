@@ -5,7 +5,6 @@
 module ReleaseLaneGuard
   LOCAL_ACTIONS = %i[
     app_store_connect_api_key
-    check_translation_progress
     ensure_git_branch
     ensure_git_status_clean
     git_add
@@ -38,6 +37,9 @@ module ReleaseLaneGuard
 
   def execute_action(method_sym, class_ref, arguments, custom_dir: nil, from_action: false)
     return super if LOCAL_ACTIONS.include?(method_sym)
+
+    # Aborts `finalize_release` on CI whenever a locale is below 100%, regardless of secrets.
+    return if method_sym == :check_translation_progress
 
     ReleaseLaneGuard.stop(lane: @guarded_lane, action: method_sym)
   end
