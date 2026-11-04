@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+echo "--- :shield: Release lane validation: remove write access and secrets"
+
+export PATH="$PWD/.buildkite/validation/bin:$PATH"
+export FL_GIT_BRANCH_DONT_USE_ENV_VARS=true
+
+unset CONFIGURE_ENCRYPTION_KEY GITHUB_TOKEN
+
+git remote set-url --push origin no-push://release-lane-validation
+printf '#!/bin/sh\necho "Release lane validation: push refused" >&2\nexit 1\n' > .git/hooks/pre-push
+chmod +x .git/hooks/pre-push
+
+if git push --dry-run origin HEAD:refs/heads/release-lane-validation-must-not-exist; then
+  echo "+++ :x: git push was not blocked" >&2
+  exit 1
+fi
+
+for secret in \
+  "$HOME/.configure/simplenote-ios/secrets" \
+  "Simplenote/Credentials/SPCredentials.swift" \
+  "SimplenoteScreenshots/Credentials/ScreenshotsCredentials.swift"; do
+  if [[ -e "$secret" ]]; then
+    echo "+++ :x: $secret exists, so this job would not prove anything" >&2
+    exit 1
+  fi
+done
+
+echo "Push blocked, no decrypted secrets on disk, secrets key and GitHub token unset."

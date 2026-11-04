@@ -1,0 +1,24 @@
+# `release-build.yml` without its Slack notification, with the build replaced by placeholder artifacts.
+---
+
+steps:
+  - label: Placeholder testflight_build artifacts
+    key: testflight_build
+    command: |
+      mkdir -p build/results
+      echo placeholder > build/results/Simplenote-AppStore.ipa
+      echo placeholder > build/results/Simplenote-AppStore.app.dSYM.zip
+    artifact_paths:
+      - build/results/*.zip
+      - build/results/*.ipa
+
+  - label: ":testflight: Upload Simplenote iOS to App Store Connect"
+    depends_on: testflight_build
+    command: |
+      checkout_release_branch $RELEASE_VERSION
+      .buildkite/commands/release-upload.sh true
+    plugins: [$CI_TOOLKIT_PLUGIN]
+    env:
+      IMAGE_ID: $IMAGE_ID
+    agents:
+      queue: mac

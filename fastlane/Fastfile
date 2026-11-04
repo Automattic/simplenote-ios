@@ -7,6 +7,8 @@ fastlane_require 'dotenv'
 fastlane_require 'open-uri'
 fastlane_require 'buildkit'
 
+require_relative '../.buildkite/validation/release_lane_guard'
+
 UI.user_error!('Please run fastlane via `bundle exec`') unless FastlaneCore::Helper.bundler?
 
 PROJECT_ROOT_FOLDER = File.dirname(File.expand_path(__dir__))

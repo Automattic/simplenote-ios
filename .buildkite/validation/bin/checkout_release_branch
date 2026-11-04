@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Stays on the commit under test, on a branch that only exists on this agent.
+git checkout -B "release/$1"
