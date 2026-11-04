@@ -23,9 +23,6 @@ steps:
       echo '--- :ruby: Set up Ruby Tools'
       install_gems
 
-      echo '--- :closed_lock_with_key: Access Secrets'
-      bundle exec fastlane run configure_apply
-
       echo '--- :package: Publish Release'
       bundle exec fastlane publish_release skip_confirm:true
     retry:
