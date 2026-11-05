@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Automattic. All rights reserved.
 //
 
+#import <math.h>
+
 #import "SPEditorTextView.h"
 #import "SPInteractiveTextStorage.h"
 #import "NSMutableAttributedString+Styling.h"
@@ -29,6 +31,13 @@ static CGFloat const TextViewMaximumWidthPhone = 0;
 // One unicode character plus a space
 NSInteger const ChecklistCursorAdjustment = 2;
 
+static BOOL SPRectIsFinite(CGRect rect)
+{
+    return isfinite(CGRectGetMinX(rect)) &&
+           isfinite(CGRectGetMinY(rect)) &&
+           isfinite(CGRectGetMaxX(rect)) &&
+           isfinite(CGRectGetMaxY(rect));
+}
 
 @interface SPEditorTextView ()<UIGestureRecognizerDelegate>
 
@@ -39,6 +48,7 @@ NSInteger const ChecklistCursorAdjustment = 2;
 @property (nonatomic) CGRect verticalMoveLastCaretRect;
 @property (nonatomic) BOOL isInserting;
 @property (nonatomic) BOOL isDeletingBackward;
+@property (nonatomic) BOOL isDraggingFloatingCursor;
 
 @end
 
@@ -209,11 +219,61 @@ NSInteger const ChecklistCursorAdjustment = 2;
 {
     [super scrollRangeToVisible:range];
     
-    if (self.layoutManager.extraLineFragmentTextContainer != nil && self.selectedRange.location == range.location)
-    {
-        CGRect caretRect = [self caretRectForPosition:self.selectedTextRange.start];
+    if (self.layoutManager.extraLineFragmentTextContainer != nil && self.selectedRange.location == range.location && self.isDraggingFloatingCursor == NO) {
+        UITextRange *selectedTextRange = self.selectedTextRange;
+        if (selectedTextRange == nil) {
+            return;
+        }
+
+        CGRect caretRect = [self caretRectForPosition:selectedTextRange.start];
+        if (![self shouldScrollCaretRectToVisible:caretRect]) {
+            return;
+        }
+
         [self scrollRectToVisible:caretRect animated:YES];
     }
+}
+
+- (BOOL)shouldScrollCaretRectToVisible:(CGRect)caretRect
+{
+    if (CGRectIsNull(caretRect) || !SPRectIsFinite(caretRect)) {
+        return NO;
+    }
+
+    CGRect visibleBounds = UIEdgeInsetsInsetRect(self.bounds, self.adjustedContentInset);
+    if (CGRectContainsRect(visibleBounds, caretRect)) {
+        return NO;
+    }
+
+    if (![self contentContainsCaretRect:caretRect]) {
+        return NO;
+    }
+
+    // The extra-line-fragment workaround is only needed below the visible area.
+    return CGRectGetMaxY(caretRect) >= CGRectGetMinY(visibleBounds);
+}
+
+- (BOOL)contentContainsCaretRect:(CGRect)caretRect
+{
+    CGSize contentSize = self.contentSize;
+    if (!isfinite(contentSize.width) || !isfinite(contentSize.height)) {
+        return NO;
+    }
+
+    CGRect contentRect = CGRectMake(0, 0, contentSize.width, contentSize.height);
+    return CGRectIntersectsRect(contentRect, caretRect);
+}
+
+- (void)beginFloatingCursorAtPoint:(CGPoint)point
+{
+    self.isDraggingFloatingCursor = YES;
+    [super beginFloatingCursorAtPoint:point];
+}
+
+- (void)endFloatingCursor
+{
+    [super endFloatingCursor];
+    self.isDraggingFloatingCursor = NO;
 }
 
 

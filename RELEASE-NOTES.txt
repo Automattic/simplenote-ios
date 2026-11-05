@@ -1,5 +1,6 @@
 4.56
 -----
+- Fixed an editor scrolling issue when placing or dragging the cursor in long notes
 
 
 4.55
