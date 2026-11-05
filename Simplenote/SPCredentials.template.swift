@@ -1,5 +1,11 @@
-/// Simplenote API Credentials
+/// Simplenote API Credentials Template
 ///
+/// Copy to `SPCredentials.external-contributors.swift` and fill in your own
+/// credentials. That path is gitignored.
+///
+
+import Foundation
+
 @objcMembers
 class SPCredentials: NSObject {
 
