@@ -192,24 +192,41 @@ platform :ios do
     ios_lint_localizations(input_dir: APP_RESOURCES_DIR, allow_retry: true)
   end
 
-  lane :check_translation_progress_all do
-    check_translation_progress_strings
-    check_translation_progress_release_notes
+  # Check the translation progress of all GlotPress projects.
+  #
+  # @param interactive [Boolean] Use `true` to ask whether to continue if a locale is under the threshold.
+  #   Use `false` to only log the locales under the threshold.
+  #
+  lane :check_translation_progress_all do |interactive: false|
+    check_translation_progress_strings(interactive: interactive)
+    check_translation_progress_release_notes(interactive: interactive)
   end
 
-  lane :check_translation_progress_strings do
+  # Check the translation progress of the app strings GlotPress project.
+  #
+  # @param interactive [Boolean] Use `true` to ask whether to continue if a locale is under the threshold.
+  #   Use `false` to only log the locales under the threshold.
+  #
+  lane :check_translation_progress_strings do |interactive: false|
     UI.message('Checking app strings translation status...')
     check_translation_progress(
       glotpress_url: GLOTPRESS_APP_STRINGS_PROJECT_URL,
-      abort_on_violations: false
+      abort_on_violations: false,
+      skip_confirm: !interactive
     )
   end
 
-  lane :check_translation_progress_release_notes do
+  # Check the translation progress of the release notes GlotPress project.
+  #
+  # @param interactive [Boolean] Use `true` to ask whether to continue if a locale is under the threshold.
+  #   Use `false` to only log the locales under the threshold.
+  #
+  lane :check_translation_progress_release_notes do |interactive: false|
     UI.message('Checking release notes strings translation status...')
     check_translation_progress(
       glotpress_url: GLOTPRESS_STORE_METADATA_PROJECT_URL,
-      abort_on_violations: false
+      abort_on_violations: false,
+      skip_confirm: !interactive
     )
   end
 end

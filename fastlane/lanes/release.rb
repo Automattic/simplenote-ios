@@ -164,7 +164,7 @@ platform :ios do
     ensure_git_status_clean
     ensure_git_branch_is_release_branch!
 
-    check_translation_progress_all
+    check_translation_progress_all(interactive: !skip_confirm)
 
     new_build_code = build_code_next
     version = release_version_current
