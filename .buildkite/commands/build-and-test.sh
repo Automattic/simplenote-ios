@@ -6,8 +6,8 @@ install_gems
 echo "--- :swift: Restoring Swift Package Manager cache"
 restore_swiftpm_cache --package-resolved Simplenote.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
 
-echo "--- :closed_lock_with_key: Installing Secrets"
-bundle exec fastlane run configure_apply
+echo "--- :key: Providing Credentials"
+cp Simplenote/SPCredentials.template.swift Simplenote/SPCredentials.external-contributors.swift
 
 echo "--- :hammer_and_wrench: Build and Test"
 set +e
