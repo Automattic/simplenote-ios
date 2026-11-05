@@ -3,8 +3,8 @@
 echo "--- :rubygems: Setting up Gems"
 install_gems
 
-echo "--- :closed_lock_with_key: Installing Secrets"
-bundle exec fastlane run configure_apply
+echo "--- :key: Providing Credentials"
+cp Simplenote/SPCredentials.template.swift Simplenote/SPCredentials.external-contributors.swift
 
 echo "--- :hammer_and_wrench: Build and Test"
 set +e
