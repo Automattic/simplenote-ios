@@ -25,12 +25,16 @@ DerivedData
 .idea/
 *.hmap
 *.xcscmblueprint
-Simplenote/DerivedSources/
+Simplenote/DerivedSources/*
+!Simplenote/DerivedSources/README.md
 
 # Settings
 Simplenote/config.plist
+# Stale copies of the decrypted credentials, from before they moved to DerivedSources
 Simplenote/Credentials/
 SimplenoteScreenshots/Credentials/
+Simplenote/SPCredentials.external-contributors.swift
+SimplenoteScreenshots/ScreenshotsCredentials.external-contributors.swift
 
 # Bundler
 /vendor/
