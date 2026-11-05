@@ -23,9 +23,6 @@ steps:
       echo '--- :ruby: Set up Ruby Tools'
       install_gems
 
-      echo '--- :closed_lock_with_key: Access Secrets'
-      bundle exec fastlane run configure_apply
-
       echo '--- :shipit: Update Release Notes and Other App Store Metadata'
       bundle exec fastlane update_metadata_on_app_store_connect skip_confirm:true
     retry:
