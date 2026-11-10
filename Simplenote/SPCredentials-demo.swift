@@ -3,19 +3,6 @@
 @objcMembers
 class SPCredentials: NSObject {
 
-    /// AppBot
-    ///
-    static let appbotKey = "not-required"
-
-    /// Google Analytics
-    ///
-    static let googleAnalyticsID = "not-required"
-
-    /// iTunes
-    ///
-    static let iTunesAppID = "not-required"
-    static let iTunesReviewURL = URL(string: "http://not.required")!
-
     /// Sentry
     ///
     static let sentryDSN = "https://00000000000000000000000000000000@sentry.io/00000000"
@@ -28,7 +15,6 @@ class SPCredentials: NSObject {
     /// Simperium: Reserved Object Keys
     ///
     static let simperiumEmailVerificationObjectKey = "not-required"
-    static let simperiumPreferencesObjectKey = "not-required"
     static let simperiumSettingsObjectKey = "not-required"
 
     /// Simperium: Endpoints
@@ -37,7 +23,6 @@ class SPCredentials: NSObject {
 
     /// Simplenote's Send Feedback
     ///
-    static let simplenoteFeedbackURL = URL(string: "https://not.required")!
     static let simplenoteFeedbackMail = "not.required@not.required.com"
 
     /// WordPressSSO
