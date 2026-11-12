@@ -1,38 +1,35 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-SOURCE_PATH=$1
-TARGET_PATH=$2
+set -euo pipefail
 
-USAGE="error: Usage $0 source_path target_path"
-
-if [[ -z ${SOURCE_PATH:+x} || -z ${TARGET_PATH:+x} ]]; then
-  echo $USAGE
+if [[ $# -ne 3 ]]; then
+  echo "error: Usage: $0 internal_secret_path external_secret_path output_path"
   exit 1
 fi
 
-git check-ignore "${TARGET_PATH}" > /dev/null
-GIT_IGNORE_EXIT_CODE=$?
-if [ $GIT_IGNORE_EXIT_CODE -ne 0 ]; then
-    echo "error: Attempting to store secret file in path that is not ignored by Git (${TARGET_PATH})."
-    exit 1
-fi
+INTERNAL_SECRET_PATH=$1
+EXTERNAL_SECRET_PATH=$2
+OUTPUT_PATH=$3
 
-# From now on, fail the script if there's an error.
-# We didn't do it above because we wanted to track the `git check-ignore` exit
-# code.
-set -e
-
-if [ ! -f ${SOURCE_PATH} ]; then
-    echo "error: Unable to copy credentials. Could not find ${SOURCE_PATH}."
-    exit 1
-fi
-
-
-if cmp --silent -- ${SOURCE_PATH} ${TARGET_PATH}; then
+apply() {
+  # Leaving an unchanged output untouched avoids recompiling the target.
+  if cmp --silent -- "$1" "$OUTPUT_PATH"; then
     echo "☑️ Credentials were not modified. Skipping..."
     exit 0
+  fi
+
+  mkdir -p "$(dirname "$OUTPUT_PATH")"
+  cp -v "$1" "$OUTPUT_PATH"
+  exit 0
+}
+
+if [[ -f "$INTERNAL_SECRET_PATH" ]]; then
+  apply "$INTERNAL_SECRET_PATH"
 fi
 
-mkdir -p $(dirname $TARGET_PATH)
-cp ${SOURCE_PATH} ${TARGET_PATH}
-echo "✅ Copied secret at ${SOURCE_PATH} to ${TARGET_PATH}"
+if [[ -f "$EXTERNAL_SECRET_PATH" ]]; then
+  apply "$EXTERNAL_SECRET_PATH"
+fi
+
+echo "error: No secrets found! Internal contributors: run \`bundle exec fastlane run configure_apply\`. External contributors: copy '${EXTERNAL_SECRET_PATH%.external-contributors.swift}.template.swift' to '${EXTERNAL_SECRET_PATH}' and fill in your own credentials."
+exit 1
