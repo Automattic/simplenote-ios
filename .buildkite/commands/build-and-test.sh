@@ -3,6 +3,9 @@
 echo "--- :rubygems: Setting up Gems"
 install_gems
 
+echo "--- :swift: Restoring Swift Package Manager cache"
+restore_swiftpm_cache --package-resolved Simplenote.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
+
 echo "--- :closed_lock_with_key: Installing Secrets"
 bundle exec fastlane run configure_apply
 
@@ -11,6 +14,9 @@ set +e
 bundle exec fastlane run_unit_tests
 TESTS_EXIT_STATUS=$?
 set -e
+
+echo "--- :swift: Saving Swift Package Manager cache"
+save_swiftpm_cache --package-resolved Simplenote.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
 
 if [[ $TESTS_EXIT_STATUS -ne 0 ]]; then
   # Keep the (otherwise collapsed) current "Testing" section open in Buildkite logs on error. See https://buildkite.com/docs/pipelines/managing-log-output#collapsing-output
