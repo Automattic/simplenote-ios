@@ -21,6 +21,11 @@ const int ChecklistItemLength = 3;
 
 - (BOOL)applyAutoBulletsWithReplacementText:(NSString *)replacementText replacementRange:(NSRange)replacementRange
 {
+    // Let the text view replace selections normally.
+    if (replacementRange.length > 0) {
+        return NO;
+    }
+
     // ReplacementText must be a TAB or NewLine
     if (!replacementText.isNewlineString && !replacementText.isTabString) {
         return NO;
@@ -74,8 +79,8 @@ const int ChecklistItemLength = 3;
         insertionString                 = [replacementText stringByAppendingString:lineString];
         newSelectedRange.location       += replacementText.length;
         
-    // Empty Line: Remove the bullet
-    } else if (cleanLineString.length == 1) {
+    // Empty Checklist: Remove the attachment
+    } else if (isApplyingChecklist && cleanLineString.length == 1) {
         insertionString                 = [NSString newLineString];
         newSelectedRange.location       -= lineRange.length - (isApplyingChecklist ? 1 :  bulletLength);
         
