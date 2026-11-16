@@ -32,6 +32,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		102310102026000000000001 /* NoteEditorPopoverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102310102026000000000002 /* NoteEditorPopoverTests.swift */; };
 		371A8630213DF00E002E9120 /* SPPinLockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371A862F213DF00E002E9120 /* SPPinLockManager.swift */; };
 		373AD30821C4739500A4EA89 /* NSMutableAttributedString+Styling.m in Sources */ = {isa = PBXBuildFile; fileRef = 373AD30721C4739400A4EA89 /* NSMutableAttributedString+Styling.m */; };
 		374F5EF521BF057E00B57E8B /* NSMutableAttributedStringStylingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F5EF421BF057E00B57E8B /* NSMutableAttributedStringStylingTests.swift */; };
@@ -705,6 +706,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		102310102026000000000002 /* NoteEditorPopoverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditorPopoverTests.swift; sourceTree = "<group>"; };
 		174838271BBDCAA400E834AF /* SPMarkdownParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPMarkdownParser.h; path = Classes/SPMarkdownParser.h; sourceTree = "<group>"; };
 		174838281BBDCAA400E834AF /* SPMarkdownParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPMarkdownParser.m; path = Classes/SPMarkdownParser.m; sourceTree = "<group>"; };
 		1748382E1BC1CC2D00E834AF /* markdown-default.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "markdown-default.css"; sourceTree = "<group>"; };
@@ -2073,6 +2075,7 @@
 		B58218981FCC45170094ECA1 /* SimplenoteTests */ = {
 			isa = PBXGroup;
 			children = (
+				102310102026000000000002 /* NoteEditorPopoverTests.swift */,
 				BA3FB8CD25FEA09F00EA9A1B /* Notice */,
 				A6CC0B0E25B83FC800F12A85 /* Verification */,
 				A6F4883025A891900050CFA8 /* Tags */,
@@ -3599,6 +3602,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				102310102026000000000001 /* NoteEditorPopoverTests.swift in Sources */,
 				A6CC0B1F25B840A400F12A85 /* MockAccountVerificationRemote.swift in Sources */,
 				A6CC0B1025B83FE400F12A85 /* AccountVerificationControllerTests.swift in Sources */,
 				A694ABB325D1687200CC3A2D /* NoteScrollPositionCacheTests.swift in Sources */,
