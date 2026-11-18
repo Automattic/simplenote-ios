@@ -29,7 +29,10 @@ class SPSheetController: UIViewController {
     ///
     @IBOutlet private var button1: SPSquaredButton! {
         didSet {
-            button1.backgroundColor = .simplenoteWPBlue50Color
+            button1.backgroundColor = .white
+            button1.setTitleColor(.simplenoteBlue50Color, for: .normal)
+            button1.layer.borderWidth = 1
+            button1.layer.borderColor = UIColor.simplenoteBlue50Color.cgColor
         }
     }
 
