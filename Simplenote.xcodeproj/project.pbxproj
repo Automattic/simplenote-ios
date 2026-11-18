@@ -517,6 +517,7 @@
 		BAA4856925D5E40900F3BDB9 /* SearchQuery+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */; };
 		BAA59E79269F9FE30068BD3D /* Date+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA59E78269F9FE30068BD3D /* Date+Simplenote.swift */; };
 		BAA63C3325EEDA83001589D7 /* NoteLinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA63C3225EEDA83001589D7 /* NoteLinkTests.swift */; };
+		FA10190001AD1E5700000002 /* SPObjectManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA10190001AD1E5700000001 /* SPObjectManagerTests.swift */; };
 		BAADC8A426C634DB004CAAA9 /* WidgetConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAADC8A326C634DB004CAAA9 /* WidgetConstants.swift */; };
 		BAADC8A526C634DB004CAAA9 /* WidgetConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAADC8A326C634DB004CAAA9 /* WidgetConstants.swift */; };
 		BAB017722609456D007A9CC3 /* PublishController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB017712609456D007A9CC3 /* PublishController.swift */; };
@@ -1207,6 +1208,7 @@
 		BAA4856825D5E40900F3BDB9 /* SearchQuery+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchQuery+Simplenote.swift"; sourceTree = "<group>"; };
 		BAA59E78269F9FE30068BD3D /* Date+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Simplenote.swift"; sourceTree = "<group>"; };
 		BAA63C3225EEDA83001589D7 /* NoteLinkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteLinkTests.swift; sourceTree = "<group>"; };
+		FA10190001AD1E5700000001 /* SPObjectManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPObjectManagerTests.swift; sourceTree = "<group>"; };
 		BAADC8A326C634DB004CAAA9 /* WidgetConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetConstants.swift; sourceTree = "<group>"; };
 		BAB017712609456D007A9CC3 /* PublishController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishController.swift; sourceTree = "<group>"; };
 		BAB01791260AAE93007A9CC3 /* NoticeFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeFactory.swift; sourceTree = "<group>"; };
@@ -1858,6 +1860,7 @@
 				A64DE6F8255D21B9001D0526 /* StringContentSliceTests.swift */,
 				A64DE700255D4570001D0526 /* NoteBodyExcerptTests.swift */,
 				BAA63C3225EEDA83001589D7 /* NoteLinkTests.swift */,
+				FA10190001AD1E5700000001 /* SPObjectManagerTests.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -3628,6 +3631,7 @@
 				B51F6DD72460D7C20074DDD9 /* NSPredicateEmailTests.swift in Sources */,
 				B5D367BE23ECF42D0024215D /* NSStringCondensingTests.swift in Sources */,
 				BAA63C3325EEDA83001589D7 /* NoteLinkTests.swift in Sources */,
+				FA10190001AD1E5700000002 /* SPObjectManagerTests.swift in Sources */,
 				B51F6DD32460D12B0074DDD9 /* AuthenticationValidatorTests.swift in Sources */,
 				B57DE27A2501806B00B4D435 /* StringSimplenoteTests.swift in Sources */,
 				B5421F3C23CE7A14004DDC19 /* Constants.swift in Sources */,

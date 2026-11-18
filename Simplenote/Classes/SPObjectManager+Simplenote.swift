@@ -11,7 +11,9 @@ extension SPObjectManager {
 
     @objc
     func newDefaultNote() -> Note {
-        guard let note = NSEntityDescription.insertNewObject(forEntityName: Note.entityName, into: managedObjectContext) as? Note else {
+        // Inserting via the Simperium Bucket ensures the note gets its `simperiumKey` right away
+        // (rather than on the first save), so the Internal Link is available immediately
+        guard let note = SPAppDelegate.shared().simperium.notesBucket.insertNewObject() as? Note else {
             fatalError()
         }
 
