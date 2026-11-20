@@ -61,7 +61,7 @@ steps:
   # UI Tests
   #################
   - label: "🔬 UI Test (Full)"
-    command: ".buildkite/commands/build-and-ui-test.sh SimplenoteUITests 'iPhone SE (3rd generation)'"
+    command: ".buildkite/commands/build-and-ui-test.sh SimplenoteUITests 'iPhone 17e'"
     plugins: [$CI_TOOLKIT_PLUGIN]
     artifact_paths:
       - "build/results/*"
