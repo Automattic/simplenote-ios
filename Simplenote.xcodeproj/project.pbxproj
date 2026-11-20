@@ -32,6 +32,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		CF145B102FF0000000000001 /* UITextViewAutoBulletsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF145B102FF0000000000002 /* UITextViewAutoBulletsTests.swift */; };
 		371A8630213DF00E002E9120 /* SPPinLockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371A862F213DF00E002E9120 /* SPPinLockManager.swift */; };
 		373AD30821C4739500A4EA89 /* NSMutableAttributedString+Styling.m in Sources */ = {isa = PBXBuildFile; fileRef = 373AD30721C4739400A4EA89 /* NSMutableAttributedString+Styling.m */; };
 		374F5EF521BF057E00B57E8B /* NSMutableAttributedStringStylingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F5EF421BF057E00B57E8B /* NSMutableAttributedStringStylingTests.swift */; };
@@ -705,6 +706,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CF145B102FF0000000000002 /* UITextViewAutoBulletsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextViewAutoBulletsTests.swift; sourceTree = "<group>"; };
 		174838271BBDCAA400E834AF /* SPMarkdownParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPMarkdownParser.h; path = Classes/SPMarkdownParser.h; sourceTree = "<group>"; };
 		174838281BBDCAA400E834AF /* SPMarkdownParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPMarkdownParser.m; path = Classes/SPMarkdownParser.m; sourceTree = "<group>"; };
 		1748382E1BC1CC2D00E834AF /* markdown-default.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "markdown-default.css"; sourceTree = "<group>"; };
@@ -1851,6 +1853,7 @@
 			children = (
 				B536989A25646D3900817E30 /* CGRectSimplenoteTests.swift */,
 				374F5EF421BF057E00B57E8B /* NSMutableAttributedStringStylingTests.swift */,
+				CF145B102FF0000000000002 /* UITextViewAutoBulletsTests.swift */,
 				B51F6DD62460D7C20074DDD9 /* NSPredicateEmailTests.swift */,
 				B5D367BD23ECF42D0024215D /* NSStringCondensingTests.swift */,
 				B576076724CFA2250097D295 /* NSStringSimplenoteTests.swift */,
@@ -3606,6 +3609,7 @@
 				B52F35D322F356F500724793 /* UserDefaults+Tests.swift in Sources */,
 				B511AEE9255A0A5E005B2159 /* InterlinkResultsControllerTests.swift in Sources */,
 				374F5EF521BF057E00B57E8B /* NSMutableAttributedStringStylingTests.swift in Sources */,
+				CF145B102FF0000000000001 /* UITextViewAutoBulletsTests.swift in Sources */,
 				BA122DCA265F2E2D003D3BC5 /* UIColorSimplenoteTests.swift in Sources */,
 				B5B9AB4722EE9CC2001CB0AD /* UIImageSimplenoteTests.swift in Sources */,
 				A6E6CE9F25A5BBC1005A92DB /* PinLockVerifyControllerTests.swift in Sources */,
