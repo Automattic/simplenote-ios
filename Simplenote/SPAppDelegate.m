@@ -36,6 +36,7 @@
 @interface SPAppDelegate ()
 
 @property (weak,   nonatomic) SPModalActivityIndicator      *signOutActivityIndicator;
+@property (assign, nonatomic) BOOL                          hasFinishedLaunching;
 
 @end
 
@@ -62,15 +63,8 @@
 	[_simperium authenticateWithAppID:[SPCredentials simperiumAppID] APIKey:[SPCredentials simperiumApiKey] rootViewController:self.navigationController];
 }
 
-- (void)setupDefaultWindow
+- (void)setupViewControllers
 {
-    if (!self.window) {
-        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    }
-    
-    self.window.backgroundColor = [UIColor simplenoteWindowBackgroundColor];
-    self.window.tintColor = [UIColor simplenoteTintColor];
-
     self.tagListViewController = [TagListViewController new];
     self.noteListViewController = [SPNoteListViewController new];
 
@@ -79,10 +73,6 @@
     self.sidebarViewController = [[SPSidebarContainerViewController alloc] initWithMainViewController:self.navigationController
                                                                                 sidebarViewController:self.tagListViewController];
     self.sidebarViewController.delegate = self.noteListViewController;
-
-    self.window.rootViewController = self.sidebarViewController;
-    
-    [self.window makeKeyAndVisible];
 }
 
 - (void)setupCrashLogging
@@ -111,7 +101,7 @@
     [self configureVersionsController];
     [self configurePublishController];
     [self configureAccountDeletionController];
-    [self setupDefaultWindow];
+    [self setupViewControllers];
     [self configureStateRestoration];
 
     [self migrateSimperiumPreferencesIfNeeded];
@@ -119,7 +109,51 @@
     return YES;
 }
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+- (void)applicationWillTerminate:(UIApplication *)application
+{
+    // Save any pending changes
+    [self.noteEditorViewController save];
+}
+
+- (BOOL)application:(UIApplication *)application shouldSaveSecureApplicationState:(NSCoder *)coder
+{
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)application shouldRestoreSecureApplicationState:(NSCoder *)coder
+{
+    return YES;
+}
+
+#pragma mark ================================================================================
+#pragma mark Scene Lifecycle
+#pragma mark ================================================================================
+
+- (void)connectWindow:(UIWindow *)window
+{
+    self.window = window;
+    self.window.backgroundColor = [UIColor simplenoteWindowBackgroundColor];
+    self.window.tintColor = [UIColor simplenoteTintColor];
+    self.window.rootViewController = self.sidebarViewController;
+    [self.window makeKeyAndVisible];
+
+    if (self.hasFinishedLaunching) {
+        [self loadSelectedTheme];
+        [self showPasscodeLockIfNecessary];
+        return;
+    }
+
+    self.hasFinishedLaunching = YES;
+    [self finishLaunching];
+}
+
+- (void)disconnectWindow
+{
+    self.pinLockWindow = nil;
+    self.window = nil;
+}
+
+- (void)finishLaunching
 {
     // Once the UI is wired, Auth Simperium
     [self authenticateSimperium];
@@ -149,18 +183,25 @@
     [self indexSpotlightItemsIfNeeded];
 
     [self setupNoticeController];
-
-    return YES;
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application
+- (void)didBecomeActive
 {
     [SPTracker trackApplicationOpened];
     [self syncWidgetDefaults];
     [self attemptContentRecoveryIfNeeded];
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application
+- (void)willResignActive
+{
+    UIViewController *viewController = self.window.rootViewController;
+    [viewController.view setNeedsLayout];
+    
+    // Save any pending changes
+    [self.noteEditorViewController save];
+}
+
+- (void)didEnterBackground
 {
     [SPTracker trackApplicationClosed];
 
@@ -175,49 +216,19 @@
     [self resetWidgetTimelines];
 }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application
+- (void)willEnterForeground
 {
     [self dismissPasscodeLockIfPossible];
     [self authenticateSimperiumIfAccountDeletionRequested];
 }
 
-- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler
+- (void)handleUserActivity:(NSUserActivity *)userActivity
 {
     if ([self performMagicLinkAuthenticationWithUserActivity:userActivity]) {
-        return YES;
+        return;
     }
-    
-    return [[ShortcutsHandler shared] handleUserActivity:userActivity];
-}
 
-- (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler
-{
-    [[ShortcutsHandler shared] handleApplicationShortcut:shortcutItem];
-}
-
-- (void)applicationWillResignActive:(UIApplication *)application
-{
-    UIViewController *viewController = self.window.rootViewController;
-    [viewController.view setNeedsLayout];
-    
-    // Save any pending changes
-    [self.noteEditorViewController save];
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-    // Save any pending changes
-    [self.noteEditorViewController save];
-}
-
-- (BOOL)application:(UIApplication *)application shouldSaveSecureApplicationState:(NSCoder *)coder
-{
-    return YES;
-}
-
-- (BOOL)application:(UIApplication *)application shouldRestoreSecureApplicationState:(NSCoder *)coder
-{
-    return YES;
+    [[ShortcutsHandler shared] handleUserActivity:userActivity];
 }
 
 
@@ -465,7 +476,7 @@
 #pragma mark URL scheme
 #pragma mark ================================================================================
 
-- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+- (void)handleURL:(NSURL *)url
 {
     if (!self.simperium.user.authenticated) {
         [self performDotcomAuthenticationWithURL:url];
@@ -473,16 +484,16 @@
         if (!self.simperium.user.authenticated && url) {
             [self performMagicLinkAuthenticationWith:url];
         }
-        return YES;
+        return;
     }
 
     // URL: Open a Note!
     if ([self handleOpenNoteWithUrl:url]) {
-        return YES;
+        return;
     }
 
     if ([self handleOpenTagListWithUrl:url]) {
-        return YES;
+        return;
     }
 
     // Support opening Simplenote and optionally creating a new note
@@ -498,8 +509,6 @@
     if ([[components host] isEqualToString:@"widgetNew"]) {
         [self presentNewNoteEditorWithUseSelectedTag:NO animated:NO];
     }
-
-    return YES;
 }
 
 - (void)performDotcomAuthenticationWithURL:(NSURL *)url

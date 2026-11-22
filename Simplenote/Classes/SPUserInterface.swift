@@ -59,8 +59,7 @@ private extension SPUserInterface {
     }
 
     func refreshOverrideInterfaceStyle() {
-        let window = SPAppDelegate.shared().window
-        window.overrideUserInterfaceStyle = Options.shared.theme.userInterfaceStyle
+        SPAppDelegate.shared().window?.overrideUserInterfaceStyle = Options.shared.theme.userInterfaceStyle
     }
 }
 

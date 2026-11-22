@@ -361,7 +361,7 @@ extension SPAppDelegate {
         let controller = PinLockVerifyController(delegate: self)
         let viewController = PinLockViewController(controller: controller)
 
-        pinLockWindow = UIWindow(frame: UIScreen.main.bounds)
+        pinLockWindow = window?.windowScene.map(UIWindow.init(windowScene:)) ?? UIWindow(frame: UIScreen.main.bounds)
         pinLockWindow?.accessibilityViewIsModal = true
         pinLockWindow?.rootViewController = viewController
         pinLockWindow?.makeKeyAndVisible()
@@ -379,7 +379,7 @@ extension SPAppDelegate {
     }
 
     private func dismissPasscodeLock() {
-        window.makeKeyAndVisible()
+        window?.makeKeyAndVisible()
         pinLockWindow?.removeFromSuperview()
         pinLockWindow = nil
     }

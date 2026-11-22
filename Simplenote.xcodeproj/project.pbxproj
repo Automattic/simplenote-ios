@@ -294,6 +294,7 @@
 		B54A11C22C135EA2002AC8AA /* UIButton+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54A11C12C135EA2002AC8AA /* UIButton+Simplenote.swift */; };
 		B54A11C42C136225002AC8AA /* MagicLinkRequestedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54A11C32C136225002AC8AA /* MagicLinkRequestedView.swift */; };
 		B54B04D82407169500401FBB /* SPAppDelegate+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54B04D72407169500401FBB /* SPAppDelegate+Extensions.swift */; };
+		505B0EA823366AC2D4D23DE0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44755FAF0DD034692EFF06ED /* SceneDelegate.swift */; };
 		B54C1B552C4EE350001E9E18 /* UIAlertController+Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54C1B542C4EE350001E9E18 /* UIAlertController+Auth.swift */; };
 		B54D9C572909BA2600D0E0EC /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D9C562909BA2600D0E0EC /* StoreManager.swift */; };
 		B54D9C592909CC4400D0E0EC /* StoreProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D9C582909CC4400D0E0EC /* StoreProduct.swift */; };
@@ -969,6 +970,7 @@
 		B54A11C12C135EA2002AC8AA /* UIButton+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Simplenote.swift"; sourceTree = "<group>"; };
 		B54A11C32C136225002AC8AA /* MagicLinkRequestedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicLinkRequestedView.swift; sourceTree = "<group>"; };
 		B54B04D72407169500401FBB /* SPAppDelegate+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SPAppDelegate+Extensions.swift"; sourceTree = "<group>"; };
+		44755FAF0DD034692EFF06ED /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B54C1B542C4EE350001E9E18 /* UIAlertController+Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Auth.swift"; sourceTree = "<group>"; };
 		B54D9C542909B21700D0E0EC /* Simplenote 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Simplenote 6.xcdatamodel"; sourceTree = "<group>"; };
 		B54D9C562909BA2600D0E0EC /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
@@ -2654,6 +2656,7 @@
 				E29ADD4A17848E8500E55842 /* SPAppDelegate.h */,
 				E29ADD4B17848E8500E55842 /* SPAppDelegate.m */,
 				B54B04D72407169500401FBB /* SPAppDelegate+Extensions.swift */,
+				44755FAF0DD034692EFF06ED /* SceneDelegate.swift */,
 			);
 			path = Simplenote;
 			sourceTree = "<group>";
@@ -3555,6 +3558,7 @@
 				B594C3EE2501E24C006D3A78 /* UINavigationController+Simplenote.swift in Sources */,
 				375D24B221E01131007AB25A /* buffer.c in Sources */,
 				B54B04D82407169500401FBB /* SPAppDelegate+Extensions.swift in Sources */,
+				505B0EA823366AC2D4D23DE0 /* SceneDelegate.swift in Sources */,
 				B50E99F4234242130092F274 /* UISearchBar+Simplenote.swift in Sources */,
 				A68ABCA624ABFA5800715EBD /* UIView+Constraints.swift in Sources */,
 				A6E1E7A024BDE440008A44BC /* SPCardDismissalAnimator.swift in Sources */,
