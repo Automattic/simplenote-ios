@@ -17,6 +17,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = window
         appDelegate.connectWindow(window)
 
+        if appDelegate.noteEditorViewController == nil, let stateRestorationActivity = session.stateRestorationActivity {
+            ShortcutsHandler.shared.handleUserActivity(stateRestorationActivity)
+        }
+
         for context in connectionOptions.urlContexts {
             appDelegate.handleURL(context.url)
         }
@@ -33,6 +37,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidDisconnect(_ scene: UIScene) {
         appDelegate.disconnectWindow()
         window = nil
+    }
+
+    func stateRestorationActivity(for scene: UIScene) -> NSUserActivity? {
+        appDelegate.stateRestorationActivity()
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {

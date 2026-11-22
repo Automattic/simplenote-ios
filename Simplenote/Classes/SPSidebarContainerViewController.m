@@ -213,13 +213,6 @@ static const CGFloat SPSidebarAnimationCompletionFactorZero = 0.0;
     [self.view insertSubview:sidebarView atIndex:0];
 }
 
-- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
-{
-    [super encodeRestorableStateWithCoder:coder];
-    [coder encodeObject:self.mainViewController forKey:@"MainControllerEncodeKey"];
-    [coder encodeObject:self.sidebarViewController forKey:@"SideControllerEncodeKey"];
-}
-
 #pragma mark - Notifications
 
 - (void)startListeningToNotifications

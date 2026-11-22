@@ -102,7 +102,6 @@
     [self configurePublishController];
     [self configureAccountDeletionController];
     [self setupViewControllers];
-    [self configureStateRestoration];
 
     [self migrateSimperiumPreferencesIfNeeded];
     
@@ -113,16 +112,6 @@
 {
     // Save any pending changes
     [self.noteEditorViewController save];
-}
-
-- (BOOL)application:(UIApplication *)application shouldSaveSecureApplicationState:(NSCoder *)coder
-{
-    return YES;
-}
-
-- (BOOL)application:(UIApplication *)application shouldRestoreSecureApplicationState:(NSCoder *)coder
-{
-    return YES;
 }
 
 #pragma mark ================================================================================

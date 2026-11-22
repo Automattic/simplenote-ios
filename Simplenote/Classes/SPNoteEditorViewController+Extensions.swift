@@ -273,32 +273,6 @@ extension SPNoteEditorViewController {
     }
 }
 
-// MARK: - State Restoration
-//
-extension SPNoteEditorViewController {
-
-    /// NSCoder Keys
-    ///
-    enum CodingKeys: String {
-        case currentNoteKey
-    }
-
-    private var simperium: Simperium {
-        SPAppDelegate.shared().simperium
-    }
-
-    override open func encodeRestorableState(with coder: NSCoder) {
-        super.encodeRestorableState(with: coder)
-
-        // Always make sure the object is persisted before proceeding
-        if note.objectID.isTemporaryID {
-            simperium.save()
-        }
-
-        coder.encode(note.simperiumKey, forKey: CodingKeys.currentNoteKey.rawValue)
-    }
-}
-
 // MARK: - History
 //
 extension SPNoteEditorViewController {
