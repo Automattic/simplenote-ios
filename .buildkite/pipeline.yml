@@ -16,8 +16,7 @@ steps:
   # Run Unit Tests
   #################
   - label: "🔬 Build and Test"
-    # Temporary: drop RBENV_VERSION once .ruby-version is 3.4.13 (AINFRA-3869); the Linux agents lack it until AINFRA-3889/3890/3891.
-    command: "RBENV_VERSION=3.4.13 .buildkite/commands/build-and-test.sh"
+    command: ".buildkite/commands/build-and-test.sh"
     plugins: [$CI_TOOLKIT_PLUGIN]
     artifact_paths:
       - "build/results/*"
@@ -53,7 +52,7 @@ steps:
         key: prototype_triggered
       - label: "🛠 Prototype Build"
         depends_on: prototype_triggered
-        command: "RBENV_VERSION=3.4.13 .buildkite/commands/build-prototype.sh"
+        command: ".buildkite/commands/build-prototype.sh"
         plugins: [$CI_TOOLKIT_PLUGIN]
         artifact_paths:
           - "build/results/*"
@@ -62,7 +61,7 @@ steps:
   # UI Tests
   #################
   - label: "🔬 UI Test (Full)"
-    command: "RBENV_VERSION=3.4.13 .buildkite/commands/build-and-ui-test.sh SimplenoteUITests 'iPhone 17e'"
+    command: ".buildkite/commands/build-and-ui-test.sh SimplenoteUITests 'iPhone 17e'"
     plugins: [$CI_TOOLKIT_PLUGIN]
     artifact_paths:
       - "build/results/*"
