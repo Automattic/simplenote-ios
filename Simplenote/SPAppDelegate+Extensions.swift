@@ -1,4 +1,5 @@
 import Foundation
+import CoreSpotlight
 import WidgetKit
 
 // MARK: - Initialization
@@ -225,65 +226,27 @@ extension SPAppDelegate {
     }
 }
 
-// MARK: - UIViewControllerRestoration
+// MARK: - Scene State Restoration
 //
-@objc
-extension SPAppDelegate: UIViewControllerRestoration {
+extension SPAppDelegate {
 
     @objc
-    func configureStateRestoration() {
-        EditorFactory.shared.restorationClass = SPAppDelegate.self
-
-        tagListViewController.restorationIdentifier = TagListViewController.defaultRestorationIdentifier
-        tagListViewController.restorationClass = SPAppDelegate.self
-
-        noteListViewController.restorationIdentifier = SPNoteListViewController.defaultRestorationIdentifier
-        noteListViewController.restorationClass = SPAppDelegate.self
-
-        navigationController.restorationIdentifier = SPNavigationController.defaultRestorationIdentifier
-        navigationController.restorationClass = SPAppDelegate.self
-
-        sidebarViewController.restorationIdentifier = SPSidebarContainerViewController.defaultRestorationIdentifier
-        sidebarViewController.restorationClass = SPAppDelegate.self
-    }
-
-    func viewController(restorationIdentifier: String, coder: NSCoder) -> UIViewController? {
-        switch restorationIdentifier {
-        case tagListViewController.restorationIdentifier:
-            return tagListViewController
-
-        case noteListViewController.restorationIdentifier:
-            return noteListViewController
-
-        case SPNoteEditorViewController.defaultRestorationIdentifier:
-            guard let simperiumKey = coder.decodeObject(forKey: SPNoteEditorViewController.CodingKeys.currentNoteKey.rawValue) as? String,
-                  let note = simperium.bucket(forName: Note.classNameWithoutNamespaces)?.object(forKey: simperiumKey) as? Note
-            else {
-                return nil
-            }
-            return EditorFactory.shared.build(with: note)
-
-        case navigationController.restorationIdentifier:
-            return navigationController
-
-        case sidebarViewController.restorationIdentifier:
-            return sidebarViewController
-
-        default:
-            return nil
-        }
-    }
-
-    @objc
-    public static func viewController(withRestorationIdentifierPath identifierComponents: [String], coder: NSCoder) -> UIViewController? {
-        guard
-            let appDelegate = UIApplication.shared.delegate as? SPAppDelegate,
-            let restorationIdentifier = identifierComponents.last
-        else {
+    func stateRestorationActivity() -> NSUserActivity? {
+        guard let note = noteEditorViewController?.note else {
             return nil
         }
 
-        return appDelegate.viewController(restorationIdentifier: restorationIdentifier, coder: coder)
+        if note.objectID.isTemporaryID {
+            simperium.save()
+        }
+
+        guard let simperiumKey = note.simperiumKey else {
+            return nil
+        }
+
+        let activity = NSUserActivity(activityType: ActivityType.openNote.rawValue)
+        activity.userInfo = [CSSearchableItemActivityIdentifier: simperiumKey]
+        return activity
     }
 }
 
@@ -361,7 +324,7 @@ extension SPAppDelegate {
         let controller = PinLockVerifyController(delegate: self)
         let viewController = PinLockViewController(controller: controller)
 
-        pinLockWindow = UIWindow(frame: UIScreen.main.bounds)
+        pinLockWindow = window?.windowScene.map(UIWindow.init(windowScene:)) ?? UIWindow(frame: UIScreen.main.bounds)
         pinLockWindow?.accessibilityViewIsModal = true
         pinLockWindow?.rootViewController = viewController
         pinLockWindow?.makeKeyAndVisible()
@@ -379,7 +342,7 @@ extension SPAppDelegate {
     }
 
     private func dismissPasscodeLock() {
-        window.makeKeyAndVisible()
+        window?.makeKeyAndVisible()
         pinLockWindow?.removeFromSuperview()
         pinLockWindow = nil
     }

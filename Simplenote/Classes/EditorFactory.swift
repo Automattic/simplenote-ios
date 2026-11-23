@@ -9,10 +9,6 @@ class EditorFactory: NSObject {
     ///
     static let shared = EditorFactory()
 
-    /// Editor's Restoration Class
-    ///
-    var restorationClass: UIViewControllerRestoration.Type?
-
     /// Scroll position cache
     ///
     let scrollPositionCache: NoteScrollPositionCache = {
@@ -29,11 +25,7 @@ class EditorFactory: NSObject {
     /// Returns a new Editor Instance
     ///
     func build(with note: Note?) -> SPNoteEditorViewController {
-        assert(restorationClass != nil)
-
         let controller = SPNoteEditorViewController(note: note ?? newNote())
-        controller.restorationClass = restorationClass
-        controller.restorationIdentifier = SPNoteEditorViewController.defaultRestorationIdentifier
         controller.scrollPositionCache = scrollPositionCache
         return controller
     }

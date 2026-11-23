@@ -337,7 +337,7 @@ platform :ios do
     scan(
       project: project_name,
       scheme: 'Simplenote',
-      device: options[:device] || 'iPhone 14',
+      device: options[:device] || 'iPhone 17',
       output_directory: OUTPUT_DIRECTORY_PATH,
       reset_simulator: true,
       result_bundle: true
@@ -361,7 +361,7 @@ platform :ios do
     scan(
       project: project_name,
       scheme: options[:scheme] || 'SimplenoteUITests_Subset',
-      device: options[:device] || 'iPhone 14',
+      device: options[:device] || 'iPhone 17',
       output_directory: OUTPUT_DIRECTORY_PATH,
       reset_simulator: true,
       xcargs: { UI_TEST_ACCOUNT: options[:test_account] || '' },

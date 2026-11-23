@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SPAppDelegate : UIResponder <UIApplicationDelegate, SPBucketDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
+@property (nullable, strong, nonatomic) UIWindow                        *window;
 @property (nullable, strong, nonatomic) UIWindow                        *pinLockWindow;
 
 @property (strong, nonatomic) Simperium						            *simperium;
@@ -40,6 +40,17 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) BOOL										bSigningUserOut;
 
 @property (nullable, strong, nonatomic) AccountDeletionController       *accountDeletionController;
+
+- (void)connectWindow:(UIWindow *)window;
+- (void)disconnectWindow;
+
+- (void)didBecomeActive;
+- (void)willResignActive;
+- (void)willEnterForeground;
+- (void)didEnterBackground;
+
+- (void)handleURL:(NSURL *)url NS_SWIFT_NAME(handleURL(_:));
+- (void)handleUserActivity:(NSUserActivity *)userActivity NS_SWIFT_NAME(handleUserActivity(_:));
 
 - (void)presentSettingsViewController;
 
