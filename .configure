@@ -7,11 +7,6 @@
       "file": "iOS/simplenote/SPCredentials.swift",
       "destination": "~/.configure/simplenote-ios/secrets/SPCredentials.swift",
       "encrypt": true
-    },
-    {
-      "file": "iOS/simplenote/ScreenshotsCredentials.swift",
-      "destination": "~/.configure/simplenote-ios/secrets/ScreenshotsCredentials.swift",
-      "encrypt": true
     }
   ],
   "file_dependencies": []
