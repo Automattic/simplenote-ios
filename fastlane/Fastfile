@@ -173,37 +173,6 @@ platform :ios do
   end
 
   #####################################################################################
-  # Screenshot lanes
-  #####################################################################################
-
-  lane :create_promo_screenshots do |options|
-    unless Fastlane::Helper::GitHelper.has_git_lfs
-      UI.user_error!('Git LFS not enabled – Unable to generate promo screenshots. Run `git lfs install && git lfs fetch && git lfs pull` to fix this.')
-    end
-
-    # This value is defined in style.css. It would be good if there was a way
-    # to make it parametric, so that if we update the CSS we don't risk this
-    # getting out of sync.
-    font_name = 'SourceSansPro-Regular.ttf'
-    user_font_directory = File.join(Dir.home, 'Library/Fonts')
-    user_font_path = File.join(user_font_directory, font_name)
-    if File.exist?(user_font_path)
-      UI.success("Custom font #{font_name} already installed locally.")
-    else
-      UI.message("Installing #{font_name} at #{user_font_path}.")
-      `mkdir -p #{user_font_directory}`
-      `cp #{File.join(Dir.pwd, "appstoreres/assets/#{font_name}")} #{user_font_path}`
-    end
-
-    promo_screenshots(
-      orig_folder: options[:source] || screenshots_directory,
-      metadata_folder: File.join(Dir.pwd, 'metadata'),
-      output_folder: promo_screenshots_directory,
-      force: options[:force] || true
-    )
-  end
-
-  #####################################################################################
   # Test lanes
   #####################################################################################
 
@@ -420,10 +389,6 @@ end
 
 def project_name
   'Simplenote.xcodeproj'
-end
-
-def screenshots_directory
-  File.join(fastlane_directory, 'screenshots')
 end
 
 def promo_screenshots_directory
