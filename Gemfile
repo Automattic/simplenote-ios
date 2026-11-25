@@ -12,7 +12,3 @@ gem 'fastlane-plugin-wpmreleasetoolkit', '~> 15.3'
 # Drop once `fastlane-plugin-wpmreleasetoolkit` moves to >= 14.4.1, whose
 # gemspec carries this floor transitively.
 gem 'nokogiri', '~> 1.19'
-
-group :screenshots, optional: true do
-  gem 'rmagick', '~> 3.2.0'
-end
