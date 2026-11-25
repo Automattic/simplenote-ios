@@ -58,14 +58,6 @@ This will allow you to compile and run the app on a device or a simulator. With 
 
 _Note: Simplenote API features such as sharing and publishing will not work with development builds._
 
-### Optional
-
-If you want to try the screenshots generation locally, also create your own testing credentials for that target:
-
-```
-mkdir -p ~/.configure/simplenote-ios/secrets && cp Simplenote/ScreenshotsCredentials-demo.swift ~/.configure/simplenote-ios/secrets/ScreenshotsCredentials.swift
-```
-
 ## Style Guidelines
 
 We follow the WordPress iOS Style Guidelines, and we're constantly improving / adopting latest techniques.
