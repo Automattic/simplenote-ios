@@ -30,6 +30,8 @@ Simplenote/DerivedSources/
 # Settings
 Simplenote/config.plist
 Simplenote/Credentials/
+# Stale local copies of deleted secrets; drop with AINFRA-3219.
+SimplenoteScreenshots/Credentials/
 
 # Bundler
 /vendor/
