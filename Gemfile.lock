@@ -328,7 +328,6 @@ GEM
       uber (< 0.2.0)
     retriable (4.2.0)
     rexml (3.4.4)
-    rmagick (3.2.0)
     rouge (3.28.0)
     rubocop (1.89.0)
       json (~> 2.3)
@@ -401,7 +400,6 @@ DEPENDENCIES
   fastlane-plugin-sentry (~> 2.8)
   fastlane-plugin-wpmreleasetoolkit (~> 15.3)
   nokogiri (~> 1.19)
-  rmagick (~> 3.2.0)
 
 BUNDLED WITH
   4.0.17
