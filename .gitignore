@@ -35,6 +35,7 @@ Simplenote/Credentials/
 # Stale local copies of deleted secrets; drop with AINFRA-3219.
 SimplenoteScreenshots/Credentials/
 Simplenote/SPCredentials.external-contributors.swift
+.configure-files/
 
 # Bundler
 /vendor/
@@ -63,9 +64,6 @@ default.profraw
 !.a8c-secrets/repo-id
 !.a8c-secrets/keys.pub
 !.a8c-secrets/*.age
-
-# Stale local copies from the legacy configure setup; drop with the legacy cleanup.
-.configure-files/
 
 # BuildTools
 BuildTools/.build
