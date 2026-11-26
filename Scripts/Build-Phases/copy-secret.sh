@@ -36,6 +36,10 @@ if command -v a8c-secrets > /dev/null 2>&1 && INTERNAL_SECRET_PATH=$(a8c-secrets
 fi
 
 if [[ -f "$EXTERNAL_SECRET_PATH" ]]; then
+  if [[ "${CONFIGURATION:-}" == Distribution* ]]; then
+    echo "error: Refusing to build the '${CONFIGURATION}' configuration with external contributor credentials from '${EXTERNAL_SECRET_PATH}'. Distribution builds need the production credentials from a8c-secrets, see https://github.com/Automattic/a8c-secrets."
+    exit 1
+  fi
   apply "$EXTERNAL_SECRET_PATH"
 fi
 
