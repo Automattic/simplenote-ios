@@ -46,7 +46,9 @@ Once you have trusted the app and the SPM packages are downloaded you should be 
 Simplenote is powered by the [Simperium Sync'ing protocol](https://www.simperium.com). To be able to connect a development build of Simplenote iOS to the Simperium syncing service you will first need to setup app credentials.
 We distribute **testing credentials** that help us authenticate your application, and verify that the API calls being made are valid. 
 
-Please copy the **testing Simperium credentials** as follows:
+Internal contributors install and set up [a8c-secrets](https://github.com/Automattic/a8c-secrets); the build decrypts the production credentials with it.
+
+External contributors, please copy the **testing Simperium credentials** as follows:
 
 ```
 cp Simplenote/SPCredentials.template.swift Simplenote/SPCredentials.external-contributors.swift

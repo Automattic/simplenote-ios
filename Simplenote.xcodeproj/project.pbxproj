@@ -6,6 +6,20 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		A8C27310000000000000C001 /* Decrypt Secrets */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = A8C27310000000000000C003 /* Build configuration list for PBXAggregateTarget "Decrypt Secrets" */;
+			buildPhases = (
+				A8C27310000000000000C002 /* Decrypt Secrets */,
+			);
+			dependencies = (
+			);
+			name = "Decrypt Secrets";
+			productName = "Decrypt Secrets";
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		371A8630213DF00E002E9120 /* SPPinLockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371A862F213DF00E002E9120 /* SPPinLockManager.swift */; };
 		373AD30821C4739500A4EA89 /* NSMutableAttributedString+Styling.m in Sources */ = {isa = PBXBuildFile; fileRef = 373AD30721C4739400A4EA89 /* NSMutableAttributedString+Styling.m */; };
@@ -588,6 +602,34 @@
 			proxyType = 1;
 			remoteGlobalIDString = 3FFBDBEA26FBF132008AD052;
 			remoteInfo = UITestsFoundation;
+		};
+		A8C27310000000000000C011 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E29ADD3017848E8500E55842 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A8C27310000000000000C001;
+			remoteInfo = "Decrypt Secrets";
+		};
+		A8C27310000000000000C012 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E29ADD3017848E8500E55842 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A8C27310000000000000C001;
+			remoteInfo = "Decrypt Secrets";
+		};
+		A8C27310000000000000C013 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E29ADD3017848E8500E55842 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A8C27310000000000000C001;
+			remoteInfo = "Decrypt Secrets";
+		};
+		A8C27310000000000000C014 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E29ADD3017848E8500E55842 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A8C27310000000000000C001;
+			remoteInfo = "Decrypt Secrets";
 		};
 		B582189C1FCC45170094ECA1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -2751,6 +2793,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A8C27310000000000000C021 /* PBXTargetDependency */,
 				B5EB1EF51C204EBD0080A1B3 /* PBXTargetDependency */,
 				BAFA93E4265DCFCD0009DCFB /* PBXTargetDependency */,
 				BAB5762A26703C8200B0C56F /* PBXTargetDependency */,
@@ -2804,6 +2847,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A8C27310000000000000C022 /* PBXTargetDependency */,
 			);
 			name = SimplenoteShare;
 			productName = SimplenoteShare;
@@ -2822,6 +2866,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A8C27310000000000000C023 /* PBXTargetDependency */,
 			);
 			name = SimplenoteIntents;
 			packageProductDependencies = (
@@ -2844,6 +2889,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A8C27310000000000000C024 /* PBXTargetDependency */,
 			);
 			name = SimplenoteWidgetsExtension;
 			packageProductDependencies = (
@@ -2988,6 +3034,7 @@
 				BAFA93D7265DCFCA0009DCFB /* SimplenoteWidgetsExtension */,
 				BAB5762126703C8100B0C56F /* SimplenoteIntents */,
 				3FFBDBEA26FBF132008AD052 /* UITestsFoundation */,
+				A8C27310000000000000C001 /* Decrypt Secrets */,
 			);
 		};
 /* End PBXProject section */
@@ -3095,7 +3142,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${HOME}/.configure/simplenote-ios/secrets/SPCredentials.swift",
+				"${SRCROOT}/.a8c-secrets/SPCredentials.swift.age",
 				"${SRCROOT}/Simplenote/SPCredentials.external-contributors.swift",
 				"${SRCROOT}/Scripts/Build-Phases/copy-secret.sh",
 			);
@@ -3117,7 +3164,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${HOME}/.configure/simplenote-ios/secrets/SPCredentials.swift",
+				"${SRCROOT}/.a8c-secrets/SPCredentials.swift.age",
 				"${SRCROOT}/Simplenote/SPCredentials.external-contributors.swift",
 				"${SRCROOT}/Scripts/Build-Phases/copy-secret.sh",
 			);
@@ -3139,7 +3186,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${HOME}/.configure/simplenote-ios/secrets/SPCredentials.swift",
+				"${SRCROOT}/.a8c-secrets/SPCredentials.swift.age",
 				"${SRCROOT}/Simplenote/SPCredentials.external-contributors.swift",
 				"${SRCROOT}/Scripts/Build-Phases/copy-secret.sh",
 			);
@@ -3161,7 +3208,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${HOME}/.configure/simplenote-ios/secrets/SPCredentials.swift",
+				"${SRCROOT}/.a8c-secrets/SPCredentials.swift.age",
 				"${SRCROOT}/Simplenote/SPCredentials.external-contributors.swift",
 				"${SRCROOT}/Scripts/Build-Phases/copy-secret.sh",
 			);
@@ -3174,6 +3221,25 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Scripts/Build-Phases/copy-secret.sh\" \\\n    \"$SCRIPT_INPUT_FILE_0\" \\\n    \"$SCRIPT_INPUT_FILE_1\" \\\n    \"$SCRIPT_OUTPUT_FILE_0\"\n";
+		};
+		A8C27310000000000000C002 /* Decrypt Secrets */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Decrypt Secrets";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Scripts/Build-Phases/decrypt-secrets.sh\"\n";
 		};
 		AD6CEDDC25D37DC100744BFB /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3772,6 +3838,26 @@
 			isa = PBXTargetDependency;
 			target = 3FFBDBEA26FBF132008AD052 /* UITestsFoundation */;
 			targetProxy = 3FF314D426FC47ED0012E68E /* PBXContainerItemProxy */;
+		};
+		A8C27310000000000000C021 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A8C27310000000000000C001 /* Decrypt Secrets */;
+			targetProxy = A8C27310000000000000C011 /* PBXContainerItemProxy */;
+		};
+		A8C27310000000000000C022 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A8C27310000000000000C001 /* Decrypt Secrets */;
+			targetProxy = A8C27310000000000000C012 /* PBXContainerItemProxy */;
+		};
+		A8C27310000000000000C023 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A8C27310000000000000C001 /* Decrypt Secrets */;
+			targetProxy = A8C27310000000000000C013 /* PBXContainerItemProxy */;
+		};
+		A8C27310000000000000C024 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A8C27310000000000000C001 /* Decrypt Secrets */;
+			targetProxy = A8C27310000000000000C014 /* PBXContainerItemProxy */;
 		};
 		B582189D1FCC45170094ECA1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -4390,6 +4476,41 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Simplenote.app/Simplenote";
 			};
 			name = "Distribution Alpha";
+		};
+		A8C27310000000000000C004 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A8C27310000000000000C005 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		A8C27310000000000000C006 /* Distribution Internal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = "Distribution Internal";
+		};
+		A8C27310000000000000C007 /* Distribution Alpha */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = "Distribution Alpha";
+		};
+		A8C27310000000000000C008 /* Distribution AppStore */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = "Distribution AppStore";
 		};
 		B50789F61C1F4F5A009F097A /* Distribution AppStore */ = {
 			isa = XCBuildConfiguration;
@@ -5606,6 +5727,18 @@
 				B50789FD1C1F4F63009F097A /* Distribution Internal */,
 				8C3FEBDD23EAE03A00EE55E6 /* Distribution Alpha */,
 				B50789F91C1F4F5A009F097A /* Distribution AppStore */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A8C27310000000000000C003 /* Build configuration list for PBXAggregateTarget "Decrypt Secrets" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A8C27310000000000000C004 /* Debug */,
+				A8C27310000000000000C005 /* Release */,
+				A8C27310000000000000C006 /* Distribution Internal */,
+				A8C27310000000000000C007 /* Distribution Alpha */,
+				A8C27310000000000000C008 /* Distribution AppStore */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
