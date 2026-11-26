@@ -173,147 +173,6 @@ platform :ios do
   end
 
   #####################################################################################
-  # Screenshot lanes
-  #####################################################################################
-
-  # This is ideal when running locally. On CI, it's better to run each lane in
-  # isolation, to leverage parallelism if necessary.
-  #
-  # On the other hand, right now Simplenote only needs one locale, so we might
-  # as well keep using this on CI too. We still benefit from not having to
-  # rebuild the app just to take the screenshots in light vs dark mode.
-  desc 'Walk through the app taking screenshots.'
-  lane :take_screenshots do |options|
-    build_app_for_screenshots(options)
-
-    # In order to preserve both light and dark screenshots, we won't be erasing
-    # the screenshots folder in between captures but only on the first one.
-    take_screenshots_from_app(
-      options.merge({ mode: 'light', clear_previous_screenshots: true })
-    )
-    take_screenshots_from_app(
-      options.merge({ mode: 'dark', clear_previous_screenshots: false })
-    )
-  end
-
-  desc 'Build the binaries to run to take the screenshots'
-  lane :build_app_for_screenshots do
-    scan(
-      project: project_path,
-      scheme: screenshots_scheme,
-      build_for_testing: true,
-      derived_data_path: derived_data_directory
-    )
-  end
-
-  desc 'Runs through the app taking screenshots, using a prebuilt binary'
-  lane :take_screenshots_from_app do |options|
-    devices = (options[:devices] || screenshot_devices).split(',').flatten
-
-    languages = [
-      'en-US'
-    ]
-
-    # Erase the Simulators between runs in order to get everything back to a
-    # default state. This should also compensate for default CI installations
-    # not having the Simulators need, by building them.
-    rebuild_screenshot_devices(
-      devices: devices,
-      simulator_version: simulator_version
-    )
-
-    capture_ios_screenshots(
-      scheme: screenshots_scheme,
-
-      localize_simulator: true,
-      languages: languages,
-
-      devices: devices,
-
-      # Don't rebuild the app, use the binaries from the given DerivedData
-      # folder. This is so that we can parallelize test runs with multiple
-      # device and locale combinations.
-      test_without_building: true,
-      derived_data_path: derived_data_directory,
-
-      output_directory: screenshots_directory,
-      clear_previous_screenshots: options.fetch(:clear_previous_screenshots, true),
-
-      # Explicitly set the iOS version to ensure we match the Simulators we
-      # recreated above
-      ios_version: simulator_version,
-
-      # Retry a few times if something is a little flaky
-      number_of_retries: 3,
-
-      # But fail completely after those 3 retries
-      stop_after_first_error: true,
-
-      # Run one Simulator at a time. One of the screenshots requires adding
-      # text to a note but because we're using the same account across all the
-      # Simulators, editing the note on one will result in the changes
-      # appearing on the other making for unexpected and inconsistent
-      # screnshots
-      concurrent_simulators: false,
-
-      # Allow the caller to invoke dark mode
-      dark_mode: options[:mode].to_s.downcase == 'dark'
-    )
-  end
-
-  lane :create_promo_screenshots do |options|
-    unless Fastlane::Helper::GitHelper.has_git_lfs
-      UI.user_error!('Git LFS not enabled – Unable to generate promo screenshots. Run `git lfs install && git lfs fetch && git lfs pull` to fix this.')
-    end
-
-    # This value is defined in style.css. It would be good if there was a way
-    # to make it parametric, so that if we update the CSS we don't risk this
-    # getting out of sync.
-    font_name = 'SourceSansPro-Regular.ttf'
-    user_font_directory = File.join(Dir.home, 'Library/Fonts')
-    user_font_path = File.join(user_font_directory, font_name)
-    if File.exist?(user_font_path)
-      UI.success("Custom font #{font_name} already installed locally.")
-    else
-      UI.message("Installing #{font_name} at #{user_font_path}.")
-      `mkdir -p #{user_font_directory}`
-      `cp #{File.join(Dir.pwd, "appstoreres/assets/#{font_name}")} #{user_font_path}`
-    end
-
-    promo_screenshots(
-      orig_folder: options[:source] || screenshots_directory,
-      metadata_folder: File.join(Dir.pwd, 'metadata'),
-      output_folder: promo_screenshots_directory,
-      force: options[:force] || true
-    )
-  end
-
-  desc 'Rebuild Screenshot Devices'
-  lane :rebuild_screenshot_devices do |options|
-    require 'simctl'
-
-    # Using flatten here because we may be getting a comma separated string if
-    # called from the command line via "fastlane run" or an array if called by
-    # another action that has already preformatted the value into an array.
-    device_names = (options[:devices] || screenshot_devices).split(',').flatten
-    sim_version = options[:simulator_version] || simulator_version
-
-    SimCtl.list_devices.each do |device|
-      next unless device_names.include? device.name
-
-      UI.message("Deleting #{device.name} because it already exists.")
-      device.delete
-    end
-
-    device_names.each do |device|
-      runtime = SimCtl.runtime(name: "iOS #{sim_version}")
-      devicetype = SimCtl.devicetype(name: device)
-
-      SimCtl.create_device device, devicetype, runtime
-    end
-  end
-
-  #####################################################################################
   # Test lanes
   #####################################################################################
 
@@ -528,41 +387,12 @@ def fastlane_directory
   __dir__
 end
 
-def derived_data_directory
-  File.join(fastlane_directory, 'DerivedData')
-end
-
 def project_name
   'Simplenote.xcodeproj'
 end
 
-def screenshots_scheme
-  'SimplenoteScreenshots'
-end
-
-def project_path
-  File.join(fastlane_directory, "../#{project_name}")
-end
-
-def screenshots_directory
-  File.join(fastlane_directory, 'screenshots')
-end
-
 def promo_screenshots_directory
   File.join(fastlane_directory, 'promo_screenshots')
-end
-
-def screenshot_devices
-  [
-    'iPhone X',
-    'iPhone 8',
-    'iPad Pro (12.9-inch) (2nd generation)',
-    'iPad Pro (12.9-inch) (3rd generation)'
-  ]
-end
-
-def simulator_version
-  '14.5'
 end
 
 def deoccupy_test_account

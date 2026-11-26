@@ -6,8 +6,7 @@ install_gems
 echo "--- :swift: Restoring Swift Package Manager cache"
 restore_swiftpm_cache --package-resolved Simplenote.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
 
-echo "--- :closed_lock_with_key: Installing Secrets"
-bundle exec fastlane run configure_apply
+.buildkite/commands/install-a8c-secrets.sh
 
 echo "--- :hammer_and_wrench: Build and Test"
 set +e

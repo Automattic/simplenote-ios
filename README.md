@@ -46,25 +46,19 @@ Once you have trusted the app and the SPM packages are downloaded you should be 
 Simplenote is powered by the [Simperium Sync'ing protocol](https://www.simperium.com). To be able to connect a development build of Simplenote iOS to the Simperium syncing service you will first need to setup app credentials.
 We distribute **testing credentials** that help us authenticate your application, and verify that the API calls being made are valid. 
 
-Please copy the **testing Simperium credentials** as follows:
+Internal contributors install and set up [a8c-secrets](https://github.com/Automattic/a8c-secrets); the build decrypts the production credentials with it.
+
+External contributors, please copy the **testing Simperium credentials** as follows:
 
 ```
-mkdir -p ~/.configure/simplenote-ios/secrets && cp Simplenote/SPCredentials-demo.swift ~/.configure/simplenote-ios/secrets/SPCredentials.swift
+cp Simplenote/SPCredentials.template.swift Simplenote/SPCredentials.external-contributors.swift
 ```
 
-This will copy the demo SPCredentials file into the correct directory with the basic details for an OSS contributor. Then edit the new `Simplenote/Credentials/SPCredentials.swift` file and change the `simperiumAppID` and `simperiumApiKey` fields to the correct values that appear in your Simperium app. If you don't see the file there, try doing a build by pressing `Command + B` and then restarting Xcode.  You should see it then.
+This file is ignored by Git, so your credentials stay out of the repository. Edit it and change the `simperiumAppID` and `simperiumApiKey` fields to the correct values that appear in your Simperium app. The build fails if it can't find any credentials.
 
 This will allow you to compile and run the app on a device or a simulator. With the app running in the simulator you can connect to Simplenote.  Note that for testing builds you can only connect to Simplenote account using the email address and password of your account on`Simperium.com`.  You can not connect to regular Simplenote accounts in development builds.
 
 _Note: Simplenote API features such as sharing and publishing will not work with development builds._
-
-### Optional
-
-If you want to try the screenshots generation locally, also create your own testing credentials for that target:
-
-```
-mkdir -p ~/.configure/simplenote-ios/secrets && cp Simplenote/ScreenshotsCredentials-demo.swift ~/.configure/simplenote-ios/secrets/ScreenshotsCredentials.swift
-```
 
 ## Style Guidelines
 

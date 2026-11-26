@@ -1,38 +1,47 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-SOURCE_PATH=$1
-TARGET_PATH=$2
+set -euo pipefail
 
-USAGE="error: Usage $0 source_path target_path"
-
-if [[ -z ${SOURCE_PATH:+x} || -z ${TARGET_PATH:+x} ]]; then
-  echo $USAGE
+# The first argument is the committed `.age` blob. The phase lists it as an input
+# so a pull that rotates the secret re-runs it; the plaintext comes from
+# `a8c-secrets which`, decrypted by the `Decrypt Secrets` aggregate target.
+if [[ $# -ne 3 ]]; then
+  echo "error: Usage: $0 encrypted_secret_path external_secret_path output_path"
   exit 1
 fi
 
-git check-ignore "${TARGET_PATH}" > /dev/null
-GIT_IGNORE_EXIT_CODE=$?
-if [ $GIT_IGNORE_EXIT_CODE -ne 0 ]; then
-    echo "error: Attempting to store secret file in path that is not ignored by Git (${TARGET_PATH})."
-    exit 1
-fi
+SECRET_NAME=$(basename "$1" .age)
+EXTERNAL_SECRET_PATH=$2
+OUTPUT_PATH=$3
 
-# From now on, fail the script if there's an error.
-# We didn't do it above because we wanted to track the `git check-ignore` exit
-# code.
-set -e
+# Build phases don't inherit the shell's PATH, so point at a8c-secrets' default
+# install location.
+export PATH="$HOME/.local/bin:$PATH"
 
-if [ ! -f ${SOURCE_PATH} ]; then
-    echo "error: Unable to copy credentials. Could not find ${SOURCE_PATH}."
-    exit 1
-fi
-
-
-if cmp --silent -- ${SOURCE_PATH} ${TARGET_PATH}; then
+apply() {
+  # Leaving an unchanged output untouched avoids recompiling the target.
+  if cmp --silent -- "$1" "$OUTPUT_PATH"; then
     echo "☑️ Credentials were not modified. Skipping..."
     exit 0
+  fi
+
+  mkdir -p "$(dirname "$OUTPUT_PATH")"
+  cp -v "$1" "$OUTPUT_PATH"
+  exit 0
+}
+
+# `a8c-secrets which` exits non-zero when the file has not been decrypted.
+if command -v a8c-secrets > /dev/null 2>&1 && INTERNAL_SECRET_PATH=$(a8c-secrets which "$SECRET_NAME" 2>/dev/null); then
+  apply "$INTERNAL_SECRET_PATH"
 fi
 
-mkdir -p $(dirname $TARGET_PATH)
-cp ${SOURCE_PATH} ${TARGET_PATH}
-echo "✅ Copied secret at ${SOURCE_PATH} to ${TARGET_PATH}"
+if [[ -f "$EXTERNAL_SECRET_PATH" ]]; then
+  if [[ "${CONFIGURATION:-}" == Distribution* ]]; then
+    echo "error: Refusing to build the '${CONFIGURATION}' configuration with external contributor credentials from '${EXTERNAL_SECRET_PATH}'. Distribution builds need the production credentials from a8c-secrets, see https://github.com/Automattic/a8c-secrets."
+    exit 1
+  fi
+  apply "$EXTERNAL_SECRET_PATH"
+fi
+
+echo "error: No secrets found! Internal contributors: install a8c-secrets and follow its setup instructions, see https://github.com/Automattic/a8c-secrets. External contributors: copy '${EXTERNAL_SECRET_PATH%.external-contributors.swift}.template.swift' to '${EXTERNAL_SECRET_PATH}' and fill in your own credentials."
+exit 1

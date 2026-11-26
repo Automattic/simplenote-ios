@@ -7,27 +7,16 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
-		3F1BB4AD243199FF006D1A04 /* ScreenshotsSecrets */ = {
+		A8C27310000000000000C001 /* Decrypt Secrets */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = 3F1BB4B4243199FF006D1A04 /* Build configuration list for PBXAggregateTarget "ScreenshotsSecrets" */;
+			buildConfigurationList = A8C27310000000000000C003 /* Build configuration list for PBXAggregateTarget "Decrypt Secrets" */;
 			buildPhases = (
-				3F1BB4B524319A04006D1A04 /* Copy Secrets */,
+				A8C27310000000000000C002 /* Decrypt Secrets */,
 			);
 			dependencies = (
 			);
-			name = ScreenshotsSecrets;
-			productName = ScreenshotsSecrets;
-		};
-		B5C7BF97230C59F5000DEC91 /* SimplenoteSecrets */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = B5C7BF98230C59F5000DEC91 /* Build configuration list for PBXAggregateTarget "SimplenoteSecrets" */;
-			buildPhases = (
-				B5C7BF9E230C5A79000DEC91 /* Copy Secrets */,
-			);
-			dependencies = (
-			);
-			name = SimplenoteSecrets;
-			productName = GenerateCredentials;
+			name = "Decrypt Secrets";
+			productName = "Decrypt Secrets";
 		};
 /* End PBXAggregateTarget section */
 
@@ -52,13 +41,10 @@
 		37E55A6721BF2B1800F14241 /* SPTextAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E55A6621BF2B1800F14241 /* SPTextAttachment.swift */; };
 		37FD30491FC4CFA2008D0B78 /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FD30471FC4CFA2008D0B78 /* KeychainPasswordItem.swift */; };
 		3F1294B52DFCC50800D1B006 /* Simperium in Frameworks */ = {isa = PBXBuildFile; productRef = 3F1294B42DFCC50800D1B006 /* Simperium */; };
-		3F1BB4A0242DB81E006D1A04 /* ScreenshotsCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1BB49F242DB81E006D1A04 /* ScreenshotsCredentials.swift */; };
-		3F1BB4A3242DC162006D1A04 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1BB4A2242DC162006D1A04 /* SnapshotHelper.swift */; };
 		3F4BA07E26CDF295000619B1 /* ScreenObject in Frameworks */ = {isa = PBXBuildFile; productRef = 3F4BA07D26CDF295000619B1 /* ScreenObject */; };
 		3FA17B5626240FF000C11C46 /* NoteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA17B5526240FF000C11C46 /* NoteData.swift */; };
 		3FA323292D63E5A90017AE66 /* XCUITestHelpers in Frameworks */ = {isa = PBXBuildFile; productRef = 3FA323282D63E5A90017AE66 /* XCUITestHelpers */; };
 		3FA3232B2D63E6F50017AE66 /* XCUITestHelpers in Frameworks */ = {isa = PBXBuildFile; productRef = 3FA3232A2D63E6F50017AE66 /* XCUITestHelpers */; };
-		3FA6013C242C5AAE0068FC52 /* SimplenoteScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA6013B242C5AAE0068FC52 /* SimplenoteScreenshots.swift */; };
 		3FA8817E2DFAADD200E1F4A3 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 3FA8817D2DFAADD200E1F4A3 /* ZIPFoundation */; };
 		3FA88CF12DFABAA100E1F4A3 /* Gridicons in Frameworks */ = {isa = PBXBuildFile; productRef = 3FA88CF02DFABAA100E1F4A3 /* Gridicons */; };
 		3FF314CE26FC20FD0012E68E /* PasscodeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4BA07F26CE00A2000619B1 /* PasscodeScreen.swift */; };
@@ -397,8 +383,8 @@
 		B5DF734422A56E2800602CE7 /* UserDefaults+Simplenote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DF734322A56E2800602CE7 /* UserDefaults+Simplenote.swift */; };
 		B5DF734622A5713600602CE7 /* SortMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DF734522A5713600602CE7 /* SortMode.swift */; };
 		B5DF734F22A599D100602CE7 /* SPNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = B5DF734E22A599D100602CE7 /* SPNotifications.m */; };
-		B5E196BB230F522D00F5658A /* SPCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E196BA230F522D00F5658A /* SPCredentials.swift */; };
-		B5E196BC230F522D00F5658A /* SPCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E196BA230F522D00F5658A /* SPCredentials.swift */; };
+		B5E196BB230F522D00F5658A /* SPCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C27310000000000000B011 /* SPCredentials.swift */; };
+		B5E196BC230F522D00F5658A /* SPCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C27310000000000000B012 /* SPCredentials.swift */; };
 		B5E3F3982539F1E900271AEA /* SPTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5E3F3962539F1E900271AEA /* SPTextView.m */; };
 		B5E4082B235DDFC800D4E1DF /* ColorStudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E4082A235DDFC800D4E1DF /* ColorStudio.swift */; };
 		B5E4082D235DE41A00D4E1DF /* UIColor+Studio.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E4082C235DE41A00D4E1DF /* UIColor+Studio.swift */; };
@@ -556,8 +542,8 @@
 		BAF8D44B26AE10FC00CA9383 /* Tag+Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42226AE10F100CA9383 /* Tag+Widget.swift */; };
 		BAF8D44C26AE10FC00CA9383 /* Note+Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42326AE10F100CA9383 /* Note+Widget.swift */; };
 		BAF8D45526AE10FC00CA9383 /* Tag+Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D42226AE10F100CA9383 /* Tag+Widget.swift */; };
-		BAF8D46426AE118800CA9383 /* SPCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E196BA230F522D00F5658A /* SPCredentials.swift */; };
-		BAF8D46E26AE118800CA9383 /* SPCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E196BA230F522D00F5658A /* SPCredentials.swift */; };
+		BAF8D46426AE118800CA9383 /* SPCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C27310000000000000B014 /* SPCredentials.swift */; };
+		BAF8D46E26AE118800CA9383 /* SPCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C27310000000000000B013 /* SPCredentials.swift */; };
 		BAF8D4F626AE171400CA9383 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3856CC2681715700F388CC /* CoreDataManager.swift */; };
 		BAF8D50026AE171400CA9383 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3856CC2681715700F388CC /* CoreDataManager.swift */; };
 		BAF8D50A26AE172600CA9383 /* StorageSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9B59012685549F00DAD1ED /* StorageSettings.swift */; };
@@ -610,27 +596,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3F1BB4B624319A5B006D1A04 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E29ADD3017848E8500E55842 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3F1BB4AD243199FF006D1A04;
-			remoteInfo = ScreenshotsSecrets;
-		};
-		3FA6013E242C5AAE0068FC52 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E29ADD3017848E8500E55842 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 46A3C96017DFA81A002865AE;
-			remoteInfo = Simplenote;
-		};
-		3FF314D026FC220B0012E68E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E29ADD3017848E8500E55842 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3FFBDBEA26FBF132008AD052;
-			remoteInfo = UITestsFoundation;
-		};
 		3FF314D426FC47ED0012E68E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E29ADD3017848E8500E55842 /* Project object */;
@@ -638,26 +603,40 @@
 			remoteGlobalIDString = 3FFBDBEA26FBF132008AD052;
 			remoteInfo = UITestsFoundation;
 		};
+		A8C27310000000000000C011 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E29ADD3017848E8500E55842 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A8C27310000000000000C001;
+			remoteInfo = "Decrypt Secrets";
+		};
+		A8C27310000000000000C012 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E29ADD3017848E8500E55842 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A8C27310000000000000C001;
+			remoteInfo = "Decrypt Secrets";
+		};
+		A8C27310000000000000C013 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E29ADD3017848E8500E55842 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A8C27310000000000000C001;
+			remoteInfo = "Decrypt Secrets";
+		};
+		A8C27310000000000000C014 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E29ADD3017848E8500E55842 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A8C27310000000000000C001;
+			remoteInfo = "Decrypt Secrets";
+		};
 		B582189C1FCC45170094ECA1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E29ADD3017848E8500E55842 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 46A3C96017DFA81A002865AE;
 			remoteInfo = Simplenote;
-		};
-		B5C7BF9F230C5AC9000DEC91 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E29ADD3017848E8500E55842 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B5C7BF97230C59F5000DEC91;
-			remoteInfo = GenerateCredentials;
-		};
-		B5E196BD230F554500F5658A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E29ADD3017848E8500E55842 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B5C7BF97230C59F5000DEC91;
-			remoteInfo = Credentials;
 		};
 		B5EB1EF41C204EBD0080A1B3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -753,14 +732,9 @@
 		37E10E7920B3477800864E43 /* WPAuthHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WPAuthHandler.h; path = Classes/WPAuthHandler.h; sourceTree = "<group>"; };
 		37E55A6621BF2B1800F14241 /* SPTextAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPTextAttachment.swift; sourceTree = "<group>"; };
 		37FD30471FC4CFA2008D0B78 /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
-		3F1BB49F242DB81E006D1A04 /* ScreenshotsCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenshotsCredentials.swift; sourceTree = "<group>"; };
-		3F1BB4A2242DC162006D1A04 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		3F3CA94826255FA800F6316F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		3F4BA07F26CE00A2000619B1 /* PasscodeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeScreen.swift; sourceTree = "<group>"; };
 		3FA17B5526240FF000C11C46 /* NoteData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteData.swift; sourceTree = "<group>"; };
-		3FA60139242C5AAD0068FC52 /* SimplenoteScreenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimplenoteScreenshots.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3FA6013B242C5AAE0068FC52 /* SimplenoteScreenshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplenoteScreenshots.swift; sourceTree = "<group>"; };
-		3FA6013D242C5AAE0068FC52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FD478242C572EE10071B8B9 /* Project.Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Project.Release.xcconfig; sourceTree = "<group>"; };
 		3FF314D226FC47720012E68E /* XCUIApplication+Assertions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+Assertions.swift"; sourceTree = "<group>"; };
 		3FFBDBEB26FBF132008AD052 /* UITestsFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UITestsFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -894,6 +868,11 @@
 		A6F489C725DA5B21005FBD1A /* PopoverPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverPresenter.swift; sourceTree = "<group>"; };
 		A6FDF73D2542BDE100415C87 /* NoteInformationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteInformationController.swift; sourceTree = "<group>"; };
 		A6FDF75725435CA500415C87 /* SubtitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleTableViewCell.swift; sourceTree = "<group>"; };
+		A8C27310000000000000B011 /* SPCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCredentials.swift; sourceTree = DERIVED_FILE_DIR; };
+		A8C27310000000000000B012 /* SPCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCredentials.swift; sourceTree = DERIVED_FILE_DIR; };
+		A8C27310000000000000B013 /* SPCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCredentials.swift; sourceTree = DERIVED_FILE_DIR; };
+		A8C27310000000000000B014 /* SPCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SPCredentials.swift; sourceTree = DERIVED_FILE_DIR; };
+		A8C27310000000000000B026 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B502311225129525002C3CDA /* SPDiagnosticsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SPDiagnosticsViewController.xib; path = Classes/SPDiagnosticsViewController.xib; sourceTree = "<group>"; };
 		B504D4DD23D2014200AEED27 /* IndexPath+Simplenote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "IndexPath+Simplenote.swift"; path = "Classes/IndexPath+Simplenote.swift"; sourceTree = "<group>"; };
 		B5095DC824632E3300812711 /* SimplenoteConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SimplenoteConstants.swift; path = Classes/SimplenoteConstants.swift; sourceTree = "<group>"; };
@@ -1103,7 +1082,6 @@
 		B5DF734522A5713600602CE7 /* SortMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SortMode.swift; path = Classes/SortMode.swift; sourceTree = "<group>"; };
 		B5DF734D22A599D100602CE7 /* SPNotifications.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SPNotifications.h; path = Classes/SPNotifications.h; sourceTree = "<group>"; };
 		B5DF734E22A599D100602CE7 /* SPNotifications.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SPNotifications.m; path = Classes/SPNotifications.m; sourceTree = "<group>"; };
-		B5E196BA230F522D00F5658A /* SPCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPCredentials.swift; sourceTree = "<group>"; };
 		B5E3F3962539F1E900271AEA /* SPTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPTextView.m; path = Classes/SPTextView.m; sourceTree = "<group>"; };
 		B5E3F3972539F1E900271AEA /* SPTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPTextView.h; path = Classes/SPTextView.h; sourceTree = "<group>"; };
 		B5E4082A235DDFC800D4E1DF /* ColorStudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorStudio.swift; path = Classes/ColorStudio.swift; sourceTree = "<group>"; };
@@ -1346,15 +1324,6 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		3FA60136242C5AAD0068FC52 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3F4BA07E26CDF295000619B1 /* ScreenObject in Frameworks */,
-				3FA323292D63E5A90017AE66 /* XCUITestHelpers in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3FFBDBE826FBF132008AD052 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1492,25 +1461,6 @@
 				375D24B021E01131007AB25A /* version.h */,
 			);
 			path = Hoextdown;
-			sourceTree = "<group>";
-		};
-		3F1BB49E242DB81E006D1A04 /* Credentials */ = {
-			isa = PBXGroup;
-			children = (
-				3F1BB49F242DB81E006D1A04 /* ScreenshotsCredentials.swift */,
-			);
-			path = Credentials;
-			sourceTree = "<group>";
-		};
-		3FA6013A242C5AAE0068FC52 /* SimplenoteScreenshots */ = {
-			isa = PBXGroup;
-			children = (
-				3F1BB49E242DB81E006D1A04 /* Credentials */,
-				3FA6013D242C5AAE0068FC52 /* Info.plist */,
-				3FA6013B242C5AAE0068FC52 /* SimplenoteScreenshots.swift */,
-				3F1BB4A2242DC162006D1A04 /* SnapshotHelper.swift */,
-			);
-			path = SimplenoteScreenshots;
 			sourceTree = "<group>";
 		};
 		3FFBDBEC26FBF132008AD052 /* UITestsFoundation */ = {
@@ -1740,6 +1690,50 @@
 				A6F4883125A891A70050CFA8 /* TagTextFieldInputValidatorTests.swift */,
 			);
 			path = Tags;
+			sourceTree = "<group>";
+		};
+		A8C27310000000000000B021 /* DerivedSources */ = {
+			isa = PBXGroup;
+			children = (
+				A8C27310000000000000B022 /* Simplenote */,
+				A8C27310000000000000B023 /* SimplenoteShare */,
+				A8C27310000000000000B024 /* SimplenoteIntents */,
+				A8C27310000000000000B025 /* SimplenoteWidgetsExtension */,
+				A8C27310000000000000B026 /* README.md */,
+			);
+			path = DerivedSources;
+			sourceTree = "<group>";
+		};
+		A8C27310000000000000B022 /* Simplenote */ = {
+			isa = PBXGroup;
+			children = (
+				A8C27310000000000000B011 /* SPCredentials.swift */,
+			);
+			name = Simplenote;
+			sourceTree = "<group>";
+		};
+		A8C27310000000000000B023 /* SimplenoteShare */ = {
+			isa = PBXGroup;
+			children = (
+				A8C27310000000000000B012 /* SPCredentials.swift */,
+			);
+			name = SimplenoteShare;
+			sourceTree = "<group>";
+		};
+		A8C27310000000000000B024 /* SimplenoteIntents */ = {
+			isa = PBXGroup;
+			children = (
+				A8C27310000000000000B013 /* SPCredentials.swift */,
+			);
+			name = SimplenoteIntents;
+			sourceTree = "<group>";
+		};
+		A8C27310000000000000B025 /* SimplenoteWidgetsExtension */ = {
+			isa = PBXGroup;
+			children = (
+				A8C27310000000000000B014 /* SPCredentials.swift */,
+			);
+			name = SimplenoteWidgetsExtension;
 			sourceTree = "<group>";
 		};
 		B511AECA255A0A01005B2159 /* Interlinks */ = {
@@ -2217,14 +2211,6 @@
 			name = Themes;
 			sourceTree = "<group>";
 		};
-		B5C7BF92230C592B000DEC91 /* Credentials */ = {
-			isa = PBXGroup;
-			children = (
-				B5E196BA230F522D00F5658A /* SPCredentials.swift */,
-			);
-			path = Credentials;
-			sourceTree = "<group>";
-		};
 		B5CFFFDF22AA9AD100B968CD /* Tools */ = {
 			isa = PBXGroup;
 			children = (
@@ -2569,7 +2555,6 @@
 				B5EB1EED1C204EBD0080A1B3 /* SimplenoteShare */,
 				B58218981FCC45170094ECA1 /* SimplenoteTests */,
 				467D9C6F1788CF2400785EF3 /* External */,
-				3FA6013A242C5AAE0068FC52 /* SimplenoteScreenshots */,
 				D864B15525CAE25000F9B73E /* SimplenoteUITests */,
 				BAFA93DD265DCFCA0009DCFB /* SimplenoteWidgets */,
 				BAB5762526703C8200B0C56F /* SimplenoteIntents */,
@@ -2586,7 +2571,6 @@
 				46A3C9D717DFA81A002865AE /* Simplenote.app */,
 				B5EB1EEC1C204EBD0080A1B3 /* SimplenoteShare.appex */,
 				B58218971FCC45170094ECA1 /* SimplenoteTests.xctest */,
-				3FA60139242C5AAD0068FC52 /* SimplenoteScreenshots.xctest */,
 				D864B15425CAE25000F9B73E /* SimplenoteUITests.xctest */,
 				BAFA93D8265DCFCA0009DCFB /* SimplenoteWidgetsExtension.appex */,
 				BAB5762226703C8100B0C56F /* SimplenoteIntents.appex */,
@@ -2634,7 +2618,7 @@
 				B51D445C2C52CD8D00F296A7 /* Authentication */,
 				467D9C7A1788D10400785EF3 /* Categories */,
 				A690032F253D85C40087D0D2 /* Controllers */,
-				B5C7BF92230C592B000DEC91 /* Credentials */,
+				A8C27310000000000000B021 /* DerivedSources */,
 				B569DBFE1C03411500EC1FE8 /* Extensions */,
 				B52BB74C22CFD14C0042C162 /* Exporter */,
 				B59983932514EC650037B129 /* Keychain */,
@@ -2774,30 +2758,6 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		3FA60138242C5AAD0068FC52 /* SimplenoteScreenshots */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3FA60146242C5AAE0068FC52 /* Build configuration list for PBXNativeTarget "SimplenoteScreenshots" */;
-			buildPhases = (
-				3FA60135242C5AAD0068FC52 /* Sources */,
-				3FA60136242C5AAD0068FC52 /* Frameworks */,
-				3FA60137242C5AAD0068FC52 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				3FF314D126FC220B0012E68E /* PBXTargetDependency */,
-				3F1BB4B724319A5B006D1A04 /* PBXTargetDependency */,
-				3FA6013F242C5AAE0068FC52 /* PBXTargetDependency */,
-			);
-			name = SimplenoteScreenshots;
-			packageProductDependencies = (
-				3F4BA07D26CDF295000619B1 /* ScreenObject */,
-				3FA323282D63E5A90017AE66 /* XCUITestHelpers */,
-			);
-			productName = SimplenoteScreenshots;
-			productReference = 3FA60139242C5AAD0068FC52 /* SimplenoteScreenshots.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 		3FFBDBEA26FBF132008AD052 /* UITestsFoundation */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3FFBDBF426FBF132008AD052 /* Build configuration list for PBXNativeTarget "UITestsFoundation" */;
@@ -2823,6 +2783,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 46A3C9D417DFA81A002865AE /* Build configuration list for PBXNativeTarget "Simplenote" */;
 			buildPhases = (
+				A8C27310000000000000B001 /* Copy Secret */,
 				AD6CEDDC25D37DC100744BFB /* SwiftLint */,
 				46A3C96117DFA81A002865AE /* Sources */,
 				46A3C9B017DFA81A002865AE /* Frameworks */,
@@ -2832,7 +2793,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				B5C7BFA0230C5AC9000DEC91 /* PBXTargetDependency */,
+				A8C27310000000000000C021 /* PBXTargetDependency */,
 				B5EB1EF51C204EBD0080A1B3 /* PBXTargetDependency */,
 				BAFA93E4265DCFCD0009DCFB /* PBXTargetDependency */,
 				BAB5762A26703C8200B0C56F /* PBXTargetDependency */,
@@ -2876,6 +2837,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B5EB1EFB1C204EBE0080A1B3 /* Build configuration list for PBXNativeTarget "SimplenoteShare" */;
 			buildPhases = (
+				A8C27310000000000000B002 /* Copy Secret */,
 				B5EB1EE81C204EBD0080A1B3 /* Sources */,
 				B5EB1EE91C204EBD0080A1B3 /* Frameworks */,
 				B5EB1EEA1C204EBD0080A1B3 /* Resources */,
@@ -2885,7 +2847,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				B5E196BE230F554500F5658A /* PBXTargetDependency */,
+				A8C27310000000000000C022 /* PBXTargetDependency */,
 			);
 			name = SimplenoteShare;
 			productName = SimplenoteShare;
@@ -2896,6 +2858,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BAB5762C26703C8200B0C56F /* Build configuration list for PBXNativeTarget "SimplenoteIntents" */;
 			buildPhases = (
+				A8C27310000000000000B003 /* Copy Secret */,
 				BAB5761E26703C8100B0C56F /* Sources */,
 				BAB5761F26703C8100B0C56F /* Frameworks */,
 				BAB5762026703C8100B0C56F /* Resources */,
@@ -2903,6 +2866,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A8C27310000000000000C023 /* PBXTargetDependency */,
 			);
 			name = SimplenoteIntents;
 			packageProductDependencies = (
@@ -2917,6 +2881,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BAFA93EB265DCFCD0009DCFB /* Build configuration list for PBXNativeTarget "SimplenoteWidgetsExtension" */;
 			buildPhases = (
+				A8C27310000000000000B004 /* Copy Secret */,
 				BAFA93D4265DCFCA0009DCFB /* Sources */,
 				BAFA93D5265DCFCA0009DCFB /* Frameworks */,
 				BAFA93D6265DCFCA0009DCFB /* Resources */,
@@ -2924,6 +2889,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A8C27310000000000000C024 /* PBXTargetDependency */,
 			);
 			name = SimplenoteWidgetsExtension;
 			packageProductDependencies = (
@@ -2968,15 +2934,6 @@
 				LastUpgradeCheck = 1530;
 				ORGANIZATIONNAME = Automattic;
 				TargetAttributes = {
-					3F1BB4AD243199FF006D1A04 = {
-						CreatedOnToolsVersion = 11.3.1;
-						ProvisioningStyle = Automatic;
-					};
-					3FA60138242C5AAD0068FC52 = {
-						CreatedOnToolsVersion = 11.3.1;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 46A3C96017DFA81A002865AE;
-					};
 					3FFBDBEA26FBF132008AD052 = {
 						CreatedOnToolsVersion = 13.0;
 					};
@@ -3001,10 +2958,6 @@
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 46A3C96017DFA81A002865AE;
-					};
-					B5C7BF97230C59F5000DEC91 = {
-						CreatedOnToolsVersion = 11.0;
-						ProvisioningStyle = Automatic;
 					};
 					B5EB1EEB1C204EBD0080A1B3 = {
 						CreatedOnToolsVersion = 7.2;
@@ -3077,25 +3030,16 @@
 				46A3C96017DFA81A002865AE /* Simplenote */,
 				B5EB1EEB1C204EBD0080A1B3 /* SimplenoteShare */,
 				B58218961FCC45170094ECA1 /* SimplenoteTests */,
-				3FA60138242C5AAD0068FC52 /* SimplenoteScreenshots */,
-				B5C7BF97230C59F5000DEC91 /* SimplenoteSecrets */,
-				3F1BB4AD243199FF006D1A04 /* ScreenshotsSecrets */,
 				D864B15325CAE25000F9B73E /* SimplenoteUITests */,
 				BAFA93D7265DCFCA0009DCFB /* SimplenoteWidgetsExtension */,
 				BAB5762126703C8100B0C56F /* SimplenoteIntents */,
 				3FFBDBEA26FBF132008AD052 /* UITestsFoundation */,
+				A8C27310000000000000C001 /* Decrypt Secrets */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		3FA60137242C5AAD0068FC52 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3FFBDBE926FBF132008AD052 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3190,7 +3134,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3F1BB4B524319A04006D1A04 /* Copy Secrets */ = {
+		A8C27310000000000000B001 /* Copy Secret */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3198,17 +3142,104 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${HOME}/.configure/simplenote-ios/secrets/ScreenshotsCredentials.swift",
+				"${SRCROOT}/.a8c-secrets/SPCredentials.swift.age",
+				"${SRCROOT}/Simplenote/SPCredentials.external-contributors.swift",
+				"${SRCROOT}/Scripts/Build-Phases/copy-secret.sh",
 			);
-			name = "Copy Secrets";
+			name = "Copy Secret";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"${SRCROOT}/SimplenoteScreenshots/Credentials/ScreenshotsCredentials.swift",
+				"$(DERIVED_FILE_DIR)/SPCredentials.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "${SRCROOT}/Scripts/Build-Phases/copy-secret.sh \\\n    $SCRIPT_INPUT_FILE_0 \\\n    $SCRIPT_OUTPUT_FILE_0\n";
+			shellScript = "\"${SRCROOT}/Scripts/Build-Phases/copy-secret.sh\" \\\n    \"$SCRIPT_INPUT_FILE_0\" \\\n    \"$SCRIPT_INPUT_FILE_1\" \\\n    \"$SCRIPT_OUTPUT_FILE_0\"\n";
+		};
+		A8C27310000000000000B002 /* Copy Secret */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/.a8c-secrets/SPCredentials.swift.age",
+				"${SRCROOT}/Simplenote/SPCredentials.external-contributors.swift",
+				"${SRCROOT}/Scripts/Build-Phases/copy-secret.sh",
+			);
+			name = "Copy Secret";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/SPCredentials.swift",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Scripts/Build-Phases/copy-secret.sh\" \\\n    \"$SCRIPT_INPUT_FILE_0\" \\\n    \"$SCRIPT_INPUT_FILE_1\" \\\n    \"$SCRIPT_OUTPUT_FILE_0\"\n";
+		};
+		A8C27310000000000000B003 /* Copy Secret */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/.a8c-secrets/SPCredentials.swift.age",
+				"${SRCROOT}/Simplenote/SPCredentials.external-contributors.swift",
+				"${SRCROOT}/Scripts/Build-Phases/copy-secret.sh",
+			);
+			name = "Copy Secret";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/SPCredentials.swift",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Scripts/Build-Phases/copy-secret.sh\" \\\n    \"$SCRIPT_INPUT_FILE_0\" \\\n    \"$SCRIPT_INPUT_FILE_1\" \\\n    \"$SCRIPT_OUTPUT_FILE_0\"\n";
+		};
+		A8C27310000000000000B004 /* Copy Secret */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/.a8c-secrets/SPCredentials.swift.age",
+				"${SRCROOT}/Simplenote/SPCredentials.external-contributors.swift",
+				"${SRCROOT}/Scripts/Build-Phases/copy-secret.sh",
+			);
+			name = "Copy Secret";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/SPCredentials.swift",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Scripts/Build-Phases/copy-secret.sh\" \\\n    \"$SCRIPT_INPUT_FILE_0\" \\\n    \"$SCRIPT_INPUT_FILE_1\" \\\n    \"$SCRIPT_OUTPUT_FILE_0\"\n";
+		};
+		A8C27310000000000000C002 /* Decrypt Secrets */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Decrypt Secrets";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Scripts/Build-Phases/decrypt-secrets.sh\"\n";
 		};
 		AD6CEDDC25D37DC100744BFB /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3258,39 +3289,9 @@
 			shellPath = /bin/sh;
 			shellScript = "cd \"${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\"\nif [[ -d \"Frameworks\" ]]; then\nrm -fr Frameworks\nfi\n";
 		};
-		B5C7BF9E230C5A79000DEC91 /* Copy Secrets */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${HOME}/.configure/simplenote-ios/secrets/SPCredentials.swift",
-			);
-			name = "Copy Secrets";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${SRCROOT}/Simplenote/Credentials/SPCredentials.swift",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "${SRCROOT}/Scripts/Build-Phases/copy-secret.sh \\\n    $SCRIPT_INPUT_FILE_0 \\\n    $SCRIPT_OUTPUT_FILE_0\n";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		3FA60135242C5AAD0068FC52 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3F1BB4A0242DB81E006D1A04 /* ScreenshotsCredentials.swift in Sources */,
-				3FA6013C242C5AAE0068FC52 /* SimplenoteScreenshots.swift in Sources */,
-				3F1BB4A3242DC162006D1A04 /* SnapshotHelper.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3FFBDBE726FBF132008AD052 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3833,40 +3834,35 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3F1BB4B724319A5B006D1A04 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3F1BB4AD243199FF006D1A04 /* ScreenshotsSecrets */;
-			targetProxy = 3F1BB4B624319A5B006D1A04 /* PBXContainerItemProxy */;
-		};
-		3FA6013F242C5AAE0068FC52 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 46A3C96017DFA81A002865AE /* Simplenote */;
-			targetProxy = 3FA6013E242C5AAE0068FC52 /* PBXContainerItemProxy */;
-		};
-		3FF314D126FC220B0012E68E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3FFBDBEA26FBF132008AD052 /* UITestsFoundation */;
-			targetProxy = 3FF314D026FC220B0012E68E /* PBXContainerItemProxy */;
-		};
 		3FF314D526FC47ED0012E68E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 3FFBDBEA26FBF132008AD052 /* UITestsFoundation */;
 			targetProxy = 3FF314D426FC47ED0012E68E /* PBXContainerItemProxy */;
 		};
+		A8C27310000000000000C021 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A8C27310000000000000C001 /* Decrypt Secrets */;
+			targetProxy = A8C27310000000000000C011 /* PBXContainerItemProxy */;
+		};
+		A8C27310000000000000C022 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A8C27310000000000000C001 /* Decrypt Secrets */;
+			targetProxy = A8C27310000000000000C012 /* PBXContainerItemProxy */;
+		};
+		A8C27310000000000000C023 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A8C27310000000000000C001 /* Decrypt Secrets */;
+			targetProxy = A8C27310000000000000C013 /* PBXContainerItemProxy */;
+		};
+		A8C27310000000000000C024 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A8C27310000000000000C001 /* Decrypt Secrets */;
+			targetProxy = A8C27310000000000000C014 /* PBXContainerItemProxy */;
+		};
 		B582189D1FCC45170094ECA1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 46A3C96017DFA81A002865AE /* Simplenote */;
 			targetProxy = B582189C1FCC45170094ECA1 /* PBXContainerItemProxy */;
-		};
-		B5C7BFA0230C5AC9000DEC91 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B5C7BF97230C59F5000DEC91 /* SimplenoteSecrets */;
-			targetProxy = B5C7BF9F230C5AC9000DEC91 /* PBXContainerItemProxy */;
-		};
-		B5E196BE230F554500F5658A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B5C7BF97230C59F5000DEC91 /* SimplenoteSecrets */;
-			targetProxy = B5E196BD230F554500F5658A /* PBXContainerItemProxy */;
 		};
 		B5EB1EF51C204EBD0080A1B3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3958,211 +3954,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		3F1BB4AE243199FF006D1A04 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		3F1BB4AF243199FF006D1A04 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		3F1BB4B0243199FF006D1A04 /* Distribution Internal */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = "Distribution Internal";
-		};
-		3F1BB4B1243199FF006D1A04 /* Distribution Alpha */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = "Distribution Alpha";
-		};
-		3F1BB4B2243199FF006D1A04 /* Distribution AppStore */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = "Distribution AppStore";
-		};
-		3FA60140242C5AAE0068FC52 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = SimplenoteScreenshots/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.automatticc.SimplenoteScreenshots;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Simplenote;
-			};
-			name = Debug;
-		};
-		3FA60141242C5AAE0068FC52 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = SimplenoteScreenshots/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.automatticc.SimplenoteScreenshots;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Simplenote;
-			};
-			name = Release;
-		};
-		3FA60142242C5AAE0068FC52 /* Distribution Internal */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = SimplenoteScreenshots/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.automatticc.SimplenoteScreenshots;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Simplenote;
-			};
-			name = "Distribution Internal";
-		};
-		3FA60143242C5AAE0068FC52 /* Distribution Alpha */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = SimplenoteScreenshots/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.automatticc.SimplenoteScreenshots;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Simplenote;
-			};
-			name = "Distribution Alpha";
-		};
-		3FA60144242C5AAE0068FC52 /* Distribution AppStore */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = SimplenoteScreenshots/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.automatticc.SimplenoteScreenshots;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Simplenote;
-			};
-			name = "Distribution AppStore";
-		};
 		3FFBDBEF26FBF132008AD052 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4686,14 +4477,40 @@
 			};
 			name = "Distribution Alpha";
 		};
-		8C3FEBE023EAE03A00EE55E6 /* Distribution Alpha */ = {
+		A8C27310000000000000C004 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A8C27310000000000000C005 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		A8C27310000000000000C006 /* Distribution Internal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = "Distribution Internal";
+		};
+		A8C27310000000000000C007 /* Distribution Alpha */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = "Distribution Alpha";
+		};
+		A8C27310000000000000C008 /* Distribution AppStore */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = "Distribution AppStore";
 		};
 		B50789F61C1F4F5A009F097A /* Distribution AppStore */ = {
 			isa = XCBuildConfiguration;
@@ -5045,42 +4862,6 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Simplenote.app/Simplenote";
-			};
-			name = "Distribution AppStore";
-		};
-		B5C7BF99230C59F5000DEC91 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		B5C7BF9A230C59F5000DEC91 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		B5C7BF9B230C59F5000DEC91 /* Distribution Internal */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = "Distribution Internal";
-		};
-		B5C7BF9C230C59F5000DEC91 /* Distribution AppStore */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = "Distribution AppStore";
 		};
@@ -5926,30 +5707,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3F1BB4B4243199FF006D1A04 /* Build configuration list for PBXAggregateTarget "ScreenshotsSecrets" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3F1BB4AE243199FF006D1A04 /* Debug */,
-				3F1BB4AF243199FF006D1A04 /* Release */,
-				3F1BB4B0243199FF006D1A04 /* Distribution Internal */,
-				3F1BB4B1243199FF006D1A04 /* Distribution Alpha */,
-				3F1BB4B2243199FF006D1A04 /* Distribution AppStore */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3FA60146242C5AAE0068FC52 /* Build configuration list for PBXNativeTarget "SimplenoteScreenshots" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3FA60140242C5AAE0068FC52 /* Debug */,
-				3FA60141242C5AAE0068FC52 /* Release */,
-				3FA60142242C5AAE0068FC52 /* Distribution Internal */,
-				3FA60143242C5AAE0068FC52 /* Distribution Alpha */,
-				3FA60144242C5AAE0068FC52 /* Distribution AppStore */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		3FFBDBF426FBF132008AD052 /* Build configuration list for PBXNativeTarget "UITestsFoundation" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -5974,6 +5731,18 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		A8C27310000000000000C003 /* Build configuration list for PBXAggregateTarget "Decrypt Secrets" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A8C27310000000000000C004 /* Debug */,
+				A8C27310000000000000C005 /* Release */,
+				A8C27310000000000000C006 /* Distribution Internal */,
+				A8C27310000000000000C007 /* Distribution Alpha */,
+				A8C27310000000000000C008 /* Distribution AppStore */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B582189E1FCC45170094ECA1 /* Build configuration list for PBXNativeTarget "SimplenoteTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -5982,18 +5751,6 @@
 				B58218A11FCC45170094ECA1 /* Distribution Internal */,
 				8C3FEBDF23EAE03A00EE55E6 /* Distribution Alpha */,
 				B58218A21FCC45170094ECA1 /* Distribution AppStore */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B5C7BF98230C59F5000DEC91 /* Build configuration list for PBXAggregateTarget "SimplenoteSecrets" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B5C7BF99230C59F5000DEC91 /* Debug */,
-				B5C7BF9A230C59F5000DEC91 /* Release */,
-				B5C7BF9B230C59F5000DEC91 /* Distribution Internal */,
-				8C3FEBE023EAE03A00EE55E6 /* Distribution Alpha */,
-				B5C7BF9C230C59F5000DEC91 /* Distribution AppStore */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
