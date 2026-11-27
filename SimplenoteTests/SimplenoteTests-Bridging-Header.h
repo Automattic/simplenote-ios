@@ -3,3 +3,4 @@
 //
 
 #import "Simplenote-Bridging-Header.h"
+#import "UITextView+Simplenote.h"
